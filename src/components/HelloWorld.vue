@@ -1,50 +1,50 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+<div>
+  {{message}}
+  <table border='1'>
+    <tr v-for='row in rows'>
+      <td v-for='value in row'>
+        {{value}}
+      </td>
+    </tr>
+  </table>
+  <button @click="play">次へ</button>
+</div>
 </template>
 
 <script>
+import { C } from "../foo"
+
+var a = new C(1)
+
+/* eslint-disable no-new */
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      message: "ok",
+      rows: [],
+      turn_index: 0,
+      moves: [
+        // {"sfen":"lnsgkgsnl/1r5b1/ppppppppp/9/9/7P1/PPPPPPP1P/1B5R1/LNSGKGSNL w - 2","move":"２六歩(27)","hash":"c057f3d656801725865eff21380df70af7c3dafb","csa":"+2726FU","comments":[]},
+        // {"sfen":"lnsgkgsnl/1r5b1/p1ppppppp/1p7/9/7P1/PPPPPPP1P/1B5R1/LNSGKGSNL b - 3","move":"８四歩(83)","hash":"32941a1c91f364d968d8fa3ade25538cb93e08a7","csa":"-8384FU","comments":[]},
+        // {"sfen":"lnsgkgsnl/1r5b1/p1ppppppp/1p7/9/2P4P1/PP1PPPP1P/1B5R1/LNSGKGSNL w - 4","move":"７六歩(77)","hash":"cc1a9d9465487ee1d970e725eee8b1f9ca15e2fb","csa":"+7776FU","comments":[]},
+      ]
+    }
+  },
+  created () {
+    let boardSize = 9
+    for (let x = 0; x < boardSize; x++) {
+      this.rows.push(Array(boardSize))
+    }
+  },
+  methods: {
+    play () {
+      console.log('play')
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
