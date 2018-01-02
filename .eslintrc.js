@@ -25,6 +25,7 @@ module.exports = {
     'quotes': 'off',
     'camelcase': 'off',
     'no-multi-spaces': 'off',
-    "comma-dangle": "always",
+    "comma-dangle": ["error", "always"],
+    "object-curly-spacing": "off",
   }
 }
