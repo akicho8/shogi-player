@@ -22,7 +22,7 @@ class Piece {
 
   static table() {
     return [
-      { key: "king", name: "玉", basic_alias: "王",  promoted_name: null, promoted_alias: null, csa_basic_name: "OU", csa_promoted_name: null, sfen_char: "K", promotable: false, },
+      { key: "king",   name: "玉", basic_alias: "王",  promoted_name: null, promoted_alias: null,   csa_basic_name: "OU", csa_promoted_name: null, sfen_char: "K", promotable: false, },
       { key: "rook",   name: "飛", basic_alias: null,  promoted_name: "龍", promoted_alias: "竜",   csa_basic_name: "HI", csa_promoted_name: "RY", sfen_char: "R", promotable: true,  },
       { key: "bishop", name: "角", basic_alias: null,  promoted_name: "馬", promoted_alias: null,   csa_basic_name: "KA", csa_promoted_name: "UM", sfen_char: "B", promotable: true,  },
       { key: "gold",   name: "金", basic_alias: null,  promoted_name: null, promoted_alias: null,   csa_basic_name: "KI", csa_promoted_name: null, sfen_char: "G", promotable: false, },

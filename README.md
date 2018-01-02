@@ -1,4 +1,4 @@
-# myapp
+# shogi_player
 
 > A Vue.js project
 

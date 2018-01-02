@@ -1,7 +1,8 @@
 // -*- coding: utf-8; compile-command: "../node_modules/.bin/babel-node usi.js" -*-
 // -*- coding: utf-8; compile-command: "node usi.js" -*-
 
-import { XRegExp } from 'xregexp'
+var XRegExp = require('xregexp')
+// import { XRegExp } from 'xregexp'
 // const Piece = require('./piece')
 // import { XRegExp } from "xregexp"
 import { Piece } from './piece'
@@ -15,13 +16,15 @@ class Sfen {
   }
 
   parse () {
+    this.source = this.source.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     // (/position\s+(sfen\s+(?<sfen>\S+)\s+(?<b_or_w>\S+)\s+(?<hold_pieces>\S+)\s+(?<turn_counter_next>\d+)|(?<startpos>startpos))(\s+moves\s+(?<moves>.*))?/)
-    const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)")
+    const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
     this.md = XRegExp.exec(this.source, regex)
     this.attributes        = this.md
     this.sfen              = this.md["sfen"]
     this.b_or_w            = this.md["b_or_w"]
     this.turn_counter_next = this.md["turn_counter_next"]
+    this.moves             = this.md["moves"]
   }
 
   field () {
@@ -77,17 +80,32 @@ class Sfen {
     return list
   }
 
+  turn_counter() {
+    return Number(this.attributes["turn_counter_next"]) - 1
+  }
+
+  komaochi_p() {
+    return (this.turn_counter() % 2) === 0 && this.location() == "white"
+  }
+
+  move_infos () {
+    return this.attributes["moves"].split(/\s+/).map((e) => {
+      return e
+    })
+  }
+
   toString () {
     return `(${this.source})`
   }
 }
 
-// if (process.argv[1] === require.main.filename) {
-//   let sfen = new Sfen("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
-//   sfen.parse()
-//   console.log(sfen.field())
-//   console.log(sfen.location())
-//   console.log(sfen.hold_pieces())
-// }
+if (process.argv[1] === require.main.filename) {
+  let sfen = new Sfen("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
+  sfen.parse()
+  // console.log(sfen.field())
+  // console.log(sfen.location())
+  // console.log(sfen.hold_pieces())
+  console.log(sfen.move_infos())
+}
 
-export { Sfen }
+// export { Sfen }

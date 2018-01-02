@@ -1,8 +1,8 @@
 {
-  "name": "myapp",
+  "name": "shogi_player",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "akicho8 <akicho8@gmail.com>",
+  "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -16,6 +16,8 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "xregexp": "^3.2.0"
