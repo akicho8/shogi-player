@@ -1,6 +1,12 @@
+// -*- coding: utf-8; compile-command: "../node_modules/.bin/babel-node usi.js" -*-
+// -*- coding: utf-8; compile-command: "node usi.js" -*-
+
 const XRegExp = require('xregexp')
-const Piece = require('./piece')
+// const Piece = require('./piece')
 // import { XRegExp } from "xregexp"
+import { Piece } from './piece'
+
+// console.log(Piece.foo())
 
 class Sfen {
   constructor (source) {

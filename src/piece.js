@@ -1,11 +1,18 @@
+// -*- coding: utf-8; compile-command: "../node_modules/.bin/babel-node piece.js" -*-
+// -*- coding: utf-8; compile-command: "node piece.js" -*-
+
 class Piece {
   // static name = "1"
 
-  static lookup(v) {
+  static foo () {
+    return 1
+  }
+
+  static lookup (v) {
     return this.table().find((e) => e.sfen_char == v.toUpperCase())
   }
 
-  static fetch(v) {
+  static fetch (v) {
     const element = this.lookup(v)
     if (!element) {
       throw(`${v} not found`)
