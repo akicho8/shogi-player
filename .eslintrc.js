@@ -10,7 +10,7 @@ module.exports = {
     browser: true,
   },
   // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  extends: 'standard',
+  // extends: 'standard',
   // required to lint *.vue files
   plugins: [
     'html'
@@ -25,7 +25,13 @@ module.exports = {
     'quotes': 'off',
     'camelcase': 'off',
     'no-multi-spaces': 'off',
-    "comma-dangle": ["error", "always"],
-    "object-curly-spacing": "off",
+    // 'comma-dangle': ['error', 'always'],
+    'comma-dangle': 'off',
+    'curly': 'off',
+    'object-curly-spacing': 'off',
+    'object-curly-even-spacing': 'off',
+    'no-throw-literal': 'off',
+    'space-before-function-paren': 'off',
+    
   }
 }
