@@ -25,5 +25,6 @@ module.exports = {
     'quotes': 'off',
     'camelcase': 'off',
     'no-multi-spaces': 'off',
+    "comma-dangle": "always",
   }
 }
