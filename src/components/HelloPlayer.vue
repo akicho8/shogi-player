@@ -12,8 +12,8 @@
   </div>
   <br>
 
-  <div>
-    <ul class="hold_pieces">
+  <div class="hold_pieces">
+    <ul>
       <li v-for="(count, piece) in hold_pieces['white']">
         <span class="piece_name">{{piece | piece_name}}</span>
         <template v-if="count >= 2">
@@ -33,8 +33,8 @@
     </tr>
   </table>
 
-  <div>
-    <ul class="hold_pieces">
+  <div class="hold_pieces">
+    <ul>
       <li v-for="(count, piece) in hold_pieces['black']">
         <span class="piece_name">{{piece | piece_name}}</span>
         <template v-if="count >= 2">
@@ -205,11 +205,15 @@ $piece-bg-color:        darken($base-color, 38%)
 $font-color:            darken($base-color,  0%)
 $blank-bg-color:        darken($base-color, 50%)
 $something-exist-color: lighten($base-color, 20%)
+$font-size:             4.4vmin
 
 $trigger-color:         darken($base-color,  0%)
 $trigger-bg-color:      darken($base-color, 37%)
 
 $cell-size: 7vmin
+
+*
+  box-sizing: border-box
 
 .shogi_player
   color: white
@@ -229,7 +233,7 @@ $cell-size: 7vmin
     border: 1px solid $line-color
     box-shadow: 0 0 24vmin rgba($line-color, 0.5)
     td
-      font-size: 4.4vmin
+      font-size: $font-size
       width: $cell-size
       height: $cell-size
       padding: 0
@@ -249,9 +253,20 @@ $cell-size: 7vmin
         background: $trigger-bg-color
       &.any_from_point
         background: $trigger-bg-color
-  ul.hold_pieces
-    list-style-type: none
-    li
-      display: inline-block
-      margin: 8px
+  .hold_pieces
+    border: 0px solid cyan
+    background: blue
+    height: $cell-size / 2
+    vertical-align: middle
+    ul
+      list-style-type: none
+      li
+        display: inline-block
+        .piece_name
+          font-size: $font-size
+          color: $piece-color
+        .piece_count
+          font-size: $font-size / 2
+          color: $piece-color
+
 </style>
