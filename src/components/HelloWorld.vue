@@ -124,6 +124,10 @@ export default {
             promoted: m.promoted,
             location: m.location,
           }
+          this.hold_pieces[m.location][battler.piece.key] -= 1 // this.$set にしないとだめかも
+          if (this.hold_pieces[m.location][battler.piece.key] <= 0) {
+            delete this.hold_pieces[m.location][battler.piece.key]
+          }
           this.$set(this.field, battler.pos, battler)
         } else {
           let battler = this.field[m.origin_pos]
