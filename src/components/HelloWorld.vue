@@ -115,7 +115,7 @@ export default {
 
       const move_infos = this.sfen.move_infos()
       const num = this.turn_current - this.turn_counter_base
-      for (let i = 0; i < num; i++) {
+      _(num).times((i) => {
         const m = move_infos[i]
         if (m.stroke_piece) {
           const battler = {
@@ -144,8 +144,9 @@ export default {
           }
           this.$set(this.field, m.pos, battler)
         }
-      }
+      })
     },
+
     cell_view(x, y) {
       const cell = this.field[[x, y]]
       let str = ""
