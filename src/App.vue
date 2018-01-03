@@ -1,10 +1,6 @@
 <template>
 <div id="app">
-  <img src="./assets/logo.png">
-  コンテンツの部分
-  <p>
-    <router-view/>
-  </p>
+  <router-view/>
 </div>
 </template>
 
@@ -14,12 +10,10 @@ export default {
 }
 </script>
 
-<style>
-#app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
+<style lang="sass">
+body
+  margin: 0
+  padding: 0
+  background: black
+  min-height: 100vh
 </style>
