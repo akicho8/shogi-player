@@ -1,15 +1,9 @@
-// -*- coding: utf-8; compile-command: "../node_modules/.bin/babel-node piece.js" -*-
-// -*- coding: utf-8; compile-command: "node piece.js" -*-
+// -*- compile-command: "babel-node piece.js" -*-
 
 class Piece {
-  // static name = "1"
-
-  static foo () {
-    return 1
-  }
-
   static lookup (v) {
-    return this.table().find((e) => e.sfen_char === v.toUpperCase())
+    v = v.toUpperCase()
+    return this.table().find((e) => e.sfen_char === v)
   }
 
   static fetch (v) {
