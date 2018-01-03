@@ -61,7 +61,7 @@ console.log(Piece.fetch("B"))
 
 /* eslint-disable no-new */
 export default {
-  name: 'HelloWorld',
+  name: 'HelloPlayer',
 
   data () {
     return {
