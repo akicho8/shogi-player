@@ -18,10 +18,8 @@ class Sfen {
 
   parse () {
     this.source = this.source.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
-    // (/position\s+(sfen\s+(?<sfen>\S+)\s+(?<b_or_w>\S+)\s+(?<hold_pieces>\S+)\s+(?<turn_counter_next>\d+)|(?<startpos>startpos))(\s+moves\s+(?<moves>.*))?/)
     const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
-    this.md = XRegExp.exec(this.source, regex)
-    this.attributes = this.md
+    this.attributes = XRegExp.exec(this.source, regex)
   }
 
   initial_field () {
@@ -36,7 +34,7 @@ class Sfen {
             pos: new Point([x, y]),
             piece: Piece.fetch(m.piece),
             promoted: (m.promoted === '+'),
-            location: this.location_by(m.piece),
+            location: this.__location_by(m.piece),
           }
           field[battler.pos] = battler
           x += 1
@@ -44,14 +42,6 @@ class Sfen {
       })
     })
     return field
-  }
-
-  location_by (v) {
-    if (/[A-Z]/.test(v)) {
-      return "black"
-    } else {
-      return "white"
-    }
   }
 
   location () {
@@ -63,19 +53,20 @@ class Sfen {
   }
 
   hold_pieces () {
-    const list = {}
+    const counts = {}
     if (this.attributes["hold_pieces"] !== "-") {
-      XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+?)(?<piece>\\S)"), (m, i) => {
+      console.log(this.attributes["hold_pieces"])
+      XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece>\\S)"), (m, i) => {
+        const piece = Piece.fetch(m.piece)
         const count = Number(m.count || 1)
-        console.log(count)
-        // piece = Piece.fetch_by_sfen_char(ch)
-        // location = Location.fetch_by_sfen_char(ch)
-        // pieces[location] ||= []
-        // pieces[location].concat([piece] * count)
-        // end
+        const location = this.__location_by(m.piece)
+        if (!counts[location]) {
+          counts[location] = {}
+        }
+        counts[location][piece.key] = (counts[location][piece.key] || 0) + count
       })
     }
-    return list
+    return counts
   }
 
   turn_counter_next() {
@@ -111,7 +102,6 @@ class Sfen {
       attrs["scene_index"] = this.turn_counter_base() + i
       attrs["scene_offsert"] = i
       attrs["location"] = this.location_of(i)
-
       const md = XRegExp.exec(e, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
       attrs["promoted_trigger"] = (md.promoted === "+")
       if (md["origin_y"] === "*") {
@@ -127,21 +117,30 @@ class Sfen {
   toString () {
     return `(${this.source})`
   }
+
+  __location_by (v) {
+    if (/[A-Z]/.test(v)) {
+      return "black"
+    } else {
+      return "white"
+    }
+  }
 }
 
 export { Sfen }
 
-// console.log(process.argv)
-// console.log(process.argv[0])
-// console.log(process.argv[1])
-// console.log(require.main.filename)
-// console.log(__filename)
+console.log(process.argv)
+console.log(process.argv[0])
+console.log(process.argv[1])
+console.log(require.main)
+console.log(require.main.filename)
+console.log(__filename)
 
-if (process) {
+if (require.main.filename) {
   let sfen = new Sfen("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
   sfen.parse()
   // console.log(sfen.field())
   // console.log(sfen.location())
-  // console.log(sfen.hold_pieces())
-  console.log(sfen.move_infos())
+  console.log(sfen.hold_pieces())
+  // console.log(sfen.move_infos())
 }

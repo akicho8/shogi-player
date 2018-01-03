@@ -11,6 +11,18 @@
     <button @click="play_next">次へ</button>
   </div>
   <br>
+
+  <div>
+    <ul class="hold_pieces">
+      <li v-for="(count, piece) in hold_pieces['white']">
+        <span class="piece_name">{{piece | piece_name}}</span>
+        <template v-if="count >= 2">
+          <span class="piece_count">{{count}}</span>
+        </template>
+      </li>
+    </ul>
+  </div>
+
   <table>
     <tr v-for="y in board_size">
       <template v-for="x in board_size">
@@ -20,13 +32,32 @@
       </template>
     </tr>
   </table>
+
+  <div>
+    <ul class="hold_pieces">
+      <li v-for="(count, piece) in hold_pieces['black']">
+        <span class="piece_name">{{piece | piece_name}}</span>
+        <template v-if="count >= 2">
+          <span class="piece_count">{{count}}</span>
+        </template>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    {{hold_pieces}}
+  </div>
+
 </div>
 </template>
 
 <script>
-
 import { Sfen } from "../usi"
 import { Board } from "../board"
+import { Piece } from "../piece"
+import { _ } from "underscore"
+
+console.log(Piece.fetch("B"))
 
 /* eslint-disable no-new */
 export default {
@@ -80,14 +111,12 @@ export default {
       this.field = this.sfen.initial_field()
       this.turn_counter_base = this.sfen.turn_counter_base()
       this.turn_counter_max = this.sfen.turn_counter_max()
+      this.hold_pieces = this.sfen.hold_pieces()
 
       const move_infos = this.sfen.move_infos()
       const num = this.turn_current - this.turn_counter_base
       for (let i = 0; i < num; i++) {
         const m = move_infos[i]
-        if (!m) {
-          break
-        }
         if (m.stroke_piece) {
           const battler = {
             pos: m.pos,
@@ -102,6 +131,13 @@ export default {
             battler.promoted = true
           }
           this.$set(this.field, m.origin_pos, null)
+          const battler0 = this.field[m.pos]
+          if (battler0) {
+            if (!this.hold_pieces[m.location]) {
+              this.hold_pieces[m.location] = {}
+            }
+            this.hold_pieces[m.location][battler0.piece.key] = (this.hold_pieces[m.location][battler0.piece.key] || 0) + 1
+          }
           this.$set(this.field, m.pos, battler)
         }
       }
@@ -126,7 +162,31 @@ export default {
         klass.push(cell.location)
       }
       return klass
-    }
+    },
+
+    cell_class2(location) {
+      const __hold_pieces = this.hold_pieces[location] || {}
+      let list = []
+      list = Piece.table().map((e) => {
+        let count = __hold_pieces[e.key] || 0
+        let value = null
+        if (count >= 1) {
+          if (count == 1) {
+            count = ""
+          }
+          value = {name: e.name, count: count}
+        }
+        return value
+      })
+      list = _.compact(list)
+      return list.join(" ")
+    },
+  },
+
+  filters: {
+    piece_name(piece_key) {
+      return Piece.fetch(piece_key).name
+    },
   },
 }
 </script>
@@ -147,6 +207,7 @@ $trigger-bg-color:      darken($base-color, 37%)
 $cell-size: 7vmin
 
 .shogi_player
+  color: white
   margin: 0 auto
   text-align: center
 
@@ -183,4 +244,9 @@ $cell-size: 7vmin
         background: $trigger-bg-color
       &.any_from_point
         background: $trigger-bg-color
+  ul.hold_pieces
+    list-style-type: none
+    li
+      display: inline-block
+      margin: 8px
 </style>
