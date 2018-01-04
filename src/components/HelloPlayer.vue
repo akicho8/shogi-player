@@ -17,9 +17,11 @@
   <div class="hold_pieces">
     <ul>
       <li v-for="(count, piece) in hold_pieces['white']">
-        <span class="piece_name">{{piece | piece_name}}</span>
-        <template v-if="count >= 2">
-          <span class="piece_count">{{count}}</span>
+        <template v-if="count >= 1">
+          <span class="piece_name">{{piece | piece_name}}</span>
+          <template v-if="count >= 2">
+            <span class="piece_count">{{count}}</span>
+          </template>
         </template>
       </li>
     </ul>
@@ -38,9 +40,11 @@
   <div class="hold_pieces">
     <ul>
       <li v-for="(count, piece) in hold_pieces['black']">
-        <span class="piece_name">{{piece | piece_name}}</span>
-        <template v-if="count >= 2">
-          <span class="piece_count">{{count}}</span>
+        <template v-if="count >= 1">
+          <span class="piece_name">{{piece | piece_name}}</span>
+          <template v-if="count >= 2">
+            <span class="piece_count">{{count}}</span>
+          </template>
         </template>
       </li>
     </ul>
@@ -72,6 +76,9 @@ export default {
       turn_current: 0,
       turn_counter_base: null,
       turn_counter_max: null,
+      hold_pieces: null,
+      field: null,
+      move_info: null,
     }
   },
 
@@ -104,11 +111,13 @@ export default {
       this.turn_counter_base = this.sfen.turn_counter_base()
       this.turn_counter_max = this.sfen.turn_counter_max()
       this.hold_pieces = this.sfen.hold_pieces()
+      this.move_info = null
 
       const move_infos = this.sfen.move_infos()
       const num = this.turn_current - this.turn_counter_base
       _(num).times((i) => {
         const m = move_infos[i]
+        this.move_info = m
         if (m.stroke_piece) {
           const battler = {
             pos: m.pos,
@@ -116,24 +125,27 @@ export default {
             promoted: m.promoted,
             location: m.location,
           }
-          this.hold_pieces[m.location][battler.piece.key] -= 1 // this.$set にしないとだめかも
-          if (this.hold_pieces[m.location][battler.piece.key] <= 0) {
-            delete this.hold_pieces[m.location][battler.piece.key]
+          {
+            const count = this.hold_pieces[m.location][battler.piece.key] - 1
+            this.$set(this.hold_pieces[m.location], battler.piece.key, count)
           }
           this.$set(this.field, battler.pos, battler)
         } else {
-          let battler = this.field[m.origin_pos]
+          {
+            const battler = this.field[m.pos]
+            if (battler) {
+              if (this.hold_pieces[m.location] === undefined) {
+                this.$set(this.hold_pieces, m.location, {})
+              }
+              const count = (this.hold_pieces[m.location][battler.piece.key] || 0) + 1
+              this.$set(this.hold_pieces[m.location], battler.piece.key, count)
+            }
+          }
+          const battler = this.field[m.origin_pos]
           if (m.promoted_trigger) {
             battler.promoted = true
           }
           this.$set(this.field, m.origin_pos, null)
-          const battler0 = this.field[m.pos]
-          if (battler0) {
-            if (!this.hold_pieces[m.location]) {
-              this.hold_pieces[m.location] = {}
-            }
-            this.hold_pieces[m.location][battler0.piece.key] = (this.hold_pieces[m.location][battler0.piece.key] || 0) + 1
-          }
           this.$set(this.field, m.pos, battler)
         }
       })
@@ -157,6 +169,18 @@ export default {
       let klass = []
       if (cell) {
         klass.push(cell.location)
+      }
+      if (this.move_info) {
+        const origin_pos = this.move_info.origin_pos
+        if (origin_pos) {
+          if (origin_pos.x === x && origin_pos.y === y) {
+            klass.push("origin_pos")
+          }
+        }
+        const pos = this.move_info.pos
+        if (pos.x === x && pos.y === y) {
+          klass.push("trigger")
+        }
       }
       return klass
     },
@@ -244,6 +268,8 @@ $cell-size: 7vmin
         color: $trigger-color
         background: $trigger-bg-color
       &.any_from_point
+        background: $trigger-bg-color
+      &.origin_pos
         background: $trigger-bg-color
   .hold_pieces
     border: 0px solid cyan

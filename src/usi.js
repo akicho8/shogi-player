@@ -60,7 +60,7 @@ class Sfen {
         const piece = Piece.fetch(m.piece)
         const count = Number(m.count || 1)
         const location = this.__location_by(m.piece)
-        if (!counts[location]) {
+        if (counts[location] === undefined) {
           counts[location] = {}
         }
         counts[location][piece.key] = (counts[location][piece.key] || 0) + count
