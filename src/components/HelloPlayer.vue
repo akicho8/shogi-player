@@ -115,6 +115,8 @@ export default {
       console.log("key", e.key)
       console.log("code", e.code)
 
+      e.preventDefault()
+
       let gap = null
       let force_value = null
 
