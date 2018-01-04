@@ -11,6 +11,18 @@ $current-bg-color:      darken($base-color, 37%)
 $cell-size: 7vmin
 
 .shogi_player
+  .obj1
+    width: 256px
+    height: 256px
+    background: blue
+  .obj2
+    width: 256px
+    height: 256px
+    background: red
+    transform: translate(200px, 200px)
+
+  font-family: "YuMincho", "Yu Mincho", serif
+
   color: white
   margin: 0 auto
   text-align: center
@@ -24,13 +36,8 @@ $cell-size: 7vmin
   .board_turn_on
     transform: rotate(180deg)
     transition: all 1000ms 0s ease-in-out
-    
-  .reverse1
-    transform: rotate(180deg)
-    transition: all 500ms 0s ease-out
 
   table
-    font-family: "YuMincho", "Yu Mincho", serif
     margin: 0 auto
     padding: 0
     background: $line-color
@@ -49,6 +56,8 @@ $cell-size: 7vmin
       &.current, &.origin_pos
         color: $piece-color
         background: $current-bg-color
+      &.current
+        /* transition: all 500ms 0s ease-out
 
   // 駒台
   .hold_pieces

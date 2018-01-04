@@ -1,5 +1,8 @@
 <template>
 <div class="shogi_player">
+  <div class="obj1"></div>
+  <div class="obj2"></div>
+  
   <div>
     {{turn_current}}手目
   </div>
@@ -119,8 +122,6 @@ export default {
       console.log("key", e.key)
       console.log("code", e.code)
 
-      e.preventDefault()
-
       let gap = null
       let force_value = null
 
@@ -153,6 +154,10 @@ export default {
       }
       if (force_value !== null) {
         this.turn_current = force_value
+      }
+
+      if (gap !== null || force_value !== null) {
+        e.preventDefault()
       }
     },
 
@@ -202,6 +207,16 @@ export default {
           this.$set(this.field, m.origin_pos, null)
           this.$set(this.field, m.pos, battler)
         }
+      })
+
+      this.$nextTick(() => {
+        const dom1 = document.querySelector(".origin_pos")
+        const rect1 = dom1.getBoundingClientRect()
+        console.log(rect1)
+
+        const dom2 = document.querySelector(".current")
+        const rect2 = dom2.getBoundingClientRect()
+        console.log(rect2)
       })
     },
 
