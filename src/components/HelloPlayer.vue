@@ -12,42 +12,47 @@
     <button @click="turn_current += 1">＞</button>
     <button @click="turn_current = turn_counter_max">＞｜</button>
   </div>
-  <br>
-
-  <div class="hold_pieces">
-    <ul>
-      <li v-for="(count, piece) in hold_pieces['white']">
-        <template v-if="count >= 1">
-          <span class="piece_name">{{piece | piece_name}}</span>
-          <template v-if="count >= 2">
-            <span class="piece_count">{{count}}</span>
-          </template>
-        </template>
-      </li>
-    </ul>
+  <div>
+    <button @click="reverse = !reverse">反転</button>
   </div>
-
-  <table>
-    <tr v-for="y in board_size">
-      <template v-for="x in board_size">
-        <td :class="cell_class(x -1, y - 1)">
-          {{cell_view(x - 1, y - 1)}}
-        </td>
-      </template>
-    </tr>
-  </table>
-
-  <div class="hold_pieces">
-    <ul>
-      <li v-for="(count, piece) in hold_pieces['black']">
-        <template v-if="count >= 1">
-          <span class="piece_name">{{piece | piece_name}}</span>
-          <template v-if="count >= 2">
-            <span class="piece_count">{{count}}</span>
+  <br>
+  
+  <div :class="{reverse: reverse}">
+    <div class="hold_pieces">
+      <ul>
+        <li v-for="(count, piece) in hold_pieces['white']">
+          <template v-if="count >= 1">
+            <span class="piece_name">{{piece | piece_name}}</span>
+            <template v-if="count >= 2">
+              <span class="piece_count">{{count}}</span>
+            </template>
           </template>
+        </li>
+      </ul>
+    </div>
+    
+    <table>
+      <tr v-for="y in board_size">
+        <template v-for="x in board_size">
+          <td :class="cell_class(x -1, y - 1)">
+            {{cell_view(x - 1, y - 1)}}
+          </td>
         </template>
-      </li>
-    </ul>
+      </tr>
+    </table>
+    
+    <div class="hold_pieces">
+      <ul>
+        <li v-for="(count, piece) in hold_pieces['black']">
+          <template v-if="count >= 1">
+            <span class="piece_name">{{piece | piece_name}}</span>
+            <template v-if="count >= 2">
+              <span class="piece_count">{{count}}</span>
+            </template>
+          </template>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div>
@@ -79,6 +84,7 @@ export default {
       hold_pieces: null,
       field: null,
       move_info: null,
+      reverse: false,
     }
   },
 
@@ -184,24 +190,6 @@ export default {
       }
       return klass
     },
-
-    cell_class2(location) {
-      const __hold_pieces = this.hold_pieces[location] || {}
-      let list = []
-      list = Piece.table().map((e) => {
-        let count = __hold_pieces[e.key] || 0
-        let value = null
-        if (count >= 1) {
-          if (count == 1) {
-            count = ""
-          }
-          value = {name: e.name, count: count}
-        }
-        return value
-      })
-      list = _.compact(list)
-      return list.join(" ")
-    },
   },
 
   filters: {
@@ -237,6 +225,9 @@ $cell-size: 7vmin
   text-align: center
 
   .white
+    transform: rotate(180deg)
+
+  .reverse
     transform: rotate(180deg)
 
   table
