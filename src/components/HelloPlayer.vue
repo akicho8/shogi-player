@@ -16,42 +16,44 @@
     <button @click="reverse = !reverse">反転</button>
   </div>
   <br>
-
+  
   <div :class="{reverse: reverse}">
-    <div class="hold_pieces">
-      <ul>
-        <li v-for="(count, piece) in hold_pieces['white']">
-          <template v-if="count >= 1">
-            <span class="piece_name">{{piece | piece_name}}</span>
-            <template v-if="count >= 2">
-              <span class="piece_count">{{count}}</span>
+    <div class="row">
+      <span class="hold_pieces">
+        <ul class="white">
+          <li v-for="(count, piece) in hold_pieces['white']">
+            <template v-if="count >= 1">
+              <span class="piece_name">{{piece | piece_name}}</span>
+              <template v-if="count >= 2">
+                <span class="piece_count">{{count}}</span>
+              </template>
             </template>
+          </li>
+        </ul>
+      </span>
+      
+      <table>
+        <tr v-for="y in board_size">
+          <template v-for="x in board_size">
+            <td :class="cell_class(x -1, y - 1)">
+              {{cell_view(x - 1, y - 1)}}
+            </td>
           </template>
-        </li>
-      </ul>
-    </div>
-
-    <table>
-      <tr v-for="y in board_size">
-        <template v-for="x in board_size">
-          <td :class="cell_class(x -1, y - 1)">
-            {{cell_view(x - 1, y - 1)}}
-          </td>
-        </template>
-      </tr>
-    </table>
-
-    <div class="hold_pieces">
-      <ul>
-        <li v-for="(count, piece) in hold_pieces['black']">
-          <template v-if="count >= 1">
-            <span class="piece_name">{{piece | piece_name}}</span>
-            <template v-if="count >= 2">
-              <span class="piece_count">{{count}}</span>
+        </tr>
+      </table>
+      
+      <span class="hold_pieces">
+        <ul class="black">
+          <li v-for="(count, piece) in hold_pieces['black']">
+            <template v-if="count >= 1">
+              <span class="piece_name">{{piece | piece_name}}</span>
+              <template v-if="count >= 2">
+                <span class="piece_count">{{count}}</span>
+              </template>
             </template>
-          </template>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </span>
     </div>
   </div>
 
@@ -67,8 +69,6 @@ import { Sfen } from "../usi"
 import { Board } from "../board"
 import { Piece } from "../piece"
 import { _ } from "underscore"
-
-console.log(Piece.fetch("B"))
 
 /* eslint-disable no-new */
 export default {
@@ -305,10 +305,9 @@ $cell-size: 7vmin
       &.origin_pos
         background: $trigger-bg-color
   .hold_pieces
-    border: 0px solid cyan
-    background: blue
-    height: $cell-size / 2
-    vertical-align: middle
+    border: 1px solid cyan
+    height: $cell-size
+    display: flex
     ul
       list-style-type: none
       li
