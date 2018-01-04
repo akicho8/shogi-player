@@ -1,0 +1,88 @@
+$base-color:            hsl(200, 50%, 50%)
+$board-bg-color:        darken($base-color, 43%)
+$line-color:            darken($base-color,  0%)
+$piece-color:           darken($base-color,  0%)
+$piece-bg-color:        darken($base-color, 38%)
+$font-color:            darken($base-color,  0%)
+$font-size:             4.4vmin
+$current-color:         darken($base-color,  0%)
+$current-bg-color:      darken($base-color, 37%)
+
+$cell-size: 7vmin
+
+.shogi_player
+  color: white
+  margin: 0 auto
+  text-align: center
+
+  .white
+    transform: rotate(180deg)
+
+  .board_turn_off
+    transform: rotate(0deg)
+    transition: all 1000ms 0s ease-in-out
+  .board_turn_on
+    transform: rotate(180deg)
+    transition: all 1000ms 0s ease-in-out
+    
+  .reverse1
+    transform: rotate(180deg)
+    transition: all 500ms 0s ease-out
+
+  table
+    font-family: "YuMincho", "Yu Mincho", serif
+    margin: 0 auto
+    padding: 0
+    background: $line-color
+    border-collapse: separate
+    border-spacing: 1px
+    border: 1px solid $line-color
+    box-shadow: 0 0 24vmin rgba($line-color, 0.5)
+    td
+      font-size: $font-size
+      width: $cell-size
+      height: $cell-size
+      padding: 0
+      color: $piece-color
+      background: $board-bg-color
+      text-align: center
+      &.current, &.origin_pos
+        color: $piece-color
+        background: $current-bg-color
+
+  // 駒台
+  .hold_pieces
+    min-width: 14vmin
+    margin: 0 1vmin
+    text-align: left
+    /* border: 1px solid cyan
+    /* background: hsl(200, 50%,10%)
+
+    ul
+      list-style-type: none
+      padding: 1vmin
+      margin: 1vmin
+      li
+        // 歩(2) の並びを横軸中央で揃える
+        display: flex
+        align-items: center
+
+        // 持駒
+        color: $piece-color
+        .piece_name
+          font-size: $font-size
+
+        // 持駒数
+        .piece_count
+          vertical-align: middle
+          font-size: $font-size * 0.75
+
+  .board_wrap
+    display: flex
+    justify-content: center
+    .flex_item:nth-child(1)
+      align-self: flex-start
+    .flex_item:nth-child(2)
+      align-self: center
+    .flex_item:nth-child(3)
+      align-self: flex-end

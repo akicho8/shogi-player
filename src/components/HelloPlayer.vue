@@ -13,47 +13,51 @@
     <button @click="turn_current = turn_counter_max">＞｜</button>
   </div>
   <div>
-    <button @click="reverse = !reverse">反転</button>
+    <button @click="board_turn = !board_turn">反転</button>
   </div>
   <br>
-  
-  <div :class="{reverse: reverse}">
+
+  <div :class="board_turn ? 'board_turn_on' : 'board_turn_off'">
     <div class="row">
-      <span class="hold_pieces">
-        <ul class="white">
-          <li v-for="(count, piece) in hold_pieces['white']">
-            <template v-if="count >= 1">
-              <span class="piece_name">{{piece | piece_name}}</span>
-              <template v-if="count >= 2">
-                <span class="piece_count">{{count}}</span>
-              </template>
-            </template>
-          </li>
-        </ul>
-      </span>
-      
-      <table>
-        <tr v-for="y in board_size">
-          <template v-for="x in board_size">
-            <td :class="cell_class(x -1, y - 1)">
-              {{cell_view(x - 1, y - 1)}}
-            </td>
-          </template>
-        </tr>
-      </table>
-      
-      <span class="hold_pieces">
-        <ul class="black">
-          <li v-for="(count, piece) in hold_pieces['black']">
-            <template v-if="count >= 1">
-              <span class="piece_name">{{piece | piece_name}}</span>
-              <template v-if="count >= 2">
-                <span class="piece_count">{{count}}</span>
-              </template>
-            </template>
-          </li>
-        </ul>
-      </span>
+      <div class="col-lg-12">
+        <div class="board_wrap">
+          <div class="flex_item hold_pieces white">
+            <ul>
+              <li v-for="(count, piece) in hold_pieces['white']">
+                <template v-if="count >= 1">
+                  <span class="piece_name">{{piece | piece_name}}</span>
+                  <template v-if="count >= 2">
+                    <span class="piece_count">{{count}}</span>
+                  </template>
+                </template>
+              </li>
+            </ul>
+          </div>
+          <div class="flex_item board">
+            <table>
+              <tr v-for="y in board_size">
+                <template v-for="x in board_size">
+                  <td :class="cell_class(x -1, y - 1)">
+                    {{cell_view(x - 1, y - 1)}}
+                  </td>
+                </template>
+              </tr>
+            </table>
+          </div>
+          <div class="flex_item hold_pieces black">
+            <ul>
+              <li v-for="(count, piece) in hold_pieces['black']">
+                <template v-if="count >= 1">
+                  <span class="piece_name">{{piece | piece_name}}</span>
+                  <template v-if="count >= 2">
+                    <span class="piece_count">{{count}}</span>
+                  </template>
+                </template>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -84,7 +88,7 @@ export default {
       hold_pieces: null,
       field: null,
       move_info: null,
-      reverse: false,
+      board_turn: false,
     }
   },
 
@@ -229,7 +233,7 @@ export default {
         }
         const pos = this.move_info.pos
         if (pos.x === x && pos.y === y) {
-          klass.push("trigger")
+          klass.push("current")
         }
       }
       return klass
@@ -245,80 +249,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-$base-color:            hsl(200, 50%, 50%)
-$board-bg-color:        darken($base-color, 43%)
-$line-color:            darken($base-color,  0%)
-$piece-color:           darken($base-color,  0%)
-$piece-bg-color:        darken($base-color, 38%)
-$font-color:            darken($base-color,  0%)
-$blank-bg-color:        darken($base-color, 50%)
-$something-exist-color: lighten($base-color, 20%)
-$font-size:             4.4vmin
-
-$trigger-color:         darken($base-color,  0%)
-$trigger-bg-color:      darken($base-color, 37%)
-
-$cell-size: 7vmin
-
-*
-  box-sizing: border-box
-
-.shogi_player
-  color: white
-  margin: 0 auto
-  text-align: center
-
-  .white
-    transform: rotate(180deg)
-
-  .reverse
-    transform: rotate(180deg)
-
-  table
-    font-family: "YuMincho", "Yu Mincho", serif
-    margin: 0 auto
-    padding: 0
-    background: $line-color
-    border-collapse: separate
-    border-spacing: 1px
-    border: 1px solid $line-color
-    box-shadow: 0 0 24vmin rgba($line-color, 0.5)
-    td
-      font-size: $font-size
-      width: $cell-size
-      height: $cell-size
-      padding: 0
-      color: $piece-color
-      background: $board-bg-color
-      text-align: center
-      &.active
-        background: $piece-bg-color
-      &.cell_blank
-        background: $blank-bg-color
-      &.something-exist-color
-        background: $something-exist-color
-      &.location_white
-        transform: rotate(180deg)
-      &.trigger
-        color: $trigger-color
-        background: $trigger-bg-color
-      &.any_from_point
-        background: $trigger-bg-color
-      &.origin_pos
-        background: $trigger-bg-color
-  .hold_pieces
-    border: 1px solid cyan
-    height: $cell-size
-    display: flex
-    ul
-      list-style-type: none
-      li
-        display: inline-block
-        .piece_name
-          font-size: $font-size
-          color: $piece-color
-        .piece_count
-          font-size: $font-size / 2
-          color: $piece-color
-
+@import "HelloPlayer"
 </style>
