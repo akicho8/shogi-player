@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { Piece } from "../piece"
 import { Mediator } from "../mediator"
 
 /* eslint-disable no-new */
@@ -91,14 +92,9 @@ export default {
   },
 
   watch: {
-    current_turn: function (new_value, old_value) {
-      if (this.mediator.sfen) {
-        if (this.current_turn < this.mediator.sfen.turn_counter_base()) {
-          this.current_turn = this.mediator.sfen.turn_counter_base()
-        }
-        if (this.mediator.sfen.turn_counter_max() < this.current_turn) {
-          this.current_turn = this.mediator.sfen.turn_counter_max()
-        }
+    current_turn: function () {
+      if (this.mediator) {
+        this.current_turn = this.mediator.current_turn_clamp(this.current_turn)
       }
       this.mediator_create()
     }

@@ -31,6 +31,7 @@ class Mediator {
     this.move_info = null
 
     const move_infos = this.sfen.move_infos()
+    this.current_turn = this.current_turn_clamp(this.current_turn)
     const num = this.current_turn - this.sfen.turn_counter_base()
     _(num).times((i) => {
       const m = move_infos[i]
@@ -100,6 +101,18 @@ class Mediator {
       }
     }
     return klass
+  }
+
+  current_turn_clamp(v) {
+    if (this.sfen) {
+      if (v < this.sfen.turn_counter_base()) {
+        v = this.sfen.turn_counter_base()
+      }
+      if (this.sfen.turn_counter_max() < v) {
+        v = this.sfen.turn_counter_max()
+      }
+    }
+    return v
   }
 }
 
