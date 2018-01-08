@@ -6,18 +6,17 @@
   <p>
     <div class="controller">
       <div class="btn-group">
-        <button clss="btn btn-default first"      @click="turn_current = turn_counter_base">｜＜</button>
-        <button clss="btn btn-default previous"   @click="turn_current -= 1">＜</button>
-        <button clss="btn btn-default next"       @click="turn_current += 1">＞</button>
-        <button clss="btn btn-default last"       @click="turn_current = turn_counter_max">＞｜</button>
-        <button clss="btn btn-default board_turn" @click="board_turn = !board_turn">反転</button>
+        <button class="btn btn-default first"      @click="turn_current = turn_counter_base">｜＜</button>
+        <button class="btn btn-default previous"   @click="turn_current -= 1">＜</button>
+        <button class="btn btn-default next"       @click="turn_current += 1">＞</button>
+        <button class="btn btn-default last"       @click="turn_current = turn_counter_max">＞｜</button>
+        <button class="btn btn-default board_turn" @click="board_turn = !board_turn">反転</button>
       </div>
     </div>
   </p>
   <p>
     <input type="range" v-model.number="turn_current" :min="turn_counter_base" :max="turn_counter_max" />
   </p>
-
   <div class="row">
     <div class="col-lg-12">
       <div class="board_container hifumin_eye" :class="{enable: board_turn}">
