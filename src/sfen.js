@@ -1,9 +1,6 @@
 // -*- compile-command: "babel-node sfen.js" -*-
 
 var XRegExp = require('xregexp')
-// import { XRegExp } from 'xregexp'
-// const Piece = require('./piece')
-// import { XRegExp } from "xregexp"
 import { Piece } from './piece'
 import { Board } from './board'
 import { Point } from './point'
@@ -11,15 +8,15 @@ import { Point } from './point'
 // console.log(Piece.foo())
 
 class Sfen {
-  constructor (source) {
-    this.source = source
+  constructor () {
+    this.kifu_body = null
     this.attributes = null
   }
 
   parse () {
-    this.source = this.source.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
+    this.kifu_body = this.kifu_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
-    this.attributes = XRegExp.exec(this.source, regex)
+    this.attributes = XRegExp.exec(this.kifu_body, regex)
   }
 
   field () {
@@ -115,7 +112,7 @@ class Sfen {
   }
 
   toString () {
-    return `(${this.source})`
+    return `(${this.kifu_body})`
   }
 
   __location_by (v) {
@@ -139,7 +136,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (require.main.filename) {
-  let sfen = new Sfen("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
+  let sfen = new Sfen()
+  sfen.kifu_body = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
   sfen.parse()
   // console.log(sfen.field())
   // console.log(sfen.location())
