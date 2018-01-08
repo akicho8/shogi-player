@@ -1,8 +1,6 @@
 <template>
 <div class="shogi_player">
-  <p>
-    {{current_turn}}手目
-  </p>
+  <p>{{current_turn}}手目</p>
   <div class="row">
     <div class="col-lg-12">
       <div class="board_container hifumin_eye" :class="{enable: board_turn}">
@@ -78,8 +76,8 @@ export default {
 
   data () {
     return {
-      mediator: null,
       current_turn: 0,
+      mediator: null,
       board_turn: false,
       env: process.env.NODE_ENV,
     }
