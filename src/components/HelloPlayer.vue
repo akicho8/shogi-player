@@ -1,5 +1,71 @@
-<template lang="pug">
-  include foo.pug
+<template>
+<div class="shogi_player">
+  <p>
+    {{turn_current}}手目
+  </p>
+  <p>
+    <div class="controller">
+      <div class="btn-group">
+        <button clss="btn btn-default first"      @click="turn_current = turn_counter_base">｜＜</button>
+        <button clss="btn btn-default previous"   @click="turn_current -= 1">＜</button>
+        <button clss="btn btn-default next"       @click="turn_current += 1">＞</button>
+        <button clss="btn btn-default last"       @click="turn_current = turn_counter_max">＞｜</button>
+        <button clss="btn btn-default board_turn" @click="board_turn = !board_turn">反転</button>
+      </div>
+    </div>
+  </p>
+  <p>
+    <input type="range" v-model.number="turn_current" :min="turn_counter_base" :max="turn_counter_max" />
+  </p>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="board_container hifumin_eye" :class="{enable: board_turn}">
+        <div class="flex_item hold_pieces white" :class="env">
+          <ul>
+            <li>☖</li>
+            <li v-for="(count, piece) in hold_pieces['white']">
+              <template v-if="count >= 1">
+                <span class="piece_name">{{piece | piece_name}}</span>
+                <template v-if="count >= 2">
+                  <span class="piece_count">{{count}}</span>
+                </template>
+              </template>
+            </li>
+          </ul>
+        </div>
+        <div class="flex_item board">
+          <table>
+            <tr v-for="y in board_size">
+              <template v-for="x in board_size">
+                <td :class="cell_class(x -1, y - 1)">
+                  {{cell_view(x - 1, y - 1)}}
+                </td>
+              </template>
+            </tr>
+          </table>
+        </div>
+        <div class="flex_item hold_pieces black" :class="env">
+          <ul>
+            <li>☗</li>
+            <li v-for="(count, piece) in hold_pieces['black']">
+              <template v-if="count >= 1">
+                <span class="piece_name">{{piece | piece_name}}</span>
+                <template v-if="count >= 2">
+                  <span class="piece_count">{{count}}</span>
+                </template>
+              </template>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template v-if="env !== 'production'">
+    {{hold_pieces}}
+  </template>
+</div>
 </template>
 
 <script>

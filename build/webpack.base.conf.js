@@ -74,18 +74,7 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      },
-      loaders: [{
-        include: /\.pug/,
-        loader: ['raw-loader', 'pug-html-loader'],
-        options: {
-          // options to pass to the compiler same as: https://pugjs.org/api/reference.html
-          data: {} // set of data to pass to the pug render.
-        }
-      },]
-  ]
-};
-
+      }
     ]
   },
   node: {
