@@ -4,11 +4,15 @@
     {{turn_current}}手目
   </p>
   <p>
-    <button @click="turn_current = turn_counter_base">｜＜</button>
-    <button @click="turn_current -= 1">＜</button>
-    <button @click="turn_current += 1">＞</button>
-    <button @click="turn_current = turn_counter_max">＞｜</button>
-    <button @click="board_turn = !board_turn">反転</button>
+    <div class="controller">
+      <div class="btn-group">
+        <button clss="btn btn-default first"      @click="turn_current = turn_counter_base">｜＜</button>
+        <button clss="btn btn-default previous"   @click="turn_current -= 1">＜</button>
+        <button clss="btn btn-default next"       @click="turn_current += 1">＞</button>
+        <button clss="btn btn-default last"       @click="turn_current = turn_counter_max">＞｜</button>
+        <button clss="btn btn-default board_turn" @click="board_turn = !board_turn">反転</button>
+      </div>
+    </div>
   </p>
   <p>
     <input type="range" v-model.number="turn_current" :min="turn_counter_base" :max="turn_counter_max" />
@@ -248,5 +252,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import "HelloPlayer"
+  @import "HelloPlayer"
 </style>
