@@ -1,4 +1,4 @@
-// -*- compile-command: "babel-node usi.js" -*-
+// -*- compile-command: "babel-node sfen.js" -*-
 
 var XRegExp = require('xregexp')
 // import { XRegExp } from 'xregexp'
@@ -22,7 +22,7 @@ class Sfen {
     this.attributes = XRegExp.exec(this.source, regex)
   }
 
-  initial_field () {
+  field () {
     let field = {}
     this.attributes["sfen"].split("/").forEach((e, y) => {
       let x = 0
@@ -129,12 +129,14 @@ class Sfen {
 
 export { Sfen }
 
-console.log(process.argv)
-console.log(process.argv[0])
-console.log(process.argv[1])
-console.log(require.main)
-console.log(require.main.filename)
-console.log(__filename)
+if (process.env.NODE_ENV !== 'production') {
+  console.log(process.argv)
+  console.log(process.argv[0])
+  console.log(process.argv[1])
+  console.log(require.main)
+  console.log(require.main.filename)
+  console.log(__filename)
+}
 
 if (require.main.filename) {
   let sfen = new Sfen("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
