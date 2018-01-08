@@ -4,39 +4,53 @@ $line-color:            darken($base-color,  0%)
 $piece-color:           darken($base-color,  0%)
 $piece-bg-color:        darken($base-color, 38%)
 $font-color:            darken($base-color,  0%)
-$font-size:             4.4vmin
 $current-color:         darken($base-color,  0%)
 $current-bg-color:      darken($base-color, 37%)
 
-$cell-size: 7vmin
+$cell-size: 5vmin
+$font-size: 3.2vmin
 
 .shogi_player
-  .obj1
-    width: 256px
-    height: 256px
-    background: blue
-  .obj2
-    width: 256px
-    height: 256px
-    background: red
-    transform: translate(200px, 200px)
-
   font-family: "YuMincho", "Yu Mincho", serif
 
   color: white
   margin: 0 auto
   text-align: center
 
+  // 汎用の反転
   .white
     transform: rotate(180deg)
 
-  .board_turn_off
+  // 将棋盤と駒台の反転
+  .hifumin_eye
     transform: rotate(0deg)
-    transition: all 1000ms 0s ease-in-out
-  .board_turn_on
-    transform: rotate(180deg)
-    transition: all 1000ms 0s ease-in-out
+    transition: all 0.2s 0s ease-in-out
+    &.enable
+      @extend .white
 
+  // スライダー
+  input[type=range]
+    width: 50vmin
+
+  // 駒台と将棋盤のレイアウト
+  .board_container
+    display: flex
+    /* すべてを中央よせ
+    justify-content: center
+
+    // △の駒台は左上
+    .flex_item:nth-child(1)
+      align-self: flex-start
+
+    // 将棋盤は上下の中央
+    .flex_item:nth-child(2)
+      align-self: center
+
+    // ▲の駒台は右下
+    .flex_item:nth-child(3)
+      align-self: flex-end
+
+  // 将棋盤
   table
     margin: 0 auto
     padding: 0
@@ -57,15 +71,16 @@ $cell-size: 7vmin
         color: $piece-color
         background: $current-bg-color
       &.current
-        /* transition: all 500ms 0s ease-out
+        // transition: all 500ms 0s ease-out
 
   // 駒台
   .hold_pieces
-    min-width: 14vmin
+    min-width: 10vmin
     margin: 0 1vmin
     text-align: left
-    /* border: 1px solid cyan
-    /* background: hsl(200, 50%,10%)
+    &.development
+      border: 1px solid cyan
+      background: hsl(200, 50%,10%)
 
     ul
       list-style-type: none
@@ -78,20 +93,13 @@ $cell-size: 7vmin
 
         // 持駒
         color: $piece-color
-        .piece_name
-          font-size: $font-size
+        font-size: $font-size
 
         // 持駒数
         .piece_count
           vertical-align: middle
-          font-size: $font-size * 0.75
+          margin-left: 0.3rem
+          font-size: $font-size * 0.8
 
-  .board_wrap
-    display: flex
-    justify-content: center
-    .flex_item:nth-child(1)
-      align-self: flex-start
-    .flex_item:nth-child(2)
-      align-self: center
-    .flex_item:nth-child(3)
-      align-self: flex-end
+        // 駒台の上のマーク
+        .location_mark

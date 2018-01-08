@@ -1,73 +1,66 @@
 <template>
 <div class="shogi_player">
-  <div class="obj1"></div>
-  <div class="obj2"></div>
-  
-  <div>
+  <p>
     {{turn_current}}手目
-  </div>
-  <div>
-    <input type="range" v-model.number="turn_current" :min="turn_counter_base" :max="turn_counter_max" />
-  </div>
-  <div>
+  </p>
+  <p>
     <button @click="turn_current = turn_counter_base">｜＜</button>
     <button @click="turn_current -= 1">＜</button>
     <button @click="turn_current += 1">＞</button>
     <button @click="turn_current = turn_counter_max">＞｜</button>
-  </div>
-  <div>
     <button @click="board_turn = !board_turn">反転</button>
-  </div>
-  <br>
+  </p>
+  <p>
+    <input type="range" v-model.number="turn_current" :min="turn_counter_base" :max="turn_counter_max" />
+  </p>
 
-  <div :class="board_turn ? 'board_turn_on' : 'board_turn_off'">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="board_wrap">
-          <div class="flex_item hold_pieces white">
-            <ul>
-              <li v-for="(count, piece) in hold_pieces['white']">
-                <template v-if="count >= 1">
-                  <span class="piece_name">{{piece | piece_name}}</span>
-                  <template v-if="count >= 2">
-                    <span class="piece_count">{{count}}</span>
-                  </template>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="board_container hifumin_eye" :class="{enable: board_turn}">
+        <div class="flex_item hold_pieces white" :class="env">
+          <ul>
+            <li>☖</li>
+            <li v-for="(count, piece) in hold_pieces['white']">
+              <template v-if="count >= 1">
+                <span class="piece_name">{{piece | piece_name}}</span>
+                <template v-if="count >= 2">
+                  <span class="piece_count">{{count}}</span>
                 </template>
-              </li>
-            </ul>
-          </div>
-          <div class="flex_item board">
-            <table>
-              <tr v-for="y in board_size">
-                <template v-for="x in board_size">
-                  <td :class="cell_class(x -1, y - 1)">
-                    {{cell_view(x - 1, y - 1)}}
-                  </td>
+              </template>
+            </li>
+          </ul>
+        </div>
+        <div class="flex_item board">
+          <table>
+            <tr v-for="y in board_size">
+              <template v-for="x in board_size">
+                <td :class="cell_class(x -1, y - 1)">
+                  {{cell_view(x - 1, y - 1)}}
+                </td>
+              </template>
+            </tr>
+          </table>
+        </div>
+        <div class="flex_item hold_pieces black" :class="env">
+          <ul>
+            <li>☗</li>
+            <li v-for="(count, piece) in hold_pieces['black']">
+              <template v-if="count >= 1">
+                <span class="piece_name">{{piece | piece_name}}</span>
+                <template v-if="count >= 2">
+                  <span class="piece_count">{{count}}</span>
                 </template>
-              </tr>
-            </table>
-          </div>
-          <div class="flex_item hold_pieces black">
-            <ul>
-              <li v-for="(count, piece) in hold_pieces['black']">
-                <template v-if="count >= 1">
-                  <span class="piece_name">{{piece | piece_name}}</span>
-                  <template v-if="count >= 2">
-                    <span class="piece_count">{{count}}</span>
-                  </template>
-                </template>
-              </li>
-            </ul>
-          </div>
+              </template>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <div>
+  <template v-if="env !== 'production'">
     {{hold_pieces}}
-  </div>
-
+  </template>
 </div>
 </template>
 
@@ -92,6 +85,7 @@ export default {
       field: null,
       move_info: null,
       board_turn: false,
+      env: process.env.NODE_ENV,
     }
   },
 
@@ -207,16 +201,6 @@ export default {
           this.$set(this.field, m.origin_pos, null)
           this.$set(this.field, m.pos, battler)
         }
-      })
-
-      this.$nextTick(() => {
-        const dom1 = document.querySelector(".origin_pos")
-        const rect1 = dom1.getBoundingClientRect()
-        console.log(rect1)
-
-        const dom2 = document.querySelector(".current")
-        const rect2 = dom2.getBoundingClientRect()
-        console.log(rect2)
       })
     },
 

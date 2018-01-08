@@ -25,6 +25,7 @@ new Vue({
       list = _.shuffle(this.source)
       console.log(list)
       list = list.map((e) => {
+        e.komadai = (Math.floor(Math.random() * 2) === 0)
         return e
       })
       this.battlers = list

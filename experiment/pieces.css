@@ -28,4 +28,8 @@
     border: 1px dotted gray;
     background: hsl(200,50%,90%);
     padding: 0.5em;
+
+    position: relative;
+    top: 32px;
+    left: 32px;
 }

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <style type="text/css">
+      #box {
+        width: 200px;
+        height: 200px;
+        background: blue;
+      }
+      .moved {
+        position: relative;
+        top:  200px;
+        left: 200px;
+      }
+      .box-move {
+        transition: all 1s 0s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script>
+      // 移動させたい移動元の要素
+      const el = document.querySelector("#box")
+
+      // 位置を取得
+      const first = el.getBoundingClientRect()
+
+      // moved クラスを付与して要素をいったん移動させる
+      el.classList.add("moved")
+
+      // すると移動したところの座標が瞬時に求まる
+      const last = el.getBoundingClientRect()
+
+      // 移動先から見た移動元への差を求める
+      const invert_x = first.left - last.left
+      const invert_y = first.top  - last.top
+
+      // 求めた値を使って移動元までずらす
+      el.style.transform = `translate(${invert_x}px, ${invert_y}px)`
+
+      // このフレームでアニメーションするとブラウザは
+      // 「移動先」から「移動元」へのアニメーションをしてしまうため1フレーム待つ
+      requestAnimationFrame(() => {
+        // 1フレーム前に設定した移動元までずらず指定を消すことで、移動先まで位置が戻る
+        el.style.transform = ""
+        // このときにアニメーションを有効にすると「移動元」から「移動先」への移動する
+        el.classList.add("box-move")
+      })
+    </script>
+  </body>
+</html>
