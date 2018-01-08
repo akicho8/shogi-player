@@ -95,7 +95,7 @@ export default {
   created () {
     this.turn_current = 0
     this.field_update()
-    document.addEventListener("keydown", this.enterFunc)
+    document.addEventListener("keydown", this.keyboard_operation)
   },
 
   watch: {
@@ -113,11 +113,13 @@ export default {
   },
 
   methods: {
-    enterFunc: function (e) {
-      console.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
-      console.log("e", e)
-      console.log("key", e.key)
-      console.log("code", e.code)
+    keyboard_operation: function (e) {
+      if (this.env !== "production") {
+        console.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
+        console.log("e", e)
+        console.log("key", e.key)
+        console.log("code", e.code)
+      }
 
       let gap = null
       let force_value = null
