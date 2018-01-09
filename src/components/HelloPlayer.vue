@@ -50,6 +50,8 @@
             <button class="btn btn-default previous"   @click="current_turn -= 1">＜</button>
             <button class="btn btn-default next"       @click="current_turn += 1">＞</button>
             <button class="btn btn-default last"       @click="current_turn = mediator.sfen.turn_counter_max()">＞｜</button>
+          </div>
+          <div class="btn-group">
             <button class="btn btn-default board_turn" @click="board_turn = !board_turn">反転</button>
           </div>
         </div>
