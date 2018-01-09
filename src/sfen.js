@@ -17,6 +17,9 @@ class Sfen {
     this.kifu_body = this.kifu_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
     this.attributes = XRegExp.exec(this.kifu_body, regex)
+    if (process.env.NODE_ENV !== 'production') {
+      console.table(this.attributes)
+    }
   }
 
   field () {
@@ -94,6 +97,9 @@ class Sfen {
   }
 
   move_infos () {
+    if (this.attributes["moves"] === undefined) {
+      return []
+    }
     return this.attributes["moves"].split(/\s+/).map((e, i) => {
       const attrs = {}
       attrs["scene_index"] = this.turn_counter_base() + i
@@ -109,10 +115,6 @@ class Sfen {
       attrs["pos"] = new Point(`${md["pos_x"]}${md["pos_y"]}`)
       return attrs
     })
-  }
-
-  toString () {
-    return `(${this.kifu_body})`
   }
 
   __location_by (v) {

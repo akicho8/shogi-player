@@ -19,6 +19,8 @@ class Point {
     this.y = y
   }
 
+  // 単なる文字列化ではなくハッシュのキーに使ったとき自動的に呼ばれて結果がキーになる
+  // これがないとキーがユニークにならない
   toString() {
     return [this.x, this.y].toString()
   }

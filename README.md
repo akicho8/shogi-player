@@ -1,5 +1,7 @@
 # shogi_player
 
+https://raw.github.com/akicho8/shogi_player/master/screenshot1.png
+
 > A Vue.js project
 
 ## Build Setup
