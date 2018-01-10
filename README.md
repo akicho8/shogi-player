@@ -1,8 +1,8 @@
 # ShogiPlayer
 
 [![Build Status](https://travis-ci.org/akicho8/shogi_player.svg?branch=master)](https://travis-ci.org/akicho8/shogi_player)
-[![Maintainability](https://api.codeclimate.com/v1/badges/d905ca0a8b92b9ebfc25/maintainability)](https://codeclimate.com/github/akicho8/shogi_player/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/d905ca0a8b92b9ebfc25/test_coverage)](https://codeclimate.com/github/akicho8/shogi_player/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3b13246110a8ab9abc08/maintainability)](https://codeclimate.com/github/akicho8/shogi_player/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3b13246110a8ab9abc08/test_coverage)](https://codeclimate.com/github/akicho8/shogi_player/test_coverage)
 [![Dependency Status](https://gemnasium.com/badges/github.com/akicho8/shogi_player.svg)](https://gemnasium.com/github.com/akicho8/shogi_player)
 <img src="https://raw.github.com/akicho8/shogi_player/master/screenshot1.png" height="640" />
 
