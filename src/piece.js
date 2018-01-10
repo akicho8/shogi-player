@@ -35,4 +35,5 @@ class Piece {
 export { Piece }
 
 if (process.argv[1] == __filename) {
+  console.log(Piece.fetch("K"))
 }
