@@ -28,21 +28,23 @@ class Point {
 
 export { Point }
 
-// let obj1 = new Position(1, 2)
-// let obj2 = new Position(1, 2)
-// console.log(obj1.toString() == obj2.toString())
-// console.log(obj1 == obj2)
-// console.log(Object.is(obj1, obj2))
-// console.log(obj1["x"])
-// console.log(obj1.x)
-//
-// obj1 = new Position(1, 2)
-// obj2 = new Position(1, 2)
-// let hash = {}
-// hash[obj1] = 1
-// hash[obj2] += 10
-// console.log(hash)
-//
-// console.log([1, 2] == [1, 2])
-// console.log([1, 2] === [1, 2])
-// console.log([1, 2].toString() === [1, 2].toString())
+if (process.argv[1] == __filename) {
+  let obj1 = new Position(1, 2)
+  let obj2 = new Position(1, 2)
+  console.log(obj1.toString() == obj2.toString())
+  console.log(obj1 == obj2)
+  console.log(Object.is(obj1, obj2))
+  console.log(obj1["x"])
+  console.log(obj1.x)
+
+  obj1 = new Position(1, 2)
+  obj2 = new Position(1, 2)
+  let hash = {}
+  hash[obj1] = 1
+  hash[obj2] += 10
+  console.log(hash)
+
+  console.log([1, 2] == [1, 2])
+  console.log([1, 2] === [1, 2])
+  console.log([1, 2].toString() === [1, 2].toString())
+}

@@ -17,8 +17,8 @@ class Sfen {
     this.kifu_body = this.kifu_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
     this.attributes = XRegExp.exec(this.kifu_body, regex)
-    if (process.env.NODE_ENV !== 'production') {
-      console.table(this.attributes)
+    if (process.env.NODE_ENV === 'deveopment') {
+      console.log(this.attributes)
     }
   }
 
@@ -55,7 +55,6 @@ class Sfen {
   hold_pieces () {
     const counts = {}
     if (this.attributes["hold_pieces"] !== "-") {
-      console.log(this.attributes["hold_pieces"])
       XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece>\\S)"), (m, i) => {
         const piece = Piece.fetch(m.piece)
         const count = Number(m.count || 1)
@@ -128,21 +127,12 @@ class Sfen {
 
 export { Sfen }
 
-if (process.env.NODE_ENV !== 'production') {
-  console.log(process.argv)
-  console.log(process.argv[0])
-  console.log(process.argv[1])
-  console.log(require.main)
-  console.log(require.main.filename)
-  console.log(__filename)
-}
-
-if (require.main.filename) {
-  let sfen = new Sfen()
+if (process.argv[1] == __filename) {
+  const sfen = new Sfen()
   sfen.kifu_body = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
   sfen.parse()
-  // console.log(sfen.field())
-  // console.log(sfen.location())
+  console.log(sfen.field())
+  console.log(sfen.location())
   console.log(sfen.hold_pieces())
-  // console.log(sfen.move_infos())
+  console.log(sfen.move_infos())
 }

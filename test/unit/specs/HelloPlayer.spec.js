@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import HelloPlayer from '@/components/HelloPlayer'
+import Vue from "vue"
+import HelloPlayer from "@/components/HelloPlayer"
 
-describe('HelloPlayer.vue', () => {
-  it('should render correct contents', () => {
+describe("HelloPlayer", () => {
+  it("should render correct contents", () => {
     const Constructor = Vue.extend(HelloPlayer)
-    const vm = new Constructor().$mount()
-    expect(vm.$el.querySelector('.shogi_player').textContent).toEqual('Welcome to Your Vue.js App')
+    const vm = new Constructor({propsData: {kifu_body: "position startpos moves 7g7f"}}).$mount()
+    expect(vm.kifu_body).toEqual("position startpos moves 7g7f")
   })
 })

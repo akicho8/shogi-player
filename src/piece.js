@@ -32,10 +32,7 @@ class Piece {
   }
 }
 
-// if (process.argv[1] === require.main.filename) {
-//   console.log(Piece.lookup("K"))
-//   console.log(Piece.lookup("K2"))
-//   console.log(Piece.fetch("K"))
-// }
-
 export { Piece }
+
+if (process.argv[1] == __filename) {
+}

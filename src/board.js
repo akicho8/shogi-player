@@ -7,3 +7,6 @@ class Board {
 }
 
 export { Board }
+
+if (process.argv[1] == __filename) {
+}
