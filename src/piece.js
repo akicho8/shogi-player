@@ -15,9 +15,7 @@ class Piece {
   }
 
   static lookup (key) {
-    key = key.toUpperCase()
-    const element = this.all().find((e) => e.key === key)
-    return element
+    return this.records_map().get(key.toUpperCase())
   }
 
   static fetch (key) {
@@ -28,8 +26,8 @@ class Piece {
     return element
   }
 
-  static all() {
-    this.instances = this.instances || this.memory_records().map((e) => new Piece(e))
+  static records_map() {
+    this.instances = this.instances || new Map(this.memory_records().map((e) => [e.key, new Piece(e)]))
     return this.instances
   }
 
@@ -60,4 +58,6 @@ if (process.argv[1] === __filename) {
   let v = Piece.fetch("K")
   v.promoted = true
   console.log(v)
+
+  console.log(Piece.records_map())
 }

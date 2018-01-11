@@ -10,17 +10,13 @@ class Point {
   constructor (point) {
     let x, y
     if (typeof(point) === "string") {
-      let chars = point.split("")
-      x = chars[0]
-      y = chars[1]
+      [x, y] = point.split("")
       x = Board.board_size - Number(x)
       y = y.charCodeAt(0) - "a".charCodeAt(0)
     } else {
-      x = point[0]
-      y = point[1]
+      [x, y] = point
     }
-    this._x = x
-    this._y = y
+    [this._x, this._y] = [x, y]
   }
 
   get to_key() {
@@ -39,5 +35,6 @@ class Point {
 export { Point }
 
 if (process.argv[1] === __filename) {
+  console.log(Point.fetch("6a").to_key)
   console.log(Point.fetch([1, 2]).to_key)
 }
