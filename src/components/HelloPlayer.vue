@@ -44,10 +44,10 @@
   <p>
     <div class="controller">
       <div class="btn-group">
-        <button class="btn btn-default first"      @click="current_turn = mediator.sfen.turn_counter_base()">｜＜</button>
+        <button class="btn btn-default first"      @click="current_turn = mediator.sfen.turn_counter_base">｜＜</button>
         <button class="btn btn-default previous"   @click="current_turn -= 1">＜</button>
         <button class="btn btn-default next"       @click="current_turn += 1">＞</button>
-        <button class="btn btn-default last"       @click="current_turn = mediator.sfen.turn_counter_max()">＞｜</button>
+        <button class="btn btn-default last"       @click="current_turn = mediator.sfen.turn_counter_max">＞｜</button>
       </div>
       <div class="btn-group">
         <button class="btn btn-default board_turn" @click="board_turn = !board_turn">反転</button>
@@ -55,7 +55,7 @@
     </div>
   </p>
   <p>
-    <input type="range" v-model.number="current_turn" :min="mediator.sfen.turn_counter_base()" :max="mediator.sfen.turn_counter_max()" />
+    <input type="range" v-model.number="current_turn" :min="mediator.sfen.turn_counter_base" :max="mediator.sfen.turn_counter_max" />
   </p>
 
   <template v-if="env !== 'production'">
@@ -134,10 +134,10 @@ export default {
         }
       }
       if (e.key === "[" || e.key === "Home" || e.code == "Escape") {
-        force_value = this.mediator.sfen.turn_counter_base()
+        force_value = this.mediator.sfen.turn_counter_base
       }
       if (e.key === "]" || e.key === "End") {
-        force_value = this.mediator.sfen.turn_counter_max()
+        force_value = this.mediator.sfen.turn_counter_max
       }
 
       if (gap !== null) {
