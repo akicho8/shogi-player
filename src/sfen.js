@@ -3,7 +3,6 @@
 import XRegExp from 'xregexp'
 
 import { Piece } from './piece'
-import { Board } from './board'
 import { Point } from './point'
 import { Battler } from './battler'
 
@@ -82,7 +81,7 @@ class Sfen {
   }
 
   get komaochi_p() {
-    return (this.turn_counter_next % 2) === 1 && this.location == "white"
+    return (this.turn_counter_next % 2) === 1 && this.location === "white"
   }
 
   location_of(offset) {

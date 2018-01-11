@@ -21,7 +21,7 @@ class Piece {
   static fetch (key) {
     const element = this.lookup(key)
     if (!element) {
-      throw `Key not found: ${key}`
+      throw new Error(`Key not found: ${key}`)
     }
     return element
   }

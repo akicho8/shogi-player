@@ -1,11 +1,9 @@
 // -*- compile-command: "babel-node mediator.js" -*-
 
-import Vue from "vue"
 import { _ } from "underscore"
 
 import { Sfen } from "./sfen"
 import { Board } from "./board"
-import { Piece } from "./piece"
 import { Point } from "./point"
 import { Battler } from "./battler"
 

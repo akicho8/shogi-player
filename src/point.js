@@ -9,7 +9,7 @@ class Point {
 
   constructor (point) {
     let x, y
-    if (typeof(point) === "string") {
+    if (typeof point === "string") {
       [x, y] = point.split("")
       x = Board.board_size - Number(x)
       y = y.charCodeAt(0) - "a".charCodeAt(0)

@@ -119,7 +119,7 @@ export default {
       if (e.code === "Space" || e.code === "Enter" || e.code === "ArrowDown" || e.code === "ArrowRight" || e.key === "j" || e.key === "n" || e.key === "f") {
         gap = 1
       }
-      if (e.code === "Backspace" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.key == "k" || e.key == "p" || e.key == "b") {
+      if (e.code === "Backspace" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.key === "k" || e.key === "p" || e.key === "b") {
         gap = -1
       }
       if (e.key === "PageUp") {
@@ -133,7 +133,7 @@ export default {
           gap *= 10
         }
       }
-      if (e.key === "[" || e.key === "Home" || e.code == "Escape") {
+      if (e.key === "[" || e.key === "Home" || e.code === "Escape") {
         force_value = this.mediator.sfen.turn_counter_base
       }
       if (e.key === "]" || e.key === "End") {
