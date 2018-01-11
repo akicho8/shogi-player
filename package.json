@@ -1,6 +1,6 @@
 {
   "name": "shogi_player",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A Vue.js project",
   "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
   "private": false,
