@@ -4,7 +4,7 @@ import { Board } from "./board"
 
 class Point {
   static fetch(v) {
-    return new Point(v)
+    return Object.freeze(new Point(v))
   }
 
   constructor (point) {

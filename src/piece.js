@@ -27,7 +27,7 @@ class Piece {
   }
 
   static records_map() {
-    this.instances = this.instances || new Map(this.memory_records().map((e) => [e.key, new Piece(e)]))
+    this.instances = this.instances || new Map(this.memory_records().map((e) => [e.key, Object.freeze(new Piece(e))]))
     return this.instances
   }
 
@@ -54,10 +54,5 @@ if (process.argv[1] === __filename) {
   console.log(Piece.fetch("K"))
   console.log(Piece.fetch("K"))
   console.log(Piece.lookup(""))
-
-  let v = Piece.fetch("K")
-  v.promoted = true
-  console.log(v)
-
   console.log(Piece.records_map())
 }

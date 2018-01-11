@@ -29,8 +29,8 @@ class Mediator {
     this.move_info = null
 
     const move_infos = this.sfen.move_infos
-    this.current_turn = this.current_turn_clamp(this.current_turn)
-    const num = this.current_turn - this.sfen.turn_counter_base
+    this.current_turn = this.turn_clamp(this.current_turn)
+    const num = this.current_turn - this.sfen.turn_min
     _(num).times((i) => {
       const m = move_infos[i]
       this.move_info = m
@@ -42,19 +42,19 @@ class Mediator {
           location: m.location,
         })
         {
-          const count = this.hold_pieces[m.location].get(battler.piece.key) - 1
-          this.hold_pieces[m.location].set(battler.piece.key, count)
+          const count = this.hold_pieces.get(m.location).get(battler.piece.key) - 1
+          this.hold_pieces.get(m.location).set(battler.piece.key, count)
         }
         this.current_field.set(battler.point.to_key, battler)
       } else {
         {
           const battler = this.current_field.get(m.point.to_key)
           if (battler) {
-            if (this.hold_pieces[m.location] === undefined) {
-              this.hold_pieces[m.location] = new Map()
+            if (this.hold_pieces.get(m.location) === undefined) {
+              this.hold_pieces.set(m.location, new Map())
             }
-            const count = (this.hold_pieces[m.location].get(battler.piece.key) || 0) + 1
-            this.hold_pieces[m.location].set(battler.piece.key, count)
+            const count = (this.hold_pieces.get(m.location).get(battler.piece.key) || 0) + 1
+            this.hold_pieces.get(m.location).set(battler.piece.key, count)
           }
         }
         const battler = this.current_field.get(m.origin_pos.to_key)
@@ -97,13 +97,13 @@ class Mediator {
     return klass
   }
 
-  current_turn_clamp(v) {
+  turn_clamp(v) {
     if (this.sfen) {
-      if (v < this.sfen.turn_counter_base) {
-        v = this.sfen.turn_counter_base
+      if (v < this.sfen.turn_min) {
+        v = this.sfen.turn_min
       }
-      if (this.sfen.turn_counter_max < v) {
-        v = this.sfen.turn_counter_max
+      if (this.sfen.turn_max < v) {
+        v = this.sfen.turn_max
       }
     }
     return v

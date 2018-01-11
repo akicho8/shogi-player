@@ -5,7 +5,7 @@ import { Piece } from './piece.js'
 
 class Battler {
   constructor (attributes) {
-    this.attributes = attributes
+    this.attributes = Object.assign({}, attributes)
   }
 
   get piece() {

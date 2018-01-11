@@ -5,7 +5,7 @@
     <div class="flex_item hold_pieces white" :class="env">
       <ul>
         <li>☖</li>
-        <li v-for="(count, piece) in mediator.hold_pieces.white">
+        <li v-for="(count, piece) in mediator.hold_pieces.get('white')">
           <template v-if="count >= 1">
             <span class="piece_name">{{piece | piece_name}}</span>
             <template v-if="count >= 2">
@@ -29,7 +29,7 @@
     <div class="flex_item hold_pieces black" :class="env">
       <ul>
         <li>☗</li>
-        <li v-for="(count, piece) in mediator.hold_pieces.black">
+        <li v-for="(count, piece) in mediator.hold_pieces.get('black')">
           <template v-if="count >= 1">
             <span class="piece_name">{{piece | piece_name}}</span>
             <template v-if="count >= 2">
@@ -44,10 +44,10 @@
   <p>
     <div class="controller">
       <div class="btn-group">
-        <button class="btn btn-default first"      @click="current_turn = mediator.sfen.turn_counter_base">｜＜</button>
+        <button class="btn btn-default first"      @click="current_turn = mediator.sfen.turn_min">｜＜</button>
         <button class="btn btn-default previous"   @click="current_turn -= 1">＜</button>
         <button class="btn btn-default next"       @click="current_turn += 1">＞</button>
-        <button class="btn btn-default last"       @click="current_turn = mediator.sfen.turn_counter_max">＞｜</button>
+        <button class="btn btn-default last"       @click="current_turn = mediator.sfen.turn_max">＞｜</button>
       </div>
       <div class="btn-group">
         <button class="btn btn-default board_turn" @click="board_turn = !board_turn">反転</button>
@@ -55,7 +55,7 @@
     </div>
   </p>
   <p>
-    <input type="range" v-model.number="current_turn" :min="mediator.sfen.turn_counter_base" :max="mediator.sfen.turn_counter_max" />
+    <input type="range" v-model.number="current_turn" :min="mediator.sfen.turn_min" :max="mediator.sfen.turn_max" />
   </p>
 
   <template v-if="env !== 'production'">
@@ -94,7 +94,7 @@ export default {
   watch: {
     current_turn: function () {
       if (this.mediator) {
-        this.current_turn = this.mediator.current_turn_clamp(this.current_turn)
+        this.current_turn = this.mediator.turn_clamp(this.current_turn)
       }
       this.mediator_update()
     },
@@ -134,10 +134,10 @@ export default {
         }
       }
       if (e.key === "[" || e.key === "Home" || e.code === "Escape") {
-        force_value = this.mediator.sfen.turn_counter_base
+        force_value = this.mediator.sfen.turn_min
       }
       if (e.key === "]" || e.key === "End") {
-        force_value = this.mediator.sfen.turn_counter_max
+        force_value = this.mediator.sfen.turn_max
       }
 
       if (gap !== null) {
