@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <div class="container">
-    <HelloPlayer :kifu_body="kifu_body" />
+    <HelloPlayer :kifu_body="kifu_body" :turn_start="-1" />
     <textarea v-model="kifu_body" class="form-control" />
   </div>
 </div>

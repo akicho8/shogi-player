@@ -29,8 +29,8 @@ class Mediator {
     this.move_info = null
 
     const move_infos = this.sfen.move_infos
-    this.current_turn = this.turn_clamp(this.current_turn)
-    const num = this.current_turn - this.sfen.turn_min
+
+    const num = this.turn_now - this.sfen.turn_min
     _(num).times((i) => {
       const m = move_infos[i]
       this.move_info = m
@@ -111,6 +111,15 @@ class Mediator {
 
   get board_size() {
     return Board.board_size
+  }
+
+  // ruby style array index access
+  get turn_now() {
+    let index = this.current_turn
+    if (index < 0) {
+      index += this.sfen.turn_max + 1
+    }
+    return this.turn_clamp(index)
   }
 }
 

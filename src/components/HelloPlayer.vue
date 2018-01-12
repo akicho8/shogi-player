@@ -1,6 +1,6 @@
 <template>
 <div class="shogi_player">
-  <p>{{current_turn}}手目</p>
+  <p>{{mediator.turn_now}}手目</p>
   <div class="board_container board_turn" :class="{enable: board_turn}">
     <div class="flex_item hold_pieces white" :class="env">
       <ul>
@@ -74,6 +74,7 @@ export default {
 
   props: [
     "kifu_body",
+    "turn_start",
   ],
 
   data () {
@@ -86,20 +87,16 @@ export default {
   },
 
   created () {
-    this.current_turn = 0
+    this.current_turn = this.turn_start || 0
     this.mediator_update()
     // document.addEventListener("keydown", this.keyboard_operation)
   },
 
   watch: {
     current_turn: function () {
-      if (this.mediator) {
-        this.current_turn = this.mediator.turn_clamp(this.current_turn)
-      }
       this.mediator_update()
     },
     kifu_body: function () {
-      this.current_turn = 0
       this.mediator_update()
     },
   },
@@ -157,6 +154,7 @@ export default {
       this.mediator.kifu_body = this.kifu_body || "position startpos"
       this.mediator.current_turn = this.current_turn
       this.mediator.run()
+      this.current_turn = this.mediator.turn_now
     },
   },
 
