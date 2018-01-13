@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <div class="container">
-    <HelloPlayer :kifu_body="kifu_body" :turn_start="-1" />
+    <HelloPlayer :kifu_body="kifu_body" :turn_start="121" />
     <textarea v-model="kifu_body" class="form-control" />
   </div>
 </div>
@@ -31,10 +31,10 @@ export default {
 
 <style lang="sass">
 body
-  color: white
+  color: white ! important
   margin: 0
   padding: 0
-  background: black
+  background: black ! important
   min-height: 100vh
 
 #app
