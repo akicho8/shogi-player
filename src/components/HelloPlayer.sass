@@ -1,14 +1,4 @@
-$base-color:            hsl(200, 50%, 50%)
-$board-bg-color:        darken($base-color, 43%)
-$line-color:            darken($base-color,  0%)
-$piece-color:           darken($base-color,  0%)
-$piece-bg-color:        darken($base-color, 38%)
-$font-color:            darken($base-color,  0%)
-$current-color:         darken($base-color,  0%)
-$current-bg-color:      darken($base-color, 37%)
-
-$cell-size: 5vmin
-$font-size: 3.2vmin
+@import "variables"
 
 .shogi_player
   font-family: "YuMincho", "Yu Mincho", serif
@@ -73,34 +63,3 @@ $font-size: 3.2vmin
         background: $current-bg-color
       &.current
         // transition: all 500ms 0s ease-out
-
-  // 駒台
-  .hold_pieces
-    min-width: 10vmin
-    margin: 0 1vmin
-    text-align: left
-    &.development
-      border: 1px solid cyan
-      background: hsl(200, 50%,10%)
-
-    ul
-      list-style-type: none
-      padding: 1vmin
-      margin: 1vmin
-      li
-        // 歩(2) の並びを横軸中央で揃える
-        display: flex
-        align-items: center
-
-        // 持駒
-        color: $piece-color
-        font-size: $font-size
-
-        // 持駒数
-        .piece_count
-          vertical-align: middle
-          margin-left: 0.3rem
-          font-size: $font-size * 0.8
-
-        // 駒台の上のマーク
-        .location_mark

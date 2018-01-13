@@ -2,19 +2,7 @@
 <div class="shogi_player">
   <p>{{mediator.turn_now}}手目</p>
   <div class="board_container board_turn" :class="{enable: board_turn}">
-    <div class="flex_item hold_pieces white" :class="env">
-      <ul>
-        <li>☖</li>
-        <li v-for="(count, piece) in mediator.hold_pieces.get('white')">
-          <template v-if="count >= 1">
-            <span class="piece_name">{{piece | piece_name}}</span>
-            <template v-if="count >= 2">
-              <span class="piece_count">{{count}}</span>
-            </template>
-          </template>
-        </li>
-      </ul>
-    </div>
+    <PieceStand :location="'white'"/>
     <div class="flex_item board">
       <table>
         <tr v-for="y in mediator.board_size">
@@ -26,19 +14,7 @@
         </tr>
       </table>
     </div>
-    <div class="flex_item hold_pieces black" :class="env">
-      <ul>
-        <li>☗</li>
-        <li v-for="(count, piece) in mediator.hold_pieces.get('black')">
-          <template v-if="count >= 1">
-            <span class="piece_name">{{piece | piece_name}}</span>
-            <template v-if="count >= 2">
-              <span class="piece_count">{{count}}</span>
-            </template>
-          </template>
-        </li>
-      </ul>
-    </div>
+    <PieceStand :location="'black'"/>
   </div>
 
   <p>
@@ -67,6 +43,11 @@
 <script>
 import { Piece } from "../piece"
 import { Mediator } from "../mediator"
+import PieceStand from "./piece_stand"
+
+import Vue from 'vue'
+import lodash from "lodash"
+Object.defineProperty(Vue.prototype, '$lodash', {value: lodash})
 
 /* eslint-disable no-new */
 export default {
@@ -76,6 +57,10 @@ export default {
     "kifu_body",
     "turn_start",
   ],
+
+  components: {
+    PieceStand,
+  },
 
   data () {
     return {

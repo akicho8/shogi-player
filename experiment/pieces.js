@@ -2,17 +2,17 @@ new Vue({
   el: '#app',
   data: {
     source: [
-      {name: "金", unique_key: 0, komadai: true},
-      {name: "銀", unique_key: 1, komadai: false},
-      {name: "歩", unique_key: 2, komadai: false},
-      {name: "金", unique_key: 3, komadai: true},
-      {name: "銀", unique_key: 4, komadai: false},
-      {name: "歩", unique_key: 5, komadai: false},
-      {name: "歩", unique_key: 6, komadai: false},
-      {name: "歩", unique_key: 7, komadai: false},
-      {name: "歩", unique_key: 8, komadai: false},
-      {name: "歩", unique_key: 9, komadai: false},
-      {name: "歩", unique_key:10, komadai: false},
+      {name: "金", unique_key: 0, piece_stand: true},
+      {name: "銀", unique_key: 1, piece_stand: false},
+      {name: "歩", unique_key: 2, piece_stand: false},
+      {name: "金", unique_key: 3, piece_stand: true},
+      {name: "銀", unique_key: 4, piece_stand: false},
+      {name: "歩", unique_key: 5, piece_stand: false},
+      {name: "歩", unique_key: 6, piece_stand: false},
+      {name: "歩", unique_key: 7, piece_stand: false},
+      {name: "歩", unique_key: 8, piece_stand: false},
+      {name: "歩", unique_key: 9, piece_stand: false},
+      {name: "歩", unique_key:10, piece_stand: false},
     ],
     battlers: [],
   },
@@ -25,7 +25,7 @@ new Vue({
       list = _.shuffle(this.source)
       console.log(list)
       list = list.map((e) => {
-        e.komadai = (Math.floor(Math.random() * 2) === 0)
+        e.piece_stand = (Math.floor(Math.random() * 2) === 0)
         return e
       })
       this.battlers = list

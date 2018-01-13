@@ -24,7 +24,7 @@
     transition: transform 1s;
 }
 
-.komadai {
+.piece_stand {
     border: 1px dotted gray;
     background: hsl(200,50%,90%);
     padding: 0.5em;
