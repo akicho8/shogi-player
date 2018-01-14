@@ -2,7 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/3b13246110a8ab9abc08/maintainability)](https://codeclimate.com/github/akicho8/shogi-player/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3b13246110a8ab9abc08/test_coverage)](https://codeclimate.com/github/akicho8/shogi-player/test_coverage)
 [![Dependency Status](https://gemnasium.com/badges/github.com/akicho8/shogi-player.svg)](https://gemnasium.com/github.com/akicho8/shogi-player)
-[![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
+[![npm version](https://badge.fury.io/js/shogi_player.svg)](https://badge.fury.io/js/shogi-player)
 [![GitHub version](https://badge.fury.io/gh/akicho8%2Fshogi-player.svg)](https://badge.fury.io/gh/akicho8%2Fshogi-player)
 
 # 将棋棋譜プレイヤー
