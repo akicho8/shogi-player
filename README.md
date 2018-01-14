@@ -5,7 +5,7 @@
 [![npm version](https://badge.fury.io/js/shogi_player.svg)](https://badge.fury.io/js/shogi_player)
 [![GitHub version](https://badge.fury.io/gh/akicho8%2Fshogi_player.svg)](https://badge.fury.io/gh/akicho8%2Fshogi_player)
 
-# JavaScriptの将棋の棋譜を作成するライブラリ
+# 将棋棋譜プレイヤー
 
 <a href="https://akicho8.github.io/shogi_player/" target="_blank"><img src="https://raw.github.com/akicho8/shogi_player/master/screenshot1.png" height="640" /></a>
 

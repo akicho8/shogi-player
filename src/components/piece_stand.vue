@@ -44,10 +44,10 @@ export default {
     margin: 0 1vmin
     text-align: left
 
-    &.development
-      border: 2px solid $line-color
-      background: $board-bg-color
-      border-radius: 0.5vmin
+    // &.development
+    border: 2px solid $line-color
+    background: $board-bg-color
+    border-radius: 0.5vmin
 
     ul
       list-style-type: none
