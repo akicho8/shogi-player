@@ -1,13 +1,13 @@
 // -*- compile-command: "babel-node sfen.js" -*-
 
-import XRegExp from 'xregexp'
+import XRegExp from "xregexp"
 
-import { Piece } from './piece'
-import { Point } from './point'
-import { Battler } from './battler'
+import { Piece } from "./piece"
+import { Point } from "./point"
+import { Battler } from "./battler"
 
 class Sfen {
-  constructor () {
+  constructor() {
     this.kifu_body = null
     this.attributes = null
   }
@@ -16,7 +16,7 @@ class Sfen {
     this.kifu_body = this.kifu_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
     this.attributes = XRegExp.exec(this.kifu_body, regex)
-    if (process.env.NODE_ENV === 'deveopment') {
+    if (process.env.NODE_ENV === "deveopment") {
       console.log(this.attributes)
     }
   }
@@ -32,7 +32,7 @@ class Sfen {
           const battler = new Battler({
             point: new Point([x, y]),
             piece: Piece.fetch(m.piece),
-            promoted: (m.promoted === '+'),
+            promoted: (m.promoted === "+"),
             location: this.__location_by(m.piece),
           })
           field.set(battler.point.to_key, battler)
@@ -43,7 +43,7 @@ class Sfen {
     return field
   }
 
-  get location () {
+  get location() {
     if (this.attributes["b_or_w"] === "b") {
       return "black"
     }
@@ -51,15 +51,12 @@ class Sfen {
   }
 
   get hold_pieces() {
-    const _hold_pieces = new Map()
+    const _hold_pieces = new Map([["black", new Map()], ["white", new Map()]])
     if (this.attributes["hold_pieces"] !== "-") {
-      XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece>\\S)"), (m, i) => {
-        const piece = Piece.fetch(m.piece)
+      XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece_key>\\S)"), (m, i) => {
+        const piece = Piece.fetch(m.piece_key)
         let count = Number(m.count || 1)
-        const location = this.__location_by(m.piece)
-        if (_hold_pieces.get(location) === undefined) {
-          _hold_pieces.set(location, new Map())
-        }
+        const location = this.__location_by(m.piece_key)
         count += _hold_pieces.get(location).get(piece.key) || 0
         _hold_pieces.get(location).set(piece.key, count)
       })
@@ -117,7 +114,7 @@ class Sfen {
     })
   }
 
-  __location_by (v) {
+  __location_by(v) {
     if (/[A-Z]/.test(v)) {
       return "black"
     }

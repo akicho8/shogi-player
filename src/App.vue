@@ -3,6 +3,9 @@
   <div class="container">
     <HelloPlayer :kifu_body="kifu_body" :turn_start="121" />
     <textarea v-model="kifu_body" class="form-control" />
+    <p class="links">
+      <a href="https://github.com/akicho8/shogi_player" target="_blank">Github</a>
+    </p>
   </div>
 </div>
 </template>
@@ -43,4 +46,7 @@ body
   -moz-osx-font-smoothing: grayscale
   text-align: center
   margin-top: 60px
+
+.links
+  margin-top: 1rem
 </style>

@@ -1,7 +1,9 @@
 // -*- compile-command: "babel-node piece.js" -*-
 
-class Piece {
-  static memory_records() {
+import { MemoryRecord } from "./memory_record"
+
+class Piece extends MemoryRecord {
+  static get define() {
     return [
       { key: "K", name: "玉", promoted_name: null, },
       { key: "R", name: "飛", promoted_name: "龍", },
@@ -14,36 +16,11 @@ class Piece {
     ]
   }
 
-  static lookup (key) {
-    return this.records_map().get(key.toUpperCase())
+  static lookup(key) {
+    return super.lookup(key.toUpperCase())
   }
 
-  static fetch (key) {
-    const element = this.lookup(key)
-    if (!element) {
-      throw new Error(`Key not found: ${key}`)
-    }
-    return element
-  }
-
-  static records_map() {
-    this.instances = this.instances || new Map(this.memory_records().map((e) => [e.key, Object.freeze(new Piece(e))]))
-    return this.instances
-  }
-
-  constructor (attributes) {
-    this.attributes = attributes
-  }
-
-  get key () {
-    return this.attributes.key
-  }
-
-  get name () {
-    return this.attributes.name
-  }
-
-  get promoted_name () {
+  get promoted_name() {
     return this.attributes.promoted_name
   }
 }
@@ -51,8 +28,9 @@ class Piece {
 export { Piece }
 
 if (process.argv[1] === __filename) {
-  console.log(Piece.fetch("K"))
-  console.log(Piece.fetch("K"))
-  console.log(Piece.lookup(""))
-  console.log(Piece.records_map())
+  // console.log(Piece.fetch("K"))
+  // console.log(Piece.fetch("K"))
+  // console.log(Piece.lookup(""))
+  console.log(Piece.values)
+  console.log(Piece.values_map.get("K"))
 }

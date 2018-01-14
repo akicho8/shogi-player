@@ -7,7 +7,7 @@ class Point {
     return Object.freeze(new Point(v))
   }
 
-  constructor (point) {
+  constructor(point) {
     let x, y
     if (typeof point === "string") {
       [x, y] = point.split("")

@@ -62,7 +62,7 @@ export default {
     PieceStand,
   },
 
-  data () {
+  data() {
     return {
       current_turn: 0,
       mediator: null,
@@ -71,7 +71,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.current_turn = this.turn_start || 0
     this.mediator_update()
     // document.addEventListener("keydown", this.keyboard_operation)
@@ -134,7 +134,7 @@ export default {
       }
     },
 
-    mediator_update () {
+    mediator_update() {
       this.mediator = new Mediator()
       this.mediator.kifu_body = this.kifu_body || "position startpos"
       this.mediator.current_turn = this.current_turn

@@ -1,11 +1,11 @@
 <template>
 <div class="flex_item piece_stand" :class="[location, $parent.env]">
   <ul>
-    <li>{{location === 'white' ? '☖' : '☗'}}</li>
-    <template v-for="[piece, count] in Array.from($parent.mediator.hold_pieces.get(location))">
+    <li>{{location | location_name}}</li>
+    <template v-for="[piece_key, count] in Array.from($parent.mediator.hold_pieces.get(location))">
       <template v-if="count >= 1">
         <li>
-          <span class="piece_name">{{piece | piece_name}}</span>
+          <span class="piece_name">{{piece_key | piece_name}}</span>
           <template v-if="count >= 2">
             <span class="piece_count">{{count}}</span>
           </template>
@@ -17,16 +17,19 @@
 </template>
 
 <script>
-
 import { Piece } from "../piece"
+import { Location } from "../location"
 
 export default {
   props: [
     "location",
   ],
   filters: {
-    piece_name(piece_key) {
-      return Piece.fetch(piece_key).name
+    piece_name(key) {
+      return Piece.fetch(key).name
+    },
+    location_name(key) {
+      return Location.fetch(key).name
     },
   },
 }
@@ -42,8 +45,9 @@ export default {
     text-align: left
 
     &.development
-      border: 1px solid $line-color
+      border: 2px solid $line-color
       background: $board-bg-color
+      border-radius: 0.5vmin
 
     ul
       list-style-type: none

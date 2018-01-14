@@ -4,7 +4,7 @@ import { Point } from './point.js'
 import { Piece } from './piece.js'
 
 class Battler {
-  constructor (attributes) {
+  constructor(attributes) {
     this.attributes = Object.assign({}, attributes)
   }
 

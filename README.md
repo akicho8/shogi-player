@@ -1,18 +1,19 @@
-# ShogiPlayer
-
 [![Build Status](https://travis-ci.org/akicho8/shogi_player.svg?branch=master)](https://travis-ci.org/akicho8/shogi_player)
 [![Maintainability](https://api.codeclimate.com/v1/badges/3b13246110a8ab9abc08/maintainability)](https://codeclimate.com/github/akicho8/shogi_player/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3b13246110a8ab9abc08/test_coverage)](https://codeclimate.com/github/akicho8/shogi_player/test_coverage)
 [![Dependency Status](https://gemnasium.com/badges/github.com/akicho8/shogi_player.svg)](https://gemnasium.com/github.com/akicho8/shogi_player)
 [![npm version](https://badge.fury.io/js/shogi_player.svg)](https://badge.fury.io/js/shogi_player)
 [![GitHub version](https://badge.fury.io/gh/akicho8%2Fshogi_player.svg)](https://badge.fury.io/gh/akicho8%2Fshogi_player)
-<img src="https://raw.github.com/akicho8/shogi_player/master/screenshot1.png" height="640" />
 
-> A Vue.js project
+# JavaScriptの将棋の棋譜を作成するライブラリ
+
+<a href="https://akicho8.github.io/shogi_player/" target="_blank"><img src="https://raw.github.com/akicho8/shogi_player/master/screenshot1.png" height="640" /></a>
+
+[Demo](https://akicho8.github.io/shogi_player/)
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 

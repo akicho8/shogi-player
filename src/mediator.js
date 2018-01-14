@@ -8,7 +8,7 @@ import { Point } from "./point"
 import { Battler } from "./battler"
 
 class Mediator {
-  constructor () {
+  constructor() {
     this.sfen = null
     this.current_turn = null
     this.current_field = null
@@ -19,7 +19,7 @@ class Mediator {
     this.kifu_body = "position startpos"
   }
 
-  run () {
+  run() {
     this.sfen = new Sfen()
     this.sfen.kifu_body = this.kifu_body
     this.sfen.parse()
@@ -61,7 +61,7 @@ class Mediator {
         if (m.promoted_trigger) {
           battler.promoted = true
         }
-        this.current_field.set(m.origin_pos.to_key, null)
+        this.current_field.delete(m.origin_pos.to_key)
         this.current_field.set(m.point.to_key, battler)
       }
     })
