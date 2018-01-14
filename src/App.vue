@@ -1,17 +1,17 @@
 <template>
 <div id="app">
   <div class="container">
-    <HelloPlayer :kifu_body="kifu_body" :turn_start="121" />
+    <ShogiPlayer :kifu_body="kifu_body" :turn_start="121" />
     <textarea v-model="kifu_body" class="form-control" />
     <p class="links">
-      <a href="https://github.com/akicho8/shogi_player">Github</a>
+      <a href="https://github.com/akicho8/shogi-player">Github</a>
     </p>
   </div>
 </div>
 </template>
 
 <script>
-import HelloPlayer from './components/HelloPlayer'
+import ShogiPlayer from './components/ShogiPlayer'
 
 export default {
   name: 'app',
@@ -27,7 +27,7 @@ export default {
   },
 
   components: {
-    HelloPlayer
+    ShogiPlayer
   },
 }
 </script>

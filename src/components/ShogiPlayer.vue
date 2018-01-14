@@ -1,5 +1,5 @@
 <template>
-<div class="shogi_player">
+<div class="shogi-player">
   <p>{{mediator.turn_now}}手目</p>
   <div class="board_container board_turn" :class="{enable: board_turn}">
     <PieceStand :location="'white'"/>
@@ -51,7 +51,7 @@ Object.defineProperty(Vue.prototype, '$lodash', {value: lodash})
 
 /* eslint-disable no-new */
 export default {
-  name: 'HelloPlayer',
+  name: 'ShogiPlayer',
 
   props: [
     "kifu_body",
@@ -152,5 +152,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  @import "HelloPlayer"
+  @import "ShogiPlayer"
 </style>

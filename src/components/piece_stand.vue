@@ -38,7 +38,7 @@ export default {
 <style scoped lang="sass">
 @import "variables"
 
-.shogi_player
+.shogi-player
   .piece_stand
     min-width: 10vmin
     margin: 0 1vmin
