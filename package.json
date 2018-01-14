@@ -11,7 +11,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "build": "node build/build.js && rsync -avzu --delete dist/ docs/"
+    "build": "node build/build.js && rsync -avzu --delete dist/ docs/",
+    "deploy": "npm run build && git add -A && git commit -m 'npm run build for deploy' && git push"
   },
   "dependencies": {
     "autoprefixer": "^7.1.2",
