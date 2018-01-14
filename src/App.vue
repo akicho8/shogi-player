@@ -4,7 +4,7 @@
     <HelloPlayer :kifu_body="kifu_body" :turn_start="121" />
     <textarea v-model="kifu_body" class="form-control" />
     <p class="links">
-      <a href="https://github.com/akicho8/shogi_player" target="_blank">Github</a>
+      <a href="https://github.com/akicho8/shogi_player">Github</a>
     </p>
   </div>
 </div>
