@@ -19,16 +19,16 @@
   <p>
     <div class="controller">
       <div class="--btn-group">
-        <button class="btn btn-default first"      @click="current_turn = mediator.sfen.turn_min">|◀</button>
+        <button class="btn btn-default first"      @click="current_turn = mediator.sfen_parser.turn_min">|◀</button>
         <button class="btn btn-default previous"   @click="current_turn -= 1">◀</button>
         <button class="btn btn-default next"       @click="current_turn += 1">▶</button>
-        <button class="btn btn-default last"       @click="current_turn = mediator.sfen.turn_max">▶|</button>
+        <button class="btn btn-default last"       @click="current_turn = mediator.sfen_parser.turn_max">▶|</button>
         <button class="btn btn-default board_turn" @click="board_turn = !board_turn">&#x21BB;</button>
       </div>
     </div>
   </p>
   <p>
-    <input type="range" v-model.number="current_turn" :min="mediator.sfen.turn_min" :max="mediator.sfen.turn_max" />
+    <input type="range" v-model.number="current_turn" :min="mediator.sfen_parser.turn_min" :max="mediator.sfen_parser.turn_max" />
   </p>
   <template v-if="env !== 'production'">
     {{mediator.hold_pieces}}
@@ -112,10 +112,10 @@ export default {
         }
       }
       if (e.key === "[" || e.key === "Home" || e.code === "Escape") {
-        force_value = this.mediator.sfen.turn_min
+        force_value = this.mediator.sfen_parser.turn_min
       }
       if (e.key === "]" || e.key === "End") {
-        force_value = this.mediator.sfen.turn_max
+        force_value = this.mediator.sfen_parser.turn_max
       }
 
       if (gap !== null) {

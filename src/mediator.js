@@ -2,14 +2,14 @@
 
 import { _ } from "underscore"
 
-import { Sfen } from "./sfen"
+import { SfenParser } from "./sfen_parser"
 import { Board } from "./board"
 import { Point } from "./point"
 import { Battler } from "./battler"
 
 class Mediator {
   constructor() {
-    this.sfen = null
+    this.sfen_parser = null
     this.current_turn = null
     this.current_field = null
     this.hold_pieces = null
@@ -20,17 +20,17 @@ class Mediator {
   }
 
   run() {
-    this.sfen = new Sfen()
-    this.sfen.kifu_body = this.kifu_body
-    this.sfen.parse()
+    this.sfen_parser = new SfenParser()
+    this.sfen_parser.kifu_body = this.kifu_body
+    this.sfen_parser.parse()
 
-    this.current_field = this.sfen.field
-    this.hold_pieces = this.sfen.hold_pieces
+    this.current_field = this.sfen_parser.field
+    this.hold_pieces = this.sfen_parser.hold_pieces
     this.move_info = null
 
-    const move_infos = this.sfen.move_infos
+    const move_infos = this.sfen_parser.move_infos
 
-    const num = this.turn_now - this.sfen.turn_min
+    const num = this.turn_now - this.sfen_parser.turn_min
     _(num).times((i) => {
       const m = move_infos[i]
       this.move_info = m
@@ -98,12 +98,12 @@ class Mediator {
   }
 
   turn_clamp(v) {
-    if (this.sfen) {
-      if (v < this.sfen.turn_min) {
-        v = this.sfen.turn_min
+    if (this.sfen_parser) {
+      if (v < this.sfen_parser.turn_min) {
+        v = this.sfen_parser.turn_min
       }
-      if (this.sfen.turn_max < v) {
-        v = this.sfen.turn_max
+      if (this.sfen_parser.turn_max < v) {
+        v = this.sfen_parser.turn_max
       }
     }
     return v
@@ -117,7 +117,7 @@ class Mediator {
   get turn_now() {
     let index = this.current_turn
     if (index < 0) {
-      index += this.sfen.turn_max + 1
+      index += this.sfen_parser.turn_max + 1
     }
     return this.turn_clamp(index)
   }

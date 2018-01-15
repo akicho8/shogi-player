@@ -1,4 +1,4 @@
-// -*- compile-command: "babel-node sfen.js" -*-
+// -*- compile-command: "babel-node sfen_parser.js" -*-
 
 import XRegExp from "xregexp"
 
@@ -6,7 +6,7 @@ import { Piece } from "./piece"
 import { Point } from "./point"
 import { Battler } from "./battler"
 
-class Sfen {
+class SfenParser {
   constructor() {
     this.kifu_body = null
     this.attributes = null
@@ -122,14 +122,14 @@ class Sfen {
   }
 }
 
-export { Sfen }
+export { SfenParser }
 
 if (process.argv[1] === __filename) {
-  const sfen = new Sfen()
-  sfen.kifu_body = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
-  sfen.parse()
-  console.log(sfen.field)
-  console.log(sfen.location)
-  console.log(sfen.hold_pieces)
-  console.log(sfen.move_infos)
+  const sfen_parser = new SfenParser()
+  sfen_parser.kifu_body = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
+  sfen_parser.parse()
+  console.log(sfen_parser.field)
+  console.log(sfen_parser.location)
+  console.log(sfen_parser.hold_pieces)
+  console.log(sfen_parser.move_infos)
 }
