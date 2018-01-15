@@ -24,7 +24,6 @@ export default {
   data() {
     return {
       kifu_body: null,
-      current_sfen: null,
     }
   },
 
