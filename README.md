@@ -11,25 +11,29 @@
 
 [Demo](https://akicho8.github.io/shogi-player/)
 
-## Rails から使う例
+## Rails で使用する例
 
 ```shell
 % yarn add shogi_player
 ```
 
-```JavaScript:app/javascript/packs/shogi_player.js
+app/javascript/packs/shogi_player.js
+
+```JavaScript
 import Vue from 'vue/dist/vue.esm'
 import ShogiPlayer from 'shogi_player/src/components/ShogiPlayer.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: '#shogi_player_app',
-    components: { "shogi_player": ShogiPlayer }
+    components: { "shogi_player": ShogiPlayer },
   })
 })
 ```
 
-```html:app/views/xxx/show.html.erb
+app/views/xxx/show.html.erb
+
+```html
 <%= javascript_pack_tag("shogi_player") %>
 <%= stylesheet_pack_tag("shogi_player") %>
 
