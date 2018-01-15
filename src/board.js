@@ -1,7 +1,7 @@
 // -*- compile-command: "babel-node board.js" -*-
 
 class Board {
-  static get board_size() {
+  static get dimension() {
     return 9
   }
 }
@@ -9,5 +9,5 @@ class Board {
 export { Board }
 
 if (process.argv[1] === __filename) {
-  console.log(Board.board_size)
+  console.log(Board.dimension)
 }

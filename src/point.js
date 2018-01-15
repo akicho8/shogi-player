@@ -11,7 +11,7 @@ class Point {
     let x, y
     if (typeof point === "string") {
       [x, y] = point.split("")
-      x = Board.board_size - Number(x)
+      x = Board.dimension - Number(x)
       y = y.charCodeAt(0) - "a".charCodeAt(0)
     } else {
       [x, y] = point

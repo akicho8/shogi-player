@@ -110,8 +110,8 @@ class Mediator {
     return v
   }
 
-  get board_size() {
-    return Board.board_size
+  get dimension() {
+    return Board.dimension
   }
 
   // ruby style array index access

@@ -5,8 +5,8 @@
     <PieceStand :location_key="'white'"/>
     <div class="flex_item board">
       <table>
-        <tr v-for="y in mediator.board_size">
-          <template v-for="x in mediator.board_size">
+        <tr v-for="y in mediator.dimension">
+          <template v-for="x in mediator.dimension">
             <td :class="mediator.cell_class(x -1, y - 1)">
               {{mediator.cell_view(x - 1, y - 1)}}
             </td>

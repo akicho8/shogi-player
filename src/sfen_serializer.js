@@ -24,10 +24,10 @@ class SfenSerializer {
 
   get to_baord_sfen() {
     const rows = []
-    _.times(Board.board_size, (y) => {
+    _.times(Board.dimension, (y) => {
       let str = ""
       let space = 0
-      _.times(Board.board_size, (x) => {
+      _.times(Board.dimension, (x) => {
         const point = Point.fetch([x, y])
         const battler = this.mediator.current_field.get(point.to_key)
         if (battler === undefined) {
