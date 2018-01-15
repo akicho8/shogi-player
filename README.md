@@ -34,9 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
 <%= stylesheet_pack_tag("shogi_player") %>
 
 <div id="shogi_player_app">
-  <shogi_player :kifu_body="'position startpos moves 7g7f 8c8d'"></shogi_player>
+  <shogi_player :kifu_body="'position startpos moves 7g7f 8c8d'" :turn_start="-1"></shogi_player>
 </div>
 ```
+
+## 引数
+
+| props      | 意味  | 補足                  |
+|------------|-------|-----------------------|
+| kifu_body  | 棋譜  | 例: position startpos |
+| turn_start | N手目 | 0:最初 -1:最後        |
+
 
 ## Build Setup
 
