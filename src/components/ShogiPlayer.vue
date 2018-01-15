@@ -2,7 +2,7 @@
 <div class="shogi-player">
   <p>{{mediator.turn_now}}手目</p>
   <div class="board_container board_turn" :class="{enable: board_turn}">
-    <PieceStand :location="'white'"/>
+    <PieceStand :location_key="'white'"/>
     <div class="flex_item board">
       <table>
         <tr v-for="y in mediator.board_size">
@@ -14,7 +14,7 @@
         </tr>
       </table>
     </div>
-    <PieceStand :location="'black'"/>
+    <PieceStand :location_key="'black'"/>
   </div>
   <p>
     <div class="controller">

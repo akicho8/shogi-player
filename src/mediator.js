@@ -40,22 +40,22 @@ class Mediator {
           piece: m.stroke_piece,
           point: m.point,
           promoted: m.promoted,
-          location: m.location,
+          location_key: m.location,
         })
         {
-          const count = this.hold_pieces.get(m.location).get(battler.piece.key) - 1
-          this.hold_pieces.get(m.location).set(battler.piece.key, count)
+          const count = this.hold_pieces.get(m.location_key).get(battler.piece.key) - 1
+          this.hold_pieces.get(m.location_key).set(battler.piece.key, count)
         }
         this.current_field.set(battler.point.to_key, battler)
       } else {
         {
           const battler = this.current_field.get(m.point.to_key)
           if (battler) {
-            if (this.hold_pieces.get(m.location) === undefined) {
-              this.hold_pieces.set(m.location, new Map())
+            if (this.hold_pieces.get(m.location_key) === undefined) {
+              this.hold_pieces.set(m.location_key, new Map())
             }
-            const count = (this.hold_pieces.get(m.location).get(battler.piece.key) || 0) + 1
-            this.hold_pieces.get(m.location).set(battler.piece.key, count)
+            const count = (this.hold_pieces.get(m.location_key).get(battler.piece.key) || 0) + 1
+            this.hold_pieces.get(m.location_key).set(battler.piece.key, count)
           }
         }
         const battler = this.current_field.get(m.origin_pos.to_key)
@@ -81,7 +81,7 @@ class Mediator {
     const battler = this.current_field.get(Point.fetch([x, y]).to_key)
     let klass = []
     if (battler) {
-      klass.push(battler.location)
+      klass.push(battler.location_key)
     }
     if (this.move_info) {
       const origin_pos = this.move_info.origin_pos

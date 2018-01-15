@@ -8,7 +8,7 @@ describe('Battler', () => {
       point: new Point([1, 2]),
       piece: Piece.fetch("R"),
       promoted: true,
-      location: "white",
+      location_key: "white",
     })
     expect(battler.name).toEqual("龍")
   })

@@ -41,7 +41,7 @@ class SfenSerializer {
             str += "+"
           }
           let key = battler.piece.key
-          if (battler.location === "white") {
+          if (battler.location_key === "white") {
             key = key.toLowerCase()
           }
           str += key

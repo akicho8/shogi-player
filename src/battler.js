@@ -1,7 +1,8 @@
 // -*- compile-command: "babel-node battler.js" -*-
 
-import { Point } from './point.js'
-import { Piece } from './piece.js'
+import { Point } from './point'
+import { Piece } from './piece'
+import { Location } from './location'
 
 class Battler {
   constructor(attributes) {
@@ -16,8 +17,12 @@ class Battler {
     return this.attributes.point
   }
 
-  get location() {
-    return this.attributes.location
+  get location_key() {
+    return this.attributes.location_key
+  }
+
+  get location_info() {
+    return Location.fetch(this.location_key)
   }
 
   get promoted() {
@@ -43,7 +48,7 @@ if (process.argv[1] === __filename) {
     point: new Point([1, 2]),
     piece: Piece.fetch("P"),
     promoted: true,
-    location: "white",
+    location_key: "white",
   })
   console.log(battler.name)
 }

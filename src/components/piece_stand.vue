@@ -1,8 +1,8 @@
 <template>
-<div class="flex_item piece_stand" :class="[location, $parent.env]">
+<div class="flex_item piece_stand" :class="[location_key, $parent.env]">
   <ul>
-    <li>{{location | location_name}}</li>
-    <template v-for="[piece_key, count] in Array.from($parent.mediator.hold_pieces.get(location))">
+    <li>{{location_key | location_name}}</li>
+    <template v-for="[piece_key, count] in Array.from($parent.mediator.hold_pieces.get(location_key))">
       <template v-if="count >= 1">
         <li>
           <span class="piece_name">{{piece_key | piece_name}}</span>
@@ -22,7 +22,7 @@ import { Location } from "../location"
 
 export default {
   props: [
-    "location",
+    "location_key",
   ],
   filters: {
     piece_name(key) {
