@@ -2,6 +2,7 @@
 <div id="app">
   <div class="container">
     <ShogiPlayer :kifu_body="kifu_body" :turn_start="121" />
+    <h3>棋譜</h3>
     <textarea v-model="kifu_body" class="form-control" />
     <p class="links">
       <a href="https://github.com/akicho8/shogi-player">Github</a>
@@ -23,6 +24,7 @@ export default {
   data() {
     return {
       kifu_body: null,
+      current_sfen: null,
     }
   },
 
@@ -45,7 +47,7 @@ body
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   text-align: center
-  margin-top: 60px
+  margin-top: 20px
 
 .links
   margin-top: 1rem

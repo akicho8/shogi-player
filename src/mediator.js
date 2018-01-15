@@ -6,6 +6,7 @@ import { SfenParser } from "./sfen_parser"
 import { Board } from "./board"
 import { Point } from "./point"
 import { Battler } from "./battler"
+import { SfenSerializer } from "./sfen_serializer"
 
 class Mediator {
   constructor() {
@@ -120,6 +121,10 @@ class Mediator {
       index += this.sfen_parser.turn_max + 1
     }
     return this.turn_clamp(index)
+  }
+
+  get to_sfen() {
+    return (new SfenSerializer(this)).to_s
   }
 }
 

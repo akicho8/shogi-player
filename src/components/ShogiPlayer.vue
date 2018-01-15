@@ -30,6 +30,9 @@
   <p>
     <input type="range" v-model.number="current_turn" :min="mediator.sfen_parser.turn_min" :max="mediator.sfen_parser.turn_max" />
   </p>
+  <p>
+    <input type="text" :value="mediator.to_sfen" class="form-control" readonly="readonly"/>
+  </p>
   <template v-if="env !== 'production'">
     {{mediator.hold_pieces}}
   </template>
