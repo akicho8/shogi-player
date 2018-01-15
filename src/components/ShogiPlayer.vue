@@ -16,24 +16,20 @@
     </div>
     <PieceStand :location="'black'"/>
   </div>
-
   <p>
     <div class="controller">
-      <div class="btn-group">
-        <button class="btn btn-default first"      @click="current_turn = mediator.sfen.turn_min">｜＜</button>
-        <button class="btn btn-default previous"   @click="current_turn -= 1">＜</button>
-        <button class="btn btn-default next"       @click="current_turn += 1">＞</button>
-        <button class="btn btn-default last"       @click="current_turn = mediator.sfen.turn_max">＞｜</button>
-      </div>
-      <div class="btn-group">
-        <button class="btn btn-default board_turn" @click="board_turn = !board_turn">反転</button>
+      <div class="--btn-group">
+        <button class="btn btn-default first"      @click="current_turn = mediator.sfen.turn_min">|◀</button>
+        <button class="btn btn-default previous"   @click="current_turn -= 1">◀</button>
+        <button class="btn btn-default next"       @click="current_turn += 1">▶</button>
+        <button class="btn btn-default last"       @click="current_turn = mediator.sfen.turn_max">▶|</button>
+        <button class="btn btn-default board_turn" @click="board_turn = !board_turn">&#x21BB;</button>
       </div>
     </div>
   </p>
   <p>
     <input type="range" v-model.number="current_turn" :min="mediator.sfen.turn_min" :max="mediator.sfen.turn_max" />
   </p>
-
   <template v-if="env !== 'production'">
     {{mediator.hold_pieces}}
   </template>
