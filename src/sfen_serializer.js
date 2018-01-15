@@ -13,7 +13,7 @@ class SfenSerializer {
     this.mediator = mediator
   }
 
-  get toString() {
+  get to_s() {
     const parts = []
     parts.push(this.to_baord_sfen)
     parts.push(this.mediator.sfen_parser.location_of(this.mediator.current_turn)[0])
@@ -95,5 +95,5 @@ if (process.argv[1] === __filename) {
   mediator.current_turn = 1
   mediator.run()
   const sfen_serializer = new SfenSerializer(mediator)
-  console.log(sfen_serializer.toString)
+  console.log(sfen_serializer.to_s)
 }

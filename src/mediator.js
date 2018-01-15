@@ -124,7 +124,7 @@ class Mediator {
   }
 
   get to_sfen() {
-    return (new SfenSerializer(this)).toString
+    return (new SfenSerializer(this)).to_s
   }
 }
 
