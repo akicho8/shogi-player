@@ -1,31 +1,13 @@
-// # | # ----  Kifu for Windows V6.26 棋譜ファイル  ----
-// # | key：value
-// # | 手数----指手---------消費時間--
-// # | *コメント0
-// # |    1 ７六歩(77)   ( 0:00/00:00:00)
-// # |    2 投了         ( 0:00/00:00:00)
-// # | 変化：1手
-// # |    1 ２六歩(25)   ( 0:00/00:00:00)
-
 import XRegExp from "xregexp"
 
+import { ParserBase } from "./parser_base"
 import { Piece } from "./piece"
 import { Point } from "./point"
-// import { Battler } from "./battler"
 import { Location } from "./location"
 import { SfenParser } from "./sfen_parser"
 import { Board } from "./board"
 
-class KifParser {
-  constructor() {
-    this.kifu_body = null
-    this.header = null
-  }
-
-  parse() {
-    this.header = {}
-  }
-
+class KifParser extends ParserBase {
   get field() {
     const sfen_parser = new SfenParser()
     sfen_parser.kifu_body = "position startpos" // TODO: sfen形式の値のテーブルを持って駒落ちに対応する
@@ -33,34 +15,10 @@ class KifParser {
     return sfen_parser.field
   }
 
-  get location() {
+  get location_base() {
     let key = null
     const value = this.header["手合割"] || "平手"
     if (value === "平手") {
-      key = "black"
-    } else {
-      key = "white"
-    }
-    return Location.fetch(key)
-  }
-
-  get hold_pieces() {
-    const _hold_pieces = new Map([["black", new Map()], ["white", new Map()]]) // FIXME: リファクタリング
-    return _hold_pieces
-  }
-
-  get turn_min() {
-    return 0
-  }
-
-  get turn_max() {
-    return this.move_infos.length
-  }
-
-  location_by_offset(offset) {
-    const index = offset
-    let key = null
-    if ((index % 2) === 0) {
       key = "black"
     } else {
       key = "white"
@@ -123,7 +81,7 @@ key：value
 `
   kif_parser.parse()
   console.log(kif_parser.field)
-  console.log(kif_parser.location_key)
+  console.log(kif_parser.location_base)
   console.log(kif_parser.hold_pieces)
   console.log(kif_parser.move_infos)
 }

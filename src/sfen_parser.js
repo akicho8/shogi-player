@@ -1,16 +1,12 @@
 import XRegExp from "xregexp"
 
+import { ParserBase } from "./parser_base"
 import { Piece } from "./piece"
 import { Point } from "./point"
 import { Battler } from "./battler"
 import { Location } from "./location"
 
-class SfenParser {
-  constructor() {
-    this.kifu_body = null
-    this.attributes = null
-  }
-
+class SfenParser extends ParserBase {
   parse() {
     this.kifu_body = this.kifu_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
@@ -42,7 +38,7 @@ class SfenParser {
     return field
   }
 
-  get location() {
+  get location_base() {
     let key = null
     if (this.attributes["b_or_w"] === "b") {
       key = "black"
@@ -53,7 +49,7 @@ class SfenParser {
   }
 
   get hold_pieces() {
-    const _hold_pieces = new Map([["black", new Map()], ["white", new Map()]]) // FIXME: リファクタリング
+    const _hold_pieces = super.hold_pieces
     if (this.attributes["hold_pieces"] !== "-") {
       XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece_char>\\S)"), (md, i) => {
         const piece = Piece.fetch(md.piece_char)
@@ -66,31 +62,12 @@ class SfenParser {
     return _hold_pieces
   }
 
-  get turn_counter_next() {
-    return Number(this.attributes["turn_counter_next"])
-  }
-
   get turn_min() {
-    return this.turn_counter_next - 1
-  }
-
-  get turn_max() {
-    return this.turn_min + this.move_infos.length
+    return Number(this.attributes["turn_counter_next"]) - 1
   }
 
   get komaochi_p() {
-    return (this.turn_counter_next % 2) === 1 && this.location.key === "white"
-  }
-
-  location_by_offset(offset) {
-    const index = this.turn_counter_next + offset
-    let key = null
-    if ((index % 2) === 1) {
-      key = "black"
-    } else {
-      key = "white"
-    }
-    return Location.fetch(key)
+    return (this.turn_min % 2) === 0 && this.location_base.key === "white"
   }
 
   get move_infos() {
@@ -134,7 +111,7 @@ if (process.argv[1] === __filename) {
   sfen_parser.kifu_body = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
   sfen_parser.parse()
   console.log(sfen_parser.field)
-  console.log(sfen_parser.location_key)
+  console.log(sfen_parser.location_base.key)
   console.log(sfen_parser.hold_pieces)
   console.log(sfen_parser.move_infos)
 }
