@@ -1,8 +1,11 @@
 <template>
 <div id="app">
   <div class="container">
+    <h1>shogi-player demo</h1>
     <ShogiPlayer :kifu_body="kifu_body" :turn_start="121" :keyboard_operation_flag="true" />
-    <h3>棋譜</h3>
+
+    <br>
+    <h4>棋譜</h4>
     <textarea v-model="kifu_body" class="form-control" />
     <p class="links">
       <a href="https://github.com/akicho8/shogi-player">Github</a>
