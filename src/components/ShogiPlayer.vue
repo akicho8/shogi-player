@@ -45,8 +45,10 @@ import { Mediator } from "../mediator"
 import PieceStand from "./piece_stand"
 
 import Vue from 'vue'
-import lodash from "lodash"
-Object.defineProperty(Vue.prototype, '$lodash', {value: lodash})
+
+// for vue template
+// import lodash from "lodash"
+// Object.defineProperty(Vue.prototype, '$lodash', {value: lodash})
 
 /* eslint-disable no-new */
 export default {
