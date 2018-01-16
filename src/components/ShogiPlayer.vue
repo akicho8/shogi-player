@@ -59,6 +59,7 @@ export default {
     "kifu_body",
     "turn_start",
     "keyboard_operation_flag",
+    "location_hash_embed_turn",
   ],
 
   components: {
@@ -172,7 +173,9 @@ export default {
       this.mediator.current_turn = this.current_turn
       this.mediator.run()
       this.current_turn = this.mediator.turn_now
-      // document.location.hash = this.current_turn
+      if (this.location_hash_embed_turn) {
+        document.location.hash = this.current_turn
+      }
     },
 
     move_to_previous() {
