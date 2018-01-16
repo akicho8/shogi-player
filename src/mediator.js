@@ -56,11 +56,11 @@ class Mediator {
             this.hold_pieces.get(m.location.key).set(battler.piece.key, count)
           }
         }
-        const battler = this.current_field.get(m.origin_pos.key)
+        const battler = this.current_field.get(m.origin_point.key)
         if (m.promoted_trigger) {
           battler.promoted = true
         }
-        this.current_field.delete(m.origin_pos.key)
+        this.current_field.delete(m.origin_point.key)
         this.current_field.set(m.point.key, battler)
       }
     })
@@ -82,10 +82,10 @@ class Mediator {
       klass.push(battler.location.key)
     }
     if (this.move_info) {
-      const origin_pos = this.move_info.origin_pos
-      if (origin_pos) {
-        if (origin_pos.x === x && origin_pos.y === y) {
-          klass.push("origin_pos")
+      const origin_point = this.move_info.origin_point
+      if (origin_point) {
+        if (origin_point.x === x && origin_point.y === y) {
+          klass.push("origin_point")
         }
       }
       const point = this.move_info.point

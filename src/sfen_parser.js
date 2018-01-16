@@ -109,7 +109,7 @@ class SfenParser {
       if (md["origin_y"] === "*") {
         attrs["stroke_piece"] = Piece.fetch(md["origin_x"])
       } else {
-        attrs["origin_pos"] = Point.fetch(`${md["origin_x"]}${md["origin_y"]}`)
+        attrs["origin_point"] = Point.fetch(`${md["origin_x"]}${md["origin_y"]}`)
       }
       attrs["point"] = Point.fetch(`${md["pos_x"]}${md["pos_y"]}`)
       return attrs
