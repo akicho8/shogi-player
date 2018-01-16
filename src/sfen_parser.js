@@ -53,7 +53,7 @@ class SfenParser {
   }
 
   get hold_pieces() {
-    const _hold_pieces = new Map([["black", new Map()], ["white", new Map()]])
+    const _hold_pieces = new Map([["black", new Map()], ["white", new Map()]]) // FIXME: リファクタリング
     if (this.attributes["hold_pieces"] !== "-") {
       XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece_char>\\S)"), (md, i) => {
         const piece = Piece.fetch(md.piece_char)

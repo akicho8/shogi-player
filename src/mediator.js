@@ -1,6 +1,7 @@
 import _ from "lodash"
 
 import { SfenParser } from "./sfen_parser"
+import { KifParser } from "./kif_parser"
 import { Board } from "./board"
 import { Point } from "./point"
 import { Battler } from "./battler"
@@ -19,7 +20,11 @@ class Mediator {
   }
 
   run() {
-    this.sfen_parser = new SfenParser()
+    if (/position/.test(this.kifu_body)) {
+      this.sfen_parser = new SfenParser()
+    } else {
+      this.sfen_parser = new KifParser()
+    }
     this.sfen_parser.kifu_body = this.kifu_body
     this.sfen_parser.parse()
 

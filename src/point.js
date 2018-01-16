@@ -8,6 +8,7 @@ class Point {
   constructor(point) {
     let x, y
     if (typeof point === "string") {
+      // FIXME: sfen 専用になっているのでsfen側に移動
       [x, y] = point.split("")
       x = Board.dimension - Number(x)
       y = y.charCodeAt(0) - "a".charCodeAt(0)
