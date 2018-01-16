@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <div class="container">
-    <ShogiPlayer :kifu_body="kifu_body" :turn_start="121" />
+    <ShogiPlayer :kifu_body="kifu_body" :turn_start="121" :keyboard_operation_flag="true" />
     <h3>棋譜</h3>
     <textarea v-model="kifu_body" class="form-control" />
     <p class="links">

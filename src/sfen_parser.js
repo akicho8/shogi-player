@@ -35,7 +35,7 @@ class SfenParser {
             location: this.__location_by_upper_or_lower_case(m.piece),
           })
           field.set(battler.point.key, battler)
-          x += 1
+          x++
         }
       })
     })

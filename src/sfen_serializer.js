@@ -29,7 +29,7 @@ class SfenSerializer {
         const point = Point.fetch([x, y])
         const battler = this.mediator.current_field.get(point.key)
         if (battler === undefined) {
-          space += 1
+          space++
         } else {
           if (space >= 1) {
             str += space

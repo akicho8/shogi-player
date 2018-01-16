@@ -1,6 +1,5 @@
 import { Point } from './point'
 import { Piece } from './piece'
-import { Location } from './location'
 
 class Battler {
   constructor(attributes) {

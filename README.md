@@ -44,10 +44,11 @@ app/views/xxx/show.html.erb
 
 ## 引数
 
-| props      | 意味  | 補足                  |
-|------------|-------|-----------------------|
-| kifu_body  | 棋譜  | 例: position startpos |
-| turn_start | N手目 | 0:最初 -1:最後        |
+| props                   | 意味                       | 例・補足                                           |
+|-------------------------|----------------------------|----------------------------------------------------|
+| kifu_body               | 棋譜                       | 例: position startpos                              |
+| turn_start              | N手目                      | 0:最初 -1:最後                                     |
+| keyboard_operation_flag | キーボード操作を充実させる | どこにもフォーカスしていないときでも左右が反応する |
 
 
 ## Build Setup
