@@ -3,6 +3,7 @@ import XRegExp from "xregexp"
 import { Piece } from "./piece"
 import { Point } from "./point"
 import { Battler } from "./battler"
+import { Location } from "./location"
 
 class SfenParser {
   constructor() {
@@ -31,9 +32,9 @@ class SfenParser {
             point: new Point([x, y]),
             piece: Piece.fetch(m.piece),
             promoted: (m.promoted === "+"),
-            location_key: this.__location_by(m.piece),
+            location: this.__location_by_upper_or_lower_case(m.piece),
           })
-          field.set(battler.point.to_key, battler)
+          field.set(battler.point.key, battler)
           x += 1
         }
       })
@@ -41,22 +42,25 @@ class SfenParser {
     return field
   }
 
-  get location_key() {
+  get location() {
+    let key = null
     if (this.attributes["b_or_w"] === "b") {
-      return "black"
+      key = "black"
+    } else {
+      key = "white"
     }
-    return "white"
+    return Location.fetch(key)
   }
 
   get hold_pieces() {
     const _hold_pieces = new Map([["black", new Map()], ["white", new Map()]])
     if (this.attributes["hold_pieces"] !== "-") {
-      XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece_key>\\S)"), (m, i) => {
-        const piece = Piece.fetch(m.piece_key)
-        let count = Number(m.count || 1)
-        const location_key = this.__location_by(m.piece_key)
-        count += _hold_pieces.get(location_key).get(piece.key) || 0
-        _hold_pieces.get(location_key).set(piece.key, count)
+      XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece_char>\\S)"), (md, i) => {
+        const piece = Piece.fetch(md.piece_char)
+        let count = Number(md.count || 1)
+        const location = this.__location_by_upper_or_lower_case(md.piece_char)
+        count += _hold_pieces.get(location.key).get(piece.key) || 0
+        _hold_pieces.get(location.key).set(piece.key, count)
       })
     }
     return _hold_pieces
@@ -75,18 +79,18 @@ class SfenParser {
   }
 
   get komaochi_p() {
-    return (this.turn_counter_next % 2) === 1 && this.location_key === "white"
+    return (this.turn_counter_next % 2) === 1 && this.location.key === "white"
   }
 
-  location_of(offset) {
+  location_by_offset(offset) {
     const index = this.turn_counter_next + offset
-    let retval = null
+    let key = null
     if ((index % 2) === 1) {
-      retval = "black"
+      key = "black"
     } else {
-      retval = "white"
+      key = "white"
     }
-    return retval
+    return Location.fetch(key)
   }
 
   get move_infos() {
@@ -99,7 +103,7 @@ class SfenParser {
         attrs["scene_index"] = this.turn_min + i
         attrs["scene_offsert"] = i
       }
-      attrs["location_key"] = this.location_of(i)
+      attrs["location"] = this.location_by_offset(i)
       const md = XRegExp.exec(e, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
       attrs["promoted_trigger"] = (md.promoted === "+")
       if (md["origin_y"] === "*") {
@@ -112,11 +116,14 @@ class SfenParser {
     })
   }
 
-  __location_by(v) {
+  __location_by_upper_or_lower_case(v) {
+    let key = null
     if (/[A-Z]/.test(v)) {
-      return "black"
+      key = "black"
+    } else {
+      key = "white"
     }
-    return "white"
+    return Location.fetch(key)
   }
 }
 

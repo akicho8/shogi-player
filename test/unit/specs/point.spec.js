@@ -1,8 +1,8 @@
-import { Point } from '@/point.js'
+import { Point } from '@/point'
 
 describe('Point', () => {
   it('SFENの座標を受け取る', () => {
     const point = new Point("2c")
-    expect(point.to_key).toEqual("7,2")
+    expect(point.key).toEqual("7,2")
   })
 })

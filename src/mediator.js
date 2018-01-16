@@ -38,36 +38,36 @@ class Mediator {
           piece: m.stroke_piece,
           point: m.point,
           promoted: m.promoted,
-          location_key: m.location,
+          location: m.location,
         })
         {
-          const count = this.hold_pieces.get(m.location_key).get(battler.piece.key) - 1
-          this.hold_pieces.get(m.location_key).set(battler.piece.key, count)
+          const count = this.hold_pieces.get(m.location.key).get(battler.piece.key) - 1
+          this.hold_pieces.get(m.location.key).set(battler.piece.key, count)
         }
-        this.current_field.set(battler.point.to_key, battler)
+        this.current_field.set(battler.point.key, battler)
       } else {
         {
-          const battler = this.current_field.get(m.point.to_key)
+          const battler = this.current_field.get(m.point.key)
           if (battler) {
-            if (this.hold_pieces.get(m.location_key) === undefined) {
+            if (this.hold_pieces.get(m.location.key) === undefined) {
               this.hold_pieces.set(m.location_key, new Map())
             }
-            const count = (this.hold_pieces.get(m.location_key).get(battler.piece.key) || 0) + 1
-            this.hold_pieces.get(m.location_key).set(battler.piece.key, count)
+            const count = (this.hold_pieces.get(m.location.key).get(battler.piece.key) || 0) + 1
+            this.hold_pieces.get(m.location.key).set(battler.piece.key, count)
           }
         }
-        const battler = this.current_field.get(m.origin_pos.to_key)
+        const battler = this.current_field.get(m.origin_pos.key)
         if (m.promoted_trigger) {
           battler.promoted = true
         }
-        this.current_field.delete(m.origin_pos.to_key)
-        this.current_field.set(m.point.to_key, battler)
+        this.current_field.delete(m.origin_pos.key)
+        this.current_field.set(m.point.key, battler)
       }
     })
   }
 
   cell_view(x, y) {
-    const battler = this.current_field.get(Point.fetch([x, y]).to_key)
+    const battler = this.current_field.get(Point.fetch([x, y]).key)
     let str = ""
     if (battler) {
       str = battler.name
@@ -76,10 +76,10 @@ class Mediator {
   }
 
   cell_class(x, y) {
-    const battler = this.current_field.get(Point.fetch([x, y]).to_key)
+    const battler = this.current_field.get(Point.fetch([x, y]).key)
     let klass = []
     if (battler) {
-      klass.push(battler.location_key)
+      klass.push(battler.location.key)
     }
     if (this.move_info) {
       const origin_pos = this.move_info.origin_pos

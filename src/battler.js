@@ -15,12 +15,8 @@ class Battler {
     return this.attributes.point
   }
 
-  get location_key() {
-    return this.attributes.location_key
-  }
-
-  get location_info() {
-    return Location.fetch(this.location_key)
+  get location() {
+    return this.attributes.location
   }
 
   get promoted() {

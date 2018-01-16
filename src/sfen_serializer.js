@@ -14,7 +14,7 @@ class SfenSerializer {
   get to_s() {
     const parts = []
     parts.push(this.to_baord_sfen)
-    parts.push(this.mediator.sfen_parser.location_of(this.mediator.current_turn)[0])
+    parts.push(this.mediator.sfen_parser.location_by_offset(this.mediator.current_turn).key[0])
     parts.push(this.to_hold_pieces)
     parts.push(this.mediator.turn_now + 1)
     return parts.join(" ")
@@ -27,7 +27,7 @@ class SfenSerializer {
       let space = 0
       _.times(Board.dimension, (x) => {
         const point = Point.fetch([x, y])
-        const battler = this.mediator.current_field.get(point.to_key)
+        const battler = this.mediator.current_field.get(point.key)
         if (battler === undefined) {
           space += 1
         } else {
@@ -39,7 +39,7 @@ class SfenSerializer {
             str += "+"
           }
           let key = battler.piece.key
-          if (battler.location_key === "white") {
+          if (battler.location.key === "white") {
             key = key.toLowerCase()
           }
           str += key

@@ -17,7 +17,7 @@ class Point {
     [this._x, this._y] = [x, y]
   }
 
-  get to_key() {
+  get key() {
     return [this._x, this._y].toString()
   }
 
@@ -33,6 +33,6 @@ class Point {
 export { Point }
 
 if (process.argv[1] === __filename) {
-  console.log(Point.fetch("6a").to_key)
-  console.log(Point.fetch([1, 2]).to_key)
+  console.log(Point.fetch("6a").key)
+  console.log(Point.fetch([1, 2]).key)
 }
