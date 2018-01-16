@@ -172,6 +172,7 @@ export default {
       this.mediator.current_turn = this.current_turn
       this.mediator.run()
       this.current_turn = this.mediator.turn_now
+      // document.location.hash = this.current_turn
     },
 
     move_to_previous() {
