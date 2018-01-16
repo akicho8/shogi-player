@@ -1,5 +1,3 @@
-// -*- compile-command: "babel-node point.js" -*-
-
 import { Board } from "./board"
 
 class Point {

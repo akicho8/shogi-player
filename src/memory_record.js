@@ -1,5 +1,3 @@
-// -*- compile-command: "babel-node memory_record.js" -*-
-
 class MemoryRecord {
   static get define() {
     console.warn("not implemented")

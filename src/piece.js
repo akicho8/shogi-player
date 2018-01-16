@@ -1,5 +1,3 @@
-// -*- compile-command: "babel-node piece.js" -*-
-
 import { MemoryRecord } from "./memory_record"
 
 class Piece extends MemoryRecord {

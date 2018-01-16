@@ -1,5 +1,3 @@
-// -*- compile-command: "babel-node battler.js" -*-
-
 import { Point } from './point'
 import { Piece } from './piece'
 import { Location } from './location'

@@ -1,5 +1,3 @@
-// -*- compile-command: "babel-node board.js" -*-
-
 class Board {
   static get dimension() {
     return 9

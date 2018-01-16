@@ -1,5 +1,3 @@
-// -*- compile-command: "babel-node sfen_parser.js" -*-
-
 import XRegExp from "xregexp"
 
 import { Piece } from "./piece"

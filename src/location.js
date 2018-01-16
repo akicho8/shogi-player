@@ -1,5 +1,3 @@
-// -*- compile-command: "babel-node location.js" -*-
-
 import { MemoryRecord } from "./memory_record"
 
 class Location extends MemoryRecord {

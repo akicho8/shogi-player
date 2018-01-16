@@ -1,5 +1,3 @@
-// -*- compile-command: "babel-node sfen_serializer.js" -*-
-
 import _ from "lodash"
 
 import { Piece } from "./piece"

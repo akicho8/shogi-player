@@ -1,6 +1,4 @@
-// -*- compile-command: "babel-node mediator.js" -*-
-
-import { _ } from "underscore"
+import _ from "lodash"
 
 import { SfenParser } from "./sfen_parser"
 import { Board } from "./board"
