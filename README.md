@@ -7,7 +7,7 @@
 
 # 将棋棋譜プレイヤー
 
-<div><a href="https://akicho8.github.io/shogi-player/"><img src="https://raw.github.com/akicho8/shogi-player/master/screenshot1.png" height="480" /></a></div>
+![shogi-player](shogi-player.png)
 
 [Demo](https://akicho8.github.io/shogi-player/)
 
