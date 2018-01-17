@@ -84,7 +84,7 @@ class Mediator {
     const battler = this.current_field.get(Point.fetch([x, y]).key)
     let klass = []
     if (battler) {
-      klass.push(battler.location.key)
+      klass.push(`location_${battler.location.key}`)
     }
     if (this.move_info) {
       const origin_point = this.move_info.origin_point

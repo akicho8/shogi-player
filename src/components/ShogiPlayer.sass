@@ -8,7 +8,7 @@
   text-align: center
 
   // 汎用の反転
-  .white
+  .location_white
     transform: rotate(180deg)
 
   // 将棋盤と駒台の反転
@@ -16,7 +16,7 @@
     transform: rotate(0deg)
     transition: all 0.2s 0s ease-in-out
     &.enable
-      @extend .white
+      @extend .location_white
 
   // 駒台と将棋盤のレイアウト
   .board_container
