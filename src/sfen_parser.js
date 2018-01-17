@@ -81,6 +81,7 @@ class SfenParser extends ParserBase {
         attrs["scene_offsert"] = i
       }
       attrs["location"] = this.location_by_offset(i)
+      attrs["location"] = this.location_by_offset(i + 1)
       const md = XRegExp.exec(e, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
       attrs["promoted_trigger"] = (md.promoted === "+")
       if (md["origin_y"] === "*") {
