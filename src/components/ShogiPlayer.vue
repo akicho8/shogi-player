@@ -4,8 +4,8 @@
   <div class="board_container board_turn" :class="{enable: board_turn}">
     <PieceStand :location_key="'white'"/>
     <div class="flex_item board_wrap">
-      <div class="navi_surface previous" @click="move_to_previous"></div>
-      <div class="navi_surface next" @click="move_to_next"></div>
+      <div class="navi_surface previous" @click="move_to(-1)"></div>
+      <div class="navi_surface next" @click="move_to(1)"></div>
       <table>
         <tr v-for="y in mediator.dimension">
           <template v-for="x in mediator.dimension">
@@ -175,6 +175,17 @@ export default {
       this.current_turn = this.mediator.turn_now
       if (this.location_hash_embed_turn) {
         document.location.hash = this.current_turn
+      }
+    },
+
+    move_to(sign) {
+      if (this.board_turn) {
+        sign *= -1
+      }
+      if (sign >= 1) {
+        this.move_to_next()
+      } else {
+        this.move_to_previous()
       }
     },
 
