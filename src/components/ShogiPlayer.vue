@@ -25,7 +25,7 @@
         <button ref="previous" class="btn btn-default previous"   @click="move_to_previous">◀</button>
         <button ref="next"     class="btn btn-default next"       @click="move_to_next">▶</button>
         <button ref="last"     class="btn btn-default last"       @click="move_to_last">▶|</button>
-        <button class="btn btn-default board_turn" @click="board_turn = !board_turn">&#x21BB;</button>
+        <button class="btn btn-default board_turn" @click="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
       </div>
     </div>
   </p>
