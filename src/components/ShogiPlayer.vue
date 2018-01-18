@@ -19,24 +19,24 @@
     <PieceStand :location_key="'black'"/>
   </div>
   <p>
-    <div class="controller">
-      <div class="--btn-group">
-        <button ref="first"    class="btn btn-default first"      @click.stop="move_to_first">|◀</button>
-        <button ref="previous" class="btn btn-default previous"   @click.stop="move_to_previous">◀</button>
-        <button ref="next"     class="btn btn-default next"       @click.stop="move_to_next">▶</button>
-        <button ref="last"     class="btn btn-default last"       @click.stop="move_to_last">▶|</button>
-        <button class="btn btn-default board_turn" @click.stop="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
-      </div>
+    <div class="sp-controllers buttons has-addons is-centered">
+      <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
+      <button ref="previous" class="button previous"   @click.stop="move_to_previous">◀</button>
+      <button ref="next"     class="button next"       @click.stop="move_to_next">▶</button>
+      <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
+      <button                class="button board_turn" @click.stop="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
     </div>
   </p>
   <p>
     <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" />
   </p>
   <p>
-    <input type="text" :value="mediator.to_sfen" class="form-control" readonly="readonly"/>
+    <div class="control">
+      <input type="text" class="input" :value="mediator.to_sfen" readonly="readonly"/>
+    </div>
   </p>
   <template v-if="env !== 'production'">
-    {{mediator.hold_pieces}}
+    <p>{{mediator.hold_pieces}}</p>
   </template>
 </div>
 </template>
@@ -214,7 +214,7 @@ export default {
     },
   },
 }
-</script>
+                              </script>
 
 <style scoped lang="sass">
   @import "ShogiPlayer"

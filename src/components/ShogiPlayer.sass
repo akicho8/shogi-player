@@ -20,6 +20,8 @@
 
   // 駒台と将棋盤のレイアウト
   .board_container
+    // margin-top
+
     display: flex
     /* すべてを中央よせ
     justify-content: center
@@ -79,15 +81,16 @@
         // background: hsla(160, 50%, 50%, .5)
 
   // コントローラー
-  .controller
+  .sp-controllers
+    margin-top: 1.5vmin
     button
-      cursor: pointer
+      // cursor: pointer
       // width: 4vmin
       &.next
         width: 16vmin
-      &.board_turn
-        margin-left: 1vmin
-        
+      // &.board_turn
+      //   margin-left: 1vmin
+
   // スライダー
   input[type=range]
     cursor: pointer
