@@ -3,7 +3,8 @@ class MemoryRecord {
     console.warn("not implemented")
 
     return [
-      { key: "(key)", },
+      { key: "(key_x)", },
+      { key: "(key_y)", },
     ]
   }
 
@@ -20,7 +21,7 @@ class MemoryRecord {
   }
 
   static get values_map() {
-    this._values_map = this._values_map || new Map(this.define.map((e) => [e.key, Object.freeze(new this(e))]))
+    this._values_map = this._values_map || new Map(this.define.map((e, i) => [e.key, Object.freeze(new this(Object.assign({}, e, {code: i})))]))
     return this._values_map
   }
 
@@ -40,10 +41,16 @@ class MemoryRecord {
   get name() {
     return this.attributes.name || this.key.toString()
   }
+
+  get code() {
+    return this.attributes.code
+  }
 }
 
 export { MemoryRecord }
 
 if (process.argv[1] === __filename) {
-  console.log(MemoryRecord.lookup("(key)").name)
+  console.log(MemoryRecord.values)
+  console.log(MemoryRecord.lookup("(key_x)").name)
+  console.log(MemoryRecord.lookup("(key_x)").code)
 }
