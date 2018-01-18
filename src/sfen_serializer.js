@@ -14,7 +14,7 @@ class SfenSerializer {
   get to_s() {
     const parts = []
     parts.push(this.to_baord_sfen)
-    parts.push(this.mediator.sfen_parser.location_by_offset(this.mediator.turn_now + 1).key[0]) // 次の手番なので + 1 している
+    parts.push(this.mediator.any_parser.location_by_offset(this.mediator.turn_now + 1).key[0]) // 次の手番なので + 1 している
     parts.push(this.to_hold_pieces)
     parts.push(this.mediator.turn_now + 1)
     return parts.join(" ")

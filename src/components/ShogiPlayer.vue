@@ -30,7 +30,7 @@
     </div>
   </p>
   <p>
-    <input type="range" v-model.number="current_turn" :min="mediator.sfen_parser.turn_min" :max="mediator.sfen_parser.turn_max" />
+    <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" />
   </p>
   <p>
     <input type="text" :value="mediator.to_sfen" class="form-control" readonly="readonly"/>
@@ -141,10 +141,10 @@ export default {
       //   }
       // }
       // if (e.key === "[" || e.key === "Home" || e.code === "Escape") {
-      //   force_value = this.mediator.sfen_parser.turn_min
+      //   force_value = this.mediator.any_parser.turn_min
       // }
       // if (e.key === "]" || e.key === "End") {
-      //   force_value = this.mediator.sfen_parser.turn_max
+      //   force_value = this.mediator.any_parser.turn_max
       // }
       //
       // let v = this.current_turn
@@ -154,11 +154,11 @@ export default {
       // if (force_value !== null) {
       //   v = force_value
       // }
-      // if (v < this.mediator.sfen_parser.turn_min) {
-      //   v = this.mediator.sfen_parser.turn_min
+      // if (v < this.mediator.any_parser.turn_min) {
+      //   v = this.mediator.any_parser.turn_min
       // }
-      // if (this.mediator.sfen_parser.turn_max < v) {
-      //   v = this.mediator.sfen_parser.turn_max
+      // if (this.mediator.any_parser.turn_max < v) {
+      //   v = this.mediator.any_parser.turn_max
       // }
       // this.current_turn = v
       //
@@ -179,26 +179,26 @@ export default {
     },
 
     move_to_previous() {
-      if (this.current_turn > this.mediator.sfen_parser.turn_min) {
+      if (this.current_turn > this.mediator.any_parser.turn_min) {
         this.current_turn--
       }
       this.$refs.previous.focus()
     },
 
     move_to_next() {
-      if (this.current_turn < this.mediator.sfen_parser.turn_max) {
+      if (this.current_turn < this.mediator.any_parser.turn_max) {
         this.current_turn++
       }
       this.$refs.next.focus()
     },
 
     move_to_first() {
-      this.current_turn = this.mediator.sfen_parser.turn_min
+      this.current_turn = this.mediator.any_parser.turn_min
       this.$refs.first.focus()
     },
 
     move_to_last() {
-      this.current_turn = this.mediator.sfen_parser.turn_max
+      this.current_turn = this.mediator.any_parser.turn_max
       this.$refs.last.focus()
     },
   },

@@ -9,7 +9,7 @@ import { SfenSerializer } from "./sfen_serializer"
 
 class Mediator {
   constructor() {
-    this.sfen_parser = null
+    this.any_parser = null
     this.current_turn = null
     this.current_field = null
     this.hold_pieces = null
@@ -20,21 +20,22 @@ class Mediator {
   }
 
   run() {
-    if (/position/.test(this.kifu_body)) {
-      this.sfen_parser = new SfenParser()
+    if (/position/.test(this.kifu_body)) { // FIXME: この判定はしょぼい
+      this.any_parser = new SfenParser()
     } else {
-      this.sfen_parser = new KifParser()
+      this.any_parser = new KifParser()
     }
-    this.sfen_parser.kifu_body = this.kifu_body
-    this.sfen_parser.parse()
 
-    this.current_field = this.sfen_parser.field
-    this.hold_pieces = this.sfen_parser.hold_pieces
+    this.any_parser.kifu_body = this.kifu_body
+    this.any_parser.parse()
+
+    this.current_field = this.any_parser.field
+    this.hold_pieces = this.any_parser.hold_pieces
     this.move_info = null
 
-    const move_infos = this.sfen_parser.move_infos
+    const move_infos = this.any_parser.move_infos
 
-    const num = this.turn_now - this.sfen_parser.turn_min
+    const num = this.turn_now - this.any_parser.turn_min
     _(num).times((i) => {
       const m = move_infos[i]
       this.move_info = m
@@ -102,12 +103,12 @@ class Mediator {
   }
 
   turn_clamp(v) {
-    if (this.sfen_parser) {
-      if (v < this.sfen_parser.turn_min) {
-        v = this.sfen_parser.turn_min
+    if (this.any_parser) {
+      if (v < this.any_parser.turn_min) {
+        v = this.any_parser.turn_min
       }
-      if (this.sfen_parser.turn_max < v) {
-        v = this.sfen_parser.turn_max
+      if (this.any_parser.turn_max < v) {
+        v = this.any_parser.turn_max
       }
     }
     return v
@@ -121,7 +122,7 @@ class Mediator {
   get turn_now() {
     let index = this.current_turn
     if (index < 0) {
-      index += this.sfen_parser.turn_max + 1
+      index += this.any_parser.turn_max + 1
     }
     return this.turn_clamp(index)
   }
