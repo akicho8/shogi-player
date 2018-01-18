@@ -4,8 +4,8 @@
   <div class="board_container board_turn" :class="{enable: board_turn}">
     <PieceStand :location_key="'white'"/>
     <div class="flex_item board_wrap">
-      <div class="navi_surface previous" @click="move_to(-1)"></div>
-      <div class="navi_surface next" @click="move_to(1)"></div>
+      <div class="navi_surface previous" @click.stop="move_to(-1)"></div>
+      <div class="navi_surface next" @click.stop="move_to(1)"></div>
       <table>
         <tr v-for="y in mediator.dimension">
           <template v-for="x in mediator.dimension">
@@ -21,11 +21,11 @@
   <p>
     <div class="controller">
       <div class="--btn-group">
-        <button ref="first"    class="btn btn-default first"      @click="move_to_first">|◀</button>
-        <button ref="previous" class="btn btn-default previous"   @click="move_to_previous">◀</button>
-        <button ref="next"     class="btn btn-default next"       @click="move_to_next">▶</button>
-        <button ref="last"     class="btn btn-default last"       @click="move_to_last">▶|</button>
-        <button class="btn btn-default board_turn" @click="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
+        <button ref="first"    class="btn btn-default first"      @click.stop="move_to_first">|◀</button>
+        <button ref="previous" class="btn btn-default previous"   @click.stop="move_to_previous">◀</button>
+        <button ref="next"     class="btn btn-default next"       @click.stop="move_to_next">▶</button>
+        <button ref="last"     class="btn btn-default last"       @click.stop="move_to_last">▶|</button>
+        <button class="btn btn-default board_turn" @click.stop="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
       </div>
     </div>
   </p>
