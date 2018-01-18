@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import 'bulma/bulma.sass'
+import "font-awesome/scss/font-awesome.scss"
 
 Vue.config.productionTip = false
 
