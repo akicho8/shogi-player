@@ -18,24 +18,24 @@
     </div>
     <PieceStand :location_key="'black'"/>
   </div>
-  <p>
-    <div class="sp-controllers buttons has-addons is-centered">
-      <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
-      <button ref="previous" class="button previous"   @click.stop="move_to_previous">◀</button>
-      <button ref="next"     class="button next"       @click.stop="move_to_next">▶</button>
-      <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
-      <button                class="button board_turn" @click.stop="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
-    </div>
-  </p>
-  <p>
+  <template v-if="controller_show">
+    <p>
+      <div class="sp-controllers buttons has-addons is-centered">
+        <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
+        <button ref="previous" class="button previous"   @click.stop="move_to_previous">◀</button>
+        <button ref="next"     class="button next"       @click.stop="move_to_next">▶</button>
+        <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
+        <button                class="button board_turn" @click.stop="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
+      </div>
+    </p>
+  </template>
+  <p v-if="slider_show">
     <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" />
   </p>
-  <p>
-    <div class="control">
-      <input type="text" class="input" :value="mediator.to_sfen" readonly="readonly"/>
-    </div>
+  <p v-if="sfen_show">
+    {{mediator.to_sfen}}
   </p>
-  <template v-if="env !== 'production'">
+  <template v-if="debug_mode">
     <p>{{mediator.hold_pieces}}</p>
   </template>
 </div>
@@ -55,12 +55,18 @@ import _ from "lodash"
 export default {
   name: 'ShogiPlayer',
 
-  props: [
-    "kifu_body",
-    "turn_start",
-    "keyboard_operation_flag",
-    "location_hash_embed_turn",
-  ],
+  /* eslint-disable */
+  props: {
+    kifu_body:                { type: String,  default: "position startpos", },
+    turn_start:               { type: Number,  default: 0,                   },
+    keyboard_operation_flag:  { type: Boolean, default: false                },
+    location_hash_embed_turn: { type: Boolean, default: false,               },
+    controller_show:          {                default: true,                },
+    slider_show:              { type: Boolean, default: true,                },
+    sfen_show:                { type: Boolean, default: true,                },
+    debug_mode:               { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
+  },
+  /* eslint-enable */
 
   components: {
     PieceStand,

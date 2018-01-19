@@ -1,6 +1,5 @@
 <template>
 <div class="flex_item piece_stand" :class="[`location_${location_key}`, $parent.env]">
-<div class="flex_item piece_stand" :class="[`location_${location_key}`, $parent.env]" @click.stop="$parent.move_to(-1)">
   <ul>
     <li>{{location_key | location_name}}</li>
     <template v-for="[piece_key, count] in hold_pieces">
@@ -21,9 +20,9 @@ import { Piece } from "../piece"
 import { Location } from "../location"
 
 export default {
-  props: [
-    "location_key",
-  ],
+  props: {
+    location_key: { required: true },
+  },
 
   computed: {
     hold_pieces: function () {
@@ -53,14 +52,14 @@ export default {
     margin: 0 1vmin
     text-align: left
 
-    &.development
-      border: 2px solid $line-color
-      background: $board-bg-color
-      border-radius: 0.5vmin
+    // &.development
+    //   border: 2px solid $line-color
+    //   background: $board-bg-color
+    //   border-radius: 0.5vmin
 
     ul
       list-style-type: none
-      padding: 0.5vmin
+      padding: 0 0.25vmin
       margin: 1vmin
       li
         // 歩(2) の並びを横軸中央で揃える
