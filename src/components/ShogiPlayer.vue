@@ -19,22 +19,20 @@
     <PieceStand :location_key="'black'"/>
   </div>
   <template v-if="controller_show">
-    <p>
-      <div class="sp-controllers buttons has-addons is-centered">
-        <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
-        <button ref="previous" class="button previous"   @click.stop="move_to_previous">◀</button>
-        <button ref="next"     class="button next"       @click.stop="move_to_next">▶</button>
-        <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
-        <button                class="button board_turn" @click.stop="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
-      </div>
-    </p>
+    <div class="sp-controllers buttons has-addons is-centered">
+      <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
+      <button ref="previous" class="button previous"   @click.stop="move_to_previous">◀</button>
+      <button ref="next"     class="button next"       @click.stop="move_to_next">▶</button>
+      <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
+      <button                class="button board_turn" @click.stop="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
+    </div>
   </template>
-  <p v-if="slider_show">
+  <template v-if="slider_show">
     <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" />
-  </p>
-  <p v-if="sfen_show">
+  </template>
+  <div v-if="sfen_show">
     {{mediator.to_sfen}}
-  </p>
+  </div>
   <template v-if="debug_mode">
     <p>{{mediator.hold_pieces}}</p>
   </template>
@@ -59,11 +57,11 @@ export default {
   props: {
     kifu_body:                { type: String,  default: "position startpos", },
     turn_start:               { type: Number,  default: 0,                   },
-    keyboard_operation_flag:  { type: Boolean, default: false                },
+    global_keyboard_operation:  { type: Boolean, default: false                },
     location_hash_embed_turn: { type: Boolean, default: false,               },
-    controller_show:          {                default: true,                },
-    slider_show:              { type: Boolean, default: true,                },
-    sfen_show:                { type: Boolean, default: true,                },
+    controller_show:          {                default: false,               },
+    slider_show:              { type: Boolean, default: false,               },
+    sfen_show:                { type: Boolean, default: false,               },
     debug_mode:               { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
   },
   /* eslint-enable */
@@ -106,7 +104,7 @@ export default {
         console.log("code", e.code)
       }
 
-      if (!this.keyboard_operation_flag) {
+      if (!this.global_keyboard_operation) {
         return
       }
 

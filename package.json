@@ -46,6 +46,7 @@
     "xregexp": "^4.0.0"
   },
   "devDependencies": {
+    "marked": "^0.3.12",
     "chalk": "^2.0.1",
     "chromedriver": "^2.27.2",
     "copy-webpack-plugin": "^4.0.1",
