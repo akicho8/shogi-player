@@ -26,7 +26,7 @@ class ParserBase {
   }
 
   location_by_offset(offset) {
-    const index = this.turn_min + offset
+    const index = this.turn_min + offset + (this.komaochi_p ? 1 : 0)
     let key = null
     if ((index % 2) === 0) {
       key = "black"
