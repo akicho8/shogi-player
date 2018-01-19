@@ -4,8 +4,8 @@
   <div class="board_container board_turn" :class="{enable: board_turn}">
     <PieceStand :location_key="'white'"/>
     <div class="flex_item board_wrap">
-      <div class="navi_surface previous" @click.stop="move_to(-1)"></div>
-      <div class="navi_surface next" @click.stop="move_to(1)"></div>
+      <div class="overlay_navi previous" @click.stop="move_to(-1)"></div>
+      <div class="overlay_navi next" @click.stop="move_to(1)"></div>
       <table>
         <tr v-for="y in mediator.dimension">
           <template v-for="x in mediator.dimension">
