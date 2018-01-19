@@ -28,7 +28,7 @@
     </div>
   </template>
   <template v-if="slider_show">
-    <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" />
+    <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" />
   </template>
   <div v-if="sfen_show">
     {{mediator.to_sfen}}
@@ -199,6 +199,8 @@ export default {
       }
       if (this.$refs.previous) {
         this.$refs.previous.focus()
+      } else {
+        this.focus_to_slide()
       }
     },
 
@@ -208,6 +210,8 @@ export default {
       }
       if (this.$refs.next) {
         this.$refs.next.focus()
+      } else {
+        this.focus_to_slide()
       }
     },
 
@@ -215,6 +219,8 @@ export default {
       this.current_turn = this.mediator.any_parser.turn_min
       if (this.$refs.first) {
         this.$refs.first.focus()
+      } else {
+        this.focus_to_slide()
       }
     },
 
@@ -222,6 +228,14 @@ export default {
       this.current_turn = this.mediator.any_parser.turn_max
       if (this.$refs.last) {
         this.$refs.last.focus()
+      } else {
+        this.focus_to_slide()
+      }
+    },
+
+    focus_to_slide() {
+      if (this.$refs.slider) {
+        this.$refs.slider.focus()
       }
     },
   },

@@ -50,7 +50,7 @@
           shogi-player
         </h1>
         <h2 class="subtitle">
-          Examples
+          Document (作成中)
         </h2>
       </div>
     </div>
