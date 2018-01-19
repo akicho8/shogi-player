@@ -193,28 +193,36 @@ export default {
       if (this.current_turn > this.mediator.any_parser.turn_min) {
         this.current_turn--
       }
-      this.$refs.previous.focus()
+      if (this.$refs.previous) {
+        this.$refs.previous.focus()
+      }
     },
 
     move_to_next() {
       if (this.current_turn < this.mediator.any_parser.turn_max) {
         this.current_turn++
       }
-      this.$refs.next.focus()
+      if (this.$refs.next) {
+        this.$refs.next.focus()
+      }
     },
 
     move_to_first() {
       this.current_turn = this.mediator.any_parser.turn_min
-      this.$refs.first.focus()
+      if (this.$refs.first) {
+        this.$refs.first.focus()
+      }
     },
 
     move_to_last() {
       this.current_turn = this.mediator.any_parser.turn_max
-      this.$refs.last.focus()
+      if (this.$refs.last) {
+        this.$refs.last.focus()
+      }
     },
   },
 }
-                              </script>
+</script>
 
 <style scoped lang="sass">
   @import "ShogiPlayer"
