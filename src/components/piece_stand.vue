@@ -1,5 +1,6 @@
 <template>
 <div class="flex_item piece_stand" :class="[`location_${location_key}`, $parent.env]">
+<div class="flex_item piece_stand" :class="[`location_${location_key}`, $parent.env]" @click.stop="$parent.move_to(-1)">
   <ul>
     <li>{{location_key | location_name}}</li>
     <template v-for="[piece_key, count] in hold_pieces">
