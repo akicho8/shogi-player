@@ -1,6 +1,6 @@
 <template>
 <div class="shogi-player">
-  <p>{{mediator.turn_now}}手目</p>
+  <p>{{mediator.current_real_turn}}手目</p>
   <div class="board_container board_turn" :class="{enable: board_turn}">
     <PieceStand :location_key="'white'"/>
     <div class="flex_item board_wrap">
@@ -35,6 +35,8 @@
   </div>
   <template v-if="debug_mode">
     <p>{{mediator.hold_pieces}}</p>
+    <p>次の手番:{{mediator.location_next.key}}</p>
+    <p>Sfen:{{mediator.to_sfen}}</p>
   </template>
 </div>
 </template>
@@ -176,7 +178,7 @@ export default {
       this.mediator.kifu_body = this.kifu_body || "position startpos"
       this.mediator.current_turn = this.current_turn
       this.mediator.run()
-      this.current_turn = this.mediator.turn_now
+      this.current_turn = this.mediator.current_real_turn
       if (this.location_hash_embed_turn) {
         document.location.hash = this.current_turn
       }

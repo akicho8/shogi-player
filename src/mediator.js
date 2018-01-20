@@ -35,7 +35,7 @@ class Mediator {
 
     const move_infos = this.any_parser.move_infos
 
-    const num = this.turn_now - this.any_parser.turn_min
+    const num = this.current_real_turn - this.any_parser.turn_min
     _(num).times((i) => {
       const m = move_infos[i]
       this.move_info = m
@@ -123,7 +123,7 @@ class Mediator {
   }
 
   // ruby style array index access
-  get turn_now() {
+  get current_real_turn() {
     let index = this.current_turn
     if (index < 0) {
       index += this.any_parser.turn_max + 1
@@ -133,6 +133,10 @@ class Mediator {
 
   get to_sfen() {
     return (new SfenSerializer(this)).to_s
+  }
+
+  get location_next() {
+    return this.any_parser.location_by_offset(this.current_real_turn)
   }
 }
 

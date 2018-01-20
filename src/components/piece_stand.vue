@@ -1,7 +1,7 @@
 <template>
-<div class="flex_item piece_stand" :class="[`location_${location_key}`, $parent.env]">
+<div class="flex_item piece_stand" :class="[`location_${location_key}`, $parent.env, {turn_active: $parent.mediator.location_next.key === location_key}]">
   <ul>
-    <li>{{location_key | location_name}}</li>
+    <li class="location_mark">{{location_key | location_name}}</li>
     <template v-for="[piece_key, count] in hold_pieces">
       <li>
         <span class="piece_name">{{piece_key | piece_name}}</span>
@@ -56,7 +56,6 @@ export default {
     //   border: 2px solid $line-color
     //   background: $board-bg-color
     //   border-radius: 0.5vmin
-
     ul
       list-style-type: none
       padding: 0 0.25vmin
@@ -78,4 +77,13 @@ export default {
 
         // 駒台の上のマーク
         .location_mark
+
+    &.turn_active
+      // border: 2px solid $line-color
+      // background: $board-bg-color
+      // border-radius: 0.5vmin
+
+      ul
+        li.location_mark
+          text-shadow: 0 0 1.0rem hsl(120,0%,50%)
 </style>
