@@ -27,7 +27,7 @@ export default {
   computed: {
     hold_pieces: function () {
       let list = Array.from(this.$parent.mediator.hold_pieces.get(this.location_key))
-      list = list.filter((key, count) => count >= 1)
+      list = list.filter(([key, count]) => count >= 1)
       return _.sortBy(list, ([key, count]) => Piece.fetch(key).code)
     },
   },
