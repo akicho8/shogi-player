@@ -48,7 +48,11 @@ class Mediator {
         })
         {
           const count = this.hold_pieces.get(m.location.key).get(battler.piece.key) - 1
-          this.hold_pieces.get(m.location.key).set(battler.piece.key, count)
+          if (count >= 1) {
+            this.hold_pieces.get(m.location.key).set(battler.piece.key, count)
+          } else {
+            this.hold_pieces.get(m.location.key).delete(battler.piece.key)
+          }
         }
         this.current_field.set(battler.point.key, battler)
       } else {
