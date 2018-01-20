@@ -181,6 +181,11 @@ export default {
   name: 'app',
 
   data() {
+    // FIXME: npm run unit で raw-loader が効かない問題を回避している
+    if (process.env.NODE_ENV === "test") {
+      return {}
+    }
+
     return {
       kif_body: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
       usage_md: marked(require('./usage.md')),
