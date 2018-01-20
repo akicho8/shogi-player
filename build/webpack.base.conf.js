@@ -22,7 +22,8 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js',
+    shogi_player: './src/components/ShogiPlayer.vue',
   },
   output: {
     path: config.build.assetsRoot,
