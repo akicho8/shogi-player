@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="dist/static/css/shogi_player.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="dist/static/js/shogi_player.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button rel="tooltip" title="OK (popper.js)">Bootsgrap</button><br>
+      {{message}}<br>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          message: 'Vue.js OK',
+        },
+      })
+    </script>
+
+  </body>
+</html>

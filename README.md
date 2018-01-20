@@ -6,7 +6,6 @@
 [![GitHub version](https://badge.fury.io/gh/akicho8%2Fshogi-player.svg)](https://badge.fury.io/gh/akicho8%2Fshogi-player)
 
 # 将棋棋譜プレイヤー
-
 <p><a href="https://akicho8.github.io/shogi-player/"><img src="https://raw.github.com/akicho8/shogi-player/master/shogi-player.png" height="480" /></a></p>
 
 [Demo](https://akicho8.github.io/shogi-player/)

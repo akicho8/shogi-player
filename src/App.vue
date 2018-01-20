@@ -143,6 +143,7 @@
     <div class="container">
       <h2 class="title">オプション</h2>
       <hr>
+      <div class="content" v-html="options_md"></div>
     </div>
   </section>
 
@@ -183,6 +184,7 @@ export default {
     return {
       kif_body: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
       usage_md: marked(require('./usage.md')),
+      options_md: marked(require('./options.md')),
     }
   },
 
