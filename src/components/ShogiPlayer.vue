@@ -199,46 +199,33 @@ export default {
       if (this.current_turn > this.mediator.any_parser.turn_min) {
         this.current_turn--
       }
-      if (this.$refs.previous) {
-        this.$refs.previous.focus()
-      } else {
-        this.focus_to_slide()
-      }
+      this.focus_to("slider") || this.focus_to("previous")
     },
 
     move_to_next() {
       if (this.current_turn < this.mediator.any_parser.turn_max) {
         this.current_turn++
       }
-      if (this.$refs.next) {
-        this.$refs.next.focus()
-      } else {
-        this.focus_to_slide()
-      }
+      this.focus_to("slider") || this.focus_to("next")
     },
 
     move_to_first() {
       this.current_turn = this.mediator.any_parser.turn_min
-      if (this.$refs.first) {
-        this.$refs.first.focus()
-      } else {
-        this.focus_to_slide()
-      }
+      this.focus_to("slider") || this.focus_to("first")
     },
 
     move_to_last() {
       this.current_turn = this.mediator.any_parser.turn_max
-      if (this.$refs.last) {
-        this.$refs.last.focus()
-      } else {
-        this.focus_to_slide()
-      }
+      this.focus_to("slider") || this.focus_to("last")
     },
 
-    focus_to_slide() {
-      if (this.$refs.slider) {
-        this.$refs.slider.focus()
+    focus_to(key) {
+      const el = this.$refs[key]
+      if (el) {
+        el.focus()
+        return true
       }
+      return false
     },
   },
 }
