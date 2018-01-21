@@ -59,7 +59,7 @@ export default {
   props: {
     kifu_body:                { type: String,  default: "position startpos", },
     turn_start:               { type: Number,  default: 0,                   },
-    global_keyboard_operation:  { type: Boolean, default: false                },
+    global_key_event_capture:  { type: Boolean, default: false                },
     location_hash_embed_turn: { type: Boolean, default: false,               },
     controller_show:          {                default: false,               },
     slider_show:              { type: Boolean, default: false,               },
@@ -106,7 +106,7 @@ export default {
         console.log("code", e.code)
       }
 
-      if (!this.global_keyboard_operation) {
+      if (!this.global_key_event_capture) {
         return
       }
 
