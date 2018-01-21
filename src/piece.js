@@ -15,7 +15,10 @@ class Piece extends MemoryRecord {
   }
 
   static lookup(key) {
-    return super.lookup(key.toUpperCase())
+    if (typeof key === "string") {
+      key = key.toUpperCase()
+    }
+    return super.lookup(key)
   }
 
   static kif_lookup(key) {
@@ -29,6 +32,10 @@ class Piece extends MemoryRecord {
   get promoted_name() {
     return this.attributes.promoted_name
   }
+
+  get css_class() {
+    return ["piece_name", `piece_${this.key}`]
+  }
 }
 
 export { Piece }
@@ -39,4 +46,5 @@ if (process.argv[1] === __filename) {
   console.log(Piece.lookup(""))
   console.log(Piece.values)
   console.log(Piece.values_map.get("K"))
+  console.log(Piece.fetch("K").key)
 }

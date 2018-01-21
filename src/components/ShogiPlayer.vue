@@ -37,9 +37,9 @@
   <template v-if="slider_show">
     <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" />
   </template>
-  <div v-if="sfen_show">
+  <p class="is-size-7 has-text-grey" v-if="sfen_show">
     {{mediator.to_sfen}}
-  </div>
+  </p>
   <template v-if="debug_mode">
     <p>{{mediator.hold_pieces}}</p>
     <p>次の手番:{{mediator.location_next.key}}</p>

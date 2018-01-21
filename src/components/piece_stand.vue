@@ -1,10 +1,10 @@
 <template>
-<div class="flex_item piece_stand" :class="[`location_${location_key}`, $parent.env, {turn_active: $parent.mediator.location_next.key === location_key}]">
+<div class="flex_item piece_stand" :class="[`location_${location.key}`, $parent.env, {turn_active: $parent.mediator.location_next.key === location.key}]">
   <ul>
-    <li class="location_mark">{{location_key | location_name}}</li>
-    <template v-for="[piece_key, count] in hold_pieces">
+    <li class="location_mark">{{location.name}}</li>
+    <template v-for="[piece, count] in hold_pieces">
       <li>
-        <span class="piece_name">{{piece_key | piece_name}}</span>
+        <span :class="piece.css_class">{{piece.name}}</span>
         <span v-if="count >= 2" class="piece_count">{{count}}</span>
       </li>
     </template>
@@ -23,21 +23,17 @@ export default {
   },
 
   computed: {
+    location: function () {
+      return Location.fetch(this.location_key)
+    },
+
     hold_pieces: function () {
-      let list = Array.from(this.$parent.mediator.hold_pieces.get(this.location_key))
+      let list = Array.from(this.$parent.mediator.hold_pieces.get(this.location.key))
       return _(list)
         .filter(([key, count]) => count >= 1)
-        .sortBy(list, ([key, count]) => Piece.fetch(key).code)
+        .map(([key, count]) => [Piece.fetch(key), count])
+        .sortBy(list, ([key, count]) => key.code)
         .value()
-    },
-  },
-
-  filters: {
-    piece_name(key) {
-      return Piece.fetch(key).name
-    },
-    location_name(key) {
-      return Location.fetch(key).name
     },
   },
 }

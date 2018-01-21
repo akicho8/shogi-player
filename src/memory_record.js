@@ -9,6 +9,9 @@ class MemoryRecord {
   }
 
   static lookup(key) {
+    if (key instanceof this) {
+      return key
+    }
     return this.values_map.get(key)
   }
 
@@ -53,4 +56,7 @@ if (process.argv[1] === __filename) {
   console.log(MemoryRecord.values)
   console.log(MemoryRecord.lookup("(key_x)").name)
   console.log(MemoryRecord.lookup("(key_x)").code)
+
+  let v = MemoryRecord.lookup("(key_x)")
+  console.log(v instanceof MemoryRecord)
 }

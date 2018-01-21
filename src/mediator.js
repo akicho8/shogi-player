@@ -90,6 +90,7 @@ class Mediator {
     let klass = []
     if (battler) {
       klass.push(`location_${battler.location.key}`)
+      klass = _.concat(klass, battler.piece.css_class)
     }
     if (this.move_info) {
       const origin_point = this.move_info.origin_point
@@ -107,6 +108,7 @@ class Mediator {
   }
 
   turn_clamp(v) {
+    // FIXME clamp
     if (this.any_parser) {
       if (v < this.any_parser.turn_min) {
         v = this.any_parser.turn_min
