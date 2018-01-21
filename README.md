@@ -1,3 +1,5 @@
+# shogi-player
+
 [![Build Status](https://travis-ci.org/akicho8/shogi-player.svg?branch=master)](https://travis-ci.org/akicho8/shogi-player)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4de340004a69572e32a0/maintainability)](https://codeclimate.com/github/akicho8/shogi-player/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/4de340004a69572e32a0/test_coverage)](https://codeclimate.com/github/akicho8/shogi-player/test_coverage)
@@ -5,51 +7,9 @@
 [![npm version](https://badge.fury.io/js/shogi_player.svg)](https://badge.fury.io/js/shogi_player)
 [![GitHub version](https://badge.fury.io/gh/akicho8%2Fshogi-player.svg)](https://badge.fury.io/gh/akicho8%2Fshogi-player)
 
-# 将棋棋譜プレイヤー
 <p><a href="https://akicho8.github.io/shogi-player/"><img src="https://raw.github.com/akicho8/shogi-player/master/shogi-player.png" height="480" /></a></p>
 
-[Demo](https://akicho8.github.io/shogi-player/)
-
-## Rails で使用する例
-
-```shell
-% yarn add shogi_player
-```
-
-app/javascript/packs/shogi_player.js
-
-```JavaScript
-import Vue from 'vue/dist/vue.esm'
-import ShogiPlayer from 'shogi_player/src/components/ShogiPlayer.vue'
-
-document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({
-    el: '#shogi_player_app',
-    components: { "shogi_player": ShogiPlayer },
-  })
-})
-```
-
-app/views/xxx/show.html.erb
-
-```html
-<%= javascript_pack_tag("shogi_player") %>
-<%= stylesheet_pack_tag("shogi_player") %>
-
-<div id="shogi_player_app">
-  <shogi_player :kifu_body="'position startpos moves 7g7f 8c8d'" :turn_start="-1"></shogi_player>
-</div>
-```
-
-## 引数
-
-| props                    | 意味                        | 例・補足                                             |            |
-|--------------------------|-----------------------------|------------------------------------------------------|------------|
-| kifu_body                | 棋譜                        | 例: position startpos                                | 必須       |
-| turn_start               | N手目                       | 0:最初 -1:最後                                       | オプション |
-| global_keyboard_operation  | キーボード操作を充実させる  | どこにもフォーカスしていないときでも左右が反応する   | オプション |
-| location_hash_embed_turn | URLのハッシュに手番を埋める | ブラウザがその個所を探そうとしてやや重くなるので注意 | オプション |
-
+[ドキュメント](https://akicho8.github.io/shogi-player/)
 
 ## Build Setup
 
