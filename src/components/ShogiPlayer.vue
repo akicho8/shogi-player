@@ -24,7 +24,7 @@
       <button ref="previous" class="button previous"   @click.stop="move_to_previous">◀</button>
       <button ref="next"     class="button next"       @click.stop="move_to_next">▶</button>
       <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
-      <button                class="button board_turn" @click.stop="board_turn = !board_turn">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
+      <button                class="button board_turn" @click.stop="board_turn_run">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
     </div>
   </template>
   <template v-if="slider_show">
@@ -226,6 +226,11 @@ export default {
         return true
       }
       return false
+    },
+
+    board_turn_run() {
+      this.board_turn = !this.board_turn
+      this.focus_to("slider")
     },
   },
 }
