@@ -35,7 +35,7 @@ class Mediator {
 
     const move_infos = this.any_parser.move_infos
 
-    const num = this.current_real_turn - this.any_parser.turn_min
+    const num = this.normalized_turn - this.any_parser.turn_min
     _(num).times((i) => {
       const m = move_infos[i]
       this.move_info = m
@@ -87,37 +87,24 @@ class Mediator {
 
   cell_class(x, y) {
     const battler = this.current_field.get(Point.fetch([x, y]).key)
-    let klass = []
+    let list = []
     if (battler) {
-      klass.push(`location_${battler.location.key}`)
-      klass = _.concat(klass, battler.piece.css_class)
+      list.push(`location_${battler.location.key}`)
+      list = _.concat(list, battler.piece.css_class_list)
     }
     if (this.move_info) {
       const origin_point = this.move_info.origin_point
       if (origin_point) {
         if (origin_point.x === x && origin_point.y === y) {
-          klass.push("origin_point")
+          list.push("origin_point")
         }
       }
       const point = this.move_info.point
       if (point.x === x && point.y === y) {
-        klass.push("current")
+        list.push("current")
       }
     }
-    return klass
-  }
-
-  turn_clamp(v) {
-    // FIXME clamp
-    if (this.any_parser) {
-      if (v < this.any_parser.turn_min) {
-        v = this.any_parser.turn_min
-      }
-      if (this.any_parser.turn_max < v) {
-        v = this.any_parser.turn_max
-      }
-    }
-    return v
+    return list
   }
 
   get dimension() {
@@ -125,20 +112,20 @@ class Mediator {
   }
 
   // ruby style array index access
-  get current_real_turn() {
+  get normalized_turn() {
     let index = Number(this.current_turn)
     if (index < 0) {
       index += this.any_parser.turn_max + 1
     }
-    return this.turn_clamp(index)
+    return _.clamp(index, this.any_parser.turn_min, this.any_parser.turn_max)
+  }
+
+  get location_next() {
+    return this.any_parser.location_by_offset(this.normalized_turn)
   }
 
   get to_sfen() {
     return (new SfenSerializer(this)).to_s
-  }
-
-  get location_next() {
-    return this.any_parser.location_by_offset(this.current_real_turn)
   }
 }
 

@@ -16,7 +16,7 @@ class SfenSerializer {
     parts.push(this.to_baord_sfen)
     parts.push(this.mediator.location_next.key[0])
     parts.push(this.to_hold_pieces)
-    parts.push(this.mediator.current_real_turn + 1)
+    parts.push(this.mediator.normalized_turn + 1)
     return parts.join(" ")
   }
 

@@ -4,7 +4,7 @@
     <li class="location_mark">{{location.name}}</li>
     <template v-for="[piece, count] in hold_pieces">
       <li>
-        <span :class="piece.css_class">{{piece.name}}</span>
+        <span :class="piece.css_class_list">{{piece.name}}</span>
         <span v-if="count >= 2" class="piece_count">{{count}}</span>
       </li>
     </template>
@@ -28,7 +28,7 @@ export default {
     },
 
     hold_pieces: function () {
-      let list = Array.from(this.$parent.mediator.hold_pieces.get(this.location.key))
+      const list = Array.from(this.$parent.mediator.hold_pieces.get(this.location.key))
       return _(list)
         .filter(([key, count]) => count >= 1)
         .map(([key, count]) => [Piece.fetch(key), count])
@@ -82,5 +82,4 @@ export default {
       ul
         li.location_mark
           text-shadow: 0 0 0.5rem hsl(0,50%,50%)
-
 </style>

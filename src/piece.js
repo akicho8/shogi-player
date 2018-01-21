@@ -33,7 +33,7 @@ class Piece extends MemoryRecord {
     return this.attributes.promoted_name
   }
 
-  get css_class() {
+  get css_class_list() {
     return ["piece_name", `piece_${this.key}`]
   }
 }

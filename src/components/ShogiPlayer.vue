@@ -2,7 +2,7 @@
 <div class="shogi-player">
   <div class="turn_editor">
     <template v-if="!turn_edit">
-      <span class="turn_edit_text" @click="turn_edit_run">{{mediator.current_real_turn}}手目</span>
+      <span class="turn_edit_text" @click="turn_edit_run">{{mediator.normalized_turn}}手目</span>
     </template>
     <template v-if="turn_edit">
       <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
@@ -190,7 +190,7 @@ export default {
       this.mediator.kifu_body = this.kifu_body || "position startpos"
       this.mediator.current_turn = this.current_turn
       this.mediator.run()
-      this.current_turn = this.mediator.current_real_turn
+      this.current_turn = this.mediator.normalized_turn
       if (this.location_hash_embed_turn) {
         document.location.hash = this.current_turn
       }
