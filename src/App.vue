@@ -80,6 +80,8 @@
         </p>
         <ul>
           <li>KIF と SFEN フォーマットに対応</li>
+          <li>盤面の左右をクリックするとターンが移動</li>
+          <li>「N手目」の部分をクリックで編集可</li>
           <li>Flash 未使用</li>
           <li>npm でインストール可</li>
         </ul>
@@ -104,7 +106,7 @@
               <h3 class="title yumincho">藤井聡太四段 vs 澤田真吾六段</h3>
               <p class="subtitle yumincho">第43期棋王戦予選</p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_body" :turn_start="121" :global_keyboard_operation="true" :controller_show="true" :slider_show="true" />
+              <ShogiPlayer :kifu_body="kif_body" :turn_start="121" :global_key_event_capture="true" :controller_show="true" :slider_show="true" />
             </div>
             <div class="column">
               <article class="message is-primary has-text-centered is-small">

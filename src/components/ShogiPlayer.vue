@@ -1,6 +1,13 @@
 <template>
 <div class="shogi-player">
-  <p>{{mediator.current_real_turn}}手目</p>
+  <div class="turn_editor">
+    <template v-if="!turn_edit">
+      <span class="turn_edit_text" @click="turn_edit_run">{{mediator.current_real_turn}}手目</span>
+    </template>
+    <template v-if="turn_edit">
+      <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
+    </template>
+  </div>
   <div class="board_container board_turn" :class="{enable: board_turn}">
     <PieceStand :location_key="'white'"/>
     <div class="flex_item board_wrap">
@@ -59,7 +66,7 @@ export default {
   props: {
     kifu_body:                { type: String,  default: "position startpos", },
     turn_start:               { type: Number,  default: 0,                   },
-    global_key_event_capture:  { type: Boolean, default: false                },
+    global_key_event_capture: { type: Boolean, default: false                },
     location_hash_embed_turn: { type: Boolean, default: false,               },
     controller_show:          {                default: false,               },
     slider_show:              { type: Boolean, default: false,               },
@@ -75,14 +82,16 @@ export default {
   data() {
     return {
       current_turn: 0,
+      turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,
       board_turn: false,
+      turn_edit: false,
       env: process.env.NODE_ENV,
     }
   },
 
   created() {
-    this.current_turn = this.turn_start || 0
+    this.current_turn = this.turn_start
     this.mediator_update()
     document.addEventListener("keydown", this.keyboard_operation)
   },
@@ -90,6 +99,9 @@ export default {
   watch: {
     current_turn: function () {
       this.mediator_update()
+    },
+    turn_edit_value: function () {
+      this.current_turn = this.turn_edit_value
     },
     kifu_body: function () {
       this.mediator_update()
@@ -231,6 +243,12 @@ export default {
     board_turn_run() {
       this.board_turn = !this.board_turn
       this.focus_to("slider")
+    },
+
+    turn_edit_run() {
+      this.turn_edit = true
+      this.turn_edit_value = this.current_turn
+      this.$nextTick(() => { this.$refs.turn_edit_input.focus() })
     },
   },
 }

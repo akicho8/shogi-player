@@ -124,7 +124,7 @@ class Mediator {
 
   // ruby style array index access
   get current_real_turn() {
-    let index = this.current_turn
+    let index = Number(this.current_turn)
     if (index < 0) {
       index += this.any_parser.turn_max + 1
     }
