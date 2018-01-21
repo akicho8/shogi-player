@@ -5,9 +5,7 @@
     <template v-for="[piece_key, count] in hold_pieces">
       <li>
         <span class="piece_name">{{piece_key | piece_name}}</span>
-        <template v-if="count >= 2">
-          <span class="piece_count">{{count}}</span>
-        </template>
+        <span v-if="count >= 2" class="piece_count">{{count}}</span>
       </li>
     </template>
   </ul>
