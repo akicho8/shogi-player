@@ -85,5 +85,6 @@ export default {
 
       ul
         li.location_mark
-          text-shadow: 0 0 1.0rem hsl(120,0%,50%)
+          text-shadow: 0 0 0.5rem hsl(0,50%,50%)
+
 </style>
