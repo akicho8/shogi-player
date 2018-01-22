@@ -103,7 +103,9 @@
                 </div>
               </article>
               <h3 class="title yumincho">藤井聡太四段 vs 佐藤天彦名人</h3>
-              <p class="subtitle yumincho">第11回朝日杯将棋オープン戦本戦</p>
+              <p class="subtitle yumincho">
+                <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
+              </p>
               <hr>
               <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :global_key_event_capture="true" />
             </div>
