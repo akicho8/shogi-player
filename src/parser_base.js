@@ -39,6 +39,10 @@ class ParserBase {
   get move_infos() {
     console.warn("not implemented")
   }
+
+  get comments_pack() {
+    return null
+  }
 }
 
 export { ParserBase }

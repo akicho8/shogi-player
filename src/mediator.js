@@ -6,6 +6,7 @@ import { Board } from "./board"
 import { Point } from "./point"
 import { Battler } from "./battler"
 import { SfenSerializer } from "./sfen_serializer"
+import Autolinker from 'autolinker'
 
 class Mediator {
   constructor() {
@@ -131,6 +132,17 @@ class Mediator {
 
   get to_sfen() {
     return (new SfenSerializer(this)).to_s
+  }
+
+  get current_comments() {
+    if (this.any_parser.comments_pack) {
+      return this.any_parser.comments_pack[this.normalized_turn]
+    }
+  }
+
+  auto_link(v) {
+    const autolinker = new Autolinker()
+    return autolinker.link(v)
   }
 }
 

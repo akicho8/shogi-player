@@ -26,6 +26,7 @@
     </div>
     <PieceStand :location_key="'black'"/>
   </div>
+
   <template v-if="controller_show">
     <div class="controller_block buttons has-addons is-centered">
       <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
@@ -35,9 +36,30 @@
       <button                class="button board_turn" @click.stop="board_turn_run">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
     </div>
   </template>
+
   <template v-if="slider_show">
     <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" />
   </template>
+
+  <template v-if="!_.isEmpty(mediator.any_parser.comments_pack)">
+    <template v-if="mediator.current_comments">
+      <div class="columns">
+        <div class="column is-three-fifths is-offset-one-fifth">
+          <div class="content has-text-left">
+            <template v-for="str in mediator.current_comments">
+              <template v-if="_.isEmpty(str)">
+                <br>
+              </template>
+              <template v-else>
+                <div v-html="mediator.auto_link(str)"></div>
+              </template>
+            </template>
+          </div>
+        </div>
+      </div>
+    </template>
+  </template>
+
   <p class="is-size-7 has-text-grey" v-if="sfen_show">
     {{mediator.to_sfen}}
   </p>
@@ -54,10 +76,9 @@ import { Mediator } from "../mediator"
 import PieceStand from "./piece_stand"
 import _ from "lodash"
 
-// for vue template
-// import Vue from 'vue'
-// import lodash from "lodash"
-// Object.defineProperty(Vue.prototype, '$lodash', {value: lodash})
+// To use lodash's _ in the vue template
+import Vue from 'vue'
+Object.defineProperty(Vue.prototype, '_', {value: _})
 
 /* eslint-disable no-new */
 export default {

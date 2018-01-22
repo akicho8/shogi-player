@@ -25,8 +25,57 @@ class KifParser extends ParserBase {
     return Location.fetch(key)
   }
 
+  parse() {
+    this.move_infos = []
+    this.comments_pack = {}
+
+    this.kifu_body.split(/\n/).forEach((line_str) => {
+      const md = XRegExp.exec(line_str, this.__kif_format_move_regexp)
+      if (md) {
+        const attrs = {}
+        attrs["location"] = this.location_by_offset(Number(md["number"]) - 1)
+        if (md["origin_point"]) {
+          attrs["origin_point"] = Point.fetch(md["origin_point"])
+        }
+        if (md["to"]) {
+          attrs["point"] = Point.fetch(md["to"])
+        }
+        if (md["motion"] === "成") {
+          attrs["promoted_trigger"] = true
+        }
+        if (md["motion"] === "打") {
+          attrs["stroke_piece"] = Piece.kif_lookup(md["piece"])
+        }
+        this.move_infos.push(attrs)
+      } else {
+        const md = XRegExp.exec(line_str, XRegExp("^\\*(?<comment>.*)"))
+        if (md) {
+          const index = this.move_infos.length
+          this.comments_pack[index] = this.comments_pack[index] || []
+          this.comments_pack[index].push(md["comment"])
+        }
+      }
+    })
+  }
+
+  set move_infos(v) {
+    this._move_infos = v
+  }
+
   get move_infos() {
-    const regexp = XRegExp(`
+    return this._move_infos || {}
+  }
+
+  set comments_pack(v) {
+    this._comments_pack = v
+  }
+
+  get comments_pack() {
+    return this._comments_pack || {}
+  }
+
+  get __kif_format_move_regexp() {
+    return XRegExp(`
         ^\\s*(?<number>\\d+)\\s+
         (?<to>[１-９1-9一二三四五六七八九]{2})?
         (?<same>同)?
@@ -35,27 +84,6 @@ class KifParser extends ParserBase {
         (?<motion>不?成|打|合|生)?
         (\\((?<origin_point>\\d{2})\\))? # KIFフォーマットの移動元用
       `, 'xm')
-
-    const list = []
-    XRegExp.forEach(this.kifu_body, regexp, (md, i) => {
-      const attrs = {}
-      attrs["location"] = this.location_by_offset(i)
-      if (md["origin_point"]) {
-        attrs["origin_point"] = Point.fetch(md["origin_point"])
-      }
-      if (md["to"]) {
-        attrs["point"] = Point.fetch(md["to"])
-      }
-      if (md["motion"] === "成") {
-        attrs["promoted_trigger"] = true
-      }
-      if (md["motion"] === "打") {
-        attrs["stroke_piece"] = Piece.kif_lookup(md["piece"])
-      }
-
-      list.push(attrs)
-    })
-    return list
   }
 }
 
@@ -67,15 +95,18 @@ if (process.argv[1] === __filename) {
 # ----  Kifu for Windows V6.26 棋譜ファイル  ----
 key：value
 手数----指手---------消費時間--
-*コメント0
+*コメント0a
+*コメント0b
    1 ７六歩(77)   ( 0:00/00:00:00)
-   2 投了         ( 0:00/00:00:00)
-変化：1手
-   1 ２六歩(25)   ( 0:00/00:00:00)
+*コメント1a
+*コメント1b
+   2 ３四歩(33)   ( 0:00/00:00:00)
+   3 投了         ( 0:00/00:00:00)
 `
   kif_parser.parse()
-  console.log(kif_parser.field)
-  console.log(kif_parser.location_base)
-  console.log(kif_parser.hold_pieces)
+  // console.log(kif_parser.field)
+  // console.log(kif_parser.location_base)
+  // console.log(kif_parser.hold_pieces)
   console.log(kif_parser.move_infos)
+  console.log(kif_parser.comments_pack)
 }
