@@ -42,12 +42,13 @@ $cell_width: 100% / $dimension
       align-self: flex-end
 
   // 将棋盤
+  $line-width: 1px
   table
     margin: 0 auto
     padding: 0
     background: $line-color
     border-collapse: separate
-    border-spacing: 1px
+    border-spacing: $line-width
     border: 1px solid $line-color
     // box-shadow: 0 0 24vmin rgba($line-color, 0.5)
     td
@@ -66,7 +67,20 @@ $cell_width: 100% / $dimension
         background: $current-bg-before
       &.current
         transition: background 500ms 0s ease-out
-
+      // .mark
+      //   $point_r: 8px
+      //   display: block
+      //   background: $line-color
+      //   position: relative
+      //   top: ceil(($line-width + ($point_r * 2)) / 2.0) * -1
+      //   left: ceil(($line-width + ($point_r * 2)) / 2.0) * -1
+      //   width: $line-width + ($point_r * 2)
+      //   height: $line-width + ($point_r * 2)
+    // tr:nth-of-type(3n+4)
+    //   td:nth-of-type(3n+4)
+    //     span
+    //       background: hsl(200, 50%, 50%)
+        
   .board_wrap
     position: relative
     // border: 8px solid hsla(0, 50%, 50%, .5)
@@ -90,12 +104,22 @@ $cell_width: 100% / $dimension
         width: $cell_width
         top: 50% - ($cell_width / 2)
         height: $cell_width
+    // .mark
+    //   position: absolute
+    //   z-index: 3
+    //   top: (100% / 3)
+    //   left: (100% / 3)
+    //   width: 5px
+    //   height: 5px
+    //   background: $line-color
+      
   .turned
     .overlay_navi
       &.previous
         cursor: e-resize
       &.next
         cursor: w-resize
+    
 
   // コントローラー
   .controller_block
