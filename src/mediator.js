@@ -117,6 +117,11 @@ class Mediator {
     if (index < 0) {
       index += this.any_parser.turn_max + 1
     }
+    return this.clamp(index)
+  }
+
+  clamp(index) {
+    index = Number(index)
     return _.clamp(index, this.any_parser.turn_min, this.any_parser.turn_max)
   }
 

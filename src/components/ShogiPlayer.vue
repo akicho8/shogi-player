@@ -11,8 +11,8 @@
   <div class="board_container board_turn" :class="{turned: board_turn}">
     <PieceStand :location_key="'white'"/>
     <div class="flex_item board_wrap">
-      <div class="overlay_navi previous" @click.stop="move_to(-1)"></div>
-      <div class="overlay_navi next" @click.stop="move_to(1)"></div>
+      <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
+      <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
       <div class="overlay_navi board_turn_area" @click="board_turn_run"></div>
       <table>
         <tr v-for="y in mediator.dimension">
@@ -29,8 +29,8 @@
   <template v-if="controller_show">
     <div class="controller_block buttons has-addons is-centered">
       <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
-      <button ref="previous" class="button previous"   @click.stop="move_to_previous">◀</button>
-      <button ref="next"     class="button next"       @click.stop="move_to_next">▶</button>
+      <button ref="previous" class="button previous"   @click.stop="relative_move(-1, $event)">◀</button>
+      <button ref="next"     class="button next"       @click.stop="relative_move(+1, $event)">▶</button>
       <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
       <button                class="button board_turn" @click.stop="board_turn_run">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
     </div>
@@ -67,11 +67,13 @@ export default {
   props: {
     kifu_body:                { type: String,  default: "position startpos", },
     turn_start:               { type: Number,  default: 0,                   },
+    slider_show:              { type: Boolean, default: false,               },
+    controller_show:          {                default: false,               },
+    sfen_show:                { type: Boolean, default: false,               },
     global_key_event_capture: { type: Boolean, default: false                },
     location_hash_embed_turn: { type: Boolean, default: false,               },
-    controller_show:          {                default: false,               },
-    slider_show:              { type: Boolean, default: false,               },
-    sfen_show:                { type: Boolean, default: false,               },
+    shift_key_mag:            { type: Number,  default: 10,                  },
+    system_key_mag:           { type: Number,  default: 50,                  },
     debug_mode:               { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
   },
   /* eslint-enable */
@@ -130,12 +132,12 @@ export default {
       }
 
       if (e.code === "Backspace" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.key === "k" || e.key === "p" || e.key === "b") {
-        this.move_to_previous()
+        this.relative_move(-1, e)
         e.preventDefault()
       }
 
       if (e.code === "Space" || e.code === "Enter" || e.code === "ArrowDown" || e.code === "ArrowRight" || e.key === "j" || e.key === "n" || e.key === "f") {
-        this.move_to_next()
+        this.relative_move(1, e)
         e.preventDefault()
       }
 
@@ -197,29 +199,39 @@ export default {
       }
     },
 
-    move_to(sign) {
-      if (this.board_turn) {
-        sign *= -1
+    navi_relative_move(v, event) {
+      this.relative_move(v * this.board_turn_sign(), event)
+    },
+
+    relative_move(v, event = null) {
+      if (event) {
+        if (event.shiftKey) {
+          if (this.shift_key_mag) {
+            v *= this.shift_key_mag
+          }
+        }
+        if (event.ctrlKey || event.altKey || event.metaKey) {
+          if (this.system_key_mag) {
+            v *= this.system_key_mag
+          }
+        }
       }
-      if (sign >= 1) {
-        this.move_to_next()
+
+      const v2 = this.mediator.clamp(this.current_turn + v)
+      if (this.current_turn !== v2) {
+        this.current_turn = v2
+      }
+      if (this.debug_mode) {
+        console.log([v, v2, this.current_turn])
+      }
+      if (this.focus_to("slider")) {
       } else {
-        this.move_to_previous()
+        if (v > 0) {
+          this.focus_to("next")
+        } else {
+          this.focus_to("previous")
+        }
       }
-    },
-
-    move_to_previous() {
-      if (this.current_turn > this.mediator.any_parser.turn_min) {
-        this.current_turn--
-      }
-      this.focus_to("slider") || this.focus_to("previous")
-    },
-
-    move_to_next() {
-      if (this.current_turn < this.mediator.any_parser.turn_max) {
-        this.current_turn++
-      }
-      this.focus_to("slider") || this.focus_to("next")
     },
 
     move_to_first() {
@@ -251,6 +263,10 @@ export default {
       this.turn_edit_value = this.current_turn
       this.$nextTick(() => { this.$refs.turn_edit_input.focus() })
     },
+
+    board_turn_sign() {
+      return this.board_turn ? -1 : 1
+    }
   },
 }
 </script>
