@@ -40,6 +40,7 @@
     "bulma": "^0.6.2",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
+    "minimalistic-assert": "^1.0.0",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
     "vue": "^2.5.2",

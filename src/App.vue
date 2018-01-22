@@ -99,13 +99,13 @@
             <div class="column">
               <article class="message is-primary has-text-centered is-small">
                 <div class="message-body">
-                  コメント付きの KIF 表示。初手から表示。キーボード操作を優先的にキャプチャ。
+                  コメント付きの KIF 表示。9手目から表示。キーボード操作を優先的にキャプチャ。
                 </div>
               </article>
               <h3 class="title yumincho">藤井聡太四段 vs 佐藤天彦名人</h3>
               <p class="subtitle yumincho">第11回朝日杯将棋オープン戦本戦</p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="0" :slider_show="true" :global_key_event_capture="true" />
+              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :global_key_event_capture="true" />
             </div>
           </div>
           <br>
