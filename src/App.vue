@@ -111,7 +111,7 @@
             <div class="column">
               <article class="message is-primary has-text-centered is-small">
                 <div class="message-body">
-                  シンプル。最終手から表示。※ボタンがなくても盤面クリックで操作可
+                  シンプル。最終手から表示。※盤面クリックで操作可。天王山クリックで反転
                 </div>
               </article>
               <h3 class="title yumincho">羽生善治名人 vs 渡辺明竜王</h3>

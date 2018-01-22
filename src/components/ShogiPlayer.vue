@@ -1,5 +1,5 @@
 <template>
-<div class="shogi-player">
+<div class="shogi-player" :class="{debug: debug_mode}">
   <div class="turn_editor">
     <template v-if="!turn_edit">
       <span class="turn_edit_text" @click="turn_edit_run">{{mediator.normalized_turn}}手目</span>
@@ -8,11 +8,12 @@
       <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
     </template>
   </div>
-  <div class="board_container board_turn" :class="{enable: board_turn}">
+  <div class="board_container board_turn" :class="{turned: board_turn}">
     <PieceStand :location_key="'white'"/>
     <div class="flex_item board_wrap">
       <div class="overlay_navi previous" @click.stop="move_to(-1)"></div>
       <div class="overlay_navi next" @click.stop="move_to(1)"></div>
+      <div class="overlay_navi board_turn_area" @click="board_turn_run"></div>
       <table>
         <tr v-for="y in mediator.dimension">
           <template v-for="x in mediator.dimension">
@@ -26,7 +27,7 @@
     <PieceStand :location_key="'black'"/>
   </div>
   <template v-if="controller_show">
-    <div class="sp-controllers buttons has-addons is-centered">
+    <div class="controller_block buttons has-addons is-centered">
       <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
       <button ref="previous" class="button previous"   @click.stop="move_to_previous">◀</button>
       <button ref="next"     class="button next"       @click.stop="move_to_next">▶</button>
@@ -81,11 +82,11 @@ export default {
 
   data() {
     return {
-      current_turn: 0,
+      current_turn: 0,          // N手目
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
-      mediator: null,
-      board_turn: false,
-      turn_edit: false,
+      mediator: null,           // 局面管理
+      board_turn: false,        // 反転したか？
+      turn_edit: false,         // N手目編集中
       env: process.env.NODE_ENV,
     }
   },
@@ -110,7 +111,7 @@ export default {
 
   methods: {
     keyboard_operation: function (e) {
-      if (this.env !== "production") {
+      if (this.debug_mode) {
         console.log(document.activeElement)
         console.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
         console.log("e", e)
