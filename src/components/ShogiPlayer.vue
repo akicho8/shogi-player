@@ -1,72 +1,96 @@
 <template>
 <div class="shogi-player" :class="{debug: debug_mode}">
-  <div class="turn_editor">
-    <template v-if="!turn_edit">
-      <span class="turn_edit_text" @click="turn_edit_run">{{mediator.normalized_turn}}手目</span>
-    </template>
-    <template v-if="turn_edit">
-      <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
-    </template>
-  </div>
-  <div class="board_container board_turn" :class="{turned: board_turn}">
-    <PieceStand :location_key="'white'"/>
-    <div class="flex_item board_wrap">
-      <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
-      <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
-      <div class="overlay_navi board_turn_area" @click="board_turn_run"></div>
-      <table>
-        <tr v-for="y in mediator.dimension">
-          <template v-for="x in mediator.dimension">
-            <td :class="mediator.cell_class(x -1, y - 1)">
-              {{mediator.cell_view(x - 1, y - 1)}}
-            </td>
-          </template>
-        </tr>
-      </table>
-    </div>
-    <PieceStand :location_key="'black'"/>
-  </div>
-
-  <template v-if="controller_show">
-    <div class="controller_block buttons has-addons is-centered">
-      <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
-      <button ref="previous" class="button previous"   @click.stop="relative_move(-1, $event)">◀</button>
-      <button ref="next"     class="button next"       @click.stop="relative_move(+1, $event)">▶</button>
-      <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
-      <button                class="button board_turn" @click.stop="board_turn_run">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
-    </div>
-  </template>
-
-  <template v-if="slider_show">
-    <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" />
-  </template>
-
-  <template v-if="!_.isEmpty(mediator.any_parser.comments_pack)">
-    <template v-if="mediator.current_comments">
-      <div class="columns">
-        <div class="column is-three-fifths is-offset-one-fifth">
-          <div class="content has-text-left">
-            <template v-for="str in mediator.current_comments">
-              <template v-if="_.isEmpty(str)">
-                <br>
-              </template>
-              <template v-else>
-                <div v-html="mediator.auto_link(str)"></div>
-              </template>
-            </template>
+  <!-- template v-if だとテスト時のみエラーになるため div v-show 形式にしている -->
+  <!-- これは jest の問題なのか vue の不具合なのかわからない  -->
+  <div v-show="error_message !== null">
+    <div class="columns">
+      <div class="column">
+        <article class="message is-danger has-text-left">
+          <div class="message-header">
+            <p>ERROR</p>
           </div>
-        </div>
+          <div class="message-body">
+            <p>{{error_message}}></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <template v-if="!mediator">
+    <i class="fas fa-spinner fa-pulse"></i>
+  </template>
+
+  <template v-if="mediator">
+    <div class="turn_editor">
+      <template v-if="!turn_edit">
+        <span class="turn_edit_text" @click="turn_edit_run">{{mediator.normalized_turn}}手目</span>
+      </template>
+      <template v-if="turn_edit">
+        <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
+      </template>
+    </div>
+    <div class="board_container board_turn" :class="{turned: board_turn}">
+      <PieceStand :location_key="'white'"/>
+      <div class="flex_item board_wrap">
+        <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
+        <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
+        <div class="overlay_navi board_turn_area" @click="board_turn_run"></div>
+        <table>
+          <tr v-for="y in mediator.dimension">
+            <template v-for="x in mediator.dimension">
+              <td :class="mediator.cell_class(x -1, y - 1)">
+                {{mediator.cell_view(x - 1, y - 1)}}
+              </td>
+            </template>
+          </tr>
+        </table>
+      </div>
+      <PieceStand :location_key="'black'"/>
+    </div>
+    <template v-if="controller_show">
+      <div class="controller_block buttons has-addons is-centered">
+        <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
+        <button ref="previous" class="button previous"   @click.stop="relative_move(-1, $event)">◀</button>
+        <button ref="next"     class="button next"       @click.stop="relative_move(+1, $event)">▶</button>
+        <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
+        <button                class="button board_turn" @click.stop="board_turn_run">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
       </div>
     </template>
-  </template>
 
-  <p class="is-size-7 has-text-grey" v-if="sfen_show">
+    <template v-if="slider_show">
+      <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" />
+    </template>
+
+    <template v-if="!_.isEmpty(mediator.any_parser.comments_pack)">
+      <template v-if="mediator.current_comments">
+        <div class="columns">
+          <div class="column is-three-fifths is-offset-one-fifth">
+            <div class="content has-text-left">
+              <template v-for="str in mediator.current_comments">
+                <template v-if="_.isEmpty(str)">
+                  <br>
+                </template>
+                <template v-else>
+                  <div v-html="mediator.auto_link(str)"></div>
+                </template>
+              </template>
+            </div>
+          </div>
+        </div>
+      </template>
+    </template>
+    <p class="is-size-7 has-text-grey" v-if="sfen_show">
     {{mediator.to_sfen}}
   </p>
+  </template>
+
   <template v-if="debug_mode">
-    <p>{{mediator.hold_pieces}}</p>
-    <p>次の手番:{{mediator.location_next.key}}</p>
-    <p>Sfen:{{mediator.to_sfen}}</p>
+    <template v-if="mediator">
+      <p>{{mediator.hold_pieces}}</p>
+      <p>次の手番:{{mediator.location_next.key}}</p>
+      <p>Sfen:{{mediator.to_sfen}}</p>
+    </template>
   </template>
 </div>
 </template>
@@ -75,6 +99,7 @@
 import { Mediator } from "../mediator"
 import PieceStand from "./piece_stand"
 import _ from "lodash"
+import axios from "axios"
 
 // To use lodash's _ in the vue template
 import Vue from 'vue'
@@ -87,6 +112,8 @@ export default {
   /* eslint-disable */
   props: {
     kifu_body:                { type: String,  default: "position startpos", },
+    kifu_url:                 { type: String,  default: null,                },
+    polling_interval:         { type: Number,  default: 3,                   },
     turn_start:               { type: Number,  default: 0,                   },
     slider_show:              { type: Boolean, default: false,               },
     controller_show:          {                default: false,               },
@@ -111,10 +138,15 @@ export default {
       board_turn: false,        // 反転したか？
       turn_edit: false,         // N手目編集中
       env: process.env.NODE_ENV,
+      polling_id: null,
+      loaded_kifu: null,
+      error_message: null,
     }
   },
 
   created() {
+    // console.log("created")
+    this.read_kifu()
     this.current_turn = this.turn_start
     this.mediator_update()
     document.addEventListener("keydown", this.keyboard_operation)
@@ -127,12 +159,58 @@ export default {
     turn_edit_value: function () {
       this.current_turn = this.turn_edit_value
     },
-    kifu_body: function () {
+
+    /* eslint-disable */
+    kifu_url:  function () { this.read_kifu() },
+    kifu_body: function () { this.read_kifu() },
+    loaded_kifu: function () {
       this.mediator_update()
+    },
+    /* eslint-enable */
+
+    // 引数は親が「変更」したときがトリガー
+    debug_mode: function (v) {
+      console.log(`watch debug_mode: ${v}`)
     },
   },
 
   methods: {
+    read_kifu() {
+      if (this.kifu_url) {
+        const url = this.kifu_url
+        // const url = "http://localhost:3000/wr/hanairobiyori-ispt-20171104_220810.kif"
+        // const url = "http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif"
+        axios.get(url, {params: {"accessd_at": Date.now().toString()}}).then((response) => {
+          this.loaded_kifu = response.data
+          this.error_message = null
+        }).catch((error) => {
+          this.loaded_kifu = null
+          // if (process.env.NODE_ENV === "test") {
+          //   // console.log(error)
+          // }
+          // console.log(error.message)
+          this.error_message = error.message
+        })
+        // , this.polling_interval * 1000)
+        // debugger
+      } else {
+        this.loaded_kifu = this.kifu_body
+      }
+    },
+
+    mediator_update() {
+      if (this.loaded_kifu) {
+        this.mediator = new Mediator()
+        this.mediator.kifu_body = this.loaded_kifu
+        this.mediator.current_turn = this.current_turn
+        this.mediator.run()
+        this.current_turn = this.mediator.normalized_turn
+        if (this.location_hash_embed_turn) {
+          document.location.hash = this.current_turn
+        }
+      }
+    },
+
     keyboard_operation: function (e) {
       if (this.debug_mode) {
         console.log(document.activeElement)
@@ -207,17 +285,6 @@ export default {
       // if (gap !== null || force_value !== null) {
       //   e.preventDefault()
       // }
-    },
-
-    mediator_update() {
-      this.mediator = new Mediator()
-      this.mediator.kifu_body = this.kifu_body || "position startpos"
-      this.mediator.current_turn = this.current_turn
-      this.mediator.run()
-      this.current_turn = this.mediator.normalized_turn
-      if (this.location_hash_embed_turn) {
-        document.location.hash = this.current_turn
-      }
     },
 
     navi_relative_move(v, event) {

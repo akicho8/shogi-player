@@ -21,13 +21,13 @@ class Mediator {
   }
 
   run() {
-    if (/position/.test(this.kifu_body)) { // FIXME: この判定はしょぼい
+    let str = this.kifu_body || "position startpos"
+    if (/position/.test(str)) { // FIXME: この判定はしょぼい
       this.any_parser = new SfenParser()
     } else {
       this.any_parser = new KifParser()
     }
-
-    this.any_parser.kifu_body = this.kifu_body
+    this.any_parser.kifu_body = str
     this.any_parser.parse()
 
     this.current_field = this.any_parser.field

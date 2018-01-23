@@ -20,6 +20,7 @@
   "dependencies": {
     "autolinker": "^1.6.0",
     "autoprefixer": "^7.1.2",
+    "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
