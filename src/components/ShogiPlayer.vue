@@ -91,6 +91,7 @@
       <p>次の手番:{{mediator.location_next.key}}</p>
       <p>Sfen:{{mediator.to_sfen}}</p>
     </template>
+    <p>read_counter: {{read_counter}}</p>
   </template>
 </div>
 </template>
@@ -106,9 +107,7 @@ import Vue from 'vue'
 Object.defineProperty(Vue.prototype, '_', {value: _})
 
 // Log content type
-// if (typeof localStorage !== "undefined") {
-//   localStorage.debug = "axios"
-// }
+// localStorage.debug = "axios"
 require('axios-debug-log')({
   request: function (debug, config) {
     debug('Request with ' + config.headers['content-type'])
@@ -125,8 +124,7 @@ require('axios-debug-log')({
   }
 })
 
-const debug = require('debug')('debug')
-debug('booting %o', "ok")
+const logger_debug = require('debug')('debug')
 
 /* eslint-disable no-new */
 export default {
@@ -136,7 +134,8 @@ export default {
   props: {
     kifu_body:                { type: String,  default: "position startpos", },
     kifu_url:                 { type: String,  default: null,                },
-    polling_interval:         { type: Number,  default: 3,                   },
+    polling_interval:         { type: Number,  default: null,                },
+    move_to_last_after_polling:        { type: Boolean, default: true,                },
     turn_start:               { type: Number,  default: 0,                   },
     slider_show:              { type: Boolean, default: false,               },
     controller_show:          {                default: false,               },
@@ -155,22 +154,24 @@ export default {
 
   data() {
     return {
-      current_turn: 0,          // N手目
-      turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
-      mediator: null,           // 局面管理
-      board_turn: false,        // 反転したか？
-      turn_edit: false,         // N手目編集中
+      current_turn: this.turn_start, // N手目
+      turn_edit_value: null,         // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
+      mediator: null,                // 局面管理
+      board_turn: false,             // 反転したか？
+      turn_edit: false,              // N手目編集中
       env: process.env.NODE_ENV,
       polling_id: null,
       loaded_kifu: null,
       error_message: null,
+      interval_id: null,
+      read_counter: 0,
     }
   },
 
   created() {
     // console.log("created")
-    this.read_kifu()
-    this.current_turn = this.turn_start
+    this.kifu_read()
+    this.polling_interval_update()
     this.mediator_update()
     document.addEventListener("keydown", this.keyboard_operation)
   },
@@ -184,11 +185,12 @@ export default {
     },
 
     /* eslint-disable */
-    kifu_url:  function () { this.read_kifu() },
-    kifu_body: function () { this.read_kifu() },
+    kifu_url:  function () { this.kifu_read() },
+    kifu_body: function () { this.kifu_read() },
     loaded_kifu: function () {
       this.mediator_update()
     },
+    polling_interval: function () { this.polling_interval_update() },
     /* eslint-enable */
 
     // 引数は親が「変更」したときがトリガー
@@ -198,26 +200,58 @@ export default {
   },
 
   methods: {
-    read_kifu() {
+    kifu_read() {
       if (this.kifu_url) {
-        const url = this.kifu_url
-        // const url = "http://localhost:3000/wr/hanairobiyori-ispt-20171104_220810.kif"
-        // const url = "http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif"
-        axios.get(url, {params: {"accessd_at": Date.now().toString()}}).then((response) => {
-          this.loaded_kifu = response.data
-          this.error_message = null
-        }).catch((error) => {
-          this.loaded_kifu = null
-          // if (process.env.NODE_ENV === "test") {
-          //   // console.log(error)
-          // }
-          // console.log(error.message)
-          this.error_message = error.message
-        })
-        // , this.polling_interval * 1000)
-        // debugger
+        this.kifu_read_from_url()
       } else {
         this.loaded_kifu = this.kifu_body
+      }
+      this.read_counter++
+      console.log(`read_counter: ${this.read_counter}`)
+      if (this.move_to_last_after_polling) {
+        this.current_turn = -1
+      }
+    },
+
+    kifu_read_from_url() {
+      const url = this.kifu_url
+      // const url = "http://localhost:3000/wr/hanairobiyori-ispt-20171104_220810.kif"
+      // const url = "http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif"
+      const accessd_at = Date.now().toString()
+      axios.get(url, {
+        params: {"accessd_at": accessd_at},
+        responseType: "text",
+        timeout: 1000 * 3,
+        headers: {"X-SHOGI-PLAYER-TIMESTAMP": accessd_at},
+      }).then((response) => {
+        this.loaded_kifu = response.data
+        this.error_message = null
+      }).catch((error) => {
+        if (error.response) {
+          logger_debug("error.response.data: %o", error.response.data)
+          logger_debug("error.response.status: %o", error.response.status)
+          logger_debug("error.response.statusText: %o", error.response.statusText)
+          logger_debug("error.response.headers: %o", error.response.headers)
+        } else if (error.request) {
+          logger_debug("error.request: %o", error.request)
+        } else {
+          logger_debug('error.message: %o', error.message)
+        }
+        logger_debug('error.config: %o', error.config)
+
+        this.loaded_kifu = null
+        this.error_message = error.message
+      })
+    },
+
+    polling_interval_update() {
+      if (this.polling_interval) {
+        if (this.interval_id) {
+          console.log(`clearInterval(${this.interval_id})`)
+          clearInterval(this.interval_id)
+        }
+        this.interval_id = setInterval(() => { this.kifu_read() }, this.polling_interval * 1000)
+        console.log(`setInterval() => ${this.interval_id}`)
       }
     },
 

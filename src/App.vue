@@ -169,23 +169,20 @@
           <br>
           <br>
 
-          <div class="columns">
-            <div class="column">
-              <article class="message is-primary has-text-centered is-small">
-                <div class="message-body">
-                  外部KIFファイルの読み込み
-                </div>
-              </article>
-              <!-- <h3 class="title yumincho">藤井聡太四段 vs 佐藤天彦名人</h3> -->
-              <!-- <p class="subtitle yumincho"> -->
-              <!--   <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a> -->
-              <!-- </p> -->
-              <!-- <hr> -->
-              <ShogiPlayer :kifu_url="'http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif'" :turn_start="-1" :slider_show="true" :debug_mode="false" />
+          <template v-if="false">
+            <div class="columns">
+              <div class="column">
+                <article class="message is-primary has-text-centered is-small">
+                  <div class="message-body">
+                    外部KIFファイルの読み込み
+                  </div>
+                </article>
+                <ShogiPlayer :kifu_url="'http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif?plain=1'" :turn_start="-1" :controller_show="true" :slider_show="true" :debug_mode="true" :polling_interval="30" />
+              </div>
             </div>
-          </div>
-          <br>
-          <br>
+            <br>
+            <br>
+          </template>
 
           <div class="columns">
             <div class="column">

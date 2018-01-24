@@ -2,7 +2,8 @@
 |----------------------------|-----------------------------|------------------------------------------------------|---------------------|
 | kifu_body                  | 棋譜の本体                  | KIF と SFEN に対応。駒落ちは SFEN のみ               | 'position startpos' |
 | kifu_url                   | 棋譜ファイルURL             |                                                      | null                |
-| polling_interval           | ポーリング間隔(秒)          |                                                      | 30                  |
+| polling_interval           | ポーリング間隔(秒)          | 30 なら30秒間隔で kifu_url を読み直す                | null                |
+| move_to_last_after_polling | ポーリング後に最終手に移動  |                                                      | true                |
 | turn_start                 | N手目                       | 例 0:初手 3:3手目 -1:最終手 -2:投了一手前            | 0                   |
 | slider_show                | スライダーを表示する        |                                                      | false               |
 | controller_show            | 操作用のボタン類を表示する  |                                                      | false               |
