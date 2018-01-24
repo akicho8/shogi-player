@@ -169,7 +169,7 @@ export default {
   },
 
   created() {
-    // console.log("created")
+    // this.log("created")
     this.kifu_read()
     this.polling_interval_update()
     this.mediator_update()
@@ -195,7 +195,7 @@ export default {
 
     // 引数は親が「変更」したときがトリガー
     debug_mode: function (v) {
-      console.log(`watch debug_mode: ${v}`)
+      this.log(`watch debug_mode: ${v}`)
     },
   },
 
@@ -207,7 +207,7 @@ export default {
         this.loaded_kifu = this.kifu_body
       }
       this.read_counter++
-      console.log(`read_counter: ${this.read_counter}`)
+      this.log(`read_counter: ${this.read_counter}`)
       if (this.move_to_last_after_polling) {
         this.current_turn = -1
       }
@@ -247,11 +247,11 @@ export default {
     polling_interval_update() {
       if (this.polling_interval) {
         if (this.interval_id) {
-          console.log(`clearInterval(${this.interval_id})`)
+          this.log(`clearInterval(${this.interval_id})`)
           clearInterval(this.interval_id)
         }
         this.interval_id = setInterval(() => { this.kifu_read() }, this.polling_interval * 1000)
-        console.log(`setInterval() => ${this.interval_id}`)
+        this.log(`setInterval() => ${this.interval_id}`)
       }
     },
 
@@ -270,11 +270,11 @@ export default {
 
     keyboard_operation: function (e) {
       if (this.debug_mode) {
-        console.log(document.activeElement)
-        console.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
-        console.log("e", e)
-        console.log("key", e.key)
-        console.log("code", e.code)
+        this.log(document.activeElement)
+        this.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
+        this.log("e", e)
+        this.log("key", e.key)
+        this.log("code", e.code)
       }
 
       if (!this.global_key_event_capture) {
@@ -367,7 +367,7 @@ export default {
         this.current_turn = v2
       }
       if (this.debug_mode) {
-        console.log([v, v2, this.current_turn])
+        this.log([v, v2, this.current_turn])
       }
       if (this.focus_to("slider")) {
       } else {
@@ -411,7 +411,13 @@ export default {
 
     board_turn_sign() {
       return this.board_turn ? -1 : 1
-    }
+    },
+
+    log(v) {
+      if (this.debug_mode) {
+        console.log(v)
+      }
+    },
   },
 }
 </script>
