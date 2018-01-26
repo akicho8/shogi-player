@@ -2,7 +2,7 @@
   "name": "react-shogi-player",
   "version": "0.0.1",
   "private": true,
-  "homepage": "https://akicho8.github.io/react-shogi-player",
+  "homepage": "https://akicho8.github.io/shogi-player/react",
   "scripts": {
     "start": "npm-run-all -p watch-css start-js",
     "start-js": "react-scripts start",
