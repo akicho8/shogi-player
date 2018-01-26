@@ -60,7 +60,7 @@ class SfenSerializer {
         let count = hold_pieces.get(e.key) || 0
         let str = ""
         if (count === 0) {
-          return
+          return null
         }
         if (count >= 2) {
           str += count
