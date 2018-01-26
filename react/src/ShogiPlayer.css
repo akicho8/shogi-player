@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .shogi-player {
   font-family: "YuMincho", "Yu Mincho", serif;
   margin: 0 auto;
@@ -9,6 +10,7 @@
     transition: all 0.2s 0s ease-in-out; }
   .shogi-player .board_container {
     display: flex;
+    /* すべてを中央よせ */
     justify-content: center; }
     .shogi-player .board_container .flex_item:nth-child(1) {
       align-self: flex-start; }
