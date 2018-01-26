@@ -1,0 +1,86 @@
+.shogi-player {
+  font-family: "YuMincho", "Yu Mincho", serif;
+  margin: 0 auto;
+  text-align: center; }
+  .shogi-player .location_white, .shogi-player .board_turn.turned {
+    transform: rotate(180deg); }
+  .shogi-player .board_turn {
+    transform: rotate(0deg);
+    transition: all 0.2s 0s ease-in-out; }
+  .shogi-player .board_container {
+    display: flex;
+    justify-content: center; }
+    .shogi-player .board_container .flex_item:nth-child(1) {
+      align-self: flex-start; }
+    .shogi-player .board_container .flex_item:nth-child(2) {
+      align-self: center; }
+    .shogi-player .board_container .flex_item:nth-child(3) {
+      align-self: flex-end; }
+  .shogi-player table {
+    margin: 0 auto;
+    padding: 0;
+    background: #999999;
+    border-collapse: separate;
+    border-spacing: 1px;
+    border: 1px solid #999999; }
+    .shogi-player table td {
+      font-size: 2.6vmin;
+      width: 3.9vmin;
+      height: 3.9vmin;
+      padding: 0;
+      color: #333333;
+      background: white;
+      text-align: center; }
+      .shogi-player table td.current {
+        color: #333333;
+        background: #e6e6e6;
+        font-weight: bold; }
+      .shogi-player table td.origin_point {
+        background: #f2f2f2; }
+      .shogi-player table td.current {
+        transition: background 500ms 0s ease-out; }
+  .shogi-player .board_wrap {
+    position: relative; }
+    .shogi-player .board_wrap .overlay_navi {
+      position: absolute;
+      z-index: 1;
+      cursor: pointer;
+      width: 75%;
+      height: 100%; }
+      .shogi-player .board_wrap .overlay_navi.previous {
+        left: -25%;
+        cursor: w-resize; }
+      .shogi-player .board_wrap .overlay_navi.next {
+        right: -25%;
+        cursor: e-resize; }
+      .shogi-player .board_wrap .overlay_navi.board_turn_area {
+        cursor: ns-resize;
+        z-index: 2;
+        left: 44.44444%;
+        width: 11.11111%;
+        top: 44.44444%;
+        height: 11.11111%; }
+  .shogi-player .turned .overlay_navi.previous {
+    cursor: e-resize; }
+  .shogi-player .turned .overlay_navi.next {
+    cursor: w-resize; }
+  .shogi-player .controller_block {
+    margin-top: 1vmin;
+    margin-bottom: 0vmin; }
+    .shogi-player .controller_block button.next {
+      width: 16vmin; }
+  .shogi-player input[type=range] {
+    cursor: pointer;
+    width: 36vmin; }
+  .shogi-player .turn_edit_input {
+    width: 3rem; }
+  .shogi-player .turn_edit_text {
+    cursor: pointer; }
+  .shogi-player.debug .controller_block {
+    background: rgba(191, 145, 64, 0.5); }
+  .shogi-player.debug .board_wrap .overlay_navi.previous {
+    background: rgba(64, 64, 191, 0.5); }
+  .shogi-player.debug .board_wrap .overlay_navi.next {
+    background: rgba(191, 64, 64, 0.5); }
+  .shogi-player.debug .board_wrap .overlay_navi.board_turn_area {
+    background: rgba(64, 191, 64, 0.5); }
