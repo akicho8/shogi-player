@@ -132,19 +132,19 @@ export default {
 
   /* eslint-disable */
   props: {
-    kifu_body:                { type: String,  default: "position startpos", },
-    kifu_url:                 { type: String,  default: null,                },
-    polling_interval:         { type: Number,  default: null,                },
-    move_to_last_after_polling:        { type: Boolean, default: true,                },
-    turn_start:               { type: Number,  default: 0,                   },
-    slider_show:              { type: Boolean, default: false,               },
-    controller_show:          {                default: false,               },
-    sfen_show:                { type: Boolean, default: false,               },
-    global_key_event_capture: { type: Boolean, default: false                },
-    location_hash_embed_turn: { type: Boolean, default: false,               },
-    shift_key_mag:            { type: Number,  default: 10,                  },
-    system_key_mag:           { type: Number,  default: 50,                  },
-    debug_mode:               { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
+    kifu_body:                  { type: String,  default: "position startpos", },
+    kifu_url:                   { type: String,  default: null,                },
+    polling_interval:           { type: Number,  default: null,                },
+    move_to_last_after_polling: { type: Boolean, default: true,                },
+    turn_start:                 { type: Number,  default: 0,                   },
+    slider_show:                { type: Boolean, default: false,               },
+    controller_show:            {                default: false,               },
+    sfen_show:                  { type: Boolean, default: false,               },
+    global_key_event_capture:   { type: Boolean, default: false                },
+    location_hash_embed_turn:   { type: Boolean, default: false,               },
+    shift_key_mag:              { type: Number,  default: 10,                  },
+    system_key_mag:             { type: Number,  default: 50,                  },
+    debug_mode:                 { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
   },
   /* eslint-enable */
 
@@ -169,7 +169,6 @@ export default {
   },
 
   created() {
-    // this.log("created")
     this.kifu_read()
     this.polling_interval_update()
     this.mediator_update()
@@ -202,7 +201,7 @@ export default {
   methods: {
     kifu_read(polling = false) {
       if (this.kifu_url) {
-        this.kifu_read_from_url()
+        this.__kifu_read_from_url()
       } else {
         this.loaded_kifu = this.kifu_body
       }
@@ -215,7 +214,7 @@ export default {
       }
     },
 
-    kifu_read_from_url() {
+    __kifu_read_from_url() {
       const url = this.kifu_url
       // const url = "http://localhost:3000/wr/hanairobiyori-ispt-20171104_220810.kif"
       // const url = "http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif"
@@ -270,7 +269,7 @@ export default {
       }
     },
 
-    keyboard_operation: function (e) {
+    keyboard_operation(e) {
       if (this.debug_mode) {
         this.log(document.activeElement)
         this.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
@@ -364,15 +363,14 @@ export default {
         }
       }
 
-      const v2 = this.mediator.clamp(this.current_turn + v)
+      const v2 = this.mediator.turn_clamp(this.current_turn + v)
       if (this.current_turn !== v2) {
         this.current_turn = v2
       }
       if (this.debug_mode) {
         this.log([v, v2, this.current_turn])
       }
-      if (this.focus_to("slider")) {
-      } else {
+      if (!this.focus_to("slider")) {
         if (v > 0) {
           this.focus_to("next")
         } else {
@@ -408,7 +406,7 @@ export default {
     turn_edit_run() {
       this.turn_edit = true
       this.turn_edit_value = this.current_turn
-      this.$nextTick(() => { this.$refs.turn_edit_input.focus() })
+      this.$nextTick(() => this.$refs.turn_edit_input.focus())
     },
 
     board_turn_sign() {

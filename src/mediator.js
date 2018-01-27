@@ -118,12 +118,11 @@ class Mediator {
     if (index < 0) {
       index += this.any_parser.turn_max + 1
     }
-    return this.clamp(index)
+    return this.turn_clamp(index)
   }
 
-  clamp(index) {
-    index = Number(index)
-    return _.clamp(index, this.any_parser.turn_min, this.any_parser.turn_max)
+  turn_clamp(index) {
+    return _.clamp(Number(index), this.any_parser.turn_min, this.any_parser.turn_max)
   }
 
   get location_next() {
