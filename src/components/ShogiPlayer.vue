@@ -97,14 +97,16 @@
 </template>
 
 <script>
-import { Mediator } from "../mediator"
-import PieceStand from "./piece_stand"
 import _ from "lodash"
 import axios from "axios"
+import Vue from 'vue'
+
+import { Mediator } from "../mediator"
+import PieceStand from "./PieceStand"
+
 import "./ShogiPlayer.sass"
 
 // To use lodash's _ in the vue template
-import Vue from 'vue'
 Object.defineProperty(Vue.prototype, '_', {value: _})
 
 // Log content type
