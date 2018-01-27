@@ -81,8 +81,8 @@
       </template>
     </template>
     <p class="is-size-7 has-text-grey" v-if="sfen_show">
-    {{mediator.to_sfen}}
-  </p>
+      {{mediator.to_sfen}}
+    </p>
   </template>
 
   <template v-if="debug_mode">
@@ -101,6 +101,7 @@ import { Mediator } from "../mediator"
 import PieceStand from "./piece_stand"
 import _ from "lodash"
 import axios from "axios"
+import "./ShogiPlayer.sass"
 
 // To use lodash's _ in the vue template
 import Vue from 'vue'
@@ -421,7 +422,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="sass">
-  @import "ShogiPlayer"
-</style>
