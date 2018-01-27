@@ -107,7 +107,7 @@
                 <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
               </p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :global_key_event_capture="true" />
+              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :key_event_capture="true" />
             </div>
           </div>
           <br>

@@ -48,8 +48,8 @@ class App extends React.Component {
               <div className="container has-text-centered">
                 <div className="columns">
                   <div className="column">
-                    {/* <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :global_key_event_capture="true" /> */}
-                    <ShogiPlayer kifu_body={kif_sample2} turn_start="9" slider_show="true" global_key_event_capture="true" />
+                    {/* <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :key_event_capture="true" /> */}
+                    <ShogiPlayer kifu_body={kif_sample2} turn_start="9" slider_show="true" key_event_capture="true" />
                   </div>
                 </div>
               </div>

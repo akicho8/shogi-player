@@ -137,14 +137,14 @@ export default {
   props: {
     kifu_body:                  { type: String,  default: "position startpos", },
     kifu_url:                   { type: String,  default: null,                },
-    polling_interval:           { type: Number,  default: null,                },
-    move_to_last_after_polling: { type: Boolean, default: true,                },
+    polling_interval:           { type: Number,  default: 0,                   },
+    last_after_polling: { type: Boolean, default: true,                },
     turn_start:                 { type: Number,  default: 0,                   },
     slider_show:                { type: Boolean, default: false,               },
     controller_show:            {                default: false,               },
     sfen_show:                  { type: Boolean, default: false,               },
-    global_key_event_capture:   { type: Boolean, default: false                },
-    location_hash_embed_turn:   { type: Boolean, default: false,               },
+    key_event_capture:   { type: Boolean, default: false                },
+    url_embed_turn:   { type: Boolean, default: false,               },
     shift_key_mag:              { type: Number,  default: 10,                  },
     system_key_mag:             { type: Number,  default: 50,                  },
     debug_mode:                 { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
@@ -211,7 +211,7 @@ export default {
       this.read_counter++
       this.log(`read_counter: ${this.read_counter}`)
       if (polling) {
-        if (this.move_to_last_after_polling) {
+        if (this.last_after_polling) {
           this.current_turn = -1
         }
       }
@@ -249,7 +249,7 @@ export default {
     },
 
     polling_interval_update() {
-      if (this.polling_interval) {
+      if (this.polling_interval >= 1) {
         if (this.interval_id) {
           this.log(`clearInterval(${this.interval_id})`)
           clearInterval(this.interval_id)
@@ -266,7 +266,7 @@ export default {
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
         this.current_turn = this.mediator.normalized_turn
-        if (this.location_hash_embed_turn) {
+        if (this.url_embed_turn) {
           document.location.hash = this.current_turn
         }
       }
@@ -281,7 +281,7 @@ export default {
         this.log("code", e.code)
       }
 
-      if (!this.global_key_event_capture) {
+      if (!this.key_event_capture) {
         return
       }
 
