@@ -200,7 +200,7 @@ export default {
   },
 
   methods: {
-    kifu_read() {
+    kifu_read(polling = false) {
       if (this.kifu_url) {
         this.kifu_read_from_url()
       } else {
@@ -208,8 +208,10 @@ export default {
       }
       this.read_counter++
       this.log(`read_counter: ${this.read_counter}`)
-      if (this.move_to_last_after_polling) {
-        this.current_turn = -1
+      if (polling) {
+        if (this.move_to_last_after_polling) {
+          this.current_turn = -1
+        }
       }
     },
 
@@ -250,7 +252,7 @@ export default {
           this.log(`clearInterval(${this.interval_id})`)
           clearInterval(this.interval_id)
         }
-        this.interval_id = setInterval(() => { this.kifu_read() }, this.polling_interval * 1000)
+        this.interval_id = setInterval(() => { this.kifu_read(true) }, this.polling_interval * 1000)
         this.log(`setInterval() => ${this.interval_id}`)
       }
     },
