@@ -49,8 +49,8 @@ export default {
     text-align: left
 
     // &.development
-    //   border: 2px solid $line-color
-    //   background: $board-bg-color
+    //   border: 2px solid $sp-grid-color
+    //   background: $sp-board-bg-color
     //   border-radius: 0.5vmin
     ul
       list-style-type: none
@@ -62,21 +62,21 @@ export default {
         align-items: center
 
         // 持駒
-        color: $piece-color
-        font-size: $font-size
+        color: $sp-piece-color
+        font-size: $sp-font-size
 
         // 持駒数
         .piece_count
           vertical-align: middle
           margin-left: 0.3rem
-          font-size: $font-size * 0.8
+          font-size: $sp-font-size * 0.8
 
         // 駒台の上のマーク
         .location_mark
 
     &.turn_active
-      // border: 2px solid $line-color
-      // background: $board-bg-color
+      // border: 2px solid $sp-grid-color
+      // background: $sp-board-bg-color
       // border-radius: 0.5vmin
 
       ul

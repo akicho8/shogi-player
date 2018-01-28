@@ -59,7 +59,7 @@
     </template>
 
     <template v-if="slider_show">
-      <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" />
+      <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" class="slider" />
     </template>
 
     <template v-if="!_.isEmpty(mediator.any_parser.comments_pack)">

@@ -1,9 +1,11 @@
-@import "variables"
+@import "initial_variables"
+
+$dimension: 9
+$cell_width: 100% / $dimension
 
 .shogi-player
   font-family: "YuMincho", "Yu Mincho", serif
 
-  // color: white
   margin: 0 auto
   text-align: center
 
@@ -20,10 +22,8 @@
 
   // 駒台と将棋盤のレイアウト
   .board_container
-    // margin-top
-
     display: flex
-    /* すべてを中央よせ
+    // すべてを中央よせ
     justify-content: center
 
     // △の駒台は左上
@@ -39,62 +39,44 @@
       align-self: flex-end
 
   // 将棋盤
-  $line-width: 1px
   table
     margin: 0 auto
     padding: 0
-    background: $line-color
+    background: $sp-grid-color
     border-collapse: separate
-    border-spacing: $line-width
-    border: 1px solid $line-color
-    // box-shadow: 0 0 24vmin rgba($line-color, 0.5)
+    border-spacing: $sp-grid-size
+    border: $sp-sub-grid-size solid $sp-grid-color
+    // box-shadow: 0 0 24vmin rgba($sp-grid-color, 0.5)
     td
-      font-size: $font-size
-      width: $cell-size
-      height: $cell-size
+      font-size: $sp-font-size
+      width: $sp-cell-size
+      height: $sp-cell-size
       padding: 0
-      color: $piece-color
-      background: $board-bg-color
+      color: $sp-piece-color
+      background: $sp-board-bg-color
       text-align: center
       &.current
-        color: $piece-color
-        background: $current-bg-color
+        color: $sp-piece-color
+        background: $sp-current-bg-color
         font-weight: bold
       &.origin_point
-        background: $current-bg-before
+        background: $sp-origin-bg-color
       &.current
         transition: background 500ms 0s ease-out
-      // .mark
-      //   $point_r: 8px
-      //   display: block
-      //   background: $line-color
-      //   position: relative
-      //   top: ceil(($line-width + ($point_r * 2)) / 2.0) * -1
-      //   left: ceil(($line-width + ($point_r * 2)) / 2.0) * -1
-      //   width: $line-width + ($point_r * 2)
-      //   height: $line-width + ($point_r * 2)
-    // tr:nth-of-type(3n+4)
-    //   td:nth-of-type(3n+4)
-    //     span
-    //       background: hsl(200, 50%, 50%)
-        
+
   .board_wrap
     position: relative
     // border: 8px solid hsla(0, 50%, 50%, .5)
     .overlay_navi
       position: absolute
       z-index: 1
-      cursor: pointer
       width: 75%
       height: 100%
       &.previous
         left: -25%
-        cursor: w-resize
       &.next
         right: -25%
-        cursor: e-resize
       &.board_turn_area
-        cursor: ns-resize
         z-index: 2
         // 天王山
         left: 50% - ($cell_width / 2)
@@ -108,15 +90,7 @@
     //   left: (100% / 3)
     //   width: 5px
     //   height: 5px
-    //   background: $line-color
-      
-  .turned
-    .overlay_navi
-      &.previous
-        cursor: e-resize
-      &.next
-        cursor: w-resize
-    
+    //   background: $sp-grid-color
 
   // コントローラー
   .controller_block
@@ -131,7 +105,9 @@
       //   margin-left: 1vmin
 
   // スライダー
-  input[type=range]
+  .slider
+    margin-left: auto
+    margin-right: auto
     cursor: pointer
     width: 36vmin
 
@@ -158,42 +134,5 @@
         &.board_turn_area
           background: hsla(120, 50%, 50%, .5)
 
-  .piece_stand
-    min-width: 8vmin
-    margin: 0 1vmin
-    text-align: left
-
-    // &.development
-    //   border: 2px solid $line-color
-    //   background: $board-bg-color
-    //   border-radius: 0.5vmin
-    ul
-      list-style-type: none
-      padding: 0 0.25vmin
-      margin: 1vmin
-      li
-        // 歩(2) の並びを横軸中央で揃える
-        display: flex
-        align-items: center
-
-        // 持駒
-        color: $piece-color
-        font-size: $font-size
-
-        // 持駒数
-        .piece_count
-          vertical-align: middle
-          margin-left: 0.3rem
-          font-size: $font-size * 0.8
-
-        // 駒台の上のマーク
-        .location_mark
-
-    &.turn_active
-      // border: 2px solid $line-color
-      // background: $board-bg-color
-      // border-radius: 0.5vmin
-
-      ul
-        li.location_mark
-          text-shadow: 0 0 0.5rem hsl(0,50%,50%)
+@import "piece_stand"
+@import "cursor"

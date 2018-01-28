@@ -1,0 +1,16 @@
+.shogi-player
+  .board_wrap
+    .overlay_navi
+      cursor: pointer
+      &.previous
+        cursor: w-resize
+      &.next
+        cursor: e-resize
+      &.board_turn_area
+        cursor: ns-resize
+  .turned
+    .overlay_navi
+        &.previous
+          cursor: e-resize
+        &.next
+          cursor: w-resize
