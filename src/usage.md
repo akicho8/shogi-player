@@ -2,18 +2,21 @@
 
 インストール
 
-    % yarn add shogi_player
+    % yarn add shogi-player
 
 読み込み
 
 (in app/javascript/packs/shogi_player.js)
 
-    import Vue from 'vue/dist/vue.esm'
-    import ShogiPlayer from 'shogi-player/src/components/ShogiPlayer.vue'
+    import Vue from "vue/dist/vue.esm"
+    import ShogiPlayer from "shogi-player/src/components/ShogiPlayer.vue"
 
-    document.addEventListener('DOMContentLoaded', () => {
+    import _ from "lodash"
+    Object.defineProperty(Vue.prototype, "_", {value: _})
+
+    document.addEventListener("DOMContentLoaded", () => {
       new Vue({
-        el: '#shogi_player_app',
+        el: "#shogi_player_app",
         components: { ShogiPlayer },
       })
     })
