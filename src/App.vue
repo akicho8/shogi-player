@@ -25,7 +25,7 @@
               <!-- </a> -->
               <a class="navbar-item" href="https://github.com/akicho8/shogi-player">
                 <span class="icon">
-                  <i class="fa fa-github"></i>
+                  <i class="fab fa-github"></i>
                 </span>
                 <span>Github</span>
               </a>
