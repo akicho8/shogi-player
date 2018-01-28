@@ -1,4 +1,4 @@
-## Rails の場合
+## Rails (+ Vue) の場合
 
 インストール
 
@@ -9,7 +9,7 @@
 (in app/javascript/packs/shogi_player.js)
 
     import Vue from 'vue/dist/vue.esm'
-    import ShogiPlayer from 'shogi_player/src/components/ShogiPlayer.vue'
+    import ShogiPlayer from 'shogi-player/src/components/ShogiPlayer.vue'
 
     document.addEventListener('DOMContentLoaded', () => {
       new Vue({
@@ -32,6 +32,33 @@
       <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d'"></ShogiPlayer>
     </div>
 
+## React で使う場合
+
+    import React from 'react'
+    port ShogiPlayer from './shogi-player/react/src/ShogiPlayer.js
+
+    class App extends React.Component {
+      render() {
+        return (
+          <ShogiPlayer kifu_body='position startpos moves 7g7f 8c8d' turn_start="9" />
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <App />,
+      document.getElementById('app')
+    )
+
+<article class="message is-warning">
+  <div class="message-header">
+    <p>注意点</p>
+  </div>
+  <div class="message-body">
+     React 版は最低限の機能しかありません
+  </div>
+</article>
+
 ## JavaScript に変換したものを直接使う場合
 
-    ただいま調査中……
+    ただいま調査中
