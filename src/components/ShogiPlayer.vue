@@ -104,8 +104,6 @@ import Vue from 'vue'
 import { Mediator } from "../mediator"
 import PieceStand from "./PieceStand"
 
-import "./ShogiPlayer"
-
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
 
@@ -424,3 +422,7 @@ export default {
   },
 }
 </script>
+
+<style lang="sass">
+  @import "./ShogiPlayer"
+</style>
