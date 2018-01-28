@@ -38,7 +38,8 @@
 ## React で使う場合
 
     import React from 'react'
-    port ShogiPlayer from './shogi-player/react/src/ShogiPlayer.js
+    import ReactDOM from 'react-dom'
+    import ShogiPlayer from 'shogi-player/react/src/ShogiPlayer.js'
 
     class App extends React.Component {
       render() {
