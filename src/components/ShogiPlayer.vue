@@ -24,7 +24,7 @@
   <template v-if="mediator">
     <div class="turn_editor">
       <template v-if="!turn_edit">
-        <span class="turn_edit_text" @click="turn_edit_run">{{mediator.normalized_turn}}手目</span>
+        <span class="turn_edit_text" @click="turn_edit_run">{{mediator.current_turn_label}}</span>
       </template>
       <template v-if="turn_edit">
         <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">

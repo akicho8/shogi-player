@@ -125,6 +125,10 @@ class Mediator {
     return _.clamp(Number(index), this.any_parser.turn_min, this.any_parser.turn_max)
   }
 
+  get location_current() {
+    return this.any_parser.location_by_offset(this.normalized_turn - 1)
+  }
+
   get location_next() {
     return this.any_parser.location_by_offset(this.normalized_turn)
   }
@@ -142,6 +146,14 @@ class Mediator {
   auto_link(v) {
     const autolinker = new Autolinker()
     return autolinker.link(v)
+  }
+
+  get current_turn_label() {
+    if (this.normalized_turn === this.any_parser.turn_max) {
+      return `まで${this.normalized_turn}手で${this.location_current.name}の勝ち`
+    } else {
+      return `${this.normalized_turn}手目`
+    }
   }
 }
 
