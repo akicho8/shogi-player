@@ -19,9 +19,7 @@
     <p>備考</p>
   </div>
   <div class="message-body">
-    <ul>
-      <li>**kifu_url** や **kifu_body** に指定したURLや文字列を変更した時点でも再読み込みします</li>
-    </ul>
+    **kifu_url** や **kifu_body** をあとから変更したときも同期して再読み込みします
   </div>
 </article>
 
