@@ -19,7 +19,7 @@ class Battler {
   }
 
   get promoted() {
-    return this.attributes.promoted
+    return !!this.attributes.promoted
   }
 
   set promoted(v) {
