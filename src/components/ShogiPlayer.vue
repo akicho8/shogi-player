@@ -36,7 +36,7 @@
         <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
         <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
         <div class="overlay_navi board_turn_area" @click="board_turn_run"></div>
-        <table>
+        <table class="board">
           <tr v-for="y in mediator.dimension">
             <template v-for="x in mediator.dimension">
               <td :class="mediator.cell_class(x -1, y - 1)">
@@ -62,7 +62,7 @@
       <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" class="slider" />
     </template>
 
-    <template v-if="!_.isEmpty(mediator.any_parser.comments_pack)">
+    <div class="comment_area" v-if="mediator.any_parser.comments_pack">
       <template v-if="mediator.current_comments">
         <div class="columns">
           <div class="column is-three-fifths is-offset-one-fifth">
@@ -79,7 +79,8 @@
           </div>
         </div>
       </template>
-    </template>
+    </div>
+
     <p class="is-size-7 has-text-grey" v-if="sfen_show">
       {{mediator.to_sfen}}
     </p>

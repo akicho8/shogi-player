@@ -283,4 +283,9 @@ export default {
 <style lang="sass">
 .yumincho
   font-family: "YuMincho", "Yu Mincho", serif
+
+.shogi-player
+  // background-image: url("./assets/ban_kaya_c.png")
+  // table
+  //   background-image: url("./assets/ban_kaya_c.png") !important
 </style>
