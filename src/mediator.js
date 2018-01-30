@@ -91,6 +91,7 @@ class Mediator {
     let list = []
     if (battler) {
       list.push(`location_${battler.location.key}`)
+      list.push(`promoted_${battler.promoted}`)
       list = _.concat(list, battler.piece.css_class_list)
     }
     if (this.move_info) {
