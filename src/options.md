@@ -12,6 +12,7 @@
 | url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                  | false               |
 | shift_key_mag              | shiftキー押下時の倍速       | 1 または null 指定で無効にできる                     | 10                  |
 | system_key_mag             | システムキー押下時の倍速    | 1 または null 指定で無効にできる                     | 50                  |
+| theme                      | テーマ名                    | simple:シンプル tree:木目                            | simple              |
 | debug_mode                 | デバッグモード              |                                                      | false               |
 
 <article class="message is-info">

@@ -3,3 +3,77 @@
 @import "piece_stand"
 @import "cursor"
 @import "xray"
+@import "piece_map_list"
+
+.shogi-player
+  &.theme-simple
+    .board
+      border-collapse: separate
+      border: $sp-simple-sub-grid-size solid $sp-simple-grid-color
+      border-spacing: $sp-simple-grid-size
+      background: $sp-simple-grid-color
+      td
+        font-size: $sp-simple-font-size
+        color: $sp-simple-piece-color
+        width: $sp-simple-cell-size
+        height: $sp-simple-cell-size
+        background: $sp-simple-board-color-bg
+        &.current
+          background: $sp-simple-current-color-bg
+        &.origin_point
+          background: $sp-simple-origin-color-bg
+        &.current
+          color: $sp-simple-piece-color
+          font-weight: bold
+          transition: background 500ms 0s ease-out
+        &.origin_point
+        .span_cell
+          display: inline-block
+          &.location_black
+            transform: translateY($sp-simple-span-cell-transform-y)
+          &.location_white
+            transform: rotate(180deg) translateY($sp-simple-span-cell-transform-y)
+
+  &.theme-tree
+    .board
+      border: $sp-tree-sub-grid-size solid $sp-tree-grid-color
+      position: relative
+      &:after
+        content: ""
+        background-image: url("../assets/ban_kaya_c.png")
+        background-position: center
+        background-size: cover
+        opacity: 0.5
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        position: absolute
+        z-index: -1
+      td
+        color: transparent
+        width: $sp-tree-cell-size
+        height: $sp-tree-cell-size
+        border: $sp-tree-grid-size solid $sp-tree-grid-color
+
+        &.current
+          background: $sp-tree-current-color-bg
+        &.origin_point
+          background: $sp-tree-origin-color-bg
+  
+        .span_cell
+          display: inline-block
+          // 升目に対しての駒の大きさ
+          width:  100%
+          height: 80%
+          
+          &.location_black
+            transform: translateY($sp-tree-span-cell-transform-y)
+          &.location_white
+            transform: translateY($sp-tree-span-cell-transform-y * -1)
+
+          // contain だと端が欠けない
+          background-size: contain
+          background-position: center
+          background-repeat: no-repeat
+          @include piece_map_list

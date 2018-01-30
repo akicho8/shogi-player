@@ -1,22 +1,21 @@
 $dimension: 9
 $cell_width: 100% / $dimension
 
+%location_white
+  transform: rotate(180deg)
+
 .shogi-player
   font-family: "YuMincho", "Yu Mincho", serif
 
   margin: 0 auto
   text-align: center
 
-  // 汎用の反転
-  .location_white
-    transform: rotate(180deg)
-
   // 将棋盤と駒台の反転
   .board_turn
     transform: rotate(0deg)
     transition: all 0.2s 0s ease-in-out
     &.turned
-      @extend .location_white
+      @extend %location_white
 
   // 駒台と将棋盤のレイアウト
   .board_container
@@ -62,33 +61,19 @@ $cell_width: 100% / $dimension
       //   left: (100% / 3)
       //   width: 5px
       //   height: 5px
-      //   background: $sp-grid-color
+      //   background: $sp-simple-grid-color
 
       // 将棋盤
       .board
         margin: 0 auto
         padding: 0
-        background: $sp-grid-color
-        border-collapse: separate
-        border-spacing: $sp-grid-size
-        border: $sp-sub-grid-size solid $sp-grid-color
-        // box-shadow: 0 0 1vmin rgba($sp-grid-color, 0.5)
+        // box-shadow: 0 0 1vmin rgba($sp-simple-grid-color, 0.5)
         td
-          font-size: $sp-font-size
-          width: $sp-cell-size
-          height: $sp-cell-size
-          padding: 0
-          color: $sp-piece-color
-          background: $sp-board-bg-color
-          // background: inherited
           text-align: center
-          &.current
-            color: $sp-piece-color
-            background: $sp-current-bg-color
-            font-weight: bold
-            transition: background 500ms 0s ease-out
-          &.origin_point
-            background: $sp-origin-bg-color
+          &.location_black
+            vertical-align: bottom
+          &.location_white
+            vertical-align: top
 
   // コントローラー
   .controller_block
@@ -116,4 +101,3 @@ $cell_width: 100% / $dimension
   //   &.piece_P
   //     background: blue
   .comment_area
-    

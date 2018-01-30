@@ -1,5 +1,5 @@
 <template>
-<div class="shogi-player" :class="{debug: debug_mode}">
+<div class="shogi-player" :class="[`theme-${theme}`, {debug: debug_mode}]">
   <!-- template v-if だとテスト時のみエラーになるため div v-show 形式にしている -->
   <!-- これは jest の問題なのか vue の不具合なのかわからない  -->
   <div v-show="error_message !== null">
@@ -39,8 +39,10 @@
         <table class="board">
           <tr v-for="y in mediator.dimension">
             <template v-for="x in mediator.dimension">
-              <td :class="mediator.cell_class(x -1, y - 1)">
-                {{mediator.cell_view(x - 1, y - 1)}}
+              <td class="td_cell" :class="mediator.cell_class(x -1, y - 1)">
+                <span class="span_cell" :class="mediator.cell_class(x - 1, y - 1)">
+                  {{mediator.cell_view(x - 1, y - 1)}}
+                </span>
               </td>
             </template>
           </tr>
@@ -146,6 +148,7 @@ export default {
     url_embed_turn:     { type: Boolean, default: false,               },
     shift_key_mag:      { type: Number,  default: 10,                  },
     system_key_mag:     { type: Number,  default: 50,                  },
+    theme:              { type: String,  default: "simple",            },
     debug_mode:         { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
   },
   /* eslint-enable */

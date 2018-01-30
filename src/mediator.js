@@ -4,6 +4,7 @@ import { SfenParser } from "./sfen_parser"
 import { KifParser } from "./kif_parser"
 import { Board } from "./board"
 import { Point } from "./point"
+import { Piece } from "./piece"
 import { Battler } from "./battler"
 import { SfenSerializer } from "./sfen_serializer"
 import Autolinker from 'autolinker'
@@ -77,22 +78,19 @@ class Mediator {
     })
   }
 
-  cell_view(x, y) {
-    const battler = this.current_field.get(Point.fetch([x, y]).key)
-    let str = ""
-    if (battler) {
-      str = battler.name
-    }
-    return str
+  cell_lookup(x, y) {
+    return this.current_field.get(Point.fetch([x, y]).key)
   }
 
   cell_class(x, y) {
-    const battler = this.current_field.get(Point.fetch([x, y]).key)
+    const battler = this.cell_lookup(x, y)
     let list = []
     if (battler) {
       list.push(`location_${battler.location.key}`)
       list.push(`promoted_${battler.promoted}`)
       list = _.concat(list, battler.piece.css_class_list)
+    } else {
+      list.push("blank")
     }
     if (this.move_info) {
       const origin_point = this.move_info.origin_point
@@ -107,6 +105,24 @@ class Mediator {
       }
     }
     return list
+  }
+
+  cell_piece_class(x, y) {
+    const battler = this.cell_lookup(x, y)
+    let list = []
+    if (battler) {
+      list.push(`location_${battler.location.key}`)
+    }
+    return list
+  }
+
+  cell_view(x, y) {
+    const battler = this.cell_lookup(x, y)
+    let str = ""
+    if (battler) {
+      str = battler.name
+    }
+    return str
   }
 
   get dimension() {
@@ -155,6 +171,15 @@ class Mediator {
     } else {
       return `${this.normalized_turn}手目`
     }
+  }
+
+  realized_hold_pieces_of(location_key) {
+    const list = Array.from(this.hold_pieces.get(location_key))
+    return _(list)
+      .filter(([key, count]) => count >= 1)
+      .map(([key, count]) => [Piece.fetch(key), count])
+      .sortBy(list, ([key, count]) => key.code)
+      .value()
   }
 }
 
