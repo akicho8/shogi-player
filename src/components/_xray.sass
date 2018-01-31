@@ -1,11 +1,11 @@
 @mixin sp_xray_color($level)
   background: hsla((360 / 5) * $level, 50%, 50%, 0.25)
-
+  
 .shogi-player
   &.debug
     .controller_block
       @include sp_xray_color(0)
-    .board_wrap
+    .board-wrap
       .overlay_navi
         &.previous
           @include sp_xray_color(1)

@@ -1,5 +1,5 @@
 <template>
-<div class="shogi-player" :class="[`theme-${theme}`, {debug: debug_mode}]">
+<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, {debug: debug_mode}]">
   <!-- template v-if だとテスト時のみエラーになるため div v-show 形式にしている -->
   <!-- これは jest の問題なのか vue の不具合なのかわからない  -->
   <div v-show="error_message !== null">
@@ -30,23 +30,25 @@
         <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
       </template>
     </div>
-    <div class="board_container board_turn" :class="{turned: board_turn}">
+    <div class="board-container board_turn" :class="{turned: board_turn}">
       <PieceStand :location_key="'white'"/>
-      <div class="flex_item board_wrap">
+      <div class="flex-item board-wrap">
         <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
         <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
         <div class="overlay_navi board_turn_area" @click="board_turn_run"></div>
-        <table class="board">
-          <tr v-for="y in mediator.dimension">
-            <template v-for="x in mediator.dimension">
-              <td class="td_cell" :class="mediator.cell_class(x -1, y - 1)">
-                <span class="span_cell" :class="mediator.cell_class(x - 1, y - 1)">
-                  {{mediator.cell_view(x - 1, y - 1)}}
-                </span>
-              </td>
-            </template>
-          </tr>
-        </table>
+        <div class="board-outer">
+          <table class="board-inner">
+            <tr v-for="y in mediator.dimension">
+              <template v-for="x in mediator.dimension">
+                <td class="td_cell" :class="mediator.cell_class(x -1, y - 1)">
+                  <span class="span_cell" :class="mediator.cell_class(x - 1, y - 1)">
+                    {{mediator.cell_view(x - 1, y - 1)}}
+                  </span>
+                </td>
+              </template>
+            </tr>
+          </table>
+        </div>
       </div>
       <PieceStand :location_key="'black'"/>
     </div>
@@ -136,20 +138,22 @@ export default {
 
   /* eslint-disable */
   props: {
-    kifu_body:          { type: String,  default: "position startpos", },
-    kifu_url:           { type: String,  default: null,                },
-    polling_interval:   { type: Number,  default: 0,                   },
-    last_after_polling: { type: Boolean, default: true,                },
-    turn_start:         { type: Number,  default: 0,                   },
-    slider_show:        { type: Boolean, default: false,               },
-    controller_show:    { type: Boolean, default: false,               },
-    sfen_show:          { type: Boolean, default: false,               },
-    key_event_capture:  { type: Boolean, default: false                },
-    url_embed_turn:     { type: Boolean, default: false,               },
-    shift_key_mag:      { type: Number,  default: 10,                  },
-    system_key_mag:     { type: Number,  default: 50,                  },
-    theme:              { type: String,  default: "simple",            },
-    debug_mode:         { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
+    kifu_body:          { type: String,  default: "position startpos",                                                                   },
+    kifu_url:           { type: String,  default: null,                                                                                  },
+    polling_interval:   { type: Number,  default: 0,                                                                                     },
+    last_after_polling: { type: Boolean, default: true,                                                                                  },
+    turn_start:         { type: Number,  default: 0,                                                                                     },
+    slider_show:        { type: Boolean, default: false,                                                                                 },
+    controller_show:    { type: Boolean, default: false,                                                                                 },
+    sfen_show:          { type: Boolean, default: false,                                                                                 },
+    key_event_capture:  { type: Boolean, default: false                                                                                  },
+    url_embed_turn:     { type: Boolean, default: false,                                                                                 },
+    shift_key_mag:      { type: Number,  default: 10,                                                                                    },
+    system_key_mag:     { type: Number,  default: 50,                                                                                    },
+    theme:              { type: String,  default: "simple",  validator(v) { return ['none', 'simple', 'real'].includes(v) }         },
+    size:               { type: String,  default: "default", validator(v) { return ['none', 'small', 'default', 'medium', 'large'].includes(v) } },
+    variation:          { type: String,  default: "a"                                                                                    },
+    debug_mode:         { type: Boolean, default: false,                                                                                 }, // process.env.NODE_ENV !== 'production'
   },
   /* eslint-enable */
 

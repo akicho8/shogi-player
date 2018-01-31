@@ -1,0 +1,29 @@
+.shogi-player
+  .board-wrap
+    position: relative
+    .overlay_navi
+      position: absolute
+      z-index: 1
+      width: 75%
+      height: 100%
+      // ←戻る
+      &.previous
+        left: -25%
+      // 進む→
+      &.next
+        right: -25%
+      // 反転用の天王山
+      &.board_turn_area
+        z-index: 2
+        left: 50% - ((100% / $sp-dimension) / 2)
+        width: (100% / $sp-dimension)
+        top: 50% - ((100% / $sp-dimension) / 2)
+        height: (100% / $sp-dimension)
+    // .mark
+    //   position: absolute
+    //   z-index: 3
+    //   top: (100% / 3)
+    //   left: (100% / 3)
+    //   width: 5px
+    //   height: 5px
+    //   background: $sp-simple-grid-color

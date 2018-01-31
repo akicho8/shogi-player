@@ -40,8 +40,11 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## 利用素材
 
-将棋駒と将棋盤 画像フリー素材|無料素材倶楽部
+将棋駒と将棋盤 画像フリー素材 | 無料素材倶楽部
 http://sozai.7gates.net/docs/japanese-chess/
 
 CC Resources for Shogi Applications | 将棋アプリ用クリエイティブコモンズ画像
 http://mucho.girly.jp/bona/
+
+フリー画像素材 - BEIZ Graphics(ベイツ・グラフィックス)
+https://www.beiz.jp/

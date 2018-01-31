@@ -12,7 +12,9 @@
 | url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                  | false               |
 | shift_key_mag              | shiftキー押下時の倍速       | 1 または null 指定で無効にできる                     | 10                  |
 | system_key_mag             | システムキー押下時の倍速    | 1 または null 指定で無効にできる                     | 50                  |
-| theme                      | テーマ名                    | simple:シンプル tree:木目                            | simple              |
+| theme                      | テーマ名                    | none:なし simple:シンプル real:木目                  | 'simple'            |
+| variation                  | テーマ内の亜種              | a, b, c, ...                                         | 'a'                 |
+| size                       | サイズ                      | none small default medium large                      | 'default'           |
 | debug_mode                 | デバッグモード              |                                                      | false               |
 
 <article class="message is-info">
@@ -20,7 +22,10 @@
     <p>備考</p>
   </div>
   <div class="message-body">
-    **kifu_url** や **kifu_body** をあとから変更したときも同期して再読み込みします
+    <ul>
+      <li>**kifu_url** や **kifu_body** をあとから変更したときも同期して再読み込みします。</li>
+      <li>theme や size の値に **none** を指定したときは何もスタイルを設定しません。</li>
+    </ul>
   </div>
 </article>
 

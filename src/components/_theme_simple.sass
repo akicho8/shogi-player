@@ -1,0 +1,42 @@
+@mixin size_define($key, $attrs)
+  .shogi-player
+    &.theme-simple
+      &.size-#{$key}
+        .board-outer
+          .board-inner
+            td
+              width:  map-get($attrs, td-size)
+              height: map-get($attrs, td-size)
+              font-size: map-get($attrs, font-size)
+        .piece_stand
+          li
+            font-size: map-get($attrs, font-size)
+
+@include size_define(small,   $sp-simple-cell-size-small)
+@include size_define(default, $sp-simple-cell-size-default)
+@include size_define(medium,  $sp-simple-cell-size-medium)
+@include size_define(large,   $sp-simple-cell-size-large)
+
+.shogi-player
+  &.theme-simple
+    .board-inner
+      border-collapse: separate
+      border: $sp-simple-grid-outer solid $sp-simple-grid-color
+      border-spacing: $sp-simple-grid-inner
+      background: $sp-simple-grid-color
+      td
+        color: $sp-simple-piece-color
+        background: $sp-simple-board-color-bg
+        &.current
+          background: $sp-simple-current-color-bg
+        &.origin_point
+          background: $sp-simple-origin-color-bg
+        &.current
+          color: $sp-simple-piece-color
+          font-weight: bold
+        .span_cell
+          display: inline-block
+          &.location_black
+            transform: translateY($sp-simple-span-cell-transform-y)
+          &.location_white
+            transform: rotate(180deg) translateY($sp-simple-span-cell-transform-y)

@@ -8,15 +8,15 @@
   .shogi-player .board_turn {
     transform: rotate(0deg);
     transition: all 0.2s 0s ease-in-out; }
-  .shogi-player .board_container {
+  .shogi-player .board-container {
     display: flex;
     /* すべてを中央よせ */
     justify-content: center; }
-    .shogi-player .board_container .flex_item:nth-child(1) {
+    .shogi-player .board-container .flex-item:nth-child(1) {
       align-self: flex-start; }
-    .shogi-player .board_container .flex_item:nth-child(2) {
+    .shogi-player .board-container .flex-item:nth-child(2) {
       align-self: center; }
-    .shogi-player .board_container .flex_item:nth-child(3) {
+    .shogi-player .board-container .flex-item:nth-child(3) {
       align-self: flex-end; }
   .shogi-player table {
     margin: 0 auto;
@@ -41,21 +41,21 @@
         background: #f2f2f2; }
       .shogi-player table td.current {
         transition: background 500ms 0s ease-out; }
-  .shogi-player .board_wrap {
+  .shogi-player .board-wrap {
     position: relative; }
-    .shogi-player .board_wrap .overlay_navi {
+    .shogi-player .board-wrap .overlay_navi {
       position: absolute;
       z-index: 1;
       cursor: pointer;
       width: 75%;
       height: 100%; }
-      .shogi-player .board_wrap .overlay_navi.previous {
+      .shogi-player .board-wrap .overlay_navi.previous {
         left: -25%;
         cursor: w-resize; }
-      .shogi-player .board_wrap .overlay_navi.next {
+      .shogi-player .board-wrap .overlay_navi.next {
         right: -25%;
         cursor: e-resize; }
-      .shogi-player .board_wrap .overlay_navi.board_turn_area {
+      .shogi-player .board-wrap .overlay_navi.board_turn_area {
         cursor: ns-resize;
         z-index: 2;
         left: 44.44444%;
@@ -80,9 +80,9 @@
     cursor: pointer; }
   .shogi-player.debug .controller_block {
     background: rgba(191, 145, 64, 0.5); }
-  .shogi-player.debug .board_wrap .overlay_navi.previous {
+  .shogi-player.debug .board-wrap .overlay_navi.previous {
     background: rgba(64, 64, 191, 0.5); }
-  .shogi-player.debug .board_wrap .overlay_navi.next {
+  .shogi-player.debug .board-wrap .overlay_navi.next {
     background: rgba(191, 64, 64, 0.5); }
-  .shogi-player.debug .board_wrap .overlay_navi.board_turn_area {
+  .shogi-player.debug .board-wrap .overlay_navi.board_turn_area {
     background: rgba(64, 191, 64, 0.5); }

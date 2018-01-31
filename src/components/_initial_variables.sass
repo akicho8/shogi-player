@@ -1,3 +1,5 @@
+//////////////////////////////////////////////////////////////////////////////// for theme-simple
+
 // color
 $sp-simple-base-color:        hsl(0, 0%, 50%)                     !default
 $sp-simple-board-color-bg:    white                               !default
@@ -6,22 +8,41 @@ $sp-simple-piece-color:       darken($sp-simple-base-color, 30%)  !default
 $sp-simple-current-color:     darken($sp-simple-base-color, 50%)  !default
 $sp-simple-current-color-bg:  lighten($sp-simple-base-color, 40%) !default
 $sp-simple-origin-color-bg:   lighten($sp-simple-base-color, 45%) !default
-  
+
 // size
-$sp-simple-cell-size: 4.0vmin                                            !default
-$sp-simple-font-size: 2.6vmin                                            !default
+$sp-simple-cell-size-small:   (td-size: 2.0vmin, font-size: 1.2vmin)  !default
+$sp-simple-cell-size-default: (td-size: 4.0vmin, font-size: 2.6vmin)  !default
+$sp-simple-cell-size-medium:  (td-size: 6.0vmin, font-size: 3.8vmin)  !default
+$sp-simple-cell-size-large:   (td-size: 8.0vmin, font-size: 6.0vmin)  !default
 
-// board grid
-$sp-simple-grid-size: 1px                                         !default
-$sp-simple-sub-grid-size: 1px                                     !default
 
+// grid
+$sp-simple-grid-inner: 1px                                        !default
+$sp-simple-grid-outer: 1px                                        !default
+
+// position
 $sp-simple-span-cell-transform-y: 5%                              !default
 
-// theme: tree
-$sp-tree-span-cell-transform-y: 0%                                !default
-$sp-tree-cell-size:        6.0vmin                                !default
-$sp-tree-grid-color:       hsla(0, 0%, 0%, 0.4)                   !default
-$sp-tree-grid-size:        1px                                    !default
-$sp-tree-sub-grid-size:    2px                                    !default
-$sp-tree-current-color-bg: hsla(0, 0%, 0%, 0.05)                  !default
-$sp-tree-origin-color-bg:  hsla(0, 0%, 0%, 0.05)                  !default
+//////////////////////////////////////////////////////////////////////////////// for theme-real
+
+// color
+$sp-real-grid-color:       hsla(0, 0%, 0%, 0.8)                   !default
+$sp-real-current-color-bg: hsla(38, 0%, 0%, 0.50)                 !default
+$sp-real-origin-color-bg:  hsla(38, 0%, 0%, 0.25)                 !default
+
+// size
+$sp-real-cell-size-small:   2.0vmin                               !default
+$sp-real-cell-size-default: 4.0vmin                               !default
+$sp-real-cell-size-medium:  6.0vmin                               !default
+$sp-real-cell-size-large:   8.0vmin                               !default
+
+// grid
+$sp-real-grid-inner: 1px                                          !default
+
+// position
+$sp-real-span-cell-transform-y: 0%                                !default
+
+//////////////////////////////////////////////////////////////////////////////// fixed
+
+$sp-dimension: 9
+$sp-cell-width: 100% / $sp-dimension

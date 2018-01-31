@@ -1,0 +1,92 @@
+@mixin size_define($key, $size)
+  .shogi-player
+    &.theme-real
+      &.size-#{$key}
+        .board-outer
+          .board-inner
+            td
+              width:  $size
+              height: $size
+
+@include size_define(small,   $sp-real-cell-size-small)
+@include size_define(default, $sp-real-cell-size-default)
+@include size_define(medium,  $sp-real-cell-size-medium)
+@include size_define(large,   $sp-real-cell-size-large)
+
+@mixin variation_define($key, $opacity, $file)
+  .shogi-player
+    &.theme-real
+      &.variation-#{$key}
+        .board-outer
+          &:after
+            background-image: url($file)
+            opacity: $opacity
+
+@include variation_define(a, 1.0, "../assets/background/ban_kaya_c.png")
+@include variation_define(b, 1.0, "../assets/background/autumn-leaves_00004.jpg")
+@include variation_define(c, 1.0, "../assets/background/autumn-leaves_00007.jpg")
+@include variation_define(d, 1.0, "../assets/background/autumn-leaves_00012.jpg")
+@include variation_define(e, 1.0, "../assets/background/cherry-blossom_00154.jpg")
+@include variation_define(f, 1.0, "../assets/background/fire_00001.jpg")
+@include variation_define(g, 1.0, "../assets/background/japanese-paper_00014.jpg")
+@include variation_define(h, 1.0, "../assets/background/sky_00001.jpg")
+@include variation_define(i, 1.0, "../assets/background/sky_00021.jpg")
+@include variation_define(j, 1.0, "../assets/background/sky_00024.jpg")
+@include variation_define(k, 1.0, "../assets/background/water_00001.jpg")
+@include variation_define(l, 1.0, "../assets/background/water_00006.jpg")
+@include variation_define(m, 1.0, "../assets/background/water_00017.jpg")
+@include variation_define(n, 1.0, "../assets/background/wood-texture_00001.jpg")
+@include variation_define(o, 1.0, "../assets/background/wood-texture_00006.jpg")
+@include variation_define(p, 1.0, "../assets/background/wood-texture_00007.jpg")
+@include variation_define(q, 1.0, "../assets/background/wood-texture_00019.jpg")
+@include variation_define(r, 1.0, "../assets/background/wood-texture_00026.jpg")
+
+.shogi-player
+  &.theme-real
+    .board-outer
+      padding: 2%
+      position: relative
+      &:after
+        position: absolute
+        z-index: -1
+        content: ""
+        border-radius: 0.8%
+        background-position: center
+        // cover にすると1枚の画像が最大まで広がる。contain は繰り返しになる
+        background-size: cover
+        top: 0
+        left: 0
+        // right: 0
+        // bottom: 0
+        width: 100%
+        height: 100%
+      .board-inner
+        td
+          // テキストを消す
+          color: transparent
+          border: $sp-real-grid-inner solid $sp-real-grid-color
+
+          &.current
+            background: $sp-real-current-color-bg
+          &.origin_point
+            background: $sp-real-origin-color-bg
+
+          .span_cell
+            display: inline-block
+
+            // 升目に対しての駒の大きさ
+            width:  100%
+            height: 85%
+
+            // 上下の微調整
+            &.location_black
+              transform: translateY($sp-real-span-cell-transform-y)
+            &.location_white
+              transform: translateY($sp-real-span-cell-transform-y * -1)
+
+            // contain にすると端が欠けない
+            background-size: contain
+            background-position: center
+            background-repeat: no-repeat
+            @import "piece_map_list"
+            @include piece_map_list

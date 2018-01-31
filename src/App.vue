@@ -107,7 +107,7 @@
                 <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
               </p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :key_event_capture="true" :theme="'tree'" />
+              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :key_event_capture="true" :theme="'real'" :size="'large'" :variation="'a'"  :debug_mode="false" />
             </div>
           </div>
           <br>
@@ -168,6 +168,47 @@
           </div>
           <br>
           <br>
+
+          <div class="columns">
+            <div class="column">
+              <article class="message is-primary has-text-centered is-small">
+                <div class="message-body">
+                  small
+                </div>
+              </article>
+              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="-1" :slider_show="true" :size="'small'" />
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <article class="message is-primary has-text-centered is-small">
+                <div class="message-body">
+                  default
+                </div>
+              </article>
+              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="-1" :slider_show="true" :size="'default'" />
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <article class="message is-primary has-text-centered is-small">
+                <div class="message-body">
+                  medium
+                </div>
+              </article>
+              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="-1" :slider_show="true" :size="'medium'" />
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <article class="message is-primary has-text-centered is-small">
+                <div class="message-body">
+                  large
+                </div>
+              </article>
+              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="-1" :slider_show="true" :size="'large'" />
+            </div>
+          </div>
 
           <template v-if="false">
             <div class="columns">
