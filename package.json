@@ -14,7 +14,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "build": "node build/build.js && rsync -avzu --delete dist/ docs/",
+    "build:clean": "rimraf dist docs",
+    "build": "npm run build:clean && node build/build.js && rsync -avzu --delete dist/ docs/",
     "deploy": "npm run build && git add -A && git commit -m 'chore: npm run build for deploy' && git push --tags"
   },
   "dependencies": {
