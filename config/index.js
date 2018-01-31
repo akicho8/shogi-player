@@ -50,7 +50,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '',       // for github pages
+    assetsPublicPath: '/shogi-player/',       // for github pages
 
     /**
      * Source Maps
