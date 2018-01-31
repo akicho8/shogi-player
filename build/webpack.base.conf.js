@@ -23,7 +23,7 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js',
-    shogi_player: './src/components/ShogiPlayer.vue',
+    // shogi_player: './src/components/ShogiPlayer.vue',
   },
   output: {
     path: config.build.assetsRoot,
@@ -60,7 +60,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 1,
+          limit: 100000000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
