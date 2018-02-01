@@ -99,7 +99,7 @@
             <div class="column">
               <article class="message is-primary has-text-centered is-small">
                 <div class="message-body">
-                  コメント付きの KIF 表示。9手目から表示。キーボード操作を優先的にキャプチャ。
+                  コメント付きの KIF 表示。9手目から表示。テーマ:real
                 </div>
               </article>
               <h3 class="title yumincho">藤井聡太四段 vs 佐藤天彦名人</h3>
@@ -107,7 +107,7 @@
                 <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
               </p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :key_event_capture="true" :theme="'real'" :size="'large'" :variation="'a'"  :debug_mode="false" />
+              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="9" :slider_show="true" :theme="'real'" :size="'large'" :variation="'a'"  :debug_mode="false" />
             </div>
           </div>
           <br>
@@ -168,47 +168,6 @@
           </div>
           <br>
           <br>
-
-          <div class="columns">
-            <div class="column">
-              <article class="message is-primary has-text-centered is-small">
-                <div class="message-body">
-                  small
-                </div>
-              </article>
-              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="-1" :slider_show="true" :size="'small'" />
-            </div>
-          </div>
-          <div class="columns">
-            <div class="column">
-              <article class="message is-primary has-text-centered is-small">
-                <div class="message-body">
-                  default
-                </div>
-              </article>
-              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="-1" :slider_show="true" :size="'default'" />
-            </div>
-          </div>
-          <div class="columns">
-            <div class="column">
-              <article class="message is-primary has-text-centered is-small">
-                <div class="message-body">
-                  medium
-                </div>
-              </article>
-              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="-1" :slider_show="true" :size="'medium'" />
-            </div>
-          </div>
-          <div class="columns">
-            <div class="column">
-              <article class="message is-primary has-text-centered is-small">
-                <div class="message-body">
-                  large
-                </div>
-              </article>
-              <ShogiPlayer :kifu_body="kif_sample2" :turn_start="-1" :slider_show="true" :size="'large'" />
-            </div>
-          </div>
 
           <template v-if="false">
             <div class="columns">
@@ -271,6 +230,110 @@
     </div>
   </section>
 
+  <section class="section">
+    <a name="options_dynamic"></a>
+    <div class="container">
+      <h3 class="title">オプション・カスタマイズ</h3>
+      <hr>
+      <div class="columns">
+        <div class="column">
+          <ShogiPlayer
+            :kifu_body="kifu_body"
+            :turn_start="turn_start"
+            :theme="theme"
+            :size="size"
+            :variation="variation"
+            :debug_mode="debug_mode"
+            :key_event_capture="key_event_capture"
+            :slider_show="slider_show"
+            :controller_show="controller_show"
+            :sfen_show="sfen_show"
+            />
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <section>
+            <b-field label="theme">
+              <div class="block">
+                <b-radio v-model="theme" native-value="simple">simple</b-radio>
+                <b-radio v-model="theme" native-value="real">real</b-radio>
+              </div>
+            </b-field>
+
+            <b-field label="variation">
+              <div class="block">
+                <template v-for="val in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's']">
+                  <b-radio v-model="variation" :native-value="val">{{val}}</b-radio>
+                </template>
+              </div>
+            </b-field>
+
+            <b-field label="size">
+              <div class="block">
+                <b-radio v-model="size" native-value="small">small</b-radio>
+                <b-radio v-model="size" native-value="default">default</b-radio>
+                <b-radio v-model="size" native-value="medium">medium</b-radio>
+                <b-radio v-model="size" native-value="large">large</b-radio>
+              </div>
+            </b-field>
+
+            <template v-if="false">
+              <b-field label="variation">
+                <b-select placeholder="Select a name" v-model="variation">
+                  <option v-for="val in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']" :value="val" :key="val">{{val}}</option>
+                </b-select>
+              </b-field>
+            </template>
+
+            <b-field label="turn_start">
+              <b-input v-model="turn_start" type="number" />
+            </b-field>
+            <b-field label="key_event_capture">
+              <b-switch v-model="key_event_capture" />
+            </b-field>
+            <b-field label="slider_show">
+              <b-switch v-model="slider_show" />
+            </b-field>
+            <b-field label="controller_show">
+              <b-switch v-model="controller_show" />
+            </b-field>
+            <b-field label="sfen_show">
+              <b-switch v-model="sfen_show" />
+            </b-field>
+            <b-field label="debug_mode">
+              <b-switch v-model="debug_mode" />
+            </b-field>
+            <b-field label="kifu_body">
+              <b-input v-model="kifu_body" type="textarea" />
+            </b-field>
+
+            <article class="message is-primary has-text-left">
+              <div class="message-header">
+                <p>引数</p>
+              </div>
+              <div class="message-body">
+                &lt;shogi-player
+                :<b>theme</b>="'{{theme}}'"
+                :<b>variation</b>="'{{variation}}'"
+                :<b>size</b>="'{{size}}'"
+                :<b>sfen_show</b>="{{sfen_show}}"
+                :<b>controller_show</b>="{{controller_show}}"
+                :<b>slider_show</b>="{{slider_show}}"
+                :<b>key_event_capture</b>="{{key_event_capture}}"
+                :<b>debug_mode</b>="{{debug_mode}}"
+                :<b>turn_start</b>="{{turn_start}}"
+                :<b>kifu_body</b>="'{{kifu_body}}'"
+                /&gt;
+              </div>
+            </article>
+
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
       <div class="columns">
@@ -285,6 +348,11 @@
 
 <script>
 import ShogiPlayer from './components/ShogiPlayer'
+
+import Vue from 'vue'
+import Buefy from 'buefy'
+
+Vue.use(Buefy)
 
 var marked = require('marked')
 marked.setOptions({
@@ -312,6 +380,16 @@ export default {
       kif_sample2: require("./第11回朝日杯将棋オープン戦本戦.kif"),
       usage_md: marked(require('./usage.md')),
       options_md: marked(require('./options.md')),
+      kifu_body: "position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+",
+      size: "default",
+      theme: "simple",
+      variation: "a",
+      debug_mode: false,
+      turn_start: -1,
+      key_event_capture: false,
+      slider_show: false,
+      controller_show: false,
+      sfen_show: false,
     }
   },
 
@@ -322,6 +400,6 @@ export default {
 </script>
 
 <style lang="sass">
-.yumincho
-  font-family: "YuMincho", "Yu Mincho", serif
+@import "./App"
+@import "buefy/lib/buefy.css"
 </style>

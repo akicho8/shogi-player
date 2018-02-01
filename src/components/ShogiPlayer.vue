@@ -92,11 +92,18 @@
 
   <template v-if="debug_mode">
     <template v-if="mediator">
-      <p>{{mediator.hold_pieces}}</p>
+      <p>持駒:{{mediator.hold_pieces}}</p>
       <p>次の手番:{{mediator.location_next.key}}</p>
       <p>Sfen:{{mediator.to_sfen}}</p>
+      <p>mediator.normalized_turn:{{mediator.normalized_turn}}</p>
     </template>
-    <p>read_counter: {{read_counter}}</p>
+    <p>
+      turn_start:{{turn_start}}
+      current_turn:{{current_turn}}
+      read_counter:{{read_counter}}
+      interval_id:{{interval_id}}
+      key_event_capture:{{key_event_capture}}
+    </p>
   </template>
 </div>
 </template>
@@ -169,7 +176,6 @@ export default {
       board_turn: false,             // 反転したか？
       turn_edit: false,              // N手目編集中
       env: process.env.NODE_ENV,
-      polling_id: null,
       loaded_kifu: null,
       error_message: null,
       interval_id: null,
@@ -190,6 +196,9 @@ export default {
     },
     turn_edit_value: function () {
       this.current_turn = this.turn_edit_value
+    },
+    turn_start: function () {
+      this.current_turn = this.turn_start
     },
 
     /* eslint-disable */

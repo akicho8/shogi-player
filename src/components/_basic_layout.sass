@@ -31,6 +31,7 @@
       align-self: flex-end
 
     .board-wrap
+      
       // .mark
       //   position: absolute
       //   z-index: 3
@@ -47,13 +48,14 @@
           padding: 8
           // box-shadow: 0 0 1vmin rgba($sp-simple-grid-color, 0.5)
           td
+            transition: all 0.5s ease-out
             text-align: center
             &.location_black
               vertical-align: bottom
             &.location_white
               vertical-align: top
             &.current, &.origin_point
-              transition: background 500ms 0s ease-out
+              transition: background 0.5s 0s ease-out
 
   // コントローラー
   .controller_block
