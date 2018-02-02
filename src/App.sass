@@ -1,2 +1,23 @@
 .yumincho
   font-family: "YuMincho", "Yu Mincho", serif
+.hero
+  position: relative
+  &:after
+    position: absolute
+    z-index: -1
+    content: ""
+    background-image: url("./assets/YOU71_syougikaku_TP_V.jpg")
+    background-position: center
+    background-size: cover
+    opacity: 1.0
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
+  &.is-primary
+    background: transparent
+.hero-foot
+  li
+    // background: hsla(0, 0%, 0%, .1)
+    // box-shadow: 0 0 10vmin hsla(0, 0%, 0%, 1.0)
