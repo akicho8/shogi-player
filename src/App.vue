@@ -255,7 +255,7 @@
 
             <b-field label="variation">
               <div class="block">
-                <template v-for="val in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's']">
+                <template v-for="val in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']">
                   <b-radio v-model="variation" :native-value="val">{{val}}</b-radio>
                 </template>
               </div>
