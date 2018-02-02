@@ -58,7 +58,7 @@ class ShogiPlayer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      current_turn: this.props.turn_start,
+      current_turn: this.props.start_turn,
     }
   }
 
@@ -104,7 +104,7 @@ class ShogiPlayer extends React.Component {
 
 ShogiPlayer.defaultProps = {
   kifu_body: "position startpos",
-  turn_start: 0,
+  start_turn: 0,
 }
 
 export default ShogiPlayer

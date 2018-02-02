@@ -41,7 +41,7 @@
     class App extends React.Component {
       render() {
         return (
-          <ShogiPlayer kifu_body='position startpos moves 7g7f 8c8d' turn_start="9" />
+          <ShogiPlayer kifu_body='position startpos moves 7g7f 8c8d' start_turn="9" />
         )
       }
     }

@@ -98,7 +98,7 @@
       <p>mediator.normalized_turn:{{mediator.normalized_turn}}</p>
     </template>
     <p>
-      turn_start:{{turn_start}}
+      start_turn:{{start_turn}}
       current_turn:{{current_turn}}
       read_counter:{{read_counter}}
       interval_id:{{interval_id}}
@@ -149,7 +149,7 @@ export default {
     kifu_url:           { type: String,  default: null,                                                                                  },
     polling_interval:   { type: Number,  default: 0,                                                                                     },
     last_after_polling: { type: Boolean, default: true,                                                                                  },
-    turn_start:         { type: Number,  default: -1,                                                                                    },
+    start_turn:         { type: Number,  default: -1,                                                                                    },
     slider_show:        { type: Boolean, default: false,                                                                                 },
     controller_show:    { type: Boolean, default: false,                                                                                 },
     sfen_show:          { type: Boolean, default: false,                                                                                 },
@@ -170,7 +170,7 @@ export default {
 
   data() {
     return {
-      current_turn: this.turn_start, // N手目
+      current_turn: this.start_turn, // N手目
       turn_edit_value: null,         // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,                // 局面管理
       board_turn: false,             // 反転したか？
@@ -197,8 +197,8 @@ export default {
     turn_edit_value: function () {
       this.current_turn = this.turn_edit_value
     },
-    turn_start: function () {
-      this.current_turn = this.turn_start
+    start_turn: function () {
+      this.current_turn = this.start_turn
     },
 
     /* eslint-disable */

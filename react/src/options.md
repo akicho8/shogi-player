@@ -4,7 +4,7 @@
 | kifu_url                   | 棋譜ファイルURL             |                                                      | null                |
 | polling_interval           | ポーリング間隔(秒)          | 30 なら30秒間隔で kifu_url を読み直す                | null                |
 | last_after_polling | ポーリング後に最終手に移動  |                                                      | true                |
-| turn_start                 | N手目                       | 例 0:初手 3:3手目 -1:最終手 -2:投了一手前            | 0                   |
+| start_turn                 | N手目                       | 例 0:初手 3:3手目 -1:最終手 -2:投了一手前            | 0                   |
 | slider_show                | スライダーを表示する        |                                                      | false               |
 | controller_show            | 操作用のボタン類を表示する  |                                                      | false               |
 | sfen_show                  | 下に sfen 表記を表示        | 主に局面ペディア用                                   | false               |
