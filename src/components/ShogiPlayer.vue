@@ -149,7 +149,7 @@ export default {
     kifu_url:           { type: String,  default: null,                                                                                  },
     polling_interval:   { type: Number,  default: 0,                                                                                     },
     last_after_polling: { type: Boolean, default: true,                                                                                  },
-    turn_start:         { type: Number,  default: 0,                                                                                     },
+    turn_start:         { type: Number,  default: -1,                                                                                    },
     slider_show:        { type: Boolean, default: false,                                                                                 },
     controller_show:    { type: Boolean, default: false,                                                                                 },
     sfen_show:          { type: Boolean, default: false,                                                                                 },
