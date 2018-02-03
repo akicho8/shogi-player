@@ -322,7 +322,9 @@
           </section>
         </div>
       </div>
-      <div class="content" v-html="options_md"></div>
+      <div class="table_wrap">
+        <div class="content" v-html="options_md"></div>
+      </div>
     </div>
   </section>
 

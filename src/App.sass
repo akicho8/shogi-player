@@ -3,7 +3,7 @@
 .hero
   &.is-primary
     background-color: transparent !important
-  
+
   position: relative
   &:after
     position: absolute
@@ -23,6 +23,13 @@
     // background: hsla(0, 0%, 0%, .1)
     // box-shadow: 0 0 10vmin hsla(0, 0%, 0%, 1.0)
 
+// 基本、英単語の途中でも折り返す
 .content
   word-break: break-all
 
+// オプションの説明がつっぱらないように横スクロールバー表示
+.table_wrap
+  overflow-x: auto
+  table
+    white-space: nowrap
+    margin-bottom: 0px
