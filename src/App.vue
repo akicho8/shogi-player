@@ -348,9 +348,11 @@ import Buefy from 'buefy'
 
 Vue.use(Buefy)
 
-var marked = require('marked')
+const marked = require('marked')
+const renderer = new marked.Renderer()
+renderer.table = (header, body) => '<div class="table_wrap"><table>\n' + '<thead>\n' + header + '</thead>\n' + '<tbody>\n' + body + '</tbody>\n' + '</table></div>\n'
 marked.setOptions({
-  renderer: new marked.Renderer(),
+  renderer: renderer,
   gfm: true,
   tables: true,
   breaks: false,
