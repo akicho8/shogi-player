@@ -292,7 +292,9 @@ export default {
           document.location.hash = this.current_turn
         }
         if (this.update_counter >= 1) {
-          piece_sound.play()
+          if (this.sound_effect) {
+            piece_sound.play()
+          }
         }
         this.update_counter++
       }
