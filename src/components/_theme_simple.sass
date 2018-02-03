@@ -15,11 +15,18 @@
         &.current
           color: $sp-simple-piece-color
           font-weight: bold
+          animation: simple-blink 0.5s ease-in-out infinite alternate
         .span_cell
           &.location_black
             transform: translateY($sp-simple-span-cell-transform-y)
           &.location_white
             transform: rotate(180deg) translateY($sp-simple-span-cell-transform-y)
+
+@keyframes simple-blink
+  0%
+    background: $sp-simple-current-color-bg
+  100%
+    background: $sp-simple-current-color-bg2
 
 @mixin size_define($key, $attrs)
   @media screen and (min-width: 321px) and (max-width: 9999px)

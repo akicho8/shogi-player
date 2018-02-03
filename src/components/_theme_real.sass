@@ -25,6 +25,7 @@
 
           &.current
             background: $sp-real-current-color-bg
+            animation: real-blink 0.5s ease-in-out infinite alternate
           &.origin_point
             background: $sp-real-origin-color-bg
 
@@ -35,19 +36,25 @@
             background-repeat: no-repeat
             @import "piece_map_list"
             @include piece_map_list
-            
+
             // 升目に対しての駒の大きさ
             width:  100%
             height: 100%
-            
+
             // 上下の微調整
             &.location_black
               transform: translateY($sp-real-span-cell-transform-y)
             &.location_white
               transform: translateY($sp-real-span-cell-transform-y * -1)
-            
+
+@keyframes real-blink
+  0%
+    background: $sp-real-current-color-bg
+  100%
+    background: $sp-real-current-color-bg2
+
 //////////////////////////////////////////////////////////////////////////////// size
-              
+
 @mixin size_define($key, $size)
   @media screen and (min-width: 321px) and (max-width: 9999px)
     .shogi-player
