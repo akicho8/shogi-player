@@ -103,6 +103,7 @@
       read_counter:{{read_counter}}
       interval_id:{{interval_id}}
       key_event_capture:{{key_event_capture}}
+      update_counter:{{update_counter}}
     </p>
   </template>
 </div>
@@ -114,6 +115,7 @@ import axios from "axios"
 import Vue from 'vue'
 
 import { Mediator } from "../mediator"
+import { Sound } from '../sound'
 import PieceStand from "./PieceStand"
 
 // To use lodash's _ in the vue template
@@ -139,6 +141,8 @@ require('axios-debug-log')({
 
 const logger_debug = require('debug')('debug')
 
+const piece_sound = new Sound("../static/piece_sound.wav")
+
 /* eslint-disable no-new */
 export default {
   name: 'ShogiPlayer',
@@ -153,6 +157,7 @@ export default {
     slider_show:        { type: Boolean, default: false,                                                                                 },
     controller_show:    { type: Boolean, default: false,                                                                                 },
     sfen_show:          { type: Boolean, default: false,                                                                                 },
+    sound_effect:       { type: Boolean, default: false,                                                                                 },
     key_event_capture:  { type: Boolean, default: false                                                                                  },
     url_embed_turn:     { type: Boolean, default: false,                                                                                 },
     shift_key_mag:      { type: Number,  default: 10,                                                                                    },
@@ -180,18 +185,19 @@ export default {
       error_message: null,
       interval_id: null,
       read_counter: 0,
+      update_counter: 0,
     }
   },
 
   created() {
     this.kifu_read()
     this.polling_interval_update()
-    this.mediator_update()
     document.addEventListener("keydown", this.keyboard_operation)
   },
 
   watch: {
     current_turn: function () {
+      this.log("mediator_update from current_turn")
       this.mediator_update()
     },
     turn_edit_value: function () {
@@ -205,6 +211,7 @@ export default {
     kifu_url:  function () { this.kifu_read() },
     kifu_body: function () { this.kifu_read() },
     loaded_kifu: function () {
+      this.log("mediator_update from loaded_kifu")
       this.mediator_update()
     },
     polling_interval: function () { this.polling_interval_update() },
@@ -284,6 +291,10 @@ export default {
         if (this.url_embed_turn) {
           document.location.hash = this.current_turn
         }
+        if (this.update_counter >= 1) {
+          piece_sound.play()
+        }
+        this.update_counter++
       }
     },
 

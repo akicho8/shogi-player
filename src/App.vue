@@ -99,7 +99,7 @@
             <div class="column">
               <article class="message is-info has-text-centered">
                 <div class="message-body">
-                  コメント付きの KIF 表示。9手目から表示。テーマ:real
+                  コメント付きの KIF 表示。9手目から表示。テーマ:real。駒音あり
                 </div>
               </article>
               <h3 class="title yumincho">藤井聡太四段 vs 佐藤天彦名人</h3>
@@ -107,7 +107,7 @@
                 <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
               </p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_sample1" :start_turn="9" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :debug_mode="false" />
+              <ShogiPlayer :kifu_body="kif_sample1" :start_turn="9" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :debug_mode="false" />
             </div>
           </div>
           <br>
@@ -240,6 +240,7 @@
             :slider_show="slider_show"
             :controller_show="controller_show"
             :sfen_show="sfen_show"
+            :sound_effect="sound_effect"
             />
         </div>
       </div>
@@ -292,6 +293,9 @@
             <b-field label="sfen_show">
               <b-switch v-model="sfen_show" />
             </b-field>
+            <b-field label="sound_effect">
+              <b-switch v-model="sound_effect" />
+            </b-field>
             <b-field label="key_event_capture">
               <b-switch v-model="key_event_capture" />
             </b-field>
@@ -315,6 +319,7 @@
                 :<b>slider_show</b>="{{slider_show}}"
                 :<b>controller_show</b>="{{controller_show}}"
                 :<b>sfen_show</b>="{{sfen_show}}"
+                :<b>sound_effect</b>="{{sound_effect}}"
                 :<b>key_event_capture</b>="{{key_event_capture}}"
                 :<b>debug_mode</b>="{{debug_mode}}"
                 :<b>kifu_body</b>="'{{kifu_body}}'"
@@ -382,6 +387,7 @@ export default {
       slider_show: false,
       controller_show: false,
       sfen_show: false,
+      sound_effect: false,
       key_event_capture: false,
       debug_mode: false,
       kifu_body: "position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+",

@@ -51,3 +51,6 @@ https://www.beiz.jp/
 
 ぱくたそ-フリー素材・無料写真ダウンロード
 https://www.pakutaso.com/
+
+しんえれ外部駒
+http://shineleckoma.web.fc2.com/
