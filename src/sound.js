@@ -6,6 +6,10 @@ class Sound {
     this.url = url
     this.buffer = null
 
+    if (process.env.NODE_ENV === "test") {
+      return
+    }
+
     window.AudioContext = window.AudioContext || window.webkitAudioContext
     this.audio = new AudioContext()
     this.__resource_load()

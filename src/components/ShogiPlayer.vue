@@ -141,7 +141,6 @@ require('axios-debug-log')({
 
 const logger_debug = require('debug')('debug')
 
-// const piece_sound = new Sound("../static/piece_sound.wav")
 const piece_sound = new Sound(require("../assets/piece_sound.wav"))
 
 /* eslint-disable no-new */
@@ -294,7 +293,9 @@ export default {
         }
         if (this.update_counter >= 1) {
           if (this.sound_effect) {
-            piece_sound.play()
+            if (piece_sound) {
+              piece_sound.play()
+            }
           }
         }
         this.update_counter++
