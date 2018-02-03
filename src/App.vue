@@ -107,7 +107,7 @@
                 <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
               </p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_sample2" :start_turn="9" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'"  :debug_mode="false" />
+              <ShogiPlayer :kifu_body="kif_sample1" :start_turn="9" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :debug_mode="false" />
             </div>
           </div>
           <br>
@@ -152,7 +152,7 @@
               <h3 class="title yumincho">藤井聡太四段 vs 澤田真吾六段</h3>
               <p class="subtitle yumincho">第43期棋王戦予選</p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_sample1" :start_turn="121" :controller_show="true" :slider_show="true" />
+              <ShogiPlayer :kifu_body="kif_sample2" :start_turn="121" :controller_show="true" :slider_show="true" />
             </div>
 
             <div class="column">
@@ -263,10 +263,12 @@
 
             <b-field label="size">
               <div class="block">
+                <b-radio v-model="size" native-value="x-small">x-small</b-radio>
                 <b-radio v-model="size" native-value="small">small</b-radio>
                 <b-radio v-model="size" native-value="default">default</b-radio>
                 <b-radio v-model="size" native-value="medium">medium</b-radio>
                 <b-radio v-model="size" native-value="large">large</b-radio>
+                <b-radio v-model="size" native-value="x-large">x-large</b-radio>
               </div>
             </b-field>
 
@@ -384,8 +386,8 @@ export default {
       debug_mode: false,
       kifu_body: "position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+",
 
-      kif_sample1: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
-      kif_sample2: require("./第11回朝日杯将棋オープン戦本戦.kif"),
+      kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
+      kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
       usage_md: marked(require('./usage.md')),
       options_md: marked(require('./options.md')),
     }

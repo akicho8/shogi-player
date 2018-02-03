@@ -158,7 +158,7 @@ export default {
     shift_key_mag:      { type: Number,  default: 10,                                                                                    },
     system_key_mag:     { type: Number,  default: 50,                                                                                    },
     theme:              { type: String,  default: "simple",  validator(v) { return ['none', 'simple', 'real'].includes(v) }         },
-    size:               { type: String,  default: "default", validator(v) { return ['none', 'small', 'default', 'medium', 'large'].includes(v) } },
+    size:               { type: String,  default: "default", validator(v) { return ['none', 'x-small', 'small', 'default', 'medium', 'large', 'x-large'].includes(v) } },
     variation:          { type: String,  default: "a"                                                                                    },
     debug_mode:         { type: Boolean, default: false,                                                                                 }, // process.env.NODE_ENV !== 'production'
   },

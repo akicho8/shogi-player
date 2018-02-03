@@ -1,22 +1,3 @@
-@mixin size_define($key, $attrs)
-  .shogi-player
-    &.theme-simple
-      &.size-#{$key}
-        .board-outer
-          .board-inner
-            td
-              width:  map-get($attrs, td-size)
-              height: map-get($attrs, td-size)
-              font-size: map-get($attrs, font-size)
-        .piece_stand
-          li
-            font-size: map-get($attrs, font-size)
-
-@include size_define(small,   $sp-simple-cell-size-small)
-@include size_define(default, $sp-simple-cell-size-default)
-@include size_define(medium,  $sp-simple-cell-size-medium)
-@include size_define(large,   $sp-simple-cell-size-large)
-
 .shogi-player
   &.theme-simple
     .board-inner
@@ -35,8 +16,28 @@
           color: $sp-simple-piece-color
           font-weight: bold
         .span_cell
-          display: inline-block
           &.location_black
             transform: translateY($sp-simple-span-cell-transform-y)
           &.location_white
             transform: rotate(180deg) translateY($sp-simple-span-cell-transform-y)
+
+@mixin size_define($key, $attrs)
+  @media screen and (min-width: 321px) and (max-width: 9999px)
+    .shogi-player
+      &.theme-simple
+        &.size-#{$key}
+          .board-outer
+            .board-inner
+              td
+                width:  map-get($attrs, td-size)
+                height: map-get($attrs, td-size)
+                font-size: map-get($attrs, font-size)
+          .piece_stand
+            li
+              font-size: map-get($attrs, font-size)
+@include size_define(x-small,   $sp-simple-cell-size-x-small)
+@include size_define(small,     $sp-simple-cell-size-small)
+@include size_define(default,   $sp-simple-cell-size-default)
+@include size_define(medium,    $sp-simple-cell-size-medium)
+@include size_define(large,     $sp-simple-cell-size-large)
+@include size_define(x-large,   $sp-simple-cell-size-x-large)

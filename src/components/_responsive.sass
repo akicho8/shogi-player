@@ -1,8 +1,10 @@
-@media (max-width: 768px)
+@media screen and (max-width: 320px)
   .shogi-player
-    .board-inner
-      width: 70vmin
-      height: 70vmin
-      td
+    .board-outer
+      .board-inner
         .span_cell
-          font-size: 200%
+          padding: 0 0.75vmin
+          &.location_black
+            transform: translateY(0)
+          &.location_white
+            transform: rotate(180deg) translateY(0)
