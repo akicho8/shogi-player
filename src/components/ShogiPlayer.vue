@@ -66,6 +66,10 @@
       <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" class="slider" />
     </template>
 
+    <div class="sfen_area is-size-7 has-text-grey" v-if="sfen_show">
+      {{mediator.to_sfen}}
+    </div>
+
     <div class="comment_area" v-if="mediator.any_parser.comments_pack">
       <template v-if="mediator.current_comments">
         <div class="columns">
@@ -84,10 +88,6 @@
         </div>
       </template>
     </div>
-
-    <p class="is-size-7 has-text-grey" v-if="sfen_show">
-      {{mediator.to_sfen}}
-    </p>
   </template>
 
   <template v-if="debug_mode">
