@@ -2,6 +2,8 @@
 // piece_sound.options[:volume] = 0.2
 // piece_sound.play()
 
+import axios from "axios"
+
 class Sound {
   constructor(url, options = {}) {
     this.url = url
@@ -48,19 +50,24 @@ class Sound {
   }
 
   __resource_load() {
-    const req = new XMLHttpRequest()
-    req.responseType = "arraybuffer"
-    req.onreadystatechange = () => {
-      if (req.readyState === 4) {
-        if (req.status === 0 || req.status === 200) {
-          this.audio.decodeAudioData(req.response, (buffer) => {
-            this.buffer = buffer
-          })
+    if (false) {
+      axios(this.uri, {responseType: "arraybuffer"})
+        .then((data) => { this.context.decodeAudioData(data) }).then((buffer) => { this.buffer = buffer })
+    } else {
+      const req = new XMLHttpRequest()
+      req.responseType = "arraybuffer"
+      req.onreadystatechange = () => {
+        if (req.readyState === 4) {
+          if (req.status === 0 || req.status === 200) {
+            this.audio.decodeAudioData(req.response, (buffer) => {
+              this.buffer = buffer
+            })
+          }
         }
       }
+      req.open("GET", this.url, true)
+      req.send("")
     }
-    req.open("GET", this.url, true)
-    req.send("")
   }
 }
 
