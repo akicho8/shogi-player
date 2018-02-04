@@ -318,6 +318,7 @@ export default {
         this.log("e", e)
         this.log("key", e.key)
         this.log("code", e.code)
+        this.log("repeat", e.repeat)
       }
 
       if (!this.key_event_capture) {
