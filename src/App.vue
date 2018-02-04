@@ -241,6 +241,7 @@
             :controller_show="controller_show"
             :sfen_show="sfen_show"
             :sound_effect="sound_effect"
+            :volume="volume"
             />
         </div>
       </div>
@@ -296,6 +297,11 @@
             <b-field label="sound_effect">
               <b-switch v-model="sound_effect" />
             </b-field>
+            <b-field label="volume">
+              <div class="block">
+                <input v-model.number="volume" type="range" min="0" max="1.0" step="0.01" /> {{volume}}
+              </div>
+            </b-field>
             <b-field label="key_event_capture">
               <b-switch v-model="key_event_capture" />
             </b-field>
@@ -320,6 +326,7 @@
                 :<b>controller_show</b>="{{controller_show}}"
                 :<b>sfen_show</b>="{{sfen_show}}"
                 :<b>sound_effect</b>="{{sound_effect}}"
+                :<b>volume</b>="{{volume}}"
                 :<b>key_event_capture</b>="{{key_event_capture}}"
                 :<b>debug_mode</b>="{{debug_mode}}"
                 :<b>kifu_body</b>="'{{kifu_body}}'"
@@ -388,6 +395,7 @@ export default {
       controller_show: false,
       sfen_show: false,
       sound_effect: false,
+      volume: 0.5,
       key_event_capture: false,
       debug_mode: false,
       kifu_body: "position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+",

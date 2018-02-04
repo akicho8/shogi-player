@@ -141,8 +141,6 @@ require('axios-debug-log')({
 
 const logger_debug = require('debug')('debug')
 
-const piece_sound = new Sound(require("../assets/piece_sound.wav"))
-
 /* eslint-disable no-new */
 export default {
   name: 'ShogiPlayer',
@@ -158,6 +156,7 @@ export default {
     controller_show:    { type: Boolean, default: false,                                                                                 },
     sfen_show:          { type: Boolean, default: false,                                                                                 },
     sound_effect:       { type: Boolean, default: false,                                                                                 },
+    volume:             { type: Number,  default: 0.5,                                                                                   },
     key_event_capture:  { type: Boolean, default: false                                                                                  },
     url_embed_turn:     { type: Boolean, default: false,                                                                                 },
     shift_key_mag:      { type: Number,  default: 10,                                                                                    },
@@ -183,6 +182,7 @@ export default {
       env: process.env.NODE_ENV,
       loaded_kifu: null,
       error_message: null,
+      piece_sound: null,
       interval_id: null,
       read_counter: 0,
       update_counter: 0,
@@ -192,6 +192,7 @@ export default {
   created() {
     this.kifu_read()
     this.polling_interval_update()
+    this.sound_load()
     document.addEventListener("keydown", this.keyboard_operation)
   },
 
@@ -216,6 +217,14 @@ export default {
     },
     polling_interval: function () { this.polling_interval_update() },
     /* eslint-enable */
+
+    sound_effect: function () {
+      this.sound_load()
+    },
+
+    volume: function () {
+      this.sound_load()
+    },
 
     // 引数は親が「変更」したときがトリガー
     debug_mode: function (v) {
@@ -293,8 +302,8 @@ export default {
         }
         if (this.update_counter >= 1) {
           if (this.sound_effect) {
-            if (piece_sound) {
-              piece_sound.play()
+            if (this.piece_sound) {
+              this.piece_sound.play()
             }
           }
         }
@@ -444,6 +453,15 @@ export default {
 
     board_turn_sign() {
       return this.board_turn ? -1 : 1
+    },
+
+    sound_load() {
+      if (this.sound_effect) {
+        if (!this.piece_sound) {
+          this.piece_sound = new Sound(require("../assets/piece_sound.wav"))
+        }
+        this.piece_sound.options["volume"] = this.volume
+      }
     },
 
     log(v) {
