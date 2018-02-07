@@ -250,6 +250,7 @@
           <section>
             <b-field label="theme">
               <div class="block">
+                <b-radio v-model="theme" native-value="none">none</b-radio>
                 <b-radio v-model="theme" native-value="simple">simple</b-radio>
                 <b-radio v-model="theme" native-value="real">real</b-radio>
               </div>
@@ -265,6 +266,7 @@
 
             <b-field label="size">
               <div class="block">
+                <b-radio v-model="size" native-value="none">none</b-radio>
                 <b-radio v-model="size" native-value="x-small">x-small</b-radio>
                 <b-radio v-model="size" native-value="small">small</b-radio>
                 <b-radio v-model="size" native-value="default">default</b-radio>

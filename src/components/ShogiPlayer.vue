@@ -147,24 +147,24 @@ export default {
 
   /* eslint-disable */
   props: {
-    kifu_body:          { type: String,  default: "position startpos",                                                                   },
-    kifu_url:           { type: String,  default: null,                                                                                  },
-    polling_interval:   { type: Number,  default: 0,                                                                                     },
-    last_after_polling: { type: Boolean, default: true,                                                                                  },
-    start_turn:         { type: Number,  default: -1,                                                                                    },
-    slider_show:        { type: Boolean, default: false,                                                                                 },
-    controller_show:    { type: Boolean, default: false,                                                                                 },
-    sfen_show:          { type: Boolean, default: false,                                                                                 },
-    sound_effect:       { type: Boolean, default: false,                                                                                 },
-    volume:             { type: Number,  default: 0.5,                                                                                   },
-    key_event_capture:  { type: Boolean, default: false                                                                                  },
-    url_embed_turn:     { type: Boolean, default: false,                                                                                 },
-    shift_key_mag:      { type: Number,  default: 10,                                                                                    },
-    system_key_mag:     { type: Number,  default: 50,                                                                                    },
-    theme:              { type: String,  default: "simple",  validator(v) { return ['none', 'simple', 'real'].includes(v) }         },
-    size:               { type: String,  default: "default", validator(v) { return ['none', 'x-small', 'small', 'default', 'medium', 'large', 'x-large'].includes(v) } },
-    variation:          { type: String,  default: "a"                                                                                    },
-    debug_mode:         { type: Boolean, default: false,                                                                                 }, // process.env.NODE_ENV !== 'production'
+    kifu_body:          { type: String,  default: "position startpos", },
+    kifu_url:           { type: String,  default: null,                },
+    polling_interval:   { type: Number,  default: 0,                   },
+    last_after_polling: { type: Boolean, default: true,                },
+    start_turn:         { type: Number,  default: -1,                  },
+    slider_show:        { type: Boolean, default: false,               },
+    controller_show:    { type: Boolean, default: false,               },
+    sfen_show:          { type: Boolean, default: false,               },
+    sound_effect:       { type: Boolean, default: false,               },
+    volume:             { type: Number,  default: 0.5,                 },
+    key_event_capture:  { type: Boolean, default: false                },
+    url_embed_turn:     { type: Boolean, default: false,               },
+    shift_key_mag:      { type: Number,  default: 10,                  },
+    system_key_mag:     { type: Number,  default: 50,                  },
+    theme:              { type: String,  default: "simple",            },
+    size:               { type: String,  default: "default",           },
+    variation:          { type: String,  default: "a"                  },
+    debug_mode:         { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
   },
   /* eslint-enable */
 
