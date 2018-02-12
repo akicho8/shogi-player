@@ -87,7 +87,7 @@ class ShogiPlayer extends React.Component {
     return (
       <div className="shogi-player">
         <div>{this.state.current_turn}手目</div>
-        <div className="board-container board_turn">
+        <div className="board-container flippable">
           <PieceStand location_key="white" mediator={mediator} />
           <div className="flex-item board-wrap">
             <table>

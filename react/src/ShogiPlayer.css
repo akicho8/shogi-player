@@ -3,9 +3,9 @@
   font-family: "YuMincho", "Yu Mincho", serif;
   margin: 0 auto;
   text-align: center; }
-  .shogi-player .location_white, .shogi-player .board_turn.turned {
+  .shogi-player .location_white, .shogi-player .flippable.flip {
     transform: rotate(180deg); }
-  .shogi-player .board_turn {
+  .shogi-player .flippable {
     transform: rotate(0deg);
     transition: all 0.2s 0s ease-in-out; }
   .shogi-player .board-container {
@@ -55,16 +55,16 @@
       .shogi-player .board-wrap .overlay_navi.next {
         right: -25%;
         cursor: e-resize; }
-      .shogi-player .board-wrap .overlay_navi.board_turn_area {
+      .shogi-player .board-wrap .overlay_navi.flip_trigger_cell {
         cursor: ns-resize;
         z-index: 2;
         left: 44.44444%;
         width: 11.11111%;
         top: 44.44444%;
         height: 11.11111%; }
-  .shogi-player .turned .overlay_navi.previous {
+  .shogi-player .flip .overlay_navi.previous {
     cursor: e-resize; }
-  .shogi-player .turned .overlay_navi.next {
+  .shogi-player .flip .overlay_navi.next {
     cursor: w-resize; }
   .shogi-player .controller_block {
     margin-top: 1vmin;
@@ -84,5 +84,5 @@
     background: rgba(64, 64, 191, 0.5); }
   .shogi-player.debug .board-wrap .overlay_navi.next {
     background: rgba(191, 64, 64, 0.5); }
-  .shogi-player.debug .board-wrap .overlay_navi.board_turn_area {
+  .shogi-player.debug .board-wrap .overlay_navi.flip_trigger_cell {
     background: rgba(64, 191, 64, 0.5); }

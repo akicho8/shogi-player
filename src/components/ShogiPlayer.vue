@@ -30,12 +30,12 @@
         <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
       </template>
     </div>
-    <div class="board-container board_turn" :class="{turned: board_turn}">
+    <div class="board-container flippable" :class="{flip: flip}">
       <PieceStand :location_key="'white'"/>
       <div class="flex-item board-wrap">
         <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
         <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
-        <div class="overlay_navi board_turn_area" @click="board_turn_run"></div>
+        <div class="overlay_navi flip_trigger_cell" @click="board_flip_run"></div>
         <div class="board-outer">
           <table class="board-inner">
             <tr v-for="y in mediator.dimension">
@@ -58,7 +58,7 @@
         <button ref="previous" class="button previous"   @click.stop="relative_move(-1, $event)">◀</button>
         <button ref="next"     class="button next"       @click.stop="relative_move(+1, $event)">▶</button>
         <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
-        <button                class="button board_turn" @click.stop="board_turn_run">{{board_turn ? '&#x21BA;' : '&#x21BB;'}}</button>
+        <button                class="button flip" @click.stop="board_flip_run">{{flip ? '&#x21BA;' : '&#x21BB;'}}</button>
       </div>
     </template>
 
@@ -177,7 +177,7 @@ export default {
       current_turn: this.start_turn, // N手目
       turn_edit_value: null,         // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,                // 局面管理
-      board_turn: false,             // 反転したか？
+      flip: false,                   // 反転したか？
       turn_edit: false,              // N手目編集中
       env: process.env.NODE_ENV,
       loaded_kifu: null,
@@ -389,7 +389,7 @@ export default {
     },
 
     navi_relative_move(v, event) {
-      this.relative_move(v * this.board_turn_sign(), event)
+      this.relative_move(v * this.flip_sign(), event)
     },
 
     relative_move(v, event = null) {
@@ -441,8 +441,8 @@ export default {
       return false
     },
 
-    board_turn_run() {
-      this.board_turn = !this.board_turn
+    board_flip_run() {
+      this.flip = !this.flip
       this.focus_to("slider")
     },
 
@@ -452,8 +452,8 @@ export default {
       this.$nextTick(() => this.$refs.turn_edit_input.focus())
     },
 
-    board_turn_sign() {
-      return this.board_turn ? -1 : 1
+    flip_sign() {
+      return this.flip ? -1 : 1
     },
 
     sound_load() {
