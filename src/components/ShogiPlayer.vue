@@ -40,7 +40,7 @@
           <table class="board-inner">
             <tr v-for="y in mediator.dimension">
               <template v-for="x in mediator.dimension">
-                <td class="td_cell" :class="mediator.cell_class(x -1, y - 1)">
+                <td class="td_cell" :class="mediator.cell_class(x - 1, y - 1)">
                   <span class="span_cell" :class="mediator.cell_class(x - 1, y - 1)">
                     {{mediator.cell_view(x - 1, y - 1)}}
                   </span>
