@@ -418,4 +418,9 @@ export default {
 <style lang="sass">
 @import "./App"
 @import "buefy/lib/buefy.css"
+
+// ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
+// main.js で読み込むと .sass のファイル基準になる
+// @import "./components/ShogiPlayer.sass"
+
 </style>
