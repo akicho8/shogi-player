@@ -16,6 +16,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "build:clean": "rimraf dist docs",
     "build": "npm run build:clean && node build/build.js && rsync -avzu --delete dist/ docs/",
+    "release": "npm version patch && npm publish",
     "deploy": "npm run build && git add -A && git commit -m '[chore] npm run build for deploy' && git push && git push --tags"
   },
   "dependencies": {
