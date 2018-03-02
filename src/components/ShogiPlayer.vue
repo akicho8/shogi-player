@@ -118,6 +118,8 @@ import { Mediator } from "../mediator"
 import { Sound } from '../sound'
 import PieceStand from "./PieceStand"
 
+import piece_sound_wav from "../assets/piece_sound.wav"
+
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
 
@@ -459,7 +461,7 @@ export default {
     sound_load() {
       if (this.sound_effect) {
         if (!this.piece_sound) {
-          this.piece_sound = new Sound(require("../assets/piece_sound.wav"))
+          this.piece_sound = new Sound(piece_sound_wav)
         }
         this.piece_sound.options["volume"] = this.volume
       }
