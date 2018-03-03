@@ -4,6 +4,14 @@
 
 import axios from "axios"
 
+var __audio_context__
+
+// new Sound() のたびに new AudioContext() すると6回目ぐらいでエラーになるため根本的な解決にはなっていないが外で一回だけ呼ぶ
+if (typeof window !== "undefined") {
+  window.AudioContext = window.AudioContext || window.webkitAudioContext
+  __audio_context__ = new AudioContext()
+}
+
 class Sound {
   constructor(url, options = {}) {
     this.url = url
@@ -14,24 +22,22 @@ class Sound {
       return
     }
 
-    window.AudioContext = window.AudioContext || window.webkitAudioContext
-    this.audio = new AudioContext()
     this.__resource_load()
   }
 
   play() {
     if (this.is_loaded) {
-      const source = this.audio.createBufferSource()
+      const source = __audio_context__.createBufferSource()
       source.buffer = this.buffer
       if (true) {
         // Sound -> GainNode -> Destination
-        const gain_node = this.audio.createGain()
+        const gain_node = __audio_context__.createGain()
         source.connect(gain_node)
-        gain_node.connect(this.audio.destination)
+        gain_node.connect(__audio_context__.destination)
         gain_node.gain.value = this.volume
       } else {
         // Sound -> Destination
-        source.connect(this.audio.destination)
+        source.connect(__audio_context__.destination)
       }
       source.start(0)
     }
@@ -59,7 +65,7 @@ class Sound {
       req.onreadystatechange = () => {
         if (req.readyState === 4) {
           if (req.status === 0 || req.status === 200) {
-            this.audio.decodeAudioData(req.response, (buffer) => {
+            __audio_context__.decodeAudioData(req.response, (buffer) => {
               this.buffer = buffer
             })
           }
