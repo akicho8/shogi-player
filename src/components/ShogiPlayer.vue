@@ -243,8 +243,19 @@ export default {
       }
       this.read_counter++
       this.log(`read_counter: ${this.read_counter}`)
-      if (polling) {
-        if (this.last_after_polling) {
+      if (false) {
+        if (polling) {
+          if (this.last_after_polling) {
+            this.current_turn = -1
+          }
+        } else {
+          if (this.start_turn === -1) {
+            this.current_turn = -1
+          }
+        }
+      } else {
+        // 最後の局面を指定して欲しいときは棋譜を更新しても最後に移動する
+        if (this.start_turn === -1) {
           this.current_turn = -1
         }
       }
