@@ -7,7 +7,7 @@ import axios from "axios"
 var __audio_context__
 
 // new Sound() のたびに new AudioContext() すると6回目ぐらいでエラーになるため根本的な解決にはなっていないが外で一回だけ呼ぶ
-if (typeof window !== "undefined") {
+if (typeof window !== "undefined" && process.env.NODE_ENV !== "test") {
   window.AudioContext = window.AudioContext || window.webkitAudioContext
   __audio_context__ = new AudioContext()
 }
