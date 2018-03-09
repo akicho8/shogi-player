@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+      .hold_pieces {
+        height: 3vmin;
+      }
+      td {
+        text-align: center;
+        font-size: 2.5vmin;
+        width:  3vmin;
+        height: 3vmin;
+      }
+      .active {
+        background: red;
+      }
+      .white {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="false">
+        <label><input type="radio" v-model="current_player" value="black" />black</label>
+        <label><input type="radio" v-model="current_player" value="white" />white</label>
+      </div>
+      <div>
+        <input type="number" v-model.number="turn_index" />{{current_player}}
+      </div>
+      <table border="1" class="hold_pieces white">
+        <tr>
+          <template v-for="(count, piece) in hold_pieces.white">
+            <td @click="hold_piece_click('white', piece, $event)">
+              {{piece}}{{count}}
+            </td>
+          </template>
+        </tr>
+      </table>
+      <table border="1">
+        <tr v-for="y in dimension">
+          <template v-for="x in dimension">
+            <td @click="board_click([x - 1, y - 1], $event)" @mouseover="mouse_over_func" :class="cell_class([x - 1, y - 1])">
+              {{cell_str([x - 1, y - 1])}}
+            </td>
+          </template>
+        </tr>
+      </table>
+      <table border="1" class="hold_pieces black">
+        <tr>
+          <template v-for="(count, piece) in hold_pieces.black">
+            <td @click="hold_piece_click('black', piece, $event)">
+              {{piece}}{{count}}
+            </td>
+          </template>
+        </tr>
+      </table>
+      place_from:{{place_from}}
+      hold_pieces:{{hold_pieces}}
+      have_piece:{{have_piece}}
+      current_player:{{current_player}}
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
