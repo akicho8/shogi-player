@@ -84,7 +84,7 @@ class SfenParser extends ParserBase {
       const md = XRegExp.exec(e, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
       attrs["promoted_trigger"] = (md.promoted === "+")
       if (md["origin_y"] === "*") {
-        attrs["stroke_piece"] = Piece.fetch(md["origin_x"])
+        attrs["drop_piece"] = Piece.fetch(md["origin_x"])
       } else {
         attrs["origin_point"] = Point.fetch(`${md["origin_x"]}${md["origin_y"]}`)
       }

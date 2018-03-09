@@ -41,9 +41,9 @@ class Mediator {
     _(num).times((i) => {
       const m = move_infos[i]
       this.move_info = m
-      if (m.stroke_piece) {
+      if (m.drop_piece) {
         const battler = new Battler({
-          piece: m.stroke_piece,
+          piece: m.drop_piece,
           point: m.point,
           promoted: m.promoted,
           location: m.location,

@@ -52,7 +52,7 @@ class KifParser extends ParserBase {
           attrs["promoted_trigger"] = true
         }
         if (md["motion"] === "打") {
-          attrs["stroke_piece"] = Piece.kif_lookup(md["piece"])
+          attrs["drop_piece"] = Piece.kif_lookup(md["piece"])
         }
         this.move_infos.push(attrs)
       } else {
