@@ -49,14 +49,15 @@ const vm = new Vue({
         "8,6": {piece: "歩", location: "black"},
       },
       hold_pieces: {
-        black: {},
-        white: {},
+        black: {"歩": 2},
+        white: {"歩": 2},
       },
       have_piece: null,
-      turn_index: 0,
+      turn_counter: 0,
+      edit_mode: false,
       rules: {
-        rule1: false, // 相手の駒を持ち上げれないようにする
-        rule2: false, // 自分の駒の上に重ねたら持ってない状態にする
+        rule1: false, // 自分の手番で相手の駒を持ち上げれないようにする
+        rule2: true, // 自分の駒の上に重ねたら持ってない状態にする(falseなら自分の駒で自分の駒をとれる)
       },
     }
   },
@@ -82,109 +83,127 @@ const vm = new Vue({
 
     // 駒台をクリック
     hold_piece_click: function(location, piece, e) {
-      if (this.motteiru()) {
-        this.mottenaijoutainisuru()
+      // 持っているならキャンセル
+      if (this.motteiru) {
+        this.state_reset()
         return
       }
 
-      // 持駒があれば持ち上げる
-      const count = (this.hold_pieces[location][piece] || 0)
-      if (count >= 1) {
-        this.have_piece = piece
-        e.target.classList.add("active")
-        this.from_dom = e.target
+      // 相手の持駒を持とうとしたときは無効
+      if (!this.motteiru && this.rules["rule1"] && location !== this.current_player) {
+        return
+      }
+
+      // 盤上の駒を駒台に置く
+      if (this.edit_mode && this.origin_soldier) {
+        const count = (this.hold_pieces[location][this.origin_soldier.piece] || 0) + 1
+        Vue.set(this.hold_pieces[location], this.origin_soldier.piece, count)
+        Vue.set(this.board, this.place_from, null)      // 元の位置を消す
+        this.state_reset()
+        this.turn_next()
+        return
+      }
+
+      if (_.isNil(this.hold_piece)) {
+        // 持駒があれば持ち上げる
+        const count = (this.hold_pieces[location][piece] || 0)
+        if (count >= 1) {
+          this.have_piece = piece
+          e.target.classList.add("active")
+          this.from_dom = e.target
+        }
       }
     },
 
     // 盤をクリック
     board_click: function(place, e) {
-      if (_.isNil(this.have_piece)) {
-        // 持駒を持ちあげてない状態
+      const soldier = this.board[place]
 
-        if (_.isNil(this.place_from)) {
-          // 盤上の駒を持ちあげる
-          const soldier = this.board[place]
-          if (soldier) {
-            if (this.rules["rule1"] && soldier.location !== this.current_player) {
-              return
-            }
-            // 盤面の駒を持ち上げる
-            this.banmenno_koma_mochiageru(place, e)
-          } else {
-            // 盤面になにもないところをクリック
-          }
-        } else {
-          // 盤上の駒を移動
-          if (this.place_from === place) {
-            // 持ってから同じところに戻した
-            this.mottenaijoutainisuru()
-          } else {
-            const soldier = this.board[place]
+      //////////////////////////////////////////////////////////////////////////////// Validation
 
-            // 持ってから別のところに置いた
+      // 自分の手番で相手の駒を持ち上げようとしたので無効とする
+      if (!this.motteiru && this.rules["rule1"] && soldier && soldier.location !== this.current_player) {
+        return
+      }
 
-            // 自分の駒の上に重ねたら持ってない状態にする
-            if (this.rules["rule2"] && soldier && soldier.location === this.current_player) {
-              this.mottenaijoutainisuru()
-              return
-            }
+      // 持たずに何もないところをクリックしたので無効とする
+      if (!this.motteiru && !soldier) {
+        return
+      }
 
-            // 相手の駒があれば取って持駒とする
-            if (soldier) {
-              // 相手の駒を取った
-              const count = (this.hold_pieces[this.current_player][soldier.piece] || 0) + 1
-              Vue.set(this.hold_pieces[this.current_player], soldier.piece, count)
-            }
+      // 自分の駒の上に駒を重ねようとしたので状況キャンセル
+      if (this.jibun_no_komanoueni_kasaneta(soldier)) {
+        this.state_reset()
+        return
+      }
 
-            Vue.set(this.board, place, this.board[this.place_from]) // 移動
-            Vue.set(this.board, this.place_from, null)          // 元の位置を消す
+      // 盤上の駒を持って同じ位置に戻したので状況キャンセル
+      if (_.isEqual(this.place_from, place)) {
+        this.state_reset()
+        return
+      }
 
-            this.mottenaijoutainisuru()
-            this.next_turn()
-          }
-        }
-      } else {
-        // 持駒を持ちあげている状態
+      ////////////////////////////////////////////////////////////////////////////////
 
-        const soldier = this.board[place]
-        if (soldier && soldier.location === this.current_player) {
-          // 自分の駒の上に重ねたら持ってない状態にする
-          this.mottenaijoutainisuru()
-          // this.banmenno_koma_mochiageru(place, e)
-          return
-        }
+      // 盤上の駒を持ちあげる
+      if (!this.motteiru) {
+        this.soldier_hold(place, e)
+        return
+      }
 
-        if (soldier) {
-          // 駒台の駒を相手の駒の上に置いたらキャンセル
-          this.mottenaijoutainisuru()
-          return
-        }
+      // 置く
+      if (this.place_from) {
+        this.piece_capture(soldier)                     // 相手の駒があれば取る
+        Vue.set(this.board, place, this.origin_soldier) // 移動
+        Vue.set(this.board, this.place_from, null)      // 元の位置を消す
+        this.state_reset()
+        this.turn_next()
+        return
+      }
 
-        // 置く
-        Vue.set(this.board, place, {piece: this.have_piece, location: this.current_player})
+      // 持駒を置く
+      if (this.have_piece) {
+        const soldier = {piece: this.have_piece, location: this.current_player}
+        Vue.set(this.board, place, soldier) // 置く
+        this.mochigoma_herasu()             // 持駒を減らす
+        this.state_reset()
+        this.turn_next()
+        return
+      }
 
-        // 持駒を減らす
-        const count = (this.hold_pieces[this.current_player][this.have_piece] || 0) - 1
-        Vue.set(this.hold_pieces[this.current_player], this.have_piece, count)
-        if (count <= 0) {
-          // 要素が0になるキーは削除する
-          delete this.hold_pieces[this.current_player][this.have_piece]
-        }
+      throw new Error("must not happen")
+    },
 
-        // 持ってない状態にする
-        this.mottenaijoutainisuru()
-        this.next_turn()
+    // 持駒減らす
+    mochigoma_herasu: function() {
+      const count = (this.hold_pieces[this.current_player][this.have_piece] || 0) - 1
+      Vue.set(this.hold_pieces[this.current_player], this.have_piece, count)
+      if (count <= 0) {
+        delete this.hold_pieces[this.current_player][this.have_piece] // 要素が0になるキーは削除
       }
     },
 
-    banmenno_koma_mochiageru: function(place, e) {
-      // 盤面の駒を持ち上げる
+    // 自分の駒の上に重ねた？
+    jibun_no_komanoueni_kasaneta: function(soldier) {
+      return this.motteiru && this.rules["rule2"] && soldier && soldier.location === this.current_player
+    },
+
+    // 駒があれば持駒とする
+    piece_capture: function(soldier) {
+      if (soldier) {
+        const count = (this.hold_pieces[soldier.location][soldier.piece] || 0) + 1
+        Vue.set(this.hold_pieces[this.current_player], soldier.piece, count)
+      }
+    },
+
+    // 盤面の駒を持ち上げる
+    soldier_hold: function(place, e) {
       this.place_from = place
       this.from_dom = e.target
       e.target.classList.add("active")
     },
 
-    mottenaijoutainisuru: function() {
+    state_reset: function() {
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       if (this.from_dom) {
@@ -193,19 +212,35 @@ const vm = new Vue({
       }
     },
 
-    motteiru: function() {
-      return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
+    turn_next: function() {
+      this.turn_counter += 1
     },
 
-    next_turn: function() {
-      this.turn_index += 1
+    location_flip: function(location) {
+      return location === "black" ? "white" : "black"
+    },
+
+    current_player_diff: function(diff) {
+      const locatios = ["black", "white"]
+      return locatios[(this.turn_counter + diff) % locatios.length]
     },
   },
 
   computed: {
     current_player: function() {
-      const locatios = ["black", "white"]
-      return locatios[this.turn_index % locatios.length]
-    }
+      return this.current_player_diff(0)
+    },
+
+    opponent_player: function() {
+      return this.current_player_diff(1)
+    },
+
+    origin_soldier: function() {
+      return this.board[this.place_from]
+    },
+
+    motteiru: function() {
+      return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
+    },
   },
 })
