@@ -3,9 +3,9 @@ import _ from "lodash"
 import { SfenParser } from "./sfen_parser"
 import { KifParser } from "./kif_parser"
 import { Board } from "./board"
-import { Point } from "./point"
+import { Place } from "./place"
 import { Piece } from "./piece"
-import { Battler } from "./battler"
+import { Soldier } from "./soldier"
 import { SfenSerializer } from "./sfen_serializer"
 import Autolinker from 'autolinker'
 
@@ -42,85 +42,86 @@ class Mediator {
       const m = move_infos[i]
       this.move_info = m
       if (m.drop_piece) {
-        const battler = new Battler({
+        const soldier = new Soldier({
           piece: m.drop_piece,
-          point: m.point,
+          place: m.place,
           promoted: m.promoted,
           location: m.location,
         })
-        {
-          const count = this.hold_pieces.get(m.location.key).get(battler.piece.key) - 1
+        if (true) {
+          const count = this.hold_pieces.get(m.location.key).get(soldier.piece.key) - 1
           if (count >= 1) {
-            this.hold_pieces.get(m.location.key).set(battler.piece.key, count)
+            this.hold_pieces.get(m.location.key).set(soldier.piece.key, count)
           } else {
-            this.hold_pieces.get(m.location.key).delete(battler.piece.key)
+            this.hold_pieces.get(m.location.key).delete(soldier.piece.key)
           }
         }
-        this.current_field.set(battler.point.key, battler)
+        this.current_field.set(soldier.place.key, soldier)
       } else {
         {
-          const battler = this.current_field.get(m.point.key)
-          if (battler) {
-            if (this.hold_pieces.get(m.location.key) === undefined) {
+          const soldier = this.current_field.get(m.place.key)
+          if (soldier) {
+            if (_.isNil(this.hold_pieces.get(m.location.key))) {
               this.hold_pieces.set(m.location_key, new Map())
             }
-            const count = (this.hold_pieces.get(m.location.key).get(battler.piece.key) || 0) + 1
-            this.hold_pieces.get(m.location.key).set(battler.piece.key, count)
+            const count = (this.hold_pieces.get(m.location.key).get(soldier.piece.key) || 0) + 1
+            this.hold_pieces.get(m.location.key).set(soldier.piece.key, count)
           }
         }
-        const battler = this.current_field.get(m.origin_point.key)
+        const soldier = this.current_field.get(m.origin_place.key)
         if (m.promoted_trigger) {
-          battler.promoted = true
+          soldier.promoted = true
         }
-        this.current_field.delete(m.origin_point.key)
-        this.current_field.set(m.point.key, battler)
+        this.current_field.delete(m.origin_place.key)
+        this.current_field.set(m.place.key, soldier)
       }
     })
   }
 
-  cell_lookup(x, y) {
-    return this.current_field.get(Point.fetch([x, y]).key)
+  cell_lookup(xy) {
+    return this.current_field.get(Place.fetch(xy).key)
   }
 
-  cell_class(x, y) {
-    const battler = this.cell_lookup(x, y)
+  cell_class(xy) {
+    const [x, y] = xy
+    const soldier = this.cell_lookup(xy)
     let list = []
-    if (battler) {
-      list.push(`location_${battler.location.key}`)
-      list.push(`promoted_${battler.promoted}`)
-      list = _.concat(list, battler.piece.css_class_list)
+    if (soldier) {
+      list.push(`location_${soldier.location.key}`)
+      list.push(`promoted_${soldier.promoted}`)
+      list = _.concat(list, soldier.piece.css_class_list)
     } else {
       list.push("blank")
     }
     if (this.move_info) {
-      const origin_point = this.move_info.origin_point
-      if (origin_point) {
-        if (origin_point.x === x && origin_point.y === y) {
-          list.push("origin_point")
+      const origin_place = this.move_info.origin_place
+      if (origin_place) {
+        if (origin_place.x === x && origin_place.y === y) {
+          list.push("origin_place")
         }
       }
-      const point = this.move_info.point
-      if (point.x === x && point.y === y) {
+      const place = this.move_info.place
+      if (place.x === x && place.y === y) {
         list.push("current")
       }
     }
     return list
   }
 
-  cell_piece_class(x, y) {
-    const battler = this.cell_lookup(x, y)
+  cell_piece_class(xy) {
+    const soldier = this.cell_lookup(xy)
     let list = []
-    if (battler) {
-      list.push(`location_${battler.location.key}`)
+    if (soldier) {
+      list.push(`location_${soldier.location.key}`)
     }
     return list
   }
 
-  cell_view(x, y) {
-    const battler = this.cell_lookup(x, y)
+  cell_view(xy) {
+    const soldier = this.cell_lookup(xy)
     let str = ""
-    if (battler) {
-      str = battler.name
+    if (soldier) {
+      str = soldier.name
     }
     return str
   }

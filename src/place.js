@@ -1,16 +1,18 @@
+import _ from "lodash"
+
 import { Board } from "./board"
 
-class Point {
+class Place {
   static fetch(v) {
-    return Object.freeze(new Point(v))
+    return Object.freeze(new Place(v))
   }
 
   constructor(value) {
     let x, y
-    if (typeof value === "string") {
+    if (_.isString(value)) {
       [x, y] = this._parse_from_string(value)
     } else {
-      [x, y] = value
+      [x, y] = value            // valus is array
     }
     [this._x, this._y] = [x, y]
   }
@@ -43,9 +45,9 @@ class Point {
   }
 }
 
-export { Point }
+export { Place }
 
 if (process.argv[1] === __filename) {
-  console.log(Point.fetch("6a").key)
-  console.log(Point.fetch([1, 2]).key)
+  console.log(Place.fetch("6a").key)
+  console.log(Place.fetch([1, 2]).key)
 }

@@ -54,10 +54,10 @@ const vm = new Vue({
       },
       have_piece: null,
       turn_counter: 0,
-      edit_mode: false,
       rules: {
-        rule1: false, // 自分の手番で相手の駒を持ち上げれないようにする
+        rule1: true, // 自分の手番で相手の駒を持ち上げれないようにする
         rule2: true, // 自分の駒の上に重ねたら持ってない状態にする(falseなら自分の駒で自分の駒をとれる)
+        rule3: true, // 駒台をクリックしたとき持っているならキャンセル
       },
     }
   },
@@ -84,18 +84,18 @@ const vm = new Vue({
     // 駒台をクリック
     hold_piece_click: function(location, piece, e) {
       // 持っているならキャンセル
-      if (this.motteiru) {
+      if (this.rules["rule3"] && this.motteiru) {
         this.state_reset()
         return
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (!this.motteiru && this.rules["rule1"] && location !== this.current_player) {
+      if (this.rules["rule1"] && !this.motteiru && location !== this.current_player) {
         return
       }
 
       // 盤上の駒を駒台に置く
-      if (this.edit_mode && this.origin_soldier) {
+      if (this.origin_soldier) {
         const count = (this.hold_pieces[location][this.origin_soldier.piece] || 0) + 1
         Vue.set(this.hold_pieces[location], this.origin_soldier.piece, count)
         Vue.set(this.board, this.place_from, null)      // 元の位置を消す
@@ -112,7 +112,10 @@ const vm = new Vue({
           e.target.classList.add("active")
           this.from_dom = e.target
         }
+        return
       }
+
+      throw new Error("must not happen")
     },
 
     // 盤をクリック

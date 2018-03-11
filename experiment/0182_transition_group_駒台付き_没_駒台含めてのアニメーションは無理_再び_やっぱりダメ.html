@@ -11,9 +11,9 @@
       <div>
         <button @click="shuffle">Shuffle</button>
         <transition-group tag="div" name="cell" class="sudoku-container">
-          <div v-for="battler in battlers" :key="battler.unique_key" class="cell">
-            <div class="flex-item" :class="{piece_stand: battler.piece_stand, main: !battler.piece_stand}">
-              {{battler.name}}
+          <div v-for="soldier in soldiers" :key="soldier.unique_key" class="cell">
+            <div class="flex-item" :class="{piece_stand: soldier.piece_stand, main: !soldier.piece_stand}">
+              {{soldier.name}}
             </div>
           </div>
         </transition-group>

@@ -230,6 +230,7 @@
       <div class="columns">
         <div class="column">
           <ShogiPlayer
+            :run_mode="run_mode"
             :kifu_body="kifu_body"
             :start_turn="start_turn"
             :theme="theme"
@@ -248,6 +249,13 @@
       <div class="columns">
         <div class="column">
           <section>
+            <b-field label="run_mode">
+              <div class="block">
+                <b-radio v-model="run_mode" native-value="kifu_play">kifu_play</b-radio>
+                <b-radio v-model="run_mode" native-value="human_play">human_play</b-radio>
+              </div>
+            </b-field>
+
             <b-field label="theme">
               <div class="block">
                 <b-radio v-model="theme" native-value="none">none</b-radio>
@@ -320,6 +328,7 @@
               </div>
               <div class="message-body">
                 &lt;shogi-player
+                :<b>run_mode</b>="'{{run_mode}}'"
                 :<b>theme</b>="'{{theme}}'"
                 :<b>variation</b>="'{{variation}}'"
                 :<b>size</b>="'{{size}}'"
@@ -389,6 +398,7 @@ export default {
 
     return {
       // カスタマイズ用
+      run_mode: "human_play",
       theme: "simple",
       variation: "a",
       size: "default",

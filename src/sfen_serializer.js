@@ -1,7 +1,7 @@
 import _ from "lodash"
 
 import { Piece } from "./piece"
-import { Point } from "./point"
+import { Place } from "./place"
 import { Mediator } from "./mediator"
 import { Location } from "./location"
 import { Board } from "./board"
@@ -26,20 +26,20 @@ class SfenSerializer {
       let str = ""
       let space = 0
       _.times(Board.dimension, (x) => {
-        const point = Point.fetch([x, y])
-        const battler = this.mediator.current_field.get(point.key)
-        if (battler === undefined) {
+        const place = Place.fetch([x, y])
+        const soldier = this.mediator.current_field.get(place.key)
+        if (soldier === undefined) {
           space++
         } else {
           if (space >= 1) {
             str += space
             space = 0
           }
-          if (battler.promoted) {
+          if (soldier.promoted) {
             str += "+"
           }
-          let key = battler.piece.key
-          if (battler.location.key === "white") {
+          let key = soldier.piece.key
+          if (soldier.location.key === "white") {
             key = key.toLowerCase()
           }
           str += key

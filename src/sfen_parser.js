@@ -2,8 +2,8 @@ import XRegExp from "xregexp"
 
 import { ParserBase } from "./parser_base"
 import { Piece } from "./piece"
-import { Point } from "./point"
-import { Battler } from "./battler"
+import { Place } from "./place"
+import { Soldier } from "./soldier"
 import { Location } from "./location"
 
 class SfenParser extends ParserBase {
@@ -24,13 +24,13 @@ class SfenParser extends ParserBase {
         if (/\d+/.test(m.piece)) {
           x += Number(m.piece)
         } else {
-          const battler = new Battler({
-            point: new Point([x, y]),
+          const soldier = new Soldier({
+            place: new Place([x, y]),
             piece: Piece.fetch(m.piece),
             promoted: (m.promoted === "+"),
             location: this.__location_by_upper_or_lower_case(m.piece),
           })
-          field.set(battler.point.key, battler)
+          field.set(soldier.place.key, soldier)
           x++
         }
       })
@@ -86,9 +86,9 @@ class SfenParser extends ParserBase {
       if (md["origin_y"] === "*") {
         attrs["drop_piece"] = Piece.fetch(md["origin_x"])
       } else {
-        attrs["origin_point"] = Point.fetch(`${md["origin_x"]}${md["origin_y"]}`)
+        attrs["origin_place"] = Place.fetch(`${md["origin_x"]}${md["origin_y"]}`)
       }
-      attrs["point"] = Point.fetch(`${md["pos_x"]}${md["pos_y"]}`)
+      attrs["place"] = Place.fetch(`${md["pos_x"]}${md["pos_y"]}`)
       return attrs
     })
   }

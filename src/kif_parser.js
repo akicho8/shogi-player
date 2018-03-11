@@ -3,7 +3,7 @@ import assert from "minimalistic-assert"
 
 import { ParserBase } from "./parser_base"
 import { Piece } from "./piece"
-import { Point } from "./point"
+import { Place } from "./place"
 import { Location } from "./location"
 import { SfenParser } from "./sfen_parser"
 
@@ -36,17 +36,17 @@ class KifParser extends ParserBase {
       if (md) {
         const attrs = {}
         attrs["location"] = this.location_by_offset(Number(md["number"]) - 1)
-        if (md["origin_point"]) {
-          attrs["origin_point"] = Point.fetch(md["origin_point"])
+        if (md["origin_place"]) {
+          attrs["origin_place"] = Place.fetch(md["origin_place"])
         }
         assert(md["to"] || md["same"])
         if (md["to"]) {
-          attrs["point"] = Point.fetch(md["to"])
-          before_point = attrs["point"]
+          attrs["place"] = Place.fetch(md["to"])
+          before_point = attrs["place"]
         } else {
           assert(md["same"])
           assert(before_point)
-          attrs["point"] = before_point
+          attrs["place"] = before_point
         }
         if (md["motion"] === "成") {
           attrs["promoted_trigger"] = true
@@ -90,7 +90,7 @@ class KifParser extends ParserBase {
         (?<piece>成[銀桂香]|[王玉金銀全桂圭香杏角馬飛龍竜歩と])
         (?<suffix>[左右直]?[寄引上]?)
         (?<motion>不?成|打|合|生)?
-        (\\((?<origin_point>\\d{2})\\))? # KIFフォーマットの移動元用
+        (\\((?<origin_place>\\d{2})\\))? # KIFフォーマットの移動元用
       `, 'xm')
   }
 }

@@ -14,7 +14,7 @@ new Vue({
       {name: "歩", unique_key: 9, piece_stand: false},
       {name: "歩", unique_key:10, piece_stand: false},
     ],
-    battlers: [],
+    soldiers: [],
   },
   created: function() {
     this.shuffle()
@@ -28,7 +28,7 @@ new Vue({
         e.piece_stand = (Math.floor(Math.random() * 2) === 0)
         return e
       })
-      this.battlers = list
+      this.soldiers = list
     },
   }
 })

@@ -1,7 +1,7 @@
-import { Point } from './point'
+import { Place } from './place'
 import { Piece } from './piece'
 
-class Battler {
+class Soldier {
   constructor(attributes) {
     this.attributes = Object.assign({}, attributes)
   }
@@ -10,8 +10,8 @@ class Battler {
     return this.attributes.piece
   }
 
-  get point() {
-    return this.attributes.point
+  get place() {
+    return this.attributes.place
   }
 
   get location() {
@@ -34,14 +34,14 @@ class Battler {
   }
 }
 
-export { Battler }
+export { Soldier }
 
 if (process.argv[1] === __filename) {
-  const battler = new Battler({
-    point: new Point([1, 2]),
+  const soldier = new Soldier({
+    place: new Place([1, 2]),
     piece: Piece.fetch("P"),
     promoted: true,
     location_key: "white",
   })
-  console.log(battler.name)
+  console.log(soldier.name)
 }
