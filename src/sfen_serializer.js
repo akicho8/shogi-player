@@ -14,7 +14,7 @@ class SfenSerializer {
   get to_s() {
     const parts = []
     parts.push(this.to_baord_sfen)
-    parts.push(this.mediator.location_next.key[0])
+    parts.push(this.mediator.current_location.key[0])
     parts.push(this.to_hold_pieces)
     parts.push(this.mediator.normalized_turn + 1)
     return parts.join(" ")
@@ -27,7 +27,7 @@ class SfenSerializer {
       let space = 0
       _.times(Board.dimension, (x) => {
         const place = Place.fetch([x, y])
-        const soldier = this.mediator.current_field.get(place.key)
+        const soldier = this.mediator.board.get(place.key)
         if (soldier === undefined) {
           space++
         } else {

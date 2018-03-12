@@ -4,6 +4,9 @@ import { Board } from "./board"
 
 class Place {
   static fetch(v) {
+    if (v instanceof this) {
+      return v
+    }
     return Object.freeze(new Place(v))
   }
 

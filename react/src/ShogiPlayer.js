@@ -27,7 +27,7 @@ class PieceStand extends React.Component {
     list.push("flex-item")
     list.push("piece_stand")
     list.push(`location_${this.location.key}`)
-    if (this.props.mediator.location_next.key === this.location.key) {
+    if (this.props.mediator.current_location.key === this.location.key) {
       list.push("turn_active")
     }
     return list
@@ -82,7 +82,7 @@ class ShogiPlayer extends React.Component {
     })
 
     const slider_block = []
-    slider_block.push(<input type="range" value={this.state.current_turn} onChange={this.current_turn_update.bind(this)} min={mediator.any_parser.turn_min} max={mediator.any_parser.turn_max} />)
+    slider_block.push(<input type="range" value={this.state.current_turn} onChange={this.current_turn_update.bind(this)} min={mediator.parser.turn_min} max={mediator.parser.turn_max} />)
 
     return (
       <div className="shogi-player">

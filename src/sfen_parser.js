@@ -1,4 +1,5 @@
 import XRegExp from "xregexp"
+import _ from "lodash"
 
 import { ParserBase } from "./parser_base"
 import { Piece } from "./piece"
@@ -16,8 +17,8 @@ class SfenParser extends ParserBase {
     }
   }
 
-  get field() {
-    let field = new Map()
+  get board() {
+    let board = new Map()
     this.attributes["sfen"].split("/").forEach((e, y) => {
       let x = 0
       XRegExp.forEach(e, XRegExp("(?<promoted>\\+?)(?<piece>\\S)"), (m, i) => {
@@ -30,12 +31,12 @@ class SfenParser extends ParserBase {
             promoted: (m.promoted === "+"),
             location: this.__location_by_upper_or_lower_case(m.piece),
           })
-          field.set(soldier.place.key, soldier)
+          board.set(soldier.place.key, soldier)
           x++
         }
       })
     })
-    return field
+    return board
   }
 
   get location_base() {
@@ -71,14 +72,14 @@ class SfenParser extends ParserBase {
   }
 
   get move_infos() {
-    if (this.attributes["moves"] === undefined) {
+    if (_.isNil(this.attributes["moves"])) {
       return []
     }
     return this.attributes["moves"].split(/\s+/).map((e, i) => {
       const attrs = {}
       // if (true) {
       //   attrs["scene_index"] = this.turn_min + i
-      //   attrs["scene_offsert"] = i
+      //   attrs["scene_offset"] = i
       // }
       attrs["location"] = this.location_by_offset(i)
       const md = XRegExp.exec(e, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
@@ -110,7 +111,7 @@ if (process.argv[1] === __filename) {
   const sfen_parser = new SfenParser()
   sfen_parser.kifu_body = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
   sfen_parser.parse()
-  console.log(sfen_parser.field)
+  console.log(sfen_parser.board)
   console.log(sfen_parser.location_base.key)
   console.log(sfen_parser.hold_pieces)
   console.log(sfen_parser.move_infos)

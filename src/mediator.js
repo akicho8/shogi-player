@@ -11,81 +11,91 @@ import Autolinker from 'autolinker'
 
 class Mediator {
   constructor() {
-    this.any_parser = null
+    this.parser = null
     this.current_turn = null
-    this.current_field = null
+    this.board = null
     this.hold_pieces = null
-    this.move_info = null
+    this.last_hand = null
 
     this.env = process.env.NODE_ENV
     this.kifu_body = "position startpos"
   }
 
   run() {
-    let str = this.kifu_body || "position startpos"
-    if (/position/.test(str)) { // FIXME: この判定はしょぼい
-      this.any_parser = new SfenParser()
-    } else {
-      this.any_parser = new KifParser()
-    }
-    this.any_parser.kifu_body = str
-    this.any_parser.parse()
+    // let str = this.kifu_body || "position startpos"
+    // let parser_object
+    // if (/position/.test(str)) {
+    //   parser_object = new SfenParser()
+    // } else {
+    //   parser_object = new KifParser()
+    // }
+    // parser_object.kifu_body = str
+    // parser_object.parse()
+    // this.parser      = parser_object
 
-    this.current_field = this.any_parser.field
-    this.hold_pieces = this.any_parser.hold_pieces
-    this.move_info = null
+    this.board       = this.parser.board
+    this.hold_pieces = this.parser.hold_pieces
+    this.last_hand   = null
 
-    const move_infos = this.any_parser.move_infos
+    const move_infos = this.parser.move_infos
 
-    const num = this.normalized_turn - this.any_parser.turn_min
+    const num = this.normalized_turn - this.parser.turn_min
     _(num).times((i) => {
-      const m = move_infos[i]
-      this.move_info = m
-      if (m.drop_piece) {
-        const soldier = new Soldier({
-          piece: m.drop_piece,
-          place: m.place,
-          promoted: m.promoted,
-          location: m.location,
-        })
-        if (true) {
-          const count = this.hold_pieces.get(m.location.key).get(soldier.piece.key) - 1
-          if (count >= 1) {
-            this.hold_pieces.get(m.location.key).set(soldier.piece.key, count)
-          } else {
-            this.hold_pieces.get(m.location.key).delete(soldier.piece.key)
-          }
-        }
-        this.current_field.set(soldier.place.key, soldier)
-      } else {
-        {
-          const soldier = this.current_field.get(m.place.key)
-          if (soldier) {
-            if (_.isNil(this.hold_pieces.get(m.location.key))) {
-              this.hold_pieces.set(m.location_key, new Map())
-            }
-            const count = (this.hold_pieces.get(m.location.key).get(soldier.piece.key) || 0) + 1
-            this.hold_pieces.get(m.location.key).set(soldier.piece.key, count)
-          }
-        }
-        const soldier = this.current_field.get(m.origin_place.key)
-        if (m.promoted_trigger) {
-          soldier.promoted = true
-        }
-        this.current_field.delete(m.origin_place.key)
-        this.current_field.set(m.place.key, soldier)
-      }
+      const move_hand = move_infos[i]
+      this.execute_one(move_hand)
     })
   }
 
-  cell_lookup(xy) {
-    return this.current_field.get(Place.fetch(xy).key)
+  execute_one(m) {
+    this.last_hand = m
+    if (m.drop_piece) {
+      const soldier = new Soldier({
+        piece: m.drop_piece,
+        place: m.place,
+        promoted: m.promoted,
+        location: m.location,
+      })
+      this.hold_pieces_add(m.location, soldier.piece, -1)
+      this.board.set(soldier.place.key, soldier)
+    } else {
+      {
+        const soldier = this.board.get(m.place.key)
+        if (soldier) {
+          this.hold_pieces_add(m.location, soldier.piece, 1)
+        }
+      }
+      const soldier = this.board.get(m.origin_place.key)
+      if (m.promoted_trigger) {
+        soldier.promoted = true
+      }
+      this.board.delete(m.origin_place.key)
+      this.board.set(m.place.key, soldier)
+    }
+  }
+
+  hold_pieces_count(location, piece) {
+    return this.hold_pieces.get(location.key).get(piece.key) || 0
+  }
+
+  hold_pieces_add(location, piece, plus) {
+    const count = this.hold_pieces_count(location, piece) + plus
+    const counts_hash = this.hold_pieces.get(location.key)
+    if (count >= 1) {
+      counts_hash.set(piece.key, count)
+    } else {
+      counts_hash.delete(piece.key)
+    }
+  }
+
+  board_place_at(xy) {
+    return this.board.get(Place.fetch(xy).key)
   }
 
   cell_class(xy) {
     const [x, y] = xy
-    const soldier = this.cell_lookup(xy)
+    const soldier = this.board_place_at(xy)
     let list = []
+
     if (soldier) {
       list.push(`location_${soldier.location.key}`)
       list.push(`promoted_${soldier.promoted}`)
@@ -93,23 +103,46 @@ class Mediator {
     } else {
       list.push("blank")
     }
-    if (this.move_info) {
-      const origin_place = this.move_info.origin_place
+
+    if (this.last_hand) {
+      const origin_place = this.last_hand.origin_place
       if (origin_place) {
         if (origin_place.x === x && origin_place.y === y) {
           list.push("origin_place")
         }
       }
-      const place = this.move_info.place
+      const place = this.last_hand.place
       if (place.x === x && place.y === y) {
         list.push("current")
       }
     }
+
     return list
   }
 
+  // cell_class2(xy) {
+  //   const [x, y] = xy
+  //   const soldier = this.board_place_at(xy)
+  //   let list = []
+  //
+  //   if (this.last_hand) {
+  //     const origin_place = this.last_hand.origin_place
+  //     if (origin_place) {
+  //       if (origin_place.x === x && origin_place.y === y) {
+  //         list.push("origin_place")
+  //       }
+  //     }
+  //     const place = this.last_hand.place
+  //     if (place.x === x && place.y === y) {
+  //       list.push("current")
+  //     }
+  //   }
+  //
+  //   return list
+  // }
+
   cell_piece_class(xy) {
-    const soldier = this.cell_lookup(xy)
+    const soldier = this.board_place_at(xy)
     let list = []
     if (soldier) {
       list.push(`location_${soldier.location.key}`)
@@ -118,7 +151,7 @@ class Mediator {
   }
 
   cell_view(xy) {
-    const soldier = this.cell_lookup(xy)
+    const soldier = this.board_place_at(xy)
     let str = ""
     if (soldier) {
       str = soldier.name
@@ -134,21 +167,21 @@ class Mediator {
   get normalized_turn() {
     let index = Number(this.current_turn)
     if (index < 0) {
-      index += this.any_parser.turn_max + 1
+      index += this.parser.turn_max + 1
     }
     return this.turn_clamp(index)
   }
 
   turn_clamp(index) {
-    return _.clamp(Number(index), this.any_parser.turn_min, this.any_parser.turn_max)
+    return _.clamp(Number(index), this.parser.turn_min, this.parser.turn_max)
   }
 
-  get location_current() {
-    return this.any_parser.location_by_offset(this.normalized_turn - 1)
+  get previous_location() {
+    return this.parser.location_by_offset(this.normalized_turn - 1)
   }
 
-  get location_next() {
-    return this.any_parser.location_by_offset(this.normalized_turn)
+  get current_location() {
+    return this.parser.location_by_offset(this.normalized_turn)
   }
 
   get to_sfen() {
@@ -156,8 +189,8 @@ class Mediator {
   }
 
   get current_comments() {
-    if (this.any_parser.comments_pack) {
-      return this.any_parser.comments_pack[this.normalized_turn]
+    if (this.parser.comments_pack) {
+      return this.parser.comments_pack[this.normalized_turn]
     }
   }
 
@@ -167,8 +200,8 @@ class Mediator {
   }
 
   get current_turn_label() {
-    if (this.normalized_turn === this.any_parser.turn_max) {
-      return `まで${this.normalized_turn}手で${this.location_current.name}の勝ち`
+    if (this.normalized_turn === this.parser.turn_max) {
+      return `まで${this.normalized_turn}手で${this.previous_location.name}の勝ち`
     } else {
       return `${this.normalized_turn}手目`
     }

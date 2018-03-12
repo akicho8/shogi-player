@@ -31,7 +31,7 @@
       </template>
     </div>
     <div class="board-container flippable" :class="{flip: flip}">
-      <PieceStand :location_key="'white'"/>
+      <PieceStand :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
       <div class="flex-item board-wrap">
         <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
         <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
@@ -40,7 +40,7 @@
           <table class="board-inner">
             <tr v-for="y in mediator.dimension">
               <template v-for="x in mediator.dimension">
-                <td class="td_cell" :class="mediator.cell_class([x - 1, y - 1])">
+                <td class="td_cell" :class="cell_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @mouseover="mouse_over_func">
                   <span class="span_cell" :class="mediator.cell_class([x - 1, y - 1])">
                     {{mediator.cell_view([x - 1, y - 1])}}
                   </span>
@@ -50,7 +50,7 @@
           </table>
         </div>
       </div>
-      <PieceStand :location_key="'black'"/>
+      <PieceStand :location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')" />
     </div>
     <template v-if="controller_show">
       <div class="controller_block buttons has-addons is-centered">
@@ -63,14 +63,14 @@
     </template>
 
     <template v-if="slider_show">
-      <input type="range" v-model.number="current_turn" :min="mediator.any_parser.turn_min" :max="mediator.any_parser.turn_max" ref="slider" class="slider" />
+      <input type="range" v-model.number="current_turn" :min="mediator.parser.turn_min" :max="mediator.parser.turn_max" ref="slider" class="slider" />
     </template>
 
     <div class="sfen_area is-size-7 has-text-grey" v-if="sfen_show">
       {{mediator.to_sfen}}
     </div>
 
-    <div class="comment_area" v-if="mediator.any_parser.comments_pack">
+    <div class="comment_area" v-if="mediator.parser.comments_pack">
       <template v-if="mediator.current_comments">
         <div class="columns">
           <div class="column is-three-fifths is-offset-one-fifth">
@@ -93,7 +93,7 @@
   <template v-if="debug_mode">
     <template v-if="mediator">
       <p>持駒:{{mediator.hold_pieces}}</p>
-      <p>次の手番:{{mediator.location_next.key}}</p>
+      <p>次の手番:{{mediator.current_location.key}}</p>
       <p>Sfen:{{mediator.to_sfen}}</p>
       <p>mediator.normalized_turn:{{mediator.normalized_turn}}</p>
     </template>
@@ -104,6 +104,9 @@
       interval_id:{{interval_id}}
       key_event_capture:{{key_event_capture}}
       update_counter:{{update_counter}}
+
+      place_from:{{place_from}}
+      have_piece:{{have_piece}}
     </p>
   </template>
 </div>
@@ -115,7 +118,12 @@ import axios from "axios"
 import Vue from 'vue'
 
 import { Mediator } from "../mediator"
+import { Place } from "../place"
+import { Soldier } from "../soldier"
+import { Location } from "../location"
 import { Sound } from '../sound'
+import { SfenParser } from "../sfen_parser"
+import { KifParser } from "../kif_parser"
 import PieceStand from "./PieceStand"
 
 import piece_sound_wav from "../assets/piece_sound.wav"
@@ -149,7 +157,7 @@ export default {
 
   /* eslint-disable */
   props: {
-    run_mode:           { type: String,  default: "kifu_play",         },
+    run_mode:           { type: String,  default: "view_mode",         },
     kifu_body:          { type: String,  default: "position startpos", },
     kifu_url:           { type: String,  default: null,                },
     polling_interval:   { type: Number,  default: 0,                   },
@@ -189,6 +197,64 @@ export default {
       interval_id: null,
       read_counter: 0,
       update_counter: 0,
+
+      // -------------------------------------------------------------------------------- human_mode
+      place_from: null,
+      from_dom: null,
+      // board: {
+      //   "0,0": {piece: "香", location_key: "white"},
+      //   "1,0": {piece: "桂", location_key: "white"},
+      //   "2,0": {piece: "銀", location_key: "white"},
+      //   "3,0": {piece: "金", location_key: "white"},
+      //   "4,0": {piece: "玉", location_key: "white"},
+      //   "5,0": {piece: "金", location_key: "white"},
+      //   "6,0": {piece: "銀", location_key: "white"},
+      //   "7,0": {piece: "桂", location_key: "white"},
+      //   "8,0": {piece: "香", location_key: "white"},
+      //   "1,1": {piece: "飛", location_key: "white"},
+      //   "7,1": {piece: "角", location_key: "white"},
+      //   "0,2": {piece: "歩", location_key: "white"},
+      //   "1,2": {piece: "歩", location_key: "white"},
+      //   "2,2": {piece: "歩", location_key: "white"},
+      //   "3,2": {piece: "歩", location_key: "white"},
+      //   "4,2": {piece: "歩", location_key: "white"},
+      //   "5,2": {piece: "歩", location_key: "white"},
+      //   "6,2": {piece: "歩", location_key: "white"},
+      //   "7,2": {piece: "歩", location_key: "white"},
+      //   "8,2": {piece: "歩", location_key: "white"},
+      //
+      //   "0,8": {piece: "香", location_key: "black"},
+      //   "1,8": {piece: "桂", location_key: "black"},
+      //   "2,8": {piece: "銀", location_key: "black"},
+      //   "3,8": {piece: "金", location_key: "black"},
+      //   "4,8": {piece: "玉", location_key: "black"},
+      //   "5,8": {piece: "金", location_key: "black"},
+      //   "6,8": {piece: "銀", location_key: "black"},
+      //   "7,8": {piece: "桂", location_key: "black"},
+      //   "8,8": {piece: "香", location_key: "black"},
+      //   "7,7": {piece: "飛", location_key: "black"},
+      //   "1,7": {piece: "角", location_key: "black"},
+      //   "0,6": {piece: "歩", location_key: "black"},
+      //   "1,6": {piece: "歩", location_key: "black"},
+      //   "2,6": {piece: "歩", location_key: "black"},
+      //   "3,6": {piece: "歩", location_key: "black"},
+      //   "4,6": {piece: "歩", location_key: "black"},
+      //   "5,6": {piece: "歩", location_key: "black"},
+      //   "6,6": {piece: "歩", location_key: "black"},
+      //   "7,6": {piece: "歩", location_key: "black"},
+      //   "8,6": {piece: "歩", location_key: "black"},
+      // },
+      // hold_pieces: {
+      //   black: {"歩": 2},
+      //   white: {"歩": 2},
+      // },
+      have_piece: null,
+      // turn_counter: 0,
+      rules: {
+        rule1: false, // 自分の手番で相手の駒を持ち上げれないようにする
+        rule2: false, // 自分の駒の上に重ねたら持ってない状態にする(falseなら自分の駒で自分の駒をとれる)
+        rule3: false, // 駒台をクリックしたとき持っているならキャンセル
+      },
     }
   },
 
@@ -306,8 +372,18 @@ export default {
 
     mediator_update() {
       if (this.loaded_kifu) {
+        let str = this.loaded_kifu || "position startpos"
+        let parser
+        if (/position/.test(str)) {
+          parser = new SfenParser()
+        } else {
+          parser = new KifParser()
+        }
+        parser.kifu_body = str
+        parser.parse()
+
         this.mediator = new Mediator()
-        this.mediator.kifu_body = this.loaded_kifu
+        this.mediator.parser = parser
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
         this.current_turn = this.mediator.normalized_turn
@@ -376,10 +452,10 @@ export default {
       //   }
       // }
       // if (e.key === "[" || e.key === "Home" || e.code === "Escape") {
-      //   force_value = this.mediator.any_parser.turn_min
+      //   force_value = this.mediator.parser.turn_min
       // }
       // if (e.key === "]" || e.key === "End") {
-      //   force_value = this.mediator.any_parser.turn_max
+      //   force_value = this.mediator.parser.turn_max
       // }
       //
       // let v = this.current_turn
@@ -389,11 +465,11 @@ export default {
       // if (force_value !== null) {
       //   v = force_value
       // }
-      // if (v < this.mediator.any_parser.turn_min) {
-      //   v = this.mediator.any_parser.turn_min
+      // if (v < this.mediator.parser.turn_min) {
+      //   v = this.mediator.parser.turn_min
       // }
-      // if (this.mediator.any_parser.turn_max < v) {
-      //   v = this.mediator.any_parser.turn_max
+      // if (this.mediator.parser.turn_max < v) {
+      //   v = this.mediator.parser.turn_max
       // }
       // this.current_turn = v
       //
@@ -437,12 +513,12 @@ export default {
     },
 
     move_to_first() {
-      this.current_turn = this.mediator.any_parser.turn_min
+      this.current_turn = this.mediator.parser.turn_min
       this.focus_to("slider") || this.focus_to("first")
     },
 
     move_to_last() {
-      this.current_turn = this.mediator.any_parser.turn_max
+      this.current_turn = this.mediator.parser.turn_max
       this.focus_to("slider") || this.focus_to("last")
     },
 
@@ -485,69 +561,84 @@ export default {
       }
     },
 
-    // human_play
+    // -------------------------------------------------------------------------------- human_mode
+
+    mouse_over_func(e) {
+        // / e.target.classList.add("active")
+      this.log("mouse_over_func")
+    },
 
     // 駒台をクリック
-    hold_piece_click(location, piece, e) {
+    hold_piece_click(location_key, piece, e) {
+      const location = Location.fetch(location_key)
+
       // 持っているならキャンセル
-      if (this.rules["rule3"] && this.motteiru) {
+      if (this.run_mode === "human_mode" && this.motteiru) {
+        console.log("持っているならキャンセル")
         this.state_reset()
         return
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.rules["rule1"] && !this.motteiru && location !== this.mediator.location_current.key) {
+      if (this.run_mode === "human_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
+        console.log("相手の持駒を持とうとしたときは無効")
         return
       }
 
       // 盤上の駒を駒台に置く
       if (this.origin_soldier) {
-        const count = (this.hold_pieces[location][this.origin_soldier.piece] || 0) + 1
-        Vue.set(this.hold_pieces[location], this.origin_soldier.piece, count)
-        Vue.set(this.board, this.place_from, null)      // 元の位置を消す
+        console.log("盤上の駒を駒台に置く")
+        const count = (this.hold_pieces[location.key][this.origin_soldier.piece] || 0) + 1
+        Vue.set(this.hold_pieces[location.key], this.origin_soldier.piece, count)
+        Vue.set(this.mediator.board, this.place_from, null)      // 元の位置を消す
         this.state_reset()
         this.turn_next()
         return
       }
 
-      if (_.isNil(this.hold_piece)) {
-        // 持駒があれば持ち上げる
-        const count = (this.hold_pieces[location][piece] || 0)
-        if (count >= 1) {
-          this.have_piece = piece
-          e.target.classList.add("active")
-          this.from_dom = e.target
-        }
+      // クリックしたけど持駒がない
+      if (this.mediator.hold_pieces_count(location, piece) <= 0) {
+        console.log("クリックしたけど持駒がない")
         return
       }
 
-      throw new Error("must not happen")
+      console.log("駒台の駒を持つ")
+      this.have_piece = piece
+      // e.target.classList.add("active")
+      // this.from_dom = e.target
     },
 
     // 盤をクリック
-    board_click(place, e) {
-      const soldier = this.board[place]
+    board_click(xy, e) {
+      this.log("board_click")
+
+      const place = Place.fetch(xy)
+      const soldier = this.mediator.board_place_at(place)
 
       // -------------------------------------------------------------------------------- Validation
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
-      if (!this.motteiru && this.rules["rule1"] && soldier && soldier.location !== this.mediator.location_current.key) {
+      if (this.run_mode === "human_mode" && !this.motteiru && soldier && soldier.location.key !== this.mediator.current_location.key) {
+        console.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
 
       // 持たずに何もないところをクリックしたので無効とする
       if (!this.motteiru && !soldier) {
+        console.log("持たずに何もないところをクリックしたので無効とする")
         return
       }
 
       // 自分の駒の上に駒を重ねようとしたので状況キャンセル
-      if (this.jibun_no_komanoueni_kasaneta(soldier)) {
+      if (this.run_mode === "human_mode" && this.jibun_no_komanoueni_kasaneta(soldier)) {
+        console.log("自分の駒の上に駒を重ねようとしたので状況キャンセル")
         this.state_reset()
         return
       }
 
       // 盤上の駒を持って同じ位置に戻したので状況キャンセル
       if (_.isEqual(this.place_from, place)) {
+        console.log("盤上の駒を持って同じ位置に戻したので状況キャンセル")
         this.state_reset()
         return
       }
@@ -556,15 +647,26 @@ export default {
 
       // 盤上の駒を持ちあげる
       if (!this.motteiru) {
+        console.log("盤上の駒を持ちあげる")
         this.soldier_hold(place, e)
         return
       }
 
       // 置く
       if (this.place_from) {
-        this.piece_capture(soldier)                     // 相手の駒があれば取る
-        Vue.set(this.board, place, this.origin_soldier) // 移動
-        Vue.set(this.board, this.place_from, null)      // 元の位置を消す
+        console.log("置く")
+        if (soldier) {
+          this.mediator.hold_pieces_add(this.mediator.current_location, soldier.piece, 1) // 相手の駒があれば取る
+          // this.$forceUpdate()
+        }
+        const new_soldier = new Soldier({
+          piece: this.origin_soldier.piece,
+          place: place,
+          promoted: this.origin_soldier.promoted,
+          location: this.origin_soldier.location,
+        })
+        this.mediator.board.set(new_soldier.place.key, new_soldier)                             // 置く
+        this.mediator.board.delete(this.place_from.key)                                 // 元に位置を消す
         this.state_reset()
         this.turn_next()
         return
@@ -572,9 +674,15 @@ export default {
 
       // 持駒を置く
       if (this.have_piece) {
-        const soldier = {piece: this.have_piece, location: this.mediator.location_current.key}
-        Vue.set(this.board, place, soldier) // 置く
-        this.mochigoma_herasu()             // 持駒を減らす
+        console.log("持駒を置く")
+        const soldier = new Soldier({
+          piece: this.have_piece,
+          place: place,
+          promoted: false,
+          location: this.mediator.current_location,
+        })
+        this.mediator.hold_pieces_add(this.mediator.current_location, soldier.piece, -1) // 持駒を減らす
+        this.mediator.board.set(soldier.place.key, soldier) // 置く
         this.state_reset()
         this.turn_next()
         return
@@ -583,69 +691,88 @@ export default {
       throw new Error("must not happen")
     },
 
-    // 持駒減らす
-    mochigoma_herasu() {
-      const count = (this.hold_pieces[this.mediator.location_current.key][this.have_piece] || 0) - 1
-      Vue.set(this.hold_pieces[this.mediator.location_current.key], this.have_piece, count)
-      if (count <= 0) {
-        delete this.hold_pieces[this.mediator.location_current.key][this.have_piece] // 要素が0になるキーは削除
-      }
-    },
+    // // 持駒減らす
+    // mochigoma_herasu() {
+    //   const count = (this.hold_pieces[this.mediator.current_location.key][this.have_piece] || 0) - 1
+    //   Vue.set(this.hold_pieces[this.mediator.current_location.key], this.have_piece, count)
+    //   if (count <= 0) {
+    //     delete this.hold_pieces[this.mediator.current_location.key][this.have_piece] // 要素が0になるキーは削除
+    //   }
+    // },
 
     // 自分の駒の上に重ねた？
     jibun_no_komanoueni_kasaneta(soldier) {
-      return this.motteiru && this.rules["rule2"] && soldier && soldier.location === this.mediator.location_current.key
+      return this.motteiru && soldier && soldier.location.key === this.mediator.current_location.key
     },
 
-    // 駒があれば持駒とする
-    piece_capture(soldier) {
-      if (soldier) {
-        const count = (this.hold_pieces[soldier.location][soldier.piece] || 0) + 1
-        Vue.set(this.hold_pieces[this.mediator.location_current.key], soldier.piece, count)
-      }
-    },
+    // // 駒があれば持駒とする
+    // piece_capture(soldier) {
+    //   soldier_capture
+    //
+    //   if (soldier) {
+    //     const count = (this.hold_pieces[soldier.location.key][soldier.piece] || 0) + 1
+    //     Vue.set(this.hold_pieces[this.mediator.current_location.key], soldier.piece, count)
+    //   }
+    // },
 
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
+      // console.log(e.target)
       this.place_from = place
-      this.from_dom = e.target
-      e.target.classList.add("active")
+      // this.from_dom = e.target
+      // e.target.classList.add("active")
+      // console.log(e.target)
     },
 
     state_reset() {
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
-      if (this.from_dom) {
-        this.from_dom.classList.remove("active")
-        this.from_dom = null
-      }
+      // if (this.from_dom) {
+      //   this.from_dom.classList.remove("active")
+      //   this.from_dom = null
+      // }
     },
 
     turn_next() {
-      this.turn_counter += 1
+      // this.current_turn += 1
+
+      // this.turn_counter += 1
     },
 
-    location_flip(location) {
-      return location === "black" ? "white" : "black"
+    location_flip(location_key) {
+      return location_key === "black" ? "white" : "black"
     },
 
-    // mediator.location_current.key_diff(diff) {
+    // mediator.current_location.key_diff(diff) {
     //   const locatios = ["black", "white"]
     //   return locatios[(this.turn_counter + diff) % locatios.length]
     // },
+
+    cell_class(xy) {
+      const place = Place.fetch(xy)
+      const list = this.mediator.cell_class(xy)
+      if (_.isEqual(this.place_from, place)) {
+        list.push("active")
+      }
+      return list
+    },
   },
 
   computed: {
-    // mediator.location_current.key() {
-    //   return this.mediator.location_current.key_diff(0)
+    // mediator.current_location.key() {
+    //   return this.mediator.current_location.key_diff(0)
     // },
 
     // opponent_player() {
-    //   return this.mediator.location_current.key_diff(1)
+    //   return this.mediator.current_location.key_diff(1)
     // },
 
     origin_soldier() {
-      return this.board[this.place_from]
+      let soldier = null
+      if (this.place_from) {
+        soldier = this.mediator.board_place_at(this.place_from)
+      }
+      return soldier
     },
 
     motteiru() {

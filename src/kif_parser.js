@@ -8,11 +8,11 @@ import { Location } from "./location"
 import { SfenParser } from "./sfen_parser"
 
 class KifParser extends ParserBase {
-  get field() {
+  get board() {
     const sfen_parser = new SfenParser()
     sfen_parser.kifu_body = "position startpos" // TODO: sfen形式の値のテーブルを持って駒落ちに対応する
     sfen_parser.parse()
-    return sfen_parser.field
+    return sfen_parser.board
   }
 
   get location_base() {
@@ -71,7 +71,7 @@ class KifParser extends ParserBase {
   }
 
   get move_infos() {
-    return this._move_infos || {}
+    return this._move_infos || []
   }
 
   set comments_pack(v) {
@@ -79,7 +79,7 @@ class KifParser extends ParserBase {
   }
 
   get comments_pack() {
-    return this._comments_pack || {}
+    return this._comments_pack || []
   }
 
   get __kif_format_move_regexp() {
@@ -125,7 +125,7 @@ if (process.argv[1] === __filename) {
   10 同 歩(23)    ( 0:10/00:01:10)
 `
   kif_parser.parse()
-  // console.log(kif_parser.field)
+  // console.log(kif_parser.board)
   // console.log(kif_parser.location_base)
   // console.log(kif_parser.hold_pieces)
   console.log(kif_parser.move_infos)

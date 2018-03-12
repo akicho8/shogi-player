@@ -251,8 +251,9 @@
           <section>
             <b-field label="run_mode">
               <div class="block">
-                <b-radio v-model="run_mode" native-value="kifu_play">kifu_play</b-radio>
-                <b-radio v-model="run_mode" native-value="human_play">human_play</b-radio>
+                <b-radio v-model="run_mode" native-value="view_mode">view_mode</b-radio>
+                <b-radio v-model="run_mode" native-value="human_mode">human_mode</b-radio>
+                <b-radio v-model="run_mode" native-value="edit_mode">edit_mode</b-radio>
               </div>
             </b-field>
 
@@ -398,14 +399,14 @@ export default {
 
     return {
       // カスタマイズ用
-      run_mode: "human_play",
+      run_mode: "view_mode",   // human_mode
       theme: "simple",
       variation: "a",
-      size: "default",
+      size: "large",
       start_turn: -1,
-      slider_show: false,
-      controller_show: false,
-      sfen_show: false,
+      slider_show: true,
+      controller_show: true,
+      sfen_show: true,
       sound_effect: false,
       volume: 0.5,
       key_event_capture: false,

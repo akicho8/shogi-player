@@ -9,7 +9,7 @@ class ParserBase {
   parse() {
   }
 
-  get field() {
+  get board() {
     console.warn("not implemented")
   }
 

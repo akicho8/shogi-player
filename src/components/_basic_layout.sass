@@ -49,11 +49,13 @@
 
           // 横セルを均等に分割する
           table-layout: fixed
-          
+
           // box-shadow: 0 0 1vmin rgba($sp-simple-grid-color, 0.5)
           td
             transition: all 0.5s ease-out
             text-align: center
+            &.active
+              background: blue
             &.location_black
               vertical-align: bottom
             &.location_white
