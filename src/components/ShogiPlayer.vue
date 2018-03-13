@@ -726,7 +726,7 @@ export default {
       if (this.place_from) {
         console.log("置く")
         if (soldier) {
-          this.mediator.hold_pieces_add(this.mediator.current_location, soldier.piece, 1) // 相手の駒があれば取る
+          this.mediator.hold_pieces_add(this.origin_soldier.location, soldier.piece, 1) // 相手の駒があれば取る
           // this.$forceUpdate()
         }
         const new_soldier = new Soldier({
