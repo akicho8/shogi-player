@@ -1,7 +1,7 @@
 import _ from "lodash"
 
-import { SfenParser } from "./sfen_parser"
-import { KifParser } from "./kif_parser"
+// import { SfenParser } from "./sfen_parser"
+// import { KifParser } from "./kif_parser"
 import { Board } from "./board"
 import { Place } from "./place"
 import { Piece } from "./piece"
@@ -11,7 +11,7 @@ import Autolinker from 'autolinker'
 
 class Mediator {
   constructor() {
-    this.parser = null
+    this.data_source = null
     this.current_turn = null
     this.board = null
     this.hold_pieces = null
@@ -31,15 +31,15 @@ class Mediator {
     // }
     // parser_object.kifu_body = str
     // parser_object.parse()
-    // this.parser      = parser_object
+    // this.data_source      = parser_object
 
-    this.board       = this.parser.board
-    this.hold_pieces = this.parser.hold_pieces
-    this.last_hand   = null
+    this.board = this.data_source.board
+    this.hold_pieces = this.data_source.hold_pieces
+    this.last_hand = null
 
-    const move_infos = this.parser.move_infos
+    const move_infos = this.data_source.move_infos
 
-    const num = this.normalized_turn - this.parser.turn_min
+    const num = this.normalized_turn - this.data_source.turn_min
     _(num).times((i) => {
       const move_hand = move_infos[i]
       this.execute_one(move_hand)
@@ -68,7 +68,7 @@ class Mediator {
       if (m.promoted_trigger) {
         soldier.promoted = true
       }
-      this.board.delete(m.origin_place.key)
+      this.board_safe_delete_on(m.origin_place)
       this.board.set(m.place.key, soldier)
     }
   }
@@ -85,6 +85,10 @@ class Mediator {
     } else {
       counts_hash.delete(piece.key)
     }
+  }
+
+  board_safe_delete_on(place) {
+    this.board.delete(place.key)
   }
 
   board_place_at(xy) {
@@ -167,21 +171,21 @@ class Mediator {
   get normalized_turn() {
     let index = Number(this.current_turn)
     if (index < 0) {
-      index += this.parser.turn_max + 1
+      index += this.data_source.turn_max + 1
     }
     return this.turn_clamp(index)
   }
 
   turn_clamp(index) {
-    return _.clamp(Number(index), this.parser.turn_min, this.parser.turn_max)
+    return _.clamp(Number(index), this.data_source.turn_min, this.data_source.turn_max)
   }
 
   get previous_location() {
-    return this.parser.location_by_offset(this.normalized_turn - 1)
+    return this.data_source.location_by_offset(this.normalized_turn - 1)
   }
 
   get current_location() {
-    return this.parser.location_by_offset(this.normalized_turn)
+    return this.data_source.location_by_offset(this.normalized_turn)
   }
 
   get to_sfen() {
@@ -189,8 +193,8 @@ class Mediator {
   }
 
   get current_comments() {
-    if (this.parser.comments_pack) {
-      return this.parser.comments_pack[this.normalized_turn]
+    if (this.data_source.comments_pack) {
+      return this.data_source.comments_pack[this.normalized_turn]
     }
   }
 
@@ -200,7 +204,7 @@ class Mediator {
   }
 
   get current_turn_label() {
-    if (this.normalized_turn === this.parser.turn_max) {
+    if (this.normalized_turn === this.data_source.turn_max) {
       return `まで${this.normalized_turn}手で${this.previous_location.name}の勝ち`
     } else {
       return `${this.normalized_turn}手目`

@@ -21,15 +21,21 @@
     <i class="fas fa-spinner fa-pulse"></i>
   </template>
 
+  <template v-if="debug_mode">
+    ({{update_counter}})
+  </template>
+
   <template v-if="mediator">
-    <div class="turn_editor">
-      <template v-if="!turn_edit">
-        <span class="turn_edit_text" @click="turn_edit_run">{{mediator.current_turn_label}}</span>
-      </template>
-      <template v-if="turn_edit">
-        <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
-      </template>
-    </div>
+    <template v-if="run_mode === 'view_mode'">
+      <div class="turn_editor">
+        <template v-if="!turn_edit">
+          <span class="turn_edit_text" @click="turn_edit_run">{{mediator.current_turn_label}}</span>
+        </template>
+        <template v-if="turn_edit">
+          <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
+        </template>
+      </div>
+    </template>
     <div class="board-container flippable" :class="{flip: flip}">
       <PieceStand :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
       <div class="flex-item board-wrap">
@@ -63,14 +69,14 @@
     </template>
 
     <template v-if="slider_show">
-      <input type="range" v-model.number="current_turn" :min="mediator.parser.turn_min" :max="mediator.parser.turn_max" ref="slider" class="slider" />
+      <input type="range" v-model.number="current_turn" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="slider" class="slider" />
     </template>
 
     <div class="sfen_area is-size-7 has-text-grey" v-if="sfen_show">
       {{mediator.to_sfen}}
     </div>
 
-    <div class="comment_area" v-if="mediator.parser.comments_pack">
+    <div class="comment_area" v-if="mediator.data_source.comments_pack">
       <template v-if="mediator.current_comments">
         <div class="columns">
           <div class="column is-three-fifths is-offset-one-fifth">
@@ -91,23 +97,22 @@
   </template>
 
   <template v-if="debug_mode">
-    <template v-if="mediator">
-      <p>持駒:{{mediator.hold_pieces}}</p>
-      <p>次の手番:{{mediator.current_location.key}}</p>
-      <p>Sfen:{{mediator.to_sfen}}</p>
-      <p>mediator.normalized_turn:{{mediator.normalized_turn}}</p>
-    </template>
-    <p>
-      start_turn:{{start_turn}}
-      current_turn:{{current_turn}}
-      read_counter:{{read_counter}}
-      interval_id:{{interval_id}}
-      key_event_capture:{{key_event_capture}}
-      update_counter:{{update_counter}}
-
-      place_from:{{place_from}}
-      have_piece:{{have_piece}}
-    </p>
+    <table class="table is-bordered is-narrow">
+      <tr><th>update_counter</th><td>{{update_counter}}</td></tr>
+      <tr><th>place_from</th><td>{{place_from}}</td></tr>
+      <tr><th>have_piece</th><td>{{have_piece}}</td></tr>
+      <template v-if="mediator">
+        <tr><th>持駒</th><td>{{mediator.hold_pieces}}</td></tr>
+        <tr><th>次の手番</th><td>{{mediator.current_location.key}}</td></tr>
+        <tr><th>SFEN</th><td>{{mediator.to_sfen}}</td></tr>
+        <tr><th>正規化手番</th><td>{{mediator.normalized_turn}}</td></tr>
+      </template>
+      <tr><th>start_turn</th><td>{{start_turn}}</td></tr>
+      <tr><th>current_turn</th><td>{{current_turn}}</td></tr>
+      <tr><th>read_counter</th><td>{{read_counter}}</td></tr>
+      <tr><th>interval_id</th><td>{{interval_id}}</td></tr>
+      <tr><th>key_event_capture</th><td>{{key_event_capture}}</td></tr>
+    </table>
   </template>
 </div>
 </template>
@@ -120,10 +125,11 @@ import Vue from 'vue'
 import { Mediator } from "../mediator"
 import { Place } from "../place"
 import { Soldier } from "../soldier"
-import { Location } from "../location"
+// import { Location } from "../location"
 import { Sound } from '../sound'
 import { SfenParser } from "../sfen_parser"
 import { KifParser } from "../kif_parser"
+import { FooParser } from "../foo_parser"
 import PieceStand from "./PieceStand"
 
 import piece_sound_wav from "../assets/piece_sound.wav"
@@ -255,6 +261,9 @@ export default {
         rule2: false, // 自分の駒の上に重ねたら持ってない状態にする(falseなら自分の駒で自分の駒をとれる)
         rule3: false, // 駒台をクリックしたとき持っているならキャンセル
       },
+
+      // -------------------------------------------------------------------------------- edit_mode
+      foo_parser: new FooParser(),
     }
   },
 
@@ -266,6 +275,8 @@ export default {
   },
 
   watch: {
+    // -------------------------------------------------------------------------------- basic
+
     current_turn: function () {
       this.log("mediator_update from current_turn")
       this.mediator_update()
@@ -287,6 +298,19 @@ export default {
     polling_interval: function () { this.polling_interval_update() },
     /* eslint-enable */
 
+    // -------------------------------------------------------------------------------- run_mode
+
+    run_mode: function () {
+      if (this.run_mode === "edit_mode") {
+        // this.turn_edit_value = 0
+        // this.current_turn = 0
+        this.mediator.current_turn = 0
+        this.mediator_update()
+      }
+    },
+
+    // -------------------------------------------------------------------------------- sound
+
     sound_effect: function () {
       this.sound_load()
     },
@@ -294,6 +318,8 @@ export default {
     volume: function () {
       this.sound_load()
     },
+
+    // -------------------------------------------------------------------------------- other
 
     // 引数は親が「変更」したときがトリガー
     debug_mode: function (v) {
@@ -370,20 +396,32 @@ export default {
       }
     },
 
-    mediator_update() {
-      if (this.loaded_kifu) {
-        let str = this.loaded_kifu || "position startpos"
-        let parser
-        if (/position/.test(str)) {
-          parser = new SfenParser()
-        } else {
-          parser = new KifParser()
+    parser_build() {
+      let data_source = null
+      if (this.run_mode === "edit_mode") {
+        data_source = new FooParser()
+        data_source.kifu_body = "position sfen " + this.mediator.to_sfen
+        data_source.parse()
+      } else {
+        if (this.loaded_kifu) {
+          let str = this.loaded_kifu || "position startpos"
+          if (/position/.test(str)) {
+            data_source = new SfenParser()
+          } else {
+            data_source = new KifParser()
+          }
+          data_source.kifu_body = str
+          data_source.parse()
         }
-        parser.kifu_body = str
-        parser.parse()
+      }
+      return data_source
+    },
 
+    mediator_update() {
+      const data_source = this.parser_build()
+      if (data_source) {
         this.mediator = new Mediator()
-        this.mediator.parser = parser
+        this.mediator.data_source = data_source
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
         this.current_turn = this.mediator.normalized_turn
@@ -452,10 +490,10 @@ export default {
       //   }
       // }
       // if (e.key === "[" || e.key === "Home" || e.code === "Escape") {
-      //   force_value = this.mediator.parser.turn_min
+      //   force_value = this.mediator.data_source.turn_min
       // }
       // if (e.key === "]" || e.key === "End") {
-      //   force_value = this.mediator.parser.turn_max
+      //   force_value = this.mediator.data_source.turn_max
       // }
       //
       // let v = this.current_turn
@@ -465,11 +503,11 @@ export default {
       // if (force_value !== null) {
       //   v = force_value
       // }
-      // if (v < this.mediator.parser.turn_min) {
-      //   v = this.mediator.parser.turn_min
+      // if (v < this.mediator.data_source.turn_min) {
+      //   v = this.mediator.data_source.turn_min
       // }
-      // if (this.mediator.parser.turn_max < v) {
-      //   v = this.mediator.parser.turn_max
+      // if (this.mediator.data_source.turn_max < v) {
+      //   v = this.mediator.data_source.turn_max
       // }
       // this.current_turn = v
       //
@@ -513,12 +551,12 @@ export default {
     },
 
     move_to_first() {
-      this.current_turn = this.mediator.parser.turn_min
+      this.current_turn = this.mediator.data_source.turn_min
       this.focus_to("slider") || this.focus_to("first")
     },
 
     move_to_last() {
-      this.current_turn = this.mediator.parser.turn_max
+      this.current_turn = this.mediator.data_source.turn_max
       this.focus_to("slider") || this.focus_to("last")
     },
 
@@ -564,18 +602,45 @@ export default {
     // -------------------------------------------------------------------------------- human_mode
 
     mouse_over_func(e) {
-        // / e.target.classList.add("active")
+      // / e.target.classList.add("active")
       this.log("mouse_over_func")
     },
 
-    // 駒台をクリック
-    hold_piece_click(location_key, piece, e) {
-      const location = Location.fetch(location_key)
+    // 駒台クリック
+    hold_piece_click2(location, e) {
+      console.log("駒台クリック")
 
-      // 持っているならキャンセル
-      if (this.run_mode === "human_mode" && this.motteiru) {
+      if (this.have_piece_location === location && this.have_piece) {
         console.log("持っているならキャンセル")
         this.state_reset()
+        return
+      }
+
+      if (this.have_piece_location !== location && this.have_piece) {
+        this.komo_idou(location)
+        return
+      }
+
+      if (this.origin_soldier) {
+        console.log("盤上の駒を駒台に置く")
+        this.koma_oku(location)
+      }
+    },
+
+    // 駒台の駒をクリック
+    hold_piece_click(location, piece, e) {
+      console.log("駒台の駒をクリック")
+
+      // 自分の駒をすでに持っているならキャンセル
+      if (this.have_piece_location === location && this.have_piece) {
+        console.log("持っているならキャンセル")
+        this.state_reset()
+        return
+      }
+
+      // 相手の持駒を自分の駒台に移動
+      if (this.have_piece_location !== location && this.have_piece) {
+        this.komo_idou(location)
         return
       }
 
@@ -588,11 +653,7 @@ export default {
       // 盤上の駒を駒台に置く
       if (this.origin_soldier) {
         console.log("盤上の駒を駒台に置く")
-        const count = (this.hold_pieces[location.key][this.origin_soldier.piece] || 0) + 1
-        Vue.set(this.hold_pieces[location.key], this.origin_soldier.piece, count)
-        Vue.set(this.mediator.board, this.place_from, null)      // 元の位置を消す
-        this.state_reset()
-        this.turn_next()
+        this.koma_oku(location)
         return
       }
 
@@ -604,6 +665,7 @@ export default {
 
       console.log("駒台の駒を持つ")
       this.have_piece = piece
+      this.have_piece_location = location
       // e.target.classList.add("active")
       // this.from_dom = e.target
     },
@@ -666,7 +728,7 @@ export default {
           location: this.origin_soldier.location,
         })
         this.mediator.board.set(new_soldier.place.key, new_soldier)                             // 置く
-        this.mediator.board.delete(this.place_from.key)                                 // 元に位置を消す
+        this.mediator.board_safe_delete_on(this.place_from)
         this.state_reset()
         this.turn_next()
         return
@@ -689,6 +751,20 @@ export default {
       }
 
       throw new Error("must not happen")
+    },
+
+    // 盤上の駒を駒台に置く
+    koma_oku(location) {
+      this.mediator.hold_pieces_add(location, this.origin_soldier.piece, 1) // 駒台にプラス
+      this.mediator.board_safe_delete_on(this.origin_soldier.place)
+      this.state_reset()
+    },
+
+    komo_idou(location) {
+      console.log("相手の持駒を自分の駒台に移動")
+      this.mediator.hold_pieces_add(location, this.have_piece, 1)
+      this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
+      this.state_reset()
     },
 
     // // 持駒減らす
@@ -717,26 +793,22 @@ export default {
 
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
-      // console.log(e.target)
       this.place_from = place
-      // this.from_dom = e.target
-      // e.target.classList.add("active")
-      // console.log(e.target)
     },
 
     state_reset() {
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
-      // if (this.from_dom) {
-      //   this.from_dom.classList.remove("active")
-      //   this.from_dom = null
-      // }
+      this.have_piece_location = null
     },
 
     turn_next() {
-      // this.current_turn += 1
+      // console.log("turn_next")
 
+      // this.current_turn += 1
       // this.turn_counter += 1
+
+      this.mediator_update()
     },
 
     location_flip(location_key) {
