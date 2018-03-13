@@ -741,7 +741,7 @@ export default {
           piece: this.have_piece,
           place: place,
           promoted: false,
-          location: this.mediator.current_location,
+          location: this.have_piece_location, // this.mediator.current_location,
         })
         this.mediator.hold_pieces_add(this.mediator.current_location, soldier.piece, -1) // 持駒を減らす
         this.mediator.board.set(soldier.place.key, soldier) // 置く
