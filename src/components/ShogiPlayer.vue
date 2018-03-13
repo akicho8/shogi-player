@@ -708,7 +708,7 @@ export default {
 
       // --------------------------------------------------------------------------------
 
-      if (!this.motteiru && soldier && e.shiftKey) {
+      if (!this.motteiru && soldier && (e.shiftKey | e.ctrlKey | e.altKey | e.metaKey)) {
         console.log("盤上の駒を裏返す")
         this.mediator.place_on(soldier.henshin)
         this.mediator_update()
