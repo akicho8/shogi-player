@@ -36,17 +36,10 @@ class Soldier {
   get henshin() {
     let attrs = null
     if (this.piece.promotable_p) {
-      if (this.location.key === "black" && !this.promoted) {
-        attrs = {promoted: !this.promoted}
-      }
-      if (this.location.key === "black" && this.promoted) {
+      if (this.promoted) {
         attrs = {location: this.location.flip, promoted: !this.promoted}
-      }
-      if (this.location.key === "white" && !this.promoted) {
+      } else {
         attrs = {promoted: !this.promoted}
-      }
-      if (this.location.key === "white" && this.promoted) {
-        attrs = {location: this.location.flip, promoted: !this.promoted}
       }
     } else {
       attrs = {location: this.location.flip}
