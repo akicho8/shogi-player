@@ -727,7 +727,7 @@ export default {
           promoted: this.origin_soldier.promoted,
           location: this.origin_soldier.location,
         })
-        this.mediator.board.set(new_soldier.place.key, new_soldier)                             // 置く
+        this.mediator.place_on(new_soldier)                             // 置く
         this.mediator.board_safe_delete_on(this.place_from)
         this.state_reset()
         this.turn_next()
@@ -743,8 +743,8 @@ export default {
           promoted: false,
           location: this.have_piece_location, // this.mediator.current_location,
         })
-        this.mediator.hold_pieces_add(this.mediator.current_location, soldier.piece, -1) // 持駒を減らす
-        this.mediator.board.set(soldier.place.key, soldier) // 置く
+        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1) // 持駒を減らす
+        this.mediator.place_on(soldier) // 置く
         this.state_reset()
         this.turn_next()
         return

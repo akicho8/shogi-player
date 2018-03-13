@@ -91,6 +91,10 @@ class Mediator {
     this.board.delete(place.key)
   }
 
+  place_on(soldier) {
+    this.board.set(soldier.place.key, soldier)
+  }
+
   board_place_at(xy) {
     return this.board.get(Place.fetch(xy).key)
   }
