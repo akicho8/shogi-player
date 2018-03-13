@@ -32,6 +32,27 @@ class Soldier {
     }
     return this.piece.name
   }
+
+  get henshin() {
+    let attrs = null
+    if (this.piece.promotable_p) {
+      if (this.location.key === "black" && !this.promoted) {
+        attrs = {promoted: !this.promoted}
+      }
+      if (this.location.key === "black" && this.promoted) {
+        attrs = {location: this.location.flip, promoted: !this.promoted}
+      }
+      if (this.location.key === "white" && !this.promoted) {
+        attrs = {promoted: !this.promoted}
+      }
+      if (this.location.key === "white" && this.promoted) {
+        attrs = {location: this.location.flip, promoted: !this.promoted}
+      }
+    } else {
+      attrs = {location: this.location.flip}
+    }
+    return new Soldier(Object.assign({}, this.attributes, attrs))
+  }
 }
 
 export { Soldier }

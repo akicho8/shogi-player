@@ -46,7 +46,7 @@
           <table class="board-inner">
             <tr v-for="y in mediator.dimension">
               <template v-for="x in mediator.dimension">
-                <td class="td_cell" :class="cell_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @mouseover="mouse_over_func">
+                <td class="td_cell" :class="cell_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click2="board_click_right([x - 1, y - 1], $event)" @mouseover="mouse_over_func">
                   <span class="span_cell" :class="mediator.cell_class([x - 1, y - 1])">
                     {{mediator.cell_view([x - 1, y - 1])}}
                   </span>
@@ -60,11 +60,11 @@
     </div>
     <template v-if="controller_show">
       <div class="controller_block buttons has-addons is-centered">
-        <button ref="first"    class="button first"      @click.stop="move_to_first">|◀</button>
-        <button ref="previous" class="button previous"   @click.stop="relative_move(-1, $event)">◀</button>
-        <button ref="next"     class="button next"       @click.stop="relative_move(+1, $event)">▶</button>
-        <button ref="last"     class="button last"       @click.stop="move_to_last">▶|</button>
-        <button                class="button flip" @click.stop="board_flip_run">{{flip ? '&#x21BA;' : '&#x21BB;'}}</button>
+        <button ref="first"    class="button first"    @click.stop="move_to_first">|◀</button>
+        <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)">◀</button>
+        <button ref="next"     class="button next"     @click.stop="relative_move(+1, $event)">▶</button>
+        <button ref="last"     class="button last"     @click.stop="move_to_last">▶|</button>
+        <button                class="button flip"     @click.stop="board_flip_run">{{flip ? '&#x21BA;' : '&#x21BB;'}}</button>
       </div>
     </template>
 
@@ -440,7 +440,7 @@ export default {
     },
 
     keyboard_operation(e) {
-      if (this.debug_mode) {
+      if (this.debug_mode && false) {
         this.log(document.activeElement)
         this.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
         this.log("e", e)
@@ -673,6 +673,7 @@ export default {
     // 盤をクリック
     board_click(xy, e) {
       this.log("board_click")
+      console.log(`shiftKey: ${e.shiftKey}`)
 
       const place = Place.fetch(xy)
       const soldier = this.mediator.board_place_at(place)
@@ -706,6 +707,13 @@ export default {
       }
 
       // --------------------------------------------------------------------------------
+
+      if (!this.motteiru && soldier && e.shiftKey) {
+        console.log("盤上の駒を裏返す")
+        this.mediator.place_on(soldier.henshin)
+        this.mediator_update()
+        return
+      }
 
       // 盤上の駒を持ちあげる
       if (!this.motteiru) {
@@ -749,6 +757,21 @@ export default {
         this.turn_next()
         return
       }
+
+      throw new Error("must not happen")
+    },
+
+    board_click_right(xy, e) {
+      console.log("盤を右クリック")
+
+      // const place = Place.fetch(xy)
+      // const soldier = this.mediator.board_place_at(place)
+      //
+      // if (soldier) {
+      //   this.mediator.place_on(soldier.henshin)
+      //   this.state_reset()
+      //   return
+      // }
 
       throw new Error("must not happen")
     },

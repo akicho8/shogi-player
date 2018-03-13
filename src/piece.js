@@ -36,6 +36,10 @@ class Piece extends MemoryRecord {
   get css_class_list() {
     return ["piece_name", `piece_${this.key}`]
   }
+
+  get promotable_p() {
+    return !!this.promoted_name
+  }
 }
 
 export { Piece }
