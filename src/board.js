@@ -1,3 +1,5 @@
+import { Soldier } from "./soldier"
+
 class Board {
   static get dimension() {
     return 9
@@ -17,6 +19,15 @@ class Board {
 
   delete_at(place) {
     this._surface.delete(place.key)
+  }
+
+  get flip() {
+    const new_map = new Board()
+    this._surface.forEach((soldier, place) => {
+      const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {location: soldier.location.flip, place: soldier.place.flip}))
+      new_map.place_on(new_soldier)
+    })
+    return new_map
   }
 }
 

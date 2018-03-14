@@ -31,6 +31,7 @@
         <option v-for="record in PresetInfo.values" :value="record.key" :key="record.key"> {{record.name}}</option>
       </b-select>
     </b-field>
+    <button class="button" @click="all_flip">盤面反転</button>
   </template>
 
   <template v-if="mediator">
@@ -135,7 +136,7 @@ import { Mediator } from "../mediator"
 import { Place } from "../place"
 import { Soldier } from "../soldier"
 import { PresetInfo } from "../preset_info"
-// import { Location } from "../location"
+import { Location } from "../location"
 import { Sound } from '../sound'
 import { SfenParser } from "../sfen_parser"
 import { KifParser } from "../kif_parser"
@@ -876,6 +877,20 @@ export default {
         list.push("active")
       }
       return list
+    },
+
+    all_flip() {
+      this.mediator.board = this.mediator.board.flip
+      // console.log(Location.values)
+      // console.log(Location.values.reverse())
+
+      this.mediator.hold_pieces = new Map(Location.values.map((e) => [e.flip.key, _.clone(this.mediator.hold_pieces.get(e.key))])) // TODO: _.transform_keys があれば置き換えたい
+
+      // const v = new Map(Location.values.map((e) => [e.key, new Map()])) // TODO: _.transform_keys があれば置き換えたい
+      // v.set("black", this.mediator.hold_pieces.get("white"))
+      // v.set("white", this.mediator.hold_pieces.get("black"))
+      // this.mediator.hold_pieces.set("black", v.get("white"))
+      // this.mediator.hold_pieces.set("white", v.get("black"))
     },
   },
 

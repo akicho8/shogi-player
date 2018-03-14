@@ -215,7 +215,9 @@ class Mediator {
   }
 
   realized_hold_pieces_of(location_key) {
+    // console.log("realized_hold_pieces_of")
     const list = Array.from(this.hold_pieces.get(location_key))
+    // console.log(list)
     return _(list)
       .filter(([key, count]) => count >= 1)
       .map(([key, count]) => [Piece.fetch(key), count])

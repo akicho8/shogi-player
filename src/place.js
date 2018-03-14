@@ -32,6 +32,10 @@ class Place {
     return this._y
   }
 
+  get flip() {
+    return Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y])
+  }
+
   _parse_from_string(s) {
     s = s.replace(/([１-９一二三四五六七八九a-z])/g, (e) => this._replace_table[e])
     const [x, y] = s.split("").map((e) => Number(e))
