@@ -27,8 +27,8 @@ class SfenSerializer {
       let space = 0
       _.times(Board.dimension, (x) => {
         const place = Place.fetch([x, y])
-        const soldier = this.mediator.board.get(place.key)
-        if (soldier === undefined) {
+        const soldier = this.mediator.board.lookup(place)
+        if (_.isNil(soldier)) {
           space++
         } else {
           if (space >= 1) {

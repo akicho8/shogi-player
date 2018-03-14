@@ -10,6 +10,10 @@ class Soldier {
     return this.attributes.piece
   }
 
+  set place(place) {
+    this.attributes.place = place
+  }
+
   get place() {
     return this.attributes.place
   }

@@ -58,20 +58,21 @@ class Mediator {
         location: m.location,
       })
       this.hold_pieces_add(m.location, soldier.piece, -1)
-      this.board.set(soldier.place.key, soldier)
+      this.board.place_on(soldier)
     } else {
       {
-        const soldier = this.board.get(m.place.key)
+        const soldier = this.board.lookup(m.place)
         if (soldier) {
           this.hold_pieces_add(m.location, soldier.piece, 1)
         }
       }
-      const soldier = this.board.get(m.origin_place.key)
+      const soldier = this.board.lookup(m.origin_place)
       if (m.promoted_trigger) {
         soldier.promoted = true
       }
-      this.board_safe_delete_on(m.origin_place)
-      this.board.set(m.place.key, soldier)
+      soldier.place = m.place
+      this.board.delete_at(m.origin_place)
+      this.board.place_on(soldier)
     }
   }
 
@@ -90,15 +91,11 @@ class Mediator {
   }
 
   board_safe_delete_on(place) {
-    this.board.delete(place.key)
-  }
-
-  place_on(soldier) {
-    this.board.set(soldier.place.key, soldier)
+    this.board.delete_at(place)
   }
 
   board_place_at(xy) {
-    return this.board.get(Place.fetch(xy).key)
+    return this.board.lookup(Place.fetch(xy))
   }
 
   cell_class(xy) {

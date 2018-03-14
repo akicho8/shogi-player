@@ -1,6 +1,7 @@
 import XRegExp from "xregexp"
 import _ from "lodash"
 
+import { Board } from "./board"
 import { ParserBase } from "./parser_base"
 import { Piece } from "./piece"
 import { Place } from "./place"
@@ -18,7 +19,7 @@ class SfenParser extends ParserBase {
   }
 
   get board() {
-    let board = new Map()
+    const board = new Board()
     this.attributes["sfen"].split("/").forEach((e, y) => {
       let x = 0
       XRegExp.forEach(e, XRegExp("(?<promoted>\\+?)(?<piece>\\S)"), (m, i) => {
@@ -31,7 +32,7 @@ class SfenParser extends ParserBase {
             promoted: (m.promoted === "+"),
             location: this.__location_by_upper_or_lower_case(m.piece),
           })
-          board.set(soldier.place.key, soldier)
+          board.place_on(soldier)
           x++
         }
       })

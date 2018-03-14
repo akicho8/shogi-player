@@ -702,7 +702,7 @@ export default {
       console.log(`shiftKey: ${e.shiftKey}`)
 
       const place = Place.fetch(xy)
-      const soldier = this.mediator.board_place_at(place)
+      const soldier = this.mediator.board.lookup(place)
 
       // -------------------------------------------------------------------------------- Validation
 
@@ -736,7 +736,7 @@ export default {
 
       if (!this.motteiru && soldier && (e.shiftKey | e.ctrlKey | e.altKey | e.metaKey)) {
         console.log("盤上の駒を裏返す")
-        this.mediator.place_on(soldier.henshin)
+        this.mediator.board.place_on(soldier.henshin)
         this.mediator_update()
         return
       }
@@ -761,8 +761,8 @@ export default {
           promoted: this.origin_soldier.promoted,
           location: this.origin_soldier.location,
         })
-        this.mediator.place_on(new_soldier)                             // 置く
-        this.mediator.board_safe_delete_on(this.place_from)
+        this.mediator.board.place_on(new_soldier)                             // 置く
+        this.mediator.board.delete_at(this.place_from)
         this.state_reset()
         this.turn_next()
         return
@@ -778,7 +778,7 @@ export default {
           location: this.have_piece_location, // this.mediator.current_location,
         })
         this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1) // 持駒を減らす
-        this.mediator.place_on(soldier) // 置く
+        this.mediator.board.place_on(soldier) // 置く
         this.state_reset()
         this.turn_next()
         return
@@ -805,7 +805,7 @@ export default {
     // 盤上の駒を駒台に置く
     koma_oku(location) {
       this.mediator.hold_pieces_add(location, this.origin_soldier.piece, 1) // 駒台にプラス
-      this.mediator.board_safe_delete_on(this.origin_soldier.place)
+      this.mediator.board.delete_at(this.origin_soldier.place)
       this.state_reset()
     },
 
@@ -891,7 +891,7 @@ export default {
     origin_soldier() {
       let soldier = null
       if (this.place_from) {
-        soldier = this.mediator.board_place_at(this.place_from)
+        soldier = this.mediator.board.lookup(this.place_from)
       }
       return soldier
     },
