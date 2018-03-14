@@ -25,6 +25,14 @@
     ({{update_counter}})
   </template>
 
+  <template v-if="run_mode === 'edit_mode'">
+    <b-field label="初期配置">
+      <b-select placeholder="初期配置" v-model="current_preset">
+        <option v-for="record in PresetInfo.values" :value="record.key" :key="record.key"> {{record.name}}</option>
+      </b-select>
+    </b-field>
+  </template>
+
   <template v-if="mediator">
     <template v-if="run_mode === 'view_mode'">
       <div class="turn_editor">
@@ -112,6 +120,7 @@
       <tr><th>read_counter</th><td>{{read_counter}}</td></tr>
       <tr><th>interval_id</th><td>{{interval_id}}</td></tr>
       <tr><th>key_event_capture</th><td>{{key_event_capture}}</td></tr>
+      <tr><th>current_preset</th><td>{{current_preset}}</td></tr>
     </table>
   </template>
 </div>
@@ -125,6 +134,7 @@ import Vue from 'vue'
 import { Mediator } from "../mediator"
 import { Place } from "../place"
 import { Soldier } from "../soldier"
+import { PresetInfo } from "../preset_info"
 // import { Location } from "../location"
 import { Sound } from '../sound'
 import { SfenParser } from "../sfen_parser"
@@ -136,6 +146,8 @@ import piece_sound_wav from "../assets/piece_sound.wav"
 
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
+
+Object.defineProperty(Vue.prototype, 'PresetInfo', {value: PresetInfo})
 
 // Log content type
 // localStorage.debug = "axios"
@@ -264,6 +276,8 @@ export default {
 
       // -------------------------------------------------------------------------------- edit_mode
       foo_parser: new FooParser(),
+
+      current_preset: null,
     }
   },
 
@@ -306,6 +320,18 @@ export default {
         // this.current_turn = 0
         this.mediator.current_turn = 0
         this.mediator_update()
+      }
+    },
+
+    current_preset: function () {
+      if (this.current_preset) {
+        const data_source = new FooParser()
+        data_source.kifu_body = PresetInfo.fetch(this.current_preset).sfen
+        data_source.parse()
+
+        this.mediator = new Mediator()
+        this.mediator.data_source = data_source
+        this.mediator.run()
       }
     },
 

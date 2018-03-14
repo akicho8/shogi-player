@@ -2,6 +2,7 @@ import _ from "lodash"
 
 // import { SfenParser } from "./sfen_parser"
 // import { KifParser } from "./kif_parser"
+import { FooParser } from "./foo_parser"
 import { Board } from "./board"
 import { Place } from "./place"
 import { Piece } from "./piece"
@@ -11,14 +12,18 @@ import Autolinker from 'autolinker'
 
 class Mediator {
   constructor() {
-    this.data_source = null
-    this.current_turn = null
+    const data_source = new FooParser()
+    data_source.kifu_body = "position startpos"
+    data_source.parse()
+
+    this.data_source = data_source
+    this.current_turn = 0
     this.board = null
     this.hold_pieces = null
     this.last_hand = null
 
     this.env = process.env.NODE_ENV
-    this.kifu_body = "position startpos"
+    // this.kifu_body = "position startpos"
   }
 
   run() {
@@ -40,10 +45,7 @@ class Mediator {
     const move_infos = this.data_source.move_infos
 
     const num = this.normalized_turn - this.data_source.turn_min
-    _(num).times((i) => {
-      const move_hand = move_infos[i]
-      this.execute_one(move_hand)
-    })
+    _(num).times((i) => { this.execute_one(move_infos[i]) })
   }
 
   execute_one(m) {
