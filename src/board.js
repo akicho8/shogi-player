@@ -4,19 +4,19 @@ class Board {
   }
 
   constructor() {
-    this.surface = new Map()
+    this._surface = new Map()
   }
 
   place_on(soldier) {
-    this.surface.set(soldier.place.key, soldier)
+    this._surface.set(soldier.place.key, soldier)
   }
 
   lookup(place) {
-    return this.surface.get(place.key)
+    return this._surface.get(place.key)
   }
 
   delete_at(place) {
-    this.surface.delete(place.key)
+    this._surface.delete(place.key)
   }
 }
 
