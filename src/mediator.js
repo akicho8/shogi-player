@@ -94,13 +94,9 @@ class Mediator {
     this.board.delete_at(place)
   }
 
-  board_place_at(xy) {
-    return this.board.lookup(Place.fetch(xy))
-  }
-
   cell_class(xy) {
-    const [x, y] = xy
-    const soldier = this.board_place_at(xy)
+    const place = Place.fetch(xy)
+    const soldier = this.board.lookup(place)
     let list = []
 
     if (soldier) {
@@ -149,7 +145,8 @@ class Mediator {
   // }
 
   cell_piece_class(xy) {
-    const soldier = this.board_place_at(xy)
+    const place = Place.fetch(xy)
+    const soldier = this.board.lookup(place)
     let list = []
     if (soldier) {
       list.push(`location_${soldier.location.key}`)
@@ -158,7 +155,8 @@ class Mediator {
   }
 
   cell_view(xy) {
-    const soldier = this.board_place_at(xy)
+    const place = Place.fetch(xy)
+    const soldier = this.board.lookup(place)
     let str = ""
     if (soldier) {
       str = soldier.name
