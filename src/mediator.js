@@ -81,7 +81,7 @@ class Mediator {
     return this.hold_pieces.get(location.key).get(piece.key) || 0
   }
 
-  hold_pieces_add(location, piece, plus) {
+  hold_pieces_add(location, piece, plus = 1) {
     const count = this.hold_pieces_count(location, piece) + plus
     const counts_hash = this.hold_pieces.get(location.key)
     if (count >= 1) {

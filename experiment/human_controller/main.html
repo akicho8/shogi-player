@@ -32,7 +32,7 @@
       <table border="1" class="hold_pieces white">
         <tr>
           <template v-for="(count, piece) in hold_pieces.white">
-            <td @click="hold_piece_click('white', piece, $event)">
+            <td @click="piece_stand_piece_click('white', piece, $event)">
               {{piece}}{{count}}
             </td>
           </template>
@@ -50,7 +50,7 @@
       <table border="1" class="hold_pieces black">
         <tr>
           <template v-for="(count, piece) in hold_pieces.black">
-            <td @click="hold_piece_click('black', piece, $event)">
+            <td @click="piece_stand_piece_click('black', piece, $event)">
               {{piece}}{{count}}
             </td>
           </template>

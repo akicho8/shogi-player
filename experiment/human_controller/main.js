@@ -82,7 +82,7 @@ const vm = new Vue({
     },
 
     // 駒台をクリック
-    hold_piece_click: function(location, piece, e) {
+    piece_stand_piece_click: function(location, piece, e) {
       // 持っているならキャンセル
       if (this.rules["rule3"] && this.motteiru) {
         this.state_reset()

@@ -687,7 +687,7 @@ export default {
       // 相手の持駒を自分の駒台に移動
       if (this.have_piece_location && this.have_piece) {
         console.log("相手の持駒を自分の駒台に移動")
-        this.mediator.piece_box_add(this.have_piece, 1)
+        this.mediator.piece_box_add(this.have_piece)
         this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
         this.state_reset()
         return
@@ -724,7 +724,7 @@ export default {
     },
 
     // 駒台クリック
-    hold_piece_click2(location, e) {
+    piece_stand_click(location, e) {
       console.log("駒台クリック")
 
       if (this.have_piece_location === location && this.have_piece) {
@@ -745,7 +745,7 @@ export default {
     },
 
     // 駒台の駒をクリック
-    hold_piece_click(location, piece, e) {
+    piece_stand_piece_click(location, piece, e) {
       console.log("駒台の駒をクリック")
 
       // 自分の駒をすでに持っているならキャンセル
@@ -843,7 +843,7 @@ export default {
       if (this.place_from) {
         console.log("置く")
         if (soldier) {
-          this.mediator.hold_pieces_add(this.origin_soldier.location, soldier.piece, 1) // 相手の駒があれば取る
+          this.mediator.hold_pieces_add(this.origin_soldier.location, soldier.piece) // 相手の駒があれば取る
           // this.$forceUpdate()
         }
         const new_soldier = new Soldier({
@@ -866,9 +866,9 @@ export default {
           piece: this.have_piece,
           place: place,
           promoted: false,
-          location: this.have_piece_location, // this.mediator.current_location,
+          location: this.have_piece_location || Location.fetch("black"), // this.mediator.current_location,
         })
-        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1) // 持駒を減らす
+        this.komo_herasu()
         this.mediator.board.place_on(soldier) // 置く
         this.state_reset()
         this.turn_next()
@@ -895,16 +895,24 @@ export default {
 
     // 盤上の駒を駒台に置く
     koma_oku(location) {
-      this.mediator.hold_pieces_add(location, this.origin_soldier.piece, 1) // 駒台にプラス
+      this.mediator.hold_pieces_add(location, this.origin_soldier.piece) // 駒台にプラス
       this.mediator.board.delete_at(this.origin_soldier.place)
       this.state_reset()
     },
 
     komo_idou(location) {
       console.log("相手の持駒を自分の駒台に移動")
-      this.mediator.hold_pieces_add(location, this.have_piece, 1)
-      this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
+      this.komo_herasu()
+      this.mediator.hold_pieces_add(location, this.have_piece)
       this.state_reset()
+    },
+
+    komo_herasu() {
+      if (this.have_piece_location) {
+        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
+      } else {
+        this.mediator.piece_box_add(this.have_piece, -1)
+      }
     },
 
     // // 持駒減らす
