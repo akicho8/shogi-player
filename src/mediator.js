@@ -110,12 +110,11 @@ class Mediator {
     if (this.last_hand) {
       const origin_place = this.last_hand.origin_place
       if (origin_place) {
-        if (origin_place.x === x && origin_place.y === y) {
+        if (_.isEqual(origin_place, place)) {
           list.push("origin_place")
         }
       }
-      const place = this.last_hand.place
-      if (place.x === x && place.y === y) {
+      if (_.isEqual(this.last_hand.place, place)) {
         list.push("current")
       }
     }
