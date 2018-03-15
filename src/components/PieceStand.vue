@@ -1,5 +1,5 @@
 <template>
-<div class="flex-item piece_stand" :class="[`location_${location.key}`, $parent.env, {turn_active: $parent.mediator.current_location.key === location.key}]" @click.stop="$parent.hold_piece_click2(location, $event)">
+<div class="piece_stand" :class="[`location_${location.key}`, $parent.env, {turn_active: $parent.mediator.current_location.key === location.key}]" @click.stop="$parent.hold_piece_click2(location, $event)">
   <ul>
     <li class="location_mark">{{location.name}}</li>
     <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.hold_piece_click(location, piece, $event)" :class="{active: hold_piece_have_p(location, piece)}">

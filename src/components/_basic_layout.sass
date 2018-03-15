@@ -28,9 +28,17 @@
     .flex-item:nth-child(2)
       align-self: center
     .flex-item:nth-child(3)
-      align-self: flex-end
-
-    .board-wrap
+      // align-self: flex-end
+      display: flex
+      // 縦並び
+      flex-direction: column
+      // 空白を空けて上下に配置
+      justify-content: space-between
+      .piece_box
+        min-height: 10vmin
+        border: 1px solid #eee
+        
+  .board-wrap
 
       // .mark
       //   position: absolute

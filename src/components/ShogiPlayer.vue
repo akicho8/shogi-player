@@ -46,7 +46,7 @@
       </div>
     </template>
     <div class="board-container flippable" :class="{flip: flip}">
-      <PieceStand :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
+      <PieceStand class="flex-item" :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
       <div class="flex-item board-wrap">
         <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
         <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
@@ -65,7 +65,17 @@
           </table>
         </div>
       </div>
-      <PieceStand :location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')" />
+      <div class="flex-item right">
+        <div class="piece_box" @click="piece_box_other_click">
+          <ul>
+            <li v-for="[piece, count] in mediator.piece_box_realized_hold_pieces_of()" @click.stop="piece_box_piece_click(piece, $event)" :class="{active: piece_box_have_p(piece)}">
+              <span :class="piece.css_class_list">{{piece.name}}</span>
+              <span v-if='count >= 2' class="piece_count">{{count}}</span>
+            </li>
+          </ul>
+        </div>
+        <PieceStand :location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')" />
+      </div>
     </div>
     <template v-if="controller_show">
       <div class="controller_block buttons has-addons is-centered">
@@ -111,6 +121,7 @@
       <tr><th>place_from</th><td>{{place_from}}</td></tr>
       <tr><th>have_piece</th><td>{{have_piece}}</td></tr>
       <template v-if="mediator">
+        <tr><th>駒箱</th><td>{{mediator.piece_box_realized_hold_pieces_of()}}</td></tr>
         <tr><th>持駒</th><td>{{mediator.hold_pieces}}</td></tr>
         <tr><th>次の手番</th><td>{{mediator.current_location.key}}</td></tr>
         <tr><th>SFEN</th><td>{{mediator.to_sfen}}</td></tr>
@@ -631,6 +642,85 @@ export default {
     mouse_over_func(e) {
       // / e.target.classList.add("active")
       this.log("mouse_over_func")
+    },
+
+    // 駒箱の駒を持ち上げている？
+    piece_box_have_p(piece) {
+      return _.isNil(this.have_piece_location) && this.have_piece === piece
+    },
+
+    piece_box_other_click(e) {
+      console.log("駒箱クリック")
+
+      if (_.isNil(this.have_piece_location) && this.have_piece) {
+        console.log("持っているならキャンセル")
+        this.state_reset()
+        return
+      }
+
+      if (this.have_piece_location && this.have_piece) {
+        console.log("駒台から駒箱に移動")
+        this.mediator.piece_box_add(this.have_piece)
+        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
+        this.state_reset()
+        return
+      }
+
+      if (this.origin_soldier) {
+        console.log("盤上の駒を駒箱に移動")
+        this.mediator.piece_box_add(this.origin_soldier.piece)
+        this.mediator.board.delete_at(this.origin_soldier.place)
+        this.state_reset()
+      }
+    },
+
+    piece_box_piece_click(piece, e) {
+      console.log("駒箱の駒をクリック")
+
+      // 自分の駒をすでに持っているならキャンセル
+      if (_.isNil(this.have_piece_location) && this.have_piece) {
+        console.log("持っているならキャンセル")
+        this.state_reset()
+        return
+      }
+
+      // 相手の持駒を自分の駒台に移動
+      if (this.have_piece_location && this.have_piece) {
+        console.log("相手の持駒を自分の駒台に移動")
+        this.mediator.piece_box_add(this.have_piece, 1)
+        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
+        this.state_reset()
+        return
+      }
+
+      // // 相手の持駒を持とうとしたときは無効
+      // if (this.run_mode === "human_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
+      //   console.log("相手の持駒を持とうとしたときは無効")
+      //   return
+      // }
+
+      // 盤上の駒を駒台に置く
+      if (this.origin_soldier) {
+        console.log("盤上の駒を駒箱に移動")
+        this.mediator.piece_box_add(this.origin_soldier.piece)
+        this.mediator.board.delete_at(this.origin_soldier.place)
+        this.state_reset()
+        // console.log("盤上の駒を駒台に置く")
+        // this.koma_oku(location)
+        return
+      }
+
+      // // クリックしたけど持駒がない
+      // if (this.mediator.piece_boxs_count(location, piece) <= 0) {
+      //   console.log("クリックしたけど持駒がない")
+      //   return
+      // }
+
+      console.log("駒台の駒を持つ")
+      this.have_piece = piece
+      this.have_piece_location = null
+      // e.target.classList.add("active")
+      // this.from_dom = e.target
     },
 
     // 駒台クリック

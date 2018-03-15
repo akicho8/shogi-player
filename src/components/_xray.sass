@@ -1,5 +1,5 @@
 @mixin sp_xray_color($level)
-  background: hsla((360 / 5) * $level, 50%, 50%, 0.25)
+  background: hsla((360 / 6) * $level, 50%, 50%, 0.25)
   
 .shogi-player
   &.debug
@@ -17,3 +17,5 @@
       @include sp_xray_color(4)
     .piece_stand
       @include sp_xray_color(5)
+    .piece_box
+      @include sp_xray_color(6)

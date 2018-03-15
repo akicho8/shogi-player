@@ -21,6 +21,7 @@ class Mediator {
     this.board = null
     this.hold_pieces = null
     this.last_hand = null
+    this.piece_box = new Map()
 
     this.env = process.env.NODE_ENV
     // this.kifu_body = "position startpos"
@@ -215,6 +216,30 @@ class Mediator {
     // console.log("realized_hold_pieces_of")
     const list = Array.from(this.hold_pieces.get(location_key))
     // console.log(list)
+    return _(list)
+      .filter(([key, count]) => count >= 1)
+      .map(([key, count]) => [Piece.fetch(key), count])
+      .sortBy(list, ([key, count]) => key.code)
+      .value()
+  }
+
+  // -------------------------------------------------------------------------------- piece_box
+
+  piece_box_count(piece) {
+    return this.piece_box.get(piece.key) || 0
+  }
+
+  piece_box_add(piece, plus = 1) {
+    const count = this.piece_box_count(piece) + plus
+    if (count >= 1) {
+      this.piece_box.set(piece.key, count)
+    } else {
+      this.piece_box.delete(piece.key)
+    }
+  }
+
+  piece_box_realized_hold_pieces_of() {
+    const list = Array.from(this.piece_box)
     return _(list)
       .filter(([key, count]) => count >= 1)
       .map(([key, count]) => [Piece.fetch(key), count])
