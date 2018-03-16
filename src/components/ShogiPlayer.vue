@@ -66,17 +66,16 @@
         </div>
       </div>
       <div class="flex-item right">
-        <div class="piece_box" @click="piece_box_other_click">
-          <ul>
-            <li v-for="[piece, count] in mediator.piece_box_realized_hold_pieces_of()" @click.stop="piece_box_piece_click(piece, $event)" :class="{active: piece_box_have_p(piece)}">
-              <span :class="piece.css_class_list">{{piece.name}}</span>
-              <span v-if='count >= 2' class="piece_count">{{count}}</span>
-            </li>
-          </ul>
-        </div>
+        <ul class="piece_box" @click="piece_box_other_click">
+          <li v-for="[piece, count] in mediator.piece_box_realized_hold_pieces_of()" @click.stop="piece_box_piece_click(piece, $event)" :class="{active: piece_box_have_p(piece)}">
+            <span :class="piece.css_class_list">{{piece.name}}</span>
+            <span v-if='count >= 2' class="piece_count">{{count}}</span>
+          </li>
+        </ul>
         <PieceStand :location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')" />
       </div>
     </div>
+
     <template v-if="controller_show">
       <div class="controller_block buttons has-addons is-centered">
         <button ref="first"    class="button first"    @click.stop="move_to_first">|◀</button>
