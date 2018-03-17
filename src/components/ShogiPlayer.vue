@@ -328,7 +328,19 @@ export default {
 
     // -------------------------------------------------------------------------------- run_mode
 
-    run_mode: function () {
+    run_mode: function (new_val, old_val) {
+      if (new_val === "human_mode" && old_val === "edit_mode") {
+        this.$dialog.confirm({
+          message: '手番はどちらですか？',
+          confirmText: '先手',
+          cancelText: '後手',
+          onConfirm: () => {
+          },
+          onCancel: () => {
+          },
+        })
+      }
+
       if (this.run_mode === "edit_mode") {
         // this.turn_edit_value = 0
         // this.current_turn = 0
