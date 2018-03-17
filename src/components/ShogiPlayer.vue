@@ -145,6 +145,7 @@ import Vue from 'vue'
 
 import { Mediator } from "../mediator"
 import { Place } from "../place"
+import { Piece } from "../piece"
 import { Soldier } from "../soldier"
 import { PresetInfo } from "../preset_info"
 import { Location } from "../location"
@@ -337,12 +338,16 @@ export default {
 
     current_preset: function () {
       if (this.current_preset) {
+        const preset_info = PresetInfo.fetch(this.current_preset)
         const data_source = new FooParser()
-        data_source.kifu_body = PresetInfo.fetch(this.current_preset).sfen
+        data_source.kifu_body = preset_info.sfen
         data_source.parse()
 
         this.mediator = new Mediator()
         this.mediator.data_source = data_source
+        preset_info.piece_box.forEach(([e, c]) => {
+          this.mediator.piece_box_add(Piece.fetch(e), c)
+        })
         this.mediator.run()
       }
     },
