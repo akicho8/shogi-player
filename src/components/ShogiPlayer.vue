@@ -838,9 +838,9 @@ export default {
         return
       }
 
-      // 置く
+      // 盤上から移動
       if (this.place_from) {
-        console.log("置く")
+        console.log("盤上から移動")
         if (soldier) {
           this.mediator.hold_pieces_add(this.origin_soldier.location, soldier.piece) // 相手の駒があれば取る
           // this.$forceUpdate()
@@ -955,7 +955,7 @@ export default {
       // this.current_turn += 1
       // this.turn_counter += 1
 
-      this.mediator_update()
+      // this.mediator_update()
     },
 
     location_flip(location_key) {
