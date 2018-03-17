@@ -66,7 +66,7 @@
         </div>
       </div>
       <div class="flex-item right">
-        <ul class="piece_box" @click="piece_box_other_click">
+        <ul v-if="run_mode === 'edit_mode'" class="piece_box" @click="piece_box_other_click">
           <li v-for="[piece, count] in mediator.piece_box_realized_hold_pieces_of()" @click.stop="piece_box_piece_click(piece, $event)" :class="{active: piece_box_have_p(piece)}">
             <span :class="piece.css_class_list">{{piece.name}}</span>
             <span v-if='count >= 2' class="piece_count">{{count}}</span>
