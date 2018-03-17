@@ -21,18 +21,19 @@
     <i class="fas fa-spinner fa-pulse"></i>
   </template>
 
-  <template v-if="debug_mode">
-    ({{update_counter}})
-  </template>
-
-  <template v-if="run_mode === 'edit_mode'">
-    <b-field label="初期配置">
-      <b-select placeholder="初期配置" v-model="current_preset">
-        <option v-for="record in PresetInfo.values" :value="record.key" :key="record.key"> {{record.name}}</option>
-      </b-select>
-    </b-field>
-    <button class="button" @click="all_flip">盤面反転</button>
-  </template>
+  <div v-if="run_mode === 'edit_mode'" class="edit_mode_controller">
+    <div class="edit_mode_controller_wrap">
+      <b-dropdown v-model="current_preset">
+        <button class="button is-primary is-outlined" slot="trigger">
+          <span>初期配置</span><b-icon icon="menu-down"></b-icon>
+        </button>
+        <b-dropdown-item v-for="record in PresetInfo.values" :value="record.key" :key="record.key">
+          {{record.name}}
+        </b-dropdown-item>
+      </b-dropdown>
+      <button class="button is-primary is-outlined" @click="all_flip">盤面反転</button>
+    </div>
+  </div>
 
   <template v-if="mediator">
     <template v-if="run_mode === 'view_mode'">
