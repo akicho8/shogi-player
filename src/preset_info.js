@@ -11,7 +11,7 @@ class PresetInfo extends MemoryRecord {
       { key: "飛車落ち",   sfen: "position sfen lnsgkgsnl/7b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",   piece_box: [["R", 1]]},
       { key: "飛香落ち",   sfen: "position sfen lnsgkgsn1/7b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",   piece_box: [["R", 1], ["L", 1]]},
       { key: "二枚落ち",   sfen: "position sfen lnsgkgsnl/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",     piece_box: [["B", 1], ["R", 1]]},
-      { key: "三枚落ち",   sfen: "position sfen lnsgkgsn1/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",     piece_box: [["B", 1], ["R", 1], ["L", 1]]},
+      // { key: "三枚落ち",   sfen: "position sfen lnsgkgsn1/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",     piece_box: [["B", 1], ["R", 1], ["L", 1]]},
       { key: "四枚落ち",   sfen: "position sfen 1nsgkgsn1/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",     piece_box: [["B", 1], ["R", 1], ["L", 2]]},
       { key: "六枚落ち",   sfen: "position sfen 2sgkgs2/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",       piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2]]},
       { key: "八枚落ち",   sfen: "position sfen 3gkg3/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",         piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2]]},
