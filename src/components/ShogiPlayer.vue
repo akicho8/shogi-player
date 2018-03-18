@@ -31,7 +31,7 @@
           {{record.name}}
         </b-dropdown-item>
       </b-dropdown>
-      <button class="button is-primary is-outlined" @click="all_flip">盤面反転</button>
+      <button class="button is-primary is-outlined" @click="all_flip">先後反転</button>
     </div>
   </div>
 
