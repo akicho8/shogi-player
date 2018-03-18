@@ -78,18 +78,20 @@
       </div>
     </div>
 
-    <template v-if="controller_show">
-      <div class="controller_block buttons has-addons is-centered">
-        <button ref="first"    class="button first"    @click.stop="move_to_first">|◀</button>
-        <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)">◀</button>
-        <button ref="next"     class="button next"     @click.stop="relative_move(+1, $event)">▶</button>
-        <button ref="last"     class="button last"     @click.stop="move_to_last">▶|</button>
-        <button                class="button flip"     @click.stop="board_flip_run">{{flip ? '&#x21BA;' : '&#x21BB;'}}</button>
-      </div>
-    </template>
+    <template v-if="run_mode !== 'edit_mode'">
+      <template v-if="controller_show">
+        <div class="controller_block buttons has-addons is-centered">
+          <button ref="first"    class="button first"    @click.stop="move_to_first">|◀</button>
+          <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)">◀</button>
+          <button ref="next"     class="button next"     @click.stop="relative_move(+1, $event)">▶</button>
+          <button ref="last"     class="button last"     @click.stop="move_to_last">▶|</button>
+          <button                class="button flip"     @click.stop="board_flip_run">{{flip ? '&#x21BA;' : '&#x21BB;'}}</button>
+        </div>
+      </template>
 
-    <template v-if="slider_show">
-      <input type="range" v-model.number="current_turn" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="slider" class="slider" />
+      <template v-if="slider_show">
+        <input type="range" v-model.number="current_turn" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="slider" class="slider" />
+      </template>
     </template>
 
     <div class="sfen_area is-size-7 has-text-grey" v-if="sfen_show">
