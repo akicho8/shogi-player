@@ -346,8 +346,18 @@ export default {
       if (this.run_mode === "edit_mode") {
         // this.turn_edit_value = 0
         // this.current_turn = 0
+
+        // this.mediator.current_turn = 0
+        // this.mediator_update()
+
+        const data_source = new FooParser()
+        data_source.kifu_body = "position sfen " + this.mediator.to_sfen
+        data_source.parse()
+        this.mediator = new Mediator()
+        this.mediator.data_source = data_source
         this.mediator.current_turn = 0
-        this.mediator_update()
+        this.mediator.run()
+        this.current_turn = 0
       }
     },
 
@@ -454,9 +464,13 @@ export default {
       }
     },
 
-    parser_build() {
+    data_source_get() {
       let data_source = null
       if (this.run_mode === "edit_mode") {
+        // data_source = new FooParser()
+        // data_source.kifu_body = "position sfen " + this.mediator.to_sfen
+        // data_source.parse()
+      } else if (this.run_mode === "human_mode") {
         data_source = new FooParser()
         data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         data_source.parse()
@@ -476,7 +490,7 @@ export default {
     },
 
     mediator_update() {
-      const data_source = this.parser_build()
+      const data_source = this.data_source_get()
       if (data_source) {
         this.mediator = new Mediator()
         this.mediator.data_source = data_source
