@@ -1,5 +1,5 @@
 <template>
-<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${run_mode}`, {debug: debug_mode}]">
+<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${run_mode2}`, {debug: debug_mode}]">
   <!-- template v-if だとテスト時のみエラーになるため div v-show 形式にしている -->
   <!-- これは jest の問題なのか vue の不具合なのかわからない  -->
   <div v-show="error_message !== null">
@@ -21,7 +21,7 @@
     <i class="fas fa-spinner fa-pulse"></i>
   </template>
 
-  <div v-if="run_mode === 'edit_mode'" class="edit_mode_controller">
+  <div v-if="run_mode2 === 'edit_mode'" class="edit_mode_controller">
     <div class="edit_mode_controller_wrap">
       <b-dropdown v-model="current_preset">
         <button class="button is-primary is-outlined" slot="trigger">
@@ -36,16 +36,18 @@
   </div>
 
   <template v-if="mediator">
-    <template v-if="run_mode === 'view_mode'">
-      <div class="turn_editor">
-        <template v-if="!turn_edit">
-          <span class="turn_edit_text" @click="turn_edit_run">{{mediator.current_turn_label}}</span>
-        </template>
-        <template v-if="turn_edit">
-          <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
-        </template>
-      </div>
+    <template v-if="run_mode2 === 'view_mode'">
+      <template v-if="!turn_edit">
+        <span class="turn_edit_text" @click="turn_edit_run">{{mediator.current_turn_label}}</span>
+      </template>
+      <template v-if="turn_edit">
+        <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
+      </template>
     </template>
+    <span class="is-pulled-right kakusi_menu" @click="isComponentModalActive = true">…</span>
+    <b-modal :active.sync="isComponentModalActive" has-modal-card>
+      <modal-form :run_mode.sync="run_mode2"></modal-form>
+    </b-modal>
     <div class="board-container flippable" :class="{flip: flip}">
       <PieceStand class="flex-item" :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
       <div class="flex-item board-wrap">
@@ -67,28 +69,25 @@
         </div>
       </div>
       <div class="flex-item">
-        <ul v-if="run_mode === 'edit_mode'" class="piece_box" @click="piece_box_other_click">
+        <ul v-if="run_mode2 === 'edit_mode'" class="piece_box" @click="piece_box_other_click">
           <li v-for="[piece, count] in mediator.piece_box_realized_hold_pieces_of()" @click.stop="piece_box_piece_click(piece, $event)" :class="{active: piece_box_have_p(piece)}">
             <span :class="piece.css_class_list">{{piece.name}}</span>
             <span v-if='count >= 2' class="piece_count">{{count}}</span>
           </li>
         </ul>
-        <div v-if="run_mode !== 'edit_mode'"></div><!-- 先手の駒台が上にくっつてしまうので防ぐため -->
+        <div v-if="run_mode2 !== 'edit_mode'"></div><!-- 先手の駒台が上にくっつてしまうので防ぐため -->
         <PieceStand :location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')" />
       </div>
     </div>
 
-    <template v-if="run_mode === 'view_mode' || run_mode === 'play_mode'">
-      <template v-if="controller_show">
-        <div class="controller_block buttons has-addons is-centered">
-          <button ref="first"    class="button first"    @click.stop="move_to_first">|◀</button>
-          <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)">◀</button>
-          <button ref="next"     class="button next"     @click.stop="relative_move(+1, $event)">▶</button>
-          <button ref="last"     class="button last"     @click.stop="move_to_last">▶|</button>
-          <button                class="button flip"     @click.stop="board_flip_run">{{flip ? '&#x21BA;' : '&#x21BB;'}}</button>
-        </div>
-      </template>
-
+    <template v-if="run_mode2 === 'view_mode' || run_mode2 === 'play_mode'">
+      <div v-if="controller_show" class="controller_block buttons has-addons is-centered">
+        <button ref="first"    class="button first"    @click.stop="move_to_first">|◀</button>
+        <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)">◀</button>
+        <button ref="next"     class="button next"     @click.stop="relative_move(+1, $event)">▶</button>
+        <button ref="last"     class="button last"     @click.stop="move_to_last">▶|</button>
+        <button                class="button flip"     @click.stop="board_flip_run">{{flip ? '&#x21BA;' : '&#x21BB;'}}</button>
+      </div>
       <template v-if="slider_show">
         <input type="range" v-model.number="current_turn" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="slider" class="slider" />
       </template>
@@ -189,6 +188,40 @@ require('axios-debug-log')({
 
 const logger_debug = require('debug')('debug')
 
+const ModalForm = {             // modal-form
+  props: ["run_mode"],
+  data: function() {
+    return {
+      run_mode2: this.run_mode,
+    }
+  },
+  template: `
+<div class="modal-card" style="width: auto">
+  <header class="modal-card-head">
+    <p class="modal-card-title">設定</p>
+  </header>
+  <section class="modal-card-body">
+    <b-field label="モード">
+      <div class="block">
+        <b-radio v-model="run_mode2" native-value="view_mode">ビュー</b-radio>
+        <b-radio v-model="run_mode2" native-value="play_mode">プレイ</b-radio>
+        <b-radio v-model="run_mode2" native-value="edit_mode">編集</b-radio>
+      </div>
+    </b-field>
+ {{run_mode2}}
+  </section>
+  <footer class="modal-card-foot">
+    <button class="button is-primary" @click="$parent.close()">Close</button>
+  </footer>
+</div>
+`,
+  watch: {
+    run_mode2: function(value) {
+      this.$emit('update:run_mode', value)
+    },
+  },
+}
+
 /* eslint-disable no-new */
 export default {
   name: 'ShogiPlayer',
@@ -219,6 +252,7 @@ export default {
 
   components: {
     PieceStand,
+    ModalForm,
   },
 
   data() {
@@ -303,6 +337,14 @@ export default {
       init_sfen: null,
       init_teban: "black",
       init_sfen2: null,
+      run_mode2: this.run_mode,
+
+      isComponentModalActive: false,
+
+      formProps: {
+        email: 'evan@you.com',
+        password: 'testing',
+      },
     }
   },
 
@@ -317,11 +359,11 @@ export default {
     // -------------------------------------------------------------------------------- basic
 
     current_turn: function () {
-      if (this.run_mode === "view_mode") {
+      if (this.run_mode2 === "view_mode") {
         this.log("mediator_update from current_turn")
         this.mediator_update()
       }
-      if (this.run_mode === "play_mode") {
+      if (this.run_mode2 === "play_mode") {
         this.init_sfen2 = this.init_sfen + " moves " + this.moves.join(" ")
 
         const data_source = new FooParser()
@@ -352,9 +394,11 @@ export default {
     polling_interval: function () { this.polling_interval_update() },
     /* eslint-enable */
 
-    // -------------------------------------------------------------------------------- run_mode
-
-    run_mode: function (new_val, old_val) {
+    // -------------------------------------------------------------------------------- run_mode2
+    run_mode: function (value) {
+      this.run_mode2 = value    // TODO: プロパティ(引数)と内部変数の名前が共有できたないためこんな複雑になっている。どうにかならないのか？
+    },
+    run_mode2: function (new_val, old_val) {
       if (new_val === "play_mode" && old_val === "edit_mode") {
         this.init_teban = "white"
 
@@ -406,7 +450,7 @@ export default {
         this.current_turn = 0
       }
 
-      if (this.run_mode === "edit_mode") {
+      if (this.run_mode2 === "edit_mode") {
         // this.turn_edit_value = 0
         // this.current_turn = 0
 
@@ -531,11 +575,11 @@ export default {
 
     data_source_get() {
       let data_source = null
-      if (this.run_mode === "edit_mode") {
+      if (this.run_mode2 === "edit_mode") {
         // data_source = new FooParser()
         // data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         // data_source.parse()
-      } else if (this.run_mode === "play_mode") {
+      } else if (this.run_mode2 === "play_mode") {
         data_source = new FooParser()
         data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         data_source.parse()
@@ -797,7 +841,7 @@ export default {
       }
 
       // // 相手の持駒を持とうとしたときは無効
-      // if (this.run_mode === "play_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
+      // if (this.run_mode2 === "play_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
       //   console.log("相手の持駒を持とうとしたときは無効")
       //   return
       // }
@@ -865,7 +909,7 @@ export default {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.run_mode === "play_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
+      if (this.run_mode2 === "play_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
         console.log("相手の持駒を持とうとしたときは無効")
         return
       }
@@ -901,7 +945,7 @@ export default {
       // -------------------------------------------------------------------------------- Validation
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
-      if (this.run_mode === "play_mode" && !this.motteiru && soldier && soldier.location.key !== this.mediator.current_location.key) {
+      if (this.run_mode2 === "play_mode" && !this.motteiru && soldier && soldier.location.key !== this.mediator.current_location.key) {
         console.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
@@ -913,7 +957,7 @@ export default {
       }
 
       // 自分の駒の上に駒を重ねようとしたので状況キャンセル
-      if (this.run_mode === "play_mode" && this.jibun_no_komanoueni_kasaneta(soldier)) {
+      if (this.run_mode2 === "play_mode" && this.jibun_no_komanoueni_kasaneta(soldier)) {
         console.log("自分の駒の上に駒を重ねようとしたので状況キャンセル")
         this.state_reset()
         return
@@ -1055,7 +1099,7 @@ export default {
     },
 
     turn_next() {
-      if (this.run_mode === "play_mode") {
+      if (this.run_mode2 === "play_mode") {
         this.init_sfen2 = this.init_sfen + " moves " + this.moves.join(" ")
 
         const data_source = new FooParser()
@@ -1110,6 +1154,17 @@ export default {
       // this.mediator.hold_pieces.set("black", v.get("white"))
       // this.mediator.hold_pieces.set("white", v.get("black"))
     },
+
+    kakusi_menu_click() {
+    },
+
+    cardModal() {
+      this.$modal.open({
+        parent: this,
+        component: ModalForm,
+        hasModalCard: true, // If your modal content has a .modal-card as root, add this prop or the card might break on mobile
+      })
+    }
   },
 
   computed: {
