@@ -73,10 +73,13 @@ class SfenParser extends ParserBase {
   }
 
   get move_infos() {
-    if (_.isNil(this.attributes["moves"])) {
+    // console.table(this.attributes)
+    const moves = this.attributes["moves"]
+
+    if (_.isNil(moves) || moves === "") {
       return []
     }
-    return this.attributes["moves"].split(/\s+/).map((e, i) => {
+    return moves.split(/\s+/).map((e, i) => {
       const attrs = {}
       // if (true) {
       //   attrs["scene_index"] = this.turn_min + i
