@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <template v-if="run_mode !== 'edit_mode'">
+    <template v-if="run_mode === 'view_mode' || run_mode === 'play_mode'">
       <template v-if="controller_show">
         <div class="controller_block buttons has-addons is-centered">
           <button ref="first"    class="button first"    @click.stop="move_to_first">|◀</button>
@@ -321,6 +321,19 @@ export default {
         this.log("mediator_update from current_turn")
         this.mediator_update()
       }
+      if (this.run_mode === "play_mode") {
+        this.init_sfen2 = this.init_sfen + " moves " + this.moves.join(" ")
+
+        const data_source = new FooParser()
+        data_source.kifu_body = this.init_sfen2
+        data_source.parse()
+
+        this.mediator = new Mediator()
+        this.mediator.data_source = data_source
+        this.mediator.current_turn = this.current_turn
+        this.mediator.run()
+        this.current_turn = this.mediator.normalized_turn
+      }
     },
     turn_edit_value: function () {
       this.current_turn = this.turn_edit_value
@@ -372,6 +385,25 @@ export default {
             this.current_turn = 0
           },
         })
+      }
+
+      if (new_val === "play_mode" && old_val === "view_mode") {
+        this.init_teban = this.mediator.current_location.key
+
+        const sfen_serializer = this.mediator.sfen_serializer
+        this.init_sfen = "position sfen " + sfen_serializer.to_baord_sfen + " " + this.init_teban[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
+        this.moves = []
+
+        const data_source = new FooParser()
+        data_source.kifu_body = this.init_sfen
+        data_source.parse()
+
+        this.mediator = new Mediator()
+        this.mediator.data_source = data_source
+        this.mediator.current_turn = 0
+        this.mediator.run()
+
+        this.current_turn = 0
       }
 
       if (this.run_mode === "edit_mode") {
