@@ -189,10 +189,6 @@ class Mediator {
     return this.data_source.location_by_offset(this.normalized_turn)
   }
 
-  get to_sfen() {
-    return (new SfenSerializer(this)).to_s
-  }
-
   get current_comments() {
     if (this.data_source.comments_pack) {
       return this.data_source.comments_pack[this.normalized_turn]
@@ -221,6 +217,16 @@ class Mediator {
       .map(([key, count]) => [Piece.fetch(key), count])
       .sortBy(list, ([key, count]) => key.code)
       .value()
+  }
+
+  // -------------------------------------------------------------------------------- serialize
+
+  get to_sfen() {
+    return this.sfen_serializer.to_s
+  }
+
+  get sfen_serializer() {
+    return new SfenSerializer(this)
   }
 
   // -------------------------------------------------------------------------------- piece_box
