@@ -236,7 +236,7 @@ export default {
       read_counter: 0,
       update_counter: 0,
 
-      // -------------------------------------------------------------------------------- human_mode
+      // -------------------------------------------------------------------------------- play_mode
       place_from: null,
       from_dom: null,
       // board: {
@@ -342,7 +342,7 @@ export default {
     // -------------------------------------------------------------------------------- run_mode
 
     run_mode: function (new_val, old_val) {
-      if (new_val === "human_mode" && old_val === "edit_mode") {
+      if (new_val === "play_mode" && old_val === "edit_mode") {
         this.init_teban = "white"
 
         this.$dialog.confirm({
@@ -353,6 +353,7 @@ export default {
             console.log("onConfirm")
             this.init_teban = "black"
           },
+          // 最後に必ず呼ばれる
           onCancel: () => {
             console.log("set init_sfen")
             const sfen_serializer = this.mediator.sfen_serializer
@@ -502,7 +503,7 @@ export default {
         // data_source = new FooParser()
         // data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         // data_source.parse()
-      } else if (this.run_mode === "human_mode") {
+      } else if (this.run_mode === "play_mode") {
         data_source = new FooParser()
         data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         data_source.parse()
@@ -707,7 +708,7 @@ export default {
       }
     },
 
-    // -------------------------------------------------------------------------------- human_mode
+    // -------------------------------------------------------------------------------- play_mode
 
     mouse_over_func(e) {
       // / e.target.classList.add("active")
@@ -764,7 +765,7 @@ export default {
       }
 
       // // 相手の持駒を持とうとしたときは無効
-      // if (this.run_mode === "human_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
+      // if (this.run_mode === "play_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
       //   console.log("相手の持駒を持とうとしたときは無効")
       //   return
       // }
@@ -832,7 +833,7 @@ export default {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.run_mode === "human_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
+      if (this.run_mode === "play_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
         console.log("相手の持駒を持とうとしたときは無効")
         return
       }
@@ -868,7 +869,7 @@ export default {
       // -------------------------------------------------------------------------------- Validation
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
-      if (this.run_mode === "human_mode" && !this.motteiru && soldier && soldier.location.key !== this.mediator.current_location.key) {
+      if (this.run_mode === "play_mode" && !this.motteiru && soldier && soldier.location.key !== this.mediator.current_location.key) {
         console.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
@@ -880,7 +881,7 @@ export default {
       }
 
       // 自分の駒の上に駒を重ねようとしたので状況キャンセル
-      if (this.run_mode === "human_mode" && this.jibun_no_komanoueni_kasaneta(soldier)) {
+      if (this.run_mode === "play_mode" && this.jibun_no_komanoueni_kasaneta(soldier)) {
         console.log("自分の駒の上に駒を重ねようとしたので状況キャンセル")
         this.state_reset()
         return
@@ -1022,7 +1023,7 @@ export default {
     },
 
     turn_next() {
-      if (this.run_mode === "human_mode") {
+      if (this.run_mode === "play_mode") {
         this.init_sfen2 = this.init_sfen + " moves " + this.moves.join(" ")
 
         const data_source = new FooParser()
