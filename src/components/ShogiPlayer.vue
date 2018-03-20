@@ -82,11 +82,11 @@
 
     <template v-if="run_mode2 === 'view_mode' || run_mode2 === 'play_mode'">
       <div v-if="controller_show" class="controller_block buttons has-addons is-centered">
-        <button ref="first"    class="button first"    @click.stop="move_to_first">|◀</button>
-        <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)">◀</button>
-        <button ref="next"     class="button next"     @click.stop="relative_move(+1, $event)">▶</button>
-        <button ref="last"     class="button last"     @click.stop="move_to_last">▶|</button>
-        <button                class="button flip"     @click.stop="board_flip_run">{{flip ? '&#x21BA;' : '&#x21BB;'}}</button>
+        <button ref="first"    class="button first"    @click.stop="move_to_first"><b-icon icon="menu-left"></b-icon></button>
+        <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)"><b-icon icon="chevron-left" size="is-small"></b-icon></button>
+        <button ref="next"     class="button next"     @click.stop="relative_move(+1, $event)"><b-icon icon="chevron-right" size="is-small"></b-icon></button>
+        <button ref="last"     class="button last"     @click.stop="move_to_last"><b-icon icon="menu-right"></b-icon></button>
+        <button                class="button flip"     @click.stop="board_flip_run"><b-icon icon="rotate-3d" size="is-small"></b-icon></button>
       </div>
       <template v-if="slider_show">
         <input type="range" v-model.number="current_turn" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="slider" class="slider" />
