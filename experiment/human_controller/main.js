@@ -135,7 +135,7 @@ const vm = new Vue({
       }
 
       // 自分の駒の上に駒を重ねようとしたので状況キャンセル
-      if (this.jibun_no_komanoueni_kasaneta(soldier)) {
+      if (this.put_on_my_piece_p(soldier)) {
         this.state_reset()
         return
       }
@@ -187,7 +187,7 @@ const vm = new Vue({
     },
 
     // 自分の駒の上に重ねた？
-    jibun_no_komanoueni_kasaneta: function(soldier) {
+    put_on_my_piece_p: function(soldier) {
       return this.hold_p && this.rules["rule2"] && soldier && soldier.location === this.current_player
     },
 

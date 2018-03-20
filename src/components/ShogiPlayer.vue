@@ -248,9 +248,9 @@ export default {
       run_mode2: this.run_mode,
 
       // -------------------------------------------------------------------------------- play_mode
-      place_from: null,
-      from_dom: null,
-      have_piece: null,
+      place_from: null,          // 盤上ら動かそうとしているときの元位置
+      have_piece: null,          // 駒台 or 駒箱から持った駒
+      have_piece_location: null, // 駒台から持ったときだけ先後が入ている
 
       // -------------------------------------------------------------------------------- edit_mode
       current_preset: null,
@@ -260,11 +260,6 @@ export default {
       init_teban: "black",
 
       isComponentModalActive: false,
-
-      formProps: {
-        email: 'evan@you.com',
-        password: 'testing',
-      },
     }
   },
 
@@ -766,7 +761,7 @@ export default {
         this.mediator.board.delete_at(this.origin_soldier.place)
         this.state_reset()
         // console.log("盤上の駒を駒台に置く")
-        // this.koma_oku(location)
+        // this.board_soldir_to_hold_pieces(location)
         return
       }
 
@@ -794,13 +789,13 @@ export default {
       }
 
       if (this.have_piece_location !== location && this.have_piece) {
-        this.komo_idou(location)
+        this.opponent_hold_pieces_move_to_my_hold_pieces(location)
         return
       }
 
       if (this.origin_soldier) {
         console.log("盤上の駒を駒台に置く")
-        this.koma_oku(location)
+        this.board_soldir_to_hold_pieces(location)
       }
     },
 
@@ -817,7 +812,7 @@ export default {
 
       // 相手の持駒を自分の駒台に移動
       if (this.have_piece_location !== location && this.have_piece) {
-        this.komo_idou(location)
+        this.opponent_hold_pieces_move_to_my_hold_pieces(location)
         return
       }
 
@@ -830,7 +825,7 @@ export default {
       // 盤上の駒を駒台に置く
       if (this.origin_soldier) {
         console.log("盤上の駒を駒台に置く")
-        this.koma_oku(location)
+        this.board_soldir_to_hold_pieces(location)
         return
       }
 
@@ -870,7 +865,7 @@ export default {
       }
 
       // 自分の駒の上に駒を重ねようとしたので状況キャンセル
-      if (this.run_mode2 === "play_mode" && this.jibun_no_komanoueni_kasaneta(soldier)) {
+      if (this.run_mode2 === "play_mode" && this.put_on_my_piece_p(soldier)) {
         console.log("自分の駒の上に駒を重ねようとしたので状況キャンセル")
         this.state_reset()
         return
@@ -952,7 +947,7 @@ export default {
           promoted: false,
           location: this.have_piece_location || Location.fetch("black"), // this.mediator.current_location,
         })
-        this.komo_herasu()
+        this.piece_sub()
         this.mediator.board.place_on(soldier) // 置く
         this.moves.push(soldier.piece.key + "*" + place.to_sfen) // P*7g
         this.state_reset()
@@ -979,20 +974,21 @@ export default {
     },
 
     // 盤上の駒を駒台に置く
-    koma_oku(location) {
+    board_soldir_to_hold_pieces(location) {
       this.mediator.hold_pieces_add(location, this.origin_soldier.piece) // 駒台にプラス
       this.mediator.board.delete_at(this.origin_soldier.place)
       this.state_reset()
     },
 
-    komo_idou(location) {
+    opponent_hold_pieces_move_to_my_hold_pieces(location) {
       console.log("相手の持駒を自分の駒台に移動")
-      this.komo_herasu()
+      this.piece_sub()
       this.mediator.hold_pieces_add(location, this.have_piece)
       this.state_reset()
     },
 
-    komo_herasu() {
+    // 駒を減らす
+    piece_sub() {
       if (this.have_piece_location) {
         this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
       } else {
@@ -1001,7 +997,7 @@ export default {
     },
 
     // 自分の駒の上に重ねた？
-    jibun_no_komanoueni_kasaneta(soldier) {
+    put_on_my_piece_p(soldier) {
       return this.hold_p && soldier && soldier.location === this.mediator.current_location
     },
 
