@@ -59,4 +59,6 @@ if (process.argv[1] === __filename) {
 
   let v = MemoryRecord.lookup("(key_x)")
   console.log(v instanceof MemoryRecord)
+
+  console.log(MemoryRecord.values[0] === MemoryRecord.values[0])
 }

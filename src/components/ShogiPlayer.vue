@@ -1000,29 +1000,10 @@ export default {
       }
     },
 
-    // // 持駒減らす
-    // mochigoma_herasu() {
-    //   const count = (this.hold_pieces[this.mediator.current_location.key][this.have_piece] || 0) - 1
-    //   Vue.set(this.hold_pieces[this.mediator.current_location.key], this.have_piece, count)
-    //   if (count <= 0) {
-    //     delete this.hold_pieces[this.mediator.current_location.key][this.have_piece] // 要素が0になるキーは削除
-    //   }
-    // },
-
     // 自分の駒の上に重ねた？
     jibun_no_komanoueni_kasaneta(soldier) {
       return this.hold_p && soldier && soldier.location.key === this.mediator.current_location.key
     },
-
-    // // 駒があれば持駒とする
-    // piece_capture(soldier) {
-    //   soldier_capture
-    //
-    //   if (soldier) {
-    //     const count = (this.hold_pieces[soldier.location.key][soldier.piece] || 0) + 1
-    //     Vue.set(this.hold_pieces[this.mediator.current_location.key], soldier.piece, count)
-    //   }
-    // },
 
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
