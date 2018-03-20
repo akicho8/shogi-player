@@ -158,7 +158,6 @@ import { Location } from "../location"
 import { Sound } from '../sound'
 import { SfenParser } from "../sfen_parser"
 import { KifParser } from "../kif_parser"
-import { FooParser } from "../foo_parser"
 import PieceStand from "./PieceStand"
 
 import piece_sound_wav from "../assets/piece_sound.wav"
@@ -316,7 +315,7 @@ export default {
         this.mediator_update()
       }
       if (this.run_mode2 === "play_mode") {
-        const data_source = new FooParser()
+        const data_source = new SfenParser()
         data_source.kifu_body = this.play_mode_current_sfen
         data_source.parse()
 
@@ -367,7 +366,7 @@ export default {
             this.init_sfen = "position sfen " + sfen_serializer.to_baord_sfen + " " + this.init_teban[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
             this.moves = []
 
-            const data_source = new FooParser()
+            const data_source = new SfenParser()
             data_source.kifu_body = this.init_sfen
             data_source.parse()
 
@@ -388,7 +387,7 @@ export default {
         this.init_sfen = "position sfen " + sfen_serializer.to_baord_sfen + " " + this.init_teban[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
         this.moves = []
 
-        const data_source = new FooParser()
+        const data_source = new SfenParser()
         data_source.kifu_body = this.init_sfen
         data_source.parse()
 
@@ -401,13 +400,7 @@ export default {
       }
 
       if (this.run_mode2 === "edit_mode") {
-        // this.turn_edit_value = 0
-        // this.current_turn = 0
-
-        // this.mediator.current_turn = 0
-        // this.mediator_update()
-
-        const data_source = new FooParser()
+        const data_source = new SfenParser()
         data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         data_source.parse()
 
@@ -423,7 +416,7 @@ export default {
     current_preset: function () {
       if (this.current_preset) {
         const preset_info = PresetInfo.fetch(this.current_preset)
-        const data_source = new FooParser()
+        const data_source = new SfenParser()
         data_source.kifu_body = preset_info.sfen
         data_source.parse()
 
@@ -526,11 +519,11 @@ export default {
     data_source_get() {
       let data_source = null
       if (this.run_mode2 === "edit_mode") {
-        // data_source = new FooParser()
+        // data_source = new SfenParser()
         // data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         // data_source.parse()
       } else if (this.run_mode2 === "play_mode") {
-        data_source = new FooParser()
+        data_source = new SfenParser()
         data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         data_source.parse()
       } else {
@@ -791,7 +784,7 @@ export default {
       }
 
       // // 相手の持駒を持とうとしたときは無効
-      // if (this.run_mode2 === "play_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
+      // if (this.run_mode2 === "play_mode" && !this.hold_p && location.key !== this.mediator.current_location.key) {
       //   console.log("相手の持駒を持とうとしたときは無効")
       //   return
       // }
@@ -859,7 +852,7 @@ export default {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.run_mode2 === "play_mode" && !this.motteiru && location.key !== this.mediator.current_location.key) {
+      if (this.run_mode2 === "play_mode" && !this.hold_p && location.key !== this.mediator.current_location.key) {
         console.log("相手の持駒を持とうとしたときは無効")
         return
       }
@@ -895,13 +888,13 @@ export default {
       // -------------------------------------------------------------------------------- Validation
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
-      if (this.run_mode2 === "play_mode" && !this.motteiru && soldier && soldier.location.key !== this.mediator.current_location.key) {
+      if (this.run_mode2 === "play_mode" && !this.hold_p && soldier && soldier.location.key !== this.mediator.current_location.key) {
         console.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
 
       // 持たずに何もないところをクリックしたので無効とする
-      if (!this.motteiru && !soldier) {
+      if (!this.hold_p && !soldier) {
         console.log("持たずに何もないところをクリックしたので無効とする")
         return
       }
@@ -922,7 +915,7 @@ export default {
 
       // --------------------------------------------------------------------------------
 
-      if (!this.motteiru && soldier && (e.shiftKey | e.ctrlKey | e.altKey | e.metaKey)) {
+      if (!this.hold_p && soldier && (e.shiftKey | e.ctrlKey | e.altKey | e.metaKey)) {
         console.log("盤上の駒を裏返す")
         this.mediator.board.place_on(soldier.henshin)
         this.mediator_update()
@@ -930,7 +923,7 @@ export default {
       }
 
       // 盤上の駒を持ちあげる
-      if (!this.motteiru) {
+      if (!this.hold_p) {
         console.log("盤上の駒を持ちあげる")
         this.soldier_hold(place, e)
         return
@@ -1024,7 +1017,7 @@ export default {
 
     // 自分の駒の上に重ねた？
     jibun_no_komanoueni_kasaneta(soldier) {
-      return this.motteiru && soldier && soldier.location.key === this.mediator.current_location.key
+      return this.hold_p && soldier && soldier.location.key === this.mediator.current_location.key
     },
 
     // // 駒があれば持駒とする
@@ -1050,7 +1043,7 @@ export default {
 
     turn_next() {
       if (this.run_mode2 === "play_mode") {
-        const data_source = new FooParser()
+        const data_source = new SfenParser()
         data_source.kifu_body = this.play_mode_current_sfen
         data_source.parse()
 
@@ -1113,26 +1106,19 @@ export default {
   },
 
   computed: {
-    // mediator.current_location.key() {
-    //   return this.mediator.current_location.key_diff(0)
-    // },
-
-    // opponent_player() {
-    //   return this.mediator.current_location.key_diff(1)
-    // },
-
+    // 移動元の駒
     origin_soldier() {
-      let soldier = null
       if (this.place_from) {
-        soldier = this.mediator.board.lookup(this.place_from)
+        return this.mediator.board.lookup(this.place_from)
       }
-      return soldier
     },
 
-    motteiru() {
+    // 駒を持ち上げている状態？
+    hold_p() {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
     },
 
+    // 
     play_mode_current_sfen() {
       return this.init_sfen + " moves " + this.moves.join(" ")
     },

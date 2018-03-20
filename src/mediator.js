@@ -1,18 +1,16 @@
 import _ from "lodash"
+import Autolinker from 'autolinker'
 
-// import { SfenParser } from "./sfen_parser"
-// import { KifParser } from "./kif_parser"
-import { FooParser } from "./foo_parser"
 import { Board } from "./board"
 import { Place } from "./place"
 import { Piece } from "./piece"
 import { Soldier } from "./soldier"
+import { SfenParser } from "./sfen_parser"
 import { SfenSerializer } from "./sfen_serializer"
-import Autolinker from 'autolinker'
 
 class Mediator {
   constructor() {
-    const data_source = new FooParser()
+    const data_source = new SfenParser()
     data_source.kifu_body = "position startpos"
     data_source.parse()
 
@@ -24,21 +22,9 @@ class Mediator {
     this.piece_box = new Map()
 
     this.env = process.env.NODE_ENV
-    // this.kifu_body = "position startpos"
   }
 
   run() {
-    // let str = this.kifu_body || "position startpos"
-    // let parser_object
-    // if (/position/.test(str)) {
-    //   parser_object = new SfenParser()
-    // } else {
-    //   parser_object = new KifParser()
-    // }
-    // parser_object.kifu_body = str
-    // parser_object.parse()
-    // this.data_source      = parser_object
-
     this.board = this.data_source.board
     this.hold_pieces = this.data_source.hold_pieces
     this.last_hand = null
@@ -123,27 +109,6 @@ class Mediator {
     return list
   }
 
-  // cell_class2(xy) {
-  //   const [x, y] = xy
-  //   const soldier = this.board_place_at(xy)
-  //   let list = []
-  //
-  //   if (this.last_hand) {
-  //     const origin_place = this.last_hand.origin_place
-  //     if (origin_place) {
-  //       if (origin_place.x === x && origin_place.y === y) {
-  //         list.push("origin_place")
-  //       }
-  //     }
-  //     const place = this.last_hand.place
-  //     if (place.x === x && place.y === y) {
-  //       list.push("current")
-  //     }
-  //   }
-  //
-  //   return list
-  // }
-
   cell_piece_class(xy) {
     const place = Place.fetch(xy)
     const soldier = this.board.lookup(place)
@@ -194,7 +159,7 @@ class Mediator {
       return this.data_source.comments_pack[this.normalized_turn]
     }
   }
-
+  
   auto_link(v) {
     const autolinker = new Autolinker()
     return autolinker.link(v)
@@ -209,9 +174,7 @@ class Mediator {
   }
 
   realized_hold_pieces_of(location_key) {
-    // console.log("realized_hold_pieces_of")
     const list = Array.from(this.hold_pieces.get(location_key))
-    // console.log(list)
     return _(list)
       .filter(([key, count]) => count >= 1)
       .map(([key, count]) => [Piece.fetch(key), count])

@@ -84,13 +84,13 @@ const vm = new Vue({
     // 駒台をクリック
     piece_stand_piece_click: function(location, piece, e) {
       // 持っているならキャンセル
-      if (this.rules["rule3"] && this.motteiru) {
+      if (this.rules["rule3"] && this.hold_p) {
         this.state_reset()
         return
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.rules["rule1"] && !this.motteiru && location !== this.current_player) {
+      if (this.rules["rule1"] && !this.hold_p && location !== this.current_player) {
         return
       }
 
@@ -125,12 +125,12 @@ const vm = new Vue({
       //////////////////////////////////////////////////////////////////////////////// Validation
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
-      if (!this.motteiru && this.rules["rule1"] && soldier && soldier.location !== this.current_player) {
+      if (!this.hold_p && this.rules["rule1"] && soldier && soldier.location !== this.current_player) {
         return
       }
 
       // 持たずに何もないところをクリックしたので無効とする
-      if (!this.motteiru && !soldier) {
+      if (!this.hold_p && !soldier) {
         return
       }
 
@@ -149,7 +149,7 @@ const vm = new Vue({
       ////////////////////////////////////////////////////////////////////////////////
 
       // 盤上の駒を持ちあげる
-      if (!this.motteiru) {
+      if (!this.hold_p) {
         this.soldier_hold(place, e)
         return
       }
@@ -188,7 +188,7 @@ const vm = new Vue({
 
     // 自分の駒の上に重ねた？
     jibun_no_komanoueni_kasaneta: function(soldier) {
-      return this.motteiru && this.rules["rule2"] && soldier && soldier.location === this.current_player
+      return this.hold_p && this.rules["rule2"] && soldier && soldier.location === this.current_player
     },
 
     // 駒があれば持駒とする
@@ -242,7 +242,7 @@ const vm = new Vue({
       return this.board[this.place_from]
     },
 
-    motteiru: function() {
+    hold_p: function() {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
     },
   },

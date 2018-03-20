@@ -12,9 +12,6 @@ class SfenSerializer {
   }
 
   get to_s() {
-    // const options = Object.assign({}, {
-    // }, _options)
-
     const parts = []
     parts.push(this.to_baord_sfen)                    // 9/9/9/9...
     parts.push(this.mediator.current_location.key[0]) // "b"
