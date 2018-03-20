@@ -178,16 +178,16 @@ Object.defineProperty(Vue.prototype, 'PresetInfo', {value: PresetInfo})
 // Log content type
 // localStorage.debug = "axios"
 require('axios-debug-log')({
-  request: function (debug, config) {
+  request(debug, config) {
     debug('Request with ' + config.headers['content-type'])
   },
-  response: function (debug, response) {
+  response(debug, response) {
     debug(
       'Response with ' + response.headers['content-type'],
       'from ' + response.config.url
     )
   },
-  error: function (debug, error) {
+  error(debug, error) {
     // Read https://www.npmjs.com/package/axios#handling-errors for more info
     debug('Boom', error)
   }
@@ -295,21 +295,21 @@ export default {
         this.current_turn = this.mediator.normalized_turn
       }
     },
-    turn_edit_value: function () {
+    turn_edit_value() {
       this.current_turn = this.turn_edit_value
     },
-    start_turn: function () {
+    start_turn() {
       this.current_turn = this.start_turn
     },
 
     /* eslint-disable */
-    kifu_url:  function () { this.kifu_read() },
-    kifu_body: function () { this.kifu_read() },
-    loaded_kifu: function () {
+    kifu_url() { this.kifu_read() },
+    kifu_body() { this.kifu_read() },
+    loaded_kifu() {
       this.log("mediator_update from loaded_kifu")
       this.mediator_update()
     },
-    polling_interval: function () { this.polling_interval_update() },
+    polling_interval() { this.polling_interval_update() },
     /* eslint-enable */
 
     // -------------------------------------------------------------------------------- run_mode2
@@ -383,7 +383,7 @@ export default {
       }
     },
 
-    current_preset: function (value) {
+    current_preset(value) {
       if (value) {
         const preset_info = PresetInfo.fetch(value)
         const data_source = new SfenParser()
@@ -401,18 +401,18 @@ export default {
 
     // -------------------------------------------------------------------------------- sound
 
-    sound_effect: function () {
+    sound_effect() {
       this.sound_load()
     },
 
-    volume: function () {
+    volume() {
       this.sound_load()
     },
 
     // -------------------------------------------------------------------------------- other
 
     // 引数は親が「変更」したときがトリガー
-    debug_mode: function (v) {
+    debug_mode(v) {
       this.log(`watch debug_mode: ${v}`)
     },
   },

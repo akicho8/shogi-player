@@ -21,13 +21,13 @@
 <script>
 export default {
   props: ["run_mode"],
-  data: function() {
+  data: function () {
     return {
       run_mode2: this.run_mode,
     }
   },
   watch: {
-    run_mode2: function(value) {
+    run_mode2(value) {
       this.$emit("update:run_mode", value)
     },
   },
