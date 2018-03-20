@@ -281,8 +281,6 @@ export default {
       },
 
       // -------------------------------------------------------------------------------- edit_mode
-      foo_parser: new FooParser(),
-
       current_preset: null,
 
       moves: [],
