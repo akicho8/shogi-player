@@ -13,14 +13,14 @@ class SfenSerializer {
 
   get to_s() {
     const parts = []
-    parts.push(this.to_baord_sfen)                    // 9/9/9/9...
+    parts.push(this.to_board_sfen)                    // 9/9/9/9...
     parts.push(this.mediator.current_location.key[0]) // "b"
     parts.push(this.to_hold_pieces)                   // "-"
     parts.push(this.mediator.normalized_turn + 1)     // 1
     return parts.join(" ")
   }
 
-  get to_baord_sfen() {
+  get to_board_sfen() {
     const rows = []
     _.times(Board.dimension, (y) => {
       let str = ""

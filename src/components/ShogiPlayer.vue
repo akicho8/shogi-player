@@ -328,7 +328,7 @@ export default {
           onCancel: () => {
             console.log("set init_sfen")
             const sfen_serializer = this.mediator.sfen_serializer
-            this.init_sfen = "position sfen " + sfen_serializer.to_baord_sfen + " " + this.init_teban[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
+            this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_teban[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
             this.moves = []
 
             const data_source = new SfenParser()
@@ -349,7 +349,7 @@ export default {
         this.init_teban = this.mediator.current_location.key
 
         const sfen_serializer = this.mediator.sfen_serializer
-        this.init_sfen = "position sfen " + sfen_serializer.to_baord_sfen + " " + this.init_teban[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
+        this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_teban[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
         this.moves = []
 
         const data_source = new SfenParser()
