@@ -46,7 +46,7 @@
     </template>
     <span class="is-pulled-right kakusi_menu" @click="isComponentModalActive = true">…</span>
     <b-modal :active.sync="isComponentModalActive" has-modal-card>
-      <modal-form :run_mode.sync="run_mode2"></modal-form>
+      <SettingModal :run_mode.sync="run_mode2"></SettingModal>
     </b-modal>
     <div class="board-container flippable" :class="{flip: flip}">
       <PieceStand class="flex-item" :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
