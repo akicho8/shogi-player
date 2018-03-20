@@ -159,7 +159,7 @@ import { Sound } from '../sound'
 import { SfenParser } from "../sfen_parser"
 import { KifParser } from "../kif_parser"
 import PieceStand from "./PieceStand"
-import ModalForm from "./ModalForm"
+import SettingModal from "./SettingModal"
 
 import piece_sound_wav from "../assets/piece_sound.wav"
 
@@ -218,7 +218,7 @@ export default {
 
   components: {
     PieceStand,
-    ModalForm,
+    SettingModal,
   },
 
   data() {
@@ -1067,7 +1067,7 @@ export default {
     cardModal() {
       this.$modal.open({
         parent: this,
-        component: ModalForm,
+        component: SettingModal,
         hasModalCard: true, // If your modal content has a .modal-card as root, add this prop or the card might break on mobile
       })
     }
