@@ -1,3 +1,24 @@
+// Example.
+//
+//   import { MemoryRecord } from "./memory_record"
+//
+//   class Foo extends MemoryRecord {
+//     static get define() {
+//       return [
+//         { key: "black", name: '☗', },
+//         { key: "white", name: '☖', },
+//       ]
+//     }
+//
+//     get flip() {
+//       return Foo.values[(this.code + 1) % Foo.values.length]
+//     }
+//   }
+//
+//   Foo.lookup("black").key           // => "black"
+//   Foo.values[0] === Foo.values[0]   // => true
+//
+
 class MemoryRecord {
   static get define() {
     console.warn("not implemented")

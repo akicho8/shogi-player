@@ -822,7 +822,7 @@ export default {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.run_mode2 === "play_mode" && !this.hold_p && location.key !== this.mediator.current_location.key) {
+      if (this.run_mode2 === "play_mode" && !this.hold_p && location !== this.mediator.current_location) {
         console.log("相手の持駒を持とうとしたときは無効")
         return
       }
@@ -858,7 +858,7 @@ export default {
       // -------------------------------------------------------------------------------- Validation
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
-      if (this.run_mode2 === "play_mode" && !this.hold_p && soldier && soldier.location.key !== this.mediator.current_location.key) {
+      if (this.run_mode2 === "play_mode" && !this.hold_p && soldier && soldier.location !== this.mediator.current_location) {
         console.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
@@ -1002,7 +1002,7 @@ export default {
 
     // 自分の駒の上に重ねた？
     jibun_no_komanoueni_kasaneta(soldier) {
-      return this.hold_p && soldier && soldier.location.key === this.mediator.current_location.key
+      return this.hold_p && soldier && soldier.location === this.mediator.current_location
     },
 
     // 盤面の駒を持ち上げる

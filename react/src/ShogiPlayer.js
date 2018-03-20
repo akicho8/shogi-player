@@ -27,7 +27,7 @@ class PieceStand extends React.Component {
     list.push("flex-item")
     list.push("piece_stand")
     list.push(`location_${this.location.key}`)
-    if (this.props.mediator.current_location.key === this.location.key) {
+    if (this.props.mediator.current_location === this.location) {
       list.push("turn_active")
     }
     return list
