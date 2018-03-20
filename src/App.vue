@@ -402,7 +402,7 @@ export default {
       run_mode: "view_mode",   // play_mode
       theme: "simple",
       variation: "a",
-      size: "large",
+      size: "default",
       start_turn: -1,
       slider_show: true,
       controller_show: true,
