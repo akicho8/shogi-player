@@ -159,6 +159,7 @@ import { Sound } from '../sound'
 import { SfenParser } from "../sfen_parser"
 import { KifParser } from "../kif_parser"
 import PieceStand from "./PieceStand"
+import ModalForm from "./ModalForm"
 
 import piece_sound_wav from "../assets/piece_sound.wav"
 
@@ -186,39 +187,6 @@ require('axios-debug-log')({
 })
 
 const logger_debug = require('debug')('debug')
-
-const ModalForm = {             // modal-form
-  props: ["run_mode"],
-  data: function() {
-    return {
-      run_mode2: this.run_mode,
-    }
-  },
-  template: `
-<div class="modal-card" style="width: auto">
-  <header class="modal-card-head">
-    <p class="modal-card-title">設定</p>
-  </header>
-  <section class="modal-card-body">
-    <b-field label="モード">
-      <div class="block">
-        <b-radio v-model="run_mode2" native-value="view_mode">ビュー</b-radio>
-        <b-radio v-model="run_mode2" native-value="play_mode">プレイ</b-radio>
-        <b-radio v-model="run_mode2" native-value="edit_mode">編集</b-radio>
-      </div>
-    </b-field>
-  </section>
-  <footer class="modal-card-foot">
-    <button class="button is-primary" @click="$parent.close()">閉じる</button>
-  </footer>
-</div>
-`,
-  watch: {
-    run_mode2: function(value) {
-      this.$emit('update:run_mode', value)
-    },
-  },
-}
 
 /* eslint-disable no-new */
 export default {
