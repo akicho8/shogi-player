@@ -44,7 +44,7 @@
         <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
       </template>
     </template>
-    <span class="is-pulled-right kakusi_menu" @click="isComponentModalActive = true">…</span>
+    <span class="is-pulled-right kakusi_menu" @click="isComponentModalActive = true"><b-icon icon="dots-vertical" size="is-small"></b-icon></span>
     <b-modal :active.sync="isComponentModalActive" has-modal-card>
       <SettingModal :run_mode.sync="run_mode2"></SettingModal>
     </b-modal>
