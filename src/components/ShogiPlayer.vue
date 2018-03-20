@@ -208,10 +208,9 @@ const ModalForm = {             // modal-form
         <b-radio v-model="run_mode2" native-value="edit_mode">編集</b-radio>
       </div>
     </b-field>
- {{run_mode2}}
   </section>
   <footer class="modal-card-foot">
-    <button class="button is-primary" @click="$parent.close()">Close</button>
+    <button class="button is-primary" @click="$parent.close()">閉じる</button>
   </footer>
 </div>
 `,
@@ -273,53 +272,6 @@ export default {
       // -------------------------------------------------------------------------------- play_mode
       place_from: null,
       from_dom: null,
-      // board: {
-      //   "0,0": {piece: "香", location_key: "white"},
-      //   "1,0": {piece: "桂", location_key: "white"},
-      //   "2,0": {piece: "銀", location_key: "white"},
-      //   "3,0": {piece: "金", location_key: "white"},
-      //   "4,0": {piece: "玉", location_key: "white"},
-      //   "5,0": {piece: "金", location_key: "white"},
-      //   "6,0": {piece: "銀", location_key: "white"},
-      //   "7,0": {piece: "桂", location_key: "white"},
-      //   "8,0": {piece: "香", location_key: "white"},
-      //   "1,1": {piece: "飛", location_key: "white"},
-      //   "7,1": {piece: "角", location_key: "white"},
-      //   "0,2": {piece: "歩", location_key: "white"},
-      //   "1,2": {piece: "歩", location_key: "white"},
-      //   "2,2": {piece: "歩", location_key: "white"},
-      //   "3,2": {piece: "歩", location_key: "white"},
-      //   "4,2": {piece: "歩", location_key: "white"},
-      //   "5,2": {piece: "歩", location_key: "white"},
-      //   "6,2": {piece: "歩", location_key: "white"},
-      //   "7,2": {piece: "歩", location_key: "white"},
-      //   "8,2": {piece: "歩", location_key: "white"},
-      //
-      //   "0,8": {piece: "香", location_key: "black"},
-      //   "1,8": {piece: "桂", location_key: "black"},
-      //   "2,8": {piece: "銀", location_key: "black"},
-      //   "3,8": {piece: "金", location_key: "black"},
-      //   "4,8": {piece: "玉", location_key: "black"},
-      //   "5,8": {piece: "金", location_key: "black"},
-      //   "6,8": {piece: "銀", location_key: "black"},
-      //   "7,8": {piece: "桂", location_key: "black"},
-      //   "8,8": {piece: "香", location_key: "black"},
-      //   "7,7": {piece: "飛", location_key: "black"},
-      //   "1,7": {piece: "角", location_key: "black"},
-      //   "0,6": {piece: "歩", location_key: "black"},
-      //   "1,6": {piece: "歩", location_key: "black"},
-      //   "2,6": {piece: "歩", location_key: "black"},
-      //   "3,6": {piece: "歩", location_key: "black"},
-      //   "4,6": {piece: "歩", location_key: "black"},
-      //   "5,6": {piece: "歩", location_key: "black"},
-      //   "6,6": {piece: "歩", location_key: "black"},
-      //   "7,6": {piece: "歩", location_key: "black"},
-      //   "8,6": {piece: "歩", location_key: "black"},
-      // },
-      // hold_pieces: {
-      //   black: {"歩": 2},
-      //   white: {"歩": 2},
-      // },
       have_piece: null,
       // turn_counter: 0,
       rules: {
@@ -336,7 +288,6 @@ export default {
       moves: [],
       init_sfen: null,
       init_teban: "black",
-      init_sfen2: null,
       run_mode2: this.run_mode,
 
       isComponentModalActive: false,
@@ -364,8 +315,6 @@ export default {
         this.mediator_update()
       }
       if (this.run_mode2 === "play_mode") {
-        this.init_sfen2 = this.init_sfen + " moves " + this.moves.join(" ")
-
         const data_source = new FooParser()
         data_source.kifu_body = this.init_sfen2
         data_source.parse()
@@ -1100,8 +1049,6 @@ export default {
 
     turn_next() {
       if (this.run_mode2 === "play_mode") {
-        this.init_sfen2 = this.init_sfen + " moves " + this.moves.join(" ")
-
         const data_source = new FooParser()
         data_source.kifu_body = this.init_sfen2
         data_source.parse()
@@ -1116,9 +1063,6 @@ export default {
       }
 
       // console.log("turn_next")
-
-      // this.current_turn += 1
-      // this.turn_counter += 1
 
       // this.mediator_update()
     },
@@ -1186,6 +1130,10 @@ export default {
 
     motteiru() {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
+    },
+
+    init_sfen2() {
+      return this.init_sfen + " moves " + this.moves.join(" ")
     },
   },
 }
