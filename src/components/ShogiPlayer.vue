@@ -138,7 +138,7 @@
       <tr><th>moves</th><td>{{moves}}</td></tr>
       <tr><th>init_sfen</th><td>{{init_sfen}}</td></tr>
       <tr><th>init_teban</th><td>{{init_teban}}</td></tr>
-      <tr><th>init_sfen2</th><td>{{init_sfen2}}</td></tr>
+      <tr><th>play_mode_current_sfen</th><td>{{play_mode_current_sfen}}</td></tr>
     </table>
   </template>
 </div>
@@ -269,6 +269,10 @@ export default {
       read_counter: 0,
       update_counter: 0,
 
+      // -------------------------------------------------------------------------------- run_mode
+
+      run_mode2: this.run_mode,
+
       // -------------------------------------------------------------------------------- play_mode
       place_from: null,
       from_dom: null,
@@ -286,7 +290,6 @@ export default {
       moves: [],
       init_sfen: null,
       init_teban: "black",
-      run_mode2: this.run_mode,
 
       isComponentModalActive: false,
 
@@ -314,7 +317,7 @@ export default {
       }
       if (this.run_mode2 === "play_mode") {
         const data_source = new FooParser()
-        data_source.kifu_body = this.init_sfen2
+        data_source.kifu_body = this.play_mode_current_sfen
         data_source.parse()
 
         this.mediator = new Mediator()
@@ -1048,7 +1051,7 @@ export default {
     turn_next() {
       if (this.run_mode2 === "play_mode") {
         const data_source = new FooParser()
-        data_source.kifu_body = this.init_sfen2
+        data_source.kifu_body = this.play_mode_current_sfen
         data_source.parse()
 
         this.mediator = new Mediator()
@@ -1130,7 +1133,7 @@ export default {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
     },
 
-    init_sfen2() {
+    play_mode_current_sfen() {
       return this.init_sfen + " moves " + this.moves.join(" ")
     },
   },
