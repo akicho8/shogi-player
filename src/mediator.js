@@ -159,7 +159,7 @@ class Mediator {
       return this.data_source.comments_pack[this.normalized_turn]
     }
   }
-  
+
   auto_link(v) {
     const autolinker = new Autolinker()
     return autolinker.link(v)

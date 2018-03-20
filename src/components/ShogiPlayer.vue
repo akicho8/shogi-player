@@ -36,9 +36,16 @@
   </div>
 
   <template v-if="mediator">
-    <template v-if="run_mode2 === 'view_mode'">
+    <template v-if="run_mode2 === 'view_mode' || run_mode2 === 'play_mode'">
       <template v-if="!turn_edit">
-        <span class="turn_edit_text" @click="turn_edit_run">{{mediator.current_turn_label}}</span>
+        <span class="turn_edit_text" @click="turn_edit_run">
+          <template v-if="run_mode2 === 'view_mode'">
+            {{mediator.current_turn_label}}
+          </template>
+          <template v-if="run_mode2 === 'play_mode'">
+            {{mediator.normalized_turn}}手目
+          </template>
+        </span>
       </template>
       <template v-if="turn_edit">
         <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
@@ -271,7 +278,7 @@ export default {
   watch: {
     // -------------------------------------------------------------------------------- basic
 
-    current_turn: function () {
+    current_turn() {
       if (this.run_mode2 === "view_mode") {
         this.log("mediator_update from current_turn")
         this.mediator_update()
@@ -306,10 +313,11 @@ export default {
     /* eslint-enable */
 
     // -------------------------------------------------------------------------------- run_mode2
-    run_mode: function (value) {
+    run_mode(value) {
       this.run_mode2 = value    // TODO: プロパティ(引数)と内部変数の名前が共有できたないためこんな複雑になっている。どうにかならないのか？
     },
-    run_mode2: function (new_val, old_val) {
+
+    run_mode2(new_val, old_val) {
       if (new_val === "play_mode" && old_val === "edit_mode") {
         this.init_teban = "white"
 
@@ -375,9 +383,9 @@ export default {
       }
     },
 
-    current_preset: function () {
-      if (this.current_preset) {
-        const preset_info = PresetInfo.fetch(this.current_preset)
+    current_preset: function (value) {
+      if (value) {
+        const preset_info = PresetInfo.fetch(value)
         const data_source = new SfenParser()
         data_source.kifu_body = preset_info.sfen
         data_source.parse()
@@ -898,17 +906,40 @@ export default {
           this.mediator.hold_pieces_add(this.origin_soldier.location, soldier.piece) // 相手の駒があれば取る
           // this.$forceUpdate()
         }
+
         const new_soldier = new Soldier({
           piece: this.origin_soldier.piece,
           place: place,
           promoted: this.origin_soldier.promoted,
           location: this.origin_soldier.location,
         })
-        this.mediator.board.place_on(new_soldier)                             // 置く
-        this.mediator.board.delete_at(this.place_from)
-        this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen)
-        this.state_reset()
-        this.turn_next()
+
+        if (new_soldier.promotable_p || this.origin_soldier.promotable_p) { // 入って成る or 出て成る
+          // 元が成ってないとき
+          this.$dialog.confirm({
+            message: '成りますか？',
+            confirmText: '成',
+            cancelText: '不成',
+            onConfirm: () => {
+              new_soldier.promoted = true
+            },
+            // 最後に必ず呼ばれる
+            onCancel: () => {
+              this.mediator.board.place_on(new_soldier)                             // 置く
+              this.mediator.board.delete_at(this.place_from)
+              this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
+              this.state_reset()
+              this.turn_next()
+            },
+          })
+        } else {
+          this.mediator.board.place_on(new_soldier)                          // 置く
+          this.mediator.board.delete_at(this.place_from)
+          this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen) // 7g7f
+          this.state_reset()
+          this.turn_next()
+        }
+
         return
       }
 
@@ -923,6 +954,7 @@ export default {
         })
         this.komo_herasu()
         this.mediator.board.place_on(soldier) // 置く
+        this.moves.push(soldier.piece.key + "*" + place.to_sfen) // P*7g
         this.state_reset()
         this.turn_next()
         return
@@ -1080,7 +1112,7 @@ export default {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
     },
 
-    // 
+    //
     play_mode_current_sfen() {
       return this.init_sfen + " moves " + this.moves.join(" ")
     },

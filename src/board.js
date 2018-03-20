@@ -5,6 +5,10 @@ class Board {
     return 9
   }
 
+  static get danger_zone_size() {
+    return 3
+  }
+
   constructor() {
     this._surface = new Map()
   }
@@ -22,12 +26,15 @@ class Board {
   }
 
   get flip() {
-    const new_map = new Board()
+    const value = new Board()
     this._surface.forEach((soldier, place) => {
-      const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {location: soldier.location.flip, place: soldier.place.flip}))
-      new_map.place_on(new_soldier)
+      const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
+        location: soldier.location.flip,
+        place: soldier.place.flip,
+      }))
+      value.place_on(new_soldier)
     })
-    return new_map
+    return value
   }
 }
 

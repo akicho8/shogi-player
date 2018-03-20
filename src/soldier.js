@@ -1,3 +1,4 @@
+import { Board } from './board'
 import { Place } from './place'
 import { Piece } from './piece'
 
@@ -49,6 +50,20 @@ class Soldier {
       attrs = {location: this.location.flip}
     }
     return new Soldier(Object.assign({}, this.attributes, attrs))
+  }
+
+  get promotable_p() {
+    if (this.piece.promotable_p && !this.promoted) { // 成れるのに成ってなくて
+      return this.danger_zone_p
+    }
+  }
+
+  get danger_zone_p() {
+    if (this.location.key === "black") {
+      return this.place.y < Board.danger_zone_size
+    } else {
+      return this.place.y >= (Board.dimension - Board.danger_zone_size)
+    }
   }
 }
 
