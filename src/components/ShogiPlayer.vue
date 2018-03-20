@@ -244,12 +244,6 @@ export default {
       place_from: null,
       from_dom: null,
       have_piece: null,
-      // turn_counter: 0,
-      rules: {
-        rule1: false, // 自分の手番で相手の駒を持ち上げれないようにする
-        rule2: false, // 自分の駒の上に重ねたら持ってない状態にする(falseなら自分の駒で自分の駒をとれる)
-        rule3: false, // 駒台をクリックしたとき持っているならキャンセル
-      },
 
       // -------------------------------------------------------------------------------- edit_mode
       current_preset: null,
