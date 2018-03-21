@@ -31,7 +31,14 @@
           {{record.name}}
         </b-dropdown-item>
       </b-dropdown>
+
       <button class="button is-primary is-outlined" @click="all_flip">先後反転</button>
+
+      <div style="display: inline-block; vertical-align: bottom">
+        <span>手番</span>
+        <b-radio v-model="init_location_key" native-value="black">☗</b-radio>
+        <b-radio v-model="init_location_key" native-value="white">☖</b-radio>
+      </div>
     </div>
   </div>
 
@@ -144,7 +151,7 @@
       <tr><th>current_preset</th><td>{{current_preset}}</td></tr>
       <tr><th>moves</th><td>{{moves}}</td></tr>
       <tr><th>init_sfen</th><td>{{init_sfen}}</td></tr>
-      <tr><th>init_teban</th><td>{{init_teban}}</td></tr>
+      <tr><th>init_location_key</th><td>{{init_location_key}}</td></tr>
       <tr><th>play_mode_current_sfen</th><td>{{play_mode_current_sfen}}</td></tr>
     </table>
   </template>
@@ -257,7 +264,7 @@ export default {
 
       moves: [],
       init_sfen: null,
-      init_teban: "black",
+      init_location_key: "black",
 
       isComponentModalActive: false,
     }
@@ -290,9 +297,11 @@ export default {
         this.current_turn = this.mediator.normalized_turn
       }
     },
+
     turn_edit_value() {
       this.current_turn = this.turn_edit_value
     },
+
     start_turn() {
       this.current_turn = this.start_turn
     },
@@ -313,43 +322,17 @@ export default {
     },
 
     run_mode2(new_val, old_val) {
-      if (new_val === "play_mode" && old_val === "edit_mode") {
-        this.init_teban = "white"
-
-        this.$dialog.confirm({
-          message: '手番はどちらですか？',
-          confirmText: '先手',
-          cancelText: '後手',
-          onConfirm: () => {
-            console.log("onConfirm")
-            this.init_teban = "black"
-          },
-          // 最後に必ず呼ばれる
-          onCancel: () => {
-            console.log("set init_sfen")
-            const sfen_serializer = this.mediator.sfen_serializer
-            this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_teban[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
-            this.moves = []
-
-            const data_source = new SfenParser()
-            data_source.kifu_body = this.init_sfen
-            data_source.parse()
-
-            this.mediator = new Mediator()
-            this.mediator.data_source = data_source
-            this.mediator.current_turn = 0
-            this.mediator.run()
-
-            this.current_turn = 0
-          },
-        })
+      if (new_val === "view_mode") {
+        this.mediator_update()
       }
 
-      if (new_val === "play_mode" && old_val === "view_mode") {
-        this.init_teban = this.mediator.current_location.key
+      if (new_val === "play_mode") {
+        if (old_val === "view_mode") {
+          this.init_location_key = this.mediator.current_location.key
+        }
 
         const sfen_serializer = this.mediator.sfen_serializer
-        this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_teban[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
+        this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location_key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
         this.moves = []
 
         const data_source = new SfenParser()
@@ -375,6 +358,7 @@ export default {
         this.mediator.run()
 
         this.current_turn = 0
+        this.init_location_key = this.mediator.current_location.key
       }
     },
 
@@ -488,9 +472,9 @@ export default {
         // data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         // data_source.parse()
       } else if (this.run_mode2 === "play_mode") {
-        data_source = new SfenParser()
-        data_source.kifu_body = "position sfen " + this.mediator.to_sfen
-        data_source.parse()
+        // data_source = new SfenParser()
+        // data_source.kifu_body = "position sfen " + this.mediator.to_sfen
+        // data_source.parse()
       } else {
         if (this.loaded_kifu) {
           let str = this.loaded_kifu || "position startpos"
