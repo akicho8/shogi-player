@@ -1,4 +1,5 @@
 import _ from "lodash"
+import Vue from "vue"
 import Autolinker from 'autolinker'
 
 import { Board } from "./board"
@@ -19,7 +20,7 @@ class Mediator {
     this.board = null
     this.hold_pieces = null
     this.last_hand = null
-    this.piece_box = new Map()
+    this.piece_box = {}
 
     this.env = process.env.NODE_ENV
   }
@@ -195,24 +196,24 @@ class Mediator {
   // -------------------------------------------------------------------------------- piece_box
 
   piece_box_count(piece) {
-    return this.piece_box.get(piece.key) || 0
+    return this.piece_box[piece.key] || 0
   }
 
   piece_box_add(piece, plus = 1) {
     const count = this.piece_box_count(piece) + plus
     if (count >= 1) {
-      this.piece_box.set(piece.key, count)
+      Vue.set(this.piece_box, piece.key, count)
     } else {
-      this.piece_box.delete(piece.key)
+      Vue.delete(this.piece_box, piece.key)
     }
   }
 
   piece_box_realize() {
-    const list = Array.from(this.piece_box)
+    const list = Object.entries(this.piece_box) // {a: 1} => [['a', 1]]
     return _(list)
       .filter(([key, count]) => count >= 1)
       .map(([key, count]) => [Piece.fetch(key), count])
-      .sortBy(list, ([key, count]) => key.code)
+      .sortBy(([key, count]) => key.code)
       .value()
   }
 }
