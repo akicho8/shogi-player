@@ -906,19 +906,19 @@ export default {
             },
             // 最後に必ず呼ばれる
             onCancel: () => {
+              this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
               this.mediator.board.place_on(new_soldier)                             // 置く
               this.mediator.board.delete_at(this.place_from)
-              this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
               this.state_reset()
               this.turn_next()
             },
           })
         } else {
-          this.mediator.board.place_on(new_soldier)                          // 置く
-          this.mediator.board.delete_at(this.place_from)
           if (this.run_mode2 === "play_mode") {
             this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen) // 7g7f
           }
+          this.mediator.board.place_on(new_soldier)                          // 置く
+          this.mediator.board.delete_at(this.place_from)
           this.state_reset()
           this.turn_next()
         }
@@ -995,6 +995,7 @@ export default {
     },
 
     state_reset() {
+      console.log("state_reset")
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       this.have_piece_location = null
