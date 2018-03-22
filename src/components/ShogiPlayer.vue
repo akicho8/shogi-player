@@ -58,8 +58,8 @@
         <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
       </template>
     </template>
-    <span class="is-pulled-right modal_trigger_dots" @click="isComponentModalActive = true"><b-icon icon="dots-vertical" size="is-small"></b-icon></span>
-    <b-modal :active.sync="isComponentModalActive" has-modal-card>
+    <span class="is-pulled-right modal_trigger_dots" @click="setting_modal_p = true"><b-icon icon="dots-vertical" size="is-small"></b-icon></span>
+    <b-modal :active.sync="setting_modal_p" has-modal-card>
       <SettingModal :run_mode.sync="run_mode2"></SettingModal>
     </b-modal>
     <div class="board-container flippable" :class="{flip: flip}">
@@ -266,7 +266,7 @@ export default {
       init_sfen: null,
       init_location_key: "black",
 
-      isComponentModalActive: false,
+      setting_modal_p: false,
     }
   },
 
