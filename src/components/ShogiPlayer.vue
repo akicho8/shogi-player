@@ -893,7 +893,7 @@ export default {
           location: this.origin_soldier.location,
         })
 
-        if (new_soldier.promotable_p || this.origin_soldier.promotable_p) { // 入って成る or 出て成る
+        if (this.run_mode2 === "play_mode" && (new_soldier.promotable_p || this.origin_soldier.promotable_p)) { // 入って成る or 出て成る
           // 元が成ってないとき
           this.$dialog.confirm({
             message: '成りますか？',
