@@ -1,3 +1,5 @@
+import _ from 'lodash'
+import Vue from 'vue'
 import { Soldier } from "./soldier"
 
 class Board {
@@ -10,24 +12,24 @@ class Board {
   }
 
   constructor() {
-    this._surface = new Map()
+    this._surface = {}
   }
 
   place_on(soldier) {
-    this._surface.set(soldier.place.key, soldier)
+    Vue.set(this._surface, soldier.place.key, soldier)
   }
 
   lookup(place) {
-    return this._surface.get(place.key)
+    return this._surface[place.key]
   }
 
   delete_at(place) {
-    this._surface.delete(place.key)
+    delete this._surface[place.key]
   }
 
   get flip() {
     const value = new Board()
-    this._surface.forEach((soldier, place) => {
+    _.forEach(this._surface, (soldier, place) => {
       const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
         location: soldier.location.flip,
         place: soldier.place.flip,
