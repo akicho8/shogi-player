@@ -864,9 +864,10 @@ export default {
 
       // --------------------------------------------------------------------------------
 
-      if (!this.hold_p && soldier && (e.shiftKey | e.ctrlKey | e.altKey | e.metaKey)) {
+      const shift_key = e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
+      if (!this.hold_p && soldier && shift_key) {
         console.log("盤上の駒を裏返す")
-        this.mediator.board.place_on(soldier.henshin)
+        this.mediator.board.place_on(soldier.piece_transform)
         this.mediator_update()
         return
       }
@@ -949,7 +950,7 @@ export default {
       // const soldier = this.mediator.board_place_at(place)
       //
       // if (soldier) {
-      //   this.mediator.place_on(soldier.henshin)
+      //   this.mediator.place_on(soldier.piece_transform)
       //   this.state_reset()
       //   return
       // }

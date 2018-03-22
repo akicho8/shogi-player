@@ -38,7 +38,7 @@ class Soldier {
     return this.piece.name
   }
 
-  get henshin() {
+  get piece_transform() {
     let attrs = null
     if (this.piece.promotable_p) {
       if (this.promoted) {
