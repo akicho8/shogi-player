@@ -207,7 +207,7 @@ class Mediator {
     }
   }
 
-  piece_box_realized_hold_pieces_of() {
+  piece_box_realize() {
     const list = Array.from(this.piece_box)
     return _(list)
       .filter(([key, count]) => count >= 1)

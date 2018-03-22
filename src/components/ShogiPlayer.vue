@@ -84,7 +84,7 @@
       </div>
       <div class="flex-item">
         <ul v-if="run_mode2 === 'edit_mode'" class="piece_box" @click="piece_box_other_click">
-          <li v-for="[piece, count] in mediator.piece_box_realized_hold_pieces_of()" @click.stop="piece_box_piece_click(piece, $event)" :class="{active: piece_box_have_p(piece)}">
+          <li v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{active: piece_box_have_p(piece)}">
             <span :class="piece.css_class_list">{{piece.name}}</span>
             <span v-if='count >= 2' class="piece_count">{{count}}</span>
           </li>
@@ -137,7 +137,7 @@
       <tr><th>place_from</th><td>{{place_from}}</td></tr>
       <tr><th>have_piece</th><td>{{have_piece}}</td></tr>
       <template v-if="mediator">
-        <tr><th>駒箱</th><td>{{mediator.piece_box_realized_hold_pieces_of()}}</td></tr>
+        <tr><th>駒箱</th><td>{{mediator.piece_box_realize()}}</td></tr>
         <tr><th>持駒</th><td>{{mediator.hold_pieces}}</td></tr>
         <tr><th>次の手番</th><td>{{mediator.current_location.key}}</td></tr>
         <tr><th>SFEN</th><td>{{mediator.to_sfen}}</td></tr>
