@@ -65,16 +65,16 @@ class Mediator {
   }
 
   hold_pieces_count(location, piece) {
-    return this.hold_pieces.get(location.key).get(piece.key) || 0
+    return this.hold_pieces[location.key][piece.key] || 0
   }
 
   hold_pieces_add(location, piece, plus = 1) {
     const count = this.hold_pieces_count(location, piece) + plus
-    const counts_hash = this.hold_pieces.get(location.key)
+    const counts_hash = this.hold_pieces[location.key]
     if (count >= 1) {
-      counts_hash.set(piece.key, count)
+      Vue.set(counts_hash, piece.key, count)
     } else {
-      counts_hash.delete(piece.key)
+      Vue.delete(counts_hash, piece.key)
     }
   }
 
@@ -175,11 +175,12 @@ class Mediator {
   }
 
   realized_hold_pieces_of(location_key) {
-    const list = Array.from(this.hold_pieces.get(location_key))
+    console.log(this.hold_pieces)
+    const list = Object.entries(this.hold_pieces[location_key])
     return _(list)
       .filter(([key, count]) => count >= 1)
       .map(([key, count]) => [Piece.fetch(key), count])
-      .sortBy(list, ([key, count]) => key.code)
+      .sortBy(([key, count]) => key.code)
       .value()
   }
 

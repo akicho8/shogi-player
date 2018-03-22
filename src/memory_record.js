@@ -19,6 +19,8 @@
 //   Foo.values[0] === Foo.values[0]   // => true
 //
 
+import _ from "lodash"
+
 class MemoryRecord {
   static get define() {
     console.warn("not implemented")
@@ -33,7 +35,7 @@ class MemoryRecord {
     if (key instanceof this) {
       return key
     }
-    return this.values_map.get(key)
+    return this.values_map[key]
   }
 
   static fetch(key) {
@@ -45,12 +47,15 @@ class MemoryRecord {
   }
 
   static get values_map() {
-    this._values_map = this._values_map || new Map(this.define.map((e, i) => [e.key, Object.freeze(new this(Object.assign({}, e, {code: i})))]))
+    this._values_map = this._values_map || _.reduce(this.define, (a, e, i) => { // http://devdocs.io/lodash~4/index#reduce
+      a[e.key] = Object.freeze(new this(Object.assign({}, e, {code: i})))
+      return a
+    }, {})
     return this._values_map
   }
 
   static get values() {
-    this._values = this._values || Array.from(this.values_map.values())
+    this._values = this._values || Object.values(this.values_map)
     return this._values
   }
 

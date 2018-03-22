@@ -1,3 +1,4 @@
+import _ from "lodash"
 import { Location } from "./location"
 
 class ParserBase {
@@ -14,7 +15,10 @@ class ParserBase {
   }
 
   get hold_pieces() {
-    return new Map(Location.values.map((e) => [e.key, new Map()]))
+    return _.reduce(Location.values, (a, e) => {
+      a[e.key] = {}
+      return a
+    }, {})
   }
 
   get turn_min() {

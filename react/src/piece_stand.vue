@@ -27,12 +27,12 @@ export default {
       return Location.fetch(this.location_key)
     },
 
-    hold_pieces: function () {
-      const list = Array.from(this.$parent.mediator.hold_pieces.get(this.location.key))
+    hold_pieces: function () {  // FIXME: この結果を親から渡せばいんじゃね？ いや mediator を渡す？
+      const list = Object.entries(this.$parent.mediator.hold_pieces[this.location.key])
       return _(list)
         .filter(([key, count]) => count >= 1)
         .map(([key, count]) => [Piece.fetch(key), count])
-        .sortBy(list, ([key, count]) => key.code)
+        .sortBy(([key, count]) => key.code)
         .value()
     },
   },

@@ -865,6 +865,7 @@ export default {
       // --------------------------------------------------------------------------------
 
       const shift_key = e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
+      console.log(`hold_p: ${this.hold_p}`)
       if (!this.hold_p && soldier && shift_key) {
         console.log("盤上の駒を裏返す")
         this.mediator.board.place_on(soldier.piece_transform)

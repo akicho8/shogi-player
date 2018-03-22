@@ -55,9 +55,9 @@ class SfenSerializer {
 
   get to_hold_pieces() {
     let str = Location.values.map((location_info) => {
-      const hold_pieces = this.mediator.hold_pieces.get(location_info.key)
+      const hold_pieces = this.mediator.hold_pieces[location_info.key]
       const values = Piece.values.map((e) => {
-        let count = hold_pieces.get(e.key) || 0
+        let count = hold_pieces[e.key] || 0
         let str = ""
         if (count === 0) {
           return null

@@ -1,4 +1,5 @@
 import XRegExp from "xregexp"
+import Vue from "vue"
 import _ from "lodash"
 
 import { Board } from "./board"
@@ -51,14 +52,16 @@ class SfenParser extends ParserBase {
   }
 
   get hold_pieces() {
+    console.log(super.hold_pieces)
+
     const _hold_pieces = super.hold_pieces
     if (this.attributes["hold_pieces"] !== "-") {
       XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece_char>\\S)"), (md, i) => {
         const piece = Piece.fetch(md.piece_char)
         let count = Number(md.count || 1)
         const location = this.__location_by_upper_or_lower_case(md.piece_char)
-        count += _hold_pieces.get(location.key).get(piece.key) || 0
-        _hold_pieces.get(location.key).set(piece.key, count)
+        count += _hold_pieces[location.key][piece.key] || 0
+        Vue.set(_hold_pieces[location.key], piece.key, count)
       })
     }
     return _hold_pieces
