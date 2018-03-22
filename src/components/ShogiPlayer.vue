@@ -915,7 +915,9 @@ export default {
         } else {
           this.mediator.board.place_on(new_soldier)                          // 置く
           this.mediator.board.delete_at(this.place_from)
-          this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen) // 7g7f
+          if (this.run_mode2 === "play_mode") {
+            this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen) // 7g7f
+          }
           this.state_reset()
           this.turn_next()
         }
