@@ -31,7 +31,7 @@ export default {
       if (this.hold_piece_have_p(this.location, piece)) {
         list.push("holding_p")
       } else if (this.$parent.mediator.current_location === this.location || this.$parent.run_mode2 === "edit_mode") {
-        list.push("piece_selectable")
+        list.push("selectable_p")
       }
       return list
     },

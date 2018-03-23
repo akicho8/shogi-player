@@ -68,8 +68,8 @@
         <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
         <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
         <div class="overlay_navi flip_trigger_cell" @click="board_flip_run"></div>
-        <div class="board-outer">
-          <table class="board-inner">
+        <div class="board_outer">
+          <table class="board_inner">
             <tr v-for="y in mediator.dimension">
               <template v-for="x in mediator.dimension">
                 <td class="td_cell" :class="cell_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click2="board_click_right([x - 1, y - 1], $event)" @mouseover="mouse_over_func">
@@ -1039,7 +1039,7 @@ export default {
       } else {
         if (soldier) {
           if (this.mediator.current_location === soldier.location || this.run_mode2 === "edit_mode") {
-            list.push("piece_selectable")
+            list.push("selectable_p")
           }
         }
       }

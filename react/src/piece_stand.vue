@@ -49,8 +49,8 @@ export default {
     text-align: left
 
     // &.development
-    //   border: 2px solid $sp-simple-grid-color
-    //   background: $sp-simple-board-color-bg
+    //   border: 2px solid $sp_simple_grid_color
+    //   background: $sp_simple_board_color_bg
     //   border-radius: 0.5vmin
     ul
       list-style-type: none
@@ -62,7 +62,7 @@ export default {
         align-items: center
 
         // 持駒
-        color: $sp-simple-piece-color
+        color: $sp_simple_piece_color
         font-size: $sp-simple-font-size
 
         // 持駒数
@@ -75,8 +75,8 @@ export default {
         .location_mark
 
     &.turn_active
-      // border: 2px solid $sp-simple-grid-color
-      // background: $sp-simple-board-color-bg
+      // border: 2px solid $sp_simple_grid_color
+      // background: $sp_simple_board_color_bg
       // border-radius: 0.5vmin
 
       ul

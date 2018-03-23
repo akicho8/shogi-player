@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import 'bulma/bulma.sass'
-import "./components/ShogiPlayer.sass" // Rails 側で sp-assets-dir を変更してから読み込みたいので .vue の中では読まないようにする
+import "./components/ShogiPlayer.sass" // Rails 側で sp_assets_dir を変更してから読み込みたいので .vue の中では読まないようにする
 
 Vue.config.productionTip = false
 
