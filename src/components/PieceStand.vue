@@ -1,5 +1,5 @@
 <template>
-<div class="piece_stand" :class="[`location_${location.key}`, $parent.env, {turn_active: $parent.mediator.current_location === location}]" @click.stop="$parent.piece_stand_click(location, $event)">
+<div :class="piece_stand_class" @click.stop="$parent.piece_stand_click(location, $event)">
   <ul>
     <li class="location_mark">{{location.name}}</li>
     <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)">
@@ -21,8 +21,19 @@ export default {
   },
 
   methods: {
-    hold_piece_have_p: function (location, piece) {
+    hold_piece_have_p(location, piece) {
       return this.$parent.have_piece_location === location && this.$parent.have_piece === piece
+    },
+
+    piece_stand_class() {
+      const list = []
+      list.push("piece_stand")
+      list.push(`location_${location.key}`)
+      list.push($parent.env)
+      if ($parent.mediator.current_location === location) {
+        list.push("turn_active")
+      }
+      return list
     },
 
     li_class(piece) {
