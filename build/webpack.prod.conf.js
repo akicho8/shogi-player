@@ -37,6 +37,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
+          drop_console: true,   // console.log を除去する(重要)
           warnings: false
         }
       },
