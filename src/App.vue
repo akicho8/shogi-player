@@ -407,7 +407,7 @@ export default {
       slider_show: true,
       controller_show: true,
       sfen_show: true,
-      sound_effect: false,
+      sound_effect: true,
       volume: 0.5,
       key_event_capture: false,
       debug_mode: false,
