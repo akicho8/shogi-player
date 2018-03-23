@@ -1047,17 +1047,14 @@ export default {
     },
 
     all_flip() {
+      // 盤面反転
       this.mediator.board = this.mediator.board.flip
-      // console.log(Location.values)
-      // console.log(Location.values.reverse())
 
-      this.mediator.hold_pieces = new Map(Location.values.map((e) => [e.flip.key, _.clone(this.mediator.hold_pieces.get(e.key))])) // TODO: _.transform_keys があれば置き換えたい
-
-      // const v = new Map(Location.values.map((e) => [e.key, new Map()])) // TODO: _.transform_keys があれば置き換えたい
-      // v.set("black", this.mediator.hold_pieces.get("white"))
-      // v.set("white", this.mediator.hold_pieces.get("black"))
-      // this.mediator.hold_pieces.set("black", v.get("white"))
-      // this.mediator.hold_pieces.set("white", v.get("black"))
+      // 持駒反転
+      this.mediator.hold_pieces = _.reduce(Location.values, (a, e) => {
+        a[e.key] = this.mediator.hold_pieces[e.flip.key]
+        return a
+      }, {})
     },
 
     modal_trigger_dots_click() {
