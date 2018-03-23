@@ -21,25 +21,14 @@ export default {
   },
 
   methods: {
-    hold_piece_have_p(location, piece) {
-      return this.$parent.have_piece_location === location && this.$parent.have_piece === piece
-    },
-
-    piece_stand_class() {
-      const list = []
-      list.push("piece_stand")
-      list.push(`location_${location.key}`)
-      list.push($parent.env)
-      if ($parent.mediator.current_location === location) {
-        list.push("turn_active")
-      }
-      return list
+    hold_piece_holding_p(piece) {
+      return this.$parent.have_piece_location === this.location && this.$parent.have_piece === piece
     },
 
     li_class(piece) {
       let list = []
       list = _.concat(list, piece.css_class_list)
-      if (this.hold_piece_have_p(this.location, piece)) {
+      if (this.hold_piece_holding_p(piece)) {
         list.push("holding_p")
       } else if (this.$parent.mediator.current_location === this.location || this.$parent.run_mode2 === "edit_mode") {
         list.push("selectable_p")
@@ -51,6 +40,17 @@ export default {
   computed: {
     location() {
       return Location.fetch(this.location_key)
+    },
+
+    piece_stand_class() {
+      const list = []
+      list.push("piece_stand")
+      list.push(`location_${this.location.key}`)
+      list.push(this.$parent.env)
+      if (this.$parent.mediator.current_location === this.location) {
+        list.push("turn_active")
+      }
+      return list
     },
   },
 }
