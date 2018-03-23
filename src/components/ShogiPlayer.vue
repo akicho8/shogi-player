@@ -176,6 +176,7 @@ import PieceStand from "./PieceStand"
 import SettingModal from "./SettingModal"
 
 import piece_sound_wav from "../assets/piece_sound.wav"
+import flip_sound_wav from "../assets/flip_sound.wav"
 
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
@@ -505,14 +506,19 @@ export default {
         }
 
         if (this.update_counter >= 1) {
-          if (this.sound_effect) {
-            if (this.piece_sound) {
-              this.piece_sound.play()
-            }
-          }
+          this.sound_call("piece_sound")
         }
 
         this.update_counter++
+      }
+    },
+
+    sound_call(key) {
+      if (this.sound_effect) {
+        const object = this[key]
+        if (object) {
+          object.play()
+        }
       }
     },
 
@@ -648,6 +654,7 @@ export default {
 
     board_flip_run() {
       this.flip = !this.flip
+      this.sound_call("flip_sound")
       this.focus_to("slider")
     },
 
@@ -667,6 +674,11 @@ export default {
           this.piece_sound = new Sound(piece_sound_wav)
         }
         this.piece_sound.options["volume"] = this.volume
+
+        if (!this.flip_sound) {
+          this.flip_sound = new Sound(flip_sound_wav)
+        }
+        this.flip_sound.options["volume"] = this.volume
       }
     },
 
@@ -1002,6 +1014,8 @@ export default {
     },
 
     turn_next() {
+      this.sound_call("piece_sound")
+
       if (this.run_mode2 === "play_mode") {
         const data_source = new SfenParser()
         data_source.kifu_body = this.play_mode_current_sfen
