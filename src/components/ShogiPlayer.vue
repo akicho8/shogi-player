@@ -72,7 +72,7 @@
           <table class="board_inner">
             <tr v-for="y in mediator.dimension">
               <template v-for="x in mediator.dimension">
-                <td class="td_cell" :class="cell_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click2="board_click_right([x - 1, y - 1], $event)" @mouseover="mouse_over_func">
+                <td class="td_cell" :class="cell_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click2="board_click_right([x - 1, y - 1], $event)">
                   <span class="span_cell" :class="mediator.cell_class([x - 1, y - 1])">
                     {{mediator.cell_view([x - 1, y - 1])}}
                   </span>
@@ -689,11 +689,6 @@ export default {
     },
 
     // -------------------------------------------------------------------------------- play_mode
-
-    mouse_over_func(e) {
-      // / e.target.classList.add("active")
-      this.log("mouse_over_func")
-    },
 
     // 駒箱の駒を持ち上げている？
     piece_box_have_p(piece) {
