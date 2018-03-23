@@ -54,3 +54,6 @@ https://www.pakutaso.com/
 
 しんえれ外部駒
 http://shineleckoma.web.fc2.com/
+
+8 bit FX | SampleScience
+https://www.samplescience.ca/2018/03/8-bit-fx.html
