@@ -84,7 +84,7 @@
       </div>
       <div class="flex-item">
         <ul v-if="run_mode2 === 'edit_mode'" class="piece_box" @click="piece_box_other_click">
-          <li v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{active: piece_box_have_p(piece)}">
+          <li v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}">
             <span :class="piece.css_class_list">{{piece.name}}</span>
             <span v-if='count >= 2' class="piece_count">{{count}}</span>
           </li>
@@ -733,7 +733,7 @@ export default {
       }
 
       // // 相手の持駒を持とうとしたときは無効
-      // if (this.run_mode2 === "play_mode" && !this.hold_p && location.key !== this.mediator.current_location.key) {
+      // if (this.run_mode2 === "play_mode" && !this.holding_p && location.key !== this.mediator.current_location.key) {
       //   console.log("相手の持駒を持とうとしたときは無効")
       //   return
       // }
@@ -801,7 +801,7 @@ export default {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.run_mode2 === "play_mode" && !this.hold_p && location !== this.mediator.current_location) {
+      if (this.run_mode2 === "play_mode" && !this.holding_p && location !== this.mediator.current_location) {
         console.log("相手の持駒を持とうとしたときは無効")
         return
       }
@@ -837,13 +837,13 @@ export default {
       // -------------------------------------------------------------------------------- Validation
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
-      if (this.run_mode2 === "play_mode" && !this.hold_p && soldier && soldier.location !== this.mediator.current_location) {
+      if (this.run_mode2 === "play_mode" && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
         console.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
 
       // 持たずに何もないところをクリックしたので無効とする
-      if (!this.hold_p && !soldier) {
+      if (!this.holding_p && !soldier) {
         console.log("持たずに何もないところをクリックしたので無効とする")
         return
       }
@@ -865,8 +865,8 @@ export default {
       // --------------------------------------------------------------------------------
 
       const shift_key = e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
-      console.log(`hold_p: ${this.hold_p}`)
-      if (!this.hold_p && soldier && shift_key) {
+      console.log(`holding_p: ${this.holding_p}`)
+      if (!this.holding_p && soldier && shift_key) {
         console.log("盤上の駒を裏返す")
         this.mediator.board.place_on(soldier.piece_transform)
         this.mediator_update()
@@ -874,7 +874,7 @@ export default {
       }
 
       // 盤上の駒を持ちあげる
-      if (!this.hold_p) {
+      if (!this.holding_p) {
         console.log("盤上の駒を持ちあげる")
         this.soldier_hold(place, e)
         return
@@ -986,7 +986,7 @@ export default {
 
     // 自分の駒の上に重ねた？
     put_on_my_piece_p(soldier) {
-      return this.hold_p && soldier && soldier.location === this.mediator.current_location
+      return this.holding_p && soldier && soldier.location === this.mediator.current_location
     },
 
     // 盤面の駒を持ち上げる
@@ -1032,9 +1032,16 @@ export default {
 
     cell_class(xy) {
       const place = Place.fetch(xy)
+      const soldier = this.mediator.board.lookup(place)
       const list = this.mediator.cell_class(xy)
       if (_.isEqual(this.place_from, place)) {
-        list.push("active")
+        list.push("holding_p")
+      } else {
+        if (soldier) {
+          if (this.mediator.current_location === soldier.location || this.run_mode2 === "edit_mode") {
+            list.push("piece_selectable")
+          }
+        }
       }
       return list
     },
@@ -1074,7 +1081,7 @@ export default {
     },
 
     // 駒を持ち上げている状態？
-    hold_p() {
+    holding_p() {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
     },
 

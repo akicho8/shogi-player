@@ -36,5 +36,11 @@
         // 駒台の上のマーク
         .location_mark
 
-        &.active
-          background: $hold-color
+        .piece_name
+          // さらに駒を持ったときは色を濃くする
+          &.holding_p
+            background: $hold_active_color
+          // 選択できる駒だけ反応する
+          &.piece_selectable
+            &:hover
+              background: $td-hover-color

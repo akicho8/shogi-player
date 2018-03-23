@@ -63,8 +63,8 @@
           td
             // transition: all 0.5s ease-out
             text-align: center
-            &.active
-              background: $hold-color
+            &.holding_p
+              background: $hold_active_color
             &.location_black
               vertical-align: bottom
             &.location_white
@@ -72,6 +72,14 @@
             &.current, &.origin_place
             .span_cell
               display: inline-block
+
+            &:hover
+              // 選択できる駒だけ反応する
+              &.piece_selectable
+                background: $td-hover-color
+              // さらに駒を持ったときは色を濃くする
+              &.holding_p
+                background: $hold_active_color
 
   // コントローラー
   .controller_block
