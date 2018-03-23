@@ -52,8 +52,6 @@ class SfenParser extends ParserBase {
   }
 
   get hold_pieces() {
-    console.log(super.hold_pieces)
-
     const _hold_pieces = super.hold_pieces
     if (this.attributes["hold_pieces"] !== "-") {
       XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece_char>\\S)"), (md, i) => {
