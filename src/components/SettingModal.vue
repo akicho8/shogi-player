@@ -20,8 +20,10 @@
 
 <script>
 export default {
-  props: ["run_mode"],
-  data: function () {
+  props: {
+    run_mode: {required: true},
+  },
+  data() {
     return {
       run_mode2: this.run_mode,
     }
