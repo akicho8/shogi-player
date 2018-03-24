@@ -96,12 +96,15 @@
     cursor: pointer
     width: 37vmin
 
-  // N手目の編集モードのnumberフィールド
-  .turn_edit_input
-    width: 3rem
-  // N手目のテキスト表示
-  .turn_edit_text
-    cursor: pointer
+  .turn_div
+    // テキストを選択できないようにする
+    user-select: none
+    // N手目の編集モードのnumberフィールド
+    .turn_edit_input
+      width: 3rem
+    // N手目のテキスト表示
+    .turn_edit_text
+      cursor: pointer
 
   // 幅が狭いときでも折り返す
   .sfen_area

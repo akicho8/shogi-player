@@ -43,25 +43,27 @@
   </div>
 
   <template v-if="mediator">
-    <template v-if="run_mode2 === 'view_mode' || run_mode2 === 'play_mode'">
-      <template v-if="!turn_edit">
-        <span class="turn_edit_text" @click="turn_edit_run">
-          <template v-if="run_mode2 === 'view_mode'">
-            {{mediator.current_turn_label}}
-          </template>
-          <template v-if="run_mode2 === 'play_mode'">
-            {{mediator.normalized_turn}}手目
-          </template>
-        </span>
+    <div class="turn_div">
+      <template v-if="run_mode2 === 'view_mode' || run_mode2 === 'play_mode'">
+        <template v-if="!turn_edit">
+          <span class="turn_edit_text" @click="turn_edit_run">
+            <template v-if="run_mode2 === 'view_mode'">
+              {{mediator.current_turn_label}}
+            </template>
+            <template v-if="run_mode2 === 'play_mode'">
+              {{mediator.normalized_turn}}手目
+            </template>
+          </span>
+        </template>
+        <template v-if="turn_edit">
+          <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
+        </template>
       </template>
-      <template v-if="turn_edit">
-        <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
-      </template>
-    </template>
-    <span class="is-pulled-right modal_trigger_dots" @click="setting_modal_p = true"><b-icon icon="dots-vertical" size="is-small"></b-icon></span>
-    <b-modal :active.sync="setting_modal_p" has-modal-card>
-      <SettingModal :run_mode.sync="run_mode2"></SettingModal>
-    </b-modal>
+      <span class="is-pulled-right modal_trigger_dots" @click="setting_modal_p = true"><b-icon icon="dots-vertical" size="is-small"></b-icon></span>
+      <b-modal :active.sync="setting_modal_p" has-modal-card>
+        <SettingModal :run_mode.sync="run_mode2"></SettingModal>
+      </b-modal>
+    </div>
     <div class="board-container flippable" :class="{flip: flip}">
       <PieceStand class="flex-item" :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
       <div class="flex-item board-wrap">
