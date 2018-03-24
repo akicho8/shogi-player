@@ -1,5 +1,8 @@
 .shogi-player
   .piece_stand
+    // 駒(テキスト)を連打やドラッグの際に選択できないようにする
+    user-select: none
+
     &.location_white
       transform: rotate(180deg)
     &.turn_active
