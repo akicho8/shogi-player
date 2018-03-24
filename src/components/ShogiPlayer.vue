@@ -876,7 +876,6 @@ export default {
       if (!this.holding_p && soldier && shift_key) {
         console.log("盤上の駒を裏返す")
         this.mediator.board.place_on(soldier.piece_transform)
-        this.mediator_update()
         return
       }
 
