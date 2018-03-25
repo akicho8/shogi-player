@@ -1,5 +1,8 @@
 .shogi-player
   &.theme-real
+    @import "piece_map_list"
+    @include piece_map_list
+    
     .board_outer
       padding: 2%
       position: relative
@@ -34,8 +37,6 @@
             background-size: contain
             background-position: center
             background-repeat: no-repeat
-            @import "piece_map_list"
-            @include piece_map_list
 
             // 升目に対しての駒の大きさ
             width:  100%
