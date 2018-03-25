@@ -75,7 +75,7 @@
             <tr v-for="y in mediator.dimension">
               <template v-for="x in mediator.dimension">
                 <td :class="td_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click2="board_click_right([x - 1, y - 1], $event)">
-                  <span class="span_cell" :class="mediator.td_span_class([x - 1, y - 1])">
+                  <span class="piece_inner" :class="mediator.td_span_class([x - 1, y - 1])">
                     {{mediator.cell_view([x - 1, y - 1])}}
                   </span>
                 </td>

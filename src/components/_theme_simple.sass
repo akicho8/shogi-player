@@ -5,7 +5,7 @@
       border: $sp_simple_grid_outer solid $sp_simple_grid_color
       border-spacing: $sp_simple_grid_inner
       background: $sp_simple_grid_color
-      td
+      .piece_outer
         color: $sp_simple_piece_color
         background: $sp_simple_board_color_bg
         &.current
@@ -16,13 +16,13 @@
           color: $sp_simple_piece_color
           font-weight: bold
           animation: simple_blink 0.5s ease-in-out infinite alternate
-        .span_cell
+        .piece_inner
           &.location_black
             transform: translateY($sp_simple_span_cell_transform_y)
           &.location_white
             transform: rotate(180deg) translateY($sp_simple_span_cell_transform_y)
     .piece_stand
-      .span_cell
+      .piece_inner
 
 @keyframes simple_blink
   0%
@@ -38,9 +38,9 @@
         &.size-#{$key}
           .board_outer
             .board_inner
-              td
-                width:  map-get($attrs, td-size)
-                height: map-get($attrs, td-size)
+              .piece_outer
+                width:  map-get($attrs, piece_outer_size)
+                height: map-get($attrs, piece_outer_size)
                 font-size: map-get($attrs, font-size)
           .piece_stand
             li

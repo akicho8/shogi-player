@@ -27,7 +27,7 @@
         width: 100%
         height: 100%
       .board_inner
-        td
+        .piece_outer
           border: $sp_real_grid_inner solid $sp_real_grid_color
 
           &.current
@@ -36,7 +36,7 @@
           &.origin_place
             background: $sp_real_origin_color_bg
 
-          .span_cell
+          .piece_inner
             @extend %image_contain
 
             // 升目に対しての駒の大きさ
@@ -49,7 +49,7 @@
             &.location_white
               transform: translateY($sp_real_span_cell_transform_y * -1)
     .piece_stand
-      .span_cell
+      .piece_inner
         @extend %image_contain
 
 @keyframes real_blink
@@ -67,7 +67,7 @@
         &.size-#{$key}
           .board_outer
             .board_inner
-              td
+              .piece_outer
                 width:  $size
                 height: $size
           .piece_stand

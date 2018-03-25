@@ -30,7 +30,7 @@ export default {
     piece_outer_class(piece) {
       let list = []
       // list = _.concat(list, piece.css_class_list)
-      // list.push("span_cell")
+      // list.push("piece_inner")
       // list.push(`location_black`) // 本当は this.location.key を埋めるべきだけど後手の駒台は180度反転するため先手の向きとする
       // list.push("promoted_false")
 
@@ -46,7 +46,7 @@ export default {
     piece_class(piece) {
       let list = []
       list = _.concat(list, piece.css_class_list)
-      list.push("span_cell")
+      list.push("piece_inner")
       list.push(`location_black`) // 本当は this.location.key を埋めるべきだけど後手の駒台は180度反転するため先手の向きとする
       list.push("promoted_false")
 
