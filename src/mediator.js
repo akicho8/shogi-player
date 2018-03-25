@@ -82,7 +82,7 @@ class Mediator {
     this.board.delete_at(place)
   }
 
-  cell_class(xy) {
+  td_span_class(xy) {
     const place = Place.fetch(xy)
     const soldier = this.board.lookup(place)
     let list = []
