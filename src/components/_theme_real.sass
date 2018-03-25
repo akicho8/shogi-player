@@ -1,8 +1,14 @@
+%image_contain
+  color: transparent            // テキストを消す
+  background-size: contain      // contain にすると端が欠けない
+  background-position: center
+  background-repeat: no-repeat
+
 .shogi-player
   &.theme-real
     @import "piece_map_list"
     @include piece_map_list
-    
+
     .board_outer
       padding: 2%
       position: relative
@@ -22,8 +28,6 @@
         height: 100%
       .board_inner
         td
-          // テキストを消す
-          color: transparent
           border: $sp_real_grid_inner solid $sp_real_grid_color
 
           &.current
@@ -33,10 +37,7 @@
             background: $sp_real_origin_color_bg
 
           .span_cell
-            // contain にすると端が欠けない
-            background-size: contain
-            background-position: center
-            background-repeat: no-repeat
+            @extend %image_contain
 
             // 升目に対しての駒の大きさ
             width:  100%
@@ -47,6 +48,9 @@
               transform: translateY($sp_real_span_cell_transform_y)
             &.location_white
               transform: translateY($sp_real_span_cell_transform_y * -1)
+    .piece_stand
+      .span_cell
+        @extend %image_contain
 
 @keyframes real_blink
   0%
@@ -66,6 +70,8 @@
               td
                 width:  $size
                 height: $size
+          .piece_stand
+            font-size: $size * 0.75
 
 @include size_define(x-small,  $sp_real_cell_size_xsmall)
 @include size_define(small,    $sp_real_cell_size_small)
@@ -84,7 +90,7 @@
           &:after
             background-image: url("#{$sp_assets_dir}/background/#{$file}")
             opacity: $opacity
-            
+
 @include variation_define(a, 1.0, "0100_wood_01.png")
 @include variation_define(b, 1.0, "0110_wood_02.png")
 @include variation_define(c, 1.0, "0120_wood_03.png")

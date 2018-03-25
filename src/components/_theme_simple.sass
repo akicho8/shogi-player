@@ -21,6 +21,8 @@
             transform: translateY($sp_simple_span_cell_transform_y)
           &.location_white
             transform: rotate(180deg) translateY($sp_simple_span_cell_transform_y)
+    .piece_stand
+      .span_cell
 
 @keyframes simple_blink
   0%
@@ -32,6 +34,7 @@
   @media screen and (min-width: 321px) and (max-width: 9999px)
     .shogi-player
       &.theme-simple
+        // font-size: map-get($attrs, font-size)
         &.size-#{$key}
           .board_outer
             .board_inner

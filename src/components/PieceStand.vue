@@ -3,7 +3,7 @@
   <ul>
     <li class="location_mark">{{location.name}}</li>
     <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)">
-      <span :class="li_class(piece)">{{piece.name}}</span>
+      <span :class="piece_class(piece)">{{piece.name}}</span>
       <span v-if="count >= 2" class="piece_count">{{count}}</span>
     </li>
   </ul>
@@ -25,14 +25,19 @@ export default {
       return this.$parent.have_piece_location === this.location && this.$parent.have_piece === piece
     },
 
-    li_class(piece) {
+    piece_class(piece) {
       let list = []
       list = _.concat(list, piece.css_class_list)
+      list.push("span_cell")
+      list.push(`location_black`) // 本当は this.location.key を埋めるべきだけど後手の駒台は180度反転するため先手の向きとする
+      list.push("promoted_false")
+
       if (this.hold_piece_holding_p(piece)) {
         list.push("holding_p")
       } else if (this.$parent.mediator.current_location === this.location || this.$parent.run_mode2 === "edit_mode") {
         list.push("selectable_p")
       }
+
       return list
     },
   },
