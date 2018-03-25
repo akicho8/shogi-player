@@ -1,7 +1,7 @@
 %location_white
   transform: rotate(180deg)
 
-%sentakudekiru
+%dom_selectable
   &.holding_p
     background: $sp_holding_color
   &:hover
@@ -26,7 +26,7 @@
       @extend %location_white
 
   // 駒台と将棋盤のレイアウト
-  .board-container
+  .board_container
     display: flex
     // すべてを中央よせ
     justify-content: center
@@ -72,7 +72,7 @@
           // box-shadow: 0 0 1vmin rgba($sp_simple_grid_color, 0.5)
 
           .piece_outer
-            @extend %sentakudekiru
+            @extend %dom_selectable
 
             // transition: all 0.5s ease-out
             text-align: center

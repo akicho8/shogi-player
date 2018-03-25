@@ -8,15 +8,15 @@
   .shogi-player .flippable {
     transform: rotate(0deg);
     transition: all 0.2s 0s ease-in-out; }
-  .shogi-player .board-container {
+  .shogi-player .board_container {
     display: flex;
     /* すべてを中央よせ */
     justify-content: center; }
-    .shogi-player .board-container .flex-item:nth-child(1) {
+    .shogi-player .board_container .flex-item:nth-child(1) {
       align-self: flex-start; }
-    .shogi-player .board-container .flex-item:nth-child(2) {
+    .shogi-player .board_container .flex-item:nth-child(2) {
       align-self: center; }
-    .shogi-player .board-container .flex-item:nth-child(3) {
+    .shogi-player .board_container .flex-item:nth-child(3) {
       align-self: flex-end; }
   .shogi-player table {
     margin: 0 auto;
