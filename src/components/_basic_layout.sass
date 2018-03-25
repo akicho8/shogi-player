@@ -1,6 +1,17 @@
 %location_white
   transform: rotate(180deg)
 
+%sentakudekiru
+  &.holding_p
+    background: $sp_holding_color
+  &:hover
+    // 選択できる駒だけ反応する
+    &.selectable_p
+      background: $sp_selectable_color
+    // さらに駒を持ったときは色を濃くする
+    &.holding_p
+      background: $sp_holding_color
+
 .shogi-player
   font-family: "YuMincho", "Yu Mincho", serif
 
@@ -34,7 +45,7 @@
       flex-direction: column
       // 空白を空けて上下に配置
       justify-content: space-between
-        
+
   .board-wrap
 
       // .mark
@@ -57,14 +68,14 @@
 
           // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
           user-select: none
-          
+
           // box-shadow: 0 0 1vmin rgba($sp_simple_grid_color, 0.5)
-            
-          td
+
+          .piece_outer
+            @extend %sentakudekiru
+
             // transition: all 0.5s ease-out
             text-align: center
-            &.holding_p
-              background: $sp_holding_color
             &.location_black
               vertical-align: bottom
             &.location_white
@@ -72,14 +83,6 @@
             &.current, &.origin_place
             .span_cell
               display: inline-block
-
-            &:hover
-              // 選択できる駒だけ反応する
-              &.selectable_p
-                background: $sp_selectable_color
-              // さらに駒を持ったときは色を濃くする
-              &.holding_p
-                background: $sp_holding_color
 
   // コントローラー
   .controller_block

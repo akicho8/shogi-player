@@ -20,7 +20,7 @@
     ul
       list-style-type: none
       padding: 0 0.3vmin
-      margin: 1vmin
+      margin: 0.5vmin
       li
         // 歩(2) の並びを横軸中央で揃える
         display: flex
@@ -39,11 +39,5 @@
         // 駒台の上のマーク
         .location_mark
 
-        .piece_name
-          // さらに駒を持ったときは色を濃くする
-          &.holding_p
-            background: $sp_holding_color
-          // 選択できる駒だけ反応する
-          &.selectable_p
-            &:hover
-              background: $sp_selectable_color
+        .piece_outer
+          @extend %sentakudekiru

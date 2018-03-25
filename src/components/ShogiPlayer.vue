@@ -1043,7 +1043,9 @@ export default {
     td_class(xy) {
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
-      const list = this.mediator.td_span_class(xy)
+      const list = [] // this.mediator.td_span_class(xy)
+
+      list.push("piece_outer")
 
       if (_.isEqual(this.place_from, place)) {
         list.push("holding_p")
