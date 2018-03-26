@@ -1,5 +1,5 @@
 .shogi-player
-  .piece_stand
+  .piece_stand_outer
     // 駒(テキスト)を連打やドラッグの際に選択できないようにする
     user-select: none
 
@@ -20,7 +20,7 @@
     ul
       list-style-type: none
       padding: 0 0.3vmin
-      margin: 0.5vmin
+      // margin: 0.5vmin
       li
         // 歩(2) の並びを横軸中央で揃える
         display: flex
@@ -35,9 +35,6 @@
           vertical-align: middle
           margin-left: 0.3rem
           font-size: 80%
-
-        // 駒台の上のマーク
-        .location_mark
 
         .piece_outer
           @extend %dom_selectable

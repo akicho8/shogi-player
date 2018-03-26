@@ -77,10 +77,13 @@
             .piece_outer
               width:  $size
               height: $size
-          .piece_stand
+          .piece_stand_outer
             font-size: $size * 0.8
-            .piece_outer
-              line-height: 100%
+            ul
+              min-height: $size * 2
+              padding: 1vmin 0
+              .piece_outer
+                line-height: 100%
             .piece_count
               font-size: $size * 0.4
           .piece_box
