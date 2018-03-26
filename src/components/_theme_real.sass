@@ -1,10 +1,5 @@
-%image_contain
-  color: transparent            // テキストを消す
-  background-size: contain      // contain にすると端が欠けない
-  background-position: center
-  background-repeat: no-repeat
-
-%texture_bg
+// 盤のテクスチャ用
+%board_texture_bg
   position: relative
   &:after
     position: absolute
@@ -18,63 +13,58 @@
     height: 100%
     border-radius: 0.5vmin
 
-.shogi-player
-  &.theme-real
-    @import "piece_map_list"
-    @include piece_map_list
-
-    .piece_inner
-      @extend %image_contain
-
-    .board_outer
-      @extend %texture_bg
-      
-      padding: 2%
-      .board_inner
-        .piece_outer
-          border: $sp_real_grid_inner solid $sp_real_grid_color
-
-          &.current
-            background: $sp_real_current_bg1
-            animation: real_blink 0.5s ease-in-out infinite alternate
-          &.origin_place
-            background: $sp_real_origin_bg
-
-          .piece_inner
-            // @extend %image_contain
-
-            // 升目に対しての駒の大きさ
-            width:  100%
-            height: 100%
-
-            // 上下の微調整
-            &.location_black
-              transform: translateY($sp_real_piece_inner_transform_y)
-            &.location_white
-              transform: translateY($sp_real_piece_inner_transform_y * -1)
-    // .piece_stand
-    //   .piece_inner
-    //     // @extend %image_contain
-    // .piece_box
-    //   .piece_inner
-    //     // @extend %image_contain
-
-    // // 駒箱
-    .piece_box
-      @extend %texture_bg
-      &:after
-        background-size: auto   // 拡大縮小しない
-      
-      // max-width:  map-get($attrs, font-size) * 3.8
-      // min-height: map-get($attrs, font-size) * 2.0
-      // li
-      //   font-size: map-get($attrs, font-size) * 0.5
+// 駒のテクスチャ用
+%piece_texture_bg
+  color: transparent            // テキストを消す
+  background-size: contain      // contain にすると端が欠けない
+  background-position: center
+  background-repeat: no-repeat
 
 @keyframes real_blink
   0%
     background: $sp_real_current_bg1
   100%
     background: $sp_real_current_bg2
+
+.shogi-player
+  &.theme-real
+    @import "piece_map_list"
+    @include piece_map_list
+
+    .piece_box
+      @extend %board_texture_bg
+
+    .piece_stand
+      @extend %board_texture_bg
+
+    .piece_inner
+      @extend %piece_texture_bg
+
+    .board_outer
+      @extend %board_texture_bg
+
+      padding: 2%               // 盤の隅の隙間
+
+      .board_inner
+        .piece_outer
+          border: $sp_real_grid_inner solid $sp_real_grid_color // 盤面の罫線
+
+          &.origin_place
+            background: $sp_real_origin_bg
+
+          &.current
+            animation: real_blink 0.5s ease-in-out infinite alternate
+
+          .piece_inner
+            // 升に合わせて駒を大きくする
+            width:  100%
+            height: 100%
+
+            // 駒の位置調整
+            &.location_black
+              transform: translateY($sp_real_piece_inner_transform_y)
+            &.location_white
+              transform: translateY($sp_real_piece_inner_transform_y * -1)
 
 //////////////////////////////////////////////////////////////////////////////// size
 
@@ -83,18 +73,20 @@
     .shogi-player
       &.theme-real
         &.size-#{$key}
-          .board_outer
-            .board_inner
-              .piece_outer
-                width:  $size
-                height: $size
+          .board_inner
+            .piece_outer
+              width:  $size
+              height: $size
           .piece_stand
-            font-size: $size * 0.75
+            font-size: $size * 0.8
+            .piece_outer
+              line-height: 100%
+            .piece_count
+              font-size: $size * 0.4
           .piece_box
             max-width:  $size * 2.5
             min-height: $size * 2.0
-            li
-              font-size: $size * 0.5
+            font-size: $size * 0.5
 
 @include size_define(x-small,  $sp_real_cell_size_xsmall)
 @include size_define(small,    $sp_real_cell_size_small)
@@ -109,7 +101,7 @@
   .shogi-player
     &.theme-real
       &.variation-#{$key}
-        .board_outer, .piece_box
+        .board_outer, .piece_box, .piece_stand
           &:after
             background-image: url("#{$sp_assets_dir}/background/#{$file}")
             opacity: $opacity
