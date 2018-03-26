@@ -21,6 +21,9 @@
             transform: translateY($sp_simple_span_cell_transform_y)
           &.location_white
             transform: rotate(180deg) translateY($sp_simple_span_cell_transform_y)
+          &.promoted_true
+            color: $sp_simple_promoted_color
+
     .piece_stand
       .piece_inner
 
@@ -50,7 +53,7 @@
             min-height: map-get($attrs, font-size) * 1.0
             li
               font-size: map-get($attrs, font-size) * 0.5
-              
+
 @include size_define(x-small,   $sp_simple_cell_size_xsmall)
 @include size_define(small,     $sp_simple_cell_size_small)
 @include size_define(default,   $sp_simple_cell_size_default)
