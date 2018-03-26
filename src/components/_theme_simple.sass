@@ -1,3 +1,10 @@
+%box
+  border: 1px solid $sp_simple_grid_color
+  background: $sp_simple_board_bg
+  padding: 0.4vmin
+  border-radius: 0.5vmin
+  min-height: 5vmin
+
 .shogi-player
   &.theme-simple
     .board_inner
@@ -32,14 +39,15 @@
       .location_mark
         margin: 0.3vmin
       .piece_inner
-        
+
     // 駒箱
     .piece_box
-      border: 1px solid $sp_simple_grid_color
-      background: $sp_simple_board_bg
-      padding: 0.4vmin
-      border-radius: 0.5vmin
-        
+      @extend %box
+
+    &.run_mode-edit_mode
+      .piece_stand
+        @extend %box
+
 @keyframes simple_blink
   0%
     background: $sp_simple_current_bg1
@@ -52,6 +60,7 @@
       &.theme-simple
         // font-size: map-get($attrs, font-size)
         &.size-#{$key}
+          // 盤
           .board_outer
             .board_inner
               .piece_outer
@@ -62,10 +71,11 @@
             font-size: map-get($attrs, font-size)
           // 駒箱
           .piece_box
-            max-width:  map-get($attrs, font-size) * 3.8
-            min-height: map-get($attrs, font-size) * 2.0
-            li
-              font-size: map-get($attrs, font-size) * 0.5
+            font-size: map-get($attrs, font-size) * 0.5
+            max-width: map-get($attrs, font-size) * 3.8
+          // 駒台
+          .piece_stand
+            font-size: map-get($attrs, font-size) * 0.8
 
 @include size_define(x-small,   $sp_simple_cell_size_xsmall)
 @include size_define(small,     $sp_simple_cell_size_small)
