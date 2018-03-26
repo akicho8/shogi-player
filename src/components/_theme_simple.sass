@@ -8,11 +8,11 @@
       // 盤上の駒の領域
       .piece_outer
         color: $sp_simple_piece_color
-        background: $sp_simple_board_color_bg
+        background: $sp_simple_board_bg
         &.current
-          background: $sp_simple_current_color_bg
+          background: $sp_simple_current_bg1
         &.origin_place
-          background: $sp_simple_origin_color_bg
+          background: $sp_simple_origin_bg
         &.current
           color: $sp_simple_piece_color
           font-weight: bold
@@ -20,9 +20,9 @@
         // 盤上の駒
         .piece_inner
           &.location_black
-            transform: translateY($sp_simple_span_cell_transform_y)
+            transform: translateY($sp_simple_piece_inner_transform_y)
           &.location_white
-            transform: rotate(180deg) translateY($sp_simple_span_cell_transform_y)
+            transform: rotate(180deg) translateY($sp_simple_piece_inner_transform_y)
           &.promoted_true
             color: $sp_simple_promoted_color
 
@@ -31,9 +31,9 @@
 
 @keyframes simple_blink
   0%
-    background: $sp_simple_current_color_bg
+    background: $sp_simple_current_bg1
   100%
-    background: $sp_simple_current_color_bg2
+    background: $sp_simple_current_bg2
 
 @mixin size_define($key, $attrs)
   @media screen and (min-width: 321px) and (max-width: 9999px)

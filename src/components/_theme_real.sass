@@ -31,10 +31,10 @@
           border: $sp_real_grid_inner solid $sp_real_grid_color
 
           &.current
-            background: $sp_real_current_color_bg
+            background: $sp_real_current_bg1
             animation: real_blink 0.5s ease-in-out infinite alternate
           &.origin_place
-            background: $sp_real_origin_color_bg
+            background: $sp_real_origin_bg
 
           .piece_inner
             @extend %image_contain
@@ -45,18 +45,18 @@
 
             // 上下の微調整
             &.location_black
-              transform: translateY($sp_real_span_cell_transform_y)
+              transform: translateY($sp_real_piece_inner_transform_y)
             &.location_white
-              transform: translateY($sp_real_span_cell_transform_y * -1)
+              transform: translateY($sp_real_piece_inner_transform_y * -1)
     .piece_stand
       .piece_inner
         @extend %image_contain
 
 @keyframes real_blink
   0%
-    background: $sp_real_current_color_bg
+    background: $sp_real_current_bg1
   100%
-    background: $sp_real_current_color_bg2
+    background: $sp_real_current_bg2
 
 //////////////////////////////////////////////////////////////////////////////// size
 

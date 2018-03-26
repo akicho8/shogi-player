@@ -1,4 +1,4 @@
-$sp_assets_dir: "../assets" !default
+$sp_assets_dir: "../assets" !default // Rails から使うとき Rails 側から見た assets へのパスに変更すること (そうしないと assets を参照できない)
 
 $sp_selectable_color: hsl(240, 50%, 80%) !default // 持ち上げげれる駒の背景色
 $sp_holding_color:    hsl( 60, 50%, 80%) !default // 持ち上げた駒の背景色
@@ -6,52 +6,52 @@ $sp_holding_color:    hsl( 60, 50%, 80%) !default // 持ち上げた駒の背景
 //////////////////////////////////////////////////////////////////////////////// for theme-simple
 
 // color
-$sp_simple_base_color:        hsl(0, 0%, 50%)                     !default
-$sp_simple_board_color_bg:    white                               !default
-$sp_simple_grid_color:        lighten($sp_simple_base_color, 10%) !default // 盤上の罫線の色
-$sp_simple_piece_color:       darken($sp_simple_base_color, 30%)  !default // 駒の色
+$sp_simple_base_color:  hsl(0, 0%, 50%)                     !default
+$sp_simple_board_bg:    white                               !default // 盤の色
+$sp_simple_grid_color:  lighten($sp_simple_base_color, 10%) !default // 盤上の罫線の色
+$sp_simple_piece_color: darken($sp_simple_base_color, 30%)  !default // 駒の色
 
-$sp_simple_current_color_bg:  lighten($sp_simple_base_color, 35%) !default
-$sp_simple_current_color_bg2: lighten($sp_simple_base_color, 45%) !default
-$sp_simple_origin_color_bg:   lighten($sp_simple_base_color, 45%) !default
-$sp_simple_promoted_color:    hsl(0, 50%, 50%)                    !default // 成駒の色
+$sp_simple_current_bg1:    lighten($sp_simple_base_color, 35%) !default // 最後に動かした駒の背景色1
+$sp_simple_current_bg2:    lighten($sp_simple_base_color, 45%) !default // 最後に動かした駒の背景色2
+$sp_simple_origin_bg:      lighten($sp_simple_base_color, 45%) !default // 最後に動かした駒の元の位置の背景色
+$sp_simple_promoted_color: hsl(0, 50%, 50%)                    !default // 成駒の色
 
 // size
-$sp_simple_cell_size_xsmall: (piece_outer_size: 2.0vmin, font-size: 1.3vmin)  !default
+$sp_simple_cell_size_xsmall:  (piece_outer_size: 2.0vmin, font-size: 1.3vmin)  !default
 $sp_simple_cell_size_small:   (piece_outer_size: 3.0vmin, font-size: 2.0vmin)  !default
 $sp_simple_cell_size_default: (piece_outer_size: 4.0vmin, font-size: 2.6vmin)  !default
 $sp_simple_cell_size_medium:  (piece_outer_size: 5.0vmin, font-size: 3.5vmin)  !default
 $sp_simple_cell_size_large:   (piece_outer_size: 6.0vmin, font-size: 4.0vmin)  !default
-$sp_simple_cell_size_xlarge: (piece_outer_size: 7.0vmin, font-size: 5.0vmin)  !default
+$sp_simple_cell_size_xlarge:  (piece_outer_size: 7.0vmin, font-size: 5.0vmin)  !default
 
 // grid
-$sp_simple_grid_inner: 1px                                        !default
-$sp_simple_grid_outer: 1px                                        !default
+$sp_simple_grid_inner: 1px !default // 盤の罫線の太さ
+$sp_simple_grid_outer: 1px !default // 盤の外枠の太さ
 
 // position
-$sp_simple_span_cell_transform_y: 5%                              !default
+$sp_simple_piece_inner_transform_y: 5% !default // 自分側に駒をずらす割合
 
 //////////////////////////////////////////////////////////////////////////////// for theme-real
 
 // color
-$sp_real_grid_color:        hsla(0, 0%, 0%, 0.8)                   !default
-$sp_real_current_color_bg:  hsla(38, 0%, 0%, 0.50)                 !default
-$sp_real_current_color_bg2: hsla(38, 0%, 0%, 0.25)                 !default
-$sp_real_origin_color_bg:   hsla(38, 0%, 0%, 0.25)                 !default
+$sp_real_grid_color:  hsla( 0, 0%, 0%, 0.80) !default // 盤上の罫線の色
+$sp_real_current_bg1: hsla(38, 0%, 0%, 0.50) !default // 最後に動かした駒の背景色1
+$sp_real_current_bg2: hsla(38, 0%, 0%, 0.25) !default // 最後に動かした駒の背景色2
+$sp_real_origin_bg:   hsla(38, 0%, 0%, 0.25) !default // 最後に動かした駒の元の位置の背景色
 
 // size
-$sp_real_cell_size_xsmall: 2.0vmin                               !default
-$sp_real_cell_size_small:   3.0vmin                               !default
-$sp_real_cell_size_default: 4.0vmin                               !default
-$sp_real_cell_size_medium:  5.0vmin                               !default
-$sp_real_cell_size_large:   6.0vmin                               !default
-$sp_real_cell_size_xlarge: 7.0vmin                               !default
+$sp_real_cell_size_xsmall:  2.0vmin !default
+$sp_real_cell_size_small:   3.0vmin !default
+$sp_real_cell_size_default: 4.0vmin !default
+$sp_real_cell_size_medium:  5.0vmin !default
+$sp_real_cell_size_large:   6.0vmin !default
+$sp_real_cell_size_xlarge:  7.0vmin !default
 
 // grid
-$sp_real_grid_inner: 1px                                          !default
+$sp_real_grid_inner: 1px !default // 盤の罫線の太さ
 
 // position
-$sp_real_span_cell_transform_y: 0%                                !default
+$sp_real_piece_inner_transform_y: 0% !default // 自分側に駒をずらす割合
 
 //////////////////////////////////////////////////////////////////////////////// fixed
 
