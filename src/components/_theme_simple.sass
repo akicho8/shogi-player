@@ -9,7 +9,7 @@
         color: $sp_simple_piece_color
         background: $sp_simple_board_color_bg
         &.current
-          background: $sp_simple_current_color-bg
+          background: $sp_simple_current_color_bg
         &.origin_place
           background: $sp_simple_origin_color_bg
         &.current
@@ -29,9 +29,9 @@
 
 @keyframes simple_blink
   0%
-    background: $sp_simple_current_color-bg
+    background: $sp_simple_current_color_bg
   100%
-    background: $sp_simple_current_color-bg2
+    background: $sp_simple_current_color_bg2
 
 @mixin size_define($key, $attrs)
   @media screen and (min-width: 321px) and (max-width: 9999px)
