@@ -82,7 +82,7 @@ class Mediator {
     this.board.delete_at(place)
   }
 
-  td_span_class(xy) {
+  board_piece_inner_class(xy) {
     const place = Place.fetch(xy)
     const soldier = this.board.lookup(place)
     let list = []
@@ -91,20 +91,6 @@ class Mediator {
       list.push(`location_${soldier.location.key}`)
       list.push(`promoted_${soldier.promoted}`)
       list = _.concat(list, soldier.piece.css_class_list)
-    } else {
-      list.push("blank")
-    }
-
-    if (this.last_hand) {
-      const origin_place = this.last_hand.origin_place
-      if (origin_place) {
-        if (_.isEqual(origin_place, place)) {
-          list.push("origin_place")
-        }
-      }
-      if (_.isEqual(this.last_hand.place, place)) {
-        list.push("current")
-      }
     }
 
     return list

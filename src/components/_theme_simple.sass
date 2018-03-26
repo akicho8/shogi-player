@@ -5,6 +5,7 @@
       border: $sp_simple_grid_outer solid $sp_simple_grid_color
       border-spacing: $sp_simple_grid_inner
       background: $sp_simple_grid_color
+      // 盤上の駒の領域
       .piece_outer
         color: $sp_simple_piece_color
         background: $sp_simple_board_color_bg
@@ -16,6 +17,7 @@
           color: $sp_simple_piece_color
           font-weight: bold
           animation: simple_blink 0.5s ease-in-out infinite alternate
+        // 盤上の駒
         .piece_inner
           &.location_black
             transform: translateY($sp_simple_span_cell_transform_y)

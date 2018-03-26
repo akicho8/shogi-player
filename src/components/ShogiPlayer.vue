@@ -74,8 +74,8 @@
           <table class="board_inner">
             <tr v-for="y in mediator.dimension">
               <template v-for="x in mediator.dimension">
-                <td :class="td_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click2="board_click_right([x - 1, y - 1], $event)">
-                  <span class="piece_inner" :class="mediator.td_span_class([x - 1, y - 1])">
+                <td class="piece_outer" :class="piece_outer_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click2="board_click_right([x - 1, y - 1], $event)">
+                  <span class="piece_inner" :class="mediator.board_piece_inner_class([x - 1, y - 1])">
                     {{mediator.cell_view([x - 1, y - 1])}}
                   </span>
                 </td>
@@ -1040,12 +1040,22 @@ export default {
     //   return locatios[(this.turn_counter + diff) % locatios.length]
     // },
 
-    td_class(xy) {
+    piece_outer_class(xy) {
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
-      const list = [] // this.mediator.td_span_class(xy)
+      const list = [] // this.mediator.board_piece_inner_class(xy)
 
-      list.push("piece_outer")
+      if (this.mediator.last_hand) {
+        const origin_place = this.mediator.last_hand.origin_place
+        if (origin_place) {
+          if (_.isEqual(origin_place, place)) {
+            list.push("origin_place")
+          }
+        }
+        if (_.isEqual(this.mediator.last_hand.place, place)) {
+          list.push("current")
+        }
+      }
 
       if (_.isEqual(this.place_from, place)) {
         list.push("holding_p")
