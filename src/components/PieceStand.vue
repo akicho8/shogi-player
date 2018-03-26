@@ -4,7 +4,7 @@
     <li class="location_mark">{{location.name}}</li>
     <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)">
       <div class="piece_outer" :class="piece_outer_class(piece)">
-        <span :class="piece_class(piece)">{{piece.name}}</span>
+        <span class="piece_inner" :class="piece_class(piece)">{{piece.name}}</span>
       </div>
       <span v-if="count >= 2" class="piece_count">{{count}}</span>
     </li>
@@ -46,7 +46,7 @@ export default {
     piece_class(piece) {
       let list = []
       list = _.concat(list, piece.css_class_list)
-      list.push("piece_inner")
+      // list.push("piece_inner")
       list.push(`location_black`) // 本当は this.location.key を埋めるべきだけど後手の駒台は180度反転するため先手の向きとする
       list.push("promoted_false")
 

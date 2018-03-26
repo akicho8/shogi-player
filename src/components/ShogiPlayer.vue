@@ -87,7 +87,9 @@
       <div class="flex-item">
         <ul v-if="run_mode2 === 'edit_mode'" class="piece_box" @click="piece_box_other_click">
           <li v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}">
-            <span :class="piece.css_class_list">{{piece.name}}</span>
+            <div class="piece_outer" :class="piece_box_piece_outer_class(piece)">
+              <span :class="piece_box_piece_inner_class(piece)">{{piece.name}}</span>
+            </div>
             <span v-if='count >= 2' class="piece_count">{{count}}</span>
           </li>
         </ul>
@@ -1068,6 +1070,36 @@ export default {
       return list
     },
 
+    // -------------------------------------------------------------------------------- piece_box
+
+    piece_box_piece_outer_class(piece) {
+      let list = []
+      if (this.piece_box_have_p(piece)) {
+        list.push("holding_p")
+      } else if (this.run_mode2 === "edit_mode") {
+        list.push("selectable_p")
+      }
+      return list
+    },
+
+    piece_box_piece_inner_class(piece) {
+      let list = []
+      list = _.concat(list, piece.css_class_list)
+      // list.push("piece_inner")
+      list.push(`location_black`) // 本当は this.location.key を埋めるべきだけど後手の駒台は180度反転するため先手の向きとする
+      list.push("promoted_false")
+
+      // if (this.piece_box_have_p(piece)) {
+      //   list.push("holding_p")
+      // } else if (this.$parent.mediator.current_location === this.location || this.$parent.run_mode2 === "edit_mode") {
+      //   list.push("selectable_p")
+      // }
+
+      return list
+    },
+
+    // --------------------------------------------------------------------------------
+
     all_flip() {
       // 盤面反転
       this.mediator.board = this.mediator.board.flip
@@ -1088,7 +1120,8 @@ export default {
         component: SettingModal,
         hasModalCard: true, // If your modal content has a .modal-card as root, add this prop or the card might break on mobile
       })
-    }
+    },
+
   },
 
   computed: {

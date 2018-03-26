@@ -1,7 +1,7 @@
 // 駒箱
 
 .shogi-player
-  ul.piece_box
+  .piece_box
     display: flex
     // 横並び
     flex-direction: row
@@ -23,7 +23,7 @@
     border-radius: 0.5vmin
 
     li
-      margin: 0.3rem
+      margin: 0.15rem
       cursor: pointer
 
       // 歩(2) の並びを横軸中央で揃える
@@ -39,3 +39,6 @@
       &.holding_p
         .piece_name
           background: $sp_holding_color
+
+      .piece_outer
+        @extend %dom_selectable
