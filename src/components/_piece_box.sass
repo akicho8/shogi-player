@@ -1,26 +1,24 @@
 // 駒箱
+//  
+// .piece_box
+//   ul
+//     li
+//      .piece_outer
+//        .piece_inner
+//
 
 .shogi-player
   .piece_box
     display: flex
-    // 横並び
-    flex-direction: row
-    // 折り返す
-    flex-wrap: wrap
-    // 列は左につめる
-    justify-content: flex-start
-    // 行は上につめる
-    align-content: flex-start
+    flex-direction: row         // 横並び
+    flex-wrap: wrap             // 折り返す
+    justify-content: flex-start // 列は左につめる
+    align-content: flex-start   // 行は上につめる
     // border: 1px solid #eee
 
     list-style-type: none
     padding: 0 0.3vmin
     margin-left: 1vmin
-
-    border: 2px solid $sp_simple_grid_color
-    background: $sp_simple_board_bg
-    padding: 0.5vmin
-    border-radius: 0.5vmin
 
     li
       margin: 0.15rem
@@ -35,10 +33,6 @@
         vertical-align: middle
         margin-left: 0.1rem
         font-size: 60%
-
-      &.holding_p
-        .piece_name
-          background: $sp_holding_color
 
       .piece_outer
         @extend %dom_selectable

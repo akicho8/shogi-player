@@ -88,7 +88,7 @@
         <ul v-if="run_mode2 === 'edit_mode'" class="piece_box" @click="piece_box_other_click">
           <li v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}">
             <div class="piece_outer" :class="piece_box_piece_outer_class(piece)">
-              <span :class="piece_box_piece_inner_class(piece)">{{piece.name}}</span>
+              <span class="piece_inner" :class="piece_box_piece_inner_class(piece)">{{piece.name}}</span>
             </div>
             <span v-if='count >= 2' class="piece_count">{{count}}</span>
           </li>

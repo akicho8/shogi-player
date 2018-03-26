@@ -4,28 +4,32 @@
   background-position: center
   background-repeat: no-repeat
 
+%texture_bg
+  position: relative
+  &:after
+    position: absolute
+    z-index: -1
+    content: ""
+    background-position: center
+    background-size: cover // cover にすると1枚の画像が最大まで広がる。contain は繰り返しになる
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    border-radius: 0.5vmin
+
 .shogi-player
   &.theme-real
     @import "piece_map_list"
     @include piece_map_list
 
+    .piece_inner
+      @extend %image_contain
+
     .board_outer
+      @extend %texture_bg
+      
       padding: 2%
-      position: relative
-      &:after
-        position: absolute
-        z-index: -1
-        content: ""
-        border-radius: 0.8%
-        background-position: center
-        // cover にすると1枚の画像が最大まで広がる。contain は繰り返しになる
-        background-size: cover
-        top: 0
-        left: 0
-        // right: 0
-        // bottom: 0
-        width: 100%
-        height: 100%
       .board_inner
         .piece_outer
           border: $sp_real_grid_inner solid $sp_real_grid_color
@@ -37,7 +41,7 @@
             background: $sp_real_origin_bg
 
           .piece_inner
-            @extend %image_contain
+            // @extend %image_contain
 
             // 升目に対しての駒の大きさ
             width:  100%
@@ -48,9 +52,23 @@
               transform: translateY($sp_real_piece_inner_transform_y)
             &.location_white
               transform: translateY($sp_real_piece_inner_transform_y * -1)
-    .piece_stand
-      .piece_inner
-        @extend %image_contain
+    // .piece_stand
+    //   .piece_inner
+    //     // @extend %image_contain
+    // .piece_box
+    //   .piece_inner
+    //     // @extend %image_contain
+
+    // // 駒箱
+    .piece_box
+      @extend %texture_bg
+      &:after
+        background-size: auto   // 拡大縮小しない
+      
+      // max-width:  map-get($attrs, font-size) * 3.8
+      // min-height: map-get($attrs, font-size) * 2.0
+      // li
+      //   font-size: map-get($attrs, font-size) * 0.5
 
 @keyframes real_blink
   0%
@@ -72,6 +90,11 @@
                 height: $size
           .piece_stand
             font-size: $size * 0.75
+          .piece_box
+            max-width:  $size * 2.5
+            min-height: $size * 2.0
+            li
+              font-size: $size * 0.5
 
 @include size_define(x-small,  $sp_real_cell_size_xsmall)
 @include size_define(small,    $sp_real_cell_size_small)
@@ -86,7 +109,7 @@
   .shogi-player
     &.theme-real
       &.variation-#{$key}
-        .board_outer
+        .board_outer, .piece_box
           &:after
             background-image: url("#{$sp_assets_dir}/background/#{$file}")
             opacity: $opacity
