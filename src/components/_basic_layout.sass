@@ -68,6 +68,12 @@
             .piece_inner
               display: inline-block
 
+  .piece_outer
+    cursor: default     // テキスト選択「I」ではな矢印カーソルとする
+    &:hover
+      &.selectable_p
+        cursor: pointer
+              
   // コントローラー
   .controller_block
     margin-top: 1vmin

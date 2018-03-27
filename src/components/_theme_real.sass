@@ -1,13 +1,11 @@
 // 選択できる駒に指定する  
 %dom_real_selectable
-  cursor: default               // テキスト選択「I」ではな矢印カーソルとする
   &.holding_p
     background: $sp_real_holding_color
   &:hover
     // 選択できる駒だけ反応する
     &.selectable_p
       background: $sp_real_selectable_color
-      cursor: pointer
     // さらに駒を持ったときは色を濃くする
     &.holding_p
       background: $sp_real_holding_color
