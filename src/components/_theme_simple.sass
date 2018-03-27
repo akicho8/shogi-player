@@ -1,5 +1,6 @@
 // 選択できる駒に指定する  
 %dom_simple_selectable
+  cursor: default               // テキスト選択「I」ではな矢印カーソルとする
   background: $sp_simple_board_bg
   &.holding_p
     background: $sp_simple_holding_color
@@ -7,6 +8,7 @@
     // 選択できる駒だけ反応する
     &.selectable_p
       background: $sp_simple_selectable_color
+      cursor: pointer
     // さらに駒を持ったときは色を濃くする
     &.holding_p
       background: $sp_simple_holding_color
