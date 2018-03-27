@@ -5,17 +5,17 @@ $sp_margin: 0.8vmin                // 盤と駒台の隙間
 //////////////////////////////////////////////////////////////////////////////// for theme-simple
 
 // color
-$sp_simple_base_color:  hsl(0, 0%, 50%)                     !default
-$sp_simple_board_bg:    white                               !default // 盤の色
-$sp_simple_grid_color:  lighten($sp_simple_base_color, 10%) !default // 盤上の罫線の色
-$sp_simple_piece_color: darken($sp_simple_base_color, 30%)  !default // 駒の色
-$sp_simple_selectable_color: hsl(240, 0%,  90%)             !default // 持ち上げげれる駒の背景色
-$sp_simple_holding_color:    hsl(240, 80%, 90%)             !default // 持ち上げた駒の背景色
-
+$sp_simple_base_color:  hsl(0, 0%, 50%)                        !default
+$sp_simple_board_bg:    white                                  !default // 盤の色
+$sp_simple_grid_color:  lighten($sp_simple_base_color, 10%)    !default // 盤上の罫線の色
+$sp_simple_piece_color: darken($sp_simple_base_color, 30%)     !default // 駒の色
 $sp_simple_current_bg1:    lighten($sp_simple_base_color, 35%) !default // 最後に動かした駒の背景色1
 $sp_simple_current_bg2:    lighten($sp_simple_base_color, 45%) !default // 最後に動かした駒の背景色2
 $sp_simple_origin_bg:      lighten($sp_simple_base_color, 45%) !default // 最後に動かした駒の元の位置の背景色
 $sp_simple_promoted_color: hsl(0, 50%, 50%)                    !default // 成駒の色
+$sp_simple_selectable_color: $sp_simple_origin_bg              !default // 持ち上げげれる駒の背景色
+$sp_simple_holding_color:    hsl(240, 80%, 90%)                !default // 持ち上げた駒の背景色
+
 
 // size
 $sp_simple_cell_size_xsmall:  (piece_outer_size: 2.0vmin, font-size: 1.3vmin)  !default
@@ -35,12 +35,12 @@ $sp_simple_piece_inner_transform_y: 5% !default // 自分側に駒をずらす�
 //////////////////////////////////////////////////////////////////////////////// for theme-real
 
 // color
-$sp_real_grid_color:  hsla( 0, 0%, 0%, 0.80)        !default // 盤上の罫線の色
-$sp_real_current_bg1: hsla( 0, 0%, 0%, 0.50)        !default // 最後に動かした駒の背景色1
-$sp_real_current_bg2: hsla( 0, 0%, 0%, 0.25)        !default // 最後に動かした駒の背景色2
-$sp_real_origin_bg:   hsla( 0, 0%, 0%, 0.25)        !default // 最後に動かした駒の元の位置の背景色
-$sp_real_selectable_color: hsla(240, 50%,  0%, 0.2) !default // 持ち上げげれる駒の背景色
-$sp_real_holding_color:    hsla(240, 50%, 50%, 0.6) !default // 持ち上げた駒の背景色
+$sp_real_grid_color:       hsla(  0,  0%,  0%, 0.80) !default // 盤上の罫線の色
+$sp_real_current_bg1:      hsla(  0,  0%,  0%, 0.30) !default // 最後に動かした駒の背景色1
+$sp_real_current_bg2:      hsla(  0,  0%,  0%, 0.15) !default // 最後に動かした駒の背景色2
+$sp_real_origin_bg:        hsla(  0,  0%,  0%, 0.15) !default // 最後に動かした駒の元の位置の背景色
+$sp_real_selectable_color: hsla(  0,  0%,  0%, 0.15) !default // 持ち上げげれる駒の背景色
+$sp_real_holding_color:    hsla(240, 50%, 30%, 0.60) !default // 持ち上げた駒の背景色
 
 // size
 $sp_real_cell_size_xsmall:  2.0vmin !default
