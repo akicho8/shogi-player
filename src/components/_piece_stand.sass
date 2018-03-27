@@ -1,40 +1,30 @@
 .shogi-player
   .piece_stand_outer
-    // 駒(テキスト)を連打やドラッグの際に選択できないようにする
-    user-select: none
+    %text_select_disable
+    margin: 0 $sukima
+    text-align: left
 
     &.location_white
-      transform: rotate(180deg)
+      @extend %dom_flip
+      
     &.turn_active
       .location_mark
         text-shadow: 0 0 1rem hsl(0, 50%, 50%)
-
-    min-width: 8vmin
-    margin: 0 1vmin
-    text-align: left
 
     // &.development
     //   border: 2px solid $sp_simple_grid_color
     //   background: $sp_simple_board_bg
     //   border-radius: 0.5vmin
     ul
-      list-style-type: none
-      padding: 0 0.3vmin
-      // margin: 0.5vmin
       li
         // 歩(2) の並びを横軸中央で揃える
         display: flex
         align-items: center
-
-        // 持駒
-        color: $sp_simple_piece_color
-        // font-size: $sp-simple-font-size
+        color: $sp_simple_piece_color // 持駒色
 
         // 持駒数
         .piece_count
           vertical-align: middle
-          margin-left: 0.3rem
-          font-size: 80%
 
         .piece_outer
           @extend %dom_selectable

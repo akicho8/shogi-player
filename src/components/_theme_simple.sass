@@ -37,16 +37,23 @@
     .piece_stand_outer
       // 駒台の上のマーク
       .location_mark
-        margin: 0.3vmin
-      .piece_inner
+      ul
+        li
+          .piece_count
+            margin-left:  0.1rem
+            margin-right: 0.1rem
+            font-size: 80%
 
     // 駒箱
     .piece_box
       @extend %box
 
+    // edit_mode の場合は駒箱を大きくする
     &.run_mode-edit_mode
       .piece_stand
         @extend %box
+        min-height: 10vmin
+        width: 2.8rem
 
 @keyframes simple_blink
   0%
@@ -67,15 +74,15 @@
                 width:  map-get($attrs, piece_outer_size)
                 height: map-get($attrs, piece_outer_size)
                 font-size: map-get($attrs, font-size)
-          .piece_stand_outer
-            font-size: map-get($attrs, font-size)
           // 駒箱
           .piece_box
             font-size: map-get($attrs, font-size) * 0.5
             max-width: map-get($attrs, font-size) * 3.8
           // 駒台
-          .piece_stand
-            font-size: map-get($attrs, font-size) * 0.8
+          .piece_stand_outer
+            font-size: map-get($attrs, font-size) * 0.9
+            // .piece_stand
+            //   font-size: map-get($attrs, font-size) * 0.8
 
 @include size_define(x-small,   $sp_simple_cell_size_xsmall)
 @include size_define(small,     $sp_simple_cell_size_small)

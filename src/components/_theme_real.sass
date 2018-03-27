@@ -66,6 +66,21 @@
             &.location_white
               transform: translateY($sp_real_piece_inner_transform_y * -1)
 
+    .piece_stand_outer
+      .location_mark
+      ul
+        padding: 0.5rem 0
+        min-width: 2.6rem
+        min-height: 10vmin
+        li
+          margin: 0.1rem 0
+          .piece_count
+            margin-left:  0.0rem
+            margin-right: 0.3rem
+            font-size: 80%
+          .piece_outer
+            line-height: 100%
+
 //////////////////////////////////////////////////////////////////////////////// size
 
 @mixin size_define($key, $size)
@@ -79,11 +94,6 @@
               height: $size
           .piece_stand_outer
             font-size: $size * 0.8
-            ul
-              min-height: $size * 2
-              padding: 1vmin 0
-              .piece_outer
-                line-height: 100%
             .piece_count
               font-size: $size * 0.4
           .piece_box

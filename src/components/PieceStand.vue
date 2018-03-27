@@ -1,16 +1,14 @@
 <template>
-<div class="piece_stand_outer" :class="piece_stand_class2">
-  <span class="location_mark">{{location.name}}</span>
-  <div :class="piece_stand_class" @click.stop="$parent.piece_stand_click(location, $event)">
-    <ul>
-      <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)">
-        <div class="piece_outer" :class="piece_outer_class(piece)">
-          <span class="piece_inner" :class="piece_class(piece)">{{piece.name}}</span>
-        </div>
-        <span v-if="count >= 2" class="piece_count">{{count}}</span>
-      </li>
-    </ul>
-  </div>
+<div class="piece_stand_outer" :class="piece_stand_outer_class">
+  <div class="location_mark">{{location.name}}</div>
+  <ul class="piece_stand" @click.stop="$parent.piece_stand_click(location, $event)">
+    <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)">
+      <div class="piece_outer" :class="piece_outer_class(piece)">
+        <span class="piece_inner" :class="piece_class(piece)">{{piece.name}}</span>
+      </div>
+      <span v-if="count >= 2" class="piece_count">{{count}}</span>
+    </li>
+  </ul>
 </div>
 </template>
 
@@ -67,24 +65,13 @@ export default {
       return Location.fetch(this.location_key)
     },
 
-    piece_stand_class2() {
+    piece_stand_outer_class() {
       const list = []
       list.push(`location_${this.location.key}`)
       list.push(this.$parent.env)
       if (this.$parent.mediator.current_location === this.location) {
         list.push("turn_active")
       }
-      return list
-    },
-
-    piece_stand_class() {
-      const list = []
-      list.push("piece_stand")
-      // list.push(`location_${this.location.key}`)
-      // list.push(this.$parent.env)
-      // if (this.$parent.mediator.current_location === this.location) {
-      //   list.push("turn_active")
-      // }
       return list
     },
   },
