@@ -1,3 +1,15 @@
+// 選択できる駒に指定する  
+%dom_real_selectable
+  &.holding_p
+    background: $sp_real_holding_color
+  &:hover
+    // 選択できる駒だけ反応する
+    &.selectable_p
+      background: $sp_real_selectable_color
+    // さらに駒を持ったときは色を濃くする
+    &.holding_p
+      background: $sp_real_holding_color
+
 // 盤のテクスチャ用
 %board_texture_bg
   position: relative
@@ -31,6 +43,9 @@
     @import "piece_map_list"
     @include piece_map_list
 
+    .piece_outer
+      @extend %dom_real_selectable
+    
     .piece_box
       @extend %board_texture_bg
 

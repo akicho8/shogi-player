@@ -1,7 +1,7 @@
 .shogi-player
   .piece_stand_outer
     %text_select_disable
-    margin: 0 $sukima
+    margin: 0 $sp_margin
     text-align: left
 
     &.location_white
@@ -25,6 +25,3 @@
         // 持駒数
         .piece_count
           vertical-align: middle
-
-        .piece_outer
-          @extend %dom_selectable

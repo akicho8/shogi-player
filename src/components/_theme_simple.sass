@@ -1,3 +1,16 @@
+// 選択できる駒に指定する  
+%dom_simple_selectable
+  background: $sp_simple_board_bg
+  &.holding_p
+    background: $sp_simple_holding_color
+  &:hover
+    // 選択できる駒だけ反応する
+    &.selectable_p
+      background: $sp_simple_selectable_color
+    // さらに駒を持ったときは色を濃くする
+    &.holding_p
+      background: $sp_simple_holding_color
+
 %box
   border: 1px solid $sp_simple_grid_color
   background: $sp_simple_board_bg
@@ -7,6 +20,9 @@
 
 .shogi-player
   &.theme-simple
+    .piece_outer
+      @extend %dom_simple_selectable
+      
     .board_inner
       border-collapse: separate
       border: $sp_simple_grid_outer solid $sp_simple_grid_color
@@ -15,7 +31,7 @@
       // 盤上の駒の領域
       .piece_outer
         color: $sp_simple_piece_color
-        background: $sp_simple_board_bg
+        
         &.current
           background: $sp_simple_current_bg1
         &.origin_place
@@ -24,6 +40,7 @@
           color: $sp_simple_piece_color
           font-weight: bold
           animation: simple_blink 0.5s ease-in-out infinite alternate
+          
         // 盤上の駒
         .piece_inner
           &.location_black
