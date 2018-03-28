@@ -37,7 +37,7 @@
         color: #333333;
         background: #e6e6e6;
         font-weight: bold; }
-      .shogi-player table td.origin_point {
+      .shogi-player table td.origin_place {
         background: #f2f2f2; }
       .shogi-player table td.current {
         transition: background 500ms 0s ease-out; }
