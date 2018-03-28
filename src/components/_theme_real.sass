@@ -52,9 +52,20 @@
     @import "piece_map_list"
     @include piece_map_list
 
-    .board_outer, .piece_box, .piece_stand
+    .board_outer, .piece_box
       &:after
         @include image_shadow(2px, 2px)
+
+    // 駒台
+    .piece_stand_outer
+      &.location_black
+        .piece_stand
+          &:after
+            @include image_shadow(2px, 2px)
+      &.location_white
+        .piece_stand
+          &:after
+            @include image_shadow(-2px, 2px) // 相手の駒台は逆になっているため影を逆にする
 
     .piece_outer
       // filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.5))
