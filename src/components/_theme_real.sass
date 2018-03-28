@@ -49,6 +49,10 @@
     @import "piece_map_list"
     @include piece_map_list
 
+    .board_outer, .piece_box, .piece_stand
+      &:after
+        filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.4))
+
     .piece_outer
       // filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.5))
       @extend %dom_real_selectable
