@@ -1,14 +1,29 @@
+// 盤の影
+$sp_board_shadow_depth: 2px // 大きさ
+$sp_board_shadow_blur:  2px // ぼかし度合い
+
+// 駒の影
+$sp_piece_shadow_depth: 4px // 大きさ
+$sp_piece_shadow_blur:  4px // ぼかし度合い
+
+// 持った駒の影
+$sp_hold_shadow_depth: 8px // 大きさ
+$sp_hold_shadow_blur:  6px // ぼかし度合い
+
+// 持った駒のずれ
+$sp_hold_gap: 4px
+
 @mixin image_shadow($x, $weight)
   filter: drop-shadow($x $x $weight rgba(0, 0, 0, 0.4))
 
 %dom_hold
   // background: $sp_real_holding_color
-  transform: translate(-4px, -4px)
-  @include image_shadow(8px, 6px)
+  transform: translate(-$sp_hold_gap, -$sp_hold_gap)
+  @include image_shadow($sp_hold_shadow_depth, $sp_hold_shadow_blur)
 
 // 選択できる駒に指定する
 %dom_real_selectable
-  @include image_shadow(4px, 4px)
+  @include image_shadow($sp_piece_shadow_depth, $sp_piece_shadow_blur)
   &.holding_p
     @extend %dom_hold
   &:hover
@@ -54,21 +69,20 @@
 
     .board_outer, .piece_box
       &:after
-        @include image_shadow(2px, 2px)
+        @include image_shadow($sp_board_shadow_depth, $sp_board_shadow_blur)
 
     // 駒台
     .piece_stand_outer
       &.location_black
         .piece_stand
           &:after
-            @include image_shadow(2px, 2px)
+            @include image_shadow($sp_board_shadow_depth, $sp_board_shadow_blur)
       &.location_white
         .piece_stand
           &:after
-            @include image_shadow(-2px, 2px) // 相手の駒台は逆になっているため影を逆にする
+            @include image_shadow(-$sp_board_shadow_depth, $sp_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
 
     .piece_outer
-      // filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, 0.5))
       @extend %dom_real_selectable
 
     .piece_box
