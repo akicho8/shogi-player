@@ -47,7 +47,7 @@ export default {
       let list = []
       list = _.concat(list, piece.css_class_list)
       // list.push("piece_inner")
-      list.push(`location_black`) // 本当は this.location.key を埋めるべきだけど後手の駒台は180度反転するため先手の向きとする
+      list.push(`location_${this.location.key}`)
       list.push("promoted_false")
 
       // if (this.hold_piece_holding_p(piece)) {

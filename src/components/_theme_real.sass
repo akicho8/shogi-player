@@ -81,6 +81,8 @@ $sp_hold_gap: 4px
         .piece_stand
           &:after
             @include image_shadow(-$sp_board_shadow_depth, $sp_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
+          .piece_outer
+            @extend %dom_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
 
     .piece_outer
       @extend %dom_real_selectable
