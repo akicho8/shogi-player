@@ -24,21 +24,15 @@
   <div v-if="run_mode2 === 'edit_mode'" class="edit_mode_controller">
     <div class="edit_mode_controller_wrap">
       <b-dropdown v-model="current_preset">
-        <button class="button is-primary is-outlined" slot="trigger">
+        <button class="button" slot="trigger">
           <span>初期配置</span><b-icon icon="menu-down"></b-icon>
         </button>
-        <b-dropdown-item v-for="record in PresetInfo.values" :value="record.key" :key="record.key">
+        <b-dropdown-item v-for="record in preset_info_values" :value="record.key" :key="record.key">
           {{record.name}}
         </b-dropdown-item>
       </b-dropdown>
-
-      <button class="button is-primary is-outlined" @click="all_flip">先後反転</button>
-
-      <div style="display: inline-block; vertical-align: bottom">
-        <span>手番</span>
-        <b-radio v-model="init_location_key" native-value="black">☗</b-radio>
-        <b-radio v-model="init_location_key" native-value="white">☖</b-radio>
-      </div>
+      <button class="button" @click="all_flip">先後反転</button>
+      <button class="button" @click="init_location_toggle">手番{{init_location.name}}</button>
     </div>
   </div>
 
@@ -1111,6 +1105,10 @@ export default {
       }, {})
     },
 
+    init_location_toggle() {
+      this.init_location_key = this.init_location.flip.key
+    },
+
     modal_trigger_dots_click() {
     },
 
@@ -1140,6 +1138,15 @@ export default {
     //
     play_mode_current_sfen() {
       return this.init_sfen + " moves " + this.moves.join(" ")
+    },
+
+    init_location() {
+      return Location.fetch(this.init_location_key)
+    },
+
+    // テンプレートの中で PresetInfo を簡単に参照できないVueの制約のため
+    preset_info_values() {
+      return PresetInfo.values
     },
   },
 }
