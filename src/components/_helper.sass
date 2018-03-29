@@ -5,3 +5,17 @@
 // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
 %text_select_disable
   user-select: none
+
+@mixin four_star($color)
+  tr:nth-child(3n+4)
+    td:nth-child(3n+4)
+      position: relative
+      &:after
+        position: absolute
+        content: ""
+        top:  calc(-0.75vmin / 2)
+        left: calc(-0.75vmin / 2)
+        width:  0.75vmin
+        height: 0.75vmin
+        border-radius: 50%
+        background: $color

@@ -102,6 +102,8 @@ $sp_hold_gap: 4px
       padding: 2%               // 盤の隅の隙間
 
       .board_inner
+        @include four_star($sp_real_grid_color)
+        
         .piece_outer
           border: $sp_real_grid_inner solid $sp_real_grid_color // 盤面の罫線
 

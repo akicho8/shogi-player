@@ -24,6 +24,8 @@
       @extend %dom_simple_selectable
       
     .board_inner
+      @include four_star($sp_simple_grid_color)
+      
       border-collapse: separate
       border: $sp_simple_grid_outer solid $sp_simple_grid_color
       border-spacing: $sp_simple_grid_inner
