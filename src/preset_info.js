@@ -4,6 +4,7 @@ class PresetInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
+      { key: "詰将棋",     sfen: "position sfen 4k4/9/9/9/9/9/9/9/9 b rb4g4s4n4l18p 1",                           piece_box: [["K", 1]]},
       { key: "平手",       sfen: "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1", piece_box: []},
       { key: "香落ち",     sfen: "position sfen lnsgkgsn1/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1", piece_box: [["L", 1]]},
       // { key: "右香落ち",   sfen: "position sfen 1nsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1", piece_box: [["L", 1]]},
@@ -18,7 +19,6 @@ class PresetInfo extends MemoryRecord {
       { key: "十枚落ち",   sfen: "position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",           piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2]]},
       { key: "十九枚落ち", sfen: "position sfen 4k4/9/9/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",                   piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2], ["P", 9]]},
       // { key: "二十枚落ち", sfen: "position sfen 9/9/9/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1",                     piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2], ["P", 9], ["K", 1]]},
-      { key: "詰将棋",     sfen: "position sfen 4k4/9/9/9/9/9/9/9/9 b rb4g4s4n4l18p 1",                           piece_box: [["K", 1]]},
       /* eslint-enable */
     ]
   }
