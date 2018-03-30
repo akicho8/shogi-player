@@ -24,7 +24,7 @@ class PieceStand extends React.Component {
 
   get custom_classes() {
     const list = []
-    list.push("flex-item")
+    list.push("flex_item")
     list.push("piece_stand")
     list.push(`location_${this.location.key}`)
     if (this.props.mediator.current_location === this.location) {
@@ -89,7 +89,7 @@ class ShogiPlayer extends React.Component {
         <div>{this.state.current_turn}手目</div>
         <div className="board_container flippable">
           <PieceStand location_key="white" mediator={mediator} />
-          <div className="flex-item board-wrap">
+          <div className="flex_item board_wrap">
             <table>
               <tbody>{tbody_block}</tbody>
             </table>

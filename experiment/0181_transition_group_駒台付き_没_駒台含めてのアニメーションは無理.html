@@ -12,10 +12,10 @@
         <button @click="shuffle">Shuffle</button>
         <transition-group tag="div" name="cell" class="sudoku-container">
           <div v-for="soldier in soldiers" :key="soldier.unique_key" class="cell">
-            <div class="flex-item piece_stand" v-if="soldier.piece_stand === true">
+            <div class="flex_item piece_stand" v-if="soldier.piece_stand === true">
               {{soldier.name}}
             </div>
-            <div class="flex-item main" v-if="soldier.piece_stand === false">
+            <div class="flex_item main" v-if="soldier.piece_stand === false">
               {{soldier.name}}
             </div>
           </div>

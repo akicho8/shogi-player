@@ -59,8 +59,8 @@
       </b-modal>
     </div>
     <div class="board_container flippable" :class="{flip: flip}">
-      <PieceStand class="flex-item" :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
-      <div class="flex-item board-wrap">
+      <PieceStand class="flex_item" :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
+      <div class="flex_item board_wrap">
         <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
         <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
         <div class="overlay_navi flip_trigger_cell" @click="board_flip_run"></div>
@@ -78,7 +78,7 @@
           </table>
         </div>
       </div>
-      <div class="flex-item">
+      <div class="flex_item">
         <ul v-if="run_mode2 === 'edit_mode'" class="piece_box" @click="piece_box_other_click">
           <li v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}">
             <div class="piece_outer" :class="piece_box_piece_outer_class(piece)">
