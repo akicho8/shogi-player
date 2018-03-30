@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { Board } from './board'
 import { Place } from './place'
 import { Piece } from './piece'
@@ -64,6 +65,14 @@ class Soldier {
     } else {
       return this.place.y >= (Board.dimension - Board.danger_zone_size)
     }
+  }
+
+  get to_class_list() {
+    let list = []
+    list.push(`location_${this.location.key}`)
+    list.push(`promoted_${this.promoted}`)
+    list = _.concat(list, this.piece.css_class_list)
+    return list
   }
 }
 

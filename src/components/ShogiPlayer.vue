@@ -412,13 +412,15 @@ export default {
 
     flag(v) {
       if (v) {
-        this.my_dom = document.createElement("div")
-        this.my_dom.classList.add("foo")
-        this.$el.appendChild(this.my_dom)
-        this.set_pos()
+        // this.my_dom = document.createElement("div")
+        // this.my_dom.classList.add("foo")
+        // this.$el.appendChild(this.my_dom)
+        // this.set_pos()
       } else {
-        this.$el.removeChild(this.my_dom)
-        this.my_dom = null
+        if (this.my_dom) {
+          this.$el.removeChild(this.my_dom)
+          this.my_dom = null
+        }
       }
     },
   },
@@ -907,7 +909,6 @@ export default {
 
       // 盤上の駒を持ちあげる
       if (!this.holding_p) {
-        this.flag = !this.flag
         console.log("盤上の駒を持ちあげる")
         this.soldier_hold(place, e)
         return
@@ -1025,6 +1026,10 @@ export default {
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
       this.place_from = place
+
+      this.flag = true
+      const list = _.concat(this.origin_soldier.to_class_list, ["foo", "piece_inner"])
+      this.make_vpiece(list)
     },
 
     state_reset() {
@@ -1032,6 +1037,7 @@ export default {
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       this.have_piece_location = null
+      this.flag = null
     },
 
     turn_next() {
@@ -1178,6 +1184,13 @@ export default {
         this.my_dom.style.left = `${this.mx}px`
         this.my_dom.style.top = `${this.my}px`
       }
+    },
+
+    make_vpiece(v) {
+      this.my_dom = document.createElement("div")
+      this.my_dom.classList.add(...v)
+      this.$el.appendChild(this.my_dom)
+      this.set_pos()
     },
   },
 

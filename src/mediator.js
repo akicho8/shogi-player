@@ -85,15 +85,12 @@ class Mediator {
   board_piece_inner_class(xy) {
     const place = Place.fetch(xy)
     const soldier = this.board.lookup(place)
-    let list = []
 
     if (soldier) {
-      list.push(`location_${soldier.location.key}`)
-      list.push(`promoted_${soldier.promoted}`)
-      list = _.concat(list, soldier.piece.css_class_list)
+      return soldier.to_class_list
     }
 
-    return list
+    return []
   }
 
   cell_piece_class(xy) {
