@@ -53,7 +53,7 @@
           table-layout: fixed
 
           // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
-          %text_select_disable
+          @extend %text_select_disable
 
           // box-shadow: 0 0 1vmin rgba($sp_simple_grid_color, 0.5)
 
@@ -91,7 +91,7 @@
 
   .turn_div
     // テキストを選択できないようにする
-    %text_select_disable
+    @extend %text_select_disable
     // N手目の編集モードのnumberフィールド
     .turn_edit_input
       width: 3rem
