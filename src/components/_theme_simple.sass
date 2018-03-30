@@ -11,7 +11,7 @@
     &.holding_p
       background: $sp_simple_holding_color
 
-%box
+%basic_box
   border: 1px solid $sp_simple_grid_color
   background: $sp_simple_board_bg
   padding: 0.4vmin
@@ -65,12 +65,12 @@
 
     // 駒箱
     .piece_box
-      @extend %box
+      @extend %basic_box
 
     // edit_mode の場合は駒箱を大きくする
     &.run_mode-edit_mode
       .piece_stand
-        @extend %box
+        @extend %basic_box
         min-height: 10vmin
         width: 3.2rem
 
