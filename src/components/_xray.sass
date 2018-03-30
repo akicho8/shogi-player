@@ -1,25 +1,26 @@
 @mixin sp_xray_color($level)
-  background: hsla((360 / 8) * $level, 50%, 50%, 0.25)
+  background: hsla((360 / 32) * $level, 50%, 50%, 0.25)
   
 .shogi-player
   &.debug
+    @include sp_xray_color(0)
     .controller_block
-      @include sp_xray_color(0)
+      @include sp_xray_color(1)
     .board_wrap
       .overlay_navi
         &.previous
-          @include sp_xray_color(1)
-        &.next
           @include sp_xray_color(2)
-        &.flip_trigger_cell
+        &.next
           @include sp_xray_color(3)
+        &.flip_trigger_cell
+          @include sp_xray_color(4)
     .comment_area
-      @include sp_xray_color(4)
-    .piece_stand
       @include sp_xray_color(5)
-    .piece_box
+    .piece_stand_outer
       @include sp_xray_color(6)
-      .piece_one
+      .piece_stand
         @include sp_xray_color(7)
-    .edit_mode_controller
+    .piece_box
       @include sp_xray_color(8)
+    .edit_mode_controller
+      @include sp_xray_color(9)

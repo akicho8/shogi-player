@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <style type="text/css">
+      body {
+        text-align: center;
+      }
+      #app {
+        margin: 10px 100px;
+        border: 1px solid blue;
+      }
+      .player {
+        margin: 50px auto;
+        border: 1px solid blue;
+        width: 50vmin;
+        height: 50vmin;
+        position: relative;
+      }
+      body {
+        position: relative;
+      }
+      .foo {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      (app)
+      <div class="player">
+        client* = ({{cx}}, {{cy}})<br>
+        cursor  = ({{x}}, {{y}})<br>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          flag: false,
+          cx: null,
+          cy: null,
+          x: null,
+          y: null,
+        },
+        mounted() {
+          window.addEventListener("mousemove", this.mousemove_func, false)
+          window.addEventListener("click", this.onclick_func, false)
+        },
+        watch: {
+          flag(v) {
+            if (v) {
+              this.cy_dom = document.createElement("div")
+              this.cy_dom.classList.add("foo")
+              this.$el.appendChild(this.cy_dom)
+              this.set_pos()
+            } else {
+              this.$el.removeChild(this.cy_dom)
+              this.cy_dom = null
+            }
+          },
+        },
+        methods: {
+          mousemove_func(e) {
+            this.cx = e.clientX
+            this.cy = e.clientY
+
+            this.last_event = e
+            this.set_pos()
+          },
+          onclick_func(e) {
+            this.last_event = e
+            this.flag = !this.flag
+          },
+          set_pos() {
+            if (this.cy_dom && this.last_event) {
+              const e = this.last_event
+              const rect = document.body.getBoundingClientRect()
+              this.x = e.clientX - rect.left
+              this.y = e.clientY - rect.top
+              this.cy_dom.style.left = `${this.x}px`
+              this.cy_dom.style.top  = `${this.y}px`
+            }
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

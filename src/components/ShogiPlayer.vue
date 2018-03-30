@@ -131,6 +131,8 @@
 
   <template v-if="debug_mode">
     <table class="table is-bordered is-narrow">
+      <tr><th>cx, cy</th><td>{{cx}}, {{cy}}</td></tr>
+      <tr><th>mx, my</th><td>{{mx}}, {{my}}</td></tr>
       <tr><th>update_counter</th><td>{{update_counter}}</td></tr>
       <tr><th>place_from</th><td>{{place_from}}</td></tr>
       <tr><th>have_piece</th><td>{{have_piece}}</td></tr>
@@ -266,6 +268,16 @@ export default {
       init_location_key: "black",
 
       setting_modal_p: false,
+
+      // last_event: null,
+      // my_dom: null,
+      flag: false,
+      cx: null,
+      cy: null,
+      mx: null,
+      my: null,
+      x: null,
+      y: null,
     }
   },
 
@@ -273,7 +285,11 @@ export default {
     this.kifu_read()
     this.polling_interval_update()
     this.sound_load()
-    document.addEventListener("keydown", this.keyboard_operation)
+  },
+
+  mounted() {
+    window.addEventListener("keydown", this.keyboard_operation, false)
+    window.addEventListener("mousemove", this.mousemove_func, false)
   },
 
   watch: {
@@ -392,6 +408,18 @@ export default {
     // 引数は親が「変更」したときがトリガー
     debug_mode(v) {
       this.log(`watch debug_mode: ${v}`)
+    },
+
+    flag(v) {
+      if (v) {
+        this.my_dom = document.createElement("div")
+        this.my_dom.classList.add("foo")
+        this.$el.appendChild(this.my_dom)
+        this.set_pos()
+      } else {
+        this.$el.removeChild(this.my_dom)
+        this.my_dom = null
+      }
     },
   },
 
@@ -879,6 +907,7 @@ export default {
 
       // 盤上の駒を持ちあげる
       if (!this.holding_p) {
+        this.flag = !this.flag
         console.log("盤上の駒を持ちあげる")
         this.soldier_hold(place, e)
         return
@@ -1120,6 +1149,36 @@ export default {
       })
     },
 
+    mousemove_func(e) {
+      this.cx = e.clientX
+      this.cy = e.clientY
+      console.log(e.clientX)
+      this.last_event = e
+      this.set_pos()
+    },
+    // onclick_func(e) {
+    //   this.last_event = e
+    //   this.flag = !this.flag
+    // },
+    set_pos() {
+      if (this.my_dom && this.last_event) {
+        const e = this.last_event
+        // const rect = document.body.getBoundingClientRect()
+        // // const rect = e.currentTarget.getBoundingClientRect()
+        // this.mx = e.clientX - rect.left
+        // this.my = e.clientY - rect.top
+        // this.mx = e.screenX
+        // this.my = e.screenY
+        this.mx = e.clientX
+        this.my = e.clientY
+        // const x = e.offsetX
+        // const y = e.offsetY
+        // const x = e.clientX
+        // const y = e.clientY
+        this.my_dom.style.left = `${this.mx}px`
+        this.my_dom.style.top = `${this.my}px`
+      }
+    },
   },
 
   computed: {
