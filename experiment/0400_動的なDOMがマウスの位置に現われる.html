@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <style type="text/css">
+      .foo {
+        position: absolute;
+        width: 8vmin;
+        height: 8vmin;
+        background: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="last_event">
+        {{last_event.clientX}}, {{last_event.clientY}}
+      </div>
+      {{counter()}}
+    </div>
+    <script>
+      var $counter = 0
+      new Vue({
+        el: '#app',
+        mounted() {
+          window.addEventListener("mousemove", this.mousemove_func, false)
+          window.addEventListener("click", this.onclick_func, false)
+        },
+        data: {
+          last_event: null,
+          my_dom: null,
+          flag: false,
+        },
+        watch: {
+          flag(v) {
+            if (v) {
+              this.my_dom = document.createElement("div")
+              this.my_dom.classList.add("foo")
+              this.$el.appendChild(this.my_dom)
+              this.set_pos()
+            } else {
+              this.$el.removeChild(this.my_dom)
+              this.my_dom = null
+            }
+          },
+        },
+        methods: {
+          mousemove_func(e) {
+            this.last_event = e
+            this.set_pos()
+          },
+          onclick_func(e) {
+            this.last_event = e
+            this.flag = !this.flag
+          },
+          set_pos() {
+            if (this.my_dom) {
+              this.my_dom.style.left = `${this.last_event.clientX}px`
+              this.my_dom.style.top  = `${this.last_event.clientY}px`
+            }
+          },
+          counter() {
+            $counter += 1
+            return $counter;
+          },
+        },
+      })
+    </script>
+  </body>
+</html>
