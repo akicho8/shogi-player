@@ -1,11 +1,3 @@
-.foo
-  pointer-events: none
-  z-index: 100
-  position: fixed
-  width:  50px
-  height: 50px
-  border: 1px solid blue
-
 // 盤の影
 $sp_real_board_shadow_depth: 2px // 大きさ
 $sp_real_board_shadow_blur:  2px // ぼかし度合い
@@ -19,15 +11,27 @@ $sp_real_hold_shadow_depth: 8px // 大きさ
 $sp_real_hold_shadow_blur:  6px // ぼかし度合い
 
 // 持った駒のずれ
-$sp_real_hold_gap: 4px
+$sp_real_hold_gap: 0.5vmin
+
+.cursor_elem
+  position: fixed
+  z-index: 1
+  pointer-events: none
+  .piece_inner
+    position: relative
+    top: -50%
+    left: -50%
+    width:  100%
+    height: 100%
 
 @mixin image_shadow($x, $weight)
   filter: drop-shadow($x $x $weight rgba(0, 0, 0, 0.4))
 
 %dom_real_hold
   // background: $sp_real_holding_color
-  transform: translate(-$sp_real_hold_gap, -$sp_real_hold_gap)
-  @include image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
+  // transform: translate(-$sp_real_hold_gap, -$sp_real_hold_gap)
+  // @include image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
+  opacity: 0.4
 
 // 選択できる駒に指定する
 %dom_real_selectable
@@ -165,6 +169,9 @@ $sp_real_hold_gap: 4px
             max-width:  $size * 2.5
             min-height: $size * 2.0
             font-size: $size * 0.5
+          .cursor_elem
+            width:  $size
+            height: $size
 
 @include size_define(x-small,  $sp_real_cell_size_xsmall)
 @include size_define(small,    $sp_real_cell_size_small)

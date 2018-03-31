@@ -1,5 +1,6 @@
 @mixin sp_xray_color($level)
-  background: hsla((360 / 32) * $level, 50%, 50%, 0.25)
+  background: hsla((360 / 10) * $level, 50%, 50%, 0.25)
+  border: 1px solid hsla((360 / 10) * $level, 50%, 50%, 0.8)
   
 .shogi-player
   &.debug
@@ -24,3 +25,5 @@
       @include sp_xray_color(8)
     .edit_mode_controller
       @include sp_xray_color(9)
+    .cursor_elem
+      @include sp_xray_color(10)

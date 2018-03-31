@@ -131,8 +131,6 @@
 
   <template v-if="debug_mode">
     <table class="table is-bordered is-narrow">
-      <tr><th>cx, cy</th><td>{{cx}}, {{cy}}</td></tr>
-      <tr><th>mx, my</th><td>{{mx}}, {{my}}</td></tr>
       <tr><th>update_counter</th><td>{{update_counter}}</td></tr>
       <tr><th>place_from</th><td>{{place_from}}</td></tr>
       <tr><th>have_piece</th><td>{{have_piece}}</td></tr>
@@ -270,14 +268,8 @@ export default {
       setting_modal_p: false,
 
       // last_event: null,
-      // my_dom: null,
-      flag: false,
-      cx: null,
-      cy: null,
-      mx: null,
-      my: null,
-      x: null,
-      y: null,
+      // cursor_elem: null,
+      virtual_piece_exist: false,
     }
   },
 
@@ -410,17 +402,10 @@ export default {
       this.log(`watch debug_mode: ${v}`)
     },
 
-    flag(v) {
+    virtual_piece_exist(v) {
       if (v) {
-        // this.my_dom = document.createElement("div")
-        // this.my_dom.classList.add("foo")
-        // this.$el.appendChild(this.my_dom)
-        // this.set_pos()
       } else {
-        if (this.my_dom) {
-          this.$el.removeChild(this.my_dom)
-          this.my_dom = null
-        }
+        this.delete_vpiece()
       }
     },
   },
@@ -793,6 +778,7 @@ export default {
       console.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = null
+      this.make_vpiece(this.origin_soldier2(Place.fetch([0, 0])).to_class_list)
       // e.target.classList.add("active")
       // this.from_dom = e.target
     },
@@ -857,6 +843,8 @@ export default {
       console.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
+      this.make_vpiece(this.origin_soldier2(Place.fetch([0, 0])).to_class_list)
+
       // e.target.classList.add("active")
       // this.from_dom = e.target
     },
@@ -963,12 +951,7 @@ export default {
       // 持駒を置く
       if (this.have_piece) {
         console.log("持駒を置く")
-        const soldier = new Soldier({
-          piece: this.have_piece,
-          place: place,
-          promoted: false,
-          location: this.have_piece_location || Location.fetch("black"), // this.mediator.current_location,
-        })
+        const soldier = this.origin_soldier2(place)
         this.piece_sub()
         this.mediator.board.place_on(soldier) // 置く
         this.moves.push(soldier.piece.key + "*" + place.to_sfen) // P*7g
@@ -1026,10 +1009,7 @@ export default {
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
       this.place_from = place
-
-      this.flag = true
-      const list = _.concat(this.origin_soldier.to_class_list, ["foo", "piece_inner"])
-      this.make_vpiece(list)
+      this.make_vpiece(this.origin_soldier.to_class_list)
     },
 
     state_reset() {
@@ -1037,7 +1017,7 @@ export default {
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       this.have_piece_location = null
-      this.flag = null
+      this.virtual_piece_exist = false
     },
 
     turn_next() {
@@ -1164,33 +1144,45 @@ export default {
     },
     // onclick_func(e) {
     //   this.last_event = e
-    //   this.flag = !this.flag
+    //   this.virtual_piece_exist = !this.virtual_piece_exist
     // },
     set_pos() {
-      if (this.my_dom && this.last_event) {
-        const e = this.last_event
-        // const rect = document.body.getBoundingClientRect()
-        // // const rect = e.currentTarget.getBoundingClientRect()
-        // this.mx = e.clientX - rect.left
-        // this.my = e.clientY - rect.top
-        // this.mx = e.screenX
-        // this.my = e.screenY
-        this.mx = e.clientX
-        this.my = e.clientY
-        // const x = e.offsetX
-        // const y = e.offsetY
-        // const x = e.clientX
-        // const y = e.clientY
-        this.my_dom.style.left = `${this.mx}px`
-        this.my_dom.style.top = `${this.my}px`
+      if (this.cursor_elem && this.last_event) {
+        this.cursor_elem.style.left = `${this.last_event.clientX}px`
+        this.cursor_elem.style.top = `${this.last_event.clientY}px`
       }
     },
 
-    make_vpiece(v) {
-      this.my_dom = document.createElement("div")
-      this.my_dom.classList.add(...v)
-      this.$el.appendChild(this.my_dom)
+    // .piece_outer.cursor_elem
+    //   .piece_inner
+    make_vpiece(class_list) {
+      this.delete_vpiece()
+      this.cursor_elem = document.createElement("div")
+      this.cursor_elem.classList.add("piece_outer", "cursor_elem")
+      const piece_inner = document.createElement("div")
+      const list = _.concat(class_list, ["piece_inner"])
+      piece_inner.classList.add(...list)
+      this.cursor_elem.appendChild(piece_inner)
+      this.$el.appendChild(this.cursor_elem)
       this.set_pos()
+      this.virtual_piece_exist = true
+    },
+
+    delete_vpiece(class_list) {
+      if (this.cursor_elem) {
+        this.$el.removeChild(this.cursor_elem)
+        this.cursor_elem = null
+      }
+    },
+
+    // 駒箱から持ち上げている駒
+    origin_soldier2(place) {
+      return new Soldier({
+        piece: this.have_piece,
+        place: place,
+        promoted: false,
+        location: this.have_piece_location || Location.fetch("black"),
+      })
     },
   },
 
