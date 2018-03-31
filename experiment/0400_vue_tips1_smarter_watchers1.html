@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model="searchText" />
+      {{counter}}
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          searchText: "",
+          counter: 0,
+        },
+        created() {
+          this.fetchUserList()
+        },
+        watch: {
+          searchText() {
+            this.fetchUserList()
+          },
+        },
+        methods: {
+          fetchUserList() {
+            this.counter += 1
+          },
+        },
+      })
+    </script>
+  </body>
+</html>
