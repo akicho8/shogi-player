@@ -280,8 +280,8 @@ export default {
   },
 
   mounted() {
-    window.addEventListener("keydown", this.keyboard_operation, false)
-    window.addEventListener("mousemove", this.mousemove_func, false)
+    window.addEventListener("keydown", this.keydown_hook, false)
+    window.addEventListener("mousemove", this.mousemove_hook, false)
   },
 
   watch: {
@@ -473,6 +473,7 @@ export default {
         if (this.interval_id) {
           this.log(`clearInterval(${this.interval_id})`)
           clearInterval(this.interval_id)
+          this.interval_id = null
         }
         this.interval_id = setInterval(() => { this.kifu_read(true) }, this.polling_interval * 1000)
         this.log(`setInterval() => ${this.interval_id}`)
@@ -535,7 +536,7 @@ export default {
       }
     },
 
-    keyboard_operation(e) {
+    keydown_hook(e) {
       if (this.debug_mode && false) {
         this.log(document.activeElement)
         this.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
@@ -1113,7 +1114,7 @@ export default {
       })
     },
 
-    mousemove_func(e) {
+    mousemove_hook(e) {
       this.cx = e.clientX
       this.cy = e.clientY
       console.log(e.clientX)
@@ -1179,7 +1180,11 @@ export default {
 
     //
     play_mode_current_sfen() {
-      return this.init_sfen + " moves " + this.moves.join(" ")
+      if (this.init_sfen) {
+        return this.init_sfen + " moves " + this.moves.join(" ")
+      } else {
+        return null
+      }
     },
 
     init_location() {
