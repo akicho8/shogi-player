@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{bar}}
+      {{counter}}
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          bar: 0,
+          counter: 0,
+        },
+        created() {
+          this.bar = 1
+        },
+        watch: {
+          bar: function() { this.counter += 1 },
+        }
+      })
+    </script>
+
+  </body>
+</html>

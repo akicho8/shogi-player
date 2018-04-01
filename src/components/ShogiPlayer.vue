@@ -131,6 +131,7 @@
 
   <template v-if="debug_mode">
     <table class="table is-bordered is-narrow">
+      <tr><th>run_mode2</th><td>{{run_mode2}}</td></tr>
       <tr><th>update_counter</th><td>{{update_counter}}</td></tr>
       <tr><th>place_from</th><td>{{place_from}}</td></tr>
       <tr><th>have_piece</th><td>{{have_piece}}</td></tr>
@@ -251,7 +252,7 @@ export default {
 
       // -------------------------------------------------------------------------------- run_mode
 
-      run_mode2: this.run_mode,
+      run_mode2: "view_mode",
 
       // -------------------------------------------------------------------------------- play_mode
       place_from: null,          // 盤上ら動かそうとしているときの元位置
@@ -269,7 +270,7 @@ export default {
 
       // last_event: null,
       // cursor_elem: null,
-      virtual_piece_exist: false,
+      // virtual_piece_exist: false,
     }
   },
 
@@ -277,6 +278,8 @@ export default {
     this.kifu_read()
     this.polling_interval_update()
     this.sound_load()
+
+    this.run_mode2 = this.run_mode
   },
 
   mounted() {
@@ -316,10 +319,7 @@ export default {
     /* eslint-disable */
     kifu_url() { this.kifu_read() },
     kifu_body() { this.kifu_read() },
-    loaded_kifu() {
-      this.log("mediator_update from loaded_kifu")
-      this.mediator_update()
-    },
+    loaded_kifu() { this.mediator_update() },
     polling_interval() { this.polling_interval_update() },
     /* eslint-enable */
 
@@ -330,10 +330,13 @@ export default {
 
     run_mode2(new_val, old_val) {
       if (new_val === "view_mode") {
+        console.log("run_mode2: view_mode")
         this.mediator_update()
       }
 
       if (new_val === "play_mode") {
+        console.log("run_mode2: play_mode")
+        this.mediator_set_fast()
         if (old_val === "view_mode") {
           this.init_location_key = this.mediator.current_location.key
         }
@@ -355,6 +358,9 @@ export default {
       }
 
       if (this.run_mode2 === "edit_mode") {
+        console.log("run_mode2: edit_mode")
+        this.mediator_set_fast()
+
         const data_source = new SfenParser()
         data_source.kifu_body = "position sfen " + this.mediator.to_sfen
         data_source.parse()
@@ -402,12 +408,11 @@ export default {
       this.log(`watch debug_mode: ${v}`)
     },
 
-    virtual_piece_exist(v) {
-      if (v) {
-      } else {
-        this.delete_vpiece()
-      }
-    },
+    // virtual_piece_exist(v) {
+    //   if (!_.isNil(v)) {
+    //     this.virtual_piece_destroy()
+    //   }
+    // },
   },
 
   methods: {
@@ -505,7 +510,27 @@ export default {
       return data_source
     },
 
+    mediator_set_fast() {
+      if (_.isNil(this.mediator)) {
+        let data_source = null
+        let str = this.loaded_kifu || "position startpos"
+        if (/position/.test(str)) {
+          data_source = new SfenParser()
+        } else {
+          data_source = new KifParser()
+        }
+        data_source.kifu_body = str
+        data_source.parse()
+        this.mediator = new Mediator()
+        this.mediator.data_source = data_source
+        this.mediator.current_turn = this.current_turn
+        this.mediator.run()
+        // this.current_turn = this.mediator.normalized_turn
+      }
+    },
+
     mediator_update() {
+      console.log("mediator_update")
       const data_source = this.data_source_get()
       if (data_source) {
         this.mediator = new Mediator()
@@ -755,7 +780,7 @@ export default {
       console.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = null
-      this.make_vpiece(this.origin_soldier2(Place.fetch([0, 0])).to_class_list)
+      this.virtual_piece_create(this.origin_soldier2(Place.fetch([0, 0])).to_class_list)
       // e.target.classList.add("active")
       // this.from_dom = e.target
     },
@@ -820,7 +845,7 @@ export default {
       console.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
-      this.make_vpiece(this.origin_soldier2(Place.fetch([0, 0])).to_class_list)
+      this.virtual_piece_create(this.origin_soldier2(Place.fetch([0, 0])).to_class_list)
 
       // e.target.classList.add("active")
       // this.from_dom = e.target
@@ -988,7 +1013,7 @@ export default {
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
       this.place_from = place
-      this.make_vpiece(this.origin_soldier.to_class_list)
+      this.virtual_piece_create(this.origin_soldier.to_class_list)
     },
 
     state_reset() {
@@ -996,7 +1021,7 @@ export default {
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       this.have_piece_location = null
-      this.virtual_piece_exist = false
+      this.virtual_piece_destroy()
     },
 
     turn_next() {
@@ -1115,8 +1140,8 @@ export default {
     },
 
     mousemove_hook(e) {
-      this.cx = e.clientX
-      this.cy = e.clientY
+      // this.cx = e.clientX
+      // this.cy = e.clientY
       console.log(e.clientX)
       this.last_event = e
       this.set_pos()
@@ -1134,8 +1159,9 @@ export default {
 
     // .piece_outer.cursor_elem
     //   .piece_inner
-    make_vpiece(class_list) {
-      this.delete_vpiece()
+    virtual_piece_create(class_list) {
+      this.virtual_piece_destroy()
+
       this.cursor_elem = document.createElement("div")
       this.cursor_elem.classList.add("piece_outer", "cursor_elem")
       const piece_inner = document.createElement("div")
@@ -1144,10 +1170,9 @@ export default {
       this.cursor_elem.appendChild(piece_inner)
       this.$el.appendChild(this.cursor_elem)
       this.set_pos()
-      this.virtual_piece_exist = true
     },
 
-    delete_vpiece(class_list) {
+    virtual_piece_destroy() {
       if (this.cursor_elem) {
         this.$el.removeChild(this.cursor_elem)
         this.cursor_elem = null
