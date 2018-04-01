@@ -7,25 +7,27 @@ $sp_real_piece_shadow_depth: 4px // 大きさ
 $sp_real_piece_shadow_blur:  4px // ぼかし度合い
 
 // 持った駒の影
-$sp_real_hold_shadow_depth: 8px // 大きさ
-$sp_real_hold_shadow_blur:  6px // ぼかし度合い
+$sp_real_hold_shadow_depth: 6px // 大きさ
+$sp_real_hold_shadow_blur:  5px // ぼかし度合い
 
 // 持った駒のずれ
 $sp_real_hold_gap: 0.5vmin
 
+@mixin image_shadow($x, $weight)
+  filter: drop-shadow($x $x $weight rgba(0, 0, 0, 0.3))
+
+// カーソル位置に表示する持駒
 .cursor_elem
   position: fixed
   z-index: 1
   pointer-events: none
   .piece_inner
+    @include image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
     position: relative
     top: -50%
     left: -50%
     width:  100%
     height: 100%
-
-@mixin image_shadow($x, $weight)
-  filter: drop-shadow($x $x $weight rgba(0, 0, 0, 0.4))
 
 %dom_real_hold
   // background: $sp_real_holding_color

@@ -708,64 +708,40 @@ export default {
       return _.isNil(this.have_piece_location) && this.have_piece === piece
     },
 
+    // FIXME: 駒を持っているときは「駒箱の駒」に対して一切反応しないようにしたい。そうすると駒箱だけの判定で済む
     piece_box_other_click(e) {
       console.log("駒箱クリック")
 
       if (_.isNil(this.have_piece_location) && this.have_piece) {
         console.log("持っているならキャンセル")
         this.state_reset()
-        return
+        return true
       }
 
       if (this.have_piece_location && this.have_piece) {
         console.log("駒台から駒箱に移動")
+        this.sound_call("piece_sound")
         this.mediator.piece_box_add(this.have_piece)
         this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
         this.state_reset()
-        return
+        return true
       }
 
       if (this.origin_soldier) {
         console.log("盤上の駒を駒箱に移動")
+        this.sound_call("piece_sound")
         this.mediator.piece_box_add(this.origin_soldier.piece)
         this.mediator.board.delete_at(this.origin_soldier.place)
         this.state_reset()
+        return true
       }
+
+      return false
     },
 
     piece_box_piece_click(piece, e) {
-      console.log("駒箱の駒をクリック")
-
-      // 自分の駒をすでに持っているならキャンセル
-      if (_.isNil(this.have_piece_location) && this.have_piece) {
-        console.log("持っているならキャンセル")
-        this.state_reset()
-        return
-      }
-
-      // 相手の持駒を自分の駒台に移動
-      if (this.have_piece_location && this.have_piece) {
-        console.log("相手の持駒を自分の駒台に移動")
-        this.mediator.piece_box_add(this.have_piece)
-        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
-        this.state_reset()
-        return
-      }
-
-      // // 相手の持駒を持とうとしたときは無効
-      // if (this.run_mode2 === "play_mode" && !this.holding_p && location.key !== this.mediator.current_location.key) {
-      //   console.log("相手の持駒を持とうとしたときは無効")
-      //   return
-      // }
-
-      // 盤上の駒を駒台に置く
-      if (this.origin_soldier) {
-        console.log("盤上の駒を駒箱に移動")
-        this.mediator.piece_box_add(this.origin_soldier.piece)
-        this.mediator.board.delete_at(this.origin_soldier.place)
-        this.state_reset()
-        // console.log("盤上の駒を駒台に置く")
-        // this.board_soldir_to_hold_pieces(location)
+      // 駒をクリックしたとき駒箱をクリックするのと同じ処理を実行
+      if (this.piece_box_other_click(e)) {
         return
       }
 
@@ -950,7 +926,7 @@ export default {
 
       // 持駒を置く
       if (this.have_piece) {
-        console.log("持駒を置く")
+        this.sound_call("piece_sound")
         const soldier = this.origin_soldier2(place)
         this.piece_sub()
         this.mediator.board.place_on(soldier) // 置く
@@ -980,6 +956,7 @@ export default {
 
     // 盤上の駒を駒台に置く
     board_soldir_to_hold_pieces(location) {
+      this.sound_call("piece_sound")
       this.mediator.hold_pieces_add(location, this.origin_soldier.piece) // 駒台にプラス
       this.mediator.board.delete_at(this.origin_soldier.place)
       this.state_reset()
@@ -987,6 +964,7 @@ export default {
 
     opponent_hold_pieces_move_to_my_hold_pieces(location) {
       console.log("相手の持駒を自分の駒台に移動")
+      this.sound_call("piece_sound")
       this.piece_sub()
       this.mediator.hold_pieces_add(location, this.have_piece)
       this.state_reset()
