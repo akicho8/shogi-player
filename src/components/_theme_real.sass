@@ -19,7 +19,7 @@ $sp_real_hold_gap: 0.5vmin
 // カーソル位置に表示する持駒
 .cursor_elem
   position: fixed
-  z-index: 1
+  z-index: 10                   // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い
   pointer-events: none
   .piece_inner
     @include image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
