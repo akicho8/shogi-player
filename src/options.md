@@ -1,6 +1,6 @@
 | 名前                       | 意味                        | 備考                                                 | 初期値              |
 |----------------------------|-----------------------------|------------------------------------------------------|---------------------|
-| kifu_body                  | 棋譜の本体                  | KIF と SFEN に対応。駒落ちは SFEN のみ               | 'position startpos' |
+| kifu_body                  | 棋譜の本体                  | KIF と SFEN に対応。駒落ちは SFEN のみ               | null                |
 | kifu_url                   | 棋譜ファイルURL             |                                                      | null                |
 | theme                      | テーマ名                    | none:なし simple:シンプル real:木目                  | 'simple'            |
 | variation                  | テーマ内の亜種              | a, b, c, ...                                         | 'a'                 |
@@ -18,6 +18,10 @@
 | system_key_mag             | システムキー押下時の倍速    | 1 または null 指定で無効にできる                     | 50                  |
 | url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                  | false               |
 | debug_mode                 | デバッグモード              |                                                      | false               |
+| run_mode                   | 実行モード                  | 再生(view_mode) 操作(play_mode) 編集(edit_mode)      | 'view_mode'         |
+| init_preset_key            | 初期配置                    | kifu_body の代わりに指定するとその配置になる         | null                |
+
+<br>
 
 <article class="message is-info">
   <div class="message-header">
@@ -25,6 +29,7 @@
   </div>
   <div class="message-body">
     <ul>
+      <li>kifu_body も init_preset_key も指定がない場合は 'position startpos' (平手) が初期配置になります</li>
       <li>**kifu_url** や **kifu_body** をあとから変更したときも同期して再読み込みします。</li>
       <li>theme や size の値に **none** を指定したときは何もスタイルを設定しません。</li>
     </ul>

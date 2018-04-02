@@ -94,7 +94,8 @@
       <hr>
       <section class="section">
         <div class="container has-text-centered">
-
+          <h3 class="title has-text-left">1. 再生モード</h3>
+          <hr>
           <div class="columns">
             <div class="column">
               <article class="message is-info has-text-centered">
@@ -107,7 +108,7 @@
                 <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
               </p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_sample1" :start_turn="9" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false"/>
+              <ShogiPlayer :kifu_body="kif_sample1" :start_turn="9" :slider_show="true" :theme="'real'" :size="'large'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false"/>
             </div>
           </div>
           <br>
@@ -172,20 +173,66 @@
 
           <div class="columns">
             <div class="column">
+              <article class="message is-success has-text-left">
+                <div class="message-header">
+                  <p>共通する操作方法</p>
+                </div>
+                <div class="message-body">
+                  <div class="content">
+                    <ul>
+                      <li>盤面の左右をクリックすると前後の手番に進む</li>
+                      <li>シフトを押しながらで10倍速</li>
+                      <li>シフト以外のシステムキーだと50倍速(シフトキーも押していると500倍速)</li>
+                      <li>天王山(５五の地点)をクリックすると反転</li>
+                      <li>「N手目」の部分をクリックで編集可</li>
+                      <li>スライダーがある場合は優先的にフォーカスする</li>
+                      <li>スライダーにフォーカスがある状態だと左右キーが効く(ブラウザの標準機能)</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <br>
+          <br>
+          <br>
+          <h3 class="title has-text-left">2. 操作モード</h3>
+          <hr>
+
+          <div class="columns">
+            <div class="column">
               <article class="message is-info has-text-centered">
                 <div class="message-body">
-                  盤面編集モード
+                  自分で操作できる。戻れば操作をやり直せる
+                </div>
+              </article>
+              <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'"/>
+            </div>
+          </div>
+
+          <br>
+          <br>
+          <h3 class="title has-text-left">3. 編集モード</h3>
+          <hr>
+
+          <div class="columns">
+            <div class="column">
+              <article class="message is-info has-text-centered">
+                <div class="message-body">
+                  盤面編集モード。すべての駒を自由に動かせる
                 </div>
               </article>
               <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'"/>
             </div>
+
             <div class="column">
               <article class="message is-info has-text-centered">
                 <div class="message-body">
-                  操作モード
+                  盤面編集モード。詰将棋用
                 </div>
               </article>
-              <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'"/>
+              <ShogiPlayer :init_preset_key="'詰将棋'" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'"/>
             </div>
           </div>
           <br>
@@ -210,18 +257,15 @@
             <div class="column">
               <article class="message is-success has-text-left">
                 <div class="message-header">
-                  <p>共通する操作方法など</p>
+                  <p>再生モードからのモード切り替えについて</p>
                 </div>
                 <div class="message-body">
                   <div class="content">
                     <ul>
-                      <li>盤面の左右をクリックすると前後の手番に進む</li>
-                      <li>シフトを押しながらで10倍速</li>
-                      <li>シフト以外のシステムキーだと50倍速(シフトキーも押していると500倍速)</li>
-                      <li>天王山(５五の地点)をクリックすると反転</li>
-                      <li>「N手目」の部分をクリックで編集可</li>
-                      <li>スライダーがある場合は優先的にフォーカスする</li>
-                      <li>スライダーにフォーカスがある状態だと左右キーが効く(ブラウザの標準機能)</li>
+                      <li>右の<b-icon icon="dots-vertical" size="is-small"></b-icon>をクリックするとモードを切り替えれます</li>
+                      <li>棋譜再生モードの途中で「操作」に切り替えるとその局面から手番側の駒を動かせるようになります。検討したいときに使います</li>
+                      <li>もっと自由に動かしたいときは編集モードにします。どの駒も自由に動かせるようになります</li>
+                      <li>盤上の駒は Shift や Meta キーを押しながらクリックすると裏返せます</li>
                     </ul>
                   </div>
                 </div>
