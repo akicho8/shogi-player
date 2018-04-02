@@ -173,6 +173,7 @@ import SettingModal from "./SettingModal"
 import navi_module from "./navi_module.js"
 import edit_mode_module from "./edit_mode_module.js"
 import sound_module from "./sound_module.js"
+import preset_module from "./preset_module.js"
 
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
@@ -206,12 +207,13 @@ export default {
     navi_module,
     edit_mode_module,
     sound_module,
+    preset_module,
   ],
 
   /* eslint-disable */
   props: {
     run_mode:           { type: String,  default: "view_mode",         },
-    kifu_body:          { type: String,  default: "position startpos", },
+    kifu_body:          { type: String,  default: null,                },
     kifu_url:           { type: String,  default: null,                },
     polling_interval:   { type: Number,  default: 0,                   },
     last_after_polling: { type: Boolean, default: true,                },
@@ -364,7 +366,7 @@ export default {
       if (this.kifu_url) {
         this.__kifu_read_from_url()
       } else {
-        this.loaded_kifu = this.kifu_body
+        this.loaded_kifu = this.init_kifu_body
       }
       this.read_counter++
       this.log(`read_counter: ${this.read_counter}`)
@@ -457,7 +459,16 @@ export default {
     mediator_set_fast() {
       if (_.isNil(this.mediator)) {
         let data_source = null
-        let str = this.loaded_kifu || "position startpos"
+        let str = this.loaded_kifu
+        console.log(str)
+        if (_.isNil(str)) {
+          if (this.init_preset_sfen) {
+            str = this.init_preset_sfen.sfen
+          }
+        }
+        if (_.isNil(str)) {
+          str = "position startpos"
+        }
         if (/position/.test(str)) {
           data_source = new SfenParser()
         } else {
@@ -548,10 +559,12 @@ export default {
 
       return list
     },
-
   },
 
   computed: {
+    init_kifu_body() {
+      return this.kifu_body || this.init_preset_sfen || "position startpos"
+    }
   },
 }
 </script>

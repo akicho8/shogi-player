@@ -1,11 +1,9 @@
 import _ from "lodash"
 
 import { Place } from "../place"
-import { Piece } from "../piece"
 import { Soldier } from "../soldier"
 import { SfenParser } from "../sfen_parser"
 import { Mediator } from "../mediator"
-import { PresetInfo } from "../preset_info"
 import { Location } from "../location"
 
 export default {
@@ -19,7 +17,6 @@ export default {
       place_from: null,           // 盤上ら動かそうとしているときの元位置
       have_piece: null,           // 駒台 or 駒箱から持った駒
       have_piece_location: null,  // 駒台から持ったときだけ先後が入ている
-      current_preset: null,       // 選択中の初期配置
       moves: [],                  // play_mode 時の棋譜
       init_sfen: null,            // play_mode に入ったときの最初の状態
       init_location_key: "black", // play_mode に入ったときの最初の手番
@@ -34,21 +31,6 @@ export default {
   },
 
   watch: {
-    current_preset(value) {
-      if (value) {
-        const preset_info = PresetInfo.fetch(value)
-        const data_source = new SfenParser()
-        data_source.kifu_body = preset_info.sfen
-        data_source.parse()
-
-        this.mediator = new Mediator()
-        this.mediator.data_source = data_source
-        preset_info.piece_box.forEach(([e, c]) => {
-          this.mediator.piece_box_add(Piece.fetch(e), c)
-        })
-        this.mediator.run()
-      }
-    },
   },
 
   methods: {
@@ -388,16 +370,8 @@ export default {
     piece_box_piece_inner_class(piece) {
       let list = []
       list = _.concat(list, piece.css_class_list)
-      // list.push("piece_inner")
-      list.push(`location_black`) // 本当は this.location.key を埋めるべきだけど後手の駒台は180度反転するため先手の向きとする
+      list.push("location_black")
       list.push("promoted_false")
-
-      // if (this.piece_box_have_p(piece)) {
-      //   list.push("holding_p")
-      // } else if (this.$parent.mediator.current_location === this.location || this.$parent.run_mode2 === "edit_mode") {
-      //   list.push("selectable_p")
-      // }
-
       return list
     },
 
@@ -497,11 +471,6 @@ export default {
 
     init_location() {
       return Location.fetch(this.init_location_key)
-    },
-
-    // テンプレートの中で PresetInfo を簡単に参照できないVueの制約のため
-    preset_info_values() {
-      return PresetInfo.values
     },
 
   },
