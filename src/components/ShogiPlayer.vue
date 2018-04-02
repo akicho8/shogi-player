@@ -112,7 +112,7 @@
     <div class="comment_area" v-if="mediator.data_source.comments_pack">
       <template v-if="mediator.current_comments">
         <div class="columns">
-          <div class="column is-three-fifths is-offset-one-fifth">
+          <div class="column"><!-- is-three-fifths is-offset-one-fifth -->
             <div class="content has-text-left">
               <template v-for="str in mediator.current_comments">
                 <template v-if="_.isEmpty(str)">

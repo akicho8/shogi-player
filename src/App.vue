@@ -108,7 +108,7 @@
                 <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
               </p>
               <hr>
-              <ShogiPlayer :kifu_body="kif_sample1" :start_turn="9" :slider_show="true" :theme="'real'" :size="'large'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false"/>
+              <ShogiPlayer class="original" :kifu_body="kif_sample1" :start_turn="9" :slider_show="true" :theme="'real'" :size="'large'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false"/>
             </div>
           </div>
           <br>
@@ -498,5 +498,33 @@ export default {
 // ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
 // main.js で読み込むと .sass のファイル基準になる
 // @import "./components/ShogiPlayer.sass"
+
+.original
+  position: relative
+  padding: 3vmin
+  &:after
+    position: absolute
+    z-index: -1
+    content: ""
+    background-image: url("./assets/tatami01-768x480.jpg")
+    // background-image: url("./assets/51587037_p15_master1200.jpg")
+
+    border-radius: 1vmin
+    background-position: center
+    background-size: cover
+    opacity: 0.2
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+  .comment_area
+    .content
+      $color: hsla(120, 50%, 100%, 0.8)
+      margin: 1vmin 20%
+      border-radius: 1vmin
+      border: 1px solid darken($color, 35%)
+      box-shadow: 0 0 3vmin darken($color, 30%)
+      background: $color
+      padding: 2vmin
 
 </style>
