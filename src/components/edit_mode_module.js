@@ -245,6 +245,8 @@ export default {
         })
 
         if (this.run_mode2 === "play_mode" && (new_soldier.promotable_p || this.origin_soldier.promotable_p)) { // 入って成る or 出て成る
+          this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
+
           // 元が成ってないとき
           this.$dialog.confirm({
             message: '成りますか？',
@@ -420,18 +422,12 @@ export default {
     },
 
     mousemove_hook(e) {
-      // this.cx = e.clientX
-      // this.cy = e.clientY
-      // console.log(e.clientX)
       this.last_event = e
       this.set_pos()
     },
-    // onclick_func(e) {
-    //   this.last_event = e
-    //   this.virtual_piece_exist = !this.virtual_piece_exist
-    // },
+
     set_pos() {
-      if (this.cursor_elem && this.last_event) {
+      if (this.cursor_elem && this.last_event && this.mouse_stick) {
         this.cursor_elem.style.left = `${this.last_event.clientX}px`
         this.cursor_elem.style.top = `${this.last_event.clientY}px`
       }
@@ -449,6 +445,7 @@ export default {
       piece_inner.classList.add(...list)
       this.cursor_elem.appendChild(piece_inner)
       this.$el.appendChild(this.cursor_elem)
+      this.mouse_stick = true
       this.set_pos()
     },
 
@@ -456,6 +453,7 @@ export default {
       if (this.cursor_elem) {
         this.$el.removeChild(this.cursor_elem)
         this.cursor_elem = null
+        this.mouse_stick = false
       }
     },
 
