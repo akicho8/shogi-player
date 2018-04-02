@@ -25,6 +25,12 @@ export default {
   watch: {
     // あとからフォームで変更があったとき
     current_preset(value) {
+      this.mediator_setup_by_preset(value)
+    }
+  },
+
+  methods: {
+    mediator_setup_by_preset(value) {
       if (value) {
         const preset_info = PresetInfo.fetch(value)
         const data_source = new SfenParser()
@@ -39,9 +45,6 @@ export default {
         this.mediator.run()
       }
     },
-  },
-
-  methods: {
   },
 
   computed: {

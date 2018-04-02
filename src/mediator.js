@@ -173,6 +173,10 @@ class Mediator {
     return this.sfen_serializer.to_s
   }
 
+  get to_position_sfen() {
+    return `position sfen ${this.to_sfen}`
+  }
+
   get sfen_serializer() {
     return new SfenSerializer(this)
   }

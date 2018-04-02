@@ -234,6 +234,7 @@ export default {
 
   data() {
     return {
+      run_mode2: this.run_mode,
       current_turn: this.start_turn, // N手目
       turn_edit_value: null,         // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,                // 局面管理
@@ -245,16 +246,25 @@ export default {
       interval_id: null,
       read_counter: 0,
       update_counter: 0,
-      run_mode2: "view_mode",
       setting_modal_p: false,
     }
   },
 
   created() {
-    this.kifu_read()
-    this.polling_interval_update()
-
-    this.run_mode2 = this.run_mode
+    if (this.run_mode2 === "view_mode") {
+      this.kifu_read()
+      this.polling_interval_update()
+    }
+    if (this.run_mode2 === "play_mode") {
+      this.play_mode_setup("view_mode")
+    }
+    if (this.run_mode2 === "edit_mode") {
+      if (this.init_preset_key) {
+        this.mediator_setup_by_preset(this.init_preset_key) // 駒箱に「玉」を乗せたいため
+      } else {
+        this.mediator_setup_if_blank()
+      }
+    }
   },
 
   watch: {
@@ -262,16 +272,12 @@ export default {
 
     current_turn() {
       if (this.run_mode2 === "view_mode") {
-        this.log("mediator_update from current_turn")
-        this.mediator_update()
+        this.log("view_mode_mediator_update from current_turn")
+        this.view_mode_mediator_update()
       }
       if (this.run_mode2 === "play_mode") {
-        const data_source = new SfenParser()
-        data_source.kifu_body = this.play_mode_current_sfen
-        data_source.parse()
-
         this.mediator = new Mediator()
-        this.mediator.data_source = data_source
+        this.mediator.data_source = this.data_source_by(this.play_mode_current_sfen)
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
         this.current_turn = this.mediator.normalized_turn
@@ -289,10 +295,10 @@ export default {
     },
 
     /* eslint-disable */
-    kifu_url() { this.kifu_read() },
-    kifu_body() { this.kifu_read() },
-    loaded_kifu() { this.mediator_update() },
-    polling_interval() { this.polling_interval_update() },
+    kifu_url()         { this.kifu_read()                 },
+    kifu_body()        { this.kifu_read()                 },
+    loaded_kifu()      { this.view_mode_mediator_update() },
+    polling_interval() { this.polling_interval_update()   },
     /* eslint-enable */
 
     // -------------------------------------------------------------------------------- run_mode2
@@ -303,42 +309,19 @@ export default {
     run_mode2(new_val, old_val) {
       if (new_val === "view_mode") {
         console.log("run_mode2: view_mode")
-        this.mediator_update()
+        this.view_mode_mediator_update()
       }
 
       if (new_val === "play_mode") {
-        console.log("run_mode2: play_mode")
-        this.mediator_set_fast()
-        if (old_val === "view_mode") {
-          this.init_location_key = this.mediator.current_location.key
-        }
-
-        const sfen_serializer = this.mediator.sfen_serializer
-        this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location_key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
-        this.moves = []
-
-        const data_source = new SfenParser()
-        data_source.kifu_body = this.init_sfen
-        data_source.parse()
-
-        this.mediator = new Mediator()
-        this.mediator.data_source = data_source
-        this.mediator.current_turn = 0
-        this.mediator.run()
-
-        this.current_turn = 0
+        this.play_mode_setup(old_val)
       }
 
       if (this.run_mode2 === "edit_mode") {
         console.log("run_mode2: edit_mode")
-        this.mediator_set_fast()
-
-        const data_source = new SfenParser()
-        data_source.kifu_body = "position sfen " + this.mediator.to_sfen
-        data_source.parse()
+        this.mediator_setup_if_blank()
 
         this.mediator = new Mediator()
-        this.mediator.data_source = data_source
+        this.mediator.data_source = this.data_source_by(this.mediator.to_position_sfen)
         this.mediator.current_turn = 0
         this.mediator.run()
 
@@ -431,68 +414,22 @@ export default {
       }
     },
 
-    data_source_get() {
-      let data_source = null
-      if (this.run_mode2 === "edit_mode") {
-        // data_source = new SfenParser()
-        // data_source.kifu_body = "position sfen " + this.mediator.to_sfen
-        // data_source.parse()
-      } else if (this.run_mode2 === "play_mode") {
-        // data_source = new SfenParser()
-        // data_source.kifu_body = "position sfen " + this.mediator.to_sfen
-        // data_source.parse()
-      } else {
-        if (this.loaded_kifu) {
-          let str = this.loaded_kifu || "position startpos"
-          if (/position/.test(str)) {
-            data_source = new SfenParser()
-          } else {
-            data_source = new KifParser()
-          }
-          data_source.kifu_body = str
-          data_source.parse()
-        }
-      }
-      return data_source
-    },
-
-    mediator_set_fast() {
+    mediator_setup_if_blank() {
       if (_.isNil(this.mediator)) {
-        let data_source = null
-        let str = this.loaded_kifu
-        console.log(str)
-        if (_.isNil(str)) {
-          if (this.init_preset_sfen) {
-            str = this.init_preset_sfen.sfen
-          }
-        }
-        if (_.isNil(str)) {
-          str = "position startpos"
-        }
-        if (/position/.test(str)) {
-          data_source = new SfenParser()
-        } else {
-          data_source = new KifParser()
-        }
-        data_source.kifu_body = str
-        data_source.parse()
         this.mediator = new Mediator()
-        this.mediator.data_source = data_source
+        this.mediator.data_source = this.data_source_by(this.init_kifu_body)
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
-        // this.current_turn = this.mediator.normalized_turn
+        this.current_turn = this.mediator.normalized_turn
       }
     },
 
-    mediator_update() {
-      console.log("mediator_update")
-      const data_source = this.data_source_get()
-      if (data_source) {
+    view_mode_mediator_update() {
+      if (this.loaded_kifu) {
         this.mediator = new Mediator()
-        this.mediator.data_source = data_source
+        this.mediator.data_source = this.data_source_by(this.loaded_kifu)
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
-
         this.current_turn = this.mediator.normalized_turn
 
         if (this.url_embed_turn) {
@@ -505,6 +442,18 @@ export default {
 
         this.update_counter++
       }
+    },
+
+    data_source_by(str) {
+      let data_source = null
+      if (/position/.test(str)) {
+        data_source = new SfenParser()
+      } else {
+        data_source = new KifParser()
+      }
+      data_source.kifu_body = str
+      data_source.parse()
+      return data_source
     },
 
     turn_edit_run() {
@@ -559,11 +508,29 @@ export default {
 
       return list
     },
+
+    play_mode_setup(old_val) {
+      console.log("run_mode2: play_mode")
+      this.mediator_setup_if_blank()
+      if (old_val === "view_mode") {
+        this.init_location_key = this.mediator.current_location.key
+      }
+      const sfen_serializer = this.mediator.sfen_serializer
+      this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location_key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
+      this.moves = []
+
+      this.mediator = new Mediator()
+      this.mediator.data_source = this.data_source_by(this.init_sfen)
+      this.mediator.current_turn = 0
+      this.mediator.run()
+
+      this.current_turn = 0
+    },
   },
 
   computed: {
     init_kifu_body() {
-      return this.kifu_body || this.init_preset_sfen || "position startpos"
+      return this.loaded_kifu || this.kifu_body || this.init_preset_sfen || "position startpos"
     }
   },
 }

@@ -352,7 +352,7 @@ export default {
 
       // console.log("turn_next")
 
-      // this.mediator_update()
+      // this.view_mode_mediator_update()
     },
 
     // -------------------------------------------------------------------------------- piece_box

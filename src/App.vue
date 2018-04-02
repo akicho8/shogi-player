@@ -229,7 +229,7 @@
             <div class="column">
               <article class="message is-info has-text-centered">
                 <div class="message-body">
-                  盤面編集モード。詰将棋用
+                  盤面編集モード。詰将棋用の初期配置で開始
                 </div>
               </article>
               <ShogiPlayer :init_preset_key="'詰将棋'" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'"/>
