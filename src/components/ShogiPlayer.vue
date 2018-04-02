@@ -273,6 +273,8 @@ export default {
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
         this.current_turn = this.mediator.normalized_turn
+
+        this.sound_call("piece_sound")
       }
     },
 

@@ -257,7 +257,7 @@ export default {
             },
             // 最後に必ず呼ばれる
             onCancel: () => {
-              this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
+              this.moves_set(this.origin_soldier.place.to_sfen + place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
               this.mediator.board.place_on(new_soldier)                             // 置く
               this.mediator.board.delete_at(this.place_from)
               this.state_reset()
@@ -266,7 +266,7 @@ export default {
           })
         } else {
           if (this.run_mode2 === "play_mode") {
-            this.moves.push(this.origin_soldier.place.to_sfen + place.to_sfen) // 7g7f
+            this.moves_set(this.origin_soldier.place.to_sfen + place.to_sfen) // 7g7f
           }
           this.mediator.board.place_on(new_soldier)                          // 置く
           this.mediator.board.delete_at(this.place_from)
@@ -283,7 +283,7 @@ export default {
         const soldier = this.origin_soldier2(place)
         this.piece_decriment()
         this.mediator.board.place_on(soldier) // 置く
-        this.moves.push(soldier.piece.key + "*" + place.to_sfen) // P*7g
+        this.moves_set(soldier.piece.key + "*" + place.to_sfen) // P*7g
         this.state_reset()
         this.turn_next()
         return
@@ -352,7 +352,7 @@ export default {
     },
 
     turn_next() {
-      this.sound_call("piece_sound")
+      // this.sound_call("piece_sound")
 
       if (this.run_mode2 === "play_mode") {
         const data_source = new SfenParser()
@@ -466,6 +466,11 @@ export default {
         location: this.have_piece_location || Location.fetch("black"),
       })
     },
+
+    moves_set(value) {
+      this.moves = _.take(this.moves, this.current_turn)
+      this.moves.push(value)
+    }
   },
 
   computed: {
