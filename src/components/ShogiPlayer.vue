@@ -168,14 +168,13 @@ import { Piece } from "../piece"
 import { Soldier } from "../soldier"
 import { PresetInfo } from "../preset_info"
 import { Location } from "../location"
-import { Sound } from '../sound'
 import { SfenParser } from "../sfen_parser"
 import { KifParser } from "../kif_parser"
 import PieceStand from "./PieceStand"
 import SettingModal from "./SettingModal"
 
-import piece_sound_wav from "../assets/piece_sound.wav"
-import flip_sound_wav from "../assets/flip_sound.wav"
+// modules
+import sound_module from "./sound_module.js"
 
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
@@ -206,6 +205,11 @@ const logger_debug = require('debug')('debug')
 export default {
   name: 'ShogiPlayer',
 
+  mixins: [
+    // ここで直接 require("./sound_module.js"), とは書けないので注意
+    sound_module,
+  ],
+
   /* eslint-disable */
   props: {
     run_mode:           { type: String,  default: "view_mode",         },
@@ -217,7 +221,6 @@ export default {
     slider_show:        { type: Boolean, default: false,               },
     controller_show:    { type: Boolean, default: false,               },
     sfen_show:          { type: Boolean, default: false,               },
-    sound_effect:       { type: Boolean, default: false,               },
     volume:             { type: Number,  default: 0.5,                 },
     key_event_capture:  { type: Boolean, default: false                },
     url_embed_turn:     { type: Boolean, default: false,               },
@@ -245,7 +248,6 @@ export default {
       env: process.env.NODE_ENV,
       loaded_kifu: null,
       error_message: null,
-      piece_sound: null,
       interval_id: null,
       read_counter: 0,
       update_counter: 0,
@@ -277,7 +279,6 @@ export default {
   created() {
     this.kifu_read()
     this.polling_interval_update()
-    this.sound_load()
 
     this.run_mode2 = this.run_mode
   },
@@ -389,16 +390,6 @@ export default {
         })
         this.mediator.run()
       }
-    },
-
-    // -------------------------------------------------------------------------------- sound
-
-    sound_effect() {
-      this.sound_load()
-    },
-
-    volume() {
-      this.sound_load()
     },
 
     // -------------------------------------------------------------------------------- other
@@ -552,15 +543,6 @@ export default {
       }
     },
 
-    sound_call(key) {
-      if (this.sound_effect) {
-        const object = this[key]
-        if (object) {
-          object.play()
-        }
-      }
-    },
-
     keydown_hook(e) {
       if (this.debug_mode && false) {
         this.log(document.activeElement)
@@ -705,20 +687,6 @@ export default {
 
     flip_sign() {
       return this.flip ? -1 : 1
-    },
-
-    sound_load() {
-      if (this.sound_effect) {
-        if (!this.piece_sound) {
-          this.piece_sound = new Sound(piece_sound_wav)
-        }
-        this.piece_sound.options["volume"] = this.volume
-
-        if (!this.flip_sound) {
-          this.flip_sound = new Sound(flip_sound_wav)
-        }
-        this.flip_sound.options["volume"] = this.volume
-      }
     },
 
     log(v) {
