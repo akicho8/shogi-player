@@ -9,6 +9,7 @@ export default {
   /* eslint-disable */
   props: {
     sound_effect: { type: Boolean, default: false, },
+    volume:       { type: Number,  default: 0.5,   },
   },
   /* eslint-enable */
 
