@@ -34,6 +34,21 @@ export default {
   },
 
   watch: {
+    current_preset(value) {
+      if (value) {
+        const preset_info = PresetInfo.fetch(value)
+        const data_source = new SfenParser()
+        data_source.kifu_body = preset_info.sfen
+        data_source.parse()
+
+        this.mediator = new Mediator()
+        this.mediator.data_source = data_source
+        preset_info.piece_box.forEach(([e, c]) => {
+          this.mediator.piece_box_add(Piece.fetch(e), c)
+        })
+        this.mediator.run()
+      }
+    },
   },
 
   methods: {
@@ -452,22 +467,6 @@ export default {
         promoted: false,
         location: this.have_piece_location || Location.fetch("black"),
       })
-    },
-
-    current_preset(value) {
-      if (value) {
-        const preset_info = PresetInfo.fetch(value)
-        const data_source = new SfenParser()
-        data_source.kifu_body = preset_info.sfen
-        data_source.parse()
-
-        this.mediator = new Mediator()
-        this.mediator.data_source = data_source
-        preset_info.piece_box.forEach(([e, c]) => {
-          this.mediator.piece_box_add(Piece.fetch(e), c)
-        })
-        this.mediator.run()
-      }
     },
   },
 
