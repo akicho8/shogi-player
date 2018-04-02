@@ -5,23 +5,15 @@
   </head>
   <body>
     <div id="app">
-      <button @click="foo = !foo">{{foo}}</button>
-      {{counter()}}
+      <button @click="foo.push('L')" @click.right.prevent="foo.push('R')">BUTTON</button>
+      <hr>
+      {{foo}}
     </div>
     <script>
-      var $counter = 0
       const vm = new Vue({
         el: '#app',
         data: {
-          foo: false,
-          _bar: 0,
-        },
-        methods: {
-          counter() {
-            console.log(this._bar)
-            $counter += 1
-            return $counter
-          },
+          foo: [],
         },
       })
     </script>

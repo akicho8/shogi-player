@@ -196,7 +196,7 @@ export default {
 
       // --------------------------------------------------------------------------------
 
-      const shift_key = e.shiftKey | e.ctrlKey | e.altKey | e.metaKey | (e.button !== 0)
+      const shift_key = e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
       console.log(`holding_p: ${this.holding_p}`)
       if (!this.holding_p && soldier && shift_key) {
         console.log("盤上の駒を裏返す")
@@ -274,20 +274,17 @@ export default {
       throw new Error("must not happen")
     },
 
-    // board_click_right(xy, e) {
-    //   console.log("盤を右クリック")
-    //
-    //   // const place = Place.fetch(xy)
-    //   // const soldier = this.mediator.board_place_at(place)
-    //   //
-    //   // if (soldier) {
-    //   //   this.mediator.place_on(soldier.piece_transform)
-    //   //   this.state_reset()
-    //   //   return
-    //   // }
-    //
-    //   throw new Error("must not happen")
-    // },
+    board_click_right(xy, e) {
+      console.log("盤を右クリック")
+
+      const place = Place.fetch(xy)
+      const soldier = this.mediator.board.lookup(place)
+
+      if (!this.holding_p && soldier) {
+        console.log("盤上の駒を裏返す")
+        this.mediator.board.place_on(soldier.piece_transform)
+      }
+    },
 
     // 盤上の駒を駒台に置く
     board_soldir_to_hold_pieces(location) {

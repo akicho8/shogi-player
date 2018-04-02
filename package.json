@@ -46,7 +46,7 @@
     "minimalistic-assert": "^1.0.0",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
-    "vue": "^2.5.2",
+    "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "xregexp": "^4.0.0"
   },

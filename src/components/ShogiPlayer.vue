@@ -68,7 +68,7 @@
           <table class="board_inner">
             <tr v-for="y in mediator.dimension">
               <template v-for="x in mediator.dimension">
-                <td class="piece_outer" :class="piece_outer_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)">
+                <td class="piece_outer" :class="piece_outer_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click.right.prevent="board_click_right([x - 1, y - 1], $event)">
                   <span class="piece_inner" :class="mediator.board_piece_inner_class([x - 1, y - 1])">
                     {{mediator.cell_view([x - 1, y - 1])}}
                   </span>
