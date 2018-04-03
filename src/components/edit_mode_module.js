@@ -292,6 +292,14 @@ export default {
       }
     },
 
+    board_click_right2(e) {
+      // FIXME: click_hook のところだけで行いたい
+      if (this.holding_p) {
+        console.log("持ち上げた駒を元に戻す")
+        this.state_reset()
+      }
+    },
+
     // 盤上の駒を駒台に置く
     board_soldir_to_hold_pieces(location) {
       // this.sound_call("piece_sound")

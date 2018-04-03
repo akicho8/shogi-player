@@ -1,7 +1,7 @@
 <template>
 <div class="piece_stand_outer" :class="piece_stand_outer_class">
   <div class="location_mark">{{location.name}}</div>
-  <ul class="piece_stand" @click.stop="$parent.piece_stand_click(location, $event)">
+  <ul class="piece_stand" @click.stop="$parent.piece_stand_click(location, $event)" @click.right.prevent="$parent.board_click_right2">
     <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)">
       <div class="piece_outer" :class="piece_outer_class(piece)">
         <span class="piece_inner" :class="piece_class(piece)">{{piece.name}}</span>
