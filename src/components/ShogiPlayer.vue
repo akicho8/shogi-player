@@ -307,12 +307,12 @@ export default {
     },
 
     run_mode2(new_val, old_val) {
-      if (new_val === "view_mode") {
+      if (this.run_mode2 === "view_mode") {
         console.log("run_mode2: view_mode")
         this.view_mode_mediator_update()
       }
 
-      if (new_val === "play_mode") {
+      if (this.run_mode2 === "play_mode") {
         this.play_mode_setup(old_val)
       }
 
