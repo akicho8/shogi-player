@@ -1,8 +1,6 @@
 <template>
 <div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${run_mode2}`, {debug: debug_mode}]">
-  <!-- template v-if だとテスト時のみエラーになるため div v-show 形式にしている -->
-  <!-- これは jest の問題なのか vue の不具合なのかわからない  -->
-  <div v-show="error_message !== null">
+  <div v-if="error_message">
     <div class="columns">
       <div class="column">
         <article class="message is-danger has-text-left">
