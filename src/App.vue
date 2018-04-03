@@ -257,6 +257,25 @@
             <div class="column">
               <article class="message is-success has-text-left">
                 <div class="message-header">
+                  <p>操作方法</p>
+                </div>
+                <div class="message-body">
+                  <div class="content">
+                    <ul>
+                      <li>盤上の駒は右クリックで裏返せます</li>
+                      <li>shift, option, meta, control キーのいずれかを押しながら左クリックでも裏返せます</li>
+                      <li>駒を持った状態で右クリックすると駒を元に戻します</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column">
+              <article class="message is-success has-text-left">
+                <div class="message-header">
                   <p>再生モードからのモード切り替えについて</p>
                 </div>
                 <div class="message-body">
@@ -264,8 +283,7 @@
                     <ul>
                       <li>右の<b-icon icon="dots-vertical" size="is-small"></b-icon>をクリックするとモードを切り替えれます</li>
                       <li>棋譜再生モードの途中で「操作」に切り替えるとその局面から手番側の駒を動かせるようになります。検討したいときに使います</li>
-                      <li>もっと自由に動かしたいときは編集モードにします。どの駒も自由に動かせるようになります</li>
-                      <li>盤上の駒は右クリック、または shift, option, meta, control キーのいずれかを押しながら左クリックすると裏返せます</li>
+                      <li>もっと自由に動かしたいときは「編集」モードにします。どの駒も自由に動かせるようになります</li>
                     </ul>
                   </div>
                 </div>
