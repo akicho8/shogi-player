@@ -61,7 +61,7 @@ export default {
 
       if (this.have_piece_location && this.have_piece) {
         console.log("駒台から駒箱に移動")
-        this.sound_call("piece_sound")
+        // this.sound_call("piece_sound")
         this.mediator.piece_box_add(this.have_piece)
         this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
         this.state_reset()
@@ -70,7 +70,7 @@ export default {
 
       if (this.origin_soldier) {
         console.log("盤上の駒を駒箱に移動")
-        this.sound_call("piece_sound")
+        // this.sound_call("piece_sound")
         this.mediator.piece_box_add(this.origin_soldier.piece)
         this.mediator.board.delete_at(this.origin_soldier.place)
         this.state_reset()
@@ -86,18 +86,10 @@ export default {
         return
       }
 
-      // // クリックしたけど持駒がない
-      // if (this.mediator.piece_boxs_count(location, piece) <= 0) {
-      //   console.log("クリックしたけど持駒がない")
-      //   return
-      // }
-
       console.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = null
-      this.virtual_piece_create(this.origin_soldier2(Place.fetch([0, 0])).to_class_list)
-      // e.target.classList.add("active")
-      // this.from_dom = e.target
+      this.virtual_piece_create(this.origin_soldier2.to_class_list)
     },
 
     // 駒台クリック
@@ -160,7 +152,7 @@ export default {
       console.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
-      this.virtual_piece_create(this.origin_soldier2(Place.fetch([0, 0])).to_class_list)
+      this.virtual_piece_create(this.origin_soldier2.to_class_list)
 
       // e.target.classList.add("active")
       // this.from_dom = e.target
@@ -269,8 +261,8 @@ export default {
 
       // 持駒を置く
       if (this.have_piece) {
-        this.sound_call("piece_sound")
-        const soldier = this.origin_soldier2(place)
+        // this.sound_call("piece_sound")
+        const soldier = this.__origin_soldier_create(place)
         this.piece_decriment()
         this.mediator.board.place_on(soldier) // 置く
         this.moves_set(soldier.piece.key + "*" + place.to_sfen) // P*7g
@@ -296,7 +288,7 @@ export default {
 
     // 盤上の駒を駒台に置く
     board_soldir_to_hold_pieces(location) {
-      this.sound_call("piece_sound")
+      // this.sound_call("piece_sound")
       this.mediator.hold_pieces_add(location, this.origin_soldier.piece) // 駒台にプラス
       this.mediator.board.delete_at(this.origin_soldier.place)
       this.state_reset()
@@ -438,7 +430,7 @@ export default {
     },
 
     // 駒箱や駒台から持ち上げている駒
-    origin_soldier2(place) {
+    __origin_soldier_create(place) {
       return new Soldier({
         piece: this.have_piece,
         place: place,
@@ -458,6 +450,14 @@ export default {
     origin_soldier() {
       if (this.place_from) {
         return this.mediator.board.lookup(this.place_from)
+      }
+    },
+
+    // 移動元の駒
+    origin_soldier2() {
+      if (this.have_piece) {
+        const place = Place.fetch([0, 0])
+        return this.__origin_soldier_create(place)
       }
     },
 
