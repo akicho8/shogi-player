@@ -319,9 +319,10 @@ export default {
       if (this.run_mode2 === "edit_mode") {
         console.log("run_mode2: edit_mode")
         this.mediator_setup_if_blank()
+        const position_sfen = this.mediator.to_position_sfen // mediator を作り直す前に現状の局面を吐き出しておく
 
         this.mediator = new Mediator()
-        this.mediator.data_source = this.data_source_by(this.mediator.to_position_sfen)
+        this.mediator.data_source = this.data_source_by(position_sfen)
         this.mediator.current_turn = 0
         this.mediator.run()
 
