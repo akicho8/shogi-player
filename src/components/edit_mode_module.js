@@ -279,6 +279,13 @@ export default {
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
 
+      // FIXME: click_hook のところだけで行いたい
+      if (this.holding_p) {
+        console.log("持ち上げた駒を元に戻す")
+        this.state_reset()
+        return
+      }
+
       if (!this.holding_p && soldier) {
         console.log("盤上の駒を裏返す")
         this.mediator.board.place_on(soldier.piece_transform)
@@ -392,9 +399,15 @@ export default {
     },
 
     mousemove_hook(e) {
-      console.log(e)
       this.last_event = e
       this.set_pos()
+    },
+
+    // 右クリックならキャンセル
+    click_hook(e) {
+      if (e.which !== 1) {
+        this.state_reset()
+      }
     },
 
     set_pos() {
@@ -425,6 +438,7 @@ export default {
       this.set_pos()
 
       window.addEventListener("mousemove", this.mousemove_hook, false)
+      window.addEventListener("click", this.click_hook, false)
     },
 
     virtual_piece_destroy() {
@@ -434,6 +448,7 @@ export default {
         this.mouse_stick = false
 
         window.removeEventListener("mousemove", this.mousemove_hook)
+        window.removeEventListener("click", this.click_hook)
       }
     },
 
