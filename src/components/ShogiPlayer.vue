@@ -253,9 +253,11 @@ export default {
       this.kifu_read()
       this.polling_interval_update()
     }
+
     if (this.run_mode2 === "play_mode") {
       this.play_mode_setup("view_mode")
     }
+
     if (this.run_mode2 === "edit_mode") {
       if (this.init_preset_key) {
         this.mediator_setup_by_preset(this.init_preset_key) // 駒箱に「玉」を乗せたいため
@@ -266,8 +268,6 @@ export default {
   },
 
   watch: {
-    // -------------------------------------------------------------------------------- basic
-
     current_turn() {
       if (this.run_mode2 === "view_mode") {
         this.log("view_mode_mediator_update from current_turn")

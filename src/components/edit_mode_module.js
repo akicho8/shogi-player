@@ -14,9 +14,17 @@ export default {
 
   data() {
     return {
+      // |------------------------+------------+------------+---------------------|
+      // | どこの駒を持ち上げた？ | place_from | have_piece | have_piece_location |
+      // |------------------------+------------+------------+---------------------|
+      // | 盤上                   | ○         |            | ○                  |
+      // | 駒台                   |            | ○         | ○                  |
+      // | 駒箱                   |            | ○         |                     |
+      // |------------------------+------------+------------+---------------------|
       place_from: null,           // 盤上ら動かそうとしているときの元位置
       have_piece: null,           // 駒台 or 駒箱から持った駒
-      have_piece_location: null,  // 駒台から持ったときだけ先後が入ている
+      have_piece_location: null,  // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
+
       moves: [],                  // play_mode 時の棋譜
       init_sfen: null,            // play_mode に入ったときの最初の状態
       init_location_key: "black", // play_mode に入ったときの最初の手番
@@ -404,8 +412,9 @@ export default {
       }
     },
 
-    // .piece_outer.cursor_elem
-    //   .piece_inner
+    // マウス位置に表示する駒の生成
+    //   .piece_outer.cursor_elem
+    //     .piece_inner
     virtual_piece_create(class_list) {
       this.virtual_piece_destroy()
 
@@ -428,7 +437,7 @@ export default {
       }
     },
 
-    // 駒箱から持ち上げている駒
+    // 駒箱や駒台から持ち上げている駒
     origin_soldier2(place) {
       return new Soldier({
         piece: this.have_piece,
