@@ -35,7 +35,6 @@ export default {
   },
 
   mounted() {
-    window.addEventListener("mousemove", this.mousemove_hook, false)
   },
 
   watch: {
@@ -89,7 +88,7 @@ export default {
       console.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = null
-      this.virtual_piece_create(this.origin_soldier2.to_class_list)
+      this.virtual_piece_create(e, this.origin_soldier2.to_class_list)
     },
 
     // 駒台クリック
@@ -152,7 +151,7 @@ export default {
       console.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
-      this.virtual_piece_create(this.origin_soldier2.to_class_list)
+      this.virtual_piece_create(e, this.origin_soldier2.to_class_list)
 
       // e.target.classList.add("active")
       // this.from_dom = e.target
@@ -319,7 +318,7 @@ export default {
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
       this.place_from = place
-      this.virtual_piece_create(this.origin_soldier.to_class_list)
+      this.virtual_piece_create(e, this.origin_soldier.to_class_list)
     },
 
     state_reset() {
@@ -393,6 +392,7 @@ export default {
     },
 
     mousemove_hook(e) {
+      console.log(e)
       this.last_event = e
       this.set_pos()
     },
@@ -407,7 +407,7 @@ export default {
     // マウス位置に表示する駒の生成
     //   .piece_outer.cursor_elem
     //     .piece_inner
-    virtual_piece_create(class_list) {
+    virtual_piece_create(event, class_list) {
       this.virtual_piece_destroy()
 
       this.cursor_elem = document.createElement("div")
@@ -417,8 +417,14 @@ export default {
       piece_inner.classList.add(...list)
       this.cursor_elem.appendChild(piece_inner)
       this.$el.appendChild(this.cursor_elem)
+
       this.mouse_stick = true
+
+      this.last_event = event
+      console.log(this.last_event)
       this.set_pos()
+
+      window.addEventListener("mousemove", this.mousemove_hook, false)
     },
 
     virtual_piece_destroy() {
@@ -426,6 +432,8 @@ export default {
         this.$el.removeChild(this.cursor_elem)
         this.cursor_elem = null
         this.mouse_stick = false
+
+        window.removeEventListener("mousemove", this.mousemove_hook)
       }
     },
 
