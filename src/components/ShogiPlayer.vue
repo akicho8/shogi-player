@@ -178,6 +178,7 @@ import SettingModal from "./SettingModal"
 // modules
 import navi_module from "./navi_module.js"
 import edit_mode_module from "./edit_mode_module.js"
+import play_mode_module from "./play_mode_module.js"
 import sound_module from "./sound_module.js"
 import preset_module from "./preset_module.js"
 
@@ -212,6 +213,7 @@ export default {
     // ここで直接 require("./xxx.js"), とは書けないので注意
     navi_module,
     edit_mode_module,
+    play_mode_module,
     sound_module,
     preset_module,
   ],

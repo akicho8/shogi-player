@@ -24,10 +24,6 @@ export default {
       place_from: null,           // 盤上ら動かそうとしているときの元位置
       have_piece: null,           // 駒台 or 駒箱から持った駒
       have_piece_location: null,  // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
-
-      moves: [],                  // play_mode 時の棋譜
-      init_sfen: null,            // play_mode に入ったときの最初の状態
-      init_location_key: "black", // play_mode に入ったときの最初の手番
     }
   },
 
@@ -467,11 +463,6 @@ export default {
         location: this.have_piece_location || Location.fetch("black"),
       })
     },
-
-    moves_set(value) {
-      this.moves = _.take(this.moves, this.current_turn)
-      this.moves.push(value)
-    }
   },
 
   computed: {
