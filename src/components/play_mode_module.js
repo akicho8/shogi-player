@@ -33,6 +33,9 @@ export default {
     moves_set(value) {
       this.moves = _.take(this.moves, this.current_turn)
       this.moves.push(value)
+      this.$emit("update:update_position1", this.play_mode_current_sfen)
+      this.$emit("update:update_position3", value)
+        this.$emit("update:update_position2", this.mediator.to_position_sfen)
     },
   },
 
