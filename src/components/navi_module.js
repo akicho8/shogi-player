@@ -122,13 +122,17 @@ export default {
         }
       }
 
-      const new_val = this.mediator.turn_clamp(this.current_turn + v)
-      if (this.current_turn !== new_val) {
-        this.current_turn = new_val
-      }
-      if (this.debug_mode) {
-        this.log([v, new_val, this.current_turn])
-      }
+      // const new_val = this.mediator.turn_clamp(this.current_turn + v)
+      // if (this.current_turn !== new_val) {
+      //   this.current_turn = new_val
+      // }
+      this.current_turn_add(v)
+      // let pos = this.mediator.real_turn
+      // const new_val = this.mediator.turn_clamp(pos + v)
+      // if (pos !== new_val) {
+      //   this.current_turn = new_val
+      // }
+
       if (!this.focus_to("slider")) {
         if (v > 0) {
           this.focus_to("next")
@@ -139,13 +143,31 @@ export default {
     },
 
     move_to_first() {
-      this.current_turn = this.mediator.data_source.turn_min
+      this.current_turn_set(this.mediator.data_source.turn_min)
       this.focus_to("slider") || this.focus_to("first")
     },
 
     move_to_last() {
-      this.current_turn = this.mediator.data_source.turn_max
+      this.current_turn_set(this.mediator.data_source.turn_max)
       this.focus_to("slider") || this.focus_to("last")
+    },
+
+    current_turn_add(v) {
+      this.current_turn_set(this.mediator.real_turn + v)
+    },
+
+    current_turn_set(v) {
+      // const new_val = this.mediator.turn_clamp(this.current_turn + v)
+      // if (this.current_turn !== new_val) {
+      //   this.current_turn = new_val
+      // }
+      const new_val = this.mediator.turn_clamp(v)
+      if (this.mediator.real_turn !== new_val) {
+        this.current_turn = new_val
+        if (this.debug_mode) {
+          this.log([v, new_val, this.current_turn])
+        }
+      }
     },
 
     focus_to(key) {

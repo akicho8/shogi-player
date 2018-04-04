@@ -1,5 +1,5 @@
 <template>
-<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${run_mode2}`, {debug_mode: debug_mode}, {position_show: position_show}]">
+<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${current_mode}`, {debug_mode: debug_mode}, {digit_show: digit_show}]">
   <div v-if="error_message">
     <div class="columns">
       <div class="column">
@@ -19,7 +19,7 @@
     <i class="fas fa-spinner fa-pulse"></i>
   </template>
 
-  <div v-if="run_mode2 === 'edit_mode'" class="edit_mode_controller">
+  <div v-if="current_mode === 'edit_mode'" class="edit_mode_controller">
     <div class="edit_mode_controller_wrap">
       <b-dropdown v-model="current_preset">
         <button class="button" slot="trigger">
@@ -36,14 +36,14 @@
 
   <template v-if="mediator">
     <div class="turn_div">
-      <template v-if="run_mode2 === 'view_mode' || run_mode2 === 'play_mode'">
+      <template v-if="current_mode === 'view_mode' || current_mode === 'play_mode'">
         <template v-if="!turn_edit">
           <span class="turn_edit_text" @click="turn_edit_run">
-            <template v-if="run_mode2 === 'view_mode'">
+            <template v-if="current_mode === 'view_mode'">
               {{mediator.current_turn_label}}
             </template>
-            <template v-if="run_mode2 === 'play_mode'">
-              {{mediator.normalized_turn}}手目
+            <template v-if="current_mode === 'play_mode'">
+              {{mediator.real_turn}}手目
             </template>
           </span>
         </template>
@@ -53,7 +53,7 @@
       </template>
       <span class="is-pulled-right modal_trigger_dots" @click="setting_modal_p = true"><b-icon icon="dots-vertical" size="is-small"></b-icon></span>
       <b-modal :active.sync="setting_modal_p" has-modal-card>
-        <SettingModal :run_mode.sync="run_mode2"></SettingModal>
+        <SettingModal :run_mode.sync="current_mode"></SettingModal>
       </b-modal>
     </div>
     <div class="board_container flippable" :class="{flip: flip}">
@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="flex_item">
-        <ul v-if="run_mode2 === 'edit_mode'" class="piece_box" @click="piece_box_other_click" @click.right.prevent="hold_cancel">
+        <ul v-if="current_mode === 'edit_mode'" class="piece_box" @click="piece_box_other_click" @click.right.prevent="hold_cancel">
           <li v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}">
             <div class="piece_outer" :class="piece_box_piece_outer_class(piece)">
               <div class="piece_inner_wrap">
@@ -89,12 +89,12 @@
             <span v-if='count >= 2' class="piece_count">{{count}}</span>
           </li>
         </ul>
-        <div v-if="run_mode2 !== 'edit_mode'"></div><!-- 先手の駒台が上にくっつてしまうので防ぐため -->
+        <div v-if="current_mode !== 'edit_mode'"></div><!-- 先手の駒台が上にくっつてしまうので防ぐため -->
         <PieceStand :location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')" />
       </div>
     </div>
 
-    <template v-if="run_mode2 === 'view_mode' || run_mode2 === 'play_mode'">
+    <template v-if="current_mode === 'view_mode' || current_mode === 'play_mode'">
       <div v-if="controller_show" class="controller_block buttons has-addons is-centered">
         <button ref="first"    class="button first"    @click.stop="move_to_first"><b-icon icon="menu-left"></b-icon></button>
         <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)"><b-icon icon="chevron-left" size="is-small"></b-icon></button>
@@ -137,7 +137,7 @@
 
   <template v-if="debug_mode">
     <table class="table is-bordered is-narrow">
-      <tr><th>run_mode2</th><td>{{run_mode2}}</td></tr>
+      <tr><th>current_mode</th><td>{{current_mode}}</td></tr>
       <tr><th>update_counter</th><td>{{update_counter}}</td></tr>
       <tr><th>place_from</th><td>{{place_from}}</td></tr>
       <tr><th>have_piece</th><td>{{have_piece}}</td></tr>
@@ -146,7 +146,7 @@
         <tr><th>持駒</th><td>{{mediator.hold_pieces}}</td></tr>
         <tr><th>次の手番</th><td>{{mediator.current_location.key}}</td></tr>
         <tr><th>SFEN</th><td>{{mediator.to_sfen}}</td></tr>
-        <tr><th>正規化手番</th><td>{{mediator.normalized_turn}}</td></tr>
+        <tr><th>正規化手番</th><td>{{mediator.real_turn}}</td></tr>
       </template>
       <tr><th>start_turn</th><td>{{start_turn}}</td></tr>
       <tr><th>current_turn</th><td>{{current_turn}}</td></tr>
@@ -232,7 +232,7 @@ export default {
     size:               { type: String,  default: "default",           },
     variation:          { type: String,  default: "a"                  },
     debug_mode:         { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
-    position_show:        { type: Boolean, default: false,               },
+    digit_show:        { type: Boolean, default: false,               },
   },
   /* eslint-enable */
 
@@ -243,7 +243,7 @@ export default {
 
   data() {
     return {
-      run_mode2: this.run_mode,
+      current_mode: this.run_mode,
       current_turn: this.start_turn, // N手目
       turn_edit_value: null,         // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,                // 局面管理
@@ -260,16 +260,21 @@ export default {
   },
 
   created() {
-    if (this.run_mode2 === "view_mode") {
-      this.kifu_read()
-      this.polling_interval_update()
+    if (this.current_mode === "view_mode") {
+      if (this.kifu_url) {
+        this.axios_call()
+        this.polling_interval_update()
+      } else {
+        this.loaded_kifu = this.init_kifu_body
+        this.view_mode_mediator_update()
+      }
     }
 
-    if (this.run_mode2 === "play_mode") {
+    if (this.current_mode === "play_mode") {
       this.play_mode_setup("view_mode")
     }
 
-    if (this.run_mode2 === "edit_mode") {
+    if (this.current_mode === "edit_mode") {
       if (this.init_preset_key) {
         this.mediator_setup_by_preset(this.init_preset_key) // 駒箱に「玉」を乗せたいため
       } else {
@@ -280,54 +285,84 @@ export default {
 
   watch: {
     current_turn() {
-      if (this.run_mode2 === "view_mode") {
+      if (this.current_mode === "view_mode") {
         this.log("view_mode_mediator_update from current_turn")
         this.view_mode_mediator_update()
-      }
-
-      if (this.run_mode2 === "play_mode") {
-        this.mediator = new Mediator()
-        this.mediator.data_source = this.data_source_by(this.play_mode_current_sfen)
-        this.mediator.current_turn = this.current_turn
-        this.mediator.run()
-        this.current_turn = this.mediator.normalized_turn
-
-        this.sound_call("piece_sound")
       }
     },
 
     turn_edit_value() {
       this.current_turn = this.turn_edit_value
+      // this.current_turn_set(this.turn_edit_value)
     },
 
     start_turn() {
       this.current_turn = this.start_turn
     },
 
-    /* eslint-disable */
-    kifu_url()         { this.kifu_read()                 },
-    kifu_body()        { this.kifu_read()                 },
-    loaded_kifu()      { this.view_mode_mediator_update() },
-    polling_interval() { this.polling_interval_update()   },
-    /* eslint-enable */
-
-    // -------------------------------------------------------------------------------- run_mode2
-    run_mode(value) {
-      this.run_mode2 = value    // TODO: プロパティ(引数)と内部変数の名前が共有できたないためこんな複雑になっている。どうにかならないのか？
+    kifu_url() {
+      this.axios_call()
     },
 
-    run_mode2(new_val, old_val) {
-      if (this.run_mode2 === "view_mode") {
-        console.log("run_mode2: view_mode")
+    kifu_body() {
+      console.log("watch: kifu_body")
+      this.loaded_kifu = this.kifu_body
+      this.loaded_kifu_to_mediator()
+      if (this.current_mode === "play_mode") {
+        this.play_mode_setup("view_mode")
+      }
+
+      // // this.read_counter++
+      // // this.log(`read_counter: ${this.read_counter}`)
+      // // if (false) {
+      // //   if (polling) {
+      // //     if (this.last_after_polling) {
+      // //       this.current_turn = -1
+      // //     }
+      // //   } else {
+      // //     if (this.start_turn === -1) {
+      // //       this.current_turn = -1
+      // //     }
+      // //   }
+      // // } else {
+      // // 最後の局面を指定して欲しいときは棋譜を更新しても最後に移動する
+      // if (this.start_turn === -1) {
+      //   this.current_turn = -1
+      // }
+      // }
+    },
+
+    polling_interval() {
+      this.polling_interval_update()
+    },
+
+    // loaded_kifu() {
+    //   console.log("watch: loaded_kifu")
+    //   this.view_mode_mediator_update()
+    //   // if (this.current_mode === "play_mode") {
+    //   //   this.mediator = null
+    //   //   this.play_mode_setup("view_mode")
+    //   // }
+    // },
+
+    // -------------------------------------------------------------------------------- current_mode
+    run_mode(value) {
+      this.current_mode = value    // TODO: プロパティ(引数)と内部変数の名前が共有できたないためこんな複雑になっている。どうにかならないのか？
+    },
+
+    // ダイアログから変更されたとき
+    current_mode(new_val, old_val) {
+      if (this.current_mode === "view_mode") {
+        console.log("current_mode: view_mode")
         this.view_mode_mediator_update()
       }
 
-      if (this.run_mode2 === "play_mode") {
+      if (this.current_mode === "play_mode") {
         this.play_mode_setup(old_val)
       }
 
-      if (this.run_mode2 === "edit_mode") {
-        console.log("run_mode2: edit_mode")
+      if (this.current_mode === "edit_mode") {
+        console.log("current_mode: edit_mode")
         this.mediator_setup_if_blank()
         const position_sfen = this.mediator.to_position_sfen // mediator を作り直す前に現状の局面を吐き出しておく
 
@@ -350,33 +385,34 @@ export default {
   },
 
   methods: {
-    kifu_read(polling = false) {
-      if (this.kifu_url) {
-        this.__kifu_read_from_url()
-      } else {
-        this.loaded_kifu = this.init_kifu_body
-      }
-      this.read_counter++
-      this.log(`read_counter: ${this.read_counter}`)
-      if (false) {
-        if (polling) {
-          if (this.last_after_polling) {
-            this.current_turn = -1
-          }
-        } else {
-          if (this.start_turn === -1) {
-            this.current_turn = -1
-          }
-        }
-      } else {
-        // 最後の局面を指定して欲しいときは棋譜を更新しても最後に移動する
-        if (this.start_turn === -1) {
-          this.current_turn = -1
-        }
-      }
-    },
+    // axios_call() {
+    //   // if (this.kifu_url) {
+    //   this.axios_call()
+    //   // this.view_mode_mediator_update()
+    //   // } else {
+    //   //   this.loaded_kifu = this.init_kifu_body
+    //   // }
+    //   // this.read_counter++
+    //   // this.log(`read_counter: ${this.read_counter}`)
+    //   // if (false) {
+    //   //   if (polling) {
+    //   //     if (this.last_after_polling) {
+    //   //       this.current_turn = -1
+    //   //     }
+    //   //   } else {
+    //   //     if (this.start_turn === -1) {
+    //   //       this.current_turn = -1
+    //   //     }
+    //   //   }
+    //   // } else {
+    //   //   // 最後の局面を指定して欲しいときは棋譜を更新しても最後に移動する
+    //   //   if (this.start_turn === -1) {
+    //   //     this.current_turn = -1
+    //   //   }
+    //   // }
+    // },
 
-    __kifu_read_from_url() {
+    axios_call() {
       const url = this.kifu_url
       // const url = "http://localhost:3000/wr/hanairobiyori-ispt-20171104_220810.kif"
       // const url = "http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif"
@@ -388,7 +424,9 @@ export default {
         headers: {"X-SHOGI-PLAYER-TIMESTAMP": accessd_at},
       }).then((response) => {
         this.loaded_kifu = response.data
+        this.current_turn = -1
         this.error_message = null
+        this.view_mode_mediator_update()
       }).catch((error) => {
         if (error.response) {
           logger_debug("error.response.data: %o", error.response.data)
@@ -414,7 +452,7 @@ export default {
           clearInterval(this.interval_id)
           this.interval_id = null
         }
-        this.interval_id = setInterval(() => { this.kifu_read(true) }, this.polling_interval * 1000)
+        this.interval_id = setInterval(() => { this.axios_call() }, this.polling_interval * 1000)
         this.log(`setInterval() => ${this.interval_id}`)
       }
     },
@@ -425,7 +463,7 @@ export default {
         this.mediator.data_source = this.data_source_by(this.init_kifu_body)
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
-        this.current_turn = this.mediator.normalized_turn
+        this.current_turn = this.mediator.real_turn
       }
     },
 
@@ -435,7 +473,7 @@ export default {
         this.mediator.data_source = this.data_source_by(this.loaded_kifu)
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
-        this.current_turn = this.mediator.normalized_turn
+        // this.current_turn = this.mediator.real_turn // 連続で呼ばれることになるので更新してはいけない
 
         if (this.url_embed_turn) {
           document.location.hash = this.current_turn
@@ -447,6 +485,14 @@ export default {
 
         this.update_counter++
       }
+    },
+
+    loaded_kifu_to_mediator() {
+      this.mediator = new Mediator()
+      this.mediator.data_source = this.data_source_by(this.loaded_kifu)
+      this.mediator.current_turn = -1
+      this.mediator.run()
+      this.current_turn = this.mediator.real_turn
     },
 
     data_source_by(str) {
@@ -497,29 +543,12 @@ export default {
       if (_.isEqual(this.place_from, place)) {
         list.push("holding_p")
       } else if (soldier) {
-        if (this.mediator.current_location === soldier.location || this.run_mode2 === "edit_mode") {
+        if (this.mediator.current_location === soldier.location || this.current_mode === "edit_mode") {
           list.push("selectable_p")
         }
       }
 
       return list
-    },
-
-    play_mode_setup(old_val) {
-      this.mediator_setup_if_blank()
-      if (old_val === "view_mode") {
-        this.init_location_key = this.mediator.current_location.key
-      }
-      const sfen_serializer = this.mediator.sfen_serializer
-      this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location_key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
-      this.moves = []
-
-      this.mediator = new Mediator()
-      this.mediator.data_source = this.data_source_by(this.init_sfen)
-      this.mediator.current_turn = 0
-      this.mediator.run()
-
-      this.current_turn = 0
     },
   },
 

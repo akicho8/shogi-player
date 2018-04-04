@@ -6,9 +6,9 @@
     <section class="modal-card-body">
       <b-field label="モード">
         <div class="block">
-          <b-radio v-model="run_mode2" native-value="view_mode">再生</b-radio>
-          <b-radio v-model="run_mode2" native-value="play_mode">操作</b-radio>
-          <b-radio v-model="run_mode2" native-value="edit_mode">編集</b-radio>
+          <b-radio v-model="current_mode" native-value="view_mode">再生</b-radio>
+          <b-radio v-model="current_mode" native-value="play_mode">操作</b-radio>
+          <b-radio v-model="current_mode" native-value="edit_mode">編集</b-radio>
         </div>
       </b-field>
     </section>
@@ -25,11 +25,11 @@ export default {
   },
   data() {
     return {
-      run_mode2: this.run_mode,
+      current_mode: this.run_mode,
     }
   },
   watch: {
-    run_mode2(value) {
+    current_mode(value) {
       this.$emit("update:run_mode", value)
     },
   },

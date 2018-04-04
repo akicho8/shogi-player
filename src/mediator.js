@@ -32,7 +32,7 @@ class Mediator {
 
     const move_infos = this.data_source.move_infos
 
-    const num = this.normalized_turn - this.data_source.turn_min
+    const num = this.real_turn - this.data_source.turn_min
     _(num).times((i) => { this.execute_one(move_infos[i]) })
   }
 
@@ -118,7 +118,7 @@ class Mediator {
   }
 
   // ruby style array index access
-  get normalized_turn() {
+  get real_turn() {
     let index = Number(this.current_turn)
     if (index < 0) {
       index += this.data_source.turn_max + 1
@@ -131,16 +131,16 @@ class Mediator {
   }
 
   get previous_location() {
-    return this.data_source.location_by_offset(this.normalized_turn - 1)
+    return this.data_source.location_by_offset(this.real_turn - 1)
   }
 
   get current_location() {
-    return this.data_source.location_by_offset(this.normalized_turn)
+    return this.data_source.location_by_offset(this.real_turn)
   }
 
   get current_comments() {
     if (this.data_source.comments_pack) {
-      return this.data_source.comments_pack[this.normalized_turn]
+      return this.data_source.comments_pack[this.real_turn]
     }
   }
 
@@ -150,10 +150,10 @@ class Mediator {
   }
 
   get current_turn_label() {
-    if (this.normalized_turn === this.data_source.turn_max) {
-      return `まで${this.normalized_turn}手で${this.previous_location.name}の勝ち`
+    if (this.real_turn === this.data_source.turn_max) {
+      return `まで${this.real_turn}手で${this.previous_location.name}の勝ち`
     } else {
-      return `${this.normalized_turn}手目`
+      return `${this.real_turn}手目`
     }
   }
 

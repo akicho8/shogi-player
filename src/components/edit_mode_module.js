@@ -2,8 +2,8 @@ import _ from "lodash"
 
 import { Place } from "../place"
 import { Soldier } from "../soldier"
-import { SfenParser } from "../sfen_parser"
-import { Mediator } from "../mediator"
+// import { SfenParser } from "../sfen_parser"
+// import { Mediator } from "../mediator"
 import { Location } from "../location"
 
 export default {
@@ -96,14 +96,14 @@ export default {
       }
 
       // 相手の持駒を自分の駒台に移動
-      if (this.run_mode2 === "edit_mode") {
+      if (this.current_mode === "edit_mode") {
         if (this.have_piece_location !== location && this.have_piece) {
           this.opponent_hold_pieces_move_to_my_hold_pieces(location)
           return true
         }
       }
 
-      if (this.run_mode2 === "play_mode") {
+      if (this.current_mode === "play_mode") {
         if (this.origin_soldier) {
           console.log("play_mode では盤上の駒を駒台に置くことはできない")
           return true
@@ -140,7 +140,7 @@ export default {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.run_mode2 === "play_mode" && location !== this.mediator.current_location) {
+      if (this.current_mode === "play_mode" && location !== this.mediator.current_location) {
         console.log("相手の持駒を持とうとしたときは無効")
         return
       }
@@ -162,7 +162,7 @@ export default {
       // -------------------------------------------------------------------------------- Validation
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
-      if (this.run_mode2 === "play_mode" && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
+      if (this.current_mode === "play_mode" && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
         console.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
@@ -174,7 +174,7 @@ export default {
       }
 
       // 自分の駒の上に駒を重ねようとしたので状況キャンセル
-      if (this.run_mode2 === "play_mode" && this.put_on_my_piece_p(soldier)) {
+      if (this.current_mode === "play_mode" && this.put_on_my_piece_p(soldier)) {
         console.log("自分の駒の上に駒を重ねようとしたので状況キャンセル")
         this.state_reset()
         return
@@ -219,7 +219,7 @@ export default {
           location: this.origin_soldier.location,
         })
 
-        if (this.run_mode2 === "play_mode" && (new_soldier.promotable_p || this.origin_soldier.promotable_p)) { // 入って成る or 出て成る
+        if (this.current_mode === "play_mode" && (new_soldier.promotable_p || this.origin_soldier.promotable_p)) { // 入って成る or 出て成る
           this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
 
           // 元が成ってないとき
@@ -240,7 +240,7 @@ export default {
             },
           })
         } else {
-          if (this.run_mode2 === "play_mode") {
+          if (this.current_mode === "play_mode") {
             this.moves_set(this.origin_soldier.place.to_sfen + place.to_sfen) // 7g7f
           }
           this.mediator.board.place_on(new_soldier)                          // 置く
@@ -338,35 +338,13 @@ export default {
       this.virtual_piece_destroy()
     },
 
-    turn_next() {
-      // this.sound_call("piece_sound")
-
-      if (this.run_mode2 === "play_mode") {
-        const data_source = new SfenParser()
-        data_source.kifu_body = this.play_mode_current_sfen
-        data_source.parse()
-
-        this.mediator = new Mediator()
-        this.mediator.data_source = data_source
-        this.mediator.current_turn = -1
-        this.mediator.run()
-        this.current_turn = this.mediator.normalized_turn
-
-        // this.current_turn = -1
-      }
-
-      // console.log("turn_next")
-
-      // this.view_mode_mediator_update()
-    },
-
     // -------------------------------------------------------------------------------- piece_box
 
     piece_box_piece_outer_class(piece) {
       let list = []
       if (this.piece_box_have_p(piece)) {
         list.push("holding_p")
-      } else if (this.run_mode2 === "edit_mode") {
+      } else if (this.current_mode === "edit_mode") {
         list.push("selectable_p")
       }
       return list
@@ -485,19 +463,5 @@ export default {
     holding_p() {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
     },
-
-    //
-    play_mode_current_sfen() {
-      if (this.init_sfen) {
-        return this.init_sfen + " moves " + this.moves.join(" ")
-      } else {
-        return null
-      }
-    },
-
-    init_location() {
-      return Location.fetch(this.init_location_key)
-    },
-
   },
 }
