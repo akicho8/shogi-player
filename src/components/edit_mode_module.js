@@ -91,54 +91,49 @@ export default {
       this.virtual_piece_create(e, this.origin_soldier2.to_class_list)
     },
 
-    // 駒台クリック
-    piece_stand_click(location, e) {
-      console.log("駒台クリック")
-
+    // 駒台 or 駒台の駒をクリックしたときの共通処理
+    piece_stand_click_shared(location, e) {
       if (this.have_piece_location === location && this.have_piece) {
-        console.log("持っているならキャンセル")
+        console.log("自分の駒台から駒を持ち上げているならキャンセル")
         this.state_reset()
-        return
-      }
-
-      if (this.have_piece_location !== location && this.have_piece) {
-        this.opponent_hold_pieces_move_to_my_hold_pieces(location)
-        return
-      }
-
-      if (this.origin_soldier) {
-        console.log("盤上の駒を駒台に置く")
-        this.board_soldir_to_hold_pieces(location)
-      }
-    },
-
-    // 駒台の駒をクリック
-    piece_stand_piece_click(location, piece, e) {
-      console.log("駒台の駒をクリック")
-
-      // 自分の駒をすでに持っているならキャンセル
-      if (this.have_piece_location === location && this.have_piece) {
-        console.log("持っているならキャンセル")
-        this.state_reset()
-        return
+        return true
       }
 
       // 相手の持駒を自分の駒台に移動
-      if (this.have_piece_location !== location && this.have_piece) {
-        this.opponent_hold_pieces_move_to_my_hold_pieces(location)
-        return
+      if (this.run_mode2 === "edit_mode") {
+        if (this.have_piece_location !== location && this.have_piece) {
+          this.opponent_hold_pieces_move_to_my_hold_pieces(location)
+          return true
+        }
       }
 
-      // 相手の持駒を持とうとしたときは無効
-      if (this.run_mode2 === "play_mode" && !this.holding_p && location !== this.mediator.current_location) {
-        console.log("相手の持駒を持とうとしたときは無効")
-        return
+      if (this.run_mode2 === "play_mode") {
+        if (this.origin_soldier) {
+          console.log("play_mode では盤上の駒を駒台に置くことはできない")
+          return true
+        }
       }
 
       // 盤上の駒を駒台に置く
       if (this.origin_soldier) {
         console.log("盤上の駒を駒台に置く")
         this.board_soldir_to_hold_pieces(location)
+        return true
+      }
+
+      return false
+    },
+
+    // 駒台クリック
+    piece_stand_click(location, e) {
+      this.piece_stand_click_shared(location, e)
+    },
+
+    // 駒台の駒をクリック
+    piece_stand_piece_click(location, piece, e) {
+      console.log("駒台の駒をクリック")
+
+      if (this.piece_stand_click_shared(location, e)) {
         return
       }
 
@@ -148,13 +143,16 @@ export default {
         return
       }
 
+      // 相手の持駒を持とうとしたときは無効
+      if (this.run_mode2 === "play_mode" && location !== this.mediator.current_location) {
+        console.log("相手の持駒を持とうとしたときは無効")
+        return
+      }
+
       console.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
       this.virtual_piece_create(e, this.origin_soldier2.to_class_list)
-
-      // e.target.classList.add("active")
-      // this.from_dom = e.target
     },
 
     // 盤をクリック
