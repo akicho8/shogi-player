@@ -524,25 +524,19 @@ export default {
     position: absolute
     z-index: -1
     content: ""
-    background-image: url("./assets/tatami01-768x480.jpg")
-    // background-image: url("./assets/51587037_p15_master1200.jpg")
-
+    // background-image: url("./assets/tatami01-768x480.jpg")
+    background-image: url("./assets/51587037_p15_master1200.jpg")
     border-radius: 1vmin
     background-position: center
     background-size: cover
-    opacity: 0.2
+    opacity: 0.25
     top: 0
     left: 0
     width: 100%
     height: 100%
+    filter: sepia(100%)
   .comment_area
-    .content
-      $color: hsla(120, 50%, 100%, 0.8)
+    .message
       margin: 1vmin 20%
-      border-radius: 1vmin
-      border: 1px solid darken($color, 35%)
-      box-shadow: 0 0 3vmin darken($color, 30%)
-      background: $color
-      padding: 2vmin
 
 </style>

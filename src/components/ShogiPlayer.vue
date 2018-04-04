@@ -111,16 +111,20 @@
       <template v-if="mediator.current_comments">
         <div class="columns">
           <div class="column"><!-- is-three-fifths is-offset-one-fifth -->
-            <div class="content has-text-left">
-              <template v-for="str in mediator.current_comments">
-                <template v-if="_.isEmpty(str)">
-                  <br>
-                </template>
-                <template v-else>
-                  <div v-html="mediator.auto_link(str)"></div>
-                </template>
-              </template>
-            </div>
+            <article class="message is-info has-text-left">
+              <div class="message-body">
+                <div class="content">
+                  <template v-for="str in mediator.current_comments">
+                    <template v-if="_.isEmpty(str)">
+                      <br>
+                    </template>
+                    <template v-else>
+                      <div v-html="mediator.auto_link(str)"></div>
+                    </template>
+                  </template>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </template>
