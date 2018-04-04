@@ -11,7 +11,7 @@ $sp_real_hold_shadow_depth: 6px // 大きさ
 $sp_real_hold_shadow_blur:  5px // ぼかし度合い
 
 // 持った駒のずれ
-$sp_real_hold_gap: 0.5vmin
+$sp_real_hold_gap: 0.5vmin      // 携帯のときだけ
 
 @mixin image_shadow($x, $weight)
   filter: drop-shadow($x $x $weight rgba(0, 0, 0, 0.3))
@@ -31,16 +31,18 @@ $sp_real_hold_gap: 0.5vmin
 
 %dom_real_hold
   // background: $sp_real_holding_color
-
-  // iPhone見ている場合はカーソルがないため元の駒を左上に持ち上げる
+  
+  // iPhoneで見ている場合はカーソルがないため元の駒を左上に持ち上げる
   @media screen and (max-width: $sp_mobile_width)
-    transform: translate(-$sp_real_hold_gap, -$sp_real_hold_gap)
-    @include image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
-
+    .piece_inner_wrap
+      transform: translate(-$sp_real_hold_gap, -$sp_real_hold_gap)
+      @include image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
+  
   // PCで見ている場合はカーソル位置に駒があるので元の駒を薄くする
-  @media screen and (min-width: 321px)
-    opacity: 0.35
-
+  @media screen and (min-width: ($sp_mobile_width + 1))
+    .piece_inner
+      opacity: 0.35
+      
 // 選択できる駒に指定する
 %dom_real_selectable
   @include image_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
@@ -143,7 +145,7 @@ $sp_real_hold_gap: 0.5vmin
               transform: translateY($sp_real_piece_inner_transform_y)
             &.location_white
               transform: translateY($sp_real_piece_inner_transform_y * -1)
-
+ 
     .piece_stand_outer
       .location_mark
       ul.piece_stand

@@ -4,7 +4,9 @@
   <ul class="piece_stand" @click.stop="$parent.piece_stand_click(location, $event)" @click.right.prevent="$parent.hold_cancel">
     <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)">
       <div class="piece_outer" :class="piece_outer_class(piece)">
-        <span class="piece_inner" :class="piece_class(piece)">{{piece.name}}</span>
+        <div class="piece_inner_wrap">
+          <span class="piece_inner" :class="piece_class(piece)">{{piece.name}}</span>
+        </div>
       </div>
       <span v-if="count >= 2" class="piece_count">{{count}}</span>
     </li>
