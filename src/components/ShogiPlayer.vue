@@ -77,7 +77,7 @@
         </div>
       </div>
       <div class="flex_item">
-        <ul v-if="run_mode2 === 'edit_mode'" class="piece_box" @click="piece_box_other_click" @click.right.prevent="board_click_right2">
+        <ul v-if="run_mode2 === 'edit_mode'" class="piece_box" @click="piece_box_other_click" @click.right.prevent="hold_cancel">
           <li v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}">
             <div class="piece_outer" :class="piece_box_piece_outer_class(piece)">
               <span class="piece_inner" :class="piece_box_piece_inner_class(piece)">{{piece.name}}</span>
@@ -277,6 +277,7 @@ export default {
         this.log("view_mode_mediator_update from current_turn")
         this.view_mode_mediator_update()
       }
+
       if (this.run_mode2 === "play_mode") {
         this.mediator = new Mediator()
         this.mediator.data_source = this.data_source_by(this.play_mode_current_sfen)
@@ -339,12 +340,6 @@ export default {
     debug_mode(v) {
       this.log(`watch debug_mode: ${v}`)
     },
-
-    // virtual_piece_exist(v) {
-    //   if (!_.isNil(v)) {
-    //     this.virtual_piece_destroy()
-    //   }
-    // },
   },
 
   methods: {
@@ -475,19 +470,10 @@ export default {
       }
     },
 
-    // location_flip(location_key) {
-    //   return location_key === "black" ? "white" : "black"
-    // },
-
-    // mediator.current_location.key_diff(diff) {
-    //   const locatios = ["black", "white"]
-    //   return locatios[(this.turn_counter + diff) % locatios.length]
-    // },
-
     piece_outer_class(xy) {
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
-      const list = [] // this.mediator.board_piece_inner_class(xy)
+      const list = []
 
       if (this.mediator.last_hand) {
         const origin_place = this.mediator.last_hand.origin_place
@@ -513,7 +499,6 @@ export default {
     },
 
     play_mode_setup(old_val) {
-      console.log("run_mode2: play_mode")
       this.mediator_setup_if_blank()
       if (old_val === "view_mode") {
         this.init_location_key = this.mediator.current_location.key

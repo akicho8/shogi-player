@@ -1,7 +1,7 @@
 <template>
 <div class="piece_stand_outer" :class="piece_stand_outer_class">
   <div class="location_mark">{{location.name}}</div>
-  <ul class="piece_stand" @click.stop="$parent.piece_stand_click(location, $event)" @click.right.prevent="$parent.board_click_right2">
+  <ul class="piece_stand" @click.stop="$parent.piece_stand_click(location, $event)" @click.right.prevent="$parent.hold_cancel">
     <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)">
       <div class="piece_outer" :class="piece_outer_class(piece)">
         <span class="piece_inner" :class="piece_class(piece)">{{piece.name}}</span>
@@ -29,33 +29,19 @@ export default {
 
     piece_outer_class(piece) {
       let list = []
-      // list = _.concat(list, piece.css_class_list)
-      // list.push("piece_inner")
-      // list.push(`location_black`) // 本当は this.location.key を埋めるべきだけど後手の駒台は180度反転するため先手の向きとする
-      // list.push("promoted_false")
-
       if (this.hold_piece_holding_p(piece)) {
         list.push("holding_p")
       } else if (this.$parent.mediator.current_location === this.location || this.$parent.run_mode2 === "edit_mode") {
         list.push("selectable_p")
       }
-
       return list
     },
 
     piece_class(piece) {
       let list = []
       list = _.concat(list, piece.css_class_list)
-      // list.push("piece_inner")
       list.push(`location_${this.location.key}`)
       list.push("promoted_false")
-
-      // if (this.hold_piece_holding_p(piece)) {
-      //   list.push("holding_p")
-      // } else if (this.$parent.mediator.current_location === this.location || this.$parent.run_mode2 === "edit_mode") {
-      //   list.push("selectable_p")
-      // }
-
       return list
     },
   },

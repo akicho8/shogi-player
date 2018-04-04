@@ -292,7 +292,7 @@ export default {
       }
     },
 
-    board_click_right2(e) {
+    hold_cancel(e) {
       // FIXME: click_hook のところだけで行いたい
       if (this.holding_p) {
         console.log("持ち上げた駒を元に戻す")
