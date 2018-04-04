@@ -1,5 +1,5 @@
 <template>
-<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${run_mode2}`, {debug: debug_mode}]">
+<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${run_mode2}`, {debug_mode: debug_mode}, {position_show: position_show}]">
   <div v-if="error_message">
     <div class="columns">
       <div class="column">
@@ -226,6 +226,7 @@ export default {
     size:               { type: String,  default: "default",           },
     variation:          { type: String,  default: "a"                  },
     debug_mode:         { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
+    position_show:        { type: Boolean, default: false,               },
   },
   /* eslint-enable */
 

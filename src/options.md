@@ -18,6 +18,7 @@
 | system_key_mag             | システムキー押下時の倍速    | 1 または null 指定で無効にできる                     | 50                  |
 | url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                  | false               |
 | debug_mode                 | デバッグモード              |                                                      | false               |
+| position_show                | 軸の桁を表示                | 上に数字、右端に漢数字を表示する                     | false               |
 | run_mode                   | 実行モード                  | 再生(view_mode) 操作(play_mode) 編集(edit_mode)      | 'view_mode'         |
 | init_preset_key            | 初期配置                    | kifu_body の代わりに指定するとその配置になる         | null                |
 

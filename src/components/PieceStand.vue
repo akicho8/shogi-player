@@ -1,6 +1,6 @@
 <template>
 <div class="piece_stand_outer" :class="piece_stand_outer_class">
-  <div class="location_mark">{{location.name}}</div>
+  <div class="location_mark" v-html="location_name"></div>
   <ul class="piece_stand" @click.stop="$parent.piece_stand_click(location, $event)" @click.right.prevent="$parent.hold_cancel">
     <li v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)">
       <div class="piece_outer" :class="piece_outer_class(piece)">
@@ -60,6 +60,14 @@ export default {
       }
       return list
     },
+
+    location_name() {
+      // if (this.location.key === "white") {
+      //   return '<span style="color:white">☗</span>'
+      // } else {
+      return this.location.name
+      // }
+    }
   },
 }
 </script>

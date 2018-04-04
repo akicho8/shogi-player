@@ -320,6 +320,7 @@
             :size="size"
             :variation="variation"
             :debug_mode="debug_mode"
+            :position_show="position_show"
             :key_event_capture="key_event_capture"
             :slider_show="slider_show"
             :controller_show="controller_show"
@@ -402,6 +403,9 @@
             <b-field label="debug_mode">
               <b-switch v-model="debug_mode" />
             </b-field>
+            <b-field label="position_show">
+              <b-switch v-model="position_show" />
+            </b-field>
             <b-field label="kifu_body">
               <b-input v-model="kifu_body" type="textarea" />
             </b-field>
@@ -424,6 +428,7 @@
                 :<b>volume</b>="{{volume}}"
                 :<b>key_event_capture</b>="{{key_event_capture}}"
                 :<b>debug_mode</b>="{{debug_mode}}"
+                :<b>position_show</b>="{{position_show}}"
                 :<b>kifu_body</b>="'{{kifu_body}}'"
                 /&gt;
               </div>
@@ -494,6 +499,7 @@ export default {
       volume: 0.5,
       key_event_capture: false,
       debug_mode: false,
+      position_show: false,
       kifu_body: "position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+",
 
       kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
