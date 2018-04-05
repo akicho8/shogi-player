@@ -555,27 +555,4 @@ export default {
 // ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
 // main.js で読み込むと .sass のファイル基準になる
 // @import "./components/ShogiPlayer.sass"
-
-.original
-  position: relative
-  padding: 3vmin
-  &:after
-    position: absolute
-    z-index: -1
-    content: ""
-    // background-image: url("./assets/tatami01-768x480.jpg")
-    background-image: url("./assets/51587037_p15_master1200.jpg")
-    border-radius: 1vmin
-    background-position: center
-    background-size: cover
-    opacity: 0.25
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-    filter: sepia(100%)
-  .comment_area
-    .message
-      margin: 1vmin 20%
-
 </style>
