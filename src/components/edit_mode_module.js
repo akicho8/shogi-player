@@ -304,7 +304,7 @@ export default {
 
     opponent_hold_pieces_move_to_my_hold_pieces(location) {
       console.log("相手の持駒を自分の駒台に移動")
-      this.sound_call("piece_sound")
+      // this.sound_call("piece_sound")
       this.piece_decriment()
       this.mediator.hold_pieces_add(location, this.have_piece)
       this.state_reset()
