@@ -74,13 +74,7 @@ class SfenParser extends ParserBase {
   }
 
   get move_infos() {
-    // console.table(this.attributes)
-    const moves = this.attributes["moves"]
-
-    if (_.isNil(moves) || moves === "") {
-      return []
-    }
-    return moves.split(/\s+/).map((e, i) => {
+    return this.moves.map((e, i) => {
       const attrs = {}
       // if (true) {
       //   attrs["scene_index"] = this.turn_min + i
@@ -97,6 +91,26 @@ class SfenParser extends ParserBase {
       attrs["place"] = Place.fetch(`${md["pos_x"]}${md["pos_y"]}`)
       return attrs
     })
+  }
+
+  get moves() {
+    let moves = this.attributes["moves"]
+    if (_.isNil(moves) || moves === "") {
+      return []
+    }
+    return moves.split(/\s+/)
+  }
+
+  // 最初の局面
+  get init_part() {
+    const parts = []
+    parts.push("position")
+    parts.push("sfen")
+    parts.push(this.attributes["sfen"])
+    parts.push(this.attributes["b_or_w"])
+    parts.push(this.attributes["hold_pieces"])
+    parts.push(this.attributes["turn_counter_next"])
+    return parts.join(" ")
   }
 
   __location_by_upper_or_lower_case(v) {
@@ -120,4 +134,6 @@ if (process.argv[1] === __filename) {
   console.log(sfen_parser.location_base.key)
   console.log(sfen_parser.hold_pieces)
   console.log(sfen_parser.move_infos)
+  console.log(sfen_parser.moves)
+  console.log(sfen_parser.init_part)
 }

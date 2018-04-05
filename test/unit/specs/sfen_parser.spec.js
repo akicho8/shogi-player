@@ -9,5 +9,8 @@ describe('SfenParser', () => {
     sfen_parser.location_key
     sfen_parser.hold_pieces
     sfen_parser.move_infos
+
+    expect(sfen_parser.moves).toEqual([ '7i6h', 'S*2d' ])
+    expect(sfen_parser.init_part.toEqual("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1")
   })
 })
