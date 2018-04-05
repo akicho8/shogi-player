@@ -130,4 +130,5 @@ if (process.argv[1] === __filename) {
   // console.log(kif_parser.hold_pieces)
   console.log(kif_parser.move_infos)
   console.log(kif_parser.comments_pack)
+  console.log(kif_parser.init_sfen === undefined)
 }

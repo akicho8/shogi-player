@@ -43,19 +43,37 @@ export default {
   },
 
   methods: {
-    // FIXME: view_mode のときの moves を保持する
     play_mode_setup(old_val) {
       console.log("play_mode_setup")
 
+      // this.mediator_setup_if_blank()
+      // if (old_val === "view_mode") {
+      //   this.init_location_key = this.mediator.current_location.key
+      // }
+      // const sfen_serializer = this.mediator.sfen_serializer
+      // this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location_key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
+      // this.moves = []
+      //
+      // this.play_mode_mediator_update()
+
       this.mediator_setup_if_blank()
-      if (old_val === "view_mode") {
-        this.init_location_key = this.mediator.current_location.key
+
+      if (this.mediator.data_source.init_sfen !== undefined) {
+        // 棋譜の最初からの指し手をすべて保持
+        this.init_sfen = this.mediator.data_source.init_sfen
+        this.moves = this.mediator.data_source.moves
+      } else {
+        // 現時点の状態から始める (KIFの場合)
+        if (old_val === "view_mode") {
+          this.init_location_key = this.mediator.current_location.key
+        }
+        const sfen_serializer = this.mediator.sfen_serializer
+        this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location.key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
+        this.moves = []
       }
-      const sfen_serializer = this.mediator.sfen_serializer
-      this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location_key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
-      this.moves = []
 
       this.play_mode_mediator_update()
+
       // this.current_turn = 0
 
       // this.mediator = new Mediator()

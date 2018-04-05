@@ -102,7 +102,7 @@ class SfenParser extends ParserBase {
   }
 
   // 最初の局面
-  get init_part() {
+  get init_sfen() {
     const parts = []
     parts.push("position")
     parts.push("sfen")
@@ -135,5 +135,5 @@ if (process.argv[1] === __filename) {
   console.log(sfen_parser.hold_pieces)
   console.log(sfen_parser.move_infos)
   console.log(sfen_parser.moves)
-  console.log(sfen_parser.init_part)
+  console.log(sfen_parser.init_sfen)
 }
