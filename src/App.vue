@@ -329,9 +329,9 @@
             :sfen_show="sfen_show"
             :sound_effect="sound_effect"
             :volume="volume"
-            @update:update_position1="update_position1"
-            @update:update_position2="update_position2"
-            @update:update_position3="update_position3"
+            @update:play_mode_long_sfen="play_mode_long_sfen"
+            @update:play_mode_short_sfen="play_mode_short_sfen"
+            @update:play_mode_move="play_mode_move"
             />
         </div>
       </div>
@@ -442,13 +442,13 @@
             <br>
             <br>
             <h4 class="title">Emit Events</h4>
-            <b-field label="@update:update_position1: play_mode で指した直後の局面を発行(movesあり)">
+            <b-field label="@update:play_mode_long_sfen: play_mode で指した直後の局面を発行(movesあり)">
               <b-input v-model="position1" type="textarea" />
             </b-field>
-            <b-field label="@update:update_position2: play_mode で指した直後の局面を発行(movesなし)">
+            <b-field label="@update:play_mode_short_sfen: play_mode で指した直後の局面を発行(movesなし)">
               <b-input v-model="position2" type="textarea" />
             </b-field>
-            <b-field label="@update:update_position3: play_mode で指した手">
+            <b-field label="@update:play_mode_move: play_mode で指した手">
               <b-input v-model="position3" type="text" />
             </b-field>
             <br>
@@ -537,13 +537,13 @@ export default {
   },
 
   methods: {
-    update_position1(v) {
+    play_mode_long_sfen(v) {
       this.position1 = v
     },
-    update_position2(v) {
+    play_mode_short_sfen(v) {
       this.position2 = v
     },
-    update_position3(v) {
+    play_mode_move(v) {
       this.position3 = v
     },
   },
