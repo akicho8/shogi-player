@@ -1,18 +1,10 @@
 <template>
 <div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${current_mode}`, {debug_mode: debug_mode}, {digit_show: digit_show}]">
   <div v-if="error_message">
-    <div class="columns">
-      <div class="column">
-        <article class="message is-danger has-text-left">
-          <div class="message-header">
-            <p>ERROR</p>
-          </div>
-          <div class="message-body">
-            <p>{{error_message}}></p>
-          </div>
-        </article>
-      </div>
-    </div>
+    <ErrorNotify>
+      <p slot="header">ERROR</p>
+      <p>{{error_message}}</p>
+    </ErrorNotify>
   </div>
 
   <template v-if="!mediator">
@@ -174,6 +166,7 @@ import { SfenParser } from "../sfen_parser"
 import { KifParser } from "../kif_parser"
 import PieceStand from "./PieceStand"
 import SettingModal from "./SettingModal"
+import ErrorNotify from "./ErrorNotify"
 
 // modules
 import navi_module from "./navi_module.js"
@@ -232,13 +225,14 @@ export default {
     size:               { type: String,  default: "default",           },
     variation:          { type: String,  default: "a"                  },
     debug_mode:         { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
-    digit_show:        { type: Boolean, default: false,               },
+    digit_show:         { type: Boolean, default: false,               },
   },
   /* eslint-enable */
 
   components: {
     PieceStand,
     SettingModal,
+    ErrorNotify,
   },
 
   data() {
@@ -271,7 +265,7 @@ export default {
     }
 
     if (this.current_mode === "play_mode") {
-      this.play_mode_setup("view_mode")
+      this.play_mode_setup_from("view_mode")
     }
 
     if (this.current_mode === "edit_mode") {
@@ -292,8 +286,13 @@ export default {
     },
 
     turn_edit_value() {
-      this.current_turn = this.turn_edit_value
-      // this.current_turn_set(this.turn_edit_value)
+      if (true) {
+        // -1 になると current_turn を更新できないため最後の局面にはならない
+        this.current_turn_set(this.turn_edit_value)
+      } else {
+        // -1 で最後を表示する場合
+        this.current_turn = this.turn_edit_value
+      }
     },
 
     start_turn() {
@@ -309,7 +308,7 @@ export default {
       this.loaded_kifu = this.kifu_body
       this.loaded_kifu_to_mediator()
       if (this.current_mode === "play_mode") {
-        this.play_mode_setup("view_mode")
+        this.play_mode_setup_from("view_mode")
       }
 
       // // this.read_counter++
@@ -341,7 +340,7 @@ export default {
     //   this.view_mode_mediator_update()
     //   // if (this.current_mode === "play_mode") {
     //   //   this.mediator = null
-    //   //   this.play_mode_setup("view_mode")
+    //   //   this.play_mode_setup_from("view_mode")
     //   // }
     // },
 
@@ -358,7 +357,7 @@ export default {
       }
 
       if (this.current_mode === "play_mode") {
-        this.play_mode_setup(old_val)
+        this.play_mode_setup_from(old_val)
       }
 
       if (this.current_mode === "edit_mode") {

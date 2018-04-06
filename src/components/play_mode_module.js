@@ -43,8 +43,8 @@ export default {
   },
 
   methods: {
-    play_mode_setup(old_val) {
-      console.log("play_mode_setup")
+    play_mode_setup_from(old_val) {
+      console.log("play_mode_setup_from")
 
       // this.mediator_setup_if_blank()
       // if (old_val === "view_mode") {
