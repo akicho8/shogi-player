@@ -408,6 +408,9 @@ export default {
       const piece_inner = document.createElement("div")
       const list = _.concat(class_list, ["piece_inner"])
       piece_inner.classList.add(...list)
+      if (this.flip) {
+        piece_inner.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
+      }
       this.cursor_elem.appendChild(piece_inner)
       this.$el.appendChild(this.cursor_elem)
 

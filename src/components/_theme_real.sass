@@ -31,18 +31,18 @@ $sp_real_hold_gap: 0.5vmin      // 携帯のときだけ
 
 %dom_real_hold
   // background: $sp_real_holding_color
-  
+
   // iPhoneで見ている場合はカーソルがないため元の駒を左上に持ち上げる
   @media screen and (max-width: $sp_mobile_width)
     .piece_inner_wrap
       transform: translate(-$sp_real_hold_gap, -$sp_real_hold_gap)
       @include image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
-  
+
   // PCで見ている場合はカーソル位置に駒があるので元の駒を薄くする
   @media screen and (min-width: ($sp_mobile_width + 1))
     .piece_inner
       opacity: 0.35
-      
+
 // 選択できる駒に指定する
 %dom_real_selectable
   @include image_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
@@ -88,6 +88,10 @@ $sp_real_hold_gap: 0.5vmin      // 携帯のときだけ
   &.theme-real
     @import "piece_map_list"
     @include piece_map_list
+
+    // 反転した状態で持ったカーソル上にある駒を反転させる用
+    .virtual_piece_flip
+      @extend %dom_flip
 
     .board_outer, .piece_box
       &:after
@@ -145,7 +149,7 @@ $sp_real_hold_gap: 0.5vmin      // 携帯のときだけ
               transform: translateY($sp_real_piece_inner_transform_y)
             &.location_white
               transform: translateY($sp_real_piece_inner_transform_y * -1)
- 
+
     .piece_stand_outer
       .location_mark
       ul.piece_stand
@@ -167,7 +171,7 @@ $sp_real_hold_gap: 0.5vmin      // 携帯のときだけ
     //   content: ""
     //   // background-image: url("#{$sp_assets_dir}/tatami01-768x480.jpg")
     //   background-image: url("#{$sp_assets_dir}/51587037_p15_master1200.jpg")
-    //   
+    //
     //   background-position: center
     //   background-size: cover
     //   opacity: 1.0
