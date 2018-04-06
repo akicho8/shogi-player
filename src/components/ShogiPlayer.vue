@@ -103,28 +103,7 @@
       {{mediator.to_sfen}}
     </div>
 
-    <div class="comment_area" v-if="mediator.data_source.comments_pack">
-      <template v-if="mediator.current_comments">
-        <div class="columns">
-          <div class="column"><!-- is-three-fifths is-offset-one-fifth -->
-            <article class="message is-info has-text-left">
-              <div class="message-body">
-                <div class="content">
-                  <template v-for="str in mediator.current_comments">
-                    <template v-if="_.isEmpty(str)">
-                      <br>
-                    </template>
-                    <template v-else>
-                      <div v-html="mediator.auto_link(str)"></div>
-                    </template>
-                  </template>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </template>
-    </div>
+    <CommentArea :comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments" />
   </template>
 
   <template v-if="debug_mode">
@@ -164,11 +143,14 @@ import { Mediator } from "../mediator"
 import { Place } from "../place"
 import { SfenParser } from "../sfen_parser"
 import { KifParser } from "../kif_parser"
+
+// components
 import PieceStand from "./PieceStand"
 import SettingModal from "./SettingModal"
 import ErrorNotify from "./ErrorNotify"
+import CommentArea from "./CommentArea"
 
-// modules
+// mixins modules
 import navi_module from "./navi_module.js"
 import edit_mode_module from "./edit_mode_module.js"
 import play_mode_module from "./play_mode_module.js"
@@ -213,19 +195,19 @@ export default {
 
   /* eslint-disable */
   props: {
-    run_mode:           { type: String,  default: "view_mode",         },
-    kifu_body:          { type: String,  default: null,                },
-    kifu_url:           { type: String,  default: null,                },
-    polling_interval:   { type: Number,  default: 0,                   },
-    last_after_polling: { type: Boolean, default: true,                },
-    start_turn:         { type: Number,  default: -1,                  },
-    sfen_show:          { type: Boolean, default: false,               },
-    url_embed_turn:     { type: Boolean, default: false,               },
-    theme:              { type: String,  default: "simple",            },
-    size:               { type: String,  default: "default",           },
-    variation:          { type: String,  default: "a"                  },
-    debug_mode:         { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
-    digit_show:         { type: Boolean, default: false,               },
+    run_mode:           { type: String,  default: "view_mode", },
+    kifu_body:          { type: String,  default: null,        },
+    kifu_url:           { type: String,  default: null,        },
+    polling_interval:   { type: Number,  default: 0,           },
+    last_after_polling: { type: Boolean, default: true,        },
+    start_turn:         { type: Number,  default: -1,          },
+    sfen_show:          { type: Boolean, default: false,       },
+    url_embed_turn:     { type: Boolean, default: false,       },
+    theme:              { type: String,  default: "simple",    },
+    size:               { type: String,  default: "default",   },
+    variation:          { type: String,  default: "a"          },
+    debug_mode:         { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
+    digit_show:         { type: Boolean, default: false,       },
   },
   /* eslint-enable */
 
@@ -233,6 +215,7 @@ export default {
     PieceStand,
     SettingModal,
     ErrorNotify,
+    CommentArea,
   },
 
   data() {
@@ -416,7 +399,9 @@ export default {
       // const url = "http://localhost:3000/wr/hanairobiyori-ispt-20171104_220810.kif"
       // const url = "http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif"
       const accessd_at = Date.now().toString()
-      axios.get(url, {
+      axios({
+        url: url,
+        method: "get",
         params: {"accessd_at": accessd_at},
         responseType: "text",
         timeout: 1000 * 3,

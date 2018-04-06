@@ -1,6 +1,5 @@
 import _ from "lodash"
 import Vue from "vue"
-import Autolinker from 'autolinker'
 
 import { Board } from "./board"
 import { Place } from "./place"
@@ -142,11 +141,6 @@ class Mediator {
     if (this.data_source.comments_pack) {
       return this.data_source.comments_pack[this.real_turn]
     }
-  }
-
-  auto_link(v) {
-    const autolinker = new Autolinker()
-    return autolinker.link(v)
   }
 
   get current_turn_label() {
