@@ -329,9 +329,9 @@
             :sfen_show="sfen_show"
             :sound_effect="sound_effect"
             :volume="volume"
-            @update:play_mode_long_sfen="play_mode_long_sfen"
-            @update:play_mode_short_sfen="play_mode_short_sfen"
-            @update:play_mode_move="play_mode_move"
+            @update:play_mode_long_sfen="play_mode_long_sfen_set"
+            @update:play_mode_short_sfen="play_mode_short_sfen_set"
+            @update:play_mode_move="play_mode_move_set"
             />
         </div>
       </div>
@@ -442,14 +442,14 @@
             <br>
             <br>
             <h4 class="title">Emit Events</h4>
-            <b-field label="@update:play_mode_long_sfen: play_mode で指した直後の局面を発行(movesあり)">
-              <b-input v-model="position1" type="textarea" />
+            <b-field label="@update:play_mode_long_sfen: 操作モードで指した直後の局面を発行(movesあり)">
+              <b-input :value="play_mode_long_sfen" type="textarea" />
             </b-field>
-            <b-field label="@update:play_mode_short_sfen: play_mode で指した直後の局面を発行(movesなし)">
-              <b-input v-model="position2" type="textarea" />
+            <b-field label="@update:play_mode_short_sfen: 操作モードで指した直後の局面を発行(movesなし)">
+              <b-input v-model="play_mode_short_sfen" type="textarea" />
             </b-field>
-            <b-field label="@update:play_mode_move: play_mode で指した手">
-              <b-input v-model="position3" type="text" />
+            <b-field label="@update:play_mode_move: 操作モードで指した手(sfenのmovesの最後の1つ)">
+              <b-input v-model="play_mode_move" type="text" />
             </b-field>
             <br>
 
@@ -522,9 +522,10 @@ export default {
       digit_show: false,
       kifu_body: "position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+",
 
-      position1: null,
-      position2: null,
-      position3: null,
+      play_mode_long_sfen: null,
+      play_mode_short_sfen: null,
+      play_mode_move: null,
+
       kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
       kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
       usage_md: marked(require('./usage.md')),
@@ -537,14 +538,14 @@ export default {
   },
 
   methods: {
-    play_mode_long_sfen(v) {
-      this.position1 = v
+    play_mode_long_sfen_set(v) {
+      this.play_mode_long_sfen = v
     },
-    play_mode_short_sfen(v) {
-      this.position2 = v
+    play_mode_short_sfen_set(v) {
+      this.play_mode_short_sfen = v
     },
-    play_mode_move(v) {
-      this.position3 = v
+    play_mode_move_set(v) {
+      this.play_mode_move = v
     },
   },
 }
