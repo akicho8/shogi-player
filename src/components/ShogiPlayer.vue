@@ -408,9 +408,10 @@ export default {
         headers: {"X-SHOGI-PLAYER-TIMESTAMP": accessd_at},
       }).then((response) => {
         this.loaded_kifu = response.data
-        this.current_turn = -1
+        // this.current_turn = -1
         this.error_message = null
-        this.view_mode_mediator_update()
+        // this.view_mode_mediator_update()
+        this.current_turn_set(-1)
       }).catch((error) => {
         if (error.response) {
           logger_debug("error.response.data: %o", error.response.data)
@@ -447,7 +448,7 @@ export default {
         this.mediator.data_source = this.data_source_by(this.init_kifu_body)
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
-        this.current_turn = this.real_turn
+        // this.current_turn = this.real_turn
       }
     },
 
@@ -460,7 +461,7 @@ export default {
         // this.current_turn = this.real_turn // 連続で呼ばれることになるので更新してはいけない
 
         if (this.url_embed_turn) {
-          document.location.hash = this.current_turn
+          document.location.hash = this.real_turn
         }
 
         if (this.update_counter >= 1) {
@@ -476,7 +477,7 @@ export default {
       this.mediator.data_source = this.data_source_by(this.loaded_kifu)
       this.mediator.current_turn = -1
       this.mediator.run()
-      this.current_turn = this.real_turn
+      // this.current_turn = this.real_turn
     },
 
     data_source_by(str) {
@@ -493,7 +494,7 @@ export default {
 
     turn_edit_run() {
       this.turn_edit = true
-      this.turn_edit_value = this.current_turn
+      this.turn_edit_value = this.real_turn
       this.$nextTick(() => this.$refs.turn_edit_input.focus())
     },
 
