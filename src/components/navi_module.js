@@ -127,7 +127,7 @@ export default {
       //   this.current_turn = new_val
       // }
       this.current_turn_add(v)
-      // let pos = this.mediator.real_turn
+      // let pos = this.real_turn
       // const new_val = this.mediator.turn_clamp(pos + v)
       // if (pos !== new_val) {
       //   this.current_turn = new_val
@@ -153,7 +153,7 @@ export default {
     },
 
     current_turn_add(v) {
-      this.current_turn_set(this.mediator.real_turn + v)
+      this.current_turn_set(this.real_turn + v)
     },
 
     current_turn_set(v) {
@@ -162,7 +162,7 @@ export default {
       //   this.current_turn = new_val
       // }
       const new_val = this.mediator.turn_clamp(v)
-      if (this.mediator.real_turn !== new_val) {
+      if (this.real_turn !== new_val) {
         this.current_turn = new_val
         if (this.debug_mode) {
           this.log([v, new_val, this.current_turn])

@@ -31,7 +31,7 @@ export default {
       if (this.current_mode === "play_mode") {
         console.log("watch: current_turn")
         this.play_mode_mediator_update()
-        // this.current_turn = this.mediator.real_turn
+        // this.current_turn = this.real_turn
         // console.log(this.current_turn)
         // this.update_counter += 1
         // if (this.update_counter >= 1) {
@@ -81,7 +81,7 @@ export default {
       // this.mediator.current_turn = 0
       // this.mediator.run()
 
-      // this.current_turn = this.mediator.real_turn
+      // this.current_turn = this.real_turn
       // this.current_turn = 0
       // this.current_turn_watch_disable = false
     },
@@ -94,7 +94,7 @@ export default {
     },
 
     moves_set(value) {
-      this.moves = _.take(this.moves, this.mediator.real_turn) // 「待った」して指す場合を考慮してカレント以降の指し手を削除する
+      this.moves = _.take(this.moves, this.real_turn) // 「待った」して指す場合を考慮してカレント以降の指し手を削除する
       this.moves.push(value)
       this.$emit("update:play_mode_long_sfen", this.play_mode_current_sfen)
       this.$emit("update:play_mode_move", value)
@@ -112,7 +112,7 @@ export default {
         this.mediator.data_source = data_source
         this.mediator.current_turn = -1
         this.mediator.run()
-        this.current_turn = this.mediator.real_turn
+        this.current_turn = this.real_turn
 
         this.$emit("update:play_mode_short_sfen", this.mediator.to_position_sfen)
         // this.current_turn = -1

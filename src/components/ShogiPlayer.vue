@@ -35,7 +35,7 @@
               {{mediator.current_turn_label}}
             </template>
             <template v-if="current_mode === 'play_mode'">
-              {{mediator.real_turn}}手目
+              {{real_turn}}手目
             </template>
           </span>
         </template>
@@ -95,7 +95,7 @@
         <button                class="button flip"     @click.stop="board_flip_run"><b-icon icon="rotate-3d" size="is-small"></b-icon></button>
       </div>
       <template v-if="slider_show">
-        <input type="range" v-model.number="current_turn" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="slider" class="slider" />
+        <input type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="slider" class="slider" />
       </template>
     </template>
 
@@ -117,7 +117,7 @@
         <tr><th>持駒</th><td>{{mediator.hold_pieces}}</td></tr>
         <tr><th>次の手番</th><td>{{mediator.current_location.key}}</td></tr>
         <tr><th>SFEN</th><td>{{mediator.to_sfen}}</td></tr>
-        <tr><th>正規化手番</th><td>{{mediator.real_turn}}</td></tr>
+        <tr><th>正規化手番</th><td>{{real_turn}}</td></tr>
       </template>
       <tr><th>start_turn</th><td>{{start_turn}}</td></tr>
       <tr><th>current_turn</th><td>{{current_turn}}</td></tr>
@@ -447,7 +447,7 @@ export default {
         this.mediator.data_source = this.data_source_by(this.init_kifu_body)
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
-        this.current_turn = this.mediator.real_turn
+        this.current_turn = this.real_turn
       }
     },
 
@@ -457,7 +457,7 @@ export default {
         this.mediator.data_source = this.data_source_by(this.loaded_kifu)
         this.mediator.current_turn = this.current_turn
         this.mediator.run()
-        // this.current_turn = this.mediator.real_turn // 連続で呼ばれることになるので更新してはいけない
+        // this.current_turn = this.real_turn // 連続で呼ばれることになるので更新してはいけない
 
         if (this.url_embed_turn) {
           document.location.hash = this.current_turn
@@ -476,7 +476,7 @@ export default {
       this.mediator.data_source = this.data_source_by(this.loaded_kifu)
       this.mediator.current_turn = -1
       this.mediator.run()
-      this.current_turn = this.mediator.real_turn
+      this.current_turn = this.real_turn
     },
 
     data_source_by(str) {
@@ -539,7 +539,10 @@ export default {
   computed: {
     init_kifu_body() {
       return this.loaded_kifu || this.kifu_body || this.init_preset_sfen || "position startpos"
-    }
+    },
+    real_turn() {
+      return this.mediator.real_turn
+    },
   },
 }
 </script>
