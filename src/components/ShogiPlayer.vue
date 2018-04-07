@@ -248,6 +248,7 @@ export default {
     }
 
     if (this.current_mode === "play_mode") {
+      this.mediator_setup_if_blank(this.start_turn)
       this.play_mode_setup_from("view_mode")
     }
 
