@@ -243,7 +243,7 @@ export default {
         this.polling_interval_update()
       } else {
         this.loaded_kifu = this.init_kifu_body
-        this.view_mode_mediator_update()
+        this.view_mode_mediator_update(this.start_turn)
       }
     }
 
@@ -255,16 +255,15 @@ export default {
       if (this.init_preset_key) {
         this.mediator_setup_by_preset(this.init_preset_key) // 駒箱に「玉」を乗せたいため
       } else {
-        this.mediator_setup_if_blank()
+        this.mediator_setup_if_blank(this.start_turn)
       }
     }
   },
 
   watch: {
-    current_turn() {
+    current_turn(value) {
       if (this.current_mode === "view_mode") {
-        this.log("view_mode_mediator_update from current_turn")
-        this.view_mode_mediator_update()
+        this.view_mode_mediator_update(value)
       }
     },
 
@@ -273,8 +272,8 @@ export default {
         // -1 になると current_turn を更新できないため最後の局面にはならない
         this.current_turn_set(this.turn_edit_value)
       } else {
-        // -1 で最後を表示する場合
-        this.current_turn = this.turn_edit_value
+        // // -1 で最後を表示する場合
+        // this.current_turn = this.turn_edit_value
       }
     },
 
@@ -289,7 +288,7 @@ export default {
     kifu_body() {
       console.log("watch: kifu_body")
       this.loaded_kifu = this.kifu_body
-      this.loaded_kifu_to_mediator()
+      this.loaded_kifu_to_mediator(-1)
       if (this.current_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
       }
@@ -336,7 +335,7 @@ export default {
     current_mode(new_val, old_val) {
       if (this.current_mode === "view_mode") {
         console.log("current_mode: view_mode")
-        this.view_mode_mediator_update()
+        this.view_mode_mediator_update(this.real_turn)
       }
 
       if (this.current_mode === "play_mode") {
@@ -345,7 +344,7 @@ export default {
 
       if (this.current_mode === "edit_mode") {
         console.log("current_mode: edit_mode")
-        this.mediator_setup_if_blank()
+        // this.mediator_setup_if_blank()
         const position_sfen = this.mediator.to_position_sfen // mediator を作り直す前に現状の局面を吐き出しておく
 
         this.mediator = new Mediator()
@@ -353,7 +352,7 @@ export default {
         this.mediator.current_turn = 0
         this.mediator.run()
 
-        this.current_turn = 0
+        // this.current_turn = 0
         this.init_location_key = this.mediator.current_location.key
       }
     },
@@ -442,21 +441,21 @@ export default {
       }
     },
 
-    mediator_setup_if_blank() {
+    mediator_setup_if_blank(value) {
       if (_.isNil(this.mediator)) {
         this.mediator = new Mediator()
         this.mediator.data_source = this.data_source_by(this.init_kifu_body)
-        this.mediator.current_turn = this.current_turn
+        this.mediator.current_turn = value
         this.mediator.run()
         // this.current_turn = this.real_turn
       }
     },
 
-    view_mode_mediator_update() {
+    view_mode_mediator_update(value) {
       if (this.loaded_kifu) {
         this.mediator = new Mediator()
         this.mediator.data_source = this.data_source_by(this.loaded_kifu)
-        this.mediator.current_turn = this.current_turn
+        this.mediator.current_turn = value
         this.mediator.run()
         // this.current_turn = this.real_turn // 連続で呼ばれることになるので更新してはいけない
 
@@ -472,10 +471,10 @@ export default {
       }
     },
 
-    loaded_kifu_to_mediator() {
+    loaded_kifu_to_mediator(value) {
       this.mediator = new Mediator()
       this.mediator.data_source = this.data_source_by(this.loaded_kifu)
-      this.mediator.current_turn = -1
+      this.mediator.current_turn = value
       this.mediator.run()
       // this.current_turn = this.real_turn
     },
