@@ -153,7 +153,7 @@ export default {
     },
 
     current_turn_add(v) {
-      this.current_turn_set(this.real_turn + v)
+      this.current_turn_set(this.mediator.real_turn + v)
     },
 
     current_turn_set(v) {
@@ -162,12 +162,25 @@ export default {
       //   this.current_turn = new_val
       // }
       const new_val = this.mediator.turn_clamp(v)
+      // this.current_turn = new_val
+
       if (this.real_turn !== new_val) {
-        this.current_turn = new_val
-        if (this.debug_mode) {
-          this.log([v, new_val, this.current_turn])
+        if (this.current_mode === "view_mode") {
+          this.view_mode_mediator_update(new_val)
+        }
+        if (this.current_mode === "play_mode") {
+          this.play_mode_mediator_seek_to(new_val)
+          this.sound_call("piece_sound")
         }
       }
+
+      // if (this.real_turn !== new_val) {
+      //   console.log(`current_turn = new_val ${this.current_turn} = ${new_val}`)
+      //   this.current_turn = new_val
+      //   if (this.debug_mode) {
+      //     this.log([v, new_val, this.current_turn])
+      //   }
+      // }
     },
 
     focus_to(key) {

@@ -1,6 +1,5 @@
 import _ from "lodash"
 
-import { SfenParser } from "../sfen_parser"
 import { Mediator } from "../mediator"
 import { Location } from "../location"
 
@@ -26,19 +25,20 @@ export default {
   },
 
   watch: {
-    current_turn() {
-      if (this.current_mode === "play_mode") {
-        this.log("watch: current_turn")
-        this.play_mode_mediator_update()
-        // this.current_turn = this.real_turn
-        // this.log(this.current_turn)
-        // this.update_counter += 1
-        // if (this.update_counter >= 1) {
-        this.sound_call("piece_sound")
-        // }
-        // this.update_counter += 1
-      }
-    },
+    // current_turn() {
+    //   this.log("watch: current_turn")
+    //
+    //   if (this.current_mode === "play_mode") {
+    //     this.play_mode_mediator_seek_to(this.current_turn)
+    //     // this.current_turn = this.real_turn
+    //     // this.log(this.current_turn)
+    //     // this.update_counter += 1
+    //     // if (this.update_counter >= 1) {
+    //     this.sound_call("piece_sound")
+    //     // }
+    //     // this.update_counter += 1
+    //   }
+    // },
   },
 
   methods: {
@@ -71,7 +71,7 @@ export default {
         this.moves = []
       }
 
-      this.play_mode_mediator_update()
+      this.play_mode_mediator_seek_to(this.real_turn)
 
       // this.current_turn = 0
 
@@ -85,10 +85,14 @@ export default {
       // this.current_turn_watch_disable = false
     },
 
-    play_mode_mediator_update() {
+    // play_mode_mediator_update() {
+    //   this.play_mode_mediator_seek_to(this.current_turn)
+    // },
+
+    play_mode_mediator_seek_to(turn) {
       this.mediator = new Mediator()
       this.mediator.data_source = this.data_source_by(this.play_mode_current_sfen)
-      this.mediator.current_turn = this.current_turn
+      this.mediator.current_turn = turn
       this.mediator.run()
     },
 
@@ -103,15 +107,13 @@ export default {
       // this.sound_call("piece_sound")
 
       if (this.current_mode === "play_mode") {
-        const data_source = new SfenParser()
-        data_source.kifu_body = this.play_mode_current_sfen
-        data_source.parse()
-
         this.mediator = new Mediator()
-        this.mediator.data_source = data_source
+        this.mediator.data_source = this.data_source_by(this.play_mode_current_sfen)
         this.mediator.current_turn = -1
         this.mediator.run()
-        this.current_turn = this.real_turn
+        this.sound_call("piece_sound")
+
+        // this.current_turn = this.real_turn
 
         this.$emit("update:play_mode_short_sfen", this.mediator.to_position_sfen)
         // this.current_turn = -1

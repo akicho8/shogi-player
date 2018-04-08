@@ -216,7 +216,7 @@ export default {
   data() {
     return {
       current_mode: this.run_mode,
-      current_turn: this.start_turn, // N手目
+      // current_turn: this.start_turn, // N手目
       turn_edit_value: null,         // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,                // 局面管理
       flip: false,                   // 反転したか？
@@ -253,11 +253,8 @@ export default {
   },
 
   watch: {
-    current_turn(value) {
-      if (this.current_mode === "view_mode") {
-        this.view_mode_mediator_update(value)
-      }
-    },
+    // current_turn(value) {
+    // },
 
     turn_edit_value() {
       if (true) {
@@ -270,7 +267,7 @@ export default {
     },
 
     start_turn() {
-      this.current_turn = this.start_turn
+      this.current_turn_set(this.start_turn)
     },
 
     kifu_body() {
