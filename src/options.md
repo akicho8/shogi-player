@@ -1,5 +1,7 @@
 | 名前                       | 意味                        | 備考                                                 | 初期値              |
 |----------------------------|-----------------------------|------------------------------------------------------|---------------------|
+| run_mode                   | 実行モード                  | 再生(view_mode) 操作(play_mode) 編集(edit_mode)      | 'view_mode'         |
+| human_side                 | 人間が操作する側            | play_mode 時の人間側を指定。nullだと両方操作可       | null                |
 | kifu_body                  | 棋譜の本体                  | KIF と SFEN に対応。駒落ちは SFEN のみ               | null                |
 | kifu_url                   | 棋譜ファイルURL             |                                                      | null                |
 | theme                      | テーマ名                    | none:なし simple:シンプル real:木目                  | 'simple'            |
@@ -19,7 +21,6 @@
 | url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                  | false               |
 | debug_mode                 | デバッグモード              |                                                      | false               |
 | digit_show              | 盤面の側面に位置を表示      | 上に数字、右端に漢数字を表示する                     | false               |
-| run_mode                   | 実行モード                  | 再生(view_mode) 操作(play_mode) 編集(edit_mode)      | 'view_mode'         |
 | init_preset_key            | 初期配置                    | kifu_body の代わりに指定するとその配置になる         | null                |
 
 <br>
