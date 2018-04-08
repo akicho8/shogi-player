@@ -234,12 +234,12 @@ export default {
         this.axios_call()
         this.polling_interval_update()
       } else {
-        this.mediator_setup_on_create(this.start_turn)
+        this.mediator_setup(this.start_turn)
       }
     }
 
     if (this.current_mode === "play_mode") {
-      this.mediator_setup_on_create(this.start_turn)
+      this.mediator_setup(this.start_turn)
       this.play_mode_setup_from("view_mode")
     }
 
@@ -247,7 +247,7 @@ export default {
       if (this.init_preset_key) {
         this.mediator_setup_by_preset(this.init_preset_key) // 駒箱に「玉」を乗せたいため
       } else {
-        this.mediator_setup_on_create(this.start_turn)
+        this.mediator_setup(this.start_turn)
       }
     }
   },
@@ -274,7 +274,7 @@ export default {
     },
 
     kifu_body() {
-      this.mediator_setup_on_create(this.start_turn)
+      this.mediator_setup(this.start_turn)
       if (this.current_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
       }
@@ -288,7 +288,7 @@ export default {
     // ダイアログから変更されたとき
     current_mode(new_val, old_val) {
       if (this.current_mode === "view_mode") {
-        console.log("current_mode: view_mode")
+        this.log("current_mode: view_mode")
         this.view_mode_mediator_update(this.real_turn)
       }
 
@@ -297,7 +297,7 @@ export default {
       }
 
       if (this.current_mode === "edit_mode") {
-        console.log("current_mode: edit_mode")
+        this.log("current_mode: edit_mode")
         const position_sfen = this.mediator.to_position_sfen // mediator を作り直す前に現状の局面を吐き出しておく
 
         this.mediator = new Mediator()
@@ -319,7 +319,7 @@ export default {
   },
 
   methods: {
-    mediator_setup_on_create(turn) {
+    mediator_setup(turn) {
       this.mediator = new Mediator()
       this.mediator.data_source = this.data_source_by(this.kifu_source)
       this.mediator.current_turn = turn
@@ -327,27 +327,13 @@ export default {
     },
 
     view_mode_mediator_update(turn) {
-      this.mediator_setup_on_create(turn)
-      // this.current_turn = this.real_turn // 連続で呼ばれることになるので更新してはいけない
-
+      this.mediator_setup(turn)
       if (this.url_embed_turn) {
         document.location.hash = this.real_turn
       }
-
-      // if (this.update_counter >= 1) {
       this.sound_call("piece_sound")
-      // }
-
       this.update_counter++
     },
-
-    // loaded_kifu_to_mediator(value) {
-    //   this.mediator = new Mediator()
-    //   this.mediator.data_source = this.data_source_by(this.kifu_source)
-    //   this.mediator.current_turn = value
-    //   this.mediator.run()
-    //   // this.current_turn = this.real_turn
-    // },
 
     data_source_by(str) {
       let data_source = null

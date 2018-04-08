@@ -29,10 +29,10 @@ export default {
   watch: {
     current_turn() {
       if (this.current_mode === "play_mode") {
-        console.log("watch: current_turn")
+        this.log("watch: current_turn")
         this.play_mode_mediator_update()
         // this.current_turn = this.real_turn
-        // console.log(this.current_turn)
+        // this.log(this.current_turn)
         // this.update_counter += 1
         // if (this.update_counter >= 1) {
         this.sound_call("piece_sound")
@@ -44,9 +44,9 @@ export default {
 
   methods: {
     play_mode_setup_from(old_val) {
-      console.log("play_mode_setup_from")
+      this.log("play_mode_setup_from")
 
-      // this.mediator_setup_on_create()
+      // this.mediator_setup()
       // if (old_val === "view_mode") {
       //   this.init_location_key = this.mediator.current_location.key
       // }
@@ -56,7 +56,7 @@ export default {
       //
       // this.play_mode_mediator_update()
 
-      // this.mediator_setup_on_create()
+      // this.mediator_setup()
 
       if (this.mediator.data_source.init_sfen !== undefined) {
         // 棋譜の最初からの指し手をすべて保持
@@ -118,7 +118,7 @@ export default {
         // this.current_turn = -1
       }
 
-      // console.log("turn_next")
+      // this.log("turn_next")
 
       // this.view_mode_mediator_update()
     },
