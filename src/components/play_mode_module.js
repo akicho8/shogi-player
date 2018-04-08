@@ -46,7 +46,7 @@ export default {
     play_mode_setup_from(old_val) {
       console.log("play_mode_setup_from")
 
-      // this.mediator_setup_if_blank()
+      // this.mediator_setup_on_create()
       // if (old_val === "view_mode") {
       //   this.init_location_key = this.mediator.current_location.key
       // }
@@ -56,7 +56,7 @@ export default {
       //
       // this.play_mode_mediator_update()
 
-      // this.mediator_setup_if_blank()
+      // this.mediator_setup_on_create()
 
       if (this.mediator.data_source.init_sfen !== undefined) {
         // 棋譜の最初からの指し手をすべて保持

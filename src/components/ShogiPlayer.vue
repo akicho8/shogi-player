@@ -227,7 +227,7 @@ export default {
       flip: false,                   // 反転したか？
       turn_edit: false,              // N手目編集中
       env: process.env.NODE_ENV,
-      loaded_kifu: null,
+      kifu_body_from_url: null,
       error_message: null,
       interval_id: null,
       read_counter: 0,
@@ -242,13 +242,12 @@ export default {
         this.axios_call()
         this.polling_interval_update()
       } else {
-        this.loaded_kifu = this.init_kifu_body
-        this.view_mode_mediator_update(this.start_turn)
+        this.mediator_setup_on_create(this.start_turn)
       }
     }
 
     if (this.current_mode === "play_mode") {
-      this.mediator_setup_if_blank(this.start_turn)
+      this.mediator_setup_on_create(this.start_turn)
       this.play_mode_setup_from("view_mode")
     }
 
@@ -256,7 +255,7 @@ export default {
       if (this.init_preset_key) {
         this.mediator_setup_by_preset(this.init_preset_key) // 駒箱に「玉」を乗せたいため
       } else {
-        this.mediator_setup_if_blank(this.start_turn)
+        this.mediator_setup_on_create(this.start_turn)
       }
     }
   },
@@ -288,8 +287,8 @@ export default {
 
     kifu_body() {
       console.log("watch: kifu_body")
-      this.loaded_kifu = this.kifu_body
-      this.loaded_kifu_to_mediator(-1)
+      // this.kifu_body_from_url = this.kifu_body
+      this.mediator_setup_on_create(-1)
       if (this.current_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
       }
@@ -318,8 +317,8 @@ export default {
       this.polling_interval_update()
     },
 
-    // loaded_kifu() {
-    //   console.log("watch: loaded_kifu")
+    // kifu_body_from_url() {
+    //   console.log("watch: kifu_body_from_url")
     //   this.view_mode_mediator_update()
     //   // if (this.current_mode === "play_mode") {
     //   //   this.mediator = null
@@ -345,7 +344,6 @@ export default {
 
       if (this.current_mode === "edit_mode") {
         console.log("current_mode: edit_mode")
-        // this.mediator_setup_if_blank()
         const position_sfen = this.mediator.to_position_sfen // mediator を作り直す前に現状の局面を吐き出しておく
 
         this.mediator = new Mediator()
@@ -372,7 +370,7 @@ export default {
     //   this.axios_call()
     //   // this.view_mode_mediator_update()
     //   // } else {
-    //   //   this.loaded_kifu = this.init_kifu_body
+    //   //   this.kifu_body_from_url = this.kifu_source
     //   // }
     //   // this.read_counter++
     //   // this.log(`read_counter: ${this.read_counter}`)
@@ -407,11 +405,9 @@ export default {
         timeout: 1000 * 3,
         headers: {"X-SHOGI-PLAYER-TIMESTAMP": accessd_at},
       }).then((response) => {
-        this.loaded_kifu = response.data
-        // this.current_turn = -1
         this.error_message = null
-        // this.view_mode_mediator_update()
-        this.current_turn_set(-1)
+        this.kifu_body_from_url = response.data
+        this.mediator_setup_on_create(this.start_turn)
       }).catch((error) => {
         if (error.response) {
           logger_debug("error.response.data: %o", error.response.data)
@@ -425,7 +421,7 @@ export default {
         }
         logger_debug('error.config: %o', error.config)
 
-        this.loaded_kifu = null
+        this.kifu_body_from_url = null
         this.error_message = error.message
       })
     },
@@ -442,43 +438,35 @@ export default {
       }
     },
 
-    mediator_setup_if_blank(value) {
-      if (_.isNil(this.mediator)) {
-        this.mediator = new Mediator()
-        this.mediator.data_source = this.data_source_by(this.init_kifu_body)
-        this.mediator.current_turn = value
-        this.mediator.run()
-        // this.current_turn = this.real_turn
-      }
-    },
-
-    view_mode_mediator_update(value) {
-      if (this.loaded_kifu) {
-        this.mediator = new Mediator()
-        this.mediator.data_source = this.data_source_by(this.loaded_kifu)
-        this.mediator.current_turn = value
-        this.mediator.run()
-        // this.current_turn = this.real_turn // 連続で呼ばれることになるので更新してはいけない
-
-        if (this.url_embed_turn) {
-          document.location.hash = this.real_turn
-        }
-
-        if (this.update_counter >= 1) {
-          this.sound_call("piece_sound")
-        }
-
-        this.update_counter++
-      }
-    },
-
-    loaded_kifu_to_mediator(value) {
+    mediator_setup_on_create(turn) {
       this.mediator = new Mediator()
-      this.mediator.data_source = this.data_source_by(this.loaded_kifu)
-      this.mediator.current_turn = value
+      this.mediator.data_source = this.data_source_by(this.kifu_source)
+      this.mediator.current_turn = turn
       this.mediator.run()
-      // this.current_turn = this.real_turn
     },
+
+    view_mode_mediator_update(turn) {
+      this.mediator_setup_on_create(turn)
+      // this.current_turn = this.real_turn // 連続で呼ばれることになるので更新してはいけない
+
+      if (this.url_embed_turn) {
+        document.location.hash = this.real_turn
+      }
+
+      // if (this.update_counter >= 1) {
+      this.sound_call("piece_sound")
+      // }
+
+      this.update_counter++
+    },
+
+    // loaded_kifu_to_mediator(value) {
+    //   this.mediator = new Mediator()
+    //   this.mediator.data_source = this.data_source_by(this.kifu_source)
+    //   this.mediator.current_turn = value
+    //   this.mediator.run()
+    //   // this.current_turn = this.real_turn
+    // },
 
     data_source_by(str) {
       let data_source = null
@@ -538,8 +526,8 @@ export default {
   },
 
   computed: {
-    init_kifu_body() {
-      return this.loaded_kifu || this.kifu_body || this.init_preset_sfen || "position startpos"
+    kifu_source() {
+      return this.kifu_body_from_url || this.kifu_body || this.init_preset_sfen || "position startpos"
     },
     real_turn() {
       return this.mediator.real_turn
