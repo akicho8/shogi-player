@@ -136,7 +136,6 @@
 
 <script>
 import _ from "lodash"
-import axios from "axios"
 import Vue from 'vue'
 
 import { Mediator } from "../mediator"
@@ -156,6 +155,7 @@ import edit_mode_module from "./edit_mode_module.js"
 import play_mode_module from "./play_mode_module.js"
 import sound_module from "./sound_module.js"
 import preset_module from "./preset_module.js"
+import polling_module from "./polling_module.js"
 
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
@@ -178,8 +178,6 @@ require('axios-debug-log')({
   }
 })
 
-const logger_debug = require('debug')('debug')
-
 /* eslint-disable no-new */
 export default {
   name: 'ShogiPlayer',
@@ -191,15 +189,13 @@ export default {
     play_mode_module,
     sound_module,
     preset_module,
+    polling_module,
   ],
 
   /* eslint-disable */
   props: {
     run_mode:           { type: String,  default: "view_mode", },
     kifu_body:          { type: String,  default: null,        },
-    kifu_url:           { type: String,  default: null,        },
-    polling_interval:   { type: Number,  default: 0,           },
-    last_after_polling: { type: Boolean, default: true,        },
     start_turn:         { type: Number,  default: -1,          },
     sfen_show:          { type: Boolean, default: false,       },
     url_embed_turn:     { type: Boolean, default: false,       },
@@ -227,9 +223,7 @@ export default {
       flip: false,                   // 反転したか？
       turn_edit: false,              // N手目編集中
       env: process.env.NODE_ENV,
-      kifu_body_from_url: null,
       error_message: null,
-      interval_id: null,
       read_counter: 0,
       update_counter: 0,
       setting_modal_p: false,
@@ -281,50 +275,12 @@ export default {
       this.current_turn = this.start_turn
     },
 
-    kifu_url() {
-      this.axios_call()
-    },
-
     kifu_body() {
-      console.log("watch: kifu_body")
-      // this.kifu_body_from_url = this.kifu_body
-      this.mediator_setup_on_create(-1)
+      this.mediator_setup_on_create(this.start_turn)
       if (this.current_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
       }
-
-      // // this.read_counter++
-      // // this.log(`read_counter: ${this.read_counter}`)
-      // // if (false) {
-      // //   if (polling) {
-      // //     if (this.last_after_polling) {
-      // //       this.current_turn = -1
-      // //     }
-      // //   } else {
-      // //     if (this.start_turn === -1) {
-      // //       this.current_turn = -1
-      // //     }
-      // //   }
-      // // } else {
-      // // 最後の局面を指定して欲しいときは棋譜を更新しても最後に移動する
-      // if (this.start_turn === -1) {
-      //   this.current_turn = -1
-      // }
-      // }
     },
-
-    polling_interval() {
-      this.polling_interval_update()
-    },
-
-    // kifu_body_from_url() {
-    //   console.log("watch: kifu_body_from_url")
-    //   this.view_mode_mediator_update()
-    //   // if (this.current_mode === "play_mode") {
-    //   //   this.mediator = null
-    //   //   this.play_mode_setup_from("view_mode")
-    //   // }
-    // },
 
     // -------------------------------------------------------------------------------- current_mode
     run_mode(value) {
@@ -365,79 +321,6 @@ export default {
   },
 
   methods: {
-    // axios_call() {
-    //   // if (this.kifu_url) {
-    //   this.axios_call()
-    //   // this.view_mode_mediator_update()
-    //   // } else {
-    //   //   this.kifu_body_from_url = this.kifu_source
-    //   // }
-    //   // this.read_counter++
-    //   // this.log(`read_counter: ${this.read_counter}`)
-    //   // if (false) {
-    //   //   if (polling) {
-    //   //     if (this.last_after_polling) {
-    //   //       this.current_turn = -1
-    //   //     }
-    //   //   } else {
-    //   //     if (this.start_turn === -1) {
-    //   //       this.current_turn = -1
-    //   //     }
-    //   //   }
-    //   // } else {
-    //   //   // 最後の局面を指定して欲しいときは棋譜を更新しても最後に移動する
-    //   //   if (this.start_turn === -1) {
-    //   //     this.current_turn = -1
-    //   //   }
-    //   // }
-    // },
-
-    axios_call() {
-      const url = this.kifu_url
-      // const url = "http://localhost:3000/wr/hanairobiyori-ispt-20171104_220810.kif"
-      // const url = "http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif"
-      const accessd_at = Date.now().toString()
-      axios({
-        url: url,
-        method: "get",
-        params: {"accessd_at": accessd_at},
-        responseType: "text",
-        timeout: 1000 * 3,
-        headers: {"X-SHOGI-PLAYER-TIMESTAMP": accessd_at},
-      }).then((response) => {
-        this.error_message = null
-        this.kifu_body_from_url = response.data
-        this.mediator_setup_on_create(this.start_turn)
-      }).catch((error) => {
-        if (error.response) {
-          logger_debug("error.response.data: %o", error.response.data)
-          logger_debug("error.response.status: %o", error.response.status)
-          logger_debug("error.response.statusText: %o", error.response.statusText)
-          logger_debug("error.response.headers: %o", error.response.headers)
-        } else if (error.request) {
-          logger_debug("error.request: %o", error.request)
-        } else {
-          logger_debug('error.message: %o', error.message)
-        }
-        logger_debug('error.config: %o', error.config)
-
-        this.kifu_body_from_url = null
-        this.error_message = error.message
-      })
-    },
-
-    polling_interval_update() {
-      if (this.polling_interval >= 1) {
-        if (this.interval_id) {
-          this.log(`clearInterval(${this.interval_id})`)
-          clearInterval(this.interval_id)
-          this.interval_id = null
-        }
-        this.interval_id = setInterval(() => { this.axios_call() }, this.polling_interval * 1000)
-        this.log(`setInterval() => ${this.interval_id}`)
-      }
-    },
-
     mediator_setup_on_create(turn) {
       this.mediator = new Mediator()
       this.mediator.data_source = this.data_source_by(this.kifu_source)
