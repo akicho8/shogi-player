@@ -143,6 +143,11 @@ export default {
         return
       }
 
+      if (this.cpu_location_p) {
+        this.log("片方の手番だけを操作できるようにする human_side の指定があってCPU側なので無効とする")
+        return
+      }
+
       this.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
@@ -158,6 +163,11 @@ export default {
       const soldier = this.mediator.board.lookup(place)
 
       // -------------------------------------------------------------------------------- Validation
+
+      if (this.cpu_location_p) {
+        this.log("片方の手番だけを操作できるようにする human_side の指定があってCPU側なので無効とする")
+        return
+      }
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
       if (this.current_mode === "play_mode" && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
@@ -461,5 +471,10 @@ export default {
     holding_p() {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
     },
+
+    // 片方の手番だけを操作できるようにする human_side の指定があってCPUの手番？
+    cpu_location_p() {
+      return this.current_mode === "play_mode" && this.human_location && this.human_location !== this.mediator.current_location
+    }
   },
 }

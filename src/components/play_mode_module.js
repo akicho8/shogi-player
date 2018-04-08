@@ -1,7 +1,5 @@
 import _ from "lodash"
 
-// import { Place } from "../place"
-// import { Soldier } from "../soldier"
 import { SfenParser } from "../sfen_parser"
 import { Mediator } from "../mediator"
 import { Location } from "../location"
@@ -9,6 +7,7 @@ import { Location } from "../location"
 export default {
   /* eslint-disable */
   props: {
+    human_side: { type: String, default: "black", }, // black or white を指定すると指定してない側の操作をできないようにする
   },
   /* eslint-enable */
 
@@ -135,6 +134,14 @@ export default {
 
     init_location() {
       return Location.fetch(this.init_location_key)
+    },
+
+    human_location() {
+      if (this.human_side) {
+        return Location.fetch(this.human_side)
+      } else {
+        return null
+      }
     },
   },
 }

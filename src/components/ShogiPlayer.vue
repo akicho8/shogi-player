@@ -383,7 +383,7 @@ export default {
       if (_.isEqual(this.place_from, place)) {
         list.push("holding_p")
       } else if (soldier) {
-        if (this.mediator.current_location === soldier.location || this.current_mode === "edit_mode") {
+        if (this.current_mode === "edit_mode" || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
           list.push("selectable_p")
         }
       }
