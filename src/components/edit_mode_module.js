@@ -56,7 +56,6 @@ export default {
 
       if (this.have_piece_location && this.have_piece) {
         this.log("駒台から駒箱に移動")
-        // this.sound_call("piece_sound")
         this.mediator.piece_box_add(this.have_piece)
         this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
         this.state_reset()
@@ -65,7 +64,6 @@ export default {
 
       if (this.origin_soldier) {
         this.log("盤上の駒を駒箱に移動")
-        // this.sound_call("piece_sound")
         this.mediator.piece_box_add(this.origin_soldier.piece)
         this.mediator.board.delete_at(this.origin_soldier.place)
         this.state_reset()
@@ -375,12 +373,9 @@ export default {
       this.init_location_key = this.init_location.flip.key
     },
 
-    modal_trigger_dots_click() {
-    },
-
     mousemove_hook(e) {
       this.last_event = e
-      this.set_pos()
+      this.cursor_elem_set_pos()
     },
 
     // 右クリックならキャンセル
@@ -390,7 +385,7 @@ export default {
       }
     },
 
-    set_pos() {
+    cursor_elem_set_pos() {
       if (this.cursor_elem && this.last_event && this.mouse_stick) {
         this.cursor_elem.style.left = `${this.last_event.clientX}px`
         this.cursor_elem.style.top = `${this.last_event.clientY}px`
@@ -418,7 +413,7 @@ export default {
 
       this.last_event = event
       this.log(this.last_event)
-      this.set_pos()
+      this.cursor_elem_set_pos()
 
       window.addEventListener("mousemove", this.mousemove_hook, false)
       window.addEventListener("click", this.click_hook, false)
@@ -447,14 +442,14 @@ export default {
   },
 
   computed: {
-    // 移動元の駒
+    // 移動元の駒(盤上から)
     origin_soldier() {
       if (this.place_from) {
         return this.mediator.board.lookup(this.place_from)
       }
     },
 
-    // 移動元の駒
+    // 移動元の駒(駒台 or 駒箱から)
     origin_soldier2() {
       if (this.have_piece) {
         const place = Place.fetch([0, 0])

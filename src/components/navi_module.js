@@ -3,11 +3,11 @@ import _ from "lodash"
 export default {
   /* eslint-disable */
   props: {
-    slider_show:        { type: Boolean, default: false,               },
-    controller_show:    { type: Boolean, default: false,               },
-    key_event_capture:  { type: Boolean, default: false                },
-    shift_key_mag:      { type: Number,  default: 10,                  },
-    system_key_mag:     { type: Number,  default: 50,                  },
+    slider_show:        { type: Boolean, default: false, },
+    controller_show:    { type: Boolean, default: false, },
+    key_event_capture:  { type: Boolean, default: false  },
+    shift_key_mag:      { type: Number,  default: 10,    },
+    system_key_mag:     { type: Number,  default: 50,    },
   },
   /* eslint-enable */
 
