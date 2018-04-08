@@ -277,6 +277,7 @@ export default {
       this.mediator_setup(this.start_turn)
       if (this.current_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
+        this.sound_call("piece_sound")
       }
     },
 
