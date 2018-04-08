@@ -121,7 +121,6 @@
       </template>
       <tr><th>start_turn</th><td>{{start_turn}}</td></tr>
       <tr><th>current_turn</th><td>{{current_turn}}</td></tr>
-      <tr><th>read_counter</th><td>{{read_counter}}</td></tr>
       <tr><th>interval_id</th><td>{{interval_id}}</td></tr>
       <tr><th>key_event_capture</th><td>{{key_event_capture}}</td></tr>
       <tr><th>current_preset</th><td>{{current_preset}}</td></tr>
@@ -224,7 +223,6 @@ export default {
       turn_edit: false,              // N手目編集中
       env: process.env.NODE_ENV,
       error_message: null,
-      read_counter: 0,
       update_counter: 0,
       setting_modal_p: false,
     }
