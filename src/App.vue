@@ -413,7 +413,7 @@
             </b-field>
             <b-field label="human_side">
               <div class="block">
-                <b-radio v-model="human_side" native-value="">なし</b-radio>
+                <b-radio v-model="human_side" native-value="">両方</b-radio>
                 <b-radio v-model="human_side" native-value="black">☗</b-radio>
                 <b-radio v-model="human_side" native-value="white">☖</b-radio>
               </div>
@@ -532,7 +532,7 @@ export default {
       slider_show: true,
       controller_show: true,
       sfen_show: true,
-      human_side: null,
+      human_side: "",
       sound_effect: true,
       volume: 0.5,
       key_event_capture: false,
