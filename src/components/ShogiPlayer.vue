@@ -253,17 +253,8 @@ export default {
   },
 
   watch: {
-    // current_turn(value) {
-    // },
-
     turn_edit_value() {
-      if (true) {
-        // -1 になると current_turn を更新できないため最後の局面にはならない
-        this.current_turn_set(this.turn_edit_value)
-      } else {
-        // // -1 で最後を表示する場合
-        // this.current_turn = this.turn_edit_value
-      }
+      this.current_turn_set(this.turn_edit_value)
     },
 
     start_turn() {
@@ -278,9 +269,9 @@ export default {
       }
     },
 
-    // -------------------------------------------------------------------------------- current_mode
+    // 外側から run_mode を変更されたとき
     run_mode(value) {
-      this.current_mode = value    // TODO: プロパティ(引数)と内部変数の名前が共有できたないためこんな複雑になっている。どうにかならないのか？
+      this.current_mode = value // TODO: プロパティ(引数)と内部変数が共有できたないため冗長になっている。いい方法ない？ それともこういうもの？
     },
 
     // ダイアログから変更されたとき
@@ -303,16 +294,8 @@ export default {
         this.mediator.current_turn = 0
         this.mediator.run()
 
-        // this.current_turn = 0
         this.init_location_key = this.mediator.current_location.key
       }
-    },
-
-    // -------------------------------------------------------------------------------- other
-
-    // 引数は親が「変更」したときがトリガー
-    debug_mode(v) {
-      this.log(`watch debug_mode: ${v}`)
     },
   },
 

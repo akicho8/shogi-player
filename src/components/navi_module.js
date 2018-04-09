@@ -3,11 +3,11 @@ import _ from "lodash"
 export default {
   /* eslint-disable */
   props: {
-    slider_show:        { type: Boolean, default: false, },
-    controller_show:    { type: Boolean, default: false, },
-    key_event_capture:  { type: Boolean, default: false  },
-    shift_key_mag:      { type: Number,  default: 10,    },
-    system_key_mag:     { type: Number,  default: 50,    },
+    slider_show:       { type: Boolean, default: false, },
+    controller_show:   { type: Boolean, default: false, },
+    key_event_capture: { type: Boolean, default: false  },
+    shift_key_mag:     { type: Number,  default: 10,    },
+    system_key_mag:    { type: Number,  default: 50,    },
   },
   /* eslint-enable */
 
@@ -122,16 +122,7 @@ export default {
         }
       }
 
-      // const new_val = this.mediator.turn_clamp(this.current_turn + v)
-      // if (this.current_turn !== new_val) {
-      //   this.current_turn = new_val
-      // }
       this.current_turn_add(v)
-      // let pos = this.real_turn
-      // const new_val = this.mediator.turn_clamp(pos + v)
-      // if (pos !== new_val) {
-      //   this.current_turn = new_val
-      // }
 
       if (!this.focus_to("slider")) {
         if (v > 0) {
@@ -157,12 +148,7 @@ export default {
     },
 
     current_turn_set(v) {
-      // const new_val = this.mediator.turn_clamp(this.current_turn + v)
-      // if (this.current_turn !== new_val) {
-      //   this.current_turn = new_val
-      // }
       const new_val = this.mediator.turn_clamp(v)
-      // this.current_turn = new_val
 
       if (this.real_turn !== new_val) {
         if (this.current_mode === "view_mode") {
@@ -173,14 +159,6 @@ export default {
           this.sound_call("piece_sound")
         }
       }
-
-      // if (this.real_turn !== new_val) {
-      //   console.log(`current_turn = new_val ${this.current_turn} = ${new_val}`)
-      //   this.current_turn = new_val
-      //   if (this.debug_mode) {
-      //     this.log([v, new_val, this.current_turn])
-      //   }
-      // }
     },
 
     focus_to(key) {
