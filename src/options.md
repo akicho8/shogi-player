@@ -15,7 +15,6 @@
 | volume                     | 駒音ボリューム              | 0 から 1.0                                           | 0.5                 |
 | key_event_capture          | キーボード操作を監視        | どこにもフォーカスしていないときでも左右キーが反応   | false               |
 | polling_interval           | ポーリング間隔(秒)          | 1以上で有効。30 なら30秒間隔で kifu_url を読み直す   | 0                   |
-| last_after_polling         | ポーリング後に最終手に移動  |                                                      | true                |
 | shift_key_mag              | shiftキー押下時の倍速       | 1 または null 指定で無効にできる                     | 10                  |
 | system_key_mag             | システムキー押下時の倍速    | 1 または null 指定で無効にできる                     | 50                  |
 | url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                  | false               |

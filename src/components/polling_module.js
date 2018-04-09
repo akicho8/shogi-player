@@ -6,7 +6,6 @@ export default {
   props: {
     kifu_url:           { type: String,  default: null, },
     polling_interval:   { type: Number,  default: 0,    },
-    last_after_polling: { type: Boolean, default: true, },
   },
   /* eslint-enable */
 
