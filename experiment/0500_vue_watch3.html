@@ -5,7 +5,7 @@
   </head>
   <body>
     <div id="app">
-      <input type="number" :value="pos" @change="pos_change" />{{pos}}<br>
+      <input type="number" :value="pos" @input="pos_change(parseInt($event.target.value))" />{{pos}}<br>
       {{count}}
     </div>
     <script>
@@ -15,12 +15,18 @@
           pos: 0,
           count: 0,
         },
+        watch: {
+          pos() {
+            this.count++
+          },
+        },
         methods: {
-          pos_change() {
-            if (this.pos < 0) {
-              this.pos = 0
+          pos_change(value) {
+            value = parseInt(value)
+            if (value < 0) {
+              value = 0
             }
-            this.count += 1
+            this.pos = value
           },
         },
       })
