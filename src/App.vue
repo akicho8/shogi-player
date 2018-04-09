@@ -219,6 +219,26 @@
             </div>
           </div>
 
+          <div class="columns">
+            <div class="column">
+              <article class="message is-success has-text-left">
+                <div class="message-header">
+                  <p>操作モードについて</p>
+                </div>
+                <div class="message-body">
+                  <div class="content">
+                    <ul>
+                      <li>スライダー等で変更した任意局面から手番側の操作が行えます</li>
+                      <li>いちど指すとその手が最終手になります(分岐には対応していません)</li>
+                      <li>human_side オプションで片側の操作のみに絞れます</li>
+                      <li>再生モードの棋譜とは独立しています(再生モードの棋譜を上書きしません)</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          
           <br>
           <br>
           <h3 class="title has-text-left">3. 編集モード</h3>
