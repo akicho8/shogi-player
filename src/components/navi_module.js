@@ -171,7 +171,7 @@ export default {
     },
 
     board_flip_run() {
-      this.flip = !this.flip
+      this.$store.commit("flip_toggle")
       this.sound_call("flip_sound")
       this.focus_to("slider")
     },

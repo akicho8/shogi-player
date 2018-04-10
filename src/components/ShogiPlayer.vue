@@ -137,6 +137,12 @@
 import _ from "lodash"
 import Vue from 'vue'
 
+import { mapState } from 'vuex'
+
+// Store
+import store from "../store/index.js"
+
+// My Library
 import { Mediator } from "../mediator"
 import { Place } from "../place"
 import { SfenParser } from "../sfen_parser"
@@ -181,6 +187,8 @@ require('axios-debug-log')({
 export default {
   name: 'ShogiPlayer',
 
+  store: store,
+
   mixins: [
     // ここで直接 require("./xxx.js"), とは書けないので注意
     navi_module,
@@ -219,7 +227,6 @@ export default {
       // current_turn: this.start_turn, // N手目
       turn_edit_value: null,         // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,                // 局面管理
-      flip: false,                   // 反転したか？
       turn_edit: false,              // N手目編集中
       env: process.env.NODE_ENV,
       error_message: null,
@@ -380,6 +387,12 @@ export default {
     real_turn() {
       return this.mediator.real_turn
     },
+    ...mapState({
+      // flip: "flip",
+    }),
+    ...mapState([
+      "flip",
+    ]),
   },
 }
 </script>
