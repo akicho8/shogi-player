@@ -2,7 +2,8 @@ import Vue from "vue"
 import Vuex from "vuex"
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
+// "() => " を外すとブラウザ内でグローバルになる
+const store = () => new Vuex.Store({
   state: {
     flip: false,                   // 反転したか？
   },
