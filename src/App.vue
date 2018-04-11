@@ -352,7 +352,7 @@
             :theme="theme"
             :size="size"
             :variation="variation"
-            :debug_mode="debug_mode"
+            :debug_mode.sync="debug_mode"
             :digit_show="digit_show"
             :key_event_capture="key_event_capture"
             :slider_show="slider_show"

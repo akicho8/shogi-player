@@ -28,7 +28,7 @@ export default {
 
   methods: {
     keydown_hook(e) {
-      if (this.debug_mode && false) {
+      if (this.inside_debug_mode && false) {
         this.log(document.activeElement)
         this.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
         this.log("e", e)

@@ -1,5 +1,5 @@
 <template>
-<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${current_mode}`, {debug_mode: debug_mode}, {digit_show: digit_show}]">
+<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${current_mode}`, {debug_mode: inside_debug_mode}, {digit_show: digit_show}]">
   <div v-if="error_message">
     <ErrorNotify>
       <p slot="header">ERROR</p>
@@ -106,7 +106,7 @@
     <CommentArea :comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments" />
   </template>
 
-  <template v-if="debug_mode">
+  <template v-if="inside_debug_mode">
     <table class="table is-bordered is-narrow">
       <tr><th>current_mode</th><td>{{current_mode}}</td></tr>
       <tr><th>update_counter</th><td>{{update_counter}}</td></tr>
@@ -120,7 +120,6 @@
         <tr><th>正規化手番</th><td>{{real_turn}}</td></tr>
       </template>
       <tr><th>start_turn</th><td>{{start_turn}}</td></tr>
-      <tr><th>current_turn</th><td>{{current_turn}}</td></tr>
       <tr><th>interval_id</th><td>{{interval_id}}</td></tr>
       <tr><th>key_event_capture</th><td>{{key_event_capture}}</td></tr>
       <tr><th>current_preset</th><td>{{current_preset}}</td></tr>
@@ -236,6 +235,8 @@ export default {
   },
 
   created() {
+    this.$store.state.inside_debug_mode = this.debug_mode
+
     if (this.current_mode === "view_mode") {
       if (this.kifu_url) {
         this.axios_call()
@@ -304,6 +305,11 @@ export default {
         this.init_location_key = this.mediator.current_location.key
       }
     },
+
+    // 外側と同期したいときは Vuex (../store/index.js) のなかでやってもだめ
+    // 呼ばれているコンポーネントで書かないといけない
+    // こういうときのために Vuex はあるのではないのかという疑問はある
+    inside_debug_mode(v) { this.$emit("update:debug_mode", v) },
   },
 
   methods: {
@@ -346,7 +352,7 @@ export default {
     },
 
     log(v) {
-      if (this.debug_mode) {
+      if (this.inside_debug_mode) {
         console.log(v)
       }
     },
@@ -387,11 +393,21 @@ export default {
     real_turn() {
       return this.mediator.real_turn
     },
+
+    // mapState({
+    // // アロー関数は、コードをとても簡潔にできます！
+    // count: state => state.count,
+    // // 文字列を渡すことは、`state => state.count` と同じです
+    // countAlias: 'count',
+    // // `this` からローカルステートを参照するときは、通常の関数を使わなければいけません
+    // countPlusLocalState (state) {
+    //   return state.count + this.localCount
+    // }
     ...mapState({
-      // flip: "flip",
     }),
     ...mapState([
       "flip",
+      "inside_debug_mode",
     ]),
   },
 }
