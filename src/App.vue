@@ -241,7 +241,7 @@
               </article>
             </div>
           </div>
-          
+
           <br>
           <br>
           <h3 class="title has-text-left">3. 編集モード</h3>
@@ -346,8 +346,8 @@
       <div class="columns">
         <div class="column">
           <ShogiPlayer
-            :run_mode="run_mode"
-            :kifu_body="kifu_body"
+            :run_mode.sync="run_mode"
+            :kifu_body.sync="kifu_body"
             :start_turn="start_turn"
             :theme="theme"
             :size="size"
@@ -481,7 +481,7 @@
 
             <br>
             <br>
-            <h4 class="title">Emit Events</h4>
+            <h4 class="title">操作モードのイベント受信内容</h4>
             <b-field label="@update:play_mode_long_sfen: 操作モードで指した直後の局面を発行(movesあり)">
               <b-input :value="play_mode_long_sfen" type="textarea" />
             </b-field>
@@ -588,6 +588,9 @@ export default {
     play_mode_move_set(v) {
       this.play_mode_move = v
     },
+    // update_kifu_source(v) {
+    //   // this.kifu_body = v
+    // },
   },
 }
 </script>

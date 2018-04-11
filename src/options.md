@@ -1,26 +1,26 @@
-| 名前                       | 意味                        | 備考                                                 | 初期値              |
-|----------------------------|-----------------------------|------------------------------------------------------|---------------------|
-| run_mode                   | 実行モード                  | 再生(view_mode) 操作(play_mode) 編集(edit_mode)      | 'view_mode'         |
-| human_side                 | 人間が操作する側            | play_mode 時の人間側を指定。nullだと両方操作可       | null                |
-| kifu_body                  | 棋譜の本体                  | KIF と SFEN に対応。駒落ちは SFEN のみ               | null                |
-| kifu_url                   | 棋譜ファイルURL             |                                                      | null                |
-| theme                      | テーマ名                    | none:なし simple:シンプル real:木目                  | 'simple'            |
-| variation                  | テーマ内の亜種              | a, b, c, ...                                         | 'a'                 |
-| size                       | サイズ                      | none x-small small default medium large x-large      | 'default'           |
-| start_turn                 | N手目の局面を表示           | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前           | -1                  |
-| slider_show                | スライダー表示              |                                                      | false               |
-| controller_show            | 前後移動用のボタン類表示    |                                                      | false               |
-| sfen_show                  | 局面を sfen で表示          | 主に局面ペディア用                                   | false               |
-| sound_effect               | 駒音                        |                                                      | false               |
-| volume                     | 駒音ボリューム              | 0 から 1.0                                           | 0.5                 |
-| key_event_capture          | キーボード操作を監視        | どこにもフォーカスしていないときでも左右キーが反応   | false               |
-| polling_interval           | ポーリング間隔(秒)          | 1以上で有効。30 なら30秒間隔で kifu_url を読み直す   | 0                   |
-| shift_key_mag              | shiftキー押下時の倍速       | 1 または null 指定で無効にできる                     | 10                  |
-| system_key_mag             | システムキー押下時の倍速    | 1 または null 指定で無効にできる                     | 50                  |
-| url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                  | false               |
-| debug_mode                 | デバッグモード              |                                                      | false               |
-| digit_show              | 盤面の側面に位置を表示      | 上に数字、右端に漢数字を表示する                     | false               |
-| init_preset_key            | 初期配置                    | kifu_body の代わりに指定するとその配置になる         | null                |
+| 名前                       | 意味                        | 備考                                                     | 初期値              | .sync          |
+|----------------------------|-----------------------------|----------------------------------------------------------|---------------------|----------------|
+| run_mode                   | 実行モード                  | view_mode:再生 play_mode:操作 編集:edit_mode。           | 'view_mode'         | ○             |
+| human_side                 | 人間が操作する側            | play_mode 時の人間側を指定。nullだと両方操作可           | null                | ○             |
+| kifu_body                  | 棋譜の本体                  | KIF と SFEN に対応。駒落ちは SFEN のみ                   | null                |                |
+| kifu_url                   | 棋譜ファイルURL             |                                                          | null                |                |
+| theme                      | テーマ名                    | none:なし simple:シンプル real:木目                      | 'simple'            |                |
+| variation                  | テーマ内の亜種              | a, b, c, ...                                             | 'a'                 |                |
+| size                       | サイズ                      | none x-small small default medium large x-large          | 'default'           |                |
+| start_turn                 | N手目の局面を表示           | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前               | -1                  |                |
+| slider_show                | スライダー表示              |                                                          | false               |                |
+| controller_show            | 前後移動用のボタン類表示    |                                                          | false               |                |
+| sfen_show                  | 局面を sfen で表示          | 主に局面ペディア用                                       | false               |                |
+| sound_effect               | 駒音                        |                                                          | false               |                |
+| volume                     | 駒音ボリューム              | 0 から 1.0                                               | 0.5                 |                |
+| key_event_capture          | キーボード操作を監視        | どこにもフォーカスしていないときでも左右キーが反応       | false               |                |
+| polling_interval           | ポーリング間隔(秒)          | 1以上で有効。30 なら30秒間隔で kifu_url を読み直す       | 0                   |                |
+| shift_key_mag              | shiftキー押下時の倍速       | 1 または null 指定で無効にできる                         | 10                  |                |
+| system_key_mag             | システムキー押下時の倍速    | 1 または null 指定で無効にできる                         | 50                  |                |
+| url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                      | false               |                |
+| debug_mode                 | デバッグモード              |                                                          | false               |  ○            |
+| digit_show                 | 盤面の側面に位置を表示      | 上に数字、右端に漢数字を表示する                         | false               |                |
+| init_preset_key            | 初期配置                    | kifu_body の代わりに指定するとその配置になる             | null                |                |
 
 <br>
 
@@ -45,3 +45,14 @@
     **key_event_capture** は副作用があります。有効にするとどこにもフォーカスしていないときでも左右ボタンに反応するようになって便利な面もありますが、他のプログラムの操作を奪ってしまうことになるかもしれません。なので基本は false にしておいた方がよいです。
   </div>
 </article>
+
+## イベント
+
+| 名前                        | 意味                                                    |
+|-----------------------------|---------------------------------------------------------|
+| update:play_mode_long_sfen  | 操作モードで指した直後の局面を発行(movesあり)           |                   
+| update:play_mode_short_sfen | 操作モードで指した直後の局面を発行(movesなし)           |
+| update:play_mode_move       | 操作モードで指した手(sfenのmovesの最後の1つ)            |
+| update:run_mode             | 設定ダイアログでモードが変更されたとき                  |
+| update:kifu_body            | 設定ダイアログで棋譜が変更されたとき                    |
+| update:debug_mode           | 設定ダイアログでデバッグモードが変更されたとき          |

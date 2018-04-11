@@ -58,8 +58,9 @@ export default {
         headers: {"X-SHOGI-PLAYER-TIMESTAMP": accessd_at},
       }).then((response) => {
         this.error_message = null
+        this.inside_custom_kifu = null
         this.kifu_body_from_url = response.data
-        this.mediator_setup(this.start_turn)
+        // this.mediator_setup(this.start_turn)
       }).catch((error) => {
         if (error.response) {
           logger_debug("error.response.data: %o", error.response.data)

@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-card has-text-left" style="width: auto">
+  <div class="modal-card has-text-left"><!-- style="width: auto" -->
     <header class="modal-card-head">
       <p class="modal-card-title">設定</p>
     </header>
@@ -16,6 +16,9 @@
       </b-field>
       <b-field label="デバッグモード">
         <b-switch v-model="inside_debug_mode" />
+      </b-field>
+      <b-field label="棋譜">
+        <b-input v-model="kifu_source2" type="textarea" />
       </b-field>
     </section>
     <footer class="modal-card-foot">
@@ -36,15 +39,20 @@
 export default {
   props: {
     run_mode: {required: true},
+    kifu_source: {required: false},
   },
   data() {
     return {
       current_mode: this.run_mode,
+      kifu_source2: this.kifu_source,
     }
   },
   watch: {
     current_mode(value) {
       this.$emit("update:run_mode", value)
+    },
+    kifu_source2(value) {
+      this.$emit("update:kifu_body", value)
     },
   },
   methods: {

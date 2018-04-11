@@ -45,7 +45,7 @@
       </template>
       <span class="is-pulled-right modal_trigger_dots" @click="setting_modal_p = true"><b-icon icon="dots-vertical" size="is-small"></b-icon></span>
       <b-modal :active.sync="setting_modal_p" has-modal-card>
-        <SettingModal :run_mode.sync="current_mode"></SettingModal>
+        <SettingModal :run_mode.sync="current_mode" :kifu_source="kifu_source" @update:kifu_body="update_kifu_source" />
       </b-modal>
     </div>
     <div class="board_container flippable" :class="{flip: flip}">
@@ -231,10 +231,12 @@ export default {
       error_message: null,
       update_counter: 0,
       setting_modal_p: false,
+      inside_custom_kifu: null, // 設定ダイアログで変更されたときに入る
     }
   },
 
   created() {
+    this.inside_custom_kifu = null
     this.$store.state.inside_debug_mode = this.debug_mode
 
     if (this.current_mode === "view_mode") {
@@ -269,7 +271,7 @@ export default {
       this.current_turn_set(this.start_turn)
     },
 
-    kifu_body() {
+    kifu_source() {
       this.mediator_setup(this.start_turn)
       if (this.current_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
@@ -284,6 +286,8 @@ export default {
 
     // ダイアログから変更されたとき
     current_mode(new_val, old_val) {
+      this.$emit("update:run_mode", this.current_mode)
+
       if (this.current_mode === "view_mode") {
         this.log("current_mode: view_mode")
         this.view_mode_mediator_update(this.real_turn)
@@ -384,11 +388,16 @@ export default {
 
       return list
     },
+
+    update_kifu_source(v) {
+      this.inside_custom_kifu = v
+      this.$emit("update:kifu_body", v) // 子で emit されたイベントを親で拾い、同じ内容でイベント発火。何この複雑さ。
+    }
   },
 
   computed: {
     kifu_source() {
-      return this.kifu_body_from_url || this.kifu_body || this.init_preset_sfen || "position startpos"
+      return this.inside_custom_kifu || this.kifu_body_from_url || this.kifu_body || this.init_preset_sfen || "position startpos"
     },
     real_turn() {
       return this.mediator.real_turn
