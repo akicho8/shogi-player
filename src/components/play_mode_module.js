@@ -6,7 +6,7 @@ import { Location } from "../location"
 export default {
   /* eslint-disable */
   props: {
-    human_side: { type: String, default: "black", }, // black or white を指定すると指定してない側の操作をできないようにする
+    human_side: { type: String, default: null, }, // black or white を指定すると指定してない側の操作をできないようにする
   },
   /* eslint-enable */
 
