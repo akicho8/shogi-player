@@ -6,21 +6,21 @@
 | kifu_url                   | 棋譜ファイルURL             |                                                          | null                |                |
 | theme                      | テーマ名                    | none:なし simple:シンプル real:木目                      | 'simple'            |                |
 | variation                  | テーマ内の亜種              | a, b, c, ...                                             | 'a'                 |                |
-| size                       | サイズ                      | none x-small small default medium large x-large          | 'default'           |                |
-| start_turn                 | N手目の局面を表示           | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前               | -1                  |                |
-| slider_show                | スライダー表示              |                                                          | false               |                |
-| controller_show            | 前後移動用のボタン類表示    |                                                          | false               |                |
+| size                       | 盤面の大きさ                | none x-small small default medium large x-large          | 'default'           |                |
+| start_turn                 | N手目の局面から表示         | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前               | -1                  |                |
+| slider_show                | 局面スライダー表示          |                                                          | false               |                |
+| controller_show            | 前後移動用のボタン類の表示  |                                                          | false               |                |
 | sfen_show                  | 局面を sfen で表示          | 主に局面ペディア用                                       | false               |                |
-| sound_effect               | 駒音                        |                                                          | false               |                |
-| volume                     | 駒音ボリューム              | 0 から 1.0                                               | 0.5                 |                |
+| sound_effect               | 駒音の有無                  |                                                          | false               |                |
+| volume                     | 駒音の大きさ                | 0 から 1.0                                               | 0.5                 |                |
 | key_event_capture          | キーボード操作を監視        | どこにもフォーカスしていないときでも左右キーが反応       | false               |                |
 | polling_interval           | ポーリング間隔(秒)          | 1以上で有効。30 なら30秒間隔で kifu_url を読み直す       | 0                   |                |
 | shift_key_mag              | shiftキー押下時の倍速       | 1 または null 指定で無効にできる                         | 10                  |                |
 | system_key_mag             | システムキー押下時の倍速    | 1 または null 指定で無効にできる                         | 50                  |                |
 | url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                      | false               |                |
-| debug_mode                 | デバッグモード              |                                                          | false               |  ○            |
+| debug_mode                 | デバッグモード              | 主に開発用                                               | false               |  ○            |
 | digit_show                 | 盤面の側面に位置を表示      | 上に数字、右端に漢数字を表示する                         | false               |                |
-| init_preset_key            | 初期配置                    | kifu_body の代わりに指定するとその配置になる             | null                |                |
+| init_preset_key            | 盤面の初期配置              | kifu_body の代わりに指定するとその配置になる             | null                |                |
 
 <br>
 
