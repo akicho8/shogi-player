@@ -59,7 +59,7 @@
         <div class="container">
           <ul>
             <li><a href="#summary">概要</a></li>
-            <li><a href="#examples">サンプル</a></li>
+            <li><a href="#examples">デモ</a></li>
             <li><a href="#usage">使い方</a></li>
             <li><a href="#options">オプション</a></li>
           </ul>
@@ -91,7 +91,7 @@
   <section class="section">
     <a name="examples"></a>
     <div class="container">
-      <h2 class="title">サンプル</h2>
+      <h2 class="title">デモ</h2>
       <hr>
       <section class="section">
         <div class="container has-text-centered">

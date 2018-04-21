@@ -1,30 +1,22 @@
-<template>
-  <div class="modal-card has-text-left"><!-- style="width: auto" -->
-    <header class="modal-card-head">
-      <p class="modal-card-title">設定</p>
-    </header>
-    <section class="modal-card-body">
-      <b-field label="モード">
-        <div class="block">
-          <b-radio v-model="current_mode" native-value="view_mode">再生</b-radio>
-          <b-radio v-model="current_mode" native-value="play_mode">操作</b-radio>
-          <b-radio v-model="current_mode" native-value="edit_mode">編集</b-radio>
-        </div>
-      </b-field>
-      <b-field label="反転">
-        <b-switch v-model="flip" />
-      </b-field>
-      <b-field label="デバッグモード">
-        <b-switch v-model="inside_debug_mode" />
-      </b-field>
-      <b-field label="棋譜">
-        <b-input v-model="kifu_source2" type="textarea" />
-      </b-field>
-    </section>
-    <footer class="modal-card-foot">
-      <button class="button is-primary" @click="$parent.close()">閉じる</button>
-    </footer>
-  </div>
+<template lang="pug">
+  //- style="width: auto"
+  .modal-card.has-text-left
+    header.modal-card-head
+      p.modal-card-title 設定
+    section.modal-card-body
+      b-field(label="モード")
+        .block
+          b-radio(v-model="current_mode" native-value="view_mode") 再生
+          b-radio(v-model="current_mode" native-value="play_mode") 操作
+          b-radio(v-model="current_mode" native-value="edit_mode") 編集
+      b-field(label="反転")
+        b-switch(v-model="flip")
+      b-field(label="デバッグモード")
+        b-switch(v-model="inside_debug_mode")
+      b-field(label="棋譜")
+        b-input(v-model="kifu_source2" type="textarea")
+    footer.modal-card-foot
+      button.button.is-primary(@click="$parent.close()") 閉じる
 </template>
 
 <script>
@@ -69,8 +61,8 @@ export default {
     inside_debug_mode: {
       get() { return this.$store.state.inside_debug_mode },
       set(v) {
-        this.$store.commit("inside_debug_mode_set", v)
-        // 別に直接更新してもよい
+        this.$store.commit("inside_debug_mode_set", v) // どんだけ冗長なことやらすんだ。面倒くさいぞこれ
+        // というか別に直接更新してもよい
         // this.$store.state.inside_debug_mode = v
       },
     },
