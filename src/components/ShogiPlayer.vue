@@ -32,7 +32,7 @@
         <template v-if="!turn_edit">
           <span class="turn_edit_text" @click="turn_edit_run">
             <template v-if="current_mode === 'view_mode'">
-              {{mediator.current_turn_label}}
+              {{mediator.current_turn_label(this.final_label)}}
             </template>
             <template v-if="current_mode === 'play_mode'">
               {{real_turn}}手目
@@ -210,6 +210,7 @@ export default {
     variation:          { type: String,  default: "a"          },
     debug_mode:         { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
     digit_show:         { type: Boolean, default: false,       },
+    final_label:              { type: String,  default: null,        },
   },
   /* eslint-enable */
 

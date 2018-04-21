@@ -143,9 +143,13 @@ class Mediator {
     }
   }
 
-  get current_turn_label() {
+  current_turn_label(final_label) {
     if (this.real_turn === this.data_source.turn_max) {
-      return `まで${this.real_turn}手で${this.previous_location.name}の勝ち`
+      if (final_label) {
+        return `まで${this.real_turn}手で${final_label}`
+      } else {
+        return `まで${this.real_turn}手で${this.previous_location.name}の勝ち`
+      }
     } else {
       return `${this.real_turn}手目`
     }

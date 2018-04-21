@@ -20,6 +20,7 @@
 | url_embed_turn             | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                      | false               |                |
 | debug_mode                 | デバッグモード              | 主に開発用                                               | false               |  ○            |
 | digit_show                 | 盤面の側面に位置を表示      | 上に数字、右端に漢数字を表示する                         | false               |                |
+| final_label                      | 結果の文字列                | 空だと「○の勝ち」                                       | null                |                |
 | init_preset_key            | 盤面の初期配置              | kifu_body の代わりに指定するとその配置になる             | null                |                |
 
 <br>
