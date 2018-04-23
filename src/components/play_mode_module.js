@@ -58,8 +58,6 @@ export default {
     moves_set(value) {
       this.moves = _.take(this.moves, this.real_turn) // 「待った」して指す場合を考慮してカレント以降の指し手を削除する
       this.moves.push(value)
-      this.$emit("update:play_mode_long_sfen", this.play_mode_current_sfen)
-      this.$emit("update:play_mode_move", value)
     },
 
     turn_next() {
@@ -70,6 +68,8 @@ export default {
         this.mediator.run()
         this.sound_call("piece_sound")
 
+        this.$emit("update:play_mode_long_sfen", this.play_mode_current_sfen)
+        this.$emit("update:play_mode_move", _.last(this.moves))
         this.$emit("update:play_mode_short_sfen", this.mediator.to_position_sfen)
       }
     },
