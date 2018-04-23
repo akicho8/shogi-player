@@ -365,7 +365,14 @@
             @update:play_mode_short_sfen="play_mode_short_sfen_set"
             @update:play_mode_move="play_mode_move_set"
             />
-          <hr>
+          <br>
+          <div class="box">
+            <b-field label="CPUの強さ">
+              <div class="block">
+                あいうえお
+              </div>
+            </b-field>
+          </div>
         </div>
       </div>
       <div class="columns">
@@ -552,14 +559,14 @@ export default {
 
     return {
       // カスタマイズ用
-      run_mode: "view_mode",   // play_mode
-      theme: "simple",
+      run_mode: "play_mode",   // play_mode
+      theme: "real",
       variation: "a",
       size: "default",
       start_turn: -1,
-      slider_show: true,
+      slider_show: false,
       controller_show: true,
-      sfen_show: true,
+      sfen_show: false,
       human_side: "",
       sound_effect: true,
       volume: 0.5,
