@@ -275,10 +275,21 @@ export default {
     },
 
     kifu_source() {
+      const before_turn_max = this.mediator.turn_max
+      console.log(`mediator.turn_max: ${this.mediator.turn_max}`)
       this.mediator_setup(this.start_turn)
+      console.log(`mediator.turn_max: ${this.mediator.turn_max}`)
       if (this.current_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
-        this.sound_call("piece_sound")
+        // 棋譜を反映された側は
+        // 1. 相手が指したのか → 駒音だす
+        // 2. 自分の指し手が正しい指し手だと判断された棋譜が返って反映されたのか → 駒音なし
+        // この区別が付かない。なのでここで成らさない方がよい
+        // this.sound_call("piece_sound")
+        // ……と思ったが 1 は mediator.turn_max が変化したかどうかで判断できる。いや sfen を見ればわかる？ → そこまでする必要ない
+        if (before_turn_max !== this.mediator.turn_max) {
+          this.sound_call("piece_sound")
+        }
       }
     },
 
