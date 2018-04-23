@@ -74,7 +74,9 @@ class SfenParser extends ParserBase {
   }
 
   get move_infos() {
-    return this.moves.map((e, i) => {
+    // this.moves.map((e, i) => { としたかったが break できないため lodash の forEach に変更。lodash のは false で break できる
+    const ary = []
+    _.forEach(this.moves, (e, i) => {
       const attrs = {}
       // if (true) {
       //   attrs["scene_index"] = this.turn_min + i
@@ -82,6 +84,9 @@ class SfenParser extends ParserBase {
       // }
       attrs["location"] = this.location_by_offset(i)
       const md = XRegExp.exec(e, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
+      if (!md) {
+        return false            // break
+      }
       attrs["promoted_trigger"] = (md.promoted === "+")
       if (md["origin_y"] === "*") {
         attrs["drop_piece"] = Piece.fetch(md["origin_x"])
@@ -89,8 +94,9 @@ class SfenParser extends ParserBase {
         attrs["origin_place"] = Place.fetch(`${md["origin_x"]}${md["origin_y"]}`)
       }
       attrs["place"] = Place.fetch(`${md["pos_x"]}${md["pos_y"]}`)
-      return attrs
+      ary.push(attrs)
     })
+    return ary
   }
 
   get moves() {
