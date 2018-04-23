@@ -95,7 +95,7 @@
         <button                class="button flip"     @click.stop="board_flip_run"><b-icon icon="rotate-3d" size="is-small"></b-icon></button>
       </div>
       <div v-if="slider_show">
-        <input type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="turn_slider" class="turn_slider" />
+        <input type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="turn_min" :max="turn_max" ref="turn_slider" class="turn_slider" />
       </div>
     </div>
 
@@ -275,10 +275,10 @@ export default {
     },
 
     kifu_source() {
-      const before_turn_max = this.mediator.turn_max
-      console.log(`mediator.turn_max: ${this.mediator.turn_max}`)
+      const before_turn_max = this.turn_max
+      console.log(`turn_max: ${this.turn_max}`)
       this.mediator_setup(this.start_turn)
-      console.log(`mediator.turn_max: ${this.mediator.turn_max}`)
+      console.log(`turn_max: ${this.turn_max}`)
       if (this.current_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
         // 棋譜を反映された側は
@@ -286,8 +286,8 @@ export default {
         // 2. 自分の指し手が正しい指し手だと判断された棋譜が返って反映されたのか → 駒音なし
         // この区別が付かない。なのでここで成らさない方がよい
         // this.sound_call("piece_sound")
-        // ……と思ったが 1 は mediator.turn_max が変化したかどうかで判断できる。いや sfen を見ればわかる？ → そこまでする必要ない
-        if (before_turn_max !== this.mediator.turn_max) {
+        // ……と思ったが 1 は turn_max が変化したかどうかで判断できる。いや sfen を見ればわかる？ → そこまでする必要ない
+        if (before_turn_max !== this.turn_max) {
           this.sound_call("piece_sound")
         }
       }
@@ -404,17 +404,22 @@ export default {
 
     update_kifu_source(v) {
       this.inside_custom_kifu = v
-      this.$emit("update:kifu_body", v) // 子で emit されたイベントを親で拾い、同じ内容でイベント発火。何この複雑さ。
+      this.$emit("update:kifu_body", v) // 子で emit されたイベントを親(自分)で拾い、同じ内容で親に向けて発火。何この複雑さ。
     }
   },
 
   computed: {
     kifu_source() {
+      // 設定で棋譜を更新したのが入った inside_custom_kifu が最優先。つまりもう更新はできなくなる。いいのか？
       return this.inside_custom_kifu || this.kifu_body_from_url || this.kifu_body || this.init_preset_sfen || "position startpos"
     },
-    real_turn() {
-      return this.mediator.real_turn
-    },
+
+    // 本当は delegate したいシリーズ
+    /* eslint-disable */
+    real_turn() { return this.mediator.real_turn },
+    turn_min()  { return this.mediator.turn_min  },
+    turn_max()  { return this.mediator.turn_max  },
+    /* eslint-enable */
 
     // mapState({
     // // アロー関数は、コードをとても簡潔にできます！

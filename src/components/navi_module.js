@@ -78,10 +78,10 @@ export default {
       //   }
       // }
       // if (e.key === "[" || e.key === "Home" || e.code === "Escape") {
-      //   force_value = this.mediator.data_source.turn_min
+      //   force_value = this.turn_min
       // }
       // if (e.key === "]" || e.key === "End") {
-      //   force_value = this.mediator.data_source.turn_max
+      //   force_value = this.turn_max
       // }
       //
       // let v = this.current_turn
@@ -91,11 +91,11 @@ export default {
       // if (force_value !== null) {
       //   v = force_value
       // }
-      // if (v < this.mediator.data_source.turn_min) {
-      //   v = this.mediator.data_source.turn_min
+      // if (v < this.turn_min) {
+      //   v = this.turn_min
       // }
-      // if (this.mediator.data_source.turn_max < v) {
-      //   v = this.mediator.data_source.turn_max
+      // if (this.turn_max < v) {
+      //   v = this.turn_max
       // }
       // this.current_turn = v
       //
@@ -134,12 +134,12 @@ export default {
     },
 
     move_to_first() {
-      this.current_turn_set(this.mediator.data_source.turn_min)
+      this.current_turn_set(this.turn_min)
       this.focus_to("turn_slider") || this.focus_to("first")
     },
 
     move_to_last() {
-      this.current_turn_set(this.mediator.data_source.turn_max)
+      this.current_turn_set(this.turn_max)
       this.focus_to("turn_slider") || this.focus_to("last")
     },
 
