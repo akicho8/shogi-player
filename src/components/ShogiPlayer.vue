@@ -238,7 +238,7 @@ export default {
 
   created() {
     this.inside_custom_kifu = null
-    this.$store.state.inside_debug_mode = this.debug_mode
+    this.$store.state.inside_debug_mode = this.debug_mode // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
 
     if (this.current_mode === "view_mode") {
       if (this.kifu_url) {
@@ -280,11 +280,6 @@ export default {
       }
     },
 
-    // 外側から run_mode を変更されたとき
-    run_mode(value) {
-      this.current_mode = value // TODO: プロパティ(引数)と内部変数が共有できたないため冗長になっている。いい方法ない？ それともこういうもの？
-    },
-
     // ダイアログから変更されたとき
     current_mode(new_val, old_val) {
       this.$emit("update:run_mode", this.current_mode)
@@ -311,10 +306,14 @@ export default {
       }
     },
 
-    // 外側と同期したいときは Vuex (../store/index.js) のなかでやってもだめ
+    // 外側に通知したいときは Vuex (../store/index.js) のなかでやってもだめ
     // 呼ばれているコンポーネントで書かないといけない
     // こういうときのために Vuex はあるのではないのかという疑問はある
-    inside_debug_mode(v) { this.$emit("update:debug_mode", v) },
+    /* eslint-disable */
+    inside_debug_mode(v) { this.$emit("update:debug_mode", v)             }, // 内から外への通知
+    debug_mode(v)        { this.$store.commit("inside_debug_mode_set", v) }, // 外から内への反映
+    run_mode(v)          { this.current_mode = v                          }, // 外側から run_mode を変更されたとき
+    /* eslint-enable */
   },
 
   methods: {

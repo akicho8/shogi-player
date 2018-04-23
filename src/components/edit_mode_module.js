@@ -407,8 +407,10 @@ export default {
     },
 
     // マウス位置に表示する駒の生成
+    //
     //   .piece_outer.cursor_elem
-    //     .piece_inner
+    //     .piece_inner.virtual_piece_flip
+    //
     virtual_piece_create(event, class_list) {
       this.virtual_piece_destroy()
 
@@ -423,7 +425,7 @@ export default {
       this.cursor_elem.appendChild(piece_inner)
       this.$el.appendChild(this.cursor_elem)
 
-      this.mouse_stick = true
+      this.mouse_stick = true   // マウスに追随する
 
       this.last_event = event
       this.log(this.last_event)

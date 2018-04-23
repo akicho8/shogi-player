@@ -365,6 +365,7 @@
             @update:play_mode_short_sfen="play_mode_short_sfen_set"
             @update:play_mode_move="play_mode_move_set"
             />
+          <hr>
         </div>
       </div>
       <div class="columns">
