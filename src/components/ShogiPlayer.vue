@@ -28,7 +28,7 @@
 
   <template v-if="mediator">
     <div class="turn_div">
-      <template v-if="current_mode === 'view_mode' || current_mode === 'play_mode'">
+      <div v-if="current_mode === 'view_mode' || current_mode === 'play_mode'" class="turn_area">
         <template v-if="!turn_edit">
           <span class="turn_edit_text" @click="turn_edit_run">
             <template v-if="current_mode === 'view_mode'">
@@ -42,7 +42,7 @@
         <template v-if="turn_edit">
           <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
         </template>
-      </template>
+      </div>
       <span class="is-pulled-right modal_trigger_dots" @click="setting_modal_p = true"><b-icon icon="dots-vertical" size="is-small"></b-icon></span>
       <b-modal :active.sync="setting_modal_p" has-modal-card>
         <SettingModal :run_mode.sync="current_mode" :kifu_source="kifu_source" @update:kifu_body="update_kifu_source" />
@@ -86,18 +86,18 @@
       </div>
     </div>
 
-    <template v-if="current_mode === 'view_mode' || current_mode === 'play_mode'">
-      <div v-if="controller_show" class="controller_block buttons has-addons is-centered">
+    <div v-if="current_mode === 'view_mode' || current_mode === 'play_mode'">
+      <div v-if="controller_show" class="controller_block buttons has-addons is-centered is-paddingless">
         <button ref="first"    class="button first"    @click.stop="move_to_first"><b-icon icon="menu-left"></b-icon></button>
         <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)"><b-icon icon="chevron-left" size="is-small"></b-icon></button>
         <button ref="next"     class="button next"     @click.stop="relative_move(+1, $event)"><b-icon icon="chevron-right" size="is-small"></b-icon></button>
         <button ref="last"     class="button last"     @click.stop="move_to_last"><b-icon icon="menu-right"></b-icon></button>
         <button                class="button flip"     @click.stop="board_flip_run"><b-icon icon="rotate-3d" size="is-small"></b-icon></button>
       </div>
-      <template v-if="slider_show">
-        <input type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="slider" class="slider" />
-      </template>
-    </template>
+      <div v-if="slider_show">
+        <input type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="mediator.data_source.turn_min" :max="mediator.data_source.turn_max" ref="turn_slider" class="turn_slider" />
+      </div>
+    </div>
 
     <div class="sfen_area is-size-7 has-text-grey" v-if="sfen_show">
       {{mediator.to_sfen}}
@@ -106,29 +106,31 @@
     <CommentArea :comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments" />
   </template>
 
-  <template v-if="inside_debug_mode">
-    <table class="table is-bordered is-narrow">
-      <tr><th>current_mode</th><td>{{current_mode}}</td></tr>
-      <tr><th>update_counter</th><td>{{update_counter}}</td></tr>
-      <tr><th>place_from</th><td>{{place_from}}</td></tr>
-      <tr><th>have_piece</th><td>{{have_piece}}</td></tr>
-      <template v-if="mediator">
-        <tr><th>駒箱</th><td>{{mediator.piece_box_realize()}}</td></tr>
-        <tr><th>持駒</th><td>{{mediator.hold_pieces}}</td></tr>
-        <tr><th>次の手番</th><td>{{mediator.current_location.key}}</td></tr>
-        <tr><th>SFEN</th><td>{{mediator.to_sfen}}</td></tr>
-        <tr><th>正規化手番</th><td>{{real_turn}}</td></tr>
-      </template>
-      <tr><th>start_turn</th><td>{{start_turn}}</td></tr>
-      <tr><th>interval_id</th><td>{{interval_id}}</td></tr>
-      <tr><th>key_event_capture</th><td>{{key_event_capture}}</td></tr>
-      <tr><th>current_preset</th><td>{{current_preset}}</td></tr>
-      <tr><th>moves</th><td>{{moves}}</td></tr>
-      <tr><th>init_sfen</th><td>{{init_sfen}}</td></tr>
-      <tr><th>init_location_key</th><td>{{init_location_key}}</td></tr>
-      <tr><th>play_mode_current_sfen</th><td>{{play_mode_current_sfen}}</td></tr>
+  <div v-if="inside_debug_mode" class="debug_table">
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <tbody>
+        <tr><th>現在のモード(current_mode)</th><td>{{current_mode}}</td></tr>
+        <tr><th>update_counter</th><td>{{update_counter}}</td></tr>
+        <tr><th>移動元座標(place_from)</th><td>{{place_from}}</td></tr>
+        <tr><th>駒台・駒箱から移動中の駒(have_piece)</th><td>{{have_piece}}</td></tr>
+        <template v-if="mediator">
+          <tr><th>駒箱</th><td>{{mediator.piece_box_realize()}}</td></tr>
+          <tr><th>持駒</th><td>{{mediator.hold_pieces}}</td></tr>
+          <tr><th>次の手番</th><td>{{mediator.current_location.key}}</td></tr>
+          <tr><th>現局面のSFEN</th><td>{{mediator.to_sfen}}</td></tr>
+          <tr><th>正規化手番</th><td>{{real_turn}}</td></tr>
+        </template>
+        <tr><th>開始局面番号(start_turn)</th><td>{{start_turn}}</td></tr>
+        <tr><th>初期配置(current_preset)</th><td>{{current_preset}}</td></tr>
+        <tr><th>play_modeでの指し手(moves)</th><td>{{moves}}</td></tr>
+        <tr><th>play_modeの開始局面(init_sfen)</th><td>{{init_sfen}}</td></tr>
+        <tr><th>編集モード時の手番(init_location_key)</th><td>{{init_location_key}}</td></tr>
+        <tr><th>play_modeでのSFEN(play_mode_current_sfen)</th><td>{{play_mode_current_sfen}}</td></tr>
+        <tr><th>key_event_capture</th><td>{{key_event_capture}}</td></tr>
+        <tr><th>interval_id</th><td>{{interval_id}}</td></tr>
+      </tbody>
     </table>
-  </template>
+  </div>
 </div>
 </template>
 
@@ -210,7 +212,7 @@ export default {
     variation:          { type: String,  default: "a"          },
     debug_mode:         { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
     digit_show:         { type: Boolean, default: false,       },
-    final_label:              { type: String,  default: null,        },
+    final_label:        { type: String,  default: null,        },
   },
   /* eslint-enable */
 

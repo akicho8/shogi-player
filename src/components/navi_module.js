@@ -124,7 +124,7 @@ export default {
 
       this.current_turn_add(v)
 
-      if (!this.focus_to("slider")) {
+      if (!this.focus_to("turn_slider")) {
         if (v > 0) {
           this.focus_to("next")
         } else {
@@ -135,12 +135,12 @@ export default {
 
     move_to_first() {
       this.current_turn_set(this.mediator.data_source.turn_min)
-      this.focus_to("slider") || this.focus_to("first")
+      this.focus_to("turn_slider") || this.focus_to("first")
     },
 
     move_to_last() {
       this.current_turn_set(this.mediator.data_source.turn_max)
-      this.focus_to("slider") || this.focus_to("last")
+      this.focus_to("turn_slider") || this.focus_to("last")
     },
 
     current_turn_add(v) {
@@ -173,7 +173,7 @@ export default {
     board_flip_run() {
       this.$store.commit("flip_toggle")
       this.sound_call("flip_sound")
-      this.focus_to("slider")
+      this.focus_to("turn_slider")
     },
   },
 }

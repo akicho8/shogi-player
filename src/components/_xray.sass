@@ -1,7 +1,8 @@
 @mixin sp_xray_color($level)
-  background: hsla((360 / 10) * $level, 50%, 50%, 0.25)
-  border: 1px solid hsla((360 / 10) * $level, 50%, 50%, 0.8)
-  
+  $color: hsla((240 + 360 / 15) * $level, 50%, 50%, 0.4)
+  background: $color
+  border: 1px solid darken($color, 50%)
+
 .shogi-player
   &.debug_mode
     @include sp_xray_color(0)
@@ -27,3 +28,14 @@
       @include sp_xray_color(9)
     .cursor_elem
       @include sp_xray_color(10)
+    .turn_slider
+      @include sp_xray_color(11)
+    .sfen_area
+      @include sp_xray_color(12)
+    .turn_area
+      @include sp_xray_color(13)
+
+  .debug_table
+    table
+      th
+        text-align: right
