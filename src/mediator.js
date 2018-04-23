@@ -31,7 +31,7 @@ class Mediator {
 
     const move_infos = this.data_source.move_infos
 
-    const num = this.real_turn - this.data_source.turn_min
+    const num = this.real_turn - this.turn_min
     _(num).times((i) => { this.execute_one(move_infos[i]) })
   }
 
@@ -120,13 +120,13 @@ class Mediator {
   get real_turn() {
     let index = Number(this.current_turn)
     if (index < 0) {
-      index += this.data_source.turn_max + 1
+      index += this.turn_max + 1
     }
     return this.turn_clamp(index)
   }
 
   turn_clamp(index) {
-    return _.clamp(Number(index), this.data_source.turn_min, this.data_source.turn_max)
+    return _.clamp(Number(index), this.turn_min, this.turn_max)
   }
 
   get previous_location() {
@@ -143,8 +143,16 @@ class Mediator {
     }
   }
 
+  get turn_min() {
+    return this.data_source.turn_min
+  }
+
+  get turn_max() {
+    return this.data_source.turn_max
+  }
+
   current_turn_label(final_label) {
-    if (this.real_turn === this.data_source.turn_max) {
+    if (this.real_turn === this.turn_max) {
       if (final_label) {
         return `まで${this.real_turn}手で${final_label}`
       } else {
