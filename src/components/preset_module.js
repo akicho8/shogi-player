@@ -39,6 +39,9 @@ export default {
           this.mediator.piece_box_add(Piece.fetch(e), c)
         })
         this.mediator.run()
+
+        // 駒落ちのときは△の手番から始まるので edit_mode での手番に反映する
+        this.init_location_key = this.mediator.current_location.key
       }
     },
   },
