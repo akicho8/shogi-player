@@ -33,19 +33,31 @@ export default {
 
       if (this.mediator.data_source.init_sfen !== undefined) {
         // 棋譜の最初からの指し手をすべて保持
-        this.init_sfen = this.mediator.data_source.init_sfen
-        this.moves = this.mediator.data_source.moves
+        // view_mode -> play_mode
+        if (old_val === "view_mode") {
+          this.init_sfen = this.mediator.data_source.init_sfen
+          this.moves = this.mediator.data_source.moves
+        }
+        // edit_mode -> play_mode
+        if (old_val === "edit_mode") {
+          this.init_sfen_build()
+        }
       } else {
         // 現時点の状態から始める (KIFの場合)
         if (old_val === "view_mode") {
           this.init_location_key = this.mediator.current_location.key
         }
-        const sfen_serializer = this.mediator.sfen_serializer
-        this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location.key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
-        this.moves = []
+        this.init_sfen_build()
       }
 
       this.play_mode_mediator_seek_to(this.real_turn)
+    },
+
+    // 現在の状態を基点として play_mode に入る
+    init_sfen_build() {
+      const sfen_serializer = this.mediator.sfen_serializer
+      this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location.key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
+      this.moves = []
     },
 
     play_mode_mediator_seek_to(turn) {
