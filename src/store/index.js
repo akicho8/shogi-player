@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const store = () => new Vuex.Store({
   state: {
     flip: false,                // 反転したか？
-    inside_debug_mode: false,
+    current_debug_mode: false,
     current_theme: null,
     current_size: null,
     current_variation: null,
@@ -17,9 +17,9 @@ const store = () => new Vuex.Store({
       state.flip = !state.flip
     },
 
-    // this.$store.commit("inside_debug_mode_set", true)
-    inside_debug_mode_set(state, payload) {
-      state.inside_debug_mode = payload
+    // this.$store.commit("current_debug_mode_set", true)
+    current_debug_mode_set(state, payload) {
+      state.current_debug_mode = payload
       // ここで呼び出しても意味ない。効き目なし。
       // this.$emit("update:debug_mode", payload)
     },

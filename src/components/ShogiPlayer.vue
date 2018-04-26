@@ -1,5 +1,5 @@
 <template lang="pug">
-.shogi-player(:class="[`theme-${current_theme}`, `size-${current_size}`, `variation-${current_variation}`, `run_mode-${current_mode}`, {debug_mode: inside_debug_mode}, {digit_show: digit_show}]")
+.shogi-player(:class="[`theme-${current_theme}`, `size-${current_size}`, `variation-${current_variation}`, `run_mode-${current_mode}`, {debug_mode: current_debug_mode}, {digit_show: digit_show}]")
   div(v-if="error_message")
     ErrorNotify
       p(slot="header") ERROR
@@ -80,7 +80,7 @@
 
     CommentArea(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
 
-  div.debug_table(v-if="inside_debug_mode")
+  div.debug_table(v-if="current_debug_mode")
     table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
       tbody
         tr: <th>現在のモード(current_mode)</th><td>{{current_mode}}</td>
@@ -209,7 +209,7 @@ export default {
 
   created() {
     this.inside_custom_kifu = null
-    this.$store.state.inside_debug_mode = this.debug_mode // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
+    this.$store.state.current_debug_mode = this.debug_mode // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
     this.$store.state.current_theme = this.theme // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
     this.$store.state.current_size = this.size // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
     this.$store.state.current_variation = this.variation // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
@@ -295,8 +295,8 @@ export default {
     // 呼ばれているコンポーネントで書かないといけない
     // こういうときのために Vuex はあるのではないのかという疑問はある
     /* eslint-disable */
-    inside_debug_mode(v) { this.$emit("update:debug_mode", v)             }, // 内から外への通知
-    debug_mode(v)        { this.$store.commit("inside_debug_mode_set", v) }, // 外から内への反映
+    current_debug_mode(v) { this.$emit("update:debug_mode", v)             }, // 内から外への通知
+    debug_mode(v)        { this.$store.commit("current_debug_mode_set", v) }, // 外から内への反映
     run_mode(v)          { this.current_mode = v                          }, // 外側から run_mode を変更されたとき
 
     current_theme(v)     { this.$emit("update:theme", v)                  }, // 中 -> 外
@@ -350,7 +350,7 @@ export default {
     },
 
     log(v) {
-      if (this.inside_debug_mode) {
+      if (this.current_debug_mode) {
         console.log(v)
       }
     },
@@ -415,7 +415,7 @@ export default {
     }),
     ...mapState([
       "flip",
-      "inside_debug_mode",
+      "current_debug_mode",
       "current_theme",
       "current_size",
       "current_variation",

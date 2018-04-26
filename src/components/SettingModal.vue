@@ -15,7 +15,7 @@
       b-switch(v-model="flip")
 
     b-field(label="デバッグモード")
-      b-switch(v-model="inside_debug_mode")
+      b-switch(v-model="current_debug_mode")
 
     b-field(label="テーマ")
       .block
@@ -83,14 +83,14 @@ export default {
       set(v) { this.$store.state.flip = v },
     },
     // ...mapState([
-    //   "inside_debug_mode",      // これだと get() しか作られない
+    //   "current_debug_mode",      // これだと get() しか作られない
     // ]),
-    inside_debug_mode: {
-      get() { return this.$store.state.inside_debug_mode },
+    current_debug_mode: {
+      get() { return this.$store.state.current_debug_mode },
       set(v) {
-        this.$store.commit("inside_debug_mode_set", v) // どんだけ冗長なことやらすんだ。面倒くさいぞこれ
+        this.$store.commit("current_debug_mode_set", v) // どんだけ冗長なことやらすんだ。面倒くさいぞこれ
         // というか別に直接更新してもよい
-        // this.$store.state.inside_debug_mode = v
+        // this.$store.state.current_debug_mode = v
       },
     },
   },
