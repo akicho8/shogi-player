@@ -5,13 +5,13 @@ import { PresetInfo } from "../preset_info"
 export default {
   /* eslint-disable */
   props: {
-    init_preset_key: { type: String,  default: null, },
+    preset_key: { type: String,  default: null, },
   },
   /* eslint-enable */
 
   data() {
     return {
-      current_preset: this.init_preset_key, // 選択中の初期配置
+      current_preset_key: this.preset_key, // 選択中の初期配置
     }
   },
 
@@ -22,10 +22,8 @@ export default {
   },
 
   watch: {
-    // あとからフォームで変更があったとき
-    current_preset(value) {
-      this.mediator_setup_by_preset(value)
-    }
+    preset_key(v) { this.current_preset_key = v },              // 引数の変更を反映
+    current_preset_key(v) { this.mediator_setup_by_preset(v) }, // 設定での変更を反映
   },
 
   methods: {
@@ -54,8 +52,8 @@ export default {
 
     // 初期配置指定がある場合、その sfen を返す
     init_preset_sfen() {
-      if (this.init_preset_key) {
-        return PresetInfo.fetch(this.init_preset_key).sfen
+      if (this.preset_key) {
+        return PresetInfo.fetch(this.preset_key).sfen
       }
     },
   },

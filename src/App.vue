@@ -262,7 +262,7 @@
                   詰将棋用の初期配置で開始
                 </div>
               </article>
-              <ShogiPlayer :init_preset_key="'詰将棋'" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'"/>
+              <ShogiPlayer :preset_key="'詰将棋'" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'"/>
             </div>
           </div>
           <br>

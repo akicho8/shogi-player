@@ -21,7 +21,7 @@
 | debug_mode                 | デバッグモード              | 主に開発用                                               | false               |  ○            |
 | digit_show                 | 盤面の側面に位置を表示      | 上に数字、右端に漢数字を表示する                         | false               |                |
 | final_label                      | 結果の文字列                | 空だと「○の勝ち」                                       | null                |                |
-| init_preset_key            | 盤面の初期配置              | kifu_body の代わりに指定するとその配置になる             | null                |                |
+| preset_key            | 盤面の初期配置              | kifu_body の代わりに指定するとその配置になる             | null                |                |
 
 <br>
 
@@ -31,7 +31,7 @@
   </div>
   <div class="message-body">
     <ul>
-      <li>kifu_body も init_preset_key も指定がない場合は 'position startpos' (平手) が初期配置になります</li>
+      <li>kifu_body も preset_key も指定がない場合は 'position startpos' (平手) が初期配置になります</li>
       <li>**kifu_url** や **kifu_body** をあとから変更したときも同期して再読み込みします。</li>
       <li>theme や size の値に **none** を指定したときは何もスタイルを設定しません。</li>
     </ul>

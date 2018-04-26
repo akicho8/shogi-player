@@ -10,7 +10,7 @@
 
   div.edit_mode_controller(v-if="current_run_mode === 'edit_mode'")
     .edit_mode_controller_wrap
-        b-dropdown(v-model="current_preset")
+        b-dropdown(v-model="current_preset_key")
           button.button(slot="trigger")
             span 初期配置
             b-icon(icon="menu-down")
@@ -94,7 +94,7 @@
           tr: <th>現局面のSFEN</th><td>{{mediator.to_sfen}}</td>
           tr: <th>正規化手番</th><td>{{real_turn}}</td>
         tr: <th>開始局面番号(start_turn)</th><td>{{start_turn}}</td>
-        tr: <th>初期配置(current_preset)</th><td>{{current_preset}}</td>
+        tr: <th>初期配置(current_preset_key)</th><td>{{current_preset_key}}</td>
         tr: <th>play_modeでの指し手(moves)</th><td>{{moves}}</td>
         tr: <th>play_modeの開始局面(init_sfen)</th><td>{{init_sfen}}</td>
         tr: <th>編集モード時の手番(init_location_key)</th><td>{{init_location_key}}</td>
@@ -229,8 +229,8 @@ export default {
     }
 
     if (this.current_run_mode === "edit_mode") {
-      if (this.init_preset_key) {
-        this.mediator_setup_by_preset(this.init_preset_key) // 駒箱に「玉」を乗せたいため
+      if (this.preset_key) {
+        this.mediator_setup_by_preset(this.preset_key) // 駒箱に「玉」を乗せたいため
       } else {
         this.mediator_setup(this.start_turn)
       }
