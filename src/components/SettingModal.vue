@@ -3,23 +3,45 @@
 .modal-card.has-text-left
   header.modal-card-head
     p.modal-card-title 設定
+
   section.modal-card-body
     b-field(label="モード")
       .block
         b-radio(v-model="current_mode" native-value="view_mode") 再生
         b-radio(v-model="current_mode" native-value="play_mode") 操作
         b-radio(v-model="current_mode" native-value="edit_mode") 編集
+
     b-field(label="反転")
       b-switch(v-model="flip")
+
     b-field(label="デバッグモード")
       b-switch(v-model="inside_debug_mode")
+
     b-field(label="テーマ")
       .block
         b-radio(v-model="$store.state.current_theme" native-value="none") なし
         b-radio(v-model="$store.state.current_theme" native-value="simple") 紙面風
         b-radio(v-model="$store.state.current_theme" native-value="real") リアル
+
+    template(v-if="$store.state.current_theme === 'real'")
+      b-field(label="バリエーション")
+        .block
+          template(v-for="val in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']")
+            b-radio(v-model="$store.state.current_variation" :native-value="val") {{val}}
+
+    b-field(label="サイズ")
+      .block
+        b-radio(v-model="$store.state.current_size" native-value="none") none
+        b-radio(v-model="$store.state.current_size" native-value="x-small") x-small
+        b-radio(v-model="$store.state.current_size" native-value="small") small
+        b-radio(v-model="$store.state.current_size" native-value="default") default
+        b-radio(v-model="$store.state.current_size" native-value="medium") medium
+        b-radio(v-model="$store.state.current_size" native-value="large") large
+        b-radio(v-model="$store.state.current_size" native-value="x-large") x-large
+
     b-field(label="棋譜")
       b-input(v-model="kifu_source2" type="textarea")
+
   footer.modal-card-foot
     button.button.is-primary(@click="$parent.close()") 閉じる
 </template>

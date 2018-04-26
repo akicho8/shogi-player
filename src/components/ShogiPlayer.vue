@@ -1,5 +1,5 @@
 <template lang="pug">
-.shogi-player(:class="[`theme-${current_theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${current_mode}`, {debug_mode: inside_debug_mode}, {digit_show: digit_show}]")
+.shogi-player(:class="[`theme-${current_theme}`, `size-${current_size}`, `variation-${current_variation}`, `run_mode-${current_mode}`, {debug_mode: inside_debug_mode}, {digit_show: digit_show}]")
   div(v-if="error_message")
     ErrorNotify
       p(slot="header") ERROR
@@ -211,6 +211,8 @@ export default {
     this.inside_custom_kifu = null
     this.$store.state.inside_debug_mode = this.debug_mode // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
     this.$store.state.current_theme = this.theme // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
+    this.$store.state.current_size = this.size // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
+    this.$store.state.current_variation = this.variation // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
 
     if (this.current_mode === "view_mode") {
       if (this.kifu_url) {
@@ -299,6 +301,12 @@ export default {
 
     current_theme(v)     { this.$emit("update:theme", v)                  }, // 中 -> 外
     theme(v)             { this.$store.state.current_theme = v            }, // 外 -> 中
+
+    current_size(v)     { this.$emit("update:size", v)                  }, // 中 -> 外
+    size(v)             { this.$store.state.current_size = v            }, // 外 -> 中
+
+    current_variation(v)     { this.$emit("update:variation", v)                  }, // 中 -> 外
+    variation(v)             { this.$store.state.current_variation = v            }, // 外 -> 中
     /* eslint-enable */
   },
 
@@ -409,6 +417,8 @@ export default {
       "flip",
       "inside_debug_mode",
       "current_theme",
+      "current_size",
+      "current_variation",
     ]),
   },
 }

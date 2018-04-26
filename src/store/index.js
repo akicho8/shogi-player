@@ -8,6 +8,8 @@ const store = () => new Vuex.Store({
     flip: false,                // 反転したか？
     inside_debug_mode: false,
     current_theme: null,
+    current_size: null,
+    current_variation: null,
   },
   mutations: {
     // this.$store.commit("flip_toggle") として呼び出す
