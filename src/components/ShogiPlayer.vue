@@ -1,137 +1,102 @@
-<template>
-<div class="shogi-player" :class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${current_mode}`, {debug_mode: inside_debug_mode}, {digit_show: digit_show}]">
-  <div v-if="error_message">
-    <ErrorNotify>
-      <p slot="header">ERROR</p>
-      <p>{{error_message}}</p>
-    </ErrorNotify>
-  </div>
+<template lang="pug">
+.shogi-player(:class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${current_mode}`, {debug_mode: inside_debug_mode}, {digit_show: digit_show}]")
+  div(v-if="error_message")
+    ErrorNotify
+      p(slot="header") ERROR
+      p {{error_message}}
 
-  <template v-if="!mediator">
-    <i class="fas fa-spinner fa-pulse"></i>
-  </template>
+  template(v-if="!mediator")
+    i.fas.fa-spinner.fa-pulse
 
-  <div v-if="current_mode === 'edit_mode'" class="edit_mode_controller">
-    <div class="edit_mode_controller_wrap">
-      <b-dropdown v-model="current_preset">
-        <button class="button" slot="trigger">
-          <span>初期配置</span><b-icon icon="menu-down"></b-icon>
-        </button>
-        <b-dropdown-item v-for="record in preset_info_values" :value="record.key" :key="record.key">
-          {{record.name}}
-        </b-dropdown-item>
-      </b-dropdown>
-      <button class="button" @click="all_flip">先後反転</button>
-      <button class="button" @click="init_location_toggle">手番{{init_location.name}}</button>
-    </div>
-  </div>
+  div.edit_mode_controller(v-if="current_mode === 'edit_mode'")
+    .edit_mode_controller_wrap
+        b-dropdown(v-model="current_preset")
+          button.button(slot="trigger")
+            span 初期配置
+            b-icon(icon="menu-down")
+          b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key")
+            | {{record.name}}
+        | &nbsp;
+        button.button(@click="all_flip") 先後反転
+        | &nbsp;
+        button.button(@click="init_location_toggle") 手番{{init_location.name}}
 
-  <template v-if="mediator">
-    <div class="turn_div">
-      <div v-if="current_mode === 'view_mode' || current_mode === 'play_mode'" class="turn_area">
-        <template v-if="!turn_edit">
-          <span class="turn_edit_text" @click="turn_edit_run">
-            <template v-if="current_mode === 'view_mode'">
-              {{mediator.current_turn_label(this.final_label)}}
-            </template>
-            <template v-if="current_mode === 'play_mode'">
-              {{real_turn}}手目
-            </template>
-          </span>
-        </template>
-        <template v-if="turn_edit">
-          <input type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input" class="turn_edit_input">
-        </template>
-      </div>
-      <span class="is-pulled-right modal_trigger_dots" @click="setting_modal_p = true"><b-icon icon="dots-vertical" size="is-small"></b-icon></span>
-      <b-modal :active.sync="setting_modal_p" has-modal-card>
-        <SettingModal :run_mode.sync="current_mode" :kifu_source="kifu_source" @update:kifu_body="update_kifu_source" />
-      </b-modal>
-    </div>
-    <div class="board_container flippable" :class="{flip: flip}">
-      <PieceStand class="flex_item" :location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')" />
-      <div class="flex_item board_wrap">
-        <div class="overlay_navi previous" @click.stop="navi_relative_move(-1, $event)"></div>
-        <div class="overlay_navi next"     @click.stop="navi_relative_move(+1, $event)"></div>
-        <div class="overlay_navi flip_trigger_cell" @click="board_flip_run"></div>
-        <div class="board_outer">
-          <table class="board_inner">
-            <tr v-for="y in mediator.dimension">
-              <template v-for="x in mediator.dimension">
-                <td class="piece_outer" :class="piece_outer_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click.right.prevent="board_click_right([x - 1, y - 1], $event)">
-                  <div class="piece_inner_wrap">
-                    <span class="piece_inner" :class="mediator.board_piece_inner_class([x - 1, y - 1])">
-                      {{mediator.cell_view([x - 1, y - 1])}}
-                    </span>
-                  </div>
-                </td>
-              </template>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="flex_item">
-        <ul v-if="current_mode === 'edit_mode'" class="piece_box" @click="piece_box_other_click" @click.right.prevent="hold_cancel">
-          <li v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}">
-            <div class="piece_outer" :class="piece_box_piece_outer_class(piece)">
-              <div class="piece_inner_wrap">
-                <span class="piece_inner" :class="piece_box_piece_inner_class(piece)">{{piece.name}}</span>
-              </div>
-            </div>
-            <span v-if='count >= 2' class="piece_count">{{count}}</span>
-          </li>
-        </ul>
-        <div v-if="current_mode !== 'edit_mode'"></div><!-- 先手の駒台が上にくっつてしまうので防ぐため -->
-        <PieceStand :location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')" />
-      </div>
-    </div>
+  template(v-if="mediator")
+    .turn_div
+      div(v-if="current_mode === 'view_mode' || current_mode === 'play_mode'" class="turn_area")
+        template(v-if="!turn_edit")
+          span.turn_edit_text(@click="turn_edit_run")
+            template(v-if="current_mode === 'view_mode'")
+              | {{mediator.current_turn_label(this.final_label)}}
+            template(v-if="current_mode === 'play_mode'")
+              | {{real_turn}}手目
+        template(v-if="turn_edit")
+          input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
+      span.is-pulled-right.modal_trigger_dots(@click="setting_modal_p = true")
+        b-icon(icon="dots-vertical" size="is-small")
+      b-modal(:active.sync="setting_modal_p" has-modal-card)
+        SettingModal(:run_mode.sync="current_mode" :kifu_source="kifu_source" @update:kifu_body="update_kifu_source")
 
-    <div v-if="current_mode === 'view_mode' || current_mode === 'play_mode'">
-      <div v-if="controller_show" class="controller_block buttons has-addons is-centered is-paddingless">
-        <button ref="first"    class="button first"    @click.stop="move_to_first"><b-icon icon="menu-left"></b-icon></button>
-        <button ref="previous" class="button previous" @click.stop="relative_move(-1, $event)"><b-icon icon="chevron-left" size="is-small"></b-icon></button>
-        <button ref="next"     class="button next"     @click.stop="relative_move(+1, $event)"><b-icon icon="chevron-right" size="is-small"></b-icon></button>
-        <button ref="last"     class="button last"     @click.stop="move_to_last"><b-icon icon="menu-right"></b-icon></button>
-        <button                class="button flip"     @click.stop="board_flip_run"><b-icon icon="rotate-3d" size="is-small"></b-icon></button>
-      </div>
-      <div v-if="slider_show">
-        <input type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="turn_min" :max="turn_max" ref="turn_slider" class="turn_slider" />
-      </div>
-    </div>
+    .board_container.flippable(:class="{flip: flip}")
+      PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
+      .flex_item.board_wrap
+        .overlay_navi.previous(          @click.stop="navi_relative_move(-1, $event)")
+        .overlay_navi.next(              @click.stop="navi_relative_move(+1, $event)")
+        .overlay_navi.flip_trigger_cell( @click="board_flip_run")
+        .board_outer
+          table.board_inner
+            tr(v-for="y in mediator.dimension")
+              template(v-for="x in mediator.dimension")
+                td.piece_outer(:class="piece_outer_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click.right.prevent="board_click_right([x - 1, y - 1], $event)")
+                  .piece_inner_wrap
+                    span.piece_inner(:class="mediator.board_piece_inner_class([x - 1, y - 1])")
+                      | {{mediator.cell_view([x - 1, y - 1])}}
+      .flex_item
+        ul.piece_box(v-if="current_mode === 'edit_mode'" @click="piece_box_other_click" @click.right.prevent="hold_cancel")
+          li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}")
+            .piece_outer(:class="piece_box_piece_outer_class(piece)")
+              .piece_inner_wrap
+                span.piece_inner(:class="piece_box_piece_inner_class(piece)") {{piece.name}}
+            span.piece_count(v-if='count >= 2') {{count}}
+        //- 先手の駒台が上にくっつてしまうので防ぐため空のdivを入れる
+        div(v-if="current_mode !== 'edit_mode'")
+        PieceStand(:location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')")
 
-    <div class="sfen_area is-size-7 has-text-grey" v-if="sfen_show">
-      {{mediator.to_sfen}}
-    </div>
+    div(v-if="current_mode === 'view_mode' || current_mode === 'play_mode'")
+      div(v-if="controller_show" class="controller_block buttons has-addons is-centered is-paddingless")
+        button.button.first(    ref="first"    @click.stop="move_to_first"):             b-icon(icon="menu-left")
+        button.button.previous( ref="previous" @click.stop="relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
+        button.button.next(     ref="next"     @click.stop="relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
+        button.button.last(     ref="last"     @click.stop="move_to_last"):              b-icon(icon="menu-right")
+        button.button.flip(                    @click.stop="board_flip_run"):            b-icon(icon="rotate-3d"     size="is-small")
+      div(v-if="slider_show")
+        input.turn_slider(type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="turn_min" :max="turn_max" ref="turn_slider")
 
-    <CommentArea :comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments" />
-  </template>
+    .sfen_area.is-size-7.has-text-grey(v-if="sfen_show") {{mediator.to_sfen}}
 
-  <div v-if="inside_debug_mode" class="debug_table">
-    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-      <tbody>
-        <tr><th>現在のモード(current_mode)</th><td>{{current_mode}}</td></tr>
-        <tr><th>update_counter</th><td>{{update_counter}}</td></tr>
-        <tr><th>移動元座標(place_from)</th><td>{{place_from}}</td></tr>
-        <tr><th>駒台・駒箱から移動中の駒(have_piece)</th><td>{{have_piece}}</td></tr>
-        <template v-if="mediator">
-          <tr><th>駒箱</th><td>{{mediator.piece_box_realize()}}</td></tr>
-          <tr><th>持駒</th><td>{{mediator.hold_pieces}}</td></tr>
-          <tr><th>次の手番</th><td>{{mediator.current_location.key}}</td></tr>
-          <tr><th>現局面のSFEN</th><td>{{mediator.to_sfen}}</td></tr>
-          <tr><th>正規化手番</th><td>{{real_turn}}</td></tr>
-        </template>
-        <tr><th>開始局面番号(start_turn)</th><td>{{start_turn}}</td></tr>
-        <tr><th>初期配置(current_preset)</th><td>{{current_preset}}</td></tr>
-        <tr><th>play_modeでの指し手(moves)</th><td>{{moves}}</td></tr>
-        <tr><th>play_modeの開始局面(init_sfen)</th><td>{{init_sfen}}</td></tr>
-        <tr><th>編集モード時の手番(init_location_key)</th><td>{{init_location_key}}</td></tr>
-        <tr><th>play_modeでのSFEN(play_mode_current_sfen)</th><td>{{play_mode_current_sfen}}</td></tr>
-        <tr><th>key_event_capture</th><td>{{key_event_capture}}</td></tr>
-        <tr><th>interval_id</th><td>{{interval_id}}</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+    CommentArea(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
+
+  div.debug_table(v-if="inside_debug_mode")
+    table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
+      tbody
+        tr: <th>現在のモード(current_mode)</th><td>{{current_mode}}</td>
+        tr: <th>update_counter</th><td>{{update_counter}}</td>
+        tr: <th>移動元座標(place_from)</th><td>{{place_from}}</td>
+        tr: <th>駒台・駒箱から移動中の駒(have_piece)</th><td>{{have_piece}}</td>
+        template(v-if="mediator")
+          tr: <th>駒箱</th><td>{{mediator.piece_box_realize()}}</td>
+          tr: <th>持駒</th><td>{{mediator.hold_pieces}}</td>
+          tr: <th>次の手番</th><td>{{mediator.current_location.key}}</td>
+          tr: <th>現局面のSFEN</th><td>{{mediator.to_sfen}}</td>
+          tr: <th>正規化手番</th><td>{{real_turn}}</td>
+        tr: <th>開始局面番号(start_turn)</th><td>{{start_turn}}</td>
+        tr: <th>初期配置(current_preset)</th><td>{{current_preset}}</td>
+        tr: <th>play_modeでの指し手(moves)</th><td>{{moves}}</td>
+        tr: <th>play_modeの開始局面(init_sfen)</th><td>{{init_sfen}}</td>
+        tr: <th>編集モード時の手番(init_location_key)</th><td>{{init_location_key}}</td>
+        tr: <th>play_modeでのSFEN(play_mode_current_sfen)</th><td>{{play_mode_current_sfen}}</td>
+        tr: <th>key_event_capture</th><td>{{key_event_capture}}</td>
+        tr: <th>interval_id</th><td>{{interval_id}}</td>
 </template>
 
 <script>
