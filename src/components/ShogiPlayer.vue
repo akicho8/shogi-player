@@ -176,7 +176,7 @@ export default {
     start_turn:         { type: Number,  default: -1,          },
     sfen_show:          { type: Boolean, default: false,       },
     url_embed_turn:     { type: Boolean, default: false,       },
-    theme:              { type: String,  default: "simple",    },
+    theme:              { type: String,  default: "real",      },
     size:               { type: String,  default: "default",   },
     variation:          { type: String,  default: "a"          },
     debug_mode:         { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
