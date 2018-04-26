@@ -1,5 +1,5 @@
 <template lang="pug">
-.shogi-player(:class="[`theme-${theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${current_mode}`, {debug_mode: inside_debug_mode}, {digit_show: digit_show}]")
+.shogi-player(:class="[`theme-${current_theme}`, `size-${size}`, `variation-${variation}`, `run_mode-${current_mode}`, {debug_mode: inside_debug_mode}, {digit_show: digit_show}]")
   div(v-if="error_message")
     ErrorNotify
       p(slot="header") ERROR
@@ -35,7 +35,11 @@
       span.is-pulled-right.modal_trigger_dots(@click="setting_modal_p = true")
         b-icon(icon="dots-vertical" size="is-small")
       b-modal(:active.sync="setting_modal_p" has-modal-card)
-        SettingModal(:run_mode.sync="current_mode" :kifu_source="kifu_source" @update:kifu_body="update_kifu_source")
+        SettingModal(
+          :run_mode.sync="current_mode"
+          :kifu_source="kifu_source"
+          @update:kifu_body="update_kifu_source"
+        )
 
     .board_container.flippable(:class="{flip: flip}")
       PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
@@ -206,6 +210,7 @@ export default {
   created() {
     this.inside_custom_kifu = null
     this.$store.state.inside_debug_mode = this.debug_mode // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
+    this.$store.state.current_theme = this.theme // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
 
     if (this.current_mode === "view_mode") {
       if (this.kifu_url) {
@@ -291,6 +296,9 @@ export default {
     inside_debug_mode(v) { this.$emit("update:debug_mode", v)             }, // 内から外への通知
     debug_mode(v)        { this.$store.commit("inside_debug_mode_set", v) }, // 外から内への反映
     run_mode(v)          { this.current_mode = v                          }, // 外側から run_mode を変更されたとき
+
+    current_theme(v)     { this.$emit("update:theme", v)                  }, // 中 -> 外
+    theme(v)             { this.$store.state.current_theme = v            }, // 外 -> 中
     /* eslint-enable */
   },
 
@@ -400,6 +408,7 @@ export default {
     ...mapState([
       "flip",
       "inside_debug_mode",
+      "current_theme",
     ]),
   },
 }

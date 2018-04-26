@@ -13,6 +13,11 @@
       b-switch(v-model="flip")
     b-field(label="デバッグモード")
       b-switch(v-model="inside_debug_mode")
+    b-field(label="テーマ")
+      .block
+        b-radio(v-model="$store.state.current_theme" native-value="none") なし
+        b-radio(v-model="$store.state.current_theme" native-value="simple") 紙面風
+        b-radio(v-model="$store.state.current_theme" native-value="real") リアル
     b-field(label="棋譜")
       b-input(v-model="kifu_source2" type="textarea")
   footer.modal-card-foot

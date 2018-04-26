@@ -348,7 +348,7 @@
             :run_mode.sync="run_mode"
             :kifu_body.sync="kifu_body"
             :start_turn="start_turn"
-            :theme="theme"
+            :theme.sync="theme"
             :size="size"
             :variation="variation"
             :debug_mode.sync="debug_mode"
