@@ -151,10 +151,10 @@ export default {
       const new_val = this.mediator.turn_clamp(v)
 
       if (this.real_turn !== new_val) {
-        if (this.current_mode === "view_mode") {
+        if (this.current_run_mode === "view_mode") {
           this.view_mode_mediator_update(new_val)
         }
-        if (this.current_mode === "play_mode") {
+        if (this.current_run_mode === "play_mode") {
           this.play_mode_mediator_seek_to(new_val)
           this.sound_call("piece_sound")
         }

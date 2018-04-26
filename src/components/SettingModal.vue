@@ -7,9 +7,9 @@
   section.modal-card-body
     b-field(label="モード")
       .block
-        b-radio(v-model="current_mode" native-value="view_mode") 再生
-        b-radio(v-model="current_mode" native-value="play_mode") 操作
-        b-radio(v-model="current_mode" native-value="edit_mode") 編集
+        b-radio(v-model="current_run_mode" native-value="view_mode") 再生
+        b-radio(v-model="current_run_mode" native-value="play_mode") 操作
+        b-radio(v-model="current_run_mode" native-value="edit_mode") 編集
 
     b-field(label="反転")
       b-switch(v-model="flip")
@@ -62,12 +62,12 @@ export default {
   },
   data() {
     return {
-      current_mode: this.run_mode,
+      current_run_mode: this.run_mode,
       kifu_source2: this.kifu_source,
     }
   },
   watch: {
-    current_mode(value) {
+    current_run_mode(value) {
       this.$emit("update:run_mode", value)
     },
     kifu_source2(value) {

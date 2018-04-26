@@ -28,7 +28,7 @@ export default {
       let list = []
       if (this.hold_piece_holding_p(piece)) {
         list.push("holding_p")
-      } else if (this.$parent.current_mode === "edit_mode" || (!this.$parent.cpu_location_p && this.$parent.mediator.current_location === this.location)) {
+      } else if (this.$parent.current_run_mode === "edit_mode" || (!this.$parent.cpu_location_p && this.$parent.mediator.current_location === this.location)) {
         list.push("selectable_p")
       }
       return list

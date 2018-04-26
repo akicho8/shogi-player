@@ -1,5 +1,5 @@
 <template lang="pug">
-.shogi-player(:class="[`theme-${current_theme}`, `size-${current_size}`, `variation-${current_variation}`, `run_mode-${current_mode}`, {debug_mode: current_debug_mode}, {digit_show: digit_show}]")
+.shogi-player(:class="[`theme-${current_theme}`, `size-${current_size}`, `variation-${current_variation}`, `run_mode-${current_run_mode}`, {debug_mode: current_debug_mode}, {digit_show: digit_show}]")
   div(v-if="error_message")
     ErrorNotify
       p(slot="header") ERROR
@@ -8,7 +8,7 @@
   template(v-if="!mediator")
     i.fas.fa-spinner.fa-pulse
 
-  div.edit_mode_controller(v-if="current_mode === 'edit_mode'")
+  div.edit_mode_controller(v-if="current_run_mode === 'edit_mode'")
     .edit_mode_controller_wrap
         b-dropdown(v-model="current_preset")
           button.button(slot="trigger")
@@ -23,12 +23,12 @@
 
   template(v-if="mediator")
     .turn_div
-      div(v-if="current_mode === 'view_mode' || current_mode === 'play_mode'" class="turn_area")
+      div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'" class="turn_area")
         template(v-if="!turn_edit")
           span.turn_edit_text(@click="turn_edit_run")
-            template(v-if="current_mode === 'view_mode'")
+            template(v-if="current_run_mode === 'view_mode'")
               | {{mediator.current_turn_label(this.final_label)}}
-            template(v-if="current_mode === 'play_mode'")
+            template(v-if="current_run_mode === 'play_mode'")
               | {{real_turn}}手目
         template(v-if="turn_edit")
           input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
@@ -36,7 +36,7 @@
         b-icon(icon="dots-vertical" size="is-small")
       b-modal(:active.sync="setting_modal_p" has-modal-card)
         SettingModal(
-          :run_mode.sync="current_mode"
+          :run_mode.sync="current_run_mode"
           :kifu_source="kifu_source"
           @update:kifu_body="update_kifu_source"
         )
@@ -56,17 +56,17 @@
                     span.piece_inner(:class="mediator.board_piece_inner_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
       .flex_item
-        ul.piece_box(v-if="current_mode === 'edit_mode'" @click="piece_box_other_click" @click.right.prevent="hold_cancel")
+        ul.piece_box(v-if="current_run_mode === 'edit_mode'" @click="piece_box_other_click" @click.right.prevent="hold_cancel")
           li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}")
             .piece_outer(:class="piece_box_piece_outer_class(piece)")
               .piece_inner_wrap
                 span.piece_inner(:class="piece_box_piece_inner_class(piece)") {{piece.name}}
             span.piece_count(v-if='count >= 2') {{count}}
         //- 先手の駒台が上にくっつてしまうので防ぐため空のdivを入れる
-        div(v-if="current_mode !== 'edit_mode'")
+        div(v-if="current_run_mode !== 'edit_mode'")
         PieceStand(:location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')")
 
-    div(v-if="current_mode === 'view_mode' || current_mode === 'play_mode'")
+    div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'")
       div(v-if="controller_show" class="controller_block buttons has-addons is-centered is-paddingless")
         button.button.first(    ref="first"    @click.stop="move_to_first"):             b-icon(icon="menu-left")
         button.button.previous( ref="previous" @click.stop="relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
@@ -83,7 +83,7 @@
   div.debug_table(v-if="current_debug_mode")
     table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
       tbody
-        tr: <th>現在のモード(current_mode)</th><td>{{current_mode}}</td>
+        tr: <th>現在のモード(current_run_mode)</th><td>{{current_run_mode}}</td>
         tr: <th>update_counter</th><td>{{update_counter}}</td>
         tr: <th>移動元座標(place_from)</th><td>{{place_from}}</td>
         tr: <th>駒台・駒箱から移動中の駒(have_piece)</th><td>{{have_piece}}</td>
@@ -194,7 +194,7 @@ export default {
 
   data() {
     return {
-      current_mode: this.run_mode,
+      current_run_mode: this.run_mode,
       // current_turn: this.start_turn, // N手目
       turn_edit_value: null,         // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,                // 局面管理
@@ -214,7 +214,7 @@ export default {
     this.$store.state.current_size = this.size // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
     this.$store.state.current_variation = this.variation // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
 
-    if (this.current_mode === "view_mode") {
+    if (this.current_run_mode === "view_mode") {
       if (this.kifu_url) {
         this.axios_call()
         this.polling_interval_update()
@@ -223,12 +223,12 @@ export default {
       }
     }
 
-    if (this.current_mode === "play_mode") {
+    if (this.current_run_mode === "play_mode") {
       this.mediator_setup(this.start_turn)
       this.play_mode_setup_from("view_mode")
     }
 
-    if (this.current_mode === "edit_mode") {
+    if (this.current_run_mode === "edit_mode") {
       if (this.init_preset_key) {
         this.mediator_setup_by_preset(this.init_preset_key) // 駒箱に「玉」を乗せたいため
       } else {
@@ -251,7 +251,7 @@ export default {
       console.log(`turn_max: ${this.turn_max}`)
       this.mediator_setup(this.start_turn)
       console.log(`turn_max: ${this.turn_max}`)
-      if (this.current_mode === "play_mode") {
+      if (this.current_run_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
         // 棋譜を反映された側は
         // 1. 相手が指したのか → 駒音だす
@@ -266,20 +266,20 @@ export default {
     },
 
     // ダイアログから変更されたとき
-    current_mode(new_val, old_val) {
-      this.$emit("update:run_mode", this.current_mode)
+    current_run_mode(new_val, old_val) {
+      this.$emit("update:run_mode", this.current_run_mode)
 
-      if (this.current_mode === "view_mode") {
-        this.log("current_mode: view_mode")
+      if (this.current_run_mode === "view_mode") {
+        this.log("current_run_mode: view_mode")
         this.view_mode_mediator_update(this.real_turn)
       }
 
-      if (this.current_mode === "play_mode") {
+      if (this.current_run_mode === "play_mode") {
         this.play_mode_setup_from(old_val)
       }
 
-      if (this.current_mode === "edit_mode") {
-        this.log("current_mode: edit_mode")
+      if (this.current_run_mode === "edit_mode") {
+        this.log("current_run_mode: edit_mode")
         const position_sfen = this.mediator.to_position_sfen // mediator を作り直す前に現状の局面を吐き出しておく
 
         this.mediator = new Mediator()
@@ -297,7 +297,7 @@ export default {
     /* eslint-disable */
     current_debug_mode(v) { this.$emit("update:debug_mode", v)             }, // 内から外への通知
     debug_mode(v)        { this.$store.commit("current_debug_mode_set", v) }, // 外から内への反映
-    run_mode(v)          { this.current_mode = v                          }, // 外側から run_mode を変更されたとき
+    run_mode(v)          { this.current_run_mode = v                          }, // 外側から run_mode を変更されたとき
 
     current_theme(v)     { this.$emit("update:theme", v)                  }, // 中 -> 外
     theme(v)             { this.$store.state.current_theme = v            }, // 外 -> 中
@@ -375,7 +375,7 @@ export default {
       if (_.isEqual(this.place_from, place)) {
         list.push("holding_p")
       } else if (soldier) {
-        if (this.current_mode === "edit_mode" || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
+        if (this.current_run_mode === "edit_mode" || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
           list.push("selectable_p")
         }
       }

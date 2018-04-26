@@ -51,7 +51,7 @@ export default {
       }
 
       // 自分の手番で相手の駒を持ち上げようとしたので無効とする
-      if (this.current_mode === "play_mode" && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
+      if (this.current_run_mode === "play_mode" && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
         this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
@@ -63,7 +63,7 @@ export default {
       }
 
       // 自分の駒の上に駒を重ねようとしたので状況キャンセル
-      if (this.current_mode === "play_mode" && this.put_on_my_piece_p(soldier)) {
+      if (this.current_run_mode === "play_mode" && this.put_on_my_piece_p(soldier)) {
         this.log("自分の駒の上に駒を重ねようとしたので状況キャンセル")
         this.state_reset()
         return
@@ -108,7 +108,7 @@ export default {
           location: this.origin_soldier1.location,
         })
 
-        if (this.current_mode === "play_mode" && (new_soldier.promotable_p || this.origin_soldier1.promotable_p)) { // 入って成る or 出て成る
+        if (this.current_run_mode === "play_mode" && (new_soldier.promotable_p || this.origin_soldier1.promotable_p)) { // 入って成る or 出て成る
           this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
 
           // 元が成ってないとき
@@ -129,7 +129,7 @@ export default {
             },
           })
         } else {
-          if (this.current_mode === "play_mode") {
+          if (this.current_run_mode === "play_mode") {
             this.moves_set(this.origin_soldier1.place.to_sfen + place.to_sfen) // 7g7f
           }
           this.mediator.board.place_on(new_soldier) // 置く
@@ -180,14 +180,14 @@ export default {
       }
 
       // 相手の持駒を自分の駒台に移動
-      if (this.current_mode === "edit_mode") {
+      if (this.current_run_mode === "edit_mode") {
         if (this.have_piece_location !== location && this.have_piece) {
           this.opponent_hold_pieces_move_to_my_hold_pieces(location)
           return true
         }
       }
 
-      if (this.current_mode === "play_mode") {
+      if (this.current_run_mode === "play_mode") {
         if (this.origin_soldier1) {
           this.log("play_mode では盤上の駒を駒台に置くことはできない")
           return true
@@ -224,7 +224,7 @@ export default {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.current_mode === "play_mode" && location !== this.mediator.current_location) {
+      if (this.current_run_mode === "play_mode" && location !== this.mediator.current_location) {
         this.log("相手の持駒を持とうとしたときは無効")
         return
       }
@@ -345,7 +345,7 @@ export default {
       let list = []
       if (this.piece_box_have_p(piece)) {
         list.push("holding_p")
-      } else if (this.current_mode === "edit_mode") {
+      } else if (this.current_run_mode === "edit_mode") {
         list.push("selectable_p")
       }
       return list
@@ -470,7 +470,7 @@ export default {
 
     // 片方の手番だけを操作できるようにする human_side の指定があってCPUの手番？
     cpu_location_p() {
-      return this.current_mode === "play_mode" && this.human_location && this.human_location !== this.mediator.current_location
+      return this.current_run_mode === "play_mode" && this.human_location && this.human_location !== this.mediator.current_location
     }
   },
 }
