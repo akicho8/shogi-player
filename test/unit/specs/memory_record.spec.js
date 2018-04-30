@@ -11,7 +11,9 @@ class MyModel extends MemoryRecord {
 
 describe('MemoryRecord', () => {
   it('lookup', () => {
-    MyModel.fetch("alice")
+    expect(MyModel.lookup("alice").key).toEqual("alice")
+    expect(MyModel.lookup(0).key).toEqual("alice")
+    expect(MyModel.lookup(-1)).toEqual(undefined)
   })
 
   it('fetch', () => {

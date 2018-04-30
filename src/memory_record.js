@@ -35,7 +35,11 @@ class MemoryRecord {
     if (key instanceof this) {
       return key
     }
-    return this.values_map[key]
+    if (typeof key === "number") {
+      return this.values[key]
+    } else {
+      return this.values_map[key]
+    }
   }
 
   static fetch(key) {
@@ -85,6 +89,10 @@ if (process.argv[1] === __filename) {
 
   let v = MemoryRecord.lookup("(key_x)")
   console.log(v instanceof MemoryRecord)
+
+  console.log(MemoryRecord.lookup(0))
+  console.log(MemoryRecord.lookup(1))
+  console.log(MemoryRecord.lookup(2))
 
   console.log(MemoryRecord.values[0] === MemoryRecord.values[0])
 }
