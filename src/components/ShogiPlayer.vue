@@ -41,7 +41,7 @@
           @update:kifu_body="update_kifu_source"
         )
 
-    .board_container.flippable(:class="{flip: flip}")
+    .board_container.flippable(:class="{flip: current_flip}")
       PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
       .flex_item.board_wrap
         .overlay_navi.previous(          @click.stop="navi_relative_move(-1, $event)")
@@ -209,10 +209,14 @@ export default {
 
   created() {
     this.inside_custom_kifu = null
-    this.$store.state.current_debug_mode = this.debug_mode // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
-    this.$store.state.current_theme = this.theme // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
-    this.$store.state.current_size = this.size // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
-    this.$store.state.current_variation = this.variation // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
+
+    /* eslint-disable */
+    // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
+    this.$store.state.current_debug_mode = this.debug_mode
+    this.$store.state.current_theme      = this.theme
+    this.$store.state.current_size       = this.size
+    this.$store.state.current_variation  = this.variation
+    /* eslint-enable */
 
     if (this.current_run_mode === "view_mode") {
       if (this.kifu_url) {
@@ -345,10 +349,6 @@ export default {
       this.$nextTick(() => this.$refs.turn_edit_input.focus())
     },
 
-    flip_sign() {
-      return this.flip ? -1 : 1
-    },
-
     log(v) {
       if (this.current_debug_mode) {
         console.log(v)
@@ -414,7 +414,6 @@ export default {
     ...mapState({
     }),
     ...mapState([
-      "flip",
       "current_debug_mode",
       "current_theme",
       "current_size",

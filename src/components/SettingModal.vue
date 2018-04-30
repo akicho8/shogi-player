@@ -79,8 +79,8 @@ export default {
   computed: {
     // http://chibinowa.net/note/vuejs/vue-11.html
     flip: {
-      get() { return this.$store.state.flip },
-      set(v) { this.$store.state.flip = v },
+      get() { return this.$store.state.current_flip },
+      set(v) { this.$store.state.current_flip = v },
     },
     // ...mapState([
     //   "current_debug_mode",      // これだと get() しか作られない

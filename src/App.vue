@@ -109,7 +109,18 @@
                 <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
               </p>
               <hr>
-              <ShogiPlayer class="original" :kifu_body="kif_sample1" :start_turn="9" :slider_show="true" :theme="'real'" :size="'large'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false"/>
+              <ShogiPlayer
+                class="original"
+                :kifu_body="kif_sample1"
+                :start_turn="9"
+                :slider_show="true"
+                :theme="'real'"
+                :size="'large'"
+                :variation="'a'"
+                :sound_effect="true"
+                :volume="0.25"
+                :debug_mode="false"
+                />
             </div>
           </div>
           <br>
@@ -352,6 +363,7 @@
             :size.sync="size"
             :variation.sync="variation"
             :debug_mode.sync="debug_mode"
+            :flip.sync="flip"
             :digit_show="digit_show"
             :final_label="final_label"
             :key_event_capture="key_event_capture"
@@ -448,6 +460,9 @@
             <b-field label="debug_mode">
               <b-switch v-model="debug_mode" />
             </b-field>
+            <b-field label="flip">
+              <b-switch v-model="flip" />
+            </b-field>
             <b-field label="digit_show">
               <b-switch v-model="digit_show" />
             </b-field>
@@ -477,6 +492,7 @@
                 :<b>volume</b>="{{volume}}"
                 :<b>key_event_capture</b>="{{key_event_capture}}"
                 :<b>debug_mode</b>="{{debug_mode}}"
+                :<b>flip</b>="{{flip}}"
                 :<b>digit_show</b>="{{digit_show}}"
                 :<b>final_label</b>="'{{final_label}}'"
                 :<b>kifu_body</b>="'{{kifu_body}}'"
@@ -565,6 +581,7 @@ export default {
       volume: 0.5,
       key_event_capture: false,
       debug_mode: false,
+      flip: false,
       digit_show: false,
 
       // ▼牧野光則 五段 vs. 中尾敏之 五段 第31期竜王戦６組ランキング戦 - 無料の棋譜サービス 将棋DB2

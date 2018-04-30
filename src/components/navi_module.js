@@ -1,4 +1,5 @@
 import _ from "lodash"
+import { mapState } from 'vuex'
 
 export default {
   /* eslint-disable */
@@ -8,6 +9,7 @@ export default {
     key_event_capture: { type: Boolean, default: false  },
     shift_key_mag:     { type: Number,  default: 10,    },
     system_key_mag:    { type: Number,  default: 50,    },
+    flip:              { type: Boolean, default: false  },
   },
   /* eslint-enable */
 
@@ -21,9 +23,14 @@ export default {
   },
 
   created() {
+    this.$store.state.current_flip = this.flip
   },
 
   watch: {
+    /* eslint-disable */
+    current_flip(v)     { this.$emit("update:flip", v)       }, // 中 -> 外
+    flip(v)             { this.$store.state.current_flip = v }, // 外 -> 中
+    /* eslint-enable */
   },
 
   methods: {
@@ -175,5 +182,14 @@ export default {
       this.sound_call("flip_sound")
       this.focus_to("turn_slider")
     },
+  },
+
+  computed: {
+    flip_sign() {
+      return this.current_flip ? -1 : 1
+    },
+    ...mapState([
+      "current_flip",
+    ]),
   },
 }

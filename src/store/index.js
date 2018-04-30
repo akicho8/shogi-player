@@ -5,7 +5,7 @@ Vue.use(Vuex)
 // "() => " を外すとブラウザ内でグローバルになる
 const store = () => new Vuex.Store({
   state: {
-    flip: false,                // 反転したか？
+    current_flip: false,                // 反転したか？
     current_debug_mode: false,
     current_theme: null,
     current_size: null,
@@ -14,7 +14,7 @@ const store = () => new Vuex.Store({
   mutations: {
     // this.$store.commit("flip_toggle") として呼び出す
     flip_toggle(state) {
-      state.flip = !state.flip
+      state.current_flip = !state.current_flip
     },
 
     // this.$store.commit("current_debug_mode_set", true)
