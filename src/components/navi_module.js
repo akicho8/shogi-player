@@ -184,12 +184,35 @@ export default {
     },
   },
 
-  computed: {
+  //
+  // ...mapState([
+  //   "current_flip",
+  // ]),
+  //
+  // が、
+  //
+  // Failed to compile.
+  //
+  // ./node_modules/shogi-player/src/components/navi_module.js
+  // Module parse failed: Unexpected token (191:4)
+  // You may need an appropriate loader to handle this file type.
+  // |       return this.current_flip ? -1 : 1
+  // |     },
+  // |     ...mapState([
+  // |       "current_flip",
+  // |     ]),
+  //  @ ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./node_modules/shogi-player/src/components/ShogiPlayer.vue 49:19-46
+  //  @ ./node_modules/shogi-player/src/components/ShogiPlayer.vue
+  //  @ ./app/javascript/packs/application.js
+  //  @ multi (webpack)-dev-server/client?http://localhost:3035 ./app/javascript/packs/application.js
+  //
+  // となるため仕方なく Object.assign を使う
+  //
+  computed: Object.assign({}, {
     flip_sign() {
       return this.current_flip ? -1 : 1
     },
-    ...mapState([
-      "current_flip",
-    ]),
-  },
+  }, mapState([
+    "current_flip",
+  ])),
 }
