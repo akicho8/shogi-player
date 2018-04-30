@@ -1,7 +1,15 @@
 import { Location } from '@/location.js'
 
 describe('Location', () => {
-  it('参照', () => {
+  it('fetch', () => {
     Location.fetch("black")
+  })
+
+  it('cycle_lookup', () => {
+    expect(Location.cycle_lookup(-1).key).toEqual("white")
+  })
+
+  it('flip', () => {
+    expect(Location.fetch("black").flip.key).toEqual("white")
   })
 })
