@@ -112,7 +112,7 @@ export default {
     },
 
     navi_relative_move(v, event) {
-      this.relative_move(v * this.flip_sign(), event)
+      this.relative_move(v * this.flip_sign, event)
     },
 
     relative_move(v, event = null) {
