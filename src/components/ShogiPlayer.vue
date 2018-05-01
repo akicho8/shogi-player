@@ -44,9 +44,9 @@
     .board_container.flippable(:class="{flip: current_flip}")
       PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
       .flex_item.board_wrap
-        .overlay_navi.previous(          @click.stop="navi_relative_move(-1, $event)")
-        .overlay_navi.next(              @click.stop="navi_relative_move(+1, $event)")
-        .overlay_navi.flip_trigger_cell( @click="board_flip_run")
+        .overlay_navi.previous(@click.stop="navi_relative_move(-1, $event)")
+        .overlay_navi.next(@click.stop="navi_relative_move(+1, $event)")
+        .overlay_navi.flip_trigger_cell(@click="board_flip_run")
         .board_outer
           table.board_inner
             tr(v-for="y in mediator.dimension")
