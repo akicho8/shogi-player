@@ -34,5 +34,4 @@ if (process.argv[1] === __filename) {
 
   console.log(Location.fetch("black").flip)
   console.log(Location.fetch("white").flip)
-
 }

@@ -16,6 +16,7 @@
 //   }
 //
 //   Foo.lookup("black").key           // => "black"
+//   Foo.lookup(1).key                 // => "white"
 //   Foo.values[0] === Foo.values[0]   // => true
 //
 
