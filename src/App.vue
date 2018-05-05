@@ -391,34 +391,37 @@
               </div>
             </b-field>
 
-            <b-field label="theme">
-              <div class="block">
-                <b-radio v-model="theme" native-value="none">none</b-radio>
-                <b-radio v-model="theme" native-value="simple">simple</b-radio>
-                <b-radio v-model="theme" native-value="real">real</b-radio>
-              </div>
-            </b-field>
+            <div class="box">
+              <b-field label="theme">
+                <div class="block">
+                  <b-radio v-model="theme" native-value="none">none</b-radio>
+                  <b-radio v-model="theme" native-value="simple">simple</b-radio>
+                  <b-radio v-model="theme" native-value="real">real</b-radio>
+                </div>
+              </b-field>
 
-            <b-field label="variation">
-              <div class="block">
-                <template v-for="val in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']">
-                  <b-radio v-model="variation" :native-value="val">{{val}}</b-radio>
-                </template>
-              </div>
-            </b-field>
+              <b-field label="variation">
+                <div class="block">
+                  <template v-for="val in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']">
+                    <b-radio v-model="variation" :native-value="val">{{val}}</b-radio>
+                  </template>
+                </div>
+              </b-field>
 
-            <b-field label="size">
-              <div class="block">
-                <b-radio v-model="size" native-value="none">none</b-radio>
-                <b-radio v-model="size" native-value="x-small">x-small</b-radio>
-                <b-radio v-model="size" native-value="small">small</b-radio>
-                <b-radio v-model="size" native-value="default">default</b-radio>
-                <b-radio v-model="size" native-value="medium">medium</b-radio>
-                <b-radio v-model="size" native-value="large">large</b-radio>
-                <b-radio v-model="size" native-value="x-large">x-large</b-radio>
-              </div>
-            </b-field>
+              <b-field label="size">
+                <div class="block">
+                  <b-radio v-model="size" native-value="none">none</b-radio>
+                  <b-radio v-model="size" native-value="x-small">x-small</b-radio>
+                  <b-radio v-model="size" native-value="small">small</b-radio>
+                  <b-radio v-model="size" native-value="default">default</b-radio>
+                  <b-radio v-model="size" native-value="medium">medium</b-radio>
+                  <b-radio v-model="size" native-value="large">large</b-radio>
+                  <b-radio v-model="size" native-value="x-large">x-large</b-radio>
+                </div>
+              </b-field>
+            </div>
 
+            
             <template v-if="false">
               <b-field label="variation">
                 <b-select placeholder="Select a name" v-model="variation">
@@ -427,26 +430,53 @@
               </b-field>
             </template>
 
-            <b-field label="start_turn">
-              <b-input v-model="start_turn" type="number" />
+            
+            <div class="box">
+              <b-field grouped group-multiline>
+                <b-field label="sound_effect">
+                  <b-switch v-model="sound_effect" />
+                </b-field>
+                <b-field label="volume">
+                  <div class="block">
+                    <input v-model.number="volume" type="range" min="0" max="1.0" step="0.01" /> {{volume}}
+                  </div>
+                </b-field>
+              </b-field>
+            </div>
+            
+            <b-field grouped group-multiline>
+              <b-field label="start_turn">
+                <b-input v-model="start_turn" type="number" />
+              </b-field>
+              <b-field label="final_label">
+                <b-input v-model.trim="final_label" type="text" />
+              </b-field>
             </b-field>
-            <b-field label="slider_show">
-              <b-switch v-model="slider_show" />
+
+            <b-field grouped group-multiline>
+              <b-field label="slider_show">
+                <b-switch v-model="slider_show" />
+              </b-field>
+              <b-field label="controller_show">
+                <b-switch v-model="controller_show" />
+              </b-field>
+              <b-field label="sfen_show">
+                <b-switch v-model="sfen_show" />
+              </b-field>
+              <b-field label="key_event_capture">
+                <b-switch v-model="key_event_capture" />
+              </b-field>
+              <b-field label="flip">
+                <b-switch v-model="flip" />
+              </b-field>
+              <b-field label="digit_show">
+                <b-switch v-model="digit_show" />
+              </b-field>
+              <b-field label="debug_mode">
+                <b-switch v-model="debug_mode" />
+              </b-field>
             </b-field>
-            <b-field label="controller_show">
-              <b-switch v-model="controller_show" />
-            </b-field>
-            <b-field label="sfen_show">
-              <b-switch v-model="sfen_show" />
-            </b-field>
-            <b-field label="sound_effect">
-              <b-switch v-model="sound_effect" />
-            </b-field>
-            <b-field label="volume">
-              <div class="block">
-                <input v-model.number="volume" type="range" min="0" max="1.0" step="0.01" /> {{volume}}
-              </div>
-            </b-field>
+
             <b-field label="human_side">
               <div class="block">
                 <b-radio v-model="human_side" native-value="">両方</b-radio>
@@ -454,21 +484,7 @@
                 <b-radio v-model="human_side" native-value="white">☖</b-radio>
               </div>
             </b-field>
-            <b-field label="key_event_capture">
-              <b-switch v-model="key_event_capture" />
-            </b-field>
-            <b-field label="debug_mode">
-              <b-switch v-model="debug_mode" />
-            </b-field>
-            <b-field label="flip">
-              <b-switch v-model="flip" />
-            </b-field>
-            <b-field label="digit_show">
-              <b-switch v-model="digit_show" />
-            </b-field>
-            <b-field label="final_label">
-              <b-input v-model.trim="final_label" type="text" />
-            </b-field>
+
             <b-field label="kifu_body">
               <b-input v-model="kifu_body" type="textarea" />
             </b-field>
