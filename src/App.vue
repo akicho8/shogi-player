@@ -224,10 +224,10 @@
             <div class="column">
               <article class="message is-info has-text-centered">
                 <div class="message-body">
-                  human_side オプションで先手側だけ操作できるようにする
+                  human_side_key オプションで先手側だけ操作できるようにする
                 </div>
               </article>
-              <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="20" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'" :human_side="'black'"/>
+              <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="20" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'" :human_side_key="'black'"/>
             </div>
           </div>
 
@@ -242,7 +242,7 @@
                     <ul>
                       <li>スライダー等で変更した任意局面から手番側の操作が行えます</li>
                       <li>いちど指すとその手が最終手になります(分岐には対応していません)</li>
-                      <li>human_side オプションで片側の操作のみに絞れます</li>
+                      <li>human_side_key オプションで片側の操作のみに絞れます</li>
                       <li>Emit Events に反応して、相手側の指し手を追加した棋譜で kifu_body を更新すればCPUとの対戦のようなことができます</li>
                       <li>再生モードの棋譜とは独立しています(再生モードの棋譜を上書きしません)</li>
                     </ul>
@@ -372,7 +372,7 @@
             :sfen_show="sfen_show"
             :sound_effect="sound_effect"
             :volume="volume"
-            :human_side="human_side"
+            :human_side_key="human_side_key"
             @update:play_mode_long_sfen="play_mode_long_sfen_set"
             @update:play_mode_short_sfen="play_mode_short_sfen_set"
             @update:play_mode_move="play_mode_move_set"
@@ -477,11 +477,11 @@
               </b-field>
             </b-field>
 
-            <b-field label="human_side">
+            <b-field label="human_side_key">
               <div class="block">
-                <b-radio v-model="human_side" native-value="">両方</b-radio>
-                <b-radio v-model="human_side" native-value="black">☗</b-radio>
-                <b-radio v-model="human_side" native-value="white">☖</b-radio>
+                <template v-for="e in SideInfo.values">
+                  <b-radio v-model="human_side_key" :native-value="e.key">{{e.name}}</b-radio>
+                </template>
               </div>
             </b-field>
 
@@ -503,7 +503,7 @@
                 :<b>slider_show</b>="{{slider_show}}"
                 :<b>controller_show</b>="{{controller_show}}"
                 :<b>sfen_show</b>="{{sfen_show}}"
-                :<b>human_side</b>="'{{human_side}}'"
+                :<b>human_side_key</b>="'{{human_side_key}}'"
                 :<b>sound_effect</b>="{{sound_effect}}"
                 :<b>volume</b>="{{volume}}"
                 :<b>key_event_capture</b>="{{key_event_capture}}"
@@ -553,11 +553,13 @@
 
 <script>
 import ShogiPlayer from './components/ShogiPlayer'
-
+import { SideInfo } from "./side_info"
 import Vue from 'vue'
 import Buefy from 'buefy'
 
 Vue.use(Buefy)
+
+Object.defineProperty(Vue.prototype, 'SideInfo', {value: SideInfo})
 
 const marked = require('marked')
 const renderer = new marked.Renderer()
@@ -592,7 +594,7 @@ export default {
       slider_show: true,
       controller_show: true,
       sfen_show: true,
-      human_side: "",
+      human_side_key: 'both',
       sound_effect: true,
       volume: 0.5,
       key_event_capture: false,

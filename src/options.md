@@ -1,7 +1,7 @@
 | 名前                       | 意味                        | 備考                                                     | 初期値              | .sync          |
 |----------------------------|-----------------------------|----------------------------------------------------------|---------------------|----------------|
 | run_mode                   | 実行モード                  | view_mode:再生 play_mode:操作 編集:edit_mode。           | 'view_mode'         | ○             |
-| human_side                 | 人間が操作する側            | play_mode 時の人間側を指定。nullだと両方操作可           | null                | ○             |
+| human_side_key             | 人間が操作する側            | play_mode時のみ有効 both, black, white, none             | 'both'              |                |
 | kifu_body                  | 棋譜の本体                  | KIF と SFEN に対応。駒落ちは SFEN のみ                   | null                |                |
 | kifu_url                   | 棋譜ファイルURL             |                                                          | null                |                |
 | theme                      | テーマ名                    | none:なし simple:シンプル real:木目                      | 'real'              | ○             |
@@ -58,3 +58,7 @@
 | update:run_mode             | 設定ダイアログでモードが変更されたとき                  |
 | update:kifu_body            | 設定ダイアログで棋譜が変更されたとき                    |
 | update:debug_mode           | 設定ダイアログでデバッグモードが変更されたとき          |
+| update:flip                 | 盤面を反転したとき                                      |
+| update:theme                | テーマ変更                                              |
+| update:variation            | バリエーション変更                                      |
+| update:size                 | サイズ変更                                              |
