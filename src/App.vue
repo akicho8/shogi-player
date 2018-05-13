@@ -1,13 +1,10 @@
-<template>
+<template lang="pug">
 <div id="app">
   <section class="hero is-primary is-medium">
     <div class="hero-head">
       <nav class="navbar">
         <div class="container">
           <div class="navbar-brand">
-            <!-- <a class="navbar-item"> -->
-            <!--   shogi-player -->
-            <!-- </a> -->
             <span class="navbar-burger burger" data-target="navbarMenuHeroA">
               <span></span>
               <span></span>
@@ -16,26 +13,12 @@
           </div>
           <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
-              <!-- <a class="navbar-item is-active"> -->
-              <!--   Home -->
-              <!-- </a> -->
-              <!-- <a class="navbar-item"> -->
-              <!--   Examples -->
-              <!-- </a> -->
               <a class="navbar-item" href="https://github.com/akicho8/shogi-player">
                 <span class="icon">
                   <i class="fab fa-github"></i>
                 </span>
                 <span>Github</span>
               </a>
-              <!-- <span class="navbar-item"> -->
-              <!--   <a class="button is-primary is-inverted"> -->
-              <!--     <span class="icon"> -->
-              <!--       <i class="fa fa-github"></i> -->
-              <!--     </span> -->
-              <!--     <span>Download</span> -->
-              <!--   </a> -->
-              <!-- </span> -->
             </div>
           </div>
         </div>
@@ -46,7 +29,7 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         <h1 class="title">
-          shogi-player
+          | shogi-player
         </h1>
         <h2 class="subtitle">
         </h2>
@@ -74,9 +57,8 @@
       <h2 class="title">概要</h2>
       <hr>
       <div class="content">
-        <p>
-          将棋の棋譜を再生できる JavaScript で次の特徴があります
-        </p>
+        p
+          | 将棋の棋譜を再生できる JavaScript で次の特徴があります
         <ul>
           <li>KIF と SFEN フォーマットに対応</li>
           <li>Flash 未使用</li>
@@ -100,16 +82,15 @@
           <div class="columns">
             <div class="column">
               <article class="message is-info has-text-centered">
-                <div class="message-body">
-                  コメント付きの KIF 表示。9手目から表示。テーマ:real。駒音あり
-                </div>
+                .message-body
+                  | コメント付きの KIF 表示。9手目から表示。テーマ:real。駒音あり
               </article>
               <h3 class="title yumincho">藤井聡太四段 vs 佐藤天彦名人</h3>
               <p class="subtitle yumincho">
                 <a href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank">第11回朝日杯将棋オープン戦本戦</a>
               </p>
               <hr>
-              <ShogiPlayer
+              ShogiPlayer(
                 class="original"
                 :kifu_body="kif_sample1"
                 :start_turn="9"
@@ -120,7 +101,7 @@
                 :sound_effect="true"
                 :volume="0.25"
                 :debug_mode="false"
-                />
+              )
             </div>
           </div>
           <br>
@@ -129,9 +110,8 @@
           <div class="columns">
             <div class="column">
               <article class="message is-info has-text-centered">
-                <div class="message-body">
-                  シンプル。最終手から表示。※盤面クリックで操作可。天王山クリックで反転
-                </div>
+                .message-body
+                  | シンプル。最終手から表示。※盤面クリックで操作可。天王山クリックで反転
               </article>
               <h3 class="title yumincho">羽生善治名人 vs 渡辺明竜王</h3>
               <p class="subtitle yumincho">第21期竜王戦七番勝負第4局</p>
@@ -141,9 +121,8 @@
 
             <div class="column">
               <article class="message is-info has-text-centered">
-                <div class="message-body">
-                  スライダーのみ表示。初手から表示
-                </div>
+                .message-body
+                  | スライダーのみ表示。初手から表示
               </article>
               <h3 class="title yumincho">藤井猛六段 vs 井上慶太六段</h3>
               <p class="subtitle yumincho">第54期順位戦B級2組7回戦</p>
@@ -158,9 +137,8 @@
           <div class="columns">
             <div class="column">
               <article class="message is-info has-text-centered">
-                <div class="message-body">
-                  コントローラーとスライダー付き。121手目から表示。
-                </div>
+                .message-body
+                  | コントローラーとスライダー付き。121手目から表示。
               </article>
               <h3 class="title yumincho">藤井聡太四段 vs 澤田真吾六段</h3>
               <p class="subtitle yumincho">第43期棋王戦予選</p>
@@ -170,9 +148,8 @@
 
             <div class="column">
               <article class="message is-info has-text-centered">
-                <div class="message-body">
-                  駒落ち。最終手から表示。局面のSFENも表示
-                </div>
+                .message-body
+                  | 駒落ち。最終手から表示。局面のSFENも表示
               </article>
               <h3 class="title yumincho">小池重明 vs 加藤一二三十段</h3>
               <p class="subtitle yumincho">加藤一二三の駒落道場</p>
@@ -189,7 +166,7 @@
                 <div class="message-header">
                   <p>共通する操作方法</p>
                 </div>
-                <div class="message-body">
+                .message-body
                   <div class="content">
                     <ul>
                       <li>盤面の左右をクリックすると前後の手番に進む</li>
@@ -201,7 +178,6 @@
                       <li>スライダーにフォーカスがある状態だと左右キーが効く(ブラウザの標準機能)</li>
                     </ul>
                   </div>
-                </div>
               </article>
             </div>
           </div>
@@ -215,17 +191,15 @@
           <div class="columns">
             <div class="column">
               <article class="message is-info has-text-centered">
-                <div class="message-body">
-                  自分で操作できる。戻れば操作をやり直せる
-                </div>
+                .message-body
+                  | 自分で操作できる。戻れば操作をやり直せる
               </article>
               <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'"/>
             </div>
             <div class="column">
               <article class="message is-info has-text-centered">
-                <div class="message-body">
-                  human_side_key オプションで先手側だけ操作できるようにする
-                </div>
+                .message-body
+                  | human_side_key オプションで先手側だけ操作できるようにする
               </article>
               <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="20" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'" :human_side_key="'black'"/>
             </div>
@@ -237,7 +211,7 @@
                 <div class="message-header">
                   <p>操作モードについて</p>
                 </div>
-                <div class="message-body">
+                .message-body
                   <div class="content">
                     <ul>
                       <li>スライダー等で変更した任意局面から手番側の操作が行えます</li>
@@ -247,7 +221,6 @@
                       <li>再生モードの棋譜とは独立しています(再生モードの棋譜を上書きしません)</li>
                     </ul>
                   </div>
-                </div>
               </article>
             </div>
           </div>
@@ -260,18 +233,16 @@
           <div class="columns">
             <div class="column">
               <article class="message is-info has-text-centered">
-                <div class="message-body">
-                  すべての駒を自由に動かせる
-                </div>
+                .message-body
+                  | すべての駒を自由に動かせる
               </article>
               <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'"/>
             </div>
 
             <div class="column">
               <article class="message is-info has-text-centered">
-                <div class="message-body">
-                  詰将棋用の初期配置で開始
-                </div>
+                .message-body
+                  | 詰将棋用の初期配置で開始
               </article>
               <ShogiPlayer :preset_key="'詰将棋'" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'"/>
             </div>
@@ -283,9 +254,8 @@
             <div class="columns">
               <div class="column">
                 <article class="message is-info has-text-centered">
-                  <div class="message-body">
-                    外部KIFファイルの読み込み
-                  </div>
+                  .message-body
+                    | 外部KIFファイルの読み込み
                 </article>
                 <ShogiPlayer :kifu_url="'http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif?plain=1'" :start_turn="-1" :controller_show="true" :slider_show="true" :debug_mode="true" :polling_interval="30" />
               </div>
@@ -300,7 +270,7 @@
                 <div class="message-header">
                   <p>操作方法</p>
                 </div>
-                <div class="message-body">
+                .message-body
                   <div class="content">
                     <ul>
                       <li>盤上の駒は右クリックで裏返せます</li>
@@ -308,7 +278,6 @@
                       <li>駒を持った状態で右クリックすると駒を元に戻します</li>
                     </ul>
                   </div>
-                </div>
               </article>
             </div>
           </div>
@@ -319,7 +288,7 @@
                 <div class="message-header">
                   <p>再生モードからのモード切り替えについて</p>
                 </div>
-                <div class="message-body">
+                .message-body
                   <div class="content">
                     <ul>
                       <li>右の<b-icon icon="dots-vertical" size="is-small"></b-icon>をクリックするとモードを切り替えれます</li>
@@ -329,7 +298,6 @@
                       <li>手番に関わらず、ただ自由に駒を動かしたいときは「編集」モードにします。</li>
                     </ul>
                   </div>
-                </div>
               </article>
             </div>
           </div>
@@ -355,7 +323,7 @@
       <hr>
       <div class="columns">
         <div class="column">
-          <ShogiPlayer
+          ShogiPlayer(
             :run_mode.sync="run_mode"
             :kifu_body.sync="kifu_body"
             :start_turn="start_turn"
@@ -376,7 +344,7 @@
             @update:play_mode_long_sfen="play_mode_long_sfen_set"
             @update:play_mode_short_sfen="play_mode_short_sfen_set"
             @update:play_mode_move="play_mode_move_set"
-            />
+          )
           <hr>
         </div>
       </div>
@@ -385,41 +353,30 @@
           <section>
             <b-field label="run_mode">
               <div class="block">
-                <b-radio v-model="run_mode" native-value="view_mode">view_mode</b-radio>
-                <b-radio v-model="run_mode" native-value="play_mode">play_mode</b-radio>
-                <b-radio v-model="run_mode" native-value="edit_mode">edit_mode</b-radio>
+                template(v-for="e in RunModeInfo.values")
+                  b-radio(v-model="run_mode" :native-value="e.key") {{e.name}}
               </div>
             </b-field>
 
             <div class="box">
               <b-field label="theme">
                 <div class="block">
-                  <b-radio v-model="theme" native-value="none">none</b-radio>
-                  <b-radio v-model="theme" native-value="simple">simple</b-radio>
-                  <b-radio v-model="theme" native-value="real">real</b-radio>
+                  template(v-for="e in ThemeInfo.values")
+                    b-radio(v-model="theme" :native-value="e.key") {{e.name}}
                 </div>
               </b-field>
 
               <b-field label="variation">
                 <div class="block">
-                  <template v-for="val in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']">
-                    <b-radio v-model="variation" :native-value="val">{{val}}</b-radio>
-                  </template>
+                  template(v-for="e in VariationInfo.values")
+                    b-radio(v-model="variation" :native-value="e.key") {{e.name}}
                 </div>
               </b-field>
 
               <b-field label="size">
                 <div class="block">
-                  <b-radio v-model="size" native-value="none">none</b-radio>
-                  <b-radio v-model="size" native-value="xx-small">xx-small</b-radio>
-                  <b-radio v-model="size" native-value="x-small">x-small</b-radio>
-                  <b-radio v-model="size" native-value="small">small</b-radio>
-                  <b-radio v-model="size" native-value="default">default</b-radio>
-                  <b-radio v-model="size" native-value="medium">medium</b-radio>
-                  <b-radio v-model="size" native-value="large">large</b-radio>
-                  <b-radio v-model="size" native-value="x-large">x-large</b-radio>
-                  <b-radio v-model="size" native-value="xx-large">xx-large</b-radio>
-                  <b-radio v-model="size" native-value="xxx-large">xxx-large</b-radio>
+                  template(v-for="e in SizeInfo.values")
+                    b-radio(v-model="size" :native-value="e.key") {{e.name}}
                 </div>
               </b-field>
             </div>
@@ -494,27 +451,26 @@
               <div class="message-header">
                 <p>引数</p>
               </div>
-              <div class="message-body">
-                &lt;shogi-player
-                :<b>run_mode</b>="'{{run_mode}}'"
-                :<b>theme</b>="'{{theme}}'"
-                :<b>variation</b>="'{{variation}}'"
-                :<b>size</b>="'{{size}}'"
-                :<b>start_turn</b>="{{start_turn}}"
-                :<b>slider_show</b>="{{slider_show}}"
-                :<b>controller_show</b>="{{controller_show}}"
-                :<b>sfen_show</b>="{{sfen_show}}"
-                :<b>human_side_key</b>="'{{human_side_key}}'"
-                :<b>sound_effect</b>="{{sound_effect}}"
-                :<b>volume</b>="{{volume}}"
-                :<b>key_event_capture</b>="{{key_event_capture}}"
-                :<b>debug_mode</b>="{{debug_mode}}"
-                :<b>flip</b>="{{flip}}"
-                :<b>digit_show</b>="{{digit_show}}"
-                :<b>final_label</b>="'{{final_label}}'"
-                :<b>kifu_body</b>="'{{kifu_body}}'"
-                /&gt;
-              </div>
+              .message-body
+                | &lt;shogi-player
+                | :<b>run_mode</b>="'{{run_mode}}'"
+                | :<b>theme</b>="'{{theme}}'"
+                | :<b>variation</b>="'{{variation}}'"
+                | :<b>size</b>="'{{size}}'"
+                | :<b>start_turn</b>="{{start_turn}}"
+                | :<b>slider_show</b>="{{slider_show}}"
+                | :<b>controller_show</b>="{{controller_show}}"
+                | :<b>sfen_show</b>="{{sfen_show}}"
+                | :<b>human_side_key</b>="'{{human_side_key}}'"
+                | :<b>sound_effect</b>="{{sound_effect}}"
+                | :<b>volume</b>="{{volume}}"
+                | :<b>key_event_capture</b>="{{key_event_capture}}"
+                | :<b>debug_mode</b>="{{debug_mode}}"
+                | :<b>flip</b>="{{flip}}"
+                | :<b>digit_show</b>="{{digit_show}}"
+                | :<b>final_label</b>="'{{final_label}}'"
+                | :<b>kifu_body</b>="'{{kifu_body}}'"
+                | /&gt;
             </article>
 
             <br>
@@ -554,13 +510,25 @@
 
 <script>
 import ShogiPlayer from './components/ShogiPlayer'
+
 import { SideInfo } from "./side_info"
+
+import { RunModeInfo } from "./run_mode_info"
+import { ThemeInfo } from "./theme_info"
+import { VariationInfo } from "./variation_info"
+import { SizeInfo } from "./size_info"
+
 import Vue from 'vue'
 import Buefy from 'buefy'
 
 Vue.use(Buefy)
 
 Object.defineProperty(Vue.prototype, 'SideInfo', {value: SideInfo})
+
+Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
+Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})
+Object.defineProperty(Vue.prototype, 'VariationInfo', {value: VariationInfo})
+Object.defineProperty(Vue.prototype, 'SizeInfo', {value: SizeInfo})
 
 const marked = require('marked')
 const renderer = new marked.Renderer()
