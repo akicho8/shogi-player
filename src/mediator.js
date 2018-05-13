@@ -164,7 +164,6 @@ class Mediator {
   }
 
   realized_hold_pieces_of(location_key) {
-    console.log(this.hold_pieces)
     const list = Object.entries(this.hold_pieces[location_key])
     return _(list)
       .filter(([key, count]) => count >= 1)

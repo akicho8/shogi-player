@@ -171,17 +171,17 @@ export default {
 
   /* eslint-disable */
   props: {
-    run_mode:           { type: String,  default: "view_mode", },
-    kifu_body:          { type: String,  default: null,        },
-    start_turn:         { type: Number,  default: -1,          },
-    sfen_show:          { type: Boolean, default: false,       },
-    url_embed_turn:     { type: Boolean, default: false,       },
-    theme:              { type: String,  default: "real",      },
-    size:               { type: String,  default: "default",   },
-    variation:          { type: String,  default: "a"          },
-    debug_mode:         { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
-    digit_show:         { type: Boolean, default: false,       },
-    final_label:        { type: String,  default: null,        },
+    run_mode:       { type: String,  default: "view_mode", },
+    kifu_body:      { type: String,  default: null,        },
+    start_turn:     { type: Number,  default: -1,          },
+    sfen_show:      { type: Boolean, default: false,       },
+    url_embed_turn: { type: Boolean, default: false,       },
+    theme:          { type: String,  default: "real",      },
+    size:           { type: String,  default: "default",   },
+    variation:      { type: String,  default: "a"          },
+    debug_mode:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
+    digit_show:     { type: Boolean, default: false,       },
+    final_label:    { type: String,  default: null,        },
   },
   /* eslint-enable */
 
@@ -195,15 +195,14 @@ export default {
   data() {
     return {
       current_run_mode: this.run_mode,
-      // current_turn: this.start_turn, // N手目
-      turn_edit_value: null,         // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
-      mediator: null,                // 局面管理
-      turn_edit: false,              // N手目編集中
-      env: process.env.NODE_ENV,
+      turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
+      mediator: null,           // 局面管理
+      turn_edit: false,         // N手目編集中
       error_message: null,
       update_counter: 0,
       setting_modal_p: false,
       inside_custom_kifu: null, // 設定ダイアログで変更されたときに入る
+      env: process.env.NODE_ENV,
     }
   },
 
