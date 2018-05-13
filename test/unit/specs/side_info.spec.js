@@ -1,7 +1,7 @@
-import { Location } from '@/side_info.js'
+import { SideInfo } from '@/side_info.js'
 
 describe('SideInfo', () => {
   it('locations', () => {
-    expect(Location.fetch("black").locations.map((e) => e.key)).toEqual(["black", "white"])
+    expect(SideInfo.fetch("both").locations.map((e) => e.key)).toEqual(["black", "white"])
   })
 })
