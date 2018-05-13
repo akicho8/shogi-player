@@ -32,12 +32,15 @@
     b-field(label="サイズ")
       .block
         b-radio(v-model="$store.state.current_size" native-value="none") none
+        b-radio(v-model="$store.state.current_size" native-value="xx-small") xx-small
         b-radio(v-model="$store.state.current_size" native-value="x-small") x-small
         b-radio(v-model="$store.state.current_size" native-value="small") small
         b-radio(v-model="$store.state.current_size" native-value="default") default
         b-radio(v-model="$store.state.current_size" native-value="medium") medium
         b-radio(v-model="$store.state.current_size" native-value="large") large
         b-radio(v-model="$store.state.current_size" native-value="x-large") x-large
+        b-radio(v-model="$store.state.current_size" native-value="xx-large") xx-large
+        b-radio(v-model="$store.state.current_size" native-value="xxx-large") xx-large
 
     b-field(label="棋譜")
       b-input(v-model="kifu_source2" type="textarea")

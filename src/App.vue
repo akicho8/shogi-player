@@ -411,17 +411,19 @@
               <b-field label="size">
                 <div class="block">
                   <b-radio v-model="size" native-value="none">none</b-radio>
+                  <b-radio v-model="size" native-value="xx-small">xx-small</b-radio>
                   <b-radio v-model="size" native-value="x-small">x-small</b-radio>
                   <b-radio v-model="size" native-value="small">small</b-radio>
                   <b-radio v-model="size" native-value="default">default</b-radio>
                   <b-radio v-model="size" native-value="medium">medium</b-radio>
                   <b-radio v-model="size" native-value="large">large</b-radio>
                   <b-radio v-model="size" native-value="x-large">x-large</b-radio>
+                  <b-radio v-model="size" native-value="xx-large">xx-large</b-radio>
+                  <b-radio v-model="size" native-value="xxx-large">xxx-large</b-radio>
                 </div>
               </b-field>
             </div>
 
-            
             <template v-if="false">
               <b-field label="variation">
                 <b-select placeholder="Select a name" v-model="variation">
@@ -430,7 +432,6 @@
               </b-field>
             </template>
 
-            
             <div class="box">
               <b-field grouped group-multiline>
                 <b-field label="sound_effect">
@@ -443,7 +444,7 @@
                 </b-field>
               </b-field>
             </div>
-            
+
             <b-field grouped group-multiline>
               <b-field label="start_turn">
                 <b-input v-model="start_turn" type="number" />
