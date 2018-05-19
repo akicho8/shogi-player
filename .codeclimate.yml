@@ -1,0 +1,9 @@
+ratings:
+  paths:
+    - src/**/*.js
+    - src/**/*.vue
+exclude_paths:
+  - build/**/*
+  - config/**/*
+  - dist/**/*
+  - test/**/*
