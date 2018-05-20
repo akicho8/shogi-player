@@ -1,4 +1,4 @@
-import { MemoryRecord } from "/Users/ikeda/src/js-memory-record/lib/memory_record.js"
+import { MemoryRecord } from "js-memory-record"
 
 class Piece extends MemoryRecord {
   static get define() {
