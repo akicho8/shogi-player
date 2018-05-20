@@ -23,18 +23,6 @@ class PresetInfo extends MemoryRecord {
       /* eslint-enable */
     ]
   }
-
-  get sfen() {
-    return this.attributes.sfen
-  }
-
-  get piece_box() {
-    return this.attributes.piece_box
-  }
-
-  get first_location_key() {
-    return this.attributes.first_location_key
-  }
 }
 
 export { PresetInfo }

@@ -29,10 +29,6 @@ class Piece extends MemoryRecord {
     return this.values.find((e) => [e.promoted_name, e.promoted_alias_name].includes(key))
   }
 
-  get promoted_name() {
-    return this.attributes.promoted_name
-  }
-
   get css_class_list() {
     return ["piece_name", `piece_${this.key}`]
   }

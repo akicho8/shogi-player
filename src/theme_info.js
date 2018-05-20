@@ -10,10 +10,6 @@ class ThemeInfo extends MemoryRecord {
       /* eslint-enable */
     ]
   }
-
-  get name() {
-    return this.attributes.name
-  }
 }
 
 export { ThemeInfo }

@@ -33,10 +33,6 @@ class VariationInfo extends MemoryRecord {
       /* eslint-enable */
     ]
   }
-
-  get name() {
-    return this.attributes.key
-  }
 }
 
 export { VariationInfo }

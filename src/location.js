@@ -8,10 +8,6 @@ class Location extends MemoryRecord {
     ]
   }
 
-  get flip() {
-    return Location.cycle_lookup(this.code + 1)
-  }
-
   static cycle_lookup(key) {
     if (typeof key === "number") {
       // -1 % 2 が -1 になってしまうのでごまかす
@@ -20,12 +16,8 @@ class Location extends MemoryRecord {
     return Location.lookup(key)
   }
 
-  get hirate_name() {
-    return this.attributes.hirate_name
-  }
-
-  get komaochi_name() {
-    return this.attributes.komaochi_name
+  get flip() {
+    return Location.cycle_lookup(this.code + 1)
   }
 
   any_name(komaochi_p) {

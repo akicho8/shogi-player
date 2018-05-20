@@ -17,10 +17,6 @@ class SizeInfo extends MemoryRecord {
       /* eslint-enable */
     ]
   }
-
-  get name() {
-    return this.attributes.key
-  }
 }
 
 export { SizeInfo }

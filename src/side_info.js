@@ -13,10 +13,6 @@ class SideInfo extends MemoryRecord {
     ]
   }
 
-  get location_keys() {
-    return this.attributes.location_keys
-  }
-
   get locations() {
     return this.location_keys.map((e) => Location.fetch(e))
   }

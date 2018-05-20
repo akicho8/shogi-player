@@ -10,10 +10,6 @@ class RunModeInfo extends MemoryRecord {
       /* eslint-enable */
     ]
   }
-
-  get name() {
-    return this.attributes.name
-  }
 }
 
 export { RunModeInfo }
