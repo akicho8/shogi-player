@@ -29,15 +29,15 @@ class Sound {
     if (this.is_loaded) {
       const source = __audio_context__.createBufferSource()
       source.buffer = this.buffer
-      if (true) {
+      if (this.volume === null) {
+        // Sound -> Destination
+        source.connect(__audio_context__.destination)
+      } else {
         // Sound -> GainNode -> Destination
         const gain_node = __audio_context__.createGain()
         source.connect(gain_node)
         gain_node.connect(__audio_context__.destination)
         gain_node.gain.value = this.volume
-      } else {
-        // Sound -> Destination
-        source.connect(__audio_context__.destination)
       }
       source.start(0)
     }
@@ -58,16 +58,16 @@ class Sound {
   __resource_load() {
     if (false) {
       axios(this.uri, {responseType: "arraybuffer"})
-        .then((data) => { this.context.decodeAudioData(data) }).then((buffer) => { this.buffer = buffer })
+        .then(data => this.context.decodeAudioData(data))
+        .then(buffer => { this.buffer = buffer })
     } else {
       const req = new XMLHttpRequest()
       req.responseType = "arraybuffer"
       req.onreadystatechange = () => {
         if (req.readyState === 4) {
           if (req.status === 0 || req.status === 200) {
-            __audio_context__.decodeAudioData(req.response, (buffer) => {
-              this.buffer = buffer
-            })
+            console.log(`${this.constructor.name}#__resource_load("${this.url}")`)
+            __audio_context__.decodeAudioData(req.response, buffer => { this.buffer = buffer })
           }
         }
       }

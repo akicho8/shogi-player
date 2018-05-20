@@ -50,9 +50,8 @@ export default {
 
     sound_load(key, file) {
       if (this.sound_effect) {
-        console.log(`sound_load(${key}, ${file})`)
-
         const object = this[key]
+
         if (_.isNil(object)) {
           this[key] = new Sound(file)
         }
