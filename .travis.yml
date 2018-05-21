@@ -1,24 +1,30 @@
----
 language: node_js
 node_js:
-  - "stable"
+- stable
 sudo: required
 cache:
   directories:
-    - node_modules
+  - node_modules
 before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
 script:
-  - npm test
+- npm test
 addons:
   code_climate:
     repo_token: f147df85a17a09bed8704ba2a3172b9a45519d0adb385b689bc2a323222f0efd
   apt:
     sources:
-      - google-chrome
+    - google-chrome
     packages:
-      - google-chrome-stable
+    - google-chrome-stable
 after_success:
-  - npm install -g codeclimate-test-reporter
-  - codeclimate-test-reporter < test/unit/coverage/lcov.info
+- npm install -g codeclimate-test-reporter
+- codeclimate-test-reporter < test/unit/coverage/lcov.info
+deploy:
+  provider: npm
+  email: pinpon.ikeda@gmail.com
+  api_key:
+    secure: DkpJqJ66AXrpwL6d6yktmvWEA0m7QLRjn8irV60DXWz58slmrYKdL+n9GgIi3a4ZGTRfGvITSDoG9cQlpawOFvOlxq2hU+AUnIuhKMvzHxDKfOtNWfvHeoue8iBD5tpG/rRRotN/1qqLIbbb1/NOFNFMd0mqQuURPuB1Ksq9uOtSWuNHOl+eCF5z5fuBVhT0sg0w93ndpRHfHHfT+WXz/YAEphoh9mGhsFvtsXYsCsY1HvxD4kvKgfgHNha3gRmcme683tTszjnshWpY/6oAo33RJhDVOUYpVhBGtepB+vJSX1R9YtDV4+3erf+rcXndQdk6uGHJrXB0nMeS+4/c9soqPEJxxtHZIGfK5AI24oIkaKp3OD7cIAGhUpUfUV5a1kWn3bBtrsIo6pATqWw+MTC/cZgPgZyal2MWUDWmgAMAnhMJcLTnR7UCqCUNWrbtF3Ae56KyWiP2HTdSR0oS3h2S5mI2qCCBcwT2BdR6tid9U8LJdnVnlBuS5RD+i/H2vUpabdKSZ6P4aIpqxlb55aPuu8dBtk4GTiM1fiMxDj44YHPRfx6K66mVigwQFpBFptsbdJbOl2YLzlrBXPDPUn6r5nZoYqgUVS7r01AqJGsaQWYwIMU84o+NENFO9R8pKg/7JrHkR4UNXKOGdj/oVThBvg51Ya0915AguHvdza8=
+  on:
+    tags: true
