@@ -232,13 +232,19 @@ export default {
     },
 
     kifu_source() {
-      const before_turn_max = this.turn_max
+      // const before_turn_max = this.turn_max
       const before_sfen = this.mediator ? this.mediator.to_sfen : ""
       this.log(`before turn_max: ${this.turn_max}`)
       this.log(`before sfen: ${before_sfen}`)
       this.mediator_setup(this.start_turn)
       this.log(`after turn_max: ${this.turn_max}`)
       this.log(`after sfen: ${this.mediator.to_sfen}`)
+      const sfen_change_p = (before_sfen !== this.mediator.to_sfen)
+      if (this.current_run_mode === "view_mode") {
+        if (sfen_change_p) {
+          this.sound_call("piece_sound")
+        }
+      }
       if (this.current_run_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
         // 棋譜を反映された側は
@@ -247,7 +253,8 @@ export default {
         // この区別が付かない。なのでここで成らさない方がよい
         // this.sound_call("piece_sound")
         // ……と思ったが 1 は turn_max が変化したかどうかで判断できる。いや sfen を見ればわかる？ → そこまでする必要ない
-        if (before_turn_max !== this.turn_max) {
+        // if (before_turn_max !== this.turn_max) {
+        if (sfen_change_p) {
           this.sound_call("piece_sound")
         }
       }
@@ -311,7 +318,7 @@ export default {
       if (this.url_embed_turn) {
         document.location.hash = this.real_turn
       }
-      this.sound_call("piece_sound")
+      // this.sound_call("piece_sound")
       this.update_counter++
     },
 
