@@ -39,6 +39,7 @@ export default {
         const object = this[key]
         if (object) {
           object.play()
+          this.log(`sound_call("${key}")`)
         }
       }
     },
