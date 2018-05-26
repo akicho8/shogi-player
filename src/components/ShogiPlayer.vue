@@ -335,7 +335,7 @@ export default {
 
     log(v) {
       if (this.current_debug_mode) {
-        console.log(...v)
+        console.log(v)
       }
     },
 
