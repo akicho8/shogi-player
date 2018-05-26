@@ -32,6 +32,9 @@ export default {
   },
 
   watch: {
+    current_run_mode() {
+      this.state_reset() // モードが切り替わったときに持ち上げた駒を元に戻す(こうしないとカーソルから駒が離れない)
+    }
   },
 
   methods: {
