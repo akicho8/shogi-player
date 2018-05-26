@@ -1,5 +1,5 @@
 <template lang="pug">
-.shogi-player(:class="[`theme-${current_theme}`, `size-${current_size}`, `variation-${current_variation}`, `run_mode-${current_run_mode}`, {debug_mode: current_debug_mode}, {digit_show: digit_show}]")
+.shogi-player(:class="class_names")
   div(v-if="error_message")
     ErrorNotify
       p(slot="header") ERROR
@@ -135,24 +135,6 @@ import polling_module from "./polling_module.js"
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
 
-// Log content type
-// localStorage.debug = "axios"
-require('axios-debug-log')({
-  request(debug, config) {
-    debug('Request with ' + config.headers['content-type'])
-  },
-  response(debug, response) {
-    debug(
-      'Response with ' + response.headers['content-type'],
-      'from ' + response.config.url
-    )
-  },
-  error(debug, error) {
-    // Read https://www.npmjs.com/package/axios#handling-errors for more info
-    debug('Boom', error)
-  }
-})
-
 /* eslint-disable no-new */
 export default {
   name: 'ShogiPlayer',
@@ -251,9 +233,12 @@ export default {
 
     kifu_source() {
       const before_turn_max = this.turn_max
-      console.log(`turn_max: ${this.turn_max}`)
+      const before_sfen = this.mediator ? this.mediator.to_sfen : ""
+      this.log(`before turn_max: ${this.turn_max}`)
+      this.log(`before sfen: ${before_sfen}`)
       this.mediator_setup(this.start_turn)
-      console.log(`turn_max: ${this.turn_max}`)
+      this.log(`after turn_max: ${this.turn_max}`)
+      this.log(`after sfen: ${this.mediator.to_sfen}`)
       if (this.current_run_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
         // 棋譜を反映された側は
@@ -298,18 +283,18 @@ export default {
     // 呼ばれているコンポーネントで書かないといけない
     // こういうときのために Vuex はあるのではないのかという疑問はある
     /* eslint-disable */
-    current_debug_mode(v) { this.$emit("update:debug_mode", v)             }, // 内から外への通知
-    debug_mode(v)        { this.$store.commit("current_debug_mode_set", v) }, // 外から内への反映
-    run_mode(v)          { this.current_run_mode = v                          }, // 外側から run_mode を変更されたとき
+    current_debug_mode(v) { this.$emit("update:debug_mode", v)              }, // 内から外への通知
+    debug_mode(v)         { this.$store.commit("current_debug_mode_set", v) }, // 外から内への反映
+    run_mode(v)           { this.current_run_mode = v                       }, // 外側から run_mode を変更されたとき
 
-    current_theme(v)     { this.$emit("update:theme", v)                  }, // 中 -> 外
-    theme(v)             { this.$store.state.current_theme = v            }, // 外 -> 中
+    current_theme(v)      { this.$emit("update:theme", v)                   }, // 中 -> 外
+    theme(v)              { this.$store.state.current_theme = v             }, // 外 -> 中
 
-    current_size(v)     { this.$emit("update:size", v)                  }, // 中 -> 外
-    size(v)             { this.$store.state.current_size = v            }, // 外 -> 中
+    current_size(v)       { this.$emit("update:size", v)                    }, // 中 -> 外
+    size(v)               { this.$store.state.current_size = v              }, // 外 -> 中
 
-    current_variation(v)     { this.$emit("update:variation", v)                  }, // 中 -> 外
-    variation(v)             { this.$store.state.current_variation = v            }, // 外 -> 中
+    current_variation(v)  { this.$emit("update:variation", v)               }, // 中 -> 外
+    variation(v)          { this.$store.state.current_variation = v         }, // 外 -> 中
     /* eslint-enable */
   },
 
@@ -350,7 +335,7 @@ export default {
 
     log(v) {
       if (this.current_debug_mode) {
-        console.log(v)
+        console.log(...v)
       }
     },
 
@@ -389,6 +374,17 @@ export default {
   },
 
   computed: {
+    class_names() {
+      return [
+        `theme-${this.current_theme}`,
+        `size-${this.current_size}`,
+        `variation-${this.current_variation}`,
+        `run_mode-${this.current_run_mode}`,
+        {debug_mode: this.current_debug_mode},
+        {digit_show: this.digit_show},
+      ]
+    },
+
     kifu_source() {
       // 設定で棋譜を更新したのが入った inside_custom_kifu が最優先。つまりもう更新はできなくなる。いいのか？
       return this.inside_custom_kifu || this.kifu_body_from_url || this.kifu_body || this.init_preset_sfen || "position startpos"
