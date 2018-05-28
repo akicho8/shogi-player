@@ -119,17 +119,8 @@ export default {
             message: '成りますか？',
             confirmText: '成',
             cancelText: '不成',
-            onConfirm: () => {
-              new_soldier.promoted = true
-            },
-            // 最後に必ず呼ばれる
-            onCancel: () => {
-              this.moves_set(this.origin_soldier1.place.to_sfen + place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
-              this.mediator.board.place_on(new_soldier) // 置く
-              this.mediator.board.delete_at(this.place_from)
-              this.state_reset()
-              this.turn_next()
-            },
+            onConfirm: () => { this.promotable_piece_moved(new_soldier, true)  },
+            onCancel:  () => { this.promotable_piece_moved(new_soldier, false) },
           })
         } else {
           if (this.current_run_mode === "play_mode") {
@@ -156,6 +147,17 @@ export default {
       }
 
       throw new Error("must not happen")
+    },
+
+    // 成れる状態の駒をどうするか
+    promotable_piece_moved(new_soldier, promoted) {
+      new_soldier.promoted = promoted
+
+      this.moves_set(this.origin_soldier1.place.to_sfen + new_soldier.place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
+      this.mediator.board.place_on(new_soldier) // 置く
+      this.mediator.board.delete_at(this.place_from)
+      this.state_reset()
+      this.turn_next()
     },
 
     board_click_right(xy, e) {
@@ -405,7 +407,7 @@ export default {
     cursor_elem_set_pos() {
       if (this.cursor_elem && this.last_event && this.mouse_stick) {
         this.cursor_elem.style.left = `${this.last_event.clientX}px`
-        this.cursor_elem.style.top = `${this.last_event.clientY}px`
+        this.cursor_elem.style.top  = `${this.last_event.clientY}px`
       }
     },
 

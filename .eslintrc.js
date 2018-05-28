@@ -34,7 +34,10 @@ module.exports = {
     'space-before-function-paren': ["error", {named: "never"}],
     'no-constant-condition': 'off',
 
-    'no-alert': 'error',
+    'no-alert': 0,              // alert 許可
+    "no-multi-spaces": 0,       // 連続スペースの許可
+    "key-spacing": 0,           // func:  () => {} としてもやーやー言わない
+
     'no-eq-null': 'error',
     'eqeqeq': 'error',
     'no-extend-native': 'error',
