@@ -51,7 +51,7 @@
           table.board_inner
             tr(v-for="y in mediator.dimension")
               template(v-for="x in mediator.dimension")
-                td.piece_outer(:class="piece_outer_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click.right.prevent="board_click_right([x - 1, y - 1], $event)")
+                td.piece_outer(:class="board_td_piece_outer_class([x - 1, y - 1])" @click="board_click([x - 1, y - 1], $event)" @click.right.prevent="board_click_right([x - 1, y - 1], $event)")
                   .piece_inner_wrap
                     span.piece_inner(:class="mediator.board_piece_inner_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
@@ -346,10 +346,12 @@ export default {
       }
     },
 
-    piece_outer_class(xy) {
+    board_td_piece_outer_class(xy) {
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
       const list = []
+
+      list.push(place.to_css_class)
 
       if (this.mediator.last_hand) {
         const origin_place = this.mediator.last_hand.origin_place

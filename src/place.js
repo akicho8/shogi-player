@@ -55,6 +55,17 @@ class Place {
     const y_table = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
     return [Board.dimension - this._x, y_table[this._y]].join("")
   }
+
+  get to_css_class() {
+    return `place_${this.human_digits}`
+  }
+
+  get human_digits() {
+    return [
+      Board.dimension - this._x,
+      this._y + 1,
+    ].join("")
+  }
 }
 
 export { Place }
