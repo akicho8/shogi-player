@@ -1373,11 +1373,11 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
-buefy@^0.6.5:
-  version "0.6.5"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.6.5.tgz#84e76e9101085dbbc84e66e755aff75030078553"
+buefy@^0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.6.6.tgz#e59df5258ad254498b888cd612bb1a4cc8773d0a"
   dependencies:
-    bulma "^0.6.2"
+    bulma "^0.7.1"
 
 buffer-indexof@^1.0.0:
   version "1.1.1"
@@ -1406,6 +1406,10 @@ builtin-status-codes@^3.0.0:
 bulma@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.6.2.tgz#f4b1d11d5acc51a79644eb0a2b0b10649d3d71f5"
+
+bulma@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.1.tgz#73c2e3b2930c90cc272029cbd19918b493fca486"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -4473,9 +4477,9 @@ js-beautify@^1.6.12, js-beautify@^1.6.14:
     mkdirp "~0.5.0"
     nopt "~3.0.1"
 
-js-memory-record@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/js-memory-record/-/js-memory-record-0.0.5.tgz#87bebe21de2d7dd20fcefbaaafdf46c647d0456a"
+js-memory-record@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/js-memory-record/-/js-memory-record-0.0.9.tgz#a491c7a1369cd1c4f60576b543e0aabf142c40fe"
   dependencies:
     babel-core "^6.22.1"
     lodash "^4.17.4"
