@@ -64,6 +64,3 @@ http://free-paper-texture.com/
 
 フリーテクスチャ素材館／畳のテクスチャ素材01（PHOTO）
 https://free-texture.net/seamless-pattern/tatami01.html
-
-【スプラトゥーン】「菊屋素材集その15【スプラトゥーンそざい】」漫画/菊にぃ [pixiv]
-https://www.pixiv.net/member_illust.php?mode=medium&illust_id=51587037
