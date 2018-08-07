@@ -81,12 +81,14 @@ export default {
 
       // --------------------------------------------------------------------------------
 
-      const shift_key = e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
-      this.log(`holding_p: ${this.holding_p}`)
-      if (!this.holding_p && soldier && shift_key) {
-        this.log("盤上の駒を裏返す")
-        this.mediator.board.place_on(soldier.piece_transform)
-        return
+      if (this.current_run_mode === "edit_mode") {
+        const shift_key = e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
+        this.log(`holding_p: ${this.holding_p}`)
+        if (!this.holding_p && soldier && shift_key) {
+          this.log("盤上の駒を裏返す")
+          this.mediator.board.place_on(soldier.piece_transform)
+          return
+        }
       }
 
       // 盤上の駒を持ちあげる
@@ -170,9 +172,11 @@ export default {
         return
       }
 
-      if (!this.holding_p && soldier) {
-        this.log("盤上の駒を裏返す")
-        this.mediator.board.place_on(soldier.piece_transform)
+      if (this.current_run_mode === "edit_mode") {
+        if (!this.holding_p && soldier) {
+          this.log("盤上の駒を裏返す")
+          this.mediator.board.place_on(soldier.piece_transform)
+        }
       }
     },
 
