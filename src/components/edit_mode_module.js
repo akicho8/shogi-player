@@ -22,6 +22,10 @@ export default {
       place_from: null,           // 盤上ら動かそうとしているときの元位置
       have_piece: null,           // 駒台 or 駒箱から持った駒
       have_piece_location: null,  // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
+
+      // プレフィクスに_をつけるとVueに監視されない
+      _running_p: false,        // mousemove イベント緩和用
+      _last_event: null,        // mousemove イベント
     }
   },
 
@@ -397,8 +401,26 @@ export default {
     },
 
     mousemove_hook(e) {
-      this.last_event = e
-      this.cursor_elem_set_pos()
+      this._last_event = e
+
+      // 連続で呼ばれるイベント処理を緩和する方法
+      // https://qiita.com/noplan1989/items/9333faad731f5ecaaccd
+      // ※試してみているけどあまり効果がない
+      if (true) {
+        // 呼び出されるまで何もしない
+        if (!this._running_p) {
+          this._running_p = true
+
+          // 描画する前のタイミングで呼び出してもらう
+          window.requestAnimationFrame(() => {
+            this.cursor_elem_set_pos()
+
+            this._running_p = false
+          })
+        }
+      } else {
+        this.cursor_elem_set_pos()
+      }
     },
 
     // 右クリックならキャンセル(動いてないっぽい)
@@ -409,9 +431,10 @@ export default {
     },
 
     cursor_elem_set_pos() {
-      if (this.cursor_elem && this.last_event && this.mouse_stick) {
-        this.cursor_elem.style.left = `${this.last_event.clientX}px`
-        this.cursor_elem.style.top  = `${this.last_event.clientY}px`
+      if (this.cursor_elem && this._last_event && this.mouse_stick) {
+        // TODO: これが遅いのか？ もっと速く設定できる方法があれば変更したい
+        this.cursor_elem.style.left = `${this._last_event.clientX}px`
+        this.cursor_elem.style.top  = `${this._last_event.clientY}px`
       }
     },
 
@@ -436,8 +459,8 @@ export default {
 
       this.mouse_stick = true   // マウスに追随する
 
-      this.last_event = event
-      this.log(this.last_event)
+      this._last_event = event
+      this.log(this._last_event)
       this.cursor_elem_set_pos()
 
       window.addEventListener("mousemove", this.mousemove_hook, false)
