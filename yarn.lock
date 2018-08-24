@@ -4477,9 +4477,9 @@ js-beautify@^1.6.12, js-beautify@^1.6.14:
     mkdirp "~0.5.0"
     nopt "~3.0.1"
 
-js-memory-record@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/js-memory-record/-/js-memory-record-0.0.9.tgz#a491c7a1369cd1c4f60576b543e0aabf142c40fe"
+js-memory-record@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/js-memory-record/-/js-memory-record-0.0.10.tgz#6bde2568c313ba6f66d5b4106de8a16b055e391d"
   dependencies:
     babel-core "^6.22.1"
     lodash "^4.17.4"

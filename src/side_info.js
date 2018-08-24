@@ -1,4 +1,4 @@
-import { MemoryRecord } from "js-memory-record"
+import MemoryRecord from "js-memory-record"
 import { Location } from "./location"
 
 class SideInfo extends MemoryRecord {
