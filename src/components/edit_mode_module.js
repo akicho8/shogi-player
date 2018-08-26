@@ -123,8 +123,8 @@ export default {
           // 元が成ってないとき
           this.$dialog.confirm({
             message: '成りますか？',
-            confirmText: '成',
-            cancelText: '不成',
+            confirmText: '成る',
+            cancelText: '成らない',
             onConfirm: () => { this.promotable_piece_moved(new_soldier, true)  },
             onCancel:  () => { this.promotable_piece_moved(new_soldier, false) },
           })
