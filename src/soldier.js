@@ -1,9 +1,9 @@
 import _ from 'lodash'
-import { Board } from './board'
-import { Place } from './place'
-import { Piece } from './piece'
+import Board from './board'
+import Place from './place'
+import Piece from './piece'
 
-class Soldier {
+export default class Soldier {
   constructor(attributes) {
     this.attributes = Object.assign({}, attributes)
   }
@@ -75,8 +75,6 @@ class Soldier {
     return list
   }
 }
-
-export { Soldier }
 
 if (process.argv[1] === __filename) {
   const soldier = new Soldier({

@@ -1,7 +1,7 @@
 import _ from "lodash"
-import { Location } from "./location"
+import Location from "./location"
 
-class ParserBase {
+export default class ParserBase {
   constructor() {
     this.kifu_body = null
     this.header = {}
@@ -48,8 +48,6 @@ class ParserBase {
     return null
   }
 }
-
-export { ParserBase }
 
 if (process.argv[1] === __filename) {
 }

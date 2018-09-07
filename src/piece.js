@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-class Piece extends MemoryRecord {
+export default class Piece extends MemoryRecord {
   static get define() {
     return [
       { key: "K", name: "玉", alias_name: "王", promoted_name: null, promoted_alias_name: null, },
@@ -37,8 +37,6 @@ class Piece extends MemoryRecord {
     return !!this.promoted_name
   }
 }
-
-export { Piece }
 
 if (process.argv[1] === __filename) {
   console.log(Piece.fetch("K"))

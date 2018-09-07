@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import Vue from 'vue'
-import { Soldier } from "./soldier"
+import Soldier from "./soldier"
 
-class Board {
+export default class Board {
   static get dimension() {
     return 9
   }
@@ -39,8 +39,6 @@ class Board {
     return value
   }
 }
-
-export { Board }
 
 if (process.argv[1] === __filename) {
   console.log(Board.dimension)

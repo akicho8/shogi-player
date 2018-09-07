@@ -1,6 +1,6 @@
-import { Piece } from "../piece"
-import { Mediator } from "../mediator"
-import { PresetInfo } from "../preset_info"
+import Piece from "../piece"
+import Mediator from "../mediator"
+import PresetInfo from "../preset_info"
 
 export default {
   /* eslint-disable */

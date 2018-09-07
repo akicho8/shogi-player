@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-class ThemeInfo extends MemoryRecord {
+export default class ThemeInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
@@ -11,8 +11,6 @@ class ThemeInfo extends MemoryRecord {
     ]
   }
 }
-
-export { ThemeInfo }
 
 if (process.argv[1] === __filename) {
   console.log(ThemeInfo.fetch("real").key)

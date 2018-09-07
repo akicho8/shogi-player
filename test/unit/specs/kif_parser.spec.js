@@ -1,4 +1,4 @@
-import { KifParser } from "@/kif_parser"
+import KifParser from "@/kif_parser"
 
 describe("KifParser", () => {
   it("基本", () => {

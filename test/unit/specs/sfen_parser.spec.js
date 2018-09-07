@@ -1,4 +1,4 @@
-import { SfenParser } from '@/sfen_parser'
+import SfenParser from '@/sfen_parser'
 
 describe('SfenParser', () => {
   it('基本', () => {

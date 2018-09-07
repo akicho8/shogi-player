@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-class Location extends MemoryRecord {
+export default class Location extends MemoryRecord {
   static get define() {
     return [
       { key: "black", name: '☗', hirate_name: "先手", komaochi_name: "下手" },
@@ -24,8 +24,6 @@ class Location extends MemoryRecord {
     return komaochi_p ? this.komaochi_name : this.hirate_name
   }
 }
-
-export { Location }
 
 if (process.argv[1] === __filename) {
   console.log(Location.cycle_lookup(-1))

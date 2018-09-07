@@ -1,6 +1,6 @@
 import _ from "lodash"
 
-import { Sound } from '../sound'
+import Sound from '../sound'
 
 import piece_sound_wav from "../assets/piece_sound.wav"
 import flip_sound_wav from "../assets/flip_sound.wav"

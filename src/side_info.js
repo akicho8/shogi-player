@@ -1,7 +1,7 @@
 import MemoryRecord from "js-memory-record"
-import { Location } from "./location"
+import Location from "./location"
 
-class SideInfo extends MemoryRecord {
+export default class SideInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
@@ -17,8 +17,6 @@ class SideInfo extends MemoryRecord {
     return this.location_keys.map((e) => Location.fetch(e))
   }
 }
-
-export { SideInfo }
 
 if (process.argv[1] === __filename) {
   console.log(SideInfo.fetch("both").locations)

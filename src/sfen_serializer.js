@@ -1,12 +1,12 @@
 import _ from "lodash"
 
-import { Piece } from "./piece"
-import { Place } from "./place"
-import { Mediator } from "./mediator"
-import { Location } from "./location"
-import { Board } from "./board"
+import Piece from "./piece"
+import Place from "./place"
+import Mediator from "./mediator"
+import Location from "./location"
+import Board from "./board"
 
-class SfenSerializer {
+export default class SfenSerializer {
   constructor(mediator) {
     this.mediator = mediator
   }
@@ -84,8 +84,6 @@ class SfenSerializer {
     return str
   }
 }
-
-export { SfenSerializer }
 
 if (process.argv[1] === __filename) {
   const mediator = new Mediator()

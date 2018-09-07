@@ -1,8 +1,8 @@
 import _ from "lodash"
 
-import { Board } from "./board"
+import Board from "./board"
 
-class Place {
+export default class Place {
   static fetch(v) {
     if (v instanceof this) {
       return v
@@ -67,8 +67,6 @@ class Place {
     ].join("")
   }
 }
-
-export { Place }
 
 if (process.argv[1] === __filename) {
   console.log(Place.fetch("6a").key)

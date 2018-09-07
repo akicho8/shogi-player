@@ -1,4 +1,4 @@
-import { SideInfo } from '@/side_info.js'
+import SideInfo from '@/side_info.js'
 
 describe('SideInfo', () => {
   it('locations', () => {

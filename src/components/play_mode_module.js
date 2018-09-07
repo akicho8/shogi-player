@@ -1,8 +1,8 @@
 import _ from "lodash"
 
-import { Mediator } from "../mediator"
-import { Location } from "../location"
-import { SideInfo } from "../side_info"
+import Mediator from "../mediator"
+import Location from "../location"
+import SideInfo from "../side_info"
 
 export default {
   /* eslint-disable */

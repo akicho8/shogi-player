@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-class RunModeInfo extends MemoryRecord {
+export default class RunModeInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
@@ -11,8 +11,6 @@ class RunModeInfo extends MemoryRecord {
     ]
   }
 }
-
-export { RunModeInfo }
 
 if (process.argv[1] === __filename) {
   console.log(RunModeInfo.fetch("simple").key)

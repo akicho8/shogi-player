@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Location } from "../location"
+import Location from "../location"
 import _ from "lodash"
 
 export default {

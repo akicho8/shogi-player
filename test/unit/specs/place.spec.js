@@ -1,4 +1,4 @@
-import { Place } from '@/place'
+import Place from '@/place'
 
 describe('Place', () => {
   it('SFENの座標を受け取る', () => {

@@ -113,10 +113,10 @@ import { mapState } from 'vuex'
 import store from "../store/index.js"
 
 // My Library
-import { Mediator } from "../mediator"
-import { Place } from "../place"
-import { SfenParser } from "../sfen_parser"
-import { KifParser } from "../kif_parser"
+import Mediator from "../mediator"
+import Place from "../place"
+import SfenParser from "../sfen_parser"
+import KifParser from "../kif_parser"
 
 // components
 import PieceStand from "./PieceStand"

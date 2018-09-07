@@ -1,14 +1,14 @@
 import _ from "lodash"
 import Vue from "vue"
 
-import { Board } from "./board"
-import { Place } from "./place"
-import { Piece } from "./piece"
-import { Soldier } from "./soldier"
-import { SfenParser } from "./sfen_parser"
-import { SfenSerializer } from "./sfen_serializer"
+import Board from "./board"
+import Place from "./place"
+import Piece from "./piece"
+import Soldier from "./soldier"
+import SfenParser from "./sfen_parser"
+import SfenSerializer from "./sfen_serializer"
 
-class Mediator {
+export default class Mediator {
   constructor() {
     const data_source = new SfenParser()
     data_source.kifu_body = "position startpos"
@@ -210,5 +210,3 @@ class Mediator {
       .value()
   }
 }
-
-export { Mediator }

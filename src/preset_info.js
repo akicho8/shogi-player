@@ -1,7 +1,7 @@
 import MemoryRecord from "js-memory-record"
-// import { Location } from "../location"
+// import Location from "../location"
 
-class PresetInfo extends MemoryRecord {
+export default class PresetInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
@@ -24,8 +24,6 @@ class PresetInfo extends MemoryRecord {
     ]
   }
 }
-
-export { PresetInfo }
 
 if (process.argv[1] === __filename) {
   console.log(PresetInfo.fetch("平手"))

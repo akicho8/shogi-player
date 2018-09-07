@@ -1,9 +1,9 @@
 import React from 'react'
 import _ from 'lodash'
-import { Mediator } from './mediator'
-import { Board } from './board'
-import { Piece } from "./piece"
-import { Location } from "./location"
+import Mediator from './mediator'
+import Board from './board'
+import Piece from "./piece"
+import Location from "./location"
 
 import "./ShogiPlayer.css"
 import "./PieceStand.css"

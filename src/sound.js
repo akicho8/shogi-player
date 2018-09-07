@@ -12,7 +12,7 @@ if (typeof window !== "undefined" && process.env.NODE_ENV !== "test") {
   __audio_context__ = new AudioContext()
 }
 
-class Sound {
+export default class Sound {
   constructor(url, options = {}) {
     this.url = url
     this.options = options
@@ -76,5 +76,3 @@ class Sound {
     }
   }
 }
-
-export { Sound }

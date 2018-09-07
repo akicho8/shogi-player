@@ -47,10 +47,10 @@
 //
 
 import Vue from "vue"
-import { RunModeInfo } from "../run_mode_info"
-import { ThemeInfo } from "../theme_info"
-import { SizeInfo } from "../size_info"
-import { VariationInfo } from "../variation_info"
+import RunModeInfo from "../run_mode_info"
+import ThemeInfo from "../theme_info"
+import SizeInfo from "../size_info"
+import VariationInfo from "../variation_info"
 
 Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
 Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})

@@ -2,14 +2,14 @@ import XRegExp from "xregexp"
 import Vue from "vue"
 import _ from "lodash"
 
-import { Board } from "./board"
-import { ParserBase } from "./parser_base"
-import { Piece } from "./piece"
-import { Place } from "./place"
-import { Soldier } from "./soldier"
-import { Location } from "./location"
+import Board from "./board"
+import ParserBase from "./parser_base"
+import Piece from "./piece"
+import Place from "./place"
+import Soldier from "./soldier"
+import Location from "./location"
 
-class SfenParser extends ParserBase {
+export default class SfenParser extends ParserBase {
   parse() {
     this.kifu_body = this.kifu_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
@@ -129,8 +129,6 @@ class SfenParser extends ParserBase {
     return Location.fetch(key)
   }
 }
-
-export { SfenParser }
 
 if (process.argv[1] === __filename) {
   const sfen_parser = new SfenParser()

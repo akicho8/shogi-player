@@ -407,12 +407,12 @@
 <script>
 import ShogiPlayer from './components/ShogiPlayer'
 
-import { SideInfo } from "./side_info"
+import SideInfo from "./side_info"
 
-import { RunModeInfo } from "./run_mode_info"
-import { ThemeInfo } from "./theme_info"
-import { VariationInfo } from "./variation_info"
-import { SizeInfo } from "./size_info"
+import RunModeInfo from "./run_mode_info"
+import ThemeInfo from "./theme_info"
+import VariationInfo from "./variation_info"
+import SizeInfo from "./size_info"
 
 import Vue from 'vue'
 import Buefy from 'buefy'

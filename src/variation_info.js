@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-class VariationInfo extends MemoryRecord {
+export default class VariationInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
@@ -34,8 +34,6 @@ class VariationInfo extends MemoryRecord {
     ]
   }
 }
-
-export { VariationInfo }
 
 if (process.argv[1] === __filename) {
   console.log(VariationInfo.fetch("a").key)

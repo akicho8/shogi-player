@@ -1,8 +1,8 @@
 import _ from "lodash"
 
-import { Place } from "../place"
-import { Soldier } from "../soldier"
-import { Location } from "../location"
+import Place from "../place"
+import Soldier from "../soldier"
+import Location from "../location"
 
 export default {
   /* eslint-disable */

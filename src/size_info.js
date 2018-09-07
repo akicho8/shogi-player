@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-class SizeInfo extends MemoryRecord {
+export default class SizeInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
@@ -18,8 +18,6 @@ class SizeInfo extends MemoryRecord {
     ]
   }
 }
-
-export { SizeInfo }
 
 if (process.argv[1] === __filename) {
   console.log(SizeInfo.fetch("x-small").key)

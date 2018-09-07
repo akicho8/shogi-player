@@ -1,13 +1,13 @@
 import XRegExp from "xregexp"
 import assert from "minimalistic-assert"
 
-import { ParserBase } from "./parser_base"
-import { Piece } from "./piece"
-import { Place } from "./place"
-import { Location } from "./location"
-import { SfenParser } from "./sfen_parser"
+import ParserBase from "./parser_base"
+import Piece from "./piece"
+import Place from "./place"
+import Location from "./location"
+import SfenParser from "./sfen_parser"
 
-class KifParser extends ParserBase {
+export default class KifParser extends ParserBase {
   get board() {
     const sfen_parser = new SfenParser()
     sfen_parser.kifu_body = "position startpos" // TODO: sfen形式の値のテーブルを持って駒落ちに対応する
@@ -94,8 +94,6 @@ class KifParser extends ParserBase {
       `, 'xm')
   }
 }
-
-export { KifParser }
 
 if (process.argv[1] === __filename) {
   const kif_parser = new KifParser()

@@ -14,8 +14,8 @@
 
 <script>
 import _ from "lodash"
-import { Piece } from "../piece"
-import { Location } from "../location"
+import Piece from "../piece"
+import Location from "../location"
 
 export default {
   props: {
