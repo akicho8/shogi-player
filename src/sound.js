@@ -57,10 +57,14 @@ export default class Sound {
 
   __resource_load() {
     if (false) {
+      // 動かない
       axios(this.uri, {responseType: "arraybuffer"})
         .then(data => this.context.decodeAudioData(data))
         .then(buffer => { this.buffer = buffer })
-    } else {
+    }
+
+    if (false) {
+      // 動くけどカオス
       const req = new XMLHttpRequest()
       req.responseType = "arraybuffer"
       req.onreadystatechange = () => {
@@ -73,6 +77,13 @@ export default class Sound {
       }
       req.open("GET", this.url, true)
       req.send("")
+    }
+
+    if (true) {
+      // 動く
+      fetch(this.url)
+        .then(response => response.arrayBuffer())
+        .then(bin => __audio_context__.decodeAudioData(bin, buffer => (this.buffer = buffer)))
     }
   }
 }
