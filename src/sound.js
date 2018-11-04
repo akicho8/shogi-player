@@ -56,15 +56,15 @@ export default class Sound {
   }
 
   __resource_load() {
+    // 動かない
     if (false) {
-      // 動かない
       axios(this.uri, {responseType: "arraybuffer"})
         .then(data => this.context.decodeAudioData(data))
         .then(buffer => { this.buffer = buffer })
     }
 
-    if (false) {
-      // 動くけどカオス
+    // Safari でも動く
+    if (true) {
       const req = new XMLHttpRequest()
       req.responseType = "arraybuffer"
       req.onreadystatechange = () => {
@@ -79,8 +79,8 @@ export default class Sound {
       req.send("")
     }
 
-    if (true) {
-      // 動く
+    // 簡単だけどsafariでは動かない
+    if (false) {
       fetch(this.url)
         .then(response => response.arrayBuffer())
         .then(bin => __audio_context__.decodeAudioData(bin, buffer => (this.buffer = buffer)))
