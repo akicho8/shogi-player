@@ -17,7 +17,7 @@
     "build:clean": "rimraf dist docs",
     "build": "npm run build:clean && node build/build.js && rsync -avzu --delete dist/ docs/ && rsync -avz google1d59e6a7bc79749e.html docs/",
     "deploy": "npm run build && git add -A && git commit -m '[chore] npm run build for deploy' && git push",
-    "release": "npm version patch && git push --tags"
+    "release": "npm version patch && npm publish && git push --tags"
   },
   "dependencies": {
     "autolinker": "^1.6.0",
