@@ -1,3 +1,5 @@
+$board_overlay_clickable_size: 12%
+
 .shogi-player
   &.run_mode-view_mode
     .board_wrap
@@ -9,10 +11,10 @@
         height: 100%
         // ←戻る
         &.previous
-          left: -25%
+          left: -$board_overlay_clickable_size
         // 進む→
         &.next
-          right: -25%
+          right: -$board_overlay_clickable_size
         // 反転用の天王山
         &.flip_trigger_cell
           z-index: 2
