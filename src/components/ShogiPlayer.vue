@@ -11,7 +11,8 @@
   div.edit_mode_controller(v-if="current_run_mode === 'edit_mode'")
     .edit_mode_controller_wrap
         b-dropdown(v-model="current_preset_key")
-          button.button(slot="trigger")
+          //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
+          .button(slot="trigger")
             span 初期配置
             b-icon(icon="menu-down")
           b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key")

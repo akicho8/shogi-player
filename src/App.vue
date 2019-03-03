@@ -259,28 +259,30 @@
       hr
       .columns
         .column
-          ShogiPlayer(
-            :run_mode.sync="run_mode"
-            :kifu_body.sync="kifu_body"
-            :start_turn="start_turn"
-            :theme.sync="theme"
-            :size.sync="size"
-            :variation.sync="variation"
-            :debug_mode.sync="debug_mode"
-            :flip.sync="flip"
-            :digit_show="digit_show"
-            :final_label="final_label"
-            :key_event_capture="key_event_capture"
-            :slider_show="slider_show"
-            :controller_show="controller_show"
-            :sfen_show="sfen_show"
-            :sound_effect="sound_effect"
-            :volume="volume"
-            :human_side_key="human_side_key"
-            @update:play_mode_long_sfen="play_mode_long_sfen_set"
-            @update:play_mode_short_sfen="play_mode_short_sfen_set"
-            @update:play_mode_move="play_mode_move_set"
-          )
+          //- この form は prevent が効いているか確認するためのもの
+          form(action="/")
+            ShogiPlayer(
+              :run_mode.sync="run_mode"
+              :kifu_body.sync="kifu_body"
+              :start_turn="start_turn"
+              :theme.sync="theme"
+              :size.sync="size"
+              :variation.sync="variation"
+              :debug_mode.sync="debug_mode"
+              :flip.sync="flip"
+              :digit_show="digit_show"
+              :final_label="final_label"
+              :key_event_capture="key_event_capture"
+              :slider_show="slider_show"
+              :controller_show="controller_show"
+              :sfen_show="sfen_show"
+              :sound_effect="sound_effect"
+              :volume="volume"
+              :human_side_key="human_side_key"
+              @update:play_mode_long_sfen="play_mode_long_sfen_set"
+              @update:play_mode_short_sfen="play_mode_short_sfen_set"
+              @update:play_mode_move="play_mode_move_set"
+            )
           hr
 
       .columns
