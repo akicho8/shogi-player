@@ -77,7 +77,10 @@
       div(v-if="slider_show")
         input.turn_slider(type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="turn_min" :max="turn_max" ref="turn_slider")
 
-    .sfen_area.is-size-7.has-text-grey(v-if="sfen_show") {{mediator.to_sfen}}
+    //- http://kyokumen.jp/positions/lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL%20w%20-
+    .sfen_area.is-size-7.has-text-grey(v-if="sfen_show")
+      slot(name="sfen_part" :sfen="mediator.to_sfen" :mediator="mediator")
+        | {{mediator.to_sfen}}
 
     CommentArea(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
 
