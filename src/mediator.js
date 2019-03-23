@@ -174,8 +174,13 @@ export default class Mediator {
 
   // -------------------------------------------------------------------------------- serialize
 
+  // 重いのでキャッシュしておく
   get to_sfen() {
-    return this.sfen_serializer.to_s
+    return this.cached("to_sfen", () => this.sfen_serializer.to_s)
+  }
+
+  get to_sfen_without_turn() {
+    return this.cached("to_sfen_without_turn", () => this.sfen_serializer.to_s_without_turn)
   }
 
   get to_position_sfen() {
@@ -208,5 +213,18 @@ export default class Mediator {
       .map(([key, count]) => [Piece.fetch(key), count])
       .sortBy(([key, count]) => key.code)
       .value()
+  }
+
+  // -------------------------------------------------------------------------------- private
+
+  cached(key, func) {
+    const name = `__cached_${key}`
+    if (typeof this[name] !== "undefined") {
+      // alert(`cached: ${key}`)
+      return this[name]
+    }
+    // alert(`run: ${key}`)
+    this[name] = func()
+    return this[name]
   }
 }
