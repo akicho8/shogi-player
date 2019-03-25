@@ -33,8 +33,10 @@
               | {{real_turn}}手目
         template(v-if="turn_edit")
           input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
+
       span.is-pulled-right.modal_trigger_dots(@click.prevent="setting_modal_p = true")
         b-icon(icon="dots-vertical" size="is-small")
+
       b-modal(:active.sync="setting_modal_p" has-modal-card)
         SettingModal(
           :run_mode.sync="current_run_mode"

@@ -96,8 +96,10 @@
           .board_outer
             .board_inner
               .piece_outer
+                // 駒がないときに升目が最小になるのを防ぐため
                 width:  map-get($attrs, piece_outer_size)
                 height: map-get($attrs, piece_outer_size)
+                // 駒のサイズ
                 font-size: map-get($attrs, font-size)
           // 駒箱
           .piece_box

@@ -32,6 +32,8 @@
             li: a(href="#usage") 使い方
             li: a(href="#options") オプション
 
+  //- ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'")
+
   .section
     a(name="summary")
     .container
