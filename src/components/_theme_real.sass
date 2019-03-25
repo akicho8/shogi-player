@@ -189,7 +189,7 @@ $sp_real_hold_gap: 0.5vmin      // 携帯のときだけ
 //////////////////////////////////////////////////////////////////////////////// size
 
 @mixin size_define($key, $size)
-  @media screen and (min-width: 321px) and (max-width: 9999px)
+  @media screen and (min-width: $sp_mobile_width + 1) and (max-width: 9999px)
     .shogi-player
       &.theme-real
         &.size-#{$key}

@@ -412,6 +412,8 @@
 </template>
 
 <script>
+import "css-browser-selector"
+
 import ShogiPlayer from './components/ShogiPlayer'
 
 import SideInfo from "./side_info"
@@ -512,6 +514,23 @@ export default {
 <style lang="sass">
 @import "./App"
 @import "buefy/lib/buefy.css"
+
+.mobile
+  font-size: 65%
+  .section
+    margin: 2em 0.5em
+    margin-bottom: 1em
+    padding: 0
+  // .row_piyo_link
+  //   height: 0.8rem
+  // .notification
+  //   font-size: 75%
+  .title
+    font-size: 150% ! important
+    padding-left: 1rem
+  // .swars_battles_index_light
+  //   .table
+  //     font-size: 90%
 
 // ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
 // main.js で読み込むと .sass のファイル基準になる

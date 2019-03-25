@@ -81,7 +81,7 @@
     background: $sp_simple_current_bg2
 
 @mixin size_define($key, $attrs)
-  @media screen and (min-width: 321px) and (max-width: 9999px)
+  @media screen and (min-width: $sp_mobile_width + 1) and (max-width: 9999px)
     .shogi-player
       &.theme-simple
         // font-size: map-get($attrs, font-size)
@@ -103,7 +103,7 @@
             // .piece_stand
             //   font-size: map-get($attrs, font-size) * 0.8
 
-@include size_define(xx-small,   $sp_simple_cell_size_xxsmall)
+@include size_define(xx-small,  $sp_simple_cell_size_xxsmall)
 @include size_define(x-small,   $sp_simple_cell_size_xsmall)
 @include size_define(small,     $sp_simple_cell_size_small)
 @include size_define(default,   $sp_simple_cell_size_default)

@@ -3,9 +3,58 @@
   .shogi-player
     .board_outer
       .board_inner
-        .piece_inner
-          padding: 0 0.75vmin
-          &.location_black
-            transform: translateY(0)
-          &.location_white
-            transform: rotate(180deg) translateY(0)
+        .piece_outer
+          .piece_inner
+            padding: 0 0.75vmin
+            &.location_black
+              transform: translateY(0)
+            &.location_white
+              transform: rotate(180deg) translateY(0)
+
+    // // コントローラー
+    // .controller_block              
+    //   .button
+    //     width: 20%
+              
+    // スライダー
+    .turn_slider
+      width: 70%
+              
+  //////////////////////////////////////////////////////////////////////////////// real
+  $size: 7.0vmin
+  .shogi-player
+    &.theme-real
+      .board_inner
+        .piece_outer
+          width:  $size
+          height: $size
+      .piece_stand_outer
+        font-size: $size * 0.8
+        .piece_count
+          font-size: $size * 0.4
+      .piece_box
+        max-width:  $size * 2.5
+        min-height: $size * 2.0
+        font-size: $size * 0.5
+      .cursor_elem
+        width:  $size
+        height: $size
+
+  //////////////////////////////////////////////////////////////////////////////// simple
+  .shogi-player
+    &.theme-simple
+      // 盤
+      .board_outer
+        .board_inner
+          .piece_outer
+            // background: blue ! important
+            // width:  4.0vmin
+            // height: 4.0vmin
+            font-size: 5.6vmin
+      // 駒箱
+      .piece_box
+        font-size: 3.6vmin * 0.8
+        max-width: 3.6vmin * 3.8
+      // 駒台
+      .piece_stand_outer
+        font-size: 3.6vmin * 1.0
