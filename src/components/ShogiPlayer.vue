@@ -18,9 +18,9 @@
           b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key")
             | {{record.name}}
         | &nbsp;
-        button.button(@click.prevent="all_flip") 先後反転
+        button.button.yumincho(@click.prevent="all_flip") 先後反転
         | &nbsp;
-        button.button(@click.prevent="init_location_toggle") 手番{{init_location.name}}
+        button.button.yumincho(@click.prevent="init_location_toggle") 手番{{init_location.name}}
 
   template(v-if="mediator")
     .turn_div
