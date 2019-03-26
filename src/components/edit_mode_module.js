@@ -91,6 +91,7 @@ export default {
         if (!this.holding_p && soldier && shift_key) {
           this.log("盤上の駒を裏返す")
           this.mediator.board.place_on(soldier.piece_transform)
+          this.pice_hold_and_put_for_bug(place, e) // 不具合対策
           return
         }
       }
@@ -180,6 +181,7 @@ export default {
         if (!this.holding_p && soldier) {
           this.log("盤上の駒を裏返す")
           this.mediator.board.place_on(soldier.piece_transform)
+          this.pice_hold_and_put_for_bug(place, e) // 不具合対策
         }
       }
     },
@@ -343,12 +345,20 @@ export default {
       this.virtual_piece_create(e, this.origin_soldier1.to_class_list)
     },
 
+    // 駒を持ってない状態にする
     state_reset() {
       this.log("state_reset")
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       this.have_piece_location = null
       this.virtual_piece_destroy()
+    },
+
+    // 駒を持つ → そのまま置く
+    // これは Vue がリアクティブにならない対策として入れているのでできれば外したい
+    pice_hold_and_put_for_bug(place, e) {
+      this.soldier_hold(place, e)
+      this.state_reset()
     },
 
     // -------------------------------------------------------------------------------- piece_box
