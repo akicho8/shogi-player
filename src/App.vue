@@ -34,6 +34,10 @@
 
   //- ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'")
   //- ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'" :run_mode="'edit_mode'")
+  //- ShogiPlayer(:kifu_body="`position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
+  //- ShogiPlayer(:kifu_body="`position startpos`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
+  //- ShogiPlayer(:kifu_body="`position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL b - 1`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
+  //- ShogiPlayer(:kifu_body="`position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL w - 2`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
 
   .section
     a(name="summary")
@@ -169,6 +173,19 @@
                   | human_side_key オプションで先手側だけ操作できるようにする
 
               ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="20" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'" :human_side_key="'black'")
+
+          .columns
+            .column
+              article.message.is-info.has-text-centered
+                .message-body
+                  | 駒落ちの場合は後手から始まる(動作確認用)
+              ShogiPlayer(:kifu_body="`position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
+
+            .column
+              article.message.is-info.has-text-centered
+                .message-body
+                  | 2手目の盤面から開始する場合も後手から始まる(動作確認用)
+              ShogiPlayer(:kifu_body="`position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL w - 2`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
 
           .columns
             .column
