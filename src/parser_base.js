@@ -34,14 +34,7 @@ export default class ParserBase {
     // const index = this.turn_min + offset + (this.komaochi_p ? 1 : 0)
 
     const index = (this.komaochi_p ? 1 : 0) + offset
-
-    let key = null
-    if ((index % 2) === 0) {
-      key = "black"
-    } else {
-      key = "white"
-    }
-    return Location.fetch(key)
+    return Location.fetch(index % 2)
   }
 
   get move_infos() {

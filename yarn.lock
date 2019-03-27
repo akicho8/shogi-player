@@ -5153,10 +5153,10 @@ js-beautify@^1.6.12, js-beautify@^1.6.14:
     mkdirp "~0.5.0"
     nopt "~3.0.1"
 
-js-memory-record@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/js-memory-record/-/js-memory-record-0.0.10.tgz#6bde2568c313ba6f66d5b4106de8a16b055e391d"
-  integrity sha512-IqbYtosQPQ55vd4d9FzympkosjhdYpeougFvhLBGaFWSHkJ4dsPjGU9A8aKE2qIc6QKXDyynBcZbbfDBw876oQ==
+js-memory-record@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/js-memory-record/-/js-memory-record-0.0.11.tgz#cdf5da13bf9f9a9e01003dac804363217fa7beb2"
+  integrity sha512-/JSw+rlqKpuFh1SeNielDVS7GHtQ5kQYG70TwRwx1c0p4UtJ+S07o+pJzFK6qA2PUFNdqSoBoO7a9TXPfx88Cg==
   dependencies:
     babel-core "^6.22.1"
     lodash "^4.17.4"
