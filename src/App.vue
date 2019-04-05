@@ -533,7 +533,7 @@ export default {
 
 <style lang="sass">
 @import "./App"
-@import "buefy/lib/buefy.css"
+@import "buefy/dist/buefy.css"
 
 .mobile
   font-size: 65%
