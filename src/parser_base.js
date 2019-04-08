@@ -34,7 +34,9 @@ export default class ParserBase {
     // const index = this.turn_min + offset + (this.komaochi_p ? 1 : 0)
 
     const index = (this.komaochi_p ? 1 : 0) + offset
-    return Location.fetch(index % 2)
+    // "position startpos" の場合 index が -1 になり (-1 % 2) が -1 になり Location.fetch(-1) でエラーになる
+    // なので Math.abs
+    return Location.fetch(Math.abs(index) % 2)
   }
 
   get move_infos() {
