@@ -46,16 +46,17 @@
 // flip:     Vuex で管理している変数をコンポーネント側でラップする方式
 //
 
-import Vue from "vue"
+// import Vue from "vue"
 import RunModeInfo from "../run_mode_info"
 import ThemeInfo from "../theme_info"
 import SizeInfo from "../size_info"
 import VariationInfo from "../variation_info"
 
-Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
-Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})
-Object.defineProperty(Vue.prototype, 'SizeInfo', {value: SizeInfo})
-Object.defineProperty(Vue.prototype, 'VariationInfo', {value: VariationInfo})
+// ↓このように定義した場合はアプリ側で再定義しないといけなくなる
+// Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
+// Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})
+// Object.defineProperty(Vue.prototype, 'SizeInfo', {value: SizeInfo})
+// Object.defineProperty(Vue.prototype, 'VariationInfo', {value: VariationInfo})
 
 export default {
   props: {
@@ -64,6 +65,11 @@ export default {
   },
   data() {
     return {
+      RunModeInfo,
+      ThemeInfo,
+      SizeInfo,
+      VariationInfo,
+
       current_run_mode: this.run_mode,
       kifu_source2: this.kifu_source,
     }

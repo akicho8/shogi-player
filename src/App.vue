@@ -446,18 +446,17 @@ Vue.use(Buefy)
 import ShogiPlayer from './components/ShogiPlayer'
 
 import SideInfo from "./side_info"
-
 import RunModeInfo from "./run_mode_info"
 import ThemeInfo from "./theme_info"
 import VariationInfo from "./variation_info"
 import SizeInfo from "./size_info"
 
-Object.defineProperty(Vue.prototype, 'SideInfo', {value: SideInfo})
+// Object.defineProperty(Vue.prototype, 'SideInfo', {value: SideInfo})
 
-Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
-Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})
-Object.defineProperty(Vue.prototype, 'VariationInfo', {value: VariationInfo})
-Object.defineProperty(Vue.prototype, 'SizeInfo', {value: SizeInfo})
+// Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
+// Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})
+// Object.defineProperty(Vue.prototype, 'VariationInfo', {value: VariationInfo})
+// Object.defineProperty(Vue.prototype, 'SizeInfo', {value: SizeInfo})
 
 const marked = require('marked')
 const renderer = new marked.Renderer()
@@ -483,6 +482,12 @@ export default {
     }
 
     return {
+      SideInfo,
+      RunModeInfo,
+      ThemeInfo,
+      VariationInfo,
+      SizeInfo,
+
       // カスタマイズ用
       run_mode: "view_mode",   // play_mode
       theme: "real",
