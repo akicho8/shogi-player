@@ -17,15 +17,17 @@
     import Vuex from "vuex"
     Vue.use(Vuex)
 
-    import ShogiPlayer from 'shogi-player/src/components/ShogiPlayer.vue'
-    Vue.component('shogi-player', ShogiPlayer)
-     
     import _ from "lodash"
     Object.defineProperty(Vue.prototype, '_', {value: _})
 
+    import ShogiPlayer from 'shogi-player/src/components/ShogiPlayer.vue'
+
     document.addEventListener('DOMContentLoaded', () => {
       new Vue({
-        el: '#shogi_player_app',
+        el: '#app',
+        components: {
+          ShogiPlayer,
+        },
       })
     })
 
