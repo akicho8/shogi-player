@@ -23,7 +23,7 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js',
-    // shogi_player: './src/components/ShogiPlayer.vue',
+    shogi_player: './src/components/ShogiPlayer.vue', // ← これどうやって使う？
   },
   output: {
     path: config.build.assetsRoot,
