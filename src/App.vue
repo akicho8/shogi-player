@@ -432,7 +432,16 @@
 </template>
 
 <script>
+/* eslint-disable import/first */
+
 import "css-browser-selector"
+
+import Vue from 'vue'
+import Vuex from 'vuex'
+import Buefy from 'buefy'
+
+Vue.use(Vuex)
+Vue.use(Buefy)
 
 import ShogiPlayer from './components/ShogiPlayer'
 
@@ -442,11 +451,6 @@ import RunModeInfo from "./run_mode_info"
 import ThemeInfo from "./theme_info"
 import VariationInfo from "./variation_info"
 import SizeInfo from "./size_info"
-
-import Vue from 'vue'
-import Buefy from 'buefy'
-
-Vue.use(Buefy)
 
 Object.defineProperty(Vue.prototype, 'SideInfo', {value: SideInfo})
 

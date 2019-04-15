@@ -1,8 +1,7 @@
-import Vue from "vue"
 import Vuex from "vuex"
-Vue.use(Vuex)
 
-// "() => " を外すとブラウザ内でグローバルになる
+// ここで Vue.use(Vuex) すると利用する側と干渉するので注意
+
 const store = () => new Vuex.Store({
   state: {
     current_flip: false,                // 反転したか？
@@ -21,7 +20,7 @@ const store = () => new Vuex.Store({
     current_debug_mode_set(state, payload) {
       state.current_debug_mode = payload
       // ここで呼び出しても意味ない。効き目なし。
-      // this.$emit("update:debug_mode", payload)
+      this.$emit("update:debug_mode", payload)
     },
   },
 })
