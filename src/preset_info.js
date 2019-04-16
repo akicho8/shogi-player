@@ -5,6 +5,7 @@ export default class PresetInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
+      { key: "全部駒箱",   sfen: "position sfen 9/9/9/9/9/9/9/9/9 b - 1",                                         first_location_key: "black", piece_box: [["B", 2], ["R", 2], ["L", 4], ["N", 4], ["S", 4], ["G", 4], ["P", 18], ["K", 2]]},
       { key: "詰将棋",     sfen: "position sfen 4k4/9/9/9/9/9/9/9/9 b 2r2b4g4s4n4l18p 1",                         first_location_key: "black", piece_box: [["K", 1]]},
       { key: "平手",       sfen: "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1", first_location_key: "black", piece_box: []},
       { key: "香落ち",     sfen: "position sfen lnsgkgsn1/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1", first_location_key: "white", piece_box: [["L", 1]]},
