@@ -1,5 +1,5 @@
 // 駒箱
-//  
+//
 // .piece_box
 //   ul
 //     li
@@ -9,6 +9,8 @@
 
 .shogi-player
   .piece_box
+    @extend %text_select_disable
+
     display: flex
     flex-direction: row         // 横並び
     flex-wrap: wrap             // 折り返す
