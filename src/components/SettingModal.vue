@@ -36,7 +36,7 @@
       b-input(v-model="kifu_source2" type="textarea")
 
   footer.modal-card-foot
-    button.button.is-primary(@click.prevent="$parent.close()") 閉じる
+    button.button.is-primary(@click.stop.prevent="$parent.close()") 閉じる
 </template>
 
 <script>

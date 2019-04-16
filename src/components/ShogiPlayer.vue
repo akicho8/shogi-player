@@ -18,15 +18,15 @@
           b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key")
             | {{record.name}}
         | &nbsp;
-        button.button.yumincho(@click.prevent="all_flip") 先後反転
+        button.button.yumincho(@click.stop.prevent="all_flip") 先後反転
         | &nbsp;
-        button.button.yumincho(@click.prevent="init_location_toggle") 手番{{init_location.name}}
+        button.button.yumincho(@click.stop.prevent="init_location_toggle") 手番{{init_location.name}}
 
   template(v-if="mediator")
     .turn_div
       div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'" class="turn_area")
         template(v-if="!turn_edit")
-          span.turn_edit_text(@click.prevent="turn_edit_run")
+          span.turn_edit_text(@click.stop.prevent="turn_edit_run")
             template(v-if="current_run_mode === 'view_mode'")
               | {{mediator.current_turn_label(this.final_label)}}
             template(v-if="current_run_mode === 'play_mode'")
@@ -34,7 +34,7 @@
         template(v-if="turn_edit")
           input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
 
-      span.is-pulled-right.modal_trigger_dots(@click.prevent="setting_modal_p = true")
+      span.is-pulled-right.modal_trigger_dots(@click.stop.prevent="setting_modal_p = true")
         b-icon(icon="dots-vertical" size="is-small")
 
       b-modal(:active.sync="setting_modal_p" has-modal-card)
@@ -47,20 +47,20 @@
     .board_container.flippable(:class="{flip: current_flip}")
       PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
       .flex_item.board_wrap
-        .overlay_navi.previous(@click.prevent="navi_relative_move(-1, $event)")
-        .overlay_navi.next(@click.prevent="navi_relative_move(+1, $event)")
-        .overlay_navi.flip_trigger_cell(@click.prevent="board_flip_run")
+        .overlay_navi.previous(@click.stop.prevent="navi_relative_move(-1, $event)")
+        .overlay_navi.next(@click.stop.prevent="navi_relative_move(+1, $event)")
+        .overlay_navi.flip_trigger_cell(@click.stop.prevent="board_flip_run")
         .board_outer
           table.board_inner
             tr(v-for="y in mediator.dimension")
               template(v-for="x in mediator.dimension")
-                td.piece_outer(:class="board_td_piece_outer_class([x - 1, y - 1])" @click.prevent="board_click([x - 1, y - 1], $event)" @click.prevent.right="board_click_right([x - 1, y - 1], $event)")
+                td.piece_outer(:class="board_td_piece_outer_class([x - 1, y - 1])" @click.stop.prevent="board_click([x - 1, y - 1], $event)" @click.stop.prevent.right="board_click_right([x - 1, y - 1], $event)")
                   .piece_inner_wrap
                     span.piece_inner(:class="mediator.board_piece_inner_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
       .flex_item
-        ul.piece_box(v-if="current_run_mode === 'edit_mode'" @click.prevent="piece_box_other_click" @click.right.prevent="hold_cancel")
-          li(v-for="[piece, count] in mediator.piece_box_realize()" @click.prevent="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}")
+        ul.piece_box(v-if="current_run_mode === 'edit_mode'" @click.stop.prevent="piece_box_other_click" @click.right.prevent="hold_cancel")
+          li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop.prevent="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}")
             .piece_outer(:class="piece_box_piece_outer_class(piece)")
               .piece_inner_wrap
                 span.piece_inner(:class="piece_box_piece_inner_class(piece)") {{piece.name}}
@@ -71,11 +71,11 @@
 
     div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'")
       div(v-if="controller_show" class="controller_block buttons has-addons is-centered is-paddingless")
-        button.button.first(    ref="first"    @click.prevent="move_to_first"):             b-icon(icon="menu-left")
-        button.button.previous( ref="previous" @click.prevent="relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
-        button.button.next(     ref="next"     @click.prevent="relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
-        button.button.last(     ref="last"     @click.prevent="move_to_last"):              b-icon(icon="menu-right")
-        button.button.flip(                    @click.prevent="board_flip_run"):            b-icon(icon="rotate-3d"     size="is-small")
+        button.button.first(    ref="first"    @click.stop.prevent="move_to_first"):             b-icon(icon="menu-left")
+        button.button.previous( ref="previous" @click.stop.prevent="relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
+        button.button.next(     ref="next"     @click.stop.prevent="relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
+        button.button.last(     ref="last"     @click.stop.prevent="move_to_last"):              b-icon(icon="menu-right")
+        button.button.flip(                    @click.stop.prevent="board_flip_run"):            b-icon(icon="rotate-3d"     size="is-small")
       div(v-if="slider_show")
         input.turn_slider(type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="turn_min" :max="turn_max" ref="turn_slider")
 

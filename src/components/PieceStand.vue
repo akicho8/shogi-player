@@ -1,7 +1,7 @@
 <template lang="pug">
 .piece_stand_outer(:class="piece_stand_outer_class")
   .location_mark(v-html="location_name")
-  ul.piece_stand(@click.stop="$parent.piece_stand_click(location, $event)" @click.right.prevent="$parent.hold_cancel")
+  ul.piece_stand(@click.stop.prevent="$parent.piece_stand_click(location, $event)" @click.right.stop.prevent="$parent.hold_cancel")
     li(v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)")
       .piece_outer(:class="piece_outer_class(piece)")
         .piece_inner_wrap
