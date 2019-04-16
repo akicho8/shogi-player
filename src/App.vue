@@ -32,6 +32,7 @@
             li: a(href="#usage") 使い方
             li: a(href="#options") オプション
 
+  // ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'" :run_mode="'edit_mode'" :sfen_show="true" :debug_mode="true")
   //- ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'")
   //- ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'" :run_mode="'edit_mode'")
   //- ShogiPlayer(:kifu_body="`position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
@@ -247,8 +248,9 @@
                   .content
                     ul
                       li 盤上の駒は右クリックで裏返せます
-                      li shift, option, meta, control キーのいずれかを押しながら左クリックでも裏返せます
+                      li 修飾キー(shift, option, meta, control キーのいずれか)を押しながら左クリックでも裏返せます
                       li 駒を持った状態で右クリックすると駒を元に戻します
+                      li 駒台と駒箱に駒を移動するときに修飾キーを押していると全部移動します
 
           .columns
             .column

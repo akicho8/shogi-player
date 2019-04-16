@@ -86,9 +86,8 @@ export default {
       // --------------------------------------------------------------------------------
 
       if (this.current_run_mode === "edit_mode") {
-        const shift_key = e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
         this.log(`holding_p: ${this.holding_p}`)
-        if (!this.holding_p && soldier && shift_key) {
+        if (!this.holding_p && soldier && this.meta_p(e)) {
           this.log("盤上の駒を裏返す")
           this.mediator.board.place_on(soldier.piece_transform)
           this.pice_hold_and_put_for_bug(place, e) // 不具合対策
@@ -194,10 +193,12 @@ export default {
         return true
       }
 
-      // 相手の持駒を自分の駒台に移動
+      // 相手の駒台から自分の駒台、まあは駒箱から自分の駒台へ移動
       if (this.current_run_mode === "edit_mode") {
-        if (this.have_piece_location !== location && this.have_piece) {
-          this.opponent_hold_pieces_move_to_my_hold_pieces(location)
+        // if (this.have_piece_location !== location && this.have_piece) {
+        if (this.have_piece) {
+          // 相手の持駒を自分の駒台に移動
+          this.hold_pieces_move_to_my_hold_pieces(e, location)
           return true
         }
       }
@@ -262,7 +263,7 @@ export default {
 
     // FIXME: 駒を持っているときは「駒箱の駒」に対して一切反応しないようにしたい。そうすると駒箱だけの判定で済む
     piece_box_other_click(e) {
-      this.log("駒箱クリック")
+      this.log("piece_box_other_click:駒箱クリック")
 
       if (_.isNil(this.have_piece_location) && this.have_piece) {
         this.log("持っているならキャンセル")
@@ -272,8 +273,8 @@ export default {
 
       if (this.have_piece_location && this.have_piece) {
         this.log("駒台から駒箱に移動")
-        this.mediator.piece_box_add(this.have_piece)
-        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
+        const count = this.hold_piece_source_cut(e)               // 相手の持駒を減らして減らした分だけ
+        this.mediator.piece_box_add(this.have_piece, count) // 駒箱に加算する
         this.state_reset()
         return true
       }
@@ -289,13 +290,14 @@ export default {
       return false
     },
 
+    // 駒箱の駒をクリック
     piece_box_piece_click(piece, e) {
       // 駒をクリックしたとき駒箱をクリックするのと同じ処理を実行
       if (this.piece_box_other_click(e)) {
         return
       }
 
-      this.log("駒台の駒を持つ")
+      this.log("piece_box_piece_click:駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = null
       this.virtual_piece_create(e, this.origin_soldier2.to_class_list)
@@ -318,14 +320,37 @@ export default {
       this.state_reset()
     },
 
-    opponent_hold_pieces_move_to_my_hold_pieces(location) {
+    hold_pieces_move_to_my_hold_pieces(e, location) {
       this.log("相手の持駒を自分の駒台に移動")
-      this.piece_decriment()
-      this.mediator.hold_pieces_add(location, this.have_piece)
+      const count = this.hold_piece_source_cut(e)                           // 相手の持駒を減らして減らした分だけ
+      this.mediator.hold_pieces_add(location, this.have_piece, count) // 自分に加算する
       this.state_reset()
     },
 
-    // 駒を減らす
+    // 持ち上げている駒を元の場所から減らす
+    hold_piece_source_cut(e) {
+      let count = 1
+
+      if (this.have_piece_location) {
+        this.log("相手の駒箱から移動")
+        if (this.meta_p(e)) {
+          this.log("シフトが押されていたので全部移動")
+          count = this.mediator.hold_pieces_count(this.have_piece_location, this.have_piece)
+        }
+        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -count)
+      } else {
+        this.log("駒箱から移動")
+        if (this.meta_p(e)) {
+          this.log("シフトが押されていたので全部移動")
+          count = this.mediator.piece_box_count(this.have_piece)
+        }
+        this.mediator.piece_box_add(this.have_piece, -count)
+      }
+
+      return count
+    },
+
+    // 駒を1つ減らす
     piece_decriment() {
       if (this.have_piece_location) {
         this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
@@ -486,6 +511,10 @@ export default {
         window.removeEventListener("mousemove", this.mousemove_hook)
         window.removeEventListener("click", this.click_hook)
       }
+    },
+
+    meta_p(e) {
+      return e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
     },
   },
 
