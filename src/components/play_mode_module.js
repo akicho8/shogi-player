@@ -84,6 +84,11 @@ export default {
         this.$emit("update:play_mode_long_sfen", this.play_mode_current_sfen)
         this.$emit("update:play_mode_move", _.last(this.moves))
         this.$emit("update:play_mode_short_sfen", this.mediator.to_position_sfen)
+
+        // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする
+        if (this.$refs.turn_slider) {
+          this.$refs.turn_slider.focus()
+        }
       }
     },
   },
