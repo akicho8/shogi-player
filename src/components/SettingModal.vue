@@ -32,8 +32,11 @@
         template(v-for="e in SizeInfo.values")
           b-radio(v-model="$store.state.current_size" :native-value="e.key") {{e.name}}
 
-    b-field(label="棋譜")
+    b-field(label="再生モードの棋譜(編集可)")
       b-input(v-model="kifu_source2" type="textarea")
+
+    b-field(label="操作モードの棋譜(Readonly)")
+      b-input(:value="play_mode_current_sfen" type="textarea" readonly)
 
   footer.modal-card-foot
     button.button.is-primary(@click.stop.prevent="$parent.close()") 閉じる
@@ -62,6 +65,7 @@ export default {
   props: {
     run_mode: {required: true},
     kifu_source: {required: false},
+    play_mode_current_sfen: {required: true},
   },
   data() {
     return {
