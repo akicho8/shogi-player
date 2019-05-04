@@ -76,10 +76,10 @@
     <p>注意点</p>
   </div>
   <div class="message-body">
-     React 版は最低限の機能しかありません
+     React 版は最低限の機能しかない
   </div>
 </article>
 
 ## JavaScript に変換したものを直接使う場合
 
-    ただいま調査中
+    TODO: どうやって単体でビルドするのかわからないので気が向いたら調べる
