@@ -9,11 +9,11 @@
 (in app/javascript/packs/shogi_player_app.js)
 
     import Vue from 'vue/dist/vue.esm'
-     
+
     import Buefy from 'buefy'
     import 'buefy/lib/buefy.css'
     Vue.use(Buefy)
-     
+
     import Vuex from "vuex"
     Vue.use(Vuex)
 
@@ -36,7 +36,7 @@
     // Bulma
     @import "../../../node_modules/bulma/sass/utilities/initial-variables.sass"
     @import "../../../node_modules/bulma/sass/utilities/derived-variables.sass"
-     
+
     // ShogiPlayer
     $sp_assets_dir: "../../../node_modules/shogi-player/src/assets"
     @import "../../../node_modules/shogi-player/src/components/ShogiPlayer.sass"
@@ -83,3 +83,10 @@
 ## JavaScript に変換したものを直接使う場合
 
     TODO: どうやって単体でビルドするのかわからないので気が向いたら調べる
+
+## 独自のスライダーを定義する例
+
+    <ShogiPlayer kifu_body='position startpos moves 7g7f 8c8d' ref="sp" />
+
+    <template v-if="$refs.sp">
+      <input type="range" :value="$refs.sp.real_turn" @input="$refs.sp.current_turn_set($event.target.value)" :min="$refs.sp.turn_min" :max="$refs.sp.turn_max" />
