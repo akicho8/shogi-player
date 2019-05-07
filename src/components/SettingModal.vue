@@ -1,6 +1,6 @@
 <template lang="pug">
 //- style="width: auto"
-.modal-card.has-text-left
+.modal-card.has-text-left(style="width:auto")
   header.modal-card-head
     p.modal-card-title 設定
 
