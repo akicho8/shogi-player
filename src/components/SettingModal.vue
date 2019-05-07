@@ -3,6 +3,7 @@
 .modal-card.has-text-left(style="width:auto")
   header.modal-card-head
     p.modal-card-title 設定
+    button.delete(aria-label="close" @click.stop.prevent="$parent.close()")
 
   section.modal-card-body
     b-field(label="モード")
