@@ -26,19 +26,22 @@
       b-field(label="バリエーション")
         .block
           template(v-for="e in VariationInfo.values")
-            b-radio(v-model="$store.state.current_variation" :native-value="e.key") {{e.name}}
+            b-radio(v-model="$store.state.current_variation" :native-value="e.key" size="is-small") {{e.name}}
 
     b-field(label="サイズ")
       .block
         template(v-for="e in SizeInfo.values")
-          b-radio(v-model="$store.state.current_size" :native-value="e.key") {{e.name}}
+          b-radio(v-model="$store.state.current_size" :native-value="e.key" size="is-small") {{e.name}}
+
+    template(v-if="sp_data.mediator")
+      b-field(label="現局面(Readonly)")
+        b-input(:value="sp_data.mediator.to_position_sfen" type="input" size="is-small" readonly)
 
     b-field(label="再生モードの棋譜(編集可)")
-      b-input(v-model="kifu_source2" type="textarea")
+      b-input(v-model="kifu_source2" type="textarea" size="is-small")
 
     b-field(label="操作モードの棋譜(Readonly)")
-      b-input(:value="play_mode_current_sfen" type="textarea" readonly)
-
+      b-input.is-small(:value="play_mode_current_sfen" type="textarea" size="is-small" readonly)
   footer.modal-card-foot
     button.button.is-primary(@click.stop.prevent="$parent.close()") 閉じる
 </template>
@@ -64,10 +67,12 @@ import VariationInfo from "../variation_info"
 
 export default {
   props: {
-    run_mode: {required: true},
-    kifu_source: {required: false},
-    play_mode_current_sfen: {required: true},
+    run_mode: { required: true },
+    kifu_source: { required: false },
+    play_mode_current_sfen: { required: true }, // TODO: 親をそのまま参照したいんだけど $data を渡しても play_mode_current_sfen は computed だから参照できない
+    sp_data: { required: true },                // TODO: $data ではなく親を受けとりたい
   },
+
   data() {
     return {
       RunModeInfo,
@@ -79,6 +84,7 @@ export default {
       kifu_source2: this.kifu_source,
     }
   },
+
   watch: {
     current_run_mode(value) {
       this.$emit("update:run_mode", value)
@@ -87,8 +93,10 @@ export default {
       this.$emit("update:kifu_body", value)
     },
   },
+
   methods: {
   },
+
   computed: {
     // http://chibinowa.net/note/vuejs/vue-11.html
     flip: {

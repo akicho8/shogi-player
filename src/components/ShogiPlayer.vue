@@ -43,6 +43,7 @@
           :kifu_source="kifu_source"
           @update:kifu_body="update_kifu_source"
           :play_mode_current_sfen="play_mode_current_sfen"
+          :sp_data="$data"
         )
 
     .board_container.flippable(:class="{flip: current_flip}")
