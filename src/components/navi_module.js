@@ -156,16 +156,17 @@ export default {
 
     current_turn_set(v) {
       const new_val = this.mediator.turn_clamp(v)
+      const updated = this.real_turn !== new_val
 
-      if (this.real_turn !== new_val) {
+      if (updated) {
         if (this.current_run_mode === "view_mode") {
           this.view_mode_mediator_update(new_val)
-          this.sound_call("piece_sound")
         }
         if (this.current_run_mode === "play_mode") {
           this.play_mode_mediator_seek_to(new_val)
-          this.sound_call("piece_sound")
         }
+        this.sound_call("piece_sound")
+        this.$emit("update:start_turn", this.real_turn)
       }
     },
 

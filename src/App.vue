@@ -288,7 +288,7 @@
             ShogiPlayer(
               :run_mode.sync="run_mode"
               :kifu_body.sync="kifu_body"
-              :start_turn="start_turn"
+              :start_turn.sync="start_turn"
               :theme.sync="theme"
               :size.sync="size"
               :variation.sync="variation"
