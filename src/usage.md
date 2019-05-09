@@ -90,3 +90,5 @@
 
     <template v-if="$refs.sp">
       <input type="range" :value="$refs.sp.real_turn" @input="$refs.sp.current_turn_set($event.target.value)" :min="$refs.sp.turn_min" :max="$refs.sp.turn_max" />
+
+$refs をテンプレート内で使うのは無作法とされているらしいので、この方法よくないらしいです(2019-05-09)

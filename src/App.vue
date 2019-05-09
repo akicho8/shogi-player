@@ -50,10 +50,18 @@
           | 将棋の棋譜を再生できる JavaScript で次の特徴がある
         ul
           li KIF と SFEN フォーマットに対応
+          li 検討できる (操作モード)
+          li 詰将棋が作れる (編集モード)
+        p
+          | その他
+        ul
+          li
+            code
+              | npm install shogi-player
+            | でインストール
           li Flash 未使用
-          li npm でインストール可
-          li 検討できる
-          li 詰将棋が作れる
+          li Vue.js で動いている
+          li Buefy (Bulma CSS) 使用
 
   .section
     a(name="examples")

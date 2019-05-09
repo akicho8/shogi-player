@@ -76,7 +76,7 @@
       <hr>
       <div class="content">
         <p>
-          将棋の棋譜を再生する JavaScript で次の特徴があります
+          将棋の棋譜を再生する JavaScript で次の特徴がある
         </p>
         <ul>
           <li>KIF と SFEN フォーマットに対応</li>
