@@ -193,6 +193,7 @@ export default {
       setting_modal_p: false,
       inside_custom_kifu: null, // 設定ダイアログで変更されたときに入る
       env: process.env.NODE_ENV,
+      view_mode_real_turn_save: null, // viewモードを抜けるとき現在の手数を記憶しておく
     }
   },
 
@@ -274,7 +275,15 @@ export default {
 
       if (this.current_run_mode === "view_mode") {
         this.log("current_run_mode: view_mode")
-        this.view_mode_mediator_update(this.real_turn)
+        // alert(`復元:${this.view_mode_real_turn_save}`)
+        this.view_mode_mediator_update(this.view_mode_real_turn_save)
+        this.view_mode_real_turn_save = null
+      } else {
+        // view_mode ではなくなったときの最初だけ保存しておく(mediatorをまるごと保存しておく手もあるかも)
+        if (this.view_mode_real_turn_save === null) {
+          this.view_mode_real_turn_save = this.real_turn
+          // alert(`保存:${this.view_mode_real_turn_save}`)
+        }
       }
 
       if (this.current_run_mode === "play_mode") {
