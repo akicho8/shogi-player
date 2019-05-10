@@ -23,7 +23,7 @@
         button.button.yumincho(@click.stop.prevent="init_location_toggle") 手番{{init_location.name}}
 
   template(v-if="mediator")
-    .turn_div
+    .turn_edit_container
       div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'" class="turn_area")
         template(v-if="!turn_edit")
           span.turn_edit_text(@click.stop.prevent="turn_edit_run")
@@ -72,7 +72,7 @@
         PieceStand(:location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')")
 
     div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'")
-      div(v-if="controller_show" class="controller_block buttons has-addons is-centered is-paddingless")
+      .controller_group.buttons.has-addons.is-centered.is-paddingless(v-if="controller_show")
         button.button.first(    ref="first"    @click.stop.prevent="move_to_first"):             b-icon(icon="menu-left")
         button.button.previous( ref="previous" @click.stop.prevent="relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
         button.button.next(     ref="next"     @click.stop.prevent="relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")

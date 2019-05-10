@@ -66,10 +66,10 @@
     cursor: e-resize; }
   .shogi-player .flip .overlay_navi.next {
     cursor: w-resize; }
-  .shogi-player .controller_block {
+  .shogi-player .controller_group {
     margin-top: 1vmin;
     margin-bottom: 0vmin; }
-    .shogi-player .controller_block button.next {
+    .shogi-player .controller_group button.next {
       width: 16vmin; }
   .shogi-player input[type=range] {
     cursor: pointer;
@@ -78,7 +78,7 @@
     width: 3rem; }
   .shogi-player .turn_edit_text {
     cursor: pointer; }
-  .shogi-player.debug .controller_block {
+  .shogi-player.debug .controller_group {
     background: rgba(191, 145, 64, 0.5); }
   .shogi-player.debug .board_wrap .overlay_navi.previous {
     background: rgba(64, 64, 191, 0.5); }

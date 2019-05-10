@@ -87,20 +87,26 @@
     height: 100%
 
   // コントローラー
-  .controller_block
-    margin-top: 1vmin
-    button
-      &.next
-        width: 16vmin
+  .controller_group
+    margin-top: 0.8rem
+    &.buttons
+      margin-bottom: 0
+      button
+        margin-bottom: 0
+        &.next
+          width: 5rem
+        &.previous
+          width: 5rem
 
   // スライダー
   .turn_slider
+    margin-top: 0.5rem
     margin-left: auto
     margin-right: auto
     cursor: pointer
     width: 37vmin
 
-  .turn_div
+  .turn_edit_container
     // テキストを選択できないようにする
     @extend %text_select_disable
     // N手目の編集モードのnumberフィールド
