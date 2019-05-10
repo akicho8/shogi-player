@@ -1,259 +1,179 @@
+@import "piece_map_list"
+
 // 盤の影
-$sp_real_board_shadow_depth: 2px // 大きさ
-$sp_real_board_shadow_blur:  2px // ぼかし度合い
+$sp_real_board_shadow_depth: 0.05em // 大きさ
+$sp_real_board_shadow_blur:  0.05em // ぼかし度合い
 
 // 駒の影
-$sp_real_piece_shadow_depth: 4px // 大きさ
-$sp_real_piece_shadow_blur:  4px // ぼかし度合い
+$sp_real_piece_shadow_depth: 0.1em // 大きさ
+$sp_real_piece_shadow_blur:  0.1em // ぼかし度合い
 
 // 持った駒の影
-$sp_real_hold_shadow_depth: 6px // 大きさ
-$sp_real_hold_shadow_blur:  5px // ぼかし度合い
+$sp_real_hold_shadow_depth: 0.15em // 大きさ
+$sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
 
-// 持った駒のずれ
-$sp_real_hold_gap: 0.5vmin      // 携帯のときだけ
-
-@mixin image_shadow($x, $weight)
+=image_shadow($x, $weight)
   filter: drop-shadow($x $x $weight rgba(0, 0, 0, 0.3))
 
-// カーソル位置に表示する持駒
-.cursor_elem
-  position: fixed
-  z-index: 10                   // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い
-  pointer-events: none
-  .piece_inner
-    @include image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
-    position: relative
-    top: -50%
-    left: -50%
-    width:  100%
-    height: 100%
-
-%dom_real_hold
-  // background: $sp_real_holding_color
-
-  // iPhoneで見ている場合はカーソルがないため元の駒を左上に持ち上げる
-  @media screen and (max-width: $sp_mobile_width)
-    .piece_inner_wrap
-      transform: translate(-$sp_real_hold_gap, -$sp_real_hold_gap)
-      @include image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
-
-  // PCで見ている場合はカーソル位置に駒があるので元の駒を薄くする
-  @media screen and (min-width: ($sp_mobile_width + 1))
-    .piece_inner
-      opacity: 0.35
+%board_shadow
+  &:after
+    +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
+  
+// 駒のテクスチャ用
+%piece_fore_texture
+  $advance: 20%                     // 大きくするほど駒が上に移動する
+  color: transparent            // テキストを消す
+  // background-size: contain      // contain にすると端が欠けない
+  // background-size: 50%          // 駒の大きさ contain にしとけばいい
+  background-size: 80%          // 駒の大きさ contain にしとけばいい
+  background-repeat: no-repeat
+  &.location_black
+    background-position: 50% 50% + $advance // 先手は枠の下寄り配置
+  &.location_white
+    background-position: 50% 50% - $advance   // 後手は枠の上寄り配置
 
 // 選択できる駒に指定する
 %dom_real_selectable
-  @include image_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
+  +image_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
   &.holding_p
-    @extend %dom_real_hold
-  &:hover
-    // 選択できる駒だけ反応する
-    &.selectable_p
-      background: $sp_real_selectable_color
-    // さらに駒を持ったときは色を濃くする
-    // &.holding_p
-    //   @extend %dom_real_hold
-
-// 盤のテクスチャ用
-%board_texture_bg
-  position: relative
-  &:after
-    position: absolute
-    z-index: -1
-    content: ""
-    background-position: center
-    background-size: cover // cover にすると1枚の画像が最大まで広がる。contain は繰り返しになる
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-    border-radius: 0.5vmin
-
-// 駒のテクスチャ用
-%piece_texture_bg
-  color: transparent            // テキストを消す
-  background-size: contain      // contain にすると端が欠けない
-  background-position: center
-  background-repeat: no-repeat
+    opacity: 0.4                // 駒を持ち上げたので元の駒を薄くする
+  &.selectable_p
+    &:hover
+      // 選択できる駒だけ反応する。background プロパティをつかうと他の設定をリセットしてしまうので注意
+      background-color: $sp_real_selectable_color
 
 @keyframes real_blink
   0%
-    background: $sp_real_current_bg1
+    background-color: $sp_real_current_bg1
   100%
-    background: $sp_real_current_bg2
+    background-color: $sp_real_current_bg2
 
 .shogi-player
   &.theme-real
-    @import "piece_map_list"
-    @include piece_map_list
+    // 駒 (あちこちにある)
+    .piece_back
+      @extend %dom_real_selectable
+      line-height: 100%         // これで隙間ができなくなる(が、意味がよくわかってない)
+      &.origin_place
+        background-color: $sp_real_origin_bg
+      &.current
+        animation: real_blink 0.5s ease-in-out infinite alternate
+      .piece_fore
+        +piece_map_list
+        @extend %piece_fore_texture
+        height: inherit // .piece_back のサイズを継承。100% としてもいい
 
-    // 反転した状態で持ったカーソル上にある駒を反転させる用
-    .virtual_piece_flip
-      @extend %dom_flip
-
-    .board_outer, .piece_box
-      &:after
-        @include image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
-
+    // 駒箱
+    .piece_box
+      @extend %board_shadow
+      @extend %board_texture_bg
+      padding: 0.25em
+      max-width:  4em
+      min-height: 2.5em
+      font-size: 0.9em
+      .piece_count
+        position: relative
+        top: 0.1em
+        font-size: 0.4em
+        margin-left: -0.3em
+      
     // 駒台
     .piece_stand_outer
+      .piece_stand
+        @extend %board_texture_bg
+        font-size: 1.3em
+        padding-top:    0.15em
+        padding-bottom: 0.15em
+        width: 1.4em
+        min-height: 3em
+        li
+          .piece_count
+            position: relative
+            top: 0.2em
+            font-size: 0.4em
+            margin-left: -0.3em
+      
       &.location_black
         .piece_stand
           &:after
-            @include image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
+            +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
       &.location_white
         .piece_stand
           &:after
-            @include image_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
-          .piece_outer
-            @extend %dom_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
+            +image_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
+          .piece_back
+            @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
 
-    .piece_outer
-      @extend %dom_real_selectable
-
-    .piece_box
-      @extend %board_texture_bg
-
-    .piece_stand
-      @extend %board_texture_bg
-
-    .piece_inner
-      @extend %piece_texture_bg
-
+    // 盤
     .board_outer
+      @extend %board_shadow
       @extend %board_texture_bg
-
+      margin: 0 $sp_real_margin
       padding: 2%               // 盤の隅の隙間
-
       .board_inner
-        @include four_star($sp_real_grid_color)
-
-        .piece_outer
+        +board_star_mark_define($sp_real_grid_color)
+        td
           border: $sp_real_grid_inner solid $sp_real_grid_color // 盤面の罫線
+          .piece_back
+            height: inherit  // td のサイズを継承。100% としてもいい
+            // 画像の場合 padding-top: 0.5em は使えない
+            .piece_fore
+              // padding-top: 1.2em // 画像の場合使えない
 
-          &.origin_place
-            background: $sp_real_origin_bg
+    // カーソル位置に表示する持駒
+    .cursor_elem
+      position: fixed
+      z-index: 10                   // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い
+      pointer-events: none
+      +image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
+      .piece_back
+        height: inherit
+        // width: 100%
+        @extend %shift_to_middle
+        // background-color: hsla(0, 0%, 50%, 0.2) // 升ごと動かしたいとき
+        // border-radius: 0.1em
+        // 反転した状態で持ったカーソル上にある駒を反転させる用
+        &.virtual_piece_flip
+          @extend %is_flip
+        //   width: 100%
+          
 
-          &.current
-            animation: real_blink 0.5s ease-in-out infinite alternate
-
-          .piece_inner
-            // 升に合わせて駒を大きくする
-            width:  100%
-            height: 100%
-
-            // 駒の位置調整
-            &.location_black
-              transform: translateY($sp_real_piece_inner_transform_y)
-            &.location_white
-              transform: translateY($sp_real_piece_inner_transform_y * -1)
-
-    .piece_stand_outer
-      .location_mark
-      ul.piece_stand
-        padding: 0.5rem 0
-        min-width: 3.2rem
-        min-height: 10vmin
-        li
-          .piece_outer
-            line-height: 100%
-          margin: 0.1rem 0
-          .piece_count
-            margin-left:  -0.2rem
-            margin-right: 0.3rem
-
-            /* 文字を縁取る場合
-            /* -webkit-text-stroke: 1px #fff
-
-    // position: relative
-    // &:after
-    //   position: absolute
-    //   z-index: -1
-    //   content: ""
-    //   // background-image: url("#{$sp_assets_dir}/tatami01-768x480.jpg")
-    //   background-image: url("#{$sp_assets_dir}/51587037_p15_master1200.jpg")
-    //
-    //   background-position: center
-    //   background-size: cover
-    //   opacity: 1.0
-    //   top: 0
-    //   left: 0
-    //   width: 100%
-    //   height: 100%
-
-    // background-image: url("#{$sp_assets_dir}/51587037_p15_master1200.jpg")
-    // background-size: cover
-
-//////////////////////////////////////////////////////////////////////////////// size
-
-@mixin size_define($key, $size)
-  @media screen and (min-width: $sp_mobile_width + 1) and (max-width: 9999px)
-    .shogi-player
-      &.theme-real
-        &.size-#{$key}
-          .board_inner
-            .piece_outer
-              width:  $size
-              height: $size
-          .piece_stand_outer
-            font-size: $size * 0.8
-            .piece_count
-              font-size: $size * 0.4
-          .piece_box
-            max-width:  $size * 2.5
-            min-height: $size * 2.0
-            font-size: $size * 0.5
-          .cursor_elem
-            width:  $size
-            height: $size
-
-@include size_define(xx-small,  $sp_real_cell_size_xxsmall)
-@include size_define(x-small,   $sp_real_cell_size_xsmall)
-@include size_define(small,     $sp_real_cell_size_small)
-@include size_define(default,   $sp_real_cell_size_default)
-@include size_define(medium,    $sp_real_cell_size_medium)
-@include size_define(large,     $sp_real_cell_size_large)
-@include size_define(x-large,   $sp_real_cell_size_xlarge)
-@include size_define(xx-large,  $sp_real_cell_size_xxlarge)
-@include size_define(xxx-large, $sp_real_cell_size_xxxlarge)
-
+            
 //////////////////////////////////////////////////////////////////////////////// valiation
 
-@mixin variation_define($key, $file)
+=variation_define($key, $file)
   .shogi-player
     &.theme-real
       &.variation-#{$key}
         .board_outer, .piece_box, .piece_stand
           &:after
             background-image: url("#{$sp_assets_dir}/background/#{$file}")
-            opacity: 1.0
+            // opacity: 1.0
 
 // (loop for i from ?a to ?z do (save-excursion (insert (format "%c" i))) (next-line))
-@include variation_define(a, "0100_wood_01.png")
-@include variation_define(b, "0110_wood_02.png")
-@include variation_define(c, "0120_wood_03.png")
-@include variation_define(d, "0130_wood_04.png")
-@include variation_define(e, "0140_wood_05.jpg")
-@include variation_define(f, "0150_japanese-paper_00008.jpg")
-@include variation_define(g, "0160_japanese-paper_00012.jpg")
-@include variation_define(h, "0170_japanese-paper_00050.jpg")
-@include variation_define(i, "0180_japanese-paper_00055.jpg")
-@include variation_define(j, "0190_japanese-paper_00070.jpg")
-@include variation_define(k, "0200_japanese-paper_00072.jpg")
-@include variation_define(l, "0210_japanese-paper_00085.jpg")
-@include variation_define(m, "0220_japanese-paper_00122.jpg")
-@include variation_define(n, "0230_japanese-paper_00128.jpg")
-@include variation_define(o, "0240_japanese-paper_xxxxx.png")
-@include variation_define(p, "0250_paper_co_cyan_papar.png")
-@include variation_define(q, "0260_paper_co_white_paper.png")
-@include variation_define(r, "0270_cherry_blossom.png")
-@include variation_define(s, "0280_fire.png")
-@include variation_define(t, "0290_forest_gray.png")
-@include variation_define(u, "0300_forest_green.png")
-@include variation_define(v, "0310_sky_01.png")
-@include variation_define(w, "0320_sky_02.png")
-@include variation_define(x, "0330_sky_03.png")
-@include variation_define(y, "0340_water_01.png")
-@include variation_define(z, "0350_water_02.png")
++variation_define(a, "0100_wood_01.png")
++variation_define(b, "0110_wood_02.png")
++variation_define(c, "0120_wood_03.png")
++variation_define(d, "0130_wood_04.png")
++variation_define(e, "0140_wood_05.jpg")
++variation_define(f, "0150_japanese-paper_00008.jpg")
++variation_define(g, "0160_japanese-paper_00012.jpg")
++variation_define(h, "0170_japanese-paper_00050.jpg")
++variation_define(i, "0180_japanese-paper_00055.jpg")
++variation_define(j, "0190_japanese-paper_00070.jpg")
++variation_define(k, "0200_japanese-paper_00072.jpg")
++variation_define(l, "0210_japanese-paper_00085.jpg")
++variation_define(m, "0220_japanese-paper_00122.jpg")
++variation_define(n, "0230_japanese-paper_00128.jpg")
++variation_define(o, "0240_japanese-paper_xxxxx.png")
++variation_define(p, "0250_paper_co_cyan_papar.png")
++variation_define(q, "0260_paper_co_white_paper.png")
++variation_define(r, "0270_cherry_blossom.png")
++variation_define(s, "0280_fire.png")
++variation_define(t, "0290_forest_gray.png")
++variation_define(u, "0300_forest_green.png")
++variation_define(v, "0310_sky_01.png")
++variation_define(w, "0320_sky_02.png")
++variation_define(x, "0330_sky_03.png")
++variation_define(y, "0340_water_01.png")
++variation_define(z, "0350_water_02.png")

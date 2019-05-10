@@ -1,11 +1,10 @@
 .shogi-player
   .piece_stand_outer
-    @extend %text_select_disable
-    margin: 0 $sp_margin
+    @extend %is_unselectable
     text-align: left
 
     &.location_white
-      @extend %dom_flip
+      @extend %is_flip
       
     // .location_mark      
     //   font-size: 50px ! important

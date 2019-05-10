@@ -81,7 +81,7 @@ export default class Mediator {
     this.board.delete_at(place)
   }
 
-  board_piece_inner_class(xy) {
+  board_piece_fore_class(xy) {
     const place = Place.fetch(xy)
     const soldier = this.board.lookup(place)
 

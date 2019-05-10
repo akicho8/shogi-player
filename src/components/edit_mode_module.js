@@ -26,13 +26,9 @@ export default {
       // プレフィクスに_をつけるとVueに監視されない
       _running_p: false,        // mousemove イベント緩和用
       _last_event: null,        // mousemove イベント
+
+      cursor_elem_in_board_container: true,
     }
-  },
-
-  created() {
-  },
-
-  mounted() {
   },
 
   watch: {
@@ -388,14 +384,19 @@ export default {
 
     // -------------------------------------------------------------------------------- piece_box
 
-    // 駒箱の駒の四角
-    piece_box_piece_outer_class(piece) {
+    // 駒箱の駒
+    piece_box_piece_back_class(piece) {
       let list = []
       if (this.piece_box_have_p(piece)) {
         list.push("holding_p")
       } else if (this.current_run_mode === "edit_mode") {
         list.push("selectable_p")
       }
+
+      // list = _.concat(list, piece.css_class_list)
+      // list.push("location_black")
+      // list.push("promoted_false")
+
       return list
     },
 
@@ -468,29 +469,53 @@ export default {
     cursor_elem_set_pos() {
       if (this.cursor_elem && this._last_event && this.mouse_stick) {
         // TODO: これが遅いのか？ もっと速く設定できる方法があれば変更したい
-        this.cursor_elem.style.left = `${this._last_event.clientX}px`
-        this.cursor_elem.style.top  = `${this._last_event.clientY}px`
+        let x = this._last_event.clientX
+        let y = this._last_event.clientY
+
+        if (this.cursor_elem_in_board_container) {
+          // const rect = this.$refs.board_container_ref.getBoundingClientRect()
+          // x -= rect.left
+          // y -= rect.top
+        }
+
+        this.cursor_elem.style.left = `${x}px`
+        this.cursor_elem.style.top  = `${y}px`
       }
     },
 
     // マウス位置に表示する駒の生成
     //
-    //   .piece_outer.cursor_elem
-    //     .piece_inner.virtual_piece_flip
+    //   .piece_back.cursor_elem
+    //     .piece_fore.virtual_piece_flip
     //
     virtual_piece_create(event, class_list) {
       this.virtual_piece_destroy()
 
       this.cursor_elem = document.createElement("div")
-      this.cursor_elem.classList.add("piece_outer", "cursor_elem")
-      const piece_inner = document.createElement("div")
-      const list = _.concat(class_list, ["piece_inner"])
-      piece_inner.classList.add(...list)
+      this.cursor_elem.classList.add("cursor_elem")
+
+      const piece_back = document.createElement("div")
+      piece_back.classList.add("piece_back")
+
+      const piece_fore = document.createElement("div")
+      piece_fore.classList.add("piece_fore", ...class_list)
+
+      // const list = _.concat(class_list, ["piece_back"])
+      // piece_fore.classList.add(...list)
+
       if (this.current_flip) {
-        piece_inner.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
+        // this.cursor_elem.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
+        piece_back.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
       }
-      this.cursor_elem.appendChild(piece_inner)
-      this.$el.appendChild(this.cursor_elem)
+
+      piece_back.appendChild(piece_fore)
+      this.cursor_elem.appendChild(piece_back)
+
+      if (this.cursor_elem_in_board_container) {
+        this.$refs.board_container_ref.appendChild(this.cursor_elem)
+      } else {
+        this.$el.appendChild(this.cursor_elem)
+      }
 
       this.mouse_stick = true   // マウスに追随する
 
@@ -504,7 +529,12 @@ export default {
 
     virtual_piece_destroy() {
       if (this.cursor_elem) {
-        this.$el.removeChild(this.cursor_elem)
+        if (this.cursor_elem_in_board_container) {
+          this.$refs.board_container_ref.removeChild(this.cursor_elem)
+        } else {
+          this.$el.removeChild(this.cursor_elem)
+        }
+
         this.cursor_elem = null
         this.mouse_stick = false
 

@@ -1,9 +1,20 @@
 $sp_assets_dir: "../assets" !default // Rails から使うとき Rails 側から見た assets へのパスに変更すること (そうしないと assets を参照できない)
 
-$sp_margin: 0.8vmin                // 盤と駒台の隙間
-
-$sp_mobile_width: 375px            // モバイルモードにするときの幅(iPhone5 = 320px, iPhoneX = 375px)
+// $sp_mobile_width: 375px            // モバイルモードにするときの幅(iPhone5 = 320px, iPhoneX = 375px)
 // $sp_mobile_width: 600px            // モバイルモードにするときの幅(iPhone5 = 320px, iPhoneX = 375px)
+
+$sp_font_family: "YuMincho", "Yu Mincho", serif
+
+$sp_size_xxsmall:  0.4 !default
+$sp_size_xsmall:   0.6 !default
+$sp_size_small:    0.8 !default
+$sp_size_default:  1.0 !default
+$sp_size_medium:   1.2 !default
+$sp_size_large:    1.4 !default
+$sp_size_xlarge:   1.6 !default
+$sp_size_xxlarge:  1.8 !default
+$sp_size_xxxlarge: 2.0 !default
+$sp_size_mag:      1.6 !default // 倍率
 
 //////////////////////////////////////////////////////////////////////////////// for theme-simple
 
@@ -18,17 +29,7 @@ $sp_simple_origin_bg:      lighten($sp_simple_base_color, 45%) !default // 最�
 $sp_simple_promoted_color: hsl(0, 50%, 50%)                    !default // 成駒の色
 $sp_simple_selectable_color: $sp_simple_origin_bg              !default // 持ち上げげれる駒の背景色
 $sp_simple_holding_color:    hsl(240, 80%, 90%)                !default // 持ち上げた駒の背景色
-
-// size
-$sp_simple_cell_size_xxsmall:  (piece_outer_size: 1.0vmin, font-size: 0.3vmin)  !default
-$sp_simple_cell_size_xsmall:   (piece_outer_size: 2.0vmin, font-size: 1.3vmin)  !default
-$sp_simple_cell_size_small:    (piece_outer_size: 3.0vmin, font-size: 2.0vmin)  !default
-$sp_simple_cell_size_default:  (piece_outer_size: 4.0vmin, font-size: 2.6vmin)  !default
-$sp_simple_cell_size_medium:   (piece_outer_size: 5.0vmin, font-size: 3.5vmin)  !default
-$sp_simple_cell_size_large:    (piece_outer_size: 6.0vmin, font-size: 4.0vmin)  !default
-$sp_simple_cell_size_xlarge:   (piece_outer_size: 7.0vmin, font-size: 5.0vmin)  !default
-$sp_simple_cell_size_xxlarge:  (piece_outer_size: 8.0vmin, font-size: 6.0vmin)  !default
-$sp_simple_cell_size_xxxlarge: (piece_outer_size: 9.0vmin, font-size: 7.0vmin)  !default
+$sp_simple_piece_count_color: lighten($sp_simple_base_color, 0%)    !default // 駒数の色
 
 // grid
 $sp_simple_grid_inner: 1px !default // 盤の罫線の太さ
@@ -37,6 +38,8 @@ $sp_simple_grid_outer: 1px !default // 盤の外枠の太さ
 // position
 // $sp_simple_piece_inner_transform_y: 5% !default // 自分側に駒をずらす割合
 $sp_simple_piece_inner_transform_y: 0.09em !default // 自分側に駒をずらす割合
+
+$sp_simple_margin: 0.3em !default               // 盤と駒台の隙間
 
 //////////////////////////////////////////////////////////////////////////////// for theme-real
 
@@ -48,24 +51,16 @@ $sp_real_origin_bg:        hsla(  0,  0%,  0%, 0.15) !default // 最後に動か
 $sp_real_selectable_color: hsla(  0,  0%,  0%, 0.15) !default // 持ち上げげれる駒の背景色
 // $sp_real_holding_color:    hsla(240, 50%, 30%, 0.60) !default // 持ち上げた駒の背景色
 
-// size
-$sp_real_cell_size_xxsmall:  1.0vmin !default
-$sp_real_cell_size_xsmall:   2.0vmin !default
-$sp_real_cell_size_small:    3.0vmin !default
-$sp_real_cell_size_default:  4.0vmin !default
-$sp_real_cell_size_medium:   5.0vmin !default
-$sp_real_cell_size_large:    6.0vmin !default
-$sp_real_cell_size_xlarge:   7.0vmin !default
-$sp_real_cell_size_xxlarge:  8.0vmin !default
-$sp_real_cell_size_xxxlarge: 9.0vmin !default
-
 // grid
 $sp_real_grid_inner: 1px !default // 盤の罫線の太さ
 
 // position
 $sp_real_piece_inner_transform_y: 0% !default // 自分側に駒をずらす割合
 
+$sp_real_margin: 0.15em !default               // 盤と駒台の隙間
+
 //////////////////////////////////////////////////////////////////////////////// fixed
 
 $sp_dimension: 9
 $sp_cell_width: 100% / $sp_dimension
+
