@@ -24,8 +24,8 @@ export default {
       have_piece_location: null,  // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
 
       // プレフィクスに_をつけるとVueに監視されない
-      _running_p: false,        // mousemove イベント緩和用
-      _last_event: null,        // mousemove イベント
+      me_running_p: false,        // mousemove イベント緩和用
+      me_last_event: null,        // mousemove イベント
 
       cursor_elem_in_board_container: true,
     }
@@ -437,21 +437,21 @@ export default {
     },
 
     mousemove_hook(e) {
-      this._last_event = e
+      this.me_last_event = e
 
       // 連続で呼ばれるイベント処理を緩和する方法
       // https://qiita.com/noplan1989/items/9333faad731f5ecaaccd
       // ※試してみているけどあまり効果がない
       if (true) {
         // 呼び出されるまで何もしない
-        if (!this._running_p) {
-          this._running_p = true
+        if (!this.me_running_p) {
+          this.me_running_p = true
 
           // 描画する前のタイミングで呼び出してもらう
           window.requestAnimationFrame(() => {
             this.cursor_elem_set_pos()
 
-            this._running_p = false
+            this.me_running_p = false
           })
         }
       } else {
@@ -467,10 +467,10 @@ export default {
     },
 
     cursor_elem_set_pos() {
-      if (this.cursor_elem && this._last_event && this.mouse_stick) {
+      if (this.cursor_elem && this.me_last_event && this.mouse_stick) {
         // TODO: これが遅いのか？ もっと速く設定できる方法があれば変更したい
-        let x = this._last_event.clientX
-        let y = this._last_event.clientY
+        let x = this.me_last_event.clientX
+        let y = this.me_last_event.clientY
 
         if (this.cursor_elem_in_board_container) {
           // const rect = this.$refs.board_container_ref.getBoundingClientRect()
@@ -519,8 +519,8 @@ export default {
 
       this.mouse_stick = true   // マウスに追随する
 
-      this._last_event = event
-      this.log(this._last_event)
+      this.me_last_event = event
+      this.log(this.me_last_event)
       this.cursor_elem_set_pos()
 
       window.addEventListener("mousemove", this.mousemove_hook, false)
