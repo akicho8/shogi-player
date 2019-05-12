@@ -36,7 +36,14 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
 %dom_real_selectable
   +image_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
   &.holding_p
-    opacity: 0.4                // 駒を持ち上げたので元の駒を薄くする
+    +desktop
+      opacity: 0.4  // 駒を持ち上げたので元の駒を薄くする
+    +touch
+      background-color: $sp_real_holding_color
+      // さらに駒を持ったときは色を濃くする
+      &:hover
+        background-color: $sp_real_holding_color
+    
   &.selectable_p
     &:hover
       // 選択できる駒だけ反応する。background プロパティをつかうと他の設定をリセットしてしまうので注意
@@ -122,22 +129,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
 
     // カーソル位置に表示する持駒
     .cursor_elem
-      position: fixed
-      z-index: 10                   // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い
-      pointer-events: none
       +image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
-      .piece_back
-        height: inherit
-        // width: 100%
-        @extend %shift_to_middle
-        // background-color: hsla(0, 0%, 50%, 0.2) // 升ごと動かしたいとき
-        // border-radius: 0.1em
-        // 反転した状態で持ったカーソル上にある駒を反転させる用
-        &.virtual_piece_flip
-          @extend %is_flip
-        //   width: 100%
-          
-
             
 //////////////////////////////////////////////////////////////////////////////// valiation
 

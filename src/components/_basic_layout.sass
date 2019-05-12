@@ -21,7 +21,7 @@
         cursor: pointer
     .piece_fore
       // height: inherit
-    
+        
   // 将棋盤と駒台の反転
   .flippable
     transform: rotate(0deg)
@@ -68,3 +68,18 @@
           text-align: center       // 駒のテキストを中央にする
           vertical-align: middle   // block要素(Y)を中央にする
           padding: 0               // ブラウザの初期値だと1pxあるので消す
+
+  // カーソル位置に表示する持駒
+  .cursor_elem
+    +touch
+      display: none             // タッチデバイスでは表示しない
+    position: fixed
+    z-index: 10                   // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い
+    pointer-events: none
+    .piece_back
+      height: inherit
+      @extend %shift_to_middle
+      // background-color: hsla(0, 0%, 50%, 0.2) // 升ごと動かしたいとき
+      // 盤を反転した状態で持ったカーソル上にある駒を反転させる用
+      &.virtual_piece_flip
+        @extend %is_flip

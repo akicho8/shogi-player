@@ -249,7 +249,7 @@ export default {
       this.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
-      this.virtual_piece_create(e, this.origin_soldier2.to_class_list)
+      this.virtual_piece_create(e, this.origin_soldier2)
     },
 
     // 駒箱の駒を持ち上げている？
@@ -296,7 +296,7 @@ export default {
       this.log("piece_box_piece_click:駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = null
-      this.virtual_piece_create(e, this.origin_soldier2.to_class_list)
+      this.virtual_piece_create(e, this.origin_soldier2)
     },
 
     // FIXME: click_hook のところだけで行いたい
@@ -363,7 +363,7 @@ export default {
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
       this.place_from = place
-      this.virtual_piece_create(e, this.origin_soldier1.to_class_list)
+      this.virtual_piece_create(e, this.origin_soldier1)
     },
 
     // 駒を持ってない状態にする
@@ -488,7 +488,7 @@ export default {
     //   .piece_back.cursor_elem
     //     .piece_fore.virtual_piece_flip
     //
-    virtual_piece_create(event, class_list) {
+    virtual_piece_create(event, soldier) {
       this.virtual_piece_destroy()
 
       this.cursor_elem = document.createElement("div")
@@ -498,7 +498,10 @@ export default {
       piece_back.classList.add("piece_back")
 
       const piece_fore = document.createElement("div")
-      piece_fore.classList.add("piece_fore", ...class_list)
+      piece_fore.classList.add("piece_fore", ...soldier.to_class_list)
+
+      const text = document.createTextNode(soldier.name)
+      piece_fore.appendChild(text)
 
       // const list = _.concat(class_list, ["piece_back"])
       // piece_fore.classList.add(...list)
