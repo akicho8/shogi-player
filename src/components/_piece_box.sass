@@ -3,13 +3,11 @@
 // .piece_box
 //   ul
 //     li
-//      .piece_outer
-//        .piece_inner
-//
+//      .piece_back
 
 .shogi-player
   .piece_box
-    @extend %text_select_disable
+    @extend %is_unselectable
 
     display: flex
     flex-direction: row         // 横並び
@@ -18,19 +16,10 @@
     align-content: flex-start   // 行は上につめる
 
     list-style-type: none
-    padding: 0 0.3vmin
-    margin-left: $sp_margin
 
     li
-      margin: 0.15rem
       cursor: pointer
 
       // 歩(2) の並びを横軸中央で揃える
       display: flex
       align-items: center
-
-      // 持駒数
-      .piece_count
-        vertical-align: middle
-        margin-left: 0.1rem
-        font-size: 60%

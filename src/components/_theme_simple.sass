@@ -1,122 +1,119 @@
-// 選択できる駒に指定する  
-%dom_simple_selectable
-  background: $sp_simple_board_bg
-  &.holding_p
-    background: $sp_simple_holding_color
-  &:hover
-    // 選択できる駒だけ反応する
-    &.selectable_p
-      background: $sp_simple_selectable_color
-    // さらに駒を持ったときは色を濃くする
-    &.holding_p
-      background: $sp_simple_holding_color
+// @import "~bulma/sass/utilities/mixins.sass"
 
 %basic_box
   border: 1px solid $sp_simple_grid_color
-  background: $sp_simple_board_bg
-  padding: 0.4vmin
-  border-radius: 0.5vmin
-  min-height: 5vmin
+  background-color: $sp_simple_board_bg
+  padding: 0.2em
+  border-radius: 0.25em
+  min-height: 4em
 
 .shogi-player
   &.theme-simple
-    .piece_outer
-      @extend %dom_simple_selectable
-      
+    .piece_back
+      color: $sp_simple_piece_color
+      // font-size: 20px ! important
+
+      .piece_fore
+        // line-height: 100% // 駒箱の駒の上下のpaddingが扱いにくくなったらこれを入れる
+        &.promoted_true
+          color: $sp_simple_promoted_color
+
+      &.holding_p
+        +desktop
+          opacity: 0.4
+        +touch
+          background-color: $sp_simple_holding_color
+          // さらに駒を持ったときは色を濃くする
+          // &:hover
+          //   background-color: $sp_simple_holding_color
+          
+      // 選択できる駒だけ反応する
+      &.selectable_p
+        &:hover
+          background-color: $sp_simple_selectable_color
+
+      &.origin_place
+        background-color: $sp_simple_origin_bg
+        
+      &.current
+        color: $sp_simple_piece_color
+        font-weight: bold
+        animation: simple_blink 0.5s ease-in-out infinite alternate
+        background-color: $sp_simple_current_bg1
+
     .board_inner
-      @include four_star($sp_simple_grid_color)
-      
+      margin: 0 $sp_simple_margin
+      +board_star_mark_define($sp_simple_grid_color)
+
       border-collapse: separate
       border: $sp_simple_grid_outer solid $sp_simple_grid_color
       border-spacing: $sp_simple_grid_inner
-      background: $sp_simple_grid_color
-      // 盤上の駒の領域
-      .piece_outer
-        color: $sp_simple_piece_color
-        
-        &.current
-          background: $sp_simple_current_bg1
-        &.origin_place
-          background: $sp_simple_origin_bg
-        &.current
-          color: $sp_simple_piece_color
-          font-weight: bold
-          animation: simple_blink 0.5s ease-in-out infinite alternate
-          
-        // 盤上の駒
-        .piece_inner
-          &.location_black
-            transform: translateY($sp_simple_piece_inner_transform_y)
-          &.location_white
-            transform: rotate(180deg) translateY($sp_simple_piece_inner_transform_y)
-          &.promoted_true
-            color: $sp_simple_promoted_color
+      background-color: $sp_simple_grid_color
+
+      td
+        background-color: $sp_simple_board_bg
+        // 盤上の駒の領域
+        .piece_back
+          height: inherit
+
+          // width: 3em
+          // height: 3em
+          // font-size: 0.5em
+          // vertical-align: middle
+
+          display: flex
+          flex-direction: column
+          justify-content: center
+          align-items: center
+
+          .piece_fore
+            line-height: 100%
+            // border: 1px solid blue
+            // margin-top: 2.5em
+            // margin-top: auto
+            // margin-bottom: auto
+            // height: auto
+
+            padding-top: 0.1em // そこで上の部分に隙間を入れることで下に少し下げる
+
+            &.location_white
+              @extend %is_flip  // 相手の駒箱が二重に反転しないように盤内だけで適用
 
     // 駒台
     .piece_stand_outer
-      // 駒台の上のマーク
-      .location_mark
-
-      // 横幅ガクガクを防ぐためにあらかじめサイズを持っておく
-      width: 1.8em
-      // border: 1px solid blue
-
-      // 駒
-      ul
-        li
-          .piece_count
-            margin-left:  0.1rem
-            margin-right: 0.1rem
-            font-size: 80%
-
-    // 駒箱
-    .piece_box
-      @extend %basic_box
+      font-size: 0.9em
+      width: 2.1em   // 横幅ガクガクを防ぐためにあらかじめサイズを持っておく
+      .piece_count
+        color: $sp_simple_piece_count_color
+        margin-left: 0.1rem
+        font-size: 0.6em
 
     // edit_mode の場合は駒箱を大きくする
     &.run_mode-edit_mode
       .piece_stand
         @extend %basic_box
-        min-height: 10vmin
-        width: 3.2rem
+        min-height: 5em
+
+    // 駒箱
+    .piece_box
+      @extend %basic_box
+      font-size: 0.5em
+      max-width: 5em
+      li
+        margin: 0.05em
+        .piece_count
+          font-size: 0.8em
+          color: $sp_simple_piece_count_color
+
+    // カーソル位置に表示する持駒
+    .cursor_elem
+      .piece_fore
+        font-size: 1.15em
+        &.location_white
+          @extend %is_flip
 
 @keyframes simple_blink
   0%
-    background: $sp_simple_current_bg1
+    background-color: $sp_simple_current_bg1
   100%
-    background: $sp_simple_current_bg2
-
-@mixin size_define($key, $attrs)
-  @media screen and (min-width: $sp_mobile_width + 1) and (max-width: 9999px)
-    .shogi-player
-      &.theme-simple
-        // font-size: map-get($attrs, font-size)
-        &.size-#{$key}
-          // 盤
-          .board_outer
-            .board_inner
-              .piece_outer
-                // 駒がないときに升目が最小になるのを防ぐため
-                width:  map-get($attrs, piece_outer_size)
-                height: map-get($attrs, piece_outer_size)
-                // 駒のサイズ
-                font-size: map-get($attrs, font-size)
-          // 駒箱
-          .piece_box
-            font-size: map-get($attrs, font-size) * 0.5
-            max-width: map-get($attrs, font-size) * 3.8
-          // 駒台
-          .piece_stand_outer
-            font-size: map-get($attrs, font-size) * 0.8
-            // .piece_stand
-            //   font-size: map-get($attrs, font-size) * 0.8
-
-@include size_define(xx-small,  $sp_simple_cell_size_xxsmall)
-@include size_define(x-small,   $sp_simple_cell_size_xsmall)
-@include size_define(small,     $sp_simple_cell_size_small)
-@include size_define(default,   $sp_simple_cell_size_default)
-@include size_define(medium,    $sp_simple_cell_size_medium)
-@include size_define(large,     $sp_simple_cell_size_large)
-@include size_define(x-large,   $sp_simple_cell_size_xlarge)
-@include size_define(xx-large,  $sp_simple_cell_size_xxlarge)
-@include size_define(xxx-large, $sp_simple_cell_size_xxxlarge)
+    background-color: $sp_simple_current_bg2

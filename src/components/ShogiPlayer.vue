@@ -46,30 +46,33 @@
           :sp_data="$data"
         )
 
-    .board_container.flippable(:class="{flip: current_flip}")
-      PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
-      .flex_item.board_wrap
-        .overlay_navi.previous(@click.stop.prevent="navi_relative_move(-1, $event)")
-        .overlay_navi.next(@click.stop.prevent="navi_relative_move(+1, $event)")
-        .overlay_navi.flip_trigger_cell(@click.stop.prevent="board_flip_run")
-        .board_outer
-          table.board_inner
-            tr(v-for="y in mediator.dimension")
-              template(v-for="x in mediator.dimension")
-                td.piece_outer(:class="board_td_piece_outer_class([x - 1, y - 1])" @click.stop.prevent="board_click([x - 1, y - 1], $event)" @click.stop.prevent.right="board_click_right([x - 1, y - 1], $event)")
-                  .piece_inner_wrap
-                    span.piece_inner(:class="mediator.board_piece_inner_class([x - 1, y - 1])")
+    //- 独自のフォントサイズを適用するのは基本このなかだけとする
+    .board_container.font_size_base(ref="board_container_ref")
+      .flippable(:class="{flip: current_flip}")
+        PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
+        .flex_item.board_wrap
+          template(v-if="overlay_navi")
+            .overlay_navi.previous(@click.stop.prevent="navi_relative_move(-1, $event)")
+            .overlay_navi.next(@click.stop.prevent="navi_relative_move(+1, $event)")
+            .overlay_navi.flip_trigger_cell(@click.stop.prevent="board_flip_run")
+          .board_outer
+            table.board_inner
+              tr(v-for="y in mediator.dimension")
+                td(v-for="x in mediator.dimension")
+                  .piece_back(:class="board_td_piece_back_class([x - 1, y - 1])" @click.stop.prevent="board_click([x - 1, y - 1], $event)" @click.stop.prevent.right="board_click_right([x - 1, y - 1], $event)")
+                    .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
-      .flex_item
-        ul.piece_box(v-if="current_run_mode === 'edit_mode'" @click.stop.prevent="piece_box_other_click" @click.right.prevent="hold_cancel")
-          li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop.prevent="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}")
-            .piece_outer(:class="piece_box_piece_outer_class(piece)")
-              .piece_inner_wrap
-                span.piece_inner(:class="piece_box_piece_inner_class(piece)") {{piece.name}}
-            span.piece_count(v-if='count >= 2') {{count}}
-        //- 先手の駒台が上にくっつてしまうので防ぐため空のdivを入れる
-        div(v-if="current_run_mode !== 'edit_mode'")
-        PieceStand(:location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')")
+        .flex_item
+          ul.piece_box(v-if="current_run_mode === 'edit_mode'" @click.stop.prevent="piece_box_other_click" @click.right.prevent="hold_cancel")
+            li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop.prevent="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}")
+              .piece_back(:class="piece_box_piece_back_class(piece)")
+                .piece_fore(:class="piece_box_piece_inner_class(piece)" v-text="piece.name")
+              .piece_count(v-if="count >= 1" :class="`piece_count${count}`")
+                | {{count}}
+          //- 先手の駒台が上にくっつてしまうので防ぐため空のdivを入れる
+          div(v-if="current_run_mode !== 'edit_mode'")
+          PieceStand(:location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')")
+      //- cursor_elem はこの部分に入るので 1em のサイズを .font_size_base で指定したものを基準にできる
 
     div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'")
       .controller_group.buttons.has-addons.is-centered.is-paddingless(v-if="controller_show")
@@ -165,6 +168,7 @@ export default {
     kifu_body:      { type: String,  default: null,        },
     start_turn:     { type: Number,  default: -1,          },
     sfen_show:      { type: Boolean, default: false,       },
+    overlay_navi:   { type: Boolean, default: false,       },
     url_embed_turn: { type: Boolean, default: false,       },
     theme:          { type: String,  default: "real",      },
     size:           { type: String,  default: "default",   },
@@ -363,12 +367,12 @@ export default {
       }
     },
 
-    board_td_piece_outer_class(xy) {
+    board_td_piece_back_class(xy) {
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
-      const list = []
+      let list = []
 
-      list.push(place.to_css_class)
+      // list.push(place.to_css_class)
 
       if (this.mediator.last_hand) {
         const origin_place = this.mediator.last_hand.origin_place
@@ -389,6 +393,10 @@ export default {
           list.push("selectable_p")
         }
       }
+
+      // if (soldier) {
+      //   list = _.concat(list, soldier.to_class_list)
+      // }
 
       return list
     },

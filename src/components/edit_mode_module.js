@@ -24,15 +24,11 @@ export default {
       have_piece_location: null,  // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
 
       // プレフィクスに_をつけるとVueに監視されない
-      _running_p: false,        // mousemove イベント緩和用
-      _last_event: null,        // mousemove イベント
+      me_running_p: false,        // mousemove イベント緩和用
+      me_last_event: null,        // mousemove イベント
+
+      cursor_elem_in_board_container: true,
     }
-  },
-
-  created() {
-  },
-
-  mounted() {
   },
 
   watch: {
@@ -46,6 +42,10 @@ export default {
     board_click(xy, e) {
       this.log("board_click")
       this.log(`shiftKey: ${e.shiftKey}`)
+
+      if (this.if_view_mode_break) {
+        return
+      }
 
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
@@ -169,6 +169,10 @@ export default {
     board_click_right(xy, e) {
       this.log("盤を右クリック")
 
+      if (this.if_view_mode_break) {
+        return
+      }
+
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
 
@@ -253,7 +257,7 @@ export default {
       this.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
-      this.virtual_piece_create(e, this.origin_soldier2.to_class_list)
+      this.virtual_piece_create(e, this.origin_soldier2)
     },
 
     // 駒箱の駒を持ち上げている？
@@ -300,7 +304,7 @@ export default {
       this.log("piece_box_piece_click:駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = null
-      this.virtual_piece_create(e, this.origin_soldier2.to_class_list)
+      this.virtual_piece_create(e, this.origin_soldier2)
     },
 
     // FIXME: click_hook のところだけで行いたい
@@ -367,7 +371,7 @@ export default {
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
       this.place_from = place
-      this.virtual_piece_create(e, this.origin_soldier1.to_class_list)
+      this.virtual_piece_create(e, this.origin_soldier1)
     },
 
     // 駒を持ってない状態にする
@@ -388,14 +392,19 @@ export default {
 
     // -------------------------------------------------------------------------------- piece_box
 
-    // 駒箱の駒の四角
-    piece_box_piece_outer_class(piece) {
+    // 駒箱の駒
+    piece_box_piece_back_class(piece) {
       let list = []
       if (this.piece_box_have_p(piece)) {
         list.push("holding_p")
       } else if (this.current_run_mode === "edit_mode") {
         list.push("selectable_p")
       }
+
+      // list = _.concat(list, piece.css_class_list)
+      // list.push("location_black")
+      // list.push("promoted_false")
+
       return list
     },
 
@@ -436,21 +445,21 @@ export default {
     },
 
     mousemove_hook(e) {
-      this._last_event = e
+      this.me_last_event = e
 
       // 連続で呼ばれるイベント処理を緩和する方法
       // https://qiita.com/noplan1989/items/9333faad731f5ecaaccd
       // ※試してみているけどあまり効果がない
       if (true) {
         // 呼び出されるまで何もしない
-        if (!this._running_p) {
-          this._running_p = true
+        if (!this.me_running_p) {
+          this.me_running_p = true
 
           // 描画する前のタイミングで呼び出してもらう
           window.requestAnimationFrame(() => {
             this.cursor_elem_set_pos()
 
-            this._running_p = false
+            this.me_running_p = false
           })
         }
       } else {
@@ -466,36 +475,63 @@ export default {
     },
 
     cursor_elem_set_pos() {
-      if (this.cursor_elem && this._last_event && this.mouse_stick) {
+      if (this.cursor_elem && this.me_last_event && this.mouse_stick) {
         // TODO: これが遅いのか？ もっと速く設定できる方法があれば変更したい
-        this.cursor_elem.style.left = `${this._last_event.clientX}px`
-        this.cursor_elem.style.top  = `${this._last_event.clientY}px`
+        let x = this.me_last_event.clientX
+        let y = this.me_last_event.clientY
+
+        if (this.cursor_elem_in_board_container) {
+          // const rect = this.$refs.board_container_ref.getBoundingClientRect()
+          // x -= rect.left
+          // y -= rect.top
+        }
+
+        this.cursor_elem.style.left = `${x}px`
+        this.cursor_elem.style.top  = `${y}px`
       }
     },
 
     // マウス位置に表示する駒の生成
     //
-    //   .piece_outer.cursor_elem
-    //     .piece_inner.virtual_piece_flip
+    //   .piece_back.cursor_elem
+    //     .piece_fore.virtual_piece_flip
     //
-    virtual_piece_create(event, class_list) {
+    virtual_piece_create(event, soldier) {
       this.virtual_piece_destroy()
 
       this.cursor_elem = document.createElement("div")
-      this.cursor_elem.classList.add("piece_outer", "cursor_elem")
-      const piece_inner = document.createElement("div")
-      const list = _.concat(class_list, ["piece_inner"])
-      piece_inner.classList.add(...list)
+      this.cursor_elem.classList.add("cursor_elem")
+
+      const piece_back = document.createElement("div")
+      piece_back.classList.add("piece_back")
+
+      const piece_fore = document.createElement("div")
+      piece_fore.classList.add("piece_fore", ...soldier.to_class_list)
+
+      const text = document.createTextNode(soldier.name)
+      piece_fore.appendChild(text)
+
+      // const list = _.concat(class_list, ["piece_back"])
+      // piece_fore.classList.add(...list)
+
       if (this.current_flip) {
-        piece_inner.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
+        // this.cursor_elem.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
+        piece_back.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
       }
-      this.cursor_elem.appendChild(piece_inner)
-      this.$el.appendChild(this.cursor_elem)
+
+      piece_back.appendChild(piece_fore)
+      this.cursor_elem.appendChild(piece_back)
+
+      if (this.cursor_elem_in_board_container) {
+        this.$refs.board_container_ref.appendChild(this.cursor_elem)
+      } else {
+        this.$el.appendChild(this.cursor_elem)
+      }
 
       this.mouse_stick = true   // マウスに追随する
 
-      this._last_event = event
-      this.log(this._last_event)
+      this.me_last_event = event
+      this.log(this.me_last_event)
       this.cursor_elem_set_pos()
 
       window.addEventListener("mousemove", this.mousemove_hook, false)
@@ -504,7 +540,12 @@ export default {
 
     virtual_piece_destroy() {
       if (this.cursor_elem) {
-        this.$el.removeChild(this.cursor_elem)
+        if (this.cursor_elem_in_board_container) {
+          this.$refs.board_container_ref.removeChild(this.cursor_elem)
+        } else {
+          this.$el.removeChild(this.cursor_elem)
+        }
+
         this.cursor_elem = null
         this.mouse_stick = false
 
@@ -544,6 +585,10 @@ export default {
       if (this.current_run_mode === "play_mode") {
         return !_.includes(this.human_locations, this.mediator.current_location)
       }
-    }
+    },
+
+    if_view_mode_break() {
+      // return this.current_run_mode === "view_mode"
+    },
   },
 }

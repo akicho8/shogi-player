@@ -11,6 +11,7 @@
 | slider_show                | 局面スライダー表示          |                                                          | false               |                |
 | controller_show            | 前後移動用のボタン類の表示  |                                                          | false               |                |
 | sfen_show                  | 局面を sfen で表示          | 主に局面ペディア用                                       | false               |                |
+| overlay_navi               | 盤上の左右で前後操作        | view_mode で盤上の左右クリックで手数を前後に移動する     | true                |                |
 | sound_effect               | 駒音の有無                  |                                                          | false               |                |
 | volume                     | 駒音の大きさ                | 0 から 1.0                                               | 0.5                 |                |
 | key_event_capture          | キーボード操作を監視        | どこにもフォーカスしていないときでも左右キーが反応       | false               |                |
@@ -32,9 +33,9 @@
   </div>
   <div class="message-body">
     <ul>
-      <li>kifu_body も preset_key も指定がない場合は 'position startpos' (平手) が初期配置になる</li>
-      <li>**kifu_url** や **kifu_body** をあとから変更したときも同期して再読み込みする</li>
-      <li>theme や size の値に **none** を指定したときは何もスタイルを設定しない</li>
+      <li>kifu_body も preset_key も指定がない場合は 'position startpos' (平手) が初期配置になります</li>
+      <li>**kifu_url** や **kifu_body** をあとから変更したときも同期して再読み込みします</li>
+      <li>theme や size の値に **none** を指定したときは何もスタイルを設定しません</li>
     </ul>
   </div>
 </article>
@@ -44,7 +45,7 @@
     <p>注意点</p>
   </div>
   <div class="message-body">
-    **key_event_capture** は副作用がある。有効にするとどこにもフォーカスしていないときでも左右ボタンに反応するようになって便利な面もあるが、他のプログラムの操作を奪ってしまうことになるかもしれない。そのため基本は false にしておいた方がよい
+    **key_event_capture** は副作用があります。有効にするとどこにもフォーカスしていないときでも左右ボタンに反応するようになって便利な面もありますが、他のプログラムの操作を奪ってしまうことになるかもしれません。そのため基本は false にしておいた方がよいです。
   </div>
 </article>
 

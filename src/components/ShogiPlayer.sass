@@ -1,13 +1,18 @@
 // for customize
 @import "initial_variables"
+@import "~bulma/sass/utilities/mixins.sass"
 @import "helper"
 
-// main
+// 将棋盤セット (.board_container 内のもの)
 @import "basic_layout"
+@import "dimension_shared"
 @import "board_overlay"
 @import "piece_stand"
 @import "piece_box"
 @import "table_unit"
+
+// 将棋盤の外
+@import "other_parts"
 
 // helper
 @import "responsive"

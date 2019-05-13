@@ -47,7 +47,7 @@
       hr
       .content
         p
-          | 将棋の棋譜を再生できる JavaScript で次の特徴がある
+          | 将棋の棋譜を再生できる JavaScript で次の特徴があります
         ul
           li KIF と SFEN フォーマットに対応
           li 検討できる (操作モード)
@@ -55,12 +55,8 @@
         p
           | その他
         ul
-          li
-            code
-              | npm install shogi-player
-            | でインストール
           li Flash 未使用
-          li Vue.js で動いている
+          li Vue.js で動作
           li Buefy (Bulma CSS) 使用
 
   .section
@@ -154,14 +150,14 @@
                 .message-body
                   .content
                     ul
-                      li 盤面の左右をクリックすると前後の手番に進む
-                      li シフトを押しながらで10倍速
-                      li シフト以外のシステムキーだと50倍速(シフトキーも押していると500倍速)
-                      li 天王山(５五の地点)をクリックすると反転
-                      li 「N手目」の部分をクリックで編集可
-                      li スライダーがある場合は優先的にフォーカスする
-                      li スライダーにフォーカスがある状態だと左右キーが効く(ブラウザの標準機能)
-                      li スライダーは fn + ←→ キーで最初と最後に移動する(ブラウザの標準機能)
+                      li 盤面の左右をクリックすると前後の手番に進みます
+                      li シフトを押しながらで10倍速になります
+                      li シフト以外のシステムキーだと50倍速になります(シフトキーも押していると500倍速)
+                      li 天王山(５五の地点)をクリックすると反転します
+                      li 「N手目」の部分をクリックで編集できます
+                      li スライダーがある場合は優先的にフォーカスします
+                      li スライダーにフォーカスがある状態だと左右キーが効きます(ブラウザの標準機能)
+                      li スライダーは fn + ←→ キーで最初と最後に移動します(ブラウザの標準機能)
 
           br
           br
@@ -206,12 +202,12 @@
                 .message-body
                   .content
                     ul
-                      li スライダー等で変更した任意局面から手番側の操作が行える
-                      li いちど指すとその手が最終手になる(分岐には対応していない)
-                      li human_side_key オプションで片側の操作のみに絞れる
-                      li Emitイベントに反応して、相手側の指し手を追加した棋譜で kifu_body を更新すればCPUとの対戦のようなことができる
-                      li 再生モードの棋譜とは独立している(再生モードの棋譜を上書きをしない)
-                      li 指し手を決定したときスライダーがあればスライダーにフォーカスにするのですぐに「←」キーで手を戻すことができる(2019-05-02)
+                      li スライダー等で変更した任意局面から手番側の操作が行えます
+                      li いちど指すとその手が最終手になります(分岐には対応していません)
+                      li human_side_key オプションで片側の操作のみに絞れます
+                      li Emitイベントに反応して、相手側の指し手を追加した棋譜で kifu_body を更新すればCPUとの対戦のようなことができます
+                      li 再生モードの棋譜とは独立しています(再生モードの棋譜を上書きしません)
+                      li 指し手を決定したときスライダーがあればスライダーにフォーカスにするのですぐに「←」キーで手を戻すことができます(2019-05-02)
 
           br
           br
@@ -257,10 +253,10 @@
                 .message-body
                   .content
                     ul
-                      li 盤上の駒は右クリックで裏返せる
-                      li または修飾キー(shift, option, meta, control キーのいずれか)を押しながら左クリックでも裏返せる
-                      li 駒を持った状態で右クリックすると駒を元に戻す
-                      li 駒台と駒箱に駒を移動するときに修飾キーを押していると全部移動する(※FactorioのUIを参考)
+                      li 盤上の駒は右クリックで裏返せます
+                      li または修飾キー(shift, option, meta, control キーのいずれか)を押しながら左クリックでも裏返せます
+                      li 駒を持った状態で右クリックすると駒を元に戻せます
+                      li 駒台と駒箱に駒を移動するときに修飾キーを押していると全部移動します(※FactorioのUIを参考)
 
           .columns
             .column
@@ -271,15 +267,14 @@
                 .message-body
                   .content
                     ul
-                      li 右の<b-icon icon="dots-vertical" size="is-small"></b-icon>をクリックするとモードを切り替えることができる
-                      li 棋譜再生モードの途中で「操作」に切り替えると手番側の駒を動かせるようになる。主に検討したいときに使う
-                      li 「操作」モードに入るとき SFEN (USI) の場合はそのまま再生モードでの棋譜を保持した状態で始まる。(スライダーで最初の局面に戻せる)
-                      li 一方 KIF の場合は都合上<b>現在の局面から</b>の開始になる。(つまりスライダーで最初の局面に戻せない)
-                      li SFENと同様になるようにしようかと思ったけど、「操作」モードにに入ったところを基点(0手目)とするのでわかりやすいというメリットがある
-                      li 手番に関わらず、ただ自由に駒を動かしたいときは「編集」モードする
-                      li 棋譜再生モードの途中で「操作」に切り替えると手番側の駒を動かせるようになる。
-                      li 再生モードから他のモードに切り替えてから再生モードに戻ったとき、他のモードに切り替えるまでの状態に復帰する
-                      li つまり接盤のような形で検討できる
+                      li 右の<b-icon icon="dots-vertical" size="is-small"></b-icon>をクリックするとモードを切り替えることができます
+                      li 棋譜再生モードの途中で「操作」に切り替えると手番側の駒を動かせるようになります。主に検討したいときに使います
+                      li 「操作」モードに入るとき SFEN (USI) の場合はそのまま再生モードでの棋譜を保持した状態で始まります。(スライダーで最初の局面に戻せます)
+                      li 一方 KIF の場合は都合上<b>現在の局面から</b>の開始になります。(つまりスライダーで最初の局面に戻せません)
+                      li (SFENと同様になるようにしようかと思いましたが、「操作」モードにに入ったところを基点(0手目)とするのでわかりやすいというメリットがあることに気づきました)
+                      li 手番に関わらず、ただ自由に駒を動かしたいときは「編集」モードになります
+                      li 棋譜再生モードの途中で「操作」に切り替えると手番側の駒を動かせるようになります
+                      li 再生モードから他のモードに切り替えてから再生モードに戻ったとき、他のモードに切り替える前の状態に復帰します (つまり継盤のような形になります)
   .section
     a(name="usage")
     .container
@@ -311,6 +306,7 @@
               :slider_show="slider_show"
               :controller_show="controller_show"
               :sfen_show="sfen_show"
+              :overlay_navi="overlay_navi"
               :sound_effect="sound_effect"
               :volume="volume"
               :human_side_key="human_side_key"
@@ -376,6 +372,9 @@
               b-field(label="sfen_show")
                 b-switch(v-model="sfen_show")
 
+              b-field(label="overlay_navi")
+                b-switch(v-model="overlay_navi")
+
               b-field(label="key_event_capture")
                 b-switch(v-model="key_event_capture")
 
@@ -410,6 +409,7 @@
                 | :<b>slider_show</b>="{{slider_show}}"
                 | :<b>controller_show</b>="{{controller_show}}"
                 | :<b>sfen_show</b>="{{sfen_show}}"
+                | :<b>overlay_navi</b>="{{overlay_navi}}"
                 | :<b>human_side_key</b>="'{{human_side_key}}'"
                 | :<b>sound_effect</b>="{{sound_effect}}"
                 | :<b>volume</b>="{{volume}}"
@@ -437,6 +437,9 @@
 
       .table_wrap
         .content(v-html="options_md")
+
+      .table_wrap
+        .content(v-html="license_md")
 
   footer.footer
     .container
@@ -491,9 +494,15 @@ export default {
   name: 'app',
 
   data() {
-    // FIXME: npm run unit で raw-loader が効かない問題を回避している
+    // FIXME: npm run unit で raw-loader が効かない問題を回避している。が、SideInfo.values などがないとテストがこけるので最低限入れとく
     if (process.env.NODE_ENV === "test") {
-      return {}
+      return {
+        SideInfo,
+        RunModeInfo,
+        ThemeInfo,
+        VariationInfo,
+        SizeInfo,
+      }
     }
 
     return {
@@ -510,6 +519,7 @@ export default {
       size: "default",
       start_turn: -1,
       slider_show: true,
+      overlay_navi: true,
       controller_show: true,
       sfen_show: true,
       human_side_key: 'both',
@@ -531,6 +541,7 @@ export default {
       kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
       usage_md: marked(require('./usage.md')),
       options_md: marked(require('./options.md')),
+      license_md: marked(require('./license.md')),
     }
   },
 
