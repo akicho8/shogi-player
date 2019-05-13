@@ -494,9 +494,15 @@ export default {
   name: 'app',
 
   data() {
-    // FIXME: npm run unit で raw-loader が効かない問題を回避している
+    // FIXME: npm run unit で raw-loader が効かない問題を回避している。が、SideInfo.values などがないとテストがこけるので最低限入れとく
     if (process.env.NODE_ENV === "test") {
-      return {}
+      return {
+        SideInfo,
+        RunModeInfo,
+        ThemeInfo,
+        VariationInfo,
+        SizeInfo,
+      }
     }
 
     return {
