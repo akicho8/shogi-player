@@ -443,6 +443,9 @@
       .table_wrap
         .content(v-html="options_md")
 
+      .table_wrap
+        .content(v-html="license_md")
+
   footer.footer
     .container
       .columns
@@ -537,6 +540,7 @@ export default {
       kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
       usage_md: marked(require('./usage.md')),
       options_md: marked(require('./options.md')),
+      license_md: marked(require('./license.md')),
     }
   },
 
