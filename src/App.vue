@@ -89,7 +89,6 @@
                 :volume="0.25"
                 :debug_mode="false"
               )
-
           br
           br
 
@@ -288,7 +287,12 @@
               .content
                 | mobile のときは size オプションで指定したサイズは無効になり、なるべく横幅いっぱいになるように調整します。
                 | 右の<b-icon icon="dots-vertical" size="is-small"></b-icon>も非表示にします。
-          a.button(@click="modal_p = true") 開く
+
+          .buttons
+            a.button(@click="modal_p = true") 開く
+
+          p
+            | .modal-card.is-shogi-player-modal-card のようにします
 
           b-modal(:active.sync="modal_p" has-modal-card)
             .modal-card.is-shogi-player-modal-card(style="width:auto")
@@ -319,6 +323,35 @@
                 //- b-tooltip(label="この局面から自分で操作")
                 //-   b-switch(v-model="sp_run_mode" true-value="play_mode" false-value="view_mode") 継盤
                 a.button(@click="modal_p = false") 閉じる
+
+          pre
+            | b-modal(:active.sync="modal_p" has-modal-card)
+            |   .modal-card.is-shogi-player-modal-card(style="width:auto")
+            |     header.modal-card-head
+            |       p.modal-card-title.is-size-5
+            |         | 詰将棋13手詰
+            |       button(class="delete" aria-label="close" @click="modal_p = false")
+            |
+            |     section.modal-card-body
+            |       shogi-player(
+            |         :run_mode="view_mode"
+            |         :debug_mode="false"
+            |         :start_turn="-1"
+            |         :kifu_body="'position sfen lns3+P2/4k4/ppppp1p2/9/5P3/9/9/9/9 b B2GSN2rb2g2s2n3l10p 1 moves N*6d 6c6d B*4a 5b6a S*6b 7a6b G*5b 6a7a 5b6b 7a6b S*6c 6b7a G*7b'"
+            |         :key_event_capture="true"
+            |         :slider_show="true"
+            |         :sfen_show="false"
+            |         :controller_show="true"
+            |         :theme="'simple'"
+            |         :size="'default'"
+            |         :sound_effect="true"
+            |       )
+            |
+            |       .box.is-size-6
+            |         | 1手目と5手詰が重要
+            |
+            |     footer.modal-card-foot.space_between
+            |       a.button(@click="modal_p = false") 閉じる
 
   .section
     a(name="usage")
