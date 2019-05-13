@@ -59,7 +59,7 @@
             table.board_inner
               tr(v-for="y in mediator.dimension")
                 td(v-for="x in mediator.dimension")
-                  .piece_back(:class="board_td_piece_back_class([x - 1, y - 1])" @click.stop.prevent="board_click([x - 1, y - 1], $event)" @click.stop.prevent.right="board_click_right([x - 1, y - 1], $event)")
+                  .piece_back(:class="board_piece_back_class([x - 1, y - 1])" @click.stop.prevent="board_click([x - 1, y - 1], $event)" @click.stop.prevent.right="board_click_right([x - 1, y - 1], $event)")
                     .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
         .flex_item
@@ -367,12 +367,12 @@ export default {
       }
     },
 
-    board_td_piece_back_class(xy) {
+    board_piece_back_class(xy) {
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
       let list = []
 
-      // list.push(place.to_css_class)
+      list.push(place.to_css_class) // place_99
 
       if (this.mediator.last_hand) {
         const origin_place = this.mediator.last_hand.origin_place
