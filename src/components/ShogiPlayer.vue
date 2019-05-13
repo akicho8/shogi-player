@@ -51,9 +51,10 @@
       .flippable(:class="{flip: current_flip}")
         PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
         .flex_item.board_wrap
-          .overlay_navi.previous(@click.stop.prevent="navi_relative_move(-1, $event)")
-          .overlay_navi.next(@click.stop.prevent="navi_relative_move(+1, $event)")
-          .overlay_navi.flip_trigger_cell(@click.stop.prevent="board_flip_run")
+          template(v-if="overlay_navi")
+            .overlay_navi.previous(@click.stop.prevent="navi_relative_move(-1, $event)")
+            .overlay_navi.next(@click.stop.prevent="navi_relative_move(+1, $event)")
+            .overlay_navi.flip_trigger_cell(@click.stop.prevent="board_flip_run")
           .board_outer
             table.board_inner
               tr(v-for="y in mediator.dimension")
@@ -167,6 +168,7 @@ export default {
     kifu_body:      { type: String,  default: null,        },
     start_turn:     { type: Number,  default: -1,          },
     sfen_show:      { type: Boolean, default: false,       },
+    overlay_navi:   { type: Boolean, default: false,       },
     url_embed_turn: { type: Boolean, default: false,       },
     theme:          { type: String,  default: "real",      },
     size:           { type: String,  default: "default",   },

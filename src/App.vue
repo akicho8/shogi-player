@@ -311,6 +311,7 @@
               :slider_show="slider_show"
               :controller_show="controller_show"
               :sfen_show="sfen_show"
+              :overlay_navi="overlay_navi"
               :sound_effect="sound_effect"
               :volume="volume"
               :human_side_key="human_side_key"
@@ -376,6 +377,9 @@
               b-field(label="sfen_show")
                 b-switch(v-model="sfen_show")
 
+              b-field(label="overlay_navi")
+                b-switch(v-model="overlay_navi")
+
               b-field(label="key_event_capture")
                 b-switch(v-model="key_event_capture")
 
@@ -410,6 +414,7 @@
                 | :<b>slider_show</b>="{{slider_show}}"
                 | :<b>controller_show</b>="{{controller_show}}"
                 | :<b>sfen_show</b>="{{sfen_show}}"
+                | :<b>overlay_navi</b>="{{overlay_navi}}"
                 | :<b>human_side_key</b>="'{{human_side_key}}'"
                 | :<b>sound_effect</b>="{{sound_effect}}"
                 | :<b>volume</b>="{{volume}}"
@@ -510,6 +515,7 @@ export default {
       size: "default",
       start_turn: -1,
       slider_show: true,
+      overlay_navi: true,
       controller_show: true,
       sfen_show: true,
       human_side_key: 'both',

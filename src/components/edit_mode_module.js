@@ -43,6 +43,10 @@ export default {
       this.log("board_click")
       this.log(`shiftKey: ${e.shiftKey}`)
 
+      if (this.if_view_mode_break) {
+        return
+      }
+
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
 
@@ -164,6 +168,10 @@ export default {
 
     board_click_right(xy, e) {
       this.log("盤を右クリック")
+
+      if (this.if_view_mode_break) {
+        return
+      }
 
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
@@ -577,6 +585,10 @@ export default {
       if (this.current_run_mode === "play_mode") {
         return !_.includes(this.human_locations, this.mediator.current_location)
       }
-    }
+    },
+
+    if_view_mode_break() {
+      // return this.current_run_mode === "view_mode"
+    },
   },
 }
