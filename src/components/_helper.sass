@@ -57,4 +57,5 @@
   .shogi-player
     &.size-#{$key}
       .font_size_base
-        font-size: #{$size * $sp_size_mag}em // 基点とするサイズ
+        +tablet
+          font-size: #{$size * $sp_size_mag}em // 基点とするサイズ

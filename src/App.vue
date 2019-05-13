@@ -70,7 +70,7 @@
           hr
           .columns
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | コメント付きの KIF 表示。9手目から表示。テーマ:real。駒音あり
 
@@ -95,7 +95,7 @@
 
           .columns
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | シンプル。最終手から表示。※盤面クリックで操作可。天王山クリックで反転
 
@@ -105,7 +105,7 @@
               ShogiPlayer(:kifu_body="'position startpos moves 2g2f 8c8d 2f2e 8d8e 6i7h 4a3b 2e2d 2c2d 2h2d P*2c 2d2h 7a7b 3i3h 3c3d 9g9f 9c9d 1g1f 1c1d 3h2g 8e8f 8g8f 8b8f P*8g 8f8d 2g3f 5a5b 7g7f 7c7d 8h2b+ 3a2b 7i8h 7b7c 8h7g 7c6d 3f4e 7d7e 4e5f 2b3c 6g6f 3c4d 5f6g 6a7b 5i6h 8a7c 4i5h 2a3c 6h7i 7e7f 6g7f 4d5e P*7e 9d9e B*7d P*8h 7i8h 7b8c 9f9e 8c7d 7e7d 8d7d P*7e 7d8d 5h6g P*7d 7e7d 8d7d P*7e 6d7e 7f7e 7d7e 7g7f 7e7d S*7e 7d4d P*7d 4d4g+ P*2d 2c2d 7d7c+ 4g4i 2h2d P*2c 2d3d 4c4d P*7i 5b4c 3d3e S*4e 6g5f P*7g 8i7g P*3d 3e4e 3c4e 5f5e R*2h N*3f 2h7h+ 8h9g 4e5g+ 5e4d 4i4d S*5b 4c5d 7i7h 4d4i G*6e 5d4e R*4d 4e5f 4d4i G*4h S*3h 4h4i R*5e 5f4f 3h4i G*4e P*4g 5g4g P*4h 4g3g 2i3g 4f3g 5e4e R*8i G*3h 3g3f G*4f 3f2f 9i9h 8i4i+ P*3i S*2i 3h2h 4i3i'" :start_turn="-1" :theme="'real'" :variation="'p'")
 
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | スライダーのみ表示。初手から表示
 
@@ -119,7 +119,7 @@
 
           .columns
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | コントローラーとスライダー付き。121手目から表示。
 
@@ -129,7 +129,7 @@
               ShogiPlayer(:kifu_body="kif_sample2" :start_turn="121" :controller_show="true" :slider_show="true" :theme="'simple'")
 
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | 駒落ち。最終手から表示。局面のSFENも表示
 
@@ -167,14 +167,14 @@
 
           .columns
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | 自分で操作できる。戻れば操作をやり直せる
 
               ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'")
 
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | human_side_key オプションで先手側だけ操作できるようにする
 
@@ -182,13 +182,13 @@
 
           .columns
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | 駒落ちの場合は後手から始まる(動作確認用)
               ShogiPlayer(:kifu_body="`position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
 
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | 2手目の盤面から開始する場合も後手から始まる(動作確認用)
               ShogiPlayer(:kifu_body="`position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL w - 2`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
@@ -216,14 +216,14 @@
 
           .columns
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | すべての駒を自由に動かせる
 
               ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :theme="'real'" :size="'medium'" :variation="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'")
 
             .column
-              article.message.is-info.has-text-centered
+              article.message.is-info
                 .message-body
                   | 詰将棋用の初期配置で開始
 
@@ -235,7 +235,7 @@
           template(v-if="false")
             .columns
               .column
-                article.message.is-info.has-text-centered
+                article.message.is-info
                   .message-body
                     | 外部KIFファイルの読み込み
 
@@ -275,6 +275,51 @@
                       li 手番に関わらず、ただ自由に駒を動かしたいときは「編集」モードになります
                       li 棋譜再生モードの途中で「操作」に切り替えると手番側の駒を動かせるようになります
                       li 再生モードから他のモードに切り替えてから再生モードに戻ったとき、他のモードに切り替える前の状態に復帰します (つまり継盤のような形になります)
+
+  .section
+    a(name="modal_in_style")
+    .container
+      h3.title モーダル内表示の例
+      hr
+      .columns
+        .column
+          article.message.is-info
+            .message-body
+              .content
+                | mobile のときは size オプションで指定したサイズは無効になり、なるべく横幅いっぱいになるように調整します。
+                | 右の<b-icon icon="dots-vertical" size="is-small"></b-icon>も非表示にします。
+          a.button(@click="modal_p = true") 開く
+
+          b-modal(:active.sync="modal_p" has-modal-card)
+            .modal-card.is-shogi-player-modal-card(style="width:auto")
+              header.modal-card-head
+                p.modal-card-title.is-size-5
+                  | 詰将棋13手詰
+                button(class="delete" aria-label="close" @click="modal_p = false")
+
+              section.modal-card-body
+                shogi-player(
+                  :run_mode="view_mode"
+                  :debug_mode="false"
+                  :start_turn="-1"
+                  :kifu_body="'position sfen lns3+P2/4k4/ppppp1p2/9/5P3/9/9/9/9 b B2GSN2rb2g2s2n3l10p 1 moves N*6d 6c6d B*4a 5b6a S*6b 7a6b G*5b 6a7a 5b6b 7a6b S*6c 6b7a G*7b'"
+                  :key_event_capture="true"
+                  :slider_show="true"
+                  :sfen_show="false"
+                  :controller_show="true"
+                  :theme="'simple'"
+                  :size="'default'"
+                  :sound_effect="true"
+                )
+
+                .box.is-size-6
+                  | 1手目と5手詰が重要
+
+              footer.modal-card-foot.space_between
+                //- b-tooltip(label="この局面から自分で操作")
+                //-   b-switch(v-model="sp_run_mode" true-value="play_mode" false-value="view_mode") 継盤
+                a.button(@click="modal_p = false") 閉じる
+
   .section
     a(name="usage")
     .container
@@ -511,6 +556,8 @@ export default {
       ThemeInfo,
       VariationInfo,
       SizeInfo,
+
+      modal_p: false,
 
       // カスタマイズ用
       run_mode: "view_mode",   // play_mode
