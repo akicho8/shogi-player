@@ -168,7 +168,7 @@ export default {
     kifu_body:      { type: String,  default: null,        },
     start_turn:     { type: Number,  default: -1,          },
     sfen_show:      { type: Boolean, default: false,       },
-    overlay_navi:   { type: Boolean, default: false,       },
+    overlay_navi:   { type: Boolean, default: true,        },
     url_embed_turn: { type: Boolean, default: false,       },
     theme:          { type: String,  default: "real",      },
     size:           { type: String,  default: "default",   },
