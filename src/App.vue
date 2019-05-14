@@ -648,27 +648,29 @@ export default {
 <style lang="sass">
 @import "./App"
 @import "buefy/dist/buefy.css"
+@import "~bulma/sass/utilities/mixins.sass"
+
+html
+  +mobile
+    font-size: 60%
 
 pre
   white-space: pre-wrap
   word-break: break-all
 
-// .mobile
-//   font-size: 65%
-//   .section
-//     margin: 2em 0.5em
-//     margin-bottom: 1em
-//     padding: 0
-//   // .row_piyo_link
-//   //   height: 0.8rem
-//   // .notification
-//   //   font-size: 75%
-//   .title
-//     font-size: 150% ! important
-//     padding-left: 1rem
-//   // .swars_battles_index_light
-//   //   .table
-//   //     font-size: 90%
+#app
+  .section
+    margin: 2em 0.5em
+    margin-bottom: 1em
+    padding: 0
+
+  .message-body
+    +mobile
+      font-size: 75%
+
+  .title
+    +mobile
+      font-size: 150%
 
 // ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
 // main.js で読み込むと .sass のファイル基準になる
