@@ -295,7 +295,7 @@
             | .modal-card.is-shogi-player-modal-card のようにします
 
           b-modal(:active.sync="modal_p" has-modal-card)
-            .modal-card.is-shogi-player-modal-card(style="width:auto")
+            .modal-card.is-shogi-player-modal-card
               header.modal-card-head
                 p.modal-card-title.is-size-5
                   | 詰将棋13手詰
@@ -306,10 +306,9 @@
                   :run_mode="view_mode"
                   :debug_mode="false"
                   :start_turn="-1"
-                  :kifu_body="'position sfen lns3+P2/4k4/ppppp1p2/9/5P3/9/9/9/9 b B2GSN2rb2g2s2n3l10p 1 moves N*6d 6c6d B*4a 5b6a S*6b 7a6b G*5b 6a7a 5b6b 7a6b S*6c 6b7a G*7b'"
+                  :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
                   :key_event_capture="true"
                   :slider_show="true"
-                  :sfen_show="false"
                   :controller_show="true"
                   :theme="'simple'"
                   :size="'default'"
@@ -326,7 +325,7 @@
 
           pre
             | b-modal(:active.sync="modal_p" has-modal-card)
-            |   .modal-card.is-shogi-player-modal-card(style="width:auto")
+            |   .modal-card.is-shogi-player-modal-card
             |     header.modal-card-head
             |       p.modal-card-title.is-size-5
             |         | 詰将棋13手詰
@@ -337,7 +336,7 @@
             |         :run_mode="view_mode"
             |         :debug_mode="false"
             |         :start_turn="-1"
-            |         :kifu_body="'position sfen lns3+P2/4k4/ppppp1p2/9/5P3/9/9/9/9 b B2GSN2rb2g2s2n3l10p 1 moves N*6d 6c6d B*4a 5b6a S*6b 7a6b G*5b 6a7a 5b6b 7a6b S*6c 6b7a G*7b'"
+            |         :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
             |         :key_event_capture="true"
             |         :slider_show="true"
             |         :sfen_show="false"
@@ -352,7 +351,6 @@
             |
             |     footer.modal-card-foot.space_between
             |       a.button(@click="modal_p = false") 閉じる
-
   .section
     a(name="usage")
     .container
@@ -591,6 +589,7 @@ export default {
       SizeInfo,
 
       modal_p: false,
+      modal_p2: false,
 
       // カスタマイズ用
       run_mode: "view_mode",   // play_mode
@@ -650,22 +649,26 @@ export default {
 @import "./App"
 @import "buefy/dist/buefy.css"
 
-.mobile
-  font-size: 65%
-  .section
-    margin: 2em 0.5em
-    margin-bottom: 1em
-    padding: 0
-  // .row_piyo_link
-  //   height: 0.8rem
-  // .notification
-  //   font-size: 75%
-  .title
-    font-size: 150% ! important
-    padding-left: 1rem
-  // .swars_battles_index_light
-  //   .table
-  //     font-size: 90%
+pre
+  white-space: pre-wrap
+  word-break: break-all
+
+// .mobile
+//   font-size: 65%
+//   .section
+//     margin: 2em 0.5em
+//     margin-bottom: 1em
+//     padding: 0
+//   // .row_piyo_link
+//   //   height: 0.8rem
+//   // .notification
+//   //   font-size: 75%
+//   .title
+//     font-size: 150% ! important
+//     padding-left: 1rem
+//   // .swars_battles_index_light
+//   //   .table
+//   //     font-size: 90%
 
 // ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
 // main.js で読み込むと .sass のファイル基準になる
