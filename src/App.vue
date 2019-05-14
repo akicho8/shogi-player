@@ -318,10 +318,12 @@
                 .box.is-size-6
                   | 1手目と5手詰が重要
 
-              footer.modal-card-foot.space_between
+              footer.modal-card-foot
                 //- b-tooltip(label="この局面から自分で操作")
                 //-   b-switch(v-model="sp_run_mode" true-value="play_mode" false-value="view_mode") 継盤
                 a.button(@click="modal_p = false") 閉じる
+                a.button(@click.prevent.stop="") ボタン2
+                a.button(@click.prevent.stop="") ボタン3
 
           pre
             | b-modal(:active.sync="modal_p" has-modal-card)
@@ -650,19 +652,20 @@ export default {
 @import "buefy/dist/buefy.css"
 @import "~bulma/sass/utilities/mixins.sass"
 
-html
-  +mobile
-    font-size: 60%
-
 pre
   white-space: pre-wrap
   word-break: break-all
 
+html
+  +mobile
+    font-size: 70%
+
 #app
   .section
-    margin: 2em 0.5em
-    margin-bottom: 1em
-    padding: 0
+    +mobile
+      margin: 2em 0em
+      margin-bottom: 1em
+      padding: 0
 
   .message-body
     +mobile

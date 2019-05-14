@@ -1,6 +1,11 @@
 <template lang="pug">
 .piece_stand_outer(:class="piece_stand_outer_class")
-  .location_mark(v-html="location_name")
+  .location_mark_wrap
+    .location_mark(v-html="location_name")
+    .piece_count.piece_count1
+      //- 2桁にして幅を常に予約しておく
+      | 99
+
   ul.piece_stand(@click.stop.prevent="$parent.piece_stand_click(location, $event)" @click.right.stop.prevent="$parent.hold_cancel")
     li(v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)")
       .piece_back(:class="piece_back_class(piece)")

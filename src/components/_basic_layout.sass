@@ -12,7 +12,7 @@
 
   .piece_count1
     visibility: hidden
-  
+
   .piece_back
     cursor: default     // テキスト選択「I」ではなく矢印カーソルとする
     // height: inherit
@@ -21,7 +21,7 @@
         cursor: pointer
     .piece_fore
       // height: inherit
-        
+
   // 将棋盤と駒台の反転
   .flippable
     transform: rotate(0deg)
@@ -29,9 +29,12 @@
     &.flip
       @extend %is_flip
 
+  .board_container
+    display: inline-block
+      
   // 駒台と将棋盤のレイアウト
   .flippable
-    display: flex
+    display: inline-flex
     // すべてを中央よせ
     justify-content: center
 

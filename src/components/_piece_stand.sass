@@ -1,3 +1,12 @@
+%piece_with_count
+  // 歩(2) の並びを横軸中央で揃える
+  display: flex
+  align-items: center
+
+  // 持駒数
+  .piece_count
+    vertical-align: middle
+
 .shogi-player
   .piece_stand_outer
     @extend %is_unselectable
@@ -19,13 +28,11 @@
     //   border: 2px solid $sp_simple_grid_color
     //   background: $sp_simple_board_bg
     //   border-radius: 0.5vmin
+      
+    .location_mark_wrap
+      @extend %piece_with_count
+      
     ul
       li
-        // 歩(2) の並びを横軸中央で揃える
-        display: flex
-        align-items: center
+        @extend %piece_with_count
         color: $sp_simple_piece_color // 持駒色
-
-        // 持駒数
-        .piece_count
-          vertical-align: middle
