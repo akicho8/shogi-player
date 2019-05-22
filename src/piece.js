@@ -3,6 +3,9 @@ import MemoryRecord from "js-memory-record"
 export default class Piece extends MemoryRecord {
   static get define() {
     return [
+      // 順序について
+      // http://yaneuraou.yaneu.com/2016/07/15/sfen%E6%96%87%E5%AD%97%E5%88%97%E3%81%AF%E6%9C%AC%E6%9D%A5%E3%81%AF%E4%B8%80%E6%84%8F%E3%81%AB%E5%AE%9A%E3%81%BE%E3%82%8B%E4%BB%B6/
+      // https://web.archive.org/web/20080131070731/http://www.glaurungchess.com/shogi/usi.html
       { key: "K", name: "玉", alias_name: "王", promoted_name: null, promoted_alias_name: null, },
       { key: "R", name: "飛", alias_name: null, promoted_name: "龍", promoted_alias_name: "竜", },
       { key: "B", name: "角", alias_name: null, promoted_name: "馬", promoted_alias_name: null, },

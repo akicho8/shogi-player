@@ -23,10 +23,15 @@
           b-radio(v-model="$store.state.current_theme" :native-value="e.key") {{e.name}}
 
     template(v-if="$store.state.current_theme === 'real'")
-      b-field(label="バリエーション")
+      b-field(label="背景の種類")
         .block
-          template(v-for="e in VariationInfo.values")
-            b-radio(v-model="$store.state.current_variation" :native-value="e.key" size="is-small") {{e.name}}
+          template(v-for="e in BgVariantInfo.values")
+            b-radio(v-model="$store.state.current_bg_variant" :native-value="e.key" size="is-small") {{e.name}}
+
+      b-field(label="駒の種類")
+        .block
+          template(v-for="e in PieceVariantInfo.values")
+            b-radio(v-model="$store.state.current_piece_variant" :native-value="e.key" size="is-small") {{e.name}}
 
     b-field(label="サイズ")
       .block
@@ -57,13 +62,14 @@
 import RunModeInfo from "../run_mode_info"
 import ThemeInfo from "../theme_info"
 import SizeInfo from "../size_info"
-import VariationInfo from "../variation_info"
+import BgVariantInfo from "../bg_variant_info"
+import PieceVariantInfo from "../piece_variant_info"
 
 // ↓このように定義した場合はアプリ側で再定義しないといけなくなる
 // Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
 // Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})
 // Object.defineProperty(Vue.prototype, 'SizeInfo', {value: SizeInfo})
-// Object.defineProperty(Vue.prototype, 'VariationInfo', {value: VariationInfo})
+// Object.defineProperty(Vue.prototype, 'BgVariantInfo', {value: BgVariantInfo})
 
 export default {
   props: {
@@ -78,7 +84,8 @@ export default {
       RunModeInfo,
       ThemeInfo,
       SizeInfo,
-      VariationInfo,
+      BgVariantInfo,
+      PieceVariantInfo,
 
       current_run_mode: this.run_mode,
       kifu_source2: this.kifu_source,

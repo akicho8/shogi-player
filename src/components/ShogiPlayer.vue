@@ -172,7 +172,8 @@ export default {
     url_embed_turn: { type: Boolean, default: false,       },
     theme:          { type: String,  default: "real",      },
     size:           { type: String,  default: "default",   },
-    variation:      { type: String,  default: "a"          },
+    bg_variant:     { type: String,  default: "a"          },
+    piece_variant:  { type: String,  default: "a"          },
     debug_mode:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
     digit_show:     { type: Boolean, default: false,       },
     final_label:    { type: String,  default: null,        },
@@ -209,7 +210,8 @@ export default {
     this.$store.state.current_debug_mode = this.debug_mode
     this.$store.state.current_theme      = this.theme
     this.$store.state.current_size       = this.size
-    this.$store.state.current_variation  = this.variation
+    this.$store.state.current_bg_variant  = this.bg_variant
+    this.$store.state.current_piece_variant = this.piece_variant
     /* eslint-enable */
 
     if (this.current_run_mode === "view_mode") {
@@ -307,9 +309,9 @@ export default {
       }
     },
 
+    // これはひどい。わけがわからない。
     // 外側に通知したいときは Vuex (../store/index.js) のなかでやってもだめ
     // 呼ばれているコンポーネントで書かないといけない
-    // こういうときのために Vuex はあるのではないのかという疑問はある
     /* eslint-disable */
     current_debug_mode(v) { this.$emit("update:debug_mode", v)              }, // 内から外への通知
     debug_mode(v)         { this.$store.commit("current_debug_mode_set", v) }, // 外から内への反映
@@ -321,8 +323,11 @@ export default {
     current_size(v)       { this.$emit("update:size", v)                    }, // 中 -> 外
     size(v)               { this.$store.state.current_size = v              }, // 外 -> 中
 
-    current_variation(v)  { this.$emit("update:variation", v)               }, // 中 -> 外
-    variation(v)          { this.$store.state.current_variation = v         }, // 外 -> 中
+    current_bg_variant(v)  { this.$emit("update:bg_variant", v)               }, // 中 -> 外
+    bg_variant(v)          { this.$store.state.current_bg_variant = v         }, // 外 -> 中
+
+    current_piece_variant(v)  { this.$emit("update:piece_variant", v)               }, // 中 -> 外
+    piece_variant(v)          { this.$store.state.current_piece_variant = v         }, // 外 -> 中
     /* eslint-enable */
   },
 
@@ -412,7 +417,8 @@ export default {
       return [
         `theme-${this.current_theme}`,
         `size-${this.current_size}`,
-        `variation-${this.current_variation}`,
+        `bg_variant-${this.current_bg_variant}`,
+        `piece_variant-${this.current_piece_variant}`,
         `run_mode-${this.current_run_mode}`,
         {debug_mode: this.current_debug_mode},
         {digit_show: this.digit_show},
@@ -446,7 +452,8 @@ export default {
       "current_debug_mode",
       "current_theme",
       "current_size",
-      "current_variation",
+      "current_bg_variant",
+      "current_piece_variant",
     ]),
   },
 }

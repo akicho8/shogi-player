@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export default class VariationInfo extends MemoryRecord {
+export default class BgVariantInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
@@ -36,6 +36,6 @@ export default class VariationInfo extends MemoryRecord {
 }
 
 if (process.argv[1] === __filename) {
-  console.log(VariationInfo.fetch("a").key)
-  console.log(VariationInfo.fetch("a").name)
+  console.log(BgVariantInfo.fetch("a").key)
+  console.log(BgVariantInfo.fetch("a").name)
 }

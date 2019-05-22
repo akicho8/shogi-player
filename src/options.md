@@ -5,7 +5,8 @@
 | kifu_body                  | 棋譜の本体                  | KIF と SFEN に対応。駒落ちは SFEN のみ                   | null                |                |
 | kifu_url                   | 棋譜ファイルURL             |                                                          | null                |                |
 | theme                      | テーマ名                    | none:なし simple:シンプル real:木目                      | 'real'              | ○             |
-| variation                  | realテーマ内の亜種          | a, b, c, ...                                             | 'a'                 | ○             |
+| bg_variant                 | realテーマの背景            | a .. z                                                   | 'a'                 | ○             |
+| piece_variant              | realテーマの駒種            | a .. b                                                   | 'a'                 | ○             |
 | size                       | 盤面の大きさ                | none xx-small x-small small default medium large x-large xx-large xxx-large | 'default'           | ○             |
 | start_turn                 | N手目の局面から表示         | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前               | -1                  | ○               |
 | slider_show                | 局面スライダー表示          |                                                          | false               |                |
@@ -61,7 +62,7 @@
 | update:debug_mode           | 設定ダイアログでデバッグモードが変更されたとき          |
 | update:flip                 | 盤面を反転したとき                                      |
 | update:theme                | テーマ変更                                              |
-| update:variation            | バリエーション変更                                      |
+| update:bg_variant            | 背景の種類変更                                      |
 | update:size                 | サイズ変更                                              |
 
 ## Slot

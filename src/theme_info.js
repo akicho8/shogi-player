@@ -6,7 +6,7 @@ export default class ThemeInfo extends MemoryRecord {
       /* eslint-disable */
       { key: "none",   name: "なし",   },
       { key: "simple", name: "紙面風", },
-      { key: "real",   name: "リアル", },
+      { key: "real",   name: "画像駒", },
       /* eslint-enable */
     ]
   }
