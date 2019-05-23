@@ -476,7 +476,7 @@
                 template(v-for="e in SideInfo.values")
                   b-radio(v-model="human_side_key" :native-value="e.key") {{e.key}}
 
-            b-field(label="kifu_body (KIF or KI2形式)")
+            b-field(label="kifu_body (KIF or USI(sfen)形式")
               b-input(v-model="kifu_body" type="textarea")
 
             article.message.is-primary.has-text-left
