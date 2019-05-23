@@ -68,6 +68,7 @@
         // box-shadow: 0 0 1vmin rgba($sp_simple_grid_color, 0.5)
 
         .piece_back
+          height: 100%             // 駒の背景の部分がTDに対して隙間ができないようにする(inheritを使うと隙間ができる)
           text-align: center       // 駒のテキストを中央にする
           vertical-align: middle   // block要素(Y)を中央にする
           padding: 0               // ブラウザの初期値だと1pxあるので消す
