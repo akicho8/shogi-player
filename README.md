@@ -44,9 +44,6 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 将棋駒と将棋盤 画像フリー素材 | 無料素材倶楽部
 http://sozai.7gates.net/docs/japanese-chess/
 
-将棋図案駒
-https://twitter.com/Shogi_Zuan
-
 CC Resources for Shogi Applications | 将棋アプリ用クリエイティブコモンズ画像
 http://mucho.girly.jp/bona/
 
@@ -67,3 +64,6 @@ http://free-paper-texture.com/
 
 フリーテクスチャ素材館／畳のテクスチャ素材01（PHOTO）
 https://free-texture.net/seamless-pattern/tatami01.html
+
+将棋図案駒
+https://twitter.com/Shogi_Zuan

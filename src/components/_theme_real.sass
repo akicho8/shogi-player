@@ -129,7 +129,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
         td
           border: $sp_real_grid_inner solid $sp_real_grid_color // 盤面の罫線
           .piece_back
-            height: inherit  // td のサイズを継承。100% としてもいい
+            height: 100% // td のサイズを継承。inherit だと xx-large のとき隙間ができてしまう(謎)
             // 画像の場合 padding-top: 0.5em は使えない
             .piece_fore
               // padding-top: 1.2em // 画像の場合使えない

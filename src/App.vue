@@ -83,7 +83,7 @@
                 :start_turn="9"
                 :slider_show="true"
                 :theme="'real'"
-                :size="'large'"
+                :size="'xxx-large'"
                 :bg_variant="'a'"
                 :sound_effect="true"
                 :volume="0.25"
