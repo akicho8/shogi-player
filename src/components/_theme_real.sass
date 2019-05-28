@@ -18,7 +18,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
 %board_shadow
   &:after
     +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
-  
+
 // 駒のテクスチャ用
 %piece_fore_texture
   $advance: 20%                     // 大きくするほど駒が上に移動する
@@ -32,6 +32,17 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
   &.location_white
     background-position: 50% 50% - $advance   // 後手は枠の上寄り配置
 
+%real_hoverable_bg
+  &.hoverable_p
+    &:hover
+      background-color: $sp_real_selectable_color
+
+// 背景はテクスチャなので色を指定できない場合
+%real_hoverable_opacity
+  &.hoverable_p
+    &:hover
+      opacity: 0.8
+
 // 選択できる駒に指定する
 %dom_real_selectable
   +image_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
@@ -43,11 +54,13 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
       // さらに駒を持ったときは色を濃くする
       &:hover
         background-color: $sp_real_holding_color
-    
+
   &.selectable_p
     &:hover
       // 選択できる駒だけ反応する。background プロパティをつかうと他の設定をリセットしてしまうので注意
       background-color: $sp_real_selectable_color
+
+  @extend %real_hoverable_bg
 
 @keyframes real_blink
   0%
@@ -64,7 +77,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
     &.piece_variant-b
       .piece_fore
         +piece_image_variant_b_pack
-    
+
     // 駒 (あちこちにある)
     .piece_back
       @extend %dom_real_selectable
@@ -81,6 +94,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
     .piece_box
       @extend %board_shadow
       @extend %board_texture_bg
+      @extend %real_hoverable_opacity
       padding: 0.25em
       max-width:  4em
       min-height: 2.5em
@@ -90,11 +104,12 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
         top: 0.1em
         font-size: 0.4em
         margin-left: -0.3em
-      
+
     // 駒台
     .piece_stand_outer
       .piece_stand
         @extend %board_texture_bg
+        @extend %real_hoverable_opacity
         font-size: 1.3em
         padding-top:    0.15em
         padding-bottom: 0.15em
@@ -106,7 +121,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
             top: 0.2em
             font-size: 0.4em
             margin-left: -0.3em
-      
+
       &.location_black
         .piece_stand
           &:after
@@ -136,7 +151,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
     // カーソル位置に表示する持駒
     .cursor_elem
       +image_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
-            
+
 //////////////////////////////////////////////////////////////////////////////// valiation
 
 =bg_variant_define($key, $file)

@@ -63,7 +63,7 @@
                     .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
         .flex_item
-          ul.piece_box(v-if="current_run_mode === 'edit_mode'" @click.stop.prevent="piece_box_other_click" @click.right.prevent="hold_cancel")
+          ul.piece_box(:class="piece_box_class" v-if="current_run_mode === 'edit_mode'" @click.stop.prevent="piece_box_other_click" @click.right.prevent="hold_cancel")
             li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop.prevent="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}")
               .piece_back(:class="piece_box_piece_back_class(piece)")
                 .piece_fore(:class="piece_box_piece_inner_class(piece)" v-text="piece.name")
@@ -379,15 +379,21 @@ export default {
 
       list.push(place.to_css_class) // place_99
 
-      if (this.mediator.last_hand) {
-        const origin_place = this.mediator.last_hand.origin_place
-        if (origin_place) {
-          if (_.isEqual(origin_place, place)) {
-            list.push("origin_place")
+      if (this.holding_p) {
+        list.push("hoverable_p")
+      }
+
+      if (!this.holding_p) {
+        if (this.mediator.last_hand) {
+          const origin_place = this.mediator.last_hand.origin_place
+          if (origin_place) {
+            if (_.isEqual(origin_place, place)) {
+              list.push("origin_place")
+            }
           }
-        }
-        if (_.isEqual(this.mediator.last_hand.place, place)) {
-          list.push("current")
+          if (_.isEqual(this.mediator.last_hand.place, place)) {
+            list.push("current")
+          }
         }
       }
 
@@ -395,7 +401,9 @@ export default {
         list.push("holding_p")
       } else if (soldier) {
         if (this.current_run_mode === "edit_mode" || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
-          list.push("selectable_p")
+          if (!this.holding_p) {
+            list.push("selectable_p")
+          }
         }
       }
 

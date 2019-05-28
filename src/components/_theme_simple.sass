@@ -7,6 +7,11 @@
   border-radius: 0.25em
   min-height: 4em
 
+%hoverable_bg
+  &.hoverable_p
+    &:hover
+      background-color: $sp_simple_selectable_color
+
 .shogi-player
   &.theme-simple
     .piece_back
@@ -26,15 +31,17 @@
           // さらに駒を持ったときは色を濃くする
           // &:hover
           //   background-color: $sp_simple_holding_color
-          
+
       // 選択できる駒だけ反応する
       &.selectable_p
         &:hover
           background-color: $sp_simple_selectable_color
 
+      @extend %hoverable_bg
+
       &.origin_place
         background-color: $sp_simple_origin_bg
-        
+
       &.current
         color: $sp_simple_piece_color
         font-weight: bold
@@ -80,6 +87,10 @@
     // 駒台
     .piece_stand_outer
       font-size: 0.9em
+
+      .piece_stand
+        @extend %hoverable_bg
+
       // width: 1.5em   // 横幅ガクガクを防ぐためにあらかじめサイズを持っておく → 「▲1」の1を hidden にして調整するので明示的には指定しない
       .piece_count
         color: $sp_simple_piece_count_color
@@ -95,6 +106,7 @@
     // 駒箱
     .piece_box
       @extend %basic_box
+      @extend %hoverable_bg
       font-size: 0.5em
       max-width: 5em
       li

@@ -398,7 +398,9 @@ export default {
       if (this.piece_box_have_p(piece)) {
         list.push("holding_p")
       } else if (this.current_run_mode === "edit_mode") {
-        list.push("selectable_p")
+        if (!this.holding_p) {
+          list.push("selectable_p")
+        }
       }
 
       // list = _.concat(list, piece.css_class_list)
@@ -589,6 +591,16 @@ export default {
 
     if_view_mode_break() {
       // return this.current_run_mode === "view_mode"
+    },
+
+    piece_box_class() {
+      const list = []
+
+      if (this.holding_p) {
+        list.push("hoverable_p")
+      }
+
+      return list
     },
   },
 }

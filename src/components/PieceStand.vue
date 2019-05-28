@@ -6,7 +6,7 @@
       //- 2桁にして幅を常に予約しておく
       | 99
 
-  ul.piece_stand(@click.stop.prevent="$parent.piece_stand_click(location, $event)" @click.right.stop.prevent="$parent.hold_cancel")
+  ul.piece_stand(:class="piece_stand_class" @click.stop.prevent="$parent.piece_stand_click(location, $event)" @click.right.stop.prevent="$parent.hold_cancel")
     li(v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)")
       .piece_back(:class="piece_back_class(piece)")
         .piece_fore(:class="piece_fore_class(piece)")
@@ -32,10 +32,17 @@ export default {
 
     piece_back_class(piece) {
       let list = []
+
+      // if (this.holding_p) {
+      //   list.push("hoverable_p")
+      // }
+
       if (this.hold_piece_holding_p(piece)) {
         list.push("holding_p")
       } else if (this.$parent.current_run_mode === "edit_mode" || (!this.$parent.cpu_location_p && this.$parent.mediator.current_location === this.location)) {
-        list.push("selectable_p")
+        if (!this.holding_p) {
+          list.push("selectable_p")
+        }
       }
 
       // list = _.concat(list, piece.css_class_list)
@@ -55,12 +62,17 @@ export default {
   },
 
   computed: {
+    holding_p() {
+      return this.$parent.holding_p
+    },
+
     location() {
       return Location.fetch(this.location_key)
     },
 
     piece_stand_outer_class() {
       const list = []
+
       list.push(`location_${this.location.key}`)
       list.push(this.$parent.env)
       if (this.$parent.mediator.current_location === this.location) {
@@ -75,7 +87,17 @@ export default {
       // } else {
       return this.location.name
       // }
-    }
+    },
+
+    piece_stand_class() {
+      const list = []
+
+      if (this.holding_p) {
+        list.push("hoverable_p")
+      }
+
+      return list
+    },
   },
 }
 </script>
