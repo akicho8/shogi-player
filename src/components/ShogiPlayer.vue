@@ -10,17 +10,26 @@
 
   div.edit_mode_controller(v-if="current_run_mode === 'edit_mode'")
     .edit_mode_controller_wrap
-        b-dropdown(v-model="current_preset_key")
-          //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
-          .button(slot="trigger")
-            span 初期配置
-            b-icon(icon="menu-down")
-          b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key")
-            | {{record.name}}
-        | &nbsp;
-        button.button.yumincho(@click.stop.prevent="all_flip") 先後反転
-        | &nbsp;
-        button.button.yumincho(@click.stop.prevent="init_location_toggle") 手番{{init_location.name}}
+      b-dropdown(v-model="current_preset_key")
+        //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
+        .button(slot="trigger")
+          b-tooltip(label="初期配置")
+            b-icon(icon="apps" size="is-small")
+          //- b-icon(icon="menu-down")
+        b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key")
+          | {{record.name}}
+      | &nbsp;
+      button.button.yumincho(@click.stop.prevent="all_flip_v")
+        b-tooltip(label="上下反転")
+          b-icon(icon="pan-vertical" size="is-small")
+      | &nbsp;
+      button.button.yumincho(@click.stop.prevent="all_flip_h")
+        b-tooltip(label="左右反転")
+          b-icon(icon="pan-horizontal" size="is-small")
+      | &nbsp;
+      button.button.yumincho(@click.stop.prevent="init_location_toggle")
+        b-tooltip(label="手番")
+          | {{init_location.name}}
 
   template(v-if="mediator")
     .turn_edit_container

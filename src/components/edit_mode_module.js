@@ -421,15 +421,20 @@ export default {
 
     // --------------------------------------------------------------------------------
 
-    all_flip() {
+    all_flip_v() {
       // 盤面反転
-      this.mediator.board = this.mediator.board.flip
+      this.mediator.board = this.mediator.board.flip_v
 
       // 持駒反転
       this.mediator.hold_pieces = _.reduce(Location.values, (a, e) => {
         a[e.key] = this.mediator.hold_pieces[e.flip.key]
         return a
       }, {})
+    },
+
+    all_flip_h() {
+      // 盤面左右反転
+      this.mediator.board = this.mediator.board.flip_h
     },
 
     init_location_toggle() {

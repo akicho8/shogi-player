@@ -32,8 +32,12 @@ export default class Place {
     return this._y
   }
 
-  get flip() {
+  get flip_v() {
     return Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y])
+  }
+
+  get flip_h() {
+    return Place.fetch([Board.dimension - 1 - this._x, this._y])
   }
 
   _parse_from_string(s) {

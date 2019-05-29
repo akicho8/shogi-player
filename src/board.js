@@ -27,12 +27,25 @@ export default class Board {
     delete this._surface[place.key]
   }
 
-  get flip() {
+  get flip_v() {
     const value = new Board()
     _.forEach(this._surface, (soldier, place) => {
       const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
         location: soldier.location.flip,
-        place: soldier.place.flip,
+        place: soldier.place.flip_v,
+      }))
+      value.place_on(new_soldier)
+    })
+    return value
+  }
+
+  // 左右反転
+  get flip_h() {
+    const value = new Board()
+    _.forEach(this._surface, (soldier, place) => {
+      const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
+        location: soldier.location,
+        place: soldier.place.flip_h,
       }))
       value.place_on(new_soldier)
     })
