@@ -166,7 +166,7 @@ export default {
       this.turn_next()
     },
 
-    board_click_right(xy, e) {
+    board_cell_click_right(xy, e) {
       this.log("盤を右クリック")
 
       if (this.if_view_mode_break) {

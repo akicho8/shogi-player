@@ -67,7 +67,7 @@
           .board_outer
             table.board_inner
               tr(v-for="y in mediator.dimension")
-                td(v-for="x in mediator.dimension" @click.stop.prevent="board_click([x - 1, y - 1], $event)" @click.stop.prevent.right="board_click_right([x - 1, y - 1], $event)")
+                td(v-for="x in mediator.dimension" @click.stop.prevent="board_click([x - 1, y - 1], $event)" @click.stop.prevent.right="board_cell_click_right([x - 1, y - 1], $event)")
                   .piece_back(:class="board_piece_back_class([x - 1, y - 1])")
                     .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
