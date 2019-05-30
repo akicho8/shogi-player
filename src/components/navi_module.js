@@ -45,14 +45,22 @@ export default {
         this.log("repeat", e.repeat)
       }
 
-      // w, b で駒台をクリックしたことにする
       if (this.current_run_mode === "edit_mode") {
+        // w, b で駒台をクリックしたことにする
         for (const loc of Location.values) {
           if (e.key === loc.char_key || e.key === loc.char_key.toUpperCase()) {
             if (this.piece_stand_click_shared(loc, e)) {
               e.preventDefault()
               return
             }
+          }
+        }
+
+        // 駒箱クリック
+        if (e.code === "Backspace") {
+          if (this.piece_box_other_click(e)) {
+            e.preventDefault()
+            return
           }
         }
       }
