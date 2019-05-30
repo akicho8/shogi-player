@@ -39,8 +39,8 @@ export default {
 
   methods: {
     // 盤をクリック
-    board_click(xy, e) {
-      this.log("board_click")
+    board_cell_click_left(xy, e) {
+      this.log("board_cell_click_left")
       this.log(`shiftKey: ${e.shiftKey}`)
 
       if (this.if_view_mode_break) {
@@ -167,7 +167,7 @@ export default {
     },
 
     board_cell_click_right(xy, e) {
-      this.log("盤を右クリック")
+      this.log("盤のセルを右クリック")
 
       if (this.if_view_mode_break) {
         return

@@ -119,7 +119,7 @@ const vm = new Vue({
     },
 
     // 盤をクリック
-    board_click: function(place, e) {
+    board_cell_click_left: function(place, e) {
       const soldier = this.board[place]
 
       //////////////////////////////////////////////////////////////////////////////// Validation
