@@ -1,5 +1,6 @@
 import _ from "lodash"
 import { mapState } from 'vuex'
+import Location from "../location"
 
 export default {
   /* eslint-disable */
@@ -42,6 +43,18 @@ export default {
         this.log("key", e.key)
         this.log("code", e.code)
         this.log("repeat", e.repeat)
+      }
+
+      // w, b で駒台をクリックしたことにする
+      if (this.current_run_mode === "edit_mode") {
+        for (const loc of Location.values) {
+          if (e.key === loc.char_key || e.key === loc.char_key.toUpperCase()) {
+            if (this.piece_stand_click_shared(loc, e)) {
+              e.preventDefault()
+              return
+            }
+          }
+        }
       }
 
       if (!this.key_event_capture) {
