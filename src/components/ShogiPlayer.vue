@@ -149,6 +149,7 @@ import CommentArea from "./CommentArea"
 
 // mixins modules
 import navi_module from "./navi_module.js"
+import shortcut_module from "./shortcut_module.js"
 import edit_mode_module from "./edit_mode_module.js"
 import play_mode_module from "./play_mode_module.js"
 import sound_module from "./sound_module.js"
@@ -167,6 +168,7 @@ export default {
   mixins: [
     // ここで直接 require("./xxx.js"), とは書けないので注意
     navi_module,
+    shortcut_module,
     edit_mode_module,
     play_mode_module,
     sound_module,
