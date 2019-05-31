@@ -54,27 +54,19 @@ export default {
       return false
     },
 
-    mouseover_handle(xy, e) {
+    board_mouseover_handle(xy, e) {
       this.mouseover_info = { type: "board", xy: xy }
     },
 
-    mouseleave_handle(xy, e) {
-      this.mouseover_info = null
-    },
-
-    mouseover_handle2(location, piece, e) {
+    piece_stand_mouseover_handle(location, piece, e) {
       this.mouseover_info = { type: "piece_stand", location: location, piece: piece }
     },
 
-    mouseleave_handle2(location, piece, e) {
-      this.mouseover_info = null
-    },
-
-    mouseover_handle3(piece, e) {
+    piece_box_mouseover_handle(piece, e) {
       this.mouseover_info = { type: "piece_box", piece: piece }
     },
 
-    mouseleave_handle3(piece, e) {
+    mouseleave_handle() {
       this.mouseover_info = null
     },
 

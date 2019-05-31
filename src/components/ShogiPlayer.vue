@@ -69,13 +69,13 @@
           .board_outer
             table.board_inner
               tr(v-for="y in mediator.dimension")
-                td(v-for="x in mediator.dimension" @click.stop.prevent="board_cell_click_left([x - 1, y - 1], $event)" @click.stop.prevent.right="board_cell_click_right([x - 1, y - 1], $event)" @mouseover="mouseover_handle([x - 1, y - 1], $event)" @mouseleave="mouseleave_handle([x - 1, y - 1], $event)")
+                td(v-for="x in mediator.dimension" @click.stop.prevent="board_cell_click_left([x - 1, y - 1], $event)" @click.stop.prevent.right="board_cell_click_right([x - 1, y - 1], $event)" @mouseover="board_mouseover_handle([x - 1, y - 1], $event)" @mouseleave="mouseleave_handle")
                   .piece_back(:class="board_piece_back_class([x - 1, y - 1])")
                     .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
         .flex_item
           ul.piece_box(:class="piece_box_class" v-if="current_run_mode === 'edit_mode'" @click.stop.prevent="piece_box_other_click" @click.right.prevent="hold_cancel")
-            li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop.prevent="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}" @mouseover="mouseover_handle3(piece, $event)" @mouseleave="mouseleave_handle3(piece, $event)")
+            li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop.prevent="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}" @mouseover="piece_box_mouseover_handle(piece, $event)" @mouseleave="mouseleave_handle")
               .piece_back(:class="piece_box_piece_back_class(piece)")
                 .piece_fore(:class="piece_box_piece_inner_class(piece)" v-text="piece.name")
               .piece_count(v-if="count >= 1" :class="`piece_count${count}`")
