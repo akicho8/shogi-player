@@ -508,7 +508,20 @@ export default {
     //
     virtual_piece_create(event, soldier) {
       this.virtual_piece_destroy()
+      this.virtual_piece_dom_create(soldier)
 
+      this.mouse_stick = true   // マウスに追随する
+
+      this.me_last_event = event
+      this.log(this.me_last_event)
+      this.cursor_elem_set_pos()
+
+      window.addEventListener("mousemove", this.mousemove_hook, false)
+      window.addEventListener("click", this.click_hook, false)
+    },
+
+    // 注意: リターンキーでこの soldier をいくら反転させようと考えてはいけない。(origin_soldier1 が元なので意味がない)
+    virtual_piece_dom_create(soldier) {
       this.cursor_elem = document.createElement("div")
       this.cursor_elem.classList.add("cursor_elem")
 
@@ -537,15 +550,6 @@ export default {
       } else {
         this.$el.appendChild(this.cursor_elem)
       }
-
-      this.mouse_stick = true   // マウスに追随する
-
-      this.me_last_event = event
-      this.log(this.me_last_event)
-      this.cursor_elem_set_pos()
-
-      window.addEventListener("mousemove", this.mousemove_hook, false)
-      window.addEventListener("click", this.click_hook, false)
     },
 
     virtual_piece_destroy() {
