@@ -8,6 +8,8 @@
   template(v-if="!mediator")
     i.fas.fa-spinner.fa-pulse
 
+  //- | {{mouseover_info}}
+
   div.edit_mode_controller(v-if="current_run_mode === 'edit_mode'")
     .edit_mode_controller_wrap
       b-dropdown(v-model="current_preset_key")
@@ -67,13 +69,13 @@
           .board_outer
             table.board_inner
               tr(v-for="y in mediator.dimension")
-                td(v-for="x in mediator.dimension" @click.stop.prevent="board_cell_click_left([x - 1, y - 1], $event)" @click.stop.prevent.right="board_cell_click_right([x - 1, y - 1], $event)" @mouseleave="mouseleave_handle([x - 1, y - 1], $event)" @mouseover="mouseover_handle([x - 1, y - 1], $event)")
+                td(v-for="x in mediator.dimension" @click.stop.prevent="board_cell_click_left([x - 1, y - 1], $event)" @click.stop.prevent.right="board_cell_click_right([x - 1, y - 1], $event)" @mouseover="mouseover_handle([x - 1, y - 1], $event)" @mouseleave="mouseleave_handle([x - 1, y - 1], $event)")
                   .piece_back(:class="board_piece_back_class([x - 1, y - 1])")
                     .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
         .flex_item
           ul.piece_box(:class="piece_box_class" v-if="current_run_mode === 'edit_mode'" @click.stop.prevent="piece_box_other_click" @click.right.prevent="hold_cancel")
-            li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop.prevent="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}")
+            li(v-for="[piece, count] in mediator.piece_box_realize()" @click.stop.prevent="piece_box_piece_click(piece, $event)" :class="{holding_p: piece_box_have_p(piece)}" @mouseover="mouseover_handle3(piece, $event)" @mouseleave="mouseleave_handle3(piece, $event)")
               .piece_back(:class="piece_box_piece_back_class(piece)")
                 .piece_fore(:class="piece_box_piece_inner_class(piece)" v-text="piece.name")
               .piece_count(v-if="count >= 1" :class="`piece_count${count}`")
@@ -121,7 +123,7 @@
         tr: <th>play_modeでのSFEN(play_mode_current_sfen)</th><td>{{play_mode_current_sfen}}</td>
         tr: <th>key_event_capture</th><td>{{key_event_capture}}</td>
         tr: <th>interval_id</th><td>{{interval_id}}</td>
-        tr: <th>mouseover_place</th><td>{{mouseover_place}}</td>
+        tr: <th>mouseover_info</th><td>{{mouseover_info}}</td>
 </template>
 
 <script>

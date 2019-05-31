@@ -344,6 +344,7 @@ export default {
           this.log("シフトが押されていたので全部移動")
           count = this.mediator.hold_pieces_count(this.have_piece_location, this.have_piece)
         }
+        count = this.mediator.hold_pieces_can_be_reduced_count(this.have_piece_location, this.have_piece, count)
         this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -count)
       } else {
         this.log("駒箱から移動")
@@ -351,9 +352,11 @@ export default {
           this.log("シフトが押されていたので全部移動")
           count = this.mediator.piece_box_count(this.have_piece)
         }
+        count = this.mediator.piece_box_can_be_reduced_count(this.have_piece, count) // 減らせる数を clamp する。そうしないと駒箱から移動するときに駒が増えいく
         this.mediator.piece_box_add(this.have_piece, -count)
       }
 
+      // 実際に減らせれた数を返す(重要)
       return count
     },
 

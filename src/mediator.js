@@ -77,6 +77,15 @@ export default class Mediator {
     }
   }
 
+  // location の piece を count 減らしたいとき本当に減らせる数を返す
+  hold_pieces_can_be_reduced_count(location, piece, count) {
+    const max = this.hold_pieces_count(location, piece)
+    if (count > max) {
+      count = max
+    }
+    return count
+  }
+
   board_safe_delete_on(place) {
     this.board.delete_at(place)
   }
@@ -204,6 +213,15 @@ export default class Mediator {
     } else {
       Vue.delete(this.piece_box, piece.key)
     }
+  }
+
+  // piece を count 減らしたいとき本当に減らせる数を返す
+  piece_box_can_be_reduced_count(piece, count) {
+    const max = this.piece_box_count(piece)
+    if (count > max) {
+      count = max
+    }
+    return count
   }
 
   piece_box_realize() {
