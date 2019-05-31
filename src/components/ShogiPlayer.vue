@@ -67,7 +67,7 @@
           .board_outer
             table.board_inner
               tr(v-for="y in mediator.dimension")
-                td(v-for="x in mediator.dimension" @click.stop.prevent="board_cell_click_left([x - 1, y - 1], $event)" @click.stop.prevent.right="board_cell_click_right([x - 1, y - 1], $event)")
+                td(v-for="x in mediator.dimension" @click.stop.prevent="board_cell_click_left([x - 1, y - 1], $event)" @click.stop.prevent.right="board_cell_click_right([x - 1, y - 1], $event)" @mouseleave="mouseleave_handle([x - 1, y - 1], $event)" @mouseover="mouseover_handle([x - 1, y - 1], $event)")
                   .piece_back(:class="board_piece_back_class([x - 1, y - 1])")
                     .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
@@ -121,6 +121,7 @@
         tr: <th>play_modeでのSFEN(play_mode_current_sfen)</th><td>{{play_mode_current_sfen}}</td>
         tr: <th>key_event_capture</th><td>{{key_event_capture}}</td>
         tr: <th>interval_id</th><td>{{interval_id}}</td>
+        tr: <th>mouseover_place</th><td>{{mouseover_place}}</td>
 </template>
 
 <script>

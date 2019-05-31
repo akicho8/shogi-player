@@ -1,6 +1,8 @@
 import _ from "lodash"
 import { mapState } from 'vuex'
 import Location from "../location"
+// import Place from "../place"
+// import Soldier from "../soldier"
 
 export default {
   /* eslint-disable */
@@ -16,6 +18,7 @@ export default {
 
   data() {
     return {
+      mouseover_place: null,    // 盤上にマウスがあるならセルの座標
     }
   },
 
@@ -45,23 +48,42 @@ export default {
         this.log("repeat", e.repeat)
       }
 
-      if (this.current_run_mode === "edit_mode") {
-        // w, b で駒台をクリックしたことにする
-        for (const loc of Location.values) {
-          if (e.key === loc.char_key || e.key === loc.char_key.toUpperCase()) {
-            if (this.piece_stand_click_shared(loc, e)) {
-              e.preventDefault()
-              return
-            }
+      // w, b で駒台をクリックしたことにする
+      for (const loc of Location.values) {
+        if (e.key === loc.char_key || e.key === loc.char_key.toUpperCase()) {
+          this.soldier_hold_unless_holding_p(e)
+          if (this.piece_stand_click_shared(loc, e)) { // 駒台クリック
+            e.preventDefault()
+            return
           }
         }
+      }
 
-        // 駒箱クリック
+      // 駒箱クリック
+      if (this.current_run_mode === "edit_mode") {
         if (e.code === "Backspace") {
+          this.soldier_hold_unless_holding_p(e)
           if (this.piece_box_other_click(e)) {
             e.preventDefault()
             return
           }
+        }
+      }
+
+      // 移動キャンセル
+      if (e.code === "Escape" || e.key === "q") {
+        if (this.hold_cancel(e)) {
+          e.preventDefault()
+          return
+        }
+      }
+
+      // 反転
+      if (e.key === "v" || e.code === "Space") {
+        if (this.mouseover_place) {
+          this.board_cell_click_right(this.mouseover_place, e)
+          e.preventDefault()
+          return
         }
       }
 
@@ -204,6 +226,23 @@ export default {
       this.$store.commit("flip_toggle")
       this.sound_call("flip_sound")
       this.focus_to("turn_slider")
+    },
+
+    mouseover_handle(xy, e) {
+      this.mouseover_place = xy
+    },
+
+    mouseleave_handle(xy, e) {
+      this.mouseover_place = null
+    },
+
+    // 盤上にマウスがあって駒を持っていなかったら左クリック
+    soldier_hold_unless_holding_p(e) {
+      if (this.mouseover_place) {                             // 盤上にマウスがあって
+        if (!this.holding_p) {                                // 駒を持っていなかったら
+          this.board_cell_click_left(this.mouseover_place, e) // 左クリック
+        }
+      }
     },
   },
 
