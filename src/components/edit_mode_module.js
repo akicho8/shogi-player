@@ -28,6 +28,9 @@ export default {
       me_last_event: null,        // mousemove イベント
 
       cursor_elem_in_board_container: true,
+
+      cursor_elem: null,        // 持ちあげている駒のDOM
+      mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
     }
   },
 
