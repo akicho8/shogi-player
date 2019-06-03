@@ -12,6 +12,13 @@
     &:hover
       background-color: $sp_simple_selectable_color
 
+%hoverable_bg_for_cell
+  &.hoverable_p
+    &:hover
+      border-color: $sp_simple_cell_hover_color
+      border-style: solid
+      border-width: 1px
+        
 .shogi-player
   &.theme-simple
     .piece_back
@@ -37,7 +44,7 @@
         &:hover
           background-color: $sp_simple_selectable_color
 
-      @extend %hoverable_bg
+      @extend %hoverable_bg_for_cell
 
       &.origin_place
         background-color: $sp_simple_origin_bg
