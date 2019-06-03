@@ -31,6 +31,7 @@ export default {
 
       cursor_elem: null,        // 持ちあげている駒のDOM
       mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
+      dialog_p: false,          // 成り確認ダイアログ表示中か？
     }
   },
 
@@ -122,8 +123,8 @@ export default {
 
         if (this.current_run_mode === "play_mode" && (new_soldier.promotable_p || this.origin_soldier1.promotable_p)) { // 入って成る or 出て成る
           this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
+          this.dialog_p = true
 
-          // 元が成ってないとき
           this.$dialog.confirm({
             message: '成りますか？',
             confirmText: '成る',
@@ -160,6 +161,8 @@ export default {
 
     // 成れる状態の駒をどうするか
     promotable_piece_moved(new_soldier, promoted) {
+      this.dialog_p = false
+
       new_soldier.promoted = promoted
 
       this.moves_set(this.origin_soldier1.place.to_sfen + new_soldier.place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
@@ -311,12 +314,16 @@ export default {
     },
 
     // FIXME: click_hook のところだけで行いたい
+    // 成り選択ダイアログ表示中に Escape でこれが呼ばれるので dialog_p のときは実行しない
     hold_cancel(e) {
-      if (this.holding_p) {
-        this.log("持ち上げた駒を元に戻す")
-        this.state_reset()
-        return true
+      if (!this.dialog_p) {
+        if (this.holding_p) {
+          this.log("持ち上げた駒を元に戻す")
+          this.state_reset()
+          return true
+        }
       }
+
       return false
     },
 
@@ -382,6 +389,9 @@ export default {
 
     // 駒を持ってない状態にする
     state_reset() {
+      if (this.dialog_p) {
+        alert("ダイアログ表示中に state_reset が呼ばれてはいけない")
+      }
       this.log("state_reset")
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
