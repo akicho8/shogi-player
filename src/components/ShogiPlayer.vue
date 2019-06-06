@@ -20,6 +20,12 @@
           //- b-icon(icon="menu-down")
         b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key")
           | {{record.name}}
+      b-dropdown(v-model="any_func_key")
+        .button(slot="trigger")
+          b-tooltip(label="操作")
+            b-icon(icon="menu" size="is-small")
+        b-dropdown-item(v-for="record in any_func_info_values" :value="record.key" :key="record.key" @click="any_func_click_handle(record)")
+          | {{record.name}}
       | &nbsp;
       button.button.yumincho(@click.stop.prevent="all_flip_v")
         b-tooltip(label="上下反転")
@@ -154,6 +160,7 @@ import edit_mode_module from "./edit_mode_module.js"
 import play_mode_module from "./play_mode_module.js"
 import sound_module from "./sound_module.js"
 import preset_module from "./preset_module.js"
+import any_func_module from "./any_func_module.js"
 import polling_module from "./polling_module.js"
 
 // To use lodash's _ in the vue template
@@ -173,6 +180,7 @@ export default {
     play_mode_module,
     sound_module,
     preset_module,
+    any_func_module,
     polling_module,
   ],
 

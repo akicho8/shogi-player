@@ -233,6 +233,26 @@ export default class Mediator {
       .value()
   }
 
+  // -------------------------------------------------------------------------------- Utilities
+
+  // location の駒台の駒をすべて駒箱に移動する
+  hold_pieces_to_piece_box(location) {
+    _.forIn(this.hold_pieces[location.key], (count, piece_key) => {
+      const piece = Piece.fetch(piece_key)
+      this.hold_pieces_add(location, piece, -count)
+      this.piece_box_add(piece, count)
+    })
+  }
+
+  // 駒箱の駒をすべて location の駒台に移動する
+  piece_box_to_hold_pieces(location) {
+    _.forIn(this.piece_box, (count, piece_key) => {
+      const piece = Piece.fetch(piece_key)
+      this.piece_box_add(piece, -count)
+      this.hold_pieces_add(location, piece, count)
+    })
+  }
+
   // -------------------------------------------------------------------------------- private
 
   cached(key, func) {
