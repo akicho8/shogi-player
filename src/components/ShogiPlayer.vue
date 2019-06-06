@@ -18,7 +18,7 @@
           b-tooltip(label="初期配置")
             b-icon(icon="apps" size="is-small")
           //- b-icon(icon="menu-down")
-        b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key")
+        b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key" @click="mediator_setup_by_preset_info(record)")
           | {{record.name}}
       b-dropdown(v-model="any_func_key")
         .button(slot="trigger")

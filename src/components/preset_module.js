@@ -30,22 +30,26 @@ export default {
     mediator_setup_by_preset(value) {
       if (value) {
         const preset_info = PresetInfo.fetch(value)
-
-        this.mediator = new Mediator()
-        if (preset_info.sfen) {
-          this.mediator.data_source = this.data_source_by(preset_info.sfen)
-        }
-        if (preset_info.piece_box) {
-          preset_info.piece_box.forEach(([e, c]) => { // preset_info には特別に駒箱の情報もある
-            this.mediator.piece_box_add(Piece.fetch(e), c)
-          })
-        }
-        this.mediator.run()
-
-        // 駒落ちのときは△の手番から始まるので edit_mode での手番に反映する
-        // mediator の current_turn が 0 のまま run しているので mediator.current_location.key で最初の手番がわかる
-        this.init_location_key = this.mediator.current_location.key
+        this.mediator_setup_by_preset_info(preset_info)
       }
+    },
+
+    // FIXME: pulldown から選択したときに2回呼ばれてしまう
+    mediator_setup_by_preset_info(preset_info) {
+      this.mediator = new Mediator()
+      if (preset_info.sfen) {
+        this.mediator.data_source = this.data_source_by(preset_info.sfen)
+      }
+      if (preset_info.piece_box) {
+        preset_info.piece_box.forEach(([e, c]) => { // preset_info には特別に駒箱の情報もある
+          this.mediator.piece_box_add(Piece.fetch(e), c)
+        })
+      }
+      this.mediator.run()
+
+      // 駒落ちのときは△の手番から始まるので edit_mode での手番に反映する
+      // mediator の current_turn が 0 のまま run しているので mediator.current_location.key で最初の手番がわかる
+      this.init_location_key = this.mediator.current_location.key
     },
   },
 
