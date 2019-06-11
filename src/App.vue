@@ -381,6 +381,7 @@
               :bg_variant.sync="bg_variant"
               :piece_variant.sync="piece_variant"
               :debug_mode.sync="debug_mode"
+              :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
               :flip.sync="flip"
               :digit_show="digit_show"
               :final_label="final_label"
@@ -474,6 +475,9 @@
               b-field(label="debug_mode")
                 b-switch(v-model="debug_mode")
 
+              b-field(label="hidden_if_piece_stand_blank")
+                b-switch(v-model="hidden_if_piece_stand_blank")
+
             b-field(label="human_side_key")
               .block
                 template(v-for="e in SideInfo.values")
@@ -503,6 +507,7 @@
                 | :<b>volume</b>="{{volume}}"
                 | :<b>key_event_capture</b>="{{key_event_capture}}"
                 | :<b>debug_mode</b>="{{debug_mode}}"
+                | :<b>hidden_if_piece_stand_blank</b>="{{hidden_if_piece_stand_blank}}"
                 | :<b>flip</b>="{{flip}}"
                 | :<b>digit_show</b>="{{digit_show}}"
                 | :<b>final_label</b>="'{{final_label}}'"
@@ -622,6 +627,7 @@ export default {
       volume: 0.5,
       key_event_capture: false,
       debug_mode: false,
+      hidden_if_piece_stand_blank: false,
       flip: false,
       digit_show: false,
 

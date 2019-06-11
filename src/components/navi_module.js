@@ -9,7 +9,8 @@ export default {
     key_event_capture: { type: Boolean, default: false  },
     shift_key_mag:     { type: Number,  default: 10,    },
     system_key_mag:    { type: Number,  default: 50,    },
-    flip:              { type: Boolean, default: false  },
+    flip:              { type: Boolean, default: false, },
+    hidden_if_piece_stand_blank: { type: Boolean, default: false, },
   },
   /* eslint-enable */
 

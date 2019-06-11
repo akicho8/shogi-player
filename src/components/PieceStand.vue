@@ -1,5 +1,5 @@
 <template lang="pug">
-.piece_stand_outer(:class="piece_stand_outer_class")
+.piece_stand_outer(:class="piece_stand_outer_class" v-if="piece_stand_show_flag")
   .location_mark_wrap
     .location_mark(v-html="location_name")
     .piece_count.piece_count1
@@ -98,6 +98,15 @@ export default {
 
       return list
     },
+
+    // ビューモードのとき持駒が空なら駒台を表示しない
+    piece_stand_show_flag() {
+      if (this.$parent.current_run_mode === "view_mode" && this.$parent.hidden_if_piece_stand_blank && _.isEmpty(this.hold_pieces)) {
+        return false
+      }
+      return true
+    },
+
   },
 }
 </script>
