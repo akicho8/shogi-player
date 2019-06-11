@@ -32,3 +32,16 @@ $board_overlay_clickable_size: 25%
       //   background: $sp_simple_grid_color
 
     -webkit-tap-highlight-color: transparent
+
+$board_overlay_clickable_size: 25%
+
+// 上に被せてすべてを押せないようにする
+.shogi-player
+  &.run_mode-view_mode
+    position: relative
+    .top_overlay
+      position: absolute
+      z-index: 2
+      // border: 1px solid blue
+      width: 100%
+      height: 100%

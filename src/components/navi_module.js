@@ -13,6 +13,7 @@ export default {
     hidden_if_piece_stand_blank: { type: Boolean, default: false, },
     setting_button_show: { type: Boolean, default: true, },
     summary_show: { type: Boolean, default: true, },
+    operation_disable: { type: Boolean, default: false, },
   },
   /* eslint-enable */
 
