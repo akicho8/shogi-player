@@ -51,7 +51,7 @@
         template(v-if="turn_edit")
           input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
 
-      span.is-pulled-right.modal_trigger_dots(@click.stop.prevent="setting_modal_p = true")
+      span.is-pulled-right.modal_trigger_dots(@click.stop.prevent="setting_modal_p = true" v-if="setting_button_show")
         b-icon(icon="dots-vertical" size="is-small")
 
       b-modal(:active.sync="setting_modal_p" has-modal-card)

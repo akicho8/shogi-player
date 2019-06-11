@@ -11,6 +11,7 @@ export default {
     system_key_mag:    { type: Number,  default: 50,    },
     flip:              { type: Boolean, default: false, },
     hidden_if_piece_stand_blank: { type: Boolean, default: false, },
+    setting_button_show: { type: Boolean, default: true, },
   },
   /* eslint-enable */
 
