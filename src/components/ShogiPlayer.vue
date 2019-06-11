@@ -1,5 +1,5 @@
 <template lang="pug">
-.shogi-player(:class="class_names")
+.shogi-player(:class="class_names" @click="$emit('click')")
   div(v-if="error_message")
     ErrorNotify
       p(slot="header") ERROR

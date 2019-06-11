@@ -69,6 +69,7 @@
 | update:bg_variant           | 背景の種類変更                                          |                  |
 | update:piece_variant        | 駒の種類変更                                            |                  |
 | update:size                 | サイズ変更                                              |                  |
+| click                       | クリックしたとき                                        |                  |
 
 ## Slot
 

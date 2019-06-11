@@ -398,6 +398,7 @@
               @update:play_mode_long_sfen="play_mode_long_sfen_set"
               @update:play_mode_short_sfen="play_mode_short_sfen_set"
               @update:play_mode_move="play_mode_move_set"
+              @click="() => $toast.open('clicked')"
               )
               //- Slot動作確認用
               template(slot="sfen_part" slot-scope="props")
