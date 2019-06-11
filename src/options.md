@@ -27,6 +27,7 @@
 | preset_key                 | 盤面の初期配置              | kifu_body の代わりに指定するとその配置になる             | null                |                |
 | hidden_if_piece_stand_blank | 持駒がないときは駒台非表示 | view_mode のみ                                           | false               |                |
 | setting_button_show         | 設定ボタンの表示           | 右端にあるドット3つのアレ(ボタンなのか？)                | true                |                |
+| summary_show        | まで○手で○の勝ちの表示   | 盤の上にあるアレ                                         | true                |                |
 
 <br>
 

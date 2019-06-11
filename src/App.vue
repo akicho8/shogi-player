@@ -383,6 +383,7 @@
               :debug_mode.sync="debug_mode"
               :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
               :setting_button_show="setting_button_show"
+              :summary_show="summary_show"
               :flip.sync="flip"
               :digit_show="digit_show"
               :final_label="final_label"
@@ -482,6 +483,9 @@
               b-field(label="setting_button_show")
                 b-switch(v-model="setting_button_show")
 
+              b-field(label="summary_show")
+                b-switch(v-model="summary_show")
+
             b-field(label="human_side_key")
               .block
                 template(v-for="e in SideInfo.values")
@@ -513,6 +517,7 @@
                 | :<b>debug_mode</b>="{{debug_mode}}"
                 | :<b>hidden_if_piece_stand_blank</b>="{{hidden_if_piece_stand_blank}}"
                 | :<b>setting_button_show</b>="{{setting_button_show}}"
+                | :<b>summary_show</b>="{{summary_show}}"
                 | :<b>flip</b>="{{flip}}"
                 | :<b>digit_show</b>="{{digit_show}}"
                 | :<b>final_label</b>="'{{final_label}}'"
@@ -634,6 +639,7 @@ export default {
       debug_mode: false,
       hidden_if_piece_stand_blank: false,
       setting_button_show: true,
+      summary_show: true,
       flip: false,
       digit_show: false,
 

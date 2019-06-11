@@ -12,6 +12,7 @@ export default {
     flip:              { type: Boolean, default: false, },
     hidden_if_piece_stand_blank: { type: Boolean, default: false, },
     setting_button_show: { type: Boolean, default: true, },
+    summary_show: { type: Boolean, default: true, },
   },
   /* eslint-enable */
 
