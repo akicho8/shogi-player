@@ -41,7 +41,7 @@ export default {
       }
 
       // 反転
-      if (e.key === "v" || e.code === "Space") {
+      if (e.key === "v" || e.key === "r" || e.code === "Space") {
         if (this.mouseover_info) {
           if (this.mouseover_info.type === "board") {
             this.board_cell_click_right(this.mouseover_info.xy, e)
