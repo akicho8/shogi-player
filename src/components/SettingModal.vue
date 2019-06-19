@@ -14,6 +14,9 @@
     b-field(label="反転")
       b-switch(v-model="flip")
 
+    b-field(label="縦並び")
+      b-switch(v-model="vlayout")
+
     b-field(label="デバッグモード")
       b-switch(v-model="current_debug_mode")
 
@@ -109,6 +112,10 @@ export default {
     flip: {
       get() { return this.$store.state.current_flip },
       set(v) { this.$store.state.current_flip = v },
+    },
+    vlayout: {
+      get() { return this.$store.state.current_vlayout },
+      set(v) { this.$store.state.current_vlayout = v },
     },
     // ...mapState([
     //   "current_debug_mode",      // これだと get() しか作られない

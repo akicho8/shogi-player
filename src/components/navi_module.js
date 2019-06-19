@@ -10,6 +10,7 @@ export default {
     shift_key_mag:     { type: Number,  default: 10,    },
     system_key_mag:    { type: Number,  default: 50,    },
     flip:              { type: Boolean, default: false, },
+    vlayout:        { type: Boolean, default: false, },
     hidden_if_piece_stand_blank: { type: Boolean, default: false, },
     setting_button_show: { type: Boolean, default: true, },
     summary_show: { type: Boolean, default: true, },
@@ -28,12 +29,16 @@ export default {
 
   created() {
     this.$store.state.current_flip = this.flip
+    this.$store.state.current_vlayout = this.vlayout
   },
 
   watch: {
     /* eslint-disable */
     current_flip(v)     { this.$emit("update:flip", v)       }, // 中 -> 外
     flip(v)             { this.$store.state.current_flip = v }, // 外 -> 中
+
+    current_vlayout(v)     { this.$emit("update:vlayout", v)       }, // 中 -> 外
+    vlayout(v)             { this.$store.state.current_vlayout = v }, // 外 -> 中
     /* eslint-enable */
   },
 
@@ -224,5 +229,6 @@ export default {
     },
   }, mapState([
     "current_flip",
+    "current_vlayout",
   ])),
 }

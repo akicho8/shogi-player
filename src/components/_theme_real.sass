@@ -111,10 +111,6 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
         @extend %board_texture_bg
         @extend %real_hoverable_opacity
         font-size: 1.3em
-        padding-top:    0.15em
-        padding-bottom: 0.15em
-        width: 1.4em
-        min-height: 3em
         li
           .piece_count
             position: relative
@@ -132,6 +128,22 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
             +image_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
           .piece_back
             @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
+
+    // 駒台(横)
+    .horizontal
+      .piece_stand_outer
+        .piece_stand
+          width: 1.4em
+          min-height: 3em
+          padding-top:    0.15em
+          padding-bottom: 0.15em
+            
+    // 駒台(縦並び)
+    .vertical
+      .piece_stand_outer
+        .piece_stand
+          padding-left:  0.15em
+          padding-right: 0.15em
 
     // 盤
     .board_outer

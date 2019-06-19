@@ -5,6 +5,7 @@ import Vuex from "vuex"
 const store = () => new Vuex.Store({
   state: {
     current_flip: false,                // 反転したか？
+    current_vlayout: false,             // 縦レイアウト
     current_debug_mode: false,
     current_theme: null,
     current_size: null,

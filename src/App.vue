@@ -386,6 +386,7 @@
               :summary_show="summary_show"
               :operation_disable="operation_disable"
               :flip.sync="flip"
+              :vlayout.sync="vlayout"
               :digit_show="digit_show"
               :final_label="final_label"
               :key_event_capture="key_event_capture"
@@ -473,6 +474,9 @@
               b-field(label="flip")
                 b-switch(v-model="flip")
 
+              b-field(label="vlayout")
+                b-switch(v-model="vlayout")
+
               b-field(label="digit_show")
                 b-switch(v-model="digit_show")
 
@@ -525,6 +529,7 @@
                 | :<b>summary_show</b>="{{summary_show}}"
                 | :<b>operation_disable</b>="{{operation_disable}}"
                 | :<b>flip</b>="{{flip}}"
+                | :<b>vlayout</b>="{{vlayout}}"
                 | :<b>digit_show</b>="{{digit_show}}"
                 | :<b>final_label</b>="'{{final_label}}'"
                 | :<b>kifu_body</b>="'{{kifu_body}}'"
@@ -648,6 +653,7 @@ export default {
       summary_show: true,
       operation_disable: false,
       flip: false,
+      vlayout: false,
       digit_show: false,
 
       final_label: null,

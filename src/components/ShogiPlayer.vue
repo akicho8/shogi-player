@@ -68,7 +68,7 @@
 
     //- 独自のフォントサイズを適用するのは基本このなかだけとする
     .board_container.font_size_base(ref="board_container_ref")
-      .flippable(:class="{flip: current_flip}")
+      .flippable(:class="[current_flip ? 'flip' : 'no_flip', current_vlayout ? 'vertical' : 'horizontal']")
         PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
         .flex_item.board_wrap
           template(v-if="overlay_navi")

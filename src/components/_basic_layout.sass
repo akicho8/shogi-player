@@ -38,21 +38,49 @@
     // すべてを中央よせ
     justify-content: center
 
-    // △の駒台は左上
-    // 将棋盤は上下の中央
-    // ▲の駒台は右下
-    .flex_item:nth-child(1)
-      align-self: flex-start
-    .flex_item:nth-child(2)
-      align-self: center
-    .flex_item:nth-child(3)
-      // align-self: flex-end
-      display: flex
-      // 縦並び
-      flex-direction: column
-      // 空白を空けて上下に配置
-      justify-content: space-between
+    // 横並び(デフォルト)
+    &.horizontal
+      // △の駒台は左上
+      // 将棋盤は上下の中央
+      // ▲の駒台は右下
+      .flex_item:nth-child(1)
+        align-self: flex-start
+      .flex_item:nth-child(2)
+        align-self: center
+      .flex_item:nth-child(3)
+        // align-self: flex-end
+        display: flex
+        // 縦並び
+        flex-direction: column
+        // 空白を空けて上下に配置
+        justify-content: space-between
 
+        // 駒台(縦並び)
+        .vertical
+    
+    // 横並び(縦並び)
+    &.vertical
+      flex-direction: column
+      align-items: center
+    
+      .piece_stand_outer
+        .piece_count
+          display: inline-block
+        
+        .location_mark_wrap
+          display: inline-block
+          .location_mark
+            display: inline-block
+
+        ul.piece_stand
+          display: inline-block
+          li
+            display: inline-block
+            .piece_back
+              display: inline-block
+              .piece_fore
+                display: inline-block
+        
     // 将棋盤
     .board_outer
       .board_inner
@@ -73,6 +101,7 @@
           vertical-align: middle   // block要素(Y)を中央にする
           padding: 0               // ブラウザの初期値だと1pxあるので消す
 
+          
   // カーソル位置に表示する持駒
   .cursor_elem
     +touch
