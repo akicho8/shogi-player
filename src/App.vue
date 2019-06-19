@@ -301,7 +301,7 @@
             .modal-card.is-shogi-player-modal-card
               header.modal-card-head
                 p.modal-card-title.is-size-5
-                  | 詰将棋13手詰
+                  | 詰将棋11手詰
                 button(class="delete" aria-label="close" @click="modal_p = false")
 
               section.modal-card-body
@@ -333,7 +333,7 @@
             |   .modal-card.is-shogi-player-modal-card
             |     header.modal-card-head
             |       p.modal-card-title.is-size-5
-            |         | 詰将棋13手詰
+            |         | 詰将棋11手詰
             |       button(class="delete" aria-label="close" @click="modal_p = false")
             |
             |     section.modal-card-body
@@ -692,6 +692,7 @@ export default {
 @import "~bulma/sass/utilities/mixins.sass"
 
 pre
+  font-family: Osaka-mono, "Osaka-等幅", "ＭＳ ゴシック", "Courier New", Consolas, monospace ! important
   white-space: pre-wrap
   word-break: break-all
 
