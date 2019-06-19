@@ -44,7 +44,7 @@
 
   template(v-if="mediator")
     .turn_edit_container
-      .turn_area(v-if="summary_show && (current_run_mode === 'view_mode' || current_run_mode === 'play_mode')")
+      .turn_number_area(v-if="summary_show && (current_run_mode === 'view_mode' || current_run_mode === 'play_mode')")
         template(v-if="!turn_edit")
           span.turn_edit_text(@click.stop.prevent="turn_edit_run")
             template(v-if="current_run_mode === 'view_mode'")
