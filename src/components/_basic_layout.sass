@@ -32,14 +32,22 @@
   .board_container
     display: inline-block
       
-  // 駒台と将棋盤のレイアウト
+  //////////////////////////////////////////////////////////////////////////////// 駒箱
+  &.horizontal
+    .piece_box
+  &.vertical
+    .piece_box
+      margin-top: $sp_size_piece_stand_margin_top_bottom
+    
+  //////////////////////////////////////////////////////////////////////////////// 駒台と将棋盤のレイアウト
   .flippable
     display: inline-flex
     // すべてを中央よせ
     justify-content: center
 
-    // 横並び(デフォルト)
-    &.horizontal
+  // 横並び(デフォルト)
+  &.horizontal
+    .flippable
       // △の駒台は左上
       // 将棋盤は上下の中央
       // ▲の駒台は右下
@@ -55,11 +63,9 @@
         // 空白を空けて上下に配置
         justify-content: space-between
 
-        // 駒台(縦並び)
-        .vertical
-    
-    // 横並び(縦並び)
-    &.vertical
+  // 横並び(縦並び)
+  &.vertical
+    .flippable
       flex-direction: column
       align-items: center
     
@@ -73,6 +79,7 @@
             display: inline-block
 
         ul.piece_stand
+          margin-top: $sp_size_piece_stand_margin_top_bottom
           display: inline-block
           li
             display: inline-block
@@ -81,25 +88,26 @@
               .piece_fore
                 display: inline-block
         
-    // 将棋盤
-    .board_outer
-      .board_inner
-        // margin: 0 auto
-        // padding: 0
+                
+  //////////////////////////////////////////////////////////////////////////////// 将棋盤
+  .board_outer
+    .board_inner
+      // margin: 0 auto
+      // padding: 0
 
-        // 横セルを均等に分割する
-        table-layout: fixed
+      // 横セルを均等に分割する
+      table-layout: fixed
 
-        // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
-        @extend %is_unselectable
+      // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
+      @extend %is_unselectable
 
-        // box-shadow: 0 0 1vmin rgba($sp_simple_grid_color, 0.5)
+      // box-shadow: 0 0 1vmin rgba($sp_simple_grid_color, 0.5)
 
-        .piece_back
-          height: 100%             // 駒の背景の部分がTDに対して隙間ができないようにする(inheritを使うと隙間ができる)
-          text-align: center       // 駒のテキストを中央にする
-          vertical-align: middle   // block要素(Y)を中央にする
-          padding: 0               // ブラウザの初期値だと1pxあるので消す
+      .piece_back
+        height: 100%             // 駒の背景の部分がTDに対して隙間ができないようにする(inheritを使うと隙間ができる)
+        text-align: center       // 駒のテキストを中央にする
+        vertical-align: middle   // block要素(Y)を中央にする
+        padding: 0               // ブラウザの初期値だと1pxあるので消す
 
           
   // カーソル位置に表示する持駒

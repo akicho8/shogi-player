@@ -618,14 +618,5 @@ export default {
       // return this.current_run_mode === "view_mode"
     },
 
-    piece_box_class() {
-      const list = []
-
-      if (this.holding_p) {
-        list.push("hoverable_p")
-      }
-
-      return list
-    },
   },
 }

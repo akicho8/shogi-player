@@ -2,9 +2,10 @@
 .piece_stand_outer(:class="piece_stand_outer_class" v-if="piece_stand_show_flag")
   .location_mark_wrap
     .location_mark(v-html="location_name")
-    .piece_count.piece_count1
-      //- 2桁にして幅を常に予約しておく
-      | 99
+    template(v-if="!$parent.current_vlayout")
+      .piece_count.piece_count1
+        //- 2桁にして幅を常に予約しておく
+        | 99
 
   ul.piece_stand(:class="piece_stand_class" @click.stop.prevent="$parent.piece_stand_click(location, $event)" @click.right.stop.prevent="$parent.hold_cancel")
     li(v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)" @mouseover="$parent.piece_stand_mouseover_handle(location, piece, $event)" @mouseleave="$parent.mouseleave_handle")

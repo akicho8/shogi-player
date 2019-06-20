@@ -90,22 +90,30 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
         @extend %piece_fore_texture
         height: 100%   // .piece_back のサイズを継承。inherit だと災いがおきやすいので100%を使う
 
-    // 駒箱
+    //////////////////////////////////////////////////////////////////////////////// 駒箱
     .piece_box
       @extend %board_shadow
       @extend %board_texture_bg
       @extend %real_hoverable_opacity
       padding: 0.25em
-      max-width:  4em
-      min-height: 2.5em
-      font-size: 0.9em
       .piece_count
         position: relative
         top: 0.1em
         font-size: 0.4em
         margin-left: -0.3em
 
-    // 駒台
+    &.horizontal
+      .piece_box
+        font-size: 0.9em
+        max-width:  4em
+        min-height: 2.5em
+
+    &.vertical
+      .piece_box
+        font-size: 1.5em
+        min-height: 1.2em
+      
+    //////////////////////////////////////////////////////////////////////////////// 駒台
     .piece_stand_outer
       .piece_stand
         @extend %board_texture_bg
@@ -130,22 +138,21 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
             @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
 
     // 駒台(横)
-    .horizontal
-      .piece_stand_outer
-        .piece_stand
-          width: 1.4em
-          min-height: 3em
-          padding-top:    0.15em
-          padding-bottom: 0.15em
+    &.horizontal
+      .piece_stand
+        width: 1.4em
+        min-height: 3em
+        padding-top:    0.15em
+        padding-bottom: 0.15em
             
     // 駒台(縦並び)
-    .vertical
-      .piece_stand_outer
-        .piece_stand
-          padding-left:  0.15em
-          padding-right: 0.15em
+    &.vertical
+      .piece_stand
+        min-width: $sp_piece_stand_size_if_blank
+        padding-left:  0.15em
+        padding-right: 0.15em
 
-    // 盤
+    //////////////////////////////////////////////////////////////////////////////// 盤
     .board_outer
       @extend %board_shadow
       @extend %board_texture_bg
