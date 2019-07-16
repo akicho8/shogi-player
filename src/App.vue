@@ -694,8 +694,11 @@ export default {
 
 <style lang="sass">
 @import "./App"
-@import "buefy/dist/buefy.css"
-@import "~bulma/sass/utilities/mixins.sass"
+// @import "buefy/dist/buefy.css"
+// @import "~bulma/sass/utilities/mixins.sass"
+
+// +mobile を使いたいため
+@import "~buefy/src/scss/buefy-build.scss"
 
 pre
   font-family: Osaka-mono, "Osaka-等幅", "ＭＳ ゴシック", "Courier New", Consolas, monospace ! important
