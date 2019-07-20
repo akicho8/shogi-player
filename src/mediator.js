@@ -168,7 +168,7 @@ export default class Mediator {
         return `まで${this.real_turn}手で${this.previous_location.name}の勝ち`
       }
     } else {
-      return `${this.real_turn}手目`
+      return `${this.real_turn}手`
     }
   }
 
