@@ -1,3 +1,12 @@
+// ShogiPlayer.sass のなかで読み込むと親アプリ側で読み込んだ Buefy を干渉してラジオボタンが崩れたりする
+@import "~buefy/src/scss/buefy-build.scss"
+
+// Rails から使うとき Rails 側から見た assets へのパスに変更すること (そうしないと assets を参照できない)
+$sp_assets_dir: "assets" !default
+
+// Rails 側で sp_assets_dir を変更してから読み込みたいので .vue の中では読まないようにする
+@import "./components/ShogiPlayer.sass"
+
 .yumincho
   font-family: "YuMincho", "Yu Mincho", serif
 .hero
@@ -55,3 +64,31 @@
   .comment_area
     .message
       margin: 1vmin 20%
+
+pre
+  font-family: Osaka-mono, "Osaka-等幅", "ＭＳ ゴシック", "Courier New", Consolas, monospace ! important
+  white-space: pre-wrap
+  word-break: break-all
+
+html
+  +mobile
+    font-size: 70%
+
+#app
+  .section
+    +mobile
+      margin: 2em 0em
+      margin-bottom: 1em
+      padding: 0
+
+  .message-body
+    +mobile
+      font-size: 75%
+
+  .title
+    +mobile
+      font-size: 150%
+
+// ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
+// main.js で読み込むと .sass のファイル基準になる
+// @import "./components/ShogiPlayer.sass"

@@ -11,7 +11,7 @@
     import Vue from 'vue/dist/vue.esm'
 
     import Buefy from 'buefy'
-    import 'buefy/lib/buefy.css'
+    // import 'buefy/lib/buefy.css'
     Vue.use(Buefy)
 
     import Vuex from "vuex"
@@ -34,8 +34,9 @@
 (in app/javascript/packs/shogi_player_app.sass)
 
     // Bulma
-    @import "../../../node_modules/bulma/sass/utilities/initial-variables.sass"
-    @import "../../../node_modules/bulma/sass/utilities/derived-variables.sass"
+    // @import "../../../node_modules/bulma/sass/utilities/initial-variables.sass"
+    // @import "../../../node_modules/bulma/sass/utilities/derived-variables.sass"
+    @import "~buefy/src/scss/buefy-build.scss"
 
     // ShogiPlayer
     $sp_assets_dir: "../../../node_modules/shogi-player/src/assets"

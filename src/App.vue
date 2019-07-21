@@ -693,38 +693,5 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./App"
-// @import "buefy/dist/buefy.css"
-// @import "~bulma/sass/utilities/mixins.sass"
-
-// +mobile を使いたいため
-@import "~buefy/src/scss/buefy-build.scss"
-
-pre
-  font-family: Osaka-mono, "Osaka-等幅", "ＭＳ ゴシック", "Courier New", Consolas, monospace ! important
-  white-space: pre-wrap
-  word-break: break-all
-
-html
-  +mobile
-    font-size: 70%
-
-#app
-  .section
-    +mobile
-      margin: 2em 0em
-      margin-bottom: 1em
-      padding: 0
-
-  .message-body
-    +mobile
-      font-size: 75%
-
-  .title
-    +mobile
-      font-size: 150%
-
-// ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
-// main.js で読み込むと .sass のファイル基準になる
-// @import "./components/ShogiPlayer.sass"
+@import "./App.sass"
 </style>

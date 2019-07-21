@@ -2,9 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+
 // import 'bulma/bulma.sass'
 // import "buefy/src/scss/buefy-build.scss"
-import "./components/ShogiPlayer.sass" // Rails 側で sp_assets_dir を変更してから読み込みたいので .vue の中では読まないようにする
+
+// import "~buefy/src/scss/buefy-build.scss"
+// import "./components/ShogiPlayer.sass" // Rails 側で sp_assets_dir を変更してから読み込みたいので .vue の中では読まないようにする
 
 Vue.config.productionTip = false
 
