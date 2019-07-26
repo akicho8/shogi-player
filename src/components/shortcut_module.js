@@ -56,7 +56,7 @@ export default {
         // 何も持っていない状態なので持駒に同じ駒があれば持つ
         if (this.mouseover_info) {
           if (this.mouseover_info.type === "board") {
-            const place = Place.fetch(this.mouseover_info.xy)
+            const place = Place.fetch(this.mouseover_info.pos)
             const soldier = this.mediator.board.lookup(place)
             if (soldier) {
               this.piece_stand_piece_click(soldier.location, soldier.piece, soldier.promoted, null) // キーボードのイベントなので null 指定
@@ -71,7 +71,7 @@ export default {
       if (e.key === "v" || e.key === "r" || e.code === "Space") {
         if (this.mouseover_info) {
           if (this.mouseover_info.type === "board") {
-            this.board_cell_click_right(this.mouseover_info.xy, e)
+            this.board_cell_click_right(this.mouseover_info.pos, e)
             e.preventDefault()
             return true
           }
@@ -81,8 +81,8 @@ export default {
       return false
     },
 
-    board_mouseover_handle(xy, e) {
-      this.mouseover_info = { type: "board", xy: xy }
+    board_mouseover_handle(pos, e) {
+      this.mouseover_info = { type: "board", pos: pos }
     },
 
     piece_stand_mouseover_handle(location, piece, e) {
@@ -102,7 +102,7 @@ export default {
       if (this.mouseover_info) {                             // 盤上にマウスがあって
         if (!this.holding_p) {                                // 駒を持っていなかったら
           if (this.mouseover_info.type === "board") {
-            this.board_cell_click_left(this.mouseover_info.xy, e) // 左クリック
+            this.board_cell_click_left(this.mouseover_info.pos, e) // 左クリック
           }
           if (this.mouseover_info.type === "piece_stand") {
             this.piece_stand_piece_click(this.mouseover_info.location, this.mouseover_info.piece, false, e)
