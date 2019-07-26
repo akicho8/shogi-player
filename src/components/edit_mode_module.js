@@ -307,7 +307,7 @@ export default {
         return
       }
 
-      this.log("piece_box_piece_click:駒台の駒を持つ")
+      this.log("piece_box_piece_click:駒箱の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = null
       this.virtual_piece_create(e, this.origin_soldier2)
