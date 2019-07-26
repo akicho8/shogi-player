@@ -83,7 +83,7 @@
                 :start_turn="9"
                 :slider_show="true"
                 :theme="'real'"
-                :size="'xxx-large'"
+                :size="'x-large'"
                 :bg_variant="'a'"
                 :sound_effect="true"
                 :volume="0.25"
@@ -183,13 +183,13 @@
             .column
               article.message.is-info
                 .message-body
-                  | 駒落ちの場合は後手から始まる(動作確認用)
+                  | 駒落ちの場合は後手から始まる
               ShogiPlayer(:kifu_body="`position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
 
             .column
               article.message.is-info
                 .message-body
-                  | 2手目の盤面から開始する場合も後手から始まる(動作確認用)
+                  | 2手目の盤面から開始する場合も後手から始まる
               ShogiPlayer(:kifu_body="`position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL w - 2`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
 
           .columns
@@ -252,15 +252,14 @@
                 .message-body
                   .content
                     ul
-                      li 盤上の駒は右クリックで裏返せます(v, r, Space キーでも可)
-                      li または修飾キー(shift, option, meta, control キーのいずれか)を押しながら左クリックでも裏返せます
-                      li 駒を持った状態で右クリックすると駒を元に戻せます (Escape または q キーでも可)
-                      li 駒台と駒箱に駒を移動するときに修飾キーを押しているとまとめて移動します
-                      li ショートカットキーがあります(b:先手の駒台 w:後手の駒台 Backspace または t で駒箱)
-                      li 修飾キーも効くので例えば先手の駒箱の歩をクリックしてから shift + w を押すと先手の駒台の歩がすべて後手の駒台に移動します
-                      li 盤上の駒にカーソルを合わせて w, b, Backspace, t を押すと自動的に持ち上げてからそのキーをタイプしたことになります(持ち上げる手間が省略できる)
+                      li 右クリックで盤上の駒の反転と向き変更できます(ショートカットキー: v, r, Space)
+                      li 修飾キー(shift, option, meta, control キーのいずれか)を押しながら「左クリック」でも変更できます
+                      li 駒を持った状態で右クリックすると駒を元に戻せます (ショートカットキー: Escape, q)
+                      li 駒台と駒箱をクリックしたことにするショートカットキーがあります(b:先手の駒台 w:後手の駒台 Backspace または t で駒箱)
+                      li その際に、修飾キーを押しているとまとめて移動します
+                      li 駒を持っていない状態で、盤上の駒にカーソルを合わせて w, b, Backspace, t したときは自動的に持ち上げてからそのキーをタイプしたことになります(持ち上げる手間が省略できる)
+                      li たとえば先手の駒箱の歩をクリックしてから shift + w で先手の駒台の歩がすべて後手の駒台に移動します
                       li 駒を持っていない状態で盤上の駒にカーソルを合わせて q をタイプすると駒台から同種の駒を取り出したことになります (factorioのピペットツールのように動作します)
-
           .columns
             .column
               article.message.is-success.has-text-left
@@ -293,7 +292,7 @@
                 | 右の<b-icon icon="dots-vertical" size="is-small"></b-icon>も非表示にします。
 
           .buttons
-            a.button(@click="modal_p = true") 開く
+            a.button.is-primary.is-fullwidth(@click="modal_p = true") 開く
 
           p
             | .modal-card.is-shogi-player-modal-card のようにします
@@ -309,7 +308,7 @@
                 shogi-player(
                   :run_mode="'view_mode'"
                   :debug_mode="false"
-                  :start_turn="-1"
+                  :start_turn="0"
                   :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
                   :key_event_capture="true"
                   :slider_show="true"
@@ -341,7 +340,7 @@
             |       shogi-player(
             |         :run_mode="'view_mode'"
             |         :debug_mode="false"
-            |         :start_turn="-1"
+            |         :start_turn="0"
             |         :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
             |         :key_event_capture="true"
             |         :slider_show="true"
