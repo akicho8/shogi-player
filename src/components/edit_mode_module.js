@@ -22,6 +22,7 @@ export default {
       place_from: null,           // 盤上ら動かそうとしているときの元位置
       have_piece: null,           // 駒台 or 駒箱から持った駒
       have_piece_location: null,  // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
+      have_piece_promoted: null,    // 持ったとき成った状態にするか？
 
       // プレフィクスに_をつけるとVueに監視されない
       me_running_p: false,        // mousemove イベント緩和用
@@ -195,6 +196,29 @@ export default {
       }
     },
 
+    // board_cell_click_right2(xy, e) {
+    //   this.log("盤のセルを右クリック")
+    //
+    //   if (this.if_view_mode_break) {
+    //     return
+    //   }
+    //
+    //   const place = Place.fetch(xy)
+    //   const soldier = this.mediator.board.lookup(place)
+    //
+    //   if (this.hold_cancel(e)) {
+    //     return
+    //   }
+    //
+    //   if (this.current_run_mode === "edit_mode") {
+    //     if (!this.holding_p && soldier) {
+    //       this.log("盤上の駒を裏返す")
+    //       this.mediator.board.place_on(soldier.piece_transform)
+    //       this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+    //     }
+    //   }
+    // },
+
     // 駒台 or 駒台の駒をクリックしたときの共通処理
     piece_stand_click_shared(location, e) {
       if (this.have_piece_location === location && this.have_piece) {
@@ -236,7 +260,7 @@ export default {
     },
 
     // 駒台の駒をクリック
-    piece_stand_piece_click(location, piece, e) {
+    piece_stand_piece_click(location, piece, have_piece_promoted, e) {
       this.log("駒台の駒をクリック")
 
       if (this.piece_stand_click_shared(location, e)) {
@@ -263,6 +287,7 @@ export default {
       this.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
+      this.have_piece_promoted = have_piece_promoted
       this.virtual_piece_create(e, this.origin_soldier2)
     },
 
@@ -310,6 +335,7 @@ export default {
       this.log("piece_box_piece_click:駒箱の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = null
+      this.have_piece_promoted = false
       this.virtual_piece_create(e, this.origin_soldier2)
     },
 
@@ -396,6 +422,7 @@ export default {
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       this.have_piece_location = null
+      this.have_piece_promoted = null
       this.virtual_piece_destroy()
     },
 
@@ -462,7 +489,7 @@ export default {
       return new Soldier({
         piece: this.have_piece,
         place: place,
-        promoted: false,
+        promoted: this.have_piece_promoted || false,
         location: this.have_piece_location || Location.fetch("black"),
       })
     },
@@ -525,9 +552,12 @@ export default {
 
       this.mouse_stick = true   // マウスに追随する
 
-      this.me_last_event = event
-      this.log(this.me_last_event)
-      this.cursor_elem_set_pos()
+      // キーボードイベントの場合は null が来るようにしている
+      // マウスを動かしてはじめて座標が取れるのでキーボードの場合はすぐに駒は表示されない
+      if (event) {
+        this.me_last_event = event
+        this.cursor_elem_set_pos()
+      }
 
       window.addEventListener("mousemove", this.mousemove_hook, false)
       window.addEventListener("click", this.click_hook, false)

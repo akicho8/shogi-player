@@ -8,7 +8,7 @@
         | 99
 
   ul.piece_stand(:class="piece_stand_class" @click.stop.prevent="$parent.piece_stand_click(location, $event)" @click.right.stop.prevent="$parent.hold_cancel")
-    li(v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, $event)" @mouseover="$parent.piece_stand_mouseover_handle(location, piece, $event)" @mouseleave="$parent.mouseleave_handle")
+    li(v-for="[piece, count] in hold_pieces" @click.stop="$parent.piece_stand_piece_click(location, piece, false, $event)" @mouseover="$parent.piece_stand_mouseover_handle(location, piece, $event)" @mouseleave="$parent.mouseleave_handle")
       .piece_back(:class="piece_back_class(piece)")
         .piece_fore(:class="piece_fore_class(piece)")
           | {{piece.name}}

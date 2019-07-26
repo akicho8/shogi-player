@@ -1,4 +1,5 @@
 import Location from "../location"
+import Place from "../place"
 
 export default {
   data() {
@@ -33,10 +34,36 @@ export default {
       }
 
       // 移動キャンセル
-      if (e.code === "Escape" || e.key === "q") {
+      if (e.code === "Escape") {
         if (this.hold_cancel(e)) {
           e.preventDefault()
           return true
+        }
+      }
+
+      // 何も持っていない状態 → 持駒に同じ駒があれば持つ
+      // 何か持っている状態   → キャンセル
+      // https://wikiwiki.jp/factorio/%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95
+      if (e.key === "q") {
+        // 何か持っている状態ならキャンセルする
+        if (this.holding_p) {
+          if (this.hold_cancel(e)) {
+            e.preventDefault()
+            return true
+          }
+        }
+
+        // 何も持っていない状態なので持駒に同じ駒があれば持つ
+        if (this.mouseover_info) {
+          if (this.mouseover_info.type === "board") {
+            const place = Place.fetch(this.mouseover_info.xy)
+            const soldier = this.mediator.board.lookup(place)
+            if (soldier) {
+              this.piece_stand_piece_click(soldier.location, soldier.piece, soldier.promoted, null) // キーボードのイベントなので null 指定
+              e.preventDefault()
+              return true
+            }
+          }
         }
       }
 
@@ -78,7 +105,7 @@ export default {
             this.board_cell_click_left(this.mouseover_info.xy, e) // 左クリック
           }
           if (this.mouseover_info.type === "piece_stand") {
-            this.piece_stand_piece_click(this.mouseover_info.location, this.mouseover_info.piece, e)
+            this.piece_stand_piece_click(this.mouseover_info.location, this.mouseover_info.piece, false, e)
           }
           if (this.mouseover_info.type === "piece_box") {
             this.piece_box_piece_click(this.mouseover_info.piece, e)
