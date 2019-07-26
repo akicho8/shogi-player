@@ -1,4 +1,4 @@
-## Rails (+ Vue) の場合
+## Rails + Vue.js の場合
 
 インストール
 
