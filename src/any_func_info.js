@@ -7,6 +7,8 @@ export default class AnyFuncInfo extends MemoryRecord {
       /* eslint-disable */
       { key: "☖の持駒を駒箱へ",   func: e => { e.mediator.hold_pieces_to_piece_box(Location.fetch("white")) }, },
       { key: "駒箱から☖の持駒へ", func: e => { e.mediator.piece_box_to_hold_pieces(Location.fetch("white")) }, },
+      { key: "駒箱に駒を一式生成", func: e => { e.mediator.piece_box_reset_by_preset("全部駒箱") }, },
+      { key: "駒箱の駒をクリア",   func: e => { e.mediator.piece_box_clear() }, },
       /* eslint-enable */
     ]
   }

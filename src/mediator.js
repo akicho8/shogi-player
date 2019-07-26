@@ -7,6 +7,7 @@ import Piece from "./piece"
 import Soldier from "./soldier"
 import SfenParser from "./sfen_parser"
 import SfenSerializer from "./sfen_serializer"
+import PresetInfo from "./preset_info"
 
 export default class Mediator {
   constructor() {
@@ -251,6 +252,22 @@ export default class Mediator {
       this.piece_box_add(piece, -count)
       this.hold_pieces_add(location, piece, count)
     })
+  }
+
+  // プリセットに対応するように駒箱をセットする
+  piece_box_reset_by_preset(preset_info) {
+    this.piece_box_clear()
+
+    const info = PresetInfo.fetch(preset_info)
+    if (info.piece_box) {
+      info.piece_box.forEach(([e, c]) => {
+        this.piece_box_add(Piece.fetch(e), c)
+      })
+    }
+  }
+
+  piece_box_clear() {
+    this.piece_box = {}
   }
 
   // -------------------------------------------------------------------------------- private

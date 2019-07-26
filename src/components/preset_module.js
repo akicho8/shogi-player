@@ -1,4 +1,3 @@
-import Piece from "../piece"
 import Mediator from "../mediator"
 import PresetInfo from "../preset_info"
 
@@ -40,11 +39,7 @@ export default {
       if (preset_info.sfen) {
         this.mediator.data_source = this.data_source_by(preset_info.sfen)
       }
-      if (preset_info.piece_box) {
-        preset_info.piece_box.forEach(([e, c]) => { // preset_info には特別に駒箱の情報もある
-          this.mediator.piece_box_add(Piece.fetch(e), c)
-        })
-      }
+      this.mediator.piece_box_reset_by_preset(preset_info)
       this.mediator.run()
 
       // 駒落ちのときは△の手番から始まるので edit_mode での手番に反映する
