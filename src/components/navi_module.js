@@ -4,17 +4,17 @@ import { mapState } from 'vuex'
 export default {
   /* eslint-disable */
   props: {
-    slider_show:       { type: Boolean, default: false, },
-    controller_show:   { type: Boolean, default: false, },
-    key_event_capture: { type: Boolean, default: false  },
-    shift_key_mag:     { type: Number,  default: 10,    },
-    system_key_mag:    { type: Number,  default: 50,    },
-    flip:              { type: Boolean, default: false, },
-    vlayout:        { type: Boolean, default: false, },
+    slider_show:                 { type: Boolean, default: false, },
+    controller_show:             { type: Boolean, default: false, },
+    key_event_capture:           { type: Boolean, default: false  },
+    shift_key_mag:               { type: Number,  default: 10,    },
+    system_key_mag:              { type: Number,  default: 50,    },
+    flip:                        { type: Boolean, default: false, },
+    vlayout:                     { type: Boolean, default: false, },
     hidden_if_piece_stand_blank: { type: Boolean, default: false, },
-    setting_button_show: { type: Boolean, default: true, },
-    summary_show: { type: Boolean, default: true, },
-    operation_disable: { type: Boolean, default: false, },
+    setting_button_show:         { type: Boolean, default: true,  },
+    summary_show:                { type: Boolean, default: true,  },
+    operation_disable:           { type: Boolean, default: false, },
   },
   /* eslint-enable */
 
@@ -51,6 +51,10 @@ export default {
         this.log("key", e.key)
         this.log("code", e.code)
         this.log("repeat", e.repeat)
+      }
+
+      if (this.operation_disable) {
+        return
       }
 
       if (this.shortcut_hook(e)) {

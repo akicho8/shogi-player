@@ -29,7 +29,7 @@
 | hidden_if_piece_stand_blank | 持駒がないときは駒台非表示 | view_mode のみ                                           | false               |                |
 | setting_button_show         | 設定ボタンの表示           | 右端にあるドット3つのアレ(ボタンなのか？)                | true                |                |
 | summary_show        | まで○手で○の勝ちの表示   | 盤の上にあるアレ                                         | true                |                |
-| operation_disable              | 操作をすべて無効化する   | 無効化すると @click イベントだけが反応する                  | false                |                |
+| operation_disable              | 操作をすべて無効化する   | 無効化すると @click イベントだけが反応する。ショートカットキーも無効化する                  | false                |                |
 
 <br>
 
