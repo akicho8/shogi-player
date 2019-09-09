@@ -126,7 +126,7 @@ export default {
           this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
           this.dialog_p = true
 
-          this.$dialog.confirm({
+          this.$buefy.dialog.confirm({
             message: '成りますか？',
             confirmText: '成る',
             cancelText: '成らない',
