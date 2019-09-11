@@ -165,6 +165,7 @@ import sound_module from "./sound_module.js"
 import preset_module from "./preset_module.js"
 import any_func_module from "./any_func_module.js"
 import polling_module from "./polling_module.js"
+import api_module from "./api_module.js"
 
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
@@ -185,6 +186,7 @@ export default {
     preset_module,
     any_func_module,
     polling_module,
+    api_module,
   ],
 
   /* eslint-disable */

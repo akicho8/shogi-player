@@ -27,6 +27,10 @@ export default class Board {
     delete this._surface[place.key]
   }
 
+  clear() {
+    this._surface = {}
+  }
+
   get flip_v() {
     const value = new Board()
     _.forEach(this._surface, (soldier, place) => {

@@ -2,8 +2,22 @@ import _ from 'lodash'
 import Board from './board'
 import Place from './place'
 import Piece from './piece'
+import Location from './location'
 
 export default class Soldier {
+  static random() {
+    const x = _.random(0, Board.dimension - 1)
+    const y = _.random(0, Board.dimension - 1)
+    const place = Place.fetch([x, y])
+
+    const piece = Piece.fetch(_.random(0, Piece.values.length - 1))
+    const promoted = piece.promotable_p && _.random(0, 1) === 0
+
+    const location = Location.fetch(_.random(0, Location.values.length - 1))
+
+    return new this({piece: piece, place: place, promoted: promoted, location: location})
+  }
+
   constructor(attributes) {
     this.attributes = Object.assign({}, attributes)
   }

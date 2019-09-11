@@ -31,6 +31,7 @@
             li: a(href="#examples") デモ
             li: a(href="#usage") 使い方
             li: a(href="#options") オプション
+            li: a(href="#api") API
 
   // ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'" :run_mode="'edit_mode'" :sfen_show="true" :debug_mode="true")
   //- ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'")
@@ -552,6 +553,30 @@
       .table_wrap
         .content(v-html="options_md")
 
+  .section
+    a(name="api")
+    .container
+      h2.title API
+      hr
+      .columns
+        .column
+          ShogiPlayer(
+            ref="api_sp"
+            :summary_show="false"
+            :hidden_if_piece_stand_blank="true"
+          )
+      .columns
+        .column
+          .buttons.is-centered
+            b-button(label="api_random_puton" @click="run_api_random_puton")
+      .columns
+        .column
+          .table_wrap
+            .content(v-html="api_md")
+
+  .section
+    a(name="license")
+    .container
       .table_wrap
         .content(v-html="license_md")
 
@@ -668,6 +693,7 @@ export default {
       usage_md: marked(require('./usage.md')),
       options_md: marked(require('./options.md')),
       license_md: marked(require('./license.md')),
+      api_md: marked(require('./api.md')),
     }
   },
 
@@ -676,6 +702,10 @@ export default {
   },
 
   methods: {
+    run_api_random_puton() {
+      this.$refs.api_sp.api_random_puton()
+    },
+
     play_mode_long_sfen_set(v) {
       this.play_mode_long_sfen = v
     },
