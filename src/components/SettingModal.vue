@@ -7,39 +7,48 @@
 
   section.modal-card-body
     b-field(label="モード")
-      .block
-        template(v-for="e in RunModeInfo.values")
-          b-radio(v-model="current_run_mode" :native-value="e.key") {{e.name}}
+    b-field
+      template(v-for="e in RunModeInfo.values")
+        b-radio-button(v-model="current_run_mode" :native-value="e.key") {{e.name}}
 
-    b-field(label="反転")
-      b-switch(v-model="flip")
+    b-field(grouped)
+      b-field(label="反転")
+        b-switch(v-model="flip")
+      b-field(label="縦並び")
+        b-switch(v-model="vlayout")
+      b-field(label="デバッグモード")
+        b-switch(v-model="current_debug_mode")
 
-    b-field(label="縦並び")
-      b-switch(v-model="vlayout")
-
-    b-field(label="デバッグモード")
-      b-switch(v-model="current_debug_mode")
+    template(v-if="false")
+      b-dropdown(v-model="$store.state.current_bg_variant")
+        button.button(slot="trigger")
+          span
+            | {{BgVariantInfo.fetch($store.state.current_bg_variant).name}}
+          b-icon(icon="menu-down")
+        template(v-for="e in BgVariantInfo.values")
+          b-dropdown-item(:value="e.key") {{e.name}}
 
     b-field(label="テーマ")
-      .block
-        template(v-for="e in ThemeInfo.values")
-          b-radio(v-model="$store.state.current_theme" :native-value="e.key") {{e.name}}
+    b-field
+      template(v-for="e in ThemeInfo.values")
+        b-radio-button(v-model="$store.state.current_theme" :native-value="e.key") {{e.name}}
 
     template(v-if="$store.state.current_theme === 'real'")
-      b-field(label="背景の種類")
-        .block
+      .box
+        b-field(label="背景の種類")
+        b-field
           template(v-for="e in BgVariantInfo.values")
-            b-radio(v-model="$store.state.current_bg_variant" :native-value="e.key" size="is-small") {{e.name}}
+            b-radio-button(v-model="$store.state.current_bg_variant" :native-value="e.key" size="is-small") {{e.name}}
 
-      b-field(label="駒の種類")
-        .block
+        b-field(label="駒の種類")
+        b-field
           template(v-for="e in PieceVariantInfo.values")
-            b-radio(v-model="$store.state.current_piece_variant" :native-value="e.key" size="is-small") {{e.name}}
+            b-radio-button(v-model="$store.state.current_piece_variant" :native-value="e.key") {{e.name}}
 
     b-field(label="サイズ")
-      .block
-        template(v-for="e in SizeInfo.values")
-          b-radio(v-model="$store.state.current_size" :native-value="e.key" size="is-small") {{e.name}}
+    b-field
+      template(v-for="e in SizeInfo.values")
+        b-radio-button(v-model="$store.state.current_size" :native-value="e.key" size="is-small") {{e.name}}
 
     template(v-if="sp_data.mediator")
       b-field(label="現局面(Readonly)")
@@ -50,6 +59,7 @@
 
     b-field(label="操作モードの棋譜(Readonly)")
       b-input.is-small(:value="play_mode_current_sfen" type="textarea" size="is-small" readonly)
+
   footer.modal-card-foot
     button.button.is-primary(@click.stop.prevent="$parent.close()") 閉じる
 </template>
