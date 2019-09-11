@@ -5,10 +5,13 @@ import Piece from './piece'
 import Location from './location'
 
 export default class Soldier {
-  static random() {
-    const x = _.random(0, Board.dimension - 1)
-    const y = _.random(0, Board.dimension - 1)
-    const place = Place.fetch([x, y])
+  static random(params = {}) {
+    let place = params.place
+    if (!place) {
+      const x = _.random(0, Board.dimension - 1)
+      const y = _.random(0, Board.dimension - 1)
+      place = Place.fetch([x, y])
+    }
 
     const piece = Piece.fetch(_.random(0, Piece.values.length - 1))
     const promoted = piece.promotable_p && _.random(0, 1) === 0
