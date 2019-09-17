@@ -79,7 +79,7 @@
             table.board_inner
               tr(v-for="y in mediator.dimension")
                 td(v-for="x in mediator.dimension" @click.stop.prevent="board_cell_click_left([x - 1, y - 1], $event)" @click.stop.prevent.right="board_cell_click_right([x - 1, y - 1], $event)" @mouseover="board_mouseover_handle([x - 1, y - 1], $event)" @mouseleave="mouseleave_handle")
-                  .piece_back(:class="board_piece_back_class([x - 1, y - 1])")
+                  .piece_back(:class="board_piece_back_class([x - 1, y - 1])" :style="board_piece_back_style([x - 1, y - 1])")
                     .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
         .flex_item
@@ -204,6 +204,8 @@ export default {
     debug_mode:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
     digit_show:     { type: Boolean, default: false,       },
     final_label:    { type: String,  default: null,        },
+    board_piece_back_user_style: { type: Function, default: place => { return {} }, },
+    board_piece_back_user_class: { type: Function, default: place => { return [] }, },
   },
   /* eslint-enable */
 
@@ -439,7 +441,17 @@ export default {
       //   list = _.concat(list, soldier.to_class_list)
       // }
 
+      if (this.board_piece_back_user_class) {
+        list = _.concat(list, this.board_piece_back_user_class(place))
+      }
+
       return list
+    },
+
+    board_piece_back_style(xy) {
+      if (this.board_piece_back_user_style) {
+        return this.board_piece_back_user_style(Place.fetch(xy))
+      }
     },
 
     update_kifu_source(v) {
