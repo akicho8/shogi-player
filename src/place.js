@@ -32,6 +32,22 @@ export default class Place {
     return this._y
   }
 
+  get human_x() {
+    return Board.dimension - this._x
+  }
+
+  get kanji_human_x() {
+    return {1: "１", 2: "２", 3: "３", 4: "４", 5: "５", 6: "６", 7: "７", 8: "８", 9: "９"}[this.human_x]
+  }
+
+  get kanji_human_y() {
+    return {1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九"}[this.human_y]
+  }
+
+  get human_y() {
+    return this._y + 1
+  }
+
   get flip_v() {
     return Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y])
   }
@@ -64,11 +80,16 @@ export default class Place {
     return `place_${this.human_digits}`
   }
 
+  get human_xy_ary() {
+    return [this.human_x, this.human_y]
+  }
+
   get human_digits() {
-    return [
-      Board.dimension - this._x,
-      this._y + 1,
-    ].join("")
+    return this.human_xy_ary.join("")
+  }
+
+  get kanji_human() {
+    return [this.kanji_human_x, this.kanji_human_y].join("")
   }
 }
 

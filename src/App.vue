@@ -706,7 +706,7 @@ export default {
 
   methods: {
     board_cell_left_click_user_handle(place, event) {
-      this.$buefy.toast.open(`${place.human_digits}のセルをクリック`)
+      this.$buefy.toast.open(`${place.kanji_human}のセルをクリック`)
       return true
     },
 
