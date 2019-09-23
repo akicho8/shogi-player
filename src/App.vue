@@ -564,6 +564,9 @@
             ref="api_sp"
             :summary_show="false"
             :hidden_if_piece_stand_blank="true"
+            :board_cell_left_click_user_handle="board_cell_left_click_user_handle"
+            :overlay_navi="false"
+            :debug_mode="true"
           )
       .columns
         .column
@@ -702,6 +705,11 @@ export default {
   },
 
   methods: {
+    board_cell_left_click_user_handle(place, event) {
+      this.$buefy.toast.open(`${place.human_digits}のセルをクリック`)
+      return true
+    },
+
     run_api_random_puton() {
       this.$refs.api_sp.api_random_puton()
     },

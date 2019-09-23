@@ -41,7 +41,7 @@
       <table border="1">
         <tr v-for="y in dimension">
           <template v-for="x in dimension">
-            <td @click="board_cell_click_left([x - 1, y - 1], $event)" @mouseover="mouse_over_func" :class="cell_class([x - 1, y - 1])">
+            <td @click="board_cell_left_click([x - 1, y - 1], $event)" @mouseover="mouse_over_func" :class="cell_class([x - 1, y - 1])">
               {{cell_str([x - 1, y - 1])}}
             </td>
           </template>

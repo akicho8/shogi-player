@@ -44,15 +44,24 @@ export default {
 
   methods: {
     // 盤をクリック
-    board_cell_click_left(xy, e) {
-      this.log("board_cell_click_left")
+    board_cell_left_click(xy, e) {
+      this.log("board_cell_left_click")
       this.log(`shiftKey: ${e.shiftKey}`)
+
+      const place = Place.fetch(xy)
+
+      const handle = this.board_cell_left_click_user_handle
+      if (handle) {
+        this.log(`ユーザー指定のクリックハンドル実行: ${place.human_digits}`)
+        if (handle(place, e)) {
+          return
+        }
+      }
 
       if (this.if_view_mode_break) {
         return
       }
 
-      const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
 
       // -------------------------------------------------------------------------------- Validation
@@ -173,7 +182,7 @@ export default {
       this.turn_next()
     },
 
-    board_cell_click_right(xy, e) {
+    board_cell_right_click(xy, e) {
       this.log("盤のセルを右クリック")
 
       if (this.if_view_mode_break) {
@@ -196,7 +205,7 @@ export default {
       }
     },
 
-    // board_cell_click_right2(xy, e) {
+    // board_cell_right_click2(xy, e) {
     //   this.log("盤のセルを右クリック")
     //
     //   if (this.if_view_mode_break) {

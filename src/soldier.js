@@ -67,7 +67,7 @@ export default class Soldier {
     } else {
       attrs = {location: this.location.flip}
     }
-    return new Soldier(Object.assign({}, this.attributes, attrs))
+    return new Soldier(Object.assign({}, this.attributes, attrs)) // FIXME: this() でいける？
   }
 
   get promotable_p() {
