@@ -111,6 +111,8 @@
     //////////////////////////////////////////////////////////////////////////////// 駒台
     .piece_stand_outer
       font-size: 0.9em
+      .player_name
+        // font-size: 0.9em
 
       .piece_stand
         @extend %hoverable_bg
@@ -121,14 +123,20 @@
         margin-left: 0.1rem
         font-size: 0.6em
 
+        
     &.horizontal
-      .piece_stand
+      .piece_stand_outer
+        .player_name
+        .piece_stand
+          margin-top: 0.1em
     &.vertical
-      .location_mark
-        margin-right: 0.4em
-      .piece_stand
-        li
-          padding: 0 0.2em
+      .piece_stand_outer
+        .player_name
+        .location_mark
+        .piece_stand
+          margin-left: 0.4em
+          li
+            padding: 0 0.2em
         
     // edit_mode の場合は駒箱を大きくする
     &.run_mode-edit_mode

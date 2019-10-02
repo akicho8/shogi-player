@@ -207,6 +207,7 @@ export default {
     board_piece_back_user_style: { type: Function, default: place => { return {} }, }, // FIXME: add to README
     board_piece_back_user_class: { type: Function, default: place => { return [] }, },
     board_cell_left_click_user_handle: { type: Function, default: null, },
+    player_info:    { type: Object,  default: null, },
   },
   /* eslint-enable */
 

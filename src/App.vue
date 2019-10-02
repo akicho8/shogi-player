@@ -390,6 +390,7 @@
               :vlayout.sync="vlayout"
               :digit_show="digit_show"
               :final_label="final_label"
+              :player_info="player_info"
               :key_event_capture="key_event_capture"
               :slider_show="slider_show"
               :controller_show="controller_show"
@@ -455,6 +456,12 @@
 
               b-field(label="final_label")
                 b-input(v-model.trim="final_label" type="text")
+
+            b-field(grouped group-multiline)
+              b-field(label="player_info.black.name")
+                b-input(v-model.trim="black_name" type="text")
+              b-field(label="player_info.white.name")
+                b-input(v-model.trim="white_name" type="text")
 
             b-field(grouped group-multiline)
               b-field(label="slider_show")
@@ -533,6 +540,7 @@
                 | :<b>vlayout</b>="{{vlayout}}"
                 | :<b>digit_show</b>="{{digit_show}}"
                 | :<b>final_label</b>="'{{final_label}}'"
+                | :<b>player_info</b>="{{player_info}}"
                 | :<b>kifu_body</b>="'{{kifu_body}}'"
                 | /&gt;
 
@@ -683,6 +691,8 @@ export default {
       flip: false,
       vlayout: false,
       digit_show: false,
+      black_name: '先手',
+      white_name: '後手',
 
       final_label: null,
       kifu_body: require("./極限早繰り銀.kif"),
@@ -726,6 +736,17 @@ export default {
     // update_kifu_source(v) {
     //   // this.kifu_body = v
     // },
+  },
+
+  computed: {
+    player_info() {
+      if (this.black_name || this.white_name) {
+        return {
+          black: {name: this.black_name},
+          white: {name: this.white_name},
+        }
+      }
+    }
   },
 }
 </script>
