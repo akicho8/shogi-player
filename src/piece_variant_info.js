@@ -4,8 +4,9 @@ export default class PieceVariantInfo extends MemoryRecord {
   static get define() {
     return [
       /* eslint-disable */
-      { key: 'a', name: "デフォルト", },
-      { key: 'b', name: "将棋図案駒", },
+      { key: 'a', name: "デフォルト",  },
+      { key: 'b', name: "将棋図案駒",  },
+      { key: 'c', name: "将棋図案駒2", },
       /* eslint-enable */
     ]
   }
