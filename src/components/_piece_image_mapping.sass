@@ -90,8 +90,10 @@
 =piece_image_variant_c($piece_key, $promoted, $location_key, $name)
   &.piece_#{$piece_key}
     &.promoted_#{$promoted}
-      &.location_#{$location_key}
-        background-image: url("#{$sp_assets_dir}/zuan/#{$name}.png")
+      background-image: url("#{$sp_assets_dir}/zuan/#{$name}.png")
+      &.location_black
+      &.location_white
+        @extend %is_flip
 
 =piece_image_variant_c_pack()
   +piece_image_variant_c("K", false, "black", "01_oushou")
