@@ -19,18 +19,30 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
   &:after
     +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
 
-// 駒のテクスチャ用
-%piece_fore_texture
-  $advance: 20%                     // 大きくするほど駒が上に移動する
+//--------------------------------------------------------------------------------
+
+$advance: 20%                 // 大きくするほど駒が上に移動する
+
+// 駒のテクスチャの共通設定
+%piece_fore_texture_shared
   color: transparent            // テキストを消す
+  background-repeat: no-repeat
   // background-size: contain      // contain にすると端が欠けない
   // background-size: 50%          // 駒の大きさ contain にしとけばいい
   background-size: 80%          // 駒の大きさ contain にしとけばいい
-  background-repeat: no-repeat
+
+// 駒のテクスチャ用(先手だけの画像を用意している場合)
+%piece_fore_texture_for_black_onoly
+  background-position: 50% 50% + $advance // 先手も後手も下寄り配置 (後手は判定しているので見た目は上にずれる)
+  
+// 駒のテクスチャ用(先後両方の画像を用意している場合)
+%piece_fore_texture_for_both
   &.location_black
-    background-position: 50% 50% + $advance // 先手は枠の下寄り配置
+    @extend %piece_fore_texture_for_black_onoly // 先手は枠の下寄り配置
   &.location_white
-    background-position: 50% 50% - $advance   // 後手は枠の上寄り配置
+    background-position: 50% 50% - $advance // 後手は枠の上寄り配置
+
+//--------------------------------------------------------------------------------
 
 %real_hoverable_bg
   &.hoverable_p
@@ -73,12 +85,17 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
     // 駒の種類
     &.piece_variant-a
       .piece_fore
+        @extend %piece_fore_texture_for_both
         +piece_image_variant_a_pack
     &.piece_variant-b
       .piece_fore
+        @extend %piece_fore_texture_for_black_onoly
         +piece_image_variant_b_pack
+        &.location_white
+          @extend %is_flip
     &.piece_variant-c
       .piece_fore
+        @extend %piece_fore_texture_for_both
         +piece_image_variant_c_pack
 
     // 駒 (あちこちにある)
@@ -90,7 +107,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
       &.current
         animation: real_blink 0.5s ease-in-out infinite alternate
       .piece_fore
-        @extend %piece_fore_texture
+        @extend %piece_fore_texture_shared
         height: 100%   // .piece_back のサイズを継承。inherit だと災いがおきやすいので100%を使う
 
     //////////////////////////////////////////////////////////////////////////////// 駒箱
@@ -115,7 +132,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
       .piece_box
         font-size: 1.5em
         min-height: 1.2em
-      
+
     //////////////////////////////////////////////////////////////////////////////// 駒台
     .piece_stand_outer
       .piece_stand
@@ -151,7 +168,7 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
           min-height: 3em
           padding-top:    0.15em
           padding-bottom: 0.15em
-            
+
     // 駒台(縦並び)
     &.vertical
       .piece_stand_outer
