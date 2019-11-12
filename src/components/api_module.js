@@ -25,6 +25,11 @@ export default {
       this.mediator_setup(turn)
     },
 
+    // 指定手数の局面に設定(play_mode専用・音が出ない)
+    api_play_mode_mediator_seek_to(turn) {
+      this.play_mode_mediator_seek_to(turn)
+    },
+
     // 反転状態の設定
     api_flip_set(flag) {
       this.$store.state.current_flip = flag
