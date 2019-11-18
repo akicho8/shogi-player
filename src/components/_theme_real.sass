@@ -69,9 +69,15 @@ $advance: 20%                 // 大きくするほど駒が上に移動する
 
   &.selectable_p
     &:hover
-      // 選択できる駒だけ反応する。background プロパティをつかうと他の設定をリセットしてしまうので注意
-      background-color: $sp_real_selectable_color
-
+      // スマホでは手を離しても hover 状態を保持してしまう
+      // そのため2手目に1手目の指し手の hover の色がつきっぱなしになってしまう
+      // そうすると手目より1手目の方が目立って違和感がある
+      // なのでマウスが使える環境だけを対象にする
+      +desktop
+        // 選択できる駒だけ反応する
+        // background プロパティをつかうと他の設定をリセットしてしまうので注意
+        background-color: $sp_real_selectable_color
+      
   @extend %real_hoverable_bg
 
 @keyframes real_blink
