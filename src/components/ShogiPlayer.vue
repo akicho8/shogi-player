@@ -122,7 +122,7 @@
           tr: <th>持駒</th><td>{{mediator.hold_pieces}}</td>
           tr: <th>次の手番</th><td>{{mediator.current_location.key}}</td>
           tr: <th>現局面のSFEN</th><td>{{mediator.to_sfen}}</td>
-          tr: <th>正規化手番</th><td>{{real_turn}}</td>
+          tr: <th>正規化手番(real_turn)</th><td>{{real_turn}}</td>
         tr: <th>開始局面番号(start_turn)</th><td>{{start_turn}}</td>
         tr: <th>初期配置(current_preset_key)</th><td>{{current_preset_key}}</td>
         tr: <th>play_modeでの指し手(moves)</th><td>{{moves}}</td>

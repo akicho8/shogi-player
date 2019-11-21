@@ -34,5 +34,14 @@ export default {
     api_flip_set(flag) {
       this.$store.state.current_flip = flag
     },
+
+    // 待った
+    api_retract_a_move() {
+      let turn = this.real_turn - 2
+      if (turn < 0) {
+        turn = 0
+      }
+      this.api_board_turn_set(turn)
+    },
   },
 }

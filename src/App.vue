@@ -580,6 +580,7 @@
         .column
           .buttons.is-centered
             b-button(label="api_random_puton" @click="run_api_random_puton")
+            b-button(label="api_retract_a_move" @click="run_api_retract_a_move")
       .columns
         .column
           .table_wrap
@@ -720,9 +721,8 @@ export default {
       return true
     },
 
-    run_api_random_puton() {
-      this.$refs.api_sp.api_random_puton()
-    },
+    run_api_random_puton()   { this.$refs.api_sp.api_random_puton()   },
+    run_api_retract_a_move() { this.$refs.api_sp.api_retract_a_move() },
 
     play_mode_long_sfen_set(v) {
       this.play_mode_long_sfen = v
