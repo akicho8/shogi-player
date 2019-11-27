@@ -7,6 +7,7 @@ export default class PieceVariantInfo extends MemoryRecord {
       { key: 'a', name: "デフォルト",      },
       { key: 'b', name: "将棋図案駒(新)",  },
       { key: 'c', name: "将棋図案駒(旧)",  },
+      { key: 'd', name: "駒書屋",          },
       /* eslint-enable */
     ]
   }

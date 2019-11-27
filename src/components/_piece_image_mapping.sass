@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------- A
-  
+
 =piece_image_variant_a($piece_key, $promoted, $location_key, $number, $piece_color)
   &.piece_#{$piece_key}
     &.promoted_#{$promoted}
@@ -51,7 +51,7 @@
   +piece_image_variant_a("P", true,  "white", "58", "red")
 
 //-------------------------------------------------------------------------------- B
-    
+
 =piece_image_variant_b($piece_key, $promoted, $name)
   &.piece_#{$piece_key}
     &.promoted_#{$promoted}
@@ -59,7 +59,7 @@
       &.location_black
       &.location_white
         @extend %is_flip
-    
+
 =piece_image_variant_b_pack()
   // 先後共有
   +piece_image_variant_b("K", false, "01_oushou")
@@ -79,13 +79,13 @@
   +piece_image_variant_b("P", true,  "15_tokin")
 
 //-------------------------------------------------------------------------------- C
-    
+
 =piece_image_variant_c($piece_key, $promoted, $location_key, $name)
   &.piece_#{$piece_key}
     &.promoted_#{$promoted}
       &.location_#{$location_key}
         background-image: url("#{$sp_assets_dir}/将棋図案駒_配布データ/#{$name}.png")
-  
+
 =piece_image_variant_c_pack()
   +piece_image_variant_c("K", false, "black", "02_玉将")
   +piece_image_variant_c("R", false, "black", "03_飛車")
@@ -118,3 +118,44 @@
   +piece_image_variant_c("N", true,  "white", "28_成桂_逆")
   +piece_image_variant_c("L", true,  "white", "30_成香_逆")
   +piece_image_variant_c("P", true,  "white", "32_と金_逆")
+
+//-------------------------------------------------------------------------------- C
+
+=piece_image_variant_d($piece_key, $promoted, $location_key, $name)
+  &.piece_#{$piece_key}
+    &.promoted_#{$promoted}
+      &.location_#{$location_key}
+        background-image: url("#{$sp_assets_dir}/SbrowserQ-kinki//#{$name}.png")
+
+=piece_image_variant_d_pack()
+  +piece_image_variant_d("K", false, "black", "sou")
+  +piece_image_variant_d("R", false, "black", "shi")
+  +piece_image_variant_d("B", false, "black", "skaku")
+  +piece_image_variant_d("G", false, "black", "skin")
+  +piece_image_variant_d("S", false, "black", "sgin")
+  +piece_image_variant_d("N", false, "black", "skei")
+  +piece_image_variant_d("L", false, "black", "skyo")
+  +piece_image_variant_d("P", false, "black", "sfu")
+  +piece_image_variant_d("X", false, "black", "sgyoku")
+  +piece_image_variant_d("R", true,  "black", "sryu")
+  +piece_image_variant_d("B", true,  "black", "suma")
+  +piece_image_variant_d("S", true,  "black", "sngin")
+  +piece_image_variant_d("N", true,  "black", "snkei")
+  +piece_image_variant_d("L", true,  "black", "snkyo")
+  +piece_image_variant_d("P", true,  "black", "sto")
+  // 後手
+  +piece_image_variant_d("K", false, "white", "gou")
+  +piece_image_variant_d("R", false, "white", "ghi")
+  +piece_image_variant_d("B", false, "white", "gkaku")
+  +piece_image_variant_d("G", false, "white", "gkin")
+  +piece_image_variant_d("S", false, "white", "ggin")
+  +piece_image_variant_d("N", false, "white", "gkei")
+  +piece_image_variant_d("L", false, "white", "gkyo")
+  +piece_image_variant_d("P", false, "white", "gfu")
+  +piece_image_variant_d("X", false, "white", "ggyoku")
+  +piece_image_variant_d("R", true,  "white", "gryu")
+  +piece_image_variant_d("B", true,  "white", "guma")
+  +piece_image_variant_d("S", true,  "white", "gngin")
+  +piece_image_variant_d("N", true,  "white", "gnkei")
+  +piece_image_variant_d("L", true,  "white", "gnkyo")
+  +piece_image_variant_d("P", true,  "white", "gto")
