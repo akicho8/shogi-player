@@ -1,4 +1,6 @@
-$board_overlay_clickable_size: 25%
+// クリックできるエリアを横に広げるとモバイルのときに画面の右に隙間ができてしまう
+// なので shogi-player の幅以上に広げてはいけない
+$board_overlay_clickable_size: 0%
 
 .shogi-player
   &.run_mode-view_mode
@@ -7,7 +9,7 @@ $board_overlay_clickable_size: 25%
       .overlay_navi
         position: absolute
         z-index: 1
-        width: 75%
+        width: 50%              // 以前まで75%にしていたが要素の半分にすること
         height: 100%
         // ←戻る
         &.previous
