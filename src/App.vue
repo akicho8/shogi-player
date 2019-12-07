@@ -302,7 +302,7 @@
             .modal-card.is-shogi-player-modal-card
               header.modal-card-head
                 p.modal-card-title.is-size-5
-                  | 詰将棋11手詰
+                  | モーダル内表示例
                 button(class="delete" aria-label="close" @click="modal_p = false")
 
               section.modal-card-body
@@ -334,7 +334,7 @@
             |   .modal-card.is-shogi-player-modal-card
             |     header.modal-card-head
             |       p.modal-card-title.is-size-5
-            |         | 詰将棋11手詰
+            |         | モーダル内表示例
             |       button(class="delete" aria-label="close" @click="modal_p = false")
             |
             |     section.modal-card-body
@@ -574,7 +574,7 @@
             :hidden_if_piece_stand_blank="true"
             :board_cell_left_click_user_handle="board_cell_left_click_user_handle"
             :overlay_navi="false"
-            :debug_mode="true"
+            :debug_mode="false"
           )
       .columns
         .column
