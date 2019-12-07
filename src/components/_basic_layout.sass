@@ -13,6 +13,9 @@
   .piece_count1
     visibility: hidden
 
+  .piece_hidden
+    visibility: hidden
+
   .piece_back
     cursor: default     // テキスト選択「I」ではなく矢印カーソルとする
     // height: inherit
@@ -31,14 +34,14 @@
 
   .board_container
     display: inline-block
-      
+
   //////////////////////////////////////////////////////////////////////////////// 駒箱
   &.horizontal
     .piece_box
   &.vertical
     .piece_box
       margin-top: $sp_size_piece_stand_margin_top_bottom
-    
+
   //////////////////////////////////////////////////////////////////////////////// 駒台と将棋盤のレイアウト
   .flippable
     display: inline-flex
@@ -68,13 +71,13 @@
     .flippable
       flex-direction: column
       align-items: center
-    
+
       .piece_stand_outer
         .player_name
           display: inline-block
         .piece_count
           display: inline-block
-        
+
         .location_mark_wrap
           display: inline-block
           .location_mark
@@ -89,8 +92,7 @@
               display: inline-block
               .piece_fore
                 display: inline-block
-        
-                
+
   //////////////////////////////////////////////////////////////////////////////// 将棋盤
   .board_outer
     .board_inner
@@ -111,7 +113,6 @@
         vertical-align: middle   // block要素(Y)を中央にする
         padding: 0               // ブラウザの初期値だと1pxあるので消す
 
-          
   // カーソル位置に表示する持駒
   .cursor_elem
     +touch

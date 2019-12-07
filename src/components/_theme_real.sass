@@ -34,7 +34,7 @@ $advance: 20%                 // 大きくするほど駒が上に移動する
 // 駒のテクスチャ用(先手だけの画像を用意している場合)
 %piece_fore_texture_for_black_onoly
   background-position: 50% 50% + $advance // 先手も後手も下寄り配置 (後手は判定しているので見た目は上にずれる)
-  
+
 // 駒のテクスチャ用(先後両方の画像を用意している場合)
 %piece_fore_texture_for_both
   &.location_black
@@ -77,7 +77,7 @@ $advance: 20%                 // 大きくするほど駒が上に移動する
         // 選択できる駒だけ反応する
         // background プロパティをつかうと他の設定をリセットしてしまうので注意
         background-color: $sp_real_selectable_color
-      
+
   @extend %real_hoverable_bg
 
 @keyframes real_blink
