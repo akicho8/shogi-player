@@ -99,7 +99,7 @@
         button.button.previous( ref="previous" @click.stop.prevent="relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
         button.button.next(     ref="next"     @click.stop.prevent="relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
         button.button.last(     ref="last"     @click.stop.prevent="move_to_last"):              b-icon(icon="menu-right")
-        button.button.flip(                    @click.stop.prevent="board_flip_run"):            b-icon(icon="rotate-3d"     size="is-small")
+        button.button.flip(                    @click.stop.prevent="board_flip_run"):            b-icon(icon="swap-vertical" size="is-small")
       div(v-if="slider_show")
         input.turn_slider(type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="turn_min" :max="turn_max" ref="turn_slider")
 
