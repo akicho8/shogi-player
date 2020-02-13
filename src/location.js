@@ -8,12 +8,11 @@ export default class Location extends MemoryRecord {
     ]
   }
 
-  static cycle_lookup(key) {
-    if (typeof key === "number") {
-      // -1 % 2 が -1 になってしまうのでごまかす
-      key = (Location.values.length + key) % Location.values.length
+  static cycle_lookup(value) {
+    if (typeof value !== "number") {
+      alert(`ArgumentError: ${value}`)
     }
-    return Location.lookup(key)
+    return Location.lookup(Math.abs(value) % Location.values.length)
   }
 
   get flip() {
