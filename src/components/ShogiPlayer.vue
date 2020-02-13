@@ -50,7 +50,7 @@
             template(v-if="current_run_mode === 'view_mode'")
               | {{mediator.current_turn_label(this.final_label)}}
             template(v-if="current_run_mode === 'play_mode'")
-              | {{mediator.display_base_turn + real_turn}}手
+              | {{display_turn}}手
         template(v-if="turn_edit")
           input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
 
@@ -483,6 +483,7 @@ export default {
 
     // 本当は delegate したいシリーズ
     /* eslint-disable */
+    display_turn() { return this.mediator.display_turn },
     real_turn() { return this.mediator.real_turn },
     turn_min()  { return this.mediator.turn_min  },
     turn_max()  { return this.mediator.turn_max  },

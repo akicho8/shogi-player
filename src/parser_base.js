@@ -29,7 +29,7 @@ export default class ParserBase {
     return this.move_infos.length
   }
 
-  get display_base_turn() {
+  get display_turn_base() {
     return 0
   }
 

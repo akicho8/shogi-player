@@ -161,20 +161,20 @@ export default class Mediator {
     return this.data_source.turn_max
   }
 
-  get display_base_turn() {
-    return this.data_source.display_base_turn
-  }
-
   current_turn_label(final_label) {
     if (this.real_turn === this.turn_max) {
       if (final_label) {
-        return `まで${this.real_turn}手で${final_label}`
+        return `まで${this.display_turn}手で${final_label}`
       } else {
-        return `まで${this.real_turn}手で${this.previous_location.name}の勝ち`
+        return `まで${this.display_turn}手で${this.previous_location.name}の勝ち`
       }
     } else {
-      return `${this.real_turn}手`
+      return `${this.display_turn}手`
     }
+  }
+
+  get display_turn() {
+    return this.data_source.display_turn_base + this.real_turn
   }
 
   realized_hold_pieces_of(location_key) {

@@ -66,7 +66,7 @@ export default class SfenParser extends ParserBase {
   }
 
   // sfen_serializer 用
-  get display_base_turn() {
+  get display_turn_base() {
     return Number(this.attributes["turn_counter_next"]) - 1
   }
 
