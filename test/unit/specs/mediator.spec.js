@@ -12,4 +12,22 @@ describe("Mediator", () => {
     mediator.current_turn = 121
     mediator.run()
   })
+
+  it("後手から始まる", () => {
+    const data_source = new SfenParser()
+    data_source.kifu_body = "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL w - 2"
+    data_source.parse()
+    expect(data_source.location_by_offset(0).key).toEqual('white')
+
+    const mediator = new Mediator()
+    mediator.data_source = data_source
+    mediator.current_turn = 0
+    mediator.run()
+
+    // console.log(mediator.turn_min)
+    // console.log(mediator.turn_max)
+    // console.log(mediator.real_turn)
+
+    expect(mediator.current_location.key).toEqual('white')
+  })
 })

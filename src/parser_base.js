@@ -30,10 +30,10 @@ export default class ParserBase {
   }
 
   location_by_offset(offset) {
-    // 次のようにすると w - 2 から始まるときに後手番なのに先手番になってしまう
+    // 次のようにすると w - 2 から始まるときに後手番なのに先手番になってしまう ← いや、あってる
     // const index = this.turn_min + offset + (this.komaochi_p ? 1 : 0)
 
-    const index = (this.komaochi_p ? 1 : 0) + offset
+    const index = this.turn_min + (this.komaochi_p ? 1 : 0) + offset
     // "position startpos" の場合 index が -1 になり (-1 % 2) が -1 になり Location.fetch(-1) でエラーになる
     // なので Math.abs
     return Location.fetch(Math.abs(index) % 2)

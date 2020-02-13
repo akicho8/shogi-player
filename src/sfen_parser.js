@@ -69,6 +69,8 @@ export default class SfenParser extends ParserBase {
     return Number(this.attributes["turn_counter_next"]) - 1
   }
 
+  // "w - 1" は1手目が後手ということ
+  // "w - 3" も、もともとは1手目が後手だった
   get komaochi_p() {
     return (this.turn_min % 2) === 0 && this.location_base.key === "white"
   }
@@ -131,7 +133,9 @@ export default class SfenParser extends ParserBase {
 }
 
 if (process.argv[1] === __filename) {
-  const sfen_parser = new SfenParser()
+  let sfen_parser
+
+  sfen_parser = new SfenParser()
   sfen_parser.kifu_body = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
   sfen_parser.parse()
   console.log(sfen_parser.board)
@@ -140,4 +144,9 @@ if (process.argv[1] === __filename) {
   console.log(sfen_parser.move_infos)
   console.log(sfen_parser.moves)
   console.log(sfen_parser.init_sfen)
+
+  sfen_parser = new SfenParser()
+  sfen_parser.kifu_body = "position sfen lr4knl/3g2gs1/4ppP2/p4bNpp/2pSsN3/PPPP1P2P/2N1P1G2/2G6/L1K4RL w BPs3p 72 moves 2b3c"
+  sfen_parser.parse()
+  console.log(sfen_parser.location_by_offset(0))
 }
