@@ -161,6 +161,10 @@ export default class Mediator {
     return this.data_source.turn_max
   }
 
+  get display_base_turn() {
+    return this.data_source.display_base_turn
+  }
+
   current_turn_label(final_label) {
     if (this.real_turn === this.turn_max) {
       if (final_label) {

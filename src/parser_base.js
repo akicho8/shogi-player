@@ -26,17 +26,23 @@ export default class ParserBase {
   }
 
   get turn_max() {
-    return this.turn_min + this.move_infos.length
+    return this.move_infos.length
+  }
+
+  get display_base_turn() {
+    return 0
   }
 
   location_by_offset(offset) {
+    return this.location_base.advance(offset)
+
     // 次のようにすると w - 2 から始まるときに後手番なのに先手番になってしまう ← いや、あってる
     // const index = this.turn_min + offset + (this.komaochi_p ? 1 : 0)
 
-    const index = this.turn_min + (this.komaochi_p ? 1 : 0) + offset
+    // const index = this.turn_min + (this.komaochi_p ? 1 : 0) + offset
     // "position startpos" の場合 index が -1 になり (-1 % 2) が -1 になり Location.fetch(-1) でエラーになる
     // なので Math.abs
-    return Location.fetch(Math.abs(index) % 2)
+    // return Location.fetch(Math.abs(index) % 2)
   }
 
   get move_infos() {

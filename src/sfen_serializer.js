@@ -13,7 +13,7 @@ export default class SfenSerializer {
 
   get to_s() {
     const parts = this.__base_parts
-    parts.push(this.mediator.real_turn + 1)           // 1
+    parts.push(this.mediator.display_base_turn + this.mediator.real_turn + 1)           // 1
     return parts.join(" ")
   }
 

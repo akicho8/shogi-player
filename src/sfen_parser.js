@@ -65,15 +65,28 @@ export default class SfenParser extends ParserBase {
     return _hold_pieces
   }
 
-  get turn_min() {
+  // sfen_serializer 用
+  get display_base_turn() {
     return Number(this.attributes["turn_counter_next"]) - 1
   }
 
-  // "w - 1" は1手目が後手ということ
-  // "w - 3" も、もともとは1手目が後手だった
-  get komaochi_p() {
-    return (this.turn_min % 2) === 0 && this.location_base.key === "white"
-  }
+  // "b - 1" なら 0
+  // "w - 2" なら 1
+  // "b - 3" なら 2
+  // get turn_min() {
+  //   // return Number(this.attributes["turn_counter_next"]) - 1
+  //   // return Number(this.attributes["turn_counter_next"]) - 1
+  // }
+
+  // // "b - 1" -> turn_min:0 % 2 -> 0 && w
+  // // "w - 2" -> turn_min:1 % 2 -> 1 && w
+  // // "b - 3" -> turn_min:2 % 2 -> 0 && w
+  // // "w - 1" -> turn_min:0 % 2 -> 0 && w -> true
+  // // "b - 2" -> turn_min:1 % 2 -> 1 && w
+  // // "w - 3" -> turn_min:2 % 2 -> 0 && w -> true
+  // get komaochi_p() {
+  //   return (this.turn_min % 2) === 0 && this.location_base.key === "white"
+  // }
 
   get move_infos() {
     // this.moves.map((e, i) => { としたかったが break できないため lodash の forEach に変更。lodash のは false で break できる
@@ -84,7 +97,7 @@ export default class SfenParser extends ParserBase {
       //   attrs["scene_index"] = this.turn_min + i
       //   attrs["scene_offset"] = i
       // }
-      attrs["location"] = this.location_by_offset(i)
+      attrs["location"] = this.location_base.advance(i)
       const md = XRegExp.exec(e, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
       if (!md) {
         return false            // break
