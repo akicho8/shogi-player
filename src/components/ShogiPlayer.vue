@@ -50,7 +50,7 @@
             template(v-if="current_run_mode === 'view_mode'")
               | {{mediator.current_turn_label(this.final_label)}}
             template(v-if="current_run_mode === 'play_mode'")
-              | {{real_turn}}手
+              | {{mediator.display_base_turn + real_turn}}手
         template(v-if="turn_edit")
           input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
 
