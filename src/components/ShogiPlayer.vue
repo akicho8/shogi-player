@@ -50,7 +50,14 @@
             template(v-if="current_run_mode === 'view_mode'")
               | {{mediator.current_turn_label(this.final_label)}}
             template(v-if="current_run_mode === 'play_mode'")
-              | {{display_turn}}手
+              template(v-if="display_turn_base === 0")
+                | {{real_turn}}
+              template(v-if="display_turn_base >= 1")
+                | {{display_turn_base}}
+                template(v-if="real_turn >= 1")
+                  | +{{real_turn}}
+              | 手
+
         template(v-if="turn_edit")
           input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
 
@@ -483,10 +490,11 @@ export default {
 
     // 本当は delegate したいシリーズ
     /* eslint-disable */
-    display_turn() { return this.mediator.display_turn },
-    real_turn() { return this.mediator.real_turn },
-    turn_min()  { return this.mediator.turn_min  },
-    turn_max()  { return this.mediator.turn_max  },
+    display_turn_base() { return this.mediator.display_turn_base }, // 表示する上での開始手数で普通は 0
+    real_turn()         { return this.mediator.real_turn         }, // 手数のオフセット
+    display_turn()      { return this.mediator.display_turn      }, // display_turn_base + real_turn
+    turn_min()          { return this.mediator.turn_min          }, // 必ず 0
+    turn_max()          { return this.mediator.turn_max          }, // moves が 2 なら 2
     /* eslint-enable */
 
     // mapState({

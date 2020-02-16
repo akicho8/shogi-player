@@ -173,8 +173,14 @@ export default class Mediator {
     }
   }
 
+  // 100手目から始まっている棋譜でオフセットが20のときは足して 120 を返す
   get display_turn() {
-    return this.data_source.display_turn_base + this.real_turn
+    return this.display_turn_base + this.real_turn
+  }
+
+  // 何手目から始まっているかを返す
+  get display_turn_base() {
+    return this.data_source.display_turn_base
   }
 
   realized_hold_pieces_of(location_key) {
