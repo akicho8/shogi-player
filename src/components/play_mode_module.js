@@ -51,7 +51,7 @@ export default {
         this.init_sfen_build()
       }
 
-      this.play_mode_mediator_seek_to(this.real_turn)
+      this.play_mode_mediator_seek_to(this.turn_offset)
     },
 
     // 現在の状態を基点として play_mode に入る
@@ -69,7 +69,7 @@ export default {
     },
 
     moves_set(value) {
-      this.moves = _.take(this.moves, this.real_turn) // 「待った」して指す場合を考慮してカレント以降の指し手を削除する
+      this.moves = _.take(this.moves, this.turn_offset) // 「待った」して指す場合を考慮してカレント以降の指し手を削除する
       this.moves.push(value)
     },
 

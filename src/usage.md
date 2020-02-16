@@ -90,6 +90,6 @@
     <ShogiPlayer kifu_body='position startpos moves 7g7f 8c8d' ref="sp" />
 
     <template v-if="$refs.sp">
-      <input type="range" :value="$refs.sp.real_turn" @input="$refs.sp.current_turn_set($event.target.value)" :min="$refs.sp.turn_min" :max="$refs.sp.turn_max" />
+      <input type="range" :value="$refs.sp.turn_offset" @input="$refs.sp.current_turn_set($event.target.value)" :min="$refs.sp.turn_offset_min" :max="$refs.sp.turn_offset_max" />
 
 $refs をテンプレート内で使うのはよくないようです(2019-05-09)

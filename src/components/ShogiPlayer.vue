@@ -50,12 +50,12 @@
             template(v-if="current_run_mode === 'view_mode'")
               | {{mediator.current_turn_label(this.final_label)}}
             template(v-if="current_run_mode === 'play_mode'")
-              template(v-if="display_turn_base === 0")
-                | {{real_turn}}
-              template(v-if="display_turn_base >= 1")
-                | {{display_turn_base}}
-                template(v-if="real_turn >= 1")
-                  | +{{real_turn}}
+              template(v-if="turn_base === 0")
+                | {{turn_offset}}
+              template(v-if="turn_base >= 1")
+                | {{turn_base}}
+                template(v-if="turn_offset >= 1")
+                  | +{{turn_offset}}
               | 手
 
         template(v-if="turn_edit")
@@ -108,7 +108,7 @@
         button.button.last(     ref="last"     @click.stop.prevent="move_to_last"):              b-icon(icon="menu-right")
         button.button.flip(                    @click.stop.prevent="board_flip_run"):            b-icon(icon="swap-vertical" size="is-small")
       div(v-if="slider_show")
-        input.turn_slider(type="range" :value="real_turn" @input="current_turn_set($event.target.value)" :min="turn_min" :max="turn_max" ref="turn_slider")
+        input.turn_slider(type="range" :value="turn_offset" @input="current_turn_set($event.target.value)" :min="turn_offset_min" :max="turn_offset_max" ref="turn_slider")
 
     //- http://kyokumen.jp/positions/lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL%20w%20-
     .sfen_area.is-size-7.has-text-grey(v-if="sfen_show")
@@ -129,7 +129,7 @@
           tr: <th>持駒</th><td>{{mediator.hold_pieces}}</td>
           tr: <th>次の手番</th><td>{{mediator.current_location.key}}</td>
           tr: <th>現局面のSFEN</th><td>{{mediator.to_sfen}}</td>
-          tr: <th>正規化手番(real_turn)</th><td>{{real_turn}}</td>
+          tr: <th>正規化手番(turn_offset)</th><td>{{turn_offset}}</td>
         tr: <th>開始局面番号(start_turn)</th><td>{{start_turn}}</td>
         tr: <th>初期配置(current_preset_key)</th><td>{{current_preset_key}}</td>
         tr: <th>play_modeでの指し手(moves)</th><td>{{moves}}</td>
@@ -237,7 +237,7 @@ export default {
       setting_modal_p: false,
       inside_custom_kifu: null, // 設定ダイアログで変更されたときに入る
       env: process.env.NODE_ENV,
-      view_mode_real_turn_save: null, // viewモードを抜けるとき現在の手数を記憶しておく
+      view_mode_turn_offset_save: null, // viewモードを抜けるとき現在の手数を記憶しておく
     }
   },
 
@@ -286,12 +286,12 @@ export default {
     },
 
     kifu_source() {
-      // const before_turn_max = this.turn_max
+      // const before_turn_offset_max = this.turn_offset_max
       const before_sfen = this.mediator ? this.mediator.to_sfen : ""
-      this.log(`before turn_max: ${this.turn_max}`)
+      this.log(`before turn_offset_max: ${this.turn_offset_max}`)
       this.log(`before sfen: ${before_sfen}`)
       this.mediator_setup(this.start_turn)
-      this.log(`after turn_max: ${this.turn_max}`)
+      this.log(`after turn_offset_max: ${this.turn_offset_max}`)
       this.log(`after sfen: ${this.mediator.to_sfen}`)
       const sfen_change_p = (before_sfen !== this.mediator.to_sfen)
       if (this.current_run_mode === "view_mode") {
@@ -306,8 +306,8 @@ export default {
         // 2. 自分の指し手が正しい指し手だと判断された棋譜が返って反映されたのか → 駒音なし
         // この区別が付かない。なのでここで成らさない方がよい
         // this.sound_call("piece_sound")
-        // ……と思ったが 1 は turn_max が変化したかどうかで判断できる。いや sfen を見ればわかる？ → そこまでする必要ない
-        // if (before_turn_max !== this.turn_max) {
+        // ……と思ったが 1 は turn_offset_max が変化したかどうかで判断できる。いや sfen を見ればわかる？ → そこまでする必要ない
+        // if (before_turn_offset_max !== this.turn_offset_max) {
         if (sfen_change_p) {
           this.sound_call("piece_sound")
         }
@@ -320,14 +320,14 @@ export default {
 
       if (this.current_run_mode === "view_mode") {
         this.log("current_run_mode: view_mode")
-        // alert(`復元:${this.view_mode_real_turn_save}`)
-        this.view_mode_mediator_update(this.view_mode_real_turn_save)
-        this.view_mode_real_turn_save = null
+        // alert(`復元:${this.view_mode_turn_offset_save}`)
+        this.view_mode_mediator_update(this.view_mode_turn_offset_save)
+        this.view_mode_turn_offset_save = null
       } else {
         // view_mode ではなくなったときの最初だけ保存しておく(mediatorをまるごと保存しておく手もあるかも)
-        if (this.view_mode_real_turn_save === null) {
-          this.view_mode_real_turn_save = this.real_turn
-          // alert(`保存:${this.view_mode_real_turn_save}`)
+        if (this.view_mode_turn_offset_save === null) {
+          this.view_mode_turn_offset_save = this.turn_offset
+          // alert(`保存:${this.view_mode_turn_offset_save}`)
         }
       }
 
@@ -381,7 +381,7 @@ export default {
     view_mode_mediator_update(turn) {
       this.mediator_setup(turn)
       if (this.url_embed_turn) {
-        document.location.hash = this.real_turn
+        document.location.hash = this.turn_offset
       }
       // this.sound_call("piece_sound")
       this.update_counter++
@@ -401,7 +401,7 @@ export default {
 
     turn_edit_run() {
       this.turn_edit = true
-      this.turn_edit_value = this.real_turn
+      this.turn_edit_value = this.turn_offset
       this.$nextTick(() => this.$refs.turn_edit_input.focus())
     },
 
@@ -490,11 +490,11 @@ export default {
 
     // 本当は delegate したいシリーズ
     /* eslint-disable */
-    display_turn_base() { return this.mediator.display_turn_base }, // 表示する上での開始手数で普通は 0
-    real_turn()         { return this.mediator.real_turn         }, // 手数のオフセット
-    display_turn()      { return this.mediator.display_turn      }, // display_turn_base + real_turn
-    turn_min()          { return this.mediator.turn_min          }, // 必ず 0
-    turn_max()          { return this.mediator.turn_max          }, // moves が 2 なら 2
+    turn_base() { return this.mediator.turn_base }, // 表示する上での開始手数で普通は 0
+    turn_offset()         { return this.mediator.turn_offset         }, // 手数のオフセット
+    display_turn()      { return this.mediator.display_turn      }, // turn_base + turn_offset
+    turn_offset_min()          { return this.mediator.turn_offset_min          }, // 必ず 0
+    turn_offset_max()          { return this.mediator.turn_offset_max          }, // moves が 2 なら 2
     /* eslint-enable */
 
     // mapState({

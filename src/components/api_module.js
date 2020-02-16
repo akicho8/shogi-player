@@ -37,7 +37,7 @@ export default {
 
     // 待った
     api_retract_a_move() {
-      let turn = this.real_turn - 2
+      let turn = this.turn_offset - 2
       if (turn < 0) {
         turn = 0
       }

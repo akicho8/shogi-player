@@ -102,10 +102,10 @@ export default {
       //   }
       // }
       // if (e.key === "[" || e.key === "Home" || e.code === "Escape") {
-      //   force_value = this.turn_min
+      //   force_value = this.turn_offset_min
       // }
       // if (e.key === "]" || e.key === "End") {
-      //   force_value = this.turn_max
+      //   force_value = this.turn_offset_max
       // }
       //
       // let v = this.current_turn
@@ -115,11 +115,11 @@ export default {
       // if (force_value !== null) {
       //   v = force_value
       // }
-      // if (v < this.turn_min) {
-      //   v = this.turn_min
+      // if (v < this.turn_offset_min) {
+      //   v = this.turn_offset_min
       // }
-      // if (this.turn_max < v) {
-      //   v = this.turn_max
+      // if (this.turn_offset_max < v) {
+      //   v = this.turn_offset_max
       // }
       // this.current_turn = v
       //
@@ -158,22 +158,22 @@ export default {
     },
 
     move_to_first() {
-      this.current_turn_set(this.turn_min)
+      this.current_turn_set(this.turn_offset_min)
       this.focus_to("turn_slider") || this.focus_to("first")
     },
 
     move_to_last() {
-      this.current_turn_set(this.turn_max)
+      this.current_turn_set(this.turn_offset_max)
       this.focus_to("turn_slider") || this.focus_to("last")
     },
 
     current_turn_add(v) {
-      this.current_turn_set(this.mediator.real_turn + v)
+      this.current_turn_set(this.mediator.turn_offset + v)
     },
 
     current_turn_set(v) {
       const new_val = this.mediator.turn_clamp(v)
-      const updated = this.real_turn !== new_val
+      const updated = this.turn_offset !== new_val
 
       if (updated) {
         if (this.current_run_mode === "view_mode") {
@@ -183,7 +183,7 @@ export default {
           this.play_mode_mediator_seek_to(new_val)
         }
         this.sound_call("piece_sound")
-        this.$emit("update:start_turn", this.real_turn)
+        this.$emit("update:start_turn", this.turn_offset)
       }
     },
 

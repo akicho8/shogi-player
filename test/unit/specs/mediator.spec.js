@@ -24,9 +24,9 @@ describe("Mediator", () => {
     mediator.current_turn = 0
     mediator.run()
 
-    // console.log(mediator.turn_min)
-    // console.log(mediator.turn_max)
-    // console.log(mediator.real_turn)
+    // console.log(mediator.turn_offset_min)
+    // console.log(mediator.turn_offset_max)
+    // console.log(mediator.turn_offset)
 
     expect(mediator.current_location.key).toEqual('white')
   })

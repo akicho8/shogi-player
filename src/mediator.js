@@ -32,7 +32,7 @@ export default class Mediator {
 
     const move_infos = this.data_source.move_infos
 
-    const num = this.real_turn - this.turn_min
+    const num = this.turn_offset - this.turn_offset_min
     _(num).times((i) => { this.execute_one(move_infos[i]) })
   }
 
@@ -127,42 +127,42 @@ export default class Mediator {
   }
 
   // ruby style array index access
-  get real_turn() {
+  get turn_offset() {
     let index = Number(this.current_turn)
     if (index < 0) {
-      index += this.turn_max + 1
+      index += this.turn_offset_max + 1
     }
     return this.turn_clamp(index)
   }
 
   turn_clamp(index) {
-    return _.clamp(Number(index), this.turn_min, this.turn_max)
+    return _.clamp(Number(index), this.turn_offset_min, this.turn_offset_max)
   }
 
   get previous_location() {
-    return this.data_source.location_by_offset(this.real_turn - 1)
+    return this.data_source.location_by_offset(this.turn_offset - 1)
   }
 
   get current_location() {
-    return this.data_source.location_by_offset(this.real_turn)
+    return this.data_source.location_by_offset(this.turn_offset)
   }
 
   get current_comments() {
     if (this.data_source.comments_pack) {
-      return this.data_source.comments_pack[this.real_turn]
+      return this.data_source.comments_pack[this.turn_offset]
     }
   }
 
-  get turn_min() {
-    return this.data_source.turn_min
+  get turn_offset_min() {
+    return this.data_source.turn_offset_min
   }
 
-  get turn_max() {
-    return this.data_source.turn_max
+  get turn_offset_max() {
+    return this.data_source.turn_offset_max
   }
 
   current_turn_label(final_label) {
-    if (this.real_turn === this.turn_max) {
+    if (this.turn_offset === this.turn_offset_max) {
       if (final_label) {
         return `まで${this.display_turn}手で${final_label}`
       } else {
@@ -175,12 +175,12 @@ export default class Mediator {
 
   // 100手目から始まっている棋譜でオフセットが20のときは足して 120 を返す
   get display_turn() {
-    return this.display_turn_base + this.real_turn
+    return this.turn_base + this.turn_offset
   }
 
   // 何手目から始まっているかを返す
-  get display_turn_base() {
-    return this.data_source.display_turn_base
+  get turn_base() {
+    return this.data_source.turn_base
   }
 
   realized_hold_pieces_of(location_key) {

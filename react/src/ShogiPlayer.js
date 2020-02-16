@@ -82,7 +82,7 @@ class ShogiPlayer extends React.Component {
     })
 
     const slider_block = []
-    slider_block.push(<input type="range" value={this.state.current_turn} onChange={this.current_turn_update.bind(this)} min={mediator.parser.turn_min} max={mediator.parser.turn_max} />)
+    slider_block.push(<input type="range" value={this.state.current_turn} onChange={this.current_turn_update.bind(this)} min={mediator.parser.turn_offset_min} max={mediator.parser.turn_offset_max} />)
 
     return (
       <div className="shogi-player">

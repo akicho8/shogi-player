@@ -66,26 +66,26 @@ export default class SfenParser extends ParserBase {
   }
 
   // sfen_serializer 用
-  get display_turn_base() {
+  get turn_base() {
     return Number(this.attributes["turn_counter_next"]) - 1
   }
 
   // "b - 1" なら 0
   // "w - 2" なら 1
   // "b - 3" なら 2
-  // get turn_min() {
+  // get turn_offset_min() {
   //   // return Number(this.attributes["turn_counter_next"]) - 1
   //   // return Number(this.attributes["turn_counter_next"]) - 1
   // }
 
-  // // "b - 1" -> turn_min:0 % 2 -> 0 && w
-  // // "w - 2" -> turn_min:1 % 2 -> 1 && w
-  // // "b - 3" -> turn_min:2 % 2 -> 0 && w
-  // // "w - 1" -> turn_min:0 % 2 -> 0 && w -> true
-  // // "b - 2" -> turn_min:1 % 2 -> 1 && w
-  // // "w - 3" -> turn_min:2 % 2 -> 0 && w -> true
+  // // "b - 1" -> turn_offset_min:0 % 2 -> 0 && w
+  // // "w - 2" -> turn_offset_min:1 % 2 -> 1 && w
+  // // "b - 3" -> turn_offset_min:2 % 2 -> 0 && w
+  // // "w - 1" -> turn_offset_min:0 % 2 -> 0 && w -> true
+  // // "b - 2" -> turn_offset_min:1 % 2 -> 1 && w
+  // // "w - 3" -> turn_offset_min:2 % 2 -> 0 && w -> true
   // get komaochi_p() {
-  //   return (this.turn_min % 2) === 0 && this.location_base.key === "white"
+  //   return (this.turn_offset_min % 2) === 0 && this.location_base.key === "white"
   // }
 
   get move_infos() {
@@ -94,7 +94,7 @@ export default class SfenParser extends ParserBase {
     _.forEach(this.moves, (e, i) => {
       const attrs = {}
       // if (true) {
-      //   attrs["scene_index"] = this.turn_min + i
+      //   attrs["scene_index"] = this.turn_offset_min + i
       //   attrs["scene_offset"] = i
       // }
       attrs["location"] = this.location_base.advance(i)
