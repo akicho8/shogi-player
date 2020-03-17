@@ -29,7 +29,7 @@ $sp_simple_current_bg2:    lighten($sp_simple_base_color, 45%)   !default // 最
 $sp_simple_origin_bg:      lighten($sp_simple_base_color, 45%)   !default // 最後に動かした駒の元の位置の背景色
 $sp_simple_promoted_color: hsl(0, 50%, 50%)                      !default // 成駒の色
 $sp_simple_selectable_color: $sp_simple_origin_bg                !default // 持ち上げげれる駒の背景色
-$sp_simple_holding_color:    hsl(240, 80%, 90%)                  !default // 持ち上げた駒の背景色
+$sp_simple_holding_color:  lighten($cyan, 25%)                   !default // 持ち上げた駒のボーダー
 $sp_simple_piece_count_color: lighten($sp_simple_base_color, 0%) !default // 駒数の色
 $sp_simple_cell_hover_color: hsl(0, 0%, 30%)                     !default // セルのボーダー
 $sp_simple_turn_active_color: lighten($cyan, 25%)                !default // 手番のときの駒マークの色

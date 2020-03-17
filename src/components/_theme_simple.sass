@@ -35,11 +35,14 @@
       &.holding_p
         +desktop
           opacity: 0.4
-        +touch
-          background-color: $sp_simple_holding_color
+          // background-color: $sp_simple_holding_color
           // さらに駒を持ったときは色を濃くする
           // &:hover
           //   background-color: $sp_simple_holding_color
+        +touch
+          // タッチデバイスの場合は動かせないので枠をつける
+          border: 1px solid $sp_simple_holding_color
+          height: inherit     // ←【超重要】これを入れないと touch のとき選択した駒の背景に隙間ができる
 
       // 選択できる駒だけ反応する
       &.selectable_p
