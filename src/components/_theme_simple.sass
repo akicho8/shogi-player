@@ -56,13 +56,14 @@
         font-weight: bold
         animation: simple_blink 0.5s ease-in-out infinite alternate
         background-color: $sp_simple_current_bg1
+        height: inherit  // ←【超重要】これを入れないと駒が移動したあとの background に隙間ができる
 
     .board_inner
       margin: 0 $sp_simple_margin
       +board_star_mark_define($sp_simple_grid_color)
 
       border-collapse: separate
-      border: $sp_simple_grid_outer solid $sp_simple_grid_color
+      // border: $sp_simple_grid_outer solid $sp_simple_grid_color
       border-spacing: $sp_simple_grid_inner
       background-color: $sp_simple_grid_color
 
