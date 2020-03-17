@@ -10,12 +10,16 @@
     &:hover
       background-color: $sp_simple_selectable_color
 
+// 駒を持ち上げた状態のとき、駒を置けるセルを明確にするため、セルにボーダーをつける
+// ただし touch 以下ではマウスカーソルがでないため、ボーダーが移動せず、つまり持ち上げたセルだけにボーダーがついてしまう
+// これはわかりにくいため desktop 以上のときだけにする
 %hoverable_bg_for_cell
   &.hoverable_p
     &:hover
-      border-color: $sp_simple_cell_hover_color
-      border-style: solid
-      border-width: 1px
+      +desktop
+        border-color: $sp_simple_cell_hover_color
+        border-style: solid
+        border-width: 1px
 
 .shogi-player
   &.theme-simple
