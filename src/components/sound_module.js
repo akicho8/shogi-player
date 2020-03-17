@@ -15,7 +15,6 @@ export default {
 
   data() {
     return {
-      piece_sound: null,
     }
   },
 
@@ -36,6 +35,7 @@ export default {
   methods: {
     sound_call(key) {
       if (this.sound_effect) {
+        key = this.as_key(key)
         const object = this[key]
         if (object) {
           object.play()
@@ -51,6 +51,7 @@ export default {
 
     sound_load(key, file) {
       if (this.sound_effect) {
+        key = this.as_key(key)
         const object = this[key]
 
         if (_.isNil(object)) {
@@ -58,6 +59,11 @@ export default {
         }
         this[key].options["volume"] = this.volume
       }
+    },
+
+    // this.piece_sound にすると無意味にリアクティブになるので this.$piece_sound にしておく
+    as_key(key) {
+      return "$" + key
     },
   },
 }
