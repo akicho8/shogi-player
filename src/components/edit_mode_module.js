@@ -42,6 +42,10 @@ export default {
     }
   },
 
+  beforeDestroy() {
+    this.virtual_piece_destroy()
+  },
+
   methods: {
     // 盤をクリック
     board_cell_left_click(xy, e) {
@@ -615,8 +619,8 @@ export default {
         this.cursor_elem = null
         this.mouse_stick = false
 
-        window.removeEventListener("mousemove", this.mousemove_hook)
-        window.removeEventListener("click", this.click_hook)
+        window.removeEventListener("mousemove", this.mousemove_hook, false)
+        window.removeEventListener("click", this.click_hook, false)
       }
     },
 

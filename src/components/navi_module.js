@@ -27,6 +27,10 @@ export default {
     window.addEventListener("keydown", this.keydown_hook, false)
   },
 
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.keydown_hook)
+  },
+
   created() {
     this.$store.state.current_flip = this.flip
     this.$store.state.current_vlayout = this.vlayout
