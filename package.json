@@ -20,8 +20,8 @@
     "release": "npm version patch && npm publish && git push --tags"
   },
   "dependencies": {
-    "autolinker": "^1.6.0",
-    "autoprefixer": "^7.1.2",
+    "autolinker": "^3.14.1",
+    "autoprefixer": "^9.7.6",
     "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.22.1",
@@ -42,14 +42,14 @@
     "bulma": "^0.8.2",
     "css-browser-selector": "^0.6.5",
     "js-memory-record": "^0.0.12",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.15",
     "minimalistic-assert": "^1.0.0",
     "pug": "^2.0.4",
     "sass-loader": "^6.0.6",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.2",
-    "xregexp": "^4.0.0"
+    "xregexp": "^4.3.0"
   },
   "devDependencies": {
     "chalk": "^2.0.1",
