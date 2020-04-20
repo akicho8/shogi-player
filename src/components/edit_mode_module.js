@@ -601,6 +601,10 @@ export default {
       piece_back.appendChild(piece_fore)
       this.$cursor_elem.appendChild(piece_back)
 
+      // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
+      this.$cursor_elem.style.left = "-50%"
+      this.$cursor_elem.style.top  = "-50%"
+
       if (this.cursor_elem_in_board_container) {
         this.$refs.board_container_ref.appendChild(this.$cursor_elem)
       } else {
