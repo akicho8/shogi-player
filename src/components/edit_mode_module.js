@@ -26,7 +26,7 @@ export default {
 
       // プレフィクスに_をつけるとVueに監視されない
       me_running_p: false,        // mousemove イベント緩和用
-      me_last_event: null,        // mousemove イベント
+      $me_last_event: null,        // mousemove イベント
 
       cursor_elem_in_board_container: true,
 
@@ -508,7 +508,7 @@ export default {
     },
 
     mousemove_hook(e) {
-      this.me_last_event = e
+      this.$me_last_event = e
 
       // 連続で呼ばれるイベント処理を緩和する方法
       // https://qiita.com/noplan1989/items/9333faad731f5ecaaccd
@@ -538,10 +538,10 @@ export default {
     },
 
     cursor_elem_set_pos() {
-      if (this.$cursor_elem && this.me_last_event && this.mouse_stick) {
+      if (this.$cursor_elem && this.$me_last_event && this.mouse_stick) {
         // TODO: これが遅いのか？ もっと速く設定できる方法があれば変更したい
-        let x = this.me_last_event.clientX
-        let y = this.me_last_event.clientY
+        let x = this.$me_last_event.clientX
+        let y = this.$me_last_event.clientY
 
         if (this.cursor_elem_in_board_container) {
           // const rect = this.$refs.board_container_ref.getBoundingClientRect()
@@ -568,7 +568,7 @@ export default {
       // キーボードイベントの場合は null が来るようにしている
       // マウスを動かしてはじめて座標が取れるのでキーボードの場合はすぐに駒は表示されない
       if (event) {
-        this.me_last_event = event
+        this.$me_last_event = event
         this.cursor_elem_set_pos()
       }
 
