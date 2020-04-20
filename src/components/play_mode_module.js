@@ -76,9 +76,9 @@ export default {
       this.mediator.run()
     },
 
+    // 「待った」して指す場合を考慮してカレント以降の指し手を削除してから追加する
     moves_set(value) {
-      this.moves = _.take(this.moves, this.turn_offset) // 「待った」して指す場合を考慮してカレント以降の指し手を削除する
-      this.moves.push(value)
+      this.moves = [...this.moves_take_turn_offset, value]
     },
 
     turn_next() {
@@ -105,8 +105,6 @@ export default {
     play_mode_current_sfen() {
       if (this.init_sfen) {
         return this.init_sfen + " moves " + this.moves.join(" ")
-      } else {
-        return null
       }
     },
 
@@ -116,6 +114,12 @@ export default {
 
     human_locations() {
       return SideInfo.fetch(this.human_side_key).locations
+    },
+
+    // moves.take(turn_offset) を返す
+    // 5手ある棋譜で3手目まで戻したときは3手分の指し手を返す
+    moves_take_turn_offset() {
+      return _.take(this.moves, this.turn_offset)
     },
   },
 }

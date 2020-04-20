@@ -441,7 +441,7 @@
               )
               //- Slot動作確認用
               template(slot="sfen_part" slot-scope="props")
-                | ({{props.mediator.to_sfen}})
+                | ({{props.mediator.to_simple_sfen}})
                 //- hr
                 //- | ({{props.mediator.to_sfen_without_turn}})
           hr

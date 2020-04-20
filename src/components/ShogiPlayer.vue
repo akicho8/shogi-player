@@ -112,8 +112,8 @@
 
     //- http://kyokumen.jp/positions/lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL%20w%20-
     .sfen_area.is-size-7.has-text-grey(v-if="sfen_show")
-      slot(name="sfen_part" :sfen="mediator.to_sfen" :mediator="mediator")
-        | {{mediator.to_sfen}}
+      slot(name="sfen_part" :sfen="mediator.to_simple_sfen" :mediator="mediator")
+        | {{mediator.to_simple_sfen}}
 
     CommentArea(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
 
@@ -128,7 +128,7 @@
           tr: <th>駒箱</th><td>{{mediator.piece_box_realize()}}</td>
           tr: <th>持駒</th><td>{{mediator.hold_pieces}}</td>
           tr: <th>次の手番</th><td>{{mediator.current_location.key}}</td>
-          tr: <th>現局面のSFEN</th><td>{{mediator.to_sfen}}</td>
+          tr: <th>現局面のSFEN</th><td>{{mediator.to_simple_sfen}}</td>
           tr: <th>正規化手番(turn_offset)</th><td>{{turn_offset}}</td>
         tr: <th>開始局面番号(start_turn)</th><td>{{start_turn}}</td>
         tr: <th>初期配置(current_preset_key)</th><td>{{current_preset_key}}</td>
@@ -287,13 +287,13 @@ export default {
 
     kifu_source() {
       // const before_turn_offset_max = this.turn_offset_max
-      const before_sfen = this.mediator ? this.mediator.to_sfen : ""
+      const before_sfen = this.mediator ? this.mediator.to_simple_sfen : ""
       this.log(`before turn_offset_max: ${this.turn_offset_max}`)
       this.log(`before sfen: ${before_sfen}`)
       this.mediator_setup(this.start_turn)
       this.log(`after turn_offset_max: ${this.turn_offset_max}`)
-      this.log(`after sfen: ${this.mediator.to_sfen}`)
-      const sfen_change_p = (before_sfen !== this.mediator.to_sfen)
+      this.log(`after sfen: ${this.mediator.to_simple_sfen}`)
+      const sfen_change_p = (before_sfen !== this.mediator.to_simple_sfen)
       if (this.current_run_mode === "view_mode") {
         if (sfen_change_p) {
           this.sound_call("piece_sound")

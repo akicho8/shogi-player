@@ -194,16 +194,19 @@ export default class Mediator {
 
   // -------------------------------------------------------------------------------- serialize
 
-  get to_sfen() {
+  // 4k4/9/4G4/9/9/9/9/9/9 b G2r2b2g4s4n4l18p 1
+  get to_simple_sfen() {
     return this.sfen_serializer.to_s
   }
 
+  // 4k4/9/4G4/9/9/9/9/9/9 b G2r2b2g4s4n4l18p
   get to_sfen_without_turn() {
     return this.sfen_serializer.to_s_without_turn
   }
 
+  // position sfen 4k4/9/4G4/9/9/9/9/9/9 b G2r2b2g4s4n4l18p 1
   get to_position_sfen() {
-    return `position sfen ${this.to_sfen}`
+    return `position sfen ${this.to_simple_sfen}`
   }
 
   get sfen_serializer() {
