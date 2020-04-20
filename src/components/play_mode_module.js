@@ -57,7 +57,15 @@ export default {
     // 現在の状態を基点として play_mode に入る
     init_sfen_build() {
       const sfen_serializer = this.mediator.sfen_serializer
-      this.init_sfen = "position sfen " + sfen_serializer.to_board_sfen + " " + this.init_location.key[0] + " " + sfen_serializer.to_hold_pieces + " " + "1"
+
+      this.init_sfen = [
+        "position sfen",
+        sfen_serializer.to_board_sfen,
+        this.init_location.key[0],
+        sfen_serializer.to_hold_pieces,
+        "1",
+      ].join(" ")
+
       this.moves = []
     },
 
