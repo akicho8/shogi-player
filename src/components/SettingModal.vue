@@ -51,8 +51,11 @@
         b-radio-button(v-model="$store.state.current_size" :native-value="e.key" size="is-small") {{e.name}}
 
     template(v-if="sp_data.mediator")
-      b-field(label="現局面(Readonly)")
+      b-field(label="再生モードの現局面(Readonly)")
         b-input(:value="sp_data.mediator.to_position_sfen" type="input" size="is-small" readonly)
+
+    b-field(label="編集モードの現局面(Readonly)")
+      b-input(:value="edit_mode_current_sfen" type="input" size="is-small" readonly)
 
     b-field(label="再生モードの棋譜(編集可)")
       b-input(v-model="kifu_source2" type="textarea" size="is-small")
@@ -89,6 +92,7 @@ export default {
     run_mode: { required: true },
     kifu_source: { required: false },
     play_mode_current_sfen: { required: true }, // TODO: 親をそのまま参照したいんだけど $data を渡しても play_mode_current_sfen は computed だから参照できない
+    edit_mode_current_sfen: { required: true },  // TODO: 親を受けとりたい
     sp_data: { required: true },                // TODO: $data ではなく親を受けとりたい
   },
 

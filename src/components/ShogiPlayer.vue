@@ -12,6 +12,7 @@
     i.fas.fa-spinner.fa-pulse
 
   //- | {{mouseover_info}}
+  //- | {{edit_mode_current_sfen}}
 
   div.edit_mode_controller(v-if="current_run_mode === 'edit_mode'")
     .edit_mode_controller_wrap
@@ -70,6 +71,7 @@
           :kifu_source="kifu_source"
           @update:kifu_body="update_kifu_source"
           :play_mode_current_sfen="play_mode_current_sfen"
+          :edit_mode_current_sfen="edit_mode_current_sfen"
           :sp_data="$data"
         )
 
@@ -135,10 +137,39 @@
         tr: <th>play_modeでの指し手(moves)</th><td>{{moves}}</td>
         tr: <th>play_modeの開始局面(init_sfen)</th><td>{{init_sfen}}</td>
         tr: <th>編集モード時の手番(init_location_key)</th><td>{{init_location_key}}</td>
+        tr: <th>編集モード時の手番を判定したSFEN(edit_mode_current_sfen)</th><td>{{edit_mode_current_sfen}}</td>
         tr: <th>play_modeでのSFEN(play_mode_current_sfen)</th><td>{{play_mode_current_sfen}}</td>
         tr: <th>key_event_capture</th><td>{{key_event_capture}}</td>
         tr: <th>interval_id</th><td>{{interval_id}}</td>
         tr: <th>mouseover_info</th><td>{{mouseover_info}}</td>
+
+  table(border=1)
+    caption
+      | props
+    tr(v-for="(value, key) in $props")
+      th(v-text="key")
+      td(style="white-space: pre" v-text="JSON.stringify(value, null, 4)")
+
+  table(border=1)
+    caption
+      | data
+    tr(v-for="(value, key) in $data")
+      th(v-text="key")
+      td(style="white-space: pre" v-text="JSON.stringify(value, null, 4)")
+
+  table(border=1)
+    caption
+      | computed
+    tr(v-for="(e, key) in _computedWatchers")
+      th(v-text="key")
+      td(style="white-space: pre" v-text="JSON.stringify(e.value, null, 4)")
+
+  table(border=1)
+    caption
+      | $store
+    tr(v-for="(value, key) in $store.state")
+      th(v-text="key")
+      td(style="white-space: pre" v-text="JSON.stringify(value, null, 4)")
 </template>
 
 <script>
@@ -314,7 +345,7 @@ export default {
       }
     },
 
-    // ダイアログから変更されたとき
+    // 外からまたはダイアログから変更されたとき
     current_run_mode(new_val, old_val) {
       this.$emit("update:run_mode", this.current_run_mode)
 
@@ -337,14 +368,14 @@ export default {
 
       if (this.current_run_mode === "edit_mode") {
         this.log("current_run_mode: edit_mode")
-        const position_sfen = this.mediator.to_position_sfen // mediator を作り直す前に現状の局面を吐き出しておく
 
-        this.mediator = new Mediator()
-        this.mediator.data_source = this.data_source_by(position_sfen)
-        this.mediator.current_turn = 0
-        this.mediator.run()
+        const new_mediator = new Mediator()
+        new_mediator.data_source = this.data_source_by(this.mediator.to_position_sfen)
+        new_mediator.current_turn = 0
+        new_mediator.run()
 
-        this.init_location_key = this.mediator.current_location.key
+        this.mediator = new_mediator
+        this.init_location_key = new_mediator.current_location.key
       }
     },
 

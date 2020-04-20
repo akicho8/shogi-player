@@ -26,6 +26,9 @@ export default {
   },
 
   watch: {
+    edit_mode_current_sfen(v) {
+      this.$emit("update:edit_mode_current_sfen", v)
+    },
   },
 
   methods: {
@@ -41,31 +44,22 @@ export default {
         }
         // edit_mode -> play_mode
         if (old_val === "edit_mode") {
-          this.init_sfen_build()
+          this.init_sfen_set()
         }
       } else {
         // 現時点の状態から始める (KIFの場合)
         if (old_val === "view_mode") {
           this.init_location_key = this.mediator.current_location.key
         }
-        this.init_sfen_build()
+        this.init_sfen_set()
       }
 
       this.play_mode_mediator_seek_to(this.turn_offset)
     },
 
     // 現在の状態を基点として play_mode に入る
-    init_sfen_build() {
-      const sfen_serializer = this.mediator.sfen_serializer
-
-      this.init_sfen = [
-        "position sfen",
-        sfen_serializer.to_board_sfen,
-        this.init_location.key[0],
-        sfen_serializer.to_hold_pieces,
-        "1",
-      ].join(" ")
-
+    init_sfen_set() {
+      this.init_sfen = this.edit_mode_current_sfen
       this.moves = []
     },
 
@@ -120,6 +114,20 @@ export default {
     // 5手ある棋譜で3手目まで戻したときは3手分の指し手を返す
     moves_take_turn_offset() {
       return _.take(this.moves, this.turn_offset)
+    },
+
+    // 現在の状態を基点とした moves がない棋譜 (init_location が反映されていることが重要)
+    edit_mode_current_sfen() {
+      if (this.mediator) {
+        const serializer = this.mediator.sfen_serializer
+        return [
+          "position sfen",
+          serializer.to_board_sfen,
+          this.init_location.key[0],
+          serializer.to_hold_pieces,
+          1,
+        ].join(" ")
+      }
     },
   },
 }
