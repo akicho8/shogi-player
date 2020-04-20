@@ -30,7 +30,7 @@ export default {
 
       cursor_elem_in_board_container: true,
 
-      cursor_elem: null,        // 持ちあげている駒のDOM
+      $cursor_elem: null,        // 持ちあげている駒のDOM
       mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
       dialog_p: false,          // 成り確認ダイアログ表示中か？
     }
@@ -538,7 +538,7 @@ export default {
     },
 
     cursor_elem_set_pos() {
-      if (this.cursor_elem && this.me_last_event && this.mouse_stick) {
+      if (this.$cursor_elem && this.me_last_event && this.mouse_stick) {
         // TODO: これが遅いのか？ もっと速く設定できる方法があれば変更したい
         let x = this.me_last_event.clientX
         let y = this.me_last_event.clientY
@@ -549,8 +549,8 @@ export default {
           // y -= rect.top
         }
 
-        this.cursor_elem.style.left = `${x}px`
-        this.cursor_elem.style.top  = `${y}px`
+        this.$cursor_elem.style.left = `${x}px`
+        this.$cursor_elem.style.top  = `${y}px`
       }
     },
 
@@ -578,8 +578,8 @@ export default {
 
     // 注意: リターンキーでこの soldier をいくら反転させようと考えてはいけない。(origin_soldier1 が元なので意味がない)
     virtual_piece_dom_create(soldier) {
-      this.cursor_elem = document.createElement("div")
-      this.cursor_elem.classList.add("cursor_elem")
+      this.$cursor_elem = document.createElement("div")
+      this.$cursor_elem.classList.add("cursor_elem")
 
       const piece_back = document.createElement("div")
       piece_back.classList.add("piece_back")
@@ -594,29 +594,29 @@ export default {
       // piece_fore.classList.add(...list)
 
       if (this.current_flip) {
-        // this.cursor_elem.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
+        // this.$cursor_elem.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
         piece_back.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
       }
 
       piece_back.appendChild(piece_fore)
-      this.cursor_elem.appendChild(piece_back)
+      this.$cursor_elem.appendChild(piece_back)
 
       if (this.cursor_elem_in_board_container) {
-        this.$refs.board_container_ref.appendChild(this.cursor_elem)
+        this.$refs.board_container_ref.appendChild(this.$cursor_elem)
       } else {
-        this.$el.appendChild(this.cursor_elem)
+        this.$el.appendChild(this.$cursor_elem)
       }
     },
 
     virtual_piece_destroy() {
-      if (this.cursor_elem) {
+      if (this.$cursor_elem) {
         if (this.cursor_elem_in_board_container) {
-          this.$refs.board_container_ref.removeChild(this.cursor_elem)
+          this.$refs.board_container_ref.removeChild(this.$cursor_elem)
         } else {
-          this.$el.removeChild(this.cursor_elem)
+          this.$el.removeChild(this.$cursor_elem)
         }
 
-        this.cursor_elem = null
+        this.$cursor_elem = null
         this.mouse_stick = false
 
         window.removeEventListener("mousemove", this.mousemove_hook, false)
