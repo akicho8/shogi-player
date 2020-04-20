@@ -79,15 +79,14 @@
         p
           | 将棋の棋譜を再生できる JavaScript で次の特徴があります
         ul
+          li 自分で駒を動かせる (play_mode)
+          li 編集モードで詰将棋などが作れる (edit_mode)
           li KIF と SFEN フォーマットに対応
-          li 検討できる (操作モード)
-          li 詰将棋が作れる (編集モード)
         p
           | その他
         ul
-          li Flash 未使用
           li Vue.js で動作
-          li Buefy (Bulma CSS) 使用
+          li Buefy 使用
 
   .section
     a(name="examples")
@@ -600,7 +599,7 @@
   .section
     a(name="api")
     .container
-      h2.title API
+      h2.title API Methods
       hr
       .columns
         .column

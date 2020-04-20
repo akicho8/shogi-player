@@ -85,7 +85,7 @@
 
     TODO: どうやったら単体ビルドできるんですか……
 
-## 独自のスライダーを定義する例
+## 独自のスライダーを定義する例(非推奨)
 
     <ShogiPlayer kifu_body='position startpos moves 7g7f 8c8d' ref="sp" />
 
