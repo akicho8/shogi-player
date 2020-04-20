@@ -142,34 +142,6 @@
         tr: <th>key_event_capture</th><td>{{key_event_capture}}</td>
         tr: <th>interval_id</th><td>{{interval_id}}</td>
         tr: <th>mouseover_info</th><td>{{mouseover_info}}</td>
-
-  table(border=1)
-    caption
-      | props
-    tr(v-for="(value, key) in $props")
-      th(v-text="key")
-      td(style="white-space: pre" v-text="JSON.stringify(value, null, 4)")
-
-  table(border=1)
-    caption
-      | data
-    tr(v-for="(value, key) in $data")
-      th(v-text="key")
-      td(style="white-space: pre" v-text="JSON.stringify(value, null, 4)")
-
-  table(border=1)
-    caption
-      | computed
-    tr(v-for="(e, key) in _computedWatchers")
-      th(v-text="key")
-      td(style="white-space: pre" v-text="JSON.stringify(e.value, null, 4)")
-
-  table(border=1)
-    caption
-      | $store
-    tr(v-for="(value, key) in $store.state")
-      th(v-text="key")
-      td(style="white-space: pre" v-text="JSON.stringify(value, null, 4)")
 </template>
 
 <script>
