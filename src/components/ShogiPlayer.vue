@@ -1,5 +1,5 @@
 <template lang="pug">
-.shogi-player(:class="class_names" @click="$emit('click')")
+.shogi-player(:class="class_names")
   //- すべてのリンクを無効化するためのオーバーレイ
   .top_overlay(v-if="operation_disable")
 
