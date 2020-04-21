@@ -58,6 +58,7 @@
 
 ## イベント
 
+<<<<<<< HEAD
 | 名前                              | 意味                                           | 懸念事項                                                          |
 |-----------------------------------|------------------------------------------------|-------------------------------------------------------------------|
 | update:play_mode_snapshot_sfen    | 操作モードの盤面の状態                         | コントローラーで手を戻しても変化する。view_mode でも呼ばれる      |
@@ -77,6 +78,27 @@
 | update:size                       | サイズ変更                                     |                                                                   |
 | board_cell_left_click_user_handle | セルをクリックしたとき                         | place が来るのでどこをクリックしたかわかる                        |
 | xxx.native                        | 任意のイベント (例: click.native)              | click の場合はだいたい operation_disable と組み合わせる           |
+=======
+| 名前                           | 意味                                           | 懸念事項                                                          |
+|--------------------------------|------------------------------------------------|-------------------------------------------------------------------|
+| update:play_mode_snapshot_sfen | 操作モードの盤面の状態                         | コントローラーで手を戻しても変化する。view_mode でも呼ばれる      |
+| update:play_mode_long_sfen     | 操作モードで指した直後の局面を発行(movesあり)  |                                                                   |
+| update:play_mode_short_sfen    | 操作モードで指した直後の局面を発行(movesなし)  |                                                                   |
+| update:play_mode_move          | 操作モードで指した手(sfenのmovesの最後の1つ)   |                                                                   |
+| update:edit_mode_current_sfen  | 編集モードの局面                               | play_mode でも呼ばれるので注意                                    |
+| update:start_turn              | 手数が変更されたとき                           | start_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも |
+| update:run_mode                | 設定ダイアログでモードが変更されたとき         |                                                                   |
+| update:kifu_body               | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
+| update:debug_mode              | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
+| update:flip                    | 盤面を反転したとき                             |                                                                   |
+| update:vlayout                 | レイアウトを変更したとき                       |                                                                   |
+| update:theme                   | テーマ変更                                     |                                                                   |
+| update:bg_variant              | 背景の種類変更                                 |                                                                   |
+| update:piece_variant           | 駒の種類変更                                   |                                                                   |
+| update:size                    | サイズ変更                                     |                                                                   |
+| click                          | クリックしたとき                               | @click.native とすれば不要？                                      |
+| board_cell_left_click_user_handle | セルをクリックしたとき                         | place が来るのでどこをクリックしたかわかる                        |
+>>>>>>> b7c23da... [docs][ci skip] board_cell_left_click_user_handle
 
 ## Slot
 
