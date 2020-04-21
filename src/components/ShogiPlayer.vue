@@ -12,7 +12,7 @@
     i.fas.fa-spinner.fa-pulse
 
   //- | {{mouseover_info}}
-  //- | {{edit_mode_current_sfen}}
+  //- | {{edit_mode_snapshot_sfen}}
 
   div.edit_mode_controller(v-if="current_run_mode === 'edit_mode'")
     .edit_mode_controller_wrap
@@ -70,8 +70,8 @@
           :run_mode.sync="current_run_mode"
           :kifu_source="kifu_source"
           @update:kifu_body="update_kifu_source"
-          :play_mode_current_sfen="play_mode_current_sfen"
-          :edit_mode_current_sfen="edit_mode_current_sfen"
+          :play_mode_full_moves_sfen="play_mode_full_moves_sfen"
+          :edit_mode_snapshot_sfen="edit_mode_snapshot_sfen"
           :sp_data="$data"
         )
 
@@ -137,8 +137,8 @@
         tr: <th>play_modeでの指し手(moves)</th><td>{{moves}}</td>
         tr: <th>play_modeの開始局面(init_sfen)</th><td>{{init_sfen}}</td>
         tr: <th>編集モード時の手番(init_location_key)</th><td>{{init_location_key}}</td>
-        tr: <th>編集モード時の手番を判定したSFEN(edit_mode_current_sfen)</th><td>{{edit_mode_current_sfen}}</td>
-        tr: <th>play_modeでのSFEN(play_mode_current_sfen)</th><td>{{play_mode_current_sfen}}</td>
+        tr: <th>編集モード時の手番を判定したSFEN(edit_mode_snapshot_sfen)</th><td>{{edit_mode_snapshot_sfen}}</td>
+        tr: <th>play_modeでのSFEN(play_mode_full_moves_sfen)</th><td>{{play_mode_full_moves_sfen}}</td>
         tr: <th>key_event_capture</th><td>{{key_event_capture}}</td>
         tr: <th>interval_id</th><td>{{interval_id}}</td>
         tr: <th>mouseover_info</th><td>{{mouseover_info}}</td>

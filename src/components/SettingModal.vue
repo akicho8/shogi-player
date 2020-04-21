@@ -55,13 +55,13 @@
         b-input(:value="sp_data.mediator.to_position_sfen" type="input" size="is-small" readonly)
 
     b-field(label="編集モードの現局面(Readonly)")
-      b-input(:value="edit_mode_current_sfen" type="input" size="is-small" readonly)
+      b-input(:value="edit_mode_snapshot_sfen" type="input" size="is-small" readonly)
 
     b-field(label="再生モードの棋譜(編集可)")
       b-input(v-model="kifu_source2" type="textarea" size="is-small")
 
     b-field(label="操作モードの棋譜(Readonly)")
-      b-input.is-small(:value="play_mode_current_sfen" type="textarea" size="is-small" readonly)
+      b-input.is-small(:value="play_mode_full_moves_sfen" type="textarea" size="is-small" readonly)
 
   footer.modal-card-foot
     button.button.is-primary(@click.stop.prevent="$parent.close()") 閉じる
@@ -91,8 +91,8 @@ export default {
   props: {
     run_mode: { required: true },
     kifu_source: { required: false },
-    play_mode_current_sfen: { required: true }, // TODO: 親をそのまま参照したいんだけど $data を渡しても play_mode_current_sfen は computed だから参照できない
-    edit_mode_current_sfen: { required: true },  // TODO: 親を受けとりたい
+    play_mode_full_moves_sfen: { required: true }, // TODO: 親をそのまま参照したいんだけど $data を渡しても play_mode_full_moves_sfen は computed だから参照できない
+    edit_mode_snapshot_sfen: { required: true },  // TODO: 親を受けとりたい
     sp_data: { required: true },                // TODO: $data ではなく親を受けとりたい
   },
 

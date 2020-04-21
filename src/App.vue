@@ -434,6 +434,8 @@
               :sound_effect="sound_effect"
               :volume="volume"
               :human_side_key="human_side_key"
+              @update:edit_mode_snapshot_sfen="edit_mode_snapshot_sfen_set"
+              @update:play_mode_snapshot_sfen="play_mode_snapshot_sfen_set"
               @update:play_mode_long_sfen="play_mode_long_sfen_set"
               @update:play_mode_short_sfen="play_mode_short_sfen_set"
               @update:play_mode_move="play_mode_move_set"
@@ -583,14 +585,19 @@
             br
             h4.title 操作モードのイベント受信内容
             b-field(label="@update:play_mode_long_sfen: 操作モードで指した直後の局面を発行(movesあり)")
-              b-input(:value="play_mode_long_sfen" type="textarea")
+              b-input(:value="play_mode_long_sfen" type="textarea" rows="1")
 
             b-field(label="@update:play_mode_short_sfen: 操作モードで指した直後の局面を発行(movesなし)")
-              b-input(:value="play_mode_short_sfen" type="textarea")
+              b-input(:value="play_mode_short_sfen" type="text")
 
             b-field(label="@update:play_mode_move: 操作モードで指した手(sfenのmovesの最後の1つ)")
               b-input(:value="play_mode_move" type="text")
 
+            b-field(label="@update:play_mode_snapshot_sfen: 操作モード(または再生モード)で盤面が変化したとき(常に更新)")
+              b-input(:value="play_mode_snapshot_sfen" type="text")
+
+            b-field(label="@update:edit_mode_snapshot_sfen: 編集モードで盤面が変化したとき")
+              b-input(:value="edit_mode_snapshot_sfen" type="text")
             br
 
       .table_wrap
@@ -733,6 +740,8 @@ export default {
       final_label: null,
       kifu_body: require("./極限早繰り銀.kif"),
 
+      edit_mode_snapshot_sfen: null,
+      play_mode_snapshot_sfen: null,
       play_mode_long_sfen: null,
       play_mode_short_sfen: null,
       play_mode_move: null,
@@ -752,22 +761,18 @@ export default {
 
   methods: {
     board_cell_left_click_user_handle(place, event) {
-      this.$buefy.toast.open(`${place.kanji_human}のセルをクリック`)
+      this.$buefy.toast.open({message: `${place.kanji_human}のセルをクリック`, queue: false})
       return true
     },
 
     run_api_random_puton()   { this.$refs.api_sp.api_random_puton()   },
     run_api_retract_a_move() { this.$refs.api_sp.api_retract_a_move() },
 
-    play_mode_long_sfen_set(v) {
-      this.play_mode_long_sfen = v
-    },
-    play_mode_short_sfen_set(v) {
-      this.play_mode_short_sfen = v
-    },
-    play_mode_move_set(v) {
-      this.play_mode_move = v
-    },
+    edit_mode_snapshot_sfen_set(v) { this.edit_mode_snapshot_sfen = v },
+    play_mode_snapshot_sfen_set(v) { this.play_mode_snapshot_sfen = v },
+    play_mode_long_sfen_set(v)     { this.play_mode_long_sfen     = v },
+    play_mode_short_sfen_set(v)    { this.play_mode_short_sfen    = v },
+    play_mode_move_set(v)          { this.play_mode_move          = v },
     // update_kifu_source(v) {
     //   // this.kifu_body = v
     // },

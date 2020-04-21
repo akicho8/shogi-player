@@ -26,8 +26,16 @@ export default {
   },
 
   watch: {
-    edit_mode_current_sfen(v) {
-      this.$emit("update:edit_mode_current_sfen", v)
+    edit_mode_snapshot_sfen(v) {
+      this.$emit("update:edit_mode_snapshot_sfen", v)
+    },
+
+    // 操作モード(または再生モード)で盤面が変化したとき(常に更新)
+    mediator: {
+      handler(v) {
+        this.$emit("update:play_mode_snapshot_sfen", v.to_position_sfen)
+      },
+      deep: true,
     },
   },
 
@@ -59,13 +67,13 @@ export default {
 
     // 現在の状態を基点として play_mode に入る
     init_sfen_set() {
-      this.init_sfen = this.edit_mode_current_sfen
+      this.init_sfen = this.edit_mode_snapshot_sfen
       this.moves = []
     },
 
     play_mode_mediator_seek_to(turn) {
       this.mediator = new Mediator()
-      this.mediator.data_source = this.data_source_by(this.play_mode_current_sfen)
+      this.mediator.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
       this.mediator.current_turn = turn
       this.mediator.run()
     },
@@ -78,12 +86,12 @@ export default {
     turn_next() {
       if (this.current_run_mode === "play_mode") {
         this.mediator = new Mediator()
-        this.mediator.data_source = this.data_source_by(this.play_mode_current_sfen)
+        this.mediator.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
         this.mediator.current_turn = -1
         this.mediator.run()
         this.sound_call("piece_sound")
 
-        this.$emit("update:play_mode_long_sfen", this.play_mode_current_sfen)
+        this.$emit("update:play_mode_long_sfen", this.play_mode_full_moves_sfen)
         this.$emit("update:play_mode_move", _.last(this.moves))
         this.$emit("update:play_mode_short_sfen", this.mediator.to_position_sfen)
 
@@ -96,7 +104,7 @@ export default {
   },
 
   computed: {
-    play_mode_current_sfen() {
+    play_mode_full_moves_sfen() {
       if (this.init_sfen) {
         return this.init_sfen + " moves " + this.moves.join(" ")
       }
@@ -117,7 +125,7 @@ export default {
     },
 
     // 現在の状態を基点とした moves がない棋譜 (init_location が反映されていることが重要)
-    edit_mode_current_sfen() {
+    edit_mode_snapshot_sfen() {
       if (this.mediator) {
         const serializer = this.mediator.sfen_serializer
         return [
