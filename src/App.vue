@@ -436,9 +436,9 @@
               :human_side_key="human_side_key"
               @update:edit_mode_snapshot_sfen="edit_mode_snapshot_sfen_set"
               @update:play_mode_snapshot_sfen="play_mode_snapshot_sfen_set"
-              @update:play_mode_long_sfen="play_mode_long_sfen_set"
-              @update:play_mode_short_sfen="play_mode_short_sfen_set"
-              @update:play_mode_move="play_mode_move_set"
+              @update:play_mode_advanced_full_moves_sfen="play_mode_long_sfen_set"
+              @update:play_mode_advanced_snapshot_sfen="play_mode_short_sfen_set"
+              @update:play_mode_advanced_last_move="play_mode_move_set"
               @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
               )
               //- Slot動作確認用
@@ -584,14 +584,14 @@
             br
             br
             h4.title 操作モードのイベント受信内容
-            b-field(label="@update:play_mode_long_sfen: 操作モードで指した直後の局面を発行(movesあり)")
-              b-input(:value="play_mode_long_sfen" type="textarea" rows="1")
+            b-field(label="@update:play_mode_advanced_full_moves_sfen: 操作モードで指した直後の局面を発行(movesあり)")
+              b-input(:value="play_mode_advanced_full_moves_sfen" type="textarea" rows="1")
 
-            b-field(label="@update:play_mode_short_sfen: 操作モードで指した直後の局面を発行(movesなし)")
-              b-input(:value="play_mode_short_sfen" type="text")
+            b-field(label="@update:play_mode_advanced_snapshot_sfen: 操作モードで指した直後の局面を発行(movesなし)")
+              b-input(:value="play_mode_advanced_snapshot_sfen" type="text")
 
-            b-field(label="@update:play_mode_move: 操作モードで指した手(sfenのmovesの最後の1つ)")
-              b-input(:value="play_mode_move" type="text")
+            b-field(label="@update:play_mode_advanced_last_move: 操作モードで指した手(sfenのmovesの最後の1つ)")
+              b-input(:value="play_mode_advanced_last_move" type="text")
 
             b-field(label="@update:play_mode_snapshot_sfen: 操作モード(または再生モード)で盤面が変化したとき(常に更新)")
               b-input(:value="play_mode_snapshot_sfen" type="text")
@@ -742,9 +742,9 @@ export default {
 
       edit_mode_snapshot_sfen: null,
       play_mode_snapshot_sfen: null,
-      play_mode_long_sfen: null,
-      play_mode_short_sfen: null,
-      play_mode_move: null,
+      play_mode_advanced_full_moves_sfen: null,
+      play_mode_advanced_snapshot_sfen: null,
+      play_mode_advanced_last_move: null,
 
       kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
       kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
@@ -770,9 +770,9 @@ export default {
 
     edit_mode_snapshot_sfen_set(v) { this.edit_mode_snapshot_sfen = v },
     play_mode_snapshot_sfen_set(v) { this.play_mode_snapshot_sfen = v },
-    play_mode_long_sfen_set(v)     { this.play_mode_long_sfen     = v },
-    play_mode_short_sfen_set(v)    { this.play_mode_short_sfen    = v },
-    play_mode_move_set(v)          { this.play_mode_move          = v },
+    play_mode_long_sfen_set(v)     { this.play_mode_advanced_full_moves_sfen     = v },
+    play_mode_short_sfen_set(v)    { this.play_mode_advanced_snapshot_sfen    = v },
+    play_mode_move_set(v)          { this.play_mode_advanced_last_move          = v },
     // update_kifu_source(v) {
     //   // this.kifu_body = v
     // },

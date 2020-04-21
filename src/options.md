@@ -7,7 +7,7 @@
 | `theme`                       | テーマ名                    | `none`:なし `simple`:シンプル `real`:木目                                         | 'real'      | ○    |
 | `bg_variant`                  | realテーマの背景            | a .. z                                                                      | 'a'         | ○    |
 | `piece_variant`               | realテーマの駒種            | a .. b                                                                      | 'a'         | ○    |
-| `size`                        | 盤面の大きさ                | `none` `xx`-small `x-small` `small` `default` `medium` `large` `x-large` `xx-large` `xxx-large` | 'default'   | ○    |
+| `size`                        | 盤面の大きさ                | `none` `xx-small` `x-small` `small` `default` `medium` `large` `x-large` `xx-large` `xxx-large` | 'default'   | ○    |
 | `start_turn`                  | N手目の局面から表示         | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前                                  | -1          | ○    |
 | `slider_show`                 | 局面スライダー表示          |                                                                             | false       |       |
 | `controller_show`             | 前後移動用のボタン類の表示  |                                                                             | false       |       |
@@ -61,9 +61,9 @@
 | 名前                              | 意味                                           | 懸念事項                                                          |
 |-----------------------------------|------------------------------------------------|-------------------------------------------------------------------|
 | `update:play_mode_snapshot_sfen`    | 操作モードの盤面の状態                         | コントローラーで手を戻しても変化する。view_mode でも呼ばれる      |
-| `update:play_mode_long_sfen`        | 操作モードで指した直後の局面を発行(movesあり)  |                                                                   |
-| `update:play_mode_short_sfen`       | 操作モードで指した直後の局面を発行(movesなし)  |                                                                   |
-| `update:play_mode_move`             | 操作モードで指した手(sfenのmovesの最後の1つ)   |                                                                   |
+| `update:play_mode_advanced_full_moves_sfen`        | 操作モードで指した直後の局面を発行(movesあり)  |                                                                   |
+| `update:play_mode_advanced_snapshot_sfen`       | 操作モードで指した直後の局面を発行(movesなし)  |                                                                   |
+| `update:play_mode_advanced_last_move`             | 操作モードで指した手(sfenのmovesの最後の1つ)   |                                                                   |
 | `update:edit_mode_snapshot_sfen`     | 編集モードの局面                               | play_mode でも呼ばれるので注意                                    |
 | `update:start_turn`                 | 手数が変更されたとき                           | start_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも |
 | `update:run_mode`                   | 設定ダイアログでモードが変更されたとき         |                                                                   |

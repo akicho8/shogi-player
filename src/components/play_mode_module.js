@@ -91,9 +91,9 @@ export default {
         this.mediator.run()
         this.sound_call("piece_sound")
 
-        this.$emit("update:play_mode_long_sfen", this.play_mode_full_moves_sfen)
-        this.$emit("update:play_mode_move", _.last(this.moves))
-        this.$emit("update:play_mode_short_sfen", this.mediator.to_position_sfen)
+        this.$emit("update:play_mode_advanced_full_moves_sfen", this.play_mode_full_moves_sfen)
+        this.$emit("update:play_mode_advanced_last_move", _.last(this.moves))
+        this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_position_sfen)
 
         // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする
         if (this.$refs.turn_slider) {
