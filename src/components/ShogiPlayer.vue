@@ -493,11 +493,11 @@ export default {
 
     // 本当は delegate したいシリーズ
     /* eslint-disable */
-    turn_base() { return this.mediator.turn_base }, // 表示する上での開始手数で普通は 0
-    turn_offset()         { return this.mediator.turn_offset         }, // 手数のオフセット
-    display_turn()      { return this.mediator.display_turn      }, // turn_base + turn_offset
-    turn_offset_min()          { return this.mediator.turn_offset_min          }, // 必ず 0
-    turn_offset_max()          { return this.mediator.turn_offset_max          }, // moves が 2 なら 2
+    turn_base()       { return this.mediator.turn_base       }, // 表示する上での開始手数で普通は 0
+    turn_offset()     { return this.mediator.turn_offset     }, // 手数のオフセット
+    display_turn()    { return this.mediator.display_turn    }, // turn_base + turn_offset
+    turn_offset_min() { return this.mediator.turn_offset_min }, // 必ず 0
+    turn_offset_max() { return this.mediator.turn_offset_max }, // moves が 2 なら 2
     /* eslint-enable */
 
     // mapState({

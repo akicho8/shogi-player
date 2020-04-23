@@ -770,9 +770,9 @@ export default {
 
     edit_mode_snapshot_sfen_set(v) { this.edit_mode_snapshot_sfen = v },
     play_mode_snapshot_sfen_set(v) { this.play_mode_snapshot_sfen = v },
-    play_mode_long_sfen_set(v)     { this.play_mode_advanced_full_moves_sfen     = v },
-    play_mode_short_sfen_set(v)    { this.play_mode_advanced_snapshot_sfen    = v },
-    play_mode_move_set(v)          { this.play_mode_advanced_last_move          = v },
+    play_mode_advanced_full_moves_sfen_set(v)     { this.play_mode_advanced_full_moves_sfen     = v },
+    play_mode_advanced_snapshot_sfen_set(v)    { this.play_mode_advanced_snapshot_sfen    = v },
+    play_mode_advanced_last_move_set(v)          { this.play_mode_advanced_last_move          = v },
     // update_kifu_source(v) {
     //   // this.kifu_body = v
     // },
