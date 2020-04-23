@@ -37,6 +37,19 @@ export default {
       },
       deep: true,
     },
+
+    // 現在の手数を返す
+    // update:start_turn とは別にしてある
+    turn_offset(v) {
+      this.$emit("update:turn_offset", v)
+    },
+
+    // 操作モードで盤面が変化したときの指し手の配列
+    // ・[a, b, c] の指し手があってポインタが c のとき「←」でポインタを b にするとトリガーする
+    // ・このとき [a, b] を返す
+    // moves_take_turn_offset(v) {
+    //   this.$emit("update:moves_take_turn_offset", v)
+    // },
   },
 
   methods: {
@@ -119,7 +132,8 @@ export default {
     },
 
     // moves.take(turn_offset) を返す
-    // 5手ある棋譜で3手目まで戻したときは3手分の指し手を返す
+    // ・3手ある棋譜で2手目まで戻したときは2手分の指し手を返す
+    // ・たとえば [a, b, c] の指し手があって turn_offset を 2 にしたとき [a, b] を返す
     moves_take_turn_offset() {
       return _.take(this.moves, this.turn_offset)
     },

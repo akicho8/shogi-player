@@ -491,13 +491,13 @@ export default {
       return this.inside_custom_kifu || this.kifu_body_from_url || this.kifu_body || this.init_preset_sfen || "position startpos"
     },
 
-    // 本当は delegate したいシリーズ
+    // 本当は delegate したい。this.$watch を使えば動的になりそう？
     /* eslint-disable */
-    turn_base()       { return this.mediator.turn_base       }, // 表示する上での開始手数で普通は 0
-    turn_offset()     { return this.mediator.turn_offset     }, // 手数のオフセット
-    display_turn()    { return this.mediator.display_turn    }, // turn_base + turn_offset
-    turn_offset_min() { return this.mediator.turn_offset_min }, // 必ず 0
-    turn_offset_max() { return this.mediator.turn_offset_max }, // moves が 2 なら 2
+    turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
+    turn_offset()     { if (this.mediator) { return this.mediator.turn_offset     } }, // 手数のオフセット
+    display_turn()    { if (this.mediator) { return this.mediator.display_turn    } }, // turn_base + turn_offset
+    turn_offset_min() { if (this.mediator) { return this.mediator.turn_offset_min } }, // 必ず 0
+    turn_offset_max() { if (this.mediator) { return this.mediator.turn_offset_max } }, // moves.length が 2 なら 2
     /* eslint-enable */
 
     // mapState({
