@@ -436,9 +436,10 @@
               :human_side_key="human_side_key"
               @update:edit_mode_snapshot_sfen="edit_mode_snapshot_sfen_set"
               @update:play_mode_snapshot_sfen="play_mode_snapshot_sfen_set"
-              @update:play_mode_advanced_full_moves_sfen="play_mode_long_sfen_set"
-              @update:play_mode_advanced_snapshot_sfen="play_mode_short_sfen_set"
-              @update:play_mode_advanced_last_move="play_mode_move_set"
+              @update:play_mode_advanced_full_moves_sfen="play_mode_advanced_full_moves_sfen_set"
+              @update:play_mode_advanced_snapshot_sfen="play_mode_advanced_snapshot_sfen_set"
+              @update:play_mode_advanced_last_move="play_mode_advanced_last_move_set"
+              @update:turn_offset="turn_offset_set"
               @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
               )
               //- Slot動作確認用
@@ -598,6 +599,9 @@
 
             b-field(label="@update:edit_mode_snapshot_sfen: 編集モードで盤面が変化したとき")
               b-input(:value="edit_mode_snapshot_sfen" type="text")
+
+            b-field(label="@update:turn_offset: 手数が変化したとき")
+              b-input(:value="turn_offset" type="text")
             br
 
       .table_wrap
@@ -745,6 +749,7 @@ export default {
       play_mode_advanced_full_moves_sfen: null,
       play_mode_advanced_snapshot_sfen: null,
       play_mode_advanced_last_move: null,
+      turn_offset: null,
 
       kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
       kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
@@ -768,11 +773,12 @@ export default {
     run_api_random_puton()   { this.$refs.api_sp.api_random_puton()   },
     run_api_retract_a_move() { this.$refs.api_sp.api_retract_a_move() },
 
-    edit_mode_snapshot_sfen_set(v) { this.edit_mode_snapshot_sfen = v },
-    play_mode_snapshot_sfen_set(v) { this.play_mode_snapshot_sfen = v },
-    play_mode_advanced_full_moves_sfen_set(v)     { this.play_mode_advanced_full_moves_sfen     = v },
-    play_mode_advanced_snapshot_sfen_set(v)    { this.play_mode_advanced_snapshot_sfen    = v },
-    play_mode_advanced_last_move_set(v)          { this.play_mode_advanced_last_move          = v },
+    edit_mode_snapshot_sfen_set(v)            { this.edit_mode_snapshot_sfen            = v },
+    play_mode_snapshot_sfen_set(v)            { this.play_mode_snapshot_sfen            = v },
+    play_mode_advanced_full_moves_sfen_set(v) { this.play_mode_advanced_full_moves_sfen = v },
+    play_mode_advanced_snapshot_sfen_set(v)   { this.play_mode_advanced_snapshot_sfen   = v },
+    play_mode_advanced_last_move_set(v)       { this.play_mode_advanced_last_move       = v },
+    turn_offset_set(v)                        { this.turn_offset                        = v },
     // update_kifu_source(v) {
     //   // this.kifu_body = v
     // },
