@@ -609,7 +609,7 @@ babel-core@^6.0.0, babel-core@^6.26.0:
     slash "^1.0.0"
     source-map "^0.5.6"
 
-babel-core@^6.22.1, babel-core@^6.25.0:
+babel-core@^6.22.1, babel-core@^6.25.0, babel-core@^6.26.3:
   version "6.26.3"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.3.tgz#b2e2f09e342d0f0c88e2f02e067794125e75c207"
   integrity sha512-6jyFLuDmeidKmUEb3NM+/yawG0M2bDZ9Z1qbZP59cyHLz8kYGKYwpJP0UwUKKUiTRNvxfLesJnTedqczP7cTDA==
@@ -1687,10 +1687,10 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
-buefy@^0.8.15:
-  version "0.8.15"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.15.tgz#88fae2d3b3b7646abb92f23e89a2e176f2a05f7f"
-  integrity sha512-rDTtLNIip+uFpB1Z9E9YllLPYUkJUIFsf7tBhutNfP9SYGrcDhXnUsIEhPHSxGEeddPlX9YT98Mx1zhOz622vg==
+buefy@^0.8.16:
+  version "0.8.16"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.16.tgz#b4c2edf0c57887a9052113630a21924d28c7d2da"
+  integrity sha512-Y5VaJbPlAjiEF8UhfzTTU4kmfLgkC6DwV4FklATGyxrqnezza+niTPgbdt+URaiw4KWzhO8BdTUIOrE5EPrOcQ==
   dependencies:
     bulma "0.7.5"
 
@@ -5354,13 +5354,13 @@ js-beautify@^1.6.12, js-beautify@^1.6.14:
     mkdirp "~0.5.0"
     nopt "~3.0.1"
 
-js-memory-record@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/js-memory-record/-/js-memory-record-0.0.12.tgz#eb6a81b05eb64184044890a0dc9042439239e5e7"
-  integrity sha512-opaj8739t4lHyt0+pASsdXdXcPe5sRH02NUtueZRoJSDExiSKFUWBdKOtXso56tXWPYzDc2fk4j9oVdO6XwyGA==
+js-memory-record@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/js-memory-record/-/js-memory-record-0.0.14.tgz#45b2dfda41bd1cabb19959edaf86ed5aecd32d40"
+  integrity sha512-lyJSvgZj4o73oefKuNggmvuN3WYyWxN/2vnmSoBVBiQn9y6HKkd+Sx05AlWCyY11mO5AhBsvZpcVDAdQcVp9Mg==
   dependencies:
-    babel-core "^6.22.1"
-    lodash "^4.17.4"
+    babel-core "^6.26.3"
+    lodash "^4.17.15"
 
 js-stringify@^1.0.1:
   version "1.0.2"
@@ -9458,10 +9458,10 @@ vue@^2.5.17:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
-vuex@^3.1.2:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.3.tgz#f2ad73e3fb73691698b38c93f66e58e267947180"
-  integrity sha512-k8vZqNMSNMgKelVZAPYw5MNb2xWSmVgCKtYKAptvm9YtZiOXnRXFWu//Y9zQNORTrm3dNj1n/WaZZI26tIX6Mw==
+vuex@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.2.0.tgz#86da7f26c3e131ff374870580109145a640ee5a8"
+  integrity sha512-qBZGJJ1gUNWZbfZlH7ylIPwENg3R0Ckpq+qPexF065kOMOt1Ixt8WDJmtssVv7OhepWD0+Qie7pOS8f0oQy1JA==
 
 walker@~1.0.5:
   version "1.0.7"
