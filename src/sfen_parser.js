@@ -10,9 +10,15 @@ import Soldier from "./soldier"
 import Location from "./location"
 
 export default class SfenParser extends ParserBase {
+  static parse(kifu_body) {
+    const object = new this(kifu_body)
+    object.parse()
+    return object
+  }
+
   parse() {
     this.kifu_body = this.kifu_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
-    const regex = XRegExp("sfen\\s+(?<sfen>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
+    const regex = XRegExp("sfen\\s+(?<board>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
     this.attributes = XRegExp.exec(this.kifu_body, regex)
     if (process.env.NODE_ENV === "deveopment") {
       console.log(this.attributes)
@@ -21,7 +27,7 @@ export default class SfenParser extends ParserBase {
 
   get board() {
     const board = new Board()
-    this.attributes["sfen"].split("/").forEach((e, y) => {
+    this.attributes["board"].split("/").forEach((e, y) => {
       let x = 0
       XRegExp.forEach(e, XRegExp("(?<promoted>\\+?)(?<piece>\\S)"), (m, i) => {
         if (/\d+/.test(m.piece)) {
@@ -127,7 +133,14 @@ export default class SfenParser extends ParserBase {
     const parts = []
     parts.push("position")
     parts.push("sfen")
-    parts.push(this.attributes["sfen"])
+    parts.push(this.init_sfen_strip)
+    return parts.join(" ")
+  }
+
+  // 最初の局面(position sfenなし)
+  get init_sfen_strip() {
+    const parts = []
+    parts.push(this.attributes["board"])
     parts.push(this.attributes["b_or_w"])
     parts.push(this.attributes["hold_pieces"])
     parts.push(this.attributes["turn_counter_next"])
@@ -148,18 +161,22 @@ export default class SfenParser extends ParserBase {
 if (process.argv[1] === __filename) {
   let sfen_parser
 
-  sfen_parser = new SfenParser()
-  sfen_parser.kifu_body = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
-  sfen_parser.parse()
-  console.log(sfen_parser.board)
-  console.log(sfen_parser.location_base.key)
-  console.log(sfen_parser.hold_pieces)
-  console.log(sfen_parser.move_infos)
-  console.log(sfen_parser.moves)
-  console.log(sfen_parser.init_sfen)
+  sfen_parser = SfenParser.parse("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
+  console.log(sfen_parser)
 
-  sfen_parser = new SfenParser()
-  sfen_parser.kifu_body = "position sfen lr4knl/3g2gs1/4ppP2/p4bNpp/2pSsN3/PPPP1P2P/2N1P1G2/2G6/L1K4RL w BPs3p 72 moves 2b3c"
-  sfen_parser.parse()
-  console.log(sfen_parser.location_by_offset(0))
+  sfen_parser = SfenParser.parse("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
+  console.log(sfen_parser)
+
+  // sfen_parser = new SfenParser("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
+  // sfen_parser.parse()
+  // console.log(sfen_parser.board)
+  // console.log(sfen_parser.location_base.key)
+  // console.log(sfen_parser.hold_pieces)
+  // console.log(sfen_parser.move_infos)
+  // console.log(sfen_parser.moves)
+  // console.log(sfen_parser.init_sfen)
+  //
+  // sfen_parser = new SfenParser("position sfen lr4knl/3g2gs1/4ppP2/p4bNpp/2pSsN3/PPPP1P2P/2N1P1G2/2G6/L1K4RL w BPs3p 72 moves 2b3c")
+  // sfen_parser.parse()
+  // console.log(sfen_parser.location_by_offset(0))
 }
