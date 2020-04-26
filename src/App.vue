@@ -439,6 +439,7 @@
               @update:play_mode_advanced_full_moves_sfen="play_mode_advanced_full_moves_sfen_set"
               @update:play_mode_advanced_snapshot_sfen="play_mode_advanced_snapshot_sfen_set"
               @update:play_mode_advanced_last_move="play_mode_advanced_last_move_set"
+              @update:play_mode_advanced_moves="play_mode_advanced_moves_set"
               @update:turn_offset="turn_offset_set"
               @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
               )
@@ -586,22 +587,25 @@
             br
             h4.title 操作モードのイベント受信内容
             b-field(label="@update:play_mode_advanced_full_moves_sfen: 操作モードで指した直後の局面を発行(movesあり)")
-              b-input(:value="play_mode_advanced_full_moves_sfen" type="textarea" rows="1")
+              b-input(:value="JSON.stringify(play_mode_advanced_full_moves_sfen)" readonly type="textarea" rows="1")
 
             b-field(label="@update:play_mode_advanced_snapshot_sfen: 操作モードで指した直後の局面を発行(movesなし)")
-              b-input(:value="play_mode_advanced_snapshot_sfen" type="text")
+              b-input(:value="JSON.stringify(play_mode_advanced_snapshot_sfen)" readonly type="text")
 
             b-field(label="@update:play_mode_advanced_last_move: 操作モードで指した手(sfenのmovesの最後の1つ)")
-              b-input(:value="play_mode_advanced_last_move" type="text")
+              b-input(:value="JSON.stringify(play_mode_advanced_last_move)" readonly type="text")
+
+            b-field(label="@update:play_mode_advanced_moves: 操作モードで指した手を含むmoves配列")
+              b-input(:value="JSON.stringify(play_mode_advanced_moves)" readonly type="text")
 
             b-field(label="@update:play_mode_snapshot_sfen: 操作モード(または再生モード)で盤面が変化したとき(常に更新)")
-              b-input(:value="play_mode_snapshot_sfen" type="text")
+              b-input(:value="JSON.stringify(play_mode_snapshot_sfen)" readonly type="text")
 
             b-field(label="@update:edit_mode_snapshot_sfen: 編集モードで盤面が変化したとき")
-              b-input(:value="edit_mode_snapshot_sfen" type="text")
+              b-input(:value="JSON.stringify(edit_mode_snapshot_sfen)" readonly type="text")
 
             b-field(label="@update:turn_offset: 手数が変化したとき")
-              b-input(:value="turn_offset" type="text")
+              b-input(:value="JSON.stringify(turn_offset)" readonly type="text")
             br
 
       .table_wrap
@@ -749,6 +753,7 @@ export default {
       play_mode_advanced_full_moves_sfen: null,
       play_mode_advanced_snapshot_sfen: null,
       play_mode_advanced_last_move: null,
+      play_mode_advanced_moves: null,
       turn_offset: null,
 
       kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
@@ -778,6 +783,7 @@ export default {
     play_mode_advanced_full_moves_sfen_set(v) { this.play_mode_advanced_full_moves_sfen = v },
     play_mode_advanced_snapshot_sfen_set(v)   { this.play_mode_advanced_snapshot_sfen   = v },
     play_mode_advanced_last_move_set(v)       { this.play_mode_advanced_last_move       = v },
+    play_mode_advanced_moves_set(v)           { this.play_mode_advanced_moves       = v },
     turn_offset_set(v)                        { this.turn_offset                        = v },
     // update_kifu_source(v) {
     //   // this.kifu_body = v
