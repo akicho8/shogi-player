@@ -91,6 +91,17 @@ export default {
         return
       }
 
+      if (true) {
+        if (this.current_run_mode === "edit_mode") {
+          if (_.isEqual(this.place_from, place)) {
+            this.log("操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す")
+            this.mediator.board.place_on(soldier.piece_transform)
+            this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+            return
+          }
+        }
+      }
+
       if (_.isEqual(this.place_from, place)) {
         this.log("盤上の駒を持って同じ位置に戻したので状況キャンセル")
         this.state_reset()
@@ -101,11 +112,13 @@ export default {
 
       if (this.current_run_mode === "edit_mode") {
         this.log(`holding_p: ${this.holding_p}`)
-        if (!this.holding_p && soldier && this.meta_p(e)) {
-          this.log("盤上の駒を裏返す")
-          this.mediator.board.place_on(soldier.piece_transform)
-          this.pice_hold_and_put_for_bug(place, e) // 不具合対策
-          return
+        if (this.meta_p(e)) {
+          if (!this.holding_p && soldier) { // 持ってなくて、駒がある
+            this.log("盤上の駒を裏返す")
+            this.mediator.board.place_on(soldier.piece_transform)
+            this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+            return
+          }
         }
       }
 
