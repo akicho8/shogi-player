@@ -137,7 +137,7 @@
         tr: <th>play_modeでの指し手(moves)</th><td>{{moves}}</td>
         tr: <th>play_modeの開始局面(init_sfen)</th><td>{{init_sfen}}</td>
         tr: <th>編集モード時の手番(init_location_key)</th><td>{{init_location_key}}</td>
-        tr: <th>編集モード時の手番を判定したSFEN(edit_mode_snapshot_sfen)</th><td>{{edit_mode_snapshot_sfen}}</td>
+        tr: <th>編集モード時の手番を反映したSFEN(edit_mode_snapshot_sfen)</th><td>{{edit_mode_snapshot_sfen}}</td>
         tr: <th>play_modeでのSFEN(play_mode_full_moves_sfen)</th><td>{{play_mode_full_moves_sfen}}</td>
         tr: <th>key_event_capture</th><td>{{key_event_capture}}</td>
         tr: <th>interval_id</th><td>{{interval_id}}</td>
