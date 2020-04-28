@@ -240,7 +240,7 @@ export default {
         return true
       }
 
-      // 相手の駒台から自分の駒台、まあは駒箱から自分の駒台へ移動
+      // 相手の駒台から自分の駒台、または駒箱から自分の駒台へ移動
       if (this.current_run_mode === "edit_mode") {
         // if (this.have_piece_location !== location && this.have_piece) {
         if (this.have_piece) {
