@@ -173,7 +173,7 @@ export default {
     promotable_piece_moved(new_soldier, promoted) {
       this.dialog_p = false
 
-      new_soldier.promoted = promoted
+      this.$set(new_soldier, "promoted", promoted)
 
       this.moves_set(this.origin_soldier1.place.to_sfen + new_soldier.place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
       this.mediator.board.place_on(new_soldier) // 置く

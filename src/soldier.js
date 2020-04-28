@@ -1,3 +1,4 @@
+import Vue from "vue"
 import _ from 'lodash'
 import Board from './board'
 import Place from './place'
@@ -30,7 +31,7 @@ export default class Soldier {
   }
 
   set place(place) {
-    this.attributes.place = place
+    Vue.set(this.attributes, "place", place)
   }
 
   get place() {
@@ -46,7 +47,7 @@ export default class Soldier {
   }
 
   set promoted(v) {
-    this.attributes.promoted = v
+    Vue.set(this.attributes, "promoted", v)
   }
 
   get name() {
