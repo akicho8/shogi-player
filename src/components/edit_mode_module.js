@@ -75,26 +75,22 @@ export default {
         return
       }
 
-      // 自分の手番で相手の駒を持ち上げようとしたので無効とする
       if (this.current_run_mode === "play_mode" && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
         this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
 
-      // 持たずに何もないところをクリックしたので無効とする
       if (!this.holding_p && !soldier) {
         this.log("持たずに何もないところをクリックしたので無効とする")
         return
       }
 
-      // 自分の駒の上に駒を重ねようとしたので状況キャンセル
       if (this.current_run_mode === "play_mode" && this.put_on_my_piece_p(soldier)) {
         this.log("自分の駒の上に駒を重ねようとしたので状況キャンセル")
         this.state_reset()
         return
       }
 
-      // 盤上の駒を持って同じ位置に戻したので状況キャンセル
       if (_.isEqual(this.place_from, place)) {
         this.log("盤上の駒を持って同じ位置に戻したので状況キャンセル")
         this.state_reset()
