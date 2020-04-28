@@ -24,7 +24,7 @@ export default class Board {
   }
 
   delete_at(place) {
-    delete this._surface[place.key]
+    Vue.delete(this._surface, place.key)
   }
 
   clear() {
