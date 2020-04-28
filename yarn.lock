@@ -1687,10 +1687,10 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
-buefy@^0.8.16:
-  version "0.8.16"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.16.tgz#b4c2edf0c57887a9052113630a21924d28c7d2da"
-  integrity sha512-Y5VaJbPlAjiEF8UhfzTTU4kmfLgkC6DwV4FklATGyxrqnezza+niTPgbdt+URaiw4KWzhO8BdTUIOrE5EPrOcQ==
+buefy@^0.8.17:
+  version "0.8.17"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.17.tgz#3669ec0a5d2ad33c8109f9b8b9290979f1202cc9"
+  integrity sha512-lLAnLjc8dQpGnLML+4tKpP2yUi/WAQ38ukR5qAMq7Cc9J0sbwy1kXAHarEPlOZkQFzx6c3VmHgL7/qGsupszrQ==
   dependencies:
     bulma "0.7.5"
 
@@ -9458,10 +9458,10 @@ vue@^2.5.17:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
-vuex@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.2.0.tgz#86da7f26c3e131ff374870580109145a640ee5a8"
-  integrity sha512-qBZGJJ1gUNWZbfZlH7ylIPwENg3R0Ckpq+qPexF065kOMOt1Ixt8WDJmtssVv7OhepWD0+Qie7pOS8f0oQy1JA==
+vuex@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.3.0.tgz#665b4630ea1347317139fcc5cb495aab3ec5e513"
+  integrity sha512-1MfcBt+YFd20DPwKe0ThhYm1UEXZya4gVKUvCy7AtS11YAOUR+9a6u4fsv1Rr6ePZCDNxW/M1zuIaswp6nNv8Q==
 
 walker@~1.0.5:
   version "1.0.7"
