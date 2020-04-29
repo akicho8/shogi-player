@@ -37,7 +37,7 @@ export default {
     // 操作モード(または再生モード)で盤面が変化したとき(常に更新)
     mediator: {
       handler(v) {
-        this.$emit("update:play_mode_snapshot_sfen", v.to_position_sfen)
+        this.$emit("update:mediator_snapshot_sfen", v.to_position_sfen)
       },
       deep: true,
     },

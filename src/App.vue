@@ -436,7 +436,7 @@
               :volume="volume"
               :human_side_key="human_side_key"
               @update:edit_mode_snapshot_sfen="edit_mode_snapshot_sfen_set"
-              @update:play_mode_snapshot_sfen="play_mode_snapshot_sfen_set"
+              @update:mediator_snapshot_sfen="mediator_snapshot_sfen_set"
               @update:play_mode_advanced_full_moves_sfen="play_mode_advanced_full_moves_sfen_set"
               @update:play_mode_advanced_snapshot_sfen="play_mode_advanced_snapshot_sfen_set"
               @update:play_mode_advanced_last_move="play_mode_advanced_last_move_set"
@@ -599,8 +599,8 @@
             b-field(label="@update:play_mode_advanced_moves: 操作モードで指した手を含むmoves配列")
               b-input(:value="JSON.stringify(play_mode_advanced_moves)" readonly type="text")
 
-            b-field(label="@update:play_mode_snapshot_sfen: 操作モード(または再生モード)で盤面が変化したとき(常に更新)")
-              b-input(:value="JSON.stringify(play_mode_snapshot_sfen)" readonly type="text")
+            b-field(label="@update:mediator_snapshot_sfen: 操作モード(または再生モード)で盤面が変化したとき(常に更新)")
+              b-input(:value="JSON.stringify(mediator_snapshot_sfen)" readonly type="text")
 
             b-field(label="@update:edit_mode_snapshot_sfen: 編集モードで盤面が変化したとき")
               b-input(:value="JSON.stringify(edit_mode_snapshot_sfen)" readonly type="text")
@@ -750,7 +750,7 @@ export default {
       kifu_body: require("./極限早繰り銀.kif"),
 
       edit_mode_snapshot_sfen: null,
-      play_mode_snapshot_sfen: null,
+      mediator_snapshot_sfen: null,
       play_mode_advanced_full_moves_sfen: null,
       play_mode_advanced_snapshot_sfen: null,
       play_mode_advanced_last_move: null,
@@ -780,7 +780,7 @@ export default {
     run_api_retract_a_move() { this.$refs.api_sp.api_retract_a_move() },
 
     edit_mode_snapshot_sfen_set(v)            { this.edit_mode_snapshot_sfen            = v },
-    play_mode_snapshot_sfen_set(v)            { this.play_mode_snapshot_sfen            = v },
+    mediator_snapshot_sfen_set(v)            { this.mediator_snapshot_sfen            = v },
     play_mode_advanced_full_moves_sfen_set(v) { this.play_mode_advanced_full_moves_sfen = v },
     play_mode_advanced_snapshot_sfen_set(v)   { this.play_mode_advanced_snapshot_sfen   = v },
     play_mode_advanced_last_move_set(v)       { this.play_mode_advanced_last_move       = v },
