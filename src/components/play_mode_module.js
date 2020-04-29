@@ -15,13 +15,14 @@ export default {
     return {
       moves: [],                  // play_mode 時の棋譜
       init_sfen: null,            // play_mode に入ったときの最初の状態
-      init_location_key: "black", // play_mode に入ったときの最初の手番 FIXME: mediator の中に持つようにする
+      init_location_key: "black", // play_mode に入ったときの最初の手番
     }
   },
 
   created() {
     this.$watch(() => [this.mediator, this.init_location_key], () => {
-      this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
+      this.emit_update_edit_mode_snapshot_sfen()
+      // this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
     }, {deep: true})
   },
 
@@ -132,6 +133,10 @@ export default {
           1,
         ].join(" ")
       }
+    },
+
+    emit_update_edit_mode_snapshot_sfen() {
+      this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
     },
   },
 

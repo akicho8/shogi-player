@@ -452,7 +452,12 @@ export default {
     // これは Vue がリアクティブにならない対策として入れているのでできれば外したい
     pice_hold_and_put_for_bug(place, e) {
       this.soldier_hold(place, e)
+
+      // ↓これは絶対にいる
       this.state_reset()
+
+      // emitされない不具合の暫定対策でちょうどここが共通処理になっているのでつっこんでおく
+      this.emit_update_edit_mode_snapshot_sfen()
     },
 
     // -------------------------------------------------------------------------------- piece_box
