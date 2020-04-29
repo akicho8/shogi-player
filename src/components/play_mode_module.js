@@ -20,14 +20,18 @@ export default {
   },
 
   created() {
+    this.$watch(() => [this.mediator, this.init_location_key], () => {
+      this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
+    }, {deep: true})
   },
 
   mounted() {
   },
 
   watch: {
-    edit_mode_snapshot_sfen(v) {
-      this.$emit("update:edit_mode_snapshot_sfen", v)
+    // 不具合確認用
+    edit_mode_snapshot_sfen2(v) {
+      this.$emit("update:edit_mode_snapshot_sfen2", v)
     },
 
     // 操作モード(または再生モード)で盤面が変化したとき(常に更新)
@@ -80,7 +84,7 @@ export default {
 
     // 現在の状態を基点として play_mode に入る
     init_sfen_set() {
-      this.init_sfen = this.edit_mode_snapshot_sfen
+      this.init_sfen = this.edit_mode_snapshot_sfen()
       this.moves = []
     },
 
@@ -115,6 +119,20 @@ export default {
         }
       }
     },
+
+    // 現在の状態を基点とした moves がない棋譜 (init_location が反映されていることが重要)
+    edit_mode_snapshot_sfen() {
+      if (this.mediator) {
+        const serializer = this.mediator.sfen_serializer
+        return [
+          "position sfen",
+          serializer.to_board_sfen,
+          this.init_location.key[0],
+          serializer.to_hold_pieces,
+          1,
+        ].join(" ")
+      }
+    },
   },
 
   computed: {
@@ -140,17 +158,32 @@ export default {
     },
 
     // 現在の状態を基点とした moves がない棋譜 (init_location が反映されていることが重要)
-    edit_mode_snapshot_sfen() {
-      if (this.mediator) {
-        const serializer = this.mediator.sfen_serializer
-        return [
-          "position sfen",
-          serializer.to_board_sfen,
-          this.init_location.key[0],
-          serializer.to_hold_pieces,
-          1,
-        ].join(" ")
-      }
+    //
+    // この方法はリアクティブにならない場合がある
+    //
+    // 不具合再現手順
+    // 1. 編集モード→詰将棋
+    // 2. 51の玉をvで反転(OK)
+    //    → this.mediator.sfen_serializer.to_board_sfen は変化する
+    //    → edit_mode_snapshot_sfen2 も変化する
+    // 3. 駒台の玉を11に置いてvで反転(ここがおかしい)
+    //    → this.mediator.sfen_serializer.to_board_sfen は変化する
+    //    → edit_mode_snapshot_sfen2 が変化しない
+    //
+    // 暫定策として mediator と init_location_key だけを監視する watch を入れてそのなかで edit_mode_snapshot_sfen() を実行している
+    //
+    edit_mode_snapshot_sfen2() {
+      return this.edit_mode_snapshot_sfen()
+      // if (this.mediator) {
+      //   const serializer = this.mediator.sfen_serializer
+      //   return [
+      //     "position sfen",
+      //     serializer.to_board_sfen,
+      //     this.init_location.key[0],
+      //     serializer.to_hold_pieces,
+      //     1,
+      //   ].join(" ")
+      // }
     },
   },
 }
