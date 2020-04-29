@@ -435,13 +435,15 @@
               :sound_effect="sound_effect"
               :volume="volume"
               :human_side_key="human_side_key"
-              @update:edit_mode_snapshot_sfen="edit_mode_snapshot_sfen_set"
-              @update:mediator_snapshot_sfen="mediator_snapshot_sfen_set"
-              @update:play_mode_advanced_full_moves_sfen="play_mode_advanced_full_moves_sfen_set"
-              @update:play_mode_advanced_snapshot_sfen="play_mode_advanced_snapshot_sfen_set"
-              @update:play_mode_advanced_last_move="play_mode_advanced_last_move_set"
-              @update:play_mode_advanced_moves="play_mode_advanced_moves_set"
-              @update:turn_offset="turn_offset_set"
+
+              @update:edit_mode_snapshot_sfen="e => trigger_check('edit_mode_snapshot_sfen', e)"
+              @update:mediator_snapshot_sfen="e => trigger_check('mediator_snapshot_sfen', e)"
+              @update:play_mode_advanced_full_moves_sfen="e => trigger_check('play_mode_advanced_full_moves_sfen', e)"
+              @update:play_mode_advanced_snapshot_sfen="e => trigger_check('play_mode_advanced_snapshot_sfen', e)"
+              @update:play_mode_advanced_last_move="e => trigger_check('play_mode_advanced_last_move', e)"
+              @update:play_mode_advanced_moves="e => trigger_check('play_mode_advanced_moves', e)"
+              @update:turn_offset="e => trigger_check('turn_offset', e)"
+
               @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
               )
               //- Slot動作確認用
@@ -779,16 +781,21 @@ export default {
     run_api_random_puton()   { this.$refs.api_sp.api_random_puton()   },
     run_api_retract_a_move() { this.$refs.api_sp.api_retract_a_move() },
 
-    edit_mode_snapshot_sfen_set(v)            { this.edit_mode_snapshot_sfen            = v },
-    mediator_snapshot_sfen_set(v)            { this.mediator_snapshot_sfen            = v },
-    play_mode_advanced_full_moves_sfen_set(v) { this.play_mode_advanced_full_moves_sfen = v },
-    play_mode_advanced_snapshot_sfen_set(v)   { this.play_mode_advanced_snapshot_sfen   = v },
-    play_mode_advanced_last_move_set(v)       { this.play_mode_advanced_last_move       = v },
-    play_mode_advanced_moves_set(v)           { this.play_mode_advanced_moves       = v },
-    turn_offset_set(v)                        { this.turn_offset                        = v },
+    // edit_mode_snapshot_sfen_set(v)            { this.edit_mode_snapshot_sfen            = v },
+    // mediator_snapshot_sfen_set(v)             { this.mediator_snapshot_sfen             = v },
+    // play_mode_advanced_full_moves_sfen_set(v) { this.play_mode_advanced_full_moves_sfen = v },
+    // play_mode_advanced_snapshot_sfen_set(v)   { this.play_mode_advanced_snapshot_sfen   = v },
+    // play_mode_advanced_last_move_set(v)       { this.play_mode_advanced_last_move       = v },
+    // play_mode_advanced_moves_set(v)           { this.play_mode_advanced_moves           = v },
+    // turn_offset_set(v)                        { this.turn_offset                        = v },
     // update_kifu_source(v) {
     //   // this.kifu_body = v
     // },
+
+    trigger_check(key, v) {
+      this.$data[key] = v
+      this.$buefy.toast.open({message: `${key} -> ${JSON.stringify(v)}`, queue: false})
+    },
   },
 
   computed: {
