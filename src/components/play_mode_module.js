@@ -15,7 +15,7 @@ export default {
     return {
       moves: [],                  // play_mode 時の棋譜
       init_sfen: null,            // play_mode に入ったときの最初の状態
-      init_location_key: "black", // play_mode に入ったときの最初の手番
+      init_location_key: "black", // play_mode に入ったときの最初の手番 FIXME: mediator の中に持つようにする
     }
   },
 
