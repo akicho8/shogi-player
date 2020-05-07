@@ -71,7 +71,7 @@
           :kifu_source="kifu_source"
           @update:kifu_body="update_kifu_source"
           :play_mode_full_moves_sfen="play_mode_full_moves_sfen"
-          :edit_mode_snapshot_sfen="edit_mode_snapshot_sfen"
+          :edit_mode_snapshot_sfen2="edit_mode_snapshot_sfen2"
           :sp_data="$data"
         )
 
