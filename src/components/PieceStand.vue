@@ -4,9 +4,10 @@
     .location_mark(v-html="location_name")
 
     //- 2桁にして幅を常に予約しておく
-    template(v-if="!$parent.current_vlayout")
-      .piece_count.piece_count1
-        | 99
+    template(v-if="$parent.theme === 'simple'")
+      template(v-if="!$parent.current_vlayout")
+        .piece_count.piece_count1
+          | 99
 
     template(v-if="$parent.current_vlayout && player_name")
       .player_name
