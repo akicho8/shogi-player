@@ -4,6 +4,8 @@ import Place from "../place"
 import Soldier from "../soldier"
 import Location from "../location"
 
+const DOUBLE_CLICK_TIME = 350
+
 export default {
   /* eslint-disable */
   props: {
@@ -33,6 +35,8 @@ export default {
       $cursor_elem: null,        // 持ちあげている駒のDOM
       mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
       dialog_p: false,          // 成り確認ダイアログ表示中か？
+
+      $double_tap_time: null,   // ダブルクリック判定用
     }
   },
 
@@ -91,13 +95,23 @@ export default {
         return
       }
 
-      if (true) {
-        if (this.current_run_mode === "edit_mode") {
-          if (_.isEqual(this.place_from, place)) {
-            this.log("操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す")
-            this.mediator.board.place_on(soldier.piece_transform)
-            this.pice_hold_and_put_for_bug(place, e) // 不具合対策
-            return
+      // ダブルタップで裏返すとシングルクリックの遅延がすさまじいことになるためダブルタップは使ってはいけない
+      if (this.current_run_mode === "edit_mode") {
+        const old = this.$double_tap_time
+        this.$double_tap_time = Date.now()
+        if (soldier) {
+          if (_.isEqual(this.place_from, place)) { // この処理をスキップすると3連打で2回反転できるが誤操作が頻発するのでやめ
+            if (old) {
+              const gap = this.$double_tap_time - old
+              const enable = gap < DOUBLE_CLICK_TIME
+              this.log(`ダブルクリック判定: (${gap} ms < ${DOUBLE_CLICK_TIME}) -> ${enable}`)
+              if (enable) {
+                this.log(`操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す`)
+                this.mediator.board.place_on(soldier.piece_transform)
+                this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+                return
+              }
+            }
           }
         }
       }
@@ -181,6 +195,28 @@ export default {
 
       throw new Error("must not happen")
     },
+
+    // board_cell_left_dblclick(xy, e) {
+    //   if (this.if_view_mode_break) {
+    //     return
+    //   }
+    //
+    //   const place = Place.fetch(xy)
+    //   const soldier = this.mediator.board.lookup(place)
+    //
+    //   if (this.current_run_mode === "edit_mode") {
+    //     if (!this.holding_p) {
+    //       if (soldier) {
+    //         this.log("操作モードでダブルタップしたので裏返す")
+    //         // this.mediator.board.place_on(soldier.piece_transform)
+    //         // this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+    //         return
+    //       }
+    //     }
+    //   }
+    //
+    //   return "eslint対策のreturn"
+    // },
 
     // 成れる状態の駒をどうするか
     promotable_piece_moved(new_soldier, promoted) {
