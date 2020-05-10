@@ -18,12 +18,24 @@
       +mobile
         // background-color: blue
         font-size: 5.2vmin        // このサイズでぎりぎり升目が正方形を保ったまま最大幅になる
-        // table
-        //   width: 4.5vmin
+        table
+          width: 100%           // これを入れるとセルがぷるぷるしなくなる
+
+  &.theme-real
+    &.horizontal
+      .board_outer
+        +mobile
+          margin-left: 1px  // 盤と駒台の隙間(オーバーライド)
+          margin-right: 1px // 盤と駒台の隙間
+          padding: 1%       // 盤の隅の隙間(オーバーライド)
 
   .modal_trigger_dots
     +mobile
       display: none
+
+.shogi-player
+  +mobile
+    margin: 0 2px
 
 // 唯一 .shogi-player の外にある
 .is-shogi-player-modal-card
