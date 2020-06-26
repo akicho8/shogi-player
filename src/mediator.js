@@ -8,6 +8,7 @@ import Soldier from "./soldier"
 import SfenParser from "./sfen_parser"
 import SfenSerializer from "./sfen_serializer"
 import PresetInfo from "./preset_info"
+import Location from "./location.js"
 
 export default class Mediator {
   constructor() {
@@ -281,4 +282,94 @@ export default class Mediator {
   piece_box_clear() {
     this.piece_box = {}
   }
+
+  /* eslint-disable */
+  //////////////////////////////////////////////////////////////////////////////// 検討用自玉配置
+
+  // 検討用自玉配置
+  kento_you_jigyoku_haiti(options) {
+    let bx = 0
+    let sx = 1
+    if (options.position === "right") {
+      bx = Board.dimension - 1
+      sx = -1
+    }
+    this.komawo_okuyo(new Soldier({piece: Piece.fetch("K"), promoted: false, location: Location.fetch("black"), place: Place.fetch([bx, Board.dimension - 1])}))
+    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx, Board.dimension - 1 - 2])}))
+    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx+sx, Board.dimension - 1 - 2])}))
+    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx+sx+sx, Board.dimension - 1 - 2])}))
+    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx+sx+sx, Board.dimension - 1 - 2 + 1])}))
+    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx+sx+sx, Board.dimension - 1 - 2 + 2])}))
+  }
+
+  // 検討用自玉配置解除
+  kento_you_jigyoku_haiti2(options) {
+    let bx = 0
+    let sx = 1
+    if (options.position === "right") {
+      bx = Board.dimension - 1
+      sx = -1
+    }
+    const list = [
+      [bx, Board.dimension - 1],
+      [bx, Board.dimension - 1 - 2],
+      [bx+sx, Board.dimension - 1 - 2],
+      [bx+sx+sx, Board.dimension - 1 - 2],
+      [bx+sx+sx, Board.dimension - 1 - 2 + 1],
+      [bx+sx+sx, Board.dimension - 1 - 2 + 2],
+    ]
+    list.forEach(e => {
+      const place = Place.fetch(e)
+      const soldier = this.board.lookup(place)
+      if (soldier) {
+        const piece = soldier.piece
+        this.board.delete_at(place)
+        if (piece.key === "K") {
+          this.piece_box_add(piece)
+        }
+      }
+    })
+
+  }
+
+  komawo_okuyo(soldier) {
+    if (this.komawo_herasu(soldier.piece)) {
+      this.board.place_on(soldier)
+    }
+  }
+
+  // 相手の駒→駒箱→自分の駒の順で駒を減らす
+  komawo_herasu(piece) {
+    let found = false
+
+    if (!found) {
+      found = this.komawo_herasu2("white", piece)
+    }
+
+    if (!found) {
+      if (this.piece_box_count(piece) >= 1) {
+        this.piece_box_add(piece, -1)
+        found = true
+      }
+    }
+
+    if (false) {
+      if (!found) {
+        found = this.komawo_herasu2("black", piece)
+      }
+    }
+
+    return found
+  }
+
+  komawo_herasu2(location_key, piece) {
+    const location = Location.fetch(location_key)
+    if (this.hold_pieces_count(location, piece) >= 1) {
+      this.hold_pieces_add(location, piece, -1)
+      return true
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+  /* eslint-enable */
 }
