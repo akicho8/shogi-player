@@ -287,23 +287,33 @@ export default class Mediator {
   //////////////////////////////////////////////////////////////////////////////// 検討用自玉配置
 
   // 検討用自玉配置
-  kento_you_jigyoku_haiti(options) {
+  king_formation_set(options) {
     let bx = 0
     let sx = 1
     if (options.position === "right") {
       bx = Board.dimension - 1
       sx = -1
     }
-    this.komawo_okuyo(new Soldier({piece: Piece.fetch("K"), promoted: false, location: Location.fetch("black"), place: Place.fetch([bx, Board.dimension - 1])}))
-    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx, Board.dimension - 1 - 2])}))
-    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx+sx, Board.dimension - 1 - 2])}))
-    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx+sx+sx, Board.dimension - 1 - 2])}))
-    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx+sx+sx, Board.dimension - 1 - 2 + 1])}))
-    this.komawo_okuyo(new Soldier({piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("white"), place: Place.fetch([bx+sx+sx, Board.dimension - 1 - 2 + 2])}))
+    [
+      { piece: "K", promoted: false, location: "black", place: [bx,           Board.dimension - 1         ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx,           Board.dimension - 1 - 2     ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx + sx,      Board.dimension - 1 - 2     ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, Board.dimension - 1 - 2     ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, Board.dimension - 1 - 2 + 1 ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, Board.dimension - 1 - 2 + 2 ] },
+    ].forEach(e => {
+      const soldier = new Soldier({
+        piece: Piece.fetch(e.piece),
+        promoted: e.promoted,
+        location: Location.fetch(e.location),
+        place: Place.fetch(e.place),
+      })
+      this.piece_search_and_place_on(soldier)
+    })
   }
 
   // 検討用自玉配置解除
-  kento_you_jigyoku_haiti2(options) {
+  king_formation_unset(options) {
     let bx = 0
     let sx = 1
     if (options.position === "right") {
@@ -329,23 +339,25 @@ export default class Mediator {
         }
       }
     })
-
   }
 
-  komawo_okuyo(soldier) {
-    if (this.komawo_herasu(soldier.piece)) {
+  // soldier.piece に対応する駒を探してあれば -1 して soldier.place の位置に配置する
+  piece_search_and_place_on(soldier) {
+    if (this.piece_search_and_decrement(soldier.piece)) {
       this.board.place_on(soldier)
     }
   }
 
-  // 相手の駒→駒箱→自分の駒の順で駒を減らす
-  komawo_herasu(piece) {
+  // 相手の駒→駒箱→自分の駒の順で駒を探してあれば -1 して true を返す
+  piece_search_and_decrement(piece) {
     let found = false
 
+    // 相手の駒から探す
     if (!found) {
-      found = this.komawo_herasu2("white", piece)
+      found = this.piece_search_on_hold_pieces_and_decrement("white", piece)
     }
 
+    // 駒箱から探す
     if (!found) {
       if (this.piece_box_count(piece) >= 1) {
         this.piece_box_add(piece, -1)
@@ -354,15 +366,17 @@ export default class Mediator {
     }
 
     if (false) {
+      // 自分の駒から探す
       if (!found) {
-        found = this.komawo_herasu2("black", piece)
+        found = this.piece_search_on_hold_pieces_and_decrement("black", piece)
       }
     }
 
     return found
   }
 
-  komawo_herasu2(location_key, piece) {
+  // location_key の持駒から piece を探してあれば -1 して true を返す
+  piece_search_on_hold_pieces_and_decrement(location_key, piece) {
     const location = Location.fetch(location_key)
     if (this.hold_pieces_count(location, piece) >= 1) {
       this.hold_pieces_add(location, piece, -1)
