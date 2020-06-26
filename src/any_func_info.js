@@ -9,9 +9,10 @@ export default class AnyFuncInfo extends MemoryRecord {
       { key: "駒箱から☖の持駒へ",  func: e => { e.mediator.piece_box_to_hold_pieces(Location.fetch("white")) }, },
       { key: "駒箱に駒を一式生成", func: e => { e.mediator.piece_box_reset_by_preset("全部駒箱") }, },
       { key: "駒箱の駒をクリア",   func: e => { e.mediator.piece_box_clear() }, },
+      { key: "----",               func: e => { }, },
       { key: "検討用玉配置(左)",   func: e => { e.mediator.king_formation_set({position: "left"}) }, },
-      { key: "検討用玉配置(右)",   func: e => { e.mediator.king_formation_set({position: "right"}) }, },
       { key: "検討用玉回収(左)",   func: e => { e.mediator.king_formation_unset({position: "left"}) }, },
+      { key: "検討用玉配置(右)",   func: e => { e.mediator.king_formation_set({position: "right"}) }, },
       { key: "検討用玉回収(右)",   func: e => { e.mediator.king_formation_unset({position: "right"}) }, },
       /* eslint-enable */
     ]

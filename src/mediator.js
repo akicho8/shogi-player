@@ -313,6 +313,8 @@ export default class Mediator {
   }
 
   // 検討用自玉配置解除
+  // 玉は駒箱へ
+  // それ以外は相手の駒台へ
   king_formation_unset(options) {
     let bx = 0
     let sx = 1
@@ -336,6 +338,8 @@ export default class Mediator {
         this.board.delete_at(place)
         if (piece.key === "K") {
           this.piece_box_add(piece)
+        } else {
+          this.hold_pieces_add(Location.fetch("white"), piece)
         }
       }
     })
@@ -343,9 +347,17 @@ export default class Mediator {
 
   // soldier.piece に対応する駒を探してあれば -1 して soldier.place の位置に配置する
   piece_search_and_place_on(soldier) {
-    if (this.piece_search_and_decrement(soldier.piece)) {
-      this.board.place_on(soldier)
+    // すでに何か置かれていれば何もしない
+    if (this.board.lookup(soldier.place)) {
+      return
     }
+
+    // 指定の駒がどこにもなければ何もしない。あれば -1 する
+    if (!this.piece_search_and_decrement(soldier.piece)) {
+      return
+    }
+
+    this.board.place_on(soldier)
   }
 
   // 相手の駒→駒箱→自分の駒の順で駒を探してあれば -1 して true を返す
