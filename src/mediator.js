@@ -322,23 +322,25 @@ export default class Mediator {
       bx = Board.dimension - 1
       sx = -1
     }
-    const list = [
-      [bx, Board.dimension - 1],
-      [bx, Board.dimension - 1 - 2],
-      [bx+sx, Board.dimension - 1 - 2],
-      [bx+sx+sx, Board.dimension - 1 - 2],
-      [bx+sx+sx, Board.dimension - 1 - 2 + 1],
-      [bx+sx+sx, Board.dimension - 1 - 2 + 2],
+    const places = [
+      [ bx          , Board.dimension - 1         ],
+      [ bx          , Board.dimension - 1 - 2     ],
+      [ bx + sx     , Board.dimension - 1 - 2     ],
+      [ bx + sx + sx, Board.dimension - 1 - 2     ],
+      [ bx + sx + sx, Board.dimension - 1 - 2 + 1 ],
+      [ bx + sx + sx, Board.dimension - 1 - 2 + 2 ],
     ]
-    list.forEach(e => {
+    places.forEach(e => {
       const place = Place.fetch(e)
       const soldier = this.board.lookup(place)
       if (soldier) {
         const piece = soldier.piece
         this.board.delete_at(place)
         if (piece.key === "K") {
+          // 玉の場合は駒箱にとらげる
           this.piece_box_add(piece)
         } else {
+          // 他の駒は相手の駒箱へ
           this.hold_pieces_add(Location.fetch("white"), piece)
         }
       }
