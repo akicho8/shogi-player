@@ -354,9 +354,14 @@ export default class Mediator {
       return
     }
 
-    // 指定の駒がどこにもなければ何もしない。あれば -1 する
-    if (!this.piece_search_and_decrement(soldier.piece)) {
-      return
+    // 玉の場合は初期配置の時点で存在しない場合もあるので「あれば」-1 するだけ
+    if (soldier.piece.key === "K") {
+      this.piece_search_and_decrement(soldier.piece)
+    } else {
+      // 玉以外は駒が数が増えてしまってややこしくなるのを防ぐため必ず「あったときだけ」-1 し、なければ何もしない
+      if (!this.piece_search_and_decrement(soldier.piece)) {
+        return
+      }
     }
 
     this.board.place_on(soldier)
