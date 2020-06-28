@@ -94,9 +94,9 @@ export default {
         return
       }
 
-      if (this.current_run_mode === "play_mode" && this.put_on_my_piece_p(soldier)) {
-        this.log("自分の駒の上に駒を重ねようとしたので状況キャンセル")
-        this.state_reset()
+      if (this.current_run_mode === "play_mode" && this.put_on_my_soldier_p(soldier)) {
+        this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
+        // this.state_reset() // ←元の位置に戻す場合
         return
       }
 
@@ -465,9 +465,16 @@ export default {
       }
     },
 
-    // 自分の駒の上に重ねた？
-    put_on_my_piece_p(soldier) {
-      return this.holding_p && soldier && soldier.location === this.mediator.current_location
+    // 自分の駒の上に重ねた？ (移動元にある駒を含まない)
+    put_on_my_soldier_p(soldier) {
+      if (this.holding_p) {
+        if (soldier && soldier.location === this.mediator.current_location) {
+          if (_.isEqual(this.place_from, soldier.place)) {
+          } else {
+            return true
+          }
+        }
+      }
     },
 
     // 盤面の駒を持ち上げる
