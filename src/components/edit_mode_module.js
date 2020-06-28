@@ -84,6 +84,11 @@ export default {
         return
       }
 
+      if (this.current_run_mode === "play_mode" && this.have_piece && soldier) {
+        this.log("駒台や駒箱から持ち上げた駒を盤上の駒の上に置こうとしたので無効とする")
+        return
+      }
+
       if (!this.holding_p && !soldier) {
         this.log("持たずに何もないところをクリックしたので無効とする")
         return
