@@ -1,4 +1,5 @@
 import Soldier from "../soldier"
+import Mediator from "../mediator"
 
 export default {
   methods: {
@@ -42,6 +43,14 @@ export default {
         turn = 0
       }
       this.api_board_turn_set(turn)
+    },
+
+    // 棋譜の反映
+    api_sfen_or_kif_set(sfen_or_kif, options = {}) {
+      this.mediator = new Mediator()
+      this.mediator.data_source = this.data_source_by(sfen_or_kif)
+      this.mediator.current_turn = options.turn || 0
+      this.mediator.run()
     },
   },
 }
