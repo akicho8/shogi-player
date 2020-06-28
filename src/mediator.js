@@ -286,56 +286,63 @@ export default class Mediator {
   /* eslint-disable */
   //////////////////////////////////////////////////////////////////////////////// 指将棋用玉配置
 
-  // 指将棋用玉配置
-  king_formation_set(options) {
-    let bx = 0
-    let sx = 1
-    if (options.position === "right") {
-      bx = Board.dimension - 1
-      sx = -1
+  // 指将棋用玉配置(自動)
+  king_formation_auto_set() {
+    let success = false
+    if (!success) {
+      success = this.king_formation_set("bottom_left")
     }
-    [
-      { piece: "K", promoted: false, location: "black", place: [bx,           Board.dimension - 1         ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx,           Board.dimension - 1 - 2     ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx + sx,      Board.dimension - 1 - 2     ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, Board.dimension - 1 - 2     ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, Board.dimension - 1 - 2 + 1 ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, Board.dimension - 1 - 2 + 2 ] },
-    ].forEach(e => {
-      const soldier = new Soldier({
-        piece: Piece.fetch(e.piece),
-        promoted: e.promoted,
-        location: Location.fetch(e.location),
-        place: Place.fetch(e.place),
-      })
-      this.piece_search_and_place_on(soldier)
-    })
+    if (!success) {
+      success = this.king_formation_set("bottom_right")
+    }
+    return success
   }
 
   // 指将棋用玉配置解除
   // 玉は駒箱へ
   // それ以外は相手の駒台へ
-  king_formation_unset(options) {
-    let bx = 0
-    let sx = 1
-    if (options.position === "right") {
-      bx = Board.dimension - 1
-      sx = -1
+  king_formation_auto_unset() {
+    let success = false
+    if (!success) {
+      success = this.king_formation_unset("bottom_left")
     }
-    const places = [
-      [ bx          , Board.dimension - 1         ],
-      [ bx          , Board.dimension - 1 - 2     ],
-      [ bx + sx     , Board.dimension - 1 - 2     ],
-      [ bx + sx + sx, Board.dimension - 1 - 2     ],
-      [ bx + sx + sx, Board.dimension - 1 - 2 + 1 ],
-      [ bx + sx + sx, Board.dimension - 1 - 2 + 2 ],
-    ]
-    places.forEach(e => {
-      const place = Place.fetch(e)
-      const soldier = this.board.lookup(place)
+    if (!success) {
+      success = this.king_formation_unset("bottom_right")
+    }
+    return success
+  }
+
+  // 指将棋用玉配置
+  king_formation_set(position) {
+    const soldiers = this.king_formation_soldiers(position)
+
+    // 置きたいところに駒が1つでも置かれていたら何もしない
+    if (soldiers.some(e => this.board.lookup(e.place))) {
+      return
+    }
+
+    // 配置
+    soldiers.forEach(e => this.piece_search_and_place_on(e))
+
+    return true
+  }
+
+  // 指将棋用玉配置解除
+  // 玉は駒箱へ
+  // それ以外は相手の駒台へ
+  king_formation_unset(position) {
+    const soldiers = this.king_formation_soldiers(position)
+
+    // 駒がそろってないときは何もしない
+    if (soldiers.some(e => !this.board.lookup(e.place))) {
+      return
+    }
+
+    soldiers.forEach(e => {
+      const soldier = this.board.lookup(e.place)
       if (soldier) {
         const piece = soldier.piece
-        this.board.delete_at(place)
+        this.board.delete_at(soldier.place)
         if (piece.key === "K") {
           // 玉の場合は駒箱にとらげる
           this.piece_box_add(piece)
@@ -345,6 +352,8 @@ export default class Mediator {
         }
       }
     })
+
+    return true
   }
 
   // soldier.piece に対応する駒を探してあれば -1 して soldier.place の位置に配置する
@@ -401,6 +410,41 @@ export default class Mediator {
       this.hold_pieces_add(location, piece, -1)
       return true
     }
+  }
+
+  // TODO: SFENで定義する方法もあり
+  king_formation_soldiers(position) {
+    let bx = null
+    let sx = null
+    let by = null
+    let sy = null
+    if (position === "bottom_left") {
+      bx = 0
+      sx = 1
+      by = Board.dimension - 1
+      sy = -1
+    }
+    if (position === "bottom_right") {
+      bx = Board.dimension - 1
+      sx = -1
+      by = Board.dimension - 1
+      sy = -1
+    }
+    return [
+      { piece: "K", promoted: false, location: "black", place: [bx,           by           ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx,           by + sy + sy ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx + sx,      by + sy + sy ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, by + sy + sy ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, by + sy      ] },
+      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, by           ] },
+    ].map(e => {
+      return new Soldier({
+        piece: Piece.fetch(e.piece),
+        promoted: e.promoted,
+        location: Location.fetch(e.location),
+        place: Place.fetch(e.place),
+      })
+    })
   }
 
   ////////////////////////////////////////////////////////////////////////////////
