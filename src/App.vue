@@ -588,6 +588,10 @@
             br
             br
             h4.title 操作モードのイベント受信内容
+
+            b-field(label="イベント確認(buefy.toast)")
+              b-switch(v-model="trigger_toast_p")
+
             b-field(label="@update:play_mode_advanced_full_moves_sfen: 操作モードで指した直後の局面を発行(movesあり)")
               b-input(:value="JSON.stringify(play_mode_advanced_full_moves_sfen)" readonly type="textarea" rows="1")
 
@@ -750,6 +754,8 @@ export default {
       final_label: null,
       kifu_body: require("./極限早繰り銀.kif"),
 
+      trigger_toast_p: false,
+
       edit_mode_snapshot_sfen: null,
       mediator_snapshot_sfen: null,
       play_mode_advanced_full_moves_sfen: null,
@@ -793,7 +799,9 @@ export default {
 
     trigger_check(key, v) {
       this.$data[key] = v
-      this.$buefy.toast.open({message: `${key} -> ${JSON.stringify(v)}`, queue: false})
+      if (this.trigger_toast_p) {
+        this.$buefy.toast.open({message: `${key} -> ${JSON.stringify(v)}`, queue: false})
+      }
     },
   },
 
