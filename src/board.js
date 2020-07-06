@@ -16,6 +16,7 @@ export default class Board {
   }
 
   place_on(soldier) {
+    this.delete_at(soldier.place) // リアクティブにするため「削除」→「追加」とする
     Vue.set(this._surface, soldier.place.key, soldier)
   }
 

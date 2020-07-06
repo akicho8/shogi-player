@@ -20,7 +20,14 @@ export default {
   },
 
   created() {
-    this.$watch(() => [this.mediator, this.init_location_key], () => {
+    // this.$watch("mediator", () => this.emit_update_edit_mode_snapshot_sfen(), {deep: true})
+    // this.$watch("init_location_key", () => this.emit_update_edit_mode_snapshot_sfen(), {deep: true})
+
+    this.$watch(() => [
+      this.mediator,
+      this.init_location_key,
+      // this.mediator.hold_pieces,
+    ], () => {
       this.emit_update_edit_mode_snapshot_sfen()
       // this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
     }, {deep: true})

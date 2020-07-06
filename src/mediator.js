@@ -72,10 +72,21 @@ export default class Mediator {
   hold_pieces_add(location, piece, plus = 1) {
     const count = this.hold_pieces_count(location, piece) + plus
     const counts_hash = this.hold_pieces[location.key]
+
+    // 次のように書いた場合、ハッシュの値(count)がいくら変化してもそのタイミングではトリガーが発生しない
+    //
+    //   if (count >= 1) {
+    //     Vue.set(counts_hash, piece.key, count) // ←ここが問題
+    //   } else {
+    //     Vue.delete(counts_hash, piece.key)
+    //   }
+    //
+    // そこで count を更新するときは「キーが新規で追加」されたことでトリガーを発生させるようにする
+    // つまり count を更新するときは「キー削除」→「キー追加」とする
+
+    Vue.delete(counts_hash, piece.key)
     if (count >= 1) {
       Vue.set(counts_hash, piece.key, count)
-    } else {
-      Vue.delete(counts_hash, piece.key)
     }
   }
 
@@ -222,10 +233,9 @@ export default class Mediator {
 
   piece_box_add(piece, plus = 1) {
     const count = this.piece_box_count(piece) + plus
+    Vue.delete(this.piece_box, piece.key)
     if (count >= 1) {
       Vue.set(this.piece_box, piece.key, count)
-    } else {
-      Vue.delete(this.piece_box, piece.key)
     }
   }
 
