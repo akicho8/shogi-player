@@ -1,9 +1,12 @@
 import _ from "lodash"
 
 import Place from "../place"
+import Board from "../board"
+import PieceVector from "../piece_vector.js"
 import Soldier from "../soldier"
 import Location from "../location"
 
+const PLAY_MODE_LEGAL_MOVE_ONLY = true // play-mode で合法手のみに絞る
 const DOUBLE_CLICK_TIME = 350
 
 export default {
@@ -70,7 +73,22 @@ export default {
         return
       }
 
+      // 移動後の取れる駒
       const soldier = this.mediator.board.lookup(place)
+
+      // 移動後の駒
+      let new_soldier = null
+      let promotable_p = null
+      if (this.origin_soldier1) {
+        new_soldier = new Soldier({
+          piece: this.origin_soldier1.piece,
+          place: place,
+          promoted: this.origin_soldier1.promoted,
+          location: this.origin_soldier1.location,
+        })
+        // 入って成る？ それとも出てなる？
+        promotable_p = new_soldier.promotable_p || this.origin_soldier1.promotable_p
+      }
 
       // -------------------------------------------------------------------------------- Validation
 
@@ -148,6 +166,78 @@ export default {
         return
       }
 
+      // 盤上から移動させようとしたとき合法手以外は指せないようにする
+      if (PLAY_MODE_LEGAL_MOVE_ONLY && this.current_run_mode === "play_mode" && this.place_from) {
+        const piece_vector = PieceVector.fetch(this.origin_soldier1.piece.key)
+        const ox = this.place_from.x
+        const oy = this.place_from.y
+
+        let method_key = null
+        let found = false
+
+        // 1つだけ動ける系
+        if (!found) {
+          if (this.origin_soldier1.promoted) {
+            method_key = piece_vector.promoted_once_vectors
+          } else {
+            method_key = piece_vector.basic_once_vectors
+          }
+          const vectors = PieceVector[method_key]
+          if (vectors) {
+            found = vectors.some(e => {
+              if (e) {
+                const vx = e[0]
+                const vy = e[1] * this.origin_soldier1.location.value_sign
+                const x = ox + vx
+                const y = oy + vy
+                return x === place.x && y === place.y
+              }
+            })
+          }
+        }
+
+        // 
+        if (!found) {
+          if (this.origin_soldier1.promoted) {
+            method_key = piece_vector.promoted_repeat_vectors
+          } else {
+            method_key = piece_vector.basic_repeat_vectors
+          }
+          const vectors = PieceVector[method_key]
+          if (vectors) {
+            found = vectors.some(e => {
+              if (e) {
+                const vx = e[0]
+                const vy = e[1] * this.origin_soldier1.location.value_sign
+
+                let x = ox + vx
+                let y = oy + vy
+
+                while (true) {
+                  if (!Place.xy_valid_p(x, y)) {
+                    break
+                  }
+                  if (x === place.x && y === place.y) {
+                    return true
+                  }
+                  const next_place = Place.fetch([x, y])
+                  const next_soldier = this.mediator.board.lookup(next_place)
+                  if (next_soldier) {
+                    break
+                  }
+                  x += vx
+                  y += vy
+                }
+              }
+            })
+          }
+        }
+
+        if (!found) {
+          return
+        }
+      }
+
       // 盤上から移動
       if (this.place_from) {
         this.log("盤上から移動")
@@ -156,14 +246,7 @@ export default {
           // this.$forceUpdate()
         }
 
-        const new_soldier = new Soldier({
-          piece: this.origin_soldier1.piece,
-          place: place,
-          promoted: this.origin_soldier1.promoted,
-          location: this.origin_soldier1.location,
-        })
-
-        if (this.current_run_mode === "play_mode" && (new_soldier.promotable_p || this.origin_soldier1.promotable_p)) { // 入って成る or 出て成る
+        if (this.current_run_mode === "play_mode" && promotable_p) { // 入って成る or 出て成る
           this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
           this.dialog_p = true
 

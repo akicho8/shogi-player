@@ -10,6 +10,10 @@ export default class Place {
     return Object.freeze(new Place(v))
   }
 
+  static xy_valid_p(x, y) {
+    return 0 <= x && x < Board.dimension && 0 <= y && y < Board.dimension
+  }
+
   constructor(value) {
     let x, y
     if (_.isString(value)) {
