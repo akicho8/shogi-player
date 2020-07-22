@@ -196,7 +196,7 @@ export default {
           }
         }
 
-        // 
+        //
         if (!found) {
           if (this.origin_soldier1.promoted) {
             method_key = piece_vector.promoted_repeat_vectors
@@ -272,10 +272,28 @@ export default {
 
       // 持駒を置く
       if (this.have_piece) {
-        const soldier = this.origin_soldier2_create(place)
+        this.log("持駒を置く")
+
+        // 駒の上に置いた場合は取る
+        if (soldier) {
+          if (this.have_piece_location) {
+            // have_piece_location の駒台から移動した駒で取ったので have_piece_location の方に置く
+            this.mediator.hold_pieces_add(this.have_piece_location, soldier.piece)
+          } else {
+            // 駒箱から移動した駒で取ったので soldier.location に返すとする場合
+            if (false) {
+              this.mediator.hold_pieces_add(soldier.location, soldier.piece)
+            } else {
+              // 駒の向きは先手と同じなのでわかりやすいように 先手に返す
+              this.mediator.hold_pieces_add(Location.fetch("black"), soldier.piece)
+            }
+          }
+        }
+
+        const new_soldier = this.origin_soldier2_create(place)
         this.piece_decriment()
-        this.mediator.board.place_on(soldier) // 置く
-        this.moves_set(soldier.piece.key + "*" + place.to_sfen) // P*7g
+        this.mediator.board.place_on(new_soldier) // 置く
+        this.moves_set(new_soldier.piece.key + "*" + place.to_sfen) // P*7g
         this.state_reset()
         this.turn_next()
         return
