@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import Vue from 'vue'
 import Soldier from "./soldier"
+import Place from "./place.js"
 
 export default class Board {
   static get dimension() {
@@ -33,28 +34,41 @@ export default class Board {
   }
 
   get flip_all() {
-    const value = new Board()
+    const new_board = new Board()
     _.forEach(this._surface, (soldier, place) => {
       const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
         location: soldier.location.flip,
         place: soldier.place.flip_all,
       }))
-      value.place_on(new_soldier)
+      new_board.place_on(new_soldier)
     })
-    return value
+    return new_board
   }
 
   // 左右反転
   get flip_h() {
-    const value = new Board()
+    const new_board = new Board()
     _.forEach(this._surface, (soldier, place) => {
       const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
         location: soldier.location,
         place: soldier.place.flip_h,
       }))
-      value.place_on(new_soldier)
+      new_board.place_on(new_soldier)
     })
-    return value
+    return new_board
+  }
+
+  // 上下左右にスライド
+  slide_xy(x, y) {
+    const new_board = new Board()
+    _.forEach(this._surface, (soldier, place) => {
+      const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
+        location: soldier.location,
+        place: soldier.place.rotate_add(x, y),
+      }))
+      new_board.place_on(new_soldier)
+    })
+    return new_board
   }
 }
 

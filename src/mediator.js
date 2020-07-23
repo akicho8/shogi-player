@@ -459,4 +459,9 @@ export default class Mediator {
 
   ////////////////////////////////////////////////////////////////////////////////
   /* eslint-enable */
+
+  // 左右スライド
+  slide_xy(x, y) {
+    this.board = this.board.slide_xy(x, y)
+  }
 }

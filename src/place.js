@@ -103,6 +103,20 @@ export default class Place {
   get kanji_human() {
     return [this.kanji_human_x, this.kanji_human_y].join("")
   }
+
+  // x, y を足した新しい位置を返す
+  // はみでたのは反対側の座標とする
+  rotate_add(x, y) {
+    const nx = this.__new_pos(this._x, x)
+    const ny = this.__new_pos(this._y, y)
+    return Place.fetch([nx, ny])
+  }
+
+  // private
+  __new_pos(origin, v) {
+    return Math.trunc((origin + v + Board.dimension) % Board.dimension) // (x + 1).modulo(dimension)
+  }
+
 }
 
 if (process.argv[1] === __filename) {
