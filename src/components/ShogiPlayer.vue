@@ -42,6 +42,10 @@
       button.button.yumincho(@click.stop.prevent="init_location_toggle")
         b-tooltip(label="手番")
           | {{init_location.name}}
+      | &nbsp;
+      button.button.yumincho.has-text-weight-bold(@click.stop.prevent="shortcut_modal_show_handle")
+        b-tooltip(label="ショートカット")
+          | ?
 
   template(v-if="mediator")
     .turn_edit_container
@@ -469,7 +473,7 @@ export default {
     update_kifu_source(v) {
       this.inside_custom_kifu = v
       this.$emit("update:kifu_body", v) // 子で emit されたイベントを親(自分)で拾い、同じ内容で親に向けて発火。何この複雑さ。
-    }
+    },
   },
 
   computed: {

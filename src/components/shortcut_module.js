@@ -1,5 +1,6 @@
 import Location from "../location"
 import Place from "../place"
+import shortcut_modal from "./shortcut_modal.vue"
 
 export default {
   data() {
@@ -24,7 +25,7 @@ export default {
 
       // 駒箱クリック
       if (this.current_run_mode === "edit_mode") {
-        if (e.code === "Backspace" || e.key.toLowerCase() === "t") {
+        if (e.code === "Backspace" || e.code === "Delete" || e.key.toLowerCase() === "t") {
           this.soldier_hold_unless_holding_p(e)
           if (this.piece_box_other_click(e)) {
             e.preventDefault()
@@ -78,6 +79,14 @@ export default {
         }
       }
 
+      if (this.current_run_mode === "edit_mode") {
+        if (e.key === "?") {
+          this.shortcut_modal_toggle_handle()
+          e.preventDefault()
+          return true
+        }
+      }
+
       return false
     },
 
@@ -112,6 +121,42 @@ export default {
           }
         }
       }
+    },
+
+    //////////////////////////////////////////////////////////////////////////////// キーボードショートカット modal 表示
+
+    shortcut_modal_toggle_handle() {
+      if (this.shortcut_modal_active_p()) {
+        this.shortcut_modal_close_handle()
+      } else {
+        this.shortcut_modal_show_handle()
+      }
+    },
+    shortcut_modal_show_handle() {
+      this.shortcut_modal_close_handle()
+      if (this.$shortcut_modal) { alert("this.$shortcut_modal") }
+      this.$shortcut_modal = this.$buefy.modal.open({
+        parent: this,
+        hasModalCard: true,
+        props: { },
+        animation: "",
+        onCancel: () => { this.shortcut_modal_close_handle() },
+        // fullScreen: true,
+        canCancel: ["escape", "outside"],
+        component: shortcut_modal,
+        // events: {
+        //   "close": () => { alert("x") },
+        // },
+      })
+    },
+    shortcut_modal_close_handle() {
+      if (this.$shortcut_modal) {
+        this.$shortcut_modal.close()
+        this.$shortcut_modal = null
+      }
+    },
+    shortcut_modal_active_p() {
+      return !!this.$shortcut_modal
     },
   },
 }
