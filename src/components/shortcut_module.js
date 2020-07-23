@@ -87,6 +87,18 @@ export default {
         }
       }
 
+      // 移動
+      if (this.current_run_mode === "edit_mode") {
+        if (this.meta_p(e)) {
+          const vector = this.arrow_vector_table[e.key]
+          if (vector) {
+            this.mediator.slide_xy(...vector)
+            e.preventDefault()
+            return true
+          }
+        }
+      }
+
       return false
     },
 
@@ -157,6 +169,17 @@ export default {
     },
     shortcut_modal_active_p() {
       return !!this.$shortcut_modal
+    },
+  },
+
+  computed: {
+    arrow_vector_table() {
+      return {
+        "ArrowRight": [ 1,  0],
+        "ArrowLeft":  [-1,  0],
+        "ArrowUp":    [ 0, -1],
+        "ArrowDown":  [ 0,  1],
+      }
     },
   },
 }

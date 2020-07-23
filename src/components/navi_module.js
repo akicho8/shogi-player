@@ -69,20 +69,22 @@ export default {
         return
       }
 
-      const dom = document.activeElement
-      const controllers = [this.$refs.first, this.$refs.previous, this.$refs.next, this.$refs.last] // FIXME: 指定DOMの下にあるか？の方法がわかればもっと簡潔になる
-      if (!(dom === undefined || dom.tagName === "BODY" || _.includes(controllers, dom))) {
-        return
-      }
+      if (this.current_run_mode === "view_mode" || this.current_run_mode === "play_mode") {
+        const dom = document.activeElement
+        const controllers = [this.$refs.first, this.$refs.previous, this.$refs.next, this.$refs.last] // FIXME: 指定DOMの下にあるか？の方法がわかればもっと簡潔になる
+        if (!(dom === undefined || dom.tagName === "BODY" || _.includes(controllers, dom))) {
+          return
+        }
 
-      if (e.code === "Backspace" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.key === "k" || e.key === "p" || e.key === "b") {
-        this.relative_move(-1, e)
-        e.preventDefault()
-      }
+        if (e.code === "Backspace" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.key === "k" || e.key === "p" || e.key === "b") {
+          this.relative_move(-1, e)
+          e.preventDefault()
+        }
 
-      if (e.code === "Space" || e.code === "Enter" || e.code === "ArrowDown" || e.code === "ArrowRight" || e.key === "j" || e.key === "n" || e.key === "f") {
-        this.relative_move(1, e)
-        e.preventDefault()
+        if (e.code === "Space" || e.code === "Enter" || e.code === "ArrowDown" || e.code === "ArrowRight" || e.key === "j" || e.key === "n" || e.key === "f") {
+          this.relative_move(1, e)
+          e.preventDefault()
+        }
       }
 
       // let gap = null

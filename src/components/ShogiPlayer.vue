@@ -412,9 +412,9 @@ export default {
       this.$nextTick(() => this.$refs.turn_edit_input.focus())
     },
 
-    log(v) {
+    log(...v) {
       if (this.current_debug_mode) {
-        console.log(v)
+        console.log(...v)
       }
     },
 

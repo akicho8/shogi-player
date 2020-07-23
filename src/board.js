@@ -58,7 +58,7 @@ export default class Board {
     return new_board
   }
 
-  // 上下左右にスライド
+  // 上下左右ローテイト
   slide_xy(x, y) {
     const new_board = new Board()
     _.forEach(this._surface, (soldier, place) => {
