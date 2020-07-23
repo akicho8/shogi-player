@@ -21,7 +21,7 @@
     "bulma": "^0.6.2",
     "debug": "^3.1.0",
     "gh-pages": "^1.1.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "minimalistic-assert": "^1.0.0",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2",
