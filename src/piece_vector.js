@@ -1,18 +1,18 @@
 import MemoryRecord from "js-memory-record"
-// import Piece from "./piece"
 // import Location from "./location"
 
 export default class PieceVector extends MemoryRecord {
   static get define() {
     return [
-      { key: "K", basic_once_vectors: "pattern_king",       basic_repeat_vectors: null,           promoted_once_vectors: null,           promoted_repeat_vectors: null,           },
-      { key: "R", basic_once_vectors: null,                 basic_repeat_vectors: "pattern_plus", promoted_once_vectors: "pattern_x",    promoted_repeat_vectors: "pattern_plus", },
-      { key: "B", basic_once_vectors: null,                 basic_repeat_vectors: "pattern_x",    promoted_once_vectors: "pattern_plus", promoted_repeat_vectors: "pattern_x",    },
-      { key: "G", basic_once_vectors: "pattern_gold",       basic_repeat_vectors: null,           promoted_once_vectors: null,           promoted_repeat_vectors: null,           },
-      { key: "S", basic_once_vectors: "pattern_silver",     basic_repeat_vectors: null,           promoted_once_vectors: "pattern_gold", promoted_repeat_vectors: null,           },
-      { key: "N", basic_once_vectors: "pattern_knight",     basic_repeat_vectors: null,           promoted_once_vectors: "pattern_gold", promoted_repeat_vectors: null,           },
-      { key: "L", basic_once_vectors: null,                 basic_repeat_vectors: "pattern_pawn", promoted_once_vectors: "pattern_gold", promoted_repeat_vectors: null,           },
-      { key: "P", basic_once_vectors: "pattern_pawn",       basic_repeat_vectors: null,           promoted_once_vectors: "pattern_gold", promoted_repeat_vectors: null,           },
+      // force_promote_length: 死に駒になる前方にある壁との隙間の数(この値以下で死に駒になる)
+      { key: "K", basic_once_vectors: "pattern_king",       basic_repeat_vectors: null,           promoted_once_vectors: null,           promoted_repeat_vectors: null,           force_promote_length: null, },
+      { key: "R", basic_once_vectors: null,                 basic_repeat_vectors: "pattern_plus", promoted_once_vectors: "pattern_x",    promoted_repeat_vectors: "pattern_plus", force_promote_length: null, },
+      { key: "B", basic_once_vectors: null,                 basic_repeat_vectors: "pattern_x",    promoted_once_vectors: "pattern_plus", promoted_repeat_vectors: "pattern_x",    force_promote_length: null, },
+      { key: "G", basic_once_vectors: "pattern_gold",       basic_repeat_vectors: null,           promoted_once_vectors: null,           promoted_repeat_vectors: null,           force_promote_length: null, },
+      { key: "S", basic_once_vectors: "pattern_silver",     basic_repeat_vectors: null,           promoted_once_vectors: "pattern_gold", promoted_repeat_vectors: null,           force_promote_length: null, },
+      { key: "N", basic_once_vectors: "pattern_knight",     basic_repeat_vectors: null,           promoted_once_vectors: "pattern_gold", promoted_repeat_vectors: null,           force_promote_length: 1,    },
+      { key: "L", basic_once_vectors: null,                 basic_repeat_vectors: "pattern_pawn", promoted_once_vectors: "pattern_gold", promoted_repeat_vectors: null,           force_promote_length: 0,    },
+      { key: "P", basic_once_vectors: "pattern_pawn",       basic_repeat_vectors: null,           promoted_once_vectors: "pattern_gold", promoted_repeat_vectors: null,           force_promote_length: 0,    },
     ]
   }
 

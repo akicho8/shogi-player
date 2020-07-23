@@ -32,12 +32,12 @@ export default class Board {
     this._surface = {}
   }
 
-  get flip_v() {
+  get flip_all() {
     const value = new Board()
     _.forEach(this._surface, (soldier, place) => {
       const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
         location: soldier.location.flip,
-        place: soldier.place.flip_v,
+        place: soldier.place.flip_all,
       }))
       value.place_on(new_soldier)
     })

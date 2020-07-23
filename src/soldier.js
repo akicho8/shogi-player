@@ -92,14 +92,25 @@ export default class Soldier {
     list = _.concat(list, this.piece.css_class_list)
     return list
   }
+
+  // 自分の側の一番下を0としてどれだけ前に進んでいるかを返す
+  get bottom_spaces() {
+    return Board.dimension - 1 - this.top_spaces
+  }
+
+  // 自分の側の一番上を0としてあとどれだけで突き当たるかの値
+  get top_spaces() {
+    return this.place.flip_if_white(this.location).y
+  }
 }
 
 if (process.argv[1] === __filename) {
   const soldier = new Soldier({
-    place: new Place([1, 2]),
+    place: new Place([1, 7]),
     piece: Piece.fetch("P"),
     promoted: true,
-    location_key: "white",
+    location: Location.fetch("white"),
   })
   console.log(soldier.name)
+  console.log(soldier.top_spaces)
 }

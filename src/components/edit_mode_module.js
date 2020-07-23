@@ -7,6 +7,7 @@ import Soldier from "../soldier"
 import Location from "../location"
 
 const PLAY_MODE_LEGAL_MOVE_ONLY = true // play-mode で合法手のみに絞る
+const AUTO_PROMOTE              = true // 死に駒になるときは自動的に成る
 const DOUBLE_CLICK_TIME = 350
 
 export default {
@@ -247,16 +248,29 @@ export default {
         }
 
         if (this.current_run_mode === "play_mode" && promotable_p) { // 入って成る or 出て成る
-          this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
-          this.dialog_p = true
 
-          this.$buefy.dialog.confirm({
-            message: '成りますか？',
-            confirmText: '成る',
-            cancelText: '成らない',
-            onConfirm: () => { this.promotable_piece_moved(new_soldier, true)  },
-            onCancel:  () => { this.promotable_piece_moved(new_soldier, false) },
-          })
+          let must_dialog = true
+          if (AUTO_PROMOTE) {
+            const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
+            if (force_promote_length != null) {                                              // チェックしない場合は null
+              if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
+                this.promotable_piece_moved(new_soldier, true)                               // 死に駒になるなら自動的に成る
+                must_dialog = false                                                          // ダイアログを表示する必要はなくなった
+              }
+            }
+          }
+
+          if (must_dialog) {
+            this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
+            this.dialog_p = true
+            this.$buefy.dialog.confirm({
+              message: '成りますか？',
+              confirmText: '成る',
+              cancelText: '成らない',
+              onConfirm: () => { this.promotable_piece_moved(new_soldier, true)  },
+              onCancel:  () => { this.promotable_piece_moved(new_soldier, false) },
+            })
+          }
         } else {
           if (this.current_run_mode === "play_mode") {
             this.moves_set(this.origin_soldier1.place.to_sfen + place.to_sfen) // 7g7f
@@ -637,9 +651,9 @@ export default {
 
     // --------------------------------------------------------------------------------
 
-    all_flip_v() {
+    fn_flip_all() {
       // 盤面反転
-      this.mediator.board = this.mediator.board.flip_v
+      this.mediator.board = this.mediator.board.flip_all
 
       // 持駒反転
       this.mediator.hold_pieces = _.reduce(Location.values, (a, e) => {
@@ -648,7 +662,7 @@ export default {
       }, {})
     },
 
-    all_flip_h() {
+    fn_flip_h() {
       // 盤面左右反転
       this.mediator.board = this.mediator.board.flip_h
     },

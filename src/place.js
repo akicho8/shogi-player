@@ -52,12 +52,20 @@ export default class Place {
     return this._y + 1
   }
 
-  get flip_v() {
+  get flip_all() {
     return Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y])
   }
 
   get flip_h() {
     return Place.fetch([Board.dimension - 1 - this._x, this._y])
+  }
+
+  flip_if_white(location) {
+    if (location.key === "white") {
+      return this.flip_all
+    } else {
+      return this
+    }
   }
 
   _parse_from_string(s) {

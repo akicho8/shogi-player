@@ -1,4 +1,5 @@
 import MemoryRecord from "js-memory-record"
+import PieceVector from "./piece_vector.js"
 
 export default class Piece extends MemoryRecord {
   static get define() {
@@ -39,6 +40,11 @@ export default class Piece extends MemoryRecord {
   get promotable_p() {
     return !!this.promoted_name
   }
+
+  get piece_vector() {
+    return PieceVector.fetch(this.key)
+  }
+
 }
 
 if (process.argv[1] === __filename) {

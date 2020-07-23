@@ -31,11 +31,11 @@
         b-dropdown-item(v-for="record in any_func_info_values" :value="record.key" :key="record.key" @click="any_func_click_handle(record)")
           | {{record.name}}
       | &nbsp;
-      button.button.yumincho(@click.stop.prevent="all_flip_v")
+      button.button.yumincho(@click.stop.prevent="fn_flip_all")
         b-tooltip(label="上下反転")
           b-icon(icon="pan-vertical" size="is-small")
       | &nbsp;
-      button.button.yumincho(@click.stop.prevent="all_flip_h")
+      button.button.yumincho(@click.stop.prevent="fn_flip_h")
         b-tooltip(label="左右反転")
           b-icon(icon="pan-horizontal" size="is-small")
       | &nbsp;
