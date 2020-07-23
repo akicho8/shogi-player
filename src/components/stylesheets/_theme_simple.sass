@@ -41,7 +41,9 @@
           //   background-color: $sp_simple_holding_color
         +touch
           // タッチデバイスの場合は動かせないので枠をつける
-          border: 1px solid $sp_simple_holding_color
+          // padding: 2px
+          // border: 2px solid $sp_simple_holding_color
+          background-color: $sp_simple_holding_color
           height: inherit     // ←【超重要】これを入れないと touch のとき選択した駒の背景に隙間ができる
 
       // 選択できる駒だけ反応する
@@ -118,7 +120,8 @@
 
     //////////////////////////////////////////////////////////////////////////////// 駒台
     .piece_stand_outer
-      font-size: 0.9em
+      // 駒台の駒の大きさ
+      // font-size: 0.9em
       .player_name
         // font-size: 0.9em
 
@@ -131,7 +134,6 @@
         margin-left: 0.1rem
         font-size: 0.6em
 
-        
     &.horizontal
       .piece_stand_outer
         .player_name
@@ -145,7 +147,7 @@
           margin-left: 0.4em
           li
             padding: 0 0.2em
-        
+
     // edit_mode の場合は駒箱を大きくする
     &.run_mode-edit_mode
       &.horizontal
