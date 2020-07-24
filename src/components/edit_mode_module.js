@@ -8,6 +8,7 @@ import Location from "../location"
 
 const PLAY_MODE_LEGAL_MOVE_ONLY = true // play-mode で合法手のみに絞る
 const AUTO_PROMOTE              = true // 死に駒になるときは自動的に成る
+const NOT_PUT_IF_DEATH_SOLDIER  = true // 死に駒になるときは置けないようにする
 const DOUBLE_CLICK_TIME = 350
 
 export default {
@@ -106,6 +107,17 @@ export default {
       if (this.current_run_mode === "play_mode" && this.have_piece && soldier) {
         this.log("駒台や駒箱から持ち上げた駒を盤上の駒の上に置こうとしたので無効とする")
         return
+      }
+
+      if (NOT_PUT_IF_DEATH_SOLDIER && this.current_run_mode === "play_mode" && this.have_piece && !soldier) {
+        const new_soldier = this.soldier_create_from_stand_or_box_on(place)
+        const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
+        if (force_promote_length != null) {                                              // チェックしない場合は null
+          if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
+            this.log("駒台や駒箱から持ち上げた駒を置こうとしたけど死に駒なので無効とする")
+            return
+          }
+        }
       }
 
       if (!this.holding_p && !soldier) {
@@ -304,7 +316,7 @@ export default {
           }
         }
 
-        const new_soldier = this.origin_soldier2_create(place)
+        const new_soldier = this.soldier_create_from_stand_or_box_on(place)
         this.piece_decriment()
         this.mediator.board.place_on(new_soldier) // 置く
         this.moves_set(new_soldier.piece.key + "*" + place.to_sfen) // P*7g
@@ -672,7 +684,7 @@ export default {
     },
 
     // 駒箱や駒台から持ち上げている駒
-    origin_soldier2_create(place) {
+    soldier_create_from_stand_or_box_on(place) {
       return new Soldier({
         piece: this.have_piece,
         place: place,
@@ -819,7 +831,7 @@ export default {
     origin_soldier2() {
       if (this.have_piece) {
         const place = Place.fetch([0, 0])
-        return this.origin_soldier2_create(place)
+        return this.soldier_create_from_stand_or_box_on(place)
       }
     },
 
