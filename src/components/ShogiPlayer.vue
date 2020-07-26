@@ -28,8 +28,8 @@
         .button(slot="trigger")
           b-tooltip(label="操作")
             b-icon(icon="menu" size="is-small")
-        b-dropdown-item(v-for="record in any_func_info_values" :value="record.key" :key="record.key" @click="any_func_click_handle(record)")
-          | {{record.name}}
+        b-dropdown-item(v-for="e in AnyFuncInfo.values" :value="e.key" :key="e.key" @click="any_func_click_handle(e)")
+          | {{e.name}}
       | &nbsp;
       button.button.yumincho(@click.stop.prevent="fn_flip_all")
         b-tooltip(label="上下反転")

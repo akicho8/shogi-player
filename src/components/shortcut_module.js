@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       mouseover_info: null,    // マウスが hover している物
+      shuffle_mode_p: false,
     }
   },
 
@@ -97,6 +98,33 @@ export default {
             return true
           }
         }
+      }
+
+      if (this.current_run_mode === "edit_mode") {
+        if (e.key === "!") {
+          this.shuffle_mode_p = !this.shuffle_mode_p
+          if (this.shuffle_mode_p) {
+            this.$buefy.toast.open({message: `盤面シャッフルモード: ON (TAP: 1-9)`, position: "is-bottom", queue: false, duration: 1000 * 2, type: "is-primary"})
+          } else {
+            this.$buefy.toast.open({message: "盤面シャッフルモード: OFF", position: "is-bottom", queue: false, duration: 1000 * 0.5})
+          }
+        }
+        if (this.shuffle_mode_p) {
+          if (e.key === "1" || e.key === "2" || e.key === "3" || e.key === "4" || e.key === "5" || e.key === "6" || e.key === "7" || e.key === "8" || e.key === "9") {
+            this.shuffle_run(e.key)
+            e.preventDefault()
+            return true
+          }
+        }
+
+        // if (this.meta_p(e)) {
+        //   const vector = this.arrow_vector_table[e.key]
+        //   if (vector) {
+        //     this.mediator.slide_xy(...vector)
+        //     e.preventDefault()
+        //     return true
+        //   }
+        // }
       }
 
       return false

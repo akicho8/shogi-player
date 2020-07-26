@@ -85,6 +85,68 @@ export default class Board {
     })
     return new_board
   }
+
+  shuffle_apply(size) {
+    // const new_board = new Board()
+    // _.forEach(this._surface, (soldier, place) => {
+    //   while (true) {
+    //     const nx = _.random(0, size - 1)
+    //     const ny = _.random(0, size - 1)
+    //     const new_place = Place.fetch([nx, ny])
+    //     if (new_board.lookup(new_place)) {
+    //       const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
+    //         location: soldier.location,
+    //         place: new_place,
+    //       }))
+    //       new_board.place_on(new_soldier)
+    //       break
+    //     }
+    //   }
+    // })
+    // return new_board
+
+    if ((size * size) < this.soldiers.length) {
+      // alert(`再配置するスペースより駒の数の方が多いため処理できません`)
+      return
+    }
+
+    const places = this.all_places(size)
+    const shuffled_places = _.shuffle(places)
+    // console.log(places)
+    // if (places.length < this.soldiers.length) {
+    //   alert("空がありません")
+    //   return
+    // }
+
+    const new_board = new Board()
+    let i = 0
+    _.forEach(this._surface, (soldier, place) => {
+      const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
+        location: soldier.location,
+        place: shuffled_places[i],
+      }))
+      new_board.place_on(new_soldier)
+      i += 1
+    })
+    return new_board
+  }
+
+  // 単純に右上を原点として size x size のセルの Place オブジェクトの配列を返す
+  all_places(size) {
+    const bx = Board.dimension - size
+    const by = 0
+
+    const places = []
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        const place = Place.fetch([bx + x, by + y])
+        // if (!this.lookup(place)) {
+        places.push(place)
+        // }
+      }
+    }
+    return places
+  }
 }
 
 if (process.argv[1] === __filename) {

@@ -317,6 +317,8 @@ export default class Mediator {
     this.piece_box = {}
   }
 
+  //////////////////////////////////////////////////////////////////////////////// ランダム配置
+
   /* eslint-disable */
   //////////////////////////////////////////////////////////////////////////////// 指将棋用玉配置
 
@@ -487,5 +489,13 @@ export default class Mediator {
   // 左右スライド
   slide_xy(x, y) {
     this.board = this.board.slide_xy(x, y)
+  }
+
+  shuffle_apply(size) {
+    const new_board = this.board.shuffle_apply(size)
+    if (new_board) {
+      this.board = new_board
+      return true
+    }
   }
 }

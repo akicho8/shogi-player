@@ -1,4 +1,5 @@
 import AnyFuncInfo from "../any_func_info"
+import Board from "../board"
 
 export default {
   /* eslint-disable */
@@ -16,11 +17,27 @@ export default {
     any_func_click_handle(any_func_info) {
       any_func_info.func(this)
     },
+
+    shuffle_dialog_open() {
+      this.shuffle_mode_p = false // 数字が入力できないため OFF にする
+
+      this.$buefy.dialog.prompt({
+        message: "寸法の一辺のサイズを指定してください",
+        inputAttrs: { type: "number", value: 4, min: 1, max: Board.dimension},
+        trapFocus: true,
+        onConfirm: e => this.shuffle_run(e),
+      })
+    },
+
+    shuffle_run(size) {
+      size = parseInt(size)
+      if (!this.mediator.shuffle_apply(size)) {
+        this.$buefy.toast.open({message: `${size} x ${size} が盤上の駒の数より少ないため何もしませんでした`, position: "is-bottom", queue: false, duration: 1000 * 2.0, type: "is-warning"})
+      }
+    },
   },
 
   computed: {
-    any_func_info_values() {
-      return AnyFuncInfo.values
-    },
+    AnyFuncInfo() { return AnyFuncInfo },
   },
 }

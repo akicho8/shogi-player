@@ -38,6 +38,15 @@
           b-tag.ml-1(type="is-primary") BACKSPACE
           b-tag.ml-1(type="is-primary") DELETE
       tr
+        th 盤面シャッフルモード
+        td
+          b-tag(type="is-primary") !
+          span.is-size-7.mx-1 で ON / OFF して
+          b-tag(type="is-primary") 1
+          span.is-size-7.mx-1 から
+          b-tag(type="is-primary") 9
+
+      tr
         th 盤面ローテイト
         td
           b-tag(type="is-primary") 修飾キー
