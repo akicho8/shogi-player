@@ -38,7 +38,7 @@
           b-tag.ml-1(type="is-primary") BACKSPACE
           b-tag.ml-1(type="is-primary") DELETE
       tr
-        th 盤面シャッフルモード
+        th 盤面シャッフル
         td
           b-tag(type="is-primary") !
           span.is-size-7.mx-1 で ON / OFF して
