@@ -33,6 +33,21 @@ export default class Board {
     this._surface = {}
   }
 
+  //////////////////////////////////////////////////////////////////////////////// Utilities
+
+  get soldiers() {
+    return Object.values(this._surface)
+  }
+
+  // soldier を piece にしてその個数をハッシュにして返す
+  get piece_counts_hash() {
+    const counts = {}
+    _.forEach(this.soldiers, e => {
+      counts[e.piece.key] = (counts[e.piece.key] || 0) + 1
+    })
+    return counts
+  }
+
   get flip_all() {
     const new_board = new Board()
     _.forEach(this._surface, (soldier, place) => {

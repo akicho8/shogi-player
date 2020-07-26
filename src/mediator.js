@@ -282,11 +282,35 @@ export default class Mediator {
     this.piece_box_clear()
 
     const info = PresetInfo.fetch(preset_info)
-    if (info.piece_box) {
-      info.piece_box.forEach(([e, c]) => {
-        this.piece_box_add(Piece.fetch(e), c)
+    info.piece_box.forEach(([e, c]) => {
+      this.piece_box_add(Piece.fetch(e), c)
+    })
+  }
+
+  // 駒箱に足りない駒だけにする
+  piece_box_piece_couns_adjust() {
+    this.piece_box_clear()
+
+    const counts_hash = this.hold_piece_all_counts_hash       // 両者の持駒の合計
+    const counts_hash_on_board = this.board.piece_counts_hash // 盤上の駒の合計
+
+    const info = PresetInfo.fetch("全部駒箱")
+    info.piece_box.forEach(([e, c]) => {
+      const piece = Piece.fetch(e)
+      const rest = c - ((counts_hash[piece.key] || 0) + (counts_hash_on_board[piece.key] || 0))
+      this.piece_box_add(piece, rest)
+    })
+  }
+
+  // 両者の持駒を合わせたハッシュを返す
+  get hold_piece_all_counts_hash() {
+    const counts = {}
+    Location.values.forEach(e => {
+      _.forIn(this.hold_pieces[e.key], (count, piece_key) => {
+        counts[piece_key] = (counts[piece_key] || 0) + count
       })
-    }
+    })
+    return counts
   }
 
   piece_box_clear() {
