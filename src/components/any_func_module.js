@@ -23,6 +23,8 @@ export default {
 
       this.$buefy.dialog.prompt({
         message: "寸法の一辺のサイズを指定してください",
+        confirmText: "実行",
+        cancelText: "キャンセル",
         inputAttrs: { type: "number", value: 4, min: 1, max: Board.dimension},
         trapFocus: true,
         onConfirm: e => this.shuffle_run(e),
