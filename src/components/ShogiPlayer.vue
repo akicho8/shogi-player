@@ -278,7 +278,7 @@ export default {
       if (this.preset_key) {
         this.mediator_setup_by_preset(this.preset_key) // 駒箱に「玉」を乗せたいため
       } else {
-        this.mediator_setup(this.start_turn)
+        this.mediator_setup_for_edit_mode()
       }
     }
   },
@@ -293,6 +293,11 @@ export default {
     },
 
     kifu_source() {
+      if (this.current_run_mode === "edit_mode") {
+        this.mediator_setup_for_edit_mode()
+        return
+      }
+
       // const before_turn_offset_max = this.turn_offset_max
       const before_sfen = this.mediator ? this.mediator.to_simple_sfen : ""
       this.log(`before turn_offset_max: ${this.turn_offset_max}`)
@@ -382,6 +387,21 @@ export default {
       this.mediator = new Mediator()
       this.mediator.data_source = this.data_source_by(this.kifu_source)
       this.mediator.current_turn = turn
+      this.mediator.run()
+    },
+
+    mediator_setup_for_edit_mode() {
+      // まず0手目の状態を作る
+      this.mediator = new Mediator()
+      this.mediator.data_source = this.data_source_by(this.kifu_source)
+      this.mediator.current_turn = 0
+      this.mediator.run()
+
+      // 0手目の手番を反映
+      this.init_location_key = this.mediator.current_location.key
+
+      // そのあとで指定の手数に変更する
+      this.mediator.current_turn = this.start_turn
       this.mediator.run()
     },
 
