@@ -17,7 +17,7 @@
     .font_size_base
       +mobile
         // background-color: blue
-        font-size: 5.2vmin        // このサイズでぎりぎり升目が正方形を保ったまま最大幅になる
+        font-size: 5.3vmin        // このサイズでぎりぎり升目が正方形を保ったまま最大幅になる
         table
           // width: 100%           // これを入れるとセルがぷるぷるしなくなる。しかし符号の鬼では入れない方がいい。いれないと升目が正方形になる。なので符号の鬼では inherit している。
 
@@ -25,9 +25,9 @@
     &.horizontal
       .board_outer
         +mobile
-          margin-left: 1px  // 盤と駒台の隙間(オーバーライド)
-          margin-right: 1px // 盤と駒台の隙間
-          padding: 1%       // 盤の隅の隙間(オーバーライド)
+          margin-left: 3px  // 盤と駒台の隙間(オーバーライド)
+          margin-right: 3px // 盤と駒台の隙間
+          padding: 1.5%       // リアルだけにある盤の辺の隙間
 
   .modal_trigger_dots
     +mobile
