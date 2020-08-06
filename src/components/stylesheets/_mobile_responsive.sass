@@ -20,6 +20,10 @@
         font-size: 5.3vmin        // このサイズでぎりぎり升目が正方形を保ったまま最大幅になる
         table
           // width: 100%           // これを入れるとセルがぷるぷるしなくなる。しかし符号の鬼では入れない方がいい。いれないと升目が正方形になる。なので符号の鬼では inherit している。
+    &.run_mode-edit_mode
+      .font_size_base
+        +mobile
+          font-size: 4.8vmin    // 編集モードのときは小さくする
 
   &.theme-real
     &.horizontal
