@@ -222,7 +222,6 @@ export default {
     board_piece_back_user_class: { type: Function, default: place => { return [] }, },
     board_cell_left_click_user_handle: { type: Function, default: null, },
     player_info:    { type: Object,  default: null, },
-    flip_if_white:  { type: Boolean, default: false,       },
   },
   /* eslint-enable */
 
