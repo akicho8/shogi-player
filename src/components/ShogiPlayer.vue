@@ -22,7 +22,7 @@
           b-tooltip(label="初期配置")
             b-icon(icon="apps" size="is-small")
           //- b-icon(icon="menu-down")
-        b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key" @click="mediator_setup_by_preset_info(record)")
+        b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key" @click="mediator_setup_by_preset(record)")
           | {{record.name}}
       b-dropdown(v-model="any_func_key")
         .button(slot="trigger")
@@ -400,9 +400,12 @@ export default {
       // 0手目の手番を反映
       this.init_location_key = this.mediator.current_location.key
 
-      // そのあとで指定の手数に変更する
+      // そのあとで指定の手数に変更
       this.mediator.current_turn = this.start_turn
       this.mediator.run()
+
+      // 不足駒を駒箱に生成
+      this.mediator.piece_box_piece_couns_adjust()
     },
 
     view_mode_mediator_update(turn) {

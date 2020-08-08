@@ -26,21 +26,20 @@ export default {
   },
 
   methods: {
-    mediator_setup_by_preset(value) {
-      if (value) {
-        const preset_info = PresetInfo.fetch(value)
-        this.mediator_setup_by_preset_info(preset_info)
-      }
-    },
-
     // FIXME: pulldown から選択したときに2回呼ばれてしまう
-    mediator_setup_by_preset_info(preset_info) {
+    mediator_setup_by_preset(preset_info) {
+      preset_info = PresetInfo.fetch(preset_info)
       this.mediator = new Mediator()
       if (preset_info.sfen) {
         this.mediator.data_source = this.data_source_by(preset_info.sfen)
       }
-      this.mediator.piece_box_reset_by_preset(preset_info)
       this.mediator.run()
+
+      // 足りない駒を preset_info から設定するのは廃止
+      // this.mediator.piece_box_reset_by_preset(preset_info)
+
+      // 自動的に駒箱を補充
+      this.mediator.piece_box_piece_couns_adjust()
 
       // 駒落ちのときは△の手番から始まるので edit_mode での手番に反映する
       // mediator の current_turn が 0 のまま run しているので mediator.current_location.key で最初の手番がわかる
