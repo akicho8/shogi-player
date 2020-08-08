@@ -414,9 +414,7 @@ export default {
 
     flip_if_white_run() {
       if (this.flip_if_white) {
-        if (this.mediator.data_source.location_base.key === "white") {
-          this.$store.state.current_flip = true
-        }
+        this.$store.state.current_flip = (this.mediator.data_source.location_base.key === "white")
       }
     },
 
