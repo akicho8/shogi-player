@@ -222,6 +222,7 @@ export default {
     board_piece_back_user_class: { type: Function, default: place => { return [] }, },
     board_cell_left_click_user_handle: { type: Function, default: null, },
     player_info:    { type: Object,  default: null, },
+    flip_if_white:  { type: Boolean, default: false,       },
   },
   /* eslint-enable */
 
@@ -388,6 +389,7 @@ export default {
       this.mediator.data_source = this.data_source_by(this.kifu_source)
       this.mediator.current_turn = turn
       this.mediator.run()
+      this.flip_if_white_run()
     },
 
     mediator_setup_for_edit_mode() {
@@ -406,6 +408,16 @@ export default {
 
       // 不足駒を駒箱に生成
       this.mediator.piece_box_piece_couns_adjust()
+
+      this.flip_if_white_run()
+    },
+
+    flip_if_white_run() {
+      if (this.flip_if_white) {
+        if (this.mediator.data_source.location_base.key === "white") {
+          this.$store.state.current_flip = true
+        }
+      }
     },
 
     view_mode_mediator_update(turn) {

@@ -12,6 +12,8 @@ export default class AnyFuncInfo extends MemoryRecord {
       { key: "駒箱の駒をクリア",   func: e => { e.mediator.piece_box_clear() }, },
       { key: "指将棋用玉配置",     func: e => { e.mediator.king_formation_auto_set()   }, },
       { key: "指将棋用玉回収",     func: e => { e.mediator.king_formation_auto_unset() }, },
+      { key: "視点切り替え",       func: e => { e.$store.state.current_flip = !e.$store.state.current_flip }, },
+
       // { key: "盤面をシャッフル",   func: e => { e.mediator.shuffle_apply(4) }, },
       { key: "盤面シャッフル",     func: e => { e.shuffle_dialog_open() }, },
       { key: "上ローテイト",       func: e => { e.mediator.slide_xy(0, -1) }, },

@@ -101,6 +101,7 @@ export default {
       this.mediator.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
       this.mediator.current_turn = turn
       this.mediator.run()
+      this.flip_if_white_run()
     },
 
     // 「待った」して指す場合を考慮してカレント以降の指し手を削除してから追加する

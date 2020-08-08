@@ -435,6 +435,7 @@
                 :summary_show="summary_show"
                 :operation_disable="operation_disable"
                 :flip.sync="flip"
+                :flip_if_white="flip_if_white"
                 :vlayout.sync="vlayout"
                 :digit_show="digit_show"
                 :final_label="final_label"
@@ -448,13 +449,13 @@
                 :volume="volume"
                 :human_side_key="human_side_key"
 
-                @update:edit_mode_snapshot_sfen="e => trigger_check('edit_mode_snapshot_sfen', e)"
-                @update:mediator_snapshot_sfen="e => trigger_check('mediator_snapshot_sfen', e)"
-                @update:play_mode_advanced_full_moves_sfen="e => trigger_check('play_mode_advanced_full_moves_sfen', e)"
-                @update:play_mode_advanced_snapshot_sfen="e => trigger_check('play_mode_advanced_snapshot_sfen', e)"
-                @update:play_mode_advanced_last_move="e => trigger_check('play_mode_advanced_last_move', e)"
-                @update:play_mode_advanced_moves="e => trigger_check('play_mode_advanced_moves', e)"
-                @update:turn_offset="e => trigger_check('turn_offset', e)"
+                @update:edit_mode_snapshot_sfen="            e => trigger_check('edit_mode_snapshot_sfen', e)"
+                @update:mediator_snapshot_sfen="             e => trigger_check('mediator_snapshot_sfen', e)"
+                @update:play_mode_advanced_full_moves_sfen=" e => trigger_check('play_mode_advanced_full_moves_sfen', e)"
+                @update:play_mode_advanced_snapshot_sfen="   e => trigger_check('play_mode_advanced_snapshot_sfen', e)"
+                @update:play_mode_advanced_last_move="       e => trigger_check('play_mode_advanced_last_move', e)"
+                @update:play_mode_advanced_moves="           e => trigger_check('play_mode_advanced_moves', e)"
+                @update:turn_offset="                        e => trigger_check('turn_offset', e)"
 
                 @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
                 )
@@ -536,6 +537,9 @@
                 b-field(label="flip")
                   b-switch(v-model="flip")
 
+                b-field(label="flip_if_white")
+                  b-switch(v-model="flip_if_white")
+
                 b-field(label="vlayout")
                   b-switch(v-model="vlayout")
 
@@ -591,6 +595,7 @@
                   | :<b>summary_show</b>="{{summary_show}}"
                   | :<b>operation_disable</b>="{{operation_disable}}"
                   | :<b>flip</b>="{{flip}}"
+                  | :<b>flip_if_white</b>="{{flip_if_white}}"
                   | :<b>vlayout</b>="{{vlayout}}"
                   | :<b>digit_show</b>="{{digit_show}}"
                   | :<b>final_label</b>="'{{final_label}}'"
@@ -759,6 +764,7 @@ export default {
       summary_show: true,
       operation_disable: false,
       flip: false,
+      flip_if_white: false,
       vlayout: false,
       digit_show: false,
       black_name: '先手',
