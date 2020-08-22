@@ -59,9 +59,10 @@ export default {
     // 操作モードで盤面が変化したときの指し手の配列
     // ・[a, b, c] の指し手があってポインタが c のとき「←」でポインタを b にするとトリガーする
     // ・このとき [a, b] を返す
-    // moves_take_turn_offset(v) {
-    //   this.$emit("update:moves_take_turn_offset", v)
-    // },
+    moves_take_turn_offset(v) {
+      console.log(v)
+      this.$emit("update:moves_take_turn_offset", v)
+    },
   },
 
   methods: {

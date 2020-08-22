@@ -456,6 +456,7 @@
                 @update:play_mode_advanced_last_move="       e => trigger_check('play_mode_advanced_last_move', e)"
                 @update:play_mode_advanced_moves="           e => trigger_check('play_mode_advanced_moves', e)"
                 @update:turn_offset="                        e => trigger_check('turn_offset', e)"
+                @update:moves_take_turn_offset="             e => trigger_check('moves_take_turn_offset', e)"
 
                 @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
                 )
@@ -630,6 +631,9 @@
 
               b-field(label="@update:turn_offset: 手数が変化したとき")
                 b-input(:value="JSON.stringify(turn_offset)" readonly type="text")
+
+              b-field(label="@update:moves_take_turn_offset: 操作モードでmovesをturn_offsetでtakeしたもの")
+                b-input(:value="JSON.stringify(moves_take_turn_offset)" readonly type="text")
               br
 
         .table_wrap
@@ -782,6 +786,7 @@ export default {
       play_mode_advanced_last_move: null,
       play_mode_advanced_moves: null,
       turn_offset: null,
+      moves_take_turn_offset: null,
 
       kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
       kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
