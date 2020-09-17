@@ -387,6 +387,8 @@ export default {
     current_piece_variant(v)  { this.$emit("update:piece_variant", v)               }, // 中 -> 外
     piece_variant(v)          { this.$store.state.current_piece_variant = v         }, // 外 -> 中
     /* eslint-enable */
+
+    turn_offset_max(v) { this.$emit("update:turn_offset_max", v) },
   },
 
   methods: {

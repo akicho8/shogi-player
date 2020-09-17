@@ -71,6 +71,7 @@
 | `update:edit_mode_snapshot_sfen`            | 編集モードの局面                               | play_mode でも呼ばれるので注意                                    |
 | `update:start_turn`                         | 手数が変更されたとき                           | start_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも |
 | `update:turn_offset`                        | 手数が変更されたとき                           | マイナスにはならない。start_turn と被るので追加。                 |
+| `update:turn_offset_max`                    | 最大手数が変更されたとき                        | 内部変数参照よりこっちの方が安全なはず              |
 | `update:run_mode`                           | 設定ダイアログでモードが変更されたとき         |                                                                   |
 | `update:kifu_body`                          | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
 | `update:debug_mode`                         | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |

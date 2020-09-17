@@ -456,6 +456,7 @@
                 @update:play_mode_advanced_last_move="       e => trigger_check('play_mode_advanced_last_move', e)"
                 @update:play_mode_advanced_moves="           e => trigger_check('play_mode_advanced_moves', e)"
                 @update:turn_offset="                        e => trigger_check('turn_offset', e)"
+                @update:turn_offset_max="                    e => trigger_check('turn_offset_max', e)"
                 @update:moves_take_turn_offset="             e => trigger_check('moves_take_turn_offset', e)"
 
                 @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
