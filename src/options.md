@@ -81,6 +81,7 @@
 | `update:piece_variant`                      | 駒の種類変更                                   |                                                                   |
 | `update:size`                               | サイズ変更                                     |                                                                   |
 | `board_cell_left_click_user_handle`         | セルをクリックしたとき                         | place が来るのでどこをクリックしたかわかる                        |
+| `board_cell_pointerdown_user_handle`         | セルをクリックしたとき(スマホの場合押した瞬間)     | place が来るのでどこをクリックしたかわかる                        |
 | `xxx.native`                                | 任意のイベント (例: `click.native`)            | click の場合はだいたい `operation_disable` と組み合わせる         |
 
 ## Slot

@@ -56,6 +56,17 @@ export default {
   },
 
   methods: {
+    // 盤を押した瞬間
+    board_cell_pointerdown_handle(xy, e) {
+      const place = Place.fetch(xy)
+      const handle = this.board_cell_pointerdown_user_handle
+      if (handle) {
+        if (handle(place, e)) {
+          return
+        }
+      }
+    },
+
     // 盤をクリック
     board_cell_left_click(xy, e) {
       this.log("board_cell_left_click")

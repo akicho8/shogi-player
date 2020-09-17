@@ -650,6 +650,7 @@
               ref="api_sp"
               :summary_show="false"
               :hidden_if_piece_stand_blank="true"
+              :board_cell_pointerdown_user_handle="board_cell_pointerdown_user_handle"
               :board_cell_left_click_user_handle="board_cell_left_click_user_handle"
               :overlay_navi="false"
               :debug_mode="false"
@@ -804,6 +805,10 @@ export default {
   methods: {
     board_cell_left_click_user_handle(place, event) {
       this.$buefy.toast.open({message: `${place.kanji_human}のセルをクリック`, queue: false})
+      return true
+    },
+    board_cell_pointerdown_user_handle(place, event) {
+      this.$buefy.toast.open({message: `${place.kanji_human}のセルをクリック(押した瞬間)`, queue: false})
       return true
     },
 

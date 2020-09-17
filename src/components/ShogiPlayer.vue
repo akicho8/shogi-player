@@ -91,7 +91,13 @@
           .board_outer
             table.board_inner
               tr(v-for="y in mediator.dimension")
-                td(v-for="x in mediator.dimension" @click.stop.prevent="board_cell_left_click([x - 1, y - 1], $event)" @click.stop.prevent.right="board_cell_right_click([x - 1, y - 1], $event)" @mouseover="board_mouseover_handle([x - 1, y - 1], $event)" @mouseleave="mouseleave_handle")
+                td(
+                  v-for="x in mediator.dimension"
+                  @pointerdown="board_cell_pointerdown_handle([x - 1, y - 1], $event)"
+                  @click.stop.prevent="board_cell_left_click([x - 1, y - 1], $event)"
+                  @click.stop.prevent.right="board_cell_right_click([x - 1, y - 1], $event)"
+                  @mouseover="board_mouseover_handle([x - 1, y - 1], $event)"
+                  @mouseleave="mouseleave_handle")
                   .piece_back(:class="board_piece_back_class([x - 1, y - 1])" :style="board_piece_back_style([x - 1, y - 1])")
                     .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
@@ -221,6 +227,7 @@ export default {
     board_piece_back_user_style: { type: Function, default: place => { return {} }, }, // FIXME: add to README
     board_piece_back_user_class: { type: Function, default: place => { return [] }, },
     board_cell_left_click_user_handle: { type: Function, default: null, },
+    board_cell_pointerdown_user_handle: { type: Function, default: null, },
     player_info:    { type: Object,  default: null, },
   },
   /* eslint-enable */
