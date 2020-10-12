@@ -2,8 +2,8 @@ import _ from "lodash"
 
 import Sound from '../sound'
 
-import piece_sound_wav from "../assets/piece_sound.wav"
-import flip_sound_wav from "../assets/flip_sound.wav"
+import piece_sound_wav from "../assets/Universal_Sound_FX/TABLE_TENNIS_Racket_Ball_Hit_07_Hard_mono.wav"
+import flip_sound_wav  from "../assets/Universal_Sound_FX/RELOAD_Rechamber_Leaver_Action_stereo.wav"
 
 export default {
   /* eslint-disable */
