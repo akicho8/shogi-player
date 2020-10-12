@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 98505dfdc9ed0ba48b285c73d6b1683c
+labels:
+- usfx
+- imphenzia
+- sport
+- table tennis
+- ping pong
+- mono
+AudioImporter:
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 1
+    sampleRateSetting: 0
+    sampleRateOverride: 0
+    compressionFormat: 0
+    quality: 0
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  preloadAudioData: 1
+  loadInBackground: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

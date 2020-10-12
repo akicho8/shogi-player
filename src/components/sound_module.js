@@ -22,6 +22,10 @@ export default {
     this.sound_setup()
   },
 
+  beforeDestroy() {
+    // TODO: ここで何か解放しないといけない気がしている
+  },
+
   watch: {
     sound_effect() {
       this.sound_setup()
@@ -45,11 +49,11 @@ export default {
     },
 
     sound_setup() {
-      this.sound_load("piece_sound", piece_sound_wav)
-      this.sound_load("flip_sound", flip_sound_wav)
+      this.sound_load("piece_sound", piece_sound_wav, 0.5)
+      this.sound_load("flip_sound",  flip_sound_wav,  2.0)
     },
 
-    sound_load(key, file) {
+    sound_load(key, file, volume) {
       if (this.sound_effect) {
         key = this.as_key(key)
         const object = this[key]
@@ -57,7 +61,7 @@ export default {
         if (_.isNil(object)) {
           this[key] = new Sound(file)
         }
-        this[key].options["volume"] = this.volume
+        this[key].options["volume"] = volume * this.volume
       }
     },
 
