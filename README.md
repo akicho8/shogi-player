@@ -56,8 +56,5 @@ http://shineleckoma.web.fc2.com/
 Paper-co | 紙のテクスチャー素材を無料でダウンロードできるサイト
 http://free-paper-texture.com/
 
-フリーテクスチャ素材館／畳のテクスチャ素材01（PHOTO）
-https://free-texture.net/seamless-pattern/tatami01.html
-
 将棋図案駒
 https://twitter.com/Shogi_Zuan
