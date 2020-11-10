@@ -280,18 +280,6 @@
             br
             br
 
-            template(v-if="false")
-              .columns
-                .column
-                  article.message.is-info
-                    .message-body
-                      | 外部KIFファイルの読み込み
-
-                  ShogiPlayer(:kifu_url="'http://tk2-221-20341.vs.sakura.ne.jp/shogi/wr/ureshino_friend-doglong-20180122_213544.kif?plain=1'" :start_turn="-1" :controller_show="true" :slider_show="true" :debug_mode="true" :polling_interval="30")
-
-              br
-              br
-
             .columns
               .column
                 article.message.is-success.has-text-left

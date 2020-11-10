@@ -1,38 +1,36 @@
-| 名前                        | 意味                        | 備考                                                                        | 初期値      | .sync |
-|-----------------------------|-----------------------------|-----------------------------------------------------------------------------|-------------|-------|
-| `run_mode`                    | 実行モード                  | `view_mode`:再生 `play_mode`:操作 編集:`edit_mode`。                              | 'view_mode' | ○    |
-| `human_side_key`              | 人間が操作する側            | play_mode 時のみ有効 `both`, `black`, `white`, `none`                                | 'both'      |       |
-| `kifu_body`                   | 棋譜の本体                  | KIF と SFEN に対応。駒落ちは SFEN のみ                                      | null        |       |
-| `kifu_url`                    | 棋譜ファイルURL             |                                                                             | null        |       |
-| `theme`                       | テーマ名                    | `none`:なし `simple`:シンプル `real`:木目                                         | 'real'      | ○    |
-| `bg_variant`                  | realテーマの背景            | a .. z                                                                      | 'a'         | ○    |
-| `piece_variant`               | realテーマの駒種            | a .. b                                                                      | 'a'         | ○    |
-| `size`                        | 盤面の大きさ                | `none` `xx-small` `x-small` `small` `default` `medium` `large` `x-large` `xx-large` `xxx-large` | 'default'   | ○    |
-| `start_turn`                  | N手目の局面から表示         | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前                                  | -1          | ○    |
-| `slider_show`                 | 局面スライダー表示          |                                                                             | false       |       |
-| `controller_show`             | 前後移動用のボタン類の表示  |                                                                             | false       |       |
-| `sfen_show`                   | 局面を sfen で表示          | 主に局面ペディア用                                                          | false       |       |
-| `overlay_navi`                | 盤上の左右で前後操作        | 無効にするとview_modeで駒操作できる                                         |             |       |
-| `sound_effect`                | 駒音の有無                  |                                                                             | false       |       |
-| `volume`                      | 駒音の大きさ                | 0 から 1.0                                                                  | 0.5         |       |
-| `key_event_capture`           | キーボード操作を監視        | どこにもフォーカスしていないときでも左右キーが反応                          | false       |       |
-| `polling_interval`            | ポーリング間隔(秒)          | 1以上で有効。30 なら30秒間隔で kifu_url を読み直す                          | 0           |       |
-| `shift_key_mag`               | shiftキー押下時の倍速       | 1 または null 指定で無効にできる                                            | 10          |       |
-| `system_key_mag`              | システムキー押下時の倍速    | 1 または null 指定で無効にできる                                            | 50          |       |
-| `url_embed_turn`              | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                                         | false       |       |
-| `debug_mode`                  | デバッグモード              | 主に開発用                                                                  | false       | ○    |
-| `flip`                        | 盤面を反転する              | △が下にくる                                                                | false       | ○    |
-| `flip_if_white`               | △から始まる場合のみ反転する| △が下にくる                                                                | false       |       |
-| `url_embed_turn`              | URLのハッシュに手番を埋める | 固定URLを作りたいときの実験用の機能                                         | false       |       |
-| `vlayout`                     | 配置を縦並びにする          | スマホ向き用レイアウト                                                      | false       | ○    |
-| `digit_show`                  | 盤面の側面に位置を表示      | 上に数字、右端に漢数字を表示する                                            | false       |       |
-| `final_label`                 | 結果の文字列                | 空だと「○の勝ち」                                                          | null        |       |
-| `preset_key`                  | 盤面の初期配置              | kifu_body の代わりに指定するとその配置になる                                | null        |       |
-| `hidden_if_piece_stand_blank` | 持駒がないときは駒台非表示  | view_mode のみ                                                              | false       |       |
-| `setting_button_show`         | 設定ボタンの表示            | 右端にあるドット3つのアレ(ボタンなのか？)                                   | true        |       |
-| `summary_show`                | まで○手で○の勝ちの表示    | 盤の上にある○手                                                            | true        |       |
-| `operation_disable`           | 操作をすべて無効化する      | 無効化すると @click イベントだけが反応する。ショートカットキーも無効化する  | false       |       |
-| `player_info`                 | 対局者名                    | `{'black': {name: 'xxx'}, 'white': {name: 'xxx'}` 形式                        | null        |       |
+| 名前                          | 意味                         | 備考                                                                                            | 初期値      | .sync |
+|-------------------------------|------------------------------|-------------------------------------------------------------------------------------------------|-------------|-------|
+| `run_mode`                    | 実行モード                   | `view_mode`:再生 `play_mode`:操作 編集:`edit_mode`。                                            | 'view_mode' | ○    |
+| `human_side_key`              | 人間が操作する側             | play_mode 時のみ有効 `both`, `black`, `white`, `none`                                           | 'both'      |       |
+| `kifu_body`                   | 棋譜の本体                   | KIF と SFEN に対応。駒落ちは SFEN のみ                                                          | null        |       |
+| `theme`                       | テーマ名                     | `none`:なし `simple`:シンプル `real`:木目                                                       | 'real'      | ○    |
+| `bg_variant`                  | realテーマの背景             | a .. z                                                                                          | 'a'         | ○    |
+| `piece_variant`               | realテーマの駒種             | a .. b                                                                                          | 'a'         | ○    |
+| `size`                        | 盤面の大きさ                 | `none` `xx-small` `x-small` `small` `default` `medium` `large` `x-large` `xx-large` `xxx-large` | 'default'   | ○    |
+| `start_turn`                  | N手目の局面から表示          | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前                                                      | -1          | ○    |
+| `slider_show`                 | 局面スライダー表示           |                                                                                                 | false       |       |
+| `controller_show`             | 前後移動用のボタン類の表示   |                                                                                                 | false       |       |
+| `sfen_show`                   | 局面を sfen で表示           | 主に局面ペディア用                                                                              | false       |       |
+| `overlay_navi`                | 盤上の左右で前後操作         | 無効にするとview_modeで駒操作できる                                                             |             |       |
+| `sound_effect`                | 駒音の有無                   |                                                                                                 | false       |       |
+| `volume`                      | 駒音の大きさ                 | 0 から 1.0                                                                                      | 0.5         |       |
+| `key_event_capture`           | キーボード操作を監視         | どこにもフォーカスしていないときでも左右キーが反応                                              | false       |       |
+| `shift_key_mag`               | shiftキー押下時の倍速        | 1 または null 指定で無効にできる                                                                | 10          |       |
+| `system_key_mag`              | システムキー押下時の倍速     | 1 または null 指定で無効にできる                                                                | 50          |       |
+| `url_embed_turn`              | URLのハッシュに手番を埋める  | 固定URLを作りたいときの実験用の機能                                                             | false       |       |
+| `debug_mode`                  | デバッグモード               | 主に開発用                                                                                      | false       | ○    |
+| `flip`                        | 盤面を反転する               | △が下にくる                                                                                    | false       | ○    |
+| `flip_if_white`               | △から始まる場合のみ反転する | △が下にくる                                                                                    | false       |       |
+| `url_embed_turn`              | URLのハッシュに手番を埋める  | 固定URLを作りたいときの実験用の機能                                                             | false       |       |
+| `vlayout`                     | 配置を縦並びにする           | スマホ向き用レイアウト                                                                          | false       | ○    |
+| `digit_show`                  | 盤面の側面に位置を表示       | 上に数字、右端に漢数字を表示する                                                                | false       |       |
+| `final_label`                 | 結果の文字列                 | 空だと「○の勝ち」                                                                              | null        |       |
+| `preset_key`                  | 盤面の初期配置               | kifu_body の代わりに指定するとその配置になる                                                    | null        |       |
+| `hidden_if_piece_stand_blank` | 持駒がないときは駒台非表示   | view_mode のみ                                                                                  | false       |       |
+| `setting_button_show`         | 設定ボタンの表示             | 右端にあるドット3つのアレ(ボタンなのか？)                                                       | true        |       |
+| `summary_show`                | まで○手で○の勝ちの表示     | 盤の上にある○手                                                                                | true        |       |
+| `operation_disable`           | 操作をすべて無効化する       | 無効化すると @click イベントだけが反応する。ショートカットキーも無効化する                      | false       |       |
+| `player_info`                 | 対局者名                     | `{'black': {name: 'xxx'}, 'white': {name: 'xxx'}` 形式                                          | null        |       |
 
 <br>
 

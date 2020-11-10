@@ -135,11 +135,11 @@ export default {
     },
 
     piece_stand_mouseover_handle(location, piece, e) {
-      this.mouseover_info = { type: "piece_stand", location: location, piece: piece }
+      this.mouseover_info = { type: "MembershipStand", location: location, piece: piece }
     },
 
     piece_box_mouseover_handle(piece, e) {
-      this.mouseover_info = { type: "piece_box", piece: piece }
+      this.mouseover_info = { type: "PieceBox", piece: piece }
     },
 
     mouseleave_handle() {
@@ -153,10 +153,10 @@ export default {
           if (this.mouseover_info.type === "board") {
             this.board_cell_left_click(this.mouseover_info.xy, e) // 左クリック
           }
-          if (this.mouseover_info.type === "piece_stand") {
+          if (this.mouseover_info.type === "MembershipStand") {
             this.piece_stand_piece_click(this.mouseover_info.location, this.mouseover_info.piece, false, e)
           }
-          if (this.mouseover_info.type === "piece_box") {
+          if (this.mouseover_info.type === "PieceBox") {
             this.piece_box_piece_click(this.mouseover_info.piece, e)
           }
         }

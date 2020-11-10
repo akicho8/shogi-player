@@ -100,7 +100,7 @@
               @extend %is_flip  // 相手の駒箱が二重に反転しないように盤内だけで適用
 
     //////////////////////////////////////////////////////////////////////////////// 駒箱
-    .piece_box
+    .PieceBox
       @extend %basic_box
       @extend %hoverable_bg
       font-size: 0.5em
@@ -111,21 +111,21 @@
           color: $sp_simple_piece_count_color
 
     &.horizontal
-      .piece_box
+      .PieceBox
         max-width: 5em
     &.vertical
-      .piece_box
+      .PieceBox
         font-size: 1.0em
         min-height: 1em
 
     //////////////////////////////////////////////////////////////////////////////// 駒台
-    .piece_stand_outer
+    .Membership
       // 駒台の駒の大きさ
       // font-size: 0.9em
       .player_name
         // font-size: 0.9em
 
-      .piece_stand
+      .MembershipStand
         @extend %hoverable_bg
 
       // width: 1.5em   // 横幅ガクガクを防ぐためにあらかじめサイズを持っておく → 「▲1」の1を hidden にして調整するので明示的には指定しない
@@ -136,15 +136,15 @@
         font-size: 0.4em
 
     &.horizontal
-      .piece_stand_outer
+      .Membership
         .player_name
-        .piece_stand
+        .MembershipStand
           margin-top: 0.1em
     &.vertical
-      .piece_stand_outer
+      .Membership
         .player_name
         .location_mark
-        .piece_stand
+        .MembershipStand
           margin-left: 0.4em
           li
             padding: 0 0.2em
@@ -152,11 +152,11 @@
     // edit_mode の場合は駒箱を大きくする
     &.run_mode-edit_mode
       &.horizontal
-        .piece_stand
+        .MembershipStand
           @extend %basic_box
           min-height: 5em
       &.vertical
-        .piece_stand
+        .MembershipStand
           @extend %basic_box
           min-width: $sp_piece_stand_size_if_blank
           min-height: 1em

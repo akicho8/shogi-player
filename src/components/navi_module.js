@@ -2,7 +2,7 @@ import _ from "lodash"
 import { mapState } from 'vuex'
 
 export default {
-  
+
   props: {
     slider_show:                 { type: Boolean, default: false, },
     controller_show:             { type: Boolean, default: false, },
@@ -17,7 +17,6 @@ export default {
     operation_disable:           { type: Boolean, default: false, },
     flip_if_white:               { type: Boolean, default: false, },
   },
-  
 
   data() {
     return {
@@ -38,13 +37,13 @@ export default {
   },
 
   watch: {
-    
+
     current_flip(v)     { this.$emit("update:flip", v)       }, // 中 -> 外
     flip(v)             { this.$store.state.current_flip = v }, // 外 -> 中
 
     current_vlayout(v)     { this.$emit("update:vlayout", v)       }, // 中 -> 外
     vlayout(v)             { this.$store.state.current_vlayout = v }, // 外 -> 中
-    
+
   },
 
   methods: {

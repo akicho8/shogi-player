@@ -2,11 +2,10 @@ import Mediator from "../mediator"
 import PresetInfo from "../preset_info"
 
 export default {
-  
+
   props: {
     preset_key: { type: String,  default: null, },
   },
-  
 
   data() {
     return {

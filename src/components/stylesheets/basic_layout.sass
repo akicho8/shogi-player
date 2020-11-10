@@ -37,9 +37,9 @@
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
   &.horizontal
-    .piece_box
+    .PieceBox
   &.vertical
-    .piece_box
+    .PieceBox
       margin-top: $sp_size_piece_stand_margin_top_bottom
 
   //////////////////////////////////////////////////////////////////////////////// 駒台と将棋盤のレイアウト
@@ -72,18 +72,18 @@
       flex-direction: column
       align-items: center
 
-      .piece_stand_outer
+      .Membership
         .player_name
           display: inline-block
         .piece_count
           display: inline-block
 
-        .location_mark_wrap
+        .MembershipLocation
           display: inline-block
           .location_mark
             display: inline-block
 
-        ul.piece_stand
+        ul.MembershipStand
           margin-top: $sp_size_piece_stand_margin_top_bottom
           display: inline-block
           li

@@ -117,7 +117,7 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
         height: 100%   // .piece_back のサイズを継承。inherit だと災いがおきやすいので100%を使う
 
     //////////////////////////////////////////////////////////////////////////////// 駒箱
-    .piece_box
+    .PieceBox
       @extend %board_shadow
       @extend %board_texture_bg
       @extend %real_hoverable_opacity
@@ -129,19 +129,19 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
         margin-left: -0.3em
 
     &.horizontal
-      .piece_box
+      .PieceBox
         font-size: 0.9em
         max-width:  4em
         min-height: 2.5em
 
     &.vertical
-      .piece_box
+      .PieceBox
         font-size: 1.5em
         min-height: 1.2em
 
     //////////////////////////////////////////////////////////////////////////////// 駒台
-    .piece_stand_outer
-      .piece_stand
+    .Membership
+      .MembershipStand
         @extend %board_texture_bg
         @extend %real_hoverable_opacity
         font-size: 1.3em
@@ -153,11 +153,11 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
             margin-left: -0.3em
 
       &.location_black
-        .piece_stand
+        .MembershipStand
           &:after
             +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
       &.location_white
-        .piece_stand
+        .MembershipStand
           &:after
             +image_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
           .piece_back
@@ -165,11 +165,11 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
 
     // 駒台(横)
     &.horizontal
-      .piece_stand_outer
+      .Membership
         .player_name
           margin-top: 0.2em
           margin-bottom: 0.5em
-        .piece_stand
+        .MembershipStand
           width: 1.4em
           min-height: 3em
           padding-top:    0.15em
@@ -177,10 +177,10 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
 
     // 駒台(縦並び)
     &.vertical
-      .piece_stand_outer
+      .Membership
         .player_name
           margin-right: 0.2em
-        .piece_stand
+        .MembershipStand
           min-width: $sp_piece_stand_size_if_blank
           padding-left:  0.15em
           padding-right: 0.15em
@@ -208,7 +208,7 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
 
 =bg_variant_define($key, $file)
   &.bg_variant-#{$key}
-    .board_outer, .piece_box, .piece_stand
+    .board_outer, .PieceBox, .MembershipStand
       &:after
         background-image: url("#{$sp_assets_dir}/background/#{$file}")
         // opacity: 1.0

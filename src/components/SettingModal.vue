@@ -1,5 +1,4 @@
 <template lang="pug">
-//- style="width: auto"
 .modal-card.has-text-left(style="width:auto")
   header.modal-card-head
     p.modal-card-title 設定
@@ -74,20 +73,13 @@
 // flip:     Vuex で管理している変数をコンポーネント側でラップする方式
 //
 
-// import Vue from "vue"
-import RunModeInfo from "../run_mode_info"
-import ThemeInfo from "../theme_info"
-import SizeInfo from "../size_info"
-import BgVariantInfo from "../bg_variant_info"
+import RunModeInfo      from "../run_mode_info"
+import ThemeInfo        from "../theme_info"
+import SizeInfo         from "../size_info"
+import BgVariantInfo    from "../bg_variant_info"
 import PieceVariantInfo from "../piece_variant_info"
 
 import { support_child } from "./support_child.js"
-
-// ↓このように定義した場合はアプリ側で再定義しないといけなくなる
-// Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
-// Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})
-// Object.defineProperty(Vue.prototype, 'SizeInfo', {value: SizeInfo})
-// Object.defineProperty(Vue.prototype, 'BgVariantInfo', {value: BgVariantInfo})
 
 export default {
   mixins: [support_child],

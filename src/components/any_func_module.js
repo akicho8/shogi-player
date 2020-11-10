@@ -2,11 +2,6 @@ import AnyFuncInfo from "../any_func_info"
 import Board from "../board"
 
 export default {
-  
-  props: {
-  },
-  
-
   data() {
     return {
       any_func_key: null, // 常に選択してないことにしたくて v-model にして設定して any_func_key 変更のタイミングで null に再設定したけど選択してないことにはできなかったのでこれ意味ない
@@ -25,7 +20,7 @@ export default {
         message: "寸法の一辺のサイズを指定してください",
         confirmText: "実行",
         cancelText: "キャンセル",
-        inputAttrs: { type: "number", value: 4, min: 1, max: Board.dimension},
+        inputAttrs: { type: "number", value: 4, min: 1, max: Board.dimension, },
         trapFocus: true,
         onConfirm: e => this.shuffle_run(e),
       })

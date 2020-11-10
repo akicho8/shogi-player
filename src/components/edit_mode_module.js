@@ -12,10 +12,9 @@ const NOT_PUT_IF_DEATH_SOLDIER  = true // 死に駒になるときは置けな�
 const DOUBLE_CLICK_TIME = 350
 
 export default {
-  
+
   props: {
   },
-  
 
   data() {
     return {
@@ -643,7 +642,7 @@ export default {
       // this.emit_update_edit_mode_snapshot_sfen()
     },
 
-    // -------------------------------------------------------------------------------- piece_box
+    // -------------------------------------------------------------------------------- PieceBox
 
     // 駒箱の駒
     piece_box_piece_back_class(piece) {

@@ -1,18 +1,9 @@
 <template lang="pug">
-.shogi-player(:class="class_names")
-  //- すべてのリンクを無効化するためのオーバーレイ
-  .top_overlay(v-if="operation_disable")
-
-  div(v-if="error_message")
-    ErrorNotify
-      p(slot="header") ERROR
-      p {{error_message}}
+.shogi-player(:class="component_class")
+  OverlayForDisable(:base="base")
 
   template(v-if="!mediator")
     i.fas.fa-spinner.fa-pulse
-
-  //- | {{mouseover_info}}
-  //- | {{edit_mode_snapshot_sfen}}
 
   div.edit_mode_controller(v-if="current_run_mode === 'edit_mode'")
     .edit_mode_controller_wrap
@@ -82,7 +73,7 @@
     //- 独自のフォントサイズを適用するのは基本このなかだけとする
     .board_container.font_size_base(ref="board_container_ref")
       .flippable(:class="[current_flip ? 'flip' : 'no_flip']")
-        PieceStand.flex_item(:location_key="'white'" :hold_pieces="mediator.realized_hold_pieces_of('white')")
+        Membership.flex_item(:base="base" :location="location_white" :hold_pieces="mediator.realized_hold_pieces_of('white')")
         .flex_item.board_wrap
           template(v-if="overlay_navi")
             .overlay_navi.previous(@click.stop.prevent="navi_relative_move(-1, $event)")
@@ -103,14 +94,14 @@
                       | {{mediator.cell_view([x - 1, y - 1])}}
         .flex_item
           template(v-if="!current_vlayout")
-            PieceBox
+            PieceBox(:base="base")
             //- 先手の駒台が上にくっつてしまうので防ぐため空のdivを入れる
             div(v-if="current_run_mode !== 'edit_mode'")
-          PieceStand(:location_key="'black'" :hold_pieces="mediator.realized_hold_pieces_of('black')")
+          Membership(:base="base" :location="location_black" :hold_pieces="mediator.realized_hold_pieces_of('black')")
       //- cursor_elem はこの部分に入るので 1em のサイズを .font_size_base で指定したものを基準にできる
 
       template(v-if="current_vlayout")
-        PieceBox
+        PieceBox(:base="base")
 
     div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'")
       .controller_group.buttons.has-addons.is-centered.is-paddingless(v-if="controller_show")
@@ -163,29 +154,30 @@ import { mapState } from 'vuex'
 // Store
 import store from "../store/index.js"
 
-// My Library
-import Mediator from "../mediator"
-import Place from "../place"
-import SfenParser from "../sfen_parser"
-import KifParser from "../kif_parser"
+// Library
+import Mediator   from "../mediator.js"
+import Place      from "../place.js"
+import SfenParser from "../sfen_parser.js"
+import KifParser  from "../kif_parser.js"
+import Location   from "../location.js"
 
 // components
-import PieceBox from "./PieceBox"
-import PieceStand from "./PieceStand"
-import SettingModal from "./SettingModal"
-import ErrorNotify from "./ErrorNotify"
-import CommentBlock from "./CommentBlock"
+import PieceBox        from "./PieceBox.vue"
+import Membership      from "./Membership.vue"
+import SettingModal    from "./SettingModal.vue"
+import ErrorNotify     from "./ErrorNotify.vue"
+import CommentBlock    from "./CommentBlock.vue"
+import OverlayForDisable      from "./OverlayForDisable.vue"
 
 // mixins modules
-import navi_module from "./navi_module.js"
-import shortcut_module from "./shortcut_module.js"
+import navi_module      from "./navi_module.js"
+import shortcut_module  from "./shortcut_module.js"
 import edit_mode_module from "./edit_mode_module.js"
 import play_mode_module from "./play_mode_module.js"
-import sound_module from "./sound_module.js"
-import preset_module from "./preset_module.js"
-import any_func_module from "./any_func_module.js"
-import polling_module from "./polling_module.js"
-import api_module from "./api_module.js"
+import sound_module     from "./sound_module.js"
+import preset_module    from "./preset_module.js"
+import any_func_module  from "./any_func_module.js"
+import api_module       from "./api_module.js"
 
 import { support } from "./support.js"
 
@@ -208,7 +200,6 @@ export default {
     sound_module,
     preset_module,
     any_func_module,
-    polling_module,
     api_module,
   ],
 
@@ -235,10 +226,11 @@ export default {
 
   components: {
     PieceBox,
-    PieceStand,
+    Membership,
     SettingModal,
     ErrorNotify,
     CommentBlock,
+    OverlayForDisable,
   },
 
   data() {
@@ -247,7 +239,6 @@ export default {
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
       turn_edit: false,         // N手目編集中
-      error_message: null,
       update_counter: 0,
       setting_modal_p: false,
       inside_custom_kifu: null, // 設定ダイアログで変更されたときに入る
@@ -267,12 +258,7 @@ export default {
     this.$store.state.current_piece_variant = this.piece_variant
 
     if (this.current_run_mode === "view_mode") {
-      if (this.kifu_url) {
-        this.axios_call()
-        this.polling_interval_update()
-      } else {
-        this.mediator_setup(this.start_turn)
-      }
+      this.mediator_setup(this.start_turn)
     }
 
     if (this.current_run_mode === "play_mode") {
@@ -516,7 +502,11 @@ export default {
   },
 
   computed: {
-    class_names() {
+    base()           { return this                    },
+    location_black() { return Location.fetch("black") },
+    location_white() { return Location.fetch("white") },
+
+    component_class() {
       return [
         `theme-${this.current_theme}`,
         `size-${this.current_size}`,
