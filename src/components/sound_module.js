@@ -6,12 +6,12 @@ import piece_sound_wav from "../assets/Universal_Sound_FX/TABLE_TENNIS_Racket_Ba
 import flip_sound_wav  from "../assets/Universal_Sound_FX/RELOAD_Rechamber_Leaver_Action_stereo.wav"
 
 export default {
-  /* eslint-disable */
+  
   props: {
     sound_effect: { type: Boolean, default: false, },
     volume:       { type: Number,  default: 0.5,   },
   },
-  /* eslint-enable */
+  
 
   data() {
     return {

@@ -681,8 +681,6 @@
 </template>
 
 <script>
-/* eslint-disable import/first */
-
 import "css-browser-selector"
 
 import Vue from 'vue'

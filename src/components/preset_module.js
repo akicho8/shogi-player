@@ -2,11 +2,11 @@ import Mediator from "../mediator"
 import PresetInfo from "../preset_info"
 
 export default {
-  /* eslint-disable */
+  
   props: {
     preset_key: { type: String,  default: null, },
   },
-  /* eslint-enable */
+  
 
   data() {
     return {

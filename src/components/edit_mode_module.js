@@ -12,10 +12,10 @@ const NOT_PUT_IF_DEATH_SOLDIER  = true // 死に駒になるときは置けな�
 const DOUBLE_CLICK_TIME = 350
 
 export default {
-  /* eslint-disable */
+  
   props: {
   },
-  /* eslint-enable */
+  
 
   data() {
     return {

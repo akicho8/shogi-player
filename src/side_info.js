@@ -4,12 +4,10 @@ import Location from "./location"
 export default class SideInfo extends MemoryRecord {
   static get define() {
     return [
-      /* eslint-disable */
       { key: "both",   name: "☗☖", location_keys: ["black", "white"], },
       { key: "black",  name: "☗",   location_keys: ["black"],          },
       { key: "white",  name: "☖",   location_keys: ["white"],          },
       { key: "none",   name: "なし", location_keys: [],                 },
-      /* eslint-enable */
     ]
   }
 

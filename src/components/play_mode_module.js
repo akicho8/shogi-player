@@ -5,11 +5,11 @@ import Location from "../location"
 import SideInfo from "../side_info"
 
 export default {
-  /* eslint-disable */
+  
   props: {
     human_side_key: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
   },
-  /* eslint-enable */
+  
 
   data() {
     return {

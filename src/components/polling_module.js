@@ -2,12 +2,12 @@ import axios from "axios"
 const logger_debug = require('debug')('debug')
 
 export default {
-  /* eslint-disable */
+  
   props: {
     kifu_url:           { type: String,  default: null, },
     polling_interval:   { type: Number,  default: 0,    },
   },
-  /* eslint-enable */
+  
 
   data() {
     return {

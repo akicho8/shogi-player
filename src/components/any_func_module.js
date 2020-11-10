@@ -2,10 +2,10 @@ import AnyFuncInfo from "../any_func_info"
 import Board from "../board"
 
 export default {
-  /* eslint-disable */
+  
   props: {
   },
-  /* eslint-enable */
+  
 
   data() {
     return {

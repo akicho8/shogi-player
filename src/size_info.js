@@ -3,7 +3,7 @@ import MemoryRecord from "js-memory-record"
 export default class SizeInfo extends MemoryRecord {
   static get define() {
     return [
-      /* eslint-disable */
+      
       { key: "none",      },
       { key: "xx-small",  },
       { key: "x-small",   },
@@ -14,7 +14,7 @@ export default class SizeInfo extends MemoryRecord {
       { key: "x-large",   },
       { key: "xx-large",  },
       { key: "xxx-large", },
-      /* eslint-enable */
+      
     ]
   }
 }

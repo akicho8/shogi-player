@@ -190,7 +190,6 @@ import api_module from "./api_module.js"
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
 
-/* eslint-disable no-new */
 export default {
   name: 'ShogiPlayer',
 
@@ -209,7 +208,7 @@ export default {
     api_module,
   ],
 
-  /* eslint-disable */
+  
   props: {
     run_mode:       { type: String,  default: "view_mode", },
     kifu_body:      { type: String,  default: null,        },
@@ -230,7 +229,7 @@ export default {
     board_cell_pointerdown_user_handle: { type: Function, default: null, },
     player_info:    { type: Object,  default: null, },
   },
-  /* eslint-enable */
+  
 
   components: {
     PieceBox,
@@ -258,14 +257,14 @@ export default {
   created() {
     this.inside_custom_kifu = null
 
-    /* eslint-disable */
+    
     // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
     this.$store.state.current_debug_mode = this.debug_mode
     this.$store.state.current_theme      = this.theme
     this.$store.state.current_size       = this.size
     this.$store.state.current_bg_variant  = this.bg_variant
     this.$store.state.current_piece_variant = this.piece_variant
-    /* eslint-enable */
+    
 
     if (this.current_run_mode === "view_mode") {
       if (this.kifu_url) {
@@ -370,7 +369,7 @@ export default {
     // これはひどい。わけがわからない。
     // 外側に通知したいときは Vuex (../store/index.js) のなかでやってもだめ
     // 呼ばれているコンポーネントで書かないといけない
-    /* eslint-disable */
+    
     current_debug_mode(v) { this.$emit("update:debug_mode", v)              }, // 内から外への通知
     debug_mode(v)         { this.$store.commit("current_debug_mode_set", v) }, // 外から内への反映
     run_mode(v)           { this.current_run_mode = v                       }, // 外側から run_mode を変更されたとき
@@ -386,7 +385,7 @@ export default {
 
     current_piece_variant(v)  { this.$emit("update:piece_variant", v)               }, // 中 -> 外
     piece_variant(v)          { this.$store.state.current_piece_variant = v         }, // 外 -> 中
-    /* eslint-enable */
+    
 
     turn_offset_max(v) { this.$emit("update:turn_offset_max", v) },
   },
@@ -537,13 +536,13 @@ export default {
     },
 
     // 本当は delegate したい。this.$watch を使えば動的になりそう？
-    /* eslint-disable */
+    
     turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
     turn_offset()     { if (this.mediator) { return this.mediator.turn_offset     } }, // 手数のオフセット
     display_turn()    { if (this.mediator) { return this.mediator.display_turn    } }, // turn_base + turn_offset
     turn_offset_min() { if (this.mediator) { return this.mediator.turn_offset_min } }, // 必ず 0
     turn_offset_max() { if (this.mediator) { return this.mediator.turn_offset_max } }, // moves.length が 2 なら 2
-    /* eslint-enable */
+    
 
     // mapState({
     // // アロー関数は、コードをとても簡潔にできます！

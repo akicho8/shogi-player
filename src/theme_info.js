@@ -3,11 +3,11 @@ import MemoryRecord from "js-memory-record"
 export default class ThemeInfo extends MemoryRecord {
   static get define() {
     return [
-      /* eslint-disable */
+      
       { key: "none",   name: "なし",   },
       { key: "simple", name: "紙面風", },
       { key: "real",   name: "画像駒", },
-      /* eslint-enable */
+      
     ]
   }
 }

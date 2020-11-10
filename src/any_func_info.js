@@ -4,7 +4,7 @@ import Location from "./location"
 export default class AnyFuncInfo extends MemoryRecord {
   static get define() {
     return [
-      /* eslint-disable */
+      
       { key: "☖の持駒を駒箱へ",   func: e => { e.mediator.hold_pieces_to_piece_box(Location.fetch("white")) }, },
       { key: "駒箱から☖の持駒へ", func: e => { e.mediator.piece_box_to_hold_pieces(Location.fetch("white")) }, },
       { key: "駒箱を正規化",       func: e => { e.mediator.piece_box_piece_couns_adjust() }, },
@@ -24,7 +24,7 @@ export default class AnyFuncInfo extends MemoryRecord {
       // { key: "指将棋用玉回収(左)", func: e => { e.mediator.king_formation_unset("bottom_left") }, },
       // { key: "指将棋用玉配置(右)", func: e => { e.mediator.king_formation_set("bottom_right") }, },
       // { key: "指将棋用玉回収(右)", func: e => { e.mediator.king_formation_unset("bottom_right") }, },
-      /* eslint-enable */
+      
     ]
   }
 }
