@@ -33,7 +33,7 @@ export default {
 
     // 反転状態の設定
     api_flip_set(flag) {
-      this.$store.state.current_flip = flag
+      this.base.new_flip = flag
     },
 
     // 待った

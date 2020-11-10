@@ -789,7 +789,7 @@ export default {
       // const list = _.concat(class_list, ["piece_back"])
       // piece_fore.classList.add(...list)
 
-      if (this.current_flip) {
+      if (this.new_flip) {
         // this.$cursor_elem.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
         piece_back.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
       }

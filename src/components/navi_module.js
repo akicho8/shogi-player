@@ -20,6 +20,7 @@ export default {
 
   data() {
     return {
+      new_flip: null,
     }
   },
 
@@ -32,14 +33,13 @@ export default {
   },
 
   created() {
-    this.$store.state.current_flip = this.flip
+    this.new_flip = this.flip
     this.$store.state.current_vlayout = this.vlayout
   },
 
   watch: {
-
-    current_flip(v)     { this.$emit("update:flip", v)       }, // 中 -> 外
-    flip(v)             { this.$store.state.current_flip = v }, // 外 -> 中
+    flip(v)     { this.new_flip = v             }, // 外 -> 中
+    new_flip(v) { this.$emit("update:flip", v)  }, // 中 -> 外
 
     current_vlayout(v)     { this.$emit("update:vlayout", v)       }, // 中 -> 外
     vlayout(v)             { this.$store.state.current_vlayout = v }, // 外 -> 中
@@ -203,7 +203,7 @@ export default {
     },
 
     board_flip_run() {
-      this.$store.commit("flip_toggle")
+      this.new_flip = !this.new_flip
       this.sound_call("flip_sound")
       this.focus_to("turn_slider")
     },
@@ -211,7 +211,7 @@ export default {
 
   //
   // ...mapState([
-  //   "current_flip",
+  //   "new_flip",
   // ]),
   //
   // が、
@@ -221,10 +221,10 @@ export default {
   // ./node_modules/shogi-player/src/components/navi_module.js
   // Module parse failed: Unexpected token (191:4)
   // You may need an appropriate loader to handle this file type.
-  // |       return this.current_flip ? -1 : 1
+  // |       return this.new_flip ? -1 : 1
   // |     },
   // |     ...mapState([
-  // |       "current_flip",
+  // |       "new_flip",
   // |     ]),
   //  @ ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./node_modules/shogi-player/src/components/ShogiPlayer.vue 49:19-46
   //  @ ./node_modules/shogi-player/src/components/ShogiPlayer.vue
@@ -235,10 +235,9 @@ export default {
   //
   computed: Object.assign({}, {
     flip_sign() {
-      return this.current_flip ? -1 : 1
+      return this.new_flip ? -1 : 1
     },
   }, mapState([
-    "current_flip",
     "current_vlayout",
   ])),
 }

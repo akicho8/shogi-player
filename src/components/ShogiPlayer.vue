@@ -62,6 +62,7 @@
 
       b-modal(:active.sync="setting_modal_p" has-modal-card)
         SettingModal(
+          :base="base"
           :run_mode.sync="current_run_mode"
           :kifu_source="kifu_source"
           @update:kifu_body="update_kifu_source"
@@ -72,7 +73,7 @@
 
     //- 独自のフォントサイズを適用するのは基本このなかだけとする
     .board_container.font_size_base(ref="board_container_ref")
-      .flippable(:class="[current_flip ? 'flip' : 'no_flip']")
+      .flippable(:class="[new_flip ? 'flip' : 'no_flip']")
         Membership.flex_item(:base="base" :location="location_white" :hold_pieces="mediator.realized_hold_pieces_of('white')")
         .flex_item.board_wrap
           template(v-if="overlay_navi")
@@ -406,7 +407,7 @@ export default {
 
     flip_if_white_run() {
       if (this.flip_if_white) {
-        this.$store.state.current_flip = (this.mediator.data_source.location_base.key === "white")
+        this.base.new_flip = (this.mediator.data_source.location_base.key === "white")
       }
     },
 

@@ -12,7 +12,7 @@
 
     b-field(grouped)
       b-field(label="反転")
-        b-switch(v-model="flip")
+        b-switch(v-model="base.new_flip")
       b-field(label="縦並び")
         b-switch(v-model="vlayout")
       b-field(label="デバッグモード")
@@ -67,12 +67,6 @@
 </template>
 
 <script>
-// ここではあえていろんな方法を試している
-//
-// run_mode: コンポーネントへの数珠繋ぎ方式
-// flip:     Vuex で管理している変数をコンポーネント側でラップする方式
-//
-
 import RunModeInfo      from "../run_mode_info"
 import ThemeInfo        from "../theme_info"
 import SizeInfo         from "../size_info"
@@ -118,11 +112,6 @@ export default {
   },
 
   computed: {
-    // http://chibinowa.net/note/vuejs/vue-11.html
-    flip: {
-      get() { return this.$store.state.current_flip },
-      set(v) { this.$store.state.current_flip = v },
-    },
     vlayout: {
       get() { return this.$store.state.current_vlayout },
       set(v) { this.$store.state.current_vlayout = v },
