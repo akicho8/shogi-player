@@ -127,7 +127,7 @@
       slot(name="sfen_part" :sfen="mediator.to_simple_sfen" :mediator="mediator")
         | {{mediator.to_simple_sfen}}
 
-    CommentArea(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
+    CommentBlock(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
 
   div.debug_table(v-if="current_debug_mode")
     table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
@@ -174,7 +174,7 @@ import PieceBox from "./PieceBox"
 import PieceStand from "./PieceStand"
 import SettingModal from "./SettingModal"
 import ErrorNotify from "./ErrorNotify"
-import CommentArea from "./CommentArea"
+import CommentBlock from "./CommentBlock"
 
 // mixins modules
 import navi_module from "./navi_module.js"
@@ -238,7 +238,7 @@ export default {
     PieceStand,
     SettingModal,
     ErrorNotify,
-    CommentArea,
+    CommentBlock,
   },
 
   data() {
