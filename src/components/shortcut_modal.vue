@@ -69,8 +69,10 @@
 </template>
 
 <script>
+import { support_child } from "./support_child.js"
 
 export default {
+  mixins: [support_child],
   name: "shortcut_modal",
   methods: {
     delete_click_handle() {

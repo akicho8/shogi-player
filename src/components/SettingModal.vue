@@ -81,6 +81,8 @@ import SizeInfo from "../size_info"
 import BgVariantInfo from "../bg_variant_info"
 import PieceVariantInfo from "../piece_variant_info"
 
+import { support_child } from "./support_child.js"
+
 // ↓このように定義した場合はアプリ側で再定義しないといけなくなる
 // Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
 // Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})
@@ -88,6 +90,8 @@ import PieceVariantInfo from "../piece_variant_info"
 // Object.defineProperty(Vue.prototype, 'BgVariantInfo', {value: BgVariantInfo})
 
 export default {
+  mixins: [support_child],
+
   props: {
     run_mode: { required: true },
     kifu_source: { required: false },

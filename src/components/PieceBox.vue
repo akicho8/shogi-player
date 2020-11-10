@@ -8,15 +8,10 @@ ul.piece_box(:class="piece_box_class" v-if="$parent.current_run_mode === 'edit_m
 </template>
 
 <script>
-// import Location from "../location"
-// import _ from "lodash"
+import { support_child } from "./support_child.js"
 
 export default {
-  props: {
-  },
-
-  methods: {
-  },
+  mixins: [support_child],
 
   computed: {
     piece_box_class() {

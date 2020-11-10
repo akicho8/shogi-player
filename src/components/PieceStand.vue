@@ -30,8 +30,11 @@
 <script>
 import Location from "../location"
 import _ from "lodash"
+import { support_child } from "./support_child.js"
 
 export default {
+  mixins: [support_child],
+
   props: {
     location_key: { required: true },
     hold_pieces: { required: true },
