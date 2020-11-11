@@ -5,7 +5,7 @@
   template(v-if="!mediator")
     i.fas.fa-spinner.fa-pulse
 
-  div.edit_mode_controller(v-if="current_run_mode === 'edit_mode'")
+  div.edit_mode_controller(v-if="new_run_mode === 'edit_mode'")
     .edit_mode_controller_wrap
       b-dropdown(v-model="current_preset_key")
         //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
@@ -40,12 +40,12 @@
 
   template(v-if="mediator")
     .turn_edit_container
-      .turn_number_area(v-if="summary_show && (current_run_mode === 'view_mode' || current_run_mode === 'play_mode')")
+      .turn_number_area(v-if="summary_show && (new_run_mode === 'view_mode' || new_run_mode === 'play_mode')")
         template(v-if="!turn_edit")
           span.turn_edit_text(@click.stop.prevent="turn_edit_run")
-            template(v-if="current_run_mode === 'view_mode'")
+            template(v-if="new_run_mode === 'view_mode'")
               | {{mediator.current_turn_label(this.final_label)}}
-            template(v-if="current_run_mode === 'play_mode'")
+            template(v-if="new_run_mode === 'play_mode'")
               template(v-if="turn_base === 0")
                 | {{turn_offset}}
               template(v-if="turn_base >= 1")
@@ -89,14 +89,14 @@
           template(v-if="!new_vlayout")
             PieceBox(:base="base")
             //- 先手の駒台が上にくっつてしまうので防ぐため空のdivを入れる
-            div(v-if="current_run_mode !== 'edit_mode'")
+            div(v-if="new_run_mode !== 'edit_mode'")
           Membership(:base="base" :location="location_black" :hold_pieces="mediator.realized_hold_pieces_of('black')")
       //- cursor_elem はこの部分に入るので 1em のサイズを .font_size_base で指定したものを基準にできる
 
       template(v-if="new_vlayout")
         PieceBox(:base="base")
 
-    div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'")
+    div(v-if="new_run_mode === 'view_mode' || new_run_mode === 'play_mode'")
       .controller_group.buttons.has-addons.is-centered.is-paddingless(v-if="controller_show")
         button.button.first(    ref="first"    @click.stop.prevent="move_to_first"):             b-icon(icon="menu-left")
         button.button.previous( ref="previous" @click.stop.prevent="relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
@@ -116,7 +116,7 @@
   div.debug_table(v-if="current_debug_mode")
     table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
       tbody
-        tr: <th>現在のモード(current_run_mode)</th><td>{{current_run_mode}}</td>
+        tr: <th>現在のモード(new_run_mode)</th><td>{{new_run_mode}}</td>
         tr: <th>update_counter</th><td>{{update_counter}}</td>
         tr: <th>移動元座標(place_from)</th><td>{{place_from}}</td>
         tr: <th>駒台・駒箱から移動中の駒(have_piece)</th><td>{{have_piece}}</td>
@@ -228,7 +228,7 @@ export default {
 
   data() {
     return {
-      current_run_mode: this.run_mode,
+      new_run_mode: this.run_mode,
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
       turn_edit: false,         // N手目編集中
@@ -250,16 +250,16 @@ export default {
     this.$store.state.current_bg_variant  = this.bg_variant
     this.$store.state.current_piece_variant = this.piece_variant
 
-    if (this.current_run_mode === "view_mode") {
+    if (this.new_run_mode === "view_mode") {
       this.mediator_setup(this.start_turn)
     }
 
-    if (this.current_run_mode === "play_mode") {
+    if (this.new_run_mode === "play_mode") {
       this.mediator_setup(this.start_turn)
       this.play_mode_setup_from("view_mode")
     }
 
-    if (this.current_run_mode === "edit_mode") {
+    if (this.new_run_mode === "edit_mode") {
       if (this.preset_key) {
         this.mediator_setup_by_preset(this.preset_key) // 駒箱に「玉」を乗せたいため
       } else {
@@ -278,7 +278,7 @@ export default {
     },
 
     kifu_source() {
-      if (this.current_run_mode === "edit_mode") {
+      if (this.new_run_mode === "edit_mode") {
         this.mediator_setup_for_edit_mode()
         return
       }
@@ -291,12 +291,12 @@ export default {
       this.log(`after turn_offset_max: ${this.turn_offset_max}`)
       this.log(`after sfen: ${this.mediator.to_simple_sfen}`)
       const sfen_change_p = (before_sfen !== this.mediator.to_simple_sfen)
-      if (this.current_run_mode === "view_mode") {
+      if (this.new_run_mode === "view_mode") {
         if (sfen_change_p) {
           this.sound_call("piece_sound")
         }
       }
-      if (this.current_run_mode === "play_mode") {
+      if (this.new_run_mode === "play_mode") {
         this.play_mode_setup_from("view_mode")
         // 棋譜を反映された側は
         // 1. 相手が指したのか → 駒音だす
@@ -312,11 +312,11 @@ export default {
     },
 
     // 外からまたはダイアログから変更されたとき
-    current_run_mode(new_val, old_val) {
-      this.$emit("update:run_mode", this.current_run_mode)
+    new_run_mode(new_val, old_val) {
+      this.$emit("update:run_mode", this.new_run_mode)
 
-      if (this.current_run_mode === "view_mode") {
-        this.log("current_run_mode: view_mode")
+      if (this.new_run_mode === "view_mode") {
+        this.log("new_run_mode: view_mode")
         // alert(`復元:${this.view_mode_turn_offset_save}`)
         this.view_mode_mediator_update(this.view_mode_turn_offset_save)
         this.view_mode_turn_offset_save = null
@@ -328,12 +328,12 @@ export default {
         }
       }
 
-      if (this.current_run_mode === "play_mode") {
+      if (this.new_run_mode === "play_mode") {
         this.play_mode_setup_from(old_val)
       }
 
-      if (this.current_run_mode === "edit_mode") {
-        this.log("current_run_mode: edit_mode")
+      if (this.new_run_mode === "edit_mode") {
+        this.log("new_run_mode: edit_mode")
 
         const new_mediator = new Mediator()
         new_mediator.data_source = this.data_source_by(this.mediator.to_position_sfen)
@@ -351,7 +351,7 @@ export default {
 
     current_debug_mode(v) { this.$emit("update:debug_mode", v)              }, // 内から外への通知
     debug_mode(v)         { this.$store.commit("current_debug_mode_set", v) }, // 外から内への反映
-    run_mode(v)           { this.current_run_mode = v                       }, // 外側から run_mode を変更されたとき
+    run_mode(v)           { this.new_run_mode = v                       }, // 外側から run_mode を変更されたとき
 
     current_theme(v)      { this.$emit("update:theme", v)                   }, // 中 -> 外
     theme(v)              { this.$store.state.current_theme = v             }, // 外 -> 中
@@ -464,7 +464,7 @@ export default {
       if (_.isEqual(this.place_from, place)) {
         list.push("holding_p")
       } else if (soldier) {
-        if (this.current_run_mode === "edit_mode" || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
+        if (this.new_run_mode === "edit_mode" || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
           if (!this.holding_p) {
             list.push("selectable_p")
           }
@@ -500,7 +500,7 @@ export default {
         `size-${this.current_size}`,
         `bg_variant-${this.current_bg_variant}`,
         `piece_variant-${this.current_piece_variant}`,
-        `run_mode-${this.current_run_mode}`,
+        `run_mode-${this.new_run_mode}`,
         {debug_mode: this.current_debug_mode},
         {digit_show: this.digit_show},
         this.new_vlayout ? 'vertical' : 'horizontal',

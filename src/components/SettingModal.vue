@@ -8,7 +8,7 @@
     b-field(label="モード")
     b-field
       template(v-for="e in RunModeInfo.values")
-        b-radio-button(v-model="base.run_mode" :native-value="e.key") {{e.name}}
+        b-radio-button(v-model="base.new_run_mode" :native-value="e.key") {{e.name}}
 
     b-field(grouped)
       b-field(label="反転")

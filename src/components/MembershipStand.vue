@@ -43,7 +43,7 @@ export default {
 
       if (this.hold_piece_holding_p(piece)) {
         list.push("holding_p")
-      } else if (this.base.current_run_mode === "edit_mode" || (!this.base.cpu_location_p && this.base.mediator.current_location === this.location)) {
+      } else if (this.base.new_run_mode === "edit_mode" || (!this.base.cpu_location_p && this.base.mediator.current_location === this.location)) {
         if (!this.holding_p) {
           list.push("selectable_p")
         }

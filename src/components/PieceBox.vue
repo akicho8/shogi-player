@@ -1,6 +1,6 @@
 <template lang="pug">
 ul.PieceBox(
-  v-if="base.current_run_mode === 'edit_mode'"
+  v-if="base.new_run_mode === 'edit_mode'"
   :class="component_class"
   @click.stop.prevent="base.piece_box_other_click"
   @click.right.prevent="base.hold_cancel"

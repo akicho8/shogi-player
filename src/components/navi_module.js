@@ -68,7 +68,7 @@ export default {
         return
       }
 
-      if (this.current_run_mode === "view_mode" || this.current_run_mode === "play_mode") {
+      if (this.new_run_mode === "view_mode" || this.new_run_mode === "play_mode") {
         const dom = document.activeElement
         const controllers = [this.$refs.first, this.$refs.previous, this.$refs.next, this.$refs.last] // FIXME: 指定DOMの下にあるか？の方法がわかればもっと簡潔になる
         if (!(dom === undefined || dom.tagName === "BODY" || _.includes(controllers, dom))) {
@@ -181,10 +181,10 @@ export default {
       const updated = this.turn_offset !== new_val
 
       if (updated) {
-        if (this.current_run_mode === "view_mode") {
+        if (this.new_run_mode === "view_mode") {
           this.view_mode_mediator_update(new_val)
         }
-        if (this.current_run_mode === "play_mode") {
+        if (this.new_run_mode === "play_mode") {
           this.play_mode_mediator_seek_to(new_val)
         }
         this.sound_call("piece_sound")
