@@ -113,7 +113,7 @@
 
     CommentBlock(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
 
-  div.debug_table(v-if="base.new_debug_mode")
+  div.debug_table(v-if="new_debug_mode")
     table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
       tbody
         tr: <th>現在のモード(new_run_mode)</th><td>{{new_run_mode}}</td>
@@ -210,11 +210,12 @@ export default {
     debug_mode:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
     digit_show:     { type: Boolean, default: false,       },
     final_label:    { type: String,  default: null,        },
-    board_piece_back_user_style: { type: Function, default: place => { return {} }, }, // FIXME: add to README
-    board_piece_back_user_class: { type: Function, default: place => { return [] }, },
-    board_cell_left_click_user_handle: { type: Function, default: null, },
-    board_cell_pointerdown_user_handle: { type: Function, default: null, },
     player_info:    { type: Object,  default: null, },
+
+    board_piece_back_user_style:        { type: Function, default: place => { return {} }, }, // FIXME: add to README
+    board_piece_back_user_class:        { type: Function, default: place => { return [] }, },
+    board_cell_left_click_user_handle:  { type: Function, default: null, },
+    board_cell_pointerdown_user_handle: { type: Function, default: null, },
   },
 
   components: {
@@ -228,8 +229,12 @@ export default {
 
   data() {
     return {
-      new_debug_mode: this.debug_mode,
-      new_run_mode:   this.run_mode,
+      new_bg_variant:    this.bg_variant,
+      new_debug_mode:    this.debug_mode,
+      new_piece_variant: this.piece_variant,
+      new_run_mode:      this.run_mode,
+      new_size:          this.size,
+      new_theme:         this.theme,
 
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
@@ -244,12 +249,6 @@ export default {
 
   created() {
     this.inside_custom_kifu = null
-
-    // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
-    this.$store.state.current_theme      = this.theme
-    this.$store.state.current_size       = this.size
-    this.$store.state.current_bg_variant  = this.bg_variant
-    this.$store.state.current_piece_variant = this.piece_variant
 
     if (this.new_run_mode === "view_mode") {
       this.mediator_setup(this.start_turn)
@@ -350,22 +349,24 @@ export default {
       }
     },
 
+    //////////////////////////////////////////////////////////////////////////////// FIXME: これまとめて書けんのか？
+
+    debug_mode(v)        { this.new_debug_mode = v               }, // 外 -> 内
+    new_debug_mode(v)    { this.$emit("update:debug_mode", v)    }, // 内 -> 外
+
+    theme(v)             { this.new_theme = v                    }, // 外 -> 中
+    new_theme(v)         { this.$emit("update:theme", v)         }, // 中 -> 外
+
+    size(v)              { this.new_size = v                     }, // 外 -> 中
+    new_size(v)          { this.$emit("update:size", v)          }, // 中 -> 外
+
+    bg_variant(v)        { this.new_bg_variant = v               }, // 外 -> 中
+    new_bg_variant(v)    { this.$emit("update:bg_variant", v)    }, // 中 -> 外
+
+    piece_variant(v)     { this.new_piece_variant = v            }, // 外 -> 中
+    new_piece_variant(v) { this.$emit("update:piece_variant", v) }, // 中 -> 外
+
     ////////////////////////////////////////////////////////////////////////////////
-
-    debug_mode(v)         { this.new_debug_mode = v            }, // 外から内への反映
-    new_debug_mode(v)     { this.$emit("update:debug_mode", v) }, // 内から外への通知
-
-    current_theme(v)      { this.$emit("update:theme", v)                   }, // 中 -> 外
-    theme(v)              { this.$store.state.current_theme = v             }, // 外 -> 中
-
-    current_size(v)       { this.$emit("update:size", v)                    }, // 中 -> 外
-    size(v)               { this.$store.state.current_size = v              }, // 外 -> 中
-
-    current_bg_variant(v)  { this.$emit("update:bg_variant", v)               }, // 中 -> 外
-    bg_variant(v)          { this.$store.state.current_bg_variant = v         }, // 外 -> 中
-
-    current_piece_variant(v)  { this.$emit("update:piece_variant", v)               }, // 中 -> 外
-    piece_variant(v)          { this.$store.state.current_piece_variant = v         }, // 外 -> 中
 
     turn_offset_max(v) { this.$emit("update:turn_offset_max", v) },
   },
@@ -401,7 +402,7 @@ export default {
 
     flip_if_white_run() {
       if (this.flip_if_white) {
-        this.base.new_flip = (this.mediator.data_source.location_base.key === "white")
+        this.new_flip = (this.mediator.data_source.location_base.key === "white")
       }
     },
 
@@ -492,17 +493,27 @@ export default {
   },
 
   computed: {
-    base()           { return this                    },
-    location_black() { return Location.fetch("black") },
-    location_white() { return Location.fetch("white") },
+    base()           { return this                              },
+    location_black() { return Location.fetch("black")           },
+    location_white() { return Location.fetch("white")           },
+    view_p()         { return this.new_run_mode === "view_mode" },
+    play_p()         { return this.new_run_mode === "play_mode" },
+    edit_p()         { return this.new_run_mode === "edit_mode" },
+
+    // 本当は delegate したい。this.$watch を使えば動的になりそう？
+    turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
+    turn_offset()     { if (this.mediator) { return this.mediator.turn_offset     } }, // 手数のオフセット
+    display_turn()    { if (this.mediator) { return this.mediator.display_turn    } }, // turn_base + turn_offset
+    turn_offset_min() { if (this.mediator) { return this.mediator.turn_offset_min } }, // 必ず 0
+    turn_offset_max() { if (this.mediator) { return this.mediator.turn_offset_max } }, // moves.length が 2 なら 2
 
     component_class() {
       return [
-        `theme-${this.current_theme}`,
-        `size-${this.current_size}`,
-        `bg_variant-${this.current_bg_variant}`,
-        `piece_variant-${this.current_piece_variant}`,
-        `run_mode-${this.new_run_mode}`,
+        ["theme", this.new_theme].join("-"),
+        ["size", this.new_size].join("-"),
+        ["bg_variant", this.new_bg_variant].join("-"),
+        ["piece_variant", this.new_piece_variant].join("-"),
+        ["run_mode", this.new_run_mode].join("-"),
         {debug_mode: this.new_debug_mode},
         {digit_show: this.digit_show},
         this.new_vlayout ? 'vertical' : 'horizontal',
@@ -514,31 +525,6 @@ export default {
       return this.inside_custom_kifu || this.kifu_body_from_url || this.kifu_body || this.init_preset_sfen || "position startpos"
     },
 
-    // 本当は delegate したい。this.$watch を使えば動的になりそう？
-
-    turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
-    turn_offset()     { if (this.mediator) { return this.mediator.turn_offset     } }, // 手数のオフセット
-    display_turn()    { if (this.mediator) { return this.mediator.display_turn    } }, // turn_base + turn_offset
-    turn_offset_min() { if (this.mediator) { return this.mediator.turn_offset_min } }, // 必ず 0
-    turn_offset_max() { if (this.mediator) { return this.mediator.turn_offset_max } }, // moves.length が 2 なら 2
-
-    // mapState({
-    // // アロー関数は、コードをとても簡潔にできます！
-    // count: state => state.count,
-    // // 文字列を渡すことは、`state => state.count` と同じです
-    // countAlias: 'count',
-    // // `this` からローカルステートを参照するときは、通常の関数を使わなければいけません
-    // countPlusLocalState (state) {
-    //   return state.count + this.localCount
-    // }
-    ...mapState({
-    }),
-    ...mapState([
-      "current_theme",
-      "current_size",
-      "current_bg_variant",
-      "current_piece_variant",
-    ]),
   },
 }
 </script>

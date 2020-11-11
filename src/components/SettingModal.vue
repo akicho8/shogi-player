@@ -19,10 +19,10 @@
         b-switch(v-model="base.new_debug_mode")
 
     template(v-if="false")
-      b-dropdown(v-model="$store.state.current_bg_variant")
+      b-dropdown(v-model="base.new_bg_variant")
         button.button(slot="trigger")
           span
-            | {{BgVariantInfo.fetch($store.state.current_bg_variant).name}}
+            | {{BgVariantInfo.fetch(base.new_bg_variant).name}}
           b-icon(icon="menu-down")
         template(v-for="e in BgVariantInfo.values")
           b-dropdown-item(:value="e.key") {{e.name}}
@@ -30,24 +30,24 @@
     b-field(label="テーマ")
     b-field
       template(v-for="e in ThemeInfo.values")
-        b-radio-button(v-model="$store.state.current_theme" :native-value="e.key") {{e.name}}
+        b-radio-button(v-model="base.new_theme" :native-value="e.key") {{e.name}}
 
-    template(v-if="$store.state.current_theme === 'real'")
+    template(v-if="base.new_theme === 'real'")
       .box
         b-field(label="背景の種類")
         b-field
           template(v-for="e in BgVariantInfo.values")
-            b-radio-button(v-model="$store.state.current_bg_variant" :native-value="e.key" size="is-small") {{e.name}}
+            b-radio-button(v-model="base.new_bg_variant" :native-value="e.key" size="is-small") {{e.name}}
 
         b-field(label="駒の種類")
         b-field
           template(v-for="e in PieceVariantInfo.values")
-            b-radio-button(v-model="$store.state.current_piece_variant" :native-value="e.key") {{e.name}}
+            b-radio-button(v-model="base.new_piece_variant" :native-value="e.key") {{e.name}}
 
     b-field(label="サイズ")
     b-field
       template(v-for="e in SizeInfo.values")
-        b-radio-button(v-model="$store.state.current_size" :native-value="e.key" size="is-small") {{e.name}}
+        b-radio-button(v-model="base.new_size" :native-value="e.key" size="is-small") {{e.name}}
 
     template(v-if="base.mediator")
       b-field(label="再生モードの現局面(Readonly)")
