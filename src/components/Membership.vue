@@ -25,10 +25,9 @@ export default {
   computed: {
     component_class() {
       const list = []
-
       list.push(`location_${this.location.key}`)
-      list.push(this.$parent.env)
-      if (this.$parent.mediator.current_location === this.location) {
+      list.push(this.base.env)
+      if (this.base.mediator.current_location === this.location) {
         list.push("turn_active")
       }
       return list
@@ -36,7 +35,7 @@ export default {
 
     // ビューモードのとき持駒が空なら駒台を表示しない
     component_show_p() {
-      if (this.$parent.current_run_mode === "view_mode" && this.$parent.hidden_if_piece_stand_blank && _.isEmpty(this.hold_pieces)) {
+      if (this.base.current_run_mode === "view_mode" && this.base.hidden_if_piece_stand_blank && _.isEmpty(this.hold_pieces)) {
         return false
       }
       return true

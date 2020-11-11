@@ -2,7 +2,6 @@ import _ from "lodash"
 import { mapState } from 'vuex'
 
 export default {
-
   props: {
     slider_show:                 { type: Boolean, default: false, },
     controller_show:             { type: Boolean, default: false, },
@@ -21,6 +20,7 @@ export default {
   data() {
     return {
       new_flip: null,
+      new_vlayout: null,
     }
   },
 
@@ -34,16 +34,15 @@ export default {
 
   created() {
     this.new_flip = this.flip
-    this.$store.state.current_vlayout = this.vlayout
+    this.new_vlayout  = this.vlayout
   },
 
   watch: {
     flip(v)     { this.new_flip = v             }, // 外 -> 中
     new_flip(v) { this.$emit("update:flip", v)  }, // 中 -> 外
 
-    current_vlayout(v)     { this.$emit("update:vlayout", v)       }, // 中 -> 外
-    vlayout(v)             { this.$store.state.current_vlayout = v }, // 外 -> 中
-
+    vlayout(v)     { this.new_vlayout = v             }, // 外 -> 中
+    new_vlayout(v) { this.$emit("update:vlayout", v)  }, // 中 -> 外
   },
 
   methods: {
@@ -208,36 +207,9 @@ export default {
       this.focus_to("turn_slider")
     },
   },
-
-  //
-  // ...mapState([
-  //   "new_flip",
-  // ]),
-  //
-  // が、
-  //
-  // Failed to compile.
-  //
-  // ./node_modules/shogi-player/src/components/navi_module.js
-  // Module parse failed: Unexpected token (191:4)
-  // You may need an appropriate loader to handle this file type.
-  // |       return this.new_flip ? -1 : 1
-  // |     },
-  // |     ...mapState([
-  // |       "new_flip",
-  // |     ]),
-  //  @ ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./node_modules/shogi-player/src/components/ShogiPlayer.vue 49:19-46
-  //  @ ./node_modules/shogi-player/src/components/ShogiPlayer.vue
-  //  @ ./app/javascript/packs/application.js
-  //  @ multi (webpack)-dev-server/client?http://localhost:3035 ./app/javascript/packs/application.js
-  //
-  // となるため仕方なく Object.assign を使う
-  //
-  computed: Object.assign({}, {
+  computed: {
     flip_sign() {
       return this.new_flip ? -1 : 1
     },
-  }, mapState([
-    "current_vlayout",
-  ])),
+  },
 }

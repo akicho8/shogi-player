@@ -4,15 +4,15 @@
 
   //- 2桁にして幅を常に予約しておく
   template(v-if="base.theme === 'simple'")
-    template(v-if="!base.current_vlayout")
+    template(v-if="!base.new_vlayout")
       .piece_count.piece_count1
         | 99
 
-  template(v-if="base.current_vlayout && player_name")
+  template(v-if="base.new_vlayout && player_name")
     .player_name
       | {{player_name}}
 
-  template(v-if="!base.current_vlayout && player_name")
+  template(v-if="!base.new_vlayout && player_name")
     .player_name
       | {{player_name}}
 </template>

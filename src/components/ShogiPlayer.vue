@@ -94,14 +94,14 @@
                     .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
                       | {{mediator.cell_view([x - 1, y - 1])}}
         .flex_item
-          template(v-if="!current_vlayout")
+          template(v-if="!new_vlayout")
             PieceBox(:base="base")
             //- 先手の駒台が上にくっつてしまうので防ぐため空のdivを入れる
             div(v-if="current_run_mode !== 'edit_mode'")
           Membership(:base="base" :location="location_black" :hold_pieces="mediator.realized_hold_pieces_of('black')")
       //- cursor_elem はこの部分に入るので 1em のサイズを .font_size_base で指定したものを基準にできる
 
-      template(v-if="current_vlayout")
+      template(v-if="new_vlayout")
         PieceBox(:base="base")
 
     div(v-if="current_run_mode === 'view_mode' || current_run_mode === 'play_mode'")
@@ -516,7 +516,7 @@ export default {
         `run_mode-${this.current_run_mode}`,
         {debug_mode: this.current_debug_mode},
         {digit_show: this.digit_show},
-        this.current_vlayout ? 'vertical' : 'horizontal',
+        this.new_vlayout ? 'vertical' : 'horizontal',
       ]
     },
 
