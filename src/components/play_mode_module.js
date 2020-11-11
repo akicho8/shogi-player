@@ -109,7 +109,7 @@ export default {
     },
 
     turn_next() {
-      if (this.new_run_mode === "play_mode") {
+      if (this.play_p) {
         this.mediator = new Mediator()
         this.mediator.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
         this.mediator.current_turn = -1

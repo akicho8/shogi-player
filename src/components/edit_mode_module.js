@@ -105,17 +105,17 @@ export default {
         return
       }
 
-      if (this.new_run_mode === "play_mode" && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
+      if (this.play_p && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
         this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
 
-      if (this.new_run_mode === "play_mode" && this.have_piece && soldier) {
+      if (this.play_p && this.have_piece && soldier) {
         this.log("駒台や駒箱から持ち上げた駒を盤上の駒の上に置こうとしたので無効とする")
         return
       }
 
-      if (NOT_PUT_IF_DEATH_SOLDIER && this.new_run_mode === "play_mode" && this.have_piece && !soldier) {
+      if (NOT_PUT_IF_DEATH_SOLDIER && this.play_p && this.have_piece && !soldier) {
         const new_soldier = this.soldier_create_from_stand_or_box_on(place)
         const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
         if (force_promote_length != null) {                                              // チェックしない場合は null
@@ -131,14 +131,14 @@ export default {
         return
       }
 
-      if (this.new_run_mode === "play_mode" && this.put_on_my_soldier_p(soldier)) {
+      if (this.play_p && this.put_on_my_soldier_p(soldier)) {
         this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
         // this.state_reset() // ←元の位置に戻す場合
         return
       }
 
       // ダブルタップで裏返すとシングルクリックの遅延がすさまじいことになるためダブルタップは使ってはいけない
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         const old = this.$double_tap_time
         this.$double_tap_time = Date.now()
         if (soldier) {
@@ -166,7 +166,7 @@ export default {
 
       // --------------------------------------------------------------------------------
 
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         this.log(`holding_p: ${this.holding_p}`)
         if (this.meta_p(e)) {
           if (!this.holding_p && soldier) { // 持ってなくて、駒がある
@@ -186,7 +186,7 @@ export default {
       }
 
       // 盤上から移動させようとしたとき合法手以外は指せないようにする
-      if (PLAY_MODE_LEGAL_MOVE_ONLY && this.new_run_mode === "play_mode" && this.place_from) {
+      if (PLAY_MODE_LEGAL_MOVE_ONLY && this.play_p && this.place_from) {
         const piece_vector = PieceVector.fetch(this.origin_soldier1.piece.key)
         const ox = this.place_from.x
         const oy = this.place_from.y
@@ -265,7 +265,7 @@ export default {
           // this.$forceUpdate()
         }
 
-        if (this.new_run_mode === "play_mode" && promotable_p) { // 入って成る or 出て成る
+        if (this.play_p && promotable_p) { // 入って成る or 出て成る
 
           let must_dialog = true
           if (AUTO_PROMOTE) {
@@ -290,7 +290,7 @@ export default {
             })
           }
         } else {
-          if (this.new_run_mode === "play_mode") {
+          if (this.play_p) {
             this.moves_set(this.origin_soldier1.place.to_sfen + place.to_sfen) // 7g7f
           }
           this.mediator.board.place_on(new_soldier) // 置く
@@ -342,7 +342,7 @@ export default {
     //   const place = Place.fetch(xy)
     //   const soldier = this.mediator.board.lookup(place)
     //
-    //   if (this.new_run_mode === "edit_mode") {
+    //   if (this.edit_p) {
     //     if (!this.holding_p) {
     //       if (soldier) {
     //         this.log("操作モードでダブルタップしたので裏返す")
@@ -383,7 +383,7 @@ export default {
         return
       }
 
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         if (!this.holding_p && soldier) {
           this.log("盤上の駒を裏返す")
           this.mediator.board.place_on(soldier.piece_transform)
@@ -406,7 +406,7 @@ export default {
     //     return
     //   }
     //
-    //   if (this.new_run_mode === "edit_mode") {
+    //   if (this.edit_p) {
     //     if (!this.holding_p && soldier) {
     //       this.log("盤上の駒を裏返す")
     //       this.mediator.board.place_on(soldier.piece_transform)
@@ -424,7 +424,7 @@ export default {
       }
 
       // 相手の駒台から自分の駒台、または駒箱から自分の駒台へ移動
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         // if (this.have_piece_location !== location && this.have_piece) {
         if (this.have_piece) {
           // 相手の持駒を自分の駒台に移動
@@ -433,7 +433,7 @@ export default {
         }
       }
 
-      if (this.new_run_mode === "play_mode") {
+      if (this.play_p) {
         if (this.origin_soldier1) {
           this.log("play_mode では盤上の駒を駒台に置くことはできない")
           return true
@@ -470,7 +470,7 @@ export default {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.new_run_mode === "play_mode" && location !== this.mediator.current_location) {
+      if (this.play_p && location !== this.mediator.current_location) {
         this.log("相手の持駒を持とうとしたときは無効")
         return
       }
@@ -645,7 +645,7 @@ export default {
       let list = []
       if (this.piece_box_have_p(piece)) {
         list.push("holding_p")
-      } else if (this.new_run_mode === "edit_mode") {
+      } else if (this.edit_p) {
         if (!this.holding_p) {
           list.push("selectable_p")
         }
@@ -848,13 +848,13 @@ export default {
 
     // 片方の手番だけを操作できるようにする human_side_key の指定があってCPUの手番？
     cpu_location_p() {
-      if (this.new_run_mode === "play_mode") {
+      if (this.play_p) {
         return !_.includes(this.human_locations, this.mediator.current_location)
       }
     },
 
     if_view_mode_break() {
-      // return this.new_run_mode === "view_mode"
+      // return this.view_p
     },
 
   },

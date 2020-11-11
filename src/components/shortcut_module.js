@@ -25,7 +25,7 @@ export default {
       }
 
       // 駒箱クリック
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         if (e.code === "Backspace" || e.code === "Delete" || e.key.toLowerCase() === "t") {
           this.soldier_hold_unless_holding_p(e)
           if (this.piece_box_other_click(e)) {
@@ -80,7 +80,7 @@ export default {
         }
       }
 
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         if (e.key === "?") {
           this.shortcut_modal_toggle_handle()
           e.preventDefault()
@@ -89,7 +89,7 @@ export default {
       }
 
       // 移動
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         if (this.meta_p(e)) {
           const vector = this.arrow_vector_table[e.key]
           if (vector) {
@@ -100,7 +100,7 @@ export default {
         }
       }
 
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         if (e.key === "!") {
           this.shuffle_mode_p = !this.shuffle_mode_p
           if (this.shuffle_mode_p) {

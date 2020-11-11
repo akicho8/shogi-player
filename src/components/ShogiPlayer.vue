@@ -5,7 +5,7 @@
   template(v-if="!mediator")
     i.fas.fa-spinner.fa-pulse
 
-  div.edit_mode_controller(v-if="new_run_mode === 'edit_mode'")
+  div.edit_mode_controller(v-if="edit_p")
     .edit_mode_controller_wrap
       b-dropdown(v-model="current_preset_key")
         //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
@@ -40,12 +40,12 @@
 
   template(v-if="mediator")
     .turn_edit_container
-      .turn_number_area(v-if="summary_show && (new_run_mode === 'view_mode' || new_run_mode === 'play_mode')")
+      .turn_number_area(v-if="summary_show && (view_p || play_p)")
         template(v-if="!turn_edit")
           span.turn_edit_text(@click.stop.prevent="turn_edit_run")
-            template(v-if="new_run_mode === 'view_mode'")
+            template(v-if="view_p")
               | {{mediator.current_turn_label(this.final_label)}}
-            template(v-if="new_run_mode === 'play_mode'")
+            template(v-if="play_p")
               template(v-if="turn_base === 0")
                 | {{turn_offset}}
               template(v-if="turn_base >= 1")
@@ -89,14 +89,14 @@
           template(v-if="!new_vlayout")
             PieceBox(:base="base")
             //- 先手の駒台が上にくっつてしまうので防ぐため空のdivを入れる
-            div(v-if="new_run_mode !== 'edit_mode'")
+            div(v-if="play_p || view_p")
           Membership(:base="base" :location="location_black" :hold_pieces="mediator.realized_hold_pieces_of('black')")
       //- cursor_elem はこの部分に入るので 1em のサイズを .font_size_base で指定したものを基準にできる
 
       template(v-if="new_vlayout")
         PieceBox(:base="base")
 
-    div(v-if="new_run_mode === 'view_mode' || new_run_mode === 'play_mode'")
+    div(v-if="view_p || play_p")
       .controller_group.buttons.has-addons.is-centered.is-paddingless(v-if="controller_show")
         button.button.first(    ref="first"    @click.stop.prevent="move_to_first"):             b-icon(icon="menu-left")
         button.button.previous( ref="previous" @click.stop.prevent="relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
@@ -250,16 +250,16 @@ export default {
   created() {
     this.inside_custom_kifu = null
 
-    if (this.new_run_mode === "view_mode") {
+    if (this.view_p) {
       this.mediator_setup(this.start_turn)
     }
 
-    if (this.new_run_mode === "play_mode") {
+    if (this.play_p) {
       this.mediator_setup(this.start_turn)
       this.play_mode_setup_from("view_mode")
     }
 
-    if (this.new_run_mode === "edit_mode") {
+    if (this.edit_p) {
       if (this.preset_key) {
         this.mediator_setup_by_preset(this.preset_key) // 駒箱に「玉」を乗せたいため
       } else {
@@ -278,7 +278,7 @@ export default {
     },
 
     kifu_source() {
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         this.mediator_setup_for_edit_mode()
         return
       }
@@ -291,12 +291,12 @@ export default {
       this.log(`after turn_offset_max: ${this.turn_offset_max}`)
       this.log(`after sfen: ${this.mediator.to_simple_sfen}`)
       const sfen_change_p = (before_sfen !== this.mediator.to_simple_sfen)
-      if (this.new_run_mode === "view_mode") {
+      if (this.view_p) {
         if (sfen_change_p) {
           this.sound_call("piece_sound")
         }
       }
-      if (this.new_run_mode === "play_mode") {
+      if (this.play_p) {
         this.play_mode_setup_from("view_mode")
         // 棋譜を反映された側は
         // 1. 相手が指したのか → 駒音だす
@@ -319,7 +319,7 @@ export default {
     new_run_mode(new_val, old_val) {
       this.$emit("update:run_mode", this.new_run_mode)
 
-      if (this.new_run_mode === "view_mode") {
+      if (this.view_p) {
         this.log("new_run_mode: view_mode")
         // alert(`復元:${this.view_mode_turn_offset_save}`)
         this.view_mode_mediator_update(this.view_mode_turn_offset_save)
@@ -332,11 +332,11 @@ export default {
         }
       }
 
-      if (this.new_run_mode === "play_mode") {
+      if (this.play_p) {
         this.play_mode_setup_from(old_val)
       }
 
-      if (this.new_run_mode === "edit_mode") {
+      if (this.edit_p) {
         this.log("new_run_mode: edit_mode")
 
         const new_mediator = new Mediator()
@@ -467,7 +467,7 @@ export default {
       if (_.isEqual(this.place_from, place)) {
         list.push("holding_p")
       } else if (soldier) {
-        if (this.new_run_mode === "edit_mode" || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
+        if (this.edit_p || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
           if (!this.holding_p) {
             list.push("selectable_p")
           }
