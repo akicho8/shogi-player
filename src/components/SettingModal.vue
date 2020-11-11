@@ -8,7 +8,7 @@
     b-field(label="モード")
     b-field
       template(v-for="e in RunModeInfo.values")
-        b-radio-button(v-model="current_run_mode" :native-value="e.key") {{e.name}}
+        b-radio-button(v-model="base.run_mode" :native-value="e.key") {{e.name}}
 
     b-field(grouped)
       b-field(label="反転")
@@ -49,18 +49,18 @@
       template(v-for="e in SizeInfo.values")
         b-radio-button(v-model="$store.state.current_size" :native-value="e.key" size="is-small") {{e.name}}
 
-    template(v-if="sp_data.mediator")
+    template(v-if="base.mediator")
       b-field(label="再生モードの現局面(Readonly)")
-        b-input(:value="sp_data.mediator.to_position_sfen" type="input" size="is-small" readonly)
+        b-input(:value="base.mediator.to_position_sfen" type="input" size="is-small" readonly)
 
     b-field(label="編集モードの現局面(Readonly) ※BUG:駒を反転したときに反映されない場合がある")
-      b-input(:value="edit_mode_snapshot_sfen2" type="input" size="is-small" readonly)
+      b-input(:value="base.edit_mode_snapshot_sfen2" type="input" size="is-small" readonly)
 
     b-field(label="再生モードの棋譜(編集可)")
-      b-input(v-model="kifu_source2" type="textarea" size="is-small")
+      b-input(v-model="new_kifu_source" type="textarea" size="is-small")
 
     b-field(label="操作モードの棋譜(Readonly)")
-      b-input.is-small(:value="play_mode_full_moves_sfen" type="textarea" size="is-small" readonly)
+      b-input.is-small(:value="base.play_mode_full_moves_sfen" type="textarea" size="is-small" readonly)
 
   footer.modal-card-foot
     button.button.is-primary(@click.stop.prevent="$parent.close()") 閉じる
@@ -78,43 +78,26 @@ import { support_child } from "./support_child.js"
 export default {
   mixins: [support_child],
 
-  props: {
-    run_mode: { required: true },
-    kifu_source: { required: false },
-    play_mode_full_moves_sfen: { required: true }, // TODO: 親をそのまま参照したいんだけど $data を渡しても play_mode_full_moves_sfen は computed だから参照できない
-    edit_mode_snapshot_sfen2: { required: true },  // TODO: 親を受けとりたい
-    sp_data: { required: true },                // TODO: $data ではなく親を受けとりたい
-  },
-
   data() {
     return {
-      RunModeInfo,
-      ThemeInfo,
-      SizeInfo,
-      BgVariantInfo,
-      PieceVariantInfo,
-
-      current_run_mode: this.run_mode,
-      kifu_source2: this.kifu_source,
+      new_kifu_source: this.base.kifu_source,
     }
   },
 
   watch: {
-    current_run_mode(value) {
-      this.$emit("update:run_mode", value)
+    new_kifu_source(v) {
+      this.base.inside_custom_kifu = v
+      this.$emit("update:kifu_body", v)
     },
-    kifu_source2(value) {
-      this.$emit("update:kifu_body", value)
-    },
-  },
-
-  methods: {
   },
 
   computed: {
-    // ...mapState([
-    //   "current_debug_mode",      // これだと get() しか作られない
-    // ]),
+    RunModeInfo()      { return RunModeInfo      },
+    ThemeInfo()        { return ThemeInfo        },
+    SizeInfo()         { return SizeInfo         },
+    BgVariantInfo()    { return BgVariantInfo    },
+    PieceVariantInfo() { return PieceVariantInfo },
+
     current_debug_mode: {
       get() { return this.$store.state.current_debug_mode },
       set(v) {

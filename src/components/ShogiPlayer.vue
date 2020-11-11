@@ -61,15 +61,7 @@
         b-icon(icon="dots-vertical" size="is-small")
 
       b-modal(:active.sync="setting_modal_p" has-modal-card)
-        SettingModal(
-          :base="base"
-          :run_mode.sync="current_run_mode"
-          :kifu_source="kifu_source"
-          @update:kifu_body="update_kifu_source"
-          :play_mode_full_moves_sfen="play_mode_full_moves_sfen"
-          :edit_mode_snapshot_sfen2="edit_mode_snapshot_sfen2"
-          :sp_data="$data"
-        )
+        SettingModal(:base="base")
 
     //- 独自のフォントサイズを適用するのは基本このなかだけとする
     .board_container.font_size_base(ref="board_container_ref")
@@ -494,11 +486,6 @@ export default {
       if (this.board_piece_back_user_style) {
         return this.board_piece_back_user_style(Place.fetch(xy))
       }
-    },
-
-    update_kifu_source(v) {
-      this.inside_custom_kifu = v
-      this.$emit("update:kifu_body", v) // 子で emit されたイベントを親(自分)で拾い、同じ内容で親に向けて発火。何この複雑さ。
     },
   },
 
