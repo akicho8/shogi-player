@@ -113,7 +113,7 @@
 
     CommentBlock(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
 
-  div.debug_table(v-if="current_debug_mode")
+  div.debug_table(v-if="base.new_debug_mode")
     table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
       tbody
         tr: <th>現在のモード(new_run_mode)</th><td>{{new_run_mode}}</td>
@@ -228,7 +228,9 @@ export default {
 
   data() {
     return {
-      new_run_mode: this.run_mode,
+      new_debug_mode: this.debug_mode,
+      new_run_mode:   this.run_mode,
+
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
       turn_edit: false,         // N手目編集中
@@ -244,7 +246,6 @@ export default {
     this.inside_custom_kifu = null
 
     // TODO: Vuex の方で外からの引数(this.debug_mode)を参照できないのでこんなことになっている
-    this.$store.state.current_debug_mode = this.debug_mode
     this.$store.state.current_theme      = this.theme
     this.$store.state.current_size       = this.size
     this.$store.state.current_bg_variant  = this.bg_variant
@@ -311,6 +312,10 @@ export default {
       }
     },
 
+    ////////////////////////////////////////////////////////////////////////////////
+
+    run_mode(v) { this.new_run_mode = v            }, // 外から内への反映
+
     // 外からまたはダイアログから変更されたとき
     new_run_mode(new_val, old_val) {
       this.$emit("update:run_mode", this.new_run_mode)
@@ -345,13 +350,10 @@ export default {
       }
     },
 
-    // これはひどい。わけがわからない。
-    // 外側に通知したいときは Vuex (../store/index.js) のなかでやってもだめ
-    // 呼ばれているコンポーネントで書かないといけない
+    ////////////////////////////////////////////////////////////////////////////////
 
-    current_debug_mode(v) { this.$emit("update:debug_mode", v)              }, // 内から外への通知
-    debug_mode(v)         { this.$store.commit("current_debug_mode_set", v) }, // 外から内への反映
-    run_mode(v)           { this.new_run_mode = v                       }, // 外側から run_mode を変更されたとき
+    debug_mode(v)         { this.new_debug_mode = v            }, // 外から内への反映
+    new_debug_mode(v)     { this.$emit("update:debug_mode", v) }, // 内から外への通知
 
     current_theme(v)      { this.$emit("update:theme", v)                   }, // 中 -> 外
     theme(v)              { this.$store.state.current_theme = v             }, // 外 -> 中
@@ -431,7 +433,7 @@ export default {
     },
 
     log(...v) {
-      if (this.current_debug_mode) {
+      if (this.new_debug_mode) {
         console.log(...v)
       }
     },
@@ -501,7 +503,7 @@ export default {
         `bg_variant-${this.current_bg_variant}`,
         `piece_variant-${this.current_piece_variant}`,
         `run_mode-${this.new_run_mode}`,
-        {debug_mode: this.current_debug_mode},
+        {debug_mode: this.new_debug_mode},
         {digit_show: this.digit_show},
         this.new_vlayout ? 'vertical' : 'horizontal',
       ]
@@ -532,7 +534,6 @@ export default {
     ...mapState({
     }),
     ...mapState([
-      "current_debug_mode",
       "current_theme",
       "current_size",
       "current_bg_variant",

@@ -16,7 +16,7 @@
       b-field(label="縦並び")
         b-switch(v-model="base.new_vlayout")
       b-field(label="デバッグモード")
-        b-switch(v-model="current_debug_mode")
+        b-switch(v-model="base.new_debug_mode")
 
     template(v-if="false")
       b-dropdown(v-model="$store.state.current_bg_variant")
@@ -97,15 +97,6 @@ export default {
     SizeInfo()         { return SizeInfo         },
     BgVariantInfo()    { return BgVariantInfo    },
     PieceVariantInfo() { return PieceVariantInfo },
-
-    current_debug_mode: {
-      get() { return this.$store.state.current_debug_mode },
-      set(v) {
-        this.$store.commit("current_debug_mode_set", v) // どんだけ冗長なことやらすんだ。面倒くさいぞこれ
-        // というか別に直接更新してもよい
-        // this.$store.state.current_debug_mode = v
-      },
-    },
   },
 }
 </script>
