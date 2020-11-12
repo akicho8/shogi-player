@@ -1,5 +1,5 @@
-import Location from "../location"
-import Place from "../place"
+import Location from "../models/location"
+import Place from "../models/place"
 import shortcut_modal from "./shortcut_modal.vue"
 
 export default {

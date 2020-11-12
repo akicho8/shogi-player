@@ -1,5 +1,5 @@
-import AnyFuncInfo from "../any_func_info"
-import Board from "../board"
+import AnyFuncInfo from "../models/any_func_info"
+import Board from "../models/board"
 
 export default {
   data() {

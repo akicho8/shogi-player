@@ -148,11 +148,11 @@ import { mapState } from 'vuex'
 import store from "../store/index.js"
 
 // Library
-import Mediator   from "../mediator.js"
-import Place      from "../place.js"
-import SfenParser from "../sfen_parser.js"
-import KifParser  from "../kif_parser.js"
-import Location   from "../location.js"
+import Mediator   from "../models/mediator.js"
+import Place      from "../models/place.js"
+import SfenParser from "../models/sfen_parser.js"
+import KifParser  from "../models/kif_parser.js"
+import Location   from "../models/location.js"
 
 // components
 import PieceBox        from "./PieceBox.vue"

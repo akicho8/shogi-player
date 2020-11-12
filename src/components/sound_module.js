@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { SoundPreset } from '../SoundPreset.js'
+import { SoundPreset } from '../models/SoundPreset.js'
 import { Howl, Howler } from "howler"
 
 export default {

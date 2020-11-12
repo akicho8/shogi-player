@@ -67,11 +67,11 @@
 </template>
 
 <script>
-import RunModeInfo      from "../run_mode_info"
-import ThemeInfo        from "../theme_info"
-import SizeInfo         from "../size_info"
-import BgVariantInfo    from "../bg_variant_info"
-import PieceVariantInfo from "../piece_variant_info"
+import RunModeInfo      from "../models/run_mode_info"
+import ThemeInfo        from "../models/theme_info"
+import SizeInfo         from "../models/size_info"
+import BgVariantInfo    from "../models/bg_variant_info"
+import PieceVariantInfo from "../models/piece_variant_info"
 
 import { support_child } from "./support_child.js"
 

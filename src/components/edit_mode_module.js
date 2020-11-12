@@ -1,10 +1,10 @@
 import _ from "lodash"
 
-import Place from "../place"
-import Board from "../board"
-import PieceVector from "../piece_vector.js"
-import Soldier from "../soldier"
-import Location from "../location"
+import Place from "../models/place"
+import Board from "../models/board"
+import PieceVector from "../models/piece_vector.js"
+import Soldier from "../models/soldier"
+import Location from "../models/location"
 
 const PLAY_MODE_LEGAL_MOVE_ONLY = true // play-mode で合法手のみに絞る
 const AUTO_PROMOTE              = true // 死に駒になるときは自動的に成る

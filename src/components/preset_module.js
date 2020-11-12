@@ -1,5 +1,5 @@
-import Mediator from "../mediator"
-import PresetInfo from "../preset_info"
+import Mediator from "../models/mediator"
+import PresetInfo from "../models/preset_info"
 
 export default {
 
