@@ -9,6 +9,8 @@ export default {
   },
   methods: {
     sound_play(key, options = {}) {
+      this.$emit("sound_play", key)
+
       if (!this.sound_effect) {
         return
       }
