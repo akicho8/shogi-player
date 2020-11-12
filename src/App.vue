@@ -1,17 +1,18 @@
 <template lang="pug">
 #app
-  template(v-if="false")
-    shogi-player(
-      :run_mode="'view_mode'"
-      :debug_mode="false"
-      :start_turn="0"
-      :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
-      :key_event_capture="true"
-      :theme="'simple'"
-      :size="'default'"
-      :sound_effect="true"
-      :vlayout="false"
-    )
+  template(v-if="true")
+    .virtual_screen
+      shogi-player(
+        :run_mode="'edit_mode'"
+        :debug_mode="false"
+        :start_turn="0"
+        :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
+        :theme="'real'"
+        :size="'xxx'"
+        :sound_effect="true"
+        :vlayout="true"
+        :setting_button_show="false"
+      )
 
     //- shogi-player(
     //-   :run_mode="'view_mode'"
@@ -116,8 +117,8 @@
                   .message-body
                     | コメント付きの KIF 表示。9手目から表示。テーマ:real。駒音あり
 
-                h3.title.yumincho 藤井聡太四段 vs 佐藤天彦名人
-                p.subtitle.yumincho
+                h3.title 藤井聡太四段 vs 佐藤天彦名人
+                p.subtitle
                   a(href="http://www.asahi.com/shougi/asahicup_live/?ref=jsa" target="_blank") 第11回朝日杯将棋オープン戦本戦
                 hr
                 ShogiPlayer.original(
@@ -140,8 +141,8 @@
                   .message-body
                     | シンプル。最終手から表示。※盤面クリックで操作可。天王山クリックで反転
 
-                h3.title.yumincho 羽生善治名人 vs 渡辺明竜王
-                p.subtitle.yumincho 第21期竜王戦七番勝負第4局
+                h3.title 羽生善治名人 vs 渡辺明竜王
+                p.subtitle 第21期竜王戦七番勝負第4局
                 hr
                 ShogiPlayer(:kifu_body="'position startpos moves 2g2f 8c8d 2f2e 8d8e 6i7h 4a3b 2e2d 2c2d 2h2d P*2c 2d2h 7a7b 3i3h 3c3d 9g9f 9c9d 1g1f 1c1d 3h2g 8e8f 8g8f 8b8f P*8g 8f8d 2g3f 5a5b 7g7f 7c7d 8h2b+ 3a2b 7i8h 7b7c 8h7g 7c6d 3f4e 7d7e 4e5f 2b3c 6g6f 3c4d 5f6g 6a7b 5i6h 8a7c 4i5h 2a3c 6h7i 7e7f 6g7f 4d5e P*7e 9d9e B*7d P*8h 7i8h 7b8c 9f9e 8c7d 7e7d 8d7d P*7e 7d8d 5h6g P*7d 7e7d 8d7d P*7e 6d7e 7f7e 7d7e 7g7f 7e7d S*7e 7d4d P*7d 4d4g+ P*2d 2c2d 7d7c+ 4g4i 2h2d P*2c 2d3d 4c4d P*7i 5b4c 3d3e S*4e 6g5f P*7g 8i7g P*3d 3e4e 3c4e 5f5e R*2h N*3f 2h7h+ 8h9g 4e5g+ 5e4d 4i4d S*5b 4c5d 7i7h 4d4i G*6e 5d4e R*4d 4e5f 4d4i G*4h S*3h 4h4i R*5e 5f4f 3h4i G*4e P*4g 5g4g P*4h 4g3g 2i3g 4f3g 5e4e R*8i G*3h 3g3f G*4f 3f2f 9i9h 8i4i+ P*3i S*2i 3h2h 4i3i'" :start_turn="-1" :theme="'real'" :bg_variant="'b'" :piece_variant="'b'")
 
@@ -150,8 +151,8 @@
                   .message-body
                     | スライダーのみ表示。初手から表示
 
-                h3.title.yumincho 藤井猛六段 vs 井上慶太六段
-                p.subtitle.yumincho 第54期順位戦B級2組7回戦
+                h3.title 藤井猛六段 vs 井上慶太六段
+                p.subtitle 第54期順位戦B級2組7回戦
                 hr
                 ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="0" :slider_show="true" :theme="'real'" :bg_variant="'c'")
 
@@ -164,8 +165,8 @@
                   .message-body
                     | コントローラーとスライダー付き。121手目から表示。
 
-                h3.title.yumincho 藤井聡太四段 vs 澤田真吾六段
-                p.subtitle.yumincho 第43期棋王戦予選
+                h3.title 藤井聡太四段 vs 澤田真吾六段
+                p.subtitle 第43期棋王戦予選
                 hr
                 ShogiPlayer(:kifu_body="kif_sample2" :start_turn="121" :controller_show="true" :slider_show="true" :theme="'simple'")
 
@@ -174,8 +175,8 @@
                   .message-body
                     | 駒落ち。最終手から表示。局面のSFENも表示
 
-                h3.title.yumincho 小池重明 vs 加藤一二三十段
-                p.subtitle.yumincho 加藤一二三の駒落道場
+                h3.title 小池重明 vs 加藤一二三十段
+                p.subtitle 加藤一二三の駒落道場
                 hr
                 ShogiPlayer(:kifu_body="'position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 8c8d 7g7f 7a6b 5g5f 8d8e 8h7g 5c5d 2h5h 6b5c 7i6h 5a4b 5i4h 3a3b 4h3h 4c4d 5f5e 3b4c 5e5d 4c5d 6h5g 5d6e 5g5f 6e7f 5f5e 7f6g+ P*5d 5c6b 5h5f 6g7g 8i7g B*3d 5f6f P*5b 6i7i 8b8d 5e4d 8d7d P*7h 7d5d S*4c 3d4c 4d4c+ 4b4c B*7f 5b5c 7i6h 4c3b 6h5h P*4c 7f5d 5c5d 8g8f B*7i 8f8e P*8b 6f8f 7i3e+ 8e8d S*7b 8f8i 3e4e P*6g 7c7d 9g9f 4e5f 8i8f 5f5e 9f9e 5e6d 8f8i 7d7e 7g8e 5d5e 8e9c+ 8a9c 9e9d P*9h 9i9h 6d6e 8i8f 6e9h 9d9c+ 9a9c R*9a 9h6e 9a9c+ 5e5f 5h4h L*9b 9c8b P*8a N*7g 6e7d 8b9a S*8b 9a8b 8a8b S*6e 7d9f 8f5f 9f7h 7g8e 7h6g P*7c 7b8a P*9c 6c6d P*6h 6g8e 9c9b+ 8a9b 7c7b+ 6a7b 6e5d N*4b 5d5c+ P*5d 5c6b 7b6b L*2f R*6i L*2e N*3a 5f4f S*3d 3g3f 6b5c 2i3g 4c4d 4f5f 2c2d 2e2d P*2c 3f3e 3d3e 2d2c+ 3a2c 2f2c+ 3b2c P*3f 3e2d 5f5i 6i6h+ 1g1f L*3d N*2h 4d4e 5i5h 6h7g 2g2f 1c1d 2f2e 2d1c 3g4e 5c4d S*4f P*2f 4e5c+ L*4e 4f5g 8e7d P*6e 7d6e P*5f 5d5e 4h3g 5e5f 5g4h P*4f 3g4f 4e4f'" :start_turn="-1" :controller_show="true" :slider_show="true" :sfen_show="true" :theme="'simple'")
 
@@ -822,5 +823,108 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./App.sass"
+// ShogiPlayer.sass のなかで読み込むと親アプリ側で読み込んだ Buefy を干渉してラジオボタンが崩れたりする
+@import "~buefy/src/scss/buefy-build.scss"
+
+// Rails から使うとき Rails 側から見た assets へのパスに変更すること (そうしないと assets を参照できない)
+$sp_assets_dir: "assets" !default
+
+// Rails 側で sp_assets_dir を変更してから読み込みたいので .vue の中では読まないようにする
+@import "./components/ShogiPlayer.sass"
+
+.hero
+  &.is-primary
+    background-color: transparent !important
+
+  position: relative
+  &:after
+    position: absolute
+    z-index: -1
+    content: ""
+    background-image: url("./assets/hero.jpg")
+    background-position: center
+    background-size: cover
+    opacity: 1.0
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
+.hero-foot
+  li
+    // background: hsla(0, 0%, 0%, .1)
+    // box-shadow: 0 0 10vmin hsla(0, 0%, 0%, 1.0)
+
+// 基本、英単語の途中でも折り返す
+.content
+  word-break: break-all
+
+// オプションの説明がつっぱらないように横スクロールバー表示
+.table_wrap
+  overflow-x: auto
+  table
+    white-space: nowrap
+
+.original
+  position: relative
+  padding: 3vmin
+  &:after
+    position: absolute
+    z-index: -1
+    content: ""
+    background-color: hsla(0, 0%, 96%, 1.0)
+    // background-image: url("./assets/tatami01-768x480.jpg")
+    // border-radius: 1vmin
+    // background-position: center
+    // background-size: cover
+    // opacity: 0.25
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    // filter: saturate(80%);
+    /* filter: contrast(100%)
+    /* filter: sepia(100%)
+  .CommentBlock
+    .message
+      margin-left: auto
+      margin-right: auto
+      max-width: 65ch
+
+pre
+  font-family: Osaka-mono, "Osaka-等幅", "ＭＳ ゴシック", "Courier New", Consolas, monospace ! important
+  white-space: pre-wrap
+  word-break: break-all
+
+html
+  +mobile
+    font-size: 70%
+
+#app
+  .section
+    +mobile
+      margin: 2em 0em
+      margin-bottom: 1em
+      padding: 0
+
+  .message-body
+    +mobile
+      font-size: 75%
+
+  .title
+    +mobile
+      font-size: 150%
+
+// ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
+// main.js で読み込むと .sass のファイル基準になる
+// @import "./components/ShogiPlayer.sass"
+
+.virtual_screen
+  border: 1px dashed change_color($primary, $alpha: 0.5)
+  margin: auto
+  width: 600px
+  height: 100vh
+  .Membership
+    border: 1px dashed change_color($primary, $alpha: 0.5)
+  .BoardWrap
 </style>

@@ -16,10 +16,10 @@
             a.dropdown-item[tabindex="0"]
               | 詰将棋
       |  
-      button.button.yumincho
+      button.button
         | 先後反転
       |  
-      button.button.yumincho
+      button.button
         | 手番☗
   .turn_edit_container
     span.is-pulled-right.modal_trigger_dots
@@ -27,7 +27,7 @@
         i.mdi.mdi-dots-vertical
 
   .board_container.font_size_base
-    .flippable
+    .Flippable
       .Membership.flex_item.location_white.development
         .location_mark
           | ☖
@@ -44,11 +44,11 @@
                 | 歩
             .piece_count.piece_count2
               | 2
-      .flex_item.board_wrap
+      .flex_item.BoardWrap
         .overlay_navi.previous
         .overlay_navi.next
         .overlay_navi.flip_trigger_cell
-        .board_outer
+        .BoardOuter
           table.board_inner
             tr
               td

@@ -22,19 +22,19 @@
         b-dropdown-item(v-for="e in AnyFuncInfo.values" :value="e.key" :key="e.key" @click="any_func_click_handle(e)")
           | {{e.name}}
       | &nbsp;
-      button.button.yumincho(@click.stop.prevent="fn_flip_all")
+      button.button(@click.stop.prevent="fn_flip_all")
         b-tooltip(label="上下反転")
           b-icon(icon="pan-vertical" size="is-small")
       | &nbsp;
-      button.button.yumincho(@click.stop.prevent="fn_flip_h")
+      button.button(@click.stop.prevent="fn_flip_h")
         b-tooltip(label="左右反転")
           b-icon(icon="pan-horizontal" size="is-small")
       | &nbsp;
-      button.button.yumincho(@click.stop.prevent="init_location_toggle")
+      button.button(@click.stop.prevent="init_location_toggle")
         b-tooltip(label="手番")
           | {{init_location.name}}
       | &nbsp;
-      button.button.yumincho.has-text-weight-bold(@click.stop.prevent="shortcut_modal_show_handle")
+      button.button.has-text-weight-bold(@click.stop.prevent="shortcut_modal_show_handle")
         b-tooltip(label="ショートカット")
           | ?
 
@@ -65,36 +65,8 @@
 
     //- 独自のフォントサイズを適用するのは基本このなかだけとする
     .board_container.font_size_base(ref="board_container_ref")
-      .flippable(:class="[new_flip ? 'flip' : 'no_flip']")
-        Membership.flex_item(:base="base" :location="location_white" :hold_pieces="mediator.realized_hold_pieces_of('white')")
-        .flex_item.board_wrap
-          template(v-if="overlay_navi")
-            .overlay_navi.previous(@click.stop.prevent="navi_relative_move(-1, $event)")
-            .overlay_navi.next(@click.stop.prevent="navi_relative_move(+1, $event)")
-            .overlay_navi.flip_trigger_cell(@click.stop.prevent="board_flip_run")
-          .board_outer
-            table.board_inner
-              tr(v-for="y in mediator.dimension")
-                td(
-                  v-for="x in mediator.dimension"
-                  @pointerdown="board_cell_pointerdown_handle([x - 1, y - 1], $event)"
-                  @click.stop.prevent="board_cell_left_click([x - 1, y - 1], $event)"
-                  @click.stop.prevent.right="board_cell_right_click([x - 1, y - 1], $event)"
-                  @mouseover="board_mouseover_handle([x - 1, y - 1], $event)"
-                  @mouseleave="mouseleave_handle")
-                  .piece_back(:class="board_piece_back_class([x - 1, y - 1])" :style="board_piece_back_style([x - 1, y - 1])")
-                    .piece_fore(:class="mediator.board_piece_fore_class([x - 1, y - 1])")
-                      | {{mediator.cell_view([x - 1, y - 1])}}
-        .flex_item
-          template(v-if="!new_vlayout")
-            PieceBox(:base="base")
-            //- 先手の駒台が上にくっつてしまうので防ぐため空のdivを入れる
-            div(v-if="play_p || view_p")
-          Membership(:base="base" :location="location_black" :hold_pieces="mediator.realized_hold_pieces_of('black')")
-      //- cursor_elem はこの部分に入るので 1em のサイズを .font_size_base で指定したものを基準にできる
-
-      template(v-if="new_vlayout")
-        PieceBox(:base="base")
+      Flippable(:base="base")
+      PieceBox(:base="base")
 
     div(v-if="view_p || play_p")
       .controller_group.buttons.has-addons.is-centered.is-paddingless(v-if="controller_show")
@@ -156,11 +128,11 @@ import Location   from "../models/location.js"
 
 // components
 import PieceBox        from "./PieceBox.vue"
-import Membership      from "./Membership.vue"
 import SettingModal    from "./SettingModal.vue"
 import ErrorNotify     from "./ErrorNotify.vue"
 import CommentBlock    from "./CommentBlock.vue"
-import OverlayForDisable      from "./OverlayForDisable.vue"
+import OverlayForDisable from "./OverlayForDisable.vue"
+import Flippable        from "./Flippable.vue"
 
 // mixins modules
 import navi_module      from "./navi_module.js"
@@ -220,11 +192,11 @@ export default {
 
   components: {
     PieceBox,
-    Membership,
     SettingModal,
     ErrorNotify,
     CommentBlock,
     OverlayForDisable,
+    Flippable,
   },
 
   data() {
@@ -530,4 +502,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import "support.sass"
+.shogi-player
+  // width: 100%
 </style>

@@ -4,26 +4,26 @@ $board_overlay_clickable_size: 0%
 
 .shogi-player
   &.run_mode-view_mode
-    .board_wrap
-      position: relative
-      .overlay_navi
-        position: absolute
-        z-index: 1
-        width: 50%              // 以前まで75%にしていたが要素の半分にすること
-        height: 100%
-        // ←戻る
-        &.previous
-          left: -$board_overlay_clickable_size
-        // 進む→
-        &.next
-          right: -$board_overlay_clickable_size
-        // 反転用の天王山
-        &.flip_trigger_cell
-          z-index: 2
-          left: 50% - ((100% / $sp_dimension) / 2)
-          width: (100% / $sp_dimension)
-          top: 50% - ((100% / $sp_dimension) / 2)
-          height: (100% / $sp_dimension)
+    // .BoardWrap
+    //   position: relative
+    .overlay_navi
+      position: absolute
+      z-index: 1
+      width: 50%              // 以前まで75%にしていたが要素の半分にすること
+      height: 100%
+      // ←戻る
+      &.previous
+        left: -$board_overlay_clickable_size
+      // 進む→
+      &.next
+        right: -$board_overlay_clickable_size
+      // 反転用の天王山
+      &.flip_trigger_cell
+        z-index: 2
+        left: 50% - ((100% / $sp_dimension) / 2)
+        width: (100% / $sp_dimension)
+        top: 50% - ((100% / $sp_dimension) / 2)
+        height: (100% / $sp_dimension)
       // .mark
       //   position: absolute
       //   z-index: 3
