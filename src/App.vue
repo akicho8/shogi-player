@@ -659,13 +659,7 @@
       .container
         .table_wrap
           .content(v-html="license_md")
-
     footer.footer
-      .container
-        .columns
-          .column.has-text-centered
-            a(href="https://bulma.io")
-              img(src="./assets/made-with-bulma.png" alt="Made with Bulma" width="128" height="24")
 </template>
 
 <script>
@@ -686,13 +680,6 @@ import ThemeInfo from "./theme_info"
 import BgVariantInfo from "./bg_variant_info"
 import PieceVariantInfo from "./piece_variant_info"
 import SizeInfo from "./size_info"
-
-// Object.defineProperty(Vue.prototype, 'SideInfo', {value: SideInfo})
-
-// Object.defineProperty(Vue.prototype, 'RunModeInfo', {value: RunModeInfo})
-// Object.defineProperty(Vue.prototype, 'ThemeInfo', {value: ThemeInfo})
-// Object.defineProperty(Vue.prototype, 'BgVariantInfo', {value: BgVariantInfo})
-// Object.defineProperty(Vue.prototype, 'SizeInfo', {value: SizeInfo})
 
 const marked = require('marked')
 const renderer = new marked.Renderer()
