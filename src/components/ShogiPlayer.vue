@@ -293,7 +293,7 @@ export default {
       const sfen_change_p = (before_sfen !== this.mediator.to_simple_sfen)
       if (this.view_p) {
         if (sfen_change_p) {
-          this.sound_call("piece_sound")
+          this.sound_play("piece_put")
         }
       }
       if (this.play_p) {
@@ -302,11 +302,11 @@ export default {
         // 1. 相手が指したのか → 駒音だす
         // 2. 自分の指し手が正しい指し手だと判断された棋譜が返って反映されたのか → 駒音なし
         // この区別が付かない。なのでここで成らさない方がよい
-        // this.sound_call("piece_sound")
+        // this.sound_play("piece_put")
         // ……と思ったが 1 は turn_offset_max が変化したかどうかで判断できる。いや sfen を見ればわかる？ → そこまでする必要ない
         // if (before_turn_offset_max !== this.turn_offset_max) {
         if (sfen_change_p) {
-          this.sound_call("piece_sound")
+          this.sound_play("piece_put")
         }
       }
     },
@@ -411,7 +411,7 @@ export default {
       if (this.url_embed_turn) {
         document.location.hash = this.turn_offset
       }
-      // this.sound_call("piece_sound")
+      // this.sound_play("piece_put")
       this.update_counter++
     },
 

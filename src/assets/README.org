@@ -5,5 +5,5 @@
 ・いつも使うときに 0.2 を指定しているので音量は 20% でよい
 ・補正値のデフォルトは 0.5 としたい
 ・ということは元wavは 40% になっていればよい
-・ffmpeg -y -i piece_sound_original.wav -af volume=0.4 piece_sound.wav
+・ffmpeg -y -i piece_put_original.wav -af volume=0.4 piece_put.wav
 

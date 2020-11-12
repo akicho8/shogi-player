@@ -187,7 +187,7 @@ export default {
         if (this.play_p) {
           this.play_mode_mediator_seek_to(new_val)
         }
-        this.sound_call("piece_sound")
+        this.sound_play("piece_put")
         this.$emit("update:start_turn", this.turn_offset)
       }
     },
@@ -203,7 +203,7 @@ export default {
 
     board_flip_run() {
       this.new_flip = !this.new_flip
-      this.sound_call("flip_sound")
+      this.sound_play("flip_sound")
       this.focus_to("turn_slider")
     },
   },

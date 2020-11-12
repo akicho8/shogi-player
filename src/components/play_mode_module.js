@@ -114,7 +114,7 @@ export default {
         this.mediator.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
         this.mediator.current_turn = -1
         this.mediator.run()
-        this.sound_call("piece_sound")
+        this.sound_play("piece_put")
 
         this.$emit("update:play_mode_advanced_full_moves_sfen", this.play_mode_full_moves_sfen)
         this.$emit("update:play_mode_advanced_last_move", _.last(this.moves))
