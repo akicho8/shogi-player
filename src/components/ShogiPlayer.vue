@@ -181,7 +181,6 @@ export default {
     bg_variant:     { type: String,  default: "a"          },
     piece_variant:  { type: String,  default: "a"          },
     debug_mode:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
-    digit_show:     { type: Boolean, default: false,       },
     final_label:    { type: String,  default: null,        },
     player_info:    { type: Object,  default: null, },
 
@@ -490,7 +489,6 @@ export default {
         ["piece_variant", this.new_piece_variant].join("-"),
         ["run_mode", this.new_run_mode].join("-"),
         {debug_mode: this.new_debug_mode},
-        {digit_show: this.digit_show},
         this.new_vlayout ? 'vertical' : 'horizontal',
       ]
     },

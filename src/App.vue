@@ -428,7 +428,6 @@
                 :flip.sync="flip"
                 :flip_if_white="flip_if_white"
                 :vlayout.sync="vlayout"
-                :digit_show="digit_show"
                 :final_label="final_label"
                 :player_info="player_info"
                 :key_event_capture="key_event_capture"
@@ -536,9 +535,6 @@
                 b-field(label="vlayout")
                   b-switch(v-model="vlayout")
 
-                b-field(label="digit_show")
-                  b-switch(v-model="digit_show")
-
                 b-field(label="debug_mode")
                   b-switch(v-model="debug_mode")
 
@@ -590,7 +586,6 @@
                   | :<b>flip</b>="{{flip}}"
                   | :<b>flip_if_white</b>="{{flip_if_white}}"
                   | :<b>vlayout</b>="{{vlayout}}"
-                  | :<b>digit_show</b>="{{digit_show}}"
                   | :<b>final_label</b>="'{{final_label}}'"
                   | :<b>player_info</b>="{{player_info}}"
                   | :<b>kifu_body</b>="'{{kifu_body}}'"
@@ -748,7 +743,6 @@ export default {
       flip: false,
       flip_if_white: false,
       vlayout: false,
-      digit_show: false,
       black_name: '先手',
       white_name: '後手',
 
