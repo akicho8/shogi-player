@@ -57,9 +57,6 @@
         template(v-if="turn_edit")
           input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
 
-      span.is-pulled-right.modal_trigger_dots(@click.stop.prevent="setting_modal_p = true" v-if="setting_button_show")
-        b-icon(icon="dots-vertical" size="is-small")
-
       b-modal(:active.sync="setting_modal_p" has-modal-card)
         SettingModal(:base="base")
 
@@ -84,6 +81,10 @@
         | {{mediator.to_simple_sfen}}
 
     CommentBlock(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
+
+  //- template(v-if="setting_button_show")
+  //-   .buttons.are-small.is-centered
+  //-     b-button(icon-left="cog" @click="setting_modal_p = true")
 
   div.debug_table(v-if="new_debug_mode")
     table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth

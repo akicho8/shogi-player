@@ -9,13 +9,13 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
   background-size: 84%          // 駒の大きさ contain にしとけばいい
 
 // 駒のテクスチャ用(先手だけの画像を用意している場合)
-%piece_fore_texture_for_black_onoly
+%piece_fore_texture_for_black_only
   background-position: 50% 50% + $advance // 先手も後手も下寄り配置 (後手は判定しているので見た目は上にずれる)
 
 // 駒のテクスチャ用(先後両方の画像を用意している場合)
 %piece_fore_texture_for_both
   &.location_black
-    @extend %piece_fore_texture_for_black_onoly // 先手は枠の下寄り配置
+    @extend %piece_fore_texture_for_black_only // 先手は枠の下寄り配置
   &.location_white
     background-position: 50% 50% - $advance // 後手は枠の上寄り配置
 
@@ -53,7 +53,7 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
         +piece_image_variant_a_pack
     &.piece_variant-b
       .piece_fore
-        @extend %piece_fore_texture_for_black_onoly
+        @extend %piece_fore_texture_for_black_only
         +piece_image_variant_b_pack
         &.location_white
           @extend %is_flip

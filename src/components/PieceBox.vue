@@ -1,35 +1,36 @@
 <template lang="pug">
-ul.PieceBox(
+.PieceBox.is-flex(
   v-if="base.edit_p"
   :class="component_class"
   @click.stop.prevent="base.piece_box_other_click"
   @click.right.prevent="base.hold_cancel"
   )
-  li(
+  .one_piece.is-flex(
     v-for="[piece, count] in base.mediator.piece_box_realize()"
     :class="{holding_p: base.piece_box_have_p(piece)}"
     @click.stop.prevent="base.piece_box_piece_click(piece, $event)"
     @mouseover="base.piece_box_mouseover_handle(piece, $event)"
     @mouseleave="base.mouseleave_handle"
     )
-    .PieceObject(
+    PieceObject(
       :base="base"
       :class="base.piece_box_piece_control_class(piece)"
       :tclass="base.piece_box_piece_inner_class(piece)"
       :piece_text="piece.name"
       )
-    .piece_count(v-if="count >= 2")
-      | {{count}}
+    PieceCount(:count="count")
 </template>
 
 <script>
 import { support_child } from "./support_child.js"
 import PieceObject from "./PieceObject.vue"
+import PieceCount from "./PieceCount.vue"
 
 export default {
   mixins: [support_child],
   components: {
     PieceObject,
+    PieceCount,
   },
   computed: {
     component_class() {
@@ -42,3 +43,31 @@ export default {
   },
 }
 </script>
+
+<style lang="sass">
+@import "./support.sass"
+.shogi-player
+  &.vertical
+    .PieceBox
+      @extend %board_shadow
+      @extend %board_texture_bg
+      @extend %real_hoverable_opacity
+
+      height: 5rem
+      // margin-top: $sp_size_piece_stand_margin_top_bottom
+      justify-content: flex-start
+      align-items: center
+
+      .one_piece                // FIXME: クリックをここにしたい
+        border: 1px dashed change_color($primary, $alpha: 0.5)
+
+        padding: 0 0.25rem
+        // font-size: 2.8rem
+        justify-content: center
+        align-items: center
+        // border: 1px dashed change_color($black, $alpha: 0.8)
+        .PieceObject
+          .piece_fore
+            height: 2rem
+            width: 2rem
+</style>

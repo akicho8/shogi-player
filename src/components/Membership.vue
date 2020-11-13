@@ -2,6 +2,7 @@
 .Membership.is-flex(:class="component_class" v-if="component_show_p")
   MembershipLocation(:base="base" :location="location")
   MembershipStand(:base="base" :location="location")
+  slot
 </template>
 
 <script>
@@ -50,11 +51,23 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+$board_top_bottom_gap: 3px
 .shogi-player
   &.vertical
     .Membership
+      &.is_white
+        margin-bottom: $board_top_bottom_gap
+      &.is_black
+        margin-top: $board_top_bottom_gap
+
       width: 100%
       flex-direction: row-reverse
       align-items: center
-      justify-content: space-between
+      justify-content: flex-end
+
+      &.location_white
+        @extend %is_flip
+
+      @extend %is_unselectable
+
 </style>

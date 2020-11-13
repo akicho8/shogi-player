@@ -12,18 +12,6 @@
 
 .shogi-player
   &.theme-real
-    //////////////////////////////////////////////////////////////////////////////// 駒箱
-    .PieceBox
-      @extend %board_shadow
-      @extend %board_texture_bg
-      @extend %real_hoverable_opacity
-      padding: 0.25em
-      .piece_count
-        position: relative
-        top: 0.1em
-        font-size: 0.4em
-        margin-left: -0.3em
-
     //////////////////////////////////////////////////////////////////////////////// 横 (共通)
     &.horizontal
       .PieceBox
@@ -39,17 +27,6 @@
 
     //////////////////////////////////////////////////////////////////////////////// 駒台
     .Membership
-      .MembershipStand
-        @extend %board_texture_bg
-        @extend %real_hoverable_opacity
-        font-size: 1.3em
-        li
-          .piece_count
-            position: relative
-            top: 0.2em
-            font-size: 0.4em
-            margin-left: -0.3em
-
       &.location_black
         .MembershipStand
           &:after
