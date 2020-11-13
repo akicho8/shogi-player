@@ -1,6 +1,6 @@
 <template lang="pug">
 .Flippable.is-flex(:class="[base.new_flip ? 'flip_on' : 'flip_off']")
-  Membership.is_white(:base="base" :location="base.location_white")
+  Membership(:base="base" :location="base.location_white")
     b-button.mr-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
   AspectRatioFixedBlock(:rwidth="1" :rheight="1.05")
     template(v-if="base.overlay_navi")
@@ -8,7 +8,7 @@
       .overlay_navi.next(@click.stop.prevent="base.navi_relative_move(+1, $event)")
       .overlay_navi.flip_trigger_cell(@click.stop.prevent="base.board_flip_run")
     BoardOuter(:base="base")
-  Membership.is_black(:base="base" :location="base.location_black")
+  Membership(:base="base" :location="base.location_black")
 </template>
 
 <script>

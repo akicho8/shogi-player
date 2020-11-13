@@ -55,19 +55,16 @@ $board_top_bottom_gap: 3px
 .shogi-player
   &.vertical
     .Membership
-      &.is_white
+      @extend %is_unselectable
+
+      &.location_white
+        @extend %is_flip
         margin-bottom: $board_top_bottom_gap
-      &.is_black
+      &.location_black
         margin-top: $board_top_bottom_gap
 
       width: 100%
       flex-direction: row-reverse
       align-items: center
       justify-content: flex-end
-
-      &.location_white
-        @extend %is_flip
-
-      @extend %is_unselectable
-
 </style>
