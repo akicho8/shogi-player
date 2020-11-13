@@ -63,13 +63,15 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
         +piece_image_variant_c_pack
 
     // 駒 (あちこちにある)
-    .piece_back
+    .PieceObject
       @extend %dom_real_selectable
-      line-height: 100%         // これで隙間ができなくなる(が、意味がよくわかってない)
+      height: 100%         // これで隙間ができなくなる(が、意味がよくわかってない)
       &.origin_place
         background-color: $sp_real_origin_bg
       &.current
         animation: real_blink 0.5s ease-in-out infinite alternate
       .piece_fore
         @extend %piece_fore_texture_shared
-        height: 100%   // .piece_back のサイズを継承。inherit だと災いがおきやすいので100%を使う
+        height: 100%   // .PieceObject のサイズを継承。inherit だと災いがおきやすいので100%を使う
+        // min-width: 1rem
+        // min-height: 1rem

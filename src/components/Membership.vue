@@ -1,5 +1,5 @@
 <template lang="pug">
-.Membership(:class="component_class" v-if="component_show_p")
+.Membership.is-flex(:class="component_class" v-if="component_show_p")
   MembershipLocation(:base="base" :location="location")
   MembershipStand(:base="base" :location="location")
 </template>
@@ -47,3 +47,14 @@ export default {
   },
 }
 </script>
+
+<style lang="sass">
+@import "./support.sass"
+.shogi-player
+  &.vertical
+    .Membership
+      width: 100%
+      flex-direction: row-reverse
+      align-items: center
+      justify-content: space-between
+</style>

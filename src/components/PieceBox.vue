@@ -12,18 +12,25 @@ ul.PieceBox(
     @mouseover="base.piece_box_mouseover_handle(piece, $event)"
     @mouseleave="base.mouseleave_handle"
     )
-    .piece_back(:class="base.piece_box_piece_back_class(piece)")
-      .piece_fore(:class="base.piece_box_piece_inner_class(piece)" v-text="piece.name")
-    .piece_count(v-if="count >= 1" :class="`piece_count${count}`")
+    .PieceObject(
+      :base="base"
+      :class="base.piece_box_piece_control_class(piece)"
+      :tclass="base.piece_box_piece_inner_class(piece)"
+      :piece_text="piece.name"
+      )
+    .piece_count(v-if="count >= 2")
       | {{count}}
 </template>
 
 <script>
 import { support_child } from "./support_child.js"
+import PieceObject from "./PieceObject.vue"
 
 export default {
   mixins: [support_child],
-
+  components: {
+    PieceObject,
+  },
   computed: {
     component_class() {
       const list = []

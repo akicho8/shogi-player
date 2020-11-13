@@ -32,7 +32,7 @@
       template(v-for="e in ThemeInfo.values")
         b-radio-button(v-model="base.new_theme" :native-value="e.key") {{e.name}}
 
-    template(v-if="base.new_theme === 'real'")
+    template(v-if="base.real_p")
       .box
         b-field(label="背景の種類")
         b-field

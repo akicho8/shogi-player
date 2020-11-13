@@ -1,24 +1,28 @@
 <template lang="pug">
-ul.MembershipStand(
+.MembershipStand.is-flex(
   :class="component_class"
   @click.stop.prevent="base.piece_stand_click(location, $event)"
   @click.right.stop.prevent="base.hold_cancel"
   )
-  li(
+  .one_piece.is-flex(
     v-for="[piece, count] in hold_pieces"
     @click.stop="base.piece_stand_piece_click(location, piece, false, $event)"
     @mouseover="base.piece_stand_mouseover_handle(location, piece, $event)"
     @mouseleave="base.mouseleave_handle"
     )
-    .piece_back(:class="piece_back_class(piece)")
-      .piece_fore(:class="piece_fore_class(piece)")
-        | {{piece.name}}
-    .piece_count(v-if="count >= 1" :class="`piece_count${count}`")
+    PieceObject(
+      :base="base"
+      :class="piece_control_class(piece)"
+      :tclass="piece_fore_class(piece)"
+      :piece_text="piece.name"
+      )
+    .piece_count(v-if="count >= 2")
       | {{count}}
 </template>
 
 <script>
 import _ from "lodash"
+import PieceObject from "./PieceObject.vue"
 import { support_child } from "./support_child.js"
 
 export default {
@@ -29,12 +33,16 @@ export default {
     location: { required: true },
   },
 
+  components: {
+    PieceObject,
+  },
+
   methods: {
     hold_piece_holding_p(piece) {
       return this.base.have_piece_location === this.location && this.base.have_piece === piece
     },
 
-    piece_back_class(piece) {
+    piece_control_class(piece) {
       let list = []
 
       // if (this.holding_p) {
@@ -84,3 +92,24 @@ export default {
   },
 }
 </script>
+
+<style lang="sass">
+@import "./support.sass"
+.shogi-player
+  &.vertical
+    .MembershipStand
+      height: 4rem
+      // margin-top: $sp_size_piece_stand_margin_top_bottom
+      justify-content: center
+      align-items: center
+      .one_piece
+        margin: 0 0.25rem
+        font-size: 1.8rem
+        justify-content: center
+        align-items: center
+        border: 1px dashed change_color($black, $alpha: 0.8)
+        .PieceObject
+          .piece_fore
+            height: 2rem
+            width: 2rem
+</style>

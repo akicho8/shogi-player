@@ -2,23 +2,11 @@
   &[v-cloak]
     display: none
 
-  margin: 0 auto
+  // margin: 0 auto
   text-align: center
 
   .piece_count1
     visibility: hidden
-
-  .piece_hidden
-    visibility: hidden
-
-  .piece_back
-    cursor: default     // テキスト選択「I」ではなく矢印カーソルとする
-    // height: inherit  // ←ここに入れても効かない
-    &.selectable_p
-      &:hover
-        cursor: pointer
-    .piece_fore
-      // height: inherit
 
   // .board_container
   // display: inline-block
@@ -53,38 +41,6 @@
           // 空白を空けて上下に配置
           justify-content: space-between
 
-  // 縦並び
-  &.vertical
-    .Flippable
-      flex-direction: column
-      align-items: center
-
-      .Membership
-        &:nth-child(1)
-          align-self: flex-end
-        &:nth-child(3)
-          align-self: flex-start
-        
-        .player_name
-          display: inline-block
-        .piece_count
-          display: inline-block
-
-        .MembershipLocation
-          display: inline-block
-          .location_mark
-            display: inline-block
-
-        ul.MembershipStand
-          margin-top: $sp_size_piece_stand_margin_top_bottom
-          display: inline-block
-          li
-            display: inline-block
-            .piece_back
-              display: inline-block
-              .piece_fore
-                display: inline-block
-
   // カーソル位置に表示する持駒
   .cursor_elem
     +touch
@@ -92,7 +48,7 @@
     position: fixed
     z-index: 10                   // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い
     pointer-events: none
-    .piece_back
+    .PieceObject
       height: inherit
       @extend %shift_to_middle
       // background-color: hsla(0, 0%, 50%, 0.2) // 升ごと動かしたいとき

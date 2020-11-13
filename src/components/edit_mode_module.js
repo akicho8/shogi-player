@@ -641,7 +641,7 @@ export default {
     // -------------------------------------------------------------------------------- PieceBox
 
     // 駒箱の駒
-    piece_box_piece_back_class(piece) {
+    piece_box_piece_control_class(piece) {
       let list = []
       if (this.piece_box_have_p(piece)) {
         list.push("holding_p")
@@ -748,7 +748,7 @@ export default {
 
     // マウス位置に表示する駒の生成
     //
-    //   .piece_back.cursor_elem
+    //   .PieceObject.cursor_elem
     //     .piece_fore.virtual_piece_flip
     //
     virtual_piece_create(event, soldier) {
@@ -773,8 +773,8 @@ export default {
       this.$cursor_elem = document.createElement("div")
       this.$cursor_elem.classList.add("cursor_elem")
 
-      const piece_back = document.createElement("div")
-      piece_back.classList.add("piece_back")
+      const PieceObject = document.createElement("div")
+      PieceObject.classList.add("PieceObject")
 
       const piece_fore = document.createElement("div")
       piece_fore.classList.add("piece_fore", ...soldier.to_class_list)
@@ -782,16 +782,16 @@ export default {
       const text = document.createTextNode(soldier.name)
       piece_fore.appendChild(text)
 
-      // const list = _.concat(class_list, ["piece_back"])
+      // const list = _.concat(class_list, ["PieceObject"])
       // piece_fore.classList.add(...list)
 
       if (this.new_flip) {
         // this.$cursor_elem.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
-        piece_back.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
+        PieceObject.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
       }
 
-      piece_back.appendChild(piece_fore)
-      this.$cursor_elem.appendChild(piece_back)
+      PieceObject.appendChild(piece_fore)
+      this.$cursor_elem.appendChild(PieceObject)
 
       // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
       this.$cursor_elem.style.left = "-50%"

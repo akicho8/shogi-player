@@ -9,18 +9,24 @@
         @click.stop.prevent.right="base.board_cell_right_click([x - 1, y - 1], $event)"
         @mouseover="base.board_mouseover_handle([x - 1, y - 1], $event)"
         @mouseleave="base.mouseleave_handle")
-        .piece_back(:class="base.board_piece_back_class([x - 1, y - 1])" :style="base.board_piece_back_style([x - 1, y - 1])")
-          .piece_fore(:class="base.mediator.board_piece_fore_class([x - 1, y - 1])")
-            | {{base.mediator.cell_view([x - 1, y - 1])}}
+        PieceObject(
+          :base="base"
+          :class="base.board_piece_control_class([x - 1, y - 1])"
+          :style="base.board_piece_back_style([x - 1, y - 1])"
+          :tclass="base.mediator.board_piece_fore_class([x - 1, y - 1])"
+          :piece_text="base.mediator.cell_view([x - 1, y - 1])"
+          )
 </template>
 
 <script>
 import { support_child } from "./support_child.js"
+import PieceObject from "./PieceObject.vue"
 
 export default {
   name: 'Flippable',
   mixins: [support_child],
   components: {
+    PieceObject,
   },
 }
 </script>
@@ -48,16 +54,14 @@ export default {
       height: 100%
 
       td
-        // height: calc(100% / 9) // 縦幅を均等にする
+        height: calc(100% / 9) // 縦幅を均等にする
 
       td
         border: $sp_real_grid_inner solid $sp_real_grid_color // 盤面の罫線
-        .piece_back
-          height: 100%          // 駒全体が表示される
-
+        .PieceObject
           // text-align: center    // 駒のテキストを中央にする
           // vertical-align: middle   // block要素(Y)を中央にする
           // padding: 0               // ブラウザの初期値だと1pxあるので消す
 
-          .piece_fore
+          // .piece_fore
 </style>

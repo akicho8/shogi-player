@@ -411,7 +411,7 @@ export default {
       }
     },
 
-    board_piece_back_class(xy) {
+    board_piece_control_class(xy) {
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
       let list = []
@@ -471,6 +471,8 @@ export default {
     view_p()         { return this.new_run_mode === "view_mode" },
     play_p()         { return this.new_run_mode === "play_mode" },
     edit_p()         { return this.new_run_mode === "edit_mode" },
+    real_p()         { return this.new_theme === "real"         },
+    simple_p()       { return this.new_theme === "simple"       },
 
     // 本当は delegate したい。this.$watch を使えば動的になりそう？
     turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
