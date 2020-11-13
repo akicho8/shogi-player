@@ -1,20 +1,20 @@
 <template lang="pug">
 .BoardOuter
   table.board_inner
-    tr(v-for="y in base.mediator.dimension")
+    tr(v-for="(_, y) in base.mediator.dimension")
       td(
-        v-for="x in base.mediator.dimension"
-        @pointerdown="base.board_cell_pointerdown_handle([x - 1, y - 1], $event)"
-        @click.stop.prevent="base.board_cell_left_click([x - 1, y - 1], $event)"
-        @click.stop.prevent.right="base.board_cell_right_click([x - 1, y - 1], $event)"
-        @mouseover="base.board_mouseover_handle([x - 1, y - 1], $event)"
+        v-for="(_, x) in base.mediator.dimension"
+        @pointerdown="base.board_cell_pointerdown_handle([x, y], $event)"
+        @click.stop.prevent="base.board_cell_left_click([x, y], $event)"
+        @click.stop.prevent.right="base.board_cell_right_click([x, y], $event)"
+        @mouseover="base.board_mouseover_handle([x, y], $event)"
         @mouseleave="base.mouseleave_handle")
         PieceObject(
           :base="base"
-          :class="base.board_piece_control_class([x - 1, y - 1])"
-          :style="base.board_piece_back_style([x - 1, y - 1])"
-          :tclass="base.mediator.board_piece_fore_class([x - 1, y - 1])"
-          :piece_text="base.mediator.cell_view([x - 1, y - 1])"
+          :class="base.board_piece_control_class([x, y])"
+          :style="base.board_piece_back_style([x, y])"
+          :tclass="base.mediator.board_piece_fore_class([x, y])"
+          :piece_text="base.mediator.cell_view([x, y])"
           )
 </template>
 
@@ -23,7 +23,7 @@ import { support_child } from "./support_child.js"
 import PieceObject from "./PieceObject.vue"
 
 export default {
-  name: 'Flippable',
+  name: "BoardOuter",
   mixins: [support_child],
   components: {
     PieceObject,
@@ -37,9 +37,9 @@ export default {
   .BoardOuter
     width: 100%
     height: 100%
-    border: 1px solid blue
+    // border: 1px dashed change_color($primary, $alpha: 0.5)
 
-    padding: 1.4%               // 盤の隅の隙間
+    padding: unquote("max(1.4%, 3px)")  // 盤の隅の隙間
 
     @extend %board_shadow
     @extend %board_texture_bg
