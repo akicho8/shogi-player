@@ -19,6 +19,9 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
   &.location_white
     background-position: 50% 50% - $advance // 後手は枠の上寄り配置
 
+%pos_center
+  background-position: center
+
 // 選択できる駒に指定する
 %dom_real_selectable
   +image_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
@@ -43,24 +46,35 @@ $advance: 26%                 // 大きくするほど駒が下に移動する
         background-color: $sp_real_selectable_color
 
   @extend %real_hoverable_bg
-    
+
 .shogi-player
   &.theme-real
+    .piece_fore
+      @extend %pos_center
+    
     // 駒の種類
     &.piece_variant-a
       .piece_fore
-        @extend %piece_fore_texture_for_both
         +piece_image_variant_a_pack
+      .BoardOuter
+        .piece_fore
+          @extend %piece_fore_texture_for_both
+
     &.piece_variant-b
       .piece_fore
-        @extend %piece_fore_texture_for_black_only
         +piece_image_variant_b_pack
         &.location_white
           @extend %is_flip
+      .BoardOuter
+        .piece_fore
+          @extend %piece_fore_texture_for_black_only
+          
     &.piece_variant-c
       .piece_fore
-        @extend %piece_fore_texture_for_both
         +piece_image_variant_c_pack
+      .BoardOuter
+        .piece_fore
+          @extend %piece_fore_texture_for_both
 
     // 駒 (あちこちにある)
     .PieceObject
