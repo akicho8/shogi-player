@@ -36,12 +36,13 @@ export default {
     .Membership
       &.location_white
         .MembershipLocation
-          margin-right: auto  // ▲だけ左寄せ (左寄せにしたければ右側のマージンをautoにする)
+          // margin-right: auto  // ▲だけ左寄せ (左寄せにしたければ右側のマージンをautoにする)
       &.location_black
         .MembershipLocation
-          margin-left: auto  // ▲だけ右寄せ (右寄せにしたければ左側のマージンをautoにする)
+          // margin-left: auto  // ▲だけ右寄せ (右寄せにしたければ左側のマージンをautoにする)
 
       .MembershipLocation
+        margin-left: auto  // ▲だけ右寄せ (右寄せにしたければ左側のマージンをautoにする)
         font-size: 1rem
         .location_mark
           color: $sp_simple_grid_color
@@ -52,4 +53,13 @@ export default {
             color: $sp_simple_turn_active_color
             -webkit-text-stroke: 1px $sp_simple_turn_active_color
             text-shadow: 0 0 0.5rem $sp_simple_turn_active_color
+
+  // 反転してない状態で上の最初から反転している「△後手」を先手目線にするため反転する
+  // つまり反転したのを一部反転して元に戻す
+  &.vertical
+    .flip_off
+      .Membership
+        &.location_white
+          .MembershipLocation
+            @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
 </style>

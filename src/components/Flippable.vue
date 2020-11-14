@@ -1,7 +1,7 @@
 <template lang="pug">
 .Flippable.is-flex(:class="[base.new_flip ? 'flip_on' : 'flip_off']")
   Membership(:base="base" :location="base.location_white")
-    b-button.ml-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
+    b-button.mr-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
   AspectRatioFixedBlock(:rwidth="1" :rheight="1.05")
     template(v-if="base.overlay_navi")
       .overlay_navi.previous(@click.stop.prevent="base.navi_relative_move(-1, $event)")

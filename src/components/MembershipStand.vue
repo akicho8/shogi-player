@@ -102,8 +102,8 @@ export default {
       @extend %board_texture_bg
       @extend %real_hoverable_opacity
 
-      &:after
-        +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
+      // &:after
+      //   +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
 
       height: 3rem
       // margin-top: $sp_size_piece_stand_margin_top_bottom
@@ -120,15 +120,15 @@ export default {
             height: 2rem
             width: 2rem
 
-
-      // &.location_black
-      //   .MembershipStand
-      //     &:after
-      //       +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
-      // &.location_white
-      //   .MembershipStand
-      //     &:after
-      //       +image_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
-      //     // .PieceObject
-      //     //   @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
+    .Membership
+      &.location_black
+        .MembershipStand
+          &:after
+            +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
+      &.location_white
+        .MembershipStand
+          &:after
+            +image_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
+          .PieceObject
+            @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
 </style>

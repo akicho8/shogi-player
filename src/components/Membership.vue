@@ -60,9 +60,10 @@ $board_top_bottom_gap: 3px
       align-items: center                             // Y軸中央
 
       &.location_white
-        flex-direction: row                           // そのままま △ 駒 の並び
+        flex-direction: row-reverse                   // そのままま △ 駒 の並び
         justify-content: flex-end                     // 右寄せ→
         margin-bottom: $board_top_bottom_gap          // 上に配置しているので下に隙間を作る
+        @extend %is_flip                              // 上のブロックはまるごと反転
       &.location_black
         flex-direction: row-reverse                   // 駒 ▲ の並びにするため反転
         justify-content: flex-start                   // ←左寄せ
