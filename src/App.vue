@@ -507,9 +507,9 @@
 
               b-field(grouped group-multiline)
                 b-field(label="player_info.black.name")
-                  b-input(v-model.trim="black_name" type="text")
+                  b-input(v-model.trim="player_info.black.name" type="text")
                 b-field(label="player_info.white.name")
-                  b-input(v-model.trim="white_name" type="text")
+                  b-input(v-model.trim="player_info.white.name" type="text")
 
               b-field(grouped group-multiline)
                 b-field(label="slider_show")
@@ -744,8 +744,11 @@ export default {
       flip: false,
       flip_if_white: false,
       vlayout: false,
-      black_name: '先手',
-      white_name: '後手',
+
+      player_info: {
+        black: { name: "先手", time: "12:34",   },
+        white: { name: "後手", time: "56:78:90" },
+      },
 
       final_label: null,
       kifu_body: require("./極限早繰り銀.kif"),
@@ -804,17 +807,6 @@ export default {
         this.$buefy.toast.open({message: `${key} -> ${JSON.stringify(v)}`, queue: false})
       }
     },
-  },
-
-  computed: {
-    player_info() {
-      if (this.black_name || this.white_name) {
-        return {
-          black: {name: this.black_name},
-          white: {name: this.white_name},
-        }
-      }
-    }
   },
 }
 </script>

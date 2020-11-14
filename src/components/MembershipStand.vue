@@ -105,7 +105,7 @@ export default {
       // &:after
       //   +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
 
-      height: 3rem
+      height: 8rem
       // margin-top: $sp_size_piece_stand_margin_top_bottom
       justify-content: center
       align-items: center
