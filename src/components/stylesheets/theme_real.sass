@@ -25,19 +25,6 @@
         font-size: 1.5em
         min-height: 1.2em
 
-    //////////////////////////////////////////////////////////////////////////////// 駒台
-    .Membership
-      &.location_black
-        .MembershipStand
-          &:after
-            +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
-      &.location_white
-        .MembershipStand
-          &:after
-            +image_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
-          .PieceObject
-            @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
-
     // 駒台(横)
     &.horizontal
       .Membership

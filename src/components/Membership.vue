@@ -27,7 +27,6 @@ export default {
     component_class() {
       const list = []
       list.push(`location_${this.location.key}`)
-      list.push(this.base.env)
       if (this.base.mediator.current_location === this.location) {
         list.push("turn_active")
       }
@@ -55,16 +54,17 @@ $board_top_bottom_gap: 3px
 .shogi-player
   &.vertical
     .Membership
-      @extend %is_unselectable
-
-      &.location_white
-        @extend %is_flip
-        margin-bottom: $board_top_bottom_gap
-      &.location_black
-        margin-top: $board_top_bottom_gap
+      // @extend %is_unselectable                        // 名前がコピーできないのは不便なので取る
 
       width: 100%
-      flex-direction: row-reverse
-      align-items: center
-      justify-content: flex-end
+      align-items: center                             // Y軸中央
+
+      &.location_white
+        flex-direction: row                           // そのままま △ 駒 の並び
+        justify-content: flex-end                     // 右寄せ→
+        margin-bottom: $board_top_bottom_gap          // 上に配置しているので下に隙間を作る
+      &.location_black
+        flex-direction: row-reverse                   // 駒 ▲ の並びにするため反転
+        justify-content: flex-start                   // ←左寄せ
+        margin-top: $board_top_bottom_gap             // 下に配置しているので上に隙間を作る
 </style>
