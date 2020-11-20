@@ -681,10 +681,8 @@
 import "css-browser-selector"
 
 import Vue from 'vue'
-import Vuex from 'vuex'
 import Buefy from 'buefy'
 
-Vue.use(Vuex)
 Vue.use(Buefy)
 
 import ShogiPlayer from './components/ShogiPlayer'

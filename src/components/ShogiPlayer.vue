@@ -115,11 +115,6 @@
 import _ from "lodash"
 import Vue from 'vue'
 
-import { mapState } from 'vuex'
-
-// Store
-import store from "../store/index.js"
-
 // Library
 import Mediator   from "../models/mediator.js"
 import Place      from "../models/place.js"
@@ -152,8 +147,6 @@ Object.defineProperty(Vue.prototype, '_', {value: _})
 
 export default {
   name: 'ShogiPlayer',
-
-  store: store,
 
   mixins: [
     support,

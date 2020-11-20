@@ -14,9 +14,6 @@
     // import 'buefy/lib/buefy.css'
     Vue.use(Buefy)
 
-    import Vuex from "vuex"
-    Vue.use(Vuex)
-
     import _ from "lodash"
     Object.defineProperty(Vue.prototype, '_', {value: _})
 
