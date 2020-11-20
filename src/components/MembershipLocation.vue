@@ -52,8 +52,8 @@ export default {
 
       .MembershipLocation
         border: 1px dashed change_color($primary, $alpha: 0.5)
-        width: 8rem
-        height: 8rem
+        // width: 8rem
+        // height: 8rem
 
         margin-left: auto  // ▲だけ右寄せ (右寄せにしたければ左側のマージンをautoにする)
         font-size: 1rem

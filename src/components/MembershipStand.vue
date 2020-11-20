@@ -4,7 +4,7 @@
   @click.stop.prevent="base.piece_stand_click(location, $event)"
   @click.right.stop.prevent="base.hold_cancel"
   )
-  .one_piece.is-flex(
+  .PieceWithCount.is-flex(
     v-for="[piece, count] in hold_pieces"
     @click.stop="base.piece_stand_piece_click(location, piece, false, $event)"
     @mouseover="base.piece_stand_mouseover_handle(location, piece, $event)"
@@ -102,23 +102,21 @@ export default {
       @extend %board_texture_bg
       @extend %real_hoverable_opacity
 
-      // &:after
-      //   +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
-
-      height: 8rem
+      // height: 100%
       // margin-top: $sp_size_piece_stand_margin_top_bottom
       justify-content: center
       align-items: center
-      .one_piece                // FIXME: クリックをここにしたい
+
+      min-width: $sp_piece_stand_size_if_blank
+      padding: 0.25rem
+
+      .PieceWithCount                // FIXME: クリックをここにしたい
         padding: 0 0.25rem
-        // font-size: 2.8rem
         justify-content: center
         align-items: center
-        // border: 1px dashed change_color($black, $alpha: 0.8)
         .PieceObject
-          .piece_fore
-            height: 2rem
-            width: 2rem
+          width:  2.4rem
+          height: 2.4rem     // 駒の大きさ
 
     .Membership
       &.location_black

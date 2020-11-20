@@ -7,7 +7,6 @@
 @import "theme_real_piece_texture"
 @import "theme_real_background_texture"
 
-
 //--------------------------------------------------------------------------------
 
 .shogi-player
@@ -18,12 +17,6 @@
         font-size: 0.9em
         max-width:  4em
         min-height: 2.5em
-
-    //////////////////////////////////////////////////////////////////////////////// 縦 (共通)
-    &.vertical
-      .PieceBox
-        font-size: 1.5em
-        min-height: 1.2em
 
     // 駒台(横)
     &.horizontal
@@ -36,17 +29,6 @@
           min-height: 3em
           padding-top:    0.15em
           padding-bottom: 0.15em
-
-    // 駒台(縦並び)
-    &.vertical
-      .Membership
-        .player_name
-          margin-right: 0.2em
-        .MembershipStand
-          min-width: $sp_piece_stand_size_if_blank
-          padding-left:  0.15em
-          padding-right: 0.15em
-
 
     // カーソル位置に表示する持駒
     .cursor_elem

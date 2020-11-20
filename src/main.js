@@ -9,7 +9,7 @@ import App from './App'
 // import "~buefy/src/scss/buefy-build.scss"
 // import "./components/ShogiPlayer.sass" // Rails 側で sp_assets_dir を変更してから読み込みたいので .vue の中では読まないようにする
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 new Vue({
   el: '#app',

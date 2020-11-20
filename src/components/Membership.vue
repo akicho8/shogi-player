@@ -56,8 +56,10 @@ $board_top_bottom_gap: 3px
     .Membership
       // @extend %is_unselectable                        // 名前がコピーできないのは不便なので取る
 
+      // height: 6rem
+
       width: 100%
-      align-items: center                             // Y軸中央
+      align-items: center                         // flex-start:Y軸を盤の方に寄せる center:中央
 
       &.location_white
         flex-direction: row-reverse                   // そのままま △ 駒 の並び

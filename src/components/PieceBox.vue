@@ -5,7 +5,7 @@
   @click.stop.prevent="base.piece_box_other_click"
   @click.right.prevent="base.hold_cancel"
   )
-  .one_piece.is-flex(
+  .PieceWithCount.is-flex(
     v-for="[piece, count] in base.mediator.piece_box_realize()"
     :class="{holding_p: base.piece_box_have_p(piece)}"
     @click.stop.prevent="base.piece_box_piece_click(piece, $event)"
@@ -52,22 +52,21 @@ export default {
       @extend %board_shadow
       @extend %board_texture_bg
       @extend %real_hoverable_opacity
+      @extend %is_unselectable
 
-      height: 5rem
-      // margin-top: $sp_size_piece_stand_margin_top_bottom
+      height: 3rem
+      margin-top: $sp_size_piece_stand_margin_top_bottom
       justify-content: flex-start
       align-items: center
 
-      .one_piece                // FIXME: クリックをここにしたい
-        border: 1px dashed change_color($primary, $alpha: 0.5)
-
+      .PieceWithCount                // FIXME: クリックをここにしたい
+        // border: 1px dashed change_color($primary, $alpha: 0.5)
         padding: 0 0.25rem
         // font-size: 2.8rem
         justify-content: center
         align-items: center
         // border: 1px dashed change_color($black, $alpha: 0.8)
         .PieceObject
-          .piece_fore
-            height: 2rem
-            width: 2rem
+          height: 2rem
+          width:  2rem
 </style>
