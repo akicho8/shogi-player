@@ -1,6 +1,6 @@
-.shogi-player.theme-simple.size-default.bg_variant-a.piece_variant-a.run_mode-edit_mode
-  .edit_mode_controller
-    .edit_mode_controller_wrap
+.ShogiPlayer.is_texture_text.size-default.bg_variant-a.pi_variant-a.run_mode-edit_mode
+  .EditToolBox
+    .EditToolBoxWrap
       .dropdown.is-mobile-modal
         .dropdown-trigger[role="button" aria-haspopup="true"]
           .button
@@ -27,20 +27,20 @@
         i.mdi.mdi-dots-vertical
 
   .board_container.font_size_base
-    .Flippable
+    .ShogiPlayerCore
       .Membership.flex_item.location_white.development
         .MembershipLocationMark
           | ☖
         ul.MembershipStand
           li
             .PieceObject.selectable_p
-              .piece_fore.piece_name.piece_L.location_white.promoted_false
+              .PieceTexture.piece_name.piece_L.location_white.promoted_false
                 | 香
             .PieceCount.piece_count1
               | 1
           li
             .PieceObject.selectable_p
-              .piece_fore.piece_name.piece_P.location_white.promoted_false
+              .PieceTexture.piece_name.piece_P.location_white.promoted_false
                 | 歩
             .PieceCount.piece_count2
               | 2
@@ -49,31 +49,31 @@
         .overlay_navi.next
         .overlay_navi.flip_trigger_cell
         .BoardOuter
-          table.board_inner
+          table.BoardInner
             tr
               td
                 .PieceObject.selectable_p
-                  .piece_fore.location_white.promoted_false.piece_name.piece_K
+                  .PieceTexture.location_white.promoted_false.piece_name.piece_K
                     | 玉
               td
                 .PieceObject.selectable_p
-                  .piece_fore.location_black.promoted_true.piece_name.piece_R
+                  .PieceTexture.location_black.promoted_true.piece_name.piece_R
                     | 龍
               td
                 .PieceObject.selectable_p
-                  .piece_fore.location_black.promoted_false.piece_name.piece_K
+                  .PieceTexture.location_black.promoted_false.piece_name.piece_K
                     | 玉
       .flex_item
         ul.PieceBox
           li
             .PieceObject.selectable_p
-              .piece_fore.piece_name.piece_R.location_black.promoted_false
+              .PieceTexture.piece_name.piece_R.location_black.promoted_false
                 | 飛
             .PieceCount.piece_count1
               | 1
           li
             .PieceObject.selectable_p
-              .piece_fore.piece_name.piece_B.location_black.promoted_false
+              .PieceTexture.piece_name.piece_B.location_black.promoted_false
                 | 角
             .PieceCount.piece_count2
               | 2
@@ -83,13 +83,13 @@
           ul.MembershipStand
             li
               .PieceObject.selectable_p
-                .piece_fore.piece_name.piece_L.location_black.promoted_false
+                .PieceTexture.piece_name.piece_L.location_black.promoted_false
                   | 香
               .PieceCount.piece_count1
                 | 1
             li
               .PieceObject.selectable_p
-                .piece_fore.piece_name.piece_P.location_black.promoted_false
+                .PieceTexture.piece_name.piece_P.location_black.promoted_false
                   | 歩
               .PieceCount.piece_count2
                 | 2

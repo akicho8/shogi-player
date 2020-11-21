@@ -659,7 +659,7 @@ export default {
     },
 
     // 駒箱の駒のテクスチャ
-    piece_box_piece_inner_class(piece) {
+    piece_box_piece_texture_class(piece) {
       let list = []
       list = _.concat(list, piece.css_class_list)
       list.push("location_black")
@@ -749,7 +749,7 @@ export default {
     // マウス位置に表示する駒の生成
     //
     //   .PieceObject.cursor_elem
-    //     .piece_fore.virtual_piece_flip
+    //     .PieceTexture.virtual_piece_flip
     //
     virtual_piece_create(event, soldier) {
       this.virtual_piece_destroy()
@@ -776,21 +776,21 @@ export default {
       const PieceObject = document.createElement("div")
       PieceObject.classList.add("PieceObject")
 
-      const piece_fore = document.createElement("div")
-      piece_fore.classList.add("piece_fore", ...soldier.to_class_list)
+      const PieceTexture = document.createElement("div")
+      PieceTexture.classList.add("PieceTexture", ...soldier.to_class_list)
 
       const text = document.createTextNode(soldier.name)
-      piece_fore.appendChild(text)
+      PieceTexture.appendChild(text)
 
       // const list = _.concat(class_list, ["PieceObject"])
-      // piece_fore.classList.add(...list)
+      // PieceTexture.classList.add(...list)
 
       if (this.new_flip) {
         // this.$cursor_elem.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
         PieceObject.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
       }
 
-      PieceObject.appendChild(piece_fore)
+      PieceObject.appendChild(PieceTexture)
       this.$cursor_elem.appendChild(PieceObject)
 
       // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す

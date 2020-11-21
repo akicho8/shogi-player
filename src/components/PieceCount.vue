@@ -17,7 +17,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.shogi-player
+.ShogiPlayer
   .PieceCount
     color: change_color($black, $alpha: 0.6)
     font-size: 1rem

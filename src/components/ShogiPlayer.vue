@@ -1,42 +1,11 @@
 <template lang="pug">
-.shogi-player(:class="component_class")
+.ShogiPlayer(:class="component_class")
   OverlayForDisable(:base="base")
 
   template(v-if="!mediator")
     i.fas.fa-spinner.fa-pulse
 
-  div.edit_mode_controller(v-if="edit_p")
-    .edit_mode_controller_wrap
-      b-dropdown(v-model="current_preset_key")
-        //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
-        .button(slot="trigger")
-          b-tooltip(label="初期配置")
-            b-icon(icon="apps" size="is-small")
-          //- b-icon(icon="menu-down")
-        b-dropdown-item(v-for="record in preset_info_values" :value="record.key" :key="record.key" @click="mediator_setup_by_preset(record)")
-          | {{record.name}}
-      b-dropdown(v-model="any_func_key")
-        .button(slot="trigger")
-          b-tooltip(label="操作")
-            b-icon(icon="menu" size="is-small")
-        b-dropdown-item(v-for="e in AnyFuncInfo.values" :value="e.key" :key="e.key" @click="any_func_click_handle(e)")
-          | {{e.name}}
-      | &nbsp;
-      button.button(@click.stop.prevent="fn_flip_all")
-        b-tooltip(label="上下反転")
-          b-icon(icon="pan-vertical" size="is-small")
-      | &nbsp;
-      button.button(@click.stop.prevent="fn_flip_h")
-        b-tooltip(label="左右反転")
-          b-icon(icon="pan-horizontal" size="is-small")
-      | &nbsp;
-      button.button(@click.stop.prevent="init_location_toggle")
-        b-tooltip(label="手番")
-          | {{init_location.name}}
-      | &nbsp;
-      button.button.has-text-weight-bold(@click.stop.prevent="shortcut_modal_show_handle")
-        b-tooltip(label="ショートカット")
-          | ?
+  EditToolBox(:base="base")
 
   template(v-if="mediator")
     .turn_edit_container
@@ -62,8 +31,7 @@
 
     //- 独自のフォントサイズを適用するのは基本このなかだけとする
     .board_container.font_size_base(ref="board_container_ref")
-      Flippable(:base="base")
-      PieceBox(:base="base")
+      ShogiPlayerPure(:base="base")
 
     div(v-if="view_p || play_p")
       .controller_group.buttons.has-addons.is-centered.is-paddingless(v-if="controller_show")
@@ -123,12 +91,13 @@ import KifParser  from "../models/kif_parser.js"
 import Location   from "../models/location.js"
 
 // components
-import PieceBox        from "./PieceBox.vue"
-import SettingModal    from "./SettingModal.vue"
-import ErrorNotify     from "./ErrorNotify.vue"
-import CommentBlock    from "./CommentBlock.vue"
+import PieceBox          from "./PieceBox.vue"
+import SettingModal      from "./SettingModal.vue"
+import ErrorNotify       from "./ErrorNotify.vue"
+import CommentBlock      from "./CommentBlock.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
-import Flippable        from "./Flippable.vue"
+import ShogiPlayerPure   from "./ShogiPlayerPure.vue"
+import EditToolBox       from "./EditToolBox.vue"
 
 // mixins modules
 import navi_module      from "./navi_module.js"
@@ -163,6 +132,8 @@ export default {
   ],
 
   props: {
+    custom_class: { default: [], },
+
     run_mode:       { type: String,  default: "view_mode", },
     kifu_body:      { type: String,  default: null,        },
     start_turn:     { type: Number,  default: -1,          },
@@ -172,7 +143,7 @@ export default {
     theme:          { type: String,  default: "real",      },
     size:           { type: String,  default: "default",   },
     bg_variant:     { type: String,  default: "a"          },
-    piece_variant:  { type: String,  default: "a"          },
+    pi_variant:  { type: String,  default: "a"          },
     debug_mode:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
     final_label:    { type: String,  default: null,        },
     player_info:    { type: Object,  default: null, },
@@ -189,14 +160,15 @@ export default {
     ErrorNotify,
     CommentBlock,
     OverlayForDisable,
-    Flippable,
+    EditToolBox,
+    ShogiPlayerPure,
   },
 
   data() {
     return {
       new_bg_variant:    this.bg_variant,
       new_debug_mode:    this.debug_mode,
-      new_piece_variant: this.piece_variant,
+      new_pi_variant: this.pi_variant,
       new_run_mode:      this.run_mode,
       new_size:          this.size,
       new_theme:         this.theme,
@@ -328,8 +300,8 @@ export default {
     bg_variant(v)        { this.new_bg_variant = v               }, // 外 -> 中
     new_bg_variant(v)    { this.$emit("update:bg_variant", v)    }, // 中 -> 外
 
-    piece_variant(v)     { this.new_piece_variant = v            }, // 外 -> 中
-    new_piece_variant(v) { this.$emit("update:piece_variant", v) }, // 中 -> 外
+    pi_variant(v)     { this.new_pi_variant = v            }, // 外 -> 中
+    new_pi_variant(v) { this.$emit("update:pi_variant", v) }, // 中 -> 外
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -476,13 +448,9 @@ export default {
 
     component_class() {
       return [
-        ["theme", this.new_theme].join("-"),
         ["size", this.new_size].join("-"),
-        ["bg_variant", this.new_bg_variant].join("-"),
-        ["piece_variant", this.new_piece_variant].join("-"),
         ["run_mode", this.new_run_mode].join("-"),
         {debug_mode: this.new_debug_mode},
-        this.new_vlayout ? 'vertical' : 'horizontal',
       ]
     },
 
@@ -490,13 +458,12 @@ export default {
       // 設定で棋譜を更新したのが入った inside_custom_kifu が最優先。つまりもう更新はできなくなる。いいのか？
       return this.inside_custom_kifu || this.kifu_body_from_url || this.kifu_body || this.init_preset_sfen || "position startpos"
     },
-
   },
 }
 </script>
 
 <style lang="sass">
 @import "support.sass"
-.shogi-player
+.ShogiPlayer
   // width: 100%
 </style>

@@ -1,4 +1,4 @@
-.shogi-player
+.ShogiPlayer
   .board_container
     +mobile
       // border: 1px solid cyan
@@ -7,13 +7,13 @@
       // border: 1px solid cyan
 
   // 縦並びの場合は横が使えるので少し大きめにできる
-  // &.vertical
+  // &.is_vertical
   //   .font_size_base
   //     +mobile
   //       font-size: 6.4vmin
 
   // 横並び
-  &.horizontal
+  &.is_horizontal
     .font_size_base
       +mobile
         // background-color: blue
@@ -25,8 +25,8 @@
         +mobile
           font-size: 4.8vmin    // 編集モードのときは小さくする
 
-  &.theme-real
-    &.horizontal
+  &.is_texture_image
+    &.is_horizontal
       .BoardOuter
         +mobile
           margin-left: 3px  // 盤と駒台の隙間(オーバーライド)
@@ -37,11 +37,11 @@
     +mobile
       display: none
 
-.shogi-player
+.ShogiPlayer
   +mobile
     // margin: 0 2px
 
-// 唯一 .shogi-player の外にある
+// 唯一 .ShogiPlayer の外にある
 .is-shogi-player-modal-card
   .modal-card-body
     overflow-x: hidden          // サイズが決まる前にはみ出ている場合、ブラウザが横スクロールモードになってしまうのを防ぐ
@@ -51,7 +51,7 @@
       padding: 1em 0            // モバイルのときは横幅を0にする
       // overflow-x: no-display
 
-      // .shogi-player
+      // .ShogiPlayer
       //   .font_size_base
       //     +mobile
       //       font-size: 5vmin

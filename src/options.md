@@ -5,7 +5,7 @@
 | `kifu_body`                   | 棋譜の本体                   | KIF と SFEN に対応。駒落ちは SFEN のみ                                                          | null        |       |
 | `theme`                       | テーマ名                     | `none`:なし `simple`:シンプル `real`:木目                                                       | 'real'      | ○    |
 | `bg_variant`                  | realテーマの背景             | a .. z                                                                                          | 'a'         | ○    |
-| `piece_variant`               | realテーマの駒種             | a .. b                                                                                          | 'a'         | ○    |
+| `pi_variant`               | realテーマの駒種             | a .. b                                                                                          | 'a'         | ○    |
 | `size`                        | 盤面の大きさ                 | `none` `xx-small` `x-small` `small` `default` `medium` `large` `x-large` `xx-large` `xxx-large` | 'default'   | ○    |
 | `start_turn`                  | N手目の局面から表示          | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前                                                      | -1          | ○    |
 | `slider_show`                 | 局面スライダー表示           |                                                                                                 | false       |       |
@@ -22,7 +22,7 @@
 | `flip`                        | 盤面を反転する               | △が下にくる                                                                                    | false       | ○    |
 | `flip_if_white`               | △から始まる場合のみ反転する | △が下にくる                                                                                    | false       |       |
 | `url_embed_turn`              | URLのハッシュに手番を埋める  | 固定URLを作りたいときの実験用の機能                                                             | false       |       |
-| `base.vlayout`                     | 配置を縦並びにする           | スマホ向き用レイアウト                                                                          | false       | ○    |
+| `base.sp_layout`                     | 配置を縦並びにする           | スマホ向き用レイアウト                                                                          | is_vertical       | ○    |
 | `final_label`                 | 結果の文字列                 | 空だと「○の勝ち」                                                                              | null        |       |
 | `preset_key`                  | 盤面の初期配置               | kifu_body の代わりに指定するとその配置になる                                                    | null        |       |
 | `hidden_if_piece_stand_blank` | 持駒がないときは駒台非表示   | view_mode のみ                                                                                  | false       |       |
@@ -73,10 +73,10 @@
 | `update:kifu_body`                          | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
 | `update:debug_mode`                         | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
 | `update:flip`                               | 盤面を反転したとき                             |                                                                   |
-| `update:vlayout`                            | レイアウトを変更したとき                       |                                                                   |
+| `update:sp_layout`                            | レイアウトを変更したとき                       |                                                                   |
 | `update:theme`                              | テーマ変更                                     |                                                                   |
 | `update:bg_variant`                         | 背景の種類変更                                 |                                                                   |
-| `update:piece_variant`                      | 駒の種類変更                                   |                                                                   |
+| `update:pi_variant`                      | 駒の種類変更                                   |                                                                   |
 | `update:size`                               | サイズ変更                                     |                                                                   |
 | `board_cell_left_click_user_handle`         | セルをクリックしたとき                         | place が来るのでどこをクリックしたかわかる                        |
 | `board_cell_pointerdown_user_handle`        | セルをクリックしたとき(スマホの場合押した瞬間) | place が来るのでどこをクリックしたかわかる                        |

@@ -21,13 +21,13 @@
         border-style: solid
         border-width: 1px
 
-.shogi-player
-  &.theme-simple
+.ShogiPlayer
+  &.is_texture_text
     .PieceObject
       color: $sp_simple_piece_color
       // font-size: 20px ! important
 
-      .piece_fore
+      .PieceTexture
         // line-height: 100% // 駒箱の駒の上下のpaddingが扱いにくくなったらこれを入れる
         &.promoted_true
           color: $sp_simple_promoted_color
@@ -63,7 +63,7 @@
         background-color: $sp_simple_current_bg1
         height: inherit  // ←【超重要】これを入れないと駒が移動したあとの background に隙間ができる
 
-    .board_inner
+    .BoardInner
       margin: 0 $sp_simple_margin
       +board_star_mark_define($sp_simple_star_color)
 
@@ -79,14 +79,14 @@
           // width: 3em
           // height: 3em
           // font-size: 0.5em
-          // vertical-align: middle
+          // is_vertical-align: middle
 
           display: flex
           flex-direction: column
           justify-content: center
           align-items: center
 
-          .piece_fore
+          .PieceTexture
             line-height: 100%
             // border: 1px solid blue
             // margin-top: 2.5em
@@ -110,10 +110,10 @@
           font-size: 0.8em
           color: $sp_simple_piece_count_color
 
-    &.horizontal
+    &.is_horizontal
       .PieceBox
         max-width: 5em
-    &.vertical
+    &.is_vertical
       .PieceBox
         font-size: 1.0em
         min-height: 1em
@@ -135,12 +135,12 @@
         margin-left: 0.1em     // 駒と数の隙間
         font-size: 0.4em
 
-    &.horizontal
+    &.is_horizontal
       .Membership
         .player_name
         .MembershipStand
           margin-top: 0.1em
-    &.vertical
+    &.is_vertical
       .Membership
         .player_name
         .MembershipLocationMark
@@ -151,11 +151,11 @@
 
     // edit_mode の場合は駒箱を大きくする
     &.run_mode-edit_mode
-      &.horizontal
+      &.is_horizontal
         .MembershipStand
           @extend %basic_box
           min-height: 5em
-      &.vertical
+      &.is_vertical
         .MembershipStand
           @extend %basic_box
           min-width: $sp_piece_stand_size_if_blank
@@ -163,7 +163,7 @@
 
     //////////////////////////////////////////////////////////////////////////////// カーソル位置に表示する持駒
     .cursor_elem
-      .piece_fore
+      .PieceTexture
         font-size: 1.15em
         &.location_white
           @extend %is_flip

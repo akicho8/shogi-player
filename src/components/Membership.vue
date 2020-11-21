@@ -1,5 +1,5 @@
 <template lang="pug">
-.Membership.is-flex(:class="component_class" v-if="component_show_p")
+.Membership(:class="component_class" v-if="component_show_p")
   MembershipLocation(:base="base" :location="location")
   MembershipStand(:base="base" :location="location")
   slot
@@ -26,7 +26,7 @@ export default {
   computed: {
     component_class() {
       const list = []
-      list.push(`location_${this.location.key}`)
+      list.push(`is_${this.location.key}`)
       if (this.base.mediator.current_location === this.location) {
         list.push("turn_active")
       }
@@ -50,24 +50,44 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-$board_top_bottom_gap: 3px
-.shogi-player
-  &.vertical
+// $board_top_bottom_gap: 3px
+
+.ShogiPlayerPure
+  .Membership
+    display: flex
+    align-items: center // ▲を中央に配置
+
+  &.is_layer_on
     .Membership
-      // @extend %is_unselectable                        // 名前がコピーできないのは不便なので取る
+      border: 1px dashed change_color($primary, $alpha: 0.5)
 
-      // height: 6rem
-
+  +tablet
+    &.is_horizontal
+      .Membership
+        flex-direction: column
+        &.is_white
+          align-self: flex-start
+          transform: rotate(180deg)
+        &.is_black
+          align-self: flex-end
+    &.is_vertical
+      .Membership
+        height: 100%
+        width: 100%
+        flex-direction: row-reverse
+        &.is_white
+          justify-content: flex-start
+          transform: rotate(180deg)
+        &.is_black
+          justify-content: flex-end
+  +mobile
+    .Membership
+      height: 100%
       width: 100%
-      align-items: center                         // flex-start:Y軸を盤の方に寄せる center:中央
-
-      &.location_white
-        flex-direction: row-reverse                   // そのままま △ 駒 の並び
-        justify-content: flex-end                     // 右寄せ→
-        margin-bottom: $board_top_bottom_gap          // 上に配置しているので下に隙間を作る
-        @extend %is_flip                              // 上のブロックはまるごと反転
-      &.location_black
-        flex-direction: row-reverse                   // 駒 ▲ の並びにするため反転
-        justify-content: flex-start                   // ←左寄せ
-        margin-top: $board_top_bottom_gap             // 下に配置しているので上に隙間を作る
+      flex-direction: row-reverse
+      &.is_white
+        justify-content: flex-start
+        transform: rotate(180deg)
+      &.is_black
+        justify-content: flex-end
 </style>

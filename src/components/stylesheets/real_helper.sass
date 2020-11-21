@@ -10,12 +10,12 @@ $sp_real_piece_shadow_blur:  0.1em // ぼかし度合い
 $sp_real_hold_shadow_depth: 0.15em // 大きさ
 $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
 
-=image_shadow($x, $weight)
+=filter_drop_shadow($x, $weight)
   filter: drop-shadow($x $x $weight rgba(0, 0, 0, 0.3))
 
 %board_shadow
   &:after
-    +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
+    +filter_drop_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
 
 %real_hoverable_bg
   &.hoverable_p
@@ -33,3 +33,4 @@ $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
     background-color: $sp_real_current_bg1
   100%
     background-color: $sp_real_current_bg2
+

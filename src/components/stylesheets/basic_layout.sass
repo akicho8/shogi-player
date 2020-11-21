@@ -1,4 +1,4 @@
-.shogi-player
+.ShogiPlayer
   text-align: center
 
   // .piece_count1
@@ -8,20 +8,20 @@
   // display: inline-block
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
-  &.horizontal
-    .PieceBox
-  &.vertical
-    .PieceBox
+  // &.is_horizontal
+  //   .PieceBox
+  // &.is_vertical
+  //   .PieceBox
 
   //////////////////////////////////////////////////////////////////////////////// 駒台と将棋盤のレイアウト
-  // .Flippable
+  // .ShogiPlayerCore
   // display: flex
   // すべてを中央よせ
   // justify-content: center
 
   // 横並び(デフォルト)
-  &.horizontal
-    .Flippable
+  &.is_horizontal
+    .ShogiPlayerCore
       // △の駒台は左上
       // 将棋盤は上下の中央
       // ▲の駒台は右下

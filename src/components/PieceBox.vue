@@ -15,8 +15,7 @@
     PieceObject(
       :base="base"
       :class="base.piece_box_piece_control_class(piece)"
-      :tclass="base.piece_box_piece_inner_class(piece)"
-      :piece_text="piece.name"
+      :piece_texture_class="base.piece_box_piece_texture_class(piece)"
       )
     PieceCount(:count="count")
 </template>
@@ -46,8 +45,8 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.shogi-player
-  &.vertical
+.ShogiPlayer
+  &.is_vertical
     .PieceBox
       @extend %board_shadow
       @extend %board_texture_bg

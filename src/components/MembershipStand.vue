@@ -1,5 +1,5 @@
 <template lang="pug">
-.MembershipStand.is-flex(
+.MembershipStand(
   :class="component_class"
   @click.stop.prevent="base.piece_stand_click(location, $event)"
   @click.right.stop.prevent="base.hold_cancel"
@@ -13,8 +13,7 @@
     PieceObject(
       :base="base"
       :class="piece_control_class(piece)"
-      :tclass="piece_fore_class(piece)"
-      :piece_text="piece.name"
+      :piece_texture_class="piece_fore_class(piece)"
       )
     PieceCount(:count="count")
 </template>
@@ -96,37 +95,52 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.shogi-player
-  &.vertical
+.ShogiPlayerPure
+  .MembershipStand
+    display: flex
+    justify-content: center
+    align-items: center
+
+    // @extend %board_texture_bg
+    @extend %real_hoverable_opacity
+
+  &.is_layer_on
     .MembershipStand
-      @extend %board_texture_bg
-      @extend %real_hoverable_opacity
+      border: 1px dashed change_color($primary, $alpha: 0.5)
+      .PieceObject
+        border: 1px dashed change_color($primary, $alpha: 0.5)
 
-      // height: 100%
-      // margin-top: $sp_size_piece_stand_margin_top_bottom
-      justify-content: center
-      align-items: center
+  +tablet
+    &.is_horizontal
+      .MembershipStand
+        flex-direction: column
+    &.is_vertical
+      .MembershipStand
+        flex-direction: row
+  +mobile
+    .MembershipStand
+      flex-direction: row
 
-      min-width: $sp_piece_stand_size_if_blank
-      padding: 0.25rem
+  // min-width: $sp_piece_stand_size_if_blank
+  // padding: 0.25rem
 
-      .PieceWithCount                // FIXME: クリックをここにしたい
-        padding: 0 0.25rem
-        justify-content: center
-        align-items: center
-        .PieceObject
-          width:  2.4rem
-          height: 2.4rem     // 駒の大きさ
+  // .PieceWithCount                // FIXME: クリックをここにしたい
+  //   padding: 0 0.25rem
+  //   justify-content: center
+  //   align-items: center
+  //   .PieceObject
+  //     // width:  2.4rem
+  //     // height: 2.4rem     // 駒の大きさ
 
-    .Membership
-      &.location_black
-        .MembershipStand
-          &:after
-            +image_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
-      &.location_white
-        .MembershipStand
-          &:after
-            +image_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
-          .PieceObject
-            @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
+  // .Membership
+  //   &.location_black
+  //     .MembershipStand
+  //       &:after
+  //         +filter_drop_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
+  //   &.location_white
+  //     .MembershipStand
+  //       &:after
+  //         +filter_drop_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
+      //       .PieceObject
+  //         @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
 </style>

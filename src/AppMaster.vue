@@ -1,67 +1,6 @@
 <template lang="pug">
 #app
   template(v-if="true")
-    .virtual_screen
-      .virtual_screen_one
-        shogi-player(
-          :run_mode="'edit_mode'"
-          :debug_mode="false"
-          :start_turn="0"
-          :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15pR3BG18SN 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
-          :theme="'real'"
-          :size="'xxx'"
-          :flip="false"
-          :sound_effect="true"
-          :vlayout="true"
-          :setting_button_show="true"
-          :controller_show="true"
-          :player_info="player_info"
-        )
-      .virtual_screen_one
-        shogi-player(
-          :run_mode="'edit_mode'"
-          :debug_mode="false"
-          :start_turn="0"
-          :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15pR3BG18SN 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
-          :theme="'simple'"
-          :size="'xxx'"
-          :flip="false"
-          :sound_effect="true"
-          :vlayout="true"
-          :setting_button_show="true"
-          :controller_show="true"
-          :player_info="player_info"
-        )
-
-    //- shogi-player(
-    //-   :run_mode="'view_mode'"
-    //-   :debug_mode="true"
-    //-   :start_turn="0"
-    //-   :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
-    //-   :key_event_capture="true"
-    //-   :slider_show="true"
-    //-   :controller_show="true"
-    //-   :theme="'simple'"
-    //-   :size="'default'"
-    //-   :sound_effect="true"
-    //-   :vlayout="false"
-    //-   :overlay_navi="true"
-    //- )
-    //- shogi-player(
-    //-   :run_mode="'view_mode'"
-    //-   :debug_mode="true"
-    //-   :start_turn="0"
-    //-   :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
-    //-   :key_event_capture="true"
-    //-   :slider_show="true"
-    //-   :controller_show="true"
-    //-   :theme="'simple'"
-    //-   :size="'default'"
-    //-   :sound_effect="true"
-    //-   :vlayout="true"
-    //-   :overlay_navi="true"
-    //- )
-  template(v-else)
     .hero.is-primary.is-medium
       .hero-head
         nav.navbar
@@ -163,7 +102,7 @@
                 h3.title 羽生善治名人 vs 渡辺明竜王
                 p.subtitle 第21期竜王戦七番勝負第4局
                 hr
-                ShogiPlayer(:kifu_body="'position startpos moves 2g2f 8c8d 2f2e 8d8e 6i7h 4a3b 2e2d 2c2d 2h2d P*2c 2d2h 7a7b 3i3h 3c3d 9g9f 9c9d 1g1f 1c1d 3h2g 8e8f 8g8f 8b8f P*8g 8f8d 2g3f 5a5b 7g7f 7c7d 8h2b+ 3a2b 7i8h 7b7c 8h7g 7c6d 3f4e 7d7e 4e5f 2b3c 6g6f 3c4d 5f6g 6a7b 5i6h 8a7c 4i5h 2a3c 6h7i 7e7f 6g7f 4d5e P*7e 9d9e B*7d P*8h 7i8h 7b8c 9f9e 8c7d 7e7d 8d7d P*7e 7d8d 5h6g P*7d 7e7d 8d7d P*7e 6d7e 7f7e 7d7e 7g7f 7e7d S*7e 7d4d P*7d 4d4g+ P*2d 2c2d 7d7c+ 4g4i 2h2d P*2c 2d3d 4c4d P*7i 5b4c 3d3e S*4e 6g5f P*7g 8i7g P*3d 3e4e 3c4e 5f5e R*2h N*3f 2h7h+ 8h9g 4e5g+ 5e4d 4i4d S*5b 4c5d 7i7h 4d4i G*6e 5d4e R*4d 4e5f 4d4i G*4h S*3h 4h4i R*5e 5f4f 3h4i G*4e P*4g 5g4g P*4h 4g3g 2i3g 4f3g 5e4e R*8i G*3h 3g3f G*4f 3f2f 9i9h 8i4i+ P*3i S*2i 3h2h 4i3i'" :start_turn="-1" :theme="'real'" :bg_variant="'b'" :piece_variant="'b'")
+                ShogiPlayer(:kifu_body="'position startpos moves 2g2f 8c8d 2f2e 8d8e 6i7h 4a3b 2e2d 2c2d 2h2d P*2c 2d2h 7a7b 3i3h 3c3d 9g9f 9c9d 1g1f 1c1d 3h2g 8e8f 8g8f 8b8f P*8g 8f8d 2g3f 5a5b 7g7f 7c7d 8h2b+ 3a2b 7i8h 7b7c 8h7g 7c6d 3f4e 7d7e 4e5f 2b3c 6g6f 3c4d 5f6g 6a7b 5i6h 8a7c 4i5h 2a3c 6h7i 7e7f 6g7f 4d5e P*7e 9d9e B*7d P*8h 7i8h 7b8c 9f9e 8c7d 7e7d 8d7d P*7e 7d8d 5h6g P*7d 7e7d 8d7d P*7e 6d7e 7f7e 7d7e 7g7f 7e7d S*7e 7d4d P*7d 4d4g+ P*2d 2c2d 7d7c+ 4g4i 2h2d P*2c 2d3d 4c4d P*7i 5b4c 3d3e S*4e 6g5f P*7g 8i7g P*3d 3e4e 3c4e 5f5e R*2h N*3f 2h7h+ 8h9g 4e5g+ 5e4d 4i4d S*5b 4c5d 7i7h 4d4i G*6e 5d4e R*4d 4e5f 4d4i G*4h S*3h 4h4i R*5e 5f4f 3h4i G*4e P*4g 5g4g P*4h 4g3g 2i3g 4f3g 5e4e R*8i G*3h 3g3f G*4f 3f2f 9i9h 8i4i+ P*3i S*2i 3h2h 4i3i'" :start_turn="-1" :theme="'real'" :bg_variant="'b'" :pi_variant="'b'")
 
               .column
                 article.message.is-info
@@ -436,7 +375,7 @@
                 :theme.sync="theme"
                 :size.sync="size"
                 :bg_variant.sync="bg_variant"
-                :piece_variant.sync="piece_variant"
+                :pi_variant.sync="pi_variant"
                 :debug_mode.sync="debug_mode"
                 :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
                 :setting_button_show="setting_button_show"
@@ -444,7 +383,7 @@
                 :operation_disable="operation_disable"
                 :flip.sync="flip"
                 :flip_if_white="flip_if_white"
-                :vlayout.sync="vlayout"
+                :sp_layout.sync="sp_layout"
                 :final_label="final_label"
                 :player_info="player_info"
                 :key_event_capture="key_event_capture"
@@ -494,10 +433,10 @@
                     template(v-for="e in BgVariantInfo.values")
                       b-radio(v-model="bg_variant" :native-value="e.key") {{e.name}}
 
-                b-field(label="piece_variant")
+                b-field(label="pi_variant")
                   .block
-                    template(v-for="e in PieceVariantInfo.values")
-                      b-radio(v-model="piece_variant" :native-value="e.key") {{e.name}}({{e.key}})
+                    template(v-for="e in PiVariantInfo.values")
+                      b-radio(v-model="pi_variant" :native-value="e.key") {{e.name}}({{e.key}})
 
                 b-field(label="size")
                   .block
@@ -549,8 +488,8 @@
                 b-field(label="flip_if_white")
                   b-switch(v-model="flip_if_white")
 
-                b-field(label="vlayout")
-                  b-switch(v-model="vlayout")
+                b-field(label="sp_layout")
+                  b-switch(v-model="sp_layout")
 
                 b-field(label="debug_mode")
                   b-switch(v-model="debug_mode")
@@ -584,7 +523,7 @@
                   | :<b>run_mode</b>="'{{run_mode}}'"
                   | :<b>theme</b>="'{{theme}}'"
                   | :<b>bg_variant</b>="'{{bg_variant}}'"
-                  | :<b>piece_variant</b>="'{{piece_variant}}'"
+                  | :<b>pi_variant</b>="'{{pi_variant}}'"
                   | :<b>size</b>="'{{size}}'"
                   | :<b>start_turn</b>="{{start_turn}}"
                   | :<b>slider_show</b>="{{slider_show}}"
@@ -602,7 +541,7 @@
                   | :<b>operation_disable</b>="{{operation_disable}}"
                   | :<b>flip</b>="{{flip}}"
                   | :<b>flip_if_white</b>="{{flip_if_white}}"
-                  | :<b>vlayout</b>="{{vlayout}}"
+                  | :<b>sp_layout</b>="{{sp_layout}}"
                   | :<b>final_label</b>="'{{final_label}}'"
                   | :<b>player_info</b>="{{player_info}}"
                   | :<b>kifu_body</b>="'{{kifu_body}}'"
@@ -691,7 +630,7 @@ import SideInfo from "./models/side_info"
 import RunModeInfo from "./models/run_mode_info"
 import ThemeInfo from "./models/theme_info"
 import BgVariantInfo from "./models/bg_variant_info"
-import PieceVariantInfo from "./models/piece_variant_info"
+import PiVariantInfo from "./models/pi_variant_info"
 import SizeInfo from "./models/size_info"
 
 const marked = require('marked')
@@ -719,7 +658,7 @@ export default {
         RunModeInfo,
         ThemeInfo,
         BgVariantInfo,
-        PieceVariantInfo,
+        PiVariantInfo,
         SizeInfo,
       }
     }
@@ -729,7 +668,7 @@ export default {
       RunModeInfo,
       ThemeInfo,
       BgVariantInfo,
-      PieceVariantInfo,
+      PiVariantInfo,
       SizeInfo,
 
       modal_p: false,
@@ -739,7 +678,7 @@ export default {
       run_mode: "view_mode",   // play_mode
       theme: "real",
       bg_variant: "a",
-      piece_variant: "a",
+      pi_variant: "a",
       size: "default",
       start_turn: -1,
       slider_show: true,
@@ -757,7 +696,7 @@ export default {
       operation_disable: false,
       flip: false,
       flip_if_white: false,
-      vlayout: false,
+      sp_layout: false,
 
       player_info: {
         black: { name: "先手", time: "",        },

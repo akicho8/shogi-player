@@ -12,7 +12,7 @@
 
   td                        ← TD にはいっさい駒の影響を与えないこと
     .PieceObject             ← 選択可能なことを知らせたりする領域
-      .piece_fore           ← 実際の駒テクスチャ
+      .PieceTexture           ← 実際の駒テクスチャ
 
   .board_container.font_size_base の下だけにサイズを指定しているので、その下の要素はすべて相対サイズになる
 

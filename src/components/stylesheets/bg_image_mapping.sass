@@ -2,17 +2,15 @@
 
 =bg_variant_define($key, $file)
   &.bg_variant-#{$key}
-    .BoardOuter, .PieceBox, .MembershipStand
-      &:after
-        background-image: url("#{$sp_assets_dir}/background/#{$file}")
-        // opacity: 1.0
+    .BoardOuter, .PieceBox
+      background-image: url("#{$sp_assets_dir}/background/#{$file}")
 
-// (loop for i from ?a to ?z do (save-excursion (insert (format "%c" i))) (next-line))
-.shogi-player
-  &.theme-real
-    +bg_variant_define(a, "0100_wood_01.png")
+.ShogiPlayerPure
+  &.is_texture_image
+    +bg_variant_define(a, "0270_337378_m.jpg")
     +bg_variant_define(b, "0160_japanese-paper_00012.jpg")
     +bg_variant_define(c, "0210_japanese-paper_00085.jpg")
     +bg_variant_define(d, "0230_japanese-paper_00128.jpg")
     +bg_variant_define(e, "0250_paper_co_cyan_papar.png")
     +bg_variant_define(f, "0260_paper_co_white_paper.png")
+    +bg_variant_define(g, "0100_wood_01.png")

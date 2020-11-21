@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export default class PieceVariantInfo extends MemoryRecord {
+export default class PiVariantInfo extends MemoryRecord {
   static get define() {
     return [
       
@@ -13,6 +13,6 @@ export default class PieceVariantInfo extends MemoryRecord {
 }
 
 if (process.argv[1] === __filename) {
-  console.log(PieceVariantInfo.fetch("a").key)
-  console.log(PieceVariantInfo.fetch("a").name)
+  console.log(PiVariantInfo.fetch("a").key)
+  console.log(PiVariantInfo.fetch("a").name)
 }

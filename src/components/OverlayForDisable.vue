@@ -12,7 +12,7 @@ export default {
 
 <style lang="sass">
 // 上に被せてすべてを押せないようにする
-.shogi-player
+.ShogiPlayer
   &.run_mode-view_mode
     position: relative
     .OverlayForDisable

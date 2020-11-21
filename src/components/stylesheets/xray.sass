@@ -3,7 +3,7 @@
   background-color: $color
   border: 1px solid darken($color, 50%)
 
-.shogi-player
+.ShogiPlayer
   &.debug_mode
     &:before
       +mobile
@@ -15,7 +15,7 @@
 
     .PieceObject
       border: 1px dotted blue
-      .piece_fore
+      .PieceTexture
         border: 1px dotted red
         
     .piece_count1
@@ -51,7 +51,7 @@
         +sp_xray_color(7)
     .PieceBox
       +sp_xray_color(8)
-    .edit_mode_controller
+    .EditToolBox
       +sp_xray_color(9)
     .cursor_elem
       +sp_xray_color(10)

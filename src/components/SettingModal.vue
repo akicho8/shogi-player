@@ -14,7 +14,7 @@
       b-field(label="反転")
         b-switch(v-model="base.new_flip")
       b-field(label="縦並び")
-        b-switch(v-model="base.new_vlayout")
+        b-switch(v-model="base.new_sp_layout")
       b-field(label="デバッグモード")
         b-switch(v-model="base.new_debug_mode")
 
@@ -41,8 +41,8 @@
 
         b-field(label="駒の種類")
         b-field
-          template(v-for="e in PieceVariantInfo.values")
-            b-radio-button(v-model="base.new_piece_variant" :native-value="e.key") {{e.name}}
+          template(v-for="e in PiVariantInfo.values")
+            b-radio-button(v-model="base.new_pi_variant" :native-value="e.key") {{e.name}}
 
     b-field(label="サイズ")
     b-field
@@ -71,7 +71,7 @@ import RunModeInfo      from "../models/run_mode_info"
 import ThemeInfo        from "../models/theme_info"
 import SizeInfo         from "../models/size_info"
 import BgVariantInfo    from "../models/bg_variant_info"
-import PieceVariantInfo from "../models/piece_variant_info"
+import PiVariantInfo from "../models/pi_variant_info"
 
 import { support_child } from "./support_child.js"
 
@@ -96,7 +96,7 @@ export default {
     ThemeInfo()        { return ThemeInfo        },
     SizeInfo()         { return SizeInfo         },
     BgVariantInfo()    { return BgVariantInfo    },
-    PieceVariantInfo() { return PieceVariantInfo },
+    PiVariantInfo() { return PiVariantInfo },
   },
 }
 </script>
