@@ -1,17 +1,23 @@
 <template lang="pug">
-.PieceObject
+.PieceObject(v-if="count >= 1")
   .PieceTexture(:class="piece_texture_class")
+    PieceObjectCount(:count="count")
 </template>
 
 <script>
 import _ from "lodash"
 import { support } from "./support.js"
+import PieceObjectCount from "./PieceObjectCount.vue"
 
 export default {
   name: "PieceObject",
   mixins: [support],
+  components: {
+    PieceObjectCount,
+  },
   props: {
-    piece_texture_class: { required: true  },
+    piece_texture_class: { required: true              },
+    count:               { required: false, default: 1 },
   },
 }
 </script>
@@ -64,10 +70,10 @@ export default {
     align-items: center    // 下を揃えて配置したいときは flex-end にすること(オプションにする)
 
   // 下揃えの場合
-  &.is_texture_image
-    .BoardOuter
-      .PieceObject
-        align-items: flex-end
+  // &.is_texture_image
+  //   .BoardOuter
+  //     .PieceObject
+  //       align-items: flex-end
 
   &.is_texture_image
     .PieceObject
@@ -78,8 +84,8 @@ export default {
         animation: real_blink 0.5s ease-in-out infinite alternate
 
     .PieceTexture
-      width: 50%
-      height: 50%
+      width: 90%
+      height: 90%
 
       // テクスチャ
       background-position: center
@@ -94,5 +100,16 @@ export default {
       // 確認用
       border: 1px dashed change_color($primary, $alpha: 0.5)
 
-  .PieceStand
+    .PieceStand
+      .PieceTexture
+
+  .Membership
+    &.is_black
+      .MembershipStand
+        // +filter_drop_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
+    &.is_white
+      .MembershipStand
+        // +filter_drop_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
+        .PieceObject
+          @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
 </style>

@@ -14,14 +14,14 @@
       :base="base"
       :class="piece_control_class(piece)"
       :piece_texture_class="piece_fore_class(piece)"
+      :count="count"
       )
-    PieceCount(:count="count")
 </template>
 
 <script>
 import _ from "lodash"
 import PieceObject from "./PieceObject.vue"
-import PieceCount from "./PieceCount.vue"
+import PieceObjectCount from "./PieceObjectCount.vue"
 import { support } from "./support.js"
 
 export default {
@@ -34,7 +34,7 @@ export default {
 
   components: {
     PieceObject,
-    PieceCount,
+    PieceObjectCount,
   },
 
   methods: {
@@ -120,6 +120,16 @@ export default {
   +mobile
     .MembershipStand
       flex-direction: row
+
+  // .Membership
+  //   &.is_black
+  //     .MembershipStand
+  //       // +filter_drop_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
+  //   &.is_white
+  //     .MembershipStand
+  //       // +filter_drop_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
+  //       .PieceObject
+  //         @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
 
   // min-width: $sp_piece_stand_size_if_blank
   // padding: 0.25rem

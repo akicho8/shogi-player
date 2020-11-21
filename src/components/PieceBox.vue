@@ -17,19 +17,19 @@
       :class="base.piece_box_piece_control_class(piece)"
       :piece_texture_class="base.piece_box_piece_texture_class(piece)"
       )
-    PieceCount(:count="count")
+    PieceObjectCount(:count="count")
 </template>
 
 <script>
 import { support } from "./support.js"
 import PieceObject from "./PieceObject.vue"
-import PieceCount from "./PieceCount.vue"
+import PieceObjectCount from "./PieceObjectCount.vue"
 
 export default {
   mixins: [support],
   components: {
     PieceObject,
-    PieceCount,
+    PieceObjectCount,
   },
   computed: {
     component_class() {
@@ -49,7 +49,7 @@ export default {
   &.is_vertical
     .PieceBox
       @extend %board_shadow
-      @extend %board_texture_bg
+      // @extend %board_texture_bg
       @extend %real_hoverable_opacity
       @extend %is_unselectable
 

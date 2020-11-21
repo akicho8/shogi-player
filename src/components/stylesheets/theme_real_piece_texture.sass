@@ -1,44 +1,15 @@
-$advance: 26%                 // 大きくするほど駒が下に移動する
-
-// 駒のテクスチャ用(先手だけの画像を用意している場合)
-%piece_fore_texture_for_black_only
-  background-position: 50% 50% + $advance // 先手も後手も下寄り配置 (後手は判定しているので見た目は上にずれる)
-
-// 駒のテクスチャ用(先後両方の画像を用意している場合)
-%piece_fore_texture_for_both
-  &.location_black
-    @extend %piece_fore_texture_for_black_only // 先手は枠の下寄り配置
-  &.location_white
-    background-position: 50% 50% - $advance // 後手は枠の上寄り配置
-
-%pos_center
-  background-position: center
-
 .ShogiPlayerPure
   &.is_texture_image
-    .PieceTexture
-      @extend %pos_center
-    
-    // 駒の種類
     &.pi_variant-a
       .PieceTexture
         +piece_image_variant_a_pack
-      .BoardOuter
-        .PieceTexture
-          @extend %piece_fore_texture_for_both
 
     &.pi_variant-b
       .PieceTexture
         +piece_image_variant_b_pack
         &.location_white
           @extend %is_flip
-      .BoardOuter
-        .PieceTexture
-          @extend %piece_fore_texture_for_black_only
           
     &.pi_variant-c
       .PieceTexture
         +piece_image_variant_c_pack
-      .BoardOuter
-        .PieceTexture
-          @extend %piece_fore_texture_for_both

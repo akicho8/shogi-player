@@ -39,7 +39,7 @@ export default {
     height: 100%
 
     @extend %board_shadow
-    @extend %board_texture_bg
+    // @extend %board_texture_bg
 
   table.BoardInner
     width: 100%
