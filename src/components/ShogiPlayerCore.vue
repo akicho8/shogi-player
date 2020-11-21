@@ -16,11 +16,11 @@ import Membership            from "./Membership.vue"
 import AspectRatioFixedBlock from "./AspectRatioFixedBlock.vue"
 import BoardOuter            from "./BoardOuter.vue"
 
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 
 export default {
   name: "ShogiPlayerCore",
-  mixins: [support_child],
+  mixins: [support],
   components: {
     Membership,
     AspectRatioFixedBlock,

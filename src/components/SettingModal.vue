@@ -73,10 +73,10 @@ import SizeInfo         from "../models/size_info"
 import BgVariantInfo    from "../models/bg_variant_info"
 import PiVariantInfo from "../models/pi_variant_info"
 
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 
 export default {
-  mixins: [support_child],
+  mixins: [support],
 
   data() {
     return {

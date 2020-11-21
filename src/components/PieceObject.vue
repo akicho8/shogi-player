@@ -5,11 +5,11 @@
 
 <script>
 import _ from "lodash"
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 
 export default {
   name: "PieceObject",
-  mixins: [support_child],
+  mixins: [support],
   props: {
     piece_texture_class: { required: true  },
   },

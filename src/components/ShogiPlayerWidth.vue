@@ -8,11 +8,11 @@
 import ShogiPlayerCore     from "./ShogiPlayerCore.vue"
 import PieceBox            from "./PieceBox.vue"
 
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 
 export default {
   name: "ShogiPlayerWidth",
-  mixins: [support_child],
+  mixins: [support],
   components: {
     ShogiPlayerCore,
     PieceBox,

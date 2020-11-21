@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 import PieceObject from "./PieceObject.vue"
 
 export default {
   name: "BoardOuter",
-  mixins: [support_child],
+  mixins: [support],
   components: {
     PieceObject,
   },

@@ -7,12 +7,12 @@
 
 <script>
 import _ from "lodash"
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 import MembershipLocation from "./MembershipLocation.vue"
 import MembershipStand from "./MembershipStand.vue"
 
 export default {
-  mixins: [support_child],
+  mixins: [support],
 
   props: {
     location: { required: true },

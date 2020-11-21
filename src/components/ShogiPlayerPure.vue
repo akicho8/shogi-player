@@ -6,11 +6,11 @@
 <script>
 import ShogiPlayerWidth from "./ShogiPlayerWidth.vue"
 
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 
 export default {
   name: "ShogiPlayerPure",
-  mixins: [support_child],
+  mixins: [support],
   components: {
     ShogiPlayerWidth,
   },

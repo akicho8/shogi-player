@@ -4,11 +4,11 @@
 </template>
 
 <script>
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 
 export default {
   name: "PieceCount",
-  mixins: [support_child],
+  mixins: [support],
   props: {
     count: { type: Number, required: true },
   },

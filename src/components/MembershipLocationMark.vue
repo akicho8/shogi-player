@@ -4,11 +4,11 @@
 </template>
 
 <script>
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 
 export default {
   name: "MembershipLocationMark",
-  mixins: [support_child],
+  mixins: [support],
   props: {
     location: { required: true },
   },

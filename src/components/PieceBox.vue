@@ -21,12 +21,12 @@
 </template>
 
 <script>
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 import PieceObject from "./PieceObject.vue"
 import PieceCount from "./PieceCount.vue"
 
 export default {
-  mixins: [support_child],
+  mixins: [support],
   components: {
     PieceObject,
     PieceCount,

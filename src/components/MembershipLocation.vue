@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 import MembershipLocationMark from "./MembershipLocationMark.vue"
 
 export default {
   name: "MembershipLocation",
-  mixins: [support_child],
+  mixins: [support],
   props: {
     location: { required: true },
   },

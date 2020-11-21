@@ -14,10 +14,10 @@
 <script>
 import Autolinker from "autolinker"
 import _ from "lodash"
-import { support_child } from "./support_child.js"
+import { support } from "./support.js"
 
 export default {
-  mixins: [support_child],
+  mixins: [support],
   props: {
     comments_pack:    { required: true },
     current_comments: { required: true },

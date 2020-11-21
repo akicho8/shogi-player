@@ -109,7 +109,7 @@ import preset_module    from "./preset_module.js"
 import any_func_module  from "./any_func_module.js"
 import api_module       from "./api_module.js"
 
-import { support } from "./support.js"
+import { root_support } from "./root_support.js"
 
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
@@ -118,7 +118,7 @@ export default {
   name: 'ShogiPlayer',
 
   mixins: [
-    support,
+    root_support,
 
     // ここで直接 require("./xxx.js"), とは書けないので注意
     navi_module,
