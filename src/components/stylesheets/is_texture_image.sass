@@ -1,3 +1,10 @@
+@import "piece_image_mapping/a.sass"
+@import "piece_image_mapping/b.sass"
+@import "piece_image_mapping/c.sass"
+
+@import "real_helper.sass"
+@import "bg_image_mapping"
+
 .ShogiPlayerPure
   &.is_texture_image
     &.pi_variant-a
@@ -9,7 +16,11 @@
         +piece_image_variant_b_pack
         &.location_white
           @extend %is_flip
-          
+
     &.pi_variant-c
       .PieceTexture
         +piece_image_variant_c_pack
+
+    // カーソル位置に表示する持駒
+    .cursor_elem
+      +filter_drop_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
