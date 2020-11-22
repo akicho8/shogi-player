@@ -69,26 +69,27 @@ export default {
           align-self: flex-start           // 全体が横並び → 持駒は縦並び → 後手は上寄せ
           // transform: rotate(180deg)
         &.is_black
-          flex-direction: column             // 全体が横並び → 持駒は縦並び
+          flex-direction: column           // 全体が横並び → 持駒は縦並び
           align-self: flex-end             // 全体が横並び → 持駒は縦並び → 先手は下寄せ
     &.is_vertical
       .Membership
         height: 100%
         width: 100%
-        flex-direction: row-reverse
         &.is_white
-          justify-content: flex-start
-          transform: rotate(180deg)
+          flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△飛歩」のままでよい (左端→)
+          // justify-content: flex-start
+          // transform: rotate(180deg)
         &.is_black
-          justify-content: flex-end
+          flex-direction: row-reverse      // 全体が縦並び → 持駒は横並び → 右寄せ 後手は「飛歩▲」とする (←右端)
+          // justify-content: flex-end
+
+  // モバイル時の設定は is_vertical と同じにしておく(共通化は危険)
   +mobile
     .Membership
       height: 100%
       width: 100%
-      flex-direction: row-reverse
       &.is_white
-        justify-content: flex-start
-        transform: rotate(180deg)
+        flex-direction: row
       &.is_black
-        justify-content: flex-end
+        flex-direction: row-reverse
 </style>

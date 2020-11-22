@@ -21,7 +21,7 @@ export default {
   .MembershipLocationMark
     background-position: center
     background-repeat: no-repeat
-    background-size: 100%
+    background-size: contain
 
   .is_black
     .MembershipLocationMark

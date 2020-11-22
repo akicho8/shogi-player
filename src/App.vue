@@ -17,9 +17,14 @@
             b-slider(v-model="sp_piece_w" :min="1" :max="10" :step="0.05")
           b-field(label="持駒画像h")
             b-slider(v-model="sp_piece_h" :min="1" :max="10" :step="0.05")
-        .column
+        .column.is-2
           b-field(label="横幅(vw)")
             b-slider(v-model="screen_width" :min="1" :max="100")
+        .column.is-2
+          b-field(label="縦時駒数位置")
+            b-slider(v-model="sp_piece_object_count_gap_right" :min="-50" :max="150")
+          b-field(label="横時駒数位置")
+            b-slider(v-model="sp_piece_object_count_gap_bottom" :min="-50" :max="150")
         //- .column
         //-   b-field(label="文字(vw)")
         //-     b-slider(v-model="sp_fsize" :min="0" :max="100.0 / 9" :step="0.1")
@@ -106,7 +111,7 @@ export default {
     return {
       sp_xpos: "is_centered",
       sp_ypos: "is_vcentered",
-      sp_layout: "is_horizontal",
+      sp_layout: "is_vertical",
       sp_theme: "is_texture_image",
       sp_fixed: "is_aspect_ratio_fixed_on",
       sp_fsize: 2.0,
@@ -115,7 +120,9 @@ export default {
       sp_is_fullheight: "",
       sp_piece_w: 2.4,
       sp_piece_h: 2.95,
-      sp_flip: true,
+      sp_flip: false,
+      sp_piece_object_count_gap_right: 84,
+      sp_piece_object_count_gap_bottom: 84,
       var1: 0,
       sp_layer: "is_layer_on",
       sp_membership_min_width: 3,
@@ -168,6 +175,10 @@ export default {
         .MembershipLocationMark {
           width:  ${this.sp_piece_w * 0.7}vw;
           height: ${this.sp_piece_h * 0.7}vw;
+        }
+        .ShogiPlayerPure {
+          --sp_piece_object_count_gap_right: ${this.sp_piece_object_count_gap_right}%;
+          --sp_piece_object_count_gap_bottom: ${this.sp_piece_object_count_gap_bottom}%;
         }
       `
     },

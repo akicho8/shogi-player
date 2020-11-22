@@ -62,6 +62,8 @@ export default {
   &.is_layer_on
     .PieceObject
       border: 1px dashed change_color($primary, $alpha: 0.5)
+    .PieceTexture
+      border: 1px dashed change_color($danger, $alpha: 0.5)
 
   // .BoardOuter
   .PieceObject
@@ -73,6 +75,7 @@ export default {
     display: flex
     justify-content: center
     align-items: center    // 下を揃えて配置したいときは flex-end にすること(オプションにする)
+    // align-items: flex-end  // 下を揃えて配置したいときは flex-end にすること(オプションにする)
 
   // 下揃えの場合
   // &.is_texture_image

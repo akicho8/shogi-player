@@ -119,42 +119,19 @@ export default {
         .MembershipStand
           flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
     &.is_vertical
-      .MembershipStand
-        flex-direction: row
+      .is_white
+        .MembershipStand
+          flex-direction: row-reverse    // 全体縦並び → 後手 → 横並び(昇順)
+      .is_black
+        .MembershipStand
+          flex-direction: row            // 全体縦並び → 先手 → 横並び(降順)
+
+  // is_vertical と同じ(共通化禁止)
   +mobile
-    .MembershipStand
-      flex-direction: row
-
-  // .Membership
-  //   &.is_black
-  //     .MembershipStand
-  //       // +filter_drop_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
-  //   &.is_white
-  //     .MembershipStand
-  //       // +filter_drop_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
-  //       .PieceObject
-  //         @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
-
-  // min-width: $sp_piece_stand_size_if_blank
-  // padding: 0.25rem
-
-  // .PieceWithCount                // FIXME: クリックをここにしたい
-  //   padding: 0 0.25rem
-  //   justify-content: center
-  //   align-items: center
-  //   .PieceObject
-  //     // width:  2.4rem
-  //     // height: 2.4rem     // 駒の大きさ
-
-  // .Membership
-  //   &.location_black
-  //     .MembershipStand
-  //       &:after
-  //         +filter_drop_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
-  //   &.location_white
-  //     .MembershipStand
-  //       &:after
-  //         +filter_drop_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
-      //       .PieceObject
-  //         @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
+    .is_white
+      .MembershipStand
+        flex-direction: row-reverse    // 全体縦並び → 後手 → 横並び(昇順)
+    .is_black
+      .MembershipStand
+        flex-direction: row            // 全体縦並び → 先手 → 横並び(降順)
 </style>

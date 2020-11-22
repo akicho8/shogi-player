@@ -18,45 +18,75 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerPure
-  .Membership
-    &.is_white
-      .PieceTexture
-        position: relative
+  --sp_piece_object_count_gap_right: 86%
+  --sp_piece_object_count_gap_bottom: 100%
+  --sp_piece_object_count_font_size: 0.75rem
+
+  //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
+  .PieceTexture
+  .PieceObjectCount
+    color: change_color($black, $alpha: 0.7)
+    font-weight: bold
+    font-size: var(--sp_piece_object_count_font_size)
+    z-index: 1            // 駒画像の下に潜るのを防ぐため
+
+  &.is_layer_on
+    .PieceObjectCount
+      border: 1px dashed change_color($primary, $alpha: 0.5)
+      line-height: 100%
+
+  //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
+  &.is_horizontal
+    .PieceTexture
+      position: relative
+    .PieceObjectCount
+      position: absolute
+      top: 0
+      bottom: 0
+
+      display: flex
+      justify-content: center
+      align-items: center
+
+    .is_white
       .PieceObjectCount
-        position: absolute
-        right: 100% // ← 横位置調整可
-        top: 0
-        bottom: 0
-
-        transform: rotate(180deg)
-
-        display: flex
-        justify-content: center
-        align-items: center
-
-        color: change_color($black, $alpha: 0.6)
-        font-size: 1rem
-        font-weight: bold
-        // margin-left: -0.4rem
-        z-index: 1            // 駒画像の下に潜るのを防ぐため
-        // -webkit-text-stroke: 1px change_color($black, $alpha: 1)
-    &.is_black
-      .PieceTexture
-        position: relative
+        right: var(--sp_piece_object_count_gap_right) // 右端から横幅分押すと左端の外になる
+        transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+    .is_black
       .PieceObjectCount
-        position: absolute
-        left: 100% // ← 横位置調整可
-        top: 0
-        bottom: 0
+        left: var(--sp_piece_object_count_gap_right)  // 左端から横幅分押すと右端の外になる
 
-        display: flex
-        justify-content: center
-        align-items: center
+  //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
+  &.is_vertical
+    // .PieceTexture
+    //   display: flex
+    //   justify-content: flex-end
+    //   align-items: flex-start
+    //
+    // .PieceObjectCount
+    //
+    // .is_white
+    //   .PieceObjectCount
+    //     // transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+    // .is_black
+    //   .PieceObjectCount
 
-        color: change_color($black, $alpha: 0.6)
-        font-size: 1rem
-        font-weight: bold
-        // margin-left: -0.4rem
-        z-index: 1            // 駒画像の下に潜るのを防ぐため
-        // -webkit-text-stroke: 1px change_color($black, $alpha: 1)
+    .PieceTexture
+      position: relative
+    .PieceObjectCount
+      position: absolute
+      left: 0
+      right: 0
+
+      display: flex
+      justify-content: center
+      align-items: center
+
+    .is_white
+      .PieceObjectCount
+        bottom: var(--sp_piece_object_count_gap_right)
+        transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+    .is_black
+      .PieceObjectCount
+        top: var(--sp_piece_object_count_gap_right)
 </style>
