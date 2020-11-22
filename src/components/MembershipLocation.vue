@@ -61,6 +61,11 @@ export default {
   //     background-image: url("../assets/location_white.svg")
   //     filter: drop-shadow(-2px -2px 2px rgba(0, 0, 0, 0.5))
 
+  //- &.is_horizontal
+  //-   .is_white
+  //-     .MembershipLocation
+  //-       @extend %is_flip      // 全体横並び → 後手側 → △反転
+
   &.is_vertical
     .MembershipLocation
       margin-left: auto

@@ -58,6 +58,11 @@ export default {
       &:hover
         cursor: pointer
 
+  // 確認用
+  &.is_layer_on
+    .PieceObject
+      border: 1px dashed change_color($primary, $alpha: 0.5)
+
   // .BoardOuter
   .PieceObject
     // box2 のサイズ%を最大するため必要
@@ -91,14 +96,11 @@ export default {
       background-position: center
       background-repeat: no-repeat
       background-size: contain // 必ず駒の全体が表示されるようにする
-      filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.5))
+      filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
 
       // 下に引く
       position: relative
       top: var(--piece_pull, 0%)
-
-      // 確認用
-      border: 1px dashed change_color($primary, $alpha: 0.5)
 
     .PieceStand
       .PieceTexture

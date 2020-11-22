@@ -112,8 +112,12 @@ export default {
 
   +tablet
     &.is_horizontal
-      .MembershipStand
-        flex-direction: column
+      .is_white
+        .MembershipStand
+          flex-direction: column-reverse // 全体横並び → 後手 → 縦並び(昇順) △が下にあるので大駒順に並べるため
+      .is_black
+        .MembershipStand
+          flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
     &.is_vertical
       .MembershipStand
         flex-direction: row

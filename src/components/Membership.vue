@@ -64,12 +64,13 @@ export default {
   +tablet
     &.is_horizontal
       .Membership
-        flex-direction: column
         &.is_white
-          align-self: flex-start
+          flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び
+          align-self: flex-start           // 全体が横並び → 持駒は縦並び → 後手は上寄せ
           // transform: rotate(180deg)
         &.is_black
-          align-self: flex-end
+          flex-direction: column             // 全体が横並び → 持駒は縦並び
+          align-self: flex-end             // 全体が横並び → 持駒は縦並び → 先手は下寄せ
     &.is_vertical
       .Membership
         height: 100%

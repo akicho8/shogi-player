@@ -32,6 +32,7 @@ export default {
     .MembershipLocationMark
       background-image: url("../assets/location_white.svg")
       filter: drop-shadow(-2px -2px 2px rgba(0, 0, 0, 0.5))
+      @extend %is_flip
 
   &.is_vertical
     .MembershipLocationMark
