@@ -67,7 +67,7 @@ export default {
         flex-direction: column
         &.is_white
           align-self: flex-start
-          transform: rotate(180deg)
+          // transform: rotate(180deg)
         &.is_black
           align-self: flex-end
     &.is_vertical

@@ -111,5 +111,5 @@ export default {
       .MembershipStand
         // +filter_drop_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
         .PieceObject
-          @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
+          // @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
 </style>
