@@ -1,7 +1,7 @@
 <template lang="pug">
-.ShogiPlayerCore.is-flex(:class="[base.new_flip ? 'is_flip_on' : 'is_flip_off']")
+.ShogiPlayerCore(:class="component_class")
   Membership(:base="base" :location="base.location_white")
-    // b-button.mr-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
+    //- b-button.mr-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
   AspectRatioFixedBlock
     template(v-if="base.overlay_navi")
       .overlay_navi.previous(@click.stop.prevent="base.navi_relative_move(-1, $event)")
@@ -26,6 +26,13 @@ export default {
     AspectRatioFixedBlock,
     BoardOuter,
   },
+  computed: {
+    component_class() {
+      return [
+        this.base.new_flip ? "is_flip_on" : "is_flip_off",
+      ]
+    },
+  },
 }
 </script>
 
@@ -37,6 +44,13 @@ export default {
     display: flex
     align-items: center
     justify-content: center
+
+    // 反転
+    transform: rotate(0deg)
+    transition: all 0.4s 0s ease-in-out
+    &.is_flip_off
+    &.is_flip_on
+      @extend %is_flip
 
   // |---------+----------------+--------------+--------------------------------------|
   // |         | .is_horizontal | .is_vertical | 備考                                 |
@@ -54,13 +68,6 @@ export default {
   +mobile
     .ShogiPlayerCore
       flex-direction: column
-
-  // 反転
-  transform: rotate(0deg)
-  transition: all 0.4s 0s ease-in-out
-  &.is_flip_off
-  &.is_flip_on
-    @extend %is_flip
 
   .overlay_navi
     cursor: pointer
