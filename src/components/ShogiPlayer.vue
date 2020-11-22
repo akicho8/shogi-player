@@ -15,19 +15,6 @@
     .board_container.font_size_base(ref="board_container_ref")
       ShogiPlayerPure(:base="base")
 
-    div(v-if="view_p || play_p")
-      .controller_group.buttons.has-addons.is-centered.is-paddingless(v-if="controller_show")
-        button.button.first(    ref="first"    @click.stop.prevent="move_to_first"):             b-icon(icon="menu-left")
-        button.button.previous( ref="previous" @click.stop.prevent="relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
-        button.button.next(     ref="next"     @click.stop.prevent="relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
-        button.button.last(     ref="last"     @click.stop.prevent="move_to_last"):              b-icon(icon="menu-right")
-        button.button.flip(                    @click.stop.prevent="board_flip_run"):            b-icon(icon="swap-vertical" size="is-small")
-      div(v-if="slider_show")
-        input.turn_slider(type="range" :value="turn_offset" @input="current_turn_set($event.target.value)" :min="turn_offset_min" :max="turn_offset_max" ref="turn_slider")
-
-    SfenShowBlock(:base="base")
-    CommentBlock(:base="base")
-
   //- template(v-if="setting_button_show")
   //-   .buttons.are-small.is-centered
   //-     b-button(icon-left="cog" @click="setting_modal_p = true")
@@ -72,12 +59,9 @@ import Location   from "../models/location.js"
 import PieceBox          from "./PieceBox.vue"
 import SettingModal      from "./SettingModal.vue"
 import ErrorNotify       from "./ErrorNotify.vue"
-import CommentBlock      from "./CommentBlock.vue"
-import SfenShowBlock      from "./SfenShowBlock.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
 import ShogiPlayerPure   from "./ShogiPlayerPure.vue"
 import EditToolBox       from "./EditToolBox.vue"
-import TurnShowOrEdit    from "./TurnShowOrEdit.vue"
 
 // mixins modules
 import navi_module      from "./navi_module.js"
@@ -138,11 +122,8 @@ export default {
     PieceBox,
     SettingModal,
     ErrorNotify,
-    CommentBlock,
     OverlayForDisable,
-    SfenShowBlock,
     EditToolBox,
-    TurnShowOrEdit,
     ShogiPlayerPure,
   },
 

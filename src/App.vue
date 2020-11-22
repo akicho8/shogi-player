@@ -80,6 +80,7 @@
     :sound_effect="true"
     :sp_layout="sp_layout"
     :setting_button_show="true"
+    :slider_show="true"
     :controller_show="true"
     :player_info="player_info"
   )

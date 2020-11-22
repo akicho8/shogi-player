@@ -122,9 +122,7 @@ export default {
         this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_position_sfen)
 
         // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする
-        if (this.$refs.turn_slider) {
-          this.$refs.turn_slider.focus()
-        }
+        this.focus_to("turn_slider")
       }
     },
 
