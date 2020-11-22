@@ -8,28 +8,10 @@
   EditToolBox(:base="base")
 
   template(v-if="mediator")
-    .turn_edit_container
-      .turn_number_area(v-if="summary_show && (view_p || play_p)")
-        template(v-if="!turn_edit")
-          span.turn_edit_text(@click.stop.prevent="turn_edit_run")
-            template(v-if="view_p")
-              | {{mediator.current_turn_label(this.final_label)}}
-            template(v-if="play_p")
-              template(v-if="turn_base === 0")
-                | {{turn_offset}}
-              template(v-if="turn_base >= 1")
-                | {{turn_base}}
-                template(v-if="turn_offset >= 1")
-                  | +{{turn_offset}}
-              | 手
+    b-modal(:active.sync="setting_modal_p" has-modal-card)
+      SettingModal(:base="base")
 
-        template(v-if="turn_edit")
-          input.turn_edit_input(type="number" v-model.number="turn_edit_value" @blur="turn_edit = false" ref="turn_edit_input")
-
-      b-modal(:active.sync="setting_modal_p" has-modal-card)
-        SettingModal(:base="base")
-
-    //- 独自のフォントサイズを適用するのは基本このなかだけとする
+  template(v-if="mediator")
     .board_container.font_size_base(ref="board_container_ref")
       ShogiPlayerPure(:base="base")
 
@@ -98,6 +80,7 @@ import CommentBlock      from "./CommentBlock.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
 import ShogiPlayerPure   from "./ShogiPlayerPure.vue"
 import EditToolBox       from "./EditToolBox.vue"
+import TurnShowOrEdit    from "./TurnShowOrEdit.vue"
 
 // mixins modules
 import navi_module      from "./navi_module.js"
@@ -161,6 +144,7 @@ export default {
     CommentBlock,
     OverlayForDisable,
     EditToolBox,
+    TurnShowOrEdit,
     ShogiPlayerPure,
   },
 
@@ -175,7 +159,7 @@ export default {
 
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
-      turn_edit: false,         // N手目編集中
+      turn_edit_p: false,         // N手目編集中
       update_counter: 0,
       setting_modal_p: false,
       inside_custom_kifu: null, // 設定ダイアログで変更されたときに入る
@@ -364,10 +348,9 @@ export default {
       return data_source
     },
 
-    turn_edit_run() {
-      this.turn_edit = true
+    turn_edit_handle() {
+      this.turn_edit_p = true
       this.turn_edit_value = this.turn_offset
-      this.$nextTick(() => this.$refs.turn_edit_input.focus())
     },
 
     log(...v) {

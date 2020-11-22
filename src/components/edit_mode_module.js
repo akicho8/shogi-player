@@ -779,8 +779,11 @@ export default {
       const PieceTexture = document.createElement("div")
       PieceTexture.classList.add("PieceTexture", ...soldier.to_class_list)
 
-      const text = document.createTextNode(soldier.name)
-      PieceTexture.appendChild(text)
+      // PieceTexture.style.width = "3rem"
+      // PieceTexture.style.height = "3rem"
+
+      // const text = document.createTextNode(soldier.name)
+      // PieceTexture.appendChild(text)
 
       // const list = _.concat(class_list, ["PieceObject"])
       // PieceTexture.classList.add(...list)

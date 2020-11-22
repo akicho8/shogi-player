@@ -26,16 +26,6 @@
     cursor: pointer
     width: 20rem
 
-  .turn_edit_container
-    // テキストを選択できないようにする
-    @extend %is_unselectable
-    // N手目の編集モードのnumberフィールド
-    .turn_edit_input
-      width: 3rem
-    // N手目のテキスト表示
-    .turn_edit_text
-      cursor: pointer
-
   // 幅が狭いときでも折り返す
   .sfen_area
     word-break: break-all
