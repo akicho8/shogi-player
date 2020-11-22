@@ -17,11 +17,8 @@ import _ from "lodash"
 import { support } from "./support.js"
 
 export default {
+  name: "CommentBlock",
   mixins: [support],
-  props: {
-    comments_pack:    { required: true },
-    current_comments: { required: true },
-  },
   created() {
     this.autolinker = new Autolinker()
   },
@@ -31,7 +28,16 @@ export default {
     },
   },
   computed: {
-    _() { return _ }
+    _()                { return _                                       },
+    mediator()         { return this.base.mediator                      },
+    comments_pack()    { return this.mediator.data_source.comments_pack },
+    current_comments() { return this.mediator.current_comments          },
   },
 }
 </script>
+
+<style lang="sass">
+@import "./support.sass"
+.ShogiPlayerPure
+  .CommentBlock
+</style>

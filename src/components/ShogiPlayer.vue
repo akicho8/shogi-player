@@ -25,12 +25,8 @@
       div(v-if="slider_show")
         input.turn_slider(type="range" :value="turn_offset" @input="current_turn_set($event.target.value)" :min="turn_offset_min" :max="turn_offset_max" ref="turn_slider")
 
-    //- http://kyokumen.jp/positions/lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL%20w%20-
-    .sfen_area.is-size-7.has-text-grey(v-if="sfen_show")
-      slot(name="sfen_part" :sfen="mediator.to_simple_sfen" :mediator="mediator")
-        | {{mediator.to_simple_sfen}}
-
-    CommentBlock(:comments_pack="mediator.data_source.comments_pack" :current_comments="mediator.current_comments")
+    SfenShowBlock(:base="base")
+    CommentBlock(:base="base")
 
   //- template(v-if="setting_button_show")
   //-   .buttons.are-small.is-centered
@@ -77,6 +73,7 @@ import PieceBox          from "./PieceBox.vue"
 import SettingModal      from "./SettingModal.vue"
 import ErrorNotify       from "./ErrorNotify.vue"
 import CommentBlock      from "./CommentBlock.vue"
+import SfenShowBlock      from "./SfenShowBlock.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
 import ShogiPlayerPure   from "./ShogiPlayerPure.vue"
 import EditToolBox       from "./EditToolBox.vue"
@@ -143,6 +140,7 @@ export default {
     ErrorNotify,
     CommentBlock,
     OverlayForDisable,
+    SfenShowBlock,
     EditToolBox,
     TurnShowOrEdit,
     ShogiPlayerPure,
