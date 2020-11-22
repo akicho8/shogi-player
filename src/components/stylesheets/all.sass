@@ -2,25 +2,24 @@
 // @import "~buefy/src/scss/buefy-build.scss"
 
 // for customize
-@import "initial_variables"
+@import "initial_variables.sass"
 
 // ここで↓を使わなくても +mobile などは使える。読み込むとモーダルのレイアウトが崩れるので注意
 // @import "~bulma/sass/utilities/mixins.sass"
-@import "helper"
+@import "helper.sass"
 
 // 将棋盤セット (.board_container 内のもの)
-@import "basic_layout"
-@import "dimension_shared"
-@import "board_overlay"
-@import "MembershipStand"
+@import "cursor_object.sass"
+@import "dimension_shared.sass"
+@import "board_overlay.sass"
+@import "MembershipStand.sass"
 
 // 将棋盤の外
-@import "other_parts"
+@import "other_parts.sass"
 
 // helper
-@import "mobile_responsive"
-@import "xray"
+@import "xray.sass"
 
 // theme
-@import "theme_simple"
-@import "is_texture_image"
+@import "is_texture_text.sass"
+@import "is_texture_image.sass"

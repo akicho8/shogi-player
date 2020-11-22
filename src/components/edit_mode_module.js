@@ -30,9 +30,9 @@ export default {
       me_running_p: false,        // mousemove イベント緩和用
       $me_last_event: null,        // mousemove イベント
 
-      cursor_elem_in_board_container: true,
+      cursor_object_in_board_container: true,
 
-      $cursor_elem: null,        // 持ちあげている駒のDOM
+      $cursor_object: null,        // 持ちあげている駒のDOM
       mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
       dialog_p: false,          // 成り確認ダイアログ表示中か？
 
@@ -712,13 +712,13 @@ export default {
 
           // 描画する前のタイミングで呼び出してもらう
           window.requestAnimationFrame(() => {
-            this.cursor_elem_set_pos()
+            this.cursor_object_set_pos()
 
             this.me_running_p = false
           })
         }
       } else {
-        this.cursor_elem_set_pos()
+        this.cursor_object_set_pos()
       }
     },
 
@@ -729,26 +729,26 @@ export default {
       }
     },
 
-    cursor_elem_set_pos() {
-      if (this.$cursor_elem && this.$me_last_event && this.mouse_stick) {
+    cursor_object_set_pos() {
+      if (this.$cursor_object && this.$me_last_event && this.mouse_stick) {
         // TODO: これが遅いのか？ もっと速く設定できる方法があれば変更したい
         let x = this.$me_last_event.clientX
         let y = this.$me_last_event.clientY
 
-        if (this.cursor_elem_in_board_container) {
+        if (this.cursor_object_in_board_container) {
           // const rect = this.$refs.board_container_ref.getBoundingClientRect()
           // x -= rect.left
           // y -= rect.top
         }
 
-        this.$cursor_elem.style.left = `${x}px`
-        this.$cursor_elem.style.top  = `${y}px`
+        this.$cursor_object.style.left = `${x}px`
+        this.$cursor_object.style.top  = `${y}px`
       }
     },
 
     // マウス位置に表示する駒の生成
     //
-    //   .PieceObject.cursor_elem
+    //   .PieceObject.cursor_object
     //     .PieceTexture.virtual_piece_flip
     //
     virtual_piece_create(event, soldier) {
@@ -761,7 +761,7 @@ export default {
       // マウスを動かしてはじめて座標が取れるのでキーボードの場合はすぐに駒は表示されない
       if (event) {
         this.$me_last_event = event
-        this.cursor_elem_set_pos()
+        this.cursor_object_set_pos()
       }
 
       window.addEventListener("mousemove", this.mousemove_hook, false)
@@ -770,8 +770,8 @@ export default {
 
     // 注意: リターンキーでこの soldier をいくら反転させようと考えてはいけない。(origin_soldier1 が元なので意味がない)
     virtual_piece_dom_create(soldier) {
-      this.$cursor_elem = document.createElement("div")
-      this.$cursor_elem.classList.add("cursor_elem")
+      this.$cursor_object = document.createElement("div")
+      this.$cursor_object.classList.add("cursor_object")
 
       const PieceObject = document.createElement("div")
       PieceObject.classList.add("PieceObject")
@@ -786,33 +786,33 @@ export default {
       // PieceTexture.classList.add(...list)
 
       if (this.new_flip) {
-        // this.$cursor_elem.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
+        // this.$cursor_object.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
         PieceObject.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
       }
 
       PieceObject.appendChild(PieceTexture)
-      this.$cursor_elem.appendChild(PieceObject)
+      this.$cursor_object.appendChild(PieceObject)
 
       // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
-      this.$cursor_elem.style.left = "-50%"
-      this.$cursor_elem.style.top  = "-50%"
+      this.$cursor_object.style.left = "-50%"
+      this.$cursor_object.style.top  = "-50%"
 
-      if (this.cursor_elem_in_board_container) {
-        this.$refs.board_container_ref.appendChild(this.$cursor_elem)
+      if (this.cursor_object_in_board_container) {
+        this.$refs.board_container_ref.appendChild(this.$cursor_object)
       } else {
-        this.$el.appendChild(this.$cursor_elem)
+        this.$el.appendChild(this.$cursor_object)
       }
     },
 
     virtual_piece_destroy() {
-      if (this.$cursor_elem) {
-        if (this.cursor_elem_in_board_container) {
-          this.$refs.board_container_ref.removeChild(this.$cursor_elem)
+      if (this.$cursor_object) {
+        if (this.cursor_object_in_board_container) {
+          this.$refs.board_container_ref.removeChild(this.$cursor_object)
         } else {
-          this.$el.removeChild(this.$cursor_elem)
+          this.$el.removeChild(this.$cursor_object)
         }
 
-        this.$cursor_elem = null
+        this.$cursor_object = null
         this.mouse_stick = false
 
         window.removeEventListener("mousemove", this.mousemove_hook, false)

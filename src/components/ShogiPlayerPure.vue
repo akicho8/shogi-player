@@ -30,46 +30,36 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayer
-  .ShogiPlayerPure
-    &.is_layer_on
-      border: 1px dashed change_color($primary, $alpha: 0.5)
-    &.is_fullheight
-      height: 100vh
+.ShogiPlayerPure
+  &.is_layer_on
+    border: 1px dashed change_color($primary, $alpha: 0.5)
+  &.is_fullheight
+    height: 100vh
 
-    text-align: center
-    line-height: 100%
-    display: flex
+  text-align: center
+  line-height: 100%
+  display: flex
 
-    //////////////////////////////////////////////////////////////////////////////// for mobile
-    +mobile
+  //////////////////////////////////////////////////////////////////////////////// for position (tablet以上)
+
+  +tablet
+    &.is_left
+      justify-content: flex-start
+    &.is_centered
       justify-content: center
-      font-size: unquote('calc(50vw / 9)')
+    &.is_right
+      justify-content: flex-end
 
-    //////////////////////////////////////////////////////////////////////////////// is_size_none 以外のときの固定値
-    +tablet
-      &.is_size_small
-        font-size: 30px
-      &.is_size_medium
-        font-size: 40px
-      &.is_size_large
-        font-size: 50px
+    // is_fullheight のときは is_vcentered にするのがよい
+    &.is_top
+      align-items: flex-start
+    &.is_vcentered
+      align-items: center
+    &.is_bottom
+      align-items: flex-end
 
-    //////////////////////////////////////////////////////////////////////////////// for position (tablet以上)
-
-    +tablet
-      &.is_left
-        justify-content: flex-start
-      &.is_centered
-        justify-content: center
-      &.is_right
-        justify-content: flex-end
-
-      // is_fullheight のときは is_vcentered にするのがよい
-      &.is_top
-        align-items: flex-start
-      &.is_vcentered
-        align-items: center
-      &.is_bottom
-        align-items: flex-end
+  //////////////////////////////////////////////////////////////////////////////// for mobile
+  +mobile
+    justify-content: center
+    // font-size: unquote('calc(50vw / 9')
 </style>
