@@ -1,175 +1,183 @@
-%basic_box
-  border: 1px solid $sp_simple_grid_color
-  background-color: $sp_simple_board_bg
-  padding: 0.2em
-  border-radius: 0.25em
-  min-height: 4em
+@import "text_pi_variant/a.sass"
 
-%hoverable_bg
-  &.hoverable_p
-    &:hover
-      background-color: $sp_simple_selectable_color
-
-// 駒を持ち上げた状態のとき、駒を置けるセルを明確にするため、セルにボーダーをつける
-// ただし touch 以下ではマウスカーソルがでないため、ボーダーが移動せず、つまり持ち上げたセルだけにボーダーがついてしまう
-// これはわかりにくいため desktop 以上のときだけにする
-%hoverable_bg_for_cell
-  &.hoverable_p
-    &:hover
-      +desktop
-        border-color: $sp_simple_cell_hover_color
-        border-style: solid
-        border-width: 1px
-
-.ShogiPlayer
+.ShogiPlayerGround
   &.is_texture_text
-    .PieceObject
-      color: $sp_simple_piece_color
-      // font-size: 20px ! important
-
+    &.is_pi_variant_a
       .PieceTexture
-        // line-height: 100% // 駒箱の駒の上下のpaddingが扱いにくくなったらこれを入れる
-        &.promoted_true
-          color: $sp_simple_promoted_color
+        +text_pi_variant_a_pack
 
-      &.holding_p
-        +desktop
-          opacity: 0.4
-          // background-color: $sp_simple_holding_color
-          // さらに駒を持ったときは色を濃くする
-          // &:hover
-          //   background-color: $sp_simple_holding_color
-        +touch
-          // タッチデバイスの場合は動かせないので枠をつける
-          // padding: 2px
-          // border: 2px solid $sp_simple_holding_color
-          background-color: $sp_simple_holding_color
-          height: inherit     // ←【超重要】これを入れないと touch のとき選択した駒の背景に隙間ができる
-
-      // 選択できる駒だけ反応する
-      &.selectable_p
-        &:hover
-          background-color: $sp_simple_selectable_color
-
-      @extend %hoverable_bg_for_cell
-
-      &.origin_place
-        background-color: $sp_simple_origin_bg
-
-      &.current
-        color: $sp_simple_piece_color
-        font-weight: bold
-        animation: simple_blink 0.5s ease-in-out infinite alternate
-        background-color: $sp_simple_current_bg1
-        height: inherit  // ←【超重要】これを入れないと駒が移動したあとの background に隙間ができる
-
-    .BoardInner
-      margin: 0 $sp_simple_margin
-      +board_star_mark_define($sp_simple_star_color)
-
-      border-collapse: separate
-      border: $sp_simple_grid_outer solid $sp_simple_grid_color2
-      border-spacing: $sp_simple_grid_inner
-      background-color: $sp_simple_grid_color
-
-      td
-        background-color: $sp_simple_board_bg
-        // 盤上の駒の領域
-        .PieceObject
-          // width: 3em
-          // height: 3em
-          // font-size: 0.5em
-          // is_vertical-align: middle
-
-          display: flex
-          flex-direction: column
-          justify-content: center
-          align-items: center
-
-          .PieceTexture
-            line-height: 100%
-            // border: 1px solid blue
-            // margin-top: 2.5em
-            // margin-top: auto
-            // margin-bottom: auto
-            // height: auto
-
-            padding-top: 0.1em // そこで上の部分に隙間を入れることで下に少し下げる
-
-            &.location_white
-              @extend %is_flip  // 相手の駒箱が二重に反転しないように盤内だけで適用
-
-    //////////////////////////////////////////////////////////////////////////////// 駒箱
-    .PieceBox
-      @extend %basic_box
-      @extend %hoverable_bg
-      font-size: 0.5em
-      li
-        margin: 0.05em
-        .PieceObjectCount
-          font-size: 0.8em
-          color: $sp_simple_piece_count_color
-
-    &.is_horizontal
-      .PieceBox
-        max-width: 5em
-    &.is_vertical
-      .PieceBox
-        font-size: 1.0em
-        min-height: 1em
-
-    //////////////////////////////////////////////////////////////////////////////// 駒台
-    .Membership
-      // 駒台の駒の大きさ
-      // font-size: 0.9em
-      .player_name
-        // font-size: 0.9em
-
-      .MembershipStand
-        @extend %hoverable_bg
-
-      // width: 1.5em   // 横幅ガクガクを防ぐためにあらかじめサイズを持っておく → 「▲1」の1を hidden にして調整するので明示的には指定しない
-      // 駒数
-      .PieceObjectCount
-        color: $sp_simple_piece_count_color
-        margin-left: 0.1em     // 駒と数の隙間
-        font-size: 0.4em
-
-    &.is_horizontal
-      .Membership
-        .player_name
-        .MembershipStand
-          margin-top: 0.1em
-    &.is_vertical
-      .Membership
-        .player_name
-        .MembershipLocationMark
-        .MembershipStand
-          margin-left: 0.4em
-          li
-            padding: 0 0.2em
-
-    // edit_mode の場合は駒箱を大きくする
-    &.run_mode-edit_mode
-      &.is_horizontal
-        .MembershipStand
-          @extend %basic_box
-          min-height: 5em
-      &.is_vertical
-        .MembershipStand
-          @extend %basic_box
-          min-width: $sp_piece_stand_size_if_blank
-          min-height: 1em
-
-    //////////////////////////////////////////////////////////////////////////////// カーソル位置に表示する持駒
-    .cursor_object
-      .PieceTexture
-        font-size: 1.15em
-        &.location_white
-          @extend %is_flip
-
-@keyframes simple_blink
-  0%
-    background-color: $sp_simple_current_bg1
-  100%
-    background-color: $sp_simple_current_bg2
+// %basic_box
+//   border: 1px solid $sp_simple_grid_color
+//   background-color: $sp_simple_board_bg
+//   padding: 0.2em
+//   border-radius: 0.25em
+//   min-height: 4em
+//
+// %hoverable_bg
+//   &.hoverable_p
+//     &:hover
+//       background-color: $sp_simple_selectable_color
+//
+// // 駒を持ち上げた状態のとき、駒を置けるセルを明確にするため、セルにボーダーをつける
+// // ただし touch 以下ではマウスカーソルがでないため、ボーダーが移動せず、つまり持ち上げたセルだけにボーダーがついてしまう
+// // これはわかりにくいため desktop 以上のときだけにする
+// %hoverable_bg_for_cell
+//   &.hoverable_p
+//     &:hover
+//       +desktop
+//         border-color: $sp_simple_cell_hover_color
+//         border-style: solid
+//         border-width: 1px
+//
+// .ShogiPlayer
+//   &.is_texture_text
+//     .PieceObject
+//       color: $sp_simple_piece_color
+//       // font-size: 20px ! important
+//
+//       .PieceTexture
+//         // line-height: 100% // 駒箱の駒の上下のpaddingが扱いにくくなったらこれを入れる
+//         &.promoted_true
+//           color: $sp_simple_promoted_color
+//
+//       &.holding_p
+//         +desktop
+//           opacity: 0.4
+//           // background-color: $sp_simple_holding_color
+//           // さらに駒を持ったときは色を濃くする
+//           // &:hover
+//           //   background-color: $sp_simple_holding_color
+//         +touch
+//           // タッチデバイスの場合は動かせないので枠をつける
+//           // padding: 2px
+//           // border: 2px solid $sp_simple_holding_color
+//           background-color: $sp_simple_holding_color
+//           height: inherit     // ←【超重要】これを入れないと touch のとき選択した駒の背景に隙間ができる
+//
+//       // 選択できる駒だけ反応する
+//       &.selectable_p
+//         &:hover
+//           background-color: $sp_simple_selectable_color
+//
+//       @extend %hoverable_bg_for_cell
+//
+//       &.origin_place
+//         background-color: $sp_simple_origin_bg
+//
+//       &.current
+//         color: $sp_simple_piece_color
+//         font-weight: bold
+//         animation: simple_blink 0.5s ease-in-out infinite alternate
+//         background-color: $sp_simple_current_bg1
+//         height: inherit  // ←【超重要】これを入れないと駒が移動したあとの background に隙間ができる
+//
+//     .BoardInner
+//       margin: 0 $sp_simple_margin
+//       +board_star_mark_define($sp_simple_star_color)
+//
+//       border-collapse: separate
+//       border: $sp_simple_grid_outer solid $sp_simple_grid_color2
+//       border-spacing: $sp_simple_grid_inner
+//       background-color: $sp_simple_grid_color
+//
+//       td
+//         background-color: $sp_simple_board_bg
+//         // 盤上の駒の領域
+//         .PieceObject
+//           // width: 3em
+//           // height: 3em
+//           // font-size: 0.5em
+//           // is_vertical-align: middle
+//
+//           display: flex
+//           flex-direction: column
+//           justify-content: center
+//           align-items: center
+//
+//           .PieceTexture
+//             line-height: 100%
+//             // border: 1px solid blue
+//             // margin-top: 2.5em
+//             // margin-top: auto
+//             // margin-bottom: auto
+//             // height: auto
+//
+//             padding-top: 0.1em // そこで上の部分に隙間を入れることで下に少し下げる
+//
+//             &.location_white
+//               @extend %is_flip  // 相手の駒箱が二重に反転しないように盤内だけで適用
+//
+//     //////////////////////////////////////////////////////////////////////////////// 駒箱
+//     .PieceBox
+//       @extend %basic_box
+//       @extend %hoverable_bg
+//       font-size: 0.5em
+//       li
+//         margin: 0.05em
+//         .PieceObjectCount
+//           font-size: 0.8em
+//           color: $sp_simple_piece_count_color
+//
+//     &.is_horizontal
+//       .PieceBox
+//         max-width: 5em
+//     &.is_vertical
+//       .PieceBox
+//         font-size: 1.0em
+//         min-height: 1em
+//
+//     //////////////////////////////////////////////////////////////////////////////// 駒台
+//     .Membership
+//       // 駒台の駒の大きさ
+//       // font-size: 0.9em
+//       .player_name
+//         // font-size: 0.9em
+//
+//       .MembershipStand
+//         @extend %hoverable_bg
+//
+//       // width: 1.5em   // 横幅ガクガクを防ぐためにあらかじめサイズを持っておく → 「▲1」の1を hidden にして調整するので明示的には指定しない
+//       // 駒数
+//       .PieceObjectCount
+//         color: $sp_simple_piece_count_color
+//         margin-left: 0.1em     // 駒と数の隙間
+//         font-size: 0.4em
+//
+//     &.is_horizontal
+//       .Membership
+//         .player_name
+//         .MembershipStand
+//           margin-top: 0.1em
+//     &.is_vertical
+//       .Membership
+//         .player_name
+//         .MembershipLocationMark
+//         .MembershipStand
+//           margin-left: 0.4em
+//           li
+//             padding: 0 0.2em
+//
+//     // edit_mode の場合は駒箱を大きくする
+//     &.run_mode-edit_mode
+//       &.is_horizontal
+//         .MembershipStand
+//           @extend %basic_box
+//           min-height: 5em
+//       &.is_vertical
+//         .MembershipStand
+//           @extend %basic_box
+//           min-width: $sp_piece_stand_size_if_blank
+//           min-height: 1em
+//
+//     //////////////////////////////////////////////////////////////////////////////// カーソル位置に表示する持駒
+//     .cursor_object
+//       .PieceTexture
+//         font-size: 1.15em
+//         &.location_white
+//           @extend %is_flip
+//
+// @keyframes simple_blink
+//   0%
+//     background-color: $sp_simple_current_bg1
+//   100%
+//     background-color: $sp_simple_current_bg2

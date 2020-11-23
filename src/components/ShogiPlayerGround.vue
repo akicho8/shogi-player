@@ -20,8 +20,8 @@ export default {
     component_class() {
       return [
         ...Object.values(this.base.new_style_params),
-        // ["bg_variant", this.base.new_bg_variant].join("-"),
-        // ["pi_variant", this.base.new_pi_variant].join("-"),
+        // ["sp_bg_variant", this.base.new_sp_bg_variant].join("-"),
+        // ["sp_pi_variant", this.base.new_sp_pi_variant].join("-"),
       ]
     },
   },

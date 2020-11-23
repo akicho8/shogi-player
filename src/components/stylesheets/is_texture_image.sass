@@ -1,25 +1,25 @@
-@import "piece_image_mapping/a.sass"
-@import "piece_image_mapping/b.sass"
-@import "piece_image_mapping/c.sass"
+@import "image_pi_variant/a.sass"
+@import "image_pi_variant/b.sass"
+@import "image_pi_variant/c.sass"
 
 @import "real_helper.sass"
 @import "bg_image_mapping"
 
 .ShogiPlayerGround
   &.is_texture_image
-    &.pi_variant_a
+    &.is_pi_variant_a
       .PieceTexture
-        +piece_image_variant_a_pack
+        +image_pi_variant_a_pack
 
-    &.pi_variant_b
+    &.is_pi_variant_b
       .PieceTexture
-        +piece_image_variant_b_pack
+        +image_pi_variant_b_pack
         &.location_white
           @extend %is_flip
 
-    &.pi_variant_c
+    &.is_pi_variant_c
       .PieceTexture
-        +piece_image_variant_c_pack
+        +image_pi_variant_c_pack
 
     // カーソル位置に表示する持駒
     .cursor_object

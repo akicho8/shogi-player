@@ -59,8 +59,8 @@ const STYLE_PARAMS_DEFAULT = {
   sp_is_fullheight: "",
   sp_fsize_class:   "is_size_none",
   sp_layer:         "is_layer_on",
-  bg_variant:       "bg_variant_a",
-  pi_variant:       "pi_variant_a",
+  sp_bg_variant:    "is_bg_variant_a",
+  sp_pi_variant:    "is_pi_variant_a",
 }
 
 export default {
@@ -88,11 +88,8 @@ export default {
     start_turn:     { type: Number,  default: -1,          },
     sfen_show:      { type: Boolean, default: false,       },
     overlay_navi:   { type: Boolean, default: true,        },
-    url_embed_turn: { type: Boolean, default: false,       },
     size:           { type: String,  default: "default",   },
-    // bg_variant:     { type: String,  default: "a"          },
-    // pi_variant:  { type: String,  default: "a"          },
-    debug_mode_p:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
+    debug_mode_p:   { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
     final_label:    { type: String,  default: null,        },
     player_info:    { type: Object,  default: null, },
 
@@ -114,8 +111,8 @@ export default {
 
   data() {
     return {
-      // new_bg_variant:    this.bg_variant,
-      // new_pi_variant: this.pi_variant,
+      // new_sp_bg_variant:    this.sp_bg_variant,
+      // new_sp_pi_variant: this.sp_pi_variant,
       new_debug_mode_p:    this.debug_mode_p,
       new_run_mode:      this.run_mode,
 
@@ -241,13 +238,13 @@ export default {
     size(v)              { this.new_size = v                     }, // 外 -> 中
     new_size(v)          { this.$emit("update:size", v)          }, // 中 -> 外
 
-    // bg_variant(v)        { this.new_bg_variant = v               }, // 外 -> 中
-    // new_bg_variant(v)    { this.$emit("update:bg_variant", v)    }, // 中 -> 外
+    // sp_bg_variant(v)        { this.new_sp_bg_variant = v               }, // 外 -> 中
+    // new_sp_bg_variant(v)    { this.$emit("update:sp_bg_variant", v)    }, // 中 -> 外
     //
-    // pi_variant(v)     { this.new_pi_variant = v            }, // 外 -> 中
-    // new_pi_variant(v) { this.$emit("update:pi_variant", v) }, // 中 -> 外
+    // sp_pi_variant(v)     { this.new_sp_pi_variant = v            }, // 外 -> 中
+    // new_sp_pi_variant(v) { this.$emit("update:sp_pi_variant", v) }, // 中 -> 外
 
-    style_params:       { deep: true, handler(v) { this.new_style_params = v            }, },
+    style_params:       { deep: true, handler(v) { this.new_style_params = {...STYLE_PARAMS_DEFAULT, ...v} }, },
     new_style_params:   { deep: true, handler(v) { this.$emit("update:style_params", v) }, },
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -292,9 +289,6 @@ export default {
 
     view_mode_mediator_update(turn) {
       this.mediator_setup(turn)
-      if (this.url_embed_turn) {
-        document.location.hash = this.turn_offset
-      }
       // this.sound_play("piece_put")
       this.update_counter++
     },

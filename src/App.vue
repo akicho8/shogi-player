@@ -60,8 +60,8 @@
             b-radio-button(v-model="sp_layer" native-value="is_layer_off") OFF
         .column
           b-field(custom-class="is-small" label="視点")
-            b-radio-button(v-model="sp_flip" :native-value="false") ▲
-            b-radio-button(v-model="sp_flip" :native-value="true") △
+            b-radio-button(v-model="sp_flip" :native-value="false") ☗
+            b-radio-button(v-model="sp_flip" :native-value="true") ☖
 
   div(is="style" v-text="style_define")
 

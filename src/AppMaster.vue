@@ -85,7 +85,7 @@
                   :slider_show="true"
                   :theme="'real'"
                   :size="'x-large'"
-                  :bg_variant="'a'"
+                  :sp_bg_variant="'a'"
                   :sound_effect="true"
                   :volume="0.25"
                   :debug_mode_p="false"
@@ -102,7 +102,7 @@
                 h3.title 羽生善治名人 vs 渡辺明竜王
                 p.subtitle 第21期竜王戦七番勝負第4局
                 hr
-                ShogiPlayer(:kifu_body="'position startpos moves 2g2f 8c8d 2f2e 8d8e 6i7h 4a3b 2e2d 2c2d 2h2d P*2c 2d2h 7a7b 3i3h 3c3d 9g9f 9c9d 1g1f 1c1d 3h2g 8e8f 8g8f 8b8f P*8g 8f8d 2g3f 5a5b 7g7f 7c7d 8h2b+ 3a2b 7i8h 7b7c 8h7g 7c6d 3f4e 7d7e 4e5f 2b3c 6g6f 3c4d 5f6g 6a7b 5i6h 8a7c 4i5h 2a3c 6h7i 7e7f 6g7f 4d5e P*7e 9d9e B*7d P*8h 7i8h 7b8c 9f9e 8c7d 7e7d 8d7d P*7e 7d8d 5h6g P*7d 7e7d 8d7d P*7e 6d7e 7f7e 7d7e 7g7f 7e7d S*7e 7d4d P*7d 4d4g+ P*2d 2c2d 7d7c+ 4g4i 2h2d P*2c 2d3d 4c4d P*7i 5b4c 3d3e S*4e 6g5f P*7g 8i7g P*3d 3e4e 3c4e 5f5e R*2h N*3f 2h7h+ 8h9g 4e5g+ 5e4d 4i4d S*5b 4c5d 7i7h 4d4i G*6e 5d4e R*4d 4e5f 4d4i G*4h S*3h 4h4i R*5e 5f4f 3h4i G*4e P*4g 5g4g P*4h 4g3g 2i3g 4f3g 5e4e R*8i G*3h 3g3f G*4f 3f2f 9i9h 8i4i+ P*3i S*2i 3h2h 4i3i'" :start_turn="-1" :theme="'real'" :bg_variant="'b'" :pi_variant="'b'")
+                ShogiPlayer(:kifu_body="'position startpos moves 2g2f 8c8d 2f2e 8d8e 6i7h 4a3b 2e2d 2c2d 2h2d P*2c 2d2h 7a7b 3i3h 3c3d 9g9f 9c9d 1g1f 1c1d 3h2g 8e8f 8g8f 8b8f P*8g 8f8d 2g3f 5a5b 7g7f 7c7d 8h2b+ 3a2b 7i8h 7b7c 8h7g 7c6d 3f4e 7d7e 4e5f 2b3c 6g6f 3c4d 5f6g 6a7b 5i6h 8a7c 4i5h 2a3c 6h7i 7e7f 6g7f 4d5e P*7e 9d9e B*7d P*8h 7i8h 7b8c 9f9e 8c7d 7e7d 8d7d P*7e 7d8d 5h6g P*7d 7e7d 8d7d P*7e 6d7e 7f7e 7d7e 7g7f 7e7d S*7e 7d4d P*7d 4d4g+ P*2d 2c2d 7d7c+ 4g4i 2h2d P*2c 2d3d 4c4d P*7i 5b4c 3d3e S*4e 6g5f P*7g 8i7g P*3d 3e4e 3c4e 5f5e R*2h N*3f 2h7h+ 8h9g 4e5g+ 5e4d 4i4d S*5b 4c5d 7i7h 4d4i G*6e 5d4e R*4d 4e5f 4d4i G*4h S*3h 4h4i R*5e 5f4f 3h4i G*4e P*4g 5g4g P*4h 4g3g 2i3g 4f3g 5e4e R*8i G*3h 3g3f G*4f 3f2f 9i9h 8i4i+ P*3i S*2i 3h2h 4i3i'" :start_turn="-1" :theme="'real'" :sp_bg_variant="'b'" :sp_pi_variant="'b'")
 
               .column
                 article.message.is-info
@@ -112,7 +112,7 @@
                 h3.title 藤井猛六段 vs 井上慶太六段
                 p.subtitle 第54期順位戦B級2組7回戦
                 hr
-                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="0" :slider_show="true" :theme="'real'" :bg_variant="'c'")
+                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="0" :slider_show="true" :theme="'real'" :sp_bg_variant="'c'")
 
             br
             br
@@ -171,14 +171,14 @@
                   .message-body
                     | 自分で操作できる。戻れば操作をやり直せる
 
-                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'play_mode'")
+                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :sp_bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'play_mode'")
 
               .column
                 article.message.is-info
                   .message-body
                     | human_side_key オプションで先手側だけ操作できるようにする
 
-                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="20" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'play_mode'" :human_side_key="'black'")
+                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="20" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :sp_bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'play_mode'" :human_side_key="'black'")
 
             .columns
               .column
@@ -227,14 +227,14 @@
                   .message-body
                     | すべての駒を自由に動かせる
 
-                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'edit_mode'")
+                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :theme="'real'" :size="'medium'" :sp_bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'edit_mode'")
 
               .column
                 article.message.is-info
                   .message-body
                     | 詰将棋用の初期配置で開始
 
-                ShogiPlayer(:preset_key="'詰将棋'" :slider_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'edit_mode'")
+                ShogiPlayer(:preset_key="'詰将棋'" :slider_show="true" :theme="'real'" :size="'medium'" :sp_bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'edit_mode'")
 
             br
             br
@@ -374,8 +374,8 @@
                 :start_turn.sync="start_turn"
                 :theme.sync="theme"
                 :size.sync="size"
-                :bg_variant.sync="bg_variant"
-                :pi_variant.sync="pi_variant"
+                :sp_bg_variant.sync="sp_bg_variant"
+                :sp_pi_variant.sync="sp_pi_variant"
                 :debug_mode_p.sync="debug_mode_p"
                 :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
                 :setting_button_show="setting_button_show"
@@ -428,15 +428,15 @@
                     template(v-for="e in ThemeInfo.values")
                       b-radio(v-model="theme" :native-value="e.key") {{e.name}}({{e.key}})
 
-                b-field(label="bg_variant")
+                b-field(label="sp_bg_variant")
                   .block
                     template(v-for="e in BgVariantInfo.values")
-                      b-radio(v-model="bg_variant" :native-value="e.key") {{e.name}}
+                      b-radio(v-model="sp_bg_variant" :native-value="e.key") {{e.name}}
 
-                b-field(label="pi_variant")
+                b-field(label="sp_pi_variant")
                   .block
                     template(v-for="e in PiVariantInfo.values")
-                      b-radio(v-model="pi_variant" :native-value="e.key") {{e.name}}({{e.key}})
+                      b-radio(v-model="sp_pi_variant" :native-value="e.key") {{e.name}}({{e.key}})
 
                 b-field(label="size")
                   .block
@@ -522,8 +522,8 @@
                   | &lt;shogi-player
                   | :<b>run_mode</b>="'{{run_mode}}'"
                   | :<b>theme</b>="'{{theme}}'"
-                  | :<b>bg_variant</b>="'{{bg_variant}}'"
-                  | :<b>pi_variant</b>="'{{pi_variant}}'"
+                  | :<b>sp_bg_variant</b>="'{{sp_bg_variant}}'"
+                  | :<b>sp_pi_variant</b>="'{{sp_pi_variant}}'"
                   | :<b>size</b>="'{{size}}'"
                   | :<b>start_turn</b>="{{start_turn}}"
                   | :<b>slider_show</b>="{{slider_show}}"
@@ -677,8 +677,8 @@ export default {
       // カスタマイズ用
       run_mode: "view_mode",   // play_mode
       theme: "real",
-      bg_variant: "a",
-      pi_variant: "a",
+      sp_bg_variant: "a",
+      sp_pi_variant: "a",
       size: "default",
       start_turn: -1,
       slider_show: true,
