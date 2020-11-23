@@ -83,10 +83,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~bulma/sass/utilities/initial-variables"
-// @import "~bulma/sass/utilities/functions"
-// @import "~bulma/sass/utilities/derived-variables"
-// @import "~bulma/sass/utilities/mixins"
+@import "./support.sass"
 .ShogiPlayer
   &.shortcut_modal
     .simple_title

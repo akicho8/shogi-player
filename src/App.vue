@@ -91,6 +91,7 @@
 <script>
 import Vue from 'vue'
 import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
 
 Vue.use(Buefy)
 
@@ -187,15 +188,8 @@ export default {
 </script>
 
 <style lang="sass">
-// ShogiPlayer.sass のなかで読み込むと親アプリ側で読み込んだ Buefy を干渉してラジオボタンが崩れたりする
-@import "~buefy/src/scss/buefy-build.scss"
-
-// Rails から使うとき Rails 側から見た assets へのパスに変更すること (そうしないと assets を参照できない)
-$sp_assets_dir: "assets" !default
-
-// Rails 側で sp_assets_dir を変更してから読み込みたいので .vue の中では読まないようにする
-@import "./components/ShogiPlayer.sass"
-
+@import "~bulma/sass/utilities/_all"
+@import "./components/ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
 #app
   .ShogiPlayerWidth
 </style>
