@@ -1,5 +1,5 @@
 <template lang="pug">
-.ShogiPlayer.shortcut_modal.modal-card.box.has-text-left(@click="delete_click_handle" style="width:auto")
+.ShogiPlayer.ShortcutModal.modal-card.box.has-text-left(@click="delete_click_handle" style="width:auto")
   .has-text-weight-bold.simple_title.is-size-5.pb-3
     | キーボードショートカット
   table.modal-card-body.table.is-fullwidth.mt-3.mb-0
@@ -73,7 +73,7 @@ import { support } from "./support.js"
 
 export default {
   mixins: [support],
-  name: "shortcut_modal",
+  name: "ShortcutModal",
   methods: {
     delete_click_handle() {
       this.$emit("close")
@@ -85,7 +85,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayer
-  &.shortcut_modal
+  &.ShortcutModal
     .simple_title
       border-bottom: 1px solid $grey-lighter
     .table

@@ -1,6 +1,6 @@
 import Location from "../models/location"
 import Place from "../models/place"
-import shortcut_modal from "./shortcut_modal.vue"
+import ShortcutModal from "./ShortcutModal.vue"
 
 export default {
   data() {
@@ -181,9 +181,8 @@ export default {
         props: { },
         animation: "",
         onCancel: () => { this.shortcut_modal_close_handle() },
-        // fullScreen: true,
         canCancel: ["escape", "outside"],
-        component: shortcut_modal,
+        component: ShortcutModal,
         // events: {
         //   "close": () => { alert("x") },
         // },

@@ -4,9 +4,6 @@
   .section
     .container.is-fluid
       .columns.is-multiline
-        .column
-          b-field(label="var1")
-            b-slider(v-model="var1" :min="1" :max="10" :step="0.05")
         .column.is-2
           b-field(label="横時駒台(min-w)")
             b-slider(v-model="sp_membership_min_width" :min="1" :max="20" :step="0.05")
@@ -124,7 +121,6 @@ export default {
       sp_flip: false,
       sp_piece_object_count_gap_right: 84,
       sp_piece_object_count_gap_bottom: 84,
-      var1: 0,
       sp_layer: "is_layer_on",
       sp_membership_min_width: 3,
       sp_membership_min_height: 3,
@@ -154,9 +150,6 @@ export default {
     style_define() {
       // .is_texture_text .ShogiPlayerCore {
       return `
-        .ShogiPlayer {
-          --var1: ${this.var1}px;
-        }
         // .is_size_none.ShogiPlayer {
         //   font-size: ${this.sp_fsize}vw;
         // }
