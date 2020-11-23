@@ -1,10 +1,12 @@
 <template lang="pug">
+// ShogiPlayerPure は ShogiPlayerWidth の位置を調整するためにあるので他のものを入れてはいけない
 .ShogiPlayerPure(:class="component_class")
-  ShogiPlayerWidth(:base="base")
+  ShogiPlayerWidth(:base="base" v-if="base.mediator" ref="board_container_ref")
 </template>
 
 <script>
 import ShogiPlayerWidth from "./ShogiPlayerWidth.vue"
+import DebugBlock from "./DebugBlock.vue"
 
 import { support } from "./support.js"
 

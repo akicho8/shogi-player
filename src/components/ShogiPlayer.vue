@@ -5,21 +5,16 @@
   template(v-if="!mediator")
     i.fas.fa-spinner.fa-pulse
 
-  EditToolBox(:base="base")
+  ShogiPlayerPure(:base="base")
+  DebugBlock(:base="base")
+
+  template(v-if="setting_button_show")
+    .buttons.are-small.is-centered
+      b-button(icon-left="cog" @click="setting_modal_p = true")
 
   template(v-if="mediator")
     b-modal(:active.sync="setting_modal_p" has-modal-card)
       SettingModal(:base="base")
-
-  template(v-if="mediator")
-    .board_container.font_size_base(ref="board_container_ref")
-      ShogiPlayerPure(:base="base")
-
-  //- template(v-if="setting_button_show")
-  //-   .buttons.are-small.is-centered
-  //-     b-button(icon-left="cog" @click="setting_modal_p = true")
-
-  DebugBlock(:base="base")
 </template>
 
 <script>
@@ -392,7 +387,7 @@ export default {
       return [
         ["size", this.new_size].join("-"),
         ["run_mode", this.new_run_mode].join("-"),
-        {debug_mode_p: this.new_debug_mode_p},
+        { debug_mode_p: this.base.new_debug_mode_p },
       ]
     },
 

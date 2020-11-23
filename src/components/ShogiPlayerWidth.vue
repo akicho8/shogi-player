@@ -1,5 +1,6 @@
 <template lang="pug">
 .ShogiPlayerWidth
+  EditToolBox(:base="base")
   TurnShowOrEdit(:base="base")
   ShogiPlayerCore(:base="base")
   PieceBox(:base="base")
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import EditToolBox     from "./EditToolBox.vue"
 import TurnShowOrEdit  from "./TurnShowOrEdit.vue"
 import ShogiPlayerCore from "./ShogiPlayerCore.vue"
 import PieceBox        from "./PieceBox.vue"
@@ -22,6 +24,7 @@ export default {
   name: "ShogiPlayerWidth",
   mixins: [support],
   components: {
+    EditToolBox,
     TurnShowOrEdit,
     ShogiPlayerCore,
     PieceBox,
