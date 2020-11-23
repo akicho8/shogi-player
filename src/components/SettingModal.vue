@@ -16,7 +16,7 @@
       b-field(label="縦並び")
         b-switch(v-model="base.new_sp_layout")
       b-field(label="デバッグモード")
-        b-switch(v-model="base.new_debug_mode")
+        b-switch(v-model="base.new_debug_mode_p")
 
     template(v-if="false")
       b-dropdown(v-model="base.new_bg_variant")

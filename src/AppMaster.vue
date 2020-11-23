@@ -34,7 +34,7 @@
               li: a(href="#options") オプション
               li: a(href="#api") API
 
-    // ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'" :run_mode="'edit_mode'" :sfen_show="true" :debug_mode="true")
+    // ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'" :run_mode="'edit_mode'" :sfen_show="true" :debug_mode_p="true")
     //- ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'")
     //- ShogiPlayer(:kifu_body="`position startpos moves 7g7f 7c7d 7f7e 7d7e 7i7h 7e7f 7h7g 7f7g+ 6i5h 7g8h 9i9h 7a6b`" :start_turn="-1" :theme="'simple'" :run_mode="'edit_mode'")
     //- ShogiPlayer(:kifu_body="`position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1`" :start_turn="-1" :theme="'simple'" :run_mode="'play_mode'")
@@ -88,7 +88,7 @@
                   :bg_variant="'a'"
                   :sound_effect="true"
                   :volume="0.25"
-                  :debug_mode="false"
+                  :debug_mode_p="false"
                 )
             br
             br
@@ -171,14 +171,14 @@
                   .message-body
                     | 自分で操作できる。戻れば操作をやり直せる
 
-                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'")
+                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'play_mode'")
 
               .column
                 article.message.is-info
                   .message-body
                     | human_side_key オプションで先手側だけ操作できるようにする
 
-                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="20" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'play_mode'" :human_side_key="'black'")
+                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="20" :slider_show="true" :controller_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'play_mode'" :human_side_key="'black'")
 
             .columns
               .column
@@ -227,14 +227,14 @@
                   .message-body
                     | すべての駒を自由に動かせる
 
-                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'")
+                ShogiPlayer(:kifu_body="'position startpos moves 7g7f 8c8d 2h6h 3c3d 6g6f 7a6b 3i3h 5a4b 4g4f 4b3b 3g3f 2b3c 1g1f 8d8e 8h7g 3b2b 7i7h 5c5d 7h6g 6a5b 2i3g 1a1b 6g5f 5d5e 5f4e 8b8d 3f3e 3d3e 3g2e 3c4d 6f6e 2c2d 6e6d 2d2e 4e4d 4c4d 7g5e N*3b P*3c 2b3c B*4e P*5d 5e6f 3c2b 6f8d 4d4e 6d6c+'" :start_turn="-1" :slider_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'edit_mode'")
 
               .column
                 article.message.is-info
                   .message-body
                     | 詰将棋用の初期配置で開始
 
-                ShogiPlayer(:preset_key="'詰将棋'" :slider_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode="false" :run_mode="'edit_mode'")
+                ShogiPlayer(:preset_key="'詰将棋'" :slider_show="true" :theme="'real'" :size="'medium'" :bg_variant="'a'" :sound_effect="true" :volume="0.25" :debug_mode_p="false" :run_mode="'edit_mode'")
 
             br
             br
@@ -303,7 +303,7 @@
                 section.modal-card-body
                   shogi-player(
                     :run_mode="'view_mode'"
-                    :debug_mode="false"
+                    :debug_mode_p="false"
                     :start_turn="0"
                     :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
                     :key_event_capture="true"
@@ -335,7 +335,7 @@
               |     section.modal-card-body
               |       shogi-player(
               |         :run_mode="'view_mode'"
-              |         :debug_mode="false"
+              |         :debug_mode_p="false"
               |         :start_turn="0"
               |         :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
               |         :key_event_capture="true"
@@ -376,7 +376,7 @@
                 :size.sync="size"
                 :bg_variant.sync="bg_variant"
                 :pi_variant.sync="pi_variant"
-                :debug_mode.sync="debug_mode"
+                :debug_mode_p.sync="debug_mode_p"
                 :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
                 :setting_button_show="setting_button_show"
                 :summary_show="summary_show"
@@ -491,8 +491,8 @@
                 b-field(label="sp_layout")
                   b-switch(v-model="sp_layout")
 
-                b-field(label="debug_mode")
-                  b-switch(v-model="debug_mode")
+                b-field(label="debug_mode_p")
+                  b-switch(v-model="debug_mode_p")
 
                 b-field(label="hidden_if_piece_stand_blank")
                   b-switch(v-model="hidden_if_piece_stand_blank")
@@ -534,7 +534,7 @@
                   | :<b>sound_effect</b>="{{sound_effect}}"
                   | :<b>volume</b>="{{volume}}"
                   | :<b>key_event_capture</b>="{{key_event_capture}}"
-                  | :<b>debug_mode</b>="{{debug_mode}}"
+                  | :<b>debug_mode_p</b>="{{debug_mode_p}}"
                   | :<b>hidden_if_piece_stand_blank</b>="{{hidden_if_piece_stand_blank}}"
                   | :<b>setting_button_show</b>="{{setting_button_show}}"
                   | :<b>summary_show</b>="{{summary_show}}"
@@ -596,7 +596,7 @@
               :board_cell_pointerdown_user_handle="board_cell_pointerdown_user_handle"
               :board_cell_left_click_user_handle="board_cell_left_click_user_handle"
               :overlay_navi="false"
-              :debug_mode="false"
+              :debug_mode_p="false"
             )
         .columns
           .column
@@ -689,7 +689,7 @@ export default {
       sound_effect: true,
       volume: 0.5,
       key_event_capture: false,
-      debug_mode: false,
+      debug_mode_p: false,
       hidden_if_piece_stand_blank: false,
       setting_button_show: true,
       summary_show: true,

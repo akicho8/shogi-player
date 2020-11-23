@@ -18,7 +18,7 @@
 | `shift_key_mag`               | shiftキー押下時の倍速        | 1 または null 指定で無効にできる                                                                | 10          |       |
 | `system_key_mag`              | システムキー押下時の倍速     | 1 または null 指定で無効にできる                                                                | 50          |       |
 | `url_embed_turn`              | URLのハッシュに手番を埋める  | 固定URLを作りたいときの実験用の機能                                                             | false       |       |
-| `debug_mode`                  | デバッグモード               | 主に開発用                                                                                      | false       | ○    |
+| `debug_mode_p`                  | デバッグモード               | 主に開発用                                                                                      | false       | ○    |
 | `flip`                        | 盤面を反転する               | △が下にくる                                                                                    | false       | ○    |
 | `flip_if_white`               | △から始まる場合のみ反転する | △が下にくる                                                                                    | false       |       |
 | `url_embed_turn`              | URLのハッシュに手番を埋める  | 固定URLを作りたいときの実験用の機能                                                             | false       |       |
@@ -71,7 +71,7 @@
 | `update:turn_offset_max`                    | 最大手数が変更されたとき                       | 内部変数参照よりこっちの方が安全なはず                            |
 | `update:run_mode`                           | 設定ダイアログでモードが変更されたとき         |                                                                   |
 | `update:kifu_body`                          | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
-| `update:debug_mode`                         | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
+| `update:debug_mode_p`                         | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
 | `update:flip`                               | 盤面を反転したとき                             |                                                                   |
 | `update:sp_layout`                            | レイアウトを変更したとき                       |                                                                   |
 | `update:theme`                              | テーマ変更                                     |                                                                   |

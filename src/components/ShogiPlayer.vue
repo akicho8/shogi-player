@@ -87,7 +87,7 @@ export default {
     size:           { type: String,  default: "default",   },
     bg_variant:     { type: String,  default: "a"          },
     pi_variant:  { type: String,  default: "a"          },
-    debug_mode:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
+    debug_mode_p:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
     final_label:    { type: String,  default: null,        },
     player_info:    { type: Object,  default: null, },
 
@@ -110,7 +110,7 @@ export default {
   data() {
     return {
       new_bg_variant:    this.bg_variant,
-      new_debug_mode:    this.debug_mode,
+      new_debug_mode_p:    this.debug_mode_p,
       new_pi_variant: this.pi_variant,
       new_run_mode:      this.run_mode,
       new_size:          this.size,
@@ -231,8 +231,8 @@ export default {
 
     //////////////////////////////////////////////////////////////////////////////// FIXME: これまとめて書けんのか？
 
-    debug_mode(v)        { this.new_debug_mode = v               }, // 外 -> 内
-    new_debug_mode(v)    { this.$emit("update:debug_mode", v)    }, // 内 -> 外
+    debug_mode_p(v)        { this.new_debug_mode_p = v               }, // 外 -> 内
+    new_debug_mode_p(v)    { this.$emit("update:debug_mode_p", v)    }, // 内 -> 外
 
     theme(v)             { this.new_theme = v                    }, // 外 -> 中
     new_theme(v)         { this.$emit("update:theme", v)         }, // 中 -> 外
@@ -313,7 +313,7 @@ export default {
     },
 
     log(...v) {
-      if (this.new_debug_mode) {
+      if (this.new_debug_mode_p) {
         console.log(...v)
       }
     },
@@ -392,7 +392,7 @@ export default {
       return [
         ["size", this.new_size].join("-"),
         ["run_mode", this.new_run_mode].join("-"),
-        {debug_mode: this.new_debug_mode},
+        {debug_mode_p: this.new_debug_mode_p},
       ]
     },
 
