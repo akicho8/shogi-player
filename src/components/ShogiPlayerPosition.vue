@@ -41,10 +41,7 @@ export default {
   text-align: center
   line-height: 100%
   display: flex
-
-  // 中には ShogiPlayerWidth しか入れない前提なので必要ないけど考え方として縦並びであるべき
-  // こうしておくと、もし .ShogiPlayerPosition:before でデバッグ情報を埋めたときも縦に並ぶようになる
-  flex-direction: column
+  flex-direction: row  // 要素は1つだからといって column してはいけない(justify-content が縦位置になってまぎらわしくなる)
 
   //////////////////////////////////////////////////////////////////////////////// for position (tablet以上)
 
@@ -56,7 +53,7 @@ export default {
     &.is_right
       justify-content: flex-end
 
-    // is_fullheight のときは is_vcentered にするのがよい
+    // is_fullheight のときは合わせて is_vcentered にするのがおすすめ
     &.is_top
       align-items: flex-start
     &.is_vcentered
