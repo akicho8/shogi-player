@@ -38,6 +38,6 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPosition
+.ShogiPlayerGround
   .CommentBlock
 </style>

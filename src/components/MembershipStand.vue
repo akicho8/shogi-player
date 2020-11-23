@@ -95,7 +95,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPosition
+.ShogiPlayerGround
   .MembershipStand
     display: flex
     justify-content: center

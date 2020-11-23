@@ -52,7 +52,7 @@ export default {
 @import "./support.sass"
 // $board_top_bottom_gap: 3px
 
-.ShogiPlayerPosition
+.ShogiPlayerGround
   .Membership
     display: flex
     align-items: center // ▲を中央に配置

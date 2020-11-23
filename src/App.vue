@@ -69,7 +69,7 @@
   div(is="style" v-text="style_define")
 
   ShogiPlayer(
-    :class_for_style="[sp_layout, sp_xpos, sp_ypos, sp_is_fullheight, sp_fsize_class, sp_layer]"
+    :style_params="{sp_layout, sp_xpos, sp_ypos, sp_is_fullheight, sp_fsize_class, sp_layer}"
     :run_mode="'play_mode'"
     :debug_mode_p="true"
     :start_turn="0"
@@ -176,7 +176,7 @@ export default {
           width:  ${this.sp_piece_w * 0.7}vw;
           height: ${this.sp_piece_h * 0.7}vw;
         }
-        .ShogiPlayerPosition {
+        .ShogiPlayerGround {
           --sp_piece_object_count_gap_right: ${this.sp_piece_object_count_gap_right}%;
           --sp_piece_object_count_gap_bottom: ${this.sp_piece_object_count_gap_bottom}%;
         }

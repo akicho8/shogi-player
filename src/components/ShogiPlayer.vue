@@ -4,7 +4,7 @@
 
   i.fas.fa-spinner.fa-pulse(v-if="!mediator")
 
-  ShogiPlayerPosition(:base="base")
+  ShogiPlayerGround(:base="base")
 
   .buttons.are-small.is-centered(v-if="setting_button_show")
     b-button(icon-left="cog" @click="setting_modal_p = true")
@@ -31,7 +31,7 @@ import PieceBox          from "./PieceBox.vue"
 import SettingModal      from "./SettingModal.vue"
 import ErrorNotify       from "./ErrorNotify.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
-import ShogiPlayerPosition   from "./ShogiPlayerPosition.vue"
+import ShogiPlayerGround   from "./ShogiPlayerGround.vue"
 import EditToolBox       from "./EditToolBox.vue"
 import DebugBlock       from "./DebugBlock.vue"
 
@@ -68,7 +68,12 @@ export default {
   ],
 
   props: {
-    class_for_style: { default: [], },
+    style_params: {
+      type: Object,
+      default: {
+        // TODO
+      },
+    },
 
     run_mode:       { type: String,  default: "view_mode", },
     kifu_body:      { type: String,  default: null,        },
@@ -97,7 +102,7 @@ export default {
     OverlayForDisable,
     EditToolBox,
     DebugBlock,
-    ShogiPlayerPosition,
+    ShogiPlayerGround,
   },
 
   data() {
@@ -106,6 +111,7 @@ export default {
       new_debug_mode_p:    this.debug_mode_p,
       new_pi_variant: this.pi_variant,
       new_run_mode:      this.run_mode,
+      new_style_params:  this.style_params,
       new_size:          this.size,
       new_theme:         this.theme,
 
@@ -238,6 +244,9 @@ export default {
 
     pi_variant(v)     { this.new_pi_variant = v            }, // 外 -> 中
     new_pi_variant(v) { this.$emit("update:pi_variant", v) }, // 中 -> 外
+
+    style_params:       { deep: true, handler(v) { this.new_style_params = v            }, },
+    new_style_params:   { deep: true, handler(v) { this.$emit("update:style_params", v) }, },
 
     ////////////////////////////////////////////////////////////////////////////////
 
