@@ -128,15 +128,12 @@ export default {
       turn_edit_p: false,         // N手目編集中
       update_counter: 0,
       setting_modal_p: false,
-      inside_custom_kifu: null, // 設定ダイアログで変更されたときに入る
       env: process.env.NODE_ENV,
       view_mode_turn_offset_save: null, // viewモードを抜けるとき現在の手数を記憶しておく
     }
   },
 
   created() {
-    this.inside_custom_kifu = null
-
     if (this.view_p) {
       this.mediator_setup(this.start_turn)
     }
@@ -385,8 +382,6 @@ export default {
     view_p()         { return this.new_run_mode === "view_mode" },
     play_p()         { return this.new_run_mode === "play_mode" },
     edit_p()         { return this.new_run_mode === "edit_mode" },
-    real_p()         { return this.new_theme === "real"         },
-    // simple_p()       { return this.new_theme === "simple"       },
 
     // 本当は delegate したい。this.$watch を使えば動的になりそう？
     turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
@@ -397,15 +392,14 @@ export default {
 
     component_class() {
       return [
-        ["size", this.new_size].join("-"),
+        // ["size", this.new_size].join("-"),
         ["run_mode", this.new_run_mode].join("-"),
         { debug_mode_p: this.base.new_debug_mode_p },
       ]
     },
 
     kifu_source() {
-      // 設定で棋譜を更新したのが入った inside_custom_kifu が最優先。つまりもう更新はできなくなる。いいのか？
-      return this.inside_custom_kifu || this.kifu_body_from_url || this.kifu_body || this.init_preset_sfen || "position startpos"
+      return this.kifu_body || this.init_preset_sfen || "position startpos"
     },
   },
 }
@@ -414,5 +408,4 @@ export default {
 <style lang="sass">
 @import "support.sass"
 .ShogiPlayer
-  // width: 100%
 </style>

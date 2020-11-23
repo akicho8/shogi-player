@@ -52,8 +52,8 @@
     b-field(label="編集モードの現局面(Readonly) ※BUG:駒を反転したときに反映されない場合がある")
       b-input(:value="base.edit_mode_snapshot_sfen2" type="input" size="is-small" readonly)
 
-    b-field(label="再生モードの棋譜(編集可)")
-      b-input(v-model="new_kifu_source" type="textarea" size="is-small")
+    b-field(label="再生モードの棋譜(Readonly)")
+      b-input(:value="base.kifu_source" type="textarea" size="is-small" readonly)
 
     b-field(label="操作モードの棋譜(Readonly)")
       b-input.is-small(:value="base.play_mode_full_moves_sfen" type="textarea" size="is-small" readonly)
@@ -72,26 +72,13 @@ import PiVariantInfo from "../models/pi_variant_info"
 import { support } from "./support.js"
 
 export default {
+  name: "SettingModal",
   mixins: [support],
-
-  data() {
-    return {
-      new_kifu_source: this.base.kifu_source,
-    }
-  },
-
-  watch: {
-    new_kifu_source(v) {
-      this.base.inside_custom_kifu = v
-      this.$emit("update:kifu_body", v)
-    },
-  },
-
   computed: {
-    RunModeInfo()      { return RunModeInfo      },
-    ThemeInfo()        { return ThemeInfo        },
-    SizeInfo()         { return SizeInfo         },
-    BgVariantInfo()    { return BgVariantInfo    },
+    RunModeInfo()   { return RunModeInfo   },
+    ThemeInfo()     { return ThemeInfo     },
+    SizeInfo()      { return SizeInfo      },
+    BgVariantInfo() { return BgVariantInfo },
     PiVariantInfo() { return PiVariantInfo },
   },
 }
