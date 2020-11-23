@@ -36,7 +36,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPure
+.ShogiPlayerPosition
   .TurnShowOrEdit
     // N手目の編集モードのnumberフィールド
     input

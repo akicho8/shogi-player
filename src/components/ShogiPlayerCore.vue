@@ -38,7 +38,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPure
+.ShogiPlayerPosition
   .ShogiPlayerCore
     // 縦横関係なく中央に寄せる
     display: flex

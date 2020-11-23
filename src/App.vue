@@ -177,7 +177,7 @@ export default {
           width:  ${this.sp_piece_w * 0.7}vw;
           height: ${this.sp_piece_h * 0.7}vw;
         }
-        .ShogiPlayerPure {
+        .ShogiPlayerPosition {
           --sp_piece_object_count_gap_right: ${this.sp_piece_object_count_gap_right}%;
           --sp_piece_object_count_gap_bottom: ${this.sp_piece_object_count_gap_bottom}%;
         }

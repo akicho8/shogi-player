@@ -40,7 +40,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPure
+.ShogiPlayerPosition
   &.is_layer_on
     .MembershipLocation
       border: 1px dashed change_color($primary, $alpha: 0.5)

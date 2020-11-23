@@ -33,7 +33,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPure
+.ShogiPlayerPosition
   .BoardOuter
     width: 100%
     height: 100%

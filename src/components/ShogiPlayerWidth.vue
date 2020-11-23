@@ -41,4 +41,18 @@ export default {
   .ShogiPlayerWidth
     +mobile
       width: 100vw
+
+  &.debug_mode_p
+    .ShogiPlayerWidth
+      &:after
+        +mobile
+          content: "(mobile)"
+        +tablet
+          content: "(tablet)"
+        +desktop
+          content: "(desktop)"
+        +widescreen
+          content: "(widescreen)"
+        +fullhd
+          content: "(fullhd)"
 </style>

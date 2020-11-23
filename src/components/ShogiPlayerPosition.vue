@@ -42,6 +42,10 @@ export default {
   line-height: 100%
   display: flex
 
+  // 中には ShogiPlayerWidth しか入れない前提なので必要ないけど考え方として縦並びであるべき
+  // こうしておくと、もし .ShogiPlayerPosition:before でデバッグ情報を埋めたときも縦に並ぶようになる
+  flex-direction: column
+
   //////////////////////////////////////////////////////////////////////////////// for position (tablet以上)
 
   +tablet

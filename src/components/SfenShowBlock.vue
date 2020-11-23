@@ -16,7 +16,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPure
+.ShogiPlayerPosition
   .SfenShowBlock
     word-break: break-all // 幅が狭いときでも折り返す
 </style>

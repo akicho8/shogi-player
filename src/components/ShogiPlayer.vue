@@ -5,7 +5,7 @@
   template(v-if="!mediator")
     i.fas.fa-spinner.fa-pulse
 
-  ShogiPlayerPure(:base="base")
+  ShogiPlayerPosition(:base="base")
   DebugBlock(:base="base")
 
   template(v-if="setting_button_show")
@@ -33,7 +33,7 @@ import PieceBox          from "./PieceBox.vue"
 import SettingModal      from "./SettingModal.vue"
 import ErrorNotify       from "./ErrorNotify.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
-import ShogiPlayerPure   from "./ShogiPlayerPure.vue"
+import ShogiPlayerPosition   from "./ShogiPlayerPosition.vue"
 import EditToolBox       from "./EditToolBox.vue"
 import DebugBlock       from "./DebugBlock.vue"
 
@@ -99,7 +99,7 @@ export default {
     OverlayForDisable,
     EditToolBox,
     DebugBlock,
-    ShogiPlayerPure,
+    ShogiPlayerPosition,
   },
 
   data() {

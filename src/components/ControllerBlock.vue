@@ -21,7 +21,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPure
+.ShogiPlayerPosition
   .ControllerBlock
     .controller_group
       margin-top: 0.8rem

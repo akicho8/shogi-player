@@ -17,7 +17,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPure
+.ShogiPlayerPosition
   --sp_piece_object_count_gap_right: 86%
   --sp_piece_object_count_gap_bottom: 100%
   --sp_piece_object_count_font_size: 0.75rem

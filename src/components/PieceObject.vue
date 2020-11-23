@@ -50,7 +50,7 @@ export default {
 
   @extend %real_hoverable_bg
 
-.ShogiPlayerPure
+.ShogiPlayerPosition
   // 共通
   .PieceObject
     // cursor: default // テキスト選択「I」ではなく矢印カーソルとする

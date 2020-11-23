@@ -17,7 +17,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerPure
+.ShogiPlayerPosition
   .MembershipLocationMark
     background-position: center
     background-repeat: no-repeat
