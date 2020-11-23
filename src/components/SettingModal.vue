@@ -25,22 +25,20 @@
         template(v-for="e in BgVariantInfo.values")
           b-dropdown-item(:value="e.key") {{e.name}}
 
-    b-field(label="テーマ")
+    //- b-field(label="テーマ")
+    //- b-field
+    //-   template(v-for="e in ThemeInfo.values")
+    //-     b-radio-button(v-model="base.new_theme" :native-value="e.key") {{e.name}}
+
+    b-field(label="背景の種類")
     b-field
-      template(v-for="e in ThemeInfo.values")
-        b-radio-button(v-model="base.new_theme" :native-value="e.key") {{e.name}}
+      template(v-for="e in BgVariantInfo.values")
+        b-radio-button(v-model="base.new_bg_variant" :native-value="e.key" size="is-small") {{e.name}}
 
-    template(v-if="base.real_p")
-      .box
-        b-field(label="背景の種類")
-        b-field
-          template(v-for="e in BgVariantInfo.values")
-            b-radio-button(v-model="base.new_bg_variant" :native-value="e.key" size="is-small") {{e.name}}
-
-        b-field(label="駒の種類")
-        b-field
-          template(v-for="e in PiVariantInfo.values")
-            b-radio-button(v-model="base.new_pi_variant" :native-value="e.key") {{e.name}}
+    b-field(label="駒の種類")
+    b-field
+      template(v-for="e in PiVariantInfo.values")
+        b-radio-button(v-model="base.new_pi_variant" :native-value="e.key") {{e.name}}
 
     b-field(label="サイズ")
     b-field

@@ -7,17 +7,17 @@
 
 .ShogiPlayerGround
   &.is_texture_image
-    &.pi_variant-a
+    &.pi_variant_a
       .PieceTexture
         +piece_image_variant_a_pack
 
-    &.pi_variant-b
+    &.pi_variant_b
       .PieceTexture
         +piece_image_variant_b_pack
         &.location_white
           @extend %is_flip
 
-    &.pi_variant-c
+    &.pi_variant_c
       .PieceTexture
         +piece_image_variant_c_pack
 

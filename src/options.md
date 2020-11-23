@@ -3,7 +3,7 @@
 | `run_mode`                    | 実行モード                   | `view_mode`:再生 `play_mode`:操作 編集:`edit_mode`。                                            | 'view_mode' | ○    |
 | `human_side_key`              | 人間が操作する側             | play_mode 時のみ有効 `both`, `black`, `white`, `none`                                           | 'both'      |       |
 | `kifu_body`                   | 棋譜の本体                   | KIF と SFEN に対応。駒落ちは SFEN のみ                                                          | null        |       |
-| `theme`                       | テーマ名                     | `none`:なし `simple`:シンプル `real`:木目                                                       | 'real'      | ○    |
+<!-- | `theme`                       | テーマ名                     | `none`:なし `simple`:シンプル `real`:木目                                                       | 'real'      | ○    | -->
 | `bg_variant`                  | realテーマの背景             | a .. z                                                                                          | 'a'         | ○    |
 | `pi_variant`               | realテーマの駒種             | a .. b                                                                                          | 'a'         | ○    |
 | `size`                        | 盤面の大きさ                 | `none` `xx-small` `x-small` `small` `default` `medium` `large` `x-large` `xx-large` `xxx-large` | 'default'   | ○    |

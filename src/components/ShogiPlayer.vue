@@ -13,6 +13,7 @@
 
   b-modal(:active.sync="setting_modal_p" has-modal-card v-if="mediator")
     SettingModal(:base="base")
+  pre {{new_style_params}}
 </template>
 
 <script>
@@ -50,6 +51,18 @@ import { root_support } from "./root_support.js"
 // To use lodash's _ in the vue template
 Object.defineProperty(Vue.prototype, '_', {value: _})
 
+const STYLE_PARAMS_DEFAULT = {
+  sp_texture:       "is_texture_image",
+  sp_layout:        "is_vertical",
+  sp_hpos:          "is_centered",
+  sp_vpos:          "is_vcentered",
+  sp_is_fullheight: "",
+  sp_fsize_class:   "is_size_none",
+  sp_layer:         "is_layer_on",
+  bg_variant:       "bg_variant_a",
+  pi_variant:       "pi_variant_a",
+}
+
 export default {
   name: 'ShogiPlayer',
 
@@ -68,12 +81,7 @@ export default {
   ],
 
   props: {
-    style_params: {
-      type: Object,
-      default: {
-        // TODO
-      },
-    },
+    style_params: { type: Object, default: {}, },
 
     run_mode:       { type: String,  default: "view_mode", },
     kifu_body:      { type: String,  default: null,        },
@@ -81,10 +89,9 @@ export default {
     sfen_show:      { type: Boolean, default: false,       },
     overlay_navi:   { type: Boolean, default: true,        },
     url_embed_turn: { type: Boolean, default: false,       },
-    theme:          { type: String,  default: "real",      },
     size:           { type: String,  default: "default",   },
-    bg_variant:     { type: String,  default: "a"          },
-    pi_variant:  { type: String,  default: "a"          },
+    // bg_variant:     { type: String,  default: "a"          },
+    // pi_variant:  { type: String,  default: "a"          },
     debug_mode_p:     { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
     final_label:    { type: String,  default: null,        },
     player_info:    { type: Object,  default: null, },
@@ -107,13 +114,14 @@ export default {
 
   data() {
     return {
-      new_bg_variant:    this.bg_variant,
+      // new_bg_variant:    this.bg_variant,
+      // new_pi_variant: this.pi_variant,
       new_debug_mode_p:    this.debug_mode_p,
-      new_pi_variant: this.pi_variant,
       new_run_mode:      this.run_mode,
-      new_style_params:  this.style_params,
+
+      new_style_params:  Object.assign({}, STYLE_PARAMS_DEFAULT, this.style_params),
+
       new_size:          this.size,
-      new_theme:         this.theme,
 
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
@@ -233,17 +241,14 @@ export default {
     debug_mode_p(v)        { this.new_debug_mode_p = v               }, // 外 -> 内
     new_debug_mode_p(v)    { this.$emit("update:debug_mode_p", v)    }, // 内 -> 外
 
-    theme(v)             { this.new_theme = v                    }, // 外 -> 中
-    new_theme(v)         { this.$emit("update:theme", v)         }, // 中 -> 外
-
     size(v)              { this.new_size = v                     }, // 外 -> 中
     new_size(v)          { this.$emit("update:size", v)          }, // 中 -> 外
 
-    bg_variant(v)        { this.new_bg_variant = v               }, // 外 -> 中
-    new_bg_variant(v)    { this.$emit("update:bg_variant", v)    }, // 中 -> 外
-
-    pi_variant(v)     { this.new_pi_variant = v            }, // 外 -> 中
-    new_pi_variant(v) { this.$emit("update:pi_variant", v) }, // 中 -> 外
+    // bg_variant(v)        { this.new_bg_variant = v               }, // 外 -> 中
+    // new_bg_variant(v)    { this.$emit("update:bg_variant", v)    }, // 中 -> 外
+    //
+    // pi_variant(v)     { this.new_pi_variant = v            }, // 外 -> 中
+    // new_pi_variant(v) { this.$emit("update:pi_variant", v) }, // 中 -> 外
 
     style_params:       { deep: true, handler(v) { this.new_style_params = v            }, },
     new_style_params:   { deep: true, handler(v) { this.$emit("update:style_params", v) }, },
@@ -381,7 +386,7 @@ export default {
     play_p()         { return this.new_run_mode === "play_mode" },
     edit_p()         { return this.new_run_mode === "edit_mode" },
     real_p()         { return this.new_theme === "real"         },
-    simple_p()       { return this.new_theme === "simple"       },
+    // simple_p()       { return this.new_theme === "simple"       },
 
     // 本当は delegate したい。this.$watch を使えば動的になりそう？
     turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
