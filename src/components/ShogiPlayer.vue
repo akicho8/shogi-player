@@ -19,29 +19,7 @@
   //-   .buttons.are-small.is-centered
   //-     b-button(icon-left="cog" @click="setting_modal_p = true")
 
-  div.debug_table(v-if="new_debug_mode")
-    table.table.is-bordered.is-striped.is-narrow.is-hoverable.is-fullwidth
-      tbody
-        tr: <th>現在のモード(new_run_mode)</th><td>{{new_run_mode}}</td>
-        tr: <th>update_counter</th><td>{{update_counter}}</td>
-        tr: <th>移動元座標(place_from)</th><td>{{place_from}}</td>
-        tr: <th>駒台・駒箱から移動中の駒(have_piece)</th><td>{{have_piece}}</td>
-        template(v-if="mediator")
-          tr: <th>駒箱</th><td>{{mediator.piece_box_realize()}}</td>
-          tr: <th>持駒</th><td>{{mediator.hold_pieces}}</td>
-          tr: <th>次の手番</th><td>{{mediator.current_location.key}}</td>
-          tr: <th>現局面のSFEN</th><td>{{mediator.to_simple_sfen}}</td>
-          tr: <th>正規化手番(turn_offset)</th><td>{{turn_offset}}</td>
-        tr: <th>開始局面番号(start_turn)</th><td>{{start_turn}}</td>
-        tr: <th>初期配置(current_preset_key)</th><td>{{current_preset_key}}</td>
-        tr: <th>play_modeでの指し手(moves)</th><td>{{moves}}</td>
-        tr: <th>play_modeの開始局面(init_sfen)</th><td>{{init_sfen}}</td>
-        tr: <th>編集モード時の手番(init_location_key)</th><td>{{init_location_key}}</td>
-        tr: <th>編集モード時の手番を反映したSFEN(edit_mode_snapshot_sfen)</th><td>{{edit_mode_snapshot_sfen}}</td>
-        tr: <th>play_modeでのSFEN(play_mode_full_moves_sfen)</th><td>{{play_mode_full_moves_sfen}}</td>
-        tr: <th>key_event_capture</th><td>{{key_event_capture}}</td>
-        tr: <th>interval_id</th><td>{{interval_id}}</td>
-        tr: <th>mouseover_info</th><td>{{mouseover_info}}</td>
+  DebugBlock(:base="base")
 </template>
 
 <script>
@@ -62,6 +40,7 @@ import ErrorNotify       from "./ErrorNotify.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
 import ShogiPlayerPure   from "./ShogiPlayerPure.vue"
 import EditToolBox       from "./EditToolBox.vue"
+import DebugBlock       from "./DebugBlock.vue"
 
 // mixins modules
 import navi_module      from "./navi_module.js"
@@ -124,6 +103,7 @@ export default {
     ErrorNotify,
     OverlayForDisable,
     EditToolBox,
+    DebugBlock,
     ShogiPlayerPure,
   },
 
