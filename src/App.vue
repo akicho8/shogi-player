@@ -69,7 +69,7 @@
   div(is="style" v-text="style_define")
 
   ShogiPlayer(
-    :custom_class="[sp_fixed, sp_xpos, sp_ypos, sp_is_fullheight, sp_fsize_class, sp_layer]"
+    :class_for_style="[sp_layout, sp_xpos, sp_ypos, sp_is_fullheight, sp_fsize_class, sp_layer]"
     :run_mode="'play_mode'"
     :debug_mode_p="true"
     :start_turn="0"
@@ -114,7 +114,6 @@ export default {
       sp_ypos: "is_vcentered",
       sp_layout: "is_vertical",
       sp_theme: "is_texture_image",
-      sp_fixed: "is_aspect_ratio_fixed_on",
       sp_fsize: 2.0,
       screen_width: 30,
       sp_fsize_class: "is_size_none",

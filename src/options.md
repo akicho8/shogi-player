@@ -22,7 +22,6 @@
 | `flip`                        | 盤面を反転する               | △が下にくる                                                                                    | false       | ○    |
 | `flip_if_white`               | △から始まる場合のみ反転する | △が下にくる                                                                                    | false       |       |
 | `url_embed_turn`              | URLのハッシュに手番を埋める  | 固定URLを作りたいときの実験用の機能                                                             | false       |       |
-| `base.sp_layout`                     | 配置を縦並びにする           | スマホ向き用レイアウト                                                                          | is_vertical       | ○    |
 | `final_label`                 | 結果の文字列                 | 空だと「○の勝ち」                                                                              | null        |       |
 | `preset_key`                  | 盤面の初期配置               | kifu_body の代わりに指定するとその配置になる                                                    | null        |       |
 | `hidden_if_piece_stand_blank` | 持駒がないときは駒台非表示   | view_mode のみ                                                                                  | false       |       |

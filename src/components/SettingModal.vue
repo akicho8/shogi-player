@@ -13,8 +13,6 @@
     b-field(grouped)
       b-field(label="反転")
         b-switch(v-model="base.new_flip")
-      b-field(label="縦並び")
-        b-switch(v-model="base.new_sp_layout")
       b-field(label="デバッグモード")
         b-switch(v-model="base.new_debug_mode_p")
 

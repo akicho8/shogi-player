@@ -68,7 +68,7 @@ export default {
   ],
 
   props: {
-    custom_class: { default: [], },
+    class_for_style: { default: [], },
 
     run_mode:       { type: String,  default: "view_mode", },
     kifu_body:      { type: String,  default: null,        },

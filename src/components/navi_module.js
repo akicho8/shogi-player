@@ -8,7 +8,6 @@ export default {
     shift_key_mag:               { type: Number,  default: 10,    },
     system_key_mag:              { type: Number,  default: 50,    },
     flip:                        { type: Boolean, default: false, },
-    sp_layout:                   { type: String,  default: "is_vertical", },
     hidden_if_piece_stand_blank: { type: Boolean, default: false, },
     setting_button_show:         { type: Boolean, default: true,  },
     summary_show:                { type: Boolean, default: true,  },
@@ -19,7 +18,6 @@ export default {
   data() {
     return {
       new_flip: null,
-      new_sp_layout: null,
     }
   },
 
@@ -33,15 +31,11 @@ export default {
 
   created() {
     this.new_flip = this.flip
-    this.new_sp_layout  = this.sp_layout
   },
 
   watch: {
     flip(v)     { this.new_flip = v             }, // 外 -> 中
     new_flip(v) { this.$emit("update:flip", v)  }, // 中 -> 外
-
-    sp_layout(v)     { this.new_sp_layout = v             }, // 外 -> 中
-    new_sp_layout(v) { this.$emit("update:sp_layout", v)  }, // 中 -> 外
   },
 
   methods: {

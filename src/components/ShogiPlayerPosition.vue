@@ -19,8 +19,7 @@ export default {
   computed: {
     component_class() {
       return [
-        ...this.base.custom_class,
-        this.base.new_sp_layout,
+        ...this.base.class_for_style,
         this.base.new_theme,
         ["bg_variant", this.base.new_bg_variant].join("-"),
         ["pi_variant", this.base.new_pi_variant].join("-"),
