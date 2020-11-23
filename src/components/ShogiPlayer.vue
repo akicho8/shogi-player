@@ -2,19 +2,17 @@
 .ShogiPlayer(:class="component_class")
   OverlayForDisable(:base="base")
 
-  template(v-if="!mediator")
-    i.fas.fa-spinner.fa-pulse
+  i.fas.fa-spinner.fa-pulse(v-if="!mediator")
 
   ShogiPlayerPosition(:base="base")
+
+  .buttons.are-small.is-centered(v-if="setting_button_show")
+    b-button(icon-left="cog" @click="setting_modal_p = true")
+
   DebugBlock(:base="base")
 
-  template(v-if="setting_button_show")
-    .buttons.are-small.is-centered
-      b-button(icon-left="cog" @click="setting_modal_p = true")
-
-  template(v-if="mediator")
-    b-modal(:active.sync="setting_modal_p" has-modal-card)
-      SettingModal(:base="base")
+  b-modal(:active.sync="setting_modal_p" has-modal-card v-if="mediator")
+    SettingModal(:base="base")
 </template>
 
 <script>
