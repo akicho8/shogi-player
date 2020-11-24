@@ -73,6 +73,7 @@
             b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_d") d
             b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_e") e
             b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_f") f
+            b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_g") g
             b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_none") none
         .column
           b-field(custom-class="is-small" label="視点")

@@ -1,38 +1,22 @@
-=is_pi_variant_c($piece_key, $promoted, $location_key, $name)
+=is_pi_variant_c($piece_key, $promoted, $code)
   &.piece_#{$piece_key}
     &.promoted_#{$promoted}
-      &.location_#{$location_key}
-        background-image: url("#{$sp_assets_dir}/将棋図案駒_配布データ/#{$name}.png")
-  
+      // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg")
+      background-image: url("#{$sp_assets_dir}/is_pi_variant/c/#{$code}.svg")
+
 =is_pi_variant_c_pack()
-  +is_pi_variant_c("K", false, "black", "02_玉将")
-  +is_pi_variant_c("R", false, "black", "03_飛車")
-  +is_pi_variant_c("B", false, "black", "05_角行")
-  +is_pi_variant_c("G", false, "black", "07_金将")
-  +is_pi_variant_c("S", false, "black", "08_銀将")
-  +is_pi_variant_c("N", false, "black", "10_桂馬")
-  +is_pi_variant_c("L", false, "black", "12_香車")
-  +is_pi_variant_c("P", false, "black", "14_歩兵")
-  +is_pi_variant_c("X", false, "black", "02_玉将")
-  +is_pi_variant_c("R", true,  "black", "04_竜王")
-  +is_pi_variant_c("B", true,  "black", "06_竜馬")
-  +is_pi_variant_c("S", true,  "black", "09_成銀")
-  +is_pi_variant_c("N", true,  "black", "11_成桂")
-  +is_pi_variant_c("L", true,  "black", "13_成香")
-  +is_pi_variant_c("P", true,  "black", "15_と金")
-  // 後手
-  +is_pi_variant_c("K", false, "white", "18_王将_逆")
-  +is_pi_variant_c("R", false, "white", "20_飛車_逆")
-  +is_pi_variant_c("B", false, "white", "22_角行_逆")
-  +is_pi_variant_c("G", false, "white", "24_金将_逆")
-  +is_pi_variant_c("S", false, "white", "25_銀将_逆")
-  +is_pi_variant_c("N", false, "white", "27_桂馬_逆")
-  +is_pi_variant_c("L", false, "white", "29_香車_逆")
-  +is_pi_variant_c("P", false, "white", "31_歩兵_逆")
-  +is_pi_variant_c("X", false, "white", "19_玉将_逆")
-  +is_pi_variant_c("R", true,  "white", "21_竜王_逆")
-  +is_pi_variant_c("B", true,  "white", "23_竜馬_逆")
-  +is_pi_variant_c("S", true,  "white", "26_成銀_逆")
-  +is_pi_variant_c("N", true,  "white", "28_成桂_逆")
-  +is_pi_variant_c("L", true,  "white", "30_成香_逆")
-  +is_pi_variant_c("P", true,  "white", "32_と金_逆")
+  +is_pi_variant_c("K", false, "K0") // https://glyphwiki.org/wiki/u738b
+  +is_pi_variant_c("R", false, "R0") // https://glyphwiki.org/wiki/u98db
+  +is_pi_variant_c("B", false, "B0") // https://glyphwiki.org/wiki/u89d2
+  +is_pi_variant_c("G", false, "G0") // https://glyphwiki.org/wiki/u91d1
+  +is_pi_variant_c("S", false, "S0") // https://glyphwiki.org/wiki/u9280
+  +is_pi_variant_c("N", false, "N0") // https://glyphwiki.org/wiki/u6842
+  +is_pi_variant_c("L", false, "L0") // https://glyphwiki.org/wiki/u9999
+  +is_pi_variant_c("P", false, "P0") // https://glyphwiki.org/wiki/u6b69
+  +is_pi_variant_c("X", false, "X0") // https://glyphwiki.org/wiki/u7389
+  +is_pi_variant_c("R", true,  "R1") // https://glyphwiki.org/wiki/u7adc
+  +is_pi_variant_c("B", true,  "B1") // https://glyphwiki.org/wiki/u99ac
+  +is_pi_variant_c("S", true,  "S1") // https://glyphwiki.org/wiki/u5168
+  +is_pi_variant_c("N", true,  "N1") // https://glyphwiki.org/wiki/u572d
+  +is_pi_variant_c("L", true,  "L1") // https://glyphwiki.org/wiki/u674f
+  +is_pi_variant_c("P", true,  "P1") // https://studio.beatnix.co.jp/files/moji-svg/hiragana/minchyo/01/hira_min_to.svg
