@@ -1,0 +1,22 @@
+=is_pi_variant_d($piece_key, $promoted, $code)
+  &.piece_#{$piece_key}
+    &.promoted_#{$promoted}
+      // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg")
+      background-image: url("#{$sp_assets_dir}/is_pi_variant/d/#{$code}.svg")
+
+=is_pi_variant_d_pack
+  +is_pi_variant_d("K", false, "K0")
+  +is_pi_variant_d("R", false, "R0")
+  +is_pi_variant_d("B", false, "B0")
+  +is_pi_variant_d("G", false, "G0")
+  +is_pi_variant_d("S", false, "S0")
+  +is_pi_variant_d("N", false, "N0")
+  +is_pi_variant_d("L", false, "L0")
+  +is_pi_variant_d("P", false, "P0")
+  +is_pi_variant_d("X", false, "K0")
+  +is_pi_variant_d("R", true,  "R1")
+  +is_pi_variant_d("B", true,  "B1")
+  +is_pi_variant_d("S", true,  "S1")
+  +is_pi_variant_d("N", true,  "N1")
+  +is_pi_variant_d("L", true,  "L1")
+  +is_pi_variant_d("P", true,  "P1")

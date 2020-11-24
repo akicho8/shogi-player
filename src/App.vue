@@ -135,7 +135,7 @@ export default {
       sp_piece_h: 2.95,
       sp_flip: false,
       sp_piece_object_count_gap_right: 84,
-      sp_piece_object_count_gap_bottom: 84,
+      sp_piece_object_count_gap_bottom: 91,
       sp_layer: "is_layer_on",
       sp_pi_variant: "is_pi_variant_a",
       sp_bg_variant: "is_bg_variant_a",
