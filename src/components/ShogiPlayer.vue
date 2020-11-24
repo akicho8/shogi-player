@@ -59,8 +59,8 @@ const STYLE_PARAMS_DEFAULT = {
   sp_is_fullheight: "",
   sp_fsize_class:   "is_size_none",
   sp_layer:         "is_layer_on",
-  sp_bg_variant:    "is_bg_variant_a",
   sp_pi_variant:    "is_pi_variant_a",
+  sp_bg_variant:    "is_bg_variant_a",
 }
 
 export default {

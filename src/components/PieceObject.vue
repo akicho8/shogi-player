@@ -27,7 +27,7 @@ export default {
 
 // 選択できる駒に指定する
 %dom_real_selectable
-  +filter_drop_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
+  // +filter_drop_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
   &.holding_p
     +desktop
       opacity: 0.4  // 駒を持ち上げたので元の駒を薄くする
@@ -93,7 +93,7 @@ export default {
       background-position: center
       background-repeat: no-repeat
       background-size: contain // 必ず駒の全体が表示されるようにする
-      filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
+      // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
       // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
 
       // 下に引く

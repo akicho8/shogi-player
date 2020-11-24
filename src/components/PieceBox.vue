@@ -48,7 +48,7 @@ export default {
 .ShogiPlayer
   &.is_vertical
     .PieceBox
-      @extend %board_shadow
+      +filter_drop_shadow(1)
       // @extend %board_texture_bg
       @extend %real_hoverable_opacity
       @extend %is_unselectable

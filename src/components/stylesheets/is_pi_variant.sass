@@ -1,0 +1,36 @@
+@import "is_pi_variant/a.sass"
+@import "is_pi_variant/b.sass"
+@import "is_pi_variant/c.sass"
+@import "is_pi_variant/d.sass"
+
+@import "is_bg_variant.sass"
+
+.ShogiPlayerGround
+  &.is_texture_image
+    &.is_pi_variant_a
+      .PieceTexture
+        +is_pi_variant_a_pack
+        +filter_drop_shadow(1)
+
+    &.is_pi_variant_b
+      .PieceTexture
+        +is_pi_variant_b_pack
+        &.location_white
+          @extend %is_flip
+          +filter_drop_shadow(-1)
+        &.location_black
+          +filter_drop_shadow(1)
+
+    &.is_pi_variant_c
+      .PieceTexture
+        +is_pi_variant_c_pack
+        +filter_drop_shadow(1)
+
+    &.is_pi_variant_d
+      .PieceTexture
+        +is_pi_variant_d_pack
+        &.location_white
+          @extend %is_flip
+
+    .cursor_object
+      // +filter_drop_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)

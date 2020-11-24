@@ -1,5 +1,13 @@
 <template lang="pug">
 .BoardOuter
+  // .BoardOuter に設定した background-image に影をつけるために drop-shadow すると
+  // .BoardOuter その子供である table にまで影が適用されてしまう
+  // table に影が適用されると、駒の影にも .BoardOuter の影が加算されてしまい濃くなってしまう
+  // それを防ぐためには .BoardOuter の :after に背景を指定すればよい
+  // が、わかりやすくするために背景専用の BoardOuterBG を追加した
+  // これなら BoardBG に適用した影が table に影響しない
+  .BoardBG
+
   table.BoardInner
     tr(v-for="(_, y) in base.mediator.dimension")
       td(
@@ -38,10 +46,11 @@ export default {
     width: 100%
     height: 100%
 
-    @extend %board_shadow
+    // +filter_drop_shadow(1)
     // @extend %board_texture_bg
 
   table.BoardInner
+    // +filter_drop_shadow(1)
     width: 100%
     height: 100%
 
@@ -58,10 +67,16 @@ export default {
   &.is_texture_image
     .BoardOuter
       padding: unquote("max(2%, 3px)")  // 盤の隅の隙間
+    .BoardBG
+      +overlay_block
+      z-index: -1
+
+      +filter_drop_shadow(1) //.BoardOuter ではなく .BoardBG に適用しているので table の駒の影に影響がない
       background-position: center
       background-repeat: no-repeat
       background-size: cover
       border-radius: var(--sp_board_texture_radius, 0.5%) // 角を丸める(オプション化)
+      // background-image: url("../assets/is_bg_variant/0270_337378_m.jpg") // for debug
 
   &.is_texture_text
     .BoardOuter

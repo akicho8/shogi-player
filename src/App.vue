@@ -19,9 +19,9 @@
             b-slider(v-model="screen_width" :min="1" :max="100")
         .column.is-2
           b-field(custom-class="is-small" label="縦時駒数位置")
-            b-slider(v-model="sp_piece_object_count_gap_right" :min="-50" :max="150")
-          b-field(custom-class="is-small" label="横時駒数位置")
             b-slider(v-model="sp_piece_object_count_gap_bottom" :min="-50" :max="150")
+          b-field(custom-class="is-small" label="横時駒数位置")
+            b-slider(v-model="sp_piece_object_count_gap_right" :min="-50" :max="150")
         //- .column
         //-   b-field(custom-class="is-small" label="文字(vw)")
         //-     b-slider(v-model="sp_fsize" :min="0" :max="100.0 / 9" :step="0.1")
@@ -59,6 +59,22 @@
             b-radio-button(v-model="sp_layer" native-value="is_layer_on") ON
             b-radio-button(v-model="sp_layer" native-value="is_layer_off") OFF
         .column
+          b-field(custom-class="is-small" label="駒種類")
+            b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_a") a
+            b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_b") b
+            b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_c") c
+            b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_d") d
+            b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_none") none
+        .column
+          b-field(custom-class="is-small" label="盤種類")
+            b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_a") a
+            b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_b") b
+            b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_c") c
+            b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_d") d
+            b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_e") e
+            b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_f") f
+            b-radio-button(v-model="sp_bg_variant" native-value="is_bg_variant_none") none
+        .column
           b-field(custom-class="is-small" label="視点")
             b-radio-button(v-model="sp_flip" :native-value="false") ☗
             b-radio-button(v-model="sp_flip" :native-value="true") ☖
@@ -66,7 +82,7 @@
   div(is="style" v-text="style_define")
 
   ShogiPlayer(
-    :style_params="{sp_texture, sp_layout, sp_hpos, sp_vpos, sp_is_fullheight, sp_fsize_class, sp_layer}"
+    :style_params="{sp_texture, sp_layout, sp_hpos, sp_vpos, sp_is_fullheight, sp_fsize_class, sp_layer, sp_pi_variant, sp_bg_variant}"
     :run_mode="'play_mode'"
     :debug_mode_p="true"
     :start_turn="0"
@@ -120,6 +136,8 @@ export default {
       sp_piece_object_count_gap_right: 84,
       sp_piece_object_count_gap_bottom: 84,
       sp_layer: "is_layer_on",
+      sp_pi_variant: "is_pi_variant_a",
+      sp_bg_variant: "is_bg_variant_a",
       sp_membership_min_width: 3,
       sp_membership_min_height: 3,
       ////////////////////////////////////////////////////////////////////////////////

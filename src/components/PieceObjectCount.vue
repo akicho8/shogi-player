@@ -84,9 +84,9 @@ export default {
 
     .is_white
       .PieceObjectCount
-        bottom: var(--sp_piece_object_count_gap_right)
+        bottom: var(--sp_piece_object_count_gap_bottom)
         transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
     .is_black
       .PieceObjectCount
-        top: var(--sp_piece_object_count_gap_right)
+        top: var(--sp_piece_object_count_gap_bottom)
 </style>

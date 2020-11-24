@@ -57,3 +57,45 @@ $star_size: 6px
 //       .font_size_base
 //         +tablet
 //           font-size: #{$size * $sp_size_mag}em // 基点とするサイズ
+
+// 盤の影
+$sp_real_board_shadow_depth: 0.15rem // 大きさ
+$sp_real_board_shadow_blur:  0.15rem // ぼかし度合い
+
+// 駒の影
+$sp_real_piece_shadow_depth: 0.1em // 大きさ
+$sp_real_piece_shadow_blur:  0.1em // ぼかし度合い
+
+// 持った駒の影
+$sp_real_hold_shadow_depth: 0.15em // 大きさ
+$sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
+
+=filter_drop_shadow($sign)
+  filter: drop-shadow(2px * $sign 2px * $sign 2px rgba(0, 0, 0, 0.9))
+  
+%board_shadow
+  +filter_drop_shadow(1)
+
+%real_hoverable_bg
+  &.hoverable_p
+    &:hover
+      background-color: $sp_real_selectable_color
+
+// 背景はテクスチャなので色を指定できない場合
+%real_hoverable_opacity
+  &.hoverable_p
+    &:hover
+      opacity: 0.8
+
+@keyframes real_blink
+  0%
+    background-color: $sp_real_current_bg1
+  100%
+    background-color: $sp_real_current_bg2
+
+=overlay_block
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%

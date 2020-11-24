@@ -1,0 +1,22 @@
+=is_pi_variant_b($piece_key, $promoted, $name)
+  &.piece_#{$piece_key}
+    &.promoted_#{$promoted}
+      background-image: url("#{$sp_assets_dir}/zuan/#{$name}.png")
+    
+=is_pi_variant_b_pack()
+  // 先後共有
+  +is_pi_variant_b("K", false, "01_oushou")
+  +is_pi_variant_b("R", false, "03_hisha")
+  +is_pi_variant_b("B", false, "05_kakugyou")
+  +is_pi_variant_b("G", false, "07_kinshou")
+  +is_pi_variant_b("S", false, "08_ginshou")
+  +is_pi_variant_b("N", false, "10_keima")
+  +is_pi_variant_b("L", false, "12_kyousha")
+  +is_pi_variant_b("P", false, "14_fuhyou")
+  +is_pi_variant_b("X", false, "02_gyokushou")
+  +is_pi_variant_b("R", true,  "04_ryuuou")
+  +is_pi_variant_b("B", true,  "06_ryuuma")
+  +is_pi_variant_b("S", true,  "09_narigin")
+  +is_pi_variant_b("N", true,  "11_narikei")
+  +is_pi_variant_b("L", true,  "13_narikyou")
+  +is_pi_variant_b("P", true,  "15_tokin")
