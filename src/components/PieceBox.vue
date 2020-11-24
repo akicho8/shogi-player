@@ -45,10 +45,9 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayer
+.ShogiPlayerGround
   &.is_vertical
     .PieceBox
-      +filter_drop_shadow(1)
       // @extend %board_texture_bg
       @extend %real_hoverable_opacity
       @extend %is_unselectable
@@ -60,7 +59,7 @@ export default {
 
       .PieceWithCount                // FIXME: クリックをここにしたい
         // border: 1px dashed change_color($primary, $alpha: 0.5)
-        padding: 0 0.25rem
+        // padding: 0 0.25rem
         // font-size: 2.8rem
         justify-content: center
         align-items: center

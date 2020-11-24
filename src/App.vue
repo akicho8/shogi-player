@@ -84,7 +84,7 @@
 
   ShogiPlayer(
     :style_params="{sp_texture, sp_layout, sp_hpos, sp_vpos, sp_is_fullheight, sp_fsize_class, sp_layer, sp_pi_variant, sp_bg_variant}"
-    :run_mode="'play_mode'"
+    :run_mode="'edit_mode'"
     :debug_mode_p="true"
     :start_turn="0"
     :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15pR3BG18SN 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"

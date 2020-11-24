@@ -6,13 +6,15 @@
 
 .ShogiPlayerGround
   &.is_texture_image
+    // 後手の画像もある
     &.is_pi_variant_a
-      .PieceTexture
+      .PieceTextureSelf
         +is_pi_variant_a_pack
         +filter_drop_shadow(1)
 
+    // 後手は先手を反転
     &.is_pi_variant_b
-      .PieceTexture
+      .PieceTextureSelf
         +is_pi_variant_b_pack
         &.location_white
           @extend %is_flip
@@ -20,11 +22,15 @@
         &.location_black
           +filter_drop_shadow(1)
 
+    // 後手は先手を反転
     &.is_pi_variant_c
-      .PieceTexture
+      .PieceTextureSelf
         +is_pi_variant_c_pack
         &.location_white
           @extend %is_flip
+          +filter_drop_shadow(-1)
+        &.location_black
+          +filter_drop_shadow(1)
 
     .cursor_object
       // +filter_drop_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)

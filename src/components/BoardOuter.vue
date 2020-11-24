@@ -5,8 +5,8 @@
   // table に影が適用されると、駒の影にも .BoardOuter の影が加算されてしまい濃くなってしまう
   // それを防ぐためには .BoardOuter の :after に背景を指定すればよい
   // が、わかりやすくするために背景専用の BoardOuterBG を追加した
-  // これなら BoardBG に適用した影が table に影響しない
-  .BoardBG
+  // これなら BoardTextureSelf に適用した影が table に影響しない
+  .BoardTextureSelf
 
   table.BoardInner
     tr(v-for="(_, y) in base.mediator.dimension")
@@ -67,11 +67,11 @@ export default {
   &.is_texture_image
     .BoardOuter
       padding: unquote("max(2%, 3px)")  // 盤の隅の隙間
-    .BoardBG
+    .BoardTextureSelf
       +overlay_block
       z-index: -1
 
-      +filter_drop_shadow(1) //.BoardOuter ではなく .BoardBG に適用しているので table の駒の影に影響がない
+      +filter_drop_shadow(1) //.BoardOuter ではなく .BoardTextureSelf に適用しているので table の駒の影に影響がない
       background-position: center
       background-repeat: no-repeat
       background-size: cover

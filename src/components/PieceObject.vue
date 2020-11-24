@@ -1,6 +1,10 @@
 <template lang="pug">
 .PieceObject(v-if="count >= 1")
-  .PieceTexture(:class="piece_texture_class")
+  // 駒を押せる部分
+  .PieceTexture
+    // PieceTexture の背景に画像を設定すると影が PieceObjectCount にまで適用されるため個別にしている
+    .PieceTextureSelf(:class="piece_texture_class")
+    // 駒テクスチャの大きさに依存させたいので中に PieceTexture のなかに入れている
     PieceObjectCount(:count="count")
 </template>
 
@@ -89,16 +93,20 @@ export default {
       width: 90%
       height: 90%
 
+      // // 下に引く
+      position: relative
+      top: var(--piece_pull, 0%)
+
+    .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
+      +overlay_block
+      // z-index: -1
+
       // テクスチャ
       background-position: center
       background-repeat: no-repeat
       background-size: contain // 必ず駒の全体が表示されるようにする
       // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
       // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
-
-      // 下に引く
-      position: relative
-      top: var(--piece_pull, 0%)
 
   // .Membership
   //   &.is_black
