@@ -1,2 +1,49 @@
 将棋駒と将棋盤 画像フリー素材|無料素材倶楽部
 http://sozai.7gates.net/docs/japanese-chess/
+
+|-------+----------+----------+--------+-------|
+| piece | location | promoted | file   | color |
+|-------+----------+----------+--------+-------|
+| K     | black    | false    | 01.png |       |
+| R     | black    | false    | 02.png |       |
+| B     | black    | false    | 03.png |       |
+| G     | black    | false    | 04.png |       |
+| S     | black    | false    | 05.png |       |
+| N     | black    | false    | 06.png |       |
+| L     | black    | false    | 07.png |       |
+| P     | black    | false    | 08.png |       |
+| X     | black    | false    | 11.png |       |
+| R     | black    | true     | 12.png |       |
+| B     | black    | true     | 13.png |       |
+| S     | black    | true     | 15.png |       |
+| N     | black    | true     | 16.png |       |
+| L     | black    | true     | 17.png |       |
+| P     | black    | true     | 18.png |       |
+| R     | black    | true     | 22.png | red   |
+| B     | black    | true     | 23.png | red   |
+| S     | black    | true     | 25.png | red   |
+| N     | black    | true     | 26.png | red   |
+| L     | black    | true     | 27.png | red   |
+| P     | black    | true     | 28.png | red   |
+| K     | white    | false    | 31.png |       |
+| R     | white    | false    | 32.png |       |
+| B     | white    | false    | 33.png |       |
+| G     | white    | false    | 34.png |       |
+| S     | white    | false    | 35.png |       |
+| N     | white    | false    | 36.png |       |
+| L     | white    | false    | 37.png |       |
+| P     | white    | false    | 38.png |       |
+| X     | white    | false    | 41.png |       |
+| R     | white    | true     | 42.png |       |
+| B     | white    | true     | 43.png |       |
+| S     | white    | true     | 45.png |       |
+| N     | white    | true     | 46.png |       |
+| L     | white    | true     | 47.png |       |
+| P     | white    | true     | 48.png |       |
+| R     | white    | true     | 51.png | red   |
+| B     | white    | true     | 53.png | red   |
+| S     | white    | true     | 55.png | red   |
+| N     | white    | true     | 56.png | red   |
+| L     | white    | true     | 57.png | red   |
+| P     | white    | true     | 58.png | red   |
+|-------+----------+----------+--------+-------|

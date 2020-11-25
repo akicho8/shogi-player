@@ -2,6 +2,7 @@
 @import "is_pi_variant/b.sass"
 @import "is_pi_variant/c.sass"
 @import "is_pi_variant/d.sass"
+@import "is_pi_variant/e.sass"
 
 .ShogiPlayerGround
   &.is_texture_image
@@ -40,6 +41,16 @@
           +filter_drop_shadow(-1)
         &.location_black
           +filter_drop_shadow(1)
-            
+
+    // 後手は先手を反転
+    &.is_pi_variant_e
+      .PieceTextureSelf
+        +is_pi_variant_e_pack
+        &.location_white
+          @extend %is_flip
+          +filter_drop_shadow(-1)
+        &.location_black
+          +filter_drop_shadow(1)
+
     .cursor_object
       // +filter_drop_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
