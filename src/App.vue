@@ -65,6 +65,7 @@
             b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_c") c
             b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_d") d
             b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_e") e
+            b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_f") f
             b-radio-button(v-model="sp_pi_variant" native-value="is_pi_variant_none") none
         .column
           b-field(custom-class="is-small" label="盤種類")
