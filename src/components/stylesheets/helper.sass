@@ -71,7 +71,9 @@ $sp_real_hold_shadow_depth: 0.15em // 大きさ
 $sp_real_hold_shadow_blur:  0.15em // ぼかし度合い
 
 =filter_drop_shadow($sign)
-  filter: drop-shadow(2px * $sign 2px * $sign 2px rgba(0, 0, 0, 0.9))
+  // filter: drop-shadow(2px * $sign 2px * $sign 2px rgba(0, 0, 0, 0.9))
+  // filter: drop-shadow(calc(var(--sp_shadow_offset) * #{$sign}) calc(var(--sp_shadow_offset) * #{$sign}) var(--sp_shadow_blur) rgba(255, 0, 0, var(--sp_shadow_color)))
+  filter: drop-shadow(calc(var(--sp_shadow_offset) * #{$sign}) calc(var(--sp_shadow_offset) * #{$sign}) var(--sp_shadow_blur) var(--sp_shadow_color))
   
 %board_shadow
   +filter_drop_shadow(1)
