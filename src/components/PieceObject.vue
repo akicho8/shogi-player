@@ -81,40 +81,35 @@ export default {
     align-items: center    // 下を揃えて配置したいときは flex-end にすること(オプションにする)
     // align-items: flex-end  // 下を揃えて配置したいときは flex-end にすること(オプションにする)
 
-  &.is_texture_image, &.is_texture_text
+  .PieceObject
+    @extend %dom_real_selectable
+    &.origin_place
+      background-color: $sp_real_origin_bg
+    &.current
+      animation: real_blink 0.5s ease-in-out infinite alternate
+
+  .PieceTexture
+    width: 90%                  // こちらを100%にして
+    height: 90%                 // こちらだけで調整してもいいかも
+
+    // 下に引く度合い
+    position: relative
+    top: var(--piece_pull, 0%)
+
+  .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
+    +overlay_block
+    // z-index: -1
+
+    // テクスチャ
+    background-position: center
+    background-repeat: no-repeat
+    background-size: contain // 必ず駒の全体が表示されるようにする
+    // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
+    // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
+
+  .Membership
     .PieceObject
-      @extend %dom_real_selectable
-      &.origin_place
-        background-color: $sp_real_origin_bg
-      &.current
-        animation: real_blink 0.5s ease-in-out infinite alternate
-
-    .PieceTexture
-      width: 90%
-      height: 90%
-
-      // // 下に引く
-      position: relative
-      top: var(--piece_pull, 0%)
-
-    .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
-      +overlay_block
-      // z-index: -1
-
-      // テクスチャ
-      background-position: center
-      background-repeat: no-repeat
-      background-size: contain // 必ず駒の全体が表示されるようにする
-      // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
-      // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
-
-  // .Membership
-  //   &.is_black
-  //     .MembershipStand
-  //       // +filter_drop_shadow($sp_real_board_shadow_depth, $sp_real_board_shadow_blur)
-  //   &.is_white
-  //     .MembershipStand
-  //       // +filter_drop_shadow(-$sp_real_board_shadow_depth, $sp_real_board_shadow_blur) // 相手の駒台は逆になっているため影を逆にする
-  //       .PieceObject
-  //         // @extend %is_flip   // 後手の下向きの駒が、駒台が逆になることで上に向いているため、下向きにする
+      +mobile
+        width: 38px
+        height: 46px  // 縦長にすることでタップ範囲を広げつつ駒数との隙間を作れる
 </style>

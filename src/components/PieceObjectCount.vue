@@ -21,13 +21,14 @@ export default {
   --sp_piece_object_count_gap_right: 86%
   --sp_piece_object_count_gap_bottom: 100%
   --sp_piece_object_count_font_size: 0.75rem
+  --sp_piece_object_count_font_color: #00000
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
   .PieceTexture
   .PieceObjectCount
-    color: change_color($black, $alpha: 0.7)
-    font-weight: bold
+    color: var(--sp_piece_object_count_font_color)
     font-size: var(--sp_piece_object_count_font_size)
+    font-weight: bold
     z-index: 1            // 駒画像の下に潜るのを防ぐため
 
   &.is_layer_on

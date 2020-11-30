@@ -37,6 +37,13 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
+  &.is_vertical
+    .TurnShowOrEdit
+      margin: 0.75rem 0
+  &.is_horizontal
+    .TurnShowOrEdit
+      margin: 0.25rem 0
+
   .TurnShowOrEdit
     // N手目の編集モードのnumberフィールド
     input

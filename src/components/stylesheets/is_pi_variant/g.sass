@@ -1,0 +1,22 @@
+=is_pi_variant_g($piece_key, $promoted, $code)
+  &.piece_#{$piece_key}
+    &.promoted_#{$promoted}
+      $code: "BK0"
+      background-image: url("#{$sp_assets_dir}/is_pi_variant/g/#{$code}.png")
+
+=is_pi_variant_g_pack
+  +is_pi_variant_g("K", false, "BK0")
+  +is_pi_variant_g("R", false, "BR0")
+  +is_pi_variant_g("B", false, "BB0")
+  +is_pi_variant_g("G", false, "BG0")
+  +is_pi_variant_g("S", false, "BS0")
+  +is_pi_variant_g("N", false, "BN0")
+  +is_pi_variant_g("L", false, "BL0")
+  +is_pi_variant_g("P", false, "BP0")
+  +is_pi_variant_g("X", false, "BX0")
+  +is_pi_variant_g("R", true,  "BR1")
+  +is_pi_variant_g("B", true,  "BB1")
+  +is_pi_variant_g("S", true,  "BS1")
+  +is_pi_variant_g("N", true,  "BN1")
+  +is_pi_variant_g("L", true,  "BL1")
+  +is_pi_variant_g("P", true,  "BP1")

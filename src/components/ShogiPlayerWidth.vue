@@ -40,7 +40,7 @@ export default {
 .ShogiPlayer
   .ShogiPlayerWidth
     +mobile
-      width: 100vw
+      width: 100%
 
   &.debug_mode_p
     .ShogiPlayerWidth

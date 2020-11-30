@@ -13,7 +13,8 @@
 
   b-modal(:active.sync="setting_modal_p" has-modal-card v-if="mediator")
     SettingModal(:base="base")
-  pre {{new_style_params}}
+
+  pre(v-if="debug_mode_p") {{new_style_params}}
 </template>
 
 <script>
@@ -32,9 +33,9 @@ import PieceBox          from "./PieceBox.vue"
 import SettingModal      from "./SettingModal.vue"
 import ErrorNotify       from "./ErrorNotify.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
-import ShogiPlayerGround   from "./ShogiPlayerGround.vue"
+import ShogiPlayerGround from "./ShogiPlayerGround.vue"
 import EditToolBox       from "./EditToolBox.vue"
-import DebugBlock       from "./DebugBlock.vue"
+import DebugBlock        from "./DebugBlock.vue"
 
 // mixins modules
 import navi_module      from "./navi_module.js"
@@ -57,7 +58,7 @@ const STYLE_PARAMS_DEFAULT = {
   sp_hpos:          "is_centered",
   sp_vpos:          "is_vcentered",
   sp_is_fullheight: "",
-  sp_fsize_class:   "is_size_none",
+  sp_size:   "is_size_none",
   sp_layer:         "is_layer_on",
   sp_pi_variant:    "is_pi_variant_a",
   sp_bg_variant:    "is_bg_variant_a",

@@ -42,19 +42,19 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
+  --sp_grid_color: rgba(0, 0, 0, 0.5)
+  --sp_board_padding: 2%
+  --sp_grid_board_outer_stroke_width: 1px
+
   .BoardOuter
     width: 100%
     height: 100%
 
-    // +filter_drop_shadow(1)
-    // @extend %board_texture_bg
-
   table.BoardInner
-    // +filter_drop_shadow(1)
     width: 100%
     height: 100%
 
-    +board_star_mark_define($sp_real_star_color)
+    +board_star_mark_define(var(--sp_grid_color))
 
     // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
     @extend %is_unselectable
@@ -62,25 +62,22 @@ export default {
     table-layout: fixed    // 横幅均等
   td
     height: calc(100% / 9) // 縦幅均等
-    border: $sp_real_grid_inner solid $sp_real_grid_color // 盤面の罫線
+    border: $sp_real_grid_inner solid var(--sp_grid_color)
 
-  &.is_texture_image
-    .BoardOuter
-      padding: unquote("max(2%, 3px)")  // 盤の隅の隙間
-    .BoardTextureSelf
-      +overlay_block
-      z-index: -1
+  .BoardOuter
+    padding: var(--sp_board_padding)
 
-      +filter_drop_shadow(1) //.BoardOuter ではなく .BoardTextureSelf に適用しているので table の駒の影に影響がない
-      background-position: center
-      background-repeat: no-repeat
-      background-size: cover
-      border-radius: var(--sp_board_texture_radius, 0.5%) // 角を丸める(オプション化)
-      // background-image: url("../assets/is_bg_variant/0270_337378_m.jpg") // for debug
+  .BoardOuter
+    border: var(--sp_grid_board_outer_stroke_width) solid var(--sp_grid_color)
 
-  &.is_texture_text
-    .BoardOuter
-      border: 1px solid change_color($black, $alpha: 0.5)
+  .BoardTextureSelf
+    +overlay_block
+    z-index: -1
 
-  &.is_texture_none
+    +filter_drop_shadow(1) // .BoardOuter ではなく .BoardTextureSelf に適用しているので table の駒の影に影響がない
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+    border-radius: var(--sp_board_texture_radius, 0.5%) // 角を丸める(オプション化)
+    // background-image: url("../assets/is_bg_variant/0270_337378_m.jpg") // for debug
 </style>

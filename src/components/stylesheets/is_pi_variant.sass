@@ -4,64 +4,73 @@
 @import "is_pi_variant/d.sass"
 @import "is_pi_variant/e.sass"
 @import "is_pi_variant/f.sass"
+@import "is_pi_variant/g.sass"
 
 .ShogiPlayerGround
-  &.is_texture_image
-    // 後手の画像もある
-    &.is_pi_variant_a
-      .PieceTextureSelf
-        +is_pi_variant_a_pack
+  // 後手の画像もある
+  &.is_pi_variant_a
+    .PieceTextureSelf
+      +is_pi_variant_a_pack
+      +filter_drop_shadow(1)
+
+  // 後手は先手を反転
+  &.is_pi_variant_b
+    .PieceTextureSelf
+      +is_pi_variant_b_pack
+      &.location_white
+        @extend %is_flip
+        +filter_drop_shadow(-1)
+      &.location_black
         +filter_drop_shadow(1)
 
-    // 後手は先手を反転
-    &.is_pi_variant_b
-      .PieceTextureSelf
-        +is_pi_variant_b_pack
-        &.location_white
-          @extend %is_flip
-          +filter_drop_shadow(-1)
-        &.location_black
-          +filter_drop_shadow(1)
+  // 後手は先手を反転
+  &.is_pi_variant_c
+    .PieceTextureSelf
+      +is_pi_variant_c_pack
+      &.location_white
+        @extend %is_flip
+        +filter_drop_shadow(-1)
+      &.location_black
+        +filter_drop_shadow(1)
 
-    // 後手は先手を反転
-    &.is_pi_variant_c
-      .PieceTextureSelf
-        +is_pi_variant_c_pack
-        &.location_white
-          @extend %is_flip
-          +filter_drop_shadow(-1)
-        &.location_black
-          +filter_drop_shadow(1)
+  // 後手は先手を反転
+  &.is_pi_variant_d
+    .PieceTextureSelf
+      +is_pi_variant_d_pack
+      &.location_white
+        @extend %is_flip
+        +filter_drop_shadow(-1)
+      &.location_black
+        +filter_drop_shadow(1)
 
-    // 後手は先手を反転
-    &.is_pi_variant_d
-      .PieceTextureSelf
-        +is_pi_variant_d_pack
-        &.location_white
-          @extend %is_flip
-          +filter_drop_shadow(-1)
-        &.location_black
-          +filter_drop_shadow(1)
+  // 後手は先手を反転
+  &.is_pi_variant_e
+    .PieceTextureSelf
+      +is_pi_variant_e_pack
+      &.location_white
+        @extend %is_flip
+        +filter_drop_shadow(-1)
+      &.location_black
+        +filter_drop_shadow(1)
 
-    // 後手は先手を反転
-    &.is_pi_variant_e
-      .PieceTextureSelf
-        +is_pi_variant_e_pack
-        &.location_white
-          @extend %is_flip
-          +filter_drop_shadow(-1)
-        &.location_black
-          +filter_drop_shadow(1)
+  // 後手は先手を反転
+  &.is_pi_variant_f
+    .PieceTextureSelf
+      +is_pi_variant_f_pack
+      &.location_white
+        @extend %is_flip
+        +filter_drop_shadow(-1)
+      &.location_black
+        +filter_drop_shadow(1)
 
-    // 後手は先手を反転
-    &.is_pi_variant_f
-      .PieceTextureSelf
-        +is_pi_variant_f_pack
-        &.location_white
-          @extend %is_flip
-          +filter_drop_shadow(-1)
-        &.location_black
-          +filter_drop_shadow(1)
+  &.is_pi_variant_g
+    .PieceTextureSelf
+      +is_pi_variant_g_pack
+      &.location_white
+        @extend %is_flip
+        +filter_drop_shadow(-1)
+      &.location_black
+        +filter_drop_shadow(1)
 
-    .cursor_object
-      // +filter_drop_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
+  .cursor_object
+    // +filter_drop_shadow($sp_real_hold_shadow_depth, $sp_real_hold_shadow_blur)
