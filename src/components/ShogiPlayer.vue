@@ -228,6 +228,8 @@ export default {
 
         this.mediator = new_mediator
         this.init_location_key = new_mediator.current_location.key
+
+        this.mediator.piece_box_piece_couns_adjust()
       }
     },
 
