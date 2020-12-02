@@ -16,20 +16,18 @@
       :base="base"
       :class="base.piece_box_piece_control_class(piece)"
       :piece_texture_class="base.piece_box_piece_texture_class(piece)"
+      :count="count"
       )
-    PieceObjectCount(:count="count")
 </template>
 
 <script>
 import { support } from "./support.js"
 import PieceObject from "./PieceObject.vue"
-import PieceObjectCount from "./PieceObjectCount.vue"
 
 export default {
   mixins: [support],
   components: {
     PieceObject,
-    PieceObjectCount,
   },
   computed: {
     component_class() {
@@ -64,7 +62,7 @@ export default {
         justify-content: center
         align-items: center
         // border: 1px dashed change_color($black, $alpha: 0.8)
-        .PieceObject
-          height: 2rem
-          width:  2rem
+        // .PieceObject
+        //   height: 2rem
+        //   width:  2rem
 </style>

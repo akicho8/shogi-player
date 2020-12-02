@@ -24,7 +24,6 @@ export default {
   --sp_piece_object_count_font_color: #00000
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
-  .PieceTexture
   .PieceObjectCount
     color: var(--sp_piece_object_count_font_color)
     font-size: var(--sp_piece_object_count_font_size)
@@ -59,19 +58,6 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
   &.is_vertical
-    // .PieceTexture
-    //   display: flex
-    //   justify-content: flex-end
-    //   align-items: flex-start
-    //
-    // .PieceObjectCount
-    //
-    // .is_white
-    //   .PieceObjectCount
-    //     // transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
-    // .is_black
-    //   .PieceObjectCount
-
     .PieceTexture
       position: relative
     .PieceObjectCount
@@ -83,11 +69,16 @@ export default {
       justify-content: center
       align-items: center
 
-    .is_white
-      .PieceObjectCount
-        bottom: var(--sp_piece_object_count_gap_bottom)
-        transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
-    .is_black
+    .Membership
+      &.is_white
+        .PieceObjectCount
+          bottom: var(--sp_piece_object_count_gap_bottom)
+          transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+      &.is_black
+        .PieceObjectCount
+          top: var(--sp_piece_object_count_gap_bottom)
+
+    .PieceBox
       .PieceObjectCount
         top: var(--sp_piece_object_count_gap_bottom)
 </style>

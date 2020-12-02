@@ -21,7 +21,6 @@
 <script>
 import _ from "lodash"
 import PieceObject from "./PieceObject.vue"
-import PieceObjectCount from "./PieceObjectCount.vue"
 import { support } from "./support.js"
 
 export default {
@@ -34,7 +33,6 @@ export default {
 
   components: {
     PieceObject,
-    PieceObjectCount,
   },
 
   methods: {

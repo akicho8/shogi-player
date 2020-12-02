@@ -71,9 +71,6 @@ export default {
 
   // .BoardOuter
   .PieceObject
-    // box2 のサイズ%を最大するため必要
-    width: 100%
-    height: 100%
 
     // 中央に配置
     display: flex
@@ -107,9 +104,27 @@ export default {
     // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
     // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
 
+  //////////////////////////////////////////////////////////////////////////////// サイズ
+
+  // テーブル
+  .BoardOuter
+    .PieceObject
+      // box2 のサイズ%を最大するため必要
+      width:  100%
+      height: 100%
+
+  // 駒台
   .Membership
     .PieceObject
       +mobile
-        width: 38px
+        width:  38px
         height: 46px  // 縦長にすることでタップ範囲を広げつつ駒数との隙間を作れる
+
+  // 駒箱
+  &.is_vertical
+    .PieceBox
+      background-color: rgba(0, 0, 0, 0.2)
+      .PieceObject
+        width:  38px
+        height: 46px
 </style>

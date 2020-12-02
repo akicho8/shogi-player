@@ -36,13 +36,17 @@ export default {
 
   &.is_vertical
     .MembershipLocationMark
-      // color: $sp_simple_grid_color
+      width:  calc(38px * 0.7)
+      height: calc(46px * 0.7)
 
-    //////////////////////////////////////////////////////////////////////////////// 手番のとき
-    // .turn_active
-    //   .MembershipLocationMark
-    //     color: $sp_simple_turn_active_color
-    //     -webkit-text-stroke: 1px $sp_simple_turn_active_color
-    //     text-shadow: 0 0 0.5rem $sp_simple_turn_active_color
+    .is_turn_active
+      .MembershipLocationMark
+        position: relative
+        animation: jump_animation 0.1s ease-in-out infinite alternate
 
+@keyframes jump_animation
+  0%
+    top: 0
+  100%
+    top: -2px
 </style>

@@ -28,7 +28,9 @@ export default {
       const list = []
       list.push(`is_${this.location.key}`)
       if (this.base.mediator.current_location === this.location) {
-        list.push("turn_active")
+        list.push("is_turn_active")
+      } else {
+        list.push("is_turn_inactive")
       }
       return list
     },

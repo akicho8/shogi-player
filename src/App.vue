@@ -21,6 +21,41 @@
             b-radio-button(size="is-small" v-model="sp_size" native-value="is_size_l") L
 
         .box
+          .title.is-5 盤
+
+          .columns.mt-4
+            .column.py-0
+              b-field(custom-class="is-small" label="カラー")
+                b-input(v-model="sp_board_rgb" type="color")
+            .column.py-0
+              b-field(custom-class="is-small" label="非透明度")
+                b-slider(v-model="sp_board_alpha" :min="0" :max="1.0" :step="0.01")
+
+          b-field(custom-class="is-small" label="テクスチャ")
+            b-select(size="is-small" v-model="sp_bg_variant")
+              option(value="is_bg_variant_none") none
+              option(value="is_bg_variant_a") a
+              option(value="is_bg_variant_b") b
+              option(value="is_bg_variant_c") c
+              option(value="is_bg_variant_d") d
+              option(value="is_bg_variant_e") e
+              option(value="is_bg_variant_f") f
+              option(value="is_bg_variant_g") g
+
+          .columns.mt-4
+            .column.py-0
+              b-field(custom-class="is-small" label="グリッド")
+                b-input(v-model="sp_grid_rgb" type="color")
+            .column.py-0
+              b-field(custom-class="is-small" label="非透明度")
+                b-slider(v-model="sp_grid_alpha" :min="0" :max="1.0" :step="0.01")
+
+          b-field(custom-class="is-small" label="余白")
+            b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
+          b-field(custom-class="is-small" label="外枠の太さ")
+            b-slider(v-model="sp_grid_board_outer_stroke_width" :min="0" :max="5" :step="1")
+
+        .box
           .title.is-5 テクスチャ
           b-field(custom-class="is-small" label="駒")
             b-select(size="is-small" v-model="sp_pi_variant")
@@ -50,27 +85,6 @@
             b-input(v-model="bg_color" type="color")
 
         .box
-          .title.is-5 盤
-          b-field(custom-class="is-small" label="テクスチャ")
-            b-select(size="is-small" v-model="sp_bg_variant")
-              option(value="is_bg_variant_none") none
-              option(value="is_bg_variant_a") a
-              option(value="is_bg_variant_b") b
-              option(value="is_bg_variant_c") c
-              option(value="is_bg_variant_d") d
-              option(value="is_bg_variant_e") e
-              option(value="is_bg_variant_f") f
-              option(value="is_bg_variant_g") g
-          b-field(custom-class="is-small" label="グリッド")
-            b-input(v-model="sp_grid_color" type="color")
-          b-field(custom-class="is-small" label="非透明度")
-            b-slider(v-model="sp_grid_alpha" :min="0" :max="1.0" :step="0.01")
-          b-field(custom-class="is-small" label="余白")
-            b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
-          b-field(custom-class="is-small" label="外枠の太さ")
-            b-slider(v-model="sp_grid_board_outer_stroke_width" :min="0" :max="5" :step="1")
-
-        .box
           .title.is-5 駒台
           b-field(custom-class="is-small" label="駒台配置")
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
@@ -82,7 +96,7 @@
             .column.py-0
               b-field(custom-class="is-small" label="持駒画像(h)")
                 b-slider(v-model="sp_piece_h" :min="1" :max="10" :step="0.05")
-          .columns.is-paddingless
+          .columns
             .column.py-0
               b-field(custom-class="is-small" label="横配置時の最小(w)")
                 b-slider(v-model="sp_membership_min_width"  :min="1" :max="10" :step="0.05")
@@ -148,12 +162,11 @@
       :flip="sp_flip"
       :debug_mode_p="false"
       :start_turn="0"
-      :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3npR3BG18SN 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
-      :size="'xxx'"
+      :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b 99krb3g3s3npR3BG18SN 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
       :sound_effect="true"
       :setting_button_show="false"
-      :slider_show="true"
-      :controller_show="true"
+      :slider_show="false"
+      :controller_show="false"
       :player_info="player_info"
     )
 
@@ -207,18 +220,20 @@ export default {
       sp_piece_h: 2.95,
       sp_flip: false,
       sp_piece_object_count_gap_right: 97,
-      sp_piece_object_count_gap_bottom: 91,
+      sp_piece_object_count_gap_bottom: 73,
       sp_piece_object_count_font_size: 0.75,
       sp_piece_object_count_font_color: "#444444",
 
-      sp_grid_color: "#000000",
+      sp_board_rgb: "#000000",
+      sp_board_alpha: 0.2,
+      sp_grid_rgb: "#000000",
       sp_grid_alpha: 0.5,
       sp_board_padding: 2.0,
       sp_grid_board_outer_stroke_width: 0,
 
       sp_layer: "is_layer_off",
-      sp_pi_variant: "is_pi_variant_a",
-      sp_bg_variant: "is_bg_variant_a",
+      sp_pi_variant: "is_pi_variant_d",
+      sp_bg_variant: "is_bg_variant_none",
       sp_membership_min_width: 3,
       sp_membership_min_height: 3,
       ////////////////////////////////////////////////////////////////////////////////
@@ -277,8 +292,8 @@ export default {
           height: ${this.sp_piece_h}vw;
         }
         .MembershipLocationMark {
-          width:  ${this.sp_piece_w * 0.7}vw;
-          height: ${this.sp_piece_h * 0.7}vw;
+          // width:  ${this.sp_piece_w * 0.7}vw;
+          // height: ${this.sp_piece_h * 0.7}vw;
         }
         .ShogiPlayerGround {
           background-color: ${this.bg_color};
@@ -291,9 +306,10 @@ export default {
           --sp_shadow_offset: ${this.sp_shadow_offset}px;
           --sp_shadow_blur:   ${this.sp_shadow_blur}px;
           --sp_shadow_color:  ${chroma(this.sp_shadow_color).alpha(this.sp_shadow_alpha).css()};
-          --sp_grid_color:    ${chroma(this.sp_grid_color).alpha(this.sp_grid_alpha).css()};
+          --sp_grid_color:    ${chroma(this.sp_grid_rgb).alpha(this.sp_grid_alpha).css()};
           --sp_board_padding: ${this.sp_board_padding}%;
           --sp_grid_board_outer_stroke_width: ${this.sp_grid_board_outer_stroke_width}px;
+          --sp_board_color:   ${chroma(this.sp_board_rgb).alpha(this.sp_board_alpha).css()};
         }
       `
     },
