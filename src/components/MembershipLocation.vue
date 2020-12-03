@@ -55,10 +55,11 @@ export default {
 
   // is_vertical と同じにする(共通化禁止)
   +mobile
-    .is_white
-      .MembershipLocation
-        margin-right: auto    // 「………△飛歩」→「△………飛歩」
-    .is_black
-      .MembershipLocation
-        margin-left: auto     // 「………飛歩▲」→「飛歩………▲」
+    &.is_mobile_style
+      .is_white
+        .MembershipLocation
+          margin-right: auto    // 「………△飛歩」→「△………飛歩」
+      .is_black
+        .MembershipLocation
+          margin-left: auto     // 「………飛歩▲」→「飛歩………▲」
 </style>

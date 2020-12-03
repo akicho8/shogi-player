@@ -52,11 +52,10 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-// $board_top_bottom_gap: 3px
 
 .ShogiPlayerGround
-  --sp_membership_min_width: 20vw
-  --sp_membership_min_height: 20vw
+  --sp_side_min_w: 20vw // 横配置時の最小(W)
+  --sp_side_min_h: 20vw // 縦配置時の最小(H)
 
   .Membership
     display: flex
@@ -66,39 +65,37 @@ export default {
     .Membership
       border: 1px dashed change_color($primary, $alpha: 0.5)
 
-  +tablet
-    &.is_horizontal
-      .Membership
-        min-width: var(--sp_membership_min_width)
-        &.is_white
-          flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び
-          align-self: flex-start           // 全体が横並び → 持駒は縦並び → 後手は上寄せ
-          // transform: rotate(180deg)
-        &.is_black
-          flex-direction: column           // 全体が横並び → 持駒は縦並び
-          align-self: flex-end             // 全体が横並び → 持駒は縦並び → 先手は下寄せ
-    &.is_vertical
-      .Membership
-        height: 100%
-        width: 100%
-        min-height: var(--sp_membership_min_height)
+  &.is_horizontal
+    .Membership
+      min-width: var(--sp_side_min_w)
+      &.is_white
+        flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び
+        align-self: flex-start           // 全体が横並び → 持駒は縦並び → 後手は上寄せ
+        // transform: rotate(180deg)
+      &.is_black
+        flex-direction: column           // 全体が横並び → 持駒は縦並び
+        align-self: flex-end             // 全体が横並び → 持駒は縦並び → 先手は下寄せ
 
-        &.is_white
-          flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△飛歩」のままでよい (左端→)
-          // justify-content: flex-start
-          // transform: rotate(180deg)
-        &.is_black
-          flex-direction: row-reverse      // 全体が縦並び → 持駒は横並び → 右寄せ 後手は「飛歩▲」とする (←右端)
-          // justify-content: flex-end
-
-  // モバイル時の設定は is_vertical と同じにしておく(共通化は危険)
-  +mobile
+  &.is_vertical
     .Membership
       height: 100%
       width: 100%
-      min-height: var(--sp_membership_min_height)
+      min-height: var(--sp_side_min_h)
+
       &.is_white
-        flex-direction: row
+        flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△飛歩」のままでよい (左端→)
       &.is_black
-        flex-direction: row-reverse
+        flex-direction: row-reverse      // 全体が縦並び → 持駒は横並び → 右寄せ 後手は「飛歩▲」とする (←右端)
+
+  // モバイル時の設定は is_vertical と同じにしておく(共通化は危険)
+  +mobile
+    &.is_mobile_style
+      .Membership
+        height: 100%
+        width: 100%
+        min-height: var(--sp_side_min_h)
+        &.is_white
+          flex-direction: row
+        &.is_black
+          flex-direction: row-reverse
 </style>

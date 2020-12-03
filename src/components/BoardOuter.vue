@@ -44,9 +44,11 @@ export default {
 .ShogiPlayerGround
   --sp_grid_color: rgba(0, 0, 0, 0.5)     // グリッド色
   --sp_board_padding: 2%                  // 盤の隅の隙間
-  --sp_grid_board_outer_stroke_width: 1px // 升目外枠の太さ
+  --sp_grid_outer_stroke: 1px // 升目外枠の太さ
   --sp_board_radius: 0.5%                 // 盤の隅の丸め度合い
   --sp_board_color: rgba(0, 0, 0, 0.2)    // 盤の色
+  --sp_board_opacity: 1.0                 // 非半透明度
+  --sp_board_bg_image: none               // 背景画像
 
   .BoardOuter
     width: 100%
@@ -70,7 +72,7 @@ export default {
     padding: var(--sp_board_padding)
 
   .BoardOuter
-    border: var(--sp_grid_board_outer_stroke_width) solid var(--sp_grid_color)
+    border: var(--sp_grid_outer_stroke) solid var(--sp_grid_color)
 
   .BoardTextureSelf
     +overlay_block
@@ -78,13 +80,16 @@ export default {
 
     +filter_drop_shadow(1) // .BoardOuter ではなく .BoardTextureSelf に適用しているので table の駒の影に影響がない
 
+    background-color: var(--sp_board_color)    // 背景色は画像の透明な部分があれば見える
+
+    // background-image: url("../assets/is_bg_variant/0270_337378_m.jpg") // for debug
+    background-image: var(--sp_board_bg_image)
+
     // テクスチャを広げてマッピングする
     background-position: center
     background-repeat: no-repeat
     background-size: cover
-    // background-image: url("../assets/is_bg_variant/0270_337378_m.jpg") // for debug
 
-    border-radius: var(--sp_board_radius) // 角を丸める(オプション化)
-
-    background-color: var(--sp_board_color) // テクスチャ画像を指定しないときにこちらが有効になる
+    border-radius:    var(--sp_board_radius)   // 角を丸める
+    opacity:          var(--sp_board_opacity)
 </style>

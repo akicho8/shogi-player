@@ -58,16 +58,16 @@ export default {
   // | +tablet | row            | column       | 画面が広いので切り替え可             |
   // | +mobile | column         | column       | 画面幅を最大に使いたいので常に縦配置 |
   // |---------+----------------+--------------+--------------------------------------|
-  +tablet
-    &.is_horizontal
-      .ShogiPlayerCore
-        flex-direction: row
-    &.is_vertical
-      .ShogiPlayerCore
-        flex-direction: column
-  +mobile
+  &.is_horizontal
+    .ShogiPlayerCore
+      flex-direction: row
+  &.is_vertical
     .ShogiPlayerCore
       flex-direction: column
+  +mobile
+    &.is_mobile_style
+      .ShogiPlayerCore
+        flex-direction: column
 
   .overlay_navi
     cursor: pointer

@@ -37,11 +37,18 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayer
-  .ShogiPlayerWidth
-    +mobile
-      width: 100%
+.ShogiPlayerGround
+  --sp_body_width: 100%
 
+  .ShogiPlayerWidth
+    width: var(--sp_body_width)
+
+  +mobile
+    &.is_mobile_style
+      .ShogiPlayerWidth
+        width: 100%
+
+.ShogiPlayer
   &.debug_mode_p
     .ShogiPlayerWidth
       &:after
