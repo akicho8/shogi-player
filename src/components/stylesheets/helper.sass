@@ -34,22 +34,6 @@
     height: 100%
     border-radius: 0.15em       // 盤の角の丸め度合い
   
-// 盤の星
-$star_size: 6px
-=board_star_mark_define($color)
-  tr:nth-child(3n+4)
-    td:nth-child(3n+4)
-      position: relative
-      &:after
-        position: absolute
-        content: ""
-        top: -($star_size / 2)
-        left: -($star_size / 2)
-        width:  $star_size
-        height: $star_size
-        border-radius: 50%
-        background: $color
-
 // 盤の影
 $sp_real_board_shadow_depth: 0.15rem // 大きさ
 $sp_real_board_shadow_blur:  0.15rem // ぼかし度合い

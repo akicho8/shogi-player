@@ -123,6 +123,8 @@
             b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
           b-field(custom-class="is-small" label="外枠の太さ")
             b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="5" :step="0.5")
+          b-field(custom-class="is-small" label="星")
+            b-slider(v-model="sp_grid_star" :min="0" :max="100" :step="0.01")
           b-field(custom-class="is-small" label="アスペクト比")
             b-slider(v-model="sp_board_aspect_ratio" :min="0" :max="200" :step="0.1")
 
@@ -325,6 +327,7 @@ export default {
       sp_grid_alpha: 0.5,
       sp_board_padding: 2.0,
       sp_grid_outer_stroke: 0,
+      sp_grid_star: 10,
       sp_board_radius: 0.5,
       sp_board_aspect_ratio: 109.7,
 
@@ -410,7 +413,7 @@ export default {
     style_define() {
       return `
         .ShogiPlayerGround {
-          --sp_body_width: ${this.sp_body_width}%;
+          --sp_body_width: ${this.sp_body_width}vw;
           --sp_ground_bg_image: ${this.sp_ground_bg_url};
 
           --sp_ground_color: ${this.sp_ground_color};
@@ -428,6 +431,7 @@ export default {
 
           --sp_grid_color:    ${chroma(this.sp_grid_rgb).alpha(this.sp_grid_alpha).css()};
           --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke}px;
+          --sp_grid_star: ${this.sp_grid_star}%;
 
           --sp_shadow_offset: ${this.sp_shadow_offset}px;
           --sp_shadow_blur:   ${this.sp_shadow_blur}px;
@@ -496,7 +500,8 @@ $sidebar_width2: 50%
       +tablet
         width: unquote("calc(100% - #{$sidebar_width1})")
       +mobile
-        width: unquote("calc(100% - #{$sidebar_width2})")
+        // width: unquote("calc(100% - #{$sidebar_width2})")
+        width: 100%
 
   // .is_size_small
   //   .ShogiPlayerWidth

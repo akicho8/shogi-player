@@ -42,13 +42,14 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  --sp_grid_color: rgba(0, 0, 0, 0.5)     // グリッド色
-  --sp_board_padding: 2%                  // 盤の隅の隙間
-  --sp_grid_outer_stroke: 1px // 升目外枠の太さ
-  --sp_board_radius: 0.5%                 // 盤の隅の丸め度合い
-  --sp_board_color: rgba(0, 0, 0, 0.2)    // 盤の色
-  --sp_board_opacity: 1.0                 // 非半透明度
-  --sp_board_bg_image: none               // 背景画像
+  --sp_grid_color: rgba(0, 0, 0, 0.5)  // グリッド色
+  --sp_board_padding: 2%               // 盤の隅の隙間
+  --sp_grid_outer_stroke: 1px          // 升目外枠の太さ
+  --sp_grid_star: 6px          // 星の大きさ
+  --sp_board_radius: 0.5%              // 盤の隅の丸め度合い
+  --sp_board_color: rgba(0, 0, 0, 0.2) // 盤の色
+  --sp_board_opacity: 1.0              // 非半透明度
+  --sp_board_bg_image: none            // 背景画像
 
   .BoardOuter
     width: 100%
@@ -58,12 +59,24 @@ export default {
     width: 100%
     height: 100%
 
-    +board_star_mark_define(var(--sp_grid_color))
-
     // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
     @extend %is_unselectable
 
     table-layout: fixed    // 横幅均等
+
+  tr:nth-child(3n+4)
+    td:nth-child(3n+4)
+      position: relative
+      &:after
+        position: absolute
+        content: ""
+        top:  calc(var(--sp_grid_star) * -0.5 - 0.5px)
+        left: calc(var(--sp_grid_star) * -0.5 - 0.5px)
+        width:  var(--sp_grid_star)
+        height: var(--sp_grid_star)
+        border-radius: 50%
+        background: var(--sp_grid_color)
+
   td
     height: calc(100% / 9) // 縦幅均等
     border: $sp_real_grid_inner solid var(--sp_grid_color)
