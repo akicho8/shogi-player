@@ -42,11 +42,11 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  --sp_grid_color: rgba(0, 0, 0, 0.5)
-  --sp_board_padding: 2%
-  --sp_grid_board_outer_stroke_width: 1px
-  --sp_board_texture_radius: 0.5%
-  --sp_board_color: rgba(0, 0, 0, 0.2)
+  --sp_grid_color: rgba(0, 0, 0, 0.5)     // グリッド色
+  --sp_board_padding: 2%                  // 盤の隅の隙間
+  --sp_grid_board_outer_stroke_width: 1px // 升目外枠の太さ
+  --sp_board_radius: 0.5%                 // 盤の隅の丸め度合い
+  --sp_board_color: rgba(0, 0, 0, 0.2)    // 盤の色
 
   .BoardOuter
     width: 100%
@@ -84,7 +84,7 @@ export default {
     background-size: cover
     // background-image: url("../assets/is_bg_variant/0270_337378_m.jpg") // for debug
 
-    border-radius: var(--sp_board_texture_radius) // 角を丸める(オプション化)
+    border-radius: var(--sp_board_radius) // 角を丸める(オプション化)
 
     background-color: var(--sp_board_color) // テクスチャ画像を指定しないときにこちらが有効になる
 </style>

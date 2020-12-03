@@ -39,7 +39,7 @@ export default {
 .ShogiPlayerGround
   &.is_vertical
     .TurnShowOrEdit
-      margin: 0.75rem 0
+      margin: 0.2rem 0
   &.is_horizontal
     .TurnShowOrEdit
       margin: 0.25rem 0

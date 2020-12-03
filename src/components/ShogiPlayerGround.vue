@@ -31,6 +31,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
+  --sp_ground_color: inherit // グラウンド背景
+
   &.is_layer_on
     border: 1px dashed change_color($primary, $alpha: 0.5)
   &.is_fullheight
@@ -40,6 +42,7 @@ export default {
   line-height: 100%
   display: flex
   flex-direction: row  // 要素は1つだからといって column してはいけない(justify-content が縦位置になってまぎらわしくなる)
+  background-color: var(--sp_ground_color)
 
   //////////////////////////////////////////////////////////////////////////////// for position (tablet以上)
 

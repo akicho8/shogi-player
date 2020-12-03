@@ -55,6 +55,9 @@ export default {
 // $board_top_bottom_gap: 3px
 
 .ShogiPlayerGround
+  --sp_membership_min_width: 20vw
+  --sp_membership_min_height: 20vw
+
   .Membership
     display: flex
     align-items: center // ▲を中央に配置
@@ -66,6 +69,7 @@ export default {
   +tablet
     &.is_horizontal
       .Membership
+        min-width: var(--sp_membership_min_width)
         &.is_white
           flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び
           align-self: flex-start           // 全体が横並び → 持駒は縦並び → 後手は上寄せ
@@ -77,6 +81,8 @@ export default {
       .Membership
         height: 100%
         width: 100%
+        min-height: var(--sp_membership_min_height)
+
         &.is_white
           flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△飛歩」のままでよい (左端→)
           // justify-content: flex-start
@@ -90,6 +96,7 @@ export default {
     .Membership
       height: 100%
       width: 100%
+      min-height: var(--sp_membership_min_height)
       &.is_white
         flex-direction: row
       &.is_black

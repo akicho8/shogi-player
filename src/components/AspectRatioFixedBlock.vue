@@ -9,36 +9,38 @@
 export default {
   name: "AspectRatioFixedBlock",
   props: {
-    ratio: { type: String, required: false, default: "is_ratio_shogi" },
+    ratio: { type: String, required: false, default: "is_ratio_var" },
   },
 }
 </script>
 
 <style lang="sass">
-.AspectRatioFixedBlockWrap
-  width: 100%
+@import "./support.sass"
+.ShogiPlayerGround
+  --sp_board_aspect_ratio: 109.7% // 盤の横を100としたときの縦の比率
 
-  .AspectRatioFixedBlock
-    position: relative
+  .AspectRatioFixedBlockWrap
     width: 100%
 
-    &.is_ratio_4_3
-      padding-top: 75%
-    &.is_ratio_16_9
-      padding-top: 56.25%
-    &.is_ratio_3_2
-      padding-top: 66.6666%
-    &.is_ratio_1_1
-      padding-top: 100%
-    &.is_ratio_shogi
-      // https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1222739597
-      padding-top: 109.7%
-
-    .AspectRatioFixedBlockContainer
-      position: absolute
-      top: 0
-      left: 0
+    .AspectRatioFixedBlock
+      position: relative
       width: 100%
-      height: 100%
-      // border: 1px dashed change_color($danger, $alpha: 0.5)
+
+      &.is_ratio_4_3
+        padding-top: 75%
+      &.is_ratio_16_9
+        padding-top: 56.25%
+      &.is_ratio_3_2
+        padding-top: 66.6666%
+      &.is_ratio_1_1
+        padding-top: 100%
+      &.is_ratio_shogi
+        // https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1222739597
+        padding-top: 109.7%
+      &.is_ratio_var
+        padding-top: var(--sp_board_aspect_ratio)
+
+      .AspectRatioFixedBlockContainer
+        +overlay_block
+        // border: 1px dashed change_color($danger, $alpha: 0.5)
 </style>

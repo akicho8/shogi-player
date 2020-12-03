@@ -18,10 +18,10 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  --sp_piece_object_count_gap_right: 86%
-  --sp_piece_object_count_gap_bottom: 100%
-  --sp_piece_object_count_font_size: 0.75rem
-  --sp_piece_object_count_font_color: #00000
+  --sp_piece_object_count_gap_right: 86%      // 駒数の位置(横配置時)
+  --sp_piece_object_count_gap_bottom: 100%    // 駒数の位置(縦配置時)
+  --sp_piece_object_count_font_size: 0.75rem  // 駒数の文字サイズ
+  --sp_piece_object_count_font_color: #000000 // 駒数の文字色
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
   .PieceObjectCount

@@ -4,7 +4,7 @@
     .mx-4.my-4
       .is-flex.is-justify-content-start.is-align-items-center
         b-button(@click="sidebar_toggle" icon-left="menu")
-        .mx-3.has-text-weight-bold 将棋盤エディタ
+        .mx-3.has-text-weight-bold 将棋盤スタイルエディタ
 
       .my_controls
         .box
@@ -22,6 +22,39 @@
 
         .box
           .title.is-5 盤
+
+          //- b-field.file
+          //-   b-upload(v-model="file_info" @input="uploaded_handle")
+          //-     span.file-cta
+          //-       b-icon(icon="upload" size="is-small")
+          //-       span.is-size-7
+          //-         template(v-if="file_info")
+          //-           | {{file_info.name}}
+          //-         template(v-else)
+          //-           | 画像アップロード
+
+          b-field.file
+            b-upload(v-model="file_info" @input="uploaded_handle")
+              span.file-cta
+                b-icon(icon="upload" size="is-small")
+                span.is-size-7.ml-2
+                  template(v-if="file_info")
+                    | {{file_info.name}}
+                  template(v-else)
+                    | 画像アップロード
+
+          template(v-if="file_src")
+            template(v-if="/^image/.test(file_info.type)")
+              .image_preview_container
+                b-image(:src="file_src")
+                .delete_container(@click="image_close")
+                  .delete
+            template(v-else-if="/^video/.test(file_info.type)")
+              video(:src="file_src" controls)
+            template(v-else-if="/^audio/.test(file_info.type)")
+              audio(:src="file_src" controls)
+            template(v-else)
+              | プレビュー未対応
 
           .columns.mt-4
             .column.py-0
@@ -50,10 +83,15 @@
               b-field(custom-class="is-small" label="非透明度")
                 b-slider(v-model="sp_grid_alpha" :min="0" :max="1.0" :step="0.01")
 
+          b-field(custom-class="is-small" label="角丸め")
+            b-slider(v-model="sp_board_radius" :min="0" :max="5" :step="0.01")
+
           b-field(custom-class="is-small" label="余白")
             b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
           b-field(custom-class="is-small" label="外枠の太さ")
             b-slider(v-model="sp_grid_board_outer_stroke_width" :min="0" :max="5" :step="1")
+          b-field(custom-class="is-small" label="アスペクト比")
+            b-slider(v-model="sp_board_aspect_ratio" :min="0" :max="200" :step="0.1")
 
         .box
           .title.is-5 テクスチャ
@@ -69,7 +107,7 @@
               option(value="is_pi_variant_g") g
 
         .box
-          .title.is-5 画面上の配置
+          .title.is-5 グランド
           b-field(custom-class="is-small" label="水平位置")
             b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_left") ←
             b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_centered") ・
@@ -82,7 +120,7 @@
             b-radio-button(size="is-small" v-model="sp_is_fullheight" native-value="is_fullheight") 画面サイズ
             b-radio-button(size="is-small" v-model="sp_is_fullheight" native-value="") none
           b-field(custom-class="is-small" label="背景色")
-            b-input(v-model="bg_color" type="color")
+            b-input(v-model="sp_ground_color" type="color")
 
         .box
           .title.is-5 駒台
@@ -91,18 +129,18 @@
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
           .columns.mt-4
             .column.py-0
-              b-field(custom-class="is-small" label="持駒画像(w)")
-                b-slider(v-model="sp_piece_w" :min="1" :max="10" :step="0.05")
+              b-field(custom-class="is-small" label="持駒画像(W)")
+                b-slider(v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
             .column.py-0
-              b-field(custom-class="is-small" label="持駒画像(h)")
-                b-slider(v-model="sp_piece_h" :min="1" :max="10" :step="0.05")
+              b-field(custom-class="is-small" label="持駒画像(H)")
+                b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
           .columns
             .column.py-0
-              b-field(custom-class="is-small" label="横配置時の最小(w)")
-                b-slider(v-model="sp_membership_min_width"  :min="1" :max="10" :step="0.05")
+              b-field(custom-class="is-small" label="横配置時の最小(W)")
+                b-slider(v-model="sp_membership_min_width"  :min="0" :max="100" :step="1")
             .column.py-0
-              b-field(custom-class="is-small" label="縦配置時の最小(h)")
-                b-slider(v-model="sp_membership_min_height" :min="1" :max="10" :step="0.05")
+              b-field(custom-class="is-small" label="縦配置時の最小(H)")
+                b-slider(v-model="sp_membership_min_height" :min="0" :max="100" :step="1")
           .columns
             .column.py-0
               b-field(custom-class="is-small" label="横時駒数位置")
@@ -165,6 +203,7 @@
       :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b 99krb3g3s3npR3BG18SN 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
       :sound_effect="true"
       :setting_button_show="false"
+      :summary_show="false"
       :slider_show="false"
       :controller_show="false"
       :player_info="player_info"
@@ -198,14 +237,16 @@ export default {
   },
   data() {
     return {
-      sidebar_p: false,
-      bg_color: "#C6E1B8",
+      file_info: null,
+      file_src: null,
+
+      sidebar_p: true,
+      sp_ground_color: "#C6E1B8",
 
       sp_hpos: "is_centered",
       sp_vpos: "is_vcentered",
       sp_layout: "is_vertical",
-      sp_run_mode: "edit_mode",
-      sp_fsize: 2.0,
+      sp_run_mode: "view_mode",
       screen_width: 35,
 
       // 影
@@ -216,8 +257,8 @@ export default {
 
       sp_size: "is_size_none",
       sp_is_fullheight: "is_fullheight",
-      sp_piece_w: 2.4,
-      sp_piece_h: 2.95,
+      sp_stand_piece_w: 35,
+      sp_stand_piece_h: 44,
       sp_flip: false,
       sp_piece_object_count_gap_right: 97,
       sp_piece_object_count_gap_bottom: 73,
@@ -230,12 +271,14 @@ export default {
       sp_grid_alpha: 0.5,
       sp_board_padding: 2.0,
       sp_grid_board_outer_stroke_width: 0,
+      sp_board_radius: 0.5,
+      sp_board_aspect_ratio: 109.7,
 
       sp_layer: "is_layer_off",
       sp_pi_variant: "is_pi_variant_d",
       sp_bg_variant: "is_bg_variant_none",
-      sp_membership_min_width: 3,
-      sp_membership_min_height: 3,
+      sp_membership_min_width: 0,
+      sp_membership_min_height: 0,
       ////////////////////////////////////////////////////////////////////////////////
 
       SideInfo,
@@ -262,6 +305,18 @@ export default {
     sidebar_toggle() {
       this.sidebar_p = !this.sidebar_p
     },
+
+    uploaded_handle(v) {
+      this.file_info = v
+      const reader = new FileReader()
+      reader.addEventListener("load", () => { this.file_src = reader.result }, false)
+      reader.readAsDataURL(this.file_info)
+    },
+
+    image_close() {
+      this.file_info = null
+      this.file_src = null
+    },
   },
   computed: {
     chroma() { return chroma },
@@ -275,41 +330,36 @@ export default {
     style_define() {
       // .is_texture_text .ShogiPlayerCore {
       return `
-        // .is_size_none.ShogiPlayer {
-        //   font-size: ${this.sp_fsize}vw;
-        // }
         .ShogiPlayerWidth {
           width: ${this.screen_width}%;
         }
-        .is_horizontal .Membership {
-          min-width: ${this.sp_membership_min_width}vw;
-        }
-        .is_vertical .Membership {
-          min-height: ${this.sp_membership_min_height}vw;
-        }
-        .MembershipStand .PieceObject {
-          width:  ${this.sp_piece_w}vw;
-          height: ${this.sp_piece_h}vw;
-        }
-        .MembershipLocationMark {
-          // width:  ${this.sp_piece_w * 0.7}vw;
-          // height: ${this.sp_piece_h * 0.7}vw;
+        .BoardTextureSelf {
+          background-image: url(${this.file_src});
         }
         .ShogiPlayerGround {
-          background-color: ${this.bg_color};
-        }
-        .ShogiPlayerGround {
+          --sp_membership_min_width: ${this.sp_membership_min_width}px;
+          --sp_membership_min_height: ${this.sp_membership_min_height}px;
+
+          --sp_stand_piece_w: ${this.sp_stand_piece_w}px;
+          --sp_stand_piece_h: ${this.sp_stand_piece_h}px;
+
+          --sp_ground_color: ${this.sp_ground_color};
           --sp_piece_object_count_gap_right: ${this.sp_piece_object_count_gap_right}%;
           --sp_piece_object_count_gap_bottom: ${this.sp_piece_object_count_gap_bottom}%;
           --sp_piece_object_count_font_size: ${this.sp_piece_object_count_font_size}rem;
           --sp_piece_object_count_font_color: ${this.sp_piece_object_count_font_color};
+
+          --sp_board_padding: ${this.sp_board_padding}%;
+          --sp_board_color:   ${chroma(this.sp_board_rgb).alpha(this.sp_board_alpha).css()};
+          --sp_board_radius:  ${this.sp_board_radius}%;
+          --sp_board_aspect_ratio: ${this.sp_board_aspect_ratio}%;
+
+          --sp_grid_color:    ${chroma(this.sp_grid_rgb).alpha(this.sp_grid_alpha).css()};
+          --sp_grid_board_outer_stroke_width: ${this.sp_grid_board_outer_stroke_width}px;
+
           --sp_shadow_offset: ${this.sp_shadow_offset}px;
           --sp_shadow_blur:   ${this.sp_shadow_blur}px;
           --sp_shadow_color:  ${chroma(this.sp_shadow_color).alpha(this.sp_shadow_alpha).css()};
-          --sp_grid_color:    ${chroma(this.sp_grid_rgb).alpha(this.sp_grid_alpha).css()};
-          --sp_board_padding: ${this.sp_board_padding}%;
-          --sp_grid_board_outer_stroke_width: ${this.sp_grid_board_outer_stroke_width}px;
-          --sp_board_color:   ${chroma(this.sp_board_rgb).alpha(this.sp_board_alpha).css()};
         }
       `
     },
@@ -339,11 +389,23 @@ $sidebar_width: 20%
   .b-slider
     margin-top: 0.5rem
 
+  .image_preview_container
+    position: relative
+    .delete_container
+      position: absolute
+      top: 0
+      right: 0
+      .delete
+        margin: 0.25rem
+        background-color: change_color($white, $alpha: 0.2)
+        border: 1px solid change_color($white, $alpha: 0.9)
+
 .StyleEditor
   .sidebar_toggle_button
     position: fixed
     top: 0.5rem
     right: 0.5rem
+    z-index: 1
 
   &.sidebar_p
     .EditBlock

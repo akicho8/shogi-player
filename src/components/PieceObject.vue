@@ -55,6 +55,9 @@ export default {
   @extend %real_hoverable_bg
 
 .ShogiPlayerGround
+  --sp_stand_piece_w: 35px // 駒台の駒(W)
+  --sp_stand_piece_h: 44px // 駒台の駒(H)
+
   // 共通
   .PieceObject
     // cursor: default // テキスト選択「I」ではなく矢印カーソルとする
@@ -116,6 +119,8 @@ export default {
   // 駒台
   .Membership
     .PieceObject
+      width:  var(--sp_stand_piece_w)
+      height: var(--sp_stand_piece_h)
       +mobile
         width:  38px
         height: 46px  // 縦長にすることでタップ範囲を広げつつ駒数との隙間を作れる
