@@ -1,11 +1,12 @@
 <template lang="pug">
-.PieceBox.is-flex(
+.PieceBox(
   v-if="base.edit_p"
   :class="component_class"
   @click.stop.prevent="base.piece_box_other_click"
   @click.right.prevent="base.hold_cancel"
   )
-  .PieceWithCount.is-flex(
+  .PieceBoxTexture
+  .PieceWithCount(
     v-for="[piece, count] in base.mediator.piece_box_realize()"
     :class="{holding_p: base.piece_box_have_p(piece)}"
     @click.stop.prevent="base.piece_box_piece_click(piece, $event)"
@@ -44,25 +45,30 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  &.is_vertical
-    .PieceBox
-      // @extend %board_texture_bg
-      @extend %real_hoverable_opacity
-      @extend %is_unselectable
+  --sp_piece_box_color: rgba(0, 0, 0, 0.2)  // 駒箱背景
+  --sp_piece_box_radius: 3px                // 角丸度合
 
-      height: 3rem
-      margin-top: $sp_size_piece_stand_margin_top_bottom
-      justify-content: flex-start
+  .PieceBox
+    @extend %real_hoverable_opacity
+    @extend %is_unselectable
+
+    // margin-top: $sp_size_piece_stand_margin_top_bottom
+
+    display: flex
+    justify-content: flex-start
+    align-items: center
+
+    position: relative
+    min-height: var(--sp_piece_box_piece_h)
+
+    .PieceWithCount
+      display: flex
+      justify-content: center
       align-items: center
 
-      .PieceWithCount                // FIXME: クリックをここにしたい
-        // border: 1px dashed change_color($primary, $alpha: 0.5)
-        // padding: 0 0.25rem
-        // font-size: 2.8rem
-        justify-content: center
-        align-items: center
-        // border: 1px dashed change_color($black, $alpha: 0.8)
-        // .PieceObject
-        //   height: 2rem
-        //   width:  2rem
+  .PieceBoxTexture
+    +overlay_block
+    +filter_drop_shadow(1)
+    background-color: var(--sp_piece_box_color)
+    border-radius: var(--sp_piece_box_radius)
 </style>

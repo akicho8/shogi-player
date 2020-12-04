@@ -83,8 +83,6 @@ export default {
 
   .BoardOuter
     padding: var(--sp_board_padding)
-
-  .BoardOuter
     border: var(--sp_grid_outer_stroke) solid var(--sp_grid_color)
 
   .BoardTextureSelf
@@ -103,6 +101,10 @@ export default {
     background-repeat: no-repeat
     background-size: cover
 
-    border-radius:    var(--sp_board_radius)   // 角を丸める
-    opacity:          var(--sp_board_opacity)
+    border-radius: var(--sp_board_radius)   // 角を丸める
+    // filter: opacity(calc(var(--sp_board_opacity) * 100%))
+    // filter: opacity(0.5)
+    // filter: opacity(0.1)
+    // filter: opacity(var(--sp_board_opacity))
+    opacity: var(--sp_board_opacity)
 </style>

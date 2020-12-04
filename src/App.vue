@@ -19,8 +19,8 @@
 
         .box
           .title.is-5 背景
-          b-field(custom-class="is-small" label="背景色")
-            b-input(v-model="sp_ground_color" type="color")
+          b-field(custom-class="is-small" label="")
+            ColorPicker(v-model="sp_ground_color" :disableAlpha="true")
 
           b-field.file
             b-upload(v-model="sp_ground_bg_file_info" @input="sp_bg_handle")
@@ -48,6 +48,9 @@
 
         .box
           .title.is-5 盤
+
+          b-field(custom-class="is-small" label="単色")
+            ColorPicker(v-model="sp_board_color")
 
           b-field(custom-class="is-small" label="プリセット画像")
             b-select(size="is-small" v-model="sp_bg_variant")
@@ -94,27 +97,14 @@
               template(v-else)
                 | プレビュー未対応
 
-          .columns.mt-4
-            .column.py-0
-              b-field(custom-class="is-small" label="単色")
-                b-input(v-model="sp_board_rgb" type="color")
-            .column.py-0
-              b-field(custom-class="is-small" label="単色透明度")
-                b-slider(v-model="sp_board_alpha" :min="0" :max="1.0" :step="0.01")
-
           b-field(custom-class="is-small" label="共通透明度")
             b-slider(v-model="sp_board_opacity" :min="0" :max="1.0" :step="0.01")
 
         .box
           .title.is-5 盤 - 装飾
 
-          .columns.mt-4
-            .column.py-0
-              b-field(custom-class="is-small" label="グリッドカラー")
-                b-input(v-model="sp_grid_rgb" type="color")
-            .column.py-0
-              b-field(custom-class="is-small" label="グリッド透明度")
-                b-slider(v-model="sp_grid_alpha" :min="0" :max="1.0" :step="0.01")
+          b-field(custom-class="is-small" label="グリッドカラー")
+            ColorPicker(v-model="sp_grid_color")
 
           b-field(custom-class="is-small" label="角丸め")
             b-slider(v-model="sp_board_radius" :min="0" :max="5" :step="0.01")
@@ -129,7 +119,7 @@
             b-slider(v-model="sp_board_aspect_ratio" :min="0" :max="200" :step="0.1")
 
         .box
-          .title.is-5 テクスチャ
+          .title.is-5 駒
           b-field(custom-class="is-small" label="駒")
             b-select(size="is-small" v-model="sp_pi_variant")
               option(value="is_pi_variant_none") none
@@ -140,6 +130,10 @@
               option(value="is_pi_variant_e") e
               option(value="is_pi_variant_f") f
               option(value="is_pi_variant_g") g
+          b-field(custom-class="is-small" label="盤上のセルに対する駒の大きさ")
+            b-slider(v-model="sp_board_piece_rate" :min="0" :max="100" :step="0.1")
+          b-field(custom-class="is-small" label="駒台のセルに対する駒の大きさ")
+            b-slider(v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
 
         .box
           .title.is-5 盤駒配置
@@ -153,13 +147,13 @@
               b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_centered") ・
               b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_right") →
 
-          .columns.mt-4
-            .column.py-0
-              b-field(custom-class="is-small" label="持駒画像(W)")
-                b-slider(v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
-            .column.py-0
-              b-field(custom-class="is-small" label="持駒画像(H)")
-                b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
+          //- .columns.mt-4
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="持駒画像(W)")
+          //-       b-slider(v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="持駒画像(H)")
+          //-       b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
 
           b-field(custom-class="is-small" label="領域縦幅")
             b-radio-button(size="is-small" v-model="sp_is_fullheight" native-value="is_fullheight") 画面サイズ
@@ -184,19 +178,35 @@
             .column.py-0
               b-field(custom-class="is-small" label="縦配置時の最小(H)")
                 b-slider(v-model="sp_side_min_h" :min="0" :max="100" :step="1")
-          .columns
+
+        .box
+          .title.is-5 駒数
+          b-field(custom-class="is-small" label="サイズ")
+            b-slider(v-model="sp_piece_count_font_size" :min="0" :max="3" :step="0.01")
+          b-field(custom-class="is-small" label="フォント色")
+            ColorPicker(v-model="sp_piece_count_font_color")
+          b-field(custom-class="is-small" label="背景")
+            ColorPicker(v-model="sp_piece_count_bg_color")
+          b-field(custom-class="is-small" label="余白")
+            b-slider(v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
+          b-field(custom-class="is-small" label="左右レイアウト時の位置")
+            b-slider(v-model="sp_piece_count_gap_right" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_vertical'")
+          b-field(custom-class="is-small" label="上下レイアウト時の位置")
+            b-slider(v-model="sp_piece_count_gap_bottom" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_horizontal'")
+
+        .box
+          .title.is-5 駒箱
+          b-field(custom-class="is-small" label="単色")
+            ColorPicker(v-model="sp_piece_box_color")
+          b-field(custom-class="is-small" label="セル内の実物の大きさ(%)")
+            b-slider(v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
+          .columns.mt-4
             .column.py-0
-              b-field(custom-class="is-small" label="横時駒数位置")
-                b-slider(v-model="sp_piece_object_count_gap_right" :min="-50" :max="150")
+              b-field(custom-class="is-small" label="セル(W)")
+                b-slider(v-model="sp_piece_box_piece_w" :min="1" :max="80" :step="1")
             .column.py-0
-              b-field(custom-class="is-small" label="縦時駒数位置")
-                b-slider(v-model="sp_piece_object_count_gap_bottom" :min="-50" :max="150")
-          .columns
-            .column.py-0
-              b-field(custom-class="is-small" label="サイズ")
-                b-slider(v-model="sp_piece_object_count_font_size" :min="0" :max="3" :step="0.01")
-              b-field(custom-class="is-small" label="色")
-                b-input(v-model="sp_piece_object_count_font_color" type="color")
+              b-field(custom-class="is-small" label="セル(H)")
+                b-slider(v-model="sp_piece_box_piece_h" :min="1" :max="80" :step="1")
 
         .box
           .title.is-5 影
@@ -205,9 +215,7 @@
           b-field(custom-class="is-small" label="ぶれ度合い")
             b-slider(v-model="sp_shadow_blur" :min="-1" :max="20")
           b-field(custom-class="is-small" label="色")
-            b-input(v-model="sp_shadow_color" type="color")
-          b-field(custom-class="is-small" label="透明度")
-            b-slider(v-model="sp_shadow_alpha" :min="0" :max="1.0" :step="0.01")
+            ColorPicker(v-model="sp_shadow_color")
 
         .box
           .title.is-5 その他
@@ -224,7 +232,7 @@
             b-radio-button(size="is-small" v-model="sp_flip" :native-value="false") ☗
             b-radio-button(size="is-small" v-model="sp_flip" :native-value="true") ☖
 
-          b-field(custom-class="is-small" label="モバイルスタイル")
+          b-field(custom-class="is-small" label="モバイル時のプリセットサイズ自動適用")
             b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style") ON
             b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="") OFF
 
@@ -270,7 +278,8 @@ import 'buefy/dist/buefy.css'
 
 Vue.use(Buefy)
 
-import ShogiPlayer from './components/ShogiPlayer'
+import ShogiPlayer from "./components/ShogiPlayer.vue"
+import ColorPicker from "./components/ColorPicker.vue"
 
 import SideInfo from "./models/side_info"
 import RunModeInfo from "./models/run_mode_info"
@@ -281,10 +290,13 @@ import SizeInfo from "./models/size_info"
 
 import chroma from "chroma-js"
 
+import { Slider, Chrome } from 'vue-color'
+
 export default {
   name: 'app',
   components: {
     ShogiPlayer,
+    ColorPicker,
   },
   data() {
     return {
@@ -300,36 +312,43 @@ export default {
       sp_hpos: "is_centered",
       sp_vpos: "is_vcentered",
       sp_layout: "is_vertical",
-      sp_run_mode: "view_mode",
+      sp_run_mode: "edit_mode",
       sp_body_width: 35,
       sp_mobile_style: "is_mobile_style",
 
       // 影
       sp_shadow_offset: 2,
       sp_shadow_blur: 3,
-      sp_shadow_color: "#000000",
-      sp_shadow_alpha: 0.4,
+      sp_shadow_color: "rgba(0, 0, 0, 0.4)",
 
       sp_size: "is_size_none",
       sp_is_fullheight: "is_fullheight",
       sp_stand_piece_w: 35,
       sp_stand_piece_h: 44,
       sp_flip: false,
-      sp_piece_object_count_gap_right: 97,
-      sp_piece_object_count_gap_bottom: 73,
-      sp_piece_object_count_font_size: 0.75,
-      sp_piece_object_count_font_color: "#444444",
+      sp_piece_count_gap_right: 97,
+      sp_piece_count_gap_bottom: 73,
+      sp_piece_count_font_size: 0.75,
+      sp_piece_count_font_color:  "rgba(0, 0, 0, 0.75)",
+      sp_piece_count_bg_color: "rgba(255, 255, 255, 0.75)",
+      sp_piece_count_padding: 3,
 
-      sp_board_rgb: "#000000",
-      sp_board_alpha: 0.2,
+      sp_board_color: "rgba(0, 0, 0, 0.2)",
       sp_board_opacity: 1.0,
-      sp_grid_rgb: "#000000",
-      sp_grid_alpha: 0.5,
+      sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_board_padding: 2.0,
       sp_grid_outer_stroke: 0,
       sp_grid_star: 10,
       sp_board_radius: 0.5,
       sp_board_aspect_ratio: 109.7,
+      sp_board_piece_rate: 90,
+      sp_stand_piece_rate: 90,
+
+      sp_piece_box_piece_w: 38,
+      sp_piece_box_piece_h: 46,
+      sp_piece_box_piece_rate: 90,
+
+      sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
 
       sp_layer: "is_layer_off",
       sp_pi_variant: "is_pi_variant_d",
@@ -417,25 +436,35 @@ export default {
           --sp_ground_bg_image: ${this.sp_ground_bg_url};
 
           --sp_ground_color: ${this.sp_ground_color};
-          --sp_piece_object_count_gap_right: ${this.sp_piece_object_count_gap_right}%;
-          --sp_piece_object_count_gap_bottom: ${this.sp_piece_object_count_gap_bottom}%;
-          --sp_piece_object_count_font_size: ${this.sp_piece_object_count_font_size}rem;
-          --sp_piece_object_count_font_color: ${this.sp_piece_object_count_font_color};
+          --sp_piece_count_gap_right:  ${this.sp_piece_count_gap_right}%;
+          --sp_piece_count_gap_bottom: ${this.sp_piece_count_gap_bottom}%;
+          --sp_piece_count_font_size:  ${this.sp_piece_count_font_size}rem;
+          --sp_piece_count_font_color: ${this.sp_piece_count_font_color};
+          --sp_piece_count_bg_color:   ${this.sp_piece_count_bg_color};
+          --sp_piece_count_padding: ${this.sp_piece_count_padding}px;
 
           --sp_board_padding: ${this.sp_board_padding}%;
-          --sp_board_color:   ${chroma(this.sp_board_rgb).alpha(this.sp_board_alpha).css()};
+          --sp_board_color:   ${this.sp_board_color};
           --sp_board_opacity: ${this.sp_board_opacity};
           --sp_board_radius:  ${this.sp_board_radius}%;
           --sp_board_aspect_ratio: ${this.sp_board_aspect_ratio}%;
           --sp_board_bg_image:  ${this.sp_board_bg_url};
+          --sp_board_piece_rate: ${this.sp_board_piece_rate}%;
+          --sp_stand_piece_rate: ${this.sp_stand_piece_rate}%;
 
-          --sp_grid_color:    ${chroma(this.sp_grid_rgb).alpha(this.sp_grid_alpha).css()};
+          --sp_piece_box_piece_w: ${this.sp_piece_box_piece_w}px;
+          --sp_piece_box_piece_h: ${this.sp_piece_box_piece_h}px;
+          --sp_piece_box_piece_rate: ${this.sp_piece_box_piece_rate}%;
+
+          --sp_piece_box_color:   ${this.sp_piece_box_color};
+
+          --sp_grid_color:    ${this.sp_grid_color};
           --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke}px;
           --sp_grid_star: ${this.sp_grid_star}%;
 
           --sp_shadow_offset: ${this.sp_shadow_offset}px;
           --sp_shadow_blur:   ${this.sp_shadow_blur}px;
-          --sp_shadow_color:  ${chroma(this.sp_shadow_color).alpha(this.sp_shadow_alpha).css()};
+          --sp_shadow_color:  ${this.sp_shadow_color};
 
           --sp_stand_piece_w: ${this.sp_stand_piece_w}px;
           --sp_stand_piece_h: ${this.sp_stand_piece_h}px;

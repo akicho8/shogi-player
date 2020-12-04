@@ -44,6 +44,7 @@
     "pug": "^3.0.0",
     "sass-loader": "^6.0.6",
     "vue": "^2.5.17",
+    "vue-color": "^2.7.1",
     "vue-router": "^3.0.1",
     "xregexp": "^4.3.0"
   },

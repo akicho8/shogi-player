@@ -99,7 +99,6 @@ export default {
     justify-content: center
     align-items: center
 
-    // @extend %board_texture_bg
     @extend %real_hoverable_opacity
 
   &.is_layer_on
@@ -126,10 +125,12 @@ export default {
 
   // is_vertical と同じ(共通化禁止)
   +mobile
-    .is_white
-      .MembershipStand
-        flex-direction: row-reverse    // 全体縦並び → 後手 → 横並び(昇順)
-    .is_black
-      .MembershipStand
-        flex-direction: row            // 全体縦並び → 先手 → 横並び(降順)
+    &.is_mobile_style
+      .is_white
+        .MembershipStand
+          flex-direction: row-reverse    // 全体縦並び → 後手 → 横並び(昇順)
+      .is_black
+        .MembershipStand
+          flex-direction: row            // 全体縦並び → 先手 → 横並び(降順)
 </style>
+

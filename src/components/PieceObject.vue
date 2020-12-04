@@ -55,8 +55,15 @@ export default {
   @extend %real_hoverable_bg
 
 .ShogiPlayerGround
-  --sp_stand_piece_w: 35px // 駒台の駒(W)
-  --sp_stand_piece_h: 44px // 駒台の駒(H)
+  --sp_board_piece_rate: 90%     // 盤のセル内の駒占有率
+
+  --sp_stand_piece_w: 35px       // 駒台のセル(W)
+  --sp_stand_piece_h: 44px       // 駒台のセル(H)
+  --sp_stand_piece_rate: 90%     // 駒台のセル内の駒占有率
+
+  --sp_piece_box_piece_w: 38px   // 駒箱のセル(W)
+  --sp_piece_box_piece_h: 46px   // 駒箱のセル(H)
+  --sp_piece_box_piece_rate: 90% // 駒箱のセル内の駒占有率
 
   // 共通
   .PieceObject
@@ -88,17 +95,13 @@ export default {
     &.current
       animation: real_blink 0.5s ease-in-out infinite alternate
 
+  ////////////////////////////////////////////////////////////////////////////////
   .PieceTexture
-    width: 90%                  // こちらを100%にして
-    height: 90%                 // こちらだけで調整してもいいかも
-
+    position: relative // PieceTextureSelf の基点を PieceTexture にするため(重要)
     // 下に引く度合い
-    position: relative
-    top: var(--piece_pull, 0%)
-
+    // top: var(--piece_pull, 0%)
   .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
     +overlay_block
-    // z-index: -1
 
     // テクスチャ
     background-position: center
@@ -112,15 +115,20 @@ export default {
   // テーブル
   .BoardOuter
     .PieceObject
-      // box2 のサイズ%を最大するため必要
       width:  100%
       height: 100%
+    .PieceTexture
+      width:  var(--sp_board_piece_rate)   // こちらを100%にして
+      height: var(--sp_board_piece_rate)  // こちらだけで調整してもいいかも
 
   // 駒台
   .Membership
     .PieceObject
       width:  var(--sp_stand_piece_w)
       height: var(--sp_stand_piece_h)
+    .PieceTexture
+      width:  var(--sp_stand_piece_rate)   // こちらを100%にして
+      height: var(--sp_stand_piece_rate)  // こちらだけで調整してもいいかも
 
   +mobile
     &.is_mobile_style
@@ -128,12 +136,16 @@ export default {
         .PieceObject
           width:  38px
           height: 46px
+        .PieceTexture
+          width:  90%
+          height: 90%
 
   // 駒箱
-  &.is_vertical
-    .PieceBox
-      background-color: rgba(0, 0, 0, 0.2)
-      .PieceObject
-        width:  38px
-        height: 46px
+  .PieceBox
+    .PieceObject
+      width:  var(--sp_piece_box_piece_w)
+      height: var(--sp_piece_box_piece_h)
+    .PieceTexture
+      width:  var(--sp_piece_box_piece_rate)
+      height: var(--sp_piece_box_piece_rate)
 </style>
