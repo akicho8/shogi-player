@@ -107,30 +107,24 @@ export default {
       .PieceObject
         border: 1px dashed change_color($primary, $alpha: 0.5)
 
-  +tablet
-    &.is_horizontal
-      .is_white
-        .MembershipStand
-          flex-direction: column-reverse // 全体横並び → 後手 → 縦並び(昇順) △が下にあるので大駒順に並べるため
-      .is_black
-        .MembershipStand
-          flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
-    &.is_vertical
-      .is_white
-        .MembershipStand
-          flex-direction: row-reverse    // 全体縦並び → 後手 → 横並び(昇順)
-      .is_black
-        .MembershipStand
-          flex-direction: row            // 全体縦並び → 先手 → 横並び(降順)
+  &.is_horizontal
+    .is_white
+      .MembershipStand
+        flex-direction: column-reverse // 全体横並び → 後手 → 縦並び(昇順) △が下にあるので大駒順に並べるため
+    .is_black
+      .MembershipStand
+        flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
 
-  // is_vertical と同じ(共通化禁止)
+  =is_vertical_style
+    .is_white
+      .MembershipStand
+        flex-direction: row-reverse    // 全体縦並び → 後手 → 横並び(昇順)
+    .is_black
+      .MembershipStand
+        flex-direction: row            // 全体縦並び → 先手 → 横並び(降順)
+  &.is_vertical
+    +is_vertical_style
   +mobile
     &.is_mobile_style
-      .is_white
-        .MembershipStand
-          flex-direction: row-reverse    // 全体縦並び → 後手 → 横並び(昇順)
-      .is_black
-        .MembershipStand
-          flex-direction: row            // 全体縦並び → 先手 → 横並び(降順)
+      +is_vertical_style
 </style>
-

@@ -29,11 +29,15 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayer
+.ShogiPlayerGround
+  --sp_edit_tool_box_margin_bottom: 0.5rem // edit_mode時の上のボタンの下のマージン
+
   .EditToolBox
+    margin-bottom: var(--sp_edit_tool_box_margin_bottom)
+
     .dropdown
       text-align: left
     .button
-      margin-left: 1px
-      margin-right: 1px
+      margin-left: 0px
+      margin-right: 0px
 </style>

@@ -17,6 +17,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+
 .ShogiPlayerGround
   --sp_piece_count_gap_right: 86%                      // 駒数の駒右端からのオフセット(横配置時)
   --sp_piece_count_gap_bottom: 100%                    // 駒数の駒底辺からのオフセット(縦配置時)
@@ -36,8 +37,8 @@ export default {
     color: var(--sp_piece_count_font_color)
     font-weight: bold
 
-    position: relative // 相対的にずらすため、かつ z-index 用
     z-index: 1         // 駒数が Membership の下に潜るのを防ぐ
+    position: relative // 相対的にずらすため、かつ z-index 用
 
   &.is_layer_on
     .PieceObjectCount
@@ -46,16 +47,12 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
   &.is_horizontal
     .PieceTexture
-      position: relative
-    .PieceObjectCount
-      position: absolute
-      top: 0
-      bottom: 0
-
       display: flex
       justify-content: center
       align-items: center
-
+    .PieceObjectCount
+      top: 0
+      bottm: 0
     .is_white
       .PieceObjectCount
         right: var(--sp_piece_count_gap_right) // 右端から横幅分押すと左端の外になる
@@ -65,24 +62,31 @@ export default {
         left: var(--sp_piece_count_gap_right)  // 左端から横幅分押すと右端の外になる
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
-  &.is_vertical
+
+  =is_vertical_style
     .Membership
       .PieceTexture
         display: flex
         justify-content: center
         align-items: center
+      .PieceObjectCount
+        right: 0
+        left: 0
 
       &.is_white
-        .PieceTexture
-          // align-items: flex-start
         .PieceObjectCount
-          transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
           bottom: var(--sp_piece_count_gap_bottom)
+          transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
       &.is_black
-        .PieceTexture
-          // align-items: flex-end
         .PieceObjectCount
           top: var(--sp_piece_count_gap_bottom)
+
+  &.is_vertical
+    +is_vertical_style
+
+  +mobile
+    &.is_mobile_style
+      +is_vertical_style
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
   .PieceBox

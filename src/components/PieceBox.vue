@@ -47,25 +47,40 @@ export default {
 .ShogiPlayerGround
   --sp_piece_box_color: rgba(0, 0, 0, 0.2)  // 駒箱背景
   --sp_piece_box_radius: 3px                // 角丸度合
+  --sp_piece_box_margin_top: 10px           // 横レイアウト時の上マージン
 
   .PieceBox
     @extend %real_hoverable_opacity
     @extend %is_unselectable
 
-    // margin-top: $sp_size_piece_stand_margin_top_bottom
-
     display: flex
     justify-content: flex-start
     align-items: center
 
-    position: relative
-    min-height: var(--sp_piece_box_piece_h)
+    position: relative                      // 基点からずらすため
+    min-height: var(--sp_piece_box_piece_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
 
     .PieceWithCount
       display: flex
       justify-content: center
       align-items: center
 
+  //////////////////////////////////////////////////////////////////////////////// is_horizontal
+  &.is_horizontal
+    .PieceBox
+      margin-top: var(--sp_piece_box_margin_top)
+
+  //////////////////////////////////////////////////////////////////////////////// is_vertical
+  =is_vertical_style
+    .PieceBox
+      margin-top: 0
+  &.is_vertical
+    +is_vertical_style
+  +mobile
+    &.is_mobile_style
+      +is_vertical_style
+
+  ////////////////////////////////////////////////////////////////////////////////
   .PieceBoxTexture
     +overlay_block
     +filter_drop_shadow(1)

@@ -3,10 +3,7 @@
   Membership(:base="base" :location="base.location_white")
     //- b-button.mr-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
   AspectRatioFixedBlock
-    template(v-if="base.overlay_navi")
-      .overlay_navi.previous(@click.stop.prevent="base.navi_relative_move(-1, $event)")
-      .overlay_navi.next(@click.stop.prevent="base.navi_relative_move(+1, $event)")
-      .overlay_navi.flip_trigger_cell(@click.stop.prevent="base.board_flip_run")
+    OverlayNavigations(:base="base")
     BoardOuter(:base="base")
   Membership(:base="base" :location="base.location_black")
 </template>
@@ -15,6 +12,7 @@
 import Membership            from "./Membership.vue"
 import AspectRatioFixedBlock from "./AspectRatioFixedBlock.vue"
 import BoardOuter            from "./BoardOuter.vue"
+import OverlayNavigations    from "./OverlayNavigations.vue"
 
 import { support } from "./support.js"
 
@@ -25,6 +23,7 @@ export default {
     Membership,
     AspectRatioFixedBlock,
     BoardOuter,
+    OverlayNavigations,
   },
   computed: {
     component_class() {
@@ -66,22 +65,15 @@ export default {
   &.is_horizontal
     .ShogiPlayerCore
       flex-direction: row
-  &.is_vertical
+  =is_vertical_style
     .ShogiPlayerCore
       flex-direction: column
+  &.is_vertical
+    +is_vertical_style
   +mobile
     &.is_mobile_style
-      .ShogiPlayerCore
-        flex-direction: column
+      +is_vertical_style
 
-  .overlay_navi
-    cursor: pointer
-    &.previous
-      cursor: w-resize
-    &.next
-      cursor: e-resize
-    &.flip_trigger_cell
-      cursor: ns-resize
   .is_flip_on
     .overlay_navi
       &.previous

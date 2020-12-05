@@ -57,9 +57,9 @@ export default {
 .ShogiPlayerGround
   --sp_board_piece_rate: 90%     // 盤のセル内の駒占有率
 
-  --sp_stand_piece_w: 35px       // 駒台のセル(W)
-  --sp_stand_piece_h: 44px       // 駒台のセル(H)
-  --sp_stand_piece_rate: 90%     // 駒台のセル内の駒占有率
+  --sp_stand_piece_w: 47px       // 駒台のセル(W)
+  --sp_stand_piece_h: 50px       // 駒台のセル(H)
+  --sp_stand_piece_rate: 80%     // 駒台のセル内の駒占有率
 
   --sp_piece_box_piece_w: 38px   // 駒箱のセル(W)
   --sp_piece_box_piece_h: 46px   // 駒箱のセル(H)
@@ -130,6 +130,15 @@ export default {
       width:  var(--sp_stand_piece_rate)   // こちらを100%にして
       height: var(--sp_stand_piece_rate)  // こちらだけで調整してもいいかも
 
+  // 駒箱
+  .PieceBox
+    .PieceObject
+      width:  var(--sp_piece_box_piece_w)
+      height: var(--sp_piece_box_piece_h)
+    .PieceTexture
+      width:  var(--sp_piece_box_piece_rate)
+      height: var(--sp_piece_box_piece_rate)
+
   +mobile
     &.is_mobile_style
       .Membership
@@ -139,13 +148,11 @@ export default {
         .PieceTexture
           width:  90%
           height: 90%
-
-  // 駒箱
-  .PieceBox
-    .PieceObject
-      width:  var(--sp_piece_box_piece_w)
-      height: var(--sp_piece_box_piece_h)
-    .PieceTexture
-      width:  var(--sp_piece_box_piece_rate)
-      height: var(--sp_piece_box_piece_rate)
+      .PieceBox
+        .PieceObject
+          width:  38px
+          height: 46px
+        .PieceTexture
+          width:  90%
+          height: 90%
 </style>

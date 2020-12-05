@@ -1,23 +1,2 @@
-グリフウィキ
-https://glyphwiki.org/
-
-コドモとアプリ
-https://studio.beatnix.co.jp/
-
-|----+---------------------------------------------------------------------------------|
-| K0 | https://glyphwiki.org/wiki/u738b                                                |
-| R0 | https://glyphwiki.org/wiki/u98db                                                |
-| B0 | https://glyphwiki.org/wiki/u89d2                                                |
-| G0 | https://glyphwiki.org/wiki/u91d1                                                |
-| S0 | https://glyphwiki.org/wiki/u9280                                                |
-| N0 | https://glyphwiki.org/wiki/u6842                                                |
-| L0 | https://glyphwiki.org/wiki/u9999                                                |
-| P0 | https://glyphwiki.org/wiki/u6b69                                                |
-| X0 | https://glyphwiki.org/wiki/u7389                                                |
-| R1 | https://glyphwiki.org/wiki/u7adc                                                |
-| B1 | https://glyphwiki.org/wiki/u99ac                                                |
-| S1 | https://glyphwiki.org/wiki/u5168                                                |
-| N1 | https://glyphwiki.org/wiki/u572d                                                |
-| L1 | https://glyphwiki.org/wiki/u674f                                                |
-| P1 | https://studio.beatnix.co.jp/files/moji-svg/hiragana/minchyo/01/hira_min_to.svg |
-|----+---------------------------------------------------------------------------------|
+将棋図案駒
+https://twitter.com/Shogi_Zuan

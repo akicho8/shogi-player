@@ -45,21 +45,16 @@ export default {
     .MembershipLocation
       border: 1px dashed change_color($primary, $alpha: 0.5)
 
-  &.is_vertical
+  =is_vertical_style
     .is_white
       .MembershipLocation
         margin-right: auto    // 「………△飛歩」→「△………飛歩」
     .is_black
       .MembershipLocation
         margin-left: auto     // 「………飛歩▲」→「飛歩………▲」
-
-  // is_vertical と同じにする(共通化禁止)
+  &.is_vertical
+    +is_vertical_style
   +mobile
     &.is_mobile_style
-      .is_white
-        .MembershipLocation
-          margin-right: auto    // 「………△飛歩」→「△………飛歩」
-      .is_black
-        .MembershipLocation
-          margin-left: auto     // 「………飛歩▲」→「飛歩………▲」
+      +is_vertical_style
 </style>

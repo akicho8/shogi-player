@@ -4,7 +4,7 @@
     .mx-4.my-4
       .is-flex.is-justify-content-start.is-align-items-center
         b-button(@click="sidebar_toggle" icon-left="menu")
-        .mx-3.has-text-weight-bold 将棋盤スタイルエディタ
+        .mx-3.has-text-weight-bold 将棋盤スタイルエディター
 
       .my_controls
         .box
@@ -66,7 +66,7 @@
 
         .box
           .title.is-5 駒
-          b-field(custom-class="is-small" label="駒")
+          b-field(custom-class="is-small" label="プリセット")
             b-select(size="is-small" v-model="sp_pi_variant")
               option(value="is_pi_variant_none") none
               option(value="is_pi_variant_a") a
@@ -76,54 +76,30 @@
               option(value="is_pi_variant_e") e
               option(value="is_pi_variant_f") f
               option(value="is_pi_variant_g") g
-          b-field(custom-class="is-small" label="盤上のセルに対する駒の大きさ")
+          b-field(custom-class="is-small" label="盤上のセル内の駒の大きさ")
             b-slider(v-model="sp_board_piece_rate" :min="0" :max="100" :step="0.1")
-          b-field(custom-class="is-small" label="駒台のセルに対する駒の大きさ")
-            b-slider(v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
-
-        .box
-          .title.is-5 盤駒配置
-          b-field(grouped)
-            b-field(custom-class="is-small" label="垂直位置" expanded)
-              b-radio-button(size="is-small" v-model="sp_vpos" native-value="is_top") ↑
-              b-radio-button(size="is-small" v-model="sp_vpos" native-value="is_vcentered") ・
-              b-radio-button(size="is-small" v-model="sp_vpos" native-value="is_bottom") ↓
-            b-field(custom-class="is-small" label="水平位置" expanded)
-              b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_left") ←
-              b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_centered") ・
-              b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_right") →
-
-          //- .columns.mt-4
-          //-   .column.py-0
-          //-     b-field(custom-class="is-small" label="持駒画像(W)")
-          //-       b-slider(v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
-          //-   .column.py-0
-          //-     b-field(custom-class="is-small" label="持駒画像(H)")
-          //-       b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
-
-          b-field(custom-class="is-small" label="領域縦幅")
-            b-radio-button(size="is-small" v-model="sp_is_fullheight" native-value="is_fullheight") 画面サイズ
-            b-radio-button(size="is-small" v-model="sp_is_fullheight" native-value="") none
 
         .box
           .title.is-5 駒台
-          b-field(custom-class="is-small" label="駒台配置")
+          b-field(custom-class="is-small" label="配置")
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
           .columns.mt-4
             .column.py-0
-              b-field(custom-class="is-small" label="持駒画像(W)")
+              b-field(custom-class="is-small" label="セル(Width)")
                 b-slider(v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
             .column.py-0
-              b-field(custom-class="is-small" label="持駒画像(H)")
+              b-field(custom-class="is-small" label="セル(Height)")
                 b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
-          .columns
-            .column.py-0
-              b-field(custom-class="is-small" label="横配置時の最小(W)")
-                b-slider(v-model="sp_side_min_w"  :min="0" :max="100" :step="1")
-            .column.py-0
-              b-field(custom-class="is-small" label="縦配置時の最小(H)")
-                b-slider(v-model="sp_side_min_h" :min="0" :max="100" :step="1")
+          //- .columns
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="横配置時の最小(W)")
+          //-       b-slider(v-model="sp_side_min_w"  :min="0" :max="100" :step="1")
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="縦配置時の最小(H)")
+          //-       b-slider(v-model="sp_side_min_h" :min="0" :max="100" :step="1")
+          b-field(custom-class="is-small" label="セル内の駒の大きさ")
+            b-slider(v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
 
         .box
           .title.is-5 駒数
@@ -153,6 +129,8 @@
                 b-slider(v-model="sp_piece_box_piece_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
             b-slider(v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
+          b-field(custom-class="is-small" label="横レイアウト時の上マージン")
+            b-slider(v-model="sp_piece_box_margin_top" :min="0" :max="100" :step="0.1")
 
         .box
           .title.is-5 影
@@ -162,6 +140,32 @@
             b-slider(v-model="sp_shadow_blur" :min="-1" :max="20")
           b-field(custom-class="is-small" label="色")
             ColorPicker(v-model="sp_shadow_color")
+
+        .box
+          .title.is-5 盤駒配置
+          .columns
+            .column
+              b-field(custom-class="is-small" label="垂直位置" expanded)
+                b-radio-button(size="is-small" v-model="sp_vpos" native-value="is_top") ↑
+                b-radio-button(size="is-small" v-model="sp_vpos" native-value="is_vcentered") ・
+                b-radio-button(size="is-small" v-model="sp_vpos" native-value="is_bottom") ↓
+            .column
+              b-field(custom-class="is-small" label="水平位置" expanded)
+                b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_left") ←
+                b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_centered") ・
+                b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_right") →
+
+          //- .columns.mt-4
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="持駒画像(W)")
+          //-       b-slider(v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="持駒画像(H)")
+          //-       b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
+
+          b-field(custom-class="is-small" label="領域縦幅")
+            b-radio-button(size="is-small" v-model="sp_is_fullheight" native-value="is_fullheight") 画面サイズ
+            b-radio-button(size="is-small" v-model="sp_is_fullheight" native-value="") none
 
         .box
           .title.is-5 その他
@@ -256,7 +260,7 @@ export default {
 
       sp_hpos: "is_centered",
       sp_vpos: "is_vcentered",
-      sp_layout: "is_vertical",
+      sp_layout: "is_horizontal",
       sp_run_mode: "edit_mode",
       sp_body_width: 35,
       sp_mobile_style: "is_mobile_style",
@@ -268,38 +272,41 @@ export default {
 
       sp_size: "is_size_none",
       sp_is_fullheight: "is_fullheight",
-      sp_stand_piece_w: 35,
-      sp_stand_piece_h: 44,
+
+      sp_stand_piece_w: 47,
+      sp_stand_piece_h: 50,
+      sp_stand_piece_rate: 80,
+
       sp_flip: false,
-      sp_piece_count_gap_right: 97,
+      sp_piece_count_gap_right: 62.0,
       sp_piece_count_gap_bottom: 47.0,
       sp_piece_count_font_size: 8,
       sp_piece_count_font_color:  "rgba(0, 0, 0, 0.75)",
       sp_piece_count_bg_color: "rgba(255, 255, 255, 0.75)",
       sp_piece_count_padding: 2,
 
+      sp_board_aspect_ratio: 109.7,
       sp_board_color: "rgba(0, 0, 0, 0.2)",
       sp_board_opacity: 1.0,
-      sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_board_padding: 2.0,
+      sp_board_piece_rate: 90,
+      sp_board_radius: 0.5,
+
+      sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_outer_stroke: 0,
       sp_grid_star: 10,
-      sp_board_radius: 0.5,
-      sp_board_aspect_ratio: 109.7,
-      sp_board_piece_rate: 90,
-      sp_stand_piece_rate: 90,
 
+      sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
       sp_piece_box_piece_w: 38,
       sp_piece_box_piece_h: 46,
       sp_piece_box_piece_rate: 90,
-
-      sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
+      sp_piece_box_margin_top: 10,
 
       sp_layer: "is_layer_off",
-      sp_pi_variant: "is_pi_variant_d",
+      sp_pi_variant: "is_pi_variant_a",
       sp_bg_variant: "is_bg_variant_none",
-      sp_side_min_w: 0,
-      sp_side_min_h: 0,
+      // sp_side_min_w: 0,
+      // sp_side_min_h: 0,
       ////////////////////////////////////////////////////////////////////////////////
 
       SideInfo,
@@ -378,6 +385,7 @@ export default {
           --sp_board_bg_image:  ${this.sp_board_bg_url};
           --sp_board_piece_rate: ${this.sp_board_piece_rate}%;
           --sp_stand_piece_rate: ${this.sp_stand_piece_rate}%;
+          --sp_piece_box_margin_top: ${this.sp_piece_box_margin_top}px;
 
           --sp_piece_box_piece_w: ${this.sp_piece_box_piece_w}px;
           --sp_piece_box_piece_h: ${this.sp_piece_box_piece_h}px;
@@ -396,8 +404,8 @@ export default {
           --sp_stand_piece_w: ${this.sp_stand_piece_w}px;
           --sp_stand_piece_h: ${this.sp_stand_piece_h}px;
 
-          --sp_side_min_w:  ${this.sp_side_min_w}px;
-          --sp_side_min_h: ${this.sp_side_min_h}px;
+          // --sp_side_min_w:  ${this.sp_side_min_w}px;
+          // --sp_side_min_h: ${this.sp_side_min_h}px;
         }
       `
     },
@@ -409,15 +417,18 @@ export default {
 @import "~bulma/sass/utilities/_all"
 @import "./components/ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
 
-$sidebar_width1: 25%
-$sidebar_width2: 50%
+$sidebar_width_desktop: 30%
+$sidebar_width_tablet:  40%
+$sidebar_width_mobile:  50%
 
 .StyleEditor-Sidebar
   .sidebar-content
-    +tablet
-      width: $sidebar_width1
     +mobile
-      width: $sidebar_width2
+      width: $sidebar_width_mobile
+    +tablet
+      width: $sidebar_width_tablet
+    +desktop
+      width: $sidebar_width_desktop
     // width: unset
     // a
     //   white-space: nowrap
@@ -440,11 +451,12 @@ $sidebar_width2: 50%
 
   &.sidebar_p
     .EditBlock
-      +tablet
-        width: unquote("calc(100% - #{$sidebar_width1})")
       +mobile
-        // width: unquote("calc(100% - #{$sidebar_width2})")
         width: 100%
+      +tablet
+        width: unquote("calc(100% - #{$sidebar_width_tablet})")
+      +desktop
+        width: unquote("calc(100% - #{$sidebar_width_desktop})")
 
   // .is_size_small
   //   .ShogiPlayerWidth

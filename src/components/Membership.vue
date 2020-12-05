@@ -67,7 +67,8 @@ export default {
 
   &.is_horizontal
     .Membership
-      min-width: var(--sp_side_min_w)
+      // width: 100%
+      // min-width: var(--sp_side_min_w) // ← これを入れると重なってしまう
       &.is_white
         flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び
         align-self: flex-start           // 全体が横並び → 持駒は縦並び → 後手は上寄せ
@@ -76,26 +77,18 @@ export default {
         flex-direction: column           // 全体が横並び → 持駒は縦並び
         align-self: flex-end             // 全体が横並び → 持駒は縦並び → 先手は下寄せ
 
-  &.is_vertical
+  =is_vertical_style
     .Membership
       height: 100%
       width: 100%
-      min-height: var(--sp_side_min_h)
 
       &.is_white
         flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△飛歩」のままでよい (左端→)
       &.is_black
         flex-direction: row-reverse      // 全体が縦並び → 持駒は横並び → 右寄せ 後手は「飛歩▲」とする (←右端)
-
-  // モバイル時の設定は is_vertical と同じにしておく(共通化は危険)
+  &.is_vertical
+    +is_vertical_style
   +mobile
     &.is_mobile_style
-      .Membership
-        height: 100%
-        width: 100%
-        min-height: var(--sp_side_min_h)
-        &.is_white
-          flex-direction: row
-        &.is_black
-          flex-direction: row-reverse
+      +is_vertical_style
 </style>
