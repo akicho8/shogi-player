@@ -1,6 +1,6 @@
 <template lang="pug">
 #app.StyleEditor(:class="component_class")
-  b-sidebar.StyleEditor-Sidebar(fullheight right v-model="sidebar_p")
+  b-sidebar.StyleEditor-Sidebar(fullheight right v-model="sidebar_p" position="absolute")
     .mx-4.my-4
       .is-flex.is-justify-content-start.is-align-items-center
         b-button(@click="sidebar_toggle" icon-left="menu")
@@ -22,29 +22,7 @@
           b-field(custom-class="is-small" label="")
             ColorPicker(v-model="sp_ground_color" :disableAlpha="true")
 
-          b-field.file
-            b-upload(v-model="sp_ground_bg_file_info" @input="sp_bg_handle")
-              span.file-cta.is-clickable
-                b-icon(icon="upload" size="is-small")
-                span.is-size-7.ml-2
-                  template(v-if="sp_ground_bg_file_info")
-                    | {{sp_ground_bg_file_info.name}}
-                  template(v-else)
-                    | 画像アップロード
-
-          .block
-            template(v-if="sp_ground_bg_file_src")
-              template(v-if="/^image/.test(sp_ground_bg_file_info.type)")
-                .image_preview_container
-                  b-image(:src="sp_ground_bg_file_src")
-                  .delete_container(@click="image_close2")
-                    .delete
-              template(v-else-if="/^video/.test(sp_ground_bg_file_info.type)")
-                video(:src="sp_ground_bg_file_src" controls)
-              template(v-else-if="/^audio/.test(sp_ground_bg_file_info.type)")
-                audio(:src="sp_ground_bg_file_src" controls)
-              template(v-else)
-                | プレビュー未対応
+          ImageUpload(@input="sp_ground_bg_file_src_input_handle")
 
         .box
           .title.is-5 盤
@@ -63,39 +41,7 @@
               option(value="is_bg_variant_f") f
               option(value="is_bg_variant_g") g
 
-          //- b-field.file
-          //-   b-upload(v-model="file_info" @input="uploaded_handle")
-          //-     span.file-cta
-          //-       b-icon(icon="upload" size="is-small")
-          //-       span.is-size-7
-          //-         template(v-if="file_info")
-          //-           | {{file_info.name}}
-          //-         template(v-else)
-          //-           | 画像アップロード
-
-          b-field.file
-            b-upload(v-model="sp_board_bg_file_info" @input="uploaded_handle")
-              span.file-cta.is-clickable
-                b-icon(icon="upload" size="is-small")
-                span.is-size-7.ml-2
-                  template(v-if="sp_board_bg_file_info")
-                    | {{sp_board_bg_file_info.name}}
-                  template(v-else)
-                    | 画像アップロード
-
-          .block
-            template(v-if="sp_board_bg_file_src")
-              template(v-if="/^image/.test(sp_board_bg_file_info.type)")
-                .image_preview_container
-                  b-image(:src="sp_board_bg_file_src")
-                  .delete_container(@click="image_close")
-                    .delete
-              template(v-else-if="/^video/.test(sp_board_bg_file_info.type)")
-                video(:src="sp_board_bg_file_src" controls)
-              template(v-else-if="/^audio/.test(sp_board_bg_file_info.type)")
-                audio(:src="sp_board_bg_file_src" controls)
-              template(v-else)
-                | プレビュー未対応
+          ImageUpload(@input="sp_board_bg_file_src_input_handle")
 
           b-field(custom-class="is-small" label="共通透明度")
             b-slider(v-model="sp_board_opacity" :min="0" :max="1.0" :step="0.01")
@@ -182,7 +128,7 @@
         .box
           .title.is-5 駒数
           b-field(custom-class="is-small" label="サイズ")
-            b-slider(v-model="sp_piece_count_font_size" :min="0" :max="3" :step="0.01")
+            b-slider(v-model="sp_piece_count_font_size" :min="0" :max="20" :step="0.01")
           b-field(custom-class="is-small" label="フォント色")
             ColorPicker(v-model="sp_piece_count_font_color")
           b-field(custom-class="is-small" label="背景")
@@ -196,10 +142,8 @@
 
         .box
           .title.is-5 駒箱
-          b-field(custom-class="is-small" label="単色")
+          b-field(custom-class="is-small" label="")
             ColorPicker(v-model="sp_piece_box_color")
-          b-field(custom-class="is-small" label="セル内の実物の大きさ(%)")
-            b-slider(v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
           .columns.mt-4
             .column.py-0
               b-field(custom-class="is-small" label="セル(W)")
@@ -207,6 +151,8 @@
             .column.py-0
               b-field(custom-class="is-small" label="セル(H)")
                 b-slider(v-model="sp_piece_box_piece_h" :min="1" :max="80" :step="1")
+          b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
+            b-slider(v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
 
         .box
           .title.is-5 影
@@ -280,6 +226,7 @@ Vue.use(Buefy)
 
 import ShogiPlayer from "./components/ShogiPlayer.vue"
 import ColorPicker from "./components/ColorPicker.vue"
+import ImageUpload from "./components/ImageUpload.vue"
 
 import SideInfo from "./models/side_info"
 import RunModeInfo from "./models/run_mode_info"
@@ -297,14 +244,12 @@ export default {
   components: {
     ShogiPlayer,
     ColorPicker,
+    ImageUpload,
   },
   data() {
     return {
-      sp_board_bg_file_info: null,
-      sp_board_bg_file_src: null,
-
-      sp_ground_bg_file_info: null,
       sp_ground_bg_file_src: null,
+      sp_board_bg_file_src: null,
 
       sidebar_p: true,
       sp_ground_color: "#C6E1B8",
@@ -327,11 +272,11 @@ export default {
       sp_stand_piece_h: 44,
       sp_flip: false,
       sp_piece_count_gap_right: 97,
-      sp_piece_count_gap_bottom: 73,
-      sp_piece_count_font_size: 0.75,
+      sp_piece_count_gap_bottom: 47.0,
+      sp_piece_count_font_size: 8,
       sp_piece_count_font_color:  "rgba(0, 0, 0, 0.75)",
       sp_piece_count_bg_color: "rgba(255, 255, 255, 0.75)",
-      sp_piece_count_padding: 3,
+      sp_piece_count_padding: 2,
 
       sp_board_color: "rgba(0, 0, 0, 0.2)",
       sp_board_opacity: 1.0,
@@ -381,29 +326,11 @@ export default {
     sidebar_toggle() {
       this.sidebar_p = !this.sidebar_p
     },
-
-    uploaded_handle(v) {
-      this.sp_board_bg_file_info = v
-      const reader = new FileReader()
-      reader.addEventListener("load", () => { this.sp_board_bg_file_src = reader.result }, false)
-      reader.readAsDataURL(this.sp_board_bg_file_info)
+    sp_ground_bg_file_src_input_handle(v) {
+      this.sp_ground_bg_file_src = v
     },
-
-    image_close() {
-      this.sp_board_bg_file_info = null
-      this.sp_board_bg_file_src = null
-    },
-
-    sp_bg_handle(v) {
-      this.sp_ground_bg_file_info = v
-      const reader = new FileReader()
-      reader.addEventListener("load", () => { this.sp_ground_bg_file_src = reader.result }, false)
-      reader.readAsDataURL(this.sp_ground_bg_file_info)
-    },
-
-    image_close2() {
-      this.sp_ground_bg_file_info = null
-      this.sp_ground_bg_file_src = null
+    sp_board_bg_file_src_input_handle(v) {
+      this.sp_board_bg_file_src = v
     },
   },
   computed: {
@@ -438,7 +365,7 @@ export default {
           --sp_ground_color: ${this.sp_ground_color};
           --sp_piece_count_gap_right:  ${this.sp_piece_count_gap_right}%;
           --sp_piece_count_gap_bottom: ${this.sp_piece_count_gap_bottom}%;
-          --sp_piece_count_font_size:  ${this.sp_piece_count_font_size}rem;
+          --sp_piece_count_font_size:  ${this.sp_piece_count_font_size}px;
           --sp_piece_count_font_color: ${this.sp_piece_count_font_color};
           --sp_piece_count_bg_color:   ${this.sp_piece_count_bg_color};
           --sp_piece_count_padding: ${this.sp_piece_count_padding}px;
@@ -503,19 +430,6 @@ $sidebar_width2: 50%
 
   .b-slider
     margin-top: 0.5rem
-
-  .image_preview_container
-    position: relative
-    .delete_container
-      position: absolute
-      top: 0
-      right: 0
-      .delete
-        margin: 0.25rem
-        background-color: change_color($black, $alpha: 0.5)
-      &:hover
-        .delete
-          background-color: change_color($black, $alpha: 0.75)
 
 .StyleEditor
   .sidebar_toggle_button

@@ -32,12 +32,12 @@ export default {
     background-color: var(--sp_piece_count_bg_color)
     border-radius: 50%
 
-    position: relative // 相対的にずらすため
-    z-index: 100
-
     padding: var(--sp_piece_count_padding)
     color: var(--sp_piece_count_font_color)
     font-weight: bold
+
+    position: relative // 相対的にずらすため、かつ z-index 用
+    z-index: 1         // 駒数が Membership の下に潜るのを防ぐ
 
   &.is_layer_on
     .PieceObjectCount

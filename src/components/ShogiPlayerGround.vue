@@ -37,7 +37,6 @@ export default {
 
   .ShogiPlayerGroundTexture
     +overlay_block
-    // z-index: -1
 
     background-color: var(--sp_ground_color)
     background-image: var(--sp_ground_bg_image)
