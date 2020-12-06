@@ -17,7 +17,7 @@ export default {
       // |------------------------+------------+------------+---------------------|
       // | どこの駒を持ち上げた？ | place_from | have_piece | have_piece_location |
       // |------------------------+------------+------------+---------------------|
-      // | 盤上                   | ○         |            | ○                  |
+      // | 盤上                   | ○         |            |                     |
       // | 駒台                   |            | ○         | ○                  |
       // | 駒箱                   |            | ○         |                     |
       // |------------------------+------------+------------+---------------------|
@@ -30,9 +30,7 @@ export default {
       me_running_p: false,        // mousemove イベント緩和用
       $me_last_event: null,        // mousemove イベント
 
-      cursor_object_in_board_container: true,
-
-      $cursor_object: null,        // 持ちあげている駒のDOM
+      $CursorObject: null,        // 持ちあげている駒のDOM
       mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
       dialog_p: false,          // 成り確認ダイアログ表示中か？
 
@@ -150,7 +148,7 @@ export default {
               if (enable) {
                 this.log(`操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す`)
                 this.mediator.board.place_on(soldier.piece_transform)
-                this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+                this.piece_hold_and_put_for_bug(place, e) // 不具合対策
                 return
               }
             }
@@ -172,7 +170,7 @@ export default {
           if (!this.holding_p && soldier) { // 持ってなくて、駒がある
             this.log("盤上の駒を裏返す")
             this.mediator.board.place_on(soldier.piece_transform)
-            this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+            this.piece_hold_and_put_for_bug(place, e) // 不具合対策
             return
           }
         }
@@ -347,7 +345,7 @@ export default {
     //       if (soldier) {
     //         this.log("操作モードでダブルタップしたので裏返す")
     //         // this.mediator.board.place_on(soldier.piece_transform)
-    //         // this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+    //         // this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //         return
     //       }
     //     }
@@ -387,7 +385,7 @@ export default {
         if (!this.holding_p && soldier) {
           this.log("盤上の駒を裏返す")
           this.mediator.board.place_on(soldier.piece_transform)
-          this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+          this.piece_hold_and_put_for_bug(place, e) // 不具合対策
         }
       }
     },
@@ -410,7 +408,7 @@ export default {
     //     if (!this.holding_p && soldier) {
     //       this.log("盤上の駒を裏返す")
     //       this.mediator.board.place_on(soldier.piece_transform)
-    //       this.pice_hold_and_put_for_bug(place, e) // 不具合対策
+    //       this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //     }
     //   }
     // },
@@ -631,7 +629,7 @@ export default {
 
     // 駒を持つ → そのまま置く
     // これは Vue がリアクティブにならない対策として入れているのでできれば外したい
-    pice_hold_and_put_for_bug(place, e) {
+    piece_hold_and_put_for_bug(place, e) {
       // this.soldier_hold(place, e)
       this.state_reset() // ←これは絶対にいる
       // emitされない不具合の暫定対策でちょうどここが共通処理になっているのでつっこんでおく
@@ -712,13 +710,13 @@ export default {
 
           // 描画する前のタイミングで呼び出してもらう
           window.requestAnimationFrame(() => {
-            this.cursor_object_set_pos()
+            this.cursor_object_xy_update()
 
             this.me_running_p = false
           })
         }
       } else {
-        this.cursor_object_set_pos()
+        this.cursor_object_xy_update()
       }
     },
 
@@ -729,28 +727,16 @@ export default {
       }
     },
 
-    cursor_object_set_pos() {
-      if (this.$cursor_object && this.$me_last_event && this.mouse_stick) {
-        // TODO: これが遅いのか？ もっと速く設定できる方法があれば変更したい
-        let x = this.$me_last_event.clientX
-        let y = this.$me_last_event.clientY
-
-        if (this.cursor_object_in_board_container) {
-          // const rect = this.$refs.board_container_ref.getBoundingClientRect()
-          // x -= rect.left
-          // y -= rect.top
-        }
-
-        this.$cursor_object.style.left = `${x}px`
-        this.$cursor_object.style.top  = `${y}px`
+    cursor_object_xy_update() {
+      if (this.$CursorObject && this.$me_last_event && this.mouse_stick) {
+        const x = this.$me_last_event.clientX
+        const y = this.$me_last_event.clientY
+        this.$CursorObject.style.left = `${x}px`
+        this.$CursorObject.style.top  = `${y}px`
       }
     },
 
     // マウス位置に表示する駒の生成
-    //
-    //   .PieceObject.cursor_object
-    //     .PieceTexture.virtual_piece_flip
-    //
     virtual_piece_create(event, soldier) {
       this.virtual_piece_destroy()
       this.virtual_piece_dom_create(soldier)
@@ -761,61 +747,55 @@ export default {
       // マウスを動かしてはじめて座標が取れるのでキーボードの場合はすぐに駒は表示されない
       if (event) {
         this.$me_last_event = event
-        this.cursor_object_set_pos()
+        this.cursor_object_xy_update()
       }
 
       window.addEventListener("mousemove", this.mousemove_hook, false)
       window.addEventListener("click", this.click_hook, false)
     },
 
-    // 注意: リターンキーでこの soldier をいくら反転させようと考えてはいけない。(origin_soldier1 が元なので意味がない)
+    // 構造
+    //
+    // .CursorObject                        // マウスの (x, y) を反映
+    //   .PieceObject.CursorObjectFlip     // 反転するときはここ
+    //     .PieceTexture
+    //       .PieceTextureSelf(駒の種類を定義するクラスたち)
+    //
     virtual_piece_dom_create(soldier) {
-      this.$cursor_object = document.createElement("div")
-      this.$cursor_object.classList.add("cursor_object")
+      this.$CursorObject    = this.el_create(["CursorObject"])
+      const PieceObject      = this.el_create(["PieceObject"])
+      const PieceTexture     = this.el_create(["PieceTexture"])
+      const PieceTextureSelf = this.el_create(["PieceTextureSelf", ...soldier.to_class_list])
 
-      const PieceObject = document.createElement("div")
-      PieceObject.classList.add("PieceObject")
-
-      const PieceTexture = document.createElement("div")
-      PieceTexture.classList.add("PieceTexture", ...soldier.to_class_list)
-
-      // PieceTexture.style.width = "3rem"
-      // PieceTexture.style.height = "3rem"
-
-      // const text = document.createTextNode(soldier.name)
-      // PieceTexture.appendChild(text)
-
-      // const list = _.concat(class_list, ["PieceObject"])
-      // PieceTexture.classList.add(...list)
-
+      // 反転しているとき(盤上 or 駒台)の駒は持ったときに逆になっているので逆にする
       if (this.new_flip) {
-        // this.$cursor_object.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
-        PieceObject.classList.add("virtual_piece_flip") // 盤面を反転している場合は駒も反転する
+        if (this.soldier_or_stand_p) {
+          PieceObject.classList.add("CursorObjectFlip") // 盤面を反転している場合は駒も反転する
+        }
       }
 
+      PieceTexture.appendChild(PieceTextureSelf)
       PieceObject.appendChild(PieceTexture)
-      this.$cursor_object.appendChild(PieceObject)
+      this.$CursorObject.appendChild(PieceObject)
 
       // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
-      this.$cursor_object.style.left = "-50%"
-      this.$cursor_object.style.top  = "-50%"
+      this.$CursorObject.style.left = "-50%"
+      this.$CursorObject.style.top  = "-50%"
 
-      if (this.cursor_object_in_board_container) {
-        this.$refs.board_container_ref.appendChild(this.$cursor_object)
-      } else {
-        this.$el.appendChild(this.$cursor_object)
-      }
+      this.$refs.ShogiPlayerGround.$el.appendChild(this.$CursorObject)
+    },
+
+    el_create(classes) {
+      const e = document.createElement("div")
+      e.classList.add(...classes)
+      return e
     },
 
     virtual_piece_destroy() {
-      if (this.$cursor_object) {
-        if (this.cursor_object_in_board_container) {
-          this.$refs.board_container_ref.removeChild(this.$cursor_object)
-        } else {
-          this.$el.removeChild(this.$cursor_object)
-        }
+      if (this.$CursorObject) {
+        this.$refs.ShogiPlayerGround.$el.removeChild(this.$CursorObject)
 
-        this.$cursor_object = null
+        this.$CursorObject = null
         this.mouse_stick = false
 
         window.removeEventListener("mousemove", this.mousemove_hook, false)
@@ -842,6 +822,11 @@ export default {
         const place = Place.fetch([0, 0])
         return this.soldier_create_from_stand_or_box_on(place)
       }
+    },
+
+    // 盤上または駒台の駒を持ち上げたか？
+    soldier_or_stand_p() {
+      return this.place_from || this.have_piece_location
     },
 
     // 駒を持ち上げている状態？

@@ -28,6 +28,12 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+//
+// .CursorObject                         // マウスの (x, y) を反映
+//   .PieceObject.CursorObjectFlip     // 反転するときはここ
+//     .PieceTexture
+//       .PieceTextureSelf(駒の種類を定義するクラスたち)
+//
 
 // 選択できる駒に指定する
 %dom_real_selectable
@@ -55,15 +61,23 @@ export default {
   @extend %real_hoverable_bg
 
 .ShogiPlayerGround
-  --sp_board_piece_rate: 90%     // 盤のセル内の駒占有率
+  --sp_board_piece_rate: 90%            // 盤のセル内の駒占有率
 
-  --sp_stand_piece_w: 47px       // 駒台のセル(W)
-  --sp_stand_piece_h: 50px       // 駒台のセル(H)
-  --sp_stand_piece_rate: 80%     // 駒台のセル内の駒占有率
+  --sp_stand_piece_w: 47px              // 駒台のセル(W)
+  --sp_stand_piece_h: 50px              // 駒台のセル(H)
+  --sp_stand_piece_rate: 80%            // 駒台のセル内の駒占有率
 
-  --sp_piece_box_piece_w: 38px   // 駒箱のセル(W)
-  --sp_piece_box_piece_h: 46px   // 駒箱のセル(H)
-  --sp_piece_box_piece_rate: 90% // 駒箱のセル内の駒占有率
+  --sp_piece_box_piece_w: 38px          // 駒箱のセル(W)
+  --sp_piece_box_piece_h: 46px          // 駒箱のセル(H)
+  --sp_piece_box_piece_rate: 90%        // 駒箱のセル内の駒占有率
+
+  --sp_stand_piece_w_mobile: 38px       // 駒台のセル(W) ※モバイル時
+  --sp_stand_piece_h_mobile: 46px       // 駒台のセル(H) ※モバイル時
+  --sp_stand_piece_rate_mobile: 90%     // 駒台のセル内の駒占有率 ※モバイル時
+
+  --sp_piece_box_piece_w_mobile: 38px   // 駒箱のセル(W) ※モバイル時
+  --sp_piece_box_piece_h_mobile: 46px   // 駒箱のセル(H) ※モバイル時
+  --sp_piece_box_piece_rate_mobile: 90% // 駒箱のセル内の駒占有率 ※モバイル時
 
   // 共通
   .PieceObject
@@ -103,23 +117,42 @@ export default {
   .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
     +overlay_block
 
-    // テクスチャ
     background-position: center
     background-repeat: no-repeat
-    background-size: contain // 必ず駒の全体が表示されるようにする
+    background-size: contain      // 必ず駒の全体が表示されるようにする
     // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
     // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
 
-  //////////////////////////////////////////////////////////////////////////////// サイズ
+  ////////////////////////////////////////////////////////////////////////////////
+  .CursorObject
+    position: fixed
+    z-index: 256                  // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い。10だとsidebarに負ける
+    pointer-events: none          // 一切のイベントに反応させない
 
-  // テーブル
+    .PieceObject
+      // この要素の半分を左上に移動する
+      position: relative
+      top: -50%
+      left: -50%
+
+    // スマホとタブレットでは表示しない
+    +touch
+      display: none
+
+  // 盤を反転した状態で持ったカーソル上にある駒を反転させる用
+  .CursorObjectFlip
+    @extend %is_flip
+
+  //////////////////////////////////////////////////////////////////////////////// サイズ (PC)
+
+  // 盤面
   .BoardOuter
     .PieceObject
-      width:  100%
+      width:  100%              // 外側の TD に合わせる
       height: 100%
     .PieceTexture
-      width:  var(--sp_board_piece_rate)   // こちらを100%にして
-      height: var(--sp_board_piece_rate)  // こちらだけで調整してもいいかも
+      width:  var(--sp_board_piece_rate)
+      height: var(--sp_board_piece_rate)
 
   // 駒台
   .Membership
@@ -127,8 +160,8 @@ export default {
       width:  var(--sp_stand_piece_w)
       height: var(--sp_stand_piece_h)
     .PieceTexture
-      width:  var(--sp_stand_piece_rate)   // こちらを100%にして
-      height: var(--sp_stand_piece_rate)  // こちらだけで調整してもいいかも
+      width:  var(--sp_stand_piece_rate)
+      height: var(--sp_stand_piece_rate)
 
   // 駒箱
   .PieceBox
@@ -139,20 +172,39 @@ export default {
       width:  var(--sp_piece_box_piece_rate)
       height: var(--sp_piece_box_piece_rate)
 
+  // 持ち上げ駒
+  // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceTexture は 100% 固定にする
+  .CursorObject
+    width:  var(--sp_stand_piece_w)
+    height: var(--sp_stand_piece_h)
+    .PieceObject
+      width:  100%     // 外側の大きさに合わせる
+      height: 100%
+    .PieceTexture
+      width:  100%     // 縮小させない
+      height: 100%
+
+  //////////////////////////////////////////////////////////////////////////////// サイズ (mobile)
   +mobile
     &.is_mobile_style
+      .BoardOuter
+        .PieceObject
+          // 100% なので外側の TD の大きさになる
       .Membership
         .PieceObject
-          width:  38px
-          height: 46px
+          width:  var(--sp_stand_piece_w_mobile)
+          height: var(--sp_stand_piece_h_mobile)
         .PieceTexture
-          width:  90%
-          height: 90%
+          width:  var(--sp_stand_piece_rate_mobile)
+          height: var(--sp_stand_piece_rate_mobile)
       .PieceBox
         .PieceObject
-          width:  38px
-          height: 46px
+          width:  var(--sp_piece_box_piece_w_mobile)
+          height: var(--sp_piece_box_piece_h_mobile)
         .PieceTexture
-          width:  90%
-          height: 90%
+          width:  var(--sp_piece_box_piece_rate_mobile)
+          height: var(--sp_piece_box_piece_rate_mobile)
+      .CursorObject
+        width:  var(--sp_stand_piece_w_mobile)
+        height: var(--sp_stand_piece_h_mobile)
 </style>

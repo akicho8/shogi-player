@@ -54,9 +54,6 @@ export default {
 @import "./support.sass"
 
 .ShogiPlayerGround
-  --sp_side_min_w: 20vw // 横配置時の最小(W)
-  --sp_side_min_h: 20vw // 縦配置時の最小(H)
-
   .Membership
     display: flex
     align-items: center // ▲を中央に配置
@@ -68,7 +65,6 @@ export default {
   &.is_horizontal
     .Membership
       // width: 100%
-      // min-width: var(--sp_side_min_w) // ← これを入れると重なってしまう
       &.is_white
         flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び
         align-self: flex-start           // 全体が横並び → 持駒は縦並び → 後手は上寄せ

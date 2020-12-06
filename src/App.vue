@@ -91,13 +91,6 @@
             .column.py-0
               b-field(custom-class="is-small" label="セル(Height)")
                 b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
-          //- .columns
-          //-   .column.py-0
-          //-     b-field(custom-class="is-small" label="横配置時の最小(W)")
-          //-       b-slider(v-model="sp_side_min_w"  :min="0" :max="100" :step="1")
-          //-   .column.py-0
-          //-     b-field(custom-class="is-small" label="縦配置時の最小(H)")
-          //-       b-slider(v-model="sp_side_min_h" :min="0" :max="100" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ")
             b-slider(v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
 
@@ -260,7 +253,7 @@ export default {
 
       sp_hpos: "is_centered",
       sp_vpos: "is_vcentered",
-      sp_layout: "is_horizontal",
+      sp_layout: "is_vertical",
       sp_run_mode: "edit_mode",
       sp_body_width: 35,
       sp_mobile_style: "is_mobile_style",
@@ -305,8 +298,6 @@ export default {
       sp_layer: "is_layer_off",
       sp_pi_variant: "is_pi_variant_a",
       sp_bg_variant: "is_bg_variant_none",
-      // sp_side_min_w: 0,
-      // sp_side_min_h: 0,
       ////////////////////////////////////////////////////////////////////////////////
 
       SideInfo,
@@ -403,9 +394,6 @@ export default {
 
           --sp_stand_piece_w: ${this.sp_stand_piece_w}px;
           --sp_stand_piece_h: ${this.sp_stand_piece_h}px;
-
-          // --sp_side_min_w:  ${this.sp_side_min_w}px;
-          // --sp_side_min_h: ${this.sp_side_min_h}px;
         }
       `
     },

@@ -1,5 +1,5 @@
 <template lang="pug">
-.ShogiPlayerCore(:class="component_class")
+.ShogiPlayerBody(:class="component_class")
   Membership(:base="base" :location="base.location_white")
     //- b-button.mr-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
   AspectRatioFixedBlock
@@ -17,7 +17,7 @@ import OverlayNavigations    from "./OverlayNavigations.vue"
 import { support } from "./support.js"
 
 export default {
-  name: "ShogiPlayerCore",
+  name: "ShogiPlayerBody",
   mixins: [support],
   components: {
     Membership,
@@ -28,7 +28,7 @@ export default {
   computed: {
     component_class() {
       return [
-        this.base.new_flip ? "is_flip_on" : "is_flip_off",
+        // this.base.new_flip ? "is_flip_on" : "is_flip_off",
       ]
     },
   },
@@ -38,18 +38,20 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  .ShogiPlayerCore
+  //////////////////////////////////////////////////////////////////////////////// 回転
+  .ShogiPlayerBody
+    transition: all 0.4s 0s ease-in-out
+  &.is_flip_off
+    .ShogiPlayerBody
+  &.is_flip_on
+    .ShogiPlayerBody
+      @extend %is_flip
+
+  .ShogiPlayerBody
     // 縦横関係なく中央に寄せる
     display: flex
     align-items: center
     justify-content: center
-
-    // 反転
-    transform: rotate(0deg)
-    transition: all 0.4s 0s ease-in-out
-    &.is_flip_off
-    &.is_flip_on
-      @extend %is_flip
 
     ////////////////////////////////////////////////////////////////////////////////
     position: relative
@@ -63,10 +65,10 @@ export default {
   // | +mobile | column         | column       | 画面幅を最大に使いたいので常に縦配置 |
   // |---------+----------------+--------------+--------------------------------------|
   &.is_horizontal
-    .ShogiPlayerCore
+    .ShogiPlayerBody
       flex-direction: row
   =is_vertical_style
-    .ShogiPlayerCore
+    .ShogiPlayerBody
       flex-direction: column
   &.is_vertical
     +is_vertical_style
@@ -81,4 +83,3 @@ export default {
       &.next
         cursor: w-resize
 </style>
-

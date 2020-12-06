@@ -20,7 +20,7 @@ export default {
 
 .ShogiPlayerGround
   --sp_piece_count_gap_right: 86%                      // 駒数の駒右端からのオフセット(横配置時)
-  --sp_piece_count_gap_bottom: 100%                    // 駒数の駒底辺からのオフセット(縦配置時)
+  --sp_piece_count_gap_bottom: 47%                     // 駒数の駒底辺からのオフセット(縦配置時)
   --sp_piece_count_font_size: 0.75rem                  // 駒数の文字サイズ
   --sp_piece_count_font_color:  rgba(0, 0, 0, 0.75)    // 駒数の文字色
   --sp_piece_count_bg_color: rgba(255, 255, 255, 0.75) // 駒数の文字色背景
@@ -51,8 +51,10 @@ export default {
       justify-content: center
       align-items: center
     .PieceObjectCount
-      top: 0
-      bottm: 0
+      top:    unset
+      bottom: unset
+      right:  unset
+      left:   unset
     .is_white
       .PieceObjectCount
         right: var(--sp_piece_count_gap_right) // 右端から横幅分押すと左端の外になる
@@ -70,9 +72,10 @@ export default {
         justify-content: center
         align-items: center
       .PieceObjectCount
-        right: 0
-        left: 0
-
+        top:    unset     // is_horizontal の状態で mobile 表示するときこれらをリセットしないとパラメータがまざってしまう
+        bottom: unset
+        right:  unset
+        left:   unset
       &.is_white
         .PieceObjectCount
           bottom: var(--sp_piece_count_gap_bottom)
@@ -80,10 +83,8 @@ export default {
       &.is_black
         .PieceObjectCount
           top: var(--sp_piece_count_gap_bottom)
-
   &.is_vertical
     +is_vertical_style
-
   +mobile
     &.is_mobile_style
       +is_vertical_style

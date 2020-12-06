@@ -20,7 +20,7 @@ export default {
 .ShogiPlayer
   &.run_mode-view_mode
     .OverlayNavigationItem
-      background-color: change_color($primary, $alpha: 0.5)
+      // background-color: change_color($primary, $alpha: 0.5)
 
       position: absolute
       z-index: 1

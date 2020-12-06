@@ -2,7 +2,7 @@
 .ShogiPlayerWidth
   EditToolBox(:base="base")
   TurnShowOrEdit(:base="base")
-  ShogiPlayerCore(:base="base")
+  ShogiPlayerBody(:base="base" ref="ShogiPlayerBody")
   PieceBox(:base="base")
   ControllerBlock(:base="base")
   SfenShowBlock(:base="base")
@@ -12,7 +12,7 @@
 <script>
 import EditToolBox     from "./EditToolBox.vue"
 import TurnShowOrEdit  from "./TurnShowOrEdit.vue"
-import ShogiPlayerCore from "./ShogiPlayerCore.vue"
+import ShogiPlayerBody from "./ShogiPlayerBody.vue"
 import PieceBox        from "./PieceBox.vue"
 import ControllerBlock from "./ControllerBlock.vue"
 import SfenShowBlock   from "./SfenShowBlock.vue"
@@ -26,7 +26,7 @@ export default {
   components: {
     EditToolBox,
     TurnShowOrEdit,
-    ShogiPlayerCore,
+    ShogiPlayerBody,
     PieceBox,
     ControllerBlock,
     SfenShowBlock,
@@ -38,7 +38,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  --sp_body_width: 100%
+  --sp_body_width: 100%         // 盤(駒台を含む)の幅
 
   .ShogiPlayerWidth
     width: var(--sp_body_width)

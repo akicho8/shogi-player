@@ -2,7 +2,7 @@
 // ShogiPlayerGround は ShogiPlayerWidth の位置を調整するためにあるので他のものを入れてはいけない
 .ShogiPlayerGround(:class="component_class")
   .ShogiPlayerGroundTexture
-  ShogiPlayerWidth(:base="base" v-if="base.mediator" ref="board_container_ref")
+  ShogiPlayerWidth(:base="base" v-if="base.mediator" ref="ShogiPlayerWidth")
 </template>
 
 <script>
@@ -21,6 +21,7 @@ export default {
     component_class() {
       return [
         ...Object.values(this.base.new_style_params),
+        this.base.new_flip ? "is_flip_on" : "is_flip_off",
         // ["sp_bg_variant", this.base.new_sp_bg_variant].join("-"),
         // ["sp_pi_variant", this.base.new_sp_pi_variant].join("-"),
       ]

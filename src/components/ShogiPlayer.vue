@@ -4,7 +4,7 @@
 
   i.fas.fa-spinner.fa-pulse(v-if="!mediator")
 
-  ShogiPlayerGround(:base="base")
+  ShogiPlayerGround(:base="base" ref="ShogiPlayerGround")
 
   .buttons.are-small.is-centered(v-if="setting_button_show")
     b-button(icon-left="cog" @click="setting_modal_p = true")

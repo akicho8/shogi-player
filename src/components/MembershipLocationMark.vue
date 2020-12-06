@@ -46,9 +46,14 @@ export default {
       +filter_drop_shadow(-1)
       @extend %is_flip
 
-  .is_turn_active
-    .MembershipLocationMark
-      position: relative
+  .is_turn_inactive
+    .MembershipLocationMarkTexture
+      width:  calc(var(--sp_stand_piece_rate) * 0.5)
+      height: calc(var(--sp_stand_piece_rate) * 0.5)
+    // .MembershipLocationMark
+      // filter: drop-shadow(0 0 var(--sp_shadow_blur) var(--sp_shadow_color))
+      // filter: drop-shadow(0 0 calc(var(--sp_shadow_blur)*2) $danger)
+      // position: relative
       // animation: jump_animation 0.1s ease-in-out infinite alternate
 
 @keyframes jump_animation
