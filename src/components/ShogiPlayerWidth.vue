@@ -1,5 +1,6 @@
 <template lang="pug">
 .ShogiPlayerWidth
+  OverlayForDisable(:base="base")
   EditToolBox(:base="base")
   TurnShowOrEdit(:base="base")
   ShogiPlayerBody(:base="base" ref="ShogiPlayerBody")
@@ -17,6 +18,7 @@ import PieceBox        from "./PieceBox.vue"
 import ControllerBlock from "./ControllerBlock.vue"
 import SfenShowBlock   from "./SfenShowBlock.vue"
 import CommentBlock    from "./CommentBlock.vue"
+import OverlayForDisable from "./OverlayForDisable.vue"
 
 import { support } from "./support.js"
 
@@ -31,6 +33,7 @@ export default {
     ControllerBlock,
     SfenShowBlock,
     CommentBlock,
+    OverlayForDisable,
   },
 }
 </script>

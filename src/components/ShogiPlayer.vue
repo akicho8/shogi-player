@@ -1,6 +1,6 @@
 <template lang="pug">
 .ShogiPlayer(:class="component_class")
-  OverlayForDisable(:base="base")
+  //- OverlayForDisable(:base="base")
 
   i.fas.fa-spinner.fa-pulse(v-if="!mediator")
 
