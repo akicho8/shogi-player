@@ -45,9 +45,9 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  --sp_piece_box_color: rgba(0, 0, 0, 0.2)  // 駒箱背景
-  --sp_piece_box_radius: 3px                // 角丸度合
-  --sp_piece_box_margin_top: 10px           // 横レイアウト時の上マージン
+  --sp_piece_box_color: rgba(0, 0, 0, 0.2)         // 駒箱背景
+  --sp_piece_box_radius: var(--sp_board_radius)    // 角丸度合
+  --sp_piece_box_margin_top: 10px                  // 横レイアウト時の上マージン
 
   .PieceBox
     @extend %real_hoverable_opacity

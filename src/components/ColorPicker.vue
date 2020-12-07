@@ -1,6 +1,11 @@
 <template lang="pug">
 .ColorPicker
-  ChromePicker(:value="new_value" @input="c => new_value = c.hex8" :disableFields="true" :disableAlpha="disableAlpha")
+  ChromePicker(
+    :value="new_value"
+    @input="c => new_value = c.hex8"
+    :disableFields="true"
+    :disableAlpha="disableAlpha"
+    )
 </template>
 
 <script>

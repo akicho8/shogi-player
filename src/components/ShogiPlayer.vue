@@ -14,7 +14,7 @@
   b-modal(:active.sync="setting_modal_p" has-modal-card v-if="mediator")
     SettingModal(:base="base")
 
-  pre(v-if="debug_mode_p") {{new_style_params}}
+  pre(v-if="debug_mode_p") {{$props}}
 </template>
 
 <script>
@@ -49,21 +49,6 @@ import api_module       from "./api_module.js"
 
 import { root_support } from "./root_support.js"
 
-// To use lodash's _ in the vue template
-Object.defineProperty(Vue.prototype, '_', {value: _})
-
-const STYLE_PARAMS_DEFAULT = {
-  sp_texture:       "is_texture_image",
-  sp_layout:        "is_vertical",
-  sp_hpos:          "is_centered",
-  sp_vpos:          "is_vcentered",
-  sp_is_fullheight: "",
-  sp_size:   "is_size_none",
-  sp_layer:         "is_layer_on",
-  sp_pi_variant:    "is_pi_variant_a",
-  sp_bg_variant:    "is_bg_variant_a",
-}
-
 export default {
   name: 'ShogiPlayer',
 
@@ -82,17 +67,24 @@ export default {
   ],
 
   props: {
-    style_params: { type: Object, default: {}, },
+    sp_layout:       { type: String, default: "is_vertical",        },
+    sp_hpos:         { type: String, default: "is_centered",        },
+    sp_vpos:         { type: String, default: "is_vcentered",       },
+    sp_fullheight:   { type: String, default: "is_fullheight_on",   },
+    sp_layer:        { type: String, default: "is_layer_off",       },
+    sp_pi_variant:   { type: String, default: "is_pi_variant_a",    },
+    sp_bg_variant:   { type: String, default: "is_bg_variant_none", },
+    sp_mobile_style: { type: String, default: "is_mobile_style",    },
 
-    run_mode:       { type: String,  default: "view_mode", },
-    kifu_body:      { type: String,  default: null,        },
-    start_turn:     { type: Number,  default: -1,          },
-    sfen_show:      { type: Boolean, default: false,       },
-    overlay_navi:   { type: Boolean, default: true,        },
-    size:           { type: String,  default: "default",   },
-    debug_mode_p:   { type: Boolean, default: false,       }, // process.env.NODE_ENV !== 'production'
-    final_label:    { type: String,  default: null,        },
-    player_info:    { type: Object,  default: null, },
+    run_mode:        { type: String,  default: "view_mode",         },
+    kifu_body:       { type: String,  default: null,                },
+    start_turn:      { type: Number,  default: -1,                  },
+    sfen_show:       { type: Boolean, default: false,               },
+    overlay_navi:    { type: Boolean, default: true,                },
+    size:            { type: String,  default: "default",           },
+    debug_mode_p:    { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
+    final_label:     { type: String,  default: null,                },
+    player_info:     { type: Object,  default: null,                },
 
     board_piece_back_user_style:        { type: Function, default: place => { return {} }, }, // FIXME: add to README
     board_piece_back_user_class:        { type: Function, default: place => { return [] }, },
@@ -116,8 +108,6 @@ export default {
       // new_sp_pi_variant: this.sp_pi_variant,
       new_debug_mode_p:    this.debug_mode_p,
       new_run_mode:      this.run_mode,
-
-      new_style_params:  Object.assign({}, STYLE_PARAMS_DEFAULT, this.style_params),
 
       new_size:          this.size,
 
@@ -238,8 +228,8 @@ export default {
     debug_mode_p(v)        { this.new_debug_mode_p = v               }, // 外 -> 内
     new_debug_mode_p(v)    { this.$emit("update:debug_mode_p", v)    }, // 内 -> 外
 
-    size(v)              { this.new_size = v                     }, // 外 -> 中
-    new_size(v)          { this.$emit("update:size", v)          }, // 中 -> 外
+    // size(v)              { this.new_size = v                     }, // 外 -> 中
+    // new_size(v)          { this.$emit("update:size", v)          }, // 中 -> 外
 
     // sp_bg_variant(v)        { this.new_sp_bg_variant = v               }, // 外 -> 中
     // new_sp_bg_variant(v)    { this.$emit("update:sp_bg_variant", v)    }, // 中 -> 外
@@ -247,8 +237,8 @@ export default {
     // sp_pi_variant(v)     { this.new_sp_pi_variant = v            }, // 外 -> 中
     // new_sp_pi_variant(v) { this.$emit("update:sp_pi_variant", v) }, // 中 -> 外
 
-    style_params:       { deep: true, handler(v) { this.new_style_params = {...STYLE_PARAMS_DEFAULT, ...v} }, },
-    new_style_params:   { deep: true, handler(v) { this.$emit("update:style_params", v) }, },
+    // style_params:       { deep: true, handler(v) { this.new_style_params = {...STYLE_PARAMS_DEFAULT, ...v} }, },
+    // new_style_params:   { deep: true, handler(v) { this.$emit("update:style_params", v) }, },
 
     ////////////////////////////////////////////////////////////////////////////////
 

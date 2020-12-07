@@ -6,7 +6,7 @@
 // 反転
 %is_flip
   transform: rotate(180deg)
-  
+
 // 選択禁止
 %is_unselectable
   user-select: none
@@ -15,29 +15,9 @@
 =square_define($w)
   width: $w
   height: $w
-  
-// // 盤のテクスチャ用
-// %board_texture_bg
-//   position: relative
-//   &:after
-//     position: absolute
-//     z-index: -1
-//     content: ""
-//     background-position: center
-//     background-size: cover       // cover にすると1枚の画像が最大まで広がる。contain は繰り返しになる
-//     top: 0
-//     left: 0
-//     width: 100%
-//     height: 100%
-//     border-radius: 0.15em       // 盤の角の丸め度合い
-  
-=filter_drop_shadow($sign)
-  // filter: drop-shadow(2px * $sign 2px * $sign 2px rgba(0, 0, 0, 0.9))
-  // filter: drop-shadow(calc(var(--sp_shadow_offset) * #{$sign}) calc(var(--sp_shadow_offset) * #{$sign}) var(--sp_shadow_blur) rgba(255, 0, 0, var(--sp_shadow_color)))
-  filter: drop-shadow(calc(var(--sp_shadow_offset) * #{$sign}) calc(var(--sp_shadow_offset) * #{$sign}) var(--sp_shadow_blur) var(--sp_shadow_color))
-  
-%board_shadow
-  +filter_drop_shadow(1)
+
+=filter_drop_shadow($dir, $prepend: "", $append: "")
+  filter: #{$prepend} drop-shadow(calc(var(--sp_shadow_offset) * #{$dir}) calc(var(--sp_shadow_offset) * #{$dir}) var(--sp_shadow_blur) var(--sp_shadow_color)) #{$append}
 
 %real_hoverable_bg
   &.hoverable_p

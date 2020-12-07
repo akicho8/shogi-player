@@ -765,14 +765,8 @@ export default {
 </script>
 
 <style lang="sass">
-// ShogiPlayer.sass のなかで読み込むと親アプリ側で読み込んだ Buefy を干渉してラジオボタンが崩れたりする
-@import "~buefy/src/scss/buefy-build.scss"
-
-// Rails から使うとき Rails 側から見た assets へのパスに変更すること (そうしないと assets を参照できない)
-$sp_assets_dir: "assets" !default
-
-// Rails 側で sp_assets_dir を変更してから読み込みたいので .vue の中では読まないようにする
-@import "./components/ShogiPlayer.sass"
+@import "~bulma/sass/utilities/_all"
+@import "./components/ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
 
 .hero
   &.is-primary
@@ -815,18 +809,10 @@ $sp_assets_dir: "assets" !default
     z-index: -1
     content: ""
     background-color: hsla(0, 0%, 96%, 1.0)
-    // background-image: url("./assets/tatami01-768x480.jpg")
-    // border-radius: 1vmin
-    // background-position: center
-    // background-size: cover
-    // opacity: 0.25
     top: 0
     left: 0
     width: 100%
     height: 100%
-    // filter: saturate(80%);
-    /* filter: contrast(100%)
-    /* filter: sepia(100%)
   .CommentBlock
     .message
       margin-left: auto
@@ -856,10 +842,6 @@ html
   .title
     +mobile
       font-size: 150%
-
-// ここで読み込むとカレントディレクトリが /src 扱いのため components/* から ../assets と参照してもパスが合わない
-// main.js で読み込むと .sass のファイル基準になる
-// @import "./components/ShogiPlayer.sass"
 
 .virtual_screen
   display: flex

@@ -20,10 +20,15 @@ export default {
   computed: {
     component_class() {
       return [
-        ...Object.values(this.base.new_style_params),
+        this.base.sp_layout,
+        this.base.sp_hpos,
+        this.base.sp_vpos,
+        this.base.sp_fullheight,
+        this.base.sp_layer,
+        this.base.sp_pi_variant,
+        this.base.sp_bg_variant,
+        this.base.sp_mobile_style,
         this.base.new_flip ? "is_flip_on" : "is_flip_off",
-        // ["sp_bg_variant", this.base.new_sp_bg_variant].join("-"),
-        // ["sp_pi_variant", this.base.new_sp_pi_variant].join("-"),
       ]
     },
   },
@@ -34,22 +39,26 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   --sp_ground_color: inherit   // グラウンド背景色
-  --sp_ground_bg_image: none   // グラウンド背景画像
+  --sp_ground_image: none      // グラウンド背景画像
+  --sp_ground_grayscale: 0     // グレースケール
+  --sp_ground_brightness: 1.0  // セピア度
+  --sp_ground_blur: 0          // ぼかし
 
   .ShogiPlayerGroundTexture
     +overlay_block
 
     background-color: var(--sp_ground_color)
-    background-image: var(--sp_ground_bg_image)
+    background-image: var(--sp_ground_image)
     background-position: center
     background-repeat: no-repeat
     background-size: cover
     // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
     // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
+    filter: unquote('grayscale(var(--sp_ground_grayscale)) brightness(var(--sp_ground_brightness)) blur(calc(var(--sp_ground_blur) * 1px))')
 
   &.is_layer_on
     border: 1px dashed change_color($primary, $alpha: 0.5)
-  &.is_fullheight
+  &.is_fullheight_on
     height: 100vh
 
   text-align: center
@@ -66,7 +75,7 @@ export default {
   &.is_right
     justify-content: flex-end
 
-  // is_fullheight のときは合わせて is_vcentered にするのがおすすめ
+  // is_fullheight_on のときは合わせて is_vcentered にするのがおすすめ
   &.is_top
     align-items: flex-start
   &.is_vcentered

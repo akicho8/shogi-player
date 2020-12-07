@@ -45,11 +45,15 @@ export default {
   --sp_grid_color: rgba(0, 0, 0, 0.5)  // グリッド色
   --sp_board_padding: 2%               // 盤の隅の隙間
   --sp_grid_outer_stroke: 1px          // 升目外枠の太さ
-  --sp_grid_star: 6px          // 星の大きさ
-  --sp_board_radius: 0.5%              // 盤の隅の丸め度合い
+  --sp_grid_star: 6px                  // 星の大きさ
+  --sp_board_radius: 5px               // 盤の隅の丸め度合い
+
   --sp_board_color: rgba(0, 0, 0, 0.2) // 盤の色
   --sp_board_opacity: 1.0              // 非半透明度
-  --sp_board_bg_image: none            // 背景画像
+  --sp_board_grayscale: 0%             // グレースケール
+  --sp_board_brightness: 1.0           // 明度
+  --sp_board_blur: 0                   // ぼかし
+  --sp_board_image: none               // 背景画像
 
   .BoardOuter
     width: 100%
@@ -89,22 +93,20 @@ export default {
     +overlay_block
     z-index: -1
 
-    +filter_drop_shadow(1) // .BoardOuter ではなく .BoardTextureSelf に適用しているので table の駒の影に影響がない
+    // +filter_drop_shadow(1) // .BoardOuter ではなく .BoardTextureSelf に適用しているので table の駒の影に影響がない
+    // +filter_drop_shadow(1)
 
     background-color: var(--sp_board_color)    // 背景色は画像の透明な部分があれば見える
 
     // background-image: url("../assets/is_bg_variant/0270_337378_m.jpg") // for debug
-    background-image: var(--sp_board_bg_image)
+    background-image: var(--sp_board_image)
 
     // テクスチャを広げてマッピングする
     background-position: center
     background-repeat: no-repeat
     background-size: cover
 
-    border-radius: var(--sp_board_radius)   // 角を丸める
-    // filter: opacity(calc(var(--sp_board_opacity) * 100%))
-    // filter: opacity(0.5)
-    // filter: opacity(0.1)
-    // filter: opacity(var(--sp_board_opacity))
-    opacity: var(--sp_board_opacity)
+    border-radius: var(--sp_board_radius)
+
+    +filter_drop_shadow(1, unquote('opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) blur(calc(var(--sp_board_blur) * 1px))'))
 </style>
