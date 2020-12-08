@@ -1,5 +1,7 @@
 <template lang="pug">
 #app
+  router-link(:to="{name: 'StyleEditor'}") StyleEditor
+
   template(v-if="true")
     .hero.is-primary.is-medium
       .hero-head
@@ -619,19 +621,19 @@
 <script>
 import "css-browser-selector"
 
-import Vue from 'vue'
-import Buefy from 'buefy'
+// import Vue from 'vue'
+// import Buefy from 'buefy'
+// import 'buefy/dist/buefy.css'
+// Vue.use(Buefy)
 
-Vue.use(Buefy)
+import ShogiPlayer from './ShogiPlayer'
 
-import ShogiPlayer from './components/ShogiPlayer'
-
-import SideInfo from "./models/side_info"
-import RunModeInfo from "./models/run_mode_info"
-import ThemeInfo from "./models/theme_info"
-import BgVariantInfo from "./models/bg_variant_info"
-import PiVariantInfo from "./models/pi_variant_info"
-import SizeInfo from "./models/size_info"
+import SideInfo from "../models/side_info"
+import RunModeInfo from "../models/run_mode_info"
+import ThemeInfo from "../models/theme_info"
+import BgVariantInfo from "../models/bg_variant_info"
+import PiVariantInfo from "../models/pi_variant_info"
+import SizeInfo from "../models/size_info"
 
 const marked = require('marked')
 const renderer = new marked.Renderer()
@@ -648,7 +650,7 @@ marked.setOptions({
 })
 
 export default {
-  name: 'app',
+  name: "SpDocument",
 
   data() {
     // FIXME: npm run unit で raw-loader が効かない問題を回避している。が、SideInfo.values などがないとテストがこけるので最低限入れとく
@@ -766,7 +768,7 @@ export default {
 
 <style lang="sass">
 @import "~bulma/sass/utilities/_all"
-@import "./components/ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
+@import "./ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
 
 .hero
   &.is-primary
@@ -777,7 +779,7 @@ export default {
     position: absolute
     z-index: -1
     content: ""
-    background-image: url("./assets/hero.jpg")
+    background-image: url("../assets/hero.jpg")
     background-position: center
     background-size: cover
     opacity: 1.0
