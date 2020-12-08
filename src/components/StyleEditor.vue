@@ -279,7 +279,7 @@ export default {
       sp_board_aspect_ratio: 109.7,
       sp_board_piece_rate: 90,
       sp_board_radius: 5,
-      sp_board_padding: 2.0,
+      sp_board_padding: 1.5,
 
       sp_hpos: "is_centered",
       sp_vpos: "is_vcentered",
@@ -334,12 +334,12 @@ export default {
         white: { name: "後手", time: "56:78:90" },
       },
 
-      kifu_body: require("./極限早繰り銀.kif"),
+      // kifu_body: require("./極限早繰り銀.kif"),
 
       trigger_toast_p: false,
 
-      kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
-      kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
+      // kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
+      // kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
     }
   },
   methods: {
@@ -402,7 +402,7 @@ export default {
           --sp_piece_count_bg_color:   ${this.sp_piece_count_bg_color};
           --sp_piece_count_padding: ${this.sp_piece_count_padding}px;
 
-          --sp_board_padding: ${this.sp_board_padding}%;
+          --sp_board_padding: ${this.sp_board_padding};
           --sp_board_radius:  ${this.sp_board_radius}px;
           --sp_board_aspect_ratio: ${this.sp_board_aspect_ratio}%;
           --sp_board_image:  ${this.sp_board_image_url};
@@ -417,11 +417,11 @@ export default {
           --sp_piece_box_color:   ${this.sp_piece_box_color};
 
           --sp_grid_color:    ${this.sp_grid_color};
-          --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke}px;
+          --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke};
           --sp_grid_star: ${this.sp_grid_star}%;
 
-          --sp_shadow_offset: ${this.sp_shadow_offset}px;
-          --sp_shadow_blur:   ${this.sp_shadow_blur}px;
+          --sp_shadow_offset: ${this.sp_shadow_offset};
+          --sp_shadow_blur:   ${this.sp_shadow_blur};
           --sp_shadow_color:  ${this.sp_shadow_color};
 
           --sp_stand_piece_w: ${this.sp_stand_piece_w}px;

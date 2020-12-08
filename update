@@ -1,4 +1,5 @@
 #!/bin/sh
+ncu /router/ -u
 ncu /lodash/ -u
 ncu /buefy/ -u
 ncu /bulma/ -u

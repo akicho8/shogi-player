@@ -17,7 +17,7 @@
   height: $w
 
 =filter_drop_shadow($dir, $prepend: "", $append: "")
-  filter: #{$prepend} drop-shadow(calc(var(--sp_shadow_offset) * #{$dir}) calc(var(--sp_shadow_offset) * #{$dir}) var(--sp_shadow_blur) var(--sp_shadow_color)) #{$append}
+  filter: #{$prepend} drop-shadow(calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_blur) * 1px) var(--sp_shadow_color)) #{$append}
 
 %real_hoverable_bg
   &.hoverable_p

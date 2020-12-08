@@ -2,7 +2,7 @@
 //- http://kyokumen.jp/positions/lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL%20w%20-
 .SfenShowBlock.is-size-7.has-text-grey(v-if="base.sfen_show")
   slot(name="sfen_part" :sfen="base.mediator.to_simple_sfen" :mediator="base.mediator")
-    | {{mediator.to_simple_sfen}}
+    | {{base.mediator.to_simple_sfen}}
 </template>
 
 <script>

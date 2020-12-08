@@ -59,7 +59,7 @@ export default {
   &.is_layer_on
     border: 1px dashed change_color($primary, $alpha: 0.5)
   &.is_fullheight_on
-    height: 100vh
+    min-height: 100vh
 
   text-align: center
   line-height: 100%

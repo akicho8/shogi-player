@@ -70,7 +70,7 @@ export default {
     sp_layout:       { type: String, default: "is_vertical",        },
     sp_hpos:         { type: String, default: "is_centered",        },
     sp_vpos:         { type: String, default: "is_vcentered",       },
-    sp_fullheight:   { type: String, default: "is_fullheight_on",   },
+    sp_fullheight:   { type: String, default: "is_fullheight_off",  },
     sp_layer:        { type: String, default: "is_layer_off",       },
     sp_pi_variant:   { type: String, default: "is_pi_variant_a",    },
     sp_bg_variant:   { type: String, default: "is_bg_variant_none", },

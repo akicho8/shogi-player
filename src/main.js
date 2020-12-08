@@ -8,6 +8,9 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 Vue.use(Buefy)
 
+import ShogiPlayer from './components/ShogiPlayer'
+Vue.component("ShogiPlayer", ShogiPlayer)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

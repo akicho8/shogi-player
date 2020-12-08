@@ -40,4 +40,5 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   .CommentBlock
+    line-height: 1.5rem
 </style>
