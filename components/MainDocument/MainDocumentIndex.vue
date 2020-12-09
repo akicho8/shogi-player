@@ -621,10 +621,9 @@ export default {
       padding: 0
 
   .is_book_like
-    .ShogiPlayerGround
-      --sp_grid_outer_stroke: 1
-      --sp_board_padding: 0
-      --sp_board_color: inherit
+    --sp_grid_outer_stroke: 1
+    --sp_board_padding: 0
+    --sp_board_color: transparent
 
   .first_sp
     .ShogiPlayerGround

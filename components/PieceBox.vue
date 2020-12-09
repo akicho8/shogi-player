@@ -45,9 +45,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 html
-  +defvar(sp_piece_box_color, rgba(0, 0, 0, 0.2)) // 駒箱背景
-  +defvar(sp_piece_box_border_hover_color, (--sp_stand_hover_border_color)) // 駒を持って駒箱の上にいるとき
-  +defvar(sp_piece_box_margin_top, 10px) // 横レイアウト時の上マージン
+  +defvar(sp_piece_box_color, rgba(0, 0, 0, 0.2))                          // 駒箱背景
+  +defvar(sp_piece_box_margin_top, 10px)                                   // 横レイアウト時の上マージン
 
 .ShogiPlayerGround
 
