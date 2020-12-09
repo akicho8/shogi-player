@@ -1,9 +1,12 @@
 {
-  "name": "SHOGI-EXTEND",
-  "version": "1.0.0",
-  "description": "将棋に関連するツールを提供するサイトです",
-  "author": "akicho8",
-  "private": true,
+  "name": "shogi-player",
+  "version": "0.0.218",
+  "description": "shogi kifu player",
+  "keywords": "shogi kifu player editor viewer kif usi sfen japanese-chess",
+  "homepage": "https://akicho8.github.io/shogi-player/",
+  "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
+  "main": "src/components/ShogiPlayer.vue",
+  "private": false,
   "scripts": {
     "dev": "nuxt dev -p 4000",
     "build": "nuxt build",
