@@ -30,7 +30,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  --sp_edit_tool_box_margin_bottom: 0.5rem // edit_mode時の上のボタンの下のマージン
+  +defvar(sp_edit_tool_box_margin_bottom, 0.5rem) // edit_mode時の上のボタンの下のマージン
 
   .EditToolBox
     margin-bottom: var(--sp_edit_tool_box_margin_bottom)

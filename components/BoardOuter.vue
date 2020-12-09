@@ -42,18 +42,18 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  --sp_grid_color: rgba(0, 0, 0, 0.5)  // グリッド色
-  --sp_board_padding: 1.5              // 盤の隅の隙間
-  --sp_grid_outer_stroke: 0            // 升目外枠の太さ
-  --sp_grid_star: 6px                  // 星の大きさ
-  --sp_board_radius: 5px               // 盤の隅の丸め度合い
+  +defvar(sp_grid_color, rgba(0, 0, 0, 0.5)) // グリッド色
+  +defvar(sp_board_padding, 1.5) // 盤の隅の隙間
+  +defvar(sp_grid_outer_stroke, 0) // 升目外枠の太さ
+  +defvar(sp_grid_star, 6px) // 星の大きさ
+  +defvar(sp_board_radius, 5px) // 盤の隅の丸め度合い
 
-  --sp_board_color: rgba(0, 0, 0, 0.2) // 盤の色
-  --sp_board_opacity: 1.0              // 非半透明度
-  --sp_board_grayscale: 0%             // グレースケール
-  --sp_board_brightness: 1.0           // 明度
-  --sp_board_blur: 0                   // ぼかし
-  --sp_board_image: none               // 背景画像
+  +defvar(sp_board_color, rgba(0, 0, 0, 0.2)) // 盤の色
+  +defvar(sp_board_opacity, 1.0) // 非半透明度
+  +defvar(sp_board_grayscale, 0%) // グレースケール
+  +defvar(sp_board_brightness, 1.0) // 明度
+  +defvar(sp_board_blur, 0) // ぼかし
+  +defvar(sp_board_image, none) // 背景画像
 
   .BoardOuter
     width: 100%

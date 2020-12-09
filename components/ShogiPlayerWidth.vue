@@ -41,7 +41,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  --sp_body_width: 100%         // 盤(駒台を含む)の幅
+  +defvar(sp_body_width, 100%) // 盤(駒台を含む)の幅
 
   .ShogiPlayerWidth
     width: var(--sp_body_width)
