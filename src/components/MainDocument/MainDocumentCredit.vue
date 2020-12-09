@@ -55,6 +55,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~bulma/sass/utilities/_all"
+@import "./support.sass"
 .MainDocumentCredit
 </style>

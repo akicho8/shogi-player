@@ -19,23 +19,24 @@
 =filter_drop_shadow($dir, $prepend: "", $append: "")
   filter: #{$prepend} drop-shadow(calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_blur) * 1px) var(--sp_shadow_color)) #{$append}
 
-%real_hoverable_bg
-  &.hoverable_p
-    &:hover
-      background-color: $sp_real_selectable_color
-
 // 背景はテクスチャなので色を指定できない場合
 %real_hoverable_opacity
   &.hoverable_p
     &:hover
       opacity: 0.8
 
-@keyframes real_blink
-  0%
-    background-color: $sp_real_current_bg1
-  100%
-    background-color: $sp_real_current_bg2
-
+// pug:
+//
+//   .Foo
+//     .FooTexture
+//  
+// sass:
+//  
+//   .Foo  
+//     position: relative
+//     .FooTexture
+//       +overlay_block
+//  
 =overlay_block
   position: absolute
   top: 0

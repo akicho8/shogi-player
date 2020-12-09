@@ -102,6 +102,8 @@
                 b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ")
             b-slider(v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
+          b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色")
+            ColorPicker(v-model="sp_stand_hover_border_color")
 
         .box
           .title.is-5 駒数
@@ -298,6 +300,7 @@ export default {
       sp_stand_piece_w: 47,
       sp_stand_piece_h: 50,
       sp_stand_piece_rate: 80,
+      sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
 
       sp_flip: false,
       sp_piece_count_gap_right: 62.0,
@@ -415,6 +418,7 @@ export default {
           --sp_piece_box_piece_rate: ${this.sp_piece_box_piece_rate}%;
 
           --sp_piece_box_color:   ${this.sp_piece_box_color};
+          --sp_stand_hover_border_color: ${this.sp_stand_hover_border_color};
 
           --sp_grid_color:    ${this.sp_grid_color};
           --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke};

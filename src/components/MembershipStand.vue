@@ -4,6 +4,7 @@
   @click.stop.prevent="base.piece_stand_click(location, $event)"
   @click.right.stop.prevent="base.hold_cancel"
   )
+  .MembershipStandTexture
   .PieceWithCount.is-flex(
     v-for="[piece, count] in hold_pieces"
     @click.stop="base.piece_stand_piece_click(location, piece, false, $event)"
@@ -94,12 +95,27 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
+  --sp_stand_hover_border_color: rgba(0, 0, 0, 0.2) // 駒を持って駒箱の上にいるときのボーダー色
+  --sp_stand_hover_border_stroke: 2px               // 駒を持って駒箱の上にいるときのボーダーの太さ
+
   .MembershipStand
     display: flex
     justify-content: center
     align-items: center
 
-    @extend %real_hoverable_opacity
+  .MembershipStand
+    position: relative
+    .MembershipStandTexture
+      // background-color などはここで指定
+      +overlay_block
+      border-radius: var(--sp_board_radius)
+
+  // 駒を持って駒箱の上にいるとき
+  .MembershipStand
+    &.hoverable_p
+      &:hover
+        .MembershipStandTexture
+          border: var(--sp_stand_hover_border_stroke) dashed var(--sp_stand_hover_border_color)
 
   &.is_layer_on
     .MembershipStand

@@ -44,13 +44,15 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+html
+  --sp_piece_box_color: rgba(0, 0, 0, 0.2)              // 駒箱背景
+  --sp_piece_box_border_hover_color: (--sp_stand_hover_border_color) // 駒を持って駒箱の上にいるとき
+  --sp_piece_box_margin_top: 10px                       // 横レイアウト時の上マージン
+
 .ShogiPlayerGround
-  --sp_piece_box_color: rgba(0, 0, 0, 0.2)         // 駒箱背景
-  --sp_piece_box_radius: var(--sp_board_radius)    // 角丸度合
-  --sp_piece_box_margin_top: 10px                  // 横レイアウト時の上マージン
 
   .PieceBox
-    @extend %real_hoverable_opacity
+    // @extend %real_hoverable_opacity
     @extend %is_unselectable
 
     display: flex
@@ -85,5 +87,12 @@ export default {
     +overlay_block
     +filter_drop_shadow(1)
     background-color: var(--sp_piece_box_color)
-    border-radius: var(--sp_piece_box_radius)
+    border-radius: var(--sp_board_radius)
+
+  //////////////////////////////////////////////////////////////////////////////// 駒持ってhoverしたとき
+  .PieceBox
+    &.hoverable_p
+      &:hover
+        .PieceBoxTexture
+          border: var(--sp_stand_hover_border_stroke) dashed var(--sp_stand_hover_border_color)
 </style>

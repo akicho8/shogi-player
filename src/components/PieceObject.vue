@@ -58,7 +58,9 @@ export default {
         // background プロパティをつかうと他の設定をリセットしてしまうので注意
         background-color: $sp_real_selectable_color
 
-  @extend %real_hoverable_bg
+  &.hoverable_p
+    &:hover
+      background-color: $sp_real_selectable_color
 
 .ShogiPlayerGround
   --sp_board_piece_rate: 90%            // 盤のセル内の駒占有率
@@ -108,6 +110,12 @@ export default {
       background-color: $sp_real_origin_bg
     &.current
       animation: real_blink 0.5s ease-in-out infinite alternate
+
+  @keyframes real_blink
+    0%
+      background-color: $sp_real_current_bg1
+    100%
+      background-color: $sp_real_current_bg2
 
   ////////////////////////////////////////////////////////////////////////////////
   .PieceTexture

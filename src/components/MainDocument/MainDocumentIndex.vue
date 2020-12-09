@@ -1,103 +1,28 @@
 <template lang="pug">
 .MainDocumentIndex
-  .hero.is-primary.is-medium
-    .hero-head
-      nav.navbar
-        .container
-          .navbar-brand
-            span.navbar-burger.burger(data-target="navbarMenuHeroA")
-              span
-              span
-              span
-
-          #navbarMenuHeroA.navbar-menu
-            .navbar-end
-              a.navbar-item(href="https://github.com/akicho8/shogi-player")
-                span.icon
-                  i.fab.fa-github
-                span
-                 | Github
-
-    .hero-body
-      .container.has-text-centered
-        h1.title
-          | shogi-player
-
-    .hero-foot
-      nav.tabs
-        .container
-          ul
-            li: a(href="#summary") 概要
-            li: a(href="#examples") デモ
-            li: a(href="#usage") 使い方
-            li: a(href="#options") オプション
-            li: a(href="#api") API
-            li: router-link(:to="{name: 'StyleEditor'}") スタイルエディタ
-
+  MainDocumentHero
   MainDocumentSummary
 
   .section
     a(name="examples")
     .container
-      h2.title デモ
+      .title.is-2 デモ
       hr
-      h3.title.has-text-left 1. 再生モード
+
+      .title.is-3.has-text-left.mt-6 1. 再生モード
       hr
       .columns.is-centered
         MainDocumentSample1.is-10-tablet.is-8-desktop.is-6-widescreen
       .columns.mt-6
         MainDocumentSample2
         MainDocumentSample3
-
       .columns.mt-6
-        .column
-          b-message(type="is-info")
-            | コントローラーとスライダー付き。121手目から表示。
-          .has-text-centered
-            h3.title 藤井聡太四段 vs 澤田真吾六段
-            p.subtitle 第43期棋王戦予選
-          hr
-          ShogiPlayer.is_book_like(
-            :kifu_body="kif_sample2"
-            :start_turn="121"
-            :controller_show="true"
-            :slider_show="true"
-            :sp_pi_variant="'is_pi_variant_b'"
-            )
+        MainDocumentSample4
+        MainDocumentSample5
+      .columns.mt-6
+        MainDocumentSousa
 
-        .column
-          b-message(type="is-info")
-            | 駒落ち。最終手から表示。局面のSFENも表示
-          .has-text-centered
-            h3.title 小池重明 vs 加藤一二三十段
-            p.subtitle 加藤一二三の駒落道場
-          hr
-          ShogiPlayer.is_book_like(
-            :sp_pi_variant="'is_pi_variant_e'"
-            :start_turn="-1"
-            :controller_show="true"
-            :slider_show="true"
-            :sfen_show="true"
-            :kifu_body="'position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 8c8d 7g7f 7a6b 5g5f 8d8e 8h7g 5c5d 2h5h 6b5c 7i6h 5a4b 5i4h 3a3b 4h3h 4c4d 5f5e 3b4c 5e5d 4c5d 6h5g 5d6e 5g5f 6e7f 5f5e 7f6g+ P*5d 5c6b 5h5f 6g7g 8i7g B*3d 5f6f P*5b 6i7i 8b8d 5e4d 8d7d P*7h 7d5d S*4c 3d4c 4d4c+ 4b4c B*7f 5b5c 7i6h 4c3b 6h5h P*4c 7f5d 5c5d 8g8f B*7i 8f8e P*8b 6f8f 7i3e+ 8e8d S*7b 8f8i 3e4e P*6g 7c7d 9g9f 4e5f 8i8f 5f5e 9f9e 5e6d 8f8i 7d7e 7g8e 5d5e 8e9c+ 8a9c 9e9d P*9h 9i9h 6d6e 8i8f 6e9h 9d9c+ 9a9c R*9a 9h6e 9a9c+ 5e5f 5h4h L*9b 9c8b P*8a N*7g 6e7d 8b9a S*8b 9a8b 8a8b S*6e 7d9f 8f5f 9f7h 7g8e 7h6g P*7c 7b8a P*9c 6c6d P*6h 6g8e 9c9b+ 8a9b 7c7b+ 6a7b 6e5d N*4b 5d5c+ P*5d 5c6b 7b6b L*2f R*6i L*2e N*3a 5f4f S*3d 3g3f 6b5c 2i3g 4c4d 4f5f 2c2d 2e2d P*2c 3f3e 3d3e 2d2c+ 3a2c 2f2c+ 3b2c P*3f 3e2d 5f5i 6i6h+ 1g1f L*3d N*2h 4d4e 5i5h 6h7g 2g2f 1c1d 2f2e 2d1c 3g4e 5c4d S*4f P*2f 4e5c+ L*4e 4f5g 8e7d P*6e 7d6e P*5f 5d5e 4h3g 5e5f 5g4h P*4f 3g4f 4e4f'"
-            )
-          br
-          br
-
-      .columns
-        .column
-          b-message(type="is-success" title="共通する操作方法" :closable="false")
-            .content
-              ul
-                li 盤面の左右をクリックすると前後の手番に進みます
-                li シフトを押しながらで10倍速になります
-                li シフト以外のシステムキーだと50倍速になります(シフトキーも押していると500倍速)
-                li 天王山(５五の地点)をクリックすると反転します
-                li 「N手目」の部分をクリックで編集できます
-                li スライダーがある場合は優先的にフォーカスします
-                li スライダーにフォーカスがある状態だと左右キーが効きます(ブラウザの標準機能)
-                li スライダーは fn + ←→ キーで最初と最後に移動します(ブラウザの標準機能)
-
-      h3.title.has-text-left 2. 操作モード
+      .title.is-3.has-text-left.mt-6 2. 操作モード
       hr
 
       .columns
@@ -146,7 +71,7 @@
 
       br
       br
-      h3.title.has-text-left 3. 編集モード
+      .title.is-3.has-text-left 3. 編集モード
       hr
 
       .columns
@@ -200,7 +125,7 @@
   .section
     a(name="modal_in_style")
     .container
-      h3.title モーダル内表示の例
+      .title.is-3 モーダル内表示の例
       hr
       .columns
         .column
@@ -240,14 +165,14 @@
   .section
     a(name="usage")
     .container
-      h3.title 使い方
+      .title.is-3 使い方
       hr
       .content(v-html="usage_md")
 
   .section
     a(name="options")
     .container
-      h2.title オプション
+      .title.is-2 オプション
       hr
       .columns
         .column
@@ -466,7 +391,7 @@
   .section
     a(name="api")
     .container
-      h2.title API Methods
+      .title.is-2 API Methods
       hr
       .columns
         .column
@@ -496,10 +421,14 @@
 <script>
 // components
 // import ShogiPlayer         from "../ShogiPlayer.vue"
+import MainDocumentHero from "./MainDocumentHero.vue"
 import MainDocumentSummary from "./MainDocumentSummary.vue"
 import MainDocumentSample1 from "./MainDocumentSample1.vue"
 import MainDocumentSample2 from "./MainDocumentSample2.vue"
 import MainDocumentSample3 from "./MainDocumentSample3.vue"
+import MainDocumentSample4 from "./MainDocumentSample4.vue"
+import MainDocumentSample5 from "./MainDocumentSample5.vue"
+import MainDocumentSousa from "./MainDocumentSousa.vue"
 import MainDocumentCredit from "./MainDocumentCredit.vue"
 
 // models
@@ -528,11 +457,14 @@ export default {
   name: "MainDocumentIndex",
 
   components: {
-    // ShogiPlayer,
+    MainDocumentHero,
     MainDocumentSummary,
     MainDocumentSample1,
     MainDocumentSample2,
     MainDocumentSample3,
+    MainDocumentSample4,
+    MainDocumentSample5,
+    MainDocumentSousa,
     MainDocumentCredit,
   },
 
@@ -590,7 +522,7 @@ export default {
       },
 
       final_label: null,
-      kifu_body: require("./極限早繰り銀.kif"),
+      kifu_body: require("./kif/極限早繰り銀.kif"),
 
       trigger_toast_p: false,
 
@@ -603,8 +535,6 @@ export default {
       turn_offset: null,
       moves_take_turn_offset: null,
 
-      kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
-      kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
       usage_md: marked(require('./usage.md')),
       options_md: marked(require('./options.md')),
       api_md: marked(require('./api.md')),
@@ -646,7 +576,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~bulma/sass/utilities/_all"
+@import "./support.sass"
 
 $sp_assets_dir: "../../assets"
 @import "../ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
@@ -707,4 +637,9 @@ $sp_assets_dir: "../../assets"
       border: 1px dashed change_color($primary, $alpha: 0.5)
       .ShogiPlayerGroundTexture
         border: 1px dashed change_color($danger, $alpha: 0.5)
+
+  // .title, .subtitle
+  //   display: flex
+  //   justify-content: center
+  //   align-items: center
 </style>

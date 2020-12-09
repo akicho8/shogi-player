@@ -24,13 +24,13 @@ export default {
   name: "MainDocumentSample1",
   data() {
     return {
-      kifu_body: require("./第11回朝日杯将棋オープン戦本戦.kif"),
+      kifu_body: require("./kif/第11回朝日杯将棋オープン戦本戦.kif"),
     }
   },
 }
 </script>
 
 <style lang="sass">
-@import "~bulma/sass/utilities/_all"
+@import "./support.sass"
 .MainDocumentSample1
 </style>

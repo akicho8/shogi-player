@@ -3,7 +3,7 @@
   b-message
     | スライダーのみ表示
   .has-text-centered
-    h3.title 藤井猛六段 vs 井上慶太六段
+    .title.is-3 藤井猛六段 vs 井上慶太六段
     p.subtitle 第54期順位戦B級2組7回戦
   hr
   ShogiPlayer(
@@ -19,13 +19,13 @@ export default {
   name: "MainDocumentSample3",
   data() {
     return {
-      kifu_body: require("./第11回朝日杯将棋オープン戦本戦.kif"),
+      kifu_body: require("./kif/第11回朝日杯将棋オープン戦本戦.kif"),
     }
   },
 }
 </script>
 
 <style lang="sass">
-@import "~bulma/sass/utilities/_all"
+@import "./support.sass"
 .MainDocumentSample3
 </style>
