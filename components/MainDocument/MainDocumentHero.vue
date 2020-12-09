@@ -31,7 +31,7 @@
           li: a(href="#usage") 使い方
           li: a(href="#options") オプション
           li: a(href="#api") API
-          li: router-link(:to="{name: 'StyleEditor'}") スタイルエディタ
+          li: nuxt-link(:to="{name: 'editor'}") スタイルエディタ
 </template>
 
 <script>

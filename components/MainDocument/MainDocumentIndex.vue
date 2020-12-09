@@ -432,12 +432,12 @@ import MainDocumentSousa from "./MainDocumentSousa.vue"
 import MainDocumentCredit from "./MainDocumentCredit.vue"
 
 // models
-import SideInfo      from ".././models/side_info.js"
-import RunModeInfo   from ".././models/run_mode_info.js"
-import ThemeInfo     from ".././models/theme_info.js"
-import BgVariantInfo from ".././models/bg_variant_info.js"
-import PiVariantInfo from ".././models/pi_variant_info.js"
-import SizeInfo      from ".././models/size_info.js"
+import SideInfo      from "../models/side_info.js"
+import RunModeInfo   from "../models/run_mode_info.js"
+import ThemeInfo     from "../models/theme_info.js"
+import BgVariantInfo from "../models/bg_variant_info.js"
+import PiVariantInfo from "../models/pi_variant_info.js"
+import SizeInfo      from "../models/size_info.js"
 
 const marked = require('marked')
 const renderer = new marked.Renderer()
@@ -452,6 +452,12 @@ marked.setOptions({
   smartLists: true,
   smartypants: false,
 })
+
+import options_md from "./options.md"
+import usage_md   from "./usage.md"
+import api_md     from "./api.md"
+
+import hayakurigin from "./kif/極限早繰り銀.kif"
 
 export default {
   name: "MainDocumentIndex",
@@ -469,18 +475,6 @@ export default {
   },
 
   data() {
-    // FIXME: npm run unit で raw-loader が効かない問題を回避している。が、SideInfo.values などがないとテストがこけるので最低限入れとく
-    if (process.env.NODE_ENV === "test") {
-      return {
-        SideInfo,
-        RunModeInfo,
-        ThemeInfo,
-        BgVariantInfo,
-        PiVariantInfo,
-        SizeInfo,
-      }
-    }
-
     return {
       SideInfo,
       RunModeInfo,
@@ -522,7 +516,7 @@ export default {
       },
 
       final_label: null,
-      kifu_body: require("./kif/極限早繰り銀.kif"),
+      kifu_body: hayakurigin,
 
       trigger_toast_p: false,
 
@@ -535,9 +529,9 @@ export default {
       turn_offset: null,
       moves_take_turn_offset: null,
 
-      usage_md: marked(require('./usage.md')),
-      options_md: marked(require('./options.md')),
-      api_md: marked(require('./api.md')),
+      usage_md: marked(usage_md),
+      options_md: marked(options_md),
+      api_md: marked(api_md),
     }
   },
 
@@ -578,8 +572,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 
-$sp_assets_dir: "../../assets"
-@import "../ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
+// $sp_assets_dir: "../../assets"
+// @import "../ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
 
 .MainDocumentIndex
   +mobile

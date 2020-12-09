@@ -16,11 +16,13 @@
 </template>
 
 <script>
+import kifu_body from "./kif/藤井聡太四段_vs_澤田真吾六段.kif"
+
 export default {
   name: "MainDocumentSample4",
   data() {
     return {
-      kifu_body: require("./kif/藤井聡太四段_vs_澤田真吾六段.kif"),
+      kifu_body: kifu_body,
     }
   },
 }

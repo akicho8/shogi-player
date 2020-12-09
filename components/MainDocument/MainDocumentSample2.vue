@@ -14,7 +14,6 @@ export default {
   name: "MainDocumentSample2",
   data() {
     return {
-      kifu_body: require("./kif/第11回朝日杯将棋オープン戦本戦.kif"),
     }
   },
 }

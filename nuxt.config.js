@@ -230,6 +230,7 @@ const config = {
       config.module.rules.push({
         test: /\.(txt|md|kif|ki2|csa|sfen)$/,
         loader: 'raw-loader',
+        exclude: /(node_modules)/,
       })
 
     },

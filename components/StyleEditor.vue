@@ -438,8 +438,8 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~bulma/sass/utilities/_all"
-@import "./ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
+// @import "~bulma/sass/utilities/_all"
+// @import "./ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
 
 $sidebar_width_desktop: 30%
 $sidebar_width_tablet:  40%

@@ -36,7 +36,8 @@
     "secure-ls": "^1.2.6",
     "shogi-player": "^0.0.218",
     "striptags": "^3.1.1",
-    "url-safe-base64": "^1.1.1"
+    "url-safe-base64": "^1.1.1",
+    "vue-color": "^2.7.1"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",
