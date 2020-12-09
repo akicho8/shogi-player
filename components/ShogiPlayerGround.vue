@@ -37,12 +37,13 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+
 .ShogiPlayerGround
-  --sp_ground_color: inherit   // グラウンド背景色
-  --sp_ground_image: none      // グラウンド背景画像
-  --sp_ground_grayscale: 0     // グレースケール
-  --sp_ground_brightness: 1.0  // セピア度
-  --sp_ground_blur: 0          // ぼかし
+  +defvar(sp_ground_color, inherit)  // グラウンド背景色
+  +defvar(sp_ground_image, none)     // グラウンド背景画像
+  +defvar(sp_ground_grayscale, 0)    // グレースケール
+  +defvar(sp_ground_brightness, 1.0) // 輝度
+  +defvar(sp_ground_blur, 0)         // ぼかし
 
   .ShogiPlayerGroundTexture
     +overlay_block

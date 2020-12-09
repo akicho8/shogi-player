@@ -25,6 +25,11 @@
     &:hover
       opacity: 0.8
 
+=defvar($key, $val)
+  @at-root
+    :root
+      --#{$key}: #{$val}
+      
 // pug:
 //
 //   .Foo

@@ -63,23 +63,23 @@ export default {
       background-color: $sp_real_selectable_color
 
 .ShogiPlayerGround
-  --sp_board_piece_rate: 90%            // 盤のセル内の駒占有率
+  +defvar(sp_board_piece_rate, 90%) // 盤のセル内の駒占有率
 
-  --sp_stand_piece_w: 47px              // 駒台のセル(W)
-  --sp_stand_piece_h: 50px              // 駒台のセル(H)
-  --sp_stand_piece_rate: 80%            // 駒台のセル内の駒占有率
+  +defvar(sp_stand_piece_w, 47px) // 駒台のセル(W)
+  +defvar(sp_stand_piece_h, 50px) // 駒台のセル(H)
+  +defvar(sp_stand_piece_rate, 80%) // 駒台のセル内の駒占有率
 
-  --sp_piece_box_piece_w: 38px          // 駒箱のセル(W)
-  --sp_piece_box_piece_h: 46px          // 駒箱のセル(H)
-  --sp_piece_box_piece_rate: 90%        // 駒箱のセル内の駒占有率
+  +defvar(sp_piece_box_piece_w, 38px) // 駒箱のセル(W)
+  +defvar(sp_piece_box_piece_h, 46px) // 駒箱のセル(H)
+  +defvar(sp_piece_box_piece_rate, 90%) // 駒箱のセル内の駒占有率
 
-  --sp_stand_piece_w_mobile: 38px       // 駒台のセル(W) ※モバイル時
-  --sp_stand_piece_h_mobile: 46px       // 駒台のセル(H) ※モバイル時
-  --sp_stand_piece_rate_mobile: 90%     // 駒台のセル内の駒占有率 ※モバイル時
+  +defvar(sp_stand_piece_w_mobile, 38px) // 駒台のセル(W) ※モバイル時
+  +defvar(sp_stand_piece_h_mobile, 46px) // 駒台のセル(H) ※モバイル時
+  +defvar(sp_stand_piece_rate_mobile, 90%) // 駒台のセル内の駒占有率 ※モバイル時
 
-  --sp_piece_box_piece_w_mobile: 38px   // 駒箱のセル(W) ※モバイル時
-  --sp_piece_box_piece_h_mobile: 46px   // 駒箱のセル(H) ※モバイル時
-  --sp_piece_box_piece_rate_mobile: 90% // 駒箱のセル内の駒占有率 ※モバイル時
+  +defvar(sp_piece_box_piece_w_mobile, 38px) // 駒箱のセル(W) ※モバイル時
+  +defvar(sp_piece_box_piece_h_mobile, 46px) // 駒箱のセル(H) ※モバイル時
+  +defvar(sp_piece_box_piece_rate_mobile, 90%) // 駒箱のセル内の駒占有率 ※モバイル時
 
   // 共通
   .PieceObject

@@ -95,8 +95,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  --sp_stand_hover_border_color: rgba(0, 0, 0, 0.2) // 駒を持って駒箱の上にいるときのボーダー色
-  --sp_stand_hover_border_stroke: 2px               // 駒を持って駒箱の上にいるときのボーダーの太さ
+  +defvar(sp_stand_hover_border_color, rgba(0, 0, 0, 0.2)) // 駒を持って駒箱の上にいるときのボーダー色
+  +defvar(sp_stand_hover_border_stroke, 2px) // 駒を持って駒箱の上にいるときのボーダーの太さ
 
   .MembershipStand
     display: flex
