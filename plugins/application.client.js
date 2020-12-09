@@ -1,25 +1,7 @@
-import SnsLoginContainer         from "@/components/SnsLoginContainer.vue"
-
 export default {
   methods: {
     tab_is_active_p() {
       return !this.tab_is_hidden_p()
-    },
-
-    tab_is_hidden_p() {
-      // console.log("[hidden, visibilityState]", [document.hidden, document.visibilityState])
-      return document.hidden || document.visibilityState === "hidden"
-    },
-
-    sns_login_modal_handle() {
-      this.$buefy.modal.open({
-        customClass: "my-modal-background-background-color-dark",
-        width: "20rem",
-        parent: this,
-        component: SnsLoginContainer,
-        animation: "",
-        onCancel: () => this.sound_play("click"),
-      })
     },
 
     dialog_ok(message, options = {}) {

@@ -4,7 +4,6 @@ import Vue from "vue"
 
 import vue_support    from "./vue_support.js"
 import vue_time       from "./vue_time.js"
-import vue_piyo_shogi from "./vue_piyo_shogi.js"
 import vue_head       from "./vue_head.js"
 
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex"
@@ -13,7 +12,6 @@ Vue.mixin({
   mixins: [
     vue_support,
     vue_time,
-    vue_piyo_shogi,
     vue_head,
   ],
   methods: {

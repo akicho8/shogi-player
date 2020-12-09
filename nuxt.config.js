@@ -2,40 +2,6 @@ import dayjs from "dayjs"
 const BUILD_VERSION = dayjs().format("YYYY-MM-DD HH:mm:ss")
 const SITE_DESC = "将棋に関連するツールを提供するサイトです"
 
-// https://github.com/nuxt-community/sitemap-module
-// http://0.0.0.0:4000/sitemap.xml
-const axios = require('axios')
-const sitemap = {
-  hostname: process.env.MY_NUXT_URL,
-  gzip: true,
-  cacheTime: 1000 * 60 * 60,    // 1時間
-  exclude: [
-    "/experiment/**",
-    "/settings/**",
-    "/launcher",
-    "/inspire",
-  ],
-  routes: async () => {
-    let list = []
-    let res = null
-
-    // http://0.0.0.0:3000/api/tsl_user_all
-    res = await axios.get(`${process.env.API_URL}/api/tsl_league_all`)
-    list = list.concat(res.data.map(({generation}) => `/three-stage-leagues/${generation}`))
-
-    // http://0.0.0.0:3000/api/tsl_league_all
-    res = await axios.get(`${process.env.API_URL}/api/tsl_user_all`)
-    list = list.concat(res.data.map(({name}) => `/three-stage-league-players/${name}`))
-
-    list.push("/swars/histograms/attack")
-    list.push("/swars/histograms/defense")
-    list.push("/swars/histograms/technique")
-    list.push("/swars/histograms/note")
-
-    return list
-  },
-}
-
 const config = {
 // export default {
   // debug: true,
@@ -47,7 +13,7 @@ const config = {
   //   mode: 'spa'        → ssr: false
   //   mode: 'universal'  → ssr: true
   //
-  ssr: true,
+  ssr: false,
 
   /*
   ** Nuxt target
@@ -159,8 +125,6 @@ const config = {
   plugins: [
     // client only
     "~/plugins/mixin_mod.client.js",
-    "~/plugins/chart_init.client.js",
-    "~/plugins/local_storage_persistedstate.client.js",
 
     // 両方
     "~/plugins/axios_mod.js",
@@ -175,18 +139,6 @@ const config = {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    // https://github.com/nuxt-community/analytics-module
-    [
-      '@nuxtjs/google-analytics',
-      {
-        id: 'UA-109851345-1',
-        // // コメントアウトすると開発環境で確認できる
-        // debug: {
-        //   enabled: true,
-        //   sendHitTask: true,
-        // },
-      },
-    ],
   ],
   /*
   ** Nuxt.js modules
@@ -198,15 +150,8 @@ const config = {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
 
-    // https://pwa.nuxtjs.org/
-    // '@nuxtjs/onesignal',   // push通知
-    // '@nuxtjs/pwa',         // アプリ化
-
     '@nuxtjs/style-resources',
-    '@nuxtjs/sitemap',
   ],
-
-  sitemap,
 
   /*
   ** Axios module configuration
@@ -281,6 +226,12 @@ const config = {
           name: '[path][name].[ext]'
         },
       })
+
+      config.module.rules.push({
+        test: /\.(txt|md|kif|ki2|csa|sfen)$/,
+        loader: 'raw-loader',
+      })
+
     },
   },
 
