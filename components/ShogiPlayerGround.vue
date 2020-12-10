@@ -45,6 +45,7 @@ export default {
   +defvar(sp_ground_brightness, 1.0)         // 輝度
   +defvar(sp_ground_blur, 0)                 // ぼかし
 
+  position: relative
   .ShogiPlayerGroundTexture
     +overlay_block
 
@@ -54,7 +55,7 @@ export default {
     background-repeat: no-repeat
     background-size: cover
     // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
-    // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
+    background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
     filter: unquote('grayscale(var(--sp_ground_grayscale)) brightness(var(--sp_ground_brightness)) blur(calc(var(--sp_ground_blur) * 1px))')
 
   &.is_layer_on
