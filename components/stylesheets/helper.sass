@@ -25,9 +25,18 @@
     &:hover
       opacity: 0.8
 
+// 本当は :root の下に定義したい
+// しかし node-sass だとエラーになる
+// dart-sass だとエラーにならない
+// しかし dart-sass は気が遠くなるほど遅い
+// それと空定義に警告がでまくる
+// なので :root のかわりに html にしている
+// defvar はもともと dart-sass で「--xxx: 1 // コメント」の値が「1 // コメント」になる災いために作った
+// node-sass の場合は「--xxx: 1 // コメント」としても「// コメント」を除去してくれるので必要ない
+// けどあとあと変更が楽なのと1行で書けるのは便利なので使う
 =defvar($key, $val)
   @at-root
-    :root
+    html
       --#{$key}: #{$val}
       
 // pug:
@@ -38,13 +47,13 @@
 // sass:
 //  
 //   .Foo  
-//     position: relative
+//     position: relative // ← 親に relative が必要なので忘れるな
 //     .FooTexture
 //       +overlay_block
 //  
 =overlay_block
   position: absolute
-  top: 0
+  top:  0
   left: 0
   width: 100%
   height: 100%
