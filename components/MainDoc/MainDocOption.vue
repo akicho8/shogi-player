@@ -57,11 +57,6 @@
                 b-radio(v-model="run_mode" :native-value="e.key") {{e.name}}({{e.key}})
 
           .box
-            b-field(custom-class="is-small" label="theme")
-              .block
-                template(v-for="e in ThemeInfo.values")
-                  b-radio(v-model="theme" :native-value="e.key") {{e.name}}({{e.key}})
-
             b-field(custom-class="is-small" label="sp_bg_variant")
               .block
                 template(v-for="e in BgVariantInfo.values")
@@ -211,7 +206,6 @@ import options_md from "./options.md"
 
 import SideInfo      from "../models/side_info.js"
 import RunModeInfo   from "../models/run_mode_info.js"
-import ThemeInfo     from "../models/theme_info.js"
 import BgVariantInfo from "../models/bg_variant_info.js"
 import PiVariantInfo from "../models/pi_variant_info.js"
 
@@ -223,7 +217,6 @@ export default {
 
       SideInfo,
       RunModeInfo,
-      ThemeInfo,
       BgVariantInfo,
       PiVariantInfo,
 

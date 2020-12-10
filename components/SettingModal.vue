@@ -25,11 +25,6 @@
         template(v-for="e in BgVariantInfo.values")
           b-dropdown-item(:value="e.key") {{e.name}}
 
-    //- b-field(label="テーマ")
-    //- b-field
-    //-   template(v-for="e in ThemeInfo.values")
-    //-     b-radio-button(v-model="base.new_theme" :native-value="e.key") {{e.name}}
-
     //- b-field(label="背景の種類")
     //- b-field
     //-   template(v-for="e in BgVariantInfo.values")
@@ -64,7 +59,6 @@
 
 <script>
 import RunModeInfo      from "./models/run_mode_info"
-import ThemeInfo        from "./models/theme_info"
 import SizeInfo         from "./models/size_info"
 import BgVariantInfo    from "./models/bg_variant_info"
 import PiVariantInfo from "./models/pi_variant_info"
@@ -76,7 +70,6 @@ export default {
   mixins: [support],
   computed: {
     RunModeInfo()   { return RunModeInfo   },
-    ThemeInfo()     { return ThemeInfo     },
     SizeInfo()      { return SizeInfo      },
     BgVariantInfo() { return BgVariantInfo },
     PiVariantInfo() { return PiVariantInfo },

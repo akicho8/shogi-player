@@ -245,7 +245,6 @@ import ImageUpload from "./ImageUpload.vue"
 
 import SideInfo from "./models/side_info"
 import RunModeInfo from "./models/run_mode_info"
-import ThemeInfo from "./models/theme_info"
 import BgVariantInfo from "./models/bg_variant_info"
 import PiVariantInfo from "./models/pi_variant_info"
 import SizeInfo from "./models/size_info"
@@ -327,7 +326,6 @@ export default {
 
       SideInfo,
       RunModeInfo,
-      ThemeInfo,
       BgVariantInfo,
       PiVariantInfo,
       SizeInfo,
