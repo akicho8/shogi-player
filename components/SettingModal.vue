@@ -35,11 +35,6 @@
     //-   template(v-for="e in PiVariantInfo.values")
     //-     b-radio-button(v-model="base.new_sp_pi_variant" :native-value="e.key") {{e.name}}
 
-    b-field(label="サイズ")
-    b-field
-      template(v-for="e in SizeInfo.values")
-        b-radio-button(v-model="base.new_size" :native-value="e.key" size="is-small") {{e.name}}
-
     template(v-if="base.mediator")
       b-field(label="再生モードの現局面(Readonly)")
         b-input(:value="base.mediator.to_position_sfen" type="input" size="is-small" readonly)
@@ -59,7 +54,6 @@
 
 <script>
 import RunModeInfo      from "./models/run_mode_info"
-import SizeInfo         from "./models/size_info"
 import BgVariantInfo    from "./models/bg_variant_info"
 import PiVariantInfo from "./models/pi_variant_info"
 
@@ -70,7 +64,6 @@ export default {
   mixins: [support],
   computed: {
     RunModeInfo()   { return RunModeInfo   },
-    SizeInfo()      { return SizeInfo      },
     BgVariantInfo() { return BgVariantInfo },
     PiVariantInfo() { return PiVariantInfo },
   },

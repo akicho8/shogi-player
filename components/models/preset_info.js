@@ -4,7 +4,6 @@ import MemoryRecord from "js-memory-record"
 export default class PresetInfo extends MemoryRecord {
   static get define() {
     return [
-      
       { key: "詰将棋",                  sfen: "position sfen 4k4/9/9/9/9/9/9/9/9 b 2r2b4g4s4n4l18p 1",                                       first_location_key: "black", piece_box: [["K", 1]]},
       { key: "詰将棋 - 美濃",           sfen: "position sfen ln1g5/1ks6/1ppp5/p8/9/9/9/9/9 b BGSNL2rb2g2s2n2l14p 1",                         first_location_key: "black", piece_box: [["K", 1]]},
       { key: "詰将棋 - 矢倉",           sfen: "position sfen 7nl/6gk1/5gspp/5pp2/9/9/9/9/9 b BGSNL2rbg2s2n2l14p 1",                          first_location_key: "black", piece_box: [["K", 1]]},
@@ -24,7 +23,7 @@ export default class PresetInfo extends MemoryRecord {
       { key: "十枚落ち",                sfen: "position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1",                         first_location_key: "white", piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2]]},
       { key: "十九枚落ち",              sfen: "position sfen 4k4/9/9/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1",                                 first_location_key: "white", piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2], ["P", 9]]},
       { key: "二十枚落ち",              sfen: "position sfen 9/9/9/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1",                                   first_location_key: "white", piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2], ["P", 9], ["K", 1]]},
-      
+
     ]
   }
 }

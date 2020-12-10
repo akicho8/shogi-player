@@ -247,7 +247,6 @@ import SideInfo from "./models/side_info"
 import RunModeInfo from "./models/run_mode_info"
 import BgVariantInfo from "./models/bg_variant_info"
 import PiVariantInfo from "./models/pi_variant_info"
-import SizeInfo from "./models/size_info"
 
 import chroma from "chroma-js"
 
@@ -328,7 +327,6 @@ export default {
       RunModeInfo,
       BgVariantInfo,
       PiVariantInfo,
-      SizeInfo,
 
       player_info: {
         black: { name: "先手", time: "",        },
