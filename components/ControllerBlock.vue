@@ -1,6 +1,6 @@
 <template lang="pug">
 .ControllerBlock(v-if="base.view_p || base.play_p")
-  .controller_group.buttons.has-addons.is-centered.is-paddingless(v-if="base.controller_show")
+  .buttons.has-addons.is-centered.is-paddingless(v-if="base.controller_show")
     button.button.first(    ref="first"    @click.stop.prevent="base.move_to_first"):             b-icon(icon="menu-left")
     button.button.previous( ref="previous" @click.stop.prevent="base.relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
     button.button.next(     ref="next"     @click.stop.prevent="base.relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
@@ -23,26 +23,22 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   .ControllerBlock
-    .controller_group
-      margin-top: 0.8rem
-      &.buttons
+    .buttons
+      margin: 0.8rem 0 0
+      .button
         margin-bottom: 0
-        .button
-          margin-bottom: 0
-          &.first
-            width: 3rem
-          &.previous
-            width: 5rem
-          &.next
-            width: 7rem
-          &.last
-            width: 3rem
-          &.flip
-            width: 2.5rem
-
+        &.first
+          width: 3rem
+        &.previous
+          width: 6rem
+        &.next
+          width: 6rem
+        &.last
+          width: 3rem
+        &.flip
+          width: 2.5rem
     .turn_slider
-      border: 1px dashed change_color($primary, $alpha: 0.5)
-      margin-top: 0.5rem
+      margin: 0.6rem 0
       cursor: pointer
-      width: 20rem
+      width: calc(3rem + 6rem + 6rem + 3rem + 2.5rem)
 </style>

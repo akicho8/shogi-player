@@ -44,11 +44,9 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-html
-  +defvar(sp_piece_box_color, rgba(0, 0, 0, 0.2))                          // 駒箱背景
-  +defvar(sp_piece_box_margin_top, 10px)                                   // 横レイアウト時の上マージン
-
 .ShogiPlayerGround
+  +defvar(sp_piece_box_color, rgba(0, 0, 0, 0.2)) // 駒箱背景
+  +defvar(sp_piece_box_margin_top, 10px)          // 横レイアウト時の上マージン
 
   .PieceBox
     // @extend %real_hoverable_opacity
@@ -58,7 +56,6 @@ html
     justify-content: flex-start
     align-items: center
 
-    position: relative                      // 基点からずらすため
     min-height: var(--sp_piece_box_piece_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
 
     .PieceWithCount
@@ -82,8 +79,10 @@ html
       +is_vertical_style
 
   ////////////////////////////////////////////////////////////////////////////////
+  .PieceBox
+    +is_overlay_origin
   .PieceBoxTexture
-    +overlay_block
+    +is_overlay_block
     +filter_drop_shadow(1)
     background-color: var(--sp_piece_box_color)
     border-radius: var(--sp_board_radius)

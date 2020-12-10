@@ -119,11 +119,11 @@ export default {
 
   ////////////////////////////////////////////////////////////////////////////////
   .PieceTexture
-    position: relative // PieceTextureSelf の基点を PieceTexture にするため(重要)
+    +is_overlay_origin
     // 下に引く度合い
     // top: var(--piece_pull, 0%)
   .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
-    +overlay_block
+    +is_overlay_block
 
     background-position: center
     background-repeat: no-repeat

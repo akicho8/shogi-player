@@ -23,9 +23,7 @@ export default {
     width: 100%
 
     .AspectRatioFixedBlock
-      position: relative
       width: 100%
-
       &.is_ratio_4_3
         padding-top: 75%
       &.is_ratio_16_9
@@ -40,7 +38,8 @@ export default {
       &.is_ratio_var
         padding-top: var(--sp_board_aspect_ratio)
 
+      +is_overlay_origin
       .AspectRatioFixedBlockContainer
-        +overlay_block
+        +is_overlay_block
         // border: 1px dashed change_color($danger, $alpha: 0.5)
 </style>

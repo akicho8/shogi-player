@@ -5,8 +5,8 @@
   // table に影が適用されると、駒の影にも .BoardOuter の影が加算されてしまい濃くなってしまう
   // それを防ぐためには .BoardOuter の :after に背景を指定すればよい
   // が、わかりやすくするために背景専用の BoardOuterBG を追加した
-  // これなら BoardTextureSelf に適用した影が table に影響しない
-  .BoardTextureSelf
+  // これなら BoardOuterTexture に適用した影が table に影響しない
+  .BoardOuterTexture
 
   table.BoardInner
     tr(v-for="(_, y) in base.mediator.dimension")
@@ -89,11 +89,13 @@ export default {
     padding: calc(var(--sp_board_padding) * 1%)
     border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_color)
 
-  .BoardTextureSelf
-    +overlay_block
+  .BoardOuter
+    +is_overlay_origin
+  .BoardOuterTexture
+    +is_overlay_block
     z-index: -1
 
-    // +filter_drop_shadow(1) // .BoardOuter ではなく .BoardTextureSelf に適用しているので table の駒の影に影響がない
+    // +filter_drop_shadow(1) // .BoardOuter ではなく .BoardOuterTexture に適用しているので table の駒の影に影響がない
     // +filter_drop_shadow(1)
 
     background-color: var(--sp_board_color)    // 背景色は画像の透明な部分があれば見える

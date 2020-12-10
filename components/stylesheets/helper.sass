@@ -47,11 +47,13 @@
 // sass:
 //  
 //   .Foo  
-//     position: relative // ← 親に relative が必要なので忘れるな
+//     +is_overlay_origin  // ← 親に relative が必要なので忘れるな
 //     .FooTexture
-//       +overlay_block
+//       +is_overlay_block
 //  
-=overlay_block
+=is_overlay_origin
+  position: relative
+=is_overlay_block
   position: absolute
   top:  0
   left: 0

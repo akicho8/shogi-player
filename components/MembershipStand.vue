@@ -104,11 +104,11 @@ export default {
     align-items: center
 
   .MembershipStand
-    position: relative
-    .MembershipStandTexture
-      // background-color などはここで指定
-      +overlay_block
-      border-radius: var(--sp_board_radius)
+    +is_overlay_origin
+  .MembershipStandTexture
+    // background-color などはここで指定
+    +is_overlay_block
+    border-radius: var(--sp_board_radius)
 
   // 駒を持って駒箱の上にいるとき
   .MembershipStand
