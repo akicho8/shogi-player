@@ -1,8 +1,49 @@
 <template lang="pug">
 .MainDocOption.section
+  b-sidebar.StyleEditor-Sidebar(fullheight right v-model="sidebar_p" position="fixed" open)
+    .mx-4.my-4
+      .is-flex.is-justify-content-start.is-align-items-center
+        b-button(@click="sidebar_toggle" icon-left="menu")
+        .mx-3.has-text-weight-bold 将棋盤スタイルエディター
+
+      .my_controls
+        .box
+          .title.is-5 基本
+          b-field(custom-class="is-small" label="コンテナ幅")
+            b-slider(v-model="sp_body_width" :min="1" :max="100")
+        .box
+          .title.is-5 基本
+          b-field(custom-class="is-small" label="コンテナ幅")
+            b-slider(v-model="sp_body_width" :min="1" :max="100")
+        .box
+          .title.is-5 基本
+          b-field(custom-class="is-small" label="コンテナ幅")
+            b-slider(v-model="sp_body_width" :min="1" :max="100")
+        .box
+          .title.is-5 基本
+          b-field(custom-class="is-small" label="コンテナ幅")
+            b-slider(v-model="sp_body_width" :min="1" :max="100")
+        .box
+          .title.is-5 基本
+          b-field(custom-class="is-small" label="コンテナ幅")
+            b-slider(v-model="sp_body_width" :min="1" :max="100")
+        .box
+          .title.is-5 基本
+          b-field(custom-class="is-small" label="コンテナ幅")
+            b-slider(v-model="sp_body_width" :min="1" :max="100")
+        .box
+          .title.is-5 基本
+          b-field(custom-class="is-small" label="コンテナ幅")
+            b-slider(v-model="sp_body_width" :min="1" :max="100")
+        .box
+          .title.is-5 基本
+          b-field(custom-class="is-small" label="コンテナ幅")
+            b-slider(v-model="sp_body_width" :min="1" :max="100")
+
   a(name="options")
   .container
     .title.is-3 オプション
+    b-button.sidebar_toggle_button(@click="sidebar_toggle" icon-left="menu")
     hr
     .columns.is-centered
       .column.is-10-tablet.is-8-desktop.is-6-widescreen
@@ -12,8 +53,6 @@
             :run_mode.sync="run_mode"
             :kifu_body.sync="kifu_body"
             :start_turn.sync="start_turn"
-            :theme.sync="theme"
-            :size.sync="size"
             :sp_bg_variant.sync="sp_bg_variant"
             :sp_pi_variant.sync="sp_pi_variant"
             :debug_mode_p.sync="debug_mode_p"
@@ -143,10 +182,8 @@
             pre.is-size-6
               | ShogiPlayer(
               |   :run_mode="'{{run_mode}}'"
-              |   :theme="'{{theme}}'"
               |   :sp_bg_variant="'{{sp_bg_variant}}'"
               |   :sp_pi_variant="'{{sp_pi_variant}}'"
-              |   :size="'{{size}}'"
               |   :start_turn="{{start_turn}}"
               |   :slider_show="{{slider_show}}"
               |   :controller_show="{{controller_show}}"
@@ -222,10 +259,11 @@ export default {
 
       modal_p: false,
       modal_p2: false,
+      sidebar_p: true,
+      sp_body_width: 0,
 
       // カスタマイズ用
       run_mode: "view_mode",   // play_mode
-      theme: "real",
       sp_bg_variant: "is_bg_variant_a",
       sp_pi_variant: "is_pi_variant_a",
       start_turn: -1,
@@ -267,6 +305,9 @@ export default {
     }
   },
   methods: {
+    sidebar_toggle() {
+      this.sidebar_p = !this.sidebar_p
+    },
     trigger_check(key, v) {
       this.$data[key] = v
       if (this.trigger_toast_p) {

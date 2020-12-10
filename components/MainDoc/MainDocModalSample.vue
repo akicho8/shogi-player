@@ -25,8 +25,6 @@
                 :key_event_capture="true"
                 :slider_show="true"
                 :controller_show="true"
-                :theme="'simple'"
-                :size="'default'"
                 :sound_effect="true"
               )
 
