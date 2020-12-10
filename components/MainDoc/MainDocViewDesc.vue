@@ -1,6 +1,6 @@
 <template lang="pug">
-.MainDocumentSousa.column
-  b-message(type="is-success" title="共通する操作方法" :closable="false")
+.MainDocViewDesc.column
+  b-message(:closable="false" type="is-success" title="共通する操作方法")
     .content
       ul
         li 盤面の左右をクリックすると前後の手番に進みます
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "MainDocumentSousa",
+  name: "MainDocViewDesc",
   data() {
     return {
     }
@@ -25,5 +25,5 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.MainDocumentSousa
+.MainDocViewDesc
 </style>

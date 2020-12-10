@@ -1,9 +1,9 @@
 <template lang="pug">
-.MainDocumentSample2.column
-  b-message
+.MainDocViewDemo2.column
+  b-message(type="is-info")
     | シンプル。最終手から表示。※盤面クリックで操作可。天王山クリックで反転
   .has-text-centered
-    .title.is-3 羽生善治名人 vs 渡辺明竜王
+    .title.is-4 羽生善治名人 vs 渡辺明竜王
     p.subtitle 第21期竜王戦七番勝負第4局
   hr
   ShogiPlayer(
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "MainDocumentSample2",
+  name: "MainDocViewDemo2",
   data() {
     return {
     }
@@ -26,5 +26,5 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.MainDocumentSample2
+.MainDocViewDemo2
 </style>

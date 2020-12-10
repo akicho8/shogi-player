@@ -1,6 +1,6 @@
 // 汎用コード
 
-import SfenParser from "shogi-player/src/sfen_parser"
+// import SfenParser from "shogi-player/src/sfen_parser"
 
 const strip_tags = require('striptags')
 
@@ -178,10 +178,10 @@ export default {
       return str.replace(/\n/g, "<br>")
     },
 
-    // sfen_parser.moves.length
-    sfen_parse(sfen) {
-      return SfenParser.parse(sfen)
-    },
+    // // sfen_parser.moves.length
+    // sfen_parse(sfen) {
+    //   return SfenParser.parse(sfen)
+    // },
 
     // strip_tags(html)
     // strip_tags(html, '<strong>')

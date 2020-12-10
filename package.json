@@ -24,11 +24,9 @@
     "bulma": "^0.9.1",
     "chroma-js": "^2.1.0",
     "dayjs": "^1.9.3",
-    "fabric": "^4.2.0",
     "howler": "^2.2.1",
     "js-memory-record": "^0.0.16",
     "lodash": "^4.17.20",
-    "lzma": "^2.3.2",
     "marked": "^1.2.5",
     "nuxt": "^2.14.7",
     "nuxt-buefy": "^0.4.4",
@@ -37,17 +35,18 @@
     "pug-plain-loader": "^1.0.0",
     "raw-loader": "^4.0.2",
     "secure-ls": "^1.2.6",
-    "shogi-player": "^0.0.218",
     "striptags": "^3.1.1",
-    "url-safe-base64": "^1.1.1",
-    "vue-color": "^2.7.1"
+    "vue-color": "^2.7.1",
+    "xregexp": "^4.3.0"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",
     "@vue/test-utils": "^1.1.0",
+    "babel-core": "^6.26.3",
     "babel-jest": "^26.6.0",
     "jest": "^26.6.0",
     "node-sass": "^5.0.0",
+    "rimraf": "^3.0.2",
     "sass-loader": "^10.1.0",
     "vue-jest": "^4.0.0-0"
   }

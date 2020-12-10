@@ -6,7 +6,7 @@
 
   ShogiPlayerGround(:base="base" ref="ShogiPlayerGround")
 
-  .buttons.are-small.is-centered(v-if="setting_button_show")
+  .buttons.are-small.is-centered(v-if="setting_button_show && false")
     b-button(icon-left="cog" @click="setting_modal_p = true")
 
   DebugBlock(:base="base")

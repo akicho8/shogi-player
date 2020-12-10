@@ -1,21 +1,11 @@
 <template lang="pug">
-.hero.is-primary.is-medium.MainDocumentHero
+.hero.is-primary.is-medium.MainDocHero
   .hero-head
-    nav.navbar
-      .container
-        .navbar-brand
-          span.navbar-burger.burger(data-target="navbarMenuHeroA")
-            span
-            span
-            span
-
-        #navbarMenuHeroA.navbar-menu
-          .navbar-end
-            a.navbar-item(href="https://github.com/akicho8/shogi-player")
-              span.icon
-                i.fab.fa-github
-              span
-               | Github
+    b-navbar(:mobile-burger="false" wrapper-class="container")
+      template(slot="end")
+        b-navbar-item(href="https://github.com/akicho8/shogi-player")
+          b-icon(icon="github")
+          .ml-2 GitHub
 
   .hero-body
     .container.has-text-centered
@@ -36,7 +26,7 @@
 
 <script>
 export default {
-  name: "MainDocumentHero",
+  name: "MainDocHero",
   data() {
     return {
     }
@@ -46,5 +36,10 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.MainDocumentHero
+.MainDocHero
+  .hero-foot
+    li
+      background-color: change_color($black, $alpha: 0.1)
+    li:not(:first-child)
+      margin-left: 0.25rem
 </style>

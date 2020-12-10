@@ -1,5 +1,5 @@
 <template lang="pug">
-.MainDocumentCredit
+.MainDocCredit
   .section
     a(name="credit")
     .container
@@ -46,7 +46,7 @@
 
 <script>
 export default {
-  name: "MainDocumentCredit",
+  name: "MainDocCredit",
   data() {
     return {
     }
@@ -56,5 +56,5 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.MainDocumentCredit
+.MainDocCredit
 </style>

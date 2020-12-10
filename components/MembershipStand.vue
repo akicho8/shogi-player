@@ -50,9 +50,20 @@ export default {
 
       if (this.hold_piece_holding_p(piece)) {
         list.push("holding_p")
-      } else if (this.base.edit_p || (!this.base.cpu_location_p && this.base.mediator.current_location === this.location)) {
-        if (!this.holding_p) {
-          list.push("selectable_p")
+      } else {
+        let f = false
+        if (this.base.edit_p) {
+          f = true
+        }
+        if (this.base.play_p) {
+          if (!this.base.cpu_location_p && this.base.mediator.current_location === this.location) {
+            f = true
+          }
+        }
+        if (f) {
+          if (!this.holding_p) {
+            list.push("selectable_p")
+          }
         }
       }
 

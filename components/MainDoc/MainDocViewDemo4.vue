@@ -1,12 +1,12 @@
 <template lang="pug">
-.MainDocumentSample4.column
+.MainDocViewDemo4.column
   b-message(type="is-info")
     | コントローラーとスライダー付き。121手目から表示。
   .has-text-centered
-    .title.is-3 藤井聡太四段 vs 澤田真吾六段
+    .title.is-4 藤井聡太四段 vs 澤田真吾六段
     p.subtitle 第43期棋王戦予選
   hr
-  ShogiPlayer.is_book_like(
+  ShogiPlayer.is_book_like.type_a(
     :kifu_body="kifu_body"
     :start_turn="121"
     :controller_show="true"
@@ -19,7 +19,7 @@
 import kifu_body from "./kif/藤井聡太四段_vs_澤田真吾六段.kif"
 
 export default {
-  name: "MainDocumentSample4",
+  name: "MainDocViewDemo4",
   data() {
     return {
       kifu_body: kifu_body,
@@ -30,5 +30,5 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.MainDocumentSample4
+.MainDocViewDemo4
 </style>

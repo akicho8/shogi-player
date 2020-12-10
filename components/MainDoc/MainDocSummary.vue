@@ -1,11 +1,12 @@
 <template lang="pug">
-.MainDocumentSummary
+.MainDocSummary
   .section
     a(name="summary")
     .container
       .title.is-3 概要
+      hr
       .content
-        p.mmt-5
+        p.mt-5
           | Vue.js 用の将棋盤ライブラリで次のモードがあります
         ul
           li <b>view_mode:</b> 指定した棋譜を再生します
@@ -27,7 +28,7 @@
 
 <script>
 export default {
-  name: "MainDocumentSummary",
+  name: "MainDocSummary",
   data() {
     return {
     }
@@ -37,5 +38,5 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.MainDocumentSummary
+.MainDocSummary
 </style>

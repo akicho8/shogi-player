@@ -415,6 +415,11 @@ export default {
 
     // 駒台 or 駒台の駒をクリックしたときの共通処理
     piece_stand_click_shared(location, e) {
+      if (this.view_p) {
+        this.log("再生モードなので無効")
+        return true
+      }
+
       if (this.have_piece_location === location && this.have_piece) {
         this.log("自分の駒台から駒を持ち上げているならキャンセル")
         this.state_reset()

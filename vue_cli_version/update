@@ -1,8 +1,0 @@
-#!/bin/sh
-ncu /router/ -u
-ncu /lodash/ -u
-ncu /buefy/ -u
-ncu /bulma/ -u
-ncu /pug/ -u
-ncu /js-memory-record/ -u
-yarn

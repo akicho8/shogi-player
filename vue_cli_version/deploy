@@ -1,4 +1,0 @@
-#!/bin/sh
-npm run release
-npm run deploy
-(cd ~/src/shogi-extend && update)

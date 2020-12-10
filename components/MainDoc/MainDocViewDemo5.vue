@@ -1,9 +1,9 @@
 <template lang="pug">
-.MainDocumentSample5.column
+.MainDocViewDemo5.column
   b-message(type="is-info")
     | 駒落ち。最終手から表示。局面のSFENも表示
   .has-text-centered
-    .title.is-3 小池重明 vs 加藤一二三十段
+    .title.is-4 小池重明 vs 加藤一二三十段
     p.subtitle 加藤一二三の駒落道場
   hr
   ShogiPlayer.is_book_like(
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "MainDocumentSample5",
+  name: "MainDocViewDemo5",
   data() {
     return {
     }
@@ -28,5 +28,8 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.MainDocumentSample5
+.MainDocViewDemo5
+  .is_book_like
+    --sp_shadow_offset: 0
+    --sp_shadow_blur: 0
 </style>

@@ -1,5 +1,5 @@
 <template lang="pug">
-MainDocumentIndex
+MainDocApp
 </template>
 
 <script>
