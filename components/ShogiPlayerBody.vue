@@ -28,7 +28,6 @@ export default {
   computed: {
     component_class() {
       return [
-        // this.base.new_flip ? "is_flip_on" : "is_flip_off",
       ]
     },
   },

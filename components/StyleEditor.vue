@@ -60,6 +60,8 @@
 
           b-field(custom-class="is-small" label="余白")
             b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
+          b-field(custom-class="is-small" label="グリッド線の太さ")
+            b-slider(v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="外枠の太さ")
             b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="星")
@@ -297,6 +299,7 @@ export default {
       sp_piece_count_padding: 2,
 
       sp_grid_color: "rgba(0, 0, 0, 0.5)",
+      sp_grid_stroke: 1,
       sp_grid_outer_stroke: 0,
       sp_grid_star: 10,
 
@@ -405,6 +408,7 @@ export default {
           --sp_stand_hover_border_color: ${this.sp_stand_hover_border_color};
 
           --sp_grid_color:    ${this.sp_grid_color};
+          --sp_grid_stroke: ${this.sp_grid_stroke};
           --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke};
           --sp_grid_star: ${this.sp_grid_star}%;
 

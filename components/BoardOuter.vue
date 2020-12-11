@@ -43,6 +43,7 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   +defvar(sp_grid_color, rgba(0, 0, 0, 0.5)) // グリッド色
+  +defvar(sp_grid_stroke, 1)                 // グリッド太さ
   +defvar(sp_board_padding, 1.5) // 盤の隅の隙間
   +defvar(sp_grid_outer_stroke, 0) // 升目外枠の太さ
   +defvar(sp_grid_star, 6px) // 星の大きさ
@@ -74,7 +75,7 @@ export default {
       &:after
         position: absolute
         content: ""
-        top:  calc(var(--sp_grid_star) * -0.5 - 0.5px)
+        top:  calc(var(--sp_grid_star) * -0.5 - 0.5px) // -0.5px で中央に寄る
         left: calc(var(--sp_grid_star) * -0.5 - 0.5px)
         width:  var(--sp_grid_star)
         height: var(--sp_grid_star)
@@ -82,8 +83,8 @@ export default {
         background-color: var(--sp_grid_color)
 
   td
-    height: calc(100% / 9) // 縦幅均等
-    border: $sp_real_grid_inner solid var(--sp_grid_color)
+    height: calc(100% / var(--sp_dimension)) // 縦幅均等
+    border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 
   .BoardOuter
     padding: calc(var(--sp_board_padding) * 1%)

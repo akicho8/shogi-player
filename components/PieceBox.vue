@@ -49,7 +49,6 @@ export default {
   +defvar(sp_piece_box_margin_top, 10px)          // 横レイアウト時の上マージン
 
   .PieceBox
-    // @extend %real_hoverable_opacity
     @extend %is_unselectable
 
     display: flex
