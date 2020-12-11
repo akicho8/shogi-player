@@ -12,6 +12,11 @@ export default {
 
   methods: {
     shortcut_hook(e) {
+      if (this.play_p || this.edit_p) {
+      } else {
+        return true
+      }
+
       // w, b で駒台をクリックしたことにする
       for (const loc of Location.values) {
         const key = e.key.toLowerCase()
