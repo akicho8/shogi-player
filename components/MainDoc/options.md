@@ -35,7 +35,6 @@
   <div class="message-body">
     <ul>
       <li>kifu_body も preset_key も指定がない場合は `position startpos` (平手) が初期配置になります</li>
-      <li>`kifu_url` や `kifu_body` をあとから変更したときも同期して再読み込みします</li>
     </ul>
   </div>
 </article>
