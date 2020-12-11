@@ -35,14 +35,8 @@
 
           b-field.my-4(custom-class="is-small" label="プリセット画像")
             b-select(size="is-small" v-model="sp_bg_variant")
-              option(value="is_bg_variant_none") none
-              option(value="is_bg_variant_a") 木1
-              option(value="is_bg_variant_b") 木2
-              option(value="is_bg_variant_c") 紙1
-              option(value="is_bg_variant_d") 紙2
-              option(value="is_bg_variant_e") 紙3
-              option(value="is_bg_variant_f") 布1
-              option(value="is_bg_variant_g") 布2
+              template(v-for="e in BgVariantInfo.values")
+                option(:value="e.key") {{e.name}}
 
           ImageUpload(@input="sp_board_image_input_handle")
 
@@ -77,14 +71,8 @@
           .title.is-5 駒
           b-field(custom-class="is-small" label="プリセット")
             b-select(size="is-small" v-model="sp_pi_variant")
-              option(value="is_pi_variant_none") none
-              option(value="is_pi_variant_a") SVG - ☗ゴシック
-              option(value="is_pi_variant_b") SVG - 紙面風
-              option(value="is_pi_variant_c") IMG - ☗図案駒
-              option(value="is_pi_variant_d") IMG - ☗毛筆体
-              option(value="is_pi_variant_e") SVG - orangain/shogi-piece-images
-              option(value="is_pi_variant_f") f
-              option(value="is_pi_variant_g") g
+              template(v-for="e in PiVariantInfo.values")
+                option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="盤上のセル内の駒の大きさ")
             b-slider(v-model="sp_board_piece_rate" :min="0" :max="100" :step="0.1")
 
@@ -243,7 +231,7 @@ import ShogiPlayer from "./ShogiPlayer.vue"
 import ColorPicker from "./ColorPicker.vue"
 import ImageUpload from "./ImageUpload.vue"
 
-import SideInfo from "./models/side_info"
+import HumanSideInfo from "./models/human_side_info"
 import RunModeInfo from "./models/run_mode_info"
 import BgVariantInfo from "./models/bg_variant_info"
 import PiVariantInfo from "./models/pi_variant_info"
@@ -323,7 +311,7 @@ export default {
       sp_bg_variant: "is_bg_variant_none",
       ////////////////////////////////////////////////////////////////////////////////
 
-      SideInfo,
+      HumanSideInfo,
       RunModeInfo,
       BgVariantInfo,
       PiVariantInfo,

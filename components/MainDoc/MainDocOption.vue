@@ -1,44 +1,76 @@
 <template lang="pug">
-.MainDocOption
+.MainDocOption(:class="component_class")
   b-sidebar.MainDocOption-Sidebar(fullheight right v-model="sidebar_p" position="fixed" open)
     .mx-4.my-4
       .is-flex.is-justify-content-start.is-align-items-center
         b-button(@click="sidebar_toggle" icon-left="menu")
-        .mx-3.has-text-weight-bold 将棋盤スタイルエディター
+        .mx-3.has-text-weight-bold オプション
 
       .my_controls
         .box
-          .title.is-5 基本
-          b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_width" :min="1" :max="100")
+          b-field(custom-class="is-small" label="run_mode")
+            template(v-for="e in RunModeInfo.values")
+              b-radio-button(size="is-small" v-model="run_mode" :native-value="e.key") {{e.name}}
+
         .box
-          .title.is-5 基本
-          b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_width" :min="1" :max="100")
+          .title.is-5 テクスチャ
+
+          b-field(custom-class="is-small" label="sp_bg_variant")
+            b-select(size="is-small" v-model="sp_bg_variant")
+              template(v-for="e in BgVariantInfo.values")
+                option(:value="e.key") {{e.name}}
+
+          b-field(custom-class="is-small" label="sp_pi_variant")
+            b-select(size="is-small" v-model="sp_pi_variant")
+              template(v-for="e in PiVariantInfo.values")
+                option(:value="e.key") {{e.name}}
+
         .box
-          .title.is-5 基本
-          b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_width" :min="1" :max="100")
+          .title.is-5 効果音
+
+          MainDocSwitch(v-model="sound_effect" label="sound_effect")
+
+          b-field(custom-class="is-small" label="volume")
+            b-slider(v-model="volume" :min="0" :max="1.0" step="0.01")
+
         .box
-          .title.is-5 基本
-          b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_width" :min="1" :max="100")
+          b-field(custom-class="is-small" label="start_turn")
+            b-input(v-model="start_turn" type="number")
+          b-field(custom-class="is-small" label="final_label")
+            b-input(v-model.trim="final_label" type="text")
+
         .box
-          .title.is-5 基本
-          b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_width" :min="1" :max="100")
-        .box
-          .title.is-5 基本
-          b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_width" :min="1" :max="100")
-        .box
-          .title.is-5 基本
-          b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_width" :min="1" :max="100")
-        .box
-          .title.is-5 基本
-          b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_width" :min="1" :max="100")
+          b-field(custom-class="is-small" label="player_info.black.name")
+            b-input(v-model.trim="player_info.black.name" type="text")
+          b-field(custom-class="is-small" label="player_info.white.name")
+            b-input(v-model.trim="player_info.white.name" type="text")
+
+        b-field(custom-class="is-small" label="slider_show")
+          b-radio-button(size="is-small" v-model="slider_show" :native-value="false") OFF
+          b-radio-button(size="is-small" v-model="slider_show" :native-value="true")  ON
+
+        MainDocSwitch(v-model="controller_show" label="controller_show")
+        MainDocSwitch(v-model="sfen_show" label="sfen_show")
+        MainDocSwitch(v-model="overlay_navi" label="overlay_navi")
+        MainDocSwitch(v-model="key_event_capture" label="key_event_capture")
+        MainDocSwitch(v-model="flip" label="flip")
+        MainDocSwitch(v-model="flip_if_white" label="flip_if_white")
+        MainDocSwitch(v-model="debug_mode_p" label="debug_mode_p")
+        MainDocSwitch(v-model="hidden_if_piece_stand_blank" label="hidden_if_piece_stand_blank")
+        MainDocSwitch(v-model="setting_button_show" label="setting_button_show")
+        MainDocSwitch(v-model="summary_show" label="summary_show")
+        MainDocSwitch(v-model="operation_disable" label="operation_disable")
+
+        b-field(custom-class="is-small" label="配置")
+          b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
+          b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
+
+        b-field(custom-class="is-small" label="human_side_key")
+          template(v-for="e in HumanSideInfo.values")
+            b-radio-button(v-model="human_side_key" :native-value="e.key") {{e.key}}
+
+        b-field(custom-class="is-small" label="kifu_body (KIF or USI(sfen)形式")
+          b-input(v-model="kifu_body" type="textarea")
 
   MainDocMainNavbar
     template(slot="brand")
@@ -47,140 +79,56 @@
     template(slot="end")
       b-navbar-item(@click="sidebar_toggle")
         b-icon(icon="menu")
+
+  //- この form は prevent が効いているか確認するためのもの
   .section
     .container
-      .columns
-        .column.is-10-tablet.is-8-desktop.is-6-widescreen
-          //- この form は prevent が効いているか確認するためのもの
-          form(action="/")
-            ShogiPlayer(
-              :run_mode.sync="run_mode"
-              :kifu_body.sync="kifu_body"
-              :start_turn.sync="start_turn"
-              :sp_bg_variant.sync="sp_bg_variant"
-              :sp_pi_variant.sync="sp_pi_variant"
-              :debug_mode_p.sync="debug_mode_p"
-              :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
-              :setting_button_show="setting_button_show"
-              :summary_show="summary_show"
-              :operation_disable="operation_disable"
-              :flip.sync="flip"
-              :flip_if_white="flip_if_white"
-              :sp_layout="sp_layout"
-              :final_label="final_label"
-              :player_info="player_info"
-              :key_event_capture="key_event_capture"
-              :slider_show="slider_show"
-              :controller_show="controller_show"
-              :sfen_show="sfen_show"
-              :overlay_navi="overlay_navi"
-              :sound_effect="sound_effect"
-              :volume="volume"
-              :human_side_key="human_side_key"
+      form(action="/")
+        .SpWrap
+          ShogiPlayer(
+            :run_mode.sync="run_mode"
+            :kifu_body.sync="kifu_body"
+            :start_turn.sync="start_turn"
+            :sp_bg_variant.sync="sp_bg_variant"
+            :sp_pi_variant.sync="sp_pi_variant"
+            :debug_mode_p.sync="debug_mode_p"
+            :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
+            :setting_button_show="setting_button_show"
+            :summary_show="summary_show"
+            :operation_disable="operation_disable"
+            :flip.sync="flip"
+            :flip_if_white="flip_if_white"
+            :sp_layout="sp_layout"
+            :final_label="final_label"
+            :player_info="player_info"
+            :key_event_capture="key_event_capture"
+            :slider_show="slider_show"
+            :controller_show="controller_show"
+            :sfen_show="sfen_show"
+            :overlay_navi="overlay_navi"
+            :sound_effect="sound_effect"
+            :volume="volume"
+            :human_side_key="human_side_key"
 
-              @update:edit_mode_snapshot_sfen="            e => trigger_check('edit_mode_snapshot_sfen', e)"
-              @update:mediator_snapshot_sfen="             e => trigger_check('mediator_snapshot_sfen', e)"
-              @update:play_mode_advanced_full_moves_sfen=" e => trigger_check('play_mode_advanced_full_moves_sfen', e)"
-              @update:play_mode_advanced_snapshot_sfen="   e => trigger_check('play_mode_advanced_snapshot_sfen', e)"
-              @update:play_mode_advanced_last_move="       e => trigger_check('play_mode_advanced_last_move', e)"
-              @update:play_mode_advanced_moves="           e => trigger_check('play_mode_advanced_moves', e)"
-              @update:turn_offset="                        e => trigger_check('turn_offset', e)"
-              @update:turn_offset_max="                    e => trigger_check('turn_offset_max', e)"
-              @update:moves_take_turn_offset="             e => trigger_check('moves_take_turn_offset', e)"
+            @update:edit_mode_snapshot_sfen="            e => trigger_check('edit_mode_snapshot_sfen', e)"
+            @update:mediator_snapshot_sfen="             e => trigger_check('mediator_snapshot_sfen', e)"
+            @update:play_mode_advanced_full_moves_sfen=" e => trigger_check('play_mode_advanced_full_moves_sfen', e)"
+            @update:play_mode_advanced_snapshot_sfen="   e => trigger_check('play_mode_advanced_snapshot_sfen', e)"
+            @update:play_mode_advanced_last_move="       e => trigger_check('play_mode_advanced_last_move', e)"
+            @update:play_mode_advanced_moves="           e => trigger_check('play_mode_advanced_moves', e)"
+            @update:turn_offset="                        e => trigger_check('turn_offset', e)"
+            @update:turn_offset_max="                    e => trigger_check('turn_offset_max', e)"
+            @update:moves_take_turn_offset="             e => trigger_check('moves_take_turn_offset', e)"
 
-              @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
-              )
+            @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
+            )
+
+  .section
+    .container
 
       .columns
         .column
           section
-            b-field(custom-class="is-small" label="run_mode")
-              .block
-                template(v-for="e in RunModeInfo.values")
-                  b-radio(v-model="run_mode" :native-value="e.key") {{e.name}}({{e.key}})
-
-            .box
-              b-field(custom-class="is-small" label="sp_bg_variant")
-                .block
-                  template(v-for="e in BgVariantInfo.values")
-                    b-radio(v-model="sp_bg_variant" :native-value="e.key") {{e.name}}
-
-              b-field(custom-class="is-small" label="sp_pi_variant")
-                .block
-                  template(v-for="e in PiVariantInfo.values")
-                    b-radio(v-model="sp_pi_variant" :native-value="e.key") {{e.name}}({{e.key}})
-
-            .box
-              b-field(grouped group-multiline)
-                b-field(custom-class="is-small" label="sound_effect")
-                  b-switch(v-model="sound_effect")
-
-                b-field(custom-class="is-small" label="volume")
-                  .block
-                    input(v-model.number="volume" type="range" min="0" max="1.0" step="0.01")
-                    | {{volume}}
-
-            b-field(grouped group-multiline)
-              b-field(custom-class="is-small" label="start_turn")
-                b-input(v-model="start_turn" type="number")
-
-              b-field(custom-class="is-small" label="final_label")
-                b-input(v-model.trim="final_label" type="text")
-
-            b-field(grouped group-multiline)
-              b-field(custom-class="is-small" label="player_info.black.name")
-                b-input(v-model.trim="player_info.black.name" type="text")
-              b-field(custom-class="is-small" label="player_info.white.name")
-                b-input(v-model.trim="player_info.white.name" type="text")
-
-            b-field(grouped group-multiline)
-              b-field(custom-class="is-small" label="slider_show")
-                b-switch(v-model="slider_show")
-
-              b-field(custom-class="is-small" label="controller_show")
-                b-switch(v-model="controller_show")
-
-              b-field(custom-class="is-small" label="sfen_show")
-                b-switch(v-model="sfen_show")
-
-              b-field(custom-class="is-small" label="overlay_navi")
-                b-switch(v-model="overlay_navi")
-
-              b-field(custom-class="is-small" label="key_event_capture")
-                b-switch(v-model="key_event_capture")
-
-              b-field(custom-class="is-small" label="flip")
-                b-switch(v-model="flip")
-
-              b-field(custom-class="is-small" label="flip_if_white")
-                b-switch(v-model="flip_if_white")
-
-              b-field(custom-class="is-small" label="配置")
-                b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
-                b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
-
-              b-field(custom-class="is-small" label="debug_mode_p")
-                b-switch(v-model="debug_mode_p")
-
-              b-field(custom-class="is-small" label="hidden_if_piece_stand_blank")
-                b-switch(v-model="hidden_if_piece_stand_blank")
-
-              b-field(custom-class="is-small" label="setting_button_show")
-                b-switch(v-model="setting_button_show")
-
-              b-field(custom-class="is-small" label="summary_show")
-                b-switch(v-model="summary_show")
-
-              b-field(custom-class="is-small" label="operation_disable")
-                b-switch(v-model="operation_disable")
-
-            b-field(custom-class="is-small" label="human_side_key")
-              .block
-                template(v-for="e in SideInfo.values")
-                  b-radio(v-model="human_side_key" :native-value="e.key") {{e.key}}
-
-            b-field(custom-class="is-small" label="kifu_body (KIF or USI(sfen)形式")
-              b-input(v-model="kifu_body" type="textarea")
 
             b-message.shogi_player_params(:closable="false" type="is-primary" title="引数")
               pre.is-size-6
@@ -246,7 +194,7 @@
 <script>
 import options_md from "./options.md"
 
-import SideInfo      from "../models/side_info.js"
+import HumanSideInfo      from "../models/human_side_info.js"
 import RunModeInfo   from "../models/run_mode_info.js"
 import BgVariantInfo from "../models/bg_variant_info.js"
 import PiVariantInfo from "../models/pi_variant_info.js"
@@ -257,7 +205,7 @@ export default {
     return {
       options_md,
 
-      SideInfo,
+      HumanSideInfo,
       RunModeInfo,
       BgVariantInfo,
       PiVariantInfo,
@@ -270,10 +218,10 @@ export default {
       sp_bg_variant: "is_bg_variant_a",
       sp_pi_variant: "is_pi_variant_a",
       start_turn: -1,
-      slider_show: true,
+      slider_show: false,
       overlay_navi: true,
-      controller_show: true,
-      sfen_show: true,
+      controller_show: false,
+      sfen_show: false,
       human_side_key: 'both',
       sound_effect: true,
       volume: 0.5,
@@ -318,19 +266,30 @@ export default {
       }
     },
   },
+  computed: {
+    component_class() {
+      return {
+        sidebar_p: this.sidebar_p,
+      }
+    },
+  },
 }
 </script>
 
 <style lang="sass">
 @import "./support.sass"
+
+html
+  +mobile
+    --main_doc_option_sidebar_width: 60%
+  +tablet
+    --main_doc_option_sidebar_width: 50%
+  +desktop
+    --main_doc_option_sidebar_width: 30%
+
 .MainDocOption-Sidebar
   .sidebar-content
-    +mobile
-      width: 50%
-    +tablet
-      width: 40%
-    +desktop
-      width: 30%
+    width: var(--main_doc_option_sidebar_width)
     // width: unset
     // a
     //   white-space: nowrap
@@ -351,4 +310,10 @@ export default {
       white-space: pre-wrap
       word-break: break-all
 
+  .SpWrap
+    +desktop
+      width: unquote("min(100%, 512px)")
+  &.sidebar_p
+    .SpWrap
+      width: unquote("min(calc(100% - var(--main_doc_option_sidebar_width)), 512px)")
 </style>

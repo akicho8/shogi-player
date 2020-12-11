@@ -2,7 +2,7 @@ import _ from "lodash"
 
 import Mediator from "./models/mediator"
 import Location from "./models/location"
-import SideInfo from "./models/side_info"
+import HumanSideInfo from "./models/human_side_info"
 
 export default {
 
@@ -157,7 +157,7 @@ export default {
     },
 
     human_locations() {
-      return SideInfo.fetch(this.human_side_key).locations
+      return HumanSideInfo.fetch(this.human_side_key).locations
     },
 
     // moves.take(turn_offset) を返す

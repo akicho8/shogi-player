@@ -1,7 +1,7 @@
 import MemoryRecord from "js-memory-record"
 import Location from "./location"
 
-export default class SideInfo extends MemoryRecord {
+export default class HumanSideInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "both",   name: "☗☖", location_keys: ["black", "white"], },
@@ -17,5 +17,5 @@ export default class SideInfo extends MemoryRecord {
 }
 
 if (process.argv[1] === __filename) {
-  console.log(SideInfo.fetch("both").locations)
+  console.log(HumanSideInfo.fetch("both").locations)
 }
