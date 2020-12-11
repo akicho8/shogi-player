@@ -1,23 +1,22 @@
 <template lang="pug">
-.MainDocUsage
+.MainDocCssVariable
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
-      b-navbar-item(tag="div").has-text-weight-bold 使い方 (情報が古い)
+      b-navbar-item(tag="div").has-text-weight-bold CSS変数
   .section
-    a(name="usage")
     .container
-      MainDocMd(:body="usage_md")
+      MainDocMd(:body="css_variable")
 </template>
 
 <script>
-import usage_md from "./MainDocUsage.md"
+import css_variable from "./css_variable.md"
 
 export default {
-  name: "MainDocUsage",
+  name: "MainDocCssVariable",
   data() {
     return {
-      usage_md,
+      css_variable,
     }
   },
 }
@@ -25,5 +24,5 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.MainDocUsage
+.MainDocCssVariable
 </style>

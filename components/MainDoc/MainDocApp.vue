@@ -3,10 +3,9 @@
   MainDocHero
   MainDocSummary
   MainDocDemo
-  MainDocUsage
-  MainDocOption
-  MainDocApi
-  MainDocCredit
+  //- MainDocUsage
+  //- MainDocApi
+  //- MainDocCredit
 </template>
 
 <script>

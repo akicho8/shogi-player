@@ -16,6 +16,15 @@
       MainDocViewDemo4
       MainDocViewDemo5
     .columns.mt-6
+      MainDocViewDemo6
+
+    b-message.mt-6(type="is-info")
+      | レスポンシブでたくさん表示
+    .columns.is-multiline
+      template(v-for="i in 12")
+        MainDocViewDemo7
+
+    .columns.mt-6
       MainDocViewDesc
 
     .title.is-4.mt-6 2. 操作モード (play_mode)
@@ -37,8 +46,6 @@
       MainDocEditDemo2
     .columns.mt-6
       MainDocEditDesc1
-    .columns.mt-6
-      MainDocEditDesc2
 </template>
 
 <script>

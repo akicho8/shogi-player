@@ -1,10 +1,10 @@
 <template lang="pug">
-StyleEditor
+MainDocOption
 </template>
 
 <script>
 export default {
-  name: "PageEditor",
+  name: "PageOptions",
   data () {
     return {
     }
@@ -12,7 +12,7 @@ export default {
   computed: {
     meta() {
       return {
-        title: "スタイルエディタ",
+        title: "オプション",
       }
     },
   },
@@ -20,5 +20,5 @@ export default {
 </script>
 
 <style lang="sass">
-.PageEditor
+.PageOptions
 </style>

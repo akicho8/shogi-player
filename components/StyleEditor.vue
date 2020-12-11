@@ -1,6 +1,6 @@
 <template lang="pug">
 .StyleEditor(:class="component_class")
-  b-sidebar.StyleEditor-Sidebar(fullheight right v-model="sidebar_p" position="absolute")
+  b-sidebar.StyleEditor-Sidebar(fullheight right v-model="sidebar_p" position="fixed")
     .mx-4.my-4
       .is-flex.is-justify-content-start.is-align-items-center
         b-button(@click="sidebar_toggle" icon-left="menu")

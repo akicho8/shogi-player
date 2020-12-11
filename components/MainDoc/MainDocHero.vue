@@ -18,10 +18,12 @@
         ul
           li: a(href="#summary") 概要
           li: a(href="#examples") デモ
-          li: a(href="#usage") 使い方
-          li: a(href="#options") オプション
-          li: a(href="#api") API
+          li: nuxt-link(:to="{name: 'usage'}") 使い方
+          li: nuxt-link(:to="{name: 'options'}") オプション
+          li: nuxt-link(:to="{name: 'api'}") API
+          li: nuxt-link(:to="{name: 'css-customize'}") CSS変数
           li: nuxt-link(:to="{name: 'editor'}") スタイルエディタ
+          li: nuxt-link(:to="{name: 'credit'}") クレジット
 </template>
 
 <script>

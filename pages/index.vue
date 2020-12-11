@@ -4,7 +4,7 @@ MainDocApp
 
 <script>
 export default {
-  name: "index",
+  name: "PageIndex",
   data () {
     return {
     }
@@ -23,5 +23,5 @@ export default {
 </script>
 
 <style lang="sass">
-.index
+.PageIndex
 </style>

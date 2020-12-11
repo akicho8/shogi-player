@@ -1,10 +1,10 @@
 <template lang="pug">
-StyleEditor
+MainDocCssVariable
 </template>
 
 <script>
 export default {
-  name: "PageEditor",
+  name: "PageCssCustomize",
   data () {
     return {
     }
@@ -12,7 +12,7 @@ export default {
   computed: {
     meta() {
       return {
-        title: "スタイルエディタ",
+        title: "CSS変数",
       }
     },
   },
@@ -20,5 +20,5 @@ export default {
 </script>
 
 <style lang="sass">
-.PageEditor
+.PageCssCustomize
 </style>

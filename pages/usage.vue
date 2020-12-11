@@ -1,10 +1,10 @@
 <template lang="pug">
-StyleEditor
+MainDocUsage
 </template>
 
 <script>
 export default {
-  name: "PageEditor",
+  name: "PageUsage",
   data () {
     return {
     }
@@ -12,7 +12,7 @@ export default {
   computed: {
     meta() {
       return {
-        title: "スタイルエディタ",
+        title: "使い方",
       }
     },
   },
@@ -20,5 +20,5 @@ export default {
 </script>
 
 <style lang="sass">
-.PageEditor
+.PageUsage
 </style>

@@ -1,10 +1,10 @@
 <template lang="pug">
-StyleEditor
+MainDocCredit
 </template>
 
 <script>
 export default {
-  name: "PageEditor",
+  name: "PageCredit",
   data () {
     return {
     }
@@ -12,7 +12,7 @@ export default {
   computed: {
     meta() {
       return {
-        title: "スタイルエディタ",
+        title: "クレジット",
       }
     },
   },
@@ -20,5 +20,5 @@ export default {
 </script>
 
 <style lang="sass">
-.PageEditor
+.PageCredit
 </style>
