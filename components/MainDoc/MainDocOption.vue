@@ -106,7 +106,7 @@
       b-navbar-item(tag="div").has-text-weight-bold オプション
     template(slot="end")
       b-navbar-item.has-text-weight-bold(@click="sidebar_toggle")
-        | テスト
+        | 動作テスト
 
   //- この form は prevent が効いているか確認するためのもの
   .section
