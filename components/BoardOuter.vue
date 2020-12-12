@@ -96,13 +96,10 @@ export default {
     +is_overlay_block
     z-index: -1
 
-    // +filter_drop_shadow(1) // .BoardOuter ではなく .BoardOuterTexture に適用しているので table の駒の影に影響がない
-    // +filter_drop_shadow(1)
-
     background-color: var(--sp_board_color)    // 背景色は画像の透明な部分があれば見える
 
-    // background-image: url("../../assets/is_bg_variant/0270_337378_m.jpg") // for debug
     background-image: var(--sp_board_image)
+    // background-image: url("../assets/inspect/256x256.png")
 
     // テクスチャを広げてマッピングする
     background-position: center
@@ -110,6 +107,7 @@ export default {
     background-size: cover
 
     border-radius: calc(var(--sp_board_radius) * 1px)
+    border: 1px solid blue
 
     +filter_drop_shadow(1, unquote('opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) blur(calc(var(--sp_board_blur) * 1px))'))
 </style>
