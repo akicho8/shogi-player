@@ -184,6 +184,9 @@
             b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style") ON
             b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="") OFF
 
+          b-field(custom-class="is-small" label="盤の縦辺のセル数")
+            b-slider(v-model="sp_dimension" :min="1" :max="18" :step="1")
+
   b-button.sidebar_toggle_button(@click="sidebar_toggle" icon-left="menu")
 
   //- b-navbar(type="is-primary" :mobile-burger="false" wrapper-class="container" spaced)
@@ -317,6 +320,7 @@ export default {
       sp_layer: "is_layer_off",
       sp_pi_variant: "is_pi_variant_a",
       sp_bg_variant: "is_bg_variant_none",
+      sp_dimension: 9,
       ////////////////////////////////////////////////////////////////////////////////
 
       HumanSideInfo,
@@ -376,6 +380,7 @@ export default {
       return `
         .ShogiPlayerGround {
           --sp_body_width: ${this.sp_body_width}vw;
+          --sp_dimension: ${this.sp_dimension};
 
           --sp_ground_color:      ${this.sp_ground_color};
           --sp_ground_image:      ${this.sp_ground_bg_url};
