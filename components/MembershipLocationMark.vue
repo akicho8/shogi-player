@@ -39,7 +39,7 @@ export default {
     .MembershipLocationMarkTexture
       background-image: url("../assets/location_white.svg")
       +filter_drop_shadow(-1)
-      @extend %is_flip
+      @extend %is_flip // 反転しない方がいいかもしれない
 
   //////////////////////////////////////////////////////////////////////////////// サイズ (基本)
 

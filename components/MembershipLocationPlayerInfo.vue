@@ -52,6 +52,7 @@ export default {
 .ShogiPlayerGround
   .MembershipLocationPlayerInfo
     line-height: 140%
+    word-break: break-all
 
   &.is_layer_on
     .MembershipLocationPlayerInfo
@@ -68,5 +69,10 @@ export default {
 
   .is_white
     .MembershipLocationPlayerInfo
-      @extend %is_flip
+      @extend %is_flip // ← 反転しない方がいいかもしれない
+
+  // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
+  &.is_horizontal
+    .MembershipLocationPlayerInfo
+      width: var(--sp_stand_piece_w)
 </style>
