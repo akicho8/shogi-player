@@ -35,18 +35,10 @@ export default {
 //       .PieceTextureSelf(駒の種類を定義するクラスたち)
 //
 
+// 自分でもよくわからなくなっている
 // 選択できる駒に指定する
-%dom_real_selectable
-  // +filter_drop_shadow($sp_real_piece_shadow_depth, $sp_real_piece_shadow_blur)
-  &.holding_p
-    +desktop
-      opacity: 0.4  // 駒を持ち上げたので元の駒を薄くする
-    +touch
-      background-color: $sp_real_holding_color
-      // さらに駒を持ったときは色を濃くする
-      &:hover
-        background-color: $sp_real_holding_color
-
+=dom_real_selectable
+  // 選択が可能
   &.selectable_p
     &:hover
       // スマホでは手を離しても hover 状態を保持してしまう
@@ -58,6 +50,17 @@ export default {
         // background プロパティをつかうと他の設定をリセットしてしまうので注意
         background-color: $sp_real_selectable_color
 
+  // 持ち上げたとき
+  &.holding_p
+    +desktop
+      opacity: 0.4  // 駒を持ち上げたので元の駒を薄くする
+    +touch
+      background-color: $sp_real_holding_color
+      // さらに駒を持ったときは色を濃くする
+      &:hover
+        background-color: $sp_real_holding_color
+
+  // なんだこれ？？？
   &.hoverable_p
     &:hover
       background-color: $sp_real_selectable_color
@@ -109,7 +112,7 @@ export default {
     align-items: center  // 先手の下を揃えて配置したいときは flex-end にする
 
   .PieceObject
-    @extend %dom_real_selectable
+    +dom_real_selectable
     &.origin_place
       background-color: $sp_real_origin_bg
     &.current
