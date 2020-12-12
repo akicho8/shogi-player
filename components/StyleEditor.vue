@@ -11,7 +11,13 @@
           .title.is-5 基本
           b-field(custom-class="is-small" label="コンテナ幅")
             b-slider(v-model="sp_body_width" :min="1" :max="100")
-
+          b-field(custom-class="is-small" label="レイアウト")
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
+          b-field(custom-class="is-small" label="モード")
+            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") 再生
+            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") 操作
+            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="edit_mode") 編集
         .box
           .title.is-5 背景
 
@@ -84,9 +90,6 @@
 
         .box
           .title.is-5 駒台
-          b-field(custom-class="is-small" label="配置")
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
           .columns.mt-4
             .column.py-0
               b-field(custom-class="is-small" label="セル(Width)")
@@ -166,11 +169,24 @@
             b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_off") none
 
         .box
+          .title.is-5 対局者情報
+          .columns
+            .column
+              b-field(custom-class="is-small" label="☗")
+                b-input(size="is-small" v-model.trim="player_info.black.name" type="text")
+            .column
+              b-field(custom-class="is-small" label="時間")
+                b-input(size="is-small" v-model.trim="player_info.black.time" type="text")
+          .columns
+            .column
+              b-field(custom-class="is-small" label="☖")
+                b-input(size="is-small" v-model.trim="player_info.white.name" type="text")
+            .column
+              b-field(custom-class="is-small" label="時間")
+                b-input(size="is-small" v-model.trim="player_info.white.time" type="text")
+
+        .box
           .title.is-5 その他
-          b-field(custom-class="is-small" label="モード")
-            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") 再生
-            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") 操作
-            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="edit_mode") 編集
 
           b-field(custom-class="is-small" label="レイヤー確認")
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
@@ -209,6 +225,7 @@
 
   .EditBlock
     ShogiPlayer(
+      :player_info_click_handle="player_info_click_handle"
       :sp_layout="sp_layout"
       :sp_blink="sp_blink"
       :sp_hpos="sp_hpos"
@@ -335,19 +352,20 @@ export default {
       PiVariantInfo,
 
       player_info: {
-        black: { name: "先手", time: "12:34:56", },
-        white: { name: "後手", time: "56:78:90", },
+        black: { name: "先手", time: "12:34", },
+        white: { name: "後手", time: "56:78", },
       },
 
       // kifu_body: require("./極限早繰り銀.kif"),
-
-      trigger_toast_p: false,
 
       // kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
       // kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
     }
   },
   methods: {
+    player_info_click_handle(location, player_info) {
+      this.$buefy.toast.open({message: `${location.name} ${player_info.name}`, queue: false, type: "is-white"})
+    },
     sidebar_toggle() {
       this.sidebar_p = !this.sidebar_p
     },

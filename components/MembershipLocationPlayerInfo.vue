@@ -28,7 +28,8 @@ export default {
   },
   computed: {
     show_p() {
-      return this.player_info && this.base.sp_layout === "is_vertical"
+      // return this.player_info && this.base.sp_layout === "is_vertical"
+      return this.player_name || this.player_time
     },
     component_class() {
       return {
@@ -50,6 +51,13 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   .MembershipLocationPlayerInfo
+    line-height: 140%
+
+  &.is_layer_on
+    .MembershipLocationPlayerInfo
+      border: 1px dashed change_color($primary, $alpha: 0.5)
+
+  .MembershipLocationPlayerInfo
     display: flex
     flex-direction: column
     align-items: center
@@ -57,10 +65,8 @@ export default {
 
   .is_black
     .MembershipLocationPlayerInfo
-      // +filter_drop_shadow(1)
 
   .is_white
     .MembershipLocationPlayerInfo
-      // +filter_drop_shadow(-1)
       @extend %is_flip
 </style>

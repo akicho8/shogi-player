@@ -1,7 +1,8 @@
 <template lang="pug">
 .Membership(:class="component_class" v-if="component_show_p")
-  MembershipLocation(:base="base" :location="location")
-  MembershipStand(:base="base" :location="location")
+  MembershipLocation(           :base="base" :location="location")
+  MembershipLocationPlayerInfo( :base="base" :location="location")
+  MembershipStand(              :base="base" :location="location")
   slot
 </template>
 
@@ -10,6 +11,7 @@ import _ from "lodash"
 import { support } from "./support.js"
 import MembershipLocation from "./MembershipLocation.vue"
 import MembershipStand from "./MembershipStand.vue"
+import MembershipLocationPlayerInfo from "./MembershipLocationPlayerInfo.vue"
 
 export default {
   mixins: [support],
@@ -20,6 +22,7 @@ export default {
 
   components: {
     MembershipLocation,
+    MembershipLocationPlayerInfo,
     MembershipStand,
   },
 
@@ -64,11 +67,9 @@ export default {
 
   &.is_horizontal
     .Membership
-      // width: 100%
       &.is_white
         flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び
         align-self: flex-start           // 全体が横並び → 持駒は縦並び → 後手は上寄せ
-        // transform: rotate(180deg)
       &.is_black
         flex-direction: column           // 全体が横並び → 持駒は縦並び
         align-self: flex-end             // 全体が横並び → 持駒は縦並び → 先手は下寄せ
@@ -79,9 +80,9 @@ export default {
       width: 100%
 
       &.is_white
-        flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△飛歩」のままでよい (左端→)
+        flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△ 後手 飛歩」のままでよい (左端→)
       &.is_black
-        flex-direction: row-reverse      // 全体が縦並び → 持駒は横並び → 右寄せ 後手は「飛歩▲」とする (←右端)
+        flex-direction: row-reverse      // 全体が縦並び → 持駒は横並び → 右寄せ 先手は「飛歩 先手 ▲」とする (←右端)
   &.is_vertical
     +is_vertical_style
   +mobile

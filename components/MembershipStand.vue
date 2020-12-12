@@ -145,10 +145,12 @@ export default {
   =is_vertical_style
     .is_white
       .MembershipStand
-        flex-direction: row-reverse    // 全体縦並び → 後手 → 横並び(昇順)
+        flex-direction: row-reverse    // 「飛歩」→「歩飛」
+        margin-left: auto              // 「△後手 飛歩…………」→「△後手…………飛歩」
     .is_black
       .MembershipStand
-        flex-direction: row            // 全体縦並び → 先手 → 横並び(降順)
+        flex-direction: row            // 「飛歩」→「飛歩」
+        margin-right: auto             // 「…………飛歩 先手▲」→「飛歩…………先手▲」
   &.is_vertical
     +is_vertical_style
   +mobile
