@@ -7,13 +7,15 @@
   //
   //- .is-flex
   MembershipLocationMark(:base="base" :location="location")
-    //- .player_name.ml-1.has-text-weight-bold(v-if="player_name" v-text="player_name")
+  MembershipLocationPlayerInfo(:base="base" :location="location")
+  //- .player_name.ml-1.has-text-weight-bold(v-if="player_name" v-text="player_name")
   //- .time_format(v-if="player_time" v-text="player_time")
 </template>
 
 <script>
 import { support } from "./support.js"
-import MembershipLocationMark from "./MembershipLocationMark.vue"
+import MembershipLocationMark       from "./MembershipLocationMark.vue"
+import MembershipLocationPlayerInfo from "./MembershipLocationPlayerInfo.vue"
 
 export default {
   name: "MembershipLocation",
@@ -23,17 +25,7 @@ export default {
   },
   components: {
     MembershipLocationMark,
-  },
-  methods: {
-    player_attr(key) {
-      if (this.base.player_info) {
-        return this.base.player_info[this.location.key][key]
-      }
-    },
-  },
-  computed: {
-    player_name() { return this.player_attr("name") },
-    player_time() { return this.player_attr("time") },
+    MembershipLocationPlayerInfo,
   },
 }
 </script>
@@ -41,6 +33,11 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
+  .MembershipLocation
+    display: flex
+    justify-content: center
+    align-items: center
+
   &.is_layer_on
     .MembershipLocation
       border: 1px dashed change_color($primary, $alpha: 0.5)
