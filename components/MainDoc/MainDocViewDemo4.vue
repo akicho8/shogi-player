@@ -12,6 +12,7 @@
     :controller_show="true"
     :slider_show="true"
     :sp_pi_variant="'is_pi_variant_b'"
+    :sp_blink="'is_blink_on'"
     )
 </template>
 

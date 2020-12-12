@@ -15,6 +15,7 @@
     :sound_effect="true"
     :volume="0.25"
     :sp_layer="'is_layer_off'"
+    :sp_blink="'is_blink_on'"
     :sp_layout="'is_horizontal'"
     :debug_mode_p="false"
   )

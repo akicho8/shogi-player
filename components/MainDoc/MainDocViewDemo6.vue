@@ -3,7 +3,7 @@
   b-message(type="is-info")
     | 大きくしても滲まない
   ShogiPlayer(
-    :sp_pi_variant="'is_pi_variant_b'"
+    :sp_pi_variant="'is_pi_variant_a'"
     :start_turn="-1"
     :controller_show="true"
     :slider_show="true"
