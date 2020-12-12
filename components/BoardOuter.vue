@@ -45,7 +45,7 @@ export default {
   +defvar(sp_grid_color, rgba(0, 0, 0, 0.5))    // グリッド色
   +defvar(sp_grid_stroke, 1)                    // グリッド太さ
   +defvar(sp_board_padding, 1.5)                // 盤の隅の隙間
-  +defvar(sp_grid_outer_stroke1, 0)             // グリッドの外枠の太さ(紙面風のとき)
+  +defvar(sp_grid_outer_stroke, 0)             // グリッドの外枠の太さ(紙面風のとき)
   +defvar(sp_grid_outer_texture_edge_stroke, 0) // 盤背景の縁取りの太さ(影の影響あり)
   +defvar(sp_grid_star, 6px)                    // 星の大きさ
   +defvar(sp_board_radius, 5px)                 // 盤の隅の丸め度合い
@@ -61,27 +61,27 @@ export default {
     width: 100%
     height: 100%
     padding: calc(var(--sp_board_padding) * 1%)
+
+  .BoardOuter
     +is_overlay_origin
   .BoardOuterTexture
     +is_overlay_block
     z-index: -1
 
-    background-color: var(--sp_board_color)    // 背景色は画像の透明な部分があれば見える
-
-    background-image: var(--sp_board_image)
+    background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
+    +is_background_cover_by_image
+    background-image: var(--sp_board_image)  // none でスルーする
     // background-image: url("../assets/inspect/256x256.png")
 
-    +is_background_cover
-
     border-radius: calc(var(--sp_board_radius) * 1px)
-    border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_color)
+    border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_color) // 画像の輪郭で影の影響あり
 
     +filter_drop_shadow(1, unquote('opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) blur(calc(var(--sp_board_blur) * 1px))'))
 
   .BoardInner
     width: 100%
     height: 100%
-    border: calc(var(--sp_grid_outer_stroke1) * 1px) solid var(--sp_grid_color)
+    border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_color)
 
     // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
     @extend %is_unselectable

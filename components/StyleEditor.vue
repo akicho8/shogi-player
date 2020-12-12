@@ -4,7 +4,7 @@
     .mx-4.my-4
       .is-flex.is-justify-content-start.is-align-items-center
         b-button(@click="sidebar_toggle" icon-left="menu")
-        .mx-3.has-text-weight-bold 将棋盤スタイルエディター
+        .mx-3.has-text-weight-bold スタイルエディタ
 
       .my_controls
         .box
@@ -58,25 +58,29 @@
           b-field(custom-class="is-small" label="角丸め")
             b-slider(v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
 
-          b-field(custom-class="is-small" label="余白")
+          b-field(custom-class="is-small" label="余白" message="紙面風: 0")
             b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
-          b-field(custom-class="is-small" label="グリッド線の太さ")
+          b-field(custom-class="is-small" label="グリッドの太さ")
             b-slider(v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
-          b-field(custom-class="is-small" label="外枠の太さ")
-            b-slider(v-model="sp_grid_outer_stroke1" :min="0" :max="5" :step="0.5")
+          b-field(custom-class="is-small" label="グリッド外枠の太さ")
+            b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="星")
             b-slider(v-model="sp_grid_star" :min="0" :max="100" :step="0.01")
-          b-field(custom-class="is-small" label="アスペクト比")
+          b-field(custom-class="is-small" label="アスペクト比(縦長度合)" message="初期値: 109.7")
             b-slider(v-model="sp_board_aspect_ratio" :min="0" :max="200" :step="0.1")
 
         .box
           .title.is-5 駒
-          b-field(custom-class="is-small" label="プリセット")
+          b-field(custom-class="is-small" label="プリセット" message="画像は拡大で画質がぼやける")
             b-select(size="is-small" v-model="sp_pi_variant")
               template(v-for="e in PiVariantInfo.values")
                 option(:value="e.key") {{e.name}}
-          b-field(custom-class="is-small" label="盤上のセル内の駒の大きさ")
+          b-field(custom-class="is-small" label="盤上のセルに対するテクスチャ領域の割合")
             b-slider(v-model="sp_board_piece_rate" :min="0" :max="100" :step="0.1")
+          b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="↓にすると駒の底ラインが揃う(ただし駒の種類による)")
+            b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
+            b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
+            b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="bottom") ↓
 
         .box
           .title.is-5 駒台
@@ -268,6 +272,7 @@ export default {
 
       sp_board_aspect_ratio: 109.7,
       sp_board_piece_rate: 90,
+      sp_board_piece_position: "center",
       sp_board_radius: 5,
       sp_board_padding: 1.5,
 
@@ -300,7 +305,7 @@ export default {
 
       sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_stroke: 1,
-      sp_grid_outer_stroke1: 0,
+      sp_grid_outer_stroke: 0,
       sp_grid_star: 10,
 
       sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
@@ -399,6 +404,7 @@ export default {
           --sp_board_piece_rate: ${this.sp_board_piece_rate}%;
           --sp_stand_piece_rate: ${this.sp_stand_piece_rate}%;
           --sp_piece_box_margin_top: ${this.sp_piece_box_margin_top}px;
+          --sp_board_piece_position: ${this.sp_board_piece_position};
 
           --sp_piece_box_piece_w: ${this.sp_piece_box_piece_w}px;
           --sp_piece_box_piece_h: ${this.sp_piece_box_piece_h}px;
@@ -409,7 +415,7 @@ export default {
 
           --sp_grid_color:    ${this.sp_grid_color};
           --sp_grid_stroke: ${this.sp_grid_stroke};
-          --sp_grid_outer_stroke1: ${this.sp_grid_outer_stroke1};
+          --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke};
           --sp_grid_star: ${this.sp_grid_star}%;
 
           --sp_shadow_offset: ${this.sp_shadow_offset};
@@ -451,8 +457,13 @@ $sidebar_width_mobile:  50%
     margin-top: 0.4rem
     margin-bottom: 1rem
 
+  .field:not(:last-child)
+    margin-bottom: 1.25rem
+
   .b-slider
-    margin-top: 0.5rem
+    margin: 0 // .help が下すぎるのを防ぐため
+    .help
+      margin-top: 0.5rem
 
 .StyleEditor
   .sidebar_toggle_button
@@ -474,10 +485,10 @@ $sidebar_width_mobile:  50%
   //   .ShogiPlayerWidth
   //     width: 20%
   //   .ShogiPlayerGround
-  //     --sp_grid_outer_stroke1: 10px
+  //     --sp_grid_outer_stroke: 10px
   // .is_size_small2
   //   .ShogiPlayerWidth
   //     width: 20%
   //   .ShogiPlayerGround
-  //     --sp_grid_outer_stroke1: 20px
+  //     --sp_grid_outer_stroke: 20px
 </style>

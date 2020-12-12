@@ -64,7 +64,9 @@ export default {
 
 .ShogiPlayerGround
   +defvar(sp_board_piece_rate, 90%)            // 盤のセル内の駒占有率
+  +defvar(sp_board_piece_position, center)     // 駒を選択できる範囲内の駒の縦位置
 
+  //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_w, 47px)              // 駒台のセル(W)
   +defvar(sp_stand_piece_h, 50px)              // 駒台のセル(H)
   +defvar(sp_stand_piece_rate, 80%)            // 駒台のセル内の駒占有率
@@ -73,6 +75,7 @@ export default {
   +defvar(sp_piece_box_piece_h, 46px)          // 駒箱のセル(H)
   +defvar(sp_piece_box_piece_rate, 90%)        // 駒箱のセル内の駒占有率
 
+  //////////////////////////////////////////////////////////////////////////////// mobile only
   +defvar(sp_stand_piece_w_mobile, 38px)       // 駒台のセル(W) ※モバイル時
   +defvar(sp_stand_piece_h_mobile, 46px)       // 駒台のセル(H) ※モバイル時
   +defvar(sp_stand_piece_rate_mobile, 90%)     // 駒台のセル内の駒占有率 ※モバイル時
@@ -95,15 +98,15 @@ export default {
     .PieceTexture
       border: 1px dashed change_color($danger, $alpha: 0.5)
 
-  // .BoardOuter
   .PieceObject
-
-    // 中央に配置
+    // セル内の PieceTexture の配置
+    // ここで縦位置を調整しようとすると先後別に分けないといけない
+    // 一方、PieceTexture は共通の処理でよい
+    // なので PieceTexture の方で縦位置を(必要であれば)調整する
+    // まぁあまり細かいことにはこだわらず常に中心配置でいいと思う
     display: flex
     justify-content: center
-    // align-items: center      // 下を揃えて配置したいときは flex-end にすること(オプションにする)
-    // align-items: flex-end    // 下を揃えて配置したいときは flex-end にすること(オプションにする)
-     align-items: flex-start  // 下を揃えて配置したいときは flex-end にすること(オプションにする)
+    align-items: center  // 先手の下を揃えて配置したいときは flex-end にする
 
   .PieceObject
     @extend %dom_real_selectable
@@ -126,7 +129,7 @@ export default {
   .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
     +is_overlay_block
 
-    background-position: center
+    background-position: var(--sp_board_piece_position)
     background-repeat: no-repeat
     background-size: contain      // 必ず駒の全体が表示されるようにする
     // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))

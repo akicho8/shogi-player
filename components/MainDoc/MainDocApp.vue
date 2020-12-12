@@ -29,7 +29,7 @@ export default {
       padding: 0
 
   .is_book_like
-    --sp_grid_outer_stroke1: 2
+    --sp_grid_outer_stroke: 2
     --sp_board_padding: 0
     --sp_board_color: transparent
 
