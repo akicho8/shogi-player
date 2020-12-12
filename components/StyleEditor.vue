@@ -335,8 +335,8 @@ export default {
       PiVariantInfo,
 
       player_info: {
-        black: { name: "先手", time: "",        },
-        white: { name: "後手", time: "56:78:90" },
+        black: { name: "先手", time: "12:34:56", },
+        white: { name: "後手", time: "56:78:90", },
       },
 
       // kifu_body: require("./極限早繰り銀.kif"),

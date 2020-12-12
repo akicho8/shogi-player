@@ -1,5 +1,5 @@
 <template lang="pug">
-.MembershipLocationPlayerInfo.has-text-weight-bold.is-size-7(v-if="player_info")
+.MembershipLocationPlayerInfo.has-text-weight-bold.is-size-7(v-if="show_p" :class="component_class" @click="click_handle")
   .PlayerName(v-html="player_name" v-if="player_name")
   .PlayerTime(v-html="player_time" v-if="player_time")
 </template>
@@ -19,8 +19,22 @@ export default {
         return this.player_info[key]
       }
     },
+    click_handle() {
+      if (this.base.player_info_click_handle) {
+        this.base.player_info_click_handle(this.location, this.player_info)
+        // this.$emit("player_info_click", location, this.player_info)
+      }
+    },
   },
   computed: {
+    show_p() {
+      return this.player_info && this.base.sp_layout === "is_vertical"
+    },
+    component_class() {
+      return {
+        "is-clickable": this.base.player_info_click_handle,
+      }
+    },
     player_info() {
       if (this.base.player_info) {
         return this.base.player_info[this.location.key]
@@ -43,10 +57,10 @@ export default {
 
   .is_black
     .MembershipLocationPlayerInfo
-      +filter_drop_shadow(1)
+      // +filter_drop_shadow(1)
 
   .is_white
     .MembershipLocationPlayerInfo
-      +filter_drop_shadow(-1)
+      // +filter_drop_shadow(-1)
       @extend %is_flip
 </style>

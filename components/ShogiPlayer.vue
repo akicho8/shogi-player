@@ -82,7 +82,6 @@ export default {
     start_turn:      { type: Number,  default: -1,                  },
     sfen_show:       { type: Boolean, default: false,               },
     overlay_navi:    { type: Boolean, default: true,                },
-    size:            { type: String,  default: "default",           },
     debug_mode_p:    { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
     final_label:     { type: String,  default: null,                },
     player_info:     { type: Object,  default: null,                },
@@ -91,6 +90,7 @@ export default {
     board_piece_back_user_class:        { type: Function, default: place => { return [] }, },
     board_cell_left_click_user_handle:  { type: Function, default: null, },
     board_cell_pointerdown_user_handle: { type: Function, default: null, },
+    player_info_click_handle:           { type: Function, default: null, },
   },
 
   components: {
@@ -109,8 +109,6 @@ export default {
       // new_sp_pi_variant: this.sp_pi_variant,
       new_debug_mode_p:    this.debug_mode_p,
       new_run_mode:      this.run_mode,
-
-      new_size:          this.size,
 
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
@@ -228,9 +226,6 @@ export default {
 
     debug_mode_p(v)        { this.new_debug_mode_p = v               }, // 外 -> 内
     new_debug_mode_p(v)    { this.$emit("update:debug_mode_p", v)    }, // 内 -> 外
-
-    // size(v)              { this.new_size = v                     }, // 外 -> 中
-    // new_size(v)          { this.$emit("update:size", v)          }, // 中 -> 外
 
     // sp_bg_variant(v)        { this.new_sp_bg_variant = v               }, // 外 -> 中
     // new_sp_bg_variant(v)    { this.$emit("update:sp_bg_variant", v)    }, // 中 -> 外
@@ -380,7 +375,6 @@ export default {
 
     component_class() {
       return [
-        // ["size", this.new_size].join("-"),
         ["run_mode", this.new_run_mode].join("-"),
         { debug_mode_p: this.base.new_debug_mode_p },
       ]
