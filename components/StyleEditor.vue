@@ -167,14 +167,18 @@
 
         .box
           .title.is-5 その他
+          b-field(custom-class="is-small" label="モード")
+            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") 再生
+            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") 操作
+            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="edit_mode") 編集
+
           b-field(custom-class="is-small" label="レイヤー確認")
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
 
-          b-field(custom-class="is-small" label="モード")
-            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") view
-            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") play
-            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="edit_mode") edit
+          b-field(custom-class="is-small" label="移動先セルの明滅" message="たくさん表示させるときはOFFにした方がブラウザに優しい")
+            b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_off") OFF
+            b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_on") ON
 
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_flip" :native-value="false") ☗
@@ -206,6 +210,7 @@
   .EditBlock
     ShogiPlayer(
       :sp_layout="sp_layout"
+      :sp_blink="sp_blink"
       :sp_hpos="sp_hpos"
       :sp_vpos="sp_vpos"
       :sp_fullheight="sp_fullheight"
@@ -318,6 +323,7 @@ export default {
       sp_piece_box_margin_top: 10,
 
       sp_layer: "is_layer_off",
+      sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a",
       sp_bg_variant: "is_bg_variant_none",
       sp_dimension: 9,

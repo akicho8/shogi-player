@@ -37,7 +37,7 @@ export default {
 
 // 自分でもよくわからなくなっている
 // 選択できる駒に指定する
-=dom_real_selectable
+=PieceObjectSelectable
   // 選択が可能
   &.selectable_p
     &:hover
@@ -48,22 +48,22 @@ export default {
       +desktop
         // 選択できる駒だけ反応する
         // background プロパティをつかうと他の設定をリセットしてしまうので注意
-        background-color: $sp_real_selectable_color
+        background-color: $sp_selectable_bg_color
 
   // 持ち上げたとき
   &.holding_p
     +desktop
       opacity: 0.4  // 駒を持ち上げたので元の駒を薄くする
     +touch
-      background-color: $sp_real_holding_color
+      background-color: $sp_holding_bg_color_if_touch
       // さらに駒を持ったときは色を濃くする
       &:hover
-        background-color: $sp_real_holding_color
+        background-color: $sp_holding_bg_color_if_touch
 
   // なんだこれ？？？
   &.hoverable_p
     &:hover
-      background-color: $sp_real_selectable_color
+      background-color: $sp_selectable_bg_color
 
 .ShogiPlayerGround
   +defvar(sp_board_piece_rate, 90%)            // 盤のセル内の駒占有率
@@ -112,17 +112,23 @@ export default {
     align-items: center  // 先手の下を揃えて配置したいときは flex-end にする
 
   .PieceObject
-    +dom_real_selectable
+    +PieceObjectSelectable
     &.origin_place
-      background-color: $sp_real_origin_bg
-    &.current
-      animation: real_blink 0.5s ease-in-out infinite alternate
+      background-color: $sp_move_bg_color
 
-  @keyframes real_blink
-    0%
-      background-color: $sp_real_current_bg1
-    100%
-      background-color: $sp_real_current_bg2
+  &.is_blink_off
+    .PieceObject
+      &.current
+        background-color: $sp_move_bg_color
+  &.is_blink_on
+    .PieceObject
+      &.current
+        animation: blink_keyframes 0.5s ease-in-out infinite alternate
+        @keyframes blink_keyframes
+          0%
+            background-color: $sp_current_bg_blink_color0
+          100%
+            background-color: $sp_current_bg_blink_color1
 
   ////////////////////////////////////////////////////////////////////////////////
   .PieceTexture

@@ -25,6 +25,7 @@ export default {
         this.base.sp_vpos,
         this.base.sp_fullheight,
         this.base.sp_layer,
+        this.base.sp_blink,
         this.base.sp_pi_variant,
         this.base.sp_bg_variant,
         this.base.sp_mobile_style,

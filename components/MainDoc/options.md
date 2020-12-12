@@ -16,6 +16,8 @@
 | `shift_key_mag`               | shiftキー押下時の倍速        | 1 または null 指定で無効にできる                                           | 10          |       |
 | `system_key_mag`              | システムキー押下時の倍速     | 1 または null 指定で無効にできる                                           | 50          |       |
 | `debug_mode_p`                | デバッグモード               | 主に開発用                                                                 | false       | ○    |
+| `sp_layer`                    | レイヤー確認                 | 主に開発用                                                                 | false       | ○    |
+| `sp_blink`                    | 移動後の駒のセルを明滅       |                                                                            | false       | ○    |
 | `flip`                        | 盤面を反転する               | △が下にくる                                                               | false       | ○    |
 | `flip_if_white`               | △から始まる場合のみ反転する | △が下にくる                                                               | false       |       |
 | `final_label`                 | 結果の文字列                 | 空だと「○の勝ち」                                                         | null        |       |
