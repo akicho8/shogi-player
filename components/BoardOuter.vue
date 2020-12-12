@@ -109,7 +109,7 @@ export default {
     background-repeat: no-repeat
     background-size: cover
 
-    border-radius: var(--sp_board_radius)
+    border-radius: calc(var(--sp_board_radius) * 1px)
 
     +filter_drop_shadow(1, unquote('opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) blur(calc(var(--sp_board_blur) * 1px))'))
 </style>

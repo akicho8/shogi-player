@@ -119,7 +119,7 @@ export default {
   .MembershipStandTexture
     // background-color などはここで指定
     +is_overlay_block
-    border-radius: var(--sp_board_radius)
+    border-radius: calc(var(--sp_board_radius) * 1px)
 
   // 駒を持って駒箱の上にいるとき
   .MembershipStand

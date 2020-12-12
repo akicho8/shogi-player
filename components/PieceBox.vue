@@ -84,7 +84,7 @@ export default {
     +is_overlay_block
     +filter_drop_shadow(1)
     background-color: var(--sp_piece_box_color)
-    border-radius: var(--sp_board_radius)
+    border-radius: calc(var(--sp_board_radius) * 1px)
 
   //////////////////////////////////////////////////////////////////////////////// 駒持ってhoverしたとき
   .PieceBox

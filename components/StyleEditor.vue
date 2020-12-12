@@ -393,7 +393,7 @@ export default {
           --sp_piece_count_padding: ${this.sp_piece_count_padding}px;
 
           --sp_board_padding: ${this.sp_board_padding};
-          --sp_board_radius:  ${this.sp_board_radius}px;
+          --sp_board_radius:  ${this.sp_board_radius};
           --sp_board_aspect_ratio: ${this.sp_board_aspect_ratio}%;
           --sp_board_image:  ${this.sp_board_image_url};
           --sp_board_piece_rate: ${this.sp_board_piece_rate}%;
