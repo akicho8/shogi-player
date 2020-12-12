@@ -63,7 +63,7 @@
           b-field(custom-class="is-small" label="グリッド線の太さ")
             b-slider(v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="外枠の太さ")
-            b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="5" :step="0.5")
+            b-slider(v-model="sp_grid_outer_stroke1" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="星")
             b-slider(v-model="sp_grid_star" :min="0" :max="100" :step="0.01")
           b-field(custom-class="is-small" label="アスペクト比")
@@ -300,7 +300,7 @@ export default {
 
       sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_stroke: 1,
-      sp_grid_outer_stroke: 0,
+      sp_grid_outer_stroke1: 0,
       sp_grid_star: 10,
 
       sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
@@ -409,7 +409,7 @@ export default {
 
           --sp_grid_color:    ${this.sp_grid_color};
           --sp_grid_stroke: ${this.sp_grid_stroke};
-          --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke};
+          --sp_grid_outer_stroke1: ${this.sp_grid_outer_stroke1};
           --sp_grid_star: ${this.sp_grid_star}%;
 
           --sp_shadow_offset: ${this.sp_shadow_offset};
@@ -474,10 +474,10 @@ $sidebar_width_mobile:  50%
   //   .ShogiPlayerWidth
   //     width: 20%
   //   .ShogiPlayerGround
-  //     --sp_grid_outer_stroke: 10px
+  //     --sp_grid_outer_stroke1: 10px
   // .is_size_small2
   //   .ShogiPlayerWidth
   //     width: 20%
   //   .ShogiPlayerGround
-  //     --sp_grid_outer_stroke: 20px
+  //     --sp_grid_outer_stroke1: 20px
 </style>

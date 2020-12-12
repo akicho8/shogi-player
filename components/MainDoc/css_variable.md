@@ -15,7 +15,7 @@
 | `--sp_piece_box_piece_rate_mobile` | 90%                       | 駒箱のセル内の駒占有率 ※モバイル時          |
 | `--sp_grid_color`                  | rgba(0, 0, 0, 0.5)        | グリッド色                                   |
 | `--sp_board_padding`               |                       1.5 | 盤の隅の隙間                                 |
-| `--sp_grid_outer_stroke`           |                         0 | 升目外枠の太さ                               |
+| `--sp_grid_outer_stroke1`           |                         0 | 升目外枠の太さ                               |
 | `--sp_grid_star`                   | 6px                       | 星の大きさ                                   |
 | `--sp_board_radius`                | 5px                       | 盤の隅の丸め度合い                           |
 | `--sp_board_color`                 | rgba(0, 0, 0, 0.2)        | 盤の色                                       |

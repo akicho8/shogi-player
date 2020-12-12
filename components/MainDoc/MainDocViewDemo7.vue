@@ -26,9 +26,6 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .MainDocViewDemo7
-  .is_book_like
-    --sp_shadow_offset: 0
-    --sp_shadow_blur: 0
-    --sp_grid_outer_stroke: 1
-    --sp_board_padding: 0
+  --sp_shadow_offset: 0
+  --sp_shadow_blur: 0
 </style>

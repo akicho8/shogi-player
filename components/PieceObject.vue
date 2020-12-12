@@ -63,22 +63,22 @@ export default {
       background-color: $sp_real_selectable_color
 
 .ShogiPlayerGround
-  +defvar(sp_board_piece_rate, 90%) // 盤のセル内の駒占有率
+  +defvar(sp_board_piece_rate, 90%)            // 盤のセル内の駒占有率
 
-  +defvar(sp_stand_piece_w, 47px) // 駒台のセル(W)
-  +defvar(sp_stand_piece_h, 50px) // 駒台のセル(H)
-  +defvar(sp_stand_piece_rate, 80%) // 駒台のセル内の駒占有率
+  +defvar(sp_stand_piece_w, 47px)              // 駒台のセル(W)
+  +defvar(sp_stand_piece_h, 50px)              // 駒台のセル(H)
+  +defvar(sp_stand_piece_rate, 80%)            // 駒台のセル内の駒占有率
 
-  +defvar(sp_piece_box_piece_w, 38px) // 駒箱のセル(W)
-  +defvar(sp_piece_box_piece_h, 46px) // 駒箱のセル(H)
-  +defvar(sp_piece_box_piece_rate, 90%) // 駒箱のセル内の駒占有率
+  +defvar(sp_piece_box_piece_w, 38px)          // 駒箱のセル(W)
+  +defvar(sp_piece_box_piece_h, 46px)          // 駒箱のセル(H)
+  +defvar(sp_piece_box_piece_rate, 90%)        // 駒箱のセル内の駒占有率
 
-  +defvar(sp_stand_piece_w_mobile, 38px) // 駒台のセル(W) ※モバイル時
-  +defvar(sp_stand_piece_h_mobile, 46px) // 駒台のセル(H) ※モバイル時
-  +defvar(sp_stand_piece_rate_mobile, 90%) // 駒台のセル内の駒占有率 ※モバイル時
+  +defvar(sp_stand_piece_w_mobile, 38px)       // 駒台のセル(W) ※モバイル時
+  +defvar(sp_stand_piece_h_mobile, 46px)       // 駒台のセル(H) ※モバイル時
+  +defvar(sp_stand_piece_rate_mobile, 90%)     // 駒台のセル内の駒占有率 ※モバイル時
 
-  +defvar(sp_piece_box_piece_w_mobile, 38px) // 駒箱のセル(W) ※モバイル時
-  +defvar(sp_piece_box_piece_h_mobile, 46px) // 駒箱のセル(H) ※モバイル時
+  +defvar(sp_piece_box_piece_w_mobile, 38px)   // 駒箱のセル(W) ※モバイル時
+  +defvar(sp_piece_box_piece_h_mobile, 46px)   // 駒箱のセル(H) ※モバイル時
   +defvar(sp_piece_box_piece_rate_mobile, 90%) // 駒箱のセル内の駒占有率 ※モバイル時
 
   // 共通
@@ -101,8 +101,9 @@ export default {
     // 中央に配置
     display: flex
     justify-content: center
-    align-items: center    // 下を揃えて配置したいときは flex-end にすること(オプションにする)
-    // align-items: flex-end  // 下を揃えて配置したいときは flex-end にすること(オプションにする)
+    // align-items: center      // 下を揃えて配置したいときは flex-end にすること(オプションにする)
+    // align-items: flex-end    // 下を揃えて配置したいときは flex-end にすること(オプションにする)
+     align-items: flex-start  // 下を揃えて配置したいときは flex-end にすること(オプションにする)
 
   .PieceObject
     @extend %dom_real_selectable
