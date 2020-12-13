@@ -56,10 +56,9 @@ export default {
     word-break: break-all
     font-weight: bold
 
-  &.is_player_info_bg_on
+  &.is_text_visibility_up_on
     .MembershipLocationPlayerInfo
-      background-color: var(--sp_piece_count_bg_color)    // 背景色は駒数スタイルと兼用
-      color:            var(--sp_piece_count_font_color)
+      @extend %is_piece_count_color_set
       padding: 0.5em
       border-radius: 3px
 

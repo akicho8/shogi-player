@@ -28,8 +28,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
   .PieceObjectCount
-    background-color: var(--sp_piece_count_bg_color)
-    color:            var(--sp_piece_count_font_color)
+    @extend %is_piece_count_color_set
     font-size:        var(--sp_piece_count_font_size)
     padding:          var(--sp_piece_count_padding)
 

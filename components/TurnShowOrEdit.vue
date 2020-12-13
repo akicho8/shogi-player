@@ -1,9 +1,9 @@
 <template lang="pug">
 .TurnShowOrEdit.is-unselectable(v-if="base.mediator && base.summary_show && (base.view_p || base.play_p)")
   template(v-if="base.turn_edit_p")
-    input(type="number" v-model.number="base.turn_edit_value" @blur="blur_handle" ref="turn_edit_input")
+    b-input(size="is-small" type="number" v-model.number="base.turn_edit_value" @blur="blur_handle" ref="turn_edit_input")
   template(v-else)
-    .turn_edit_text.is-inline-block(@click.stop.prevent="turn_edit_handle")
+    span.TurnEditText(@click.stop.prevent="turn_edit_handle")
       template(v-if="base.view_p")
         | {{base.mediator.current_turn_label(base.final_label)}}
       template(v-if="base.play_p")
@@ -37,18 +37,24 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
+  .TurnShowOrEdit
+    input
+      max-width: 5em
+
+  .TurnEditText
+    cursor: pointer
+    font-weight: bold
+
+  &.is_text_visibility_up_on
+    .TurnEditText
+      @extend %is_piece_count_color_set
+      padding: 0.5em
+      border-radius: 3px
+
   &.is_vertical
     .TurnShowOrEdit
       margin: 0.2rem 0
   &.is_horizontal
     .TurnShowOrEdit
       margin: 0.25rem 0
-
-  .TurnShowOrEdit
-    // N手目の編集モードのnumberフィールド
-    input
-      width: 3rem
-    // N手目のテキスト表示
-    .turn_edit_text
-      cursor: pointer
 </style>

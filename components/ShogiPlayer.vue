@@ -71,7 +71,7 @@ export default {
     sp_hpos:         { type: String, default: "is_centered",        },
     sp_vpos:         { type: String, default: "is_vcentered",       },
     sp_fullheight:   { type: String, default: "is_fullheight_off",  },
-    sp_player_info:       { type: String, default: "is_player_info_bg_on",       },
+    sp_text_visibility_up:       { type: String, default: "is_text_visibility_up_on",       },
     sp_layer:        { type: String, default: "is_layer_off",       },
     sp_blink:        { type: String, default: "is_blink_off",       },
     sp_pi_variant:   { type: String, default: "is_pi_variant_a",    },

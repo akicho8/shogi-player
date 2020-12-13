@@ -204,12 +204,11 @@
             .column
               b-field(custom-class="is-small" label="時間")
                 b-input(size="is-small" v-model.trim="player_info.white.time" type="text")
-          b-field(custom-class="is-small" label="駒数と同じ単色の背景を置く")
-            b-radio-button(size="is-small" v-model="sp_player_info" native-value="is_player_info_bg_off") OFF
-            b-radio-button(size="is-small" v-model="sp_player_info" native-value="is_player_info_bg_on") ON
-
         .box
           .title.is-5 その他
+          b-field(custom-class="is-small" label="テキストを見やすくする(駒数の色を適用)")
+            b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_off") OFF
+            b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_on") ON
 
           b-field(custom-class="is-small" label="レイヤー確認")
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
@@ -254,7 +253,7 @@
       :sp_hpos="sp_hpos"
       :sp_vpos="sp_vpos"
       :sp_fullheight="sp_fullheight"
-      :sp_player_info="sp_player_info"
+      :sp_text_visibility_up="sp_text_visibility_up"
       :sp_layer="sp_layer"
       :sp_pi_variant="sp_pi_variant"
       :sp_bg_variant="sp_bg_variant"
@@ -343,7 +342,7 @@ export default {
       sp_shadow_color: "rgba(0, 0, 0, 0.4)",
 
       sp_fullheight: "is_fullheight_on",
-      sp_player_info: "is_player_info_bg_on",
+      sp_text_visibility_up: "is_text_visibility_up_on",
 
       sp_stand_piece_w: 47,
       sp_stand_piece_h: 50,
