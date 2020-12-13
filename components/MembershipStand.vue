@@ -141,19 +141,21 @@ export default {
       &:hover
         .MembershipStandTexture
           border: var(--sp_stand_hover_border_stroke) dashed var(--sp_stand_hover_border_color)
-  // 駒がなくても駒が置けるようにする
-  &.is_horizontal
-    .MembershipStand
-      &.hoverable_p
-        min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
-        justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
-        min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
-  &.is_vertical
-    .MembershipStand
-      &.hoverable_p
-        width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
-        justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
-        min-height: var(--sp_stand_piece_h) // 縦を最低限確保
+
+  // 駒がなくても駒が置けるようにする ← hoverable_p になったときだけにすると駒台が拡縮して使いにくい
+  //
+  // &.is_horizontal
+  //   .MembershipStand
+  //     &.hoverable_p
+  //       min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
+  //       justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
+  //       min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
+  // &.is_vertical
+  //   .MembershipStand
+  //     &.hoverable_p
+  //       width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
+  //       justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
+  //       min-height: var(--sp_stand_piece_h) // 縦を最低限確保
 
   ////////////////////////////////////////////////////////////////////////////////
   &.is_layer_on
@@ -185,4 +187,21 @@ export default {
   +mobile
     &.is_mobile_style
       +is_vertical_style
+
+//////////////////////////////////////////////////////////////////////////////// edit_mode なら最初から駒台を確保する
+.ShogiPlayer
+  &.run_mode-edit_mode
+    // 駒がなくても駒が置けるようにする
+    .is_horizontal
+      .MembershipStand
+        // &.hoverable_p
+        min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
+        justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
+        min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
+    .is_vertical
+      .MembershipStand
+        // &.hoverable_p
+        width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
+        justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
+        min-height: var(--sp_stand_piece_h) // 縦を最低限確保
 </style>
