@@ -146,7 +146,7 @@ export default {
 
       this.current_turn_add(v)
 
-      // SpTurnSliderComponent → (next || previous) の順でフォーカスを試みる
+      // TurnSliderBlock → (next || previous) の順でフォーカスを試みる
       if (!this.turn_slider_focus()) {
         // this.toast_ok("focusしてないのでフォーカスする")
         if (v > 0) {
@@ -197,14 +197,9 @@ export default {
     },
 
     turn_slider_focus() {
-      const SpTurnSliderComponent = this.controller_block_element_refs("SpTurnSliderComponent")
-      if (SpTurnSliderComponent) {
-        // フォーカスさせた状態で document.activeElement を見ると何にフォーカスするべきかわかる
-        const el = SpTurnSliderComponent.$el.querySelector(".b-slider-thumb")
-        if (el) {
-          el.focus()
-          return true
-        }
+      const TurnSliderBlock = this.controller_block_element_refs("TurnSliderBlock")
+      if (TurnSliderBlock) {
+        return TurnSliderBlock.focus_to_self()
       }
       return false
     },

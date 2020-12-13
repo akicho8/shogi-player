@@ -9,26 +9,25 @@
       button.button.flip(                    @click.stop.prevent="base.board_flip_run"):            b-icon(icon="swap-vertical" size="is-small")
     template(v-if="base.setting_button_show")
       button.button.setting(                 @click.stop.prevent="base.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
-  .is-flex.is-justify-content-center(v-if="slider_show")
-    //- input.SpTurnSliderComponent(type="range" :value="base.turn_offset" @input="base.current_turn_set($event.target.value)" :min="base.turn_offset_min" :max="base.turn_offset_max" ref="SpTurnSliderComponent")
-    b-slider.SpTurnSliderComponent(:value="base.turn_offset" @input="base.current_turn_set" :min="base.turn_offset_min" :max="base.turn_offset_max" ref="SpTurnSliderComponent")
+  TurnSliderBlock(:base="base" ref="TurnSliderBlock")
 </template>
 
 <script>
 import { support } from "./support.js"
+import TurnSliderBlock from "./TurnSliderBlock.vue"
 
 export default {
   name: "ControllerBlock",
   mixins: [support],
+  components: {
+    TurnSliderBlock,
+  },
   mounted() {
     this.base.$ControllerBlock = this // どこからでも refs するための荒技
   },
   computed: {
     controll_buttons_show_p() {
       return this.base.controller_show && (this.base.view_p || this.base.play_p)
-    },
-    slider_show() {
-      return this.base.slider_show && (this.base.view_p || this.base.play_p)
     },
   },
 }
@@ -54,8 +53,4 @@ export default {
           width: 2.5rem
         &.setting
           width: 2.5rem
-    .SpTurnSliderComponent
-      margin: 0.6rem 0
-      cursor: pointer
-      width: calc(3rem + 6rem + 6rem + 3rem + 2.5rem)
 </style>
