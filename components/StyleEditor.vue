@@ -80,7 +80,7 @@
           b-field(custom-class="is-small" label="グリッドの太さ")
             b-slider(v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="グリッド外枠の太さ")
-            b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="5" :step="0.5")
+            b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
           b-field(custom-class="is-small" label="星")
             b-slider(v-model="sp_grid_star" :min="0" :max="100" :step="0.01")
           b-field(custom-class="is-small" label="アスペクト比(縦長度合)" message="初期値: 109.7")
@@ -94,7 +94,7 @@
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="盤上のセルに対するテクスチャ領域の割合")
             b-slider(v-model="sp_board_piece_rate" :min="0" :max="100" :step="0.1")
-          b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="↓にすると駒の底ラインが揃う(ただし駒の種類による)")
+          b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="↓にすると駒の底辺が揃う(ただし駒の種類による)")
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="bottom") ↓
