@@ -10,6 +10,7 @@ require "pathname"
 class App
   def run
     [
+      [64,  64],
       [256, 256],
       [320, 240],
       [512, 512],

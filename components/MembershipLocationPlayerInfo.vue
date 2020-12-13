@@ -53,6 +53,18 @@ export default {
   .MembershipLocationPlayerInfo
     line-height: 140%
     word-break: break-all
+    color: var(--sp_font_color)
+    color: $black
+    background-color: white
+    padding: 0.5em
+    border-radius: 3px
+
+    font-size: var(--sp_piece_count_font_size)
+    line-height: 100%
+    background-color: var(--sp_piece_count_bg_color)
+    padding: var(--sp_piece_count_padding)
+    color: var(--sp_piece_count_font_color)
+    font-weight: bold
 
   &.is_layer_on
     .MembershipLocationPlayerInfo
@@ -74,5 +86,5 @@ export default {
   // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
   &.is_horizontal
     .MembershipLocationPlayerInfo
-      width: var(--sp_stand_piece_w)
+      max-width: var(--sp_stand_piece_w)
 </style>

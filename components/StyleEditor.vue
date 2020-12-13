@@ -18,11 +18,15 @@
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") 再生
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") 操作
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="edit_mode") 編集
+
         .box
           .title.is-5 背景
 
           b-field(custom-class="is-small" label="")
             ColorPicker(v-model="sp_ground_color" :disableAlpha="false")
+
+          b-field(custom-class="is-small" label="player_info.name.color")
+            ColorPicker(v-model="sp_font_color")
 
           ImageUpload(@input="sp_ground_image_input_handle")
 
@@ -169,6 +173,15 @@
             b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_off") none
 
         .box
+          .title.is-5 棋譜
+          b-field.my-4(custom-class="is-small" label="プリセット")
+            b-select(size="is-small" v-model="kifu_sample_key")
+              template(v-for="e in KifuSampleInfo.values")
+                option(:value="e.key") {{e.name}}
+          b-field(custom-class="is-small" label="棋譜")
+            b-input(size="is-small" v-model="kifu_body" type="textarea")
+
+        .box
           .title.is-5 対局者情報
           .columns
             .column
@@ -238,12 +251,12 @@
       :run_mode="sp_run_mode"
       :flip="sp_flip"
       :debug_mode_p="false"
-      :start_turn="0"
-      :kifu_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b 99krb3g3s3npR3BG18SN 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
+      :start_turn="-1"
+      :kifu_body="kifu_body"
       :sound_effect="true"
       :setting_button_show="false"
-      :summary_show="false"
-      :slider_show="false"
+      :summary_show="true"
+      :slider_show="true"
       :controller_show="false"
       :player_info="player_info"
     )
@@ -262,10 +275,11 @@ import ShogiPlayer from "./ShogiPlayer.vue"
 import ColorPicker from "./ColorPicker.vue"
 import ImageUpload from "./ImageUpload.vue"
 
-import HumanSideInfo from "./models/human_side_info"
-import RunModeInfo from "./models/run_mode_info"
-import BgVariantInfo from "./models/bg_variant_info"
-import PiVariantInfo from "./models/pi_variant_info"
+import HumanSideInfo from "./models/human_side_info.js"
+import RunModeInfo from "./models/run_mode_info.js"
+import BgVariantInfo from "./models/bg_variant_info.js"
+import PiVariantInfo from "./models/pi_variant_info.js"
+import KifuSampleInfo from "./models/kifu_sample_info.js"
 
 import chroma from "chroma-js"
 
@@ -282,6 +296,8 @@ export default {
     return {
       sp_ground_image: null,
       sp_board_image: null,
+
+      sp_font_color: "#ffffff",
 
       sidebar_p: true,
       sp_ground_color: "#C6E1B8",
@@ -344,24 +360,44 @@ export default {
       sp_pi_variant: "is_pi_variant_a",
       sp_bg_variant: "is_bg_variant_none",
       sp_dimension: 9,
+
+      kifu_sample_key: null,
+
       ////////////////////////////////////////////////////////////////////////////////
 
-      HumanSideInfo,
-      RunModeInfo,
-      BgVariantInfo,
-      PiVariantInfo,
-
       player_info: {
-        black: { name: "先手", time: "12:34", },
-        white: { name: "後手", time: "56:78", },
+        black: { name: "先手", time: "", },
+        white: { name: "後手", time: "", },
       },
 
-      // kifu_body: require("./極限早繰り銀.kif"),
+      kifu_body: null,
 
       // kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
       // kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
     }
   },
+
+  created() {
+    this.kifu_sample_key = this.KifuSampleInfo.values[1].key
+
+    // this.player_info = {
+    //   black: { name: "先手", time: "12:34", },
+    //   white: { name: "後手", time: "56:78", },
+    // }
+  },
+
+  watch: {
+    kifu_sample_key(v) {
+      if (this.kifu_sample_info) {
+        this.kifu_body = this.kifu_sample_info.sfen
+        this.player_info.black.name = this.kifu_sample_info.black
+        this.player_info.white.name = this.kifu_sample_info.white
+      } else {
+        this.kifu_body = "position startpos"
+      }
+    },
+  },
+
   methods: {
     player_info_click_handle(location, player_info) {
       this.$buefy.toast.open({message: `${location.name} ${player_info.name}`, queue: false, type: "is-white"})
@@ -378,6 +414,18 @@ export default {
     },
   },
   computed: {
+    HumanSideInfo()  { return HumanSideInfo  },
+    RunModeInfo()    { return RunModeInfo    },
+    BgVariantInfo()  { return BgVariantInfo  },
+    PiVariantInfo()  { return PiVariantInfo  },
+    KifuSampleInfo() { return KifuSampleInfo },
+
+    kifu_sample_info() {
+      if (this.kifu_sample_key) {
+        return KifuSampleInfo.fetch(this.kifu_sample_key)
+      }
+    },
+
     chroma() { return chroma },
 
     component_class() {
@@ -405,6 +453,7 @@ export default {
         .ShogiPlayerGround {
           --sp_body_width: ${this.sp_body_width}vw;
           --sp_dimension: ${this.sp_dimension};
+          --sp_font_color: ${this.sp_font_color};
 
           --sp_ground_color:      ${this.sp_ground_color};
           --sp_ground_image:      ${this.sp_ground_bg_url};
