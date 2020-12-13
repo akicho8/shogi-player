@@ -114,6 +114,12 @@ export default {
     justify-content: center
     align-items: center
 
+    // もし駒台を最初から見せる場合は？
+    //
+    //   width: 100%
+    //   justify-content: flex-start
+    //
+
   .MembershipStand
     +is_overlay_origin
   .MembershipStandTexture
@@ -121,12 +127,22 @@ export default {
     +is_overlay_block
     border-radius: calc(var(--sp_board_radius) * 1px)
 
-  // 駒を持って駒箱の上にいるとき
+  //////////////////////////////////////////////////////////////////////////////// 駒を持って駒箱の上にいるとき
   .MembershipStand
     &.hoverable_p
+      min-width: var(--sp_stand_piece_w)
+      min-height: var(--sp_stand_piece_h)
       &:hover
         .MembershipStandTexture
           border: var(--sp_stand_hover_border_stroke) dashed var(--sp_stand_hover_border_color)
+  // 駒がなくても駒が置けるようにする
+  &.is_vertical
+    .MembershipStand
+      &.hoverable_p
+        width: 100%                     // 駒がなくても駒台に置けるようにするため横幅最大化
+        justify-content: flex-start     // そうすると既存の駒が中央によってしまうので左寄せ
+        min-height: var(--sp_stand_piece_h)
+  ////////////////////////////////////////////////////////////////////////////////
 
   &.is_layer_on
     .MembershipStand

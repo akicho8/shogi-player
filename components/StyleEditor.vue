@@ -391,7 +391,7 @@ export default {
   },
 
   created() {
-    this.kifu_sample_key = this.KifuSampleInfo.values[1].key
+    this.kifu_sample_key = this.KifuSampleInfo.values[0].key
 
     // this.player_info = {
     //   black: { name: "先手", time: "12:34", },

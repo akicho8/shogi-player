@@ -55,6 +55,7 @@ export default {
     line-height: 100%
     word-break: break-all
     font-weight: bold
+    flex-shrink: 0 // 縮小しない(縦置き時に駒台の横幅を100%にするとここが縮小しようとして1文字ずつ折り返しになる、のを防ぐ)
 
   &.is_text_visibility_up_on
     .MembershipLocationPlayerInfo
