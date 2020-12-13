@@ -27,14 +27,18 @@
 
           ImageUpload(@input="sp_ground_image_input_handle")
 
+          b-field(custom-class="is-small" label="色相")
+            b-slider(v-model="sp_ground_hue" :min="-0.5" :max="0.5" :step="0.001")
+          b-field(custom-class="is-small" label="彩度")
+            b-slider(v-model="sp_ground_saturate" :min="0" :max="2.0" :step="0.001")
+          b-field(custom-class="is-small" label="輝度")
+            b-slider(v-model="sp_ground_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
-            b-slider(v-model="sp_ground_blur" :min="0" :max="30" :step="0.01")
+            b-slider(v-model="sp_ground_blur" :min="0" :max="30" :step="0.001")
           b-field(custom-class="is-small" label="グレースケール")
-            b-slider(v-model="sp_ground_grayscale" :min="0" :max="1.0" :step="0.01")
-          b-field(custom-class="is-small" label="明度")
-            b-slider(v-model="sp_ground_brightness" :min="0" :max="5.0" :step="0.01")
-          b-field(custom-class="is-small" label="hue")
-            b-slider(v-model="sp_ground_hue" :min="0" :max="1.0" :step="0.001")
+            b-slider(v-model="sp_ground_grayscale" :min="0" :max="1.0" :step="0.001")
+          //- b-field(custom-class="is-small" label="非透輝度")
+          //-   b-slider(v-model="sp_ground_opacity" :min="0" :max="1.0" :step="0.001")
 
         .box
           .title.is-5 盤
@@ -49,16 +53,18 @@
 
           ImageUpload(@input="sp_board_image_input_handle")
 
+          b-field(custom-class="is-small" label="色相")
+            b-slider(v-model="sp_board_hue" :min="-0.5" :max="0.5" :step="0.001")
+          b-field(custom-class="is-small" label="彩度")
+            b-slider(v-model="sp_board_saturate" :min="0" :max="2.0" :step="0.001")
+          b-field(custom-class="is-small" label="輝度")
+            b-slider(v-model="sp_board_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
-            b-slider(v-model="sp_board_blur" :min="0" :max="30" :step="0.01")
+            b-slider(v-model="sp_board_blur" :min="0" :max="30" :step="0.001")
           b-field(custom-class="is-small" label="グレースケール")
-            b-slider(v-model="sp_board_grayscale" :min="0" :max="1.0" :step="0.01")
-          b-field(custom-class="is-small" label="明度")
-            b-slider(v-model="sp_board_brightness" :min="0" :max="5.0" :step="0.01")
-          b-field(custom-class="is-small" label="hue")
-            b-slider(v-model="sp_board_hue" :min="0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="非透明度")
-            b-slider(v-model="sp_board_opacity" :min="0" :max="1.0" :step="0.01")
+            b-slider(v-model="sp_board_grayscale" :min="0" :max="1.0" :step="0.001")
+          b-field(custom-class="is-small" label="非透輝度")
+            b-slider(v-model="sp_board_opacity" :min="0" :max="1.0" :step="0.001")
 
         .box
           .title.is-5 盤 - 装飾
@@ -306,15 +312,17 @@ export default {
       sp_ground_color: "#C6E1B8",
       sp_ground_blur: 0,
       sp_ground_grayscale: 0,
+      sp_ground_hue:        0,
+      sp_ground_saturate:   1.0,
       sp_ground_brightness: 1.0,
-      sp_ground_hue: 1.0,
 
       sp_board_color: "rgba(0, 0, 0, 0.2)",
       sp_board_blur: 0,
       sp_board_grayscale: 0,
-      sp_board_brightness: 1.0,
       sp_board_opacity: 1.0,
-      sp_board_hue: 1.0,
+      sp_board_hue:        0,
+      sp_board_saturate:   1.0,
+      sp_board_brightness: 1.0,
 
       sp_board_aspect_ratio: 109.7,
       sp_board_piece_rate: 90,
@@ -464,15 +472,17 @@ export default {
           --sp_ground_image:      ${this.sp_ground_bg_url};
           --sp_ground_blur:       ${this.sp_ground_blur};
           --sp_ground_grayscale:  ${this.sp_ground_grayscale};
+          --sp_ground_hue:        ${this.sp_ground_hue};
+          --sp_ground_saturate:   ${this.sp_ground_saturate};
           --sp_ground_brightness: ${this.sp_ground_brightness};
-          --sp_ground_hue:   ${this.sp_ground_hue};
 
-          --sp_board_color:      ${this.sp_board_color};
-          --sp_board_image:      ${this.sp_board_image_url};
-          --sp_board_blur:       ${this.sp_board_blur};
-          --sp_board_grayscale:  ${this.sp_board_grayscale};
-          --sp_board_brightness: ${this.sp_board_brightness};
-          --sp_board_hue:   ${this.sp_board_hue};
+          --sp_board_color:       ${this.sp_board_color};
+          --sp_board_image:       ${this.sp_board_image_url};
+          --sp_board_blur:        ${this.sp_board_blur};
+          --sp_board_grayscale:   ${this.sp_board_grayscale};
+          --sp_board_hue:         ${this.sp_board_hue};
+          --sp_board_saturate:   ${this.sp_board_saturate};
+          --sp_board_brightness:  ${this.sp_board_brightness};
 
           --sp_board_opacity:    ${this.sp_board_opacity};
 

@@ -27,7 +27,7 @@
   //-     b-slider(v-model="new_blur" :min="0" :max="30" :step="0.01")
   //-   b-field(custom-class="is-small" label="グレースケール")
   //-     b-slider(v-model="new_grayscale" :min="0" :max="1.0" :step="0.01")
-  //-   b-field(custom-class="is-small" label="明度")
+  //-   b-field(custom-class="is-small" label="輝度")
   //-     b-slider(v-model="new_brightness" :min="0" :max="2.0" :step="0.01")
 
   b-field(v-if="debug_p")

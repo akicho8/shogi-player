@@ -48,7 +48,7 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_board_color`                    | rgba(0, 0, 0, 0.2)        | 盤の色                                       |
 # >> | `--sp_board_opacity`                  |                       1.0 | 非半透明度                                   |
 # >> | `--sp_board_grayscale`                | 0%                        | グレースケール                               |
-# >> | `--sp_board_brightness`               |                       1.0 | 明度                                         |
+# >> | `--sp_board_brightness`               |                       1.0 | 輝度                                         |
 # >> | `--sp_board_blur`                     |                         0 | ぼかし                                       |
 # >> | `--sp_board_image`                    | none                      | 背景画像                                     |
 # >> | `--sp_body_width`                     | 100%                      | 盤(駒台を含む)の幅                           |

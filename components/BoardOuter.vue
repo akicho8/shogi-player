@@ -57,8 +57,9 @@ export default {
   +defvar(sp_board_image, none)                 // 背景画像
   +defvar(sp_board_blur, 0)                     // ぼかし
   +defvar(sp_board_grayscale, 0%)               // グレースケール
-  +defvar(sp_board_brightness, 1.0)             // 明度
-  +defvar(sp_board_hue, 1.0)                    // hue
+  +defvar(sp_board_hue, 1.0)                    // 色相
+  +defvar(sp_board_saturate, 1.0)               // 彩度
+  +defvar(sp_board_brightness, 1.0)             // 輝度
 
   +defvar(sp_board_opacity, 1.0)                // 非半透明度
   +defvar(sp_board_padding, 1.5)                // 盤の隅の隙間
@@ -89,7 +90,7 @@ export default {
     border-radius: calc(var(--sp_board_radius) * 1px)
     border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_color) // 画像の輪郭で影の影響あり
 
-    +filter_drop_shadow(1, unquote('hue-rotate(calc(var(--sp_board_hue) * 1turn)) opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) blur(calc(var(--sp_board_blur) * 1px))'))
+    +filter_drop_shadow(1, unquote('hue-rotate(calc(var(--sp_board_hue) * 1turn)) saturate(var(--sp_board_saturate)) opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) blur(calc(var(--sp_board_blur) * 1px))'))
 
   .BoardInner
     width: 100%
