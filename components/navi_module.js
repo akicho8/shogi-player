@@ -146,7 +146,9 @@ export default {
 
       this.current_turn_add(v)
 
+      // turn_slider → (next || previous) の順でフォーカスを試みる
       if (!this.focus_to("turn_slider")) {
+        // this.toast_ok("focusしてないのでフォーカスする")
         if (v > 0) {
           this.focus_to("next")
         } else {
@@ -186,12 +188,20 @@ export default {
     },
 
     focus_to(key) {
-      const el = this.$refs[key]
+      const el = this.controller_block_element_refs(key)
       if (el) {
+        // this.toast_ok(`${key} にフォーカスした`)
         el.focus()
         return true
       }
+      // this.toast_ok(`${key} がみつからない`)
       return false
+    },
+
+    controller_block_element_refs(key) {
+      if (this.base.$ControllerBlock) {
+        return this.base.$ControllerBlock.$refs[key]
+      }
     },
 
     board_flip_run() {

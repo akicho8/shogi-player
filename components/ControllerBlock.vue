@@ -19,6 +19,9 @@ import { support } from "./support.js"
 export default {
   name: "ControllerBlock",
   mixins: [support],
+  mounted() {
+    this.base.$ControllerBlock = this // どこからでも refs するための荒技
+  },
   computed: {
     controll_buttons_show_p() {
       return this.base.controller_show && (this.base.view_p || this.base.play_p)
