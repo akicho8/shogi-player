@@ -4,7 +4,7 @@
     b-input(size="is-small" type="number" v-model.number="base.turn_edit_value" @blur="blur_handle" ref="turn_edit_input")
   template(v-else)
     // is-inline-block にすることで縦の margin が効く
-    .TurnEditText.is-inline-block(@click.stop.prevent="turn_edit_handle")
+    .SpTurnText.is-inline-block(@click.stop.prevent="turn_edit_handle")
       template(v-if="base.view_p")
         | {{base.mediator.current_turn_label(base.final_label)}}
       template(v-if="base.play_p")
@@ -42,12 +42,13 @@ export default {
     input
       max-width: 5em
 
-  .TurnEditText
+  .SpTurnText
     cursor: pointer
     font-weight: bold
+    font-size: $size-7
 
   &.is_text_visibility_up_on
-    .TurnEditText
+    .SpTurnText
       @extend %is_piece_count_color_set
       padding: 0.5em
       border-radius: 3px
