@@ -28,13 +28,13 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
   .PieceObjectCount
-    font-size: var(--sp_piece_count_font_size)
-    line-height: 100%
     background-color: var(--sp_piece_count_bg_color)
-    border-radius: 50%
+    color:            var(--sp_piece_count_font_color)
+    font-size:        var(--sp_piece_count_font_size)
+    padding:          var(--sp_piece_count_padding)
 
-    padding: var(--sp_piece_count_padding)
-    color: var(--sp_piece_count_font_color)
+    line-height: 100%
+    border-radius: 50%
     font-weight: bold
 
     z-index: 1         // 駒数が Membership の下に潜るのを防ぐ

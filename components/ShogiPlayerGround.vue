@@ -24,6 +24,7 @@ export default {
         this.base.sp_hpos,
         this.base.sp_vpos,
         this.base.sp_fullheight,
+        this.base.sp_player_info,
         this.base.sp_layer,
         this.base.sp_blink,
         this.base.sp_pi_variant,

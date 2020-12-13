@@ -71,6 +71,7 @@ export default {
     sp_hpos:         { type: String, default: "is_centered",        },
     sp_vpos:         { type: String, default: "is_vcentered",       },
     sp_fullheight:   { type: String, default: "is_fullheight_off",  },
+    sp_player_info:       { type: String, default: "is_player_info_bg_on",       },
     sp_layer:        { type: String, default: "is_layer_off",       },
     sp_blink:        { type: String, default: "is_blink_off",       },
     sp_pi_variant:   { type: String, default: "is_pi_variant_a",    },
@@ -82,7 +83,7 @@ export default {
     start_turn:      { type: Number,  default: -1,                  },
     sfen_show:       { type: Boolean, default: false,               },
     overlay_navi:    { type: Boolean, default: true,                },
-    debug_mode_p:    { type: Boolean, default: false,               }, // process.env.NODE_ENV !== 'production'
+    debug_mode_p:    { type: Boolean, default: false,               },
     final_label:     { type: String,  default: null,                },
     player_info:     { type: Object,  default: null,                },
 

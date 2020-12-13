@@ -25,9 +25,6 @@
           b-field(custom-class="is-small" label="")
             ColorPicker(v-model="sp_ground_color" :disableAlpha="false")
 
-          b-field(custom-class="is-small" label="player_info.name.color")
-            ColorPicker(v-model="sp_font_color")
-
           ImageUpload(@input="sp_ground_image_input_handle")
 
           b-field(custom-class="is-small" label="ぼかし")
@@ -197,6 +194,9 @@
             .column
               b-field(custom-class="is-small" label="時間")
                 b-input(size="is-small" v-model.trim="player_info.white.time" type="text")
+          b-field(custom-class="is-small" label="駒数と同じ単色の背景を置く")
+            b-radio-button(size="is-small" v-model="sp_player_info" native-value="is_player_info_bg_off") OFF
+            b-radio-button(size="is-small" v-model="sp_player_info" native-value="is_player_info_bg_on") ON
 
         .box
           .title.is-5 その他
@@ -244,6 +244,7 @@
       :sp_hpos="sp_hpos"
       :sp_vpos="sp_vpos"
       :sp_fullheight="sp_fullheight"
+      :sp_player_info="sp_player_info"
       :sp_layer="sp_layer"
       :sp_pi_variant="sp_pi_variant"
       :sp_bg_variant="sp_bg_variant"
@@ -297,8 +298,6 @@ export default {
       sp_ground_image: null,
       sp_board_image: null,
 
-      sp_font_color: "#ffffff",
-
       sidebar_p: true,
       sp_ground_color: "#C6E1B8",
       sp_ground_blur: 0,
@@ -330,6 +329,7 @@ export default {
       sp_shadow_color: "rgba(0, 0, 0, 0.4)",
 
       sp_fullheight: "is_fullheight_on",
+      sp_player_info: "is_player_info_bg_on",
 
       sp_stand_piece_w: 47,
       sp_stand_piece_h: 50,
@@ -453,7 +453,6 @@ export default {
         .ShogiPlayerGround {
           --sp_body_width: ${this.sp_body_width}vw;
           --sp_dimension: ${this.sp_dimension};
-          --sp_font_color: ${this.sp_font_color};
 
           --sp_ground_color:      ${this.sp_ground_color};
           --sp_ground_image:      ${this.sp_ground_bg_url};

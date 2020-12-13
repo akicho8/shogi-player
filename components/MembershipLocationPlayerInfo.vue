@@ -1,7 +1,7 @@
 <template lang="pug">
-.MembershipLocationPlayerInfo.has-text-weight-bold.is-size-7(v-if="show_p" :class="component_class" @click="click_handle")
-  .PlayerName(v-html="player_name" v-if="player_name")
-  .PlayerTime(v-html="player_time" v-if="player_time")
+.MembershipLocationPlayerInfo(v-if="show_p" :class="component_class" @click="click_handle")
+  .MembershipLocationPlayerInfoName(v-html="player_name" v-if="player_name")
+  .MembershipLocationPlayerInfoTime(v-html="player_time" v-if="player_time")
 </template>
 
 <script>
@@ -51,20 +51,17 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   .MembershipLocationPlayerInfo
-    line-height: 140%
-    word-break: break-all
-    color: var(--sp_font_color)
-    color: $black
-    background-color: white
-    padding: 0.5em
-    border-radius: 3px
-
-    font-size: var(--sp_piece_count_font_size)
+    font-size: $size-7
     line-height: 100%
-    background-color: var(--sp_piece_count_bg_color)
-    padding: var(--sp_piece_count_padding)
-    color: var(--sp_piece_count_font_color)
+    word-break: break-all
     font-weight: bold
+
+  &.is_player_info_bg_on
+    .MembershipLocationPlayerInfo
+      background-color: var(--sp_piece_count_bg_color)    // 背景色は駒数スタイルと兼用
+      color:            var(--sp_piece_count_font_color)
+      padding: 0.5em
+      border-radius: 3px
 
   &.is_layer_on
     .MembershipLocationPlayerInfo
@@ -87,4 +84,9 @@ export default {
   &.is_horizontal
     .MembershipLocationPlayerInfo
       max-width: var(--sp_stand_piece_w)
+
+  // 縦幅がわりと自由につかえるので隙間をあける
+  &.is_horizontal
+    .MembershipLocationPlayerInfo
+      line-height: 140%
 </style>
