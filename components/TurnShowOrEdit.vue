@@ -3,7 +3,8 @@
   template(v-if="base.turn_edit_p")
     b-input(size="is-small" type="number" v-model.number="base.turn_edit_value" @blur="blur_handle" ref="turn_edit_input")
   template(v-else)
-    span.TurnEditText(@click.stop.prevent="turn_edit_handle")
+    // is-inline-block にすることで縦の margin が効く
+    .TurnEditText.is-inline-block(@click.stop.prevent="turn_edit_handle")
       template(v-if="base.view_p")
         | {{base.mediator.current_turn_label(base.final_label)}}
       template(v-if="base.play_p")
