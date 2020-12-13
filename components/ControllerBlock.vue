@@ -9,8 +9,9 @@
       button.button.flip(                    @click.stop.prevent="base.board_flip_run"):            b-icon(icon="swap-vertical" size="is-small")
     template(v-if="base.setting_button_show")
       button.button.setting(                 @click.stop.prevent="base.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
-  .is-flex.is-justify-content-center(v-if="base.slider_show")
-    input.turn_slider(type="range" :value="base.turn_offset" @input="base.current_turn_set($event.target.value)" :min="base.turn_offset_min" :max="base.turn_offset_max" ref="turn_slider")
+  .is-flex.is-justify-content-center(v-if="slider_show")
+    //- input.SpTurnSliderComponent(type="range" :value="base.turn_offset" @input="base.current_turn_set($event.target.value)" :min="base.turn_offset_min" :max="base.turn_offset_max" ref="SpTurnSliderComponent")
+    b-slider.SpTurnSliderComponent(:value="base.turn_offset" @input="base.current_turn_set" :min="base.turn_offset_min" :max="base.turn_offset_max" ref="SpTurnSliderComponent")
 </template>
 
 <script>
@@ -25,6 +26,9 @@ export default {
   computed: {
     controll_buttons_show_p() {
       return this.base.controller_show && (this.base.view_p || this.base.play_p)
+    },
+    slider_show() {
+      return this.base.slider_show && (this.base.view_p || this.base.play_p)
     },
   },
 }
@@ -50,7 +54,7 @@ export default {
           width: 2.5rem
         &.setting
           width: 2.5rem
-    .turn_slider
+    .SpTurnSliderComponent
       margin: 0.6rem 0
       cursor: pointer
       width: calc(3rem + 6rem + 6rem + 3rem + 2.5rem)

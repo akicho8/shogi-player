@@ -1,3 +1,4 @@
+
 import Soldier from "./models/soldier"
 import Mediator from "./models/mediator"
 
@@ -51,6 +52,11 @@ export default {
       this.mediator.data_source = this.data_source_by(sfen_or_kif)
       this.mediator.current_turn = options.turn || 0
       this.mediator.run()
+    },
+
+    // slider にフォーカスする
+    api_turn_slider_focus() {
+      this.turn_slider_focus()
     },
   },
 }

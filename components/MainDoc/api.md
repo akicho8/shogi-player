@@ -8,3 +8,4 @@
 | `api_flip_set(flag)`                   | 反転状態の設定                                                      |
 | `api_retract_a_move()`                 | 待った(2手戻す)                                                     |
 | `api_sfen_or_kif_set()`                | 棋譜の設定                                                          |
+| `api_turn_slider_focus()`              | 手数のスライダーがあればフォーカスする                                |

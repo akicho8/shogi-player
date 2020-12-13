@@ -146,25 +146,25 @@ export default {
 
       this.current_turn_add(v)
 
-      // turn_slider → (next || previous) の順でフォーカスを試みる
-      if (!this.focus_to("turn_slider")) {
+      // SpTurnSliderComponent → (next || previous) の順でフォーカスを試みる
+      if (!this.turn_slider_focus()) {
         // this.toast_ok("focusしてないのでフォーカスする")
         if (v > 0) {
-          this.focus_to("next")
+          this.nav_focus_to("next")
         } else {
-          this.focus_to("previous")
+          this.nav_focus_to("previous")
         }
       }
     },
 
     move_to_first() {
       this.current_turn_set(this.turn_offset_min)
-      this.focus_to("turn_slider") || this.focus_to("first")
+      this.turn_slider_focus() || this.nav_focus_to("first")
     },
 
     move_to_last() {
       this.current_turn_set(this.turn_offset_max)
-      this.focus_to("turn_slider") || this.focus_to("last")
+      this.turn_slider_focus() || this.nav_focus_to("last")
     },
 
     current_turn_add(v) {
@@ -187,14 +187,25 @@ export default {
       }
     },
 
-    focus_to(key) {
+    nav_focus_to(key) {
       const el = this.controller_block_element_refs(key)
       if (el) {
-        // this.toast_ok(`${key} にフォーカスした`)
         el.focus()
         return true
       }
-      // this.toast_ok(`${key} がみつからない`)
+      return false
+    },
+
+    turn_slider_focus() {
+      const SpTurnSliderComponent = this.controller_block_element_refs("SpTurnSliderComponent")
+      if (SpTurnSliderComponent) {
+        // フォーカスさせた状態で document.activeElement を見ると何にフォーカスするべきかわかる
+        const el = SpTurnSliderComponent.$el.querySelector(".b-slider-thumb")
+        if (el) {
+          el.focus()
+          return true
+        }
+      }
       return false
     },
 
@@ -207,7 +218,7 @@ export default {
     board_flip_run() {
       this.new_flip = !this.new_flip
       this.sound_play("flip_sound")
-      this.focus_to("turn_slider")
+      this.turn_slider_focus()
     },
   },
   computed: {
