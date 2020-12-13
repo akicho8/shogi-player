@@ -180,6 +180,31 @@
             b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_off") none
 
         .box
+          .title.is-5 分別が難しいやつ
+          b-field(custom-class="is-small" label="テキストを見やすくする(駒数の色を適用)")
+            b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_off") OFF
+            b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_on") ON
+
+          b-field(custom-class="is-small" label="レイヤー確認")
+            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
+            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
+
+          b-field(custom-class="is-small" label="移動先セルの明滅" message="たくさん表示させるときはOFFにした方がブラウザに優しい")
+            b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_off") OFF
+            b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_on") ON
+
+          b-field(custom-class="is-small" label="視点")
+            b-radio-button(size="is-small" v-model="sp_flip" :native-value="false") ☗
+            b-radio-button(size="is-small" v-model="sp_flip" :native-value="true") ☖
+
+          b-field(custom-class="is-small" label="モバイル時のプリセットサイズ自動適用")
+            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style") ON
+            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="") OFF
+
+          b-field(custom-class="is-small" label="盤の縦辺のセル数")
+            b-slider(v-model="sp_dimension" :min="1" :max="18" :step="1")
+
+        .box
           .title.is-5 棋譜
           b-field.my-4(custom-class="is-small" label="プリセット")
             b-select(size="is-small" v-model="kifu_sample_key")
@@ -204,30 +229,6 @@
             .column
               b-field(custom-class="is-small" label="時間")
                 b-input(size="is-small" v-model.trim="player_info.white.time" type="text")
-        .box
-          .title.is-5 その他
-          b-field(custom-class="is-small" label="テキストを見やすくする(駒数の色を適用)")
-            b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_off") OFF
-            b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_on") ON
-
-          b-field(custom-class="is-small" label="レイヤー確認")
-            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
-            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
-
-          b-field(custom-class="is-small" label="移動先セルの明滅" message="たくさん表示させるときはOFFにした方がブラウザに優しい")
-            b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_off") OFF
-            b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_on") ON
-
-          b-field(custom-class="is-small" label="視点")
-            b-radio-button(size="is-small" v-model="sp_flip" :native-value="false") ☗
-            b-radio-button(size="is-small" v-model="sp_flip" :native-value="true") ☖
-
-          b-field(custom-class="is-small" label="モバイル時のプリセットサイズ自動適用")
-            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style") ON
-            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="") OFF
-
-          b-field(custom-class="is-small" label="盤の縦辺のセル数")
-            b-slider(v-model="sp_dimension" :min="1" :max="18" :step="1")
 
   b-button.sidebar_toggle_button(@click="sidebar_toggle" icon-left="menu")
 
