@@ -30,7 +30,8 @@ const config = {
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
-  target: 'server',
+  // target: 'server',
+  target: 'static',
 
   router: {
     base: process.env.NODE_ENV === 'production' ? "/shogi-player/" : "/",
