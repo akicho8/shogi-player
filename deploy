@@ -1,7 +1,6 @@
 #!/bin/sh
 
-npm run generate
-
+nuxt generate
 
 # rimraf dist docs
 # node build/build.js

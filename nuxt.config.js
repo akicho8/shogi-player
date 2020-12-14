@@ -2,6 +2,17 @@ import dayjs from "dayjs"
 const BUILD_VERSION = dayjs().format("YYYY-MM-DD HH:mm:ss")
 const SITE_DESC = "将棋に関連するツールを提供するサイトです"
 
+// /* nuxt.config.js */
+// // `DEPLOY_ENV` が `GH_PAGES` の場合のみ `router.base = '/<repository-name>/'` を追加する
+// const routerBase =
+//       process.env.DEPLOY_ENV === 'GH_PAGES'
+//       ? {
+//         router: {
+//           base: '/akicho8/'
+//         }
+//       }
+//       : {}
+
 const config = {
 // export default {
   // debug: true,
@@ -22,8 +33,7 @@ const config = {
   target: 'server',
 
   router: {
-    // base: process.env.NODE_ENV === 'production' ? "/app/" : "/",
-
+    base: process.env.NODE_ENV === 'production' ? "/shogi-player/" : "/",
     // https://ja.nuxtjs.org/api/configuration-router/#trailingslash
     // trailingSlash: false,
   },
