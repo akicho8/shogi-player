@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" style="overflow:visible" viewBox="-150 -150 300 300" height="300px" width="300px">
+  <rect fill-opacity="0" fill="rgb(0,0,0)" height="300" width="300" y="-150" x="-150"/>
+  <svg version="1.1" y="-250" x="-250" viewBox="-250 -250 500 500" height="500px" width="500px" style="overflow:visible">
+    <g transform="rotate(0,0,0)" stroke-linejoin="round" fill="#fff">
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(255,227,156)" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(239,69,74)" d="m45.92-42.663001c-4.66667 3.92-10.08 7.09333-16.9867 11.2c-8.77333 4.85333-24.8267 13.0667-39.9467 21.84c-7.46666-14.1867-16.0533-31.92-23.1467-51.1467l-23.3333 9.52c8.4 19.6 17.36 39.2 25.9467 55.0667c-17.7333 13.0667-30.6133 28.1867-30.6133 48.72c0 31.7333 27.8133 42 64.586698 42c24.08 0 43.68-1.86666 59.36-4.48l0.37333-26.6933c-16.4267 3.73333-41.44 6.72-60.48 6.72c-25.5733 0-38.4533-7.09333-38.4533-20.3467c0-12.88 10.2667-23.52 25.76-33.6c16.8-10.8267 39.9467-21.6533 51.52-27.44c6.72-3.36 12.6933-6.53333 18.2933-9.89333z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke-width="0" stroke-opacity="1" stroke="rgb(68,68,68)" fill="none" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
+    </g>
+  </svg>
+</svg>
