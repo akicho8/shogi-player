@@ -210,7 +210,7 @@ export default {
       }
     },
 
-    board_flip_run() {
+    board_flip_toggle() {
       this.new_flip = !this.new_flip
       this.sound_play("flip_sound")
       this.turn_slider_focus()

@@ -6,7 +6,7 @@
       button.button.previous( ref="previous" @click.stop.prevent="base.relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
       button.button.next(     ref="next"     @click.stop.prevent="base.relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
       button.button.last(     ref="last"     @click.stop.prevent="base.move_to_last"):              b-icon(icon="menu-right")
-      button.button.flip(                    @click.stop.prevent="base.board_flip_run"):            b-icon(icon="swap-vertical" size="is-small")
+      button.button.flip(                    @click.stop.prevent="base.board_flip_toggle"):            b-icon(icon="swap-vertical" size="is-small")
     template(v-if="base.setting_button_show")
       button.button.setting(                 @click.stop.prevent="base.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
   TurnSliderBlock(:base="base" ref="TurnSliderBlock")

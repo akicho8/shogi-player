@@ -77,6 +77,7 @@ export default {
     sp_pi_variant:   { type: String, default: "is_pi_variant_a",    },
     sp_bg_variant:   { type: String, default: "is_bg_variant_none", },
     sp_mobile_style: { type: String, default: "is_mobile_style",    },
+    sp_location_behavior: { type: String, default: "is_location_flip_on",    },
 
     run_mode:        { type: String,  default: "view_mode",         },
     kifu_body:       { type: String,  default: null,                },
@@ -92,6 +93,7 @@ export default {
     board_cell_left_click_user_handle:  { type: Function, default: null, },
     board_cell_pointerdown_user_handle: { type: Function, default: null, },
     player_info_click_handle:           { type: Function, default: null, },
+    location_click_handle:          { type: Function, default: null, },
   },
 
   components: {

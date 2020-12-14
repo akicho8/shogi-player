@@ -28,11 +28,15 @@ export default {
   },
   methods: {
     // フォーカスさせた状態で document.activeElement を見ると何にフォーカスするべきかわかる
+    // v-if="false" のときは querySelector が取れないので注意
     focus_to_self() {
-      const el = this.$el.querySelector(".b-slider-thumb")
-      if (el) {
-        el.focus()
-        return true
+      const querySelector = this.$el.querySelector
+      if (querySelector) {
+        const el = querySelector(".b-slider-thumb")
+        if (el) {
+          el.focus()
+          return true
+        }
       }
       return false
     },

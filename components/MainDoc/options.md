@@ -74,6 +74,7 @@
 | `board_cell_left_click_user_handle`         | セルをクリックしたとき                         | place が来るのでどこをクリックしたかわかる                        |
 | `board_cell_pointerdown_user_handle`        | セルをクリックしたとき(スマホの場合押した瞬間) | place が来るのでどこをクリックしたかわかる                        |
 | `player_info_click_handle`                  | プレイヤー名をクリックしたとき                 | (location, player_info) がくる                                    |
+| `location_click_handle`                 | ☗☖をクリックしたとき                         | (location) がくる                                    |
 | `xxx.native`                                | 任意のイベント (例: `click.native`)            | click の場合はだいたい `operation_disable` と組み合わせる         |
 | `board_piece_back_user_style`               | ?
 | `board_piece_back_user_class`               | ?

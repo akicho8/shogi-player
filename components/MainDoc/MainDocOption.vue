@@ -115,6 +115,7 @@
         .SpWrap
           ShogiPlayer(
             :player_info_click_handle="(location, player_info) => $buefy.toast.open(location.name)"
+            :location_click_handle="(location) => $buefy.toast.open(location.name)"
             :run_mode.sync="run_mode"
             :kifu_body.sync="kifu_body"
             :start_turn.sync="start_turn"

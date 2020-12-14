@@ -1,5 +1,5 @@
 <template lang="pug">
-.MembershipLocationMark
+.MembershipLocationMark(:class="component_class" @click="click_handle")
   .MembershipLocationMarkTexture
 </template>
 
@@ -11,6 +11,26 @@ export default {
   mixins: [support],
   props: {
     location: { required: true },
+  },
+  methods: {
+    click_handle() {
+      if (this.flipable) {
+        this.base.board_flip_toggle()
+      }
+      if (this.base.location_click_handle) {
+        this.base.location_click_handle(this.location)
+      }
+    },
+  },
+  computed: {
+    component_class() {
+      return {
+        "is-clickable": this.base.location_click_handle || this.flipable
+      }
+    },
+    flipable() {
+      return this.base.sp_location_behavior === "is_location_flip_on"
+    },
   },
 }
 </script>

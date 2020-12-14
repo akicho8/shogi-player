@@ -37,6 +37,11 @@ export default {
       this.base.new_flip = flag
     },
 
+    // 反転(音がでる)
+    api_flip_toggle() {
+      this.base.board_flip_toggle()
+    },
+
     // 待った
     api_retract_a_move() {
       let turn = this.turn_offset - 2
