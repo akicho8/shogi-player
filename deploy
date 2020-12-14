@@ -1,3 +1,6 @@
 #!/bin/sh
 nuxt generate --dotenv .env.production
+git add -A
+git commit -m "[chore][deploy] nuxt generate --dotenv .env.production"
 git push
+open https://akicho8.github.io/shogi-player/credit
