@@ -8,7 +8,7 @@
     :max="base.turn_offset_max"
     :tooltip="false"
     :indicator="false"
-    @change="change_handle"
+    @dragstart="focus_handle"
     )
 </template>
 
@@ -22,7 +22,7 @@ export default {
     // スライダーを動かしているのにフォーカスしない
     // buefy の不具合っぽい
     // なので自力でフォーカスしておく
-    change_handle(v) {
+    focus_handle() {
       this.focus_to_self()
     },
 
