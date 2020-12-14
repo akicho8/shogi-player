@@ -1,8 +1,8 @@
 #!/bin/sh
 
-rimraf dist docs
+# rimraf dist docs
 nuxt generate
-rsync -avzu --delete dist/ docs/
+# rsync -avzu --delete dist/ docs/
 
 # node build/build.js
 # rsync -avzu --delete dist/ docs/

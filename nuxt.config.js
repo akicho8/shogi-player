@@ -41,7 +41,7 @@ const config = {
 
   generate: {
     subFolders: false,  // false: xxx.html true: xxx/index.html
-    // dir: '../public', Railsの / を直接置き換える
+    dir: "docs",        // for github pages
   },
 
   /*
