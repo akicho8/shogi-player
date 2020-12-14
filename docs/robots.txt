@@ -1,1 +1,0 @@
-# https://developers.google.com/search/reference/robots_txt?hl=ja
