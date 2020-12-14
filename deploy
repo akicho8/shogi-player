@@ -1,13 +1,3 @@
 #!/bin/sh
-
-# rimraf dist docs
-nuxt generate
-# rsync -avzu --delete dist/ docs/
-
-# node build/build.js
-# rsync -avzu --delete dist/ docs/
-# rsync -avz google1d59e6a7bc79749e.html docs/
-# npm run build
-# git add -A
-# git commit -m '[chore] npm run build for deploy'
-# git push
+nuxt generate --dotenv .env.production
+git push
