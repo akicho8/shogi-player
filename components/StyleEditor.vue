@@ -230,6 +230,11 @@
               b-field(custom-class="is-small" label="時間")
                 b-input(size="is-small" v-model.trim="player_info.white.time" type="text")
 
+        .box
+          .title.is-5 CSS変数確認
+          pre.is-paddingless
+            | {{style_define2}}
+
   b-button.sidebar_toggle_button(@click="sidebar_toggle" icon-left="menu")
 
   //- b-navbar(type="is-primary" :mobile-burger="false" wrapper-class="container" spaced)
@@ -244,7 +249,7 @@
   //-     .buttons
   //-     .columns.is-multiline
 
-  div(is="style" v-text="style_define")
+  div(is="style" v-text="style_define1")
 
   .EditBlock
     ShogiPlayer(
@@ -272,7 +277,7 @@
       :player_info="player_info"
     )
 
-  pre(v-if="false") {{style_define}}
+  //- pre(v-if="true") {{style_define2}}
 </template>
 
 <script>
@@ -305,6 +310,8 @@ export default {
   },
   data() {
     return {
+      isOpen: 0,
+
       sp_ground_image: null,
       sp_board_image: null,
 
@@ -462,12 +469,31 @@ export default {
       return `url(${this.sp_ground_image})`
     },
 
+    style_define2() {
+      let s = this.style_define
+      s = s.replace(/url\(.*\)/g, "url(...)")
+      s = s.replace(/\s*.ShogiPlayerGround.*\n/, "")
+      s = s.replace(/\s}\s*\n/, "")
+      s = s.replace(/;/g, "")
+      s = s.replace(/^\s*/gm, "")
+      s = s.replace(/:\s*/g, ": ")
+      s = s.replace(/^--/gm, "")
+      return s
+    },
+
+    style_define1() {
+      let s = this.style_define
+      s = s.replace(/\s*\/\/.*\n/gm, "")
+      return s
+    },
+
     style_define() {
       return `
         .ShogiPlayerGround {
           --sp_body_width: ${this.sp_body_width}vw;
-          --sp_dimension: ${this.sp_dimension};
+          --sp_dimension:  ${this.sp_dimension};
 
+          // 背景
           --sp_ground_color:      ${this.sp_ground_color};
           --sp_ground_image:      ${this.sp_ground_bg_url};
           --sp_ground_blur:       ${this.sp_ground_blur};
@@ -476,50 +502,54 @@ export default {
           --sp_ground_saturate:   ${this.sp_ground_saturate};
           --sp_ground_brightness: ${this.sp_ground_brightness};
 
+          // 盤
           --sp_board_color:       ${this.sp_board_color};
           --sp_board_image:       ${this.sp_board_image_url};
           --sp_board_blur:        ${this.sp_board_blur};
           --sp_board_grayscale:   ${this.sp_board_grayscale};
           --sp_board_hue:         ${this.sp_board_hue};
-          --sp_board_saturate:   ${this.sp_board_saturate};
+          --sp_board_saturate:    ${this.sp_board_saturate};
           --sp_board_brightness:  ${this.sp_board_brightness};
+          --sp_board_opacity:     ${this.sp_board_opacity};
 
-          --sp_board_opacity:    ${this.sp_board_opacity};
+          // 盤 - 装飾
+          --sp_board_padding:        ${this.sp_board_padding};
+          --sp_board_radius:         ${this.sp_board_radius};
+          --sp_board_aspect_ratio:   ${this.sp_board_aspect_ratio}%;
+          --sp_board_piece_rate:     ${this.sp_board_piece_rate}%;
+          --sp_board_piece_position: ${this.sp_board_piece_position};
 
+          // グリッド
+          --sp_grid_color:        ${this.sp_grid_color};
+          --sp_grid_stroke:       ${this.sp_grid_stroke};
+          --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke};
+          --sp_grid_star:         ${this.sp_grid_star}%;
+
+          // 駒数
           --sp_piece_count_gap_right:  ${this.sp_piece_count_gap_right}%;
           --sp_piece_count_gap_bottom: ${this.sp_piece_count_gap_bottom}%;
           --sp_piece_count_font_size:  ${this.sp_piece_count_font_size}px;
           --sp_piece_count_font_color: ${this.sp_piece_count_font_color};
           --sp_piece_count_bg_color:   ${this.sp_piece_count_bg_color};
-          --sp_piece_count_padding: ${this.sp_piece_count_padding}px;
+          --sp_piece_count_padding:    ${this.sp_piece_count_padding}px;
 
-          --sp_board_padding: ${this.sp_board_padding};
-          --sp_board_radius:  ${this.sp_board_radius};
-          --sp_board_aspect_ratio: ${this.sp_board_aspect_ratio}%;
-          --sp_board_image:  ${this.sp_board_image_url};
-          --sp_board_piece_rate: ${this.sp_board_piece_rate}%;
-          --sp_stand_piece_rate: ${this.sp_stand_piece_rate}%;
-          --sp_piece_box_margin_top: ${this.sp_piece_box_margin_top}px;
-          --sp_board_piece_position: ${this.sp_board_piece_position};
-
-          --sp_piece_box_piece_w: ${this.sp_piece_box_piece_w}px;
-          --sp_piece_box_piece_h: ${this.sp_piece_box_piece_h}px;
-          --sp_piece_box_piece_rate: ${this.sp_piece_box_piece_rate}%;
-
-          --sp_piece_box_color:   ${this.sp_piece_box_color};
+          // 駒台
+          --sp_stand_piece_rate:         ${this.sp_stand_piece_rate}%;
           --sp_stand_hover_border_color: ${this.sp_stand_hover_border_color};
+          --sp_stand_piece_w:            ${this.sp_stand_piece_w}px;
+          --sp_stand_piece_h:            ${this.sp_stand_piece_h}px;
 
-          --sp_grid_color:    ${this.sp_grid_color};
-          --sp_grid_stroke: ${this.sp_grid_stroke};
-          --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke};
-          --sp_grid_star: ${this.sp_grid_star}%;
+          // 駒箱
+          --sp_piece_box_margin_top: ${this.sp_piece_box_margin_top}px;
+          --sp_piece_box_piece_w:    ${this.sp_piece_box_piece_w}px;
+          --sp_piece_box_piece_h:    ${this.sp_piece_box_piece_h}px;
+          --sp_piece_box_piece_rate: ${this.sp_piece_box_piece_rate}%;
+          --sp_piece_box_color:      ${this.sp_piece_box_color};
 
+          // 影
           --sp_shadow_offset: ${this.sp_shadow_offset};
           --sp_shadow_blur:   ${this.sp_shadow_blur};
           --sp_shadow_color:  ${this.sp_shadow_color};
-
-          --sp_stand_piece_w: ${this.sp_stand_piece_w}px;
-          --sp_stand_piece_h: ${this.sp_stand_piece_h}px;
         }
       `
     },
@@ -560,6 +590,9 @@ $sidebar_width_mobile:  50%
     margin: 0 // .help が下すぎるのを防ぐため
     .help
       margin-top: 0.5rem
+
+  pre
+    background-color: transparent
 
 .StyleEditor
   .sidebar_toggle_button
