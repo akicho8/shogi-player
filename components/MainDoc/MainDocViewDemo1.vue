@@ -1,13 +1,13 @@
 <template lang="pug">
 .MainDocViewDemo1.column
   b-message(type="is-info")
-    | コメント付きの KIF 表示。9手目から表示。駒音あり
+    | コメント付きの KIF 表示。駒音あり
   .has-text-centered
-    .title.is-4 藤井聡太四段 vs 佐藤天彦名人
-    .subtitle.is-6 第11回朝日杯将棋オープン戦本戦
+    .title.is-4 六代大橋宗銀 vs 伊藤印達
+    .subtitle.is-6 57番指し第57局 (1711/2/28)
   ShogiPlayer.first_sp(
     :kifu_body="kifu_body"
-    :start_turn="9"
+    :start_turn="-1"
     :slider_show="true"
     :controller_show="true"
     :sp_bg_variant="'is_bg_variant_a'"
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import kifu_body from "./kif/第11回朝日杯将棋オープン戦本戦.kif"
+import kifu_body from "./kif/15733.kif"
 
 export default {
   name: "MainDocViewDemo1",
