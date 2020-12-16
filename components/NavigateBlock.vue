@@ -38,6 +38,7 @@ export default {
 
   .NavigateBlock
     .buttons
+      margin-bottom: 0
       .button
         margin-bottom: 0
         &.first

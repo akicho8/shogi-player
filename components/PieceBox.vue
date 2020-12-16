@@ -46,7 +46,7 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   +defvar(sp_piece_box_color, rgba(0, 0, 0, 0.2)) // 駒箱背景
-  +defvar(sp_common_gap, 12px)          // 横レイアウト時の上マージン
+  +defvar(sp_common_gap, 12px)          // 共通の隙間
 
   .PieceBox
     @extend %is_unselectable

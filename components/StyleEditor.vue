@@ -141,8 +141,6 @@
                 b-slider(v-model="sp_piece_box_piece_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
             b-slider(v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
-          b-field(custom-class="is-small" label="横レイアウト時の上マージン")
-            b-slider(v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
 
         .box
           .title.is-5 影
@@ -181,7 +179,10 @@
 
         .box
           .title.is-5 その他
-          b-field(custom-class="is-small" label="テキストを見やすくする(駒数の色を適用)")
+          b-field(custom-class="is-small" label="共通の隙間")
+            b-slider(v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
+
+          b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
             b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_off") OFF
             b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_on") ON
 
@@ -189,7 +190,7 @@
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
 
-          b-field(custom-class="is-small" label="移動先セルの明滅" message="たくさん表示させるときはOFFにした方がブラウザに優しい")
+          b-field(custom-class="is-small" label="移動先セルの明滅")
             b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_off") OFF
             b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_on") ON
 
@@ -369,8 +370,8 @@ export default {
       sp_piece_box_piece_w: 38,
       sp_piece_box_piece_h: 46,
       sp_piece_box_piece_rate: 90,
-      sp_common_gap: 12,
 
+      sp_common_gap: 12,
       sp_layer: DEVELOPMENT_P ? "is_layer_on" : "is_layer_off",
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a",
@@ -498,7 +499,7 @@ export default {
     human_css() {
       let s = this.raw_css
       s = s.replace(/url\(.*\)/g, "url(...)")
-      s = s.replace(/\s*.ShogiPlayerGround.*\n/, "")
+      s = s.replace(/\s*.StyleEditor.*\n/, "")
       s = s.replace(/\s}\s*\n/, "")
       s = s.replace(/;/g, "")
       s = s.replace(/^\s*/gm, "")
@@ -515,7 +516,7 @@ export default {
 
     raw_css() {
       return `
-        .ShogiPlayerGround {
+        .StyleEditor {
           --sp_body_width: ${this.sp_body_width}vw;
           --sp_dimension:  ${this.sp_dimension};
 

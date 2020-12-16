@@ -56,6 +56,10 @@ export default {
       .ShogiPlayerWidth
         width: 100%
 
+  &.is_layer_on
+    .ShogiPlayerWidth
+      +is_layer_border
+
 .ShogiPlayer
   &.debug_mode_p
     .ShogiPlayerWidth

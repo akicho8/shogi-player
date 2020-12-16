@@ -45,16 +45,24 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
+  +defvar(sp_turn_slider_block_margin_top, 0.75rem) // 手数スライダーの上マージン
+
   .TurnSliderBlock
+    margin-top: var(--sp_turn_slider_block_margin_top)
+
     display: flex
     justify-content: center
     align-items: center
+
     .b-slider
-      margin-top: 0rem
+      margin: 0
       cursor: pointer
       width: calc(3rem + 6rem + 6rem + 3rem)
-      outline: none
     .b-slider-thumb
       &:focus
         outline: none // 青い枠を除去。フォーカスしているかどうかはサイズでわかるので不要
+
+  &.is_layer_on
+    .TurnSliderBlock
+      +is_layer_border
 </style>
