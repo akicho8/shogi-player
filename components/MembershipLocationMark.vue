@@ -52,12 +52,12 @@ export default {
 
   .is_black
     .MembershipLocationMarkTexture
-      background-image: url("../assets/location_black.svg")
+      background-image: url("../assets/location/location_black.svg")
       +filter_drop_shadow(1)
 
   .is_white
     .MembershipLocationMarkTexture
-      background-image: url("../assets/location_white.svg")
+      background-image: url("../assets/location/location_white.svg")
       +filter_drop_shadow(-1)
       @extend %is_flip // 反転しない方がいいかもしれない
 
