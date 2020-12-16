@@ -15,21 +15,24 @@
     "test": "jest"
   },
   "dependencies": {
+    "buefy": "^0.9.4",
+    "bulma": "^0.9.1",
+    "howler": "^2.2.1",
+    "js-memory-record": "^0.0.16",
+    "lodash": "^4.17.20",
+    "xregexp": "^4.3.0"
+  },
+  "devDependencies": {
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/pwa": "^3.2.2",
     "@nuxtjs/sitemap": "^2.4.0",
+    "nuxt-buefy": "^0.4.4",
     "autolinker": "^3.14.1",
-    "buefy": "^0.9.4",
-    "bulma": "^0.9.1",
     "chroma-js": "^2.1.0",
     "dayjs": "^1.9.3",
-    "howler": "^2.2.1",
-    "js-memory-record": "^0.0.16",
-    "lodash": "^4.17.20",
     "marked": "^1.2.5",
     "nuxt": "^2.14.7",
-    "nuxt-buefy": "^0.4.4",
     "pug": "^3.0.0",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
@@ -37,9 +40,6 @@
     "secure-ls": "^1.2.6",
     "striptags": "^3.1.1",
     "vue-color": "^2.7.1",
-    "xregexp": "^4.3.0"
-  },
-  "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",
     "@vue/test-utils": "^1.1.0",
     "babel-core": "^6.26.3",
