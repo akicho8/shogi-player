@@ -172,8 +172,7 @@ export default {
     .is_black
       .MembershipStand
         flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
-
-  =is_vertical_style
+  +is_vertical_and_mobile
     .is_white
       .MembershipStand
         flex-direction: row-reverse    // 「飛歩」→「歩飛」
@@ -182,11 +181,6 @@ export default {
       .MembershipStand
         flex-direction: row            // 「飛歩」→「飛歩」
         margin-right: auto             // 「…………飛歩 先手▲」→「飛歩…………先手▲」
-  &.is_vertical
-    +is_vertical_style
-  +mobile
-    &.is_mobile_style
-      +is_vertical_style
 
 //////////////////////////////////////////////////////////////////////////////// edit_mode なら最初から駒台を確保する
 .ShogiPlayer

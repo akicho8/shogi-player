@@ -66,14 +66,9 @@ export default {
   &.is_horizontal
     .ShogiPlayerBody
       flex-direction: row
-  =is_vertical_style
+  +is_vertical_and_mobile
     .ShogiPlayerBody
       flex-direction: column
-  &.is_vertical
-    +is_vertical_style
-  +mobile
-    &.is_mobile_style
-      +is_vertical_style
 
   .is_flip_on
     .overlay_navi

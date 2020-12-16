@@ -1,3 +1,25 @@
+// +is_vertical_and_mobile
+//   .NavigateBlock
+//     margin: 0
+// &.is_vertical
+//   +is_vertical_style
+// +mobile
+//   &.is_mobile_style
+//     +is_vertical_style
+//
+// ↓置き換え
+//
+// +is_vertical_and_mobile
+//   .NavigateBlock
+//     margin: 0
+=is_vertical_and_mobile
+  &.is_vertical
+    @content
+  +mobile
+    &.is_mobile_style
+      @content
+
+// is_layer_on のとき用
 =is_layer_border($color: $primary)
   border: 2px dashed change_color($color, $alpha: 0.5)
 

@@ -31,6 +31,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+
 .ShogiPlayerGround
   .NavigateBlock
     .buttons
@@ -58,12 +59,7 @@ export default {
   &.is_horizontal
     .NavigateBlock
       margin: var(--sp_common_gap) 0
-  =is_vertical_style
+  +is_vertical_and_mobile
     .NavigateBlock
       margin: 0
-  &.is_vertical
-    +is_vertical_style
-  +mobile
-    &.is_mobile_style
-      +is_vertical_style
 </style>

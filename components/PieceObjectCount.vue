@@ -64,7 +64,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
-  =is_vertical_style
+  +is_vertical_and_mobile
     .Membership
       .PieceTexture
         display: flex
@@ -82,11 +82,6 @@ export default {
       &.is_black
         .PieceObjectCount
           top: var(--sp_piece_count_gap_bottom)
-  &.is_vertical
-    +is_vertical_style
-  +mobile
-    &.is_mobile_style
-      +is_vertical_style
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
   .PieceBox
