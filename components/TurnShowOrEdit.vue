@@ -58,10 +58,6 @@ export default {
       padding: 0.5em
       border-radius: 3px
 
-  &.is_horizontal
-    .TurnShowOrEdit
-      margin: var(--sp_common_gap) 0
-
   &.is_layer_on
     .TurnShowOrEdit
       +is_layer_border
@@ -72,4 +68,17 @@ export default {
   // &.is_horizontal
   //   .TurnShowOrEdit
   //     margin: 0.25rem 0
+
+  ////////////////////////////////////////////////////////////////////////////////
+  &.is_horizontal
+    .TurnShowOrEdit
+      margin: var(--sp_common_gap) 0
+  =is_vertical_style
+    .TurnShowOrEdit
+      margin: 0
+  &.is_vertical
+    +is_vertical_style
+  +mobile
+    &.is_mobile_style
+      +is_vertical_style
 </style>

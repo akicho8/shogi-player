@@ -18,7 +18,9 @@
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") 再生
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") 操作
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="edit_mode") 編集
-
+          b-field(custom-class="is-small" label="レイヤー確認")
+            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
+            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
         .box
           .title.is-5 背景
 
@@ -185,10 +187,6 @@
           b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
             b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_off") OFF
             b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_on") ON
-
-          b-field(custom-class="is-small" label="レイヤー確認")
-            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
-            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
 
           b-field(custom-class="is-small" label="移動先セルの明滅")
             b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_off") OFF

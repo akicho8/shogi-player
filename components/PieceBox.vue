@@ -62,15 +62,13 @@ export default {
       justify-content: center
       align-items: center
 
-  //////////////////////////////////////////////////////////////////////////////// is_horizontal
+  //////////////////////////////////////////////////////////////////////////////// is_horizontal or is_vertical
   &.is_horizontal
     .PieceBox
       margin: var(--sp_common_gap) 0
-
-  //////////////////////////////////////////////////////////////////////////////// is_vertical
   =is_vertical_style
     .PieceBox
-      margin-top: 0
+      margin: 0
   &.is_vertical
     +is_vertical_style
   +mobile

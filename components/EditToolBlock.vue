@@ -37,11 +37,20 @@ export default {
       margin-left: 0px
       margin-right: 0px
 
-  &.is_horizontal
-    .EditToolBlock
-      margin: var(--sp_common_gap) 0
-
   &.is_layer_on
     .EditToolBlock
       +is_layer_border
+
+  ////////////////////////////////////////////////////////////////////////////////
+  &.is_horizontal
+    .EditToolBlock
+      margin: var(--sp_common_gap) 0
+  =is_vertical_style
+    .EditToolBlock
+      margin: 0
+  &.is_vertical
+    +is_vertical_style
+  +mobile
+    &.is_mobile_style
+      +is_vertical_style
 </style>
