@@ -58,8 +58,8 @@ export default {
   ////////////////////////////////////////////////////////////////////////////////
   &.is_horizontal
     .NavigateBlock
-      margin: var(--sp_common_gap) 0
+      margin-top: var(--sp_common_gap)
   +is_vertical_and_mobile
     .NavigateBlock
-      margin: 0
+      margin-top: 0
 </style>

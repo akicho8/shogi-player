@@ -65,10 +65,10 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// is_horizontal or is_vertical
   &.is_horizontal
     .PieceBox
-      margin: var(--sp_common_gap) 0
+      margin-top: var(--sp_common_gap)
   +is_vertical_and_mobile
     .PieceBox
-      margin: 0
+      margin-top: 0
 
   ////////////////////////////////////////////////////////////////////////////////
   .PieceBox
