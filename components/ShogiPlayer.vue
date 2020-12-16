@@ -34,7 +34,7 @@ import SettingModal      from "./SettingModal.vue"
 import ErrorNotify       from "./ErrorNotify.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
 import ShogiPlayerGround from "./ShogiPlayerGround.vue"
-import EditToolBox       from "./EditToolBox.vue"
+import EditToolBlock       from "./EditToolBlock.vue"
 import DebugBlock        from "./DebugBlock.vue"
 
 // mixins modules
@@ -68,7 +68,7 @@ export default {
 
   props: {
     sp_layout:       { type: String, default: "is_vertical",        },
-    sp_hpos:         { type: String, default: "is_centered",        },
+    sp_hpos:         { type: String, default: "is_hcentered",        },
     sp_vpos:         { type: String, default: "is_vcentered",       },
     sp_fullheight:   { type: String, default: "is_fullheight_off",  },
     sp_text_visibility_up:       { type: String, default: "is_text_visibility_up_on",       },
@@ -101,7 +101,7 @@ export default {
     SettingModal,
     ErrorNotify,
     OverlayForDisable,
-    EditToolBox,
+    EditToolBlock,
     DebugBlock,
     ShogiPlayerGround,
   },

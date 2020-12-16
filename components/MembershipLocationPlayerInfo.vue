@@ -65,7 +65,7 @@ export default {
 
   &.is_layer_on
     .MembershipLocationPlayerInfo
-      border: 1px dashed change_color($primary, $alpha: 0.5)
+      +is_layer_border
 
   .MembershipLocationPlayerInfo
     display: flex

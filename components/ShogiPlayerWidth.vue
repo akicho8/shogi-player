@@ -1,21 +1,21 @@
 <template lang="pug">
 .ShogiPlayerWidth
   OverlayForDisable(:base="base")
-  EditToolBox(:base="base")
+  EditToolBlock(:base="base")
   TurnShowOrEdit(:base="base")
   ShogiPlayerBody(:base="base" ref="ShogiPlayerBody")
   PieceBox(:base="base")
-  ControllerBlock(:base="base")
+  NavigateBlock(:base="base")
   SfenShowBlock(:base="base")
   CommentBlock(:base="base")
 </template>
 
 <script>
-import EditToolBox     from "./EditToolBox.vue"
+import EditToolBlock     from "./EditToolBlock.vue"
 import TurnShowOrEdit  from "./TurnShowOrEdit.vue"
 import ShogiPlayerBody from "./ShogiPlayerBody.vue"
 import PieceBox        from "./PieceBox.vue"
-import ControllerBlock from "./ControllerBlock.vue"
+import NavigateBlock from "./NavigateBlock.vue"
 import SfenShowBlock   from "./SfenShowBlock.vue"
 import CommentBlock    from "./CommentBlock.vue"
 import OverlayForDisable from "./OverlayForDisable.vue"
@@ -26,11 +26,11 @@ export default {
   name: "ShogiPlayerWidth",
   mixins: [support],
   components: {
-    EditToolBox,
+    EditToolBlock,
     TurnShowOrEdit,
     ShogiPlayerBody,
     PieceBox,
-    ControllerBlock,
+    NavigateBlock,
     SfenShowBlock,
     CommentBlock,
     OverlayForDisable,
@@ -42,6 +42,11 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   +defvar(sp_body_width, 100%) // 盤(駒台を含む)の幅
+
+  .ShogiPlayerWidth
+    // これがないと OverlayForDisable の 100% は画面幅になってしまう
+    // また NavigateBlock や TurnShowOrEdit の border が画面全体に及んでしまう
+    position: relative
 
   .ShogiPlayerWidth
     width: var(--sp_body_width)

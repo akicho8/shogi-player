@@ -1,12 +1,13 @@
 <template lang="pug">
-.ControllerBlock
-  .buttons.has-addons.is-centered.is-paddingless(v-if="base.setting_button_show || controll_buttons_show_p")
-    template(v-if="controll_buttons_show_p")
+.NavigateBlock(v-if="base.inside_navigate_p")
+  .buttons.has-addons.is-centered.is-paddingless(v-if="base.inside_controller_show_p")
+    template(v-if="base.inside_controller_show_p")
       button.button.first(    ref="first"    @click.stop.prevent="base.move_to_first"):             b-icon(icon="menu-left")
       button.button.previous( ref="previous" @click.stop.prevent="base.relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
       button.button.next(     ref="next"     @click.stop.prevent="base.relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
       button.button.last(     ref="last"     @click.stop.prevent="base.move_to_last"):              b-icon(icon="menu-right")
-      button.button.flip(                    @click.stop.prevent="base.board_flip_toggle"):            b-icon(icon="swap-vertical" size="is-small" v-if="false")
+    template(v-if="false")
+      button.button.flip(                    @click.stop.prevent="base.board_flip_toggle"):            b-icon(icon="swap-vertical" size="is-small")
     template(v-if="base.setting_button_show")
       button.button.setting(                 @click.stop.prevent="base.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
   TurnSliderBlock(:base="base" ref="TurnSliderBlock")
@@ -17,18 +18,13 @@ import { support } from "./support.js"
 import TurnSliderBlock from "./TurnSliderBlock.vue"
 
 export default {
-  name: "ControllerBlock",
+  name: "NavigateBlock",
   mixins: [support],
   components: {
     TurnSliderBlock,
   },
   mounted() {
-    this.base.$ControllerBlock = this // どこからでも refs するための荒技
-  },
-  computed: {
-    controll_buttons_show_p() {
-      return this.base.controller_show && (this.base.view_p || this.base.play_p)
-    },
+    this.base.$NavigateBlock = this // どこからでも refs するための荒技
   },
 }
 </script>
@@ -36,9 +32,12 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  .ControllerBlock
+  &.is_horizontal
+    .NavigateBlock
+      margin: var(--sp_common_gap) 0
+
+  .NavigateBlock
     .buttons
-      margin: 0.8rem 0 0
       .button
         margin-bottom: 0
         &.first
@@ -53,4 +52,8 @@ export default {
           width: 2.5rem
         &.setting
           width: 2.5rem
+
+  &.is_layer_on
+    .NavigateBlock
+      +is_layer_border($danger)
 </style>

@@ -42,7 +42,7 @@
 | `--sp_ground_blur`                    |                         0 | ぼかし                                       |
 | `--sp_location_mark_inactive_rate`    |                       0.5 | 手番ではないときの☗サイズの倍率             |
 | `--sp_piece_box_color`                | rgba(0, 0, 0, 0.2)        | 駒箱背景                                     |
-| `--sp_piece_box_margin_top`           | 10px                      | 横レイアウト時の上マージン                   |
+| `--sp_common_gap`           | 10px                      | 横レイアウト時の上マージン                   |
 | `--sp_stand_hover_border_color`       | rgba(0, 0, 0, 0.2)        | 駒を持って駒箱の上にいるときのボーダー色     |
 | `--sp_stand_hover_border_stroke`      | 2px                       | 駒を持って駒箱の上にいるときのボーダーの太さ |
 | `--sp_board_aspect_ratio`             | 109.7%                    | 盤の横を100としたときの縦の比率              |

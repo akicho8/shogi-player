@@ -1,5 +1,5 @@
 <template lang="pug">
-.TurnSliderBlock(v-if="slider_show")
+.TurnSliderBlock(v-if="base.inside_slider_show_p")
   //- input.TurnSliderBlock(type="range" :value="base.turn_offset" @input="base.current_turn_set($event.target.value)" :min="base.turn_offset_min" :max="base.turn_offset_max" ref="TurnSliderBlock")
   b-slider(
     :value="base.turn_offset"
@@ -39,11 +39,6 @@ export default {
       return false
     },
   },
-  computed: {
-    slider_show() {
-      return this.base.slider_show && (this.base.view_p || this.base.play_p)
-    },
-  },
 }
 </script>
 
@@ -55,9 +50,9 @@ export default {
     justify-content: center
     align-items: center
     .b-slider
-      margin: 1rem auto
+      margin-top: 0rem
       cursor: pointer
-      width: calc(3rem + 6rem + 6rem + 3rem + 2.5rem)
+      width: calc(3rem + 6rem + 6rem + 3rem)
       outline: none
     .b-slider-thumb
       &:focus

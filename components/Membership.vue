@@ -63,7 +63,7 @@ export default {
 
   &.is_layer_on
     .Membership
-      border: 1px dashed change_color($primary, $alpha: 0.5)
+      +is_layer_border
 
   &.is_horizontal
     .Membership

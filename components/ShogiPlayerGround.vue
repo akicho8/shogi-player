@@ -65,7 +65,7 @@ export default {
     filter: unquote('hue-rotate(calc(var(--sp_ground_hue) * 1turn)) saturate(var(--sp_ground_saturate)) grayscale(var(--sp_ground_grayscale)) brightness(var(--sp_ground_brightness)) blur(calc(var(--sp_ground_blur) * 1px))')
 
   &.is_layer_on
-    border: 1px dashed change_color($primary, $alpha: 0.5)
+    +is_layer_border
   &.is_fullheight_on
     min-height: 100vh
 
@@ -78,7 +78,7 @@ export default {
 
   &.is_left
     justify-content: flex-start
-  &.is_centered
+  &.is_hcentered
     justify-content: center
   &.is_right
     justify-content: flex-end

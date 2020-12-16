@@ -41,7 +41,7 @@ export default {
 
   &.is_layer_on
     .PieceObjectCount
-      border: 1px dashed change_color($primary, $alpha: 0.5)
+      +is_layer_border
 
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
   &.is_horizontal

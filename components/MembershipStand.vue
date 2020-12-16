@@ -160,9 +160,9 @@ export default {
   ////////////////////////////////////////////////////////////////////////////////
   &.is_layer_on
     .MembershipStand
-      border: 1px dashed change_color($primary, $alpha: 0.5)
+      +is_layer_border
       .PieceObject
-        border: 1px dashed change_color($primary, $alpha: 0.5)
+        +is_layer_border
 
   ////////////////////////////////////////////////////////////////////////////////
   &.is_horizontal

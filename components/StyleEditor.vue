@@ -142,7 +142,7 @@
           b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
             b-slider(v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
           b-field(custom-class="is-small" label="横レイアウト時の上マージン")
-            b-slider(v-model="sp_piece_box_margin_top" :min="0" :max="100" :step="0.1")
+            b-slider(v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
 
         .box
           .title.is-5 影
@@ -154,7 +154,7 @@
             ColorPicker(v-model="sp_shadow_color")
 
         .box
-          .title.is-5 盤駒配置
+          .title.is-5 画面位置
           .columns
             .column
               b-field(custom-class="is-small" label="垂直位置" expanded)
@@ -164,7 +164,7 @@
             .column
               b-field(custom-class="is-small" label="水平位置" expanded)
                 b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_left") ←
-                b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_centered") ・
+                b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_hcentered") ・
                 b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_right") →
 
           //- .columns.mt-4
@@ -180,7 +180,7 @@
             b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_off") none
 
         .box
-          .title.is-5 分別が難しいやつ
+          .title.is-5 その他
           b-field(custom-class="is-small" label="テキストを見やすくする(駒数の色を適用)")
             b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_off") OFF
             b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_on") ON
@@ -203,6 +203,18 @@
 
           b-field(custom-class="is-small" label="盤の縦辺のセル数")
             b-slider(v-model="sp_dimension" :min="1" :max="18" :step="1")
+
+          b-field(custom-class="is-small" label="controller_show")
+            b-radio-button(size="is-small" v-model="controller_show" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="controller_show" :native-value="true") ON
+
+          b-field(custom-class="is-small" label="slider_show")
+            b-radio-button(size="is-small" v-model="slider_show" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="slider_show" :native-value="true") ON
+
+          b-field(custom-class="is-small" label="summary_show")
+            b-radio-button(size="is-small" v-model="summary_show" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="summary_show" :native-value="true") ON
 
         .box
           .title.is-5 棋譜
@@ -231,9 +243,13 @@
                 b-input(size="is-small" v-model.trim="player_info.white.time" type="text")
 
         .box
+          .title.is-5 コンポーネント引数確認
+          pre.is-paddingless
+            | {{sp_params}}
+        .box
           .title.is-5 CSS変数確認
           pre.is-paddingless
-            | {{style_define2}}
+            | {{human_css}}
 
   b-button.sidebar_toggle_button(@click="sidebar_toggle" icon-left="menu")
 
@@ -249,38 +265,17 @@
   //-     .buttons
   //-     .columns.is-multiline
 
-  div(is="style" v-text="style_define1")
+  div(is="style" v-text="comment_removed_css")
 
   .EditBlock
-    ShogiPlayer(
-      :player_info_click_handle="player_info_click_handle"
-      :sp_layout="sp_layout"
-      :sp_blink="sp_blink"
-      :sp_hpos="sp_hpos"
-      :sp_vpos="sp_vpos"
-      :sp_fullheight="sp_fullheight"
-      :sp_text_visibility_up="sp_text_visibility_up"
-      :sp_layer="sp_layer"
-      :sp_pi_variant="sp_pi_variant"
-      :sp_bg_variant="sp_bg_variant"
-      :sp_mobile_style="sp_mobile_style"
-      :run_mode="sp_run_mode"
-      :flip="sp_flip"
-      :debug_mode_p="false"
-      :start_turn="-1"
-      :kifu_body="kifu_body"
-      :sound_effect="true"
-      :setting_button_show="false"
-      :summary_show="true"
-      :slider_show="true"
-      :controller_show="false"
-      :player_info="player_info"
-    )
+    ShogiPlayer(v-bind="sp_params")
 
-  //- pre(v-if="true") {{style_define2}}
+  //- pre(v-if="true") {{human_css}}
 </template>
 
 <script>
+const DEVELOPMENT_P = process.env.NODE_ENV === "development"
+
 // import Vue from 'vue'
 // import Buefy from 'buefy'
 // import 'buefy/dist/buefy.css'
@@ -337,7 +332,7 @@ export default {
       sp_board_radius: 5,
       sp_board_padding: 1.5,
 
-      sp_hpos: "is_centered",
+      sp_hpos: "is_hcentered",
       sp_vpos: "is_vcentered",
       sp_layout: "is_vertical",
       sp_run_mode: "edit_mode",
@@ -374,9 +369,9 @@ export default {
       sp_piece_box_piece_w: 38,
       sp_piece_box_piece_h: 46,
       sp_piece_box_piece_rate: 90,
-      sp_piece_box_margin_top: 10,
+      sp_common_gap: 12,
 
-      sp_layer: "is_layer_off",
+      sp_layer: DEVELOPMENT_P ? "is_layer_on" : "is_layer_off",
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a",
       sp_bg_variant: "is_bg_variant_none",
@@ -392,6 +387,10 @@ export default {
       },
 
       kifu_body: null,
+
+      summary_show: true,
+      slider_show: true,
+      controller_show: true,
 
       // kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
       // kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
@@ -469,8 +468,35 @@ export default {
       return `url(${this.sp_ground_image})`
     },
 
-    style_define2() {
-      let s = this.style_define
+    sp_params() {
+      let params = {}
+      params.player_info_click_handle = this.player_info_click_handle
+      params.sp_layout                = this.sp_layout
+      params.sp_blink                 = this.sp_blink
+      params.sp_hpos                  = this.sp_hpos
+      params.sp_vpos                  = this.sp_vpos
+      params.sp_fullheight            = this.sp_fullheight
+      params.sp_text_visibility_up    = this.sp_text_visibility_up
+      params.sp_layer                 = this.sp_layer
+      params.sp_pi_variant            = this.sp_pi_variant
+      params.sp_bg_variant            = this.sp_bg_variant
+      params.sp_mobile_style          = this.sp_mobile_style
+      params.run_mode                 = this.sp_run_mode
+      params.flip                     = this.sp_flip
+      params.debug_mode_p             = this.false
+      params.start_turn               = -1
+      params.kifu_body                = this.kifu_body
+      params.sound_effect             = true
+      params.setting_button_show      = false
+      params.summary_show             = this.summary_show
+      params.slider_show              = this.slider_show
+      params.controller_show          = this.controller_show
+      params.player_info              = this.player_info
+      return params
+    },
+
+    human_css() {
+      let s = this.raw_css
       s = s.replace(/url\(.*\)/g, "url(...)")
       s = s.replace(/\s*.ShogiPlayerGround.*\n/, "")
       s = s.replace(/\s}\s*\n/, "")
@@ -481,13 +507,13 @@ export default {
       return s
     },
 
-    style_define1() {
-      let s = this.style_define
+    comment_removed_css() {
+      let s = this.raw_css
       s = s.replace(/\s*\/\/.*\n/gm, "")
       return s
     },
 
-    style_define() {
+    raw_css() {
       return `
         .ShogiPlayerGround {
           --sp_body_width: ${this.sp_body_width}vw;
@@ -540,7 +566,7 @@ export default {
           --sp_stand_piece_h:            ${this.sp_stand_piece_h}px;
 
           // 駒箱
-          --sp_piece_box_margin_top: ${this.sp_piece_box_margin_top}px;
+          --sp_common_gap: ${this.sp_common_gap}px;
           --sp_piece_box_piece_w:    ${this.sp_piece_box_piece_w}px;
           --sp_piece_box_piece_h:    ${this.sp_piece_box_piece_h}px;
           --sp_piece_box_piece_rate: ${this.sp_piece_box_piece_rate}%;

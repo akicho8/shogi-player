@@ -16,7 +16,6 @@ export default {
 .ShogiPlayer
   &.run_mode-view_mode
     .ShogiPlayerWidth
-      position: relative // これがないと OverlayForDisable の 100% は画面幅になってしまう
       .OverlayForDisable
         position: absolute
         z-index: 2

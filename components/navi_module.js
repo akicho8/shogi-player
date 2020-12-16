@@ -188,7 +188,7 @@ export default {
     },
 
     nav_focus_to(key) {
-      const el = this.controller_block_element_refs(key)
+      const el = this.navigate_block_element_refs(key)
       if (el) {
         el.focus()
         return true
@@ -197,16 +197,16 @@ export default {
     },
 
     turn_slider_focus() {
-      const TurnSliderBlock = this.controller_block_element_refs("TurnSliderBlock")
+      const TurnSliderBlock = this.navigate_block_element_refs("TurnSliderBlock")
       if (TurnSliderBlock) {
         return TurnSliderBlock.focus_to_self()
       }
       return false
     },
 
-    controller_block_element_refs(key) {
-      if (this.base.$ControllerBlock) {
-        return this.base.$ControllerBlock.$refs[key]
+    navigate_block_element_refs(key) {
+      if (this.base.$NavigateBlock) {
+        return this.base.$NavigateBlock.$refs[key]
       }
     },
 
@@ -219,6 +219,23 @@ export default {
   computed: {
     flip_sign() {
       return this.new_flip ? -1 : 1
+    },
+
+    //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, TurnSliderBlock.vue
+
+    inside_controller_show_p() {
+      if (this.setting_button_show) {
+        return true
+      }
+      return this.controller_show && (this.view_p || this.play_p)
+    },
+
+    inside_slider_show_p() {
+      return this.slider_show && (this.view_p || this.play_p)
+    },
+
+    inside_navigate_p() {
+      return this.inside_controller_show_p || this.inside_slider_show_p
     },
   },
 }

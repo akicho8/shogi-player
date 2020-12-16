@@ -1,5 +1,5 @@
 <template lang="pug">
-.TurnShowOrEdit.is-unselectable(v-if="base.mediator && base.summary_show && (base.view_p || base.play_p)")
+.TurnShowOrEdit.is-unselectable(v-if="component_alive_p")
   template(v-if="base.turn_edit_p")
     b-input(size="is-small" type="number" v-model.number="base.turn_edit_value" @blur="blur_handle" ref="turn_edit_input")
   template(v-else)
@@ -32,6 +32,11 @@ export default {
       this.$nextTick(() => this.$refs.turn_edit_input.focus())
     },
   },
+  computed: {
+    component_alive_p() {
+      return this.base.mediator && this.base.summary_show && (this.base.view_p || this.base.play_p)
+    },
+  },
 }
 </script>
 
@@ -53,10 +58,18 @@ export default {
       padding: 0.5em
       border-radius: 3px
 
-  &.is_vertical
-    .TurnShowOrEdit
-      margin: 0.2rem 0
   &.is_horizontal
     .TurnShowOrEdit
-      margin: 0.25rem 0
+      margin: var(--sp_common_gap) 0
+
+  &.is_layer_on
+    .TurnShowOrEdit
+      +is_layer_border
+
+  // &.is_vertical
+  //   .TurnShowOrEdit
+  //     margin: 0.2rem 0
+  // &.is_horizontal
+  //   .TurnShowOrEdit
+  //     margin: 0.25rem 0
 </style>

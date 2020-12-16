@@ -1,5 +1,5 @@
 <template lang="pug">
-.EditToolBox(v-if="base.edit_p")
+.EditToolBlock(v-if="base.edit_p")
   b-dropdown(v-model="base.current_preset_key")
     //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
     .button.is-small(slot="trigger")
@@ -22,7 +22,7 @@
 import { support } from "./support.js"
 
 export default {
-  name: "EditToolBox",
+  name: "EditToolBlock",
   mixins: [support],
 }
 </script>
@@ -30,14 +30,18 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  +defvar(sp_edit_tool_box_margin_bottom, 0.5rem) // edit_mode時の上のボタンの下のマージン
-
-  .EditToolBox
-    margin-bottom: var(--sp_edit_tool_box_margin_bottom)
-
+  .EditToolBlock
     .dropdown
       text-align: left
     .button
       margin-left: 0px
       margin-right: 0px
+
+  &.is_horizontal
+    .EditToolBlock
+      margin: var(--sp_common_gap) 0
+
+  &.is_layer_on
+    .EditToolBlock
+      +is_layer_border
 </style>

@@ -97,9 +97,9 @@ export default {
   // 確認用
   &.is_layer_on
     .PieceObject
-      border: 1px dashed change_color($primary, $alpha: 0.5)
+      +is_layer_border
     .PieceTexture
-      border: 1px dashed change_color($danger, $alpha: 0.5)
+      +is_layer_border($danger)
 
   .PieceObject
     // セル内の PieceTexture の配置

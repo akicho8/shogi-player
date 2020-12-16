@@ -46,7 +46,7 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   +defvar(sp_piece_box_color, rgba(0, 0, 0, 0.2)) // 駒箱背景
-  +defvar(sp_piece_box_margin_top, 10px)          // 横レイアウト時の上マージン
+  +defvar(sp_common_gap, 12px)          // 横レイアウト時の上マージン
 
   .PieceBox
     @extend %is_unselectable
@@ -65,7 +65,7 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// is_horizontal
   &.is_horizontal
     .PieceBox
-      margin-top: var(--sp_piece_box_margin_top)
+      margin: var(--sp_common_gap) 0
 
   //////////////////////////////////////////////////////////////////////////////// is_vertical
   =is_vertical_style
