@@ -50,9 +50,6 @@ http://mucho.girly.jp/bona/
 フリー画像素材 - BEIZ Graphics(ベイツ・グラフィックス)
 https://www.beiz.jp/
 
-しんえれ外部駒
-http://shineleckoma.web.fc2.com/
-
 Paper-co | 紙のテクスチャー素材を無料でダウンロードできるサイト
 http://free-paper-texture.com/
 
