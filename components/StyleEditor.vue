@@ -273,11 +273,11 @@
 
         .box
           .title.is-5 コンポーネント引数確認
-          pre.is-paddingless
+          pre
             | {{sp_params}}
         .box
           .title.is-5 CSS変数確認
-          pre.is-paddingless
+          pre
             | {{human_css}}
 
   b-button.sidebar_toggle_button(@click="sidebar_toggle_handle" icon-left="menu" size="is-medium" type="is-text")
