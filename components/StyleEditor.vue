@@ -3,7 +3,7 @@
   b-sidebar.StyleEditor-Sidebar(fullheight right v-model="sidebar_p" position="fixed")
     .mx-4.my-4
       .is-flex.is-justify-content-start.is-align-items-center
-        b-button(@click="sidebar_toggle" icon-left="menu")
+        b-button(@click="sidebar_toggle_handle" icon-left="menu")
         .mx-3.has-text-weight-bold スタイルエディタ
 
       .my_controls
@@ -184,6 +184,11 @@
           b-field(custom-class="is-small" label="共通の隙間")
             b-slider(v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
 
+          b-field(custom-class="is-small" label="プリセット")
+            .control
+              .buttons
+                b-button(@click="force_paper_style" size="is-small") 紙面風
+
           b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
             b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_off") OFF
             b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_on") ON
@@ -250,13 +255,13 @@
           pre.is-paddingless
             | {{human_css}}
 
-  b-button.sidebar_toggle_button(@click="sidebar_toggle" icon-left="menu")
+  b-button.sidebar_toggle_button(@click="sidebar_toggle_handle" icon-left="menu" size="is-medium" type="is-text")
 
   //- b-navbar(type="is-primary" :mobile-burger="false" wrapper-class="container" spaced)
   //-   template(slot="brand")
   //-     b-navbar-item.has-text-weight-bold 将棋盤エディター
   //-   template(slot="end")
-  //-     b-navbar-item(@click="sidebar_toggle")
+  //-     b-navbar-item(@click="sidebar_toggle_handle")
   //-       b-icon(icon="menu")
 
   //- .section
@@ -265,38 +270,27 @@
   //-     .columns.is-multiline
 
   div(is="style" v-text="comment_removed_css")
-
-  .EditBlock
-    ShogiPlayer(v-bind="sp_params")
-
-  //- pre(v-if="true") {{human_css}}
+  ShogiPlayer(v-bind="sp_params")
 </template>
 
 <script>
 const DEVELOPMENT_P = process.env.NODE_ENV === "development"
 
-// import Vue from 'vue'
-// import Buefy from 'buefy'
-// import 'buefy/dist/buefy.css'
-//
-// Vue.use(Buefy)
+import chroma from "chroma-js"
+import { Slider, Chrome } from "vue-color"
+
+import HumanSideInfo  from "./models/human_side_info.js"
+import RunModeInfo    from "./models/run_mode_info.js"
+import BgVariantInfo  from "./models/bg_variant_info.js"
+import PiVariantInfo  from "./models/pi_variant_info.js"
+import KifuSampleInfo from "./models/kifu_sample_info.js"
 
 import ShogiPlayer from "./ShogiPlayer.vue"
 import ColorPicker from "./ColorPicker.vue"
 import ImageUpload from "./ImageUpload.vue"
 
-import HumanSideInfo from "./models/human_side_info.js"
-import RunModeInfo from "./models/run_mode_info.js"
-import BgVariantInfo from "./models/bg_variant_info.js"
-import PiVariantInfo from "./models/pi_variant_info.js"
-import KifuSampleInfo from "./models/kifu_sample_info.js"
-
-import chroma from "chroma-js"
-
-import { Slider, Chrome } from 'vue-color'
-
 export default {
-  name: 'StyleEditor',
+  name: "StyleEditor",
   components: {
     ShogiPlayer,
     ColorPicker,
@@ -304,12 +298,12 @@ export default {
   },
   data() {
     return {
-      isOpen: 0,
+      sidebar_p: true,
 
+      ////////////////////////////////////////////////////////////////////////////////
       sp_ground_image: null,
       sp_board_image: null,
 
-      sidebar_p: true,
       sp_ground_color: "#C6E1B8",
       sp_ground_blur: 0,
       sp_ground_grayscale: 0,
@@ -370,11 +364,12 @@ export default {
       sp_piece_box_piece_rate: 90,
 
       sp_common_gap: 12,
-      sp_layer: DEVELOPMENT_P ? "is_layer_on" : "is_layer_off",
+      sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a",
       sp_bg_variant: "is_bg_variant_none",
       sp_dimension: 9,
+      ////////////////////////////////////////////////////////////////////////////////
 
       kifu_sample_key: null,
 
@@ -390,19 +385,18 @@ export default {
       summary_show: true,
       slider_show: true,
       controller_show: true,
-
-      // kif_sample1: require("./第11回朝日杯将棋オープン戦本戦.kif"),
-      // kif_sample2: require("./藤井聡太四段_vs_澤田真吾六段.kif"),
     }
   },
 
   created() {
     this.kifu_sample_key = this.KifuSampleInfo.values[0].key
 
-    // this.player_info = {
-    //   black: { name: "先手", time: "12:34", },
-    //   white: { name: "後手", time: "56:78", },
-    // }
+    if (false) {
+      this.player_info = {
+        black: { name: "先手", time: "12:34", },
+        white: { name: "後手", time: "56:78", },
+      }
+    }
   },
 
   watch: {
@@ -421,7 +415,7 @@ export default {
     player_info_click_handle(location, player_info) {
       this.$buefy.toast.open({message: `${location.name} ${player_info.name}`, queue: false, type: "is-white"})
     },
-    sidebar_toggle() {
+    sidebar_toggle_handle() {
       this.sidebar_p = !this.sidebar_p
     },
     sp_ground_image_input_handle(v) {
@@ -429,7 +423,18 @@ export default {
     },
     sp_board_image_input_handle(v) {
       this.sp_board_image = v
-      this.sp_bg_variant = "is_bg_variant_none"
+      this.sp_bg_variant = "is_bg_variant_none" // 背景画像プリセットを選択してない状態に戻しておく
+    },
+    force_paper_style() {
+      this.sp_pi_variant        = "is_pi_variant_b" // 紙面風駒
+      this.sp_board_padding     = 0                 // 隙間なし
+      this.sp_ground_color      = "transparent"     // 背景透過
+      this.sp_board_color       = "transparent"     // 盤透過
+      this.sp_grid_stroke       = 1                 // グリッド線(細)
+      this.sp_grid_outer_stroke = 2                 // グリッド枠(細)
+    },
+    hsla_format(v) {
+      return chroma(v).css("hsla")
     },
   },
   computed: {
@@ -515,66 +520,66 @@ export default {
     raw_css() {
       return `
         .StyleEditor {
-          --sp_body_width: ${this.sp_body_width}vw;
-          --sp_dimension:  ${this.sp_dimension};
+          --sp_body_width:               ${this.sp_body_width}vw;
+          --sp_common_gap:               ${this.sp_common_gap}px;
+          --sp_dimension:                ${this.sp_dimension};
 
           // 背景
-          --sp_ground_color:      ${this.sp_ground_color};
-          --sp_ground_image:      ${this.sp_ground_bg_url};
-          --sp_ground_blur:       ${this.sp_ground_blur};
-          --sp_ground_grayscale:  ${this.sp_ground_grayscale};
-          --sp_ground_hue:        ${this.sp_ground_hue};
-          --sp_ground_saturate:   ${this.sp_ground_saturate};
-          --sp_ground_brightness: ${this.sp_ground_brightness};
+          --sp_ground_color:             ${this.hsla_format(this.sp_ground_color)};
+          --sp_ground_image:             ${this.sp_ground_bg_url};
+          --sp_ground_blur:              ${this.sp_ground_blur};
+          --sp_ground_grayscale:         ${this.sp_ground_grayscale};
+          --sp_ground_hue:               ${this.sp_ground_hue};
+          --sp_ground_saturate:          ${this.sp_ground_saturate};
+          --sp_ground_brightness:        ${this.sp_ground_brightness};
 
           // 盤
-          --sp_board_color:       ${this.sp_board_color};
-          --sp_board_image:       ${this.sp_board_image_url};
-          --sp_board_blur:        ${this.sp_board_blur};
-          --sp_board_grayscale:   ${this.sp_board_grayscale};
-          --sp_board_hue:         ${this.sp_board_hue};
-          --sp_board_saturate:    ${this.sp_board_saturate};
-          --sp_board_brightness:  ${this.sp_board_brightness};
-          --sp_board_opacity:     ${this.sp_board_opacity};
+          --sp_board_color:              ${this.hsla_format(this.sp_board_color)};
+          --sp_board_image:              ${this.sp_board_image_url};
+          --sp_board_blur:               ${this.sp_board_blur};
+          --sp_board_grayscale:          ${this.sp_board_grayscale};
+          --sp_board_hue:                ${this.sp_board_hue};
+          --sp_board_saturate:           ${this.sp_board_saturate};
+          --sp_board_brightness:         ${this.sp_board_brightness};
+          --sp_board_opacity:            ${this.sp_board_opacity};
 
           // 盤 - 装飾
-          --sp_board_padding:        ${this.sp_board_padding};
-          --sp_board_radius:         ${this.sp_board_radius};
-          --sp_board_aspect_ratio:   ${this.sp_board_aspect_ratio}%;
-          --sp_board_piece_rate:     ${this.sp_board_piece_rate}%;
-          --sp_board_piece_position: ${this.sp_board_piece_position};
+          --sp_board_padding:            ${this.sp_board_padding};
+          --sp_board_radius:             ${this.sp_board_radius};
+          --sp_board_aspect_ratio:       ${this.sp_board_aspect_ratio}%;
+          --sp_board_piece_rate:         ${this.sp_board_piece_rate}%;
+          --sp_board_piece_position:     ${this.sp_board_piece_position};
 
           // グリッド
-          --sp_grid_color:        ${this.sp_grid_color};
-          --sp_grid_stroke:       ${this.sp_grid_stroke};
-          --sp_grid_outer_stroke: ${this.sp_grid_outer_stroke};
-          --sp_grid_star:         ${this.sp_grid_star}%;
+          --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
+          --sp_grid_stroke:              ${this.sp_grid_stroke};
+          --sp_grid_outer_stroke:        ${this.sp_grid_outer_stroke};
+          --sp_grid_star:                ${this.sp_grid_star}%;
 
           // 駒数
-          --sp_piece_count_gap_right:  ${this.sp_piece_count_gap_right}%;
-          --sp_piece_count_gap_bottom: ${this.sp_piece_count_gap_bottom}%;
-          --sp_piece_count_font_size:  ${this.sp_piece_count_font_size}px;
-          --sp_piece_count_font_color: ${this.sp_piece_count_font_color};
-          --sp_piece_count_bg_color:   ${this.sp_piece_count_bg_color};
-          --sp_piece_count_padding:    ${this.sp_piece_count_padding}px;
+          --sp_piece_count_gap_right:    ${this.sp_piece_count_gap_right}%;
+          --sp_piece_count_gap_bottom:   ${this.sp_piece_count_gap_bottom}%;
+          --sp_piece_count_font_size:    ${this.sp_piece_count_font_size}px;
+          --sp_piece_count_font_color:   ${this.hsla_format(this.sp_piece_count_font_color)};
+          --sp_piece_count_bg_color:     ${this.hsla_format(this.sp_piece_count_bg_color)};
+          --sp_piece_count_padding:      ${this.sp_piece_count_padding}px;
 
           // 駒台
           --sp_stand_piece_rate:         ${this.sp_stand_piece_rate}%;
-          --sp_stand_hover_border_color: ${this.sp_stand_hover_border_color};
+          --sp_stand_hover_border_color: ${this.hsla_format(this.sp_stand_hover_border_color)};
           --sp_stand_piece_w:            ${this.sp_stand_piece_w}px;
           --sp_stand_piece_h:            ${this.sp_stand_piece_h}px;
 
           // 駒箱
-          --sp_common_gap: ${this.sp_common_gap}px;
-          --sp_piece_box_piece_w:    ${this.sp_piece_box_piece_w}px;
-          --sp_piece_box_piece_h:    ${this.sp_piece_box_piece_h}px;
-          --sp_piece_box_piece_rate: ${this.sp_piece_box_piece_rate}%;
-          --sp_piece_box_color:      ${this.sp_piece_box_color};
+          --sp_piece_box_piece_w:        ${this.sp_piece_box_piece_w}px;
+          --sp_piece_box_piece_h:        ${this.sp_piece_box_piece_h}px;
+          --sp_piece_box_piece_rate:     ${this.sp_piece_box_piece_rate}%;
+          --sp_piece_box_color:          ${this.hsla_format(this.sp_piece_box_color)};
 
           // 影
-          --sp_shadow_offset: ${this.sp_shadow_offset};
-          --sp_shadow_blur:   ${this.sp_shadow_blur};
-          --sp_shadow_color:  ${this.sp_shadow_color};
+          --sp_shadow_offset:            ${this.sp_shadow_offset};
+          --sp_shadow_blur:              ${this.sp_shadow_blur};
+          --sp_shadow_color:             ${this.hsla_format(this.sp_shadow_color)};
         }
       `
     },
@@ -583,9 +588,6 @@ export default {
 </script>
 
 <style lang="sass">
-// @import "~bulma/sass/utilities/_all"
-// @import "./ShogiPlayer.sass" // Rails 側では sp_assets_dir を変更してから読み込む
-
 $sidebar_width_desktop: 30%
 $sidebar_width_tablet:  40%
 $sidebar_width_mobile:  50%
@@ -598,12 +600,11 @@ $sidebar_width_mobile:  50%
       width: $sidebar_width_tablet
     +desktop
       width: $sidebar_width_desktop
-    // width: unset
-    // a
-    //   white-space: nowrap
+
   .box
     margin-top: 1rem
     margin-bottom: 0
+
   .title
     margin-top: 0.4rem
     margin-bottom: 1rem
@@ -622,27 +623,16 @@ $sidebar_width_mobile:  50%
 .StyleEditor
   .sidebar_toggle_button
     position: fixed
-    top: 0.5rem
-    right: 0.5rem
+    top: 0
+    right: 0
     z-index: 1
 
   &.sidebar_p
-    .EditBlock
+    .ShogiPlayer
       +mobile
         width: 100%
       +tablet
         width: unquote("calc(100% - #{$sidebar_width_tablet})")
       +desktop
         width: unquote("calc(100% - #{$sidebar_width_desktop})")
-
-  // .is_size_small
-  //   .ShogiPlayerWidth
-  //     width: 20%
-  //   .ShogiPlayerGround
-  //     --sp_grid_outer_stroke: 10px
-  // .is_size_small2
-  //   .ShogiPlayerWidth
-  //     width: 20%
-  //   .ShogiPlayerGround
-  //     --sp_grid_outer_stroke: 20px
 </style>
