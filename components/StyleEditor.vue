@@ -32,7 +32,7 @@
           b-field(custom-class="is-small" label="色相")
             b-slider(v-model="sp_ground_hue" :min="-0.5" :max="0.5" :step="0.001")
           b-field(custom-class="is-small" label="彩度")
-            b-slider(v-model="sp_ground_saturate" :min="0" :max="2.0" :step="0.001")
+            b-slider(v-model="sp_ground_saturate" :min="0" :max="4.0" :step="0.001")
           b-field(custom-class="is-small" label="輝度")
             b-slider(v-model="sp_ground_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
@@ -58,7 +58,7 @@
           b-field(custom-class="is-small" label="色相")
             b-slider(v-model="sp_board_hue" :min="-0.5" :max="0.5" :step="0.001")
           b-field(custom-class="is-small" label="彩度")
-            b-slider(v-model="sp_board_saturate" :min="0" :max="2.0" :step="0.001")
+            b-slider(v-model="sp_board_saturate" :min="0" :max="4.0" :step="0.001")
           b-field(custom-class="is-small" label="輝度")
             b-slider(v-model="sp_board_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
@@ -100,6 +100,19 @@
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="bottom") ↓
+
+          b-field(custom-class="is-small" label="色相")
+            b-slider(v-model="sp_piece_hue" :min="-0.5" :max="0.5" :step="0.001")
+          b-field(custom-class="is-small" label="彩度")
+            b-slider(v-model="sp_piece_saturate" :min="0" :max="4.0" :step="0.001")
+          b-field(custom-class="is-small" label="輝度")
+            b-slider(v-model="sp_piece_brightness" :min="0" :max="2.0" :step="0.001")
+          b-field(custom-class="is-small" label="ぼかし")
+            b-slider(v-model="sp_piece_blur" :min="0" :max="30" :step="0.001")
+          b-field(custom-class="is-small" label="グレースケール")
+            b-slider(v-model="sp_piece_grayscale" :min="0" :max="1.0" :step="0.001")
+          b-field(custom-class="is-small" label="非透輝度")
+            b-slider(v-model="sp_piece_opacity" :min="0" :max="1.0" :step="0.001")
 
         .box
           .title.is-5 駒台
@@ -275,6 +288,7 @@
 
 <script>
 const DEVELOPMENT_P = process.env.NODE_ENV === "development"
+const IS_TRANSPARENT = "rgba(0,0,0,0)" // chroma は "transparent" をパースできないため
 
 import chroma from "chroma-js"
 import { Slider, Chrome } from "vue-color"
@@ -310,6 +324,13 @@ export default {
       sp_ground_hue:        0,
       sp_ground_saturate:   1.0,
       sp_ground_brightness: 1.0,
+
+      sp_piece_blur: 0,
+      sp_piece_grayscale: 0,
+      sp_piece_opacity: 1.0,
+      sp_piece_hue:        0,
+      sp_piece_saturate:   1.0,
+      sp_piece_brightness: 1.0,
 
       sp_board_color: "rgba(0, 0, 0, 0.2)",
       sp_board_blur: 0,
@@ -429,8 +450,8 @@ export default {
     force_paper_style() {
       this.sp_pi_variant        = "is_pi_variant_b" // 紙面風駒
       this.sp_board_padding     = 0                 // 隙間なし
-      this.sp_ground_color      = "transparent"     // 背景透過
-      this.sp_board_color       = "transparent"     // 盤透過
+      this.sp_ground_color      = IS_TRANSPARENT    // 背景透過
+      this.sp_board_color       = IS_TRANSPARENT    // 盤透過
       this.sp_grid_stroke       = 1                 // グリッド線(細)
       this.sp_grid_outer_stroke = 2                 // グリッド枠(細)
     },
@@ -539,10 +560,10 @@ export default {
           --sp_board_image:              ${this.sp_board_image_url};
           --sp_board_blur:               ${this.sp_board_blur};
           --sp_board_grayscale:          ${this.sp_board_grayscale};
+          --sp_board_opacity:            ${this.sp_board_opacity};
           --sp_board_hue:                ${this.sp_board_hue};
           --sp_board_saturate:           ${this.sp_board_saturate};
           --sp_board_brightness:         ${this.sp_board_brightness};
-          --sp_board_opacity:            ${this.sp_board_opacity};
 
           // 盤 - 装飾
           --sp_board_padding:            ${this.sp_board_padding};
@@ -556,6 +577,14 @@ export default {
           --sp_grid_stroke:              ${this.sp_grid_stroke};
           --sp_grid_outer_stroke:        ${this.sp_grid_outer_stroke};
           --sp_grid_star:                ${this.sp_grid_star}%;
+
+          // 盤
+          --sp_piece_blur:               ${this.sp_piece_blur};
+          --sp_piece_grayscale:          ${this.sp_piece_grayscale};
+          --sp_piece_opacity:            ${this.sp_piece_opacity};
+          --sp_piece_hue:                ${this.sp_piece_hue};
+          --sp_piece_saturate:           ${this.sp_piece_saturate};
+          --sp_piece_brightness:         ${this.sp_piece_brightness};
 
           // 駒数
           --sp_piece_count_gap_right:    ${this.sp_piece_count_gap_right}%;
@@ -619,7 +648,7 @@ $sidebar_width_mobile:  50%
       margin-top: 0.5rem
 
   pre
-    background-color: transparent
+    background-color: IS_TRANSPARENT
 
 .StyleEditor
   .sidebar_toggle_button

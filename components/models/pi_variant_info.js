@@ -1,4 +1,3 @@
-
 import MemoryRecord from "js-memory-record"
 
 export default class PiVariantInfo extends MemoryRecord {
@@ -6,6 +5,7 @@ export default class PiVariantInfo extends MemoryRecord {
     return [
       { key: "is_pi_variant_none", name: "none",                        },
       { key: "is_pi_variant_a1by", name: "☗ゴシック(1文字・黄)",       },
+      // { key: "is_pi_variant_a1bw", name: "☗ゴシック(1文字・白)",       },
       { key: "is_pi_variant_a2by", name: "☗ゴシック(2文字・黄)",       },
       { key: "is_pi_variant_b",    name: "紙面風",                      },
       { key: "is_pi_variant_c",    name: "☗図案駒(画像)",              },

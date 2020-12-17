@@ -1,4 +1,5 @@
 @import "is_pi_variant/a1by.sass"
+@import "is_pi_variant/a1bw.sass"
 @import "is_pi_variant/a2by.sass"
 @import "is_pi_variant/b.sass"
 @import "is_pi_variant/c.sass"
@@ -7,20 +8,28 @@
 @import "is_pi_variant/f.sass"
 @import "is_pi_variant/g.sass"
 
+=filter_drop_shadow2($dir)
+  +filter_drop_shadow($dir, unquote('hue-rotate(calc(var(--sp_piece_hue) * 1turn)) saturate(var(--sp_piece_saturate)) opacity(var(--sp_piece_opacity)) grayscale(var(--sp_piece_grayscale)) brightness(var(--sp_piece_brightness)) blur(calc(var(--sp_piece_blur) * 1px))'))
+
 %is_pi_black_only
   &.location_white
     @extend %is_flip
-    +filter_drop_shadow(-1)
+    +filter_drop_shadow2(-1)
   &.location_black
-    +filter_drop_shadow(1)
+    +filter_drop_shadow2(1)
 
 %is_pi_black_and_white
-  +filter_drop_shadow(1)
+  +filter_drop_shadow2(1)
 
 .ShogiPlayerGround
   &.is_pi_variant_a1by
     .PieceTextureSelf
       +is_pi_variant_a1by_pack
+      @extend %is_pi_black_only
+
+  &.is_pi_variant_a1bw
+    .PieceTextureSelf
+      +is_pi_variant_a1bw_pack
       @extend %is_pi_black_only
 
   &.is_pi_variant_a2by

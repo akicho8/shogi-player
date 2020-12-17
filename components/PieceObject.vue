@@ -66,6 +66,18 @@ export default {
       background-color: $sp_selectable_bg_color
 
 .ShogiPlayerGround
+  // 盤背景と同じ構成
+  // +defvar(sp_piece_color, transparent)      // 駒色
+  // +defvar(sp_piece_image, none)             // グラウンド背景画像
+  +defvar(sp_piece_blur, 0)                 // 駒ぼかし
+  +defvar(sp_piece_grayscale, 0)            // 駒グレースケール
+  +defvar(sp_piece_opacity, 1.0)            // 駒不透明度
+  +defvar(sp_piece_hue, 1.0)                // 駒色相
+  +defvar(sp_piece_saturate, 1.0)           // 駒彩度
+  +defvar(sp_piece_brightness, 1.0)         // 駒輝度
+
+  //////////////////////////////////////////////////////////////////////////////// >= tablet
+
   +defvar(sp_board_piece_rate, 90%)            // 盤のセル内の駒占有率
   +defvar(sp_board_piece_position, center)     // 駒を選択できる範囲内の駒の縦位置
 
