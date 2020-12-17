@@ -211,7 +211,7 @@ export default {
       PiVariantInfo,
 
       sidebar_p: true,
-      sp_body_width: 0,
+      sp_body_max_width: 0,
 
       // カスタマイズ用
       run_mode: "view_mode",   // play_mode

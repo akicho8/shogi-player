@@ -53,7 +53,7 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_grid_outer_stroke`                     |                         0 | グリッドの外枠の太さ(紙面風のとき)                                    |
 # >> | `--sp_grid_outer_texture_edge_stroke`        |                         0 | 盤背景の縁取りの太さ(影の影響あり)                                    |
 # >> | `--sp_grid_star`                             | 6px                       | 星の大きさ                                                            |
-# >> | `--sp_body_width`                            | 100%                      | 盤(駒台を含む)の幅                                                    |
+# >> | `--sp_body_max_width`                            | 100%                      | 盤(駒台を含む)の幅                                                    |
 # >> | `--sp_piece_count_gap_right`                 | 86%                       | 駒数の駒右端からのオフセット(横配置時)                                |
 # >> | `--sp_piece_count_gap_bottom`                | 47%                       | 駒数の駒底辺からのオフセット(縦配置時)                                |
 # >> | `--sp_piece_count_font_size`                 | 0.75rem                   | 駒数の文字サイズ                                                      |

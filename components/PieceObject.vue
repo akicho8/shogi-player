@@ -80,7 +80,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// mobile only
   +defvar(sp_stand_piece_w_mobile, 38px)       // 駒台のセル(W) ※モバイル時
-  +defvar(sp_stand_piece_h_mobile, 46px)       // 駒台のセル(H) ※モバイル時
+  +defvar(sp_stand_piece_h_mobile, 56px)       // 駒台のセル(H) ※モバイル時
   +defvar(sp_stand_piece_rate_mobile, 90%)     // 駒台のセル内の駒占有率 ※モバイル時
 
   +defvar(sp_piece_box_piece_w_mobile, 38px)   // 駒箱のセル(W) ※モバイル時

@@ -10,7 +10,7 @@
         .box
           .title.is-5 基本
           b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_width" :min="1" :max="100")
+            b-slider(v-model="sp_body_max_width" :min="1" :max="100")
           b-field(custom-class="is-small" label="レイアウト")
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
@@ -329,7 +329,8 @@ export default {
       sp_vpos: "is_vcentered",
       sp_layout: "is_vertical",
       sp_run_mode: "edit_mode",
-      sp_body_width: 35,
+      sp_body_max_width: 35,
+      sp_body_max_width: 35,
       sp_mobile_style: "is_mobile_style",
 
       // 影
@@ -520,7 +521,7 @@ export default {
     raw_css() {
       return `
         .StyleEditor {
-          --sp_body_width:               ${this.sp_body_width}vw;
+          --sp_body_max_width:               ${this.sp_body_max_width}vw;
           --sp_common_gap:               ${this.sp_common_gap}px;
           --sp_dimension:                ${this.sp_dimension};
 
