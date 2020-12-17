@@ -1,4 +1,5 @@
-@import "is_pi_variant/a.sass"
+@import "is_pi_variant/a1by.sass"
+@import "is_pi_variant/a2by.sass"
 @import "is_pi_variant/b.sass"
 @import "is_pi_variant/c.sass"
 @import "is_pi_variant/d.sass"
@@ -17,9 +18,14 @@
   +filter_drop_shadow(1)
 
 .ShogiPlayerGround
-  &.is_pi_variant_a
+  &.is_pi_variant_a1by
     .PieceTextureSelf
-      +is_pi_variant_a_pack
+      +is_pi_variant_a1by_pack
+      @extend %is_pi_black_only
+
+  &.is_pi_variant_a2by
+    .PieceTextureSelf
+      +is_pi_variant_a2by_pack
       @extend %is_pi_black_only
 
   &.is_pi_variant_b

@@ -367,7 +367,7 @@ export default {
       sp_common_gap: 12,
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_blink: "is_blink_on",
-      sp_pi_variant: "is_pi_variant_a",
+      sp_pi_variant: "is_pi_variant_a1by",
       sp_bg_variant: "is_bg_variant_none",
       sp_dimension: 9,
       ////////////////////////////////////////////////////////////////////////////////

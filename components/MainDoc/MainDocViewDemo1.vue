@@ -11,7 +11,7 @@
     :slider_show="true"
     :controller_show="true"
     :sp_bg_variant="'is_bg_variant_a'"
-    :sp_pi_variant="'is_pi_variant_a'"
+    :sp_pi_variant="'is_pi_variant_a1by'"
     :sound_effect="true"
     :volume="0.25"
     :sp_layer="'is_layer_off'"

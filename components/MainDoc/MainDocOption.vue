@@ -216,7 +216,7 @@ export default {
       // カスタマイズ用
       run_mode: "view_mode",   // play_mode
       sp_bg_variant: "is_bg_variant_a",
-      sp_pi_variant: "is_pi_variant_a",
+      sp_pi_variant: "is_pi_variant_a1by",
       start_turn: -1,
       slider_show: false,
       overlay_navi: true,

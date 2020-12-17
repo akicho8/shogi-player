@@ -74,7 +74,7 @@ export default {
     sp_text_visibility_up:       { type: String, default: "is_text_visibility_up_on",       },
     sp_layer:        { type: String, default: "is_layer_off",       },
     sp_blink:        { type: String, default: "is_blink_off",       },
-    sp_pi_variant:   { type: String, default: "is_pi_variant_a",    },
+    sp_pi_variant:   { type: String, default: "is_pi_variant_a1by",    },
     sp_bg_variant:   { type: String, default: "is_bg_variant_none", },
     sp_mobile_style: { type: String, default: "is_mobile_style",    },
     sp_location_behavior: { type: String, default: "is_location_flip_on",    },
