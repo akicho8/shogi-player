@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" style="overflow:visible" viewBox="-150 -150 300 300" height="300px" width="300px">
+  <rect fill-opacity="0" fill="rgb(0,0,0)" height="300" width="300" y="-150" x="-150"/>
+  <svg version="1.1" y="-250" x="-250" viewBox="-250 -250 500 500" height="500px" width="500px" style="overflow:visible">
+    <g transform="rotate(0,0,0)" stroke-linejoin="round" fill="#fff">
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(255,227,156)" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(68,68,68)" d="m7.379999-4.615001v-32.64h36.84v-13.92h-36.84v-26.4h42.12v-14.04h-97.92v14.04h40.08v26.4h-34.32v13.92h34.32v32.64h-45.36v13.92h108.72v-13.92z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(68,68,68)" d="m14.939999-27.415c6.6 6.72 15.84 16.079999 20.16 21.72l10.8-9.6c-4.68-5.52-14.16-14.28-20.64-20.4z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(68,68,68)" d="m-35.28 47.975c-2.28-6.24-5.52-13.44-8.76-19.32l-11.64 5.04c4.08 8.52 8.4 19.56 9.96 26.76l10.44-5.04v22.92c-8.04 5.04-16.08 9.6-21.36 12.48l6.36 14.88c4.8-3.48 9.96-7.44 15-11.4v31.92h13.92v-111.84h-13.92zm76.44-33.72c-14.52 4.32-38.16 7.8-59.16 9.72c1.32 2.88 3.12 8.039999 3.6 11.28c21.6-1.56 46.8-4.92 65.04-10.08zm-15.84 40.44c-0.6-5.52-3.24-14.28-6.12-20.88l-12.36 3.24c2.76 6.84 5.04 15.6 5.4 21.24zm-20.4 4.2c-1.44-5.88-5.52-14.52-9.48-21.12l-11.28 4.08c3.72 6.96 7.32 16.079999 8.52 21.72zm-15.12 31.92c5.28 6.48 11.52 15.36 13.8 21.12l12.48-6.84c-2.76-5.88-9.24-14.28-14.76-20.28zm66.84-20.04h-15.48v-7.56h-3.48c5.64-6.96 11.88-15.96 17.16-24.6l-13.2-6.12c-4.44 9.36-12.36 21.48-18.6 29.16l3.96 2.04v7.08h-44.64v13.2h44.64v26.52c0 1.56-0.48 1.92-2.52 2.04s-8.76 0.12-15-0.24c1.92 3.96 3.84 9.96 4.44 13.92c9.36 0 16.2-0.12 20.88-2.4c5.04-2.04 6.36-5.88 6.36-13.08v-26.76h15.48z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke-width="0" stroke-opacity="1" stroke="rgb(68,68,68)" fill="none" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
+    </g>
+  </svg>
+</svg>

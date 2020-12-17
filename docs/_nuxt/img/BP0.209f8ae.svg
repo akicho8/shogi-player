@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" style="overflow:visible" viewBox="-150 -150 300 300" height="300px" width="300px">
+  <rect fill-opacity="0" fill="rgb(0,0,0)" height="300" width="300" y="-150" x="-150"/>
+  <svg version="1.1" y="-250" x="-250" viewBox="-250 -250 500 500" height="500px" width="500px" style="overflow:visible">
+    <g transform="rotate(0,0,0)" stroke-linejoin="round" fill="#fff">
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(255,227,156)" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(68,68,68)" d="m-7.14-28.015c0 1.2-0.6 1.56-2.4 1.68c-1.68 0-8.28 0-13.56-0.24c1.8 3.6 3.72 9 4.32 12.84c8.64 0 15 0 19.8-1.92c4.68-1.92 6-5.52 6-12v-22.32h46.44v-13.44h-46.2v-11.16h34.56v-12.72h-34.56v-11.28h-14.52v35.16h-16.2v-27.12h-14.52v27.12h-16.08v13.44h46.92zm-24.96-20.52c-5.04 8.88-13.68 18.12-22.32 23.76c3.48 2.04 9.84 6.48 12.72 9.24c8.52-6.84 18.24-17.76 24.36-28.44zm86.4 24.96c-4.56-7.56-15-18.12-23.64-25.44l-11.64 7.32c4.32 3.84 9 8.64 13.2 13.32l-11.52-3.24c-9.84 22.44-31.32 29.52-65.64 32.04c2.88 3.6 5.64 9.36 6.84 13.92c37.32-4.56 60.72-13.8 72.72-39.84c3 3.6 5.52 7.2 7.08 10.08z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(68,68,68)" d="m-20.64 58.774999h35.88v22.92h-35.88zm75 22.92h-24.6v-22.92h18.72v-13.32h-69.12v-9.84c21.24-1.92 44.64-5.16 62.52-10.08l-12-11.52c-13.2 3.84-34.08 7.32-53.88 9.36l-11.28-2.4v60.72h-18.96v13.44h108.6zm-74.64 13.56c-7.68 6.72-22.32 15.48-34.32 20.16c3.24 3.12 7.8 7.92 10.2 11.16c12.12-5.16 27.12-14.04 37.08-21.84zm27.6 9.84c11.64 6.12 27.84 15.6 35.4 21.48l11.88-11.04c-8.4-5.88-25.08-14.64-36.12-20.04z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke-width="0" stroke-opacity="1" stroke="rgb(68,68,68)" fill="none" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
+    </g>
+  </svg>
+</svg>
