@@ -553,7 +553,7 @@ export default {
 
     comment_removed_css() {
       let s = this.raw_css
-      s = s.replace(/\s*\/\/.*\n/gm, "")
+      s = s.replace(/^\s*\/\/.*\n/gm, "")
       return s
     },
 
