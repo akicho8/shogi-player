@@ -46,6 +46,8 @@ export default {
   +defvar(sp_ground_image, none)             // グラウンド背景画像
   +defvar(sp_ground_blur, 0)                 // ぼかし
   +defvar(sp_ground_grayscale, 0)            // グレースケール
+  +defvar(sp_ground_contrast, 1.0)           // 駒コントラスト
+  +defvar(sp_ground_invert, 0)               // 駒色反転
   +defvar(sp_ground_hue, 1.0)                // 色相
   +defvar(sp_ground_saturate, 1.0)           // 彩度
   +defvar(sp_ground_brightness, 1.0)         // 輝度
@@ -62,7 +64,7 @@ export default {
     // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
     // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
     // background-color: red
-    filter: unquote('hue-rotate(calc(var(--sp_ground_hue) * 1turn)) saturate(var(--sp_ground_saturate)) grayscale(var(--sp_ground_grayscale)) brightness(var(--sp_ground_brightness)) blur(calc(var(--sp_ground_blur) * 1px))')
+    filter: unquote('invert(var(--sp_ground_invert)) hue-rotate(calc(var(--sp_ground_hue) * 1turn)) saturate(var(--sp_ground_saturate)) grayscale(var(--sp_ground_grayscale)) brightness(var(--sp_ground_brightness)) contrast(var(--sp_ground_contrast)) blur(calc(var(--sp_ground_blur) * 1px))')
 
   &.is_layer_on
     +is_layer_border

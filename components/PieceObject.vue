@@ -71,6 +71,8 @@ export default {
   // +defvar(sp_piece_image, none)             // グラウンド背景画像
   +defvar(sp_piece_blur, 0)                 // 駒ぼかし
   +defvar(sp_piece_grayscale, 0)            // 駒グレースケール
+  +defvar(sp_piece_contrast, 1.0)           // 駒コントラスト
+  +defvar(sp_piece_invert, 0)               // 駒色反転
   +defvar(sp_piece_opacity, 1.0)            // 駒不透明度
   +defvar(sp_piece_hue, 1.0)                // 駒色相
   +defvar(sp_piece_saturate, 1.0)           // 駒彩度

@@ -8,7 +8,7 @@
 @import "is_pi_variant/g.sass"
 
 =filter_drop_shadow2($dir)
-  +filter_drop_shadow($dir, unquote('hue-rotate(calc(var(--sp_piece_hue) * 1turn)) saturate(var(--sp_piece_saturate)) opacity(var(--sp_piece_opacity)) grayscale(var(--sp_piece_grayscale)) brightness(var(--sp_piece_brightness)) blur(calc(var(--sp_piece_blur) * 1px))'))
+  +filter_drop_shadow($dir, unquote('invert(var(--sp_piece_invert)) hue-rotate(calc(var(--sp_piece_hue) * 1turn)) saturate(var(--sp_piece_saturate)) opacity(var(--sp_piece_opacity)) grayscale(var(--sp_piece_grayscale)) brightness(var(--sp_piece_brightness)) contrast(var(--sp_piece_contrast)) blur(calc(var(--sp_piece_blur) * 1px))'))
 
 %is_pi_black_only
   &.location_white
