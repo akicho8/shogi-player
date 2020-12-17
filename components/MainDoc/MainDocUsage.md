@@ -1,51 +1,47 @@
-## Rails + Vue.js の場合
+## Nuxt.js への組み込み例
 
 インストール
 
     % yarn add shogi-player
 
-読み込み
+事前設定
 
-(in app/javascript/packs/shogi_player_app.js)
+    # in nuxt.config.js
 
-    import Vue from 'vue/dist/vue.esm'
+    export default {
+      build: {
+        transpile: ["shogi-player/components"],
+      },
+    }
 
-    import Buefy from 'buefy'
-    // import 'buefy/lib/buefy.css'
-    Vue.use(Buefy)
+コンポーネント
 
-    import _ from "lodash"
-    Object.defineProperty(Vue.prototype, '_', {value: _})
+    <template lang="pug">
+    .MySample.section
+      .container
+        .columns.is-centered
+          .column.is-6-desktop
+            ShogiPlayer(
+              :sp_layout="'is_horizontal'"
+              )
+    </template>
 
-    import ShogiPlayer from 'shogi-player/src/components/ShogiPlayer.vue'
+    <script>
+    import ShogiPlayer from "shogi-player/components/ShogiPlayer.vue"
 
-    document.addEventListener('DOMContentLoaded', () => {
-      new Vue({
-        el: '#app',
-        components: {
-          ShogiPlayer,
-        },
-      })
-    })
+    export default {
+      name: "MySample",
+      components: {
+        ShogiPlayer,
+      },
+    }
+    </script>
 
-(in app/javascript/packs/shogi_player_app.sass)
+    <style lang="sass">
+    $sp_assets_dir: "../node_modules/shogi-player/assets"
+    @import "../node_modules/shogi-player/components/ShogiPlayer.sass"
 
-    // Bulma
-    // @import "../../../node_modules/bulma/sass/utilities/initial-variables.sass"
-    // @import "../../../node_modules/bulma/sass/utilities/derived-variables.sass"
-    @import "~buefy/src/scss/buefy-build.scss"
-
-    // ShogiPlayer
-    $sp_assets_dir: "../../../node_modules/shogi-player/src/assets"
-    @import "../../../node_modules/shogi-player/src/components/ShogiPlayer.sass"
-
-表示
-
-(in app/views/xxx/show.html.erb)
-
-    <%= javascript_pack_tag("shogi_player_app") %>
-    <%= stylesheet_pack_tag("shogi_player_app") %>
-
-    <div id="shogi_player_app">
-      <ShogiPlayer :kifu_body="'position startpos moves 7g7f 8c8d'"></ShogiPlayer>
-    </div>
+    .MySample
+      // CSSのカスタマイズ等
+      --sp_ground_color: transparent
+    </style>
