@@ -91,7 +91,7 @@
             b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
           b-field(custom-class="is-small" label="グリッドの太さ")
             b-slider(v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
-          b-field(custom-class="is-small" label="グリッド外枠の太さ")
+          b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線 Safari: 1.5px, Chrome: 2.0px")
             b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
           b-field(custom-class="is-small" label="星")
             b-slider(v-model="sp_grid_star" :min="0" :max="100" :step="0.01")
