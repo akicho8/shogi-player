@@ -61,5 +61,5 @@ export default {
       margin-top: var(--sp_common_gap)
   +is_vertical_and_mobile
     .NavigateBlock
-      margin-top: 0
+      margin-top: 0 // 少し開けた方がいいかな？
 </style>
