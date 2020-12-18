@@ -67,10 +67,10 @@ export default {
   +defvar(sp_board_padding, 1.5)                // 盤の隅の隙間
   +defvar(sp_board_radius, 5px)                 // 盤の隅の丸め度合い
 
-  +defvar(sp_grid_color, rgba(0, 0, 0, 0.5))    // グリッド色
+  +defvar(sp_grid_outer_stroke, 1.5)              // グリッドの外枠の太さ(紙面風のとき)
   +defvar(sp_grid_outer_color, rgba(0, 0, 0, 0.5))   // グリッド外枠色
+  +defvar(sp_grid_color, rgba(0, 0, 0, 0.3))    // グリッド色
   +defvar(sp_grid_stroke, 1)                    // グリッド太さ
-  +defvar(sp_grid_outer_stroke, 0)              // グリッドの外枠の太さ(紙面風のとき)
   +defvar(sp_grid_outer_texture_edge_stroke, 0) // 盤背景の縁取りの太さ(影の影響あり)
   +defvar(sp_grid_star, 6px)                    // 星の大きさ
 

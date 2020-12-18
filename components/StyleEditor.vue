@@ -395,10 +395,10 @@ export default {
       sp_piece_count_bg_color: "rgba(255, 255, 255, 0.75)",
       sp_piece_count_padding: 2,
 
-      sp_grid_color: "rgba(0, 0, 0, 0.5)",
+      sp_grid_outer_stroke: 1.5,
       sp_grid_outer_color: "rgba(0, 0, 0, 0.5)",
+      sp_grid_color: "rgba(0, 0, 0, 0.3)",
       sp_grid_stroke: 1,
-      sp_grid_outer_stroke: 0,
       sp_grid_star: 10,
 
       sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
@@ -474,7 +474,7 @@ export default {
       this.sp_ground_color      = IS_TRANSPARENT    // 背景透過
       this.sp_board_color       = IS_TRANSPARENT    // 盤透過
       this.sp_grid_stroke       = 1                 // グリッド線(細)
-      this.sp_grid_outer_stroke = 2                 // グリッド枠(細)
+      this.sp_grid_outer_stroke = 1.5               // グリッド枠(細)
     },
     hsla_format(v) {
       return chroma(v).css("hsla")
