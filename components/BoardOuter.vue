@@ -68,6 +68,7 @@ export default {
   +defvar(sp_board_radius, 5px)                 // 盤の隅の丸め度合い
 
   +defvar(sp_grid_color, rgba(0, 0, 0, 0.5))    // グリッド色
+  +defvar(sp_grid_outer_color, rgba(0, 0, 0, 0.5))   // グリッド外枠色
   +defvar(sp_grid_stroke, 1)                    // グリッド太さ
   +defvar(sp_grid_outer_stroke, 0)              // グリッドの外枠の太さ(紙面風のとき)
   +defvar(sp_grid_outer_texture_edge_stroke, 0) // 盤背景の縁取りの太さ(影の影響あり)
@@ -90,14 +91,14 @@ export default {
     // background-image: url("../assets/inspect/256x256.png")
 
     border-radius: calc(var(--sp_board_radius) * 1px)
-    border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_color) // 画像の輪郭で影の影響あり
+    border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
 
     +filter_drop_shadow(1, unquote('invert(var(--sp_board_invert)) hue-rotate(calc(var(--sp_board_hue) * 1turn)) saturate(var(--sp_board_saturate)) opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) contrast(var(--sp_board_contrast)) blur(calc(var(--sp_board_blur) * 1px))'))
 
   .BoardInner
     width: 100%
     height: 100%
-    border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_color)
+    border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_outer_color)
 
     // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
     @extend %is_unselectable

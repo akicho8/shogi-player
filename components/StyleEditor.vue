@@ -81,6 +81,8 @@
 
           b-field(custom-class="is-small" label="グリッドカラー")
             ColorPicker(v-model="sp_grid_color")
+          b-field(custom-class="is-small" label="グリッド外枠カラー")
+            ColorPicker(v-model="sp_grid_outer_color")
 
           b-field(custom-class="is-small" label="角丸め")
             b-slider(v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
@@ -394,6 +396,7 @@ export default {
       sp_piece_count_padding: 2,
 
       sp_grid_color: "rgba(0, 0, 0, 0.5)",
+      sp_grid_outer_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_stroke: 1,
       sp_grid_outer_stroke: 0,
       sp_grid_star: 10,
@@ -597,6 +600,7 @@ export default {
 
           // グリッド
           --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
+          --sp_grid_outer_color:              ${this.hsla_format(this.sp_grid_outer_color)};
           --sp_grid_stroke:              ${this.sp_grid_stroke};
           --sp_grid_outer_stroke:        ${this.sp_grid_outer_stroke};
           --sp_grid_star:                ${this.sp_grid_star}%;
