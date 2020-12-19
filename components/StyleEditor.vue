@@ -110,10 +110,10 @@
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="bottom") ↓
-          b-field(custom-class="is-small" label="駒のブレンド方法")
-            b-radio-button(size="is-small" v-model="sp_mix_blend_mode" native-value="normal") normal
-            b-radio-button(size="is-small" v-model="sp_mix_blend_mode" native-value="darken") darken
-            b-radio-button(size="is-small" v-model="sp_mix_blend_mode" native-value="screen") screen
+          b-field(custom-class="is-small" label="ブレンドモード")
+            b-select(size="is-small" v-model="sp_mix_blend_mode")
+              template(v-for="e in MixBlendModeInfo.values")
+                option(:value="e.key") {{e.name}} - {{e.desc}}
 
           b-field(custom-class="is-small" label="色相")
             b-slider(v-model="sp_piece_hue" :min="-0.5" :max="0.5" :step="0.001")
@@ -320,6 +320,7 @@ import RunModeInfo    from "./models/run_mode_info.js"
 import BgVariantInfo  from "./models/bg_variant_info.js"
 import PiVariantInfo  from "./models/pi_variant_info.js"
 import KifuSampleInfo from "./models/kifu_sample_info.js"
+import { MixBlendModeInfo } from "./models/MixBlendModeInfo.js"
 
 import ShogiPlayer from "./ShogiPlayer.vue"
 import ColorPicker from "./ColorPicker.vue"
@@ -496,6 +497,7 @@ export default {
     BgVariantInfo()  { return BgVariantInfo  },
     PiVariantInfo()  { return PiVariantInfo  },
     KifuSampleInfo() { return KifuSampleInfo },
+    MixBlendModeInfo() { return MixBlendModeInfo },
 
     kifu_sample_info() {
       if (this.kifu_sample_key) {
@@ -608,7 +610,7 @@ export default {
           --sp_board_aspect_ratio:       ${this.sp_board_aspect_ratio};
           --sp_board_piece_rate:         ${this.sp_board_piece_rate}%;
           --sp_board_piece_position:     ${this.sp_board_piece_position};
-          --sp_mix_blend_mode:    ${this.sp_mix_blend_mode};
+          --sp_mix_blend_mode:           ${this.sp_mix_blend_mode};
 
           // 盤グリッド
           --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
