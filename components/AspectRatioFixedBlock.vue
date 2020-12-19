@@ -17,7 +17,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  +defvar(sp_board_aspect_ratio, 109.7%) // 盤の横を100としたときの縦の比率
+  +defvar(sp_board_aspect_ratio, 109.7) // 盤の横を100としたときの縦の比率
 
   .AspectRatioFixedBlockWrap
     width: 100%
@@ -36,7 +36,7 @@ export default {
         // https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1222739597
         padding-top: 109.7%
       &.is_ratio_var
-        padding-top: var(--sp_board_aspect_ratio)
+        padding-top: calc(var(--sp_board_aspect_ratio) * 1%)
 
       +is_overlay_origin
       .AspectRatioFixedBlockContainer

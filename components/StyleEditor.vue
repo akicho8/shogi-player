@@ -91,7 +91,7 @@
             b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
           b-field(custom-class="is-small" label="グリッドの太さ")
             b-slider(v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
-          b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線 Safari: 1.5px, Chrome: 2.0px")
+          b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線はブラウザ依存 Safari: 1.5px, Chrome: 2.0px")
             b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
           b-field(custom-class="is-small" label="星")
             b-slider(v-model="sp_grid_star" :min="0" :max="100" :step="0.01")
@@ -397,7 +397,7 @@ export default {
 
       sp_grid_outer_stroke: 1.5,
       sp_grid_outer_color: "rgba(0, 0, 0, 0.5)",
-      sp_grid_color: "rgba(0, 0, 0, 0.3)",
+      sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_stroke: 1,
       sp_grid_star: 10,
 
@@ -594,7 +594,7 @@ export default {
           // 盤 - 装飾
           --sp_board_padding:            ${this.sp_board_padding};
           --sp_board_radius:             ${this.sp_board_radius};
-          --sp_board_aspect_ratio:       ${this.sp_board_aspect_ratio}%;
+          --sp_board_aspect_ratio:       ${this.sp_board_aspect_ratio};
           --sp_board_piece_rate:         ${this.sp_board_piece_rate}%;
           --sp_board_piece_position:     ${this.sp_board_piece_position};
 

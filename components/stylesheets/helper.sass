@@ -49,9 +49,13 @@
   background-color: $color
   border: 1px solid darken($color, 50%)
 
+// drop-shadow や box-shadow に渡す引数を返す
+@function shadow_func_args($dir)
+  @return calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_blur) * 1px) var(--sp_shadow_color)
+  
 // 共通の drop-shadow
 =filter_drop_shadow($dir, $prepend: "", $append: "")
-  filter: #{$prepend} drop-shadow(calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_blur) * 1px) var(--sp_shadow_color)) #{$append}
+  filter: #{$prepend} drop-shadow(shadow_func_args($dir)) #{$append}
 
 // 本当は :root の下に定義したい
 // しかし node-sass だとエラーになる

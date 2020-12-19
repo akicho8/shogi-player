@@ -35,12 +35,13 @@
 | `--sp_board_brightness`                      |                       1.0 | 輝度                                                                  |
 | `--sp_board_opacity`                         |                       1.0 | 非半透明度                                                            |
 | `--sp_board_padding`                         |                       1.5 | 盤の隅の隙間                                                          |
-| `--sp_board_radius`                          | 5px                       | 盤の隅の丸め度合い                                                    |
+| `--sp_board_radius`                          |                         5 | 盤の隅の丸め度合い                                                    |
+| `--sp_grid_outer_stroke`                     |                       1.5 | グリッドの外枠の太さ(紙面風のとき)                                    |
+| `--sp_grid_outer_color`                      | rgba(0, 0, 0, 0.5)        | グリッド外枠色                                                        |
 | `--sp_grid_color`                            | rgba(0, 0, 0, 0.5)        | グリッド色                                                            |
 | `--sp_grid_stroke`                           |                         1 | グリッド太さ                                                          |
-| `--sp_grid_outer_stroke`                     |                         0 | グリッドの外枠の太さ(紙面風のとき)                                    |
 | `--sp_grid_outer_texture_edge_stroke`        |                         0 | 盤背景の縁取りの太さ(影の影響あり)                                    |
-| `--sp_grid_star`                             | 6px                       | 星の大きさ                                                            |
+| `--sp_grid_star`                             | 10%                       | 星の大きさ                                                            |
 | `--sp_body_width`                            | 100%                      | 盤(駒台を含む)の幅                                                    |
 | `--sp_body_max_width`                        | none                      | 盤(駒台を含む)の最大幅                                                |
 | `--sp_piece_count_gap_right`                 | 86%                       | 駒数の駒右端からのオフセット(横配置時)                                |
