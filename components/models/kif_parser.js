@@ -15,10 +15,13 @@ export default class KifParser extends ParserBase {
     return sfen_parser.board
   }
 
+  get preset_key() {
+    return this.header["手合割"] || "平手"
+  }
+
   get location_base() {
     let key = null
-    const value = this.header["手合割"] || "平手"
-    if (value === "平手") {
+    if (this.preset_key === "平手") {
       key = "black"
     } else {
       key = "white"
