@@ -78,10 +78,11 @@ export default {
   +defvar(sp_piece_saturate, 1.0)           // 駒彩度
   +defvar(sp_piece_brightness, 1.0)         // 駒輝度
 
-  //////////////////////////////////////////////////////////////////////////////// >= tablet
+  ////////////////////////////////////////////////////////////////////////////////
 
   +defvar(sp_board_piece_rate, 90%)            // 盤のセル内の駒占有率
   +defvar(sp_board_piece_position, center)     // 駒を選択できる範囲内の駒の縦位置
+  +defvar(sp_mix_blend_mode, normal)    // 駒の mix-blend-mode の値
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_w, 47px)              // 駒台のセル(W)
@@ -151,6 +152,7 @@ export default {
     // top: var(--piece_pull, 0%)
   .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
     +is_overlay_block
+    mix-blend-mode: var(--sp_mix_blend_mode)
 
     background-position: var(--sp_board_piece_position)
     background-repeat: no-repeat

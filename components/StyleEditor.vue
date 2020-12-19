@@ -110,6 +110,10 @@
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="bottom") ↓
+          b-field(custom-class="is-small" label="駒のブレンド方法")
+            b-radio-button(size="is-small" v-model="sp_mix_blend_mode" native-value="normal") normal
+            b-radio-button(size="is-small" v-model="sp_mix_blend_mode" native-value="darken") darken
+            b-radio-button(size="is-small" v-model="sp_mix_blend_mode" native-value="screen") screen
 
           b-field(custom-class="is-small" label="色相")
             b-slider(v-model="sp_piece_hue" :min="-0.5" :max="0.5" :step="0.001")
@@ -367,6 +371,7 @@ export default {
       sp_board_aspect_ratio: 109.7,
       sp_board_piece_rate: 90,
       sp_board_piece_position: "center",
+      sp_mix_blend_mode: "normal",
       sp_board_radius: 5,
       sp_board_padding: 1.5,
 
@@ -412,7 +417,7 @@ export default {
 
       sp_common_gap: 12,
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
-      sp_board_shadow: "is_board_shadow_box",
+      sp_board_shadow: "is_board_shadow_drop",
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a1by",
       sp_bg_variant: "is_bg_variant_none",
@@ -603,6 +608,7 @@ export default {
           --sp_board_aspect_ratio:       ${this.sp_board_aspect_ratio};
           --sp_board_piece_rate:         ${this.sp_board_piece_rate}%;
           --sp_board_piece_position:     ${this.sp_board_piece_position};
+          --sp_mix_blend_mode:    ${this.sp_mix_blend_mode};
 
           // 盤グリッド
           --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
