@@ -73,6 +73,7 @@ export default {
     sp_fullheight:   { type: String, default: "is_fullheight_off",  },
     sp_text_visibility_up:       { type: String, default: "is_text_visibility_up_on",       },
     sp_layer:        { type: String, default: "is_layer_off",       },
+    sp_board_shadow:        { type: String, default: "is_board_shadow_drop",       },
     sp_blink:        { type: String, default: "is_blink_off",       },
     sp_pi_variant:   { type: String, default: "is_pi_variant_a1by",    },
     sp_bg_variant:   { type: String, default: "is_bg_variant_none", },

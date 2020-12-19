@@ -49,13 +49,27 @@
   background-color: $color
   border: 1px solid darken($color, 50%)
 
-// drop-shadow や box-shadow に渡す引数を返す
-@function shadow_func_args($dir)
+// drop-shadow や box-shadow に渡すパラメータを返す
+@function shadow_args($dir)
   @return calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_blur) * 1px) var(--sp_shadow_color)
-  
-// 共通の drop-shadow
+
+// 盤に適用する filter パラメータ (drop-shadow を除く)
+@function board_filter_params_without_drop_shadow()
+  @return unquote('invert(var(--sp_board_invert)) hue-rotate(calc(var(--sp_board_hue) * 1turn)) saturate(var(--sp_board_saturate)) opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) contrast(var(--sp_board_contrast)) blur(calc(var(--sp_board_blur) * 1px))')
+
 =filter_drop_shadow($dir, $prepend: "", $append: "")
-  filter: #{$prepend} drop-shadow(shadow_func_args($dir)) #{$append}
+  filter: #{$prepend} drop-shadow(shadow_args($dir)) #{$append}
+
+=filter_box_shadow($dir, $prepend: "", $append: "")
+  filter: #{$prepend} #{$append}
+  box-shadow: shadow_args($dir)
+
+// 簡潔にかけるが余計わかりにくくなるので使わない
+=filter_drop_shadow2($dir, $prepend: "", $append: "")
+  @at-root .is_board_shadow_drop &
+    +filter_drop_shadow($dir, $prepend, $append)
+  @at-root .is_board_shadow_box &
+    +filter_box_shadow($dir, $prepend, $append)
 
 // 本当は :root の下に定義したい
 // しかし node-sass だとエラーになる

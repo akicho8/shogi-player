@@ -93,7 +93,15 @@ export default {
     border-radius: calc(var(--sp_board_radius) * 1px)
     border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
 
-    +filter_drop_shadow(1, unquote('invert(var(--sp_board_invert)) hue-rotate(calc(var(--sp_board_hue) * 1turn)) saturate(var(--sp_board_saturate)) opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) contrast(var(--sp_board_contrast)) blur(calc(var(--sp_board_blur) * 1px))'))
+  &.is_board_shadow_box
+    .BoardOuterTexture
+      +filter_box_shadow(1, board_filter_params_without_drop_shadow())
+  &.is_board_shadow_drop
+    .BoardOuterTexture
+      +filter_drop_shadow(1, board_filter_params_without_drop_shadow())
+  &.is_board_shadow_none
+    .BoardOuterTexture
+      filter: board_filter_params_without_drop_shadow()
 
   .BoardInner
     width: 100%

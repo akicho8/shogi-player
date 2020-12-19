@@ -47,7 +47,7 @@
           //-   b-slider(v-model="sp_ground_opacity" :min="0" :max="1.0" :step="0.001")
 
         .box
-          .title.is-5 盤
+          .title.is-5 盤テクスチャ
 
           b-field(custom-class="is-small" label="")
             ColorPicker(v-model="sp_board_color")
@@ -77,26 +77,26 @@
             b-slider(v-model="sp_board_opacity" :min="0" :max="1.0" :step="0.001")
 
         .box
-          .title.is-5 盤 - 装飾
+          .title.is-5 盤
+          b-field(custom-class="is-small" label="角丸め")
+            b-slider(v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
+          b-field(custom-class="is-small" label="余白" message="紙面風: 0")
+            b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
+          b-field(custom-class="is-small" label="アスペクト比(縦長度合)" message="初期値: 109.7")
+            b-slider(v-model="sp_board_aspect_ratio" :min="0" :max="200" :step="0.1")
 
+        .box
+          .title.is-5 盤グリッド
           b-field(custom-class="is-small" label="グリッドカラー")
             ColorPicker(v-model="sp_grid_color")
           b-field(custom-class="is-small" label="グリッド外枠カラー")
             ColorPicker(v-model="sp_grid_outer_color")
-
-          b-field(custom-class="is-small" label="角丸め")
-            b-slider(v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
-
-          b-field(custom-class="is-small" label="余白" message="紙面風: 0")
-            b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
           b-field(custom-class="is-small" label="グリッドの太さ")
             b-slider(v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線はブラウザ依存 Safari: 1.5px, Chrome: 2.0px")
             b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
           b-field(custom-class="is-small" label="星")
             b-slider(v-model="sp_grid_star" :min="0" :max="100" :step="0.01")
-          b-field(custom-class="is-small" label="アスペクト比(縦長度合)" message="初期値: 109.7")
-            b-slider(v-model="sp_board_aspect_ratio" :min="0" :max="200" :step="0.1")
 
         .box
           .title.is-5 駒
@@ -179,6 +179,10 @@
             b-slider(v-model="sp_shadow_blur" :min="-1" :max="20")
           b-field(custom-class="is-small" label="色")
             ColorPicker(v-model="sp_shadow_color")
+          b-field(custom-class="is-small" label="盤と駒台への適用方法" message="dropは透明度を継承するので元が透明だと影も薄い")
+            b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_drop") drop
+            b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_box") box
+            b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_none") none
 
         .box
           .title.is-5 画面位置
@@ -408,6 +412,7 @@ export default {
 
       sp_common_gap: 12,
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
+      sp_board_shadow: "is_board_shadow_box",
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a1by",
       sp_bg_variant: "is_bg_variant_none",
@@ -525,6 +530,7 @@ export default {
       params.sp_fullheight            = this.sp_fullheight
       params.sp_text_visibility_up    = this.sp_text_visibility_up
       params.sp_layer                 = this.sp_layer
+      params.sp_board_shadow                = this.sp_board_shadow
       params.sp_pi_variant            = this.sp_pi_variant
       params.sp_bg_variant            = this.sp_bg_variant
       params.sp_mobile_style          = this.sp_mobile_style
@@ -579,7 +585,7 @@ export default {
           --sp_ground_saturate:          ${this.sp_ground_saturate};
           --sp_ground_brightness:        ${this.sp_ground_brightness};
 
-          // 盤
+          // 盤テクスチャ
           --sp_board_color:              ${this.hsla_format(this.sp_board_color)};
           --sp_board_image:              ${this.sp_board_image_url};
           --sp_board_blur:               ${this.sp_board_blur};
@@ -591,21 +597,21 @@ export default {
           --sp_board_saturate:           ${this.sp_board_saturate};
           --sp_board_brightness:         ${this.sp_board_brightness};
 
-          // 盤 - 装飾
+          // 盤
           --sp_board_padding:            ${this.sp_board_padding};
           --sp_board_radius:             ${this.sp_board_radius};
           --sp_board_aspect_ratio:       ${this.sp_board_aspect_ratio};
           --sp_board_piece_rate:         ${this.sp_board_piece_rate}%;
           --sp_board_piece_position:     ${this.sp_board_piece_position};
 
-          // グリッド
+          // 盤グリッド
           --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
           --sp_grid_outer_color:              ${this.hsla_format(this.sp_grid_outer_color)};
           --sp_grid_stroke:              ${this.sp_grid_stroke};
           --sp_grid_outer_stroke:        ${this.sp_grid_outer_stroke};
           --sp_grid_star:                ${this.sp_grid_star}%;
 
-          // 盤
+          // 駒
           --sp_piece_blur:               ${this.sp_piece_blur};
           --sp_piece_grayscale:          ${this.sp_piece_grayscale};
           --sp_piece_contrast:           ${this.sp_piece_contrast};

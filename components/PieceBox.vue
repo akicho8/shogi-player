@@ -70,19 +70,26 @@ export default {
     .PieceBox
       margin-top: 0
 
-  ////////////////////////////////////////////////////////////////////////////////
-  .PieceBox
-    +is_overlay_origin
-  .PieceBoxTexture
-    +is_overlay_block
-    +filter_drop_shadow(1)
-    background-color: var(--sp_piece_box_color)
-    border-radius: calc(var(--sp_board_radius) * 1px)
-
   //////////////////////////////////////////////////////////////////////////////// 駒持ってhoverしたとき
   .PieceBox
     &.hoverable_p
       &:hover
         .PieceBoxTexture
           border: var(--sp_stand_hover_border_stroke) dashed var(--sp_stand_hover_border_color)
+
+  ////////////////////////////////////////////////////////////////////////////////
+  .PieceBox
+    +is_overlay_origin
+  .PieceBoxTexture
+    +is_overlay_block
+    background-color: var(--sp_piece_box_color)
+    border-radius: calc(var(--sp_board_radius) * 1px)
+  &.is_board_shadow_box
+    .PieceBoxTexture
+      +filter_box_shadow(1)
+  &.is_board_shadow_drop
+    .PieceBoxTexture
+      +filter_drop_shadow(1)
+  &.is_board_shadow_none
+    .PieceBoxTexture
 </style>
