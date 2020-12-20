@@ -5,11 +5,9 @@
   .has-text-centered
     .title.is-4 六代大橋宗銀 vs 伊藤印達
     .subtitle.is-6 57番指し第57局 (1711/2/28)
-  ShogiPlayer.first_sp(
+  ShogiPlayer(
     :kifu_body="kifu_body"
     :start_turn="-1"
-    :slider_show="true"
-    :controller_show="true"
     :sp_bg_variant="'is_bg_variant_a'"
     :sp_pi_variant="'is_pi_variant_a1by'"
     :sound_effect="true"

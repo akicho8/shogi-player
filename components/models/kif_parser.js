@@ -6,11 +6,11 @@ import Piece from "./piece"
 import Place from "./place"
 import Location from "./location"
 import SfenParser from "./sfen_parser"
-
+import PresetInfo from "./preset_info.js"
 export default class KifParser extends ParserBase {
   get board() {
     const sfen_parser = new SfenParser()
-    sfen_parser.kifu_body = "position startpos" // TODO: sfen形式の値のテーブルを持って駒落ちに対応する
+    sfen_parser.kifu_body = this.preset_info.sfen
     sfen_parser.parse()
     return sfen_parser.board
   }
@@ -19,51 +19,56 @@ export default class KifParser extends ParserBase {
     return this.header["手合割"] || "平手"
   }
 
+  get preset_info() {
+    return PresetInfo.fetch(this.preset_key)
+  }
+
+  // 特別なメソッド
   get location_base() {
-    let key = null
-    if (this.preset_key === "平手") {
-      key = "black"
-    } else {
-      key = "white"
-    }
-    return Location.fetch(key)
+    return Location.fetch(this.preset_info.first_location_key)
   }
 
   parse() {
     this.move_infos = []
     this.comments_pack = {}
-    let before_point = null
+
+    let before_place = null
 
     this.kifu_body.split(/\n/).forEach((line) => {
-      const md = XRegExp.exec(line, this.__kif_format_move_regexp)
+      const md = XRegExp.exec(line, this.__kif_format_header_regexp)
       if (md) {
-        const attrs = {}
-        attrs["location"] = this.location_by_offset(Number(md["number"]) - 1)
-        if (md["origin_place"]) {
-          attrs["origin_place"] = Place.fetch(md["origin_place"])
-        }
-        assert(md["to"] || md["same"])
-        if (md["to"]) {
-          attrs["place"] = Place.fetch(md["to"])
-          before_point = attrs["place"]
-        } else {
-          assert(md["same"])
-          assert(before_point)
-          attrs["place"] = before_point
-        }
-        if (md["motion"] === "成") {
-          attrs["promoted_trigger"] = true
-        }
-        if (md["motion"] === "打") {
-          attrs["drop_piece"] = Piece.kif_lookup(md["piece"])
-        }
-        this.move_infos.push(attrs)
+        this.header[md["key"]] = md["value"]
       } else {
-        const md = XRegExp.exec(line, XRegExp("^\\*(?<comment>.*)"))
+        const md = XRegExp.exec(line, this.__kif_format_move_regexp)
         if (md) {
-          const index = this.move_infos.length
-          this.comments_pack[index] = this.comments_pack[index] || []
-          this.comments_pack[index].push(md["comment"])
+          const attrs = {}
+          attrs["location"] = this.location_by_offset(Number(md["number"]) - 1)
+          if (md["origin_place"]) {
+            attrs["origin_place"] = Place.fetch(md["origin_place"])
+          }
+          assert(md["to"] || md["same"])
+          if (md["to"]) {
+            attrs["place"] = Place.fetch(md["to"])
+            before_place = attrs["place"]
+          } else {
+            assert(md["same"])
+            assert(before_place)
+            attrs["place"] = before_place
+          }
+          if (md["motion"] === "成") {
+            attrs["promoted_trigger"] = true
+          }
+          if (md["motion"] === "打") {
+            attrs["drop_piece"] = Piece.kif_lookup(md["piece"])
+          }
+          this.move_infos.push(attrs)
+        } else {
+          const md = XRegExp.exec(line, XRegExp("^\\*(?<comment>.*)"))
+          if (md) {
+            const index = this.move_infos.length
+            this.comments_pack[index] = this.comments_pack[index] || []
+            this.comments_pack[index].push(md["comment"])
+          }
         }
       }
     })
@@ -74,7 +79,7 @@ export default class KifParser extends ParserBase {
   }
 
   get move_infos() {
-    return this._move_infos || []
+    return this._move_infos
   }
 
   set comments_pack(v) {
@@ -82,7 +87,7 @@ export default class KifParser extends ParserBase {
   }
 
   get comments_pack() {
-    return this._comments_pack || []
+    return this._comments_pack
   }
 
   get __kif_format_move_regexp() {
@@ -95,6 +100,10 @@ export default class KifParser extends ParserBase {
         (?<motion>不?成|打|合|生)?
         (\\((?<origin_place>\\d{2})\\))? # KIFフォーマットの移動元用
       `, 'xm')
+  }
+
+  get __kif_format_header_regexp() {
+    return XRegExp("(?<key>.*)：(?<value>.*)")
   }
 }
 
