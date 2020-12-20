@@ -259,7 +259,7 @@
           .title.is-5 棋譜
           b-field.my-4(custom-class="is-small" label="プリセット")
             b-select(size="is-small" v-model="kifu_sample_key")
-              template(v-for="e in KifuSampleInfo.values")
+              template(v-for="e in KifuBookInfo.values")
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="棋譜")
             b-input(size="is-small" v-model="kifu_body" type="textarea")
@@ -319,7 +319,7 @@ import HumanSideInfo  from "./models/human_side_info.js"
 import RunModeInfo    from "./models/run_mode_info.js"
 import BgVariantInfo  from "./models/bg_variant_info.js"
 import PiVariantInfo  from "./models/pi_variant_info.js"
-import KifuSampleInfo from "./models/KifuSampleInfo.js"
+import KifuBookInfo from "./models/KifuBookInfo.js"
 import { MixBlendModeInfo } from "./models/MixBlendModeInfo.js"
 
 import ShogiPlayer from "./ShogiPlayer.vue"
@@ -443,7 +443,7 @@ export default {
   },
 
   created() {
-    this.kifu_sample_key = this.KifuSampleInfo.values[0].key
+    this.kifu_sample_key = this.KifuBookInfo.values[0].key
 
     if (false) {
       this.player_info = {
@@ -455,10 +455,10 @@ export default {
 
   watch: {
     kifu_sample_key(v) {
-      if (this.kifu_sample_info) {
-        this.kifu_body = this.kifu_sample_info.kifu_body
-        this.player_info.black.name = this.kifu_sample_info.black
-        this.player_info.white.name = this.kifu_sample_info.white
+      if (this.kifu_book_info) {
+        this.kifu_body = this.kifu_book_info.kifu_body
+        this.player_info.black.name = this.kifu_book_info.black
+        this.player_info.white.name = this.kifu_book_info.white
       } else {
         this.kifu_body = "position startpos"
       }
@@ -496,12 +496,12 @@ export default {
     RunModeInfo()    { return RunModeInfo    },
     BgVariantInfo()  { return BgVariantInfo  },
     PiVariantInfo()  { return PiVariantInfo  },
-    KifuSampleInfo() { return KifuSampleInfo },
+    KifuBookInfo() { return KifuBookInfo },
     MixBlendModeInfo() { return MixBlendModeInfo },
 
-    kifu_sample_info() {
+    kifu_book_info() {
       if (this.kifu_sample_key) {
-        return KifuSampleInfo.fetch(this.kifu_sample_key)
+        return KifuBookInfo.fetch(this.kifu_sample_key)
       }
     },
 
