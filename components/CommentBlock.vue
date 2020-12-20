@@ -41,4 +41,6 @@ export default {
 .ShogiPlayerGround
   .CommentBlock
     line-height: 1.5rem
+    .column
+      margin-top: var(--sp_common_gap)
 </style>

@@ -19,4 +19,5 @@ export default {
 .ShogiPlayerGround
   .SfenShowBlock
     word-break: break-all // 幅が狭いときでも折り返す
+    margin-top: var(--sp_common_gap)
 </style>
