@@ -110,8 +110,8 @@ export default class KifParser extends ParserBase {
 }
 
 if (process.argv[1] === __filename) {
-  const kif_parser = new KifParser()
-//   kif_parser.kifu_body = `
+  const instance = new KifParser()
+//   instance.kifu_body = `
 // # ----  Kifu for Windows V6.26 棋譜ファイル  ----
 // key：value
 // 手数----指手---------消費時間--
@@ -124,7 +124,7 @@ if (process.argv[1] === __filename) {
 //    3 投了         ( 0:00/00:00:00)
 // `
 
-  kif_parser.kifu_body = `
+  instance.kifu_body = `
    1 ２六歩(27)   ( 0:16/00:00:16)
    2 ３四歩(33)   ( 0:22/00:00:22)
    3 ７六歩(77)   ( 0:06/00:00:22)
@@ -136,11 +136,11 @@ if (process.argv[1] === __filename) {
    9 ２四歩(25)   ( 0:04/00:00:39)
   10 同 歩(23)    ( 0:10/00:01:10)
 `
-  kif_parser.parse()
-  // console.log(kif_parser.board)
-  // console.log(kif_parser.location_base)
-  // console.log(kif_parser.hold_pieces)
-  console.log(kif_parser.move_infos)
-  console.log(kif_parser.comments_pack)
-  console.log(kif_parser.init_sfen === undefined)
+  instance.parse()
+  // console.log(instance.board)
+  // console.log(instance.location_base)
+  // console.log(instance.hold_pieces)
+  console.log(instance.move_infos)
+  console.log(instance.comments_pack)
+  console.log(instance.init_sfen === undefined)
 }

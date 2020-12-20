@@ -1,9 +1,9 @@
-import KifParser from "@/kif_parser"
+import KifParser from "@/KifParser"
 
 describe("KifParser", () => {
   it("基本", () => {
-    const kif_parser = new KifParser()
-    kif_parser.kifu_body = `
+    const instance = new KifParser()
+    instance.kifu_body = `
 先手の囲い：銀矢倉
 後手の囲い：銀矢倉
 先手の戦型：角換わり腰掛け銀
@@ -173,10 +173,10 @@ describe("KifParser", () => {
  156 投了
 まで155手で先手の勝ち
 `
-    kif_parser.parse()
-    kif_parser.field
-    kif_parser.location_key
-    kif_parser.hold_pieces
-    kif_parser.move_infos
+    instance.parse()
+    instance.field
+    instance.location_key
+    instance.hold_pieces
+    instance.move_infos
   })
 })

@@ -25,7 +25,7 @@ import Vue from 'vue'
 import Mediator   from "./models/mediator.js"
 import Place      from "./models/place.js"
 import SfenParser from "./models/sfen_parser.js"
-import KifParser  from "./models/kif_parser.js"
+import KifParser  from "./models/KifParser.js"
 import Location   from "./models/location.js"
 
 // components

@@ -319,7 +319,7 @@ import HumanSideInfo  from "./models/human_side_info.js"
 import RunModeInfo    from "./models/run_mode_info.js"
 import BgVariantInfo  from "./models/bg_variant_info.js"
 import PiVariantInfo  from "./models/pi_variant_info.js"
-import KifuSampleInfo from "./models/kifu_sample_info.js"
+import KifuSampleInfo from "./models/KifuSampleInfo.js"
 import { MixBlendModeInfo } from "./models/MixBlendModeInfo.js"
 
 import ShogiPlayer from "./ShogiPlayer.vue"
@@ -456,7 +456,7 @@ export default {
   watch: {
     kifu_sample_key(v) {
       if (this.kifu_sample_info) {
-        this.kifu_body = this.kifu_sample_info.sfen
+        this.kifu_body = this.kifu_sample_info.kifu_body
         this.player_info.black.name = this.kifu_sample_info.black
         this.player_info.white.name = this.kifu_sample_info.white
       } else {
