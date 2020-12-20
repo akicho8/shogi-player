@@ -2,23 +2,30 @@ import XRegExp from "xregexp"
 import assert from "minimalistic-assert"
 
 import ParserBase from "./parser_base.js"
-import Piece from "./piece.js"
-import Place from "./place.js"
-import Location from "./location.js"
+import Piece      from "./piece.js"
+import Place      from "./place.js"
+import Location   from "./location.js"
 import SfenParser from "./sfen_parser.js"
 import PresetInfo from "./preset_info.js"
 
-const REGEXP_HEADER = "(?<key>.*)：(?<value>.*)"
-const REGEXP_COMMENT = "^\\*(?<comment>.*)"
-const REGEXP_HAND = `^\\s*(?<number>\\d+)\\s+                                # 1    ; 手数
-                     (?<to>[１-９1-9一二三四五六七八九]{2})?                 # 76   ; 移動先
-                     (?<same>同)?\\s*                                        # 同   ; 座標を書いてくれ
-                     (?<piece>成[銀桂香]|[王玉金銀全桂圭香杏角馬飛龍竜歩と]) # 歩   ; 駒
-                     (?<suffix>[左右直]?[寄引上]?)                           # 上   ; KI2っぽい表記
-                     (?<motion>不?成|打|合|生)?                              # 打   ; 成や打
-                     (\\((?<origin_place>\\d{2})\\))?                        # (77) ; 移動元`
+////////////////////////////////////////////////////////////////////////////////
 
-const REGEXP_ALL = XRegExp([REGEXP_HEADER, REGEXP_COMMENT, REGEXP_HAND].join("|"), "x")
+const REGEXP = {
+  header: "(?<key>.*)：(?<value>.*)",
+  comment: "^\\*(?<comment>.*)",
+  hand: `^\\s*(?<number>\\d+)\\s+                                # 1    ; 手数
+         (?<to>[１-９1-9一二三四五六七八九]+)?                   # 76   ; 移動先
+         (?<same>同)?\\s*                                        # 同   ; 座標を書いてくれ
+         (?<piece>成[銀桂香]|[王玉金銀全桂圭香杏角馬飛龍竜歩と]) # 歩   ; 駒
+         (?<suffix>[左右直]?[寄引上]?)                           # 上   ; KI2っぽい表記は読み捨てる
+         (?<motion>不?成|打|合|生)?                              # 打   ; 成や打
+         (\\((?<origin_place>\\d+)\\))?                          # (77) ; 移動元`,
+}
+
+// XRegExp.union はバグっていて ?<key> を外される
+const MERGED_REGEXP = XRegExp(Object.values(REGEXP).join("|"), "x")
+
+////////////////////////////////////////////////////////////////////////////////
 
 export default class KifParser extends ParserBase {
   get board() {
@@ -48,7 +55,7 @@ export default class KifParser extends ParserBase {
     let before_place = null
 
     this.kifu_body.split(/\n/).forEach(line => {
-      const md = XRegExp.exec(line, REGEXP_ALL)
+      const md = XRegExp.exec(line, MERGED_REGEXP)
       if (md) {
         if (md["key"]) {
           this.header[md["key"]] = md["value"]
