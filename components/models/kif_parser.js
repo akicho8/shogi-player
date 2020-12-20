@@ -11,8 +11,8 @@ import PresetInfo from "./preset_info.js"
 ////////////////////////////////////////////////////////////////////////////////
 
 const REGEXP = {
-  header: "(?<key>.*)：(?<value>.*)",
-  comment: "^\\*(?<comment>.*)",
+  header: "(?<key>.*)：\s*(?<value>.*)",                         // 手合割：角落ち
+  comment: "^\\*(?<comment>.*)",                                 // *コメント
   hand: `^\\s*(?<number>\\d+)\\s+                                # 1    ; 手数
          (?<to>[１-９1-9一二三四五六七八九]+)?                   # 76   ; 移動先
          (?<same>同)?\\s*                                        # 同   ; 座標を書いてくれ
@@ -85,6 +85,8 @@ export default class KifParser extends ParserBase {
             attrs["drop_piece"] = Piece.kif_lookup(md["piece"])
           }
           this.move_infos.push(attrs)
+        } else {
+          // # で始まる行はここにくる
         }
       }
     })
