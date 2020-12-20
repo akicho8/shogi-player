@@ -36,7 +36,7 @@
   </div>
   <div class="message-body">
     <ul>
-      <li>kifu_body も preset_key も指定がない場合は `position startpos` (平手) が初期配置になります</li>
+      <li>kifu_body も preset_key も指定がない場合は `position startpos` (平手) が初期配置になる</li>
     </ul>
   </div>
 </article>
@@ -46,7 +46,7 @@
     <p>注意点</p>
   </div>
   <div class="message-body">
-    `key_event_capture` は副作用があります。有効にするとどこにもフォーカスしていないときでも左右ボタンに反応するようになって便利な面もありますが、他のプログラムの操作を奪ってしまうことになるかもしれません。そのため基本は false にしておいた方がよいです。
+    `key_event_capture` は副作用がある。有効にするとどこにもフォーカスしていないときでも左右ボタンに反応するようになって便利な面もあるが、他のプログラムの操作を奪ってしまうことになるかもしれません。そのため基本は false にしておいた方がよいです。
   </div>
 </article>
 

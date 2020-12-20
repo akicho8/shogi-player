@@ -18,7 +18,7 @@ export default {
 @import "./support.sass"
 .MainDocApp
   +mobile
-    font-size: 14px
+    font-size: 15px
 
   .content
     word-break: break-all
@@ -32,7 +32,4 @@ export default {
     --sp_grid_outer_stroke: 2
     --sp_board_padding: 0
     --sp_board_color: transparent
-
-  .media-content
-    font-size: $size-7
 </style>
