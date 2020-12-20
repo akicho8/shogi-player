@@ -83,6 +83,9 @@ export default {
     +is_overlay_origin
   .BoardOuterTexture
     +is_overlay_block
+    // mix-blend-mode: var(--sp_mix_blend_mode)
+    // isolation: isolate
+
     z-index: -1
 
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない

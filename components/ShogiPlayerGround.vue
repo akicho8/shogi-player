@@ -56,6 +56,8 @@ export default {
   +is_overlay_origin
   .ShogiPlayerGroundTexture
     +is_overlay_block
+    // mix-blend-mode: var(--sp_mix_blend_mode)
+    // isolation: isolate
 
     background-color: var(--sp_ground_color)
     background-image: var(--sp_ground_image)
