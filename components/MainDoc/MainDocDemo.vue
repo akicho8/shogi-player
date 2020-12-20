@@ -19,9 +19,9 @@
       MainDocViewDemo6
 
     b-message.mt-6(type="is-info")
-      | レスポンシブでたくさん表示
+      | レスポンシブでたくさん表示。画面幅に応じて横に並ぶ個数が変わる
     .columns.is-multiline
-      template(v-for="i in 12")
+      template(v-for="i in 15")
         MainDocViewDemo7
 
     .columns.mt-6
