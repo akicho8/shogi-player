@@ -1,12 +1,25 @@
 import XRegExp from "xregexp"
 import assert from "minimalistic-assert"
 
-import ParserBase from "./parser_base"
-import Piece from "./piece"
-import Place from "./place"
-import Location from "./location"
-import SfenParser from "./sfen_parser"
+import ParserBase from "./parser_base.js"
+import Piece from "./piece.js"
+import Place from "./place.js"
+import Location from "./location.js"
+import SfenParser from "./sfen_parser.js"
 import PresetInfo from "./preset_info.js"
+
+const REGEXP_HEADER = "(?<key>.*)：(?<value>.*)"
+const REGEXP_COMMENT = "^\\*(?<comment>.*)"
+const REGEXP_HAND = `^\\s*(?<number>\\d+)\\s+                                # 1    ; 手数
+                     (?<to>[１-９1-9一二三四五六七八九]{2})?                 # 76   ; 移動先
+                     (?<same>同)?\\s*                                        # 同   ; 座標を書いてくれ
+                     (?<piece>成[銀桂香]|[王玉金銀全桂圭香杏角馬飛龍竜歩と]) # 歩   ; 駒
+                     (?<suffix>[左右直]?[寄引上]?)                           # 上   ; KI2っぽい表記
+                     (?<motion>不?成|打|合|生)?                              # 打   ; 成や打
+                     (\\((?<origin_place>\\d{2})\\))?                        # (77) ; 移動元`
+
+const REGEXP_ALL = XRegExp([REGEXP_HEADER, REGEXP_COMMENT, REGEXP_HAND].join("|"), "x")
+
 export default class KifParser extends ParserBase {
   get board() {
     const sfen_parser = new SfenParser()
@@ -34,13 +47,16 @@ export default class KifParser extends ParserBase {
 
     let before_place = null
 
-    this.kifu_body.split(/\n/).forEach((line) => {
-      const md = XRegExp.exec(line, this.__kif_format_header_regexp)
+    this.kifu_body.split(/\n/).forEach(line => {
+      const md = XRegExp.exec(line, REGEXP_ALL)
       if (md) {
-        this.header[md["key"]] = md["value"]
-      } else {
-        const md = XRegExp.exec(line, this.__kif_format_move_regexp)
-        if (md) {
+        if (md["key"]) {
+          this.header[md["key"]] = md["value"]
+        } else if (md["comment"]) {
+          const i = this.move_infos.length
+          this.comments_pack[i] = this.comments_pack[i] || []
+          this.comments_pack[i].push(md["comment"])
+        } else if (md["number"]) {
           const attrs = {}
           attrs["location"] = this.location_by_offset(Number(md["number"]) - 1)
           if (md["origin_place"]) {
@@ -62,13 +78,6 @@ export default class KifParser extends ParserBase {
             attrs["drop_piece"] = Piece.kif_lookup(md["piece"])
           }
           this.move_infos.push(attrs)
-        } else {
-          const md = XRegExp.exec(line, XRegExp("^\\*(?<comment>.*)"))
-          if (md) {
-            const index = this.move_infos.length
-            this.comments_pack[index] = this.comments_pack[index] || []
-            this.comments_pack[index].push(md["comment"])
-          }
         }
       }
     })
@@ -88,22 +97,6 @@ export default class KifParser extends ParserBase {
 
   get comments_pack() {
     return this._comments_pack
-  }
-
-  get __kif_format_move_regexp() {
-    return XRegExp(`
-        ^\\s*(?<number>\\d+)\\s+
-        (?<to>[１-９1-9一二三四五六七八九]{2})?
-        (?<same>同)?\\s*
-        (?<piece>成[銀桂香]|[王玉金銀全桂圭香杏角馬飛龍竜歩と])
-        (?<suffix>[左右直]?[寄引上]?)
-        (?<motion>不?成|打|合|生)?
-        (\\((?<origin_place>\\d{2})\\))? # KIFフォーマットの移動元用
-      `, 'xm')
-  }
-
-  get __kif_format_header_regexp() {
-    return XRegExp("(?<key>.*)：(?<value>.*)")
   }
 }
 
