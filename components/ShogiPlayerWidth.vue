@@ -54,7 +54,7 @@ export default {
     max-width: var(--sp_body_max_width)
 
   +mobile
-    &.is_mobile_style
+    &.is_mobile_style_on
       .ShogiPlayerWidth
         width: 100%
         max-width: none

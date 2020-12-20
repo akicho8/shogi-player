@@ -237,8 +237,8 @@
             b-radio-button(size="is-small" v-model="sp_flip" :native-value="true") ☖
 
           b-field(custom-class="is-small" label="モバイル時のプリセットサイズ自動適用")
-            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style") ON
-            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="") OFF
+            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style_on") ON
+            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style_off") OFF
 
           b-field(custom-class="is-small" label="盤の縦辺のセル数")
             b-slider(v-model="sp_dimension" :min="1" :max="18" :step="1")
@@ -382,7 +382,7 @@ export default {
       sp_run_mode: "edit_mode",
       sp_body_max_width: 35,
       sp_body_max_width: 35,
-      sp_mobile_style: "is_mobile_style",
+      sp_mobile_style: "is_mobile_style_on",
 
       // 影
       sp_shadow_offset: 2,

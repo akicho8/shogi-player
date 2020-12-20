@@ -96,7 +96,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// for mobile
   +mobile
-    &.is_mobile_style
+    &.is_mobile_style_on
       justify-content: center
       align-items: center
 </style>

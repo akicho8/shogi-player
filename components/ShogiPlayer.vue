@@ -77,7 +77,7 @@ export default {
     sp_blink:        { type: String, default: "is_blink_off",       },
     sp_pi_variant:   { type: String, default: "is_pi_variant_a1by",    },
     sp_bg_variant:   { type: String, default: "is_bg_variant_none", },
-    sp_mobile_style: { type: String, default: "is_mobile_style",    },
+    sp_mobile_style: { type: String, default: "is_mobile_style_on",    },
     sp_location_behavior: { type: String, default: "is_location_flip_on",    },
 
     run_mode:        { type: String,  default: "view_mode",         },

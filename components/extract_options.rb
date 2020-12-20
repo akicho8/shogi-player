@@ -6,7 +6,7 @@ rows = []
 Pathname(".").glob("**/*.{vue,scss,sass}") do |file|
   next if file.basename.to_s.match?(/MainDoc|StyleEditor/)
   file.readlines.grep(/\+defvar/).each do |e|
-    if md = e.match(/defvar\((\w+)\, (.*)\)\s*\/\/\s*(.*)\s*/)
+    if md = e.match(/defvar\((\w+)\,\s*(.*)\)\s*\/\/\s*(.*)\s*/)
       key, val, comment = md.captures
       rows << {
         "変数"   => "`--#{key}`",
@@ -36,6 +36,7 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_piece_brightness`                      |                       1.0 | 駒輝度                                                                |
 # >> | `--sp_board_piece_rate`                      | 90%                       | 盤のセル内の駒占有率                                                  |
 # >> | `--sp_board_piece_position`                  | center                    | 駒を選択できる範囲内の駒の縦位置                                      |
+# >> | `--sp_mix_blend_mode`                        | normal                    | 駒の mix-blend-mode の値                                              |
 # >> | `--sp_stand_piece_w`                         | 47px                      | 駒台のセル(W)                                                         |
 # >> | `--sp_stand_piece_h`                         | 50px                      | 駒台のセル(H)                                                         |
 # >> | `--sp_stand_piece_rate`                      | 80%                       | 駒台のセル内の駒占有率                                                |
@@ -71,7 +72,7 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_piece_count_gap_right`                 | 86%                       | 駒数の駒右端からのオフセット(横配置時)                                |
 # >> | `--sp_piece_count_gap_bottom`                | 32%                       | 駒数の駒底辺からのオフセット(縦配置時)                                |
 # >> | `--sp_piece_count_font_size`                 | 0.75rem                   | 駒数の文字サイズ                                                      |
-# >> | `--sp_piece_count_font_color`                |  rgba(0, 0, 0, 0.75)      | 駒数の文字色                                                          |
+# >> | `--sp_piece_count_font_color`                | rgba(0, 0, 0, 0.75)       | 駒数の文字色                                                          |
 # >> | `--sp_piece_count_bg_color`                  | rgba(255, 255, 255, 0.75) | 駒数の文字色背景                                                      |
 # >> | `--sp_piece_count_padding`                   | 3px                       | 駒数のパディング                                                      |
 # >> | `--sp_ground_color`                          | transparent               | グラウンド背景色                                                      |
@@ -90,7 +91,7 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_stand_hover_border_color`              | rgba(0, 0, 0, 0.2)        | 駒を持って駒箱の上にいるときのボーダー色                              |
 # >> | `--sp_stand_hover_border_stroke`             | 2px                       | 駒を持って駒箱の上にいるときのボーダーの太さ                          |
 # >> | `--sp_stand_horizontal_hoverable_min_height` |                         3 | edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分) |
-# >> | `--sp_board_aspect_ratio`                    | 109.7%                    | 盤の横を100としたときの縦の比率                                       |
+# >> | `--sp_board_aspect_ratio`                    |                     109.7 | 盤の横を100としたときの縦の比率                                       |
 # >> | `--sp_shadow_offset`                         |                         2 | 影の右下方法への長さ                                                  |
 # >> | `--sp_shadow_blur`                           |                         3 | 影の範囲                                                              |
 # >> | `--sp_shadow_color`                          | rgba(0, 0, 0, 0.4)        | 影の色                                                                |

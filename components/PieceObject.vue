@@ -223,7 +223,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// サイズ (mobile)
   +mobile
-    &.is_mobile_style
+    &.is_mobile_style_on
       .BoardOuter
         .PieceObject
           // 100% なので外側の TD の大きさになる
