@@ -1,7 +1,5 @@
 | 変数                                         | 初期値                    | 意味                                                                  |
 |----------------------------------------------|---------------------------|-----------------------------------------------------------------------|
-| `--sp_piece_color`                           | transparent               | 駒色                                                                  |
-| `--sp_piece_image`                           | none                      | グラウンド背景画像                                                    |
 | `--sp_piece_blur`                            |                         0 | 駒ぼかし                                                              |
 | `--sp_piece_grayscale`                       |                         0 | 駒グレースケール                                                      |
 | `--sp_piece_contrast`                        |                       1.0 | 駒コントラスト                                                        |
@@ -10,9 +8,9 @@
 | `--sp_piece_hue`                             |                       1.0 | 駒色相                                                                |
 | `--sp_piece_saturate`                        |                       1.0 | 駒彩度                                                                |
 | `--sp_piece_brightness`                      |                       1.0 | 駒輝度                                                                |
+| `--sp_piece_blend`                           | normal                    | 駒の mix-blend-mode の値                                              |
 | `--sp_board_piece_rate`                      | 90%                       | 盤のセル内の駒占有率                                                  |
 | `--sp_board_piece_position`                  | center                    | 駒を選択できる範囲内の駒の縦位置                                      |
-| `--sp_mix_blend_mode`                        | normal                    | 駒の mix-blend-mode の値                                              |
 | `--sp_stand_piece_w`                         | 47px                      | 駒台のセル(W)                                                         |
 | `--sp_stand_piece_h`                         | 50px                      | 駒台のセル(H)                                                         |
 | `--sp_stand_piece_rate`                      | 80%                       | 駒台のセル内の駒占有率                                                |
@@ -34,6 +32,7 @@
 | `--sp_board_hue`                             |                       1.0 | 色相                                                                  |
 | `--sp_board_saturate`                        |                       1.0 | 彩度                                                                  |
 | `--sp_board_brightness`                      |                       1.0 | 輝度                                                                  |
+| `--sp_board_blend`                           | normal                    | 盤の mix-blend-mode の値                                              |
 | `--sp_board_opacity`                         |                       1.0 | 非半透明度                                                            |
 | `--sp_board_padding`                         |                       1.5 | 盤の隅の隙間                                                          |
 | `--sp_board_radius`                          |                         5 | 盤の隅の丸め度合い                                                    |
@@ -45,7 +44,7 @@
 | `--sp_grid_star`                             | 10%                       | 星の大きさ                                                            |
 | `--sp_body_width`                            | 100%                      | 盤(駒台を含む)の幅                                                    |
 | `--sp_body_max_width`                        | none                      | 盤(駒台を含む)の最大幅                                                |
-| `--sp_piece_count_gap_right`                 | 86%                       | 駒数の駒右端からのオフセット(横配置時)                                |
+| `--sp_piece_count_gap_right`                 | 62%                       | 駒数の駒右端からのオフセット(横配置時)                                |
 | `--sp_piece_count_gap_bottom`                | 32%                       | 駒数の駒底辺からのオフセット(縦配置時)                                |
 | `--sp_piece_count_font_size`                 | 0.75rem                   | 駒数の文字サイズ                                                      |
 | `--sp_piece_count_font_color`                | rgba(0, 0, 0, 0.75)       | 駒数の文字色                                                          |

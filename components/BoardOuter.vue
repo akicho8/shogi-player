@@ -54,26 +54,27 @@ export default {
 
 .ShogiPlayerGround
   // 全体背景と同じ構成
-  +defvar(sp_board_color, rgba(0, 0, 0, 0.2))   // 盤の色
-  +defvar(sp_board_image, none)                 // 背景画像
-  +defvar(sp_board_blur, 0)                     // ぼかし
-  +defvar(sp_board_grayscale, 0%)               // グレースケール
-  +defvar(sp_board_contrast, 1.0)           // 駒コントラスト
-  +defvar(sp_board_invert, 0)               // 駒色反転
-  +defvar(sp_board_hue, 1.0)                    // 色相
-  +defvar(sp_board_saturate, 1.0)               // 彩度
-  +defvar(sp_board_brightness, 1.0)             // 輝度
+  +defvar(sp_board_color, rgba(0, 0, 0, 0.2))      // 盤の色
+  +defvar(sp_board_image, none)                    // 背景画像
+  +defvar(sp_board_blur, 0)                        // ぼかし
+  +defvar(sp_board_grayscale, 0%)                  // グレースケール
+  +defvar(sp_board_contrast, 1.0)                  // 駒コントラスト
+  +defvar(sp_board_invert, 0)                      // 駒色反転
+  +defvar(sp_board_hue, 1.0)                       // 色相
+  +defvar(sp_board_saturate, 1.0)                  // 彩度
+  +defvar(sp_board_brightness, 1.0)                // 輝度
+  +defvar(sp_board_blend, normal)                  // 盤の mix-blend-mode の値
 
-  +defvar(sp_board_opacity, 1.0)                // 非半透明度
-  +defvar(sp_board_padding, 1.5)                // 盤の隅の隙間
-  +defvar(sp_board_radius, 5)                   // 盤の隅の丸め度合い
+  +defvar(sp_board_opacity, 1.0)                   // 非半透明度
+  +defvar(sp_board_padding, 1.5)                   // 盤の隅の隙間
+  +defvar(sp_board_radius, 5)                      // 盤の隅の丸め度合い
 
-  +defvar(sp_grid_outer_stroke, 1.5)              // グリッドの外枠の太さ(紙面風のとき)
-  +defvar(sp_grid_outer_color, rgba(0, 0, 0, 0.5))   // グリッド外枠色
-  +defvar(sp_grid_color, rgba(0, 0, 0, 0.5))    // グリッド色
-  +defvar(sp_grid_stroke, 1)                    // グリッド太さ
-  +defvar(sp_grid_outer_texture_edge_stroke, 0) // 盤背景の縁取りの太さ(影の影響あり)
-  +defvar(sp_grid_star, 10%)                    // 星の大きさ
+  +defvar(sp_grid_outer_stroke, 1.5)               // グリッドの外枠の太さ(紙面風のとき)
+  +defvar(sp_grid_outer_color, rgba(0, 0, 0, 0.5)) // グリッド外枠色
+  +defvar(sp_grid_color, rgba(0, 0, 0, 0.5))       // グリッド色
+  +defvar(sp_grid_stroke, 1)                       // グリッド太さ
+  +defvar(sp_grid_outer_texture_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
+  +defvar(sp_grid_star, 10%)                       // 星の大きさ
 
   .BoardOuter
     width: 100%
@@ -84,7 +85,7 @@ export default {
     +is_overlay_origin
   .BoardOuterTexture
     +is_overlay_block
-    mix-blend-mode: var(--sp_mix_blend_mode)
+    mix-blend-mode: var(--sp_board_blend)
 
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
     +is_background_cover_by_image
@@ -123,7 +124,7 @@ export default {
   td
     height: calc(100% / var(--sp_dimension))
 
-  // border が BoardOuterTexture に負ける入れ子にしている
+  // border が BoardOuterTexture に負けるので入れ子にしている
   td
     +is_overlay_origin
     .CellBorder

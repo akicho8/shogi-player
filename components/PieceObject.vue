@@ -67,8 +67,6 @@ export default {
 
 .ShogiPlayerGround
   // 盤背景と同じ構成
-  // +defvar(sp_piece_color, transparent)      // 駒色
-  // +defvar(sp_piece_image, none)             // グラウンド背景画像
   +defvar(sp_piece_blur, 0)                 // 駒ぼかし
   +defvar(sp_piece_grayscale, 0)            // 駒グレースケール
   +defvar(sp_piece_contrast, 1.0)           // 駒コントラスト
@@ -77,12 +75,12 @@ export default {
   +defvar(sp_piece_hue, 1.0)                // 駒色相
   +defvar(sp_piece_saturate, 1.0)           // 駒彩度
   +defvar(sp_piece_brightness, 1.0)         // 駒輝度
+  +defvar(sp_piece_blend, normal)           // 駒の mix-blend-mode の値
 
   ////////////////////////////////////////////////////////////////////////////////
 
   +defvar(sp_board_piece_rate, 90%)            // 盤のセル内の駒占有率
   +defvar(sp_board_piece_position, center)     // 駒を選択できる範囲内の駒の縦位置
-  +defvar(sp_mix_blend_mode, normal)    // 駒の mix-blend-mode の値
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_w, 47px)              // 駒台のセル(W)
@@ -152,7 +150,7 @@ export default {
     // top: var(--piece_pull, 0%)
   .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
     +is_overlay_block
-    mix-blend-mode: var(--sp_mix_blend_mode)
+    mix-blend-mode: var(--sp_piece_blend)
 
     background-position: var(--sp_board_piece_position)
     background-repeat: no-repeat
