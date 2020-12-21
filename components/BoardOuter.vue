@@ -136,8 +136,8 @@ export default {
       &:after
         position: absolute
         content: ""
-        top:  calc(var(--sp_grid_star) * -0.5 - 0.5px) // -0.5px で中央に寄る
-        left: calc(var(--sp_grid_star) * -0.5 - 0.5px)
+        top:  calc(var(--sp_grid_star) * -0.5)
+        left: calc(var(--sp_grid_star) * -0.5)
         width:  var(--sp_grid_star)
         height: var(--sp_grid_star)
         border-radius: 50%
