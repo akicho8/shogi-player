@@ -229,7 +229,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// サイズ (mobile)
   +mobile
-    &.is_mobile_style_on
+    &.is_mobile_fit_on
       .BoardWood
         .PieceTap
           // 100% なので外側の TD の大きさになる

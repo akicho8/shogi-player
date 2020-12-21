@@ -30,7 +30,7 @@ export default {
         this.base.sp_blink,
         this.base.sp_pi_variant,
         this.base.sp_bg_variant,
-        this.base.sp_mobile_style,
+        this.base.sp_mobile_fit,
         this.base.new_flip ? "is_flip_on" : "is_flip_off",
       ]
     },
@@ -96,7 +96,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// for mobile
   +mobile
-    &.is_mobile_style_on
+    &.is_mobile_fit_on
       justify-content: center
       align-items: center
 </style>

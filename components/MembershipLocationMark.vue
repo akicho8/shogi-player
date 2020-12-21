@@ -76,7 +76,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// サイズ (mobile)
   +mobile
-    &.is_mobile_style_on
+    &.is_mobile_fit_on
       .MembershipLocationMark
         width:  var(--sp_stand_piece_w_mobile)
         height: var(--sp_stand_piece_h_mobile)

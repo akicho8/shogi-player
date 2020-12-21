@@ -219,6 +219,15 @@
             b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_off") none
 
         .box
+          .title.is-5 モバイル
+          b-field(custom-class="is-small" label="持駒等のサイズを縮小する")
+            b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_on") ON
+            b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_off") OFF
+          b-field(custom-class="is-small" label="縦配置にする")
+            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
+            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
+
+        .box
           .title.is-5 その他
           b-field(custom-class="is-small" label="共通の隙間")
             b-slider(v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
@@ -239,10 +248,6 @@
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_flip" :native-value="false") ☗
             b-radio-button(size="is-small" v-model="sp_flip" :native-value="true") ☖
-
-          b-field(custom-class="is-small" label="モバイル時のプリセットサイズ自動適用")
-            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style_on") ON
-            b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style_off") OFF
 
           b-field(custom-class="is-small" label="盤の縦辺のセル数")
             b-slider(v-model="sp_board_dimension" :min="1" :max="18" :step="1")
@@ -266,7 +271,7 @@
               template(v-for="e in KifuBookInfo.values")
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="棋譜")
-            b-input(size="is-small" v-model="kifu_body" type="textarea")
+            b-input(size="is-small" v-model="kifu_body" type="textarea" :rows="12")
 
         .box
           .title.is-5 対局者情報
@@ -384,10 +389,10 @@ export default {
       sp_hpos: "is_hcentered",
       sp_vpos: "is_vcentered",
       sp_layout: "is_vertical",
-      sp_run_mode: "edit_mode",
+      sp_run_mode: DEVELOPMENT_P ? "edit_mode" : "view_mode",
       sp_body_max_width: 35,
-      sp_body_max_width: 35,
-      sp_mobile_style: "is_mobile_style_on",
+      sp_mobile_fit: "is_mobile_fit_on",
+      sp_mobile_vertical: "is_mobile_vertical_on",
 
       // 影
       sp_shadow_offset: 2,
@@ -441,9 +446,9 @@ export default {
 
       kifu_body: null,
 
-      summary_show: true,
-      slider_show: true,
-      controller_show: true,
+      summary_show:    DEVELOPMENT_P,
+      slider_show:     DEVELOPMENT_P,
+      controller_show: DEVELOPMENT_P,
     }
   },
 
@@ -471,9 +476,6 @@ export default {
   },
 
   methods: {
-    player_info_click_handle(location, player_info) {
-      this.$buefy.toast.open({message: `${location.name} ${player_info.name}`, queue: false, type: "is-white"})
-    },
     sidebar_toggle_handle() {
       this.sidebar_p = !this.sidebar_p
     },
@@ -534,29 +536,29 @@ export default {
 
     sp_params() {
       let params = {}
-      params.player_info_click_handle = this.player_info_click_handle
-      params.sp_layout                = this.sp_layout
-      params.sp_blink                 = this.sp_blink
-      params.sp_hpos                  = this.sp_hpos
-      params.sp_vpos                  = this.sp_vpos
-      params.sp_fullheight            = this.sp_fullheight
-      params.sp_balloon    = this.sp_balloon
-      params.sp_layer                 = this.sp_layer
-      params.sp_board_shadow                = this.sp_board_shadow
-      params.sp_pi_variant            = this.sp_pi_variant
-      params.sp_bg_variant            = this.sp_bg_variant
-      params.sp_mobile_style          = this.sp_mobile_style
-      params.run_mode                 = this.sp_run_mode
-      params.flip                     = this.sp_flip
-      params.debug_mode_p             = this.false
-      params.start_turn               = -1
-      params.kifu_body                = this.kifu_body
-      params.sound_effect             = true
-      params.setting_button_show      = false
-      params.summary_show             = this.summary_show
-      params.slider_show              = this.slider_show
-      params.controller_show          = this.controller_show
-      params.player_info              = this.player_info
+      params.sp_layout           = this.sp_layout
+      params.sp_blink            = this.sp_blink
+      params.sp_hpos             = this.sp_hpos
+      params.sp_vpos             = this.sp_vpos
+      params.sp_fullheight       = this.sp_fullheight
+      params.sp_balloon          = this.sp_balloon
+      params.sp_layer            = this.sp_layer
+      params.sp_board_shadow     = this.sp_board_shadow
+      params.sp_pi_variant       = this.sp_pi_variant
+      params.sp_bg_variant       = this.sp_bg_variant
+      params.sp_mobile_fit       = this.sp_mobile_fit
+      params.sp_mobile_vertical  = this.sp_mobile_vertical
+      params.run_mode            = this.sp_run_mode
+      params.flip                = this.sp_flip
+      params.debug_mode_p        = false
+      params.start_turn          = -1
+      params.kifu_body           = this.kifu_body
+      params.sound_effect        = true
+      params.setting_button_show = false
+      params.summary_show        = this.summary_show
+      params.slider_show         = this.slider_show
+      params.controller_show     = this.controller_show
+      params.player_info         = this.player_info
       return params
     },
 
