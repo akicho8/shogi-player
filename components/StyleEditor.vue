@@ -100,7 +100,7 @@
           b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線はブラウザ依存 Safari: 1.5px, Chrome: 2.0px")
             b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
           b-field(custom-class="is-small" label="星")
-            b-slider(v-model="sp_grid_star" :min="0" :max="100" :step="0.01")
+            b-slider(v-model="sp_grid_star_size" :min="0" :max="100" :step="0.01")
 
         .box
           .title.is-5 駒
@@ -419,7 +419,7 @@ export default {
       sp_grid_outer_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_stroke: 1,
-      sp_grid_star: 10,
+      sp_grid_star_size: 10,
 
       sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
       sp_piece_box_piece_w: 38,
@@ -626,7 +626,7 @@ export default {
           --sp_grid_outer_color:              ${this.hsla_format(this.sp_grid_outer_color)};
           --sp_grid_stroke:              ${this.sp_grid_stroke};
           --sp_grid_outer_stroke:        ${this.sp_grid_outer_stroke};
-          --sp_grid_star:                ${this.sp_grid_star}%;
+          --sp_grid_star_size:                ${this.sp_grid_star_size}%;
 
           // 駒
           --sp_piece_blur:               ${this.sp_piece_blur};

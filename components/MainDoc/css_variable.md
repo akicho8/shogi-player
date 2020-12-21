@@ -41,7 +41,7 @@
 | `--sp_grid_color`                            | rgba(0, 0, 0, 0.5)        | グリッド色                                                            |
 | `--sp_grid_stroke`                           |                         1 | グリッド太さ                                                          |
 | `--sp_grid_outer_texture_edge_stroke`        |                         0 | 盤背景の縁取りの太さ(影の影響あり)                                    |
-| `--sp_grid_star`                             | 10%                       | 星の大きさ                                                            |
+| `--sp_grid_star_size`                             | 10%                       | 星の大きさ                                                            |
 | `--sp_body_width`                            | 100%                      | 盤(駒台を含む)の幅                                                    |
 | `--sp_body_max_width`                        | none                      | 盤(駒台を含む)の最大幅                                                |
 | `--sp_piece_count_gap_right`                 | 62%                       | 駒数の駒右端からのオフセット(横配置時)                                |
