@@ -2,6 +2,7 @@
 .TurnSliderBlock(v-if="base.inside_slider_show_p")
   //- input.TurnSliderBlock(type="range" :value="base.turn_offset" @input="base.current_turn_set($event.target.value)" :min="base.turn_offset_min" :max="base.turn_offset_max" ref="TurnSliderBlock")
   b-slider(
+    size="is-small"
     :value="base.turn_offset"
     @input="base.current_turn_set"
     :min="base.turn_offset_min"
