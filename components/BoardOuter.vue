@@ -10,8 +10,20 @@
 
   table.BoardInner
     tr(v-for="(_, y) in base.mediator.dimension")
-      td(v-for="(_, x) in base.mediator.dimension")
-        PieceObject(:base="base" :piece_texture_class="base.mediator.board_piece_fore_class([x, y])")
+      td(
+        v-for="(_, x) in base.mediator.dimension"
+        @pointerdown="base.board_cell_pointerdown_handle([x, y], $event)"
+        @click.stop.prevent="base.board_cell_left_click([x, y], $event)"
+        @click.stop.prevent.right="base.board_cell_right_click([x, y], $event)"
+        @mouseover="base.board_mouseover_handle([x, y], $event)"
+        @mouseleave="base.mouseleave_handle"
+        )
+        PieceObject(
+          :base="base"
+          :class="base.board_piece_control_class([x, y])"
+          :style="base.board_piece_back_style([x, y])"
+          :piece_texture_class="base.mediator.board_piece_fore_class([x, y])"
+          )
 </template>
 
 <script>
@@ -29,6 +41,16 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+
+// 外枠 border をどこに適用するか？
+// |-------------------+--------------------------+------------------------------------+------------------------------------+------|
+// | 場所              | よい                     | だめ                               | 備考                               | 結果 |
+// |-------------------+--------------------------+------------------------------------+------------------------------------+------|
+// | BoardOuter        | わかりやすい             | Chromeで隙間ができる               | わかりやすい気がしていただけ       |      |
+// | BoardOuterTexture | 角を丸めても縁取りできる | 影の影響がある                     | 画像に縁取りできても別に嬉しくない |      |
+// | table.BoardInner  | 普通に考えてここ         | グリッドと外枠に隙間が入れられない | 隙間を入れれても嬉しくない         | ←   |
+// |-------------------+--------------------------+------------------------------------+------------------------------------+------|
+
 .ShogiPlayerGround
   // 全体背景と同じ構成
   +defvar(sp_board_color, rgba(0, 0, 0, 0.2))   // 盤の色
@@ -61,20 +83,52 @@ export default {
     +is_overlay_origin
   .BoardOuterTexture
     +is_overlay_block
-    mix-blend-mode: difference
+    mix-blend-mode: var(--sp_mix_blend_mode)
 
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
     +is_background_cover_by_image
     background-image: var(--sp_board_image)  // none でスルーする
-    background-image: url("../assets/inspect/256x256.png")
+    // background-image: url("../assets/inspect/256x256.png")
 
     border-radius: calc(var(--sp_board_radius) * 1px)
     border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
 
+  &.is_board_shadow_box
+    .BoardOuterTexture
+      +filter_box_shadow(1, board_filter_params_without_drop_shadow())
+  &.is_board_shadow_drop
+    .BoardOuterTexture
+      +filter_drop_shadow(1, board_filter_params_without_drop_shadow())
+  &.is_board_shadow_none
+    .BoardOuterTexture
+      filter: board_filter_params_without_drop_shadow()
+
   .BoardInner
+    isolation: isolate // オーバーレイの兄(BoardOuterTexture)の上に表示するため
+
     width: 100%
     height: 100%
     border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_outer_color)
+
+    // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
+    @extend %is_unselectable
+
+    table-layout: fixed    // 横幅均等
+
+  tr:nth-child(3n+4)
+    td:nth-child(3n+4)
+      position: relative
+      &:after
+        position: absolute
+        content: ""
+        top:  calc(var(--sp_grid_star) * -0.5 - 0.5px) // -0.5px で中央に寄る
+        left: calc(var(--sp_grid_star) * -0.5 - 0.5px)
+        width:  var(--sp_grid_star)
+        height: var(--sp_grid_star)
+        border-radius: 50%
+        background-color: var(--sp_grid_color)
+
   td
     height: calc(100% / var(--sp_dimension)) // 縦幅均等
+    border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 </style>
