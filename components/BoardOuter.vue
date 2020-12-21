@@ -114,6 +114,7 @@ export default {
     width: 100%
     height: 100%
     border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_outer_color)
+    border-collapse: collapse // td同士のborderを共有する
 
     // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
     @extend %is_unselectable
@@ -123,6 +124,7 @@ export default {
   // 縦幅均等
   td
     height: calc(100% / var(--sp_dimension))
+    // border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 
   // border が BoardOuterTexture に負けるので入れ子にしている
   td
