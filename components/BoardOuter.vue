@@ -83,10 +83,7 @@ export default {
     +is_overlay_origin
   .BoardOuterTexture
     +is_overlay_block
-    // mix-blend-mode: var(--sp_mix_blend_mode)
-    // isolation: isolate
-
-    z-index: -1
+    mix-blend-mode: var(--sp_mix_blend_mode)
 
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
     +is_background_cover_by_image
@@ -107,6 +104,8 @@ export default {
       filter: board_filter_params_without_drop_shadow()
 
   .BoardInner
+    isolation: isolate // オーバーレイの兄(BoardOuterTexture)の上に表示するため
+
     width: 100%
     height: 100%
     border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_outer_color)
