@@ -31,6 +31,7 @@ export default {
         this.base.sp_pi_variant,
         this.base.sp_bg_variant,
         this.base.sp_mobile_fit,
+        this.base.sp_mobile_vertical,
         this.base.new_flip ? "is_flip_on" : "is_flip_off",
       ]
     },
