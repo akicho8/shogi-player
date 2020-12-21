@@ -13,7 +13,7 @@
     @mouseover="base.piece_box_mouseover_handle(piece, $event)"
     @mouseleave="base.mouseleave_handle"
     )
-    PieceObject(
+    PieceTap(
       :base="base"
       :class="base.piece_box_piece_control_class(piece)"
       :piece_texture_class="base.piece_box_piece_texture_class(piece)"
@@ -23,12 +23,12 @@
 
 <script>
 import { support } from "./support.js"
-import PieceObject from "./PieceObject.vue"
+import PieceTap from "./PieceTap.vue"
 
 export default {
   mixins: [support],
   components: {
-    PieceObject,
+    PieceTap,
   },
   computed: {
     component_class() {

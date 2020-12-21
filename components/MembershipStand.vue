@@ -11,7 +11,7 @@
     @mouseover="base.piece_stand_mouseover_handle(location, piece, $event)"
     @mouseleave="base.mouseleave_handle"
     )
-    PieceObject(
+    PieceTap(
       :base="base"
       :class="piece_control_class(piece)"
       :piece_texture_class="piece_fore_class(piece)"
@@ -21,7 +21,7 @@
 
 <script>
 import _ from "lodash"
-import PieceObject from "./PieceObject.vue"
+import PieceTap from "./PieceTap.vue"
 import { support } from "./support.js"
 
 export default {
@@ -33,7 +33,7 @@ export default {
   },
 
   components: {
-    PieceObject,
+    PieceTap,
   },
 
   methods: {
@@ -161,7 +161,7 @@ export default {
   &.is_layer_on
     .MembershipStand
       +is_layer_border
-      .PieceObject
+      .PieceTap
         +is_layer_border
 
   ////////////////////////////////////////////////////////////////////////////////

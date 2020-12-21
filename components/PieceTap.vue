@@ -1,23 +1,23 @@
 <template lang="pug">
-.PieceObject(v-if="count >= 1")
+.PieceTap(v-if="count >= 1")
   // 駒を押せる部分
   .PieceTexture
-    // PieceTexture の背景に画像を設定すると影が PieceObjectCount にまで適用されるため個別にしている
+    // PieceTexture の背景に画像を設定すると影が PieceTapCount にまで適用されるため個別にしている
     .PieceTextureSelf(:class="piece_texture_class")
     // 駒テクスチャの大きさに依存させたいので中に PieceTexture のなかに入れている
-    PieceObjectCount(:count="count")
+    PieceTapCount(:count="count")
 </template>
 
 <script>
 import _ from "lodash"
 import { support } from "./support.js"
-import PieceObjectCount from "./PieceObjectCount.vue"
+import PieceTapCount from "./PieceTapCount.vue"
 
 export default {
-  name: "PieceObject",
+  name: "PieceTap",
   mixins: [support],
   components: {
-    PieceObjectCount,
+    PieceTapCount,
   },
   props: {
     piece_texture_class: { required: true              },
@@ -30,14 +30,14 @@ export default {
 @import "./support.sass"
 //
 // .CursorObject                         // マウスの (x, y) を反映
-//   .PieceObject.CursorObjectFlip     // 反転するときはここ
+//   .PieceTap.CursorObjectFlip     // 反転するときはここ
 //     .PieceTexture
 //       .PieceTextureSelf(駒の種類を定義するクラスたち)
 //
 
 // 自分でもよくわからなくなっている
 // 選択できる駒に指定する
-=PieceObjectSelectable
+=PieceTapSelectable
   // 選択が可能
   &.selectable_p
     &:hover
@@ -101,7 +101,7 @@ export default {
   +defvar(sp_piece_box_piece_rate_mobile, 90%) // 駒箱のセル内の駒占有率 ※モバイル時
 
   // 共通
-  .PieceObject
+  .PieceTap
     // cursor: default // テキスト選択「I」ではなく矢印カーソルとする
     &.selectable_p
       &:hover
@@ -109,12 +109,12 @@ export default {
 
   // 確認用
   &.is_layer_on
-    .PieceObject
+    .PieceTap
       +is_layer_border
     .PieceTexture
       +is_layer_border($danger)
 
-  .PieceObject
+  .PieceTap
     // セル内の PieceTexture の配置
     // ここで縦位置を調整しようとすると先後別に分けないといけない
     // 一方、PieceTexture は共通の処理でよい
@@ -124,17 +124,17 @@ export default {
     justify-content: center
     align-items: center  // 先手の下を揃えて配置したいときは flex-end にする
 
-  .PieceObject
-    +PieceObjectSelectable
+  .PieceTap
+    +PieceTapSelectable
     &.origin_place
       background-color: $sp_move_bg_color
 
   &.is_blink_off
-    .PieceObject
+    .PieceTap
       &.current
         background-color: $sp_move_bg_color
   &.is_blink_on
-    .PieceObject
+    .PieceTap
       &.current
         animation: blink_keyframes 0.5s ease-in-out infinite alternate
         @keyframes blink_keyframes
@@ -164,7 +164,7 @@ export default {
     z-index: 256                  // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い。10だとsidebarに負ける
     pointer-events: none          // 一切のイベントに反応させない
 
-    .PieceObject
+    .PieceTap
       // この要素の半分を左上に移動する
       position: relative
       top: -50%
@@ -182,7 +182,7 @@ export default {
 
   // 盤面
   .BoardOuter
-    .PieceObject
+    .PieceTap
       width:  100%              // 外側の TD に合わせる
       height: 100%
     .PieceTexture
@@ -191,7 +191,7 @@ export default {
 
   // 駒台
   .Membership
-    .PieceObject
+    .PieceTap
       width:  var(--sp_stand_piece_w)
       height: var(--sp_stand_piece_h)
     .PieceTexture
@@ -200,7 +200,7 @@ export default {
 
   // 駒箱
   .PieceBox
-    .PieceObject
+    .PieceTap
       width:  var(--sp_piece_box_piece_w)
       height: var(--sp_piece_box_piece_h)
     .PieceTexture
@@ -212,7 +212,7 @@ export default {
   .CursorObject
     width:  var(--sp_stand_piece_w)
     height: var(--sp_stand_piece_h)
-    .PieceObject
+    .PieceTap
       width:  100%     // 外側の大きさに合わせる
       height: 100%
     .PieceTexture
@@ -223,17 +223,17 @@ export default {
   +mobile
     &.is_mobile_style_on
       .BoardOuter
-        .PieceObject
+        .PieceTap
           // 100% なので外側の TD の大きさになる
       .Membership
-        .PieceObject
+        .PieceTap
           width:  var(--sp_stand_piece_w_mobile)
           height: var(--sp_stand_piece_h_mobile)
         .PieceTexture
           width:  var(--sp_stand_piece_rate_mobile)
           height: var(--sp_stand_piece_rate_mobile)
       .PieceBox
-        .PieceObject
+        .PieceTap
           width:  var(--sp_piece_box_piece_w_mobile)
           height: var(--sp_piece_box_piece_h_mobile)
         .PieceTexture

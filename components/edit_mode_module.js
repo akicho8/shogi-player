@@ -762,26 +762,26 @@ export default {
     // 構造
     //
     // .CursorObject                        // マウスの (x, y) を反映
-    //   .PieceObject.CursorObjectFlip     // 反転するときはここ
+    //   .PieceTap.CursorObjectFlip     // 反転するときはここ
     //     .PieceTexture
     //       .PieceTextureSelf(駒の種類を定義するクラスたち)
     //
     virtual_piece_dom_create(soldier) {
       this.$CursorObject    = this.el_create(["CursorObject"])
-      const PieceObject      = this.el_create(["PieceObject"])
+      const PieceTap      = this.el_create(["PieceTap"])
       const PieceTexture     = this.el_create(["PieceTexture"])
       const PieceTextureSelf = this.el_create(["PieceTextureSelf", ...soldier.to_class_list])
 
       // 反転しているとき(盤上 or 駒台)の駒は持ったときに逆になっているので逆にする
       if (this.new_flip) {
         if (this.soldier_or_stand_p) {
-          PieceObject.classList.add("CursorObjectFlip") // 盤面を反転している場合は駒も反転する
+          PieceTap.classList.add("CursorObjectFlip") // 盤面を反転している場合は駒も反転する
         }
       }
 
       PieceTexture.appendChild(PieceTextureSelf)
-      PieceObject.appendChild(PieceTexture)
-      this.$CursorObject.appendChild(PieceObject)
+      PieceTap.appendChild(PieceTexture)
+      this.$CursorObject.appendChild(PieceTap)
 
       // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
       this.$CursorObject.style.left = "-50%"

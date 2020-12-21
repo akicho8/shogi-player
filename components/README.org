@@ -6,12 +6,12 @@
 
 * CSSに関して
 
-  td.PieceObject にしてはいけない
+  td.PieceTap にしてはいけない
     ・駒の反転に連動して星が反転する
     ・移動元の色を半透明にすると星まで半透明になる
 
   td                        ← TD にはいっさい駒の影響を与えないこと
-    .PieceObject             ← 選択可能なことを知らせたりする領域
+    .PieceTap             ← 選択可能なことを知らせたりする領域
       .PieceTexture           ← 実際の駒テクスチャ
 
   .board_container.font_size_base の下だけにサイズを指定しているので、その下の要素はすべて相対サイズになる

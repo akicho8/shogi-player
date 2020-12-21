@@ -19,7 +19,7 @@
         @mouseleave="base.mouseleave_handle"
         )
         .CellBorder
-        PieceObject(
+        PieceTap(
           :base="base"
           :class="base.board_piece_control_class([x, y])"
           :style="base.board_piece_back_style([x, y])"
@@ -29,13 +29,13 @@
 
 <script>
 import { support } from "./support.js"
-import PieceObject from "./PieceObject.vue"
+import PieceTap from "./PieceTap.vue"
 
 export default {
   name: "BoardOuter",
   mixins: [support],
   components: {
-    PieceObject,
+    PieceTap,
   },
 }
 </script>

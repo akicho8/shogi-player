@@ -1,5 +1,5 @@
 <template lang="pug">
-.PieceObjectCount.is-unselectable(v-if="count >= 2")
+.PieceTapCount.is-unselectable(v-if="count >= 2")
   | {{count}}
 </template>
 
@@ -7,7 +7,7 @@
 import { support } from "./support.js"
 
 export default {
-  name: "PieceObjectCount",
+  name: "PieceTapCount",
   mixins: [support],
   props: {
     count: { type: Number, required: true },
@@ -27,7 +27,7 @@ export default {
   +defvar(sp_piece_count_padding, 3px)                        // 駒数のパディング
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
-  .PieceObjectCount
+  .PieceTapCount
     @extend %is_piece_count_color_set
     font-size:        var(--sp_piece_count_font_size)
     padding:          var(--sp_piece_count_padding)
@@ -40,7 +40,7 @@ export default {
     position: relative // 相対的にずらすため、かつ z-index 用
 
   &.is_layer_on
-    .PieceObjectCount
+    .PieceTapCount
       +is_layer_border
 
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
@@ -49,17 +49,17 @@ export default {
       display: flex
       justify-content: center
       align-items: center
-    .PieceObjectCount
+    .PieceTapCount
       top:    unset
       bottom: unset
       right:  unset
       left:   unset
     .is_white
-      .PieceObjectCount
+      .PieceTapCount
         right: var(--sp_piece_count_gap_right) // 右端から横幅分押すと左端の外になる
         transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
     .is_black
-      .PieceObjectCount
+      .PieceTapCount
         left: var(--sp_piece_count_gap_right)  // 左端から横幅分押すと右端の外になる
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
@@ -70,17 +70,17 @@ export default {
         display: flex
         justify-content: center
         align-items: center
-      .PieceObjectCount
+      .PieceTapCount
         top:    unset     // is_horizontal の状態で mobile 表示するときこれらをリセットしないとパラメータがまざってしまう
         bottom: unset
         right:  unset
         left:   unset
       &.is_white
-        .PieceObjectCount
+        .PieceTapCount
           bottom: var(--sp_piece_count_gap_bottom)
           transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
       &.is_black
-        .PieceObjectCount
+        .PieceTapCount
           top: var(--sp_piece_count_gap_bottom)
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
@@ -89,6 +89,6 @@ export default {
       display: flex
       justify-content: center
       align-items: center
-    .PieceObjectCount
+    .PieceTapCount
       top: var(--sp_piece_count_gap_bottom)
 </style>
