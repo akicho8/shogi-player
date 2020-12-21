@@ -70,4 +70,4 @@
 | `--sp_shadow_offset`                         |                         2 | 影の右下方法への長さ                                                  |
 | `--sp_shadow_blur`                           |                         3 | 影の範囲                                                              |
 | `--sp_shadow_color`                          | rgba(0, 0, 0, 0.4)        | 影の色                                                                |
-| `--sp_dimension`                             |                         9 | 盤の縦辺のセル数                                                      |
+| `--sp_board_dimension`                             |                         9 | 盤の縦辺のセル数                                                      |

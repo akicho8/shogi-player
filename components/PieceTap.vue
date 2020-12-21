@@ -48,22 +48,22 @@ export default {
       +desktop
         // 選択できる駒だけ反応する
         // background プロパティをつかうと他の設定をリセットしてしまうので注意
-        background-color: $sp_selectable_bg_color
+        background-color: var(--sp_piece_selectable_color)
 
   // 持ち上げたとき
   &.holding_p
     +desktop
-      opacity: 0.4  // 駒を持ち上げたので元の駒を薄くする
+      opacity: var(--sp_hold_origin_opacity)  // 駒を持ち上げたので元の駒を含めて薄くする
     +touch
-      background-color: $sp_holding_bg_color_if_touch
+      background-color: var(--sp_hold_color_if_touch)
       // さらに駒を持ったときは色を濃くする
       &:hover
-        background-color: $sp_holding_bg_color_if_touch
+        background-color: var(--sp_hold_color_if_touch)
 
-  // なんだこれ？？？
+  // 持ち上げれる駒
   &.hoverable_p
     &:hover
-      background-color: $sp_selectable_bg_color
+      background-color: var(--sp_piece_selectable_color)
 
 .ShogiPlayerGround
   // 盤背景と同じ構成
@@ -79,8 +79,16 @@ export default {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  +defvar(sp_board_piece_rate, 90%)            // 盤のセル内の駒占有率
-  +defvar(sp_board_piece_position, center)     // 駒を選択できる範囲内の駒の縦位置
+  +defvar(sp_board_piece_rate, 90%)                         // 盤のセル内の駒占有率
+  +defvar(sp_board_piece_position, center)                  // 駒を選択できる範囲内の駒の縦位置
+
+  +defvar(sp_piece_blink_color0, hsla(0, 0%, 0%, 0.25))     // 最後に動かした駒の背景色1(点滅:0%)
+  +defvar(sp_piece_blink_color1, hsla(0, 0%, 0%, 0.10))     // 最後に動かした駒の背景色2(点滅:100%)
+
+  +defvar(sp_piece_origin_color, hsla(0, 0%, 0%, 0.10))     // 最後に動かした駒の元の位置の背景色
+  +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.10)) // 持ち上げれる駒の背景色
+  +defvar(sp_hold_color_if_touch, hsla(0, 0%, 0%, 0.25))    // 持ち上げた駒の背景色
+  +defvar(sp_hold_origin_opacity, 0.4)                      // 持ち上げた駒の元のセルの非透明度
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_w, 47px)              // 駒台のセル(W)
@@ -127,21 +135,21 @@ export default {
   .PieceTap
     +PieceTapSelectable
     &.origin_place
-      background-color: $sp_move_bg_color
+      background-color: var(--sp_piece_origin_color)
 
   &.is_blink_off
     .PieceTap
       &.current
-        background-color: $sp_move_bg_color
+        background-color: var(--sp_piece_origin_color)
   &.is_blink_on
     .PieceTap
       &.current
         animation: blink_keyframes 0.5s ease-in-out infinite alternate
         @keyframes blink_keyframes
           0%
-            background-color: $sp_current_bg_blink_color0
+            background-color: var(--sp_piece_blink_color0)
           100%
-            background-color: $sp_current_bg_blink_color1
+            background-color: var(--sp_piece_blink_color1)
 
   ////////////////////////////////////////////////////////////////////////////////
   .PieceTexture

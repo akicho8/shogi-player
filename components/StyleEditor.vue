@@ -245,7 +245,7 @@
             b-radio-button(size="is-small" v-model="sp_mobile_style" native-value="is_mobile_style_off") OFF
 
           b-field(custom-class="is-small" label="盤の縦辺のセル数")
-            b-slider(v-model="sp_dimension" :min="1" :max="18" :step="1")
+            b-slider(v-model="sp_board_dimension" :min="1" :max="18" :step="1")
 
           b-field(custom-class="is-small" label="コントローラー表示")
             b-radio-button(size="is-small" v-model="controller_show" :native-value="false") OFF
@@ -427,7 +427,7 @@ export default {
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a1by",
       sp_bg_variant: "is_bg_variant_none",
-      sp_dimension: 9,
+      sp_board_dimension: 9,
       ////////////////////////////////////////////////////////////////////////////////
 
       kifu_sample_key: null,
@@ -584,7 +584,7 @@ export default {
         .StyleEditor {
           --sp_body_max_width:           ${this.sp_body_max_width}vw;
           --sp_common_gap:               ${this.sp_common_gap}px;
-          --sp_dimension:                ${this.sp_dimension};
+          --sp_board_dimension:                ${this.sp_board_dimension};
 
           // 背景
           --sp_ground_color:             ${this.hsla_format(this.sp_ground_color)};

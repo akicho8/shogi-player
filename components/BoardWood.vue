@@ -125,7 +125,7 @@ export default {
 
   // 縦幅均等
   td
-    height: calc(100% / var(--sp_dimension))
+    height: calc(100% / var(--sp_board_dimension))
     border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 
   // border が BoardWoodTexture に負けるので入れ子にしている
