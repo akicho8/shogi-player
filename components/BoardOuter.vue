@@ -6,25 +6,27 @@
   // それを防ぐためには .BoardOuter の :after に背景を指定すればよい
   // が、わかりやすくするために背景専用の BoardOuterBG を追加した
   // これなら BoardOuterTexture に適用した影が table に影響しない
-  .BoardOuterTexture
+  .BoardOuterTexture.is-overlay
 
-  table.BoardInner
-    tr(v-for="(_, y) in base.mediator.dimension")
-      td(
-        v-for="(_, x) in base.mediator.dimension"
-        @pointerdown="base.board_cell_pointerdown_handle([x, y], $event)"
-        @click.stop.prevent="base.board_cell_left_click([x, y], $event)"
-        @click.stop.prevent.right="base.board_cell_right_click([x, y], $event)"
-        @mouseover="base.board_mouseover_handle([x, y], $event)"
-        @mouseleave="base.mouseleave_handle"
-        )
-        .CellBorder
-        PieceTap(
-          :base="base"
-          :class="base.board_piece_control_class([x, y])"
-          :style="base.board_piece_back_style([x, y])"
-          :piece_texture_class="base.mediator.board_piece_fore_class([x, y])"
+  // BoardOuterTexture の兄弟として BoardInner を置くと BoardOuterTexture に BoardInner の border が負ける
+  .BoardInnerWithPadding.is-overlay
+    table.BoardInner
+      tr(v-for="(_, y) in base.mediator.dimension")
+        td(
+          v-for="(_, x) in base.mediator.dimension"
+          @pointerdown="base.board_cell_pointerdown_handle([x, y], $event)"
+          @click.stop.prevent="base.board_cell_left_click([x, y], $event)"
+          @click.stop.prevent.right="base.board_cell_right_click([x, y], $event)"
+          @mouseover="base.board_mouseover_handle([x, y], $event)"
+          @mouseleave="base.mouseleave_handle"
           )
+          .CellBorder
+          PieceTap(
+            :base="base"
+            :class="base.board_piece_control_class([x, y])"
+            :style="base.board_piece_back_style([x, y])"
+            :piece_texture_class="base.mediator.board_piece_fore_class([x, y])"
+            )
 </template>
 
 <script>
@@ -79,12 +81,9 @@ export default {
   .BoardOuter
     width: 100%
     height: 100%
-    padding: calc(var(--sp_board_padding) * 1%)
-
-  .BoardOuter
     +is_overlay_origin
+
   .BoardOuterTexture
-    +is_overlay_block
     mix-blend-mode: var(--sp_board_blend)
 
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
@@ -105,6 +104,9 @@ export default {
     .BoardOuterTexture
       filter: board_filter_params_without_drop_shadow()
 
+  .BoardInnerWithPadding
+    padding: calc(var(--sp_board_padding) * 1%)
+
   .BoardInner
     // これを指定するとオーバーレイの兄(BoardOuterTexture)の上に表示できる
     // が、駒のテクスチャに mix-blend-mode が効かなくなる
@@ -124,14 +126,14 @@ export default {
   // 縦幅均等
   td
     height: calc(100% / var(--sp_dimension))
-    // border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
+    border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 
   // border が BoardOuterTexture に負けるので入れ子にしている
-  td
-    +is_overlay_origin
-    .CellBorder
-      +is_overlay_block
-      border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
+  // td
+  //   +is_overlay_origin
+  //   .CellBorder
+  //     +is_overlay_block
+  //     // border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 
   tr:nth-child(3n+4)
     td:nth-child(3n+4)
