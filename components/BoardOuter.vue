@@ -18,6 +18,7 @@
         @mouseover="base.board_mouseover_handle([x, y], $event)"
         @mouseleave="base.mouseleave_handle"
         )
+        .CellBorder
         PieceObject(
           :base="base"
           :class="base.board_piece_control_class([x, y])"
@@ -104,7 +105,10 @@ export default {
       filter: board_filter_params_without_drop_shadow()
 
   .BoardInner
-    isolation: isolate // オーバーレイの兄(BoardOuterTexture)の上に表示するため
+    // これを指定するとオーバーレイの兄(BoardOuterTexture)の上に表示できる
+    // が、駒のテクスチャに mix-blend-mode が効かなくなる
+    // ので指定してはいけない
+    // isolation: isolate
 
     width: 100%
     height: 100%
@@ -114,6 +118,17 @@ export default {
     @extend %is_unselectable
 
     table-layout: fixed    // 横幅均等
+
+  // 縦幅均等
+  td
+    height: calc(100% / var(--sp_dimension))
+
+  // border が BoardOuterTexture に負ける入れ子にしている
+  td
+    +is_overlay_origin
+    .CellBorder
+      +is_overlay_block
+      border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 
   tr:nth-child(3n+4)
     td:nth-child(3n+4)
@@ -127,8 +142,4 @@ export default {
         height: var(--sp_grid_star)
         border-radius: 50%
         background-color: var(--sp_grid_color)
-
-  td
-    height: calc(100% / var(--sp_dimension)) // 縦幅均等
-    border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 </style>
