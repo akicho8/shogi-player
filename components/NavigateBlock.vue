@@ -1,6 +1,6 @@
 <template lang="pug">
 .NavigateBlock(v-if="base.inside_navigate_p")
-  .buttons.has-addons.is-centered.is-paddingless(v-if="base.inside_controller_show_p")
+  .buttons.are-small.has-addons.is-centered.is-paddingless(v-if="base.inside_controller_show_p")
     template(v-if="base.inside_controller_show_p")
       button.button.first(    ref="first"    @click.stop.prevent="base.move_to_first"):             b-icon(icon="menu-left")
       button.button.previous( ref="previous" @click.stop.prevent="base.relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
