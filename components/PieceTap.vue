@@ -2,22 +2,22 @@
 .PieceTap(v-if="count >= 1")
   // 駒を押せる部分
   .PieceTexture
-    // PieceTexture の背景に画像を設定すると影が PieceTapCount にまで適用されるため個別にしている
+    // PieceTexture の背景に画像を設定すると影が PieceCount にまで適用されるため個別にしている
     .PieceTextureSelf(:class="piece_texture_class")
     // 駒テクスチャの大きさに依存させたいので中に PieceTexture のなかに入れている
-    PieceTapCount(:count="count")
+    PieceCount(:count="count")
 </template>
 
 <script>
 import _ from "lodash"
 import { support } from "./support.js"
-import PieceTapCount from "./PieceTapCount.vue"
+import PieceCount from "./PieceCount.vue"
 
 export default {
   name: "PieceTap",
   mixins: [support],
   components: {
-    PieceTapCount,
+    PieceCount,
   },
   props: {
     piece_texture_class: { required: true              },
