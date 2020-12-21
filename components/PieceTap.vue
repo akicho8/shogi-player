@@ -181,7 +181,7 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// サイズ (PC)
 
   // 盤面
-  .BoardOuter
+  .BoardWood
     .PieceTap
       width:  100%              // 外側の TD に合わせる
       height: 100%
@@ -222,7 +222,7 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// サイズ (mobile)
   +mobile
     &.is_mobile_style_on
-      .BoardOuter
+      .BoardWood
         .PieceTap
           // 100% なので外側の TD の大きさになる
       .Membership

@@ -52,7 +52,7 @@ export default {
     font-weight: bold
     font-size: $size-7
 
-  &.is_text_visibility_up_on
+  &.is_balloon_on
     .SpTurnText
       @extend %is_piece_count_color_set
       padding: 0.5em

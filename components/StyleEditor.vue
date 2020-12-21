@@ -229,8 +229,8 @@
                 b-button(@click="force_paper_style" size="is-small") 紙面風
 
           b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
-            b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_off") OFF
-            b-radio-button(size="is-small" v-model="sp_text_visibility_up" native-value="is_text_visibility_up_on") ON
+            b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_off") OFF
+            b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_on") ON
 
           b-field(custom-class="is-small" label="移動先セルの明滅")
             b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_off") OFF
@@ -395,7 +395,7 @@ export default {
       sp_shadow_color: "rgba(0, 0, 0, 0.4)",
 
       sp_fullheight: "is_fullheight_on",
-      sp_text_visibility_up: "is_text_visibility_up_on",
+      sp_balloon: "is_balloon_on",
 
       sp_stand_piece_w: 47,
       sp_stand_piece_h: 50,
@@ -540,7 +540,7 @@ export default {
       params.sp_hpos                  = this.sp_hpos
       params.sp_vpos                  = this.sp_vpos
       params.sp_fullheight            = this.sp_fullheight
-      params.sp_text_visibility_up    = this.sp_text_visibility_up
+      params.sp_balloon    = this.sp_balloon
       params.sp_layer                 = this.sp_layer
       params.sp_board_shadow                = this.sp_board_shadow
       params.sp_pi_variant            = this.sp_pi_variant
@@ -568,7 +568,8 @@ export default {
       s = s.replace(/;/g, "")
       s = s.replace(/^\s*/gm, "")
       s = s.replace(/:\s*/g, ": ")
-      s = s.replace(/^--/gm, "")
+      // s = s.replace(/^--/gm, "")
+      s = s.replace(/^\/\//gm, "\n//")
       return s
     },
 

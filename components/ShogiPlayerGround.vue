@@ -24,7 +24,7 @@ export default {
         this.base.sp_hpos,
         this.base.sp_vpos,
         this.base.sp_fullheight,
-        this.base.sp_text_visibility_up,
+        this.base.sp_balloon,
         this.base.sp_layer,
         this.base.sp_board_shadow,
         this.base.sp_blink,

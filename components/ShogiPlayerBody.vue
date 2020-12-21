@@ -4,14 +4,14 @@
     //- b-button.mr-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
   AspectRatioFixedBlock
     OverlayNavigations(:base="base")
-    BoardOuter(:base="base")
+    BoardWood(:base="base")
   Membership(:base="base" :location="base.location_black")
 </template>
 
 <script>
 import Membership            from "./Membership.vue"
 import AspectRatioFixedBlock from "./AspectRatioFixedBlock.vue"
-import BoardOuter            from "./BoardOuter.vue"
+import BoardWood            from "./BoardWood.vue"
 import OverlayNavigations    from "./OverlayNavigations.vue"
 
 import { support } from "./support.js"
@@ -22,7 +22,7 @@ export default {
   components: {
     Membership,
     AspectRatioFixedBlock,
-    BoardOuter,
+    BoardWood,
     OverlayNavigations,
   },
   computed: {

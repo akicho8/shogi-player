@@ -1,16 +1,16 @@
 <template lang="pug">
-.BoardOuter
-  // .BoardOuter に設定した background-image に影をつけるために drop-shadow すると
-  // .BoardOuter その子供である table にまで影が適用されてしまう
-  // table に影が適用されると、駒の影にも .BoardOuter の影が加算されてしまい濃くなってしまう
-  // それを防ぐためには .BoardOuter の :after に背景を指定すればよい
-  // が、わかりやすくするために背景専用の BoardOuterBG を追加した
-  // これなら BoardOuterTexture に適用した影が table に影響しない
-  .BoardOuterTexture.is-overlay
+.BoardWood
+  // .BoardWood に設定した background-image に影をつけるために drop-shadow すると
+  // .BoardWood その子供である table にまで影が適用されてしまう
+  // table に影が適用されると、駒の影にも .BoardWood の影が加算されてしまい濃くなってしまう
+  // それを防ぐためには .BoardWood の :after に背景を指定すればよい
+  // が、わかりやすくするために背景専用の BoardWoodBG を追加した
+  // これなら BoardWoodTexture に適用した影が table に影響しない
+  .BoardWoodTexture.is-overlay
 
-  // BoardOuterTexture の兄弟として BoardInner を置くと BoardOuterTexture に BoardInner の border が負ける
-  .BoardInnerWithPadding.is-overlay
-    table.BoardInner
+  // BoardWoodTexture の兄弟として BoardField を置くと BoardWoodTexture に BoardField の border が負ける
+  .BoardFieldWithPadding.is-overlay
+    table.BoardField
       tr(v-for="(_, y) in base.mediator.dimension")
         td(
           v-for="(_, x) in base.mediator.dimension"
@@ -34,7 +34,7 @@ import { support } from "./support.js"
 import PieceTap from "./PieceTap.vue"
 
 export default {
-  name: "BoardOuter",
+  name: "BoardWood",
   mixins: [support],
   components: {
     PieceTap,
@@ -49,9 +49,9 @@ export default {
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 // | 場所              | よい                     | だめ                               | 備考                               | 結果 |
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
-// | BoardOuter        | わかりやすい             | Chromeで隙間ができる               | わかりやすい気がしていただけ       |      |
-// | BoardOuterTexture | 角を丸めても縁取りできる | 影の影響がある                     | 画像に縁取りできても別に嬉しくない |      |
-// | table.BoardInner  | 普通に考えてここ         | グリッドと外枠に隙間が入れられない | 隙間を入れれても嬉しくない         | ←   |
+// | BoardWood        | わかりやすい             | Chromeで隙間ができる               | わかりやすい気がしていただけ       |      |
+// | BoardWoodTexture | 角を丸めても縁取りできる | 影の影響がある                     | 画像に縁取りできても別に嬉しくない |      |
+// | table.BoardField  | 普通に考えてここ         | グリッドと外枠に隙間が入れられない | 隙間を入れれても嬉しくない         | ←   |
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 
 .ShogiPlayerGround
@@ -78,12 +78,12 @@ export default {
   +defvar(sp_grid_outer_texture_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
   +defvar(sp_grid_star, 10%)                       // 星の大きさ
 
-  .BoardOuter
+  .BoardWood
     width: 100%
     height: 100%
     +is_overlay_origin
 
-  .BoardOuterTexture
+  .BoardWoodTexture
     mix-blend-mode: var(--sp_board_blend)
 
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
@@ -95,20 +95,20 @@ export default {
     border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
 
   &.is_board_shadow_box
-    .BoardOuterTexture
+    .BoardWoodTexture
       +filter_box_shadow(1, board_filter_params_without_drop_shadow())
   &.is_board_shadow_drop
-    .BoardOuterTexture
+    .BoardWoodTexture
       +filter_drop_shadow(1, board_filter_params_without_drop_shadow())
   &.is_board_shadow_none
-    .BoardOuterTexture
+    .BoardWoodTexture
       filter: board_filter_params_without_drop_shadow()
 
-  .BoardInnerWithPadding
+  .BoardFieldWithPadding
     padding: calc(var(--sp_board_padding) * 1%)
 
-  .BoardInner
-    // これを指定するとオーバーレイの兄(BoardOuterTexture)の上に表示できる
+  .BoardField
+    // これを指定するとオーバーレイの兄(BoardWoodTexture)の上に表示できる
     // が、駒のテクスチャに mix-blend-mode が効かなくなる
     // ので指定してはいけない
     // isolation: isolate
@@ -128,7 +128,7 @@ export default {
     height: calc(100% / var(--sp_dimension))
     border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 
-  // border が BoardOuterTexture に負けるので入れ子にしている
+  // border が BoardWoodTexture に負けるので入れ子にしている
   // td
   //   +is_overlay_origin
   //   .CellBorder
