@@ -63,7 +63,7 @@ export default {
       align-items: center
 
   //////////////////////////////////////////////////////////////////////////////// is_horizontal or is_vertical
-  &.is_horizontal
+  +IS_HORIZONTAL_ONLY
     .PieceBox
       margin-top: var(--sp_common_gap)
   +IS_VERTICAL_OR_MOBILE

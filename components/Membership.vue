@@ -65,7 +65,7 @@ export default {
     .Membership
       +is_layer_border
 
-  &.is_horizontal
+  +IS_HORIZONTAL_ONLY
     .Membership
       &.is_white
         flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び

@@ -56,7 +56,7 @@ export default {
       +is_layer_border($danger)
 
   ////////////////////////////////////////////////////////////////////////////////
-  &.is_horizontal
+  +IS_HORIZONTAL_ONLY
     .NavigateBlock
       margin-top: var(--sp_common_gap)
   +IS_VERTICAL_OR_MOBILE

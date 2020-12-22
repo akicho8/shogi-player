@@ -42,7 +42,7 @@ export default {
       +is_layer_border
 
   ////////////////////////////////////////////////////////////////////////////////
-  &.is_horizontal
+  +IS_HORIZONTAL_ONLY
     .EditToolBlock
       margin-bottom: var(--sp_common_gap)
   +IS_VERTICAL_OR_MOBILE

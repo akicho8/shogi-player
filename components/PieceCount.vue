@@ -44,7 +44,7 @@ export default {
       +is_layer_border
 
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
-  &.is_horizontal
+  +IS_HORIZONTAL_ONLY
     .PieceTexture
       display: flex
       justify-content: center

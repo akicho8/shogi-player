@@ -144,7 +144,7 @@ export default {
 
   // 駒がなくても駒が置けるようにする ← hoverable_p になったときだけにすると駒台が拡縮して使いにくい
   //
-  // &.is_horizontal
+  // +IS_HORIZONTAL_ONLY
   //   .MembershipStand
   //     &.hoverable_p
   //       min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
@@ -165,7 +165,7 @@ export default {
         +is_layer_border
 
   ////////////////////////////////////////////////////////////////////////////////
-  &.is_horizontal
+  +IS_HORIZONTAL_ONLY
     .is_white
       .MembershipStand
         flex-direction: column-reverse // 全体横並び → 後手 → 縦並び(昇順) △が下にあるので大駒順に並べるため
@@ -187,7 +187,7 @@ export default {
   &.run_mode-edit_mode
     // 駒がなくても駒が置けるようにする
     .ShogiPlayerGround
-      &.is_horizontal
+      +IS_HORIZONTAL_ONLY
         .MembershipStand
           // &.hoverable_p
           min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
@@ -196,8 +196,7 @@ export default {
       +IS_VERTICAL_OR_MOBILE
         .MembershipStand
           // &.hoverable_p
-          min-height: 0px ! important
+          min-height: var(--sp_stand_piece_h) // 縦を最低限確保
           width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
           justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
-          min-height: var(--sp_stand_piece_h) // 縦を最低限確保
 </style>

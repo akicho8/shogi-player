@@ -65,12 +65,12 @@ export default {
   // &.is_vertical
   //   .TurnShowOrEdit
   //     margin: 0.2rem 0
-  // &.is_horizontal
+  // +IS_HORIZONTAL_ONLY
   //   .TurnShowOrEdit
   //     margin: 0.25rem 0
 
   ////////////////////////////////////////////////////////////////////////////////
-  &.is_horizontal
+  +IS_HORIZONTAL_ONLY
     .TurnShowOrEdit
       margin-bottom: var(--sp_common_gap)
   +IS_VERTICAL_OR_MOBILE
