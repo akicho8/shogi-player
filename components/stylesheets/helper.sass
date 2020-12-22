@@ -1,5 +1,12 @@
 // 全体にCSSは定義しないこと
 
+$switch_variable_prefix: "swvar"
+=def_switch_variable($name)
+  --#{$switch_variable_prefix}_#{$name}: var(--#{$name})
+  &.is_mobile_fit_on
+    +mobile
+      --#{$switch_variable_prefix}_#{$name}: var(--#{$name}_mobile)
+  
 // is_vertical の定義は +mobile のときにも適用する
 //
 // 冗長な書き方
@@ -18,7 +25,7 @@
 //   +IS_VERTICAL
 //     .NavigateBlock
 //       margin: 0
-//  
+//
 // 書き方
 //
 //   .ShogiPlayerGround
@@ -26,7 +33,7 @@
 //       ...
 //     +IS_VERTICAL
 //       ...
-//  
+//
 // 注意点
 // ・必ず .ShogiPlayerGround の直下で +IS_HORIZONTAL とのペアで定義すること
 =IS_HORIZONTAL
@@ -104,7 +111,7 @@
   @at-root
     html
       --#{$key}: #{$val}
-
+        
 // pug:
 //
 //   .Foo

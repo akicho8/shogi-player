@@ -221,11 +221,11 @@
         .box
           .title.is-5 モバイル
           b-field(custom-class="is-small" label="持駒等のサイズを縮小する")
-            b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_on") ON
             b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_off") OFF
+            b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_on") ON
           b-field(custom-class="is-small" label="縦配置にする")
-            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
             b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
+            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
 
         .box
           .title.is-5 その他
