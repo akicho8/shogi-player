@@ -95,9 +95,9 @@ export default {
   +defvar(sp_stand_piece_h, 50px)              // 駒台のセル(H)
   +defvar(sp_stand_piece_rate, 80%)            // 駒台のセル内の駒占有率
 
-  +defvar(sp_piece_box_piece_w, var(--sp_stand_piece_w))          // 駒箱のセル(W)
-  +defvar(sp_piece_box_piece_h, var(--sp_stand_piece_h))          // 駒箱のセル(H)
-  +defvar(sp_piece_box_piece_rate, var(--sp_stand_piece_rate))    // 駒箱のセル内の駒占有率
+  +defvar(sp_piece_box_piece_w,    47px)       // 駒箱のセル(W)
+  +defvar(sp_piece_box_piece_h,    50px)       // 駒箱のセル(H)
+  +defvar(sp_piece_box_piece_rate, 80%)        // 駒箱のセル内の駒占有率
 
   //////////////////////////////////////////////////////////////////////////////// mobile only
   +defvar(sp_stand_piece_w_mobile, 38px)       // 駒台のセル(W) ※モバイル時
