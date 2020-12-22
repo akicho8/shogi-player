@@ -228,6 +228,33 @@
         //-     b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
 
         .box
+          .title.is-5 Transform
+          b-field(custom-class="is-small" label="奥行き")
+            b-slider(v-model="sp_tf_perspective" :min="0" :max="400" :step="0.001")
+          b-field(custom-class="is-small" label="移動 X")
+            b-slider(v-model="sp_tf_translate_x" :min="-1000" :max="1000" :step="1")
+          b-field(custom-class="is-small" label="移動 Y")
+            b-slider(v-model="sp_tf_translate_y" :min="-1000" :max="1000" :step="1")
+          b-field(custom-class="is-small" label="移動 Z")
+            b-slider(v-model="sp_tf_translate_z" :min="-1000" :max="1000" :step="1")
+          b-field(custom-class="is-small" label="回転 X")
+            b-slider(v-model="sp_tf_rotate_x" :min="-1" :max="1" :step="0.001")
+          b-field(custom-class="is-small" label="回転 Y")
+            b-slider(v-model="sp_tf_rotate_y" :min="-1" :max="1" :step="0.001")
+          b-field(custom-class="is-small" label="回転 Z")
+            b-slider(v-model="sp_tf_rotate_z" :min="-1" :max="1" :step="0.001")
+          //- b-field(custom-class="is-small" label="回転A")
+          //-   b-slider(v-model="sp_tf_rotate_a" :min="-1.0" :max="1.0" :step="0.001")
+          b-field(custom-class="is-small" label="拡縮")
+            b-slider(v-model="sp_tf_scale" :min="-8.0" :max="8.0" :step="0.01")
+          //- b-field(custom-class="is-small" label="拡縮X")
+          //-   b-slider(v-model="sp_tf_scale_x" :min="-8.0" :max="8.0" :step="0.01")
+          //- b-field(custom-class="is-small" label="拡縮Y")
+          //-   b-slider(v-model="sp_tf_scale_y" :min="-8.0" :max="8.0" :step="0.01")
+          //- b-field(custom-class="is-small" label="拡縮Z")
+          //-   b-slider(v-model="sp_tf_scale_z" :min="-8.0" :max="8.0" :step="0.01")
+
+        .box
           .title.is-5 その他
           b-field(custom-class="is-small" label="共通の隙間")
             b-slider(v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
@@ -453,6 +480,19 @@ export default {
       summary_show:    DEVELOPMENT_P,
       slider_show:     DEVELOPMENT_P,
       controller_show: DEVELOPMENT_P,
+
+      sp_tf_perspective: 50,
+      sp_tf_translate_x: 0,
+      sp_tf_translate_y: 0,
+      sp_tf_translate_z: 0,
+      sp_tf_rotate_x: 0,
+      sp_tf_rotate_y: 0,
+      sp_tf_rotate_z: 0,
+      sp_tf_rotate_a: 0,
+      sp_tf_scale: 1.0,
+      sp_tf_scale_x: 1.0,
+      sp_tf_scale_y: 1.0,
+      sp_tf_scale_z: 1.0,
     }
   },
 
@@ -666,6 +706,21 @@ export default {
           --sp_shadow_offset:            ${this.sp_shadow_offset};
           --sp_shadow_blur:              ${this.sp_shadow_blur};
           --sp_shadow_color:             ${this.hsla_format(this.sp_shadow_color)};
+
+          // 3D
+          --sp_tf_perspective: ${this.sp_tf_perspective}px;
+          --sp_tf_translate_x: ${this.sp_tf_translate_x}px;
+          --sp_tf_translate_y: ${this.sp_tf_translate_y}px;
+          --sp_tf_translate_z: ${this.sp_tf_translate_z}px;
+          --sp_tf_rotate_x:    ${this.sp_tf_rotate_x}turn;
+          --sp_tf_rotate_y:    ${this.sp_tf_rotate_y}turn;
+          --sp_tf_rotate_z:    ${this.sp_tf_rotate_z}turn;
+          --sp_tf_rotate_a:    ${this.sp_tf_rotate_a}turn;
+          --sp_tf_scale:       ${this.sp_tf_scale};
+          --sp_tf_scale_x:     ${this.sp_tf_scale_x};
+          --sp_tf_scale_y:     ${this.sp_tf_scale_y};
+          --sp_tf_scale_z:     ${this.sp_tf_scale_z};
+
         }
       `
     },
@@ -721,4 +776,9 @@ $sidebar_width_mobile:  50%
         width: unquote("calc(100% - #{$sidebar_width_tablet})")
       +desktop
         width: unquote("calc(100% - #{$sidebar_width_desktop})")
+
+  .ShogiPlayerForTransform
+    transition: none
+    // これで背景とのブレンドはなくなる
+    transform: perspective(var(--sp_tf_perspective)) translate3d(var(--sp_tf_translate_x), var(--sp_tf_translate_y), var(--sp_tf_translate_z)) rotateX(var(--sp_tf_rotate_x)) rotateY(var(--sp_tf_rotate_y)) rotateZ(var(--sp_tf_rotate_z)) scale(var(--sp_tf_scale))
 </style>

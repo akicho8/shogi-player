@@ -3,7 +3,8 @@
   OverlayForDisable(:base="base")
   EditToolBlock(:base="base")
   TurnShowOrEdit(:base="base")
-  ShogiPlayerBody(:base="base" ref="ShogiPlayerBody")
+  .ShogiPlayerForTransform
+    ShogiPlayerBody(:base="base" ref="ShogiPlayerBody")
   PieceBox(:base="base")
   NavigateBlock(:base="base")
   SfenShowBlock(:base="base")
