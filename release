@@ -2,3 +2,5 @@
 npm version patch
 npm publish
 git push --tags
+
+(cd ~/src/shogi-extend/front_app && ncu /shogi-player/ -u && yarn)
