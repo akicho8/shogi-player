@@ -73,10 +73,10 @@ export default {
       &.is_black
         flex-direction: column           // 全体が横並び → 持駒は縦並び
         align-self: flex-end             // 全体が横並び → 持駒は縦並び → 先手は下寄せ
-  +is_vertical_and_mobile
+  +IS_VERTICAL_OR_MOBILE
     .Membership
-      height: 100%
       width: 100%
+      height: 100%
       &.is_white
         flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△ 後手 飛歩」のままでよい (左端→)
       &.is_black

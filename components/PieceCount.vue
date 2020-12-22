@@ -64,7 +64,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
-  +is_vertical_and_mobile
+  +IS_VERTICAL_OR_MOBILE
     .Membership
       .PieceTexture
         display: flex

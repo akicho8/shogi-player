@@ -388,7 +388,7 @@ export default {
 
       sp_hpos: "is_hcentered",
       sp_vpos: "is_vcentered",
-      sp_layout: "is_vertical",
+      sp_layout: "is_horizontal",
       sp_run_mode: DEVELOPMENT_P ? "edit_mode" : "view_mode",
       sp_body_max_width: 35,
       sp_mobile_fit: "is_mobile_fit_on",

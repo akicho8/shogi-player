@@ -172,7 +172,7 @@ export default {
     .is_black
       .MembershipStand
         flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
-  +is_vertical_and_mobile
+  +IS_VERTICAL_OR_MOBILE
     .is_white
       .MembershipStand
         flex-direction: row-reverse    // 「飛歩」→「歩飛」
@@ -186,16 +186,18 @@ export default {
 .ShogiPlayer
   &.run_mode-edit_mode
     // 駒がなくても駒が置けるようにする
-    .is_horizontal
-      .MembershipStand
-        // &.hoverable_p
-        min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
-        justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
-        min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
-    .is_vertical
-      .MembershipStand
-        // &.hoverable_p
-        width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
-        justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
-        min-height: var(--sp_stand_piece_h) // 縦を最低限確保
+    .ShogiPlayerGround
+      &.is_horizontal
+        .MembershipStand
+          // &.hoverable_p
+          min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
+          justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
+          min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
+      +IS_VERTICAL_OR_MOBILE
+        .MembershipStand
+          // &.hoverable_p
+          min-height: 0px ! important
+          width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
+          justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
+          min-height: var(--sp_stand_piece_h) // 縦を最低限確保
 </style>

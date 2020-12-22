@@ -1,24 +1,42 @@
 // 全体にCSSは定義しないこと
 
-// +is_vertical_and_mobile
-//   .NavigateBlock
-//     margin: 0
-// &.is_vertical
-//   +is_vertical_style
-// +mobile
-//   &.is_mobile_fit_on
+// is_vertical の定義は +mobile のときにも適用する
+//
+// 冗長な書き方
+//
+//   +IS_VERTICAL_OR_MOBILE
+//     .NavigateBlock
+//       margin: 0
+//   &.is_vertical
 //     +is_vertical_style
+//   +mobile
+//     &.is_mobile_fit_on
+//       +is_vertical_style
 //
-// ↓置き換え
+// 置き換え後
 //
-// +is_vertical_and_mobile
-//   .NavigateBlock
-//     margin: 0
-=is_vertical_and_mobile
+//   +IS_VERTICAL_OR_MOBILE
+//     .NavigateBlock
+//       margin: 0
+//  
+// 書き方
+//
+//   .ShogiPlayerGround
+//     +IS_HORIZONTAL
+//       ...
+//     +IS_VERTICAL_OR_MOBILE
+//       ...
+//  
+// 注意点
+// ・必ず .ShogiPlayerGround の直下で &.is_horizontal とのペアで定義すること
+=IS_HORIZONTAL_ONLY
+  &.is_horizontal
+    @content
+=IS_VERTICAL_OR_MOBILE
   &.is_vertical
     @content
-  +mobile
-    &.is_mobile_vertical_on
+  &.is_mobile_vertical_on
+    +mobile
       @content
 
 // is_layer_on のとき用
