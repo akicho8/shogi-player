@@ -1,12 +1,5 @@
 // 全体にCSSは定義しないこと
 
-$switch_variable_prefix: "swvar"
-=def_switch_variable($name)
-  --#{$switch_variable_prefix}_#{$name}: var(--#{$name})
-  &.is_mobile_fit_on
-    +mobile
-      --#{$switch_variable_prefix}_#{$name}: var(--#{$name}_mobile)
-  
 // is_vertical の定義は +mobile のときにも適用する
 //
 // 冗長な書き方

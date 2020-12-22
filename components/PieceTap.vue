@@ -99,23 +99,6 @@ export default {
   +defvar(sp_piece_box_piece_h,    50px)       // 駒箱のセル(H)
   +defvar(sp_piece_box_piece_rate, 80%)        // 駒箱のセル内の駒占有率
 
-  //////////////////////////////////////////////////////////////////////////////// mobile only
-  +defvar(sp_stand_piece_w_mobile, 38px)       // 駒台のセル(W) ※モバイル時
-  +defvar(sp_stand_piece_h_mobile, 56px)       // 駒台のセル(H) ※モバイル時
-  +defvar(sp_stand_piece_rate_mobile, 90%)     // 駒台のセル内の駒占有率 ※モバイル時
-
-  +defvar(sp_piece_box_piece_w_mobile, 38px)   // 駒箱のセル(W) ※モバイル時
-  +defvar(sp_piece_box_piece_h_mobile, 46px)   // 駒箱のセル(H) ※モバイル時
-  +defvar(sp_piece_box_piece_rate_mobile, 90%) // 駒箱のセル内の駒占有率 ※モバイル時
-
-  //////////////////////////////////////////////////////////////////////////////// 切り替えたあとの変数
-  +def_switch_variable(sp_stand_piece_w)        // 駒台のセル(W)
-  +def_switch_variable(sp_stand_piece_h)        // 駒台のセル(H)
-  +def_switch_variable(sp_stand_piece_rate)     // 駒台のセル内の駒占有率
-  +def_switch_variable(sp_piece_box_piece_w)    // 駒箱のセル(W)
-  +def_switch_variable(sp_piece_box_piece_h)    // 駒箱のセル(H)
-  +def_switch_variable(sp_piece_box_piece_rate) // 駒箱のセル内の駒占有率
-
   // 共通
   .PieceTap
     // cursor: default // テキスト選択「I」ではなく矢印カーソルとする
@@ -234,28 +217,4 @@ export default {
     .PieceTexture
       width:  100%     // 縮小させない
       height: 100%
-
-  //////////////////////////////////////////////////////////////////////////////// サイズ (mobile)
-  +mobile
-    &.is_mobile_fit_on2
-      .BoardWood
-        .PieceTap
-          // 100% なので外側の TD の大きさになる
-      .Membership
-        .PieceTap
-          width:  var(--sp_stand_piece_w_mobile)
-          height: var(--sp_stand_piece_h_mobile)
-        .PieceTexture
-          width:  var(--sp_stand_piece_rate_mobile)
-          height: var(--sp_stand_piece_rate_mobile)
-      .PieceBox
-        .PieceTap
-          width:  var(--sp_piece_box_piece_w_mobile)
-          height: var(--sp_piece_box_piece_h_mobile)
-        .PieceTexture
-          width:  var(--sp_piece_box_piece_rate_mobile)
-          height: var(--sp_piece_box_piece_rate_mobile)
-      .CursorObject
-        width:  var(--sp_stand_piece_w_mobile)
-        height: var(--sp_stand_piece_h_mobile)
 </style>

@@ -73,18 +73,4 @@ export default {
     .MembershipLocationMarkTexture
       width:  calc(var(--sp_stand_piece_rate) * var(--sp_location_mark_inactive_rate))
       height: calc(var(--sp_stand_piece_rate) * var(--sp_location_mark_inactive_rate))
-
-  //////////////////////////////////////////////////////////////////////////////// サイズ (mobile)
-  +mobile
-    &.is_mobile_fit_on2
-      .MembershipLocationMark
-        width:  var(--sp_stand_piece_w_mobile)
-        height: var(--sp_stand_piece_h_mobile)
-      .MembershipLocationMarkTexture
-        width:  var(--sp_stand_piece_rate_mobile)
-        height: var(--sp_stand_piece_rate_mobile)
-      .is_turn_inactive
-        .MembershipLocationMarkTexture
-          width:  calc(var(--sp_stand_piece_rate_mobile) * var(--sp_location_mark_inactive_rate))
-          height: calc(var(--sp_stand_piece_rate_mobile) * var(--sp_location_mark_inactive_rate))
 </style>
