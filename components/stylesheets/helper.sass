@@ -4,7 +4,7 @@
 //
 // 冗長な書き方
 //
-//   +IS_VERTICAL_OR_MOBILE
+//   +IS_VERTICAL
 //     .NavigateBlock
 //       margin: 0
 //   &.is_vertical
@@ -15,7 +15,7 @@
 //
 // 置き換え後
 //
-//   +IS_VERTICAL_OR_MOBILE
+//   +IS_VERTICAL
 //     .NavigateBlock
 //       margin: 0
 //  
@@ -24,15 +24,15 @@
 //   .ShogiPlayerGround
 //     +IS_HORIZONTAL
 //       ...
-//     +IS_VERTICAL_OR_MOBILE
+//     +IS_VERTICAL
 //       ...
 //  
 // 注意点
-// ・必ず .ShogiPlayerGround の直下で +IS_HORIZONTAL_ONLY とのペアで定義すること
-=IS_HORIZONTAL_ONLY
+// ・必ず .ShogiPlayerGround の直下で +IS_HORIZONTAL とのペアで定義すること
+=IS_HORIZONTAL
   &.is_horizontal
     @content
-=IS_VERTICAL_OR_MOBILE
+=IS_VERTICAL
   &.is_vertical
     @content
   &.is_mobile_vertical_on

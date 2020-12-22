@@ -81,12 +81,12 @@ export default {
       @extend %is_flip // ← 反転しない方がいいかもしれない
 
   // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
-  +IS_HORIZONTAL_ONLY
+  +IS_HORIZONTAL
     .MembershipLocationPlayerInfo
       max-width: var(--sp_stand_piece_w)
 
   // 縦幅がわりと自由につかえるので隙間をあける
-  +IS_HORIZONTAL_ONLY
+  +IS_HORIZONTAL
     .MembershipLocationPlayerInfo
       line-height: 140%
 </style>

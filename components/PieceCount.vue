@@ -44,7 +44,7 @@ export default {
       +is_layer_border
 
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
-  +IS_HORIZONTAL_ONLY
+  +IS_HORIZONTAL
     .PieceTexture
       display: flex
       justify-content: center
@@ -64,7 +64,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
-  +IS_VERTICAL_OR_MOBILE
+  +IS_VERTICAL
     .Membership
       .PieceTexture
         display: flex

@@ -65,7 +65,7 @@ export default {
     .Membership
       +is_layer_border
 
-  +IS_HORIZONTAL_ONLY
+  +IS_HORIZONTAL
     .Membership
       &.is_white
         flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び
@@ -73,7 +73,7 @@ export default {
       &.is_black
         flex-direction: column           // 全体が横並び → 持駒は縦並び
         align-self: flex-end             // 全体が横並び → 持駒は縦並び → 先手は下寄せ
-  +IS_VERTICAL_OR_MOBILE
+  +IS_VERTICAL
     .Membership
       width: 100%
       height: 100%
