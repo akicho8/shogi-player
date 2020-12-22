@@ -192,7 +192,7 @@
             b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_box") box
             b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_none") none
 
-        .box
+        .box(v-if="false")
           .title.is-5 画面位置
           .columns
             .column
@@ -218,19 +218,23 @@
             b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_on") 画面サイズ
             b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_off") none
 
-        .box
-          .title.is-5 モバイル
-          b-field(custom-class="is-small" label="持駒等のサイズを縮小する")
-            b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_off") OFF
-            b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_on") ON
-          b-field(custom-class="is-small" label="縦配置にする")
-            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
-            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
+        //- .box
+        //-   .title.is-5 モバイル
+        //-   b-field(custom-class="is-small" label="持駒等のサイズを縮小する" v-if="false")
+        //-     b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_off") OFF
+        //-     b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_on") ON
+        //-   b-field(custom-class="is-small" label="縦配置にする")
+        //-     b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
+        //-     b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
 
         .box
           .title.is-5 その他
           b-field(custom-class="is-small" label="共通の隙間")
             b-slider(v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
+
+          b-field(custom-class="is-small" label="モバイル時に縦配置にする")
+            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
+            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
 
           b-field(custom-class="is-small" label="プリセット")
             .control
