@@ -57,6 +57,9 @@ export default {
     font-weight: bold
     flex-shrink: 0 // 縮小しない(縦置き時に駒台の横幅を100%にするとここが縮小しようとして1文字ずつ折り返しになる、のを防ぐ)
 
+  .MembershipLocationPlayerInfoTime
+    white-space: nowrap
+
   &.is_balloon_on
     .MembershipLocationPlayerInfo
       @extend %is_piece_count_color_set
