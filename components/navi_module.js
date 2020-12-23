@@ -127,7 +127,7 @@ export default {
     },
 
     navi_relative_move(v, event) {
-      this.relative_move(v * this.flip_sign, event)
+      this.relative_move(v, event)
     },
 
     relative_move(v, event = null) {
@@ -217,10 +217,6 @@ export default {
     },
   },
   computed: {
-    flip_sign() {
-      return this.new_flip ? -1 : 1
-    },
-
     //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, TurnSliderBlock.vue
 
     inside_controller_show_p() {
