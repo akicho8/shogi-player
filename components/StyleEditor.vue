@@ -28,26 +28,26 @@
           .title.is-5 背景
 
           b-field(custom-class="is-small" label="")
-            ColorPicker(v-model="sp_ground_color" :disableAlpha="false")
+            ColorPicker(v-model="se_ws_color" :disableAlpha="false")
 
-          ImageUpload(@input="sp_ground_image_input_handle")
+          ImageUpload(@input="se_ws_image_input_handle")
 
           b-field(custom-class="is-small" label="色相")
-            b-slider(v-model="sp_ground_hue" :min="-0.5" :max="0.5" :step="0.001")
+            b-slider(v-model="se_ws_hue" :min="-0.5" :max="0.5" :step="0.001")
           b-field(custom-class="is-small" label="彩度")
-            b-slider(v-model="sp_ground_saturate" :min="0" :max="4.0" :step="0.001")
+            b-slider(v-model="se_ws_saturate" :min="0" :max="4.0" :step="0.001")
           b-field(custom-class="is-small" label="輝度")
-            b-slider(v-model="sp_ground_brightness" :min="0" :max="2.0" :step="0.001")
+            b-slider(v-model="se_ws_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
-            b-slider(v-model="sp_ground_blur" :min="0" :max="30" :step="0.001")
+            b-slider(v-model="se_ws_blur" :min="0" :max="30" :step="0.001")
           b-field(custom-class="is-small" label="グレースケール")
-            b-slider(v-model="sp_ground_grayscale" :min="0" :max="1.0" :step="0.001")
+            b-slider(v-model="se_ws_grayscale" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="コントラスト")
-            b-slider(v-model="sp_ground_contrast" :min="0" :max="2.0" :step="0.001")
+            b-slider(v-model="se_ws_contrast" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="反転")
-            b-slider(v-model="sp_ground_invert" :min="0" :max="1.0" :step="0.001")
+            b-slider(v-model="se_ws_invert" :min="0" :max="1.0" :step="0.001")
           //- b-field(custom-class="is-small" label="非透輝度")
-          //-   b-slider(v-model="sp_ground_opacity" :min="0" :max="1.0" :step="0.001")
+          //-   b-slider(v-model="se_ws_opacity" :min="0" :max="1.0" :step="0.001")
 
         .box
           .title.is-5 盤テクスチャ
@@ -403,7 +403,7 @@
     //-     .buttons
     //-     .columns.is-multiline
 
-  .WorkSheet
+  .WorkSpace
     ShogiPlayer(v-bind="sp_params")
 </template>
 
@@ -438,17 +438,17 @@ export default {
       sidebar_p: true,
 
       ////////////////////////////////////////////////////////////////////////////////
-      sp_ground_image: null,
+      se_ws_image: null,
       sp_board_image: null,
 
-      sp_ground_color: "#C6E1B8",
-      sp_ground_blur: 0,
-      sp_ground_grayscale: 0,
-      sp_ground_contrast: 1.0,
-      sp_ground_invert: 0,
-      sp_ground_hue:        0,
-      sp_ground_saturate:   1.0,
-      sp_ground_brightness: 1.0,
+      se_ws_color: "#C6E1B8",
+      se_ws_blur: 0,
+      se_ws_grayscale: 0,
+      se_ws_contrast: 1.0,
+      se_ws_invert: 0,
+      se_ws_hue:        0,
+      se_ws_saturate:   1.0,
+      se_ws_brightness: 1.0,
 
       sp_piece_blur: 0,
       sp_piece_grayscale: 0,
@@ -492,7 +492,7 @@ export default {
       sp_shadow_blur: 3,
       sp_shadow_color: "rgba(0, 0, 0, 0.4)",
 
-      sp_fullheight: "is_fullheight_on",
+      sp_fullheight: "is_fullheight_off",
       sp_balloon: "is_balloon_on",
 
       sp_stand_piece_w: 47,
@@ -617,8 +617,8 @@ export default {
     sidebar_toggle_handle() {
       this.sidebar_p = !this.sidebar_p
     },
-    sp_ground_image_input_handle(v) {
-      this.sp_ground_image = v
+    se_ws_image_input_handle(v) {
+      this.se_ws_image = v
     },
     sp_board_image_input_handle(v) {
       this.sp_board_image = v
@@ -627,7 +627,7 @@ export default {
     force_paper_style() {
       this.sp_pi_variant        = "is_pi_variant_b" // 紙面風駒
       this.sp_board_padding     = 0                 // 隙間なし
-      this.sp_ground_color      = IS_TRANSPARENT    // 背景透過
+      this.se_ws_color      = IS_TRANSPARENT    // 背景透過
       this.sp_board_color       = IS_TRANSPARENT    // 盤透過
       this.sp_grid_stroke       = 1                 // グリッド線(細)
       this.sp_grid_outer_stroke = 1.5               // グリッド枠(細)
@@ -700,11 +700,11 @@ export default {
       return `url(${this.sp_board_image})`
     },
 
-    sp_ground_bg_url() {
-      if (!this.sp_ground_image) {
+    se_ws_bg_url() {
+      if (!this.se_ws_image) {
         return "none"
       }
-      return `url(${this.sp_ground_image})`
+      return `url(${this.se_ws_image})`
     },
 
     sp_params() {
@@ -740,7 +740,7 @@ export default {
     human_css() {
       let s = this.raw_css
       s = s.replace(/url\(.*\)/g, "url(...)")
-      s = s.replace(/\s*.WorkSheet.*\n/, "")
+      s = s.replace(/\s*.WorkSpace.*\n/, "")
       s = s.replace(/\s}\s*\n/, "")
       s = s.replace(/;/g, "")
       s = s.replace(/^\s*/gm, "")
@@ -758,21 +758,21 @@ export default {
 
     raw_css() {
       return `
-        .WorkSheet {
+        .WorkSpace {
           --sp_body_max_width:           ${this.sp_body_max_width}vw;
           --sp_common_gap:               ${this.sp_common_gap}px;
 
           // 背景
-          --sp_ground_color:             ${this.hsla_format(this.sp_ground_color)};
-          --sp_ground_image:             ${this.sp_ground_bg_url};
-          --sp_ground_blur:              ${this.sp_ground_blur};
-          --sp_ground_grayscale:         ${this.sp_ground_grayscale};
-          --sp_ground_contrast:          ${this.sp_ground_contrast};
-          --sp_ground_invert:            ${this.sp_ground_invert};
+          --se_ws_color:             ${this.hsla_format(this.se_ws_color)};
+          --se_ws_image:             ${this.se_ws_bg_url};
+          --se_ws_blur:              ${this.se_ws_blur};
+          --se_ws_grayscale:         ${this.se_ws_grayscale};
+          --se_ws_contrast:          ${this.se_ws_contrast};
+          --se_ws_invert:            ${this.se_ws_invert};
 
-          --sp_ground_hue:               ${this.sp_ground_hue};
-          --sp_ground_saturate:          ${this.sp_ground_saturate};
-          --sp_ground_brightness:        ${this.sp_ground_brightness};
+          --se_ws_hue:               ${this.se_ws_hue};
+          --se_ws_saturate:          ${this.se_ws_saturate};
+          --se_ws_brightness:        ${this.se_ws_brightness};
 
           // 盤テクスチャ
           --sp_board_color:              ${this.hsla_format(this.sp_board_color)};
@@ -912,16 +912,29 @@ $sidebar_width_mobile:  50%
     z-index: 1
 
   &.sidebar_p
-    .ShogiPlayer
-      +mobile
-        width: 100%
+    .WorkSpace
       +tablet
         width: unquote("calc(100% - #{$sidebar_width_tablet})")
       +desktop
         width: unquote("calc(100% - #{$sidebar_width_desktop})")
 
+  .WorkSpace
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+
+    min-height: 100vh
+
+    background-color: var(--se_ws_color)
+    background-image: var(--se_ws_image)
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+    filter: unquote('invert(var(--se_ws_invert)) hue-rotate(calc(var(--se_ws_hue) * 1turn)) saturate(var(--se_ws_saturate)) grayscale(var(--se_ws_grayscale)) brightness(var(--se_ws_brightness)) contrast(var(--se_ws_contrast)) blur(calc(var(--se_ws_blur) * 1px))')
+
   &.is_tf0_mode_on
-    .WorkSheet
+    .WorkSpace
       transform: perspective(var(--se_tf0_perspective)) translate3d(var(--se_tf0_translate_x), var(--se_tf0_translate_y), var(--se_tf0_translate_z)) rotateX(var(--se_tf0_rotate_x)) rotateY(var(--se_tf0_rotate_y)) rotateZ(var(--se_tf0_rotate_z)) scale(var(--se_tf0_scale))
 
   &.is_tf1_mode_on

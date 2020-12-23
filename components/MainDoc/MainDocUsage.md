@@ -43,7 +43,6 @@
 
     .MySample
       // CSSのカスタマイズ等
-      --sp_ground_color: transparent // 盤は透明にする
       +mobile
         --sp_board_radius: 0 // モバイルのときに角を丸めない
     </style>
