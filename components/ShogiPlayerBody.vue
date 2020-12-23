@@ -48,12 +48,6 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// 回転
   .ShogiPlayerBody
     transition: all 0.4s 0s ease-in-out
-  &.is_flip_off
-    .ShogiPlayerBody
-
-  &.is_flip_on
-    .ShogiPlayerBody
-      // @extend %is_flip
 
   .ShogiPlayerBody
     // 縦横関係なく中央に寄せる
@@ -78,11 +72,4 @@ export default {
   +IS_VERTICAL
     .ShogiPlayerBody
       flex-direction: column
-
-  .is_flip_on
-    .overlay_navi
-      &.previous
-        cursor: e-resize
-      &.next
-        cursor: w-resize
 </style>
