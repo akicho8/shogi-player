@@ -1,5 +1,5 @@
 <template lang="pug">
-.StyleEditor(:class="component_class")
+.StyleEditor.pattern-dots-lg(:class="component_class")
   div(is="style" v-text="comment_removed_css")
   div(is="style" v-text="user_css")
 
@@ -872,6 +872,8 @@ export default {
 </script>
 
 <style lang="sass">
+@import "pattern.css/pattern.scss"
+
 $sidebar_width_desktop: 30%
 $sidebar_width_tablet:  40%
 $sidebar_width_mobile:  50%
@@ -925,6 +927,8 @@ $sidebar_width_mobile:  50%
     flex-direction: column
 
     min-height: 100vh
+
+    // color: var(--se_ws_color)
 
     background-color: var(--se_ws_color)
     background-image: var(--se_ws_image)
