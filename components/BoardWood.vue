@@ -11,20 +11,20 @@
   // BoardWoodTexture の兄弟として BoardField を置くと BoardWoodTexture に BoardField の border が負ける
   .BoardFieldWithPadding.is-overlay
     table.BoardField
-      tr(v-for="(_, y) in masume_y")
+      tr(v-for="(_, y) in base.sp_board_dimension_h")
         td(
-          v-for="(_, x) in masume_x"
-          @pointerdown="base.board_cell_pointerdown_handle(logical_vector(x, y), $event)"
-          @click.stop.prevent="base.board_cell_left_click(logical_vector(x, y), $event)"
-          @click.stop.prevent.right="base.board_cell_right_click(logical_vector(x, y), $event)"
-          @mouseover="base.board_mouseover_handle(logical_vector(x, y), $event)"
+          v-for="(_, x) in base.sp_board_dimension_w"
+          @pointerdown="base.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
+          @click.stop.prevent="base.board_cell_left_click(logical_xy(x, y), $event)"
+          @click.stop.prevent.right="base.board_cell_right_click(logical_xy(x, y), $event)"
+          @mouseover="base.board_mouseover_handle(logical_xy(x, y), $event)"
           @mouseleave="base.mouseleave_handle"
           )
           PieceTap(
             :base="base"
-            :class="base.board_piece_control_class(logical_vector(x, y))"
-            :style="base.board_piece_back_style(logical_vector(x, y))"
-            :piece_texture_class="base.mediator.board_piece_fore_class(logical_vector(x, y))"
+            :class="base.board_piece_control_class(logical_xy(x, y))"
+            :style="base.board_piece_back_style(logical_xy(x, y))"
+            :piece_texture_class="base.mediator.board_piece_fore_class(logical_xy(x, y))"
             )
 </template>
 
@@ -40,7 +40,7 @@ export default {
     PieceTap,
   },
   methods: {
-    logical_vector(x, y) {
+    logical_xy(x, y) {
       x = x + Board.dimension - this.base.sp_board_dimension_w
       y = y + Board.dimension - this.base.sp_board_dimension_h
       if (this.base.new_flip) {
@@ -49,10 +49,6 @@ export default {
       }
       return [x, y]
     },
-  },
-  computed: {
-    masume_x() { return this.base.sp_board_dimension_w },
-    masume_y() { return this.base.sp_board_dimension_h },
   },
 }
 </script>

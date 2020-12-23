@@ -766,7 +766,7 @@ export default {
     // 構造
     //
     // .CursorObject                        // マウスの (x, y) を反映
-    //   .PieceTap.CursorObjectFlip     // 反転するときはここ
+    //   .PieceTap.is_position_north        // or is_position_south
     //     .PieceTexture
     //       .PieceTextureSelf(駒の種類を定義するクラスたち)
     //
@@ -776,12 +776,7 @@ export default {
       const PieceTexture     = this.el_create(["PieceTexture"])
       const PieceTextureSelf = this.el_create(["PieceTextureSelf", ...soldier.to_class_list])
 
-      // 反転しているとき(盤上 or 駒台)の駒は持ったときに逆になっているので逆にする
-      if (this.new_flip) {
-        if (this.soldier_or_stand_p) {
-          PieceTap.classList.add("CursorObjectFlip") // 盤面を反転している場合は駒も反転する
-        }
-      }
+      PieceTap.classList.add(soldier.location.flip_if(this.base.new_flip).position_key)
 
       PieceTexture.appendChild(PieceTextureSelf)
       PieceTap.appendChild(PieceTexture)

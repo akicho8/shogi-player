@@ -29,8 +29,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 //
-// .CursorObject                         // マウスの (x, y) を反映
-//   .PieceTap.CursorObjectFlip     // 反転するときはここ
+// .CursorObject // マウスの (x, y) を反映
+//   .PieceTap.is_position_north
 //     .PieceTexture
 //       .PieceTextureSelf(駒の種類を定義するクラスたち)
 //
