@@ -1,5 +1,8 @@
 <template lang="pug">
 .StyleEditor(:class="component_class")
+  div(is="style" v-text="comment_removed_css")
+  div(is="style" v-text="user_css")
+
   b-sidebar.StyleEditor-Sidebar(fullheight right v-model="sidebar_p" position="fixed")
     .mx-4.my-4
       .is-flex.is-justify-content-start.is-align-items-center
@@ -236,30 +239,76 @@
 
         .box
           .title.is-5 Transform
-          b-field(custom-class="is-small" label="奥行き")
-            b-slider(v-model="sp_tf_perspective" :min="0" :max="400" :step="0.001")
-          b-field(custom-class="is-small" label="移動 X")
-            b-slider(v-model="sp_tf_translate_x" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="移動 Y")
-            b-slider(v-model="sp_tf_translate_y" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="移動 Z")
-            b-slider(v-model="sp_tf_translate_z" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="回転 X")
-            b-slider(v-model="sp_tf_rotate_x" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="回転 Y")
-            b-slider(v-model="sp_tf_rotate_y" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="回転 Z")
-            b-slider(v-model="sp_tf_rotate_z" :min="-1" :max="1" :step="0.001")
-          //- b-field(custom-class="is-small" label="回転A")
-          //-   b-slider(v-model="sp_tf_rotate_a" :min="-1.0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="拡縮")
-            b-slider(v-model="sp_tf_scale" :min="-8.0" :max="8.0" :step="0.01")
-          //- b-field(custom-class="is-small" label="拡縮X")
-          //-   b-slider(v-model="sp_tf_scale_x" :min="-8.0" :max="8.0" :step="0.01")
-          //- b-field(custom-class="is-small" label="拡縮Y")
-          //-   b-slider(v-model="sp_tf_scale_y" :min="-8.0" :max="8.0" :step="0.01")
-          //- b-field(custom-class="is-small" label="拡縮Z")
-          //-   b-slider(v-model="sp_tf_scale_z" :min="-8.0" :max="8.0" :step="0.01")
+          b-tabs(size="is-small" v-model="transform_tab_index" expanded)
+            b-tab-item(label="盤")
+              b-field(custom-class="is-small" label="" message="ONにすると部屋とのブレンドは効かなくなる")
+                b-radio-button(size="is-small" v-model="se_tf1_mode" native-value="is_tf1_mode_off") OFF
+                b-radio-button(size="is-small" v-model="se_tf1_mode" native-value="is_tf1_mode_on") ON
+              b-field(custom-class="is-small" label="視点との距離")
+                b-slider(v-model="se_tf1_perspective" :min="0" :max="400" :step="0.001")
+              b-field(custom-class="is-small" label="移動 X")
+                b-slider(v-model="se_tf1_translate_x" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Y")
+                b-slider(v-model="se_tf1_translate_y" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Z")
+                b-slider(v-model="se_tf1_translate_z" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="回転 X")
+                b-slider(v-model="se_tf1_rotate_x" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Y")
+                b-slider(v-model="se_tf1_rotate_y" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Z")
+                b-slider(v-model="se_tf1_rotate_z" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="拡縮")
+                b-slider(v-model="se_tf1_scale" :min="0" :max="2.0" :step="0.001")
+              b-field(custom-class="is-small")
+                .control
+                  b-button(size="is-small" @click="se_tf1_reset") リセット
+            b-tab-item(label="駒")
+              b-field(custom-class="is-small" label="" message="ONにすると盤とのブレンドは効かなくなる")
+                b-radio-button(size="is-small" v-model="se_tf2_mode" native-value="is_tf2_mode_off") OFF
+                b-radio-button(size="is-small" v-model="se_tf2_mode" native-value="is_tf2_mode_on") ON
+              b-field(custom-class="is-small" label="視点との距離")
+                b-slider(v-model="se_tf2_perspective" :min="0" :max="400" :step="0.001")
+              b-field(custom-class="is-small" label="移動 X")
+                b-slider(v-model="se_tf2_translate_x" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Y")
+                b-slider(v-model="se_tf2_translate_y" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Z")
+                b-slider(v-model="se_tf2_translate_z" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="回転 X")
+                b-slider(v-model="se_tf2_rotate_x" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Y")
+                b-slider(v-model="se_tf2_rotate_y" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Z")
+                b-slider(v-model="se_tf2_rotate_z" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="拡縮")
+                b-slider(v-model="se_tf2_scale" :min="0" :max="2.0" :step="0.001")
+              b-field(custom-class="is-small")
+                .control
+                  b-button(size="is-small" @click="se_tf2_reset") リセット
+            b-tab-item(label="部屋")
+              b-field(custom-class="is-small" label="")
+                b-radio-button(size="is-small" v-model="se_tf0_mode" native-value="is_tf0_mode_off") OFF
+                b-radio-button(size="is-small" v-model="se_tf0_mode" native-value="is_tf0_mode_on") ON
+              b-field(custom-class="is-small" label="視点との距離")
+                b-slider(v-model="se_tf0_perspective" :min="0" :max="400" :step="0.001")
+              b-field(custom-class="is-small" label="移動 X")
+                b-slider(v-model="se_tf0_translate_x" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Y")
+                b-slider(v-model="se_tf0_translate_y" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Z")
+                b-slider(v-model="se_tf0_translate_z" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="回転 X")
+                b-slider(v-model="se_tf0_rotate_x" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Y")
+                b-slider(v-model="se_tf0_rotate_y" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Z")
+                b-slider(v-model="se_tf0_rotate_z" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="拡縮")
+                b-slider(v-model="se_tf0_scale" :min="0" :max="2.0" :step="0.001")
+              b-field(custom-class="is-small")
+                .control
+                  b-button(size="is-small" @click="se_tf0_reset") リセット
 
         .box
           .title.is-5 その他
@@ -301,6 +350,11 @@
             b-radio-button(size="is-small" v-model="summary_show" :native-value="true") ON
 
         .box
+          .title.is-5 カスタムCSS
+          b-field(custom-class="is-small" label="")
+            b-input(size="is-small" v-model="user_css" type="textarea" :rows="8")
+
+        .box
           .title.is-5 棋譜
           b-field.my-4(custom-class="is-small" label="プリセット")
             b-select(size="is-small" v-model="kifu_sample_key")
@@ -337,20 +391,20 @@
 
   b-button.sidebar_toggle_button(@click="sidebar_toggle_handle" icon-left="menu" size="is-medium" type="is-text")
 
-  //- b-navbar(type="is-primary" :mobile-burger="false" wrapper-class="container" spaced)
-  //-   template(slot="brand")
-  //-     b-navbar-item.has-text-weight-bold 将棋盤エディター
-  //-   template(slot="end")
-  //-     b-navbar-item(@click="sidebar_toggle_handle")
-  //-       b-icon(icon="menu")
+    //- b-navbar(type="is-primary" :mobile-burger="false" wrapper-class="container" spaced)
+    //-   template(slot="brand")
+    //-     b-navbar-item.has-text-weight-bold 将棋盤エディター
+    //-   template(slot="end")
+    //-     b-navbar-item(@click="sidebar_toggle_handle")
+    //-       b-icon(icon="menu")
 
-  //- .section
-  //-   .container.is-fluid
-  //-     .buttons
-  //-     .columns.is-multiline
+    //- .section
+    //-   .container.is-fluid
+    //-     .buttons
+    //-     .columns.is-multiline
 
-  div(is="style" v-text="comment_removed_css")
-  ShogiPlayer(v-bind="sp_params")
+  .WorkSheet
+    ShogiPlayer(v-bind="sp_params")
 </template>
 
 <script>
@@ -380,6 +434,7 @@ export default {
   },
   data() {
     return {
+      html_background_color: null,
       sidebar_p: true,
 
       ////////////////////////////////////////////////////////////////////////////////
@@ -482,23 +537,45 @@ export default {
       },
 
       kifu_body: null,
+      user_css: `.StyleEditor {
+  background-color: black;
+}`,
 
       summary_show:    DEVELOPMENT_P,
       slider_show:     DEVELOPMENT_P,
       controller_show: DEVELOPMENT_P,
 
-      sp_tf_perspective: 50,
-      sp_tf_translate_x: 0,
-      sp_tf_translate_y: 0,
-      sp_tf_translate_z: 0,
-      sp_tf_rotate_x: 0,
-      sp_tf_rotate_y: 0,
-      sp_tf_rotate_z: 0,
-      sp_tf_rotate_a: 0,
-      sp_tf_scale: 1.0,
-      sp_tf_scale_x: 1.0,
-      sp_tf_scale_y: 1.0,
-      sp_tf_scale_z: 1.0,
+      transform_tab_index: 0,
+
+      se_tf0_mode: "is_tf0_mode_off",
+      se_tf0_perspective: 200,
+      se_tf0_translate_x: 0,
+      se_tf0_translate_y: 0,
+      se_tf0_translate_z: 0,
+      se_tf0_rotate_x: 0.03,
+      se_tf0_rotate_y: 0,
+      se_tf0_rotate_z: 0,
+      se_tf0_scale: 1.0,
+
+      se_tf1_mode: "is_tf1_mode_off",
+      se_tf1_perspective: 200,
+      se_tf1_translate_x: 0,
+      se_tf1_translate_y: -70,
+      se_tf1_translate_z: 0,
+      se_tf1_rotate_x: 0.05,
+      se_tf1_rotate_y: 0,
+      se_tf1_rotate_z: 0,
+      se_tf1_scale: 1.0,
+
+      se_tf2_mode: "is_tf2_mode_off",
+      se_tf2_perspective: 200,
+      se_tf2_translate_x: 0,
+      se_tf2_translate_y: 0,
+      se_tf2_translate_z: 0,
+      se_tf2_rotate_x: 0,
+      se_tf2_rotate_y: 0,
+      se_tf2_rotate_z: 0,
+      se_tf2_scale: 1.0,
     }
   },
 
@@ -512,6 +589,17 @@ export default {
       }
     }
   },
+
+  // mounted() {
+  //   const el = document.querySelector("html")
+  //   this.html_background_color = el.style.backgroundColor
+  //   el.style.backgroundColor = "black"
+  // },
+  //
+  // beforeDestroy() {
+  //   const el = document.querySelector("html")
+  //   el.style.backgroundColor = this.html_background_color
+  // },
 
   watch: {
     kifu_sample_key(v) {
@@ -547,6 +635,36 @@ export default {
     hsla_format(v) {
       return chroma(v).css("hsla")
     },
+    se_tf0_reset() {
+      this.se_tf0_perspective = 200
+      this.se_tf0_translate_x = 0
+      this.se_tf0_translate_y = 0
+      this.se_tf0_translate_z = 0
+      this.se_tf0_rotate_x    = 0
+      this.se_tf0_rotate_y    = 0
+      this.se_tf0_rotate_z    = 0
+      this.se_tf0_scale       = 1.0
+    },
+    se_tf1_reset() {
+      this.se_tf1_perspective = 200
+      this.se_tf1_translate_x = 0
+      this.se_tf1_translate_y = 0
+      this.se_tf1_translate_z = 0
+      this.se_tf1_rotate_x    = 0
+      this.se_tf1_rotate_y    = 0
+      this.se_tf1_rotate_z    = 0
+      this.se_tf1_scale       = 1.0
+    },
+    se_tf2_reset() {
+      this.se_tf2_perspective = 200
+      this.se_tf2_translate_x = 0
+      this.se_tf2_translate_y = 0
+      this.se_tf2_translate_z = 0
+      this.se_tf2_rotate_x    = 0
+      this.se_tf2_rotate_y    = 0
+      this.se_tf2_rotate_z    = 0
+      this.se_tf2_scale       = 1.0
+    },
   },
   computed: {
     HumanSideInfo()  { return HumanSideInfo  },
@@ -565,9 +683,14 @@ export default {
     chroma() { return chroma },
 
     component_class() {
-      return {
-        sidebar_p: this.sidebar_p,
-      }
+      return [
+        {
+          sidebar_p: this.sidebar_p
+        },
+        this.se_tf0_mode,
+        this.se_tf1_mode,
+        this.se_tf2_mode,
+      ]
     },
 
     sp_board_image_url() {
@@ -617,7 +740,7 @@ export default {
     human_css() {
       let s = this.raw_css
       s = s.replace(/url\(.*\)/g, "url(...)")
-      s = s.replace(/\s*.StyleEditor.*\n/, "")
+      s = s.replace(/\s*.WorkSheet.*\n/, "")
       s = s.replace(/\s}\s*\n/, "")
       s = s.replace(/;/g, "")
       s = s.replace(/^\s*/gm, "")
@@ -635,10 +758,9 @@ export default {
 
     raw_css() {
       return `
-        .StyleEditor {
+        .WorkSheet {
           --sp_body_max_width:           ${this.sp_body_max_width}vw;
           --sp_common_gap:               ${this.sp_common_gap}px;
-          --sp_invisible_dimension:                ${this.sp_invisible_dimension};
 
           // 背景
           --sp_ground_color:             ${this.hsla_format(this.sp_ground_color)};
@@ -671,7 +793,6 @@ export default {
           --sp_board_aspect_ratio:       ${this.sp_board_aspect_ratio};
           --sp_board_piece_rate:         ${this.sp_board_piece_rate}%;
           --sp_board_piece_position:     ${this.sp_board_piece_position};
-          --sp_piece_blend:          ${this.sp_piece_blend};
 
           // 盤グリッド
           --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
@@ -689,6 +810,7 @@ export default {
           --sp_piece_hue:                ${this.sp_piece_hue};
           --sp_piece_saturate:           ${this.sp_piece_saturate};
           --sp_piece_brightness:         ${this.sp_piece_brightness};
+          --sp_piece_blend:              ${this.sp_piece_blend};
 
           // 駒数
           --sp_piece_count_gap_right:    ${this.sp_piece_count_gap_right}%;
@@ -715,20 +837,33 @@ export default {
           --sp_shadow_blur:              ${this.sp_shadow_blur};
           --sp_shadow_color:             ${this.hsla_format(this.sp_shadow_color)};
 
-          // 3D
-          --sp_tf_perspective: ${this.sp_tf_perspective}px;
-          --sp_tf_translate_x: ${this.sp_tf_translate_x}px;
-          --sp_tf_translate_y: ${this.sp_tf_translate_y}px;
-          --sp_tf_translate_z: ${this.sp_tf_translate_z}px;
-          --sp_tf_rotate_x:    ${this.sp_tf_rotate_x}turn;
-          --sp_tf_rotate_y:    ${this.sp_tf_rotate_y}turn;
-          --sp_tf_rotate_z:    ${this.sp_tf_rotate_z}turn;
-          --sp_tf_rotate_a:    ${this.sp_tf_rotate_a}turn;
-          --sp_tf_scale:       ${this.sp_tf_scale};
-          --sp_tf_scale_x:     ${this.sp_tf_scale_x};
-          --sp_tf_scale_y:     ${this.sp_tf_scale_y};
-          --sp_tf_scale_z:     ${this.sp_tf_scale_z};
+          // Transform
+          --se_tf0_perspective: ${this.se_tf0_perspective}px;
+          --se_tf0_translate_x: ${this.se_tf0_translate_x}px;
+          --se_tf0_translate_y: ${this.se_tf0_translate_y}px;
+          --se_tf0_translate_z: ${this.se_tf0_translate_z}px;
+          --se_tf0_rotate_x:    ${this.se_tf0_rotate_x}turn;
+          --se_tf0_rotate_y:    ${this.se_tf0_rotate_y}turn;
+          --se_tf0_rotate_z:    ${this.se_tf0_rotate_z}turn;
+          --se_tf0_scale:       ${this.se_tf0_scale};
 
+          --se_tf1_perspective: ${this.se_tf1_perspective}px;
+          --se_tf1_translate_x: ${this.se_tf1_translate_x}px;
+          --se_tf1_translate_y: ${this.se_tf1_translate_y}px;
+          --se_tf1_translate_z: ${this.se_tf1_translate_z}px;
+          --se_tf1_rotate_x:    ${this.se_tf1_rotate_x}turn;
+          --se_tf1_rotate_y:    ${this.se_tf1_rotate_y}turn;
+          --se_tf1_rotate_z:    ${this.se_tf1_rotate_z}turn;
+          --se_tf1_scale:       ${this.se_tf1_scale};
+
+          --se_tf2_perspective: ${this.se_tf2_perspective}px;
+          --se_tf2_translate_x: ${this.se_tf2_translate_x}px;
+          --se_tf2_translate_y: ${this.se_tf2_translate_y}px;
+          --se_tf2_translate_z: ${this.se_tf2_translate_z}px;
+          --se_tf2_rotate_x:    ${this.se_tf2_rotate_x}turn;
+          --se_tf2_rotate_y:    ${this.se_tf2_rotate_y}turn;
+          --se_tf2_rotate_z:    ${this.se_tf2_rotate_z}turn;
+          --se_tf2_scale:       ${this.se_tf2_scale};
         }
       `
     },
@@ -785,8 +920,15 @@ $sidebar_width_mobile:  50%
       +desktop
         width: unquote("calc(100% - #{$sidebar_width_desktop})")
 
-  .ShogiPlayerForTransform
-    transition: none
-    // これで背景とのブレンドはなくなる
-    transform: perspective(var(--sp_tf_perspective)) translate3d(var(--sp_tf_translate_x), var(--sp_tf_translate_y), var(--sp_tf_translate_z)) rotateX(var(--sp_tf_rotate_x)) rotateY(var(--sp_tf_rotate_y)) rotateZ(var(--sp_tf_rotate_z)) scale(var(--sp_tf_scale))
+  &.is_tf0_mode_on
+    .WorkSheet
+      transform: perspective(var(--se_tf0_perspective)) translate3d(var(--se_tf0_translate_x), var(--se_tf0_translate_y), var(--se_tf0_translate_z)) rotateX(var(--se_tf0_rotate_x)) rotateY(var(--se_tf0_rotate_y)) rotateZ(var(--se_tf0_rotate_z)) scale(var(--se_tf0_scale))
+
+  &.is_tf1_mode_on
+    .ShogiPlayerForTransform
+      transform: perspective(var(--se_tf1_perspective)) translate3d(var(--se_tf1_translate_x), var(--se_tf1_translate_y), var(--se_tf1_translate_z)) rotateX(var(--se_tf1_rotate_x)) rotateY(var(--se_tf1_rotate_y)) rotateZ(var(--se_tf1_rotate_z)) scale(var(--se_tf1_scale))
+
+  &.is_tf2_mode_on
+    .PieceTexture
+      transform: perspective(var(--se_tf2_perspective)) translate3d(var(--se_tf2_translate_x), var(--se_tf2_translate_y), var(--se_tf2_translate_z)) rotateX(var(--se_tf2_rotate_x)) rotateY(var(--se_tf2_rotate_y)) rotateZ(var(--se_tf2_rotate_z)) scale(var(--se_tf2_scale))
 </style>
