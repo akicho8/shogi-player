@@ -12,6 +12,13 @@ export default class Board {
     return 3
   }
 
+  static vector_flip(x, y) {
+    return [
+      this.dimension - x - 1,
+      this.dimension - y - 1,
+    ]
+  }
+
   constructor() {
     this._surface = {}
   }

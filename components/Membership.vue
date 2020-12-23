@@ -18,6 +18,7 @@ export default {
 
   props: {
     location: { required: true },
+    position: { required: true },
   },
 
   components: {
@@ -29,6 +30,7 @@ export default {
   computed: {
     component_class() {
       const list = []
+      list.push(`is_position_${this.position}`)
       list.push(`is_${this.location.key}`)
       if (this.base.mediator.current_location === this.location) {
         list.push("is_turn_active")
@@ -47,7 +49,7 @@ export default {
     },
 
     hold_pieces() {
-      return this.base.mediator.realized_hold_pieces_of(this.location.key)
+      return this.base.mediator.realized_hold_pieces_of(this.location.flip_if(this.base.new_flip).key)
     },
   },
 }
@@ -67,18 +69,18 @@ export default {
 
   +IS_HORIZONTAL
     .Membership
-      &.is_white
+      &.is_position_north
         flex-direction: column-reverse   // 全体が横並び → 持駒は縦並び
         align-self: flex-start           // 全体が横並び → 持駒は縦並び → 後手は上寄せ
-      &.is_black
+      &.is_position_south
         flex-direction: column           // 全体が横並び → 持駒は縦並び
         align-self: flex-end             // 全体が横並び → 持駒は縦並び → 先手は下寄せ
   +IS_VERTICAL
     .Membership
       width: 100%
       height: 100%
-      &.is_white
+      &.is_position_north
         flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△ 後手 飛歩」のままでよい (左端→)
-      &.is_black
+      &.is_position_south
         flex-direction: row-reverse      // 全体が縦並び → 持駒は横並び → 右寄せ 先手は「飛歩 先手 ▲」とする (←右端)
 </style>

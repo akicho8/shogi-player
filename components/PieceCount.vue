@@ -45,22 +45,23 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
   +IS_HORIZONTAL
-    .PieceTexture
-      display: flex
-      justify-content: center
-      align-items: center
-    .PieceCount
-      top:    unset
-      bottom: unset
-      right:  unset
-      left:   unset
-    .is_white
+    .Membership
+      .PieceTexture
+        display: flex
+        justify-content: center
+        align-items: center
       .PieceCount
-        right: var(--sp_piece_count_gap_right) // 右端から横幅分押すと左端の外になる
-        transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
-    .is_black
-      .PieceCount
-        left: var(--sp_piece_count_gap_right)  // 左端から横幅分押すと右端の外になる
+        top:    unset
+        bottom: unset
+        right:  unset
+        left:   unset
+      &.is_position_north
+        .PieceCount
+          right: var(--sp_piece_count_gap_right) // 右端から横幅分押すと左端の外になる
+          +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+      &.is_position_south
+        .PieceCount
+          left: var(--sp_piece_count_gap_right)  // 左端から横幅分押すと右端の外になる
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
@@ -75,11 +76,11 @@ export default {
         bottom: unset
         right:  unset
         left:   unset
-      &.is_white
+      &.is_position_north
         .PieceCount
           bottom: var(--sp_piece_count_gap_bottom)
-          transform: rotate(180deg) // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
-      &.is_black
+          +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+      &.is_position_south
         .PieceCount
           top: var(--sp_piece_count_gap_bottom)
 

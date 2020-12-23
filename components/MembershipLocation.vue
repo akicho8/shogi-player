@@ -1,6 +1,6 @@
 <template lang="pug">
 .MembershipLocation
-  MembershipLocationMark(:base="base" :location="location")
+  MembershipLocationMark(:base="base" :position="position" :location="location")
 </template>
 
 <script>
@@ -12,6 +12,7 @@ export default {
   mixins: [support],
   props: {
     location: { required: true },
+    position: { required: true },
   },
   components: {
     MembershipLocationMark,

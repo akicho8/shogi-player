@@ -658,6 +658,8 @@ export default {
       // list.push("location_black")
       // list.push("promoted_false")
 
+      list.push("is_position_south") // 常に上向きにする
+
       return list
     },
 

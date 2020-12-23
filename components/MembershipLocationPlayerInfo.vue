@@ -76,12 +76,18 @@ export default {
     align-items: center
     justify-content: center
 
+  .is_white
+    .MembershipLocationPlayerInfo
+
   .is_black
     .MembershipLocationPlayerInfo
 
-  .is_white
+  .is_position_north
     .MembershipLocationPlayerInfo
-      @extend %is_flip // ← 反転しない方がいいかもしれない
+      @extend %is_flip
+
+  .is_position_south
+    .MembershipLocationPlayerInfo
 
   // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
   +IS_HORIZONTAL

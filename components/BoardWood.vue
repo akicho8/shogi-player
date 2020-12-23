@@ -14,30 +14,39 @@
       tr(v-for="(_, y) in base.mediator.dimension")
         td(
           v-for="(_, x) in base.mediator.dimension"
-          @pointerdown="base.board_cell_pointerdown_handle([x, y], $event)"
-          @click.stop.prevent="base.board_cell_left_click([x, y], $event)"
-          @click.stop.prevent.right="base.board_cell_right_click([x, y], $event)"
-          @mouseover="base.board_mouseover_handle([x, y], $event)"
+          @pointerdown="base.board_cell_pointerdown_handle(logical_vector(x, y), $event)"
+          @click.stop.prevent="base.board_cell_left_click(logical_vector(x, y), $event)"
+          @click.stop.prevent.right="base.board_cell_right_click(logical_vector(x, y), $event)"
+          @mouseover="base.board_mouseover_handle(logical_vector(x, y), $event)"
           @mouseleave="base.mouseleave_handle"
           )
           .CellBorder
           PieceTap(
             :base="base"
-            :class="base.board_piece_control_class([x, y])"
-            :style="base.board_piece_back_style([x, y])"
-            :piece_texture_class="base.mediator.board_piece_fore_class([x, y])"
+            :class="base.board_piece_control_class(logical_vector(x, y))"
+            :style="base.board_piece_back_style(logical_vector(x, y))"
+            :piece_texture_class="base.mediator.board_piece_fore_class(logical_vector(x, y))"
             )
 </template>
 
 <script>
 import { support } from "./support.js"
 import PieceTap from "./PieceTap.vue"
+import Board from "./models/board.js"
 
 export default {
   name: "BoardWood",
   mixins: [support],
   components: {
     PieceTap,
+  },
+  methods: {
+    logical_vector(x, y) {
+      if (this.base.new_flip) {
+        return Board.vector_flip(x, y)
+      }
+      return [x, y]
+    },
   },
 }
 </script>

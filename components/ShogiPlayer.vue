@@ -350,6 +350,14 @@ export default {
       //   list = _.concat(list, soldier.to_class_list)
       // }
 
+      // 先後関係なく上か下かどちら側にいるかを表すクラスを指定
+      //   white -> is_position_north
+      //   black -> is_position_south
+      // もし反転しているなら逆になる
+      if (soldier) {
+        list.push(soldier.location.flip_if(this.base.new_flip).position_key)
+      }
+
       if (this.board_piece_back_user_class) {
         list = _.concat(list, this.board_piece_back_user_class(place))
       }

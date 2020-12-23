@@ -55,10 +55,13 @@
   background-repeat: no-repeat
   background-size: cover
 
+=is_flip
+  transform: rotate(180deg)
+  
 // 反転
 %is_flip
-  transform: rotate(180deg)
-
+  +is_flip
+  
 // 選択禁止
 %is_unselectable
   user-select: none

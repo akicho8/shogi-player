@@ -50,16 +50,22 @@ export default {
     background-repeat: no-repeat
     background-size: contain
 
-  .is_black
-    .MembershipLocationMarkTexture
-      background-image: url("../assets/location/location_black.svg")
-      +filter_drop_shadow(1)
-
   .is_white
     .MembershipLocationMarkTexture
       background-image: url("../assets/location/location_white.svg")
+
+  .is_black
+    .MembershipLocationMarkTexture
+      background-image: url("../assets/location/location_black.svg")
+
+  .is_position_north
+    .MembershipLocationMarkTexture
       +filter_drop_shadow(-1)
-      @extend %is_flip // 反転しない方がいいかもしれない
+      @extend %is_flip
+
+  .is_position_south
+    .MembershipLocationMarkTexture
+      +filter_drop_shadow(1)
 
   //////////////////////////////////////////////////////////////////////////////// サイズ (基本)
 

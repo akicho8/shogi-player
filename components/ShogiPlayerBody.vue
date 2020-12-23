@@ -1,18 +1,19 @@
 <template lang="pug">
 .ShogiPlayerBody(:class="component_class")
-  Membership(:base="base" :location="base.location_white")
+  Membership(:base="base" position="north" :location="location_of('white')")
     //- b-button.mr-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
   AspectRatioFixedBlock
     OverlayNavigations(:base="base")
     BoardWood(:base="base")
-  Membership(:base="base" :location="base.location_black")
+  Membership(:base="base" position="south" :location="location_of('black')")
 </template>
 
 <script>
 import Membership            from "./Membership.vue"
 import AspectRatioFixedBlock from "./AspectRatioFixedBlock.vue"
-import BoardWood            from "./BoardWood.vue"
+import BoardWood             from "./BoardWood.vue"
 import OverlayNavigations    from "./OverlayNavigations.vue"
+import Location              from "./models/location.js"
 
 import { support } from "./support.js"
 
@@ -25,6 +26,13 @@ export default {
     BoardWood,
     OverlayNavigations,
   },
+
+  methods: {
+    location_of(key) {
+      return Location.fetch(key).flip_if(this.base.new_flip)
+    },
+  },
+
   computed: {
     component_class() {
       return [
@@ -42,9 +50,10 @@ export default {
     transition: all 0.4s 0s ease-in-out
   &.is_flip_off
     .ShogiPlayerBody
+
   &.is_flip_on
     .ShogiPlayerBody
-      @extend %is_flip
+      // @extend %is_flip
 
   .ShogiPlayerBody
     // 縦横関係なく中央に寄せる

@@ -5,8 +5,8 @@ export default class Location extends MemoryRecord {
     return [
       // { key: "black", name: '☗', hirate_name: "先手", komaochi_name: "下手", char_key: "b", },
       // { key: "white", name: '☖', hirate_name: "後手", komaochi_name: "上手", char_key: "w", },
-      { key: "black", name: '☗', char_key: "b", value_sign: +1, },
-      { key: "white", name: '☖', char_key: "w", value_sign: -1, },
+      { key: "black", name: '☗', char_key: "b", value_sign: +1, position_key: "is_position_south", },
+      { key: "white", name: '☖', char_key: "w", value_sign: -1, position_key: "is_position_north", },
     ]
   }
 
@@ -27,6 +27,10 @@ export default class Location extends MemoryRecord {
 
   advance(value) {
     return Location.cycle_lookup(this.code + value)
+  }
+
+  flip_if(flip) {
+    return this.advance(flip ? 1 : 0)
   }
 }
 

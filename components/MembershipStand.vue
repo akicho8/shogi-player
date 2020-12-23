@@ -166,18 +166,18 @@ export default {
 
   ////////////////////////////////////////////////////////////////////////////////
   +IS_HORIZONTAL
-    .is_white
+    .is_position_north
       .MembershipStand
         flex-direction: column-reverse // 全体横並び → 後手 → 縦並び(昇順) △が下にあるので大駒順に並べるため
-    .is_black
+    .is_position_south
       .MembershipStand
         flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
   +IS_VERTICAL
-    .is_white
+    .is_position_north
       .MembershipStand
         flex-direction: row-reverse    // 「飛歩」→「歩飛」
         margin-left: auto              // 「△後手 飛歩…………」→「△後手…………飛歩」
-    .is_black
+    .is_position_south
       .MembershipStand
         flex-direction: row            // 「飛歩」→「飛歩」
         margin-right: auto             // 「…………飛歩 先手▲」→「飛歩…………先手▲」

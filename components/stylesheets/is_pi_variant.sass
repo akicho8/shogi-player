@@ -11,11 +11,18 @@
   +filter_drop_shadow($dir, unquote('invert(var(--sp_piece_invert)) hue-rotate(calc(var(--sp_piece_hue) * 1turn)) saturate(var(--sp_piece_saturate)) opacity(var(--sp_piece_opacity)) grayscale(var(--sp_piece_grayscale)) brightness(var(--sp_piece_brightness)) contrast(var(--sp_piece_contrast)) blur(calc(var(--sp_piece_blur) * 1px))'))
 
 %is_pi_black_only
-  &.location_white
-    @extend %is_flip
-    +filter_drop_shadow_for_piece(-1)
-  &.location_black
-    +filter_drop_shadow_for_piece(1)
+  // &.location_white
+  //   @extend %is_flip
+  //   +filter_drop_shadow_for_piece(-1)
+  // &.location_black
+  //   +filter_drop_shadow_for_piece(1)
+  .is_position_north
+    .PieceTextureSelf
+      @extend %is_flip
+      +filter_drop_shadow_for_piece(-1)
+  .is_position_south
+    .PieceTextureSelf
+      +filter_drop_shadow_for_piece(1)
 
 %is_pi_black_and_white
   +filter_drop_shadow_for_piece(1)
@@ -24,7 +31,7 @@
   &.is_pi_variant_a1by
     .PieceTextureSelf
       +is_pi_variant_a1by_pack
-      @extend %is_pi_black_only
+    @extend %is_pi_black_only
 
   &.is_pi_variant_a2by
     .PieceTextureSelf
