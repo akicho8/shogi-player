@@ -30,7 +30,7 @@ export default {
   computed: {
     component_class() {
       const list = []
-      list.push(`is_position_${this.position}`)
+      list.push(`is_position_${this.position}`) // 一番上で定義してあるので子には渡す必要なし
       list.push(`is_${this.location.key}`)
       if (this.base.mediator.current_location === this.location) {
         list.push("is_turn_active")
