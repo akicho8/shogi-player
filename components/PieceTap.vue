@@ -160,7 +160,7 @@ export default {
   ////////////////////////////////////////////////////////////////////////////////
   .CursorObject
     position: fixed
-    z-index: 256                  // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い。10だとsidebarに負ける
+    z-index: $cursor_object_z     // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い。10だとsidebarに負ける
     pointer-events: none          // 一切のイベントに反応させない
 
     .PieceTap

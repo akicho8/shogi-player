@@ -18,7 +18,7 @@ export default {
     .ShogiPlayerWidth
       .OverlayForDisable
         position: absolute
-        z-index: 2
+        z-index: $overlay_for_disable_z
         width: 100%
         height: 100%
     .is_layer_on

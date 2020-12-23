@@ -23,7 +23,7 @@ export default {
       // background-color: change_color($primary, $alpha: 0.5)
 
       position: absolute
-      z-index: 1
+      z-index: $overlay_navigation_item_z
       width: 50% // クリックできるエリアを横に広げるとモバイルのときに画面の右に隙間ができてしまうの盤の幅以上広げはいけない
       height: 100%
       -webkit-tap-highlight-color: transparent
@@ -33,7 +33,7 @@ export default {
       &.next
         right: 0                // 右端から50%
       &.flip_trigger_cell       // 天王山あたり(パディングを考慮していないため正確に合っているわけではない)
-        z-index: 2
+        z-index: $flip_trigger_cell_z
         left: calc(50% - ((100% / var(--sp_board_dimension)) / 2))
         width: calc((100% / var(--sp_board_dimension)))
         top:  calc(50% - ((100% / var(--sp_board_dimension)) / 2))

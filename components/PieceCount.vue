@@ -36,7 +36,7 @@ export default {
     border-radius: 50%
     font-weight: bold
 
-    z-index: 1         // 駒数が Membership の下に潜るのを防ぐ
+    z-index: $piece_count_z // 駒数が Membership の下に潜るのを防ぐ
     position: relative // 相対的にずらすため、かつ z-index 用
 
   &.is_layer_on
