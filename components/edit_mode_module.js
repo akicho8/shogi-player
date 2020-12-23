@@ -1,17 +1,19 @@
 import _ from "lodash"
 
-import Place from "./models/place"
-import Board from "./models/board"
+import Place       from "./models/place"
+import Board       from "./models/board"
 import PieceVector from "./models/piece_vector.js"
-import Soldier from "./models/soldier"
-import Location from "./models/location"
-
-const PLAY_MODE_LEGAL_MOVE_ONLY = true // play-mode で合法手のみに絞る
-const AUTO_PROMOTE              = true // 死に駒になるときは自動的に成る
-const NOT_PUT_IF_DEATH_SOLDIER  = true // 死に駒になるときは置けないようにする
-const DOUBLE_CLICK_TIME = 350
+import Soldier     from "./models/soldier"
+import Location    from "./models/location"
 
 export default {
+  props: {
+    play_mode_legal_move_only:          { type: Boolean, required: false, default: true, }, // play_mode で合法手のみに絞る
+    play_mode_auto_promote:             { type: Boolean, required: false, default: true, }, // play_mode で死に駒になるときは自動的に成る
+    play_mode_not_put_if_death_soldier: { type: Boolean, required: false, default: true, }, // play_mode で死に駒になるときは置けないようにする
+    edit_mode_double_click_time_ms:     { type: Number,  required: false, default: 350,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
+  },
+
   data() {
     return {
       // |------------------------+------------+------------+---------------------|
@@ -113,7 +115,7 @@ export default {
         return
       }
 
-      if (NOT_PUT_IF_DEATH_SOLDIER && this.play_p && this.have_piece && !soldier) {
+      if (this.play_mode_not_put_if_death_soldier && this.play_p && this.have_piece && !soldier) {
         const new_soldier = this.soldier_create_from_stand_or_box_on(place)
         const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
         if (force_promote_length != null) {                                              // チェックしない場合は null
@@ -143,8 +145,8 @@ export default {
           if (_.isEqual(this.place_from, place)) { // この処理をスキップすると3連打で2回反転できるが誤操作が頻発するのでやめ
             if (old) {
               const gap = this.$double_tap_time - old
-              const enable = gap < DOUBLE_CLICK_TIME
-              this.log(`ダブルクリック判定: (${gap} ms < ${DOUBLE_CLICK_TIME}) -> ${enable}`)
+              const enable = gap < this.edit_mode_double_click_time_ms
+              this.log(`ダブルクリック判定: (${gap} ms < ${this.edit_mode_double_click_time_ms}) -> ${enable}`)
               if (enable) {
                 this.log(`操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す`)
                 this.mediator.board.place_on(soldier.piece_transform)
@@ -184,7 +186,7 @@ export default {
       }
 
       // 盤上から移動させようとしたとき合法手以外は指せないようにする
-      if (PLAY_MODE_LEGAL_MOVE_ONLY && this.play_p && this.place_from) {
+      if (this.play_mode_legal_move_only && this.play_p && this.place_from) {
         const piece_vector = PieceVector.fetch(this.origin_soldier1.piece.key)
         const ox = this.place_from.x
         const oy = this.place_from.y
@@ -266,7 +268,7 @@ export default {
         if (this.play_p && promotable_p) { // 入って成る or 出て成る
 
           let must_dialog = true
-          if (AUTO_PROMOTE) {
+          if (this.play_mode_auto_promote) {
             const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
             if (force_promote_length != null) {                                              // チェックしない場合は null
               if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
