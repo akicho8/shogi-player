@@ -1,6 +1,6 @@
 <template lang="pug">
 .MembershipLocation
-  MembershipLocationMark(v-bind="$props")
+  MembershipLocationMark(:base="base" :position="position" :location="location")
 </template>
 
 <script>
