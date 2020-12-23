@@ -1,6 +1,6 @@
 <template lang="pug">
 // ShogiPlayerGround は ShogiPlayerWidth の位置を調整するためにあるので他のものを入れてはいけない
-.ShogiPlayerGround(:class="component_class")
+.ShogiPlayerGround(:class="component_class" :style="component_style")
   .ShogiPlayerGroundTexture
   ShogiPlayerWidth(:base="base" v-if="base.mediator" ref="ShogiPlayerWidth")
 </template>
@@ -34,6 +34,11 @@ export default {
         this.base.sp_mobile_vertical,
         this.base.new_flip ? "is_flip_on" : "is_flip_off",
       ]
+    },
+    component_style() {
+      return {
+        // "--sp_dimension": this.base.sp_dimension,
+      }
     },
   },
 }

@@ -44,15 +44,9 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_stand_piece_w`                         | 47px                      | 駒台のセル(W)                                                         |
 # >> | `--sp_stand_piece_h`                         | 50px                      | 駒台のセル(H)                                                         |
 # >> | `--sp_stand_piece_rate`                      | 80%                       | 駒台のセル内の駒占有率                                                |
-# >> | `--sp_piece_box_piece_w`                     | 38px                      | 駒箱のセル(W)                                                         |
-# >> | `--sp_piece_box_piece_h`                     | 46px                      | 駒箱のセル(H)                                                         |
-# >> | `--sp_piece_box_piece_rate`                  | 90%                       | 駒箱のセル内の駒占有率                                                |
-# >> | `--sp_stand_piece_w_mobile`                  | 38px                      | 駒台のセル(W) ※モバイル時                                            |
-# >> | `--sp_stand_piece_h_mobile`                  | 56px                      | 駒台のセル(H) ※モバイル時                                            |
-# >> | `--sp_stand_piece_rate_mobile`               | 90%                       | 駒台のセル内の駒占有率 ※モバイル時                                   |
-# >> | `--sp_piece_box_piece_w_mobile`              | 38px                      | 駒箱のセル(W) ※モバイル時                                            |
-# >> | `--sp_piece_box_piece_h_mobile`              | 46px                      | 駒箱のセル(H) ※モバイル時                                            |
-# >> | `--sp_piece_box_piece_rate_mobile`           | 90%                       | 駒箱のセル内の駒占有率 ※モバイル時                                   |
+# >> | `--sp_piece_box_piece_w`                     | 47px                      | 駒箱のセル(W)                                                         |
+# >> | `--sp_piece_box_piece_h`                     | 50px                      | 駒箱のセル(H)                                                         |
+# >> | `--sp_piece_box_piece_rate`                  | 80%                       | 駒箱のセル内の駒占有率                                                |
 # >> | `--sp_body_width`                            | 100%                      | 盤(駒台を含む)の幅                                                    |
 # >> | `--sp_body_max_width`                        | none                      | 盤(駒台を含む)の最大幅                                                |
 # >> | `--sp_ground_color`                          | transparent               | グラウンド背景色                                                      |
@@ -98,7 +92,7 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_piece_count_bg_color`                  | rgba(255, 255, 255, 0.75) | 駒数の文字色背景                                                      |
 # >> | `--sp_piece_count_padding`                   | 3px                       | 駒数のパディング                                                      |
 # >> | `--sp_board_aspect_ratio`                    |                     109.7 | 盤の横を100としたときの縦の比率                                       |
-# >> | `--sp_board_dimension`                       |                         9 | 盤の縦辺のセル数                                                      |
+# >> | `--sp_invisible_dimension`                   |                         9 | 天王山の付近を求めるための盤の縦辺のセル数                            |
 # >> | `--sp_shadow_offset`                         |                         2 | 影の右下方法への長さ                                                  |
 # >> | `--sp_shadow_blur`                           |                         3 | 影の範囲                                                              |
 # >> | `--sp_shadow_color`                          | rgba(0, 0, 0, 0.4)        | 影の色                                                                |

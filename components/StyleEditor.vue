@@ -88,6 +88,13 @@
             b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
           b-field(custom-class="is-small" label="アスペクト比(縦長度合)" message="初期値: 109.7")
             b-slider(v-model="sp_board_aspect_ratio" :min="0" :max="200" :step="0.1")
+          .columns.mt-4.mb-2
+            .column.py-0
+              b-field(custom-class="is-small" label="セル数(W)")
+                b-slider(v-model="sp_board_dimension_w" :min="0" :max="12")
+            .column.py-0
+              b-field(custom-class="is-small" label="セル数(H)")
+                b-slider(v-model="sp_board_dimension_h" :min="0" :max="12")
 
         .box
           .title.is-5 盤グリッド
@@ -140,10 +147,10 @@
           .title.is-5 駒台
           .columns.mt-4
             .column.py-0
-              b-field(custom-class="is-small" label="セル(Width)")
+              b-field(custom-class="is-small" label="セル(W)")
                 b-slider(v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
             .column.py-0
-              b-field(custom-class="is-small" label="セル(Height)")
+              b-field(custom-class="is-small" label="セル(H)")
                 b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ")
             b-slider(v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
@@ -256,6 +263,7 @@
 
         .box
           .title.is-5 その他
+
           b-field(custom-class="is-small" label="共通の隙間")
             b-slider(v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
 
@@ -279,9 +287,6 @@
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_flip" :native-value="false") ☗
             b-radio-button(size="is-small" v-model="sp_flip" :native-value="true") ☖
-
-          b-field(custom-class="is-small" label="盤の縦辺のセル数")
-            b-slider(v-model="sp_board_dimension" :min="1" :max="18" :step="1")
 
           b-field(custom-class="is-small" label="コントローラー表示")
             b-radio-button(size="is-small" v-model="controller_show" :native-value="false") OFF
@@ -417,6 +422,8 @@ export default {
       sp_board_radius: 5,
       sp_board_padding: 1.5,
 
+      sp_board_dimension_w: 9,
+      sp_board_dimension_h: 9,
       sp_hpos: "is_hcentered",
       sp_vpos: "is_vcentered",
       sp_layout: "is_horizontal",
@@ -463,7 +470,6 @@ export default {
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a1by",
       sp_bg_variant: "is_bg_variant_none",
-      sp_board_dimension: 9,
       ////////////////////////////////////////////////////////////////////////////////
 
       kifu_sample_key: null,
@@ -580,6 +586,8 @@ export default {
 
     sp_params() {
       let params = {}
+      params.sp_board_dimension_w      = this.sp_board_dimension_w
+      params.sp_board_dimension_h      = this.sp_board_dimension_h
       params.sp_layout           = this.sp_layout
       params.sp_blink            = this.sp_blink
       params.sp_hpos             = this.sp_hpos
@@ -630,7 +638,7 @@ export default {
         .StyleEditor {
           --sp_body_max_width:           ${this.sp_body_max_width}vw;
           --sp_common_gap:               ${this.sp_common_gap}px;
-          --sp_board_dimension:                ${this.sp_board_dimension};
+          --sp_invisible_dimension:                ${this.sp_invisible_dimension};
 
           // 背景
           --sp_ground_color:             ${this.hsla_format(this.sp_ground_color)};

@@ -34,10 +34,10 @@ export default {
         right: 0                // 右端から50%
       &.flip_trigger_cell       // 天王山あたり(パディングを考慮していないため正確に合っているわけではない)
         z-index: $flip_trigger_cell_z
-        left: calc(50% - ((100% / var(--sp_board_dimension)) / 2))
-        width: calc((100% / var(--sp_board_dimension)))
-        top:  calc(50% - ((100% / var(--sp_board_dimension)) / 2))
-        height: calc((100% / var(--sp_board_dimension)))
+        left: calc(50% - ((100% / var(--sp_invisible_dimension)) / 2))
+        width: calc((100% / var(--sp_invisible_dimension)))
+        top:  calc(50% - ((100% / var(--sp_invisible_dimension)) / 2))
+        height: calc((100% / var(--sp_invisible_dimension)))
 
       //////////////////////////////////////////////////////////////////////////////// cursor
       cursor: pointer

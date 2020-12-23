@@ -11,9 +11,9 @@
   // BoardWoodTexture の兄弟として BoardField を置くと BoardWoodTexture に BoardField の border が負ける
   .BoardFieldWithPadding.is-overlay
     table.BoardField
-      tr(v-for="(_, y) in base.mediator.dimension")
+      tr(v-for="(_, y) in masume_y")
         td(
-          v-for="(_, x) in base.mediator.dimension"
+          v-for="(_, x) in masume_x"
           @pointerdown="base.board_cell_pointerdown_handle(logical_vector(x, y), $event)"
           @click.stop.prevent="base.board_cell_left_click(logical_vector(x, y), $event)"
           @click.stop.prevent.right="base.board_cell_right_click(logical_vector(x, y), $event)"
@@ -41,11 +41,18 @@ export default {
   },
   methods: {
     logical_vector(x, y) {
+      x = x + Board.dimension - this.base.sp_board_dimension_w
+      y = y + Board.dimension - this.base.sp_board_dimension_h
       if (this.base.new_flip) {
-        return Board.vector_flip(x, y)
+        x = this.base.sp_board_dimension_w - x - 1
+        y = this.base.sp_board_dimension_h - y - 1
       }
       return [x, y]
     },
+  },
+  computed: {
+    masume_x() { return this.base.sp_board_dimension_w },
+    masume_y() { return this.base.sp_board_dimension_h },
   },
 }
 </script>
@@ -132,10 +139,9 @@ export default {
 
     table-layout: fixed    // 横幅均等
 
-  // 縦幅均等
   td
-    height: calc(100% / var(--sp_board_dimension))
-    border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
+    // 何もしなければ縦幅は均等になる
+    border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color) // border-collapse: collapse の効果で重ならない
 
   // border が BoardWoodTexture に負けるので入れ子にしている
   // td
