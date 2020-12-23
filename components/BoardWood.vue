@@ -20,7 +20,6 @@
           @mouseover="base.board_mouseover_handle(logical_vector(x, y), $event)"
           @mouseleave="base.mouseleave_handle"
           )
-          .CellBorder
           PieceTap(
             :base="base"
             :class="base.board_piece_control_class(logical_vector(x, y))"
