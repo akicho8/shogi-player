@@ -45,10 +45,6 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  //////////////////////////////////////////////////////////////////////////////// 回転
-  .ShogiPlayerBody
-    transition: all 0.4s 0s ease-in-out
-
   .ShogiPlayerBody
     // 縦横関係なく中央に寄せる
     display: flex
