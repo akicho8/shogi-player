@@ -12,7 +12,6 @@ export default {
   mixins: [support],
   props: {
     location: { required: true },
-    position: { required: true },
   },
   components: {
     MembershipLocationMark,
