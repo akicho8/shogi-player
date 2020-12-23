@@ -403,7 +403,7 @@
     //-     .buttons
     //-     .columns.is-multiline
 
-  .WorkSpace
+  .Workspace
     ShogiPlayer(v-bind="sp_params")
 </template>
 
@@ -740,7 +740,7 @@ export default {
     human_css() {
       let s = this.raw_css
       s = s.replace(/url\(.*\)/g, "url(...)")
-      s = s.replace(/\s*.WorkSpace.*\n/, "")
+      s = s.replace(/\s*.Workspace.*\n/, "")
       s = s.replace(/\s}\s*\n/, "")
       s = s.replace(/;/g, "")
       s = s.replace(/^\s*/gm, "")
@@ -758,7 +758,7 @@ export default {
 
     raw_css() {
       return `
-        .WorkSpace {
+        .Workspace {
           --sp_body_max_width:           ${this.sp_body_max_width}vw;
           --sp_common_gap:               ${this.sp_common_gap}px;
 
@@ -914,13 +914,13 @@ $sidebar_width_mobile:  50%
     z-index: 1
 
   &.sidebar_p
-    .WorkSpace
+    .Workspace
       +tablet
         width: unquote("calc(100% - #{$sidebar_width_tablet})")
       +desktop
         width: unquote("calc(100% - #{$sidebar_width_desktop})")
 
-  .WorkSpace
+  .Workspace
     display: flex
     align-items: center
     justify-content: center
@@ -938,7 +938,7 @@ $sidebar_width_mobile:  50%
     filter: unquote('invert(var(--se_ws_invert)) hue-rotate(calc(var(--se_ws_hue) * 1turn)) saturate(var(--se_ws_saturate)) grayscale(var(--se_ws_grayscale)) brightness(var(--se_ws_brightness)) contrast(var(--se_ws_contrast)) blur(calc(var(--se_ws_blur) * 1px))')
 
   &.is_tf0_mode_on
-    .WorkSpace
+    .Workspace
       transform: perspective(var(--se_tf0_perspective)) translate3d(var(--se_tf0_translate_x), var(--se_tf0_translate_y), var(--se_tf0_translate_z)) rotateX(var(--se_tf0_rotate_x)) rotateY(var(--se_tf0_rotate_y)) rotateZ(var(--se_tf0_rotate_z)) scale(var(--se_tf0_scale))
 
   &.is_tf1_mode_on
