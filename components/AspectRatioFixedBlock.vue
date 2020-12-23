@@ -17,7 +17,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  +defvar(sp_board_aspect_ratio, 109.7) // 盤の横を100としたときの縦の比率
+  +defvar(sp_board_aspect_ratio, 1.097) // 盤の横を1.0としたときの縦の比率
 
   // TODO: https://techblog.yahoo.co.jp/entry/2020122130052964/#8.%E3%82%A2%E3%82%B9%E3%83%9A%E3%82%AF%E3%83%88%E6%AF%94%E3%82%92%E7%B0%A1%E5%8D%98%E3%81%AB%E4%BF%9D%E3%81%A4%EF%BC%9A%E3%80%8Caspect-ratio%E3%80%8D
   .AspectRatioFixedBlockWrap
@@ -37,7 +37,7 @@ export default {
         // https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1222739597
         padding-top: 109.7%
       &.is_ratio_var
-        padding-top: calc(var(--sp_board_aspect_ratio) * 1%)
+        padding-top: calc(var(--sp_board_aspect_ratio) * 100%)
 
       +is_overlay_origin
       .AspectRatioFixedBlockContainer

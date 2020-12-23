@@ -84,10 +84,10 @@
           .title.is-5 盤
           b-field(custom-class="is-small" label="角丸め")
             b-slider(v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
-          b-field(custom-class="is-small" label="余白" message="紙面風: 0")
+          b-field(custom-class="is-small" label="余白")
             b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
-          b-field(custom-class="is-small" label="アスペクト比(縦長度合)" message="初期値: 109.7")
-            b-slider(v-model="sp_board_aspect_ratio" :min="0" :max="200" :step="0.1")
+          b-field(custom-class="is-small" label="アスペクト比(縦長度合)")
+            b-slider(v-model="sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
           .columns.mt-4.mb-2
             .column.py-0
               b-field(custom-class="is-small" label="セル数(W)")
@@ -111,13 +111,13 @@
 
         .box
           .title.is-5 駒
-          b-field(custom-class="is-small" label="プリセット" message="画像は拡大で画質がぼやける")
+          b-field(custom-class="is-small" label="プリセット")
             b-select(size="is-small" v-model="sp_pi_variant")
               template(v-for="e in PiVariantInfo.values")
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="盤上のセルに対するテクスチャ領域の割合")
             b-slider(v-model="sp_board_piece_rate" :min="0" :max="100" :step="0.1")
-          b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="↓にすると駒の底辺が揃う(ただし駒の種類による)")
+          b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="下にすると駒の底辺が揃う(ただし駒の種類による)")
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="bottom") ↓
@@ -307,7 +307,7 @@
               template(v-for="e in KifuBookInfo.values")
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="棋譜")
-            b-input(size="is-small" v-model="kifu_body" type="textarea" :rows="12")
+            b-input(size="is-small" v-model="kifu_body" type="textarea" :rows="8")
 
         .box
           .title.is-5 対局者情報
@@ -414,7 +414,7 @@ export default {
       sp_board_saturate:   1.0,
       sp_board_brightness: 1.0,
 
-      sp_board_aspect_ratio: 109.7,
+      sp_board_aspect_ratio: 1.097,
       sp_board_piece_rate: 90,
       sp_board_piece_position: "center",
       sp_piece_blend: "normal",
