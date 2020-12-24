@@ -42,8 +42,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  +defvar(sp_body_width, 100%)      // 盤(駒台を含む)の幅
-  +defvar(sp_body_max_width, none)  // 盤(駒台を含む)の最大幅
+  +defvar(sp_body_width, 100%)      // 盤(駒台を含む)の幅         FIXME: とる
+  +defvar(sp_body_max_width, none)  // 盤(駒台を含む)の最大幅     FIXME: とる
 
   .ShogiPlayerWidth
     // これがないと OverlayForDisable の 100% は画面幅になってしまう
