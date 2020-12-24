@@ -50,17 +50,18 @@ export default {
         display: flex
         justify-content: center
         align-items: center
-      .PieceCount
-        top:    unset
-        bottom: unset
-        right:  unset
-        left:   unset
       &.is_position_north
         .PieceCount
+          top:    unset
+          bottom: unset
           right: var(--sp_piece_count_gap_right) // 右端から横幅分押すと左端の外になる
+          left:   unset
           +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
       &.is_position_south
         .PieceCount
+          top:    unset
+          bottom: unset
+          right:  unset
           left: var(--sp_piece_count_gap_right)  // 左端から横幅分押すと右端の外になる
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
@@ -71,18 +72,19 @@ export default {
         display: flex
         justify-content: center
         align-items: center
-      .PieceCount
-        top:    unset     // is_horizontal の状態で mobile 表示するときこれらをリセットしないとパラメータがまざってしまう
-        bottom: unset
-        right:  unset
-        left:   unset
       &.is_position_north
         .PieceCount
+          top:    unset
           bottom: var(--sp_piece_count_gap_bottom)
+          right:  unset
+          left:   unset
           +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
       &.is_position_south
         .PieceCount
           top: var(--sp_piece_count_gap_bottom)
+          bottom: unset
+          right:  unset
+          left:   unset
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
   .PieceBox
