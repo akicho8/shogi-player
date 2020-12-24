@@ -27,6 +27,7 @@ import KIF_15733 from "./KifuBookInfo/15733.kif"
 export default class KifuBookInfo extends MemoryRecord {
   static get define() {
     return [
+      {"name":"平手","black":"先手","white":"後手","kifu_body":"position startpos"},
       {"key":"KIF_27479","kif_code":"27479","generation":1,"name":"1709-10-10 宗銀印達57番指し1局","black":"六代大橋宗銀","white":"伊藤印達","kifu_body":KIF_27479},
       {"key":"KIF_27480","kif_code":"27480","generation":2,"name":"1709-10-11 宗銀印達57番指し2局","black":"伊藤印達","white":"六代大橋宗銀","kifu_body":KIF_27480},
       {"key":"KIF_27481","kif_code":"27481","generation":3,"name":"1709-10-18 宗銀印達57番指し3局","black":"六代大橋宗銀","white":"伊藤印達","kifu_body":KIF_27481},

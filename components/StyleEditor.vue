@@ -359,28 +359,29 @@
         .box
           .title.is-5 棋譜
           b-field.my-4(custom-class="is-small" label="プリセット")
-            b-select(size="is-small" v-model="kifu_sample_key")
+            b-select(size="is-small" v-model="kifu_sample_key" @input="kifu_sample_key_input_handle")
+              option(:value="null")
               template(v-for="e in KifuBookInfo.values")
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="棋譜")
-            b-input(size="is-small" v-model="kifu_body" type="textarea" :rows="8")
+            b-input(size="is-small" v-model="new_kifu_body" type="textarea" :rows="8")
 
         .box
           .title.is-5 対局者情報
           .columns
             .column
               b-field(custom-class="is-small" label="☗")
-                b-input(size="is-small" v-model.trim="player_info.black.name" type="text")
+                b-input(size="is-small" v-model.trim="new_player_info.black.name" type="text")
             .column
               b-field(custom-class="is-small" label="時間")
-                b-input(size="is-small" v-model.trim="player_info.black.time" type="text")
+                b-input(size="is-small" v-model.trim="new_player_info.black.time" type="text")
           .columns
             .column
               b-field(custom-class="is-small" label="☖")
-                b-input(size="is-small" v-model.trim="player_info.white.name" type="text")
+                b-input(size="is-small" v-model.trim="new_player_info.white.name" type="text")
             .column
               b-field(custom-class="is-small" label="時間")
-                b-input(size="is-small" v-model.trim="player_info.white.time" type="text")
+                b-input(size="is-small" v-model.trim="new_player_info.white.time" type="text")
 
         .box
           .title.is-5 コンポーネント引数確認
@@ -434,6 +435,11 @@ export default {
     ColorPicker,
     ImageUpload,
   },
+  props: {
+    kifu_body:   { type: String, required: false, default: null, },
+    player_info: { type: Object, required: false, default: null, },
+  },
+
   data() {
     return {
       html_background_color: null,
@@ -533,12 +539,12 @@ export default {
 
       ////////////////////////////////////////////////////////////////////////////////
 
-      player_info: {
+      new_player_info: {
         black: { name: "先手", time: "", },
         white: { name: "後手", time: "", },
       },
 
-      kifu_body: null,
+      new_kifu_body: null,
 //       user_css: `.StyleEditor {
 //   background-color: black;
 // }`,
@@ -583,12 +589,22 @@ export default {
   },
 
   created() {
-    this.kifu_sample_key = this.KifuBookInfo.values[0].key
+    if (this.kifu_body) {
+      this.new_kifu_body = this.kifu_body
+    } else {
+      this.kifu_sample_key = this.KifuBookInfo.values[1].key
+      this.kifu_sample_key = this.KifuBookInfo.fetch("KIF_15733").key
+      this.kifu_sample_key_input_handle()
+    }
 
-    if (false) {
-      this.player_info = {
-        black: { name: "先手", time: "12:34", },
-        white: { name: "後手", time: "56:78", },
+    if (this.player_info) {
+      this.new_player_info = {...this.player_info}
+    } else {
+      if (false) {
+        this.new_player_info = {
+          black: { name: "先手", time: "12:34", },
+          white: { name: "後手", time: "56:78", },
+        }
       }
     }
   },
@@ -604,19 +620,15 @@ export default {
   //   el.style.backgroundColor = this.html_background_color
   // },
 
-  watch: {
-    kifu_sample_key(v) {
+  methods: {
+    kifu_sample_key_input_handle() {
       if (this.kifu_book_info) {
-        this.kifu_body = this.kifu_book_info.kifu_body
-        this.player_info.black.name = this.kifu_book_info.black
-        this.player_info.white.name = this.kifu_book_info.white
-      } else {
-        this.kifu_body = "position startpos"
+        this.new_kifu_body = this.kifu_book_info.kifu_body
+        this.new_player_info.black.name = this.kifu_book_info.black
+        this.new_player_info.white.name = this.kifu_book_info.white
       }
     },
-  },
 
-  methods: {
     sidebar_toggle_handle() {
       this.sidebar_p = !this.sidebar_p
     },
@@ -730,13 +742,13 @@ export default {
       params.flip                = this.sp_flip
       params.debug_mode_p        = false
       params.start_turn          = -1
-      params.kifu_body           = this.kifu_body
+      params.kifu_body           = this.new_kifu_body
       params.sound_effect        = true
       params.setting_button_show = false
       params.summary_show        = this.summary_show
       params.slider_show         = this.slider_show
       params.controller_show     = this.controller_show
-      params.player_info         = this.player_info
+      params.player_info         = this.new_player_info
       return params
     },
 
@@ -879,7 +891,7 @@ export default {
 
 $sidebar_width_desktop: 30%
 $sidebar_width_tablet:  40%
-$sidebar_width_mobile:  66.6%
+$sidebar_width_mobile:  100% * 3 / 4
 
 .StyleEditor-Sidebar
   .sidebar-content
