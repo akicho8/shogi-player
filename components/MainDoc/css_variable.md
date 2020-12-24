@@ -23,8 +23,8 @@
 | `--sp_piece_box_piece_w`                     | 47px                      | 駒箱のセル(W)                                                         |
 | `--sp_piece_box_piece_h`                     | 50px                      | 駒箱のセル(H)                                                         |
 | `--sp_piece_box_piece_rate`                  | 80%                       | 駒箱のセル内の駒占有率                                                |
-| `--sp_body_width`                            | 100%                      | 盤(駒台を含む)の幅                                                    |
-| `--sp_body_max_width`                        | none                      | 盤(駒台を含む)の最大幅                                                |
+| `--sp_body_width`                            | 100%                      | 盤(駒台を含む)の幅         FIXME: とる                                |
+| `--sp_body_max_width`                        | none                      | 盤(駒台を含む)の最大幅     FIXME: とる                                |
 | `--sp_ground_color`                          | transparent               | グラウンド背景色                                                      |
 | `--sp_ground_image`                          | none                      | グラウンド背景画像                                                    |
 | `--sp_ground_blur`                           |                         0 | ぼかし                                                                |
