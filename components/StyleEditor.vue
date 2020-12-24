@@ -15,7 +15,7 @@
         .box
           .title.is-5 基本
           b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_body_max_width" :min="1" :max="100")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="se_frame_width" :min="1" :max="100")
           b-field(custom-class="is-small" label="レイアウト")
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
@@ -407,7 +407,8 @@
     //-     .columns.is-multiline
 
   .Workspace.is-overlay
-    ShogiPlayer(v-bind="sp_params")
+    .ShogiPlayerWrap
+      ShogiPlayer(v-bind="sp_params")
 </template>
 
 <script>
@@ -491,7 +492,7 @@ export default {
       sp_vpos: "is_vcentered",
       sp_layout: "is_horizontal",
       sp_run_mode: DEVELOPMENT_P ? "edit_mode" : "view_mode",
-      sp_body_max_width: 35,
+      se_frame_width: 80,
       sp_mobile_fit: "is_mobile_fit_on",
       sp_mobile_vertical: "is_mobile_vertical_on",
 
@@ -774,7 +775,7 @@ export default {
     raw_css() {
       return `
         .Workspace {
-          --sp_body_max_width:           ${this.sp_body_max_width}vw;
+          --se_frame_width:           ${this.se_frame_width}vmin;
           --sp_common_gap:               ${this.sp_common_gap}px;
 
           // 背景
@@ -959,6 +960,12 @@ $sidebar_width_mobile:  100% * 3 / 4
     background-repeat: no-repeat
     background-size: cover
     filter: unquote('invert(var(--se_ws_invert)) hue-rotate(calc(var(--se_ws_hue) * 1turn)) saturate(var(--se_ws_saturate)) grayscale(var(--se_ws_grayscale)) brightness(var(--se_ws_brightness)) contrast(var(--se_ws_contrast)) blur(calc(var(--se_ws_blur) * 1px))')
+
+  .ShogiPlayerWrap
+    // width: 100%
+    // +tablet
+    //   width: var(--se_frame_width)
+    width: var(--se_frame_width)
 
   &.is_tf0_mode_on
     .Workspace
