@@ -15,7 +15,6 @@
 
         h5 駒
         ul
-          MainDocExternalLink(href="http://sozai.7gates.net/docs/japanese-chess/") 将棋駒と将棋盤 画像フリー素材 | 無料素材倶楽部
           MainDocExternalLink(href="http://mucho.girly.jp/bona/") 将棋アプリ用クリエイティブコモンズ画像
           MainDocExternalLink(href="https://nureyon.com/") ぬれよん - 色が塗れる無料イラスト素材
           MainDocExternalLink(href="https://twitter.com/Shogi_Zuan") 将棋図案駒
