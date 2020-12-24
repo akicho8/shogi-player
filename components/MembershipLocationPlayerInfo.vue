@@ -52,7 +52,6 @@ export default {
 .ShogiPlayerGround
   .MembershipLocationPlayerInfo
     font-size: $size-7
-    line-height: 100%
     word-break: break-all
     font-weight: bold
     flex-shrink: 0 // 縮小しない(縦置き時に駒台の横幅を100%にするとここが縮小しようとして1文字ずつ折り返しになる、のを防ぐ)
@@ -76,12 +75,6 @@ export default {
     align-items: center
     justify-content: center
 
-  .is_white
-    .MembershipLocationPlayerInfo
-
-  .is_black
-    .MembershipLocationPlayerInfo
-
   .is_position_north
     .MembershipLocationPlayerInfo
       @extend %is_flip
@@ -93,9 +86,11 @@ export default {
   +IS_HORIZONTAL
     .MembershipLocationPlayerInfo
       max-width: var(--sp_stand_piece_w)
+      line-height: 100%
 
   // 縦幅がわりと自由につかえるので隙間をあける
-  +IS_HORIZONTAL
+  +IS_VERTICAL
     .MembershipLocationPlayerInfo
+      max-width: unset
       line-height: 140%
 </style>
