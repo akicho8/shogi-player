@@ -10,7 +10,7 @@ export default class PiVariantInfo extends MemoryRecord {
       { key: "is_pi_variant_c",    name: "図案駒(画像)",                },
       { key: "is_pi_variant_d",    name: "orangain/shogi-piece-images", },
       { key: "is_pi_variant_e",    name: "プチッチ(画像・暗め)",        },
-      { key: "is_pi_variant_f",    name: "テスト中",                    },
+      // { key: "is_pi_variant_f",    name: "テスト中",                    },
     ]
   }
 }
