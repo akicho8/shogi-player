@@ -67,21 +67,21 @@ export default {
   ],
 
   props: {
-    sp_board_dimension_w: { type: Number, default: 9,                       }, // 盤のセル数
-    sp_board_dimension_h: { type: Number, default: 9,                       },
-    sp_layout:            { type: String, default: "is_vertical",           },
-    sp_hpos:              { type: String, default: "is_hcentered",          },
-    sp_vpos:              { type: String, default: "is_vcentered",          },
-    sp_fullheight:        { type: String, default: "is_fullheight_off",     },
-    sp_balloon:           { type: String, default: "is_balloon_on",         },
-    sp_layer:             { type: String, default: "is_layer_off",          },
-    sp_board_shadow:      { type: String, default: "is_board_shadow_drop",  },
-    sp_blink:             { type: String, default: "is_blink_off",          },
-    sp_pi_variant:        { type: String, default: "is_pi_variant_a1by",    },
-    sp_bg_variant:        { type: String, default: "is_bg_variant_none",    },
-    sp_mobile_fit:        { type: String, default: "is_mobile_fit_on",      },
-    sp_mobile_vertical:   { type: String, default: "is_mobile_vertical_on", },
-    sp_location_behavior: { type: String, default: "is_location_flip_on",   },
+    sp_board_dimension_w: { type: Number, default: 9,                       }, // 盤のセル数(W)
+    sp_board_dimension_h: { type: Number, default: 9,                       }, // 盤のセル数(H)
+    sp_layout:            { type: String, default: "is_vertical",           }, // レイアウト is_(vertical|horizontal)
+    sp_hpos:              { type: String, default: "is_hcentered",          }, // DEPRECATION
+    sp_vpos:              { type: String, default: "is_vcentered",          }, // DEPRECATION
+    sp_fullheight:        { type: String, default: "is_fullheight_off",     }, // DEPRECATION
+    sp_balloon:           { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
+    sp_layer:             { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
+    sp_board_shadow:      { type: String, default: "is_board_shadow_drop",  }, // 盤の影適用方法 is_board_shadow_(drop|box|none)
+    sp_blink:             { type: String, default: "is_blink_off",          }, // 最終手の表現方法 is_blink_(on|off)
+    sp_pi_variant:        { type: String, default: "is_pi_variant_a1by",    }, // 駒の種類
+    sp_bg_variant:        { type: String, default: "is_bg_variant_none",    }, // 盤の種類
+    sp_mobile_fit:        { type: String, default: "is_mobile_fit_on",      }, // DEPRECATION
+    sp_mobile_vertical:   { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
+    sp_location_behavior: { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
 
     // TODO ↑に合わせる
     run_mode:        { type: String,  default: "view_mode",         },
