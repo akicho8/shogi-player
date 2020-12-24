@@ -67,8 +67,8 @@ export default {
   ],
 
   props: {
-    sp_board_dimension_w:       { type: Number, default: 9,                       },
-    sp_board_dimension_h:       { type: Number, default: 9,                       },
+    sp_board_dimension_w: { type: Number, default: 9,                       }, // 盤のセル数
+    sp_board_dimension_h: { type: Number, default: 9,                       },
     sp_layout:            { type: String, default: "is_vertical",           },
     sp_hpos:              { type: String, default: "is_hcentered",          },
     sp_vpos:              { type: String, default: "is_vcentered",          },

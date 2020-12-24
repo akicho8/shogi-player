@@ -22,6 +22,7 @@
           li: nuxt-link(:to="{name: 'options'}") オプション
           li: nuxt-link(:to="{name: 'api'}") API
           li: nuxt-link(:to="{name: 'css-customize'}") CSS変数
+          li: nuxt-link(:to="{name: 'props'}") 引数
           li: nuxt-link(:to="{name: 'editor'}") スタイルエディタ
           li: nuxt-link(:to="{name: 'credit'}") クレジット
 </template>
