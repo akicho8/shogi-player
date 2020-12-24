@@ -1,6 +1,7 @@
 <template lang="pug">
 .StyleEditor.is-relative(:class="component_class")
   .StyleEditor-Background.is-overlay.pattern-checks-md.has-text-black-bis.has-background-black-ter
+  //- .StyleEditor-Background.is-overlay
 
   div(is="style" v-text="comment_removed_css")
   div(is="style" v-text="user_css")
@@ -30,7 +31,7 @@
           .title.is-5 背景
 
           b-field(custom-class="is-small" label="")
-            ColorPicker(v-model="se_ws_color" :disableAlpha="false")
+            ColorPicker(v-model="se_ws_color" :disableAlpha="true")
 
           ImageUpload(@input="se_ws_image_input_handle")
 
@@ -407,6 +408,7 @@
     //-     .columns.is-multiline
 
   .Workspace.is-overlay
+    .WorkspaceBackground.is-overlay
     .ShogiPlayerWrap
       ShogiPlayer(v-bind="sp_params")
 </template>
@@ -447,6 +449,7 @@ export default {
       sidebar_p: true,
 
       ////////////////////////////////////////////////////////////////////////////////
+      se_frame_width: 80,
       se_ws_image: null,
       sp_board_image: null,
 
@@ -492,7 +495,6 @@ export default {
       sp_vpos: "is_vcentered",
       sp_layout: "is_horizontal",
       sp_run_mode: DEVELOPMENT_P ? "edit_mode" : "view_mode",
-      se_frame_width: 80,
       sp_mobile_fit: "is_mobile_fit_on",
       sp_mobile_vertical: "is_mobile_vertical_on",
 
@@ -546,6 +548,7 @@ export default {
       },
 
       new_kifu_body: null,
+
 //       user_css: `.StyleEditor {
 //   background-color: black;
 // }`,
@@ -775,9 +778,6 @@ export default {
     raw_css() {
       return `
         .Workspace {
-          --se_frame_width:           ${this.se_frame_width}vmin;
-          --sp_common_gap:               ${this.sp_common_gap}px;
-
           // 背景
           --se_ws_color:             ${this.hsla_format(this.se_ws_color)};
           --se_ws_image:             ${this.se_ws_bg_url};
@@ -852,6 +852,10 @@ export default {
           --sp_shadow_offset:            ${this.sp_shadow_offset};
           --sp_shadow_blur:              ${this.sp_shadow_blur};
           --sp_shadow_color:             ${this.hsla_format(this.sp_shadow_color)};
+
+          // Other
+          --sp_common_gap:            ${this.sp_common_gap}px;
+          --se_frame_width:           ${this.se_frame_width}vmin;
 
           // Transform
           --se_tf0_perspective: ${this.se_tf0_perspective}px;
@@ -952,8 +956,7 @@ $sidebar_width_mobile:  100% * 3 / 4
     justify-content: center
     flex-direction: column
 
-    height: 100%
-
+  .WorkspaceBackground
     background-color: var(--se_ws_color)
     background-image: var(--se_ws_image)
     background-position: center
