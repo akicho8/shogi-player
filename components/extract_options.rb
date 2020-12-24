@@ -49,6 +49,15 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_piece_box_piece_rate`                  | 80%                       | 駒箱のセル内の駒占有率                                                |
 # >> | `--sp_body_width`                            | 100%                      | 盤(駒台を含む)の幅                                                    |
 # >> | `--sp_body_max_width`                        | none                      | 盤(駒台を含む)の最大幅                                                |
+# >> | `--sp_ground_color`                          | transparent               | グラウンド背景色                                                      |
+# >> | `--sp_ground_image`                          | none                      | グラウンド背景画像                                                    |
+# >> | `--sp_ground_blur`                           |                         0 | ぼかし                                                                |
+# >> | `--sp_ground_grayscale`                      |                         0 | グレースケール                                                        |
+# >> | `--sp_ground_contrast`                       |                       1.0 | 駒コントラスト                                                        |
+# >> | `--sp_ground_invert`                         |                         0 | 駒色反転                                                              |
+# >> | `--sp_ground_hue`                            |                       1.0 | 色相                                                                  |
+# >> | `--sp_ground_saturate`                       |                       1.0 | 彩度                                                                  |
+# >> | `--sp_ground_brightness`                     |                       1.0 | 輝度                                                                  |
 # >> | `--sp_location_mark_inactive_rate`           |                       0.5 | 手番ではないときの☗サイズの倍率                                      |
 # >> | `--sp_piece_box_color`                       | rgba(0, 0, 0, 0.2)        | 駒箱背景                                                              |
 # >> | `--sp_common_gap`                            | 12px                      | 共通の隙間                                                            |
