@@ -1,5 +1,7 @@
 <template lang="pug">
-.StyleEditor.pattern-dots-lg(:class="component_class")
+.StyleEditor.is-relative(:class="component_class")
+  .StyleEditor-Background.is-overlay.pattern-checks-md.has-text-black-bis.has-background-black-ter
+
   div(is="style" v-text="comment_removed_css")
   div(is="style" v-text="user_css")
 
@@ -13,7 +15,7 @@
         .box
           .title.is-5 基本
           b-field(custom-class="is-small" label="コンテナ幅")
-            b-slider(v-model="sp_body_max_width" :min="1" :max="100")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_body_max_width" :min="1" :max="100")
           b-field(custom-class="is-small" label="レイアウト")
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
@@ -33,21 +35,21 @@
           ImageUpload(@input="se_ws_image_input_handle")
 
           b-field(custom-class="is-small" label="色相")
-            b-slider(v-model="se_ws_hue" :min="-0.5" :max="0.5" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="se_ws_hue" :min="-0.5" :max="0.5" :step="0.001")
           b-field(custom-class="is-small" label="彩度")
-            b-slider(v-model="se_ws_saturate" :min="0" :max="4.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="se_ws_saturate" :min="0" :max="4.0" :step="0.001")
           b-field(custom-class="is-small" label="輝度")
-            b-slider(v-model="se_ws_brightness" :min="0" :max="2.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="se_ws_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
-            b-slider(v-model="se_ws_blur" :min="0" :max="30" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="se_ws_blur" :min="0" :max="30" :step="0.001")
           b-field(custom-class="is-small" label="グレースケール")
-            b-slider(v-model="se_ws_grayscale" :min="0" :max="1.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="se_ws_grayscale" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="コントラスト")
-            b-slider(v-model="se_ws_contrast" :min="0" :max="2.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="se_ws_contrast" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="反転")
-            b-slider(v-model="se_ws_invert" :min="0" :max="1.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="se_ws_invert" :min="0" :max="1.0" :step="0.001")
           //- b-field(custom-class="is-small" label="非透輝度")
-          //-   b-slider(v-model="se_ws_opacity" :min="0" :max="1.0" :step="0.001")
+          //-   b-slider(indicator :tooltip="false" size="is-small" v-model="se_ws_opacity" :min="0" :max="1.0" :step="0.001")
 
         .box
           .title.is-5 盤テクスチャ
@@ -63,21 +65,21 @@
           ImageUpload(@input="sp_board_image_input_handle")
 
           b-field(custom-class="is-small" label="色相")
-            b-slider(v-model="sp_board_hue" :min="-0.5" :max="0.5" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_hue" :min="-0.5" :max="0.5" :step="0.001")
           b-field(custom-class="is-small" label="彩度")
-            b-slider(v-model="sp_board_saturate" :min="0" :max="4.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_saturate" :min="0" :max="4.0" :step="0.001")
           b-field(custom-class="is-small" label="輝度")
-            b-slider(v-model="sp_board_brightness" :min="0" :max="2.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
-            b-slider(v-model="sp_board_blur" :min="0" :max="30" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_blur" :min="0" :max="30" :step="0.001")
           b-field(custom-class="is-small" label="グレースケール")
-            b-slider(v-model="sp_board_grayscale" :min="0" :max="1.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_grayscale" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="コントラスト")
-            b-slider(v-model="sp_board_contrast" :min="0" :max="2.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_contrast" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="反転")
-            b-slider(v-model="sp_board_invert" :min="0" :max="1.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_invert" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="非透輝度")
-            b-slider(v-model="sp_board_opacity" :min="0" :max="1.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_opacity" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="ブレンドモード")
             b-select(size="is-small" v-model="sp_board_blend")
               template(v-for="e in MixBlendModeInfo.values")
@@ -86,18 +88,18 @@
         .box
           .title.is-5 盤
           b-field(custom-class="is-small" label="角丸め")
-            b-slider(v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
           b-field(custom-class="is-small" label="余白")
-            b-slider(v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
           b-field(custom-class="is-small" label="アスペクト比(縦長度合)")
-            b-slider(v-model="sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
           .columns.mt-4.mb-2
             .column.py-0
               b-field(custom-class="is-small" label="セル数(W)")
-                b-slider(v-model="sp_board_dimension_w" :min="0" :max="12")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_dimension_w" :min="0" :max="12")
             .column.py-0
               b-field(custom-class="is-small" label="セル数(H)")
-                b-slider(v-model="sp_board_dimension_h" :min="0" :max="12")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_dimension_h" :min="0" :max="12")
 
         .box
           .title.is-5 盤グリッド
@@ -106,11 +108,11 @@
           b-field(custom-class="is-small" label="グリッド外枠カラー")
             ColorPicker(v-model="sp_grid_outer_color")
           b-field(custom-class="is-small" label="グリッドの太さ")
-            b-slider(v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線はブラウザ依存 Safari: 1.5px, Chrome: 2.0px")
-            b-slider(v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
           b-field(custom-class="is-small" label="星")
-            b-slider(v-model="sp_grid_star_size" :min="0" :max="100" :step="0.01")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_grid_star_size" :min="0" :max="100" :step="0.01")
 
         .box
           .title.is-5 駒
@@ -119,28 +121,28 @@
               template(v-for="e in PiVariantInfo.values")
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="盤上のセルに対するテクスチャ領域の割合")
-            b-slider(v-model="sp_board_piece_rate" :min="0" :max="100" :step="0.1")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_board_piece_rate" :min="0" :max="100" :step="0.1")
           b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="下にすると駒の底辺が揃う(ただし駒の種類による)")
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="bottom") ↓
 
           b-field(custom-class="is-small" label="色相")
-            b-slider(v-model="sp_piece_hue" :min="-0.5" :max="0.5" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_hue" :min="-0.5" :max="0.5" :step="0.001")
           b-field(custom-class="is-small" label="彩度")
-            b-slider(v-model="sp_piece_saturate" :min="0" :max="4.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_saturate" :min="0" :max="4.0" :step="0.001")
           b-field(custom-class="is-small" label="輝度")
-            b-slider(v-model="sp_piece_brightness" :min="0" :max="2.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
-            b-slider(v-model="sp_piece_blur" :min="0" :max="30" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_blur" :min="0" :max="30" :step="0.001")
           b-field(custom-class="is-small" label="グレースケール")
-            b-slider(v-model="sp_piece_grayscale" :min="0" :max="1.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_grayscale" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="コントラスト")
-            b-slider(v-model="sp_piece_contrast" :min="0" :max="2.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_contrast" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="反転")
-            b-slider(v-model="sp_piece_invert" :min="0" :max="1.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_invert" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="非透輝度")
-            b-slider(v-model="sp_piece_opacity" :min="0" :max="1.0" :step="0.001")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_opacity" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="ブレンドモード")
             b-select(size="is-small" v-model="sp_piece_blend")
               template(v-for="e in MixBlendModeInfo.values")
@@ -151,29 +153,29 @@
           .columns.mt-4
             .column.py-0
               b-field(custom-class="is-small" label="セル(W)")
-                b-slider(v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
             .column.py-0
               b-field(custom-class="is-small" label="セル(H)")
-                b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ")
-            b-slider(v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
           b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色")
             ColorPicker(v-model="sp_stand_hover_border_color")
 
         .box
           .title.is-5 駒数
           b-field(custom-class="is-small" label="サイズ")
-            b-slider(v-model="sp_piece_count_font_size" :min="0" :max="20" :step="0.01")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_count_font_size" :min="0" :max="20" :step="0.01")
           b-field(custom-class="is-small" label="フォント色")
             ColorPicker(v-model="sp_piece_count_font_color")
           b-field(custom-class="is-small" label="背景")
             ColorPicker(v-model="sp_piece_count_bg_color")
           b-field(custom-class="is-small" label="余白")
-            b-slider(v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
           b-field(custom-class="is-small" label="左右レイアウト時の位置")
-            b-slider(v-model="sp_piece_count_gap_right" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_vertical'")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_count_gap_right" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_vertical'")
           b-field(custom-class="is-small" label="上下レイアウト時の位置")
-            b-slider(v-model="sp_piece_count_gap_bottom" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_horizontal'")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_count_gap_bottom" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_horizontal'")
 
         .box
           .title.is-5 駒箱
@@ -182,19 +184,19 @@
           .columns.mt-4
             .column.py-0
               b-field(custom-class="is-small" label="セル(W)")
-                b-slider(v-model="sp_piece_box_piece_w" :min="1" :max="80" :step="1")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_box_piece_w" :min="1" :max="80" :step="1")
             .column.py-0
               b-field(custom-class="is-small" label="セル(H)")
-                b-slider(v-model="sp_piece_box_piece_h" :min="1" :max="80" :step="1")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_box_piece_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
-            b-slider(v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
 
         .box
           .title.is-5 影
           b-field(custom-class="is-small" label="右下方向へのずれ")
-            b-slider(v-model="sp_shadow_offset" :min="-10" :max="10")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_shadow_offset" :min="-10" :max="10")
           b-field(custom-class="is-small" label="ぶれ度合い")
-            b-slider(v-model="sp_shadow_blur" :min="-1" :max="20")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_shadow_blur" :min="-1" :max="20")
           b-field(custom-class="is-small" label="色")
             ColorPicker(v-model="sp_shadow_color")
           b-field(custom-class="is-small" label="盤と駒台への適用方法" message="dropは透明度を継承するので元が透明だと影も薄い")
@@ -219,10 +221,10 @@
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(W)")
-          //-       b-slider(v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
+          //-       b-slider(indicator :tooltip="false" size="is-small" v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(H)")
-          //-       b-slider(v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
+          //-       b-slider(indicator :tooltip="false" size="is-small" v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
 
           b-field(custom-class="is-small" label="領域縦幅")
             b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_on") 画面サイズ
@@ -240,81 +242,81 @@
         .box
           .title.is-5 Transform
           b-tabs(size="is-small" v-model="transform_tab_index" expanded)
-            b-tab-item(label="盤")
-              b-field(custom-class="is-small" label="" message="ONにすると部屋とのブレンドは効かなくなる")
-                b-radio-button(size="is-small" v-model="se_tf1_mode" native-value="is_tf1_mode_off") OFF
-                b-radio-button(size="is-small" v-model="se_tf1_mode" native-value="is_tf1_mode_on") ON
-              b-field(custom-class="is-small" label="視点との距離")
-                b-slider(v-model="se_tf1_perspective" :min="0" :max="400" :step="0.001")
-              b-field(custom-class="is-small" label="移動 X")
-                b-slider(v-model="se_tf1_translate_x" :min="-1000" :max="1000" :step="1")
-              b-field(custom-class="is-small" label="移動 Y")
-                b-slider(v-model="se_tf1_translate_y" :min="-1000" :max="1000" :step="1")
-              b-field(custom-class="is-small" label="移動 Z")
-                b-slider(v-model="se_tf1_translate_z" :min="-1000" :max="1000" :step="1")
-              b-field(custom-class="is-small" label="回転 X")
-                b-slider(v-model="se_tf1_rotate_x" :min="-1" :max="1" :step="0.001")
-              b-field(custom-class="is-small" label="回転 Y")
-                b-slider(v-model="se_tf1_rotate_y" :min="-1" :max="1" :step="0.001")
-              b-field(custom-class="is-small" label="回転 Z")
-                b-slider(v-model="se_tf1_rotate_z" :min="-1" :max="1" :step="0.001")
-              b-field(custom-class="is-small" label="拡縮")
-                b-slider(v-model="se_tf1_scale" :min="0" :max="2.0" :step="0.001")
-              b-field(custom-class="is-small")
-                .control
-                  b-button(size="is-small" @click="se_tf1_reset") リセット
-            b-tab-item(label="駒")
-              b-field(custom-class="is-small" label="" message="ONにすると盤とのブレンドは効かなくなる")
-                b-radio-button(size="is-small" v-model="se_tf2_mode" native-value="is_tf2_mode_off") OFF
-                b-radio-button(size="is-small" v-model="se_tf2_mode" native-value="is_tf2_mode_on") ON
-              b-field(custom-class="is-small" label="視点との距離")
-                b-slider(v-model="se_tf2_perspective" :min="0" :max="400" :step="0.001")
-              b-field(custom-class="is-small" label="移動 X")
-                b-slider(v-model="se_tf2_translate_x" :min="-1000" :max="1000" :step="1")
-              b-field(custom-class="is-small" label="移動 Y")
-                b-slider(v-model="se_tf2_translate_y" :min="-1000" :max="1000" :step="1")
-              b-field(custom-class="is-small" label="移動 Z")
-                b-slider(v-model="se_tf2_translate_z" :min="-1000" :max="1000" :step="1")
-              b-field(custom-class="is-small" label="回転 X")
-                b-slider(v-model="se_tf2_rotate_x" :min="-1" :max="1" :step="0.001")
-              b-field(custom-class="is-small" label="回転 Y")
-                b-slider(v-model="se_tf2_rotate_y" :min="-1" :max="1" :step="0.001")
-              b-field(custom-class="is-small" label="回転 Z")
-                b-slider(v-model="se_tf2_rotate_z" :min="-1" :max="1" :step="0.001")
-              b-field(custom-class="is-small" label="拡縮")
-                b-slider(v-model="se_tf2_scale" :min="0" :max="2.0" :step="0.001")
-              b-field(custom-class="is-small")
-                .control
-                  b-button(size="is-small" @click="se_tf2_reset") リセット
-            b-tab-item(label="部屋")
+            b-tab-item(label="背景")
               b-field(custom-class="is-small" label="")
                 b-radio-button(size="is-small" v-model="se_tf0_mode" native-value="is_tf0_mode_off") OFF
                 b-radio-button(size="is-small" v-model="se_tf0_mode" native-value="is_tf0_mode_on") ON
               b-field(custom-class="is-small" label="視点との距離")
-                b-slider(v-model="se_tf0_perspective" :min="0" :max="400" :step="0.001")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf0_perspective" :min="0" :max="400" :step="0.001")
               b-field(custom-class="is-small" label="移動 X")
-                b-slider(v-model="se_tf0_translate_x" :min="-1000" :max="1000" :step="1")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf0_translate_x" :min="-1000" :max="1000" :step="1")
               b-field(custom-class="is-small" label="移動 Y")
-                b-slider(v-model="se_tf0_translate_y" :min="-1000" :max="1000" :step="1")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf0_translate_y" :min="-1000" :max="1000" :step="1")
               b-field(custom-class="is-small" label="移動 Z")
-                b-slider(v-model="se_tf0_translate_z" :min="-1000" :max="1000" :step="1")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf0_translate_z" :min="-1000" :max="1000" :step="1")
               b-field(custom-class="is-small" label="回転 X")
-                b-slider(v-model="se_tf0_rotate_x" :min="-1" :max="1" :step="0.001")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf0_rotate_x" :min="-1" :max="1" :step="0.001")
               b-field(custom-class="is-small" label="回転 Y")
-                b-slider(v-model="se_tf0_rotate_y" :min="-1" :max="1" :step="0.001")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf0_rotate_y" :min="-1" :max="1" :step="0.001")
               b-field(custom-class="is-small" label="回転 Z")
-                b-slider(v-model="se_tf0_rotate_z" :min="-1" :max="1" :step="0.001")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf0_rotate_z" :min="-1" :max="1" :step="0.001")
               b-field(custom-class="is-small" label="拡縮")
-                b-slider(v-model="se_tf0_scale" :min="0" :max="2.0" :step="0.001")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf0_scale" :min="0" :max="2.0" :step="0.001")
               b-field(custom-class="is-small")
                 .control
                   b-button(size="is-small" @click="se_tf0_reset") リセット
 
+            b-tab-item(label="盤")
+              b-field(custom-class="is-small" label="" message="有効にすると背景とのブレンドは効かなくなる")
+                b-radio-button(size="is-small" v-model="se_tf1_mode" native-value="is_tf1_mode_off") OFF
+                b-radio-button(size="is-small" v-model="se_tf1_mode" native-value="is_tf1_mode_on") ON
+              b-field(custom-class="is-small" label="視点との距離")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf1_perspective" :min="0" :max="400" :step="0.001")
+              b-field(custom-class="is-small" label="移動 X")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf1_translate_x" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Y")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf1_translate_y" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Z")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf1_translate_z" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="回転 X")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf1_rotate_x" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Y")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf1_rotate_y" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Z")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf1_rotate_z" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="拡縮")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf1_scale" :min="0" :max="2.0" :step="0.001")
+              b-field(custom-class="is-small")
+                .control
+                  b-button(size="is-small" @click="se_tf1_reset") リセット
+            b-tab-item(label="駒")
+              b-field(custom-class="is-small" label="" message="有効にすると盤とのブレンドは効かなくなる")
+                b-radio-button(size="is-small" v-model="se_tf2_mode" native-value="is_tf2_mode_off") OFF
+                b-radio-button(size="is-small" v-model="se_tf2_mode" native-value="is_tf2_mode_on") ON
+              b-field(custom-class="is-small" label="視点との距離")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf2_perspective" :min="0" :max="400" :step="0.001")
+              b-field(custom-class="is-small" label="移動 X")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf2_translate_x" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Y")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf2_translate_y" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="移動 Z")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf2_translate_z" :min="-1000" :max="1000" :step="1")
+              b-field(custom-class="is-small" label="回転 X")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf2_rotate_x" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Y")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf2_rotate_y" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="回転 Z")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf2_rotate_z" :min="-1" :max="1" :step="0.001")
+              b-field(custom-class="is-small" label="拡縮")
+                b-slider(indicator :tooltip="false" size="is-small" v-model="se_tf2_scale" :min="0" :max="2.0" :step="0.001")
+              b-field(custom-class="is-small")
+                .control
+                  b-button(size="is-small" @click="se_tf2_reset") リセット
         .box
           .title.is-5 その他
 
           b-field(custom-class="is-small" label="共通の隙間")
-            b-slider(v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
+            b-slider(indicator :tooltip="false" size="is-small" v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
 
           b-field(custom-class="is-small" label="モバイル時に縦配置にする")
             b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
@@ -403,7 +405,7 @@
     //-     .buttons
     //-     .columns.is-multiline
 
-  .Workspace
+  .Workspace.is-overlay
     ShogiPlayer(v-bind="sp_params")
 </template>
 
@@ -537,9 +539,10 @@ export default {
       },
 
       kifu_body: null,
-      user_css: `.StyleEditor {
-  background-color: black;
-}`,
+//       user_css: `.StyleEditor {
+//   background-color: black;
+// }`,
+      user_css: "",
 
       summary_show:    DEVELOPMENT_P,
       slider_show:     DEVELOPMENT_P,
@@ -903,8 +906,13 @@ $sidebar_width_mobile:  50%
     .help
       margin-top: 0.5rem
 
+    .b-slider-thumb-wrapper.has-indicator
+      .b-slider-thumb
+        padding: 8px 4px
+        font-size: 10px
+
   pre
-    background-color: IS_TRANSPARENT
+    background-color: transparent
 
 .StyleEditor
   .sidebar_toggle_button
@@ -913,6 +921,8 @@ $sidebar_width_mobile:  50%
     right: 0
     z-index: 1
 
+  min-height: 100vh
+
   &.sidebar_p
     .Workspace
       +tablet
@@ -920,15 +930,16 @@ $sidebar_width_mobile:  50%
       +desktop
         width: unquote("calc(100% - #{$sidebar_width_desktop})")
 
+  .StyleEditor-Background
+    height: 100%
+
   .Workspace
     display: flex
     align-items: center
     justify-content: center
     flex-direction: column
 
-    min-height: 100vh
-
-    // color: var(--se_ws_color)
+    height: 100%
 
     background-color: var(--se_ws_color)
     background-image: var(--se_ws_image)
@@ -942,7 +953,7 @@ $sidebar_width_mobile:  50%
       transform: perspective(var(--se_tf0_perspective)) translate3d(var(--se_tf0_translate_x), var(--se_tf0_translate_y), var(--se_tf0_translate_z)) rotateX(var(--se_tf0_rotate_x)) rotateY(var(--se_tf0_rotate_y)) rotateZ(var(--se_tf0_rotate_z)) scale(var(--se_tf0_scale))
 
   &.is_tf1_mode_on
-    .ShogiPlayerForTransform
+    .ShogiPlayerTransformBlock
       transform: perspective(var(--se_tf1_perspective)) translate3d(var(--se_tf1_translate_x), var(--se_tf1_translate_y), var(--se_tf1_translate_z)) rotateX(var(--se_tf1_rotate_x)) rotateY(var(--se_tf1_rotate_y)) rotateZ(var(--se_tf1_rotate_z)) scale(var(--se_tf1_scale))
 
   &.is_tf2_mode_on
