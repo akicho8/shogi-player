@@ -15,7 +15,7 @@
 | `key_event_capture`           | キーボード操作を監視         | どこにもフォーカスしていないときでも左右キーが反応                         | false         |       |
 | `shift_key_mag`               | shiftキー押下時の倍速        | 1 または null 指定で無効にできる                                           | 10            |       |
 | `system_key_mag`              | システムキー押下時の倍速     | 1 または null 指定で無効にできる                                           | 50            |       |
-| `debug_mode_p`                | デバッグモード               | 主に開発用                                                                 | false         | ○    |
+| `sp_debug`                    | デバッグモード               | 主に開発用                                                                 | is_debug_off  | ○    |
 | `sp_layer`                    | レイヤー確認                 | 主に開発用                                                                 | false         | ○    |
 | `sp_blink`                    | 移動後の駒のセルを明滅       |                                                                            | false         | ○    |
 | `flip`                        | 盤面を反転する               | △が下にくる                                                               | false         | ○    |
@@ -65,7 +65,7 @@
 | `update:turn_offset_max`                    | 最大手数が変更されたとき                       | 内部変数参照よりこっちの方が安全なはず                            |
 | `update:run_mode`                           | 設定ダイアログでモードが変更されたとき         |                                                                   |
 | `update:kifu_body`                          | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
-| `update:debug_mode_p`                       | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
+| `update:sp_debug`                       | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
 | `update:flip`                               | 盤面を反転したとき                             |                                                                   |
 | `update:sp_layout`                          | レイアウトを変更したとき                       |                                                                   |
 | `update:sp_bg_variant`                      | 背景の種類変更                                 |                                                                   |

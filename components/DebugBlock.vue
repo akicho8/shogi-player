@@ -1,5 +1,5 @@
 <template lang="pug">
-.DebugBlock(v-if="base.new_debug_mode_p")
+.DebugBlock(v-if="base.debug_p")
   table.table.is-narrow.is-hoverable.is-fullwidth
     caption Global
     thead

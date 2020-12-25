@@ -14,7 +14,7 @@
   b-modal(:active.sync="setting_modal_p" has-modal-card v-if="mediator")
     SettingModal(:base="base")
 
-  pre(v-if="debug_mode_p") {{$props}}
+  pre(v-if="debug_p") {{$props}}
 </template>
 
 <script>
@@ -82,6 +82,7 @@ export default {
     sp_mobile_fit:        { type: String, default: "is_mobile_fit_on",      }, // DEPRECATE
     sp_mobile_vertical:   { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior: { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
+    sp_debug:             { type: String, default: "is_debug_off",          }, // デバッグモード
 
     // TODO ↑に合わせる
     run_mode:        { type: String,  default: "view_mode",         },
@@ -89,7 +90,6 @@ export default {
     start_turn:      { type: Number,  default: -1,                  },
     sfen_show:       { type: Boolean, default: false,               },
     overlay_navi:    { type: Boolean, default: false,               }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
-    debug_mode_p:    { type: Boolean, default: false,               },
     player_info:     { type: Object,  default: null,                },
 
     player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する
@@ -114,10 +114,8 @@ export default {
 
   data() {
     return {
-      // new_sp_bg_variant:    this.sp_bg_variant,
-      // new_sp_pi_variant: this.sp_pi_variant,
-      new_debug_mode_p:    this.debug_mode_p,
-      new_run_mode:      this.run_mode,
+      new_debug:    this.sp_debug,
+      new_run_mode: this.run_mode,
 
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
@@ -233,17 +231,8 @@ export default {
 
     //////////////////////////////////////////////////////////////////////////////// FIXME: これまとめて書けんのか？
 
-    debug_mode_p(v)        { this.new_debug_mode_p = v               }, // 外 -> 内
-    new_debug_mode_p(v)    { this.$emit("update:debug_mode_p", v)    }, // 内 -> 外
-
-    // sp_bg_variant(v)        { this.new_sp_bg_variant = v               }, // 外 -> 中
-    // new_sp_bg_variant(v)    { this.$emit("update:sp_bg_variant", v)    }, // 中 -> 外
-    //
-    // sp_pi_variant(v)     { this.new_sp_pi_variant = v            }, // 外 -> 中
-    // new_sp_pi_variant(v) { this.$emit("update:sp_pi_variant", v) }, // 中 -> 外
-
-    // style_params:       { deep: true, handler(v) { this.new_style_params = {...STYLE_PARAMS_DEFAULT, ...v} }, },
-    // new_style_params:   { deep: true, handler(v) { this.$emit("update:style_params", v) }, },
+    sp_debug(v)  { this.new_debug = v               }, // 外 -> 内
+    new_debug(v) { this.$emit("update:sp_debug", v) }, // 内 -> 外
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -309,7 +298,7 @@ export default {
     },
 
     log(...v) {
-      if (this.new_debug_mode_p) {
+      if (this.debug_p) {
         console.log(...v)
       }
     },
@@ -382,6 +371,7 @@ export default {
     view_p()         { return this.new_run_mode === "view_mode" },
     play_p()         { return this.new_run_mode === "play_mode" },
     edit_p()         { return this.new_run_mode === "edit_mode" },
+    debug_p()        { return this.new_debug === "is_debug_on"  },
 
     // 本当は delegate したい。this.$watch を使えば動的になりそう？
     turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
@@ -393,7 +383,7 @@ export default {
     component_class() {
       return [
         ["run_mode", this.new_run_mode].join("-"),
-        { debug_mode_p: this.base.new_debug_mode_p },
+        this.new_debug,
       ]
     },
 

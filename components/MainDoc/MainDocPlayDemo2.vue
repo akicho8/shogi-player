@@ -10,7 +10,7 @@
     :sp_bg_variant="'is_bg_variant_a'"
     :sound_effect="true"
     :volume="0.25"
-    :debug_mode_p="false"
+    sp_debug="is_debug_off"
     :run_mode="'play_mode'"
     :human_side_key="'black'"
     )

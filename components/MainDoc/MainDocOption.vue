@@ -70,7 +70,11 @@
           .title.is-5 その他
           MainDocSwitch(v-model="overlay_navi" label="overlay_navi")
           MainDocSwitch(v-model="key_event_capture" label="key_event_capture")
-          MainDocSwitch(v-model="debug_mode_p" label="debug_mode_p")
+
+          b-field(custom-class="is-small" label="デバッグモード")
+            b-radio-button(size="is-small" v-model="sp_debug" native-value="is_debug_off") OFF
+            b-radio-button(size="is-small" v-model="sp_debug" native-value="is_debug_on") ON
+
           MainDocSwitch(v-model="operation_disable" label="operation_disable")
           b-field(custom-class="is-small" label="human_side_key")
             template(v-for="e in HumanSideInfo.values")
@@ -130,7 +134,7 @@
             :sp_layout="sp_layout"
             :sp_summary="sp_summary"
             :sp_slider="sp_slider"
-            :debug_mode_p.sync="debug_mode_p"
+            :sp_debug.sync="sp_debug"
             :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
             :setting_button_show="setting_button_show"
             :operation_disable="operation_disable"
@@ -168,11 +172,14 @@
             b-message.shogi_player_params(:closable="false" type="is-primary" title="引数")
               pre.is-size-6
                 | ShogiPlayer(
-                |   :run_mode="'{{run_mode}}'"
-                |   :sp_bg_variant="'{{sp_bg_variant}}'"
-                |   :sp_pi_variant="'{{sp_pi_variant}}'"
+                |   run_mode="{{run_mode}}"
+                |   sp_bg_variant="{{sp_bg_variant}}"
+                |   sp_pi_variant="{{sp_pi_variant}}"
+                |   sp_slider="{{sp_slider}}"
+                |   sp_layout="{{sp_layout}}"
+                |   sp_debug="{{sp_debug}}"
+                |   sp_summary="{{sp_summary}}"
                 |   :start_turn="{{start_turn}}"
-                |   :sp_slider="'{{sp_slider}}'"
                 |   :controller_show="{{controller_show}}"
                 |   :sfen_show="{{sfen_show}}"
                 |   :overlay_navi="{{overlay_navi}}"
@@ -180,14 +187,11 @@
                 |   :sound_effect="{{sound_effect}}"
                 |   :volume="{{volume}}"
                 |   :key_event_capture="{{key_event_capture}}"
-                |   :debug_mode_p="{{debug_mode_p}}"
                 |   :hidden_if_piece_stand_blank="{{hidden_if_piece_stand_blank}}"
                 |   :setting_button_show="{{setting_button_show}}"
-                |   :sp_summary="'{{sp_summary}}'"
                 |   :operation_disable="{{operation_disable}}"
                 |   :flip="{{flip}}"
                 |   :flip_if_white="{{flip_if_white}}"
-                |   :sp_layout="'{{sp_layout}}'"
                 |   :player_info='{{JSON.stringify(player_info)}}'
                 |   :kifu_body="'{{kifu_body}}'"
 
@@ -230,7 +234,7 @@ export default {
       sound_effect: true,
       volume: 0.5,
       key_event_capture: false,
-      debug_mode_p: false,
+      sp_debug: "is_debug_off",
       hidden_if_piece_stand_blank: false,
       setting_button_show: false,
       sp_summary: "is_summary_on",

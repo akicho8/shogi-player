@@ -744,7 +744,7 @@ export default {
       params.sp_mobile_vertical  = this.sp_mobile_vertical
       params.run_mode            = this.sp_run_mode
       params.flip                = this.sp_flip
-      params.debug_mode_p        = false
+      params.sp_debug            = "is_debug_off"
       params.start_turn          = this.sp_turn
       params.kifu_body           = this.sp_body
       params.sound_effect        = true

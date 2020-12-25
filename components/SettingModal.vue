@@ -14,7 +14,8 @@
       b-field(label="反転")
         b-switch(v-model="base.new_flip")
       b-field(label="デバッグモード")
-        b-switch(v-model="base.new_debug_mode_p")
+        b-radio-button(v-model="base.new_debug" native-value="is_debug_off") OFF
+        b-radio-button(v-model="base.new_debug" native-value="is_debug_on") ON
 
     template(v-if="false")
       b-dropdown(v-model="base.new_sp_bg_variant")
