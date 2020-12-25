@@ -1,5 +1,6 @@
 | Name                          | Description                                               | Default                 |
 |-------------------------------|-----------------------------------------------------------|-------------------------|
+| `sp_summary`                  |                                                           | "is_summary_on"         |
 | `sp_board_dimension_w`        | 盤のセル数(W)                                             |                       9 |
 | `sp_board_dimension_h`        | 盤のセル数(H)                                             |                       9 |
 | `sp_layout`                   | レイアウト is_(vertical\|horizontal)                      | "is_vertical"           |

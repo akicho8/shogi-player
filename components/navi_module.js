@@ -2,6 +2,8 @@ import _ from "lodash"
 
 export default {
   props: {
+    sp_summary:                  { type: String,  default: "is_summary_on", }, // 手数や結果の表示
+
     slider_show:                 { type: Boolean, default: false, },
     controller_show:             { type: Boolean, default: false, },
     key_event_capture:           { type: Boolean, default: false, },
@@ -10,7 +12,6 @@ export default {
     flip:                        { type: Boolean, default: false, },
     hidden_if_piece_stand_blank: { type: Boolean, default: false, },
     setting_button_show:         { type: Boolean, default: false, },
-    summary_show:                { type: Boolean, default: true,  },
     operation_disable:           { type: Boolean, default: false, },
     flip_if_white:               { type: Boolean, default: false, },
   },

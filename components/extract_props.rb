@@ -4,7 +4,7 @@ require "table_format"
 require "json"
 
 rows = []
-Pathname(".").glob("**/ShogiPlayer.{vue,js}") do |file|
+Pathname(".").glob("**/{navi_module,ShogiPlayer}.{vue,js}") do |file|
   file.readlines.each do |e|
     if md = e.match(/^\s+(?<key>\w+):\s*{.*type:.*default:\s*(?<default>.*?),.*\/\/\s*(?<desc>.*)\n/m)
       rows << {
@@ -21,6 +21,7 @@ puts s
 Pathname("MainDoc/props.md").write(s)
 # >> | Name                          | Description                                               | Default                 |
 # >> |-------------------------------|-----------------------------------------------------------|-------------------------|
+# >> | `sp_summary`                  |                                                           | "is_summary_on"         |
 # >> | `sp_board_dimension_w`        | 盤のセル数(W)                                             |                       9 |
 # >> | `sp_board_dimension_h`        | 盤のセル数(H)                                             |                       9 |
 # >> | `sp_layout`                   | レイアウト is_(vertical\|horizontal)                      | "is_vertical"           |

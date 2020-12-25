@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     component_alive_p() {
-      return this.base.mediator && this.base.summary_show && (this.base.view_p || this.base.play_p)
+      return this.base.mediator && this.base.sp_summary === "is_summary_on" && (this.base.view_p || this.base.play_p)
     },
   },
 }

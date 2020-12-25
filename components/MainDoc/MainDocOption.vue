@@ -33,7 +33,11 @@
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
           MainDocSwitch(v-model="setting_button_show" label="setting_button_show")
-          MainDocSwitch(v-model="summary_show" label="summary_show")
+
+          b-field(custom-class="is-small" label="手数表示")
+            b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
+            b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_on") ON
+
           MainDocSwitch(v-model="slider_show" label="slider_show")
           MainDocSwitch(v-model="controller_show" label="controller_show")
           MainDocSwitch(v-model="sfen_show" label="sfen_show")
@@ -126,7 +130,7 @@
             :debug_mode_p.sync="debug_mode_p"
             :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
             :setting_button_show="setting_button_show"
-            :summary_show="summary_show"
+            :sp_summary="sp_summary"
             :operation_disable="operation_disable"
             :flip.sync="flip"
             :flip_if_white="flip_if_white"
@@ -179,7 +183,7 @@
                 |   :debug_mode_p="{{debug_mode_p}}"
                 |   :hidden_if_piece_stand_blank="{{hidden_if_piece_stand_blank}}"
                 |   :setting_button_show="{{setting_button_show}}"
-                |   :summary_show="{{summary_show}}"
+                |   :sp_summary="'{{sp_summary}}'"
                 |   :operation_disable="{{operation_disable}}"
                 |   :flip="{{flip}}"
                 |   :flip_if_white="{{flip_if_white}}"
@@ -230,7 +234,7 @@ export default {
       debug_mode_p: false,
       hidden_if_piece_stand_blank: false,
       setting_button_show: false,
-      summary_show: true,
+      sp_summary: "is_summary_on",
       operation_disable: false,
       flip: false,
       flip_if_white: false,

@@ -10,7 +10,7 @@
         .column
           ShogiPlayer(
             ref="api_sp"
-            :summary_show="false"
+            :sp_summary="is_summary_off"
             :hidden_if_piece_stand_blank="true"
             :board_cell_pointerdown_user_handle="board_cell_pointerdown_user_handle"
             :board_cell_left_click_user_handle="board_cell_left_click_user_handle"

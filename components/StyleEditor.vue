@@ -349,8 +349,8 @@
             b-radio-button(size="is-small" v-model="slider_show" :native-value="true") ON
 
           b-field(custom-class="is-small" label="手数表示")
-            b-radio-button(size="is-small" v-model="summary_show" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="summary_show" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
+            b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_on") ON
 
         .box(v-if="false")
           .title.is-5 カスタムCSS
@@ -550,7 +550,7 @@ export default {
 
       sp_body: null,
 
-      summary_show:    DEVELOPMENT_P,
+      sp_summary:    DEVELOPMENT_P ? "is_summary_on" : "is_summary_off",
       slider_show:     DEVELOPMENT_P,
       controller_show: DEVELOPMENT_P,
 
@@ -749,7 +749,7 @@ export default {
       params.kifu_body           = this.sp_body
       params.sound_effect        = true
       params.setting_button_show = false
-      params.summary_show        = this.summary_show
+      params.sp_summary        = this.sp_summary
       params.slider_show         = this.slider_show
       params.controller_show     = this.controller_show
       params.player_info         = this.sp_player_info
