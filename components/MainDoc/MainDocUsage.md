@@ -2,7 +2,7 @@
 
 インストール
 
-    % yarn add shogi-player
+    yarn add shogi-player
 
 事前設定
 
@@ -17,20 +17,18 @@
 コンポーネント
 
     <template lang="pug">
-    .MySample.section
+    .MyPage.section
       .container
         .columns.is-centered
-          .column.is-6-desktop
-            ShogiPlayer(
-              :sp_layout="'is_horizontal'"
-              )
+          .column.is-half-desktop
+            ShogiPlayer
     </template>
 
     <script>
     import ShogiPlayer from "shogi-player/components/ShogiPlayer.vue"
 
     export default {
-      name: "MySample",
+      name: "MyPage",
       components: {
         ShogiPlayer,
       },
@@ -41,8 +39,7 @@
     $sp_assets_dir: "../node_modules/shogi-player/assets"
     @import "../node_modules/shogi-player/components/ShogiPlayer.sass"
 
-    .MySample
-      // CSSのカスタマイズ等
+    .MyPage
       +mobile
         --sp_board_radius: 0 // モバイルのときに角を丸めない
     </style>

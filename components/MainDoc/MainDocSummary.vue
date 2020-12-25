@@ -9,9 +9,9 @@
         p.mt-5
           | Vue.js 用の将棋盤ライブラリで3つのモードがある
         ul
-          li <b>view_mode:</b> 指定した棋譜を再生する
-          li <b>play_mode:</b> 手番毎に駒を操作する
-          li <b>edit_mode:</b> 自由に局面を作る
+          li <b>再生:</b> 指定した棋譜を再生する
+          li <b>操作:</b> 手番毎に駒を操作する
+          li <b>編集:</b> 自由に局面を作る
         p.mt-5
           | UIについて
         ul
@@ -22,7 +22,7 @@
         p.mt-5
           | その他
         ul
-          li <b>駒落ち棋譜再生</b>: 可
+          li <b>駒落ち棋譜再生</b>: 対応
           li <b>対応棋譜フォーマット:</b> KIF, SFEN
           li <b>フレームワーク:</b> Buefy
 </template>
