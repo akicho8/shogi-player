@@ -10,7 +10,7 @@
     :kifu_body="kifu_body"
     :start_turn="121"
     :controller_show="true"
-    :slider_show="true"
+    sp_slider="is_slider_on"
     :sp_pi_variant="'is_pi_variant_b'"
     :sp_blink="'is_blink_on'"
     )

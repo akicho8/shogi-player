@@ -345,8 +345,8 @@
             b-radio-button(size="is-small" v-model="controller_show" :native-value="true") ON
 
           b-field(custom-class="is-small" label="スライダー表示")
-            b-radio-button(size="is-small" v-model="slider_show" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="slider_show" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_off") OFF
+            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_on") ON
 
           b-field(custom-class="is-small" label="手数表示")
             b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
@@ -551,7 +551,7 @@ export default {
       sp_body: null,
 
       sp_summary:    DEVELOPMENT_P ? "is_summary_on" : "is_summary_off",
-      slider_show:     DEVELOPMENT_P,
+      sp_slider:    DEVELOPMENT_P ? "is_slider_on" : "is_slider_off",
       controller_show: DEVELOPMENT_P,
 
       se_tf0_mode: "is_tf0_mode_off",
@@ -750,7 +750,7 @@ export default {
       params.sound_effect        = true
       params.setting_button_show = false
       params.sp_summary        = this.sp_summary
-      params.slider_show         = this.slider_show
+      params.sp_slider         = this.sp_slider
       params.controller_show     = this.controller_show
       params.player_info         = this.sp_player_info
       return params

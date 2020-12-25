@@ -4,7 +4,7 @@
     | 詰将棋用の初期配置で開始
   ShogiPlayer(
     :preset_key="'詰将棋'"
-    :slider_show="true"
+    sp_slider="is_slider_on"
     :sp_bg_variant="'is_bg_variant_a'"
     :sound_effect="true"
     :volume="0.25"

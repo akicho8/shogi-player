@@ -2,9 +2,9 @@ import _ from "lodash"
 
 export default {
   props: {
-    sp_summary:                  { type: String,  default: "is_summary_on", }, // 手数や結果の表示
+    sp_summary:                  { type: String,  default: "is_summary_on",  },  // 手数や結果の表示
+    sp_slider:                   { type: String,  default: "is_summary_off", }, // スライダー表示
 
-    slider_show:                 { type: Boolean, default: false, },
     controller_show:             { type: Boolean, default: false, },
     key_event_capture:           { type: Boolean, default: false, },
     shift_key_mag:               { type: Number,  default: 10,    },
@@ -227,12 +227,12 @@ export default {
       return this.controller_show && (this.view_p || this.play_p)
     },
 
-    inside_slider_show_p() {
-      return this.slider_show && (this.view_p || this.play_p)
+    inside_slider_enabled() {
+      return this.sp_slider === "is_slider_on" && (this.view_p || this.play_p)
     },
 
     inside_navigate_p() {
-      return this.inside_controller_show_p || this.inside_slider_show_p
+      return this.inside_controller_show_p || this.inside_slider_enabled
     },
   },
 }

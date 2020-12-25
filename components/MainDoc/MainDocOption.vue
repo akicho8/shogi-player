@@ -38,7 +38,10 @@
             b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
             b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_on") ON
 
-          MainDocSwitch(v-model="slider_show" label="slider_show")
+          b-field(custom-class="is-small" label="スライダー表示")
+            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_off") OFF
+            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_on") ON
+
           MainDocSwitch(v-model="controller_show" label="controller_show")
           MainDocSwitch(v-model="sfen_show" label="sfen_show")
           MainDocSwitch(v-model="flip" label="flip")
@@ -127,17 +130,17 @@
             :sp_bg_variant.sync="sp_bg_variant"
             :sp_pi_variant.sync="sp_pi_variant"
             :sp_layout="sp_layout"
+            :sp_summary="sp_summary"
+            :sp_slider="sp_slider"
             :debug_mode_p.sync="debug_mode_p"
             :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
             :setting_button_show="setting_button_show"
-            :sp_summary="sp_summary"
             :operation_disable="operation_disable"
             :flip.sync="flip"
             :flip_if_white="flip_if_white"
             :final_label="final_label"
             :player_info="player_info"
             :key_event_capture="key_event_capture"
-            :slider_show="slider_show"
             :controller_show="controller_show"
             :sfen_show="sfen_show"
             :overlay_navi="overlay_navi"
@@ -172,7 +175,7 @@
                 |   :sp_bg_variant="'{{sp_bg_variant}}'"
                 |   :sp_pi_variant="'{{sp_pi_variant}}'"
                 |   :start_turn="{{start_turn}}"
-                |   :slider_show="{{slider_show}}"
+                |   :sp_slider="'{{sp_slider}}'"
                 |   :controller_show="{{controller_show}}"
                 |   :sfen_show="{{sfen_show}}"
                 |   :overlay_navi="{{overlay_navi}}"
@@ -223,7 +226,7 @@ export default {
       sp_bg_variant: "is_bg_variant_a",
       sp_pi_variant: "is_pi_variant_a1by",
       start_turn: -1,
-      slider_show: false,
+      sp_slider: "is_slider_off",
       overlay_navi: true,
       controller_show: false,
       sfen_show: false,
