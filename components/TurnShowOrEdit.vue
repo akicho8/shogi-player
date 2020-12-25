@@ -6,7 +6,7 @@
     // is-inline-block にすることで縦の margin が効く
     .SpTurnText.is-inline-block(@click.stop.prevent="turn_edit_handle")
       template(v-if="base.view_p")
-        | {{base.mediator.current_turn_label(base.final_label)}}
+        | {{base.mediator.current_turn_label}}
       template(v-if="base.play_p")
         template(v-if="base.turn_base === 0")
           | {{base.turn_offset}}

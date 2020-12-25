@@ -90,7 +90,6 @@ export default {
     sfen_show:       { type: Boolean, default: false,               },
     overlay_navi:    { type: Boolean, default: false,               }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     debug_mode_p:    { type: Boolean, default: false,               },
-    final_label:     { type: String,  default: null,                },
     player_info:     { type: Object,  default: null,                },
 
     player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する

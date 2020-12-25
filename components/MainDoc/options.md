@@ -20,7 +20,6 @@
 | `sp_blink`                    | 移動後の駒のセルを明滅       |                                                                            | false         | ○    |
 | `flip`                        | 盤面を反転する               | △が下にくる                                                               | false         | ○    |
 | `flip_if_white`               | △から始まる場合のみ反転する | △が下にくる                                                               | false         |       |
-| `final_label`                 | 結果の文字列                 | 空だと「○の勝ち」                                                         | null          |       |
 | `preset_key`                  | 盤面の初期配置               | kifu_body の代わりに指定するとその配置になる                               | null          |       |
 | `hidden_if_piece_stand_blank` | 持駒がないときは駒台非表示   | view_mode のみ                                                             | false         |       |
 | `setting_button_show`         | 設定ボタンの表示             | 右端にあるドット3つのアレ(ボタンなのか？)                                  | true          |       |

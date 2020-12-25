@@ -173,13 +173,9 @@ export default class Mediator {
     return this.data_source.turn_offset_max
   }
 
-  current_turn_label(final_label) {
+  current_turn_label() {
     if (this.turn_offset === this.turn_offset_max) {
-      if (final_label) {
-        return `まで${this.display_turn}手で${final_label}`
-      } else {
-        return `まで${this.display_turn}手で${this.previous_location.name}の勝ち`
-      }
+      return `まで${this.display_turn}手で${this.previous_location.name}の勝ち`
     } else {
       return `${this.display_turn}手`
     }
