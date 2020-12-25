@@ -352,7 +352,7 @@
             b-radio-button(size="is-small" v-model="summary_show" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="summary_show" :native-value="true") ON
 
-        .box
+        .box(v-if="false")
           .title.is-5 カスタムCSS
           b-field(custom-class="is-small" label="")
             b-input(size="is-small" v-model="user_css" type="textarea" :rows="8")
@@ -365,24 +365,24 @@
               template(v-for="e in KifuBookInfo.values")
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="棋譜")
-            b-input(size="is-small" v-model="new_kifu_body" type="textarea" :rows="8")
+            b-input(size="is-small" v-model="sp_body" type="textarea" :rows="8")
 
         .box
           .title.is-5 対局者情報
           .columns
             .column
               b-field(custom-class="is-small" label="☗")
-                b-input(size="is-small" v-model.trim="new_player_info.black.name" type="text")
+                b-input(size="is-small" v-model.trim="sp_player_info.black.name" type="text")
             .column
               b-field(custom-class="is-small" label="時間")
-                b-input(size="is-small" v-model.trim="new_player_info.black.time" type="text")
+                b-input(size="is-small" v-model.trim="sp_player_info.black.time" type="text")
           .columns
             .column
               b-field(custom-class="is-small" label="☖")
-                b-input(size="is-small" v-model.trim="new_player_info.white.name" type="text")
+                b-input(size="is-small" v-model.trim="sp_player_info.white.name" type="text")
             .column
               b-field(custom-class="is-small" label="時間")
-                b-input(size="is-small" v-model.trim="new_player_info.white.time" type="text")
+                b-input(size="is-small" v-model.trim="sp_player_info.white.time" type="text")
 
         .box
           .title.is-5 コンポーネント引数確認
@@ -438,15 +438,17 @@ export default {
     ColorPicker,
     ImageUpload,
   },
-  props: {
-    kifu_body:   { type: String, required: false, default: null, },
-    player_info: { type: Object, required: false, default: null, },
-  },
+  // props: {
+  //   kifu_body:   { type: String, required: false, default: null, },
+  //   player_info: { type: Object, required: false, default: null, },
+  // },
 
   data() {
     return {
-      html_background_color: null,
       sidebar_p: true,
+      kifu_sample_key: null,
+      transform_tab_index: 0,
+      user_css: "",
 
       ////////////////////////////////////////////////////////////////////////////////
       se_frame_width: 80,
@@ -511,6 +513,7 @@ export default {
       sp_stand_piece_rate: 80,
       sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
 
+      sp_turn: -1,
       sp_flip: false,
       sp_piece_count_gap_right: 62.0,
       sp_piece_count_gap_bottom: 47.0,
@@ -538,27 +541,18 @@ export default {
       sp_bg_variant: "is_bg_variant_none",
       ////////////////////////////////////////////////////////////////////////////////
 
-      kifu_sample_key: null,
-
       ////////////////////////////////////////////////////////////////////////////////
 
-      new_player_info: {
+      sp_player_info: {
         black: { name: "先手", time: "", },
         white: { name: "後手", time: "", },
       },
 
-      new_kifu_body: null,
-
-//       user_css: `.StyleEditor {
-//   background-color: black;
-// }`,
-      user_css: "",
+      sp_body: null,
 
       summary_show:    DEVELOPMENT_P,
       slider_show:     DEVELOPMENT_P,
       controller_show: DEVELOPMENT_P,
-
-      transform_tab_index: 0,
 
       se_tf0_mode: "is_tf0_mode_off",
       se_tf0_perspective: 200,
@@ -593,43 +587,49 @@ export default {
   },
 
   created() {
-    if (this.kifu_body) {
-      this.new_kifu_body = this.kifu_body
-    } else {
+    const query = this.$route.query
+    const { body, black, white } = query
+
+    if (body) {
+      this.sp_body = body
+    }
+    if (black) {
+      this.sp_player_info.black = black
+    }
+    if (white) {
+      this.sp_player_info.white = white
+    }
+    if ("turn" in query) {
+      this.sp_turn = Number(query.turn)
+    }
+    if ("flip" in query) {
+      this.sp_flip = (query.flip == "true")
+    }
+
+    if (!body) {
       this.kifu_sample_key = this.KifuBookInfo.values[1].key
       this.kifu_sample_key = this.KifuBookInfo.fetch("KIF_15733").key
       this.kifu_sample_key_input_handle()
     }
 
-    if (this.player_info) {
-      this.new_player_info = {...this.player_info}
-    } else {
-      if (false) {
-        this.new_player_info = {
-          black: { name: "先手", time: "12:34", },
-          white: { name: "後手", time: "56:78", },
-        }
+    if (false) {
+      this.sp_player_info = {
+        black: { name: "先手", time: "12:34", },
+        white: { name: "後手", time: "56:78", },
       }
     }
   },
 
-  // mounted() {
-  //   const el = document.querySelector("html")
-  //   this.html_background_color = el.style.backgroundColor
-  //   el.style.backgroundColor = "black"
-  // },
-  //
-  // beforeDestroy() {
-  //   const el = document.querySelector("html")
-  //   el.style.backgroundColor = this.html_background_color
-  // },
-
   methods: {
+    reset_all() {
+
+    },
+
     kifu_sample_key_input_handle() {
       if (this.kifu_book_info) {
-        this.new_kifu_body = this.kifu_book_info.kifu_body
-        this.new_player_info.black.name = this.kifu_book_info.black
-        this.new_player_info.white.name = this.kifu_book_info.white
+        this.sp_body = this.kifu_book_info.kifu_body
+        this.sp_player_info.black.name = this.kifu_book_info.black
+        this.sp_player_info.white.name = this.kifu_book_info.white
       }
     },
 
@@ -745,14 +745,14 @@ export default {
       params.run_mode            = this.sp_run_mode
       params.flip                = this.sp_flip
       params.debug_mode_p        = false
-      params.start_turn          = -1
-      params.kifu_body           = this.new_kifu_body
+      params.start_turn          = this.sp_turn
+      params.kifu_body           = this.sp_body
       params.sound_effect        = true
       params.setting_button_show = false
       params.summary_show        = this.summary_show
       params.slider_show         = this.slider_show
       params.controller_show     = this.controller_show
-      params.player_info         = this.new_player_info
+      params.player_info         = this.sp_player_info
       return params
     },
 
@@ -766,7 +766,7 @@ export default {
       s = s.replace(/:\s*/g, ": ")
       // s = s.replace(/^--/gm, "")
       s = s.replace(/^\/\//gm, "\n//")
-      return s
+      return s.trim()
     },
 
     comment_removed_css() {
@@ -927,9 +927,6 @@ $sidebar_width_mobile:  100% * 3 / 4
       .b-slider-thumb
         padding: 8px 4px
         font-size: 10px
-
-  pre
-    background-color: transparent
 
 .StyleEditor
   .sidebar_toggle_button
