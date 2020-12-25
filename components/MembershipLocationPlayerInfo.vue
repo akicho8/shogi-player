@@ -14,35 +14,36 @@ export default {
     location: { required: true },
   },
   methods: {
-    player_attr(key) {
+    player_attr_of(key) {
       if (this.player_info) {
         return this.player_info[key]
       }
     },
     click_handle() {
-      if (this.base.player_info_click_handle) {
-        this.base.player_info_click_handle(this.location, this.player_info)
-        // this.$emit("player_info_click", location, this.player_info)
+      if (this.base.player_click_handle) {
+        this.base.player_click_handle(this.location, this.player_info)
+        // this.$emit("player_info_click", this.location, this.player_info)
       }
     },
   },
   computed: {
     show_p() {
-      // return this.player_info && this.base.sp_layout === "is_vertical"
       return this.player_name || this.player_time
     },
     component_class() {
-      return {
-        "is-clickable": this.base.player_info_click_handle,
-      }
+      return [
+        { "is-clickable": this.base.player_click_handle },
+        this.player_class,
+      ]
     },
     player_info() {
       if (this.base.player_info) {
         return this.base.player_info[this.location.key]
       }
     },
-    player_name() { return this.player_attr("name") },
-    player_time() { return this.player_attr("time") },
+    player_name()  { return this.player_attr_of("name")  },
+    player_time()  { return this.player_attr_of("time")  },
+    player_class() { return this.player_attr_of("class") },
   },
 }
 </script>

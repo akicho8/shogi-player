@@ -113,8 +113,9 @@
     .container
       form(action="/")
         .SpWrap
+          //- @player_info_click="(location, player_info) => $buefy.toast.open(location.name)"
           ShogiPlayer(
-            :player_info_click_handle="(location, player_info) => $buefy.toast.open(location.name)"
+            :player_click_handle="(location, player_info) => $buefy.toast.open(location.name)"
             :location_click_handle="(location) => $buefy.toast.open(location.name)"
             :run_mode.sync="run_mode"
             :kifu_body.sync="kifu_body"
@@ -150,8 +151,8 @@
             @update:turn_offset_max="                    e => trigger_check('turn_offset_max', e)"
             @update:moves_take_turn_offset="             e => trigger_check('moves_take_turn_offset', e)"
 
-            @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
             )
+            //- @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
 
   .section
     .container

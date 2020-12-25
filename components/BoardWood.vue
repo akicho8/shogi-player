@@ -1,5 +1,5 @@
 <template lang="pug">
-.BoardWood
+.BoardWood(@click.capture="click_handle")
   // .BoardWood に設定した background-image に影をつけるために drop-shadow すると
   // .BoardWood その子供である table にまで影が適用されてしまう
   // table に影が適用されると、駒の影にも .BoardWood の影が加算されてしまい濃くなってしまう
@@ -40,6 +40,12 @@ export default {
     PieceTap,
   },
   methods: {
+    click_handle() {
+      if (this.base.board_click_handle) {
+        this.base.board_click_handle()
+      }
+    },
+
     logical_xy(x, y) {
       x = x + Board.dimension - this.base.sp_board_dimension_w
       y = y + Board.dimension - this.base.sp_board_dimension_h

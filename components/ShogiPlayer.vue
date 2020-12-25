@@ -88,17 +88,19 @@ export default {
     kifu_body:       { type: String,  default: null,                },
     start_turn:      { type: Number,  default: -1,                  },
     sfen_show:       { type: Boolean, default: false,               },
-    overlay_navi:    { type: Boolean, default: true,                },
+    overlay_navi:    { type: Boolean, default: false,               }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     debug_mode_p:    { type: Boolean, default: false,               },
     final_label:     { type: String,  default: null,                },
     player_info:     { type: Object,  default: null,                },
+
+    player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する
+    location_click_handle: { type: Function, default: null, }, // ☗☖をタップしたときに実行する
+    board_click_handle:    { type: Function, default: null, }, // 盤をタップしたときに実行する(駒よりも優先)
 
     board_piece_back_user_style:        { type: Function, default: place => { return {} }, }, // FIXME: add to README
     board_piece_back_user_class:        { type: Function, default: place => { return [] }, },
     board_cell_left_click_user_handle:  { type: Function, default: null, },
     board_cell_pointerdown_user_handle: { type: Function, default: null, },
-    player_info_click_handle:           { type: Function, default: null, },
-    location_click_handle:          { type: Function, default: null, },
   },
 
   components: {
