@@ -3,19 +3,19 @@ import Location from "./models/location.js"
 
 export default {
   props: {
-    sp_summary:     { type: String,  default: "is_summary_on",     }, // 手数や結果の表示
-    sp_slider:      { type: String,  default: "is_slider_off",     }, // スライダー表示
-    sp_setting:     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
-    sp_controller:  { type: String,  default: "is_controller_off", }, // コントローラー表示
-    sp_vpoint:      { type: String,  default: "black",             }, // 視点
+    sp_summary:                     { type: String,  default: "is_summary_on",     }, // 手数や結果の表示
+    sp_slider:                      { type: String,  default: "is_slider_off",     }, // スライダー表示
+    sp_setting:                     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
+    sp_controller:                  { type: String,  default: "is_controller_off", }, // コントローラー表示
+    sp_vpoint:                      { type: String,  default: "black",             }, // 視点
 
-    sp_op_disabled:                 { type: Boolean, default: false, }, // 全体の操作を無効化
-    sp_hidden_if_piece_stand_blank: { type: Boolean, default: false, }, // 駒がないときは駒台側を非表示
-    sp_flip_if_white:               { type: Boolean, default: false, }, // 最初に表示した局面が△なら反転
+    sp_op_disabled:                 { type: Boolean, default: false,               }, // 全体の操作を無効化
+    sp_hidden_if_piece_stand_blank: { type: Boolean, default: false,               }, // 駒がないときは駒台側を非表示
+    sp_flip_if_white:               { type: Boolean, default: false,               }, // 最初に表示した局面が△なら反転
 
-    sp_key_event_capture_enabled:   { type: Boolean, default: false, }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
-    sp_shift_key_mag:               { type: Number,  default: 10,    }, // キーで左右するとき shift を押したときの倍率
-    sp_system_key_mag:              { type: Number,  default: 50,    }, // キーで左右するとき command などを押したときの倍率
+    sp_key_event_capture_enabled:   { type: Boolean, default: false,               }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
+    sp_shift_key_mag:               { type: Number,  default: 10,                  }, // キーで左右するとき shift を押したときの倍率
+    sp_system_key_mag:              { type: Number,  default: 50,                  }, // キーで左右するとき command などを押したときの倍率
   },
 
   data() {
