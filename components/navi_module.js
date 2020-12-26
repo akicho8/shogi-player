@@ -4,6 +4,7 @@ export default {
   props: {
     sp_summary:                  { type: String,  default: "is_summary_on",  },  // 手数や結果の表示
     sp_slider:                   { type: String,  default: "is_summary_off", }, // スライダー表示
+    sp_setting_button_show:      { type: String,  default: "is_setting_button_show_off", },
 
     controller_show:             { type: Boolean, default: false, },
     key_event_capture:           { type: Boolean, default: false, },
@@ -11,7 +12,6 @@ export default {
     system_key_mag:              { type: Number,  default: 50,    },
     flip:                        { type: Boolean, default: false, },
     hidden_if_piece_stand_blank: { type: Boolean, default: false, },
-    setting_button_show:         { type: Boolean, default: false, },
     operation_disable:           { type: Boolean, default: false, },
     flip_if_white:               { type: Boolean, default: false, },
   },
@@ -221,7 +221,7 @@ export default {
     //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, TurnSliderBlock.vue
 
     inside_controller_show_p() {
-      if (this.setting_button_show) {
+      if (this.sp_setting_button_show === "is_setting_button_show_on") {
         return true
       }
       return this.controller_show && (this.view_p || this.play_p)

@@ -8,7 +8,7 @@
       button.button.last(     ref="last"     @click.stop.prevent="base.move_to_last"):              b-icon(icon="menu-right")
     template(v-if="false")
       button.button.flip(                    @click.stop.prevent="base.board_flip_toggle"):            b-icon(icon="swap-vertical" size="is-small")
-    template(v-if="base.setting_button_show")
+    template(v-if="base.sp_setting_button_show === 'is_setting_button_show_on'")
       button.button.setting(                 @click.stop.prevent="base.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
   TurnSliderBlock(:base="base" ref="TurnSliderBlock")
 </template>

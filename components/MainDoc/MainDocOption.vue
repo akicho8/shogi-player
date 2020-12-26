@@ -32,7 +32,6 @@
           b-field(custom-class="is-small" label="配置")
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
-          MainDocSwitch(v-model="setting_button_show" label="setting_button_show")
 
           b-field(custom-class="is-small" label="手数表示")
             b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
@@ -45,6 +44,10 @@
           b-field(custom-class="is-small" label="SFEN表示")
             b-radio-button(size="is-small" v-model="sp_sfen_show" native-value="is_sfen_show_off") OFF
             b-radio-button(size="is-small" v-model="sp_sfen_show" native-value="is_sfen_show_on") ON
+
+          b-field(custom-class="is-small" label="設定ボタン表示")
+            b-radio-button(size="is-small" v-model="sp_setting_button_show" native-value="is_setting_button_show_off") OFF
+            b-radio-button(size="is-small" v-model="sp_setting_button_show" native-value="is_setting_button_show_on") ON
 
           MainDocSwitch(v-model="controller_show" label="controller_show")
 
@@ -143,7 +146,7 @@
             :sp_slider="sp_slider"
             :sp_debug.sync="sp_debug"
             :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
-            :setting_button_show="setting_button_show"
+            :sp_setting_button_show="sp_setting_button_show"
             :operation_disable="operation_disable"
             :flip.sync="flip"
             :flip_if_white="flip_if_white"
@@ -195,7 +198,7 @@
                 |   :volume="{{volume}}"
                 |   :key_event_capture="{{key_event_capture}}"
                 |   :hidden_if_piece_stand_blank="{{hidden_if_piece_stand_blank}}"
-                |   :setting_button_show="{{setting_button_show}}"
+                |   :sp_setting_button_show="{{sp_setting_button_show}}"
                 |   :operation_disable="{{operation_disable}}"
                 |   :flip="{{flip}}"
                 |   :flip_if_white="{{flip_if_white}}"
@@ -243,7 +246,7 @@ export default {
       key_event_capture: false,
       sp_debug: "is_debug_off",
       hidden_if_piece_stand_blank: false,
-      setting_button_show: false,
+      sp_setting_button_show: "is_setting_button_show_off",
       sp_summary: "is_summary_on",
       operation_disable: false,
       flip: false,

@@ -1,7 +1,6 @@
 <template lang="pug">
 .ShogiPlayerBody(:class="component_class")
   Membership(:base="base" position="north" :location="location_of('white')")
-    //- b-button.mr-1(icon-left="cog" @click="base.setting_modal_p = true" v-if="base.setting_button_show" size="is-small")
   AspectRatioFixedBlock
     OverlayNavigations(:base="base")
     BoardWood(:base="base")
