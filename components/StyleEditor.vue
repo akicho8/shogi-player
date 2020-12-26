@@ -567,7 +567,7 @@ export default {
       se_tf1_mode: "is_tf1_mode_off",
       se_tf1_perspective: 200,
       se_tf1_translate_x: 0,
-      se_tf1_translate_y: -70,
+      se_tf1_translate_y: -180,
       se_tf1_translate_z: 0,
       se_tf1_rotate_x: 0.05,
       se_tf1_rotate_y: 0,
