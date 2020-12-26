@@ -55,7 +55,7 @@
 
           MainDocSwitch(v-model="flip" label="flip")
           MainDocSwitch(v-model="flip_if_white" label="flip_if_white")
-          MainDocSwitch(v-model="hidden_if_piece_stand_blank" label="hidden_if_piece_stand_blank")
+          MainDocSwitch(v-model="sp_hidden_if_piece_stand_blank" label="sp_hidden_if_piece_stand_blank")
 
         .box
           .title.is-5 効果音
@@ -150,7 +150,7 @@
             :sp_summary="sp_summary"
             :sp_slider="sp_slider"
             :sp_debug.sync="sp_debug"
-            :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
+            :sp_hidden_if_piece_stand_blank="sp_hidden_if_piece_stand_blank"
             :sp_setting="sp_setting"
             :sp_op_disabled="sp_op_disabled"
             :flip.sync="flip"
@@ -204,7 +204,7 @@
                 |   :sound_effect="{{sound_effect}}"
                 |   :volume="{{volume}}"
                 |   :key_event_capture="{{key_event_capture}}"
-                |   :hidden_if_piece_stand_blank="{{hidden_if_piece_stand_blank}}"
+                |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
                 |   :flip="{{flip}}"
                 |   :flip_if_white="{{flip_if_white}}"
                 |   :player_info='{{JSON.stringify(player_info)}}'
@@ -250,7 +250,7 @@ export default {
       volume: 0.5,
       key_event_capture: false,
       sp_debug: "is_debug_off",
-      hidden_if_piece_stand_blank: false,
+      sp_hidden_if_piece_stand_blank: false,
       sp_setting: "is_setting_off",
       sp_summary: "is_summary_on",
       sp_op_disabled: "is_overlay_disable_off",

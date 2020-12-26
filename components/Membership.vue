@@ -42,7 +42,7 @@ export default {
 
     // ビューモードのとき持駒が空なら駒台を表示しない
     component_show_p() {
-      if (this.base.view_p && this.base.hidden_if_piece_stand_blank && _.isEmpty(this.hold_pieces)) {
+      if (this.base.view_p && this.base.sp_hidden_if_piece_stand_blank && _.isEmpty(this.hold_pieces)) {
         return false
       }
       return true

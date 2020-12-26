@@ -7,12 +7,12 @@ export default {
     sp_setting:     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
     sp_op_disabled: { type: Boolean, default: false,               }, // 全体の操作を無効化
     sp_controller:  { type: String,  default: "is_controller_off", }, // コントローラー表示
+    sp_hidden_if_piece_stand_blank: { type: Boolean, default: false, }, // 駒がないときは駒台側を非表示
 
     key_event_capture:           { type: Boolean, default: false, },
     shift_key_mag:               { type: Number,  default: 10,    },
     system_key_mag:              { type: Number,  default: 50,    },
     flip:                        { type: Boolean, default: false, },
-    hidden_if_piece_stand_blank: { type: Boolean, default: false, },
     flip_if_white:               { type: Boolean, default: false, },
   },
 

@@ -10,8 +10,8 @@
         .column
           ShogiPlayer(
             ref="api_sp"
-            :sp_summary="is_summary_off"
-            :hidden_if_piece_stand_blank="true"
+            sp_summary="is_summary_off"
+            :sp_hidden_if_piece_stand_blank="true"
             :board_cell_pointerdown_user_handle="board_cell_pointerdown_user_handle"
             :board_cell_left_click_user_handle="board_cell_left_click_user_handle"
             sp_debug="is_debug_off"
