@@ -11,8 +11,10 @@
         b-radio-button(v-model="base.new_run_mode" :native-value="e.key") {{e.name}}
 
     b-field(grouped)
-      b-field(label="反転")
-        b-switch(v-model="base.new_flip")
+      b-field(label="視点")
+        b-radio-button(v-model="base.new_vpoint" native-value="black") ☗
+        b-radio-button(v-model="base.new_vpoint" native-value="white") ☖
+
       b-field(label="デバッグモード")
         b-radio-button(v-model="base.new_debug" native-value="is_debug_off") OFF
         b-radio-button(v-model="base.new_debug" native-value="is_debug_on") ON
@@ -30,7 +32,7 @@
     //- b-field
     //-   template(v-for="e in BgVariantInfo.values")
     //-     b-radio-button(v-model="base.new_sp_bg_variant" :native-value="e.key" size="is-small") {{e.name}}
-    //- 
+    //-
     //- b-field(label="駒の種類")
     //- b-field
     //-   template(v-for="e in PiVariantInfo.values")

@@ -267,7 +267,7 @@ export default {
 
     flip_if_white_run() {
       if (this.sp_flip_if_white) {
-        this.new_flip = (this.mediator.data_source.location_base.key === "white")
+        this.new_vpoint = this.mediator.data_source.location_base.key
       }
     },
 
@@ -344,7 +344,7 @@ export default {
       //   black -> is_position_south
       // もし反転しているなら逆になる
       if (soldier) {
-        list.push(soldier.location.flip_if(this.base.new_flip).position_key)
+        list.push(soldier.location.flip_if(this.base.fliped).position_key)
       }
 
       if (this.board_piece_back_user_class) {

@@ -53,9 +53,17 @@
             b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_off") OFF
             b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_on") ON
 
-          MainDocSwitch(v-model="flip" label="flip")
-          MainDocSwitch(v-model="sp_flip_if_white" label="sp_flip_if_white")
-          MainDocSwitch(v-model="sp_hidden_if_piece_stand_blank" label="sp_hidden_if_piece_stand_blank")
+          b-field(custom-class="is-small" label="視点")
+            b-radio-button(size="is-small" v-model="sp_vpoint" native-value="black") ☗
+            b-radio-button(size="is-small" v-model="sp_vpoint" native-value="white") ☖
+
+          b-field(custom-class="is-small" label="表示局面が☖なら反転")
+            b-radio-button(size="is-small" v-model="sp_flip_if_white" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_flip_if_white" :native-value="false") OFF
+
+          b-field(custom-class="is-small" label="持駒が空なら駒台を表示しない")
+            b-radio-button(size="is-small" v-model="sp_hidden_if_piece_stand_blank" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_hidden_if_piece_stand_blank" :native-value="false") OFF
 
         .box
           .title.is-5 効果音
@@ -153,7 +161,7 @@
             :sp_hidden_if_piece_stand_blank="sp_hidden_if_piece_stand_blank"
             :sp_setting="sp_setting"
             :sp_op_disabled="sp_op_disabled"
-            :flip.sync="flip"
+            :sp_vpoint.sync="sp_vpoint"
             :sp_flip_if_white="sp_flip_if_white"
             :player_info="player_info"
             :sp_key_event_capture_enabled="sp_key_event_capture_enabled"
@@ -205,7 +213,7 @@
                 |   :volume="{{volume}}"
                 |   :sp_key_event_capture_enabled="{{sp_key_event_capture_enabled}}"
                 |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
-                |   :flip="{{flip}}"
+                |   sp_vpoint="{{sp_vpoint}}"
                 |   :sp_flip_if_white="{{sp_flip_if_white}}"
                 |   :player_info='{{JSON.stringify(player_info)}}'
                 |   :kifu_body="'{{kifu_body}}'"
@@ -254,7 +262,7 @@ export default {
       sp_setting: "is_setting_off",
       sp_summary: "is_summary_on",
       sp_op_disabled: "is_overlay_disable_off",
-      flip: false,
+      sp_vpoint: "black",
       sp_flip_if_white: false,
       sp_layout: "is_horizontal",
 

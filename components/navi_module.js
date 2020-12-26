@@ -1,4 +1,5 @@
 import _ from "lodash"
+import Location from "./models/location.js"
 
 export default {
   props: {
@@ -6,6 +7,7 @@ export default {
     sp_slider:      { type: String,  default: "is_slider_off",     }, // スライダー表示
     sp_setting:     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
     sp_controller:  { type: String,  default: "is_controller_off", }, // コントローラー表示
+    sp_vpoint:      { type: String,  default: "black",             }, // 視点
 
     sp_op_disabled:                 { type: Boolean, default: false, }, // 全体の操作を無効化
     sp_hidden_if_piece_stand_blank: { type: Boolean, default: false, }, // 駒がないときは駒台側を非表示
@@ -14,12 +16,11 @@ export default {
     sp_key_event_capture_enabled:   { type: Boolean, default: false, }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
     sp_shift_key_mag:               { type: Number,  default: 10,    },
     sp_system_key_mag:              { type: Number,  default: 50,    },
-    flip:                        { type: Boolean, default: false, },
   },
 
   data() {
     return {
-      new_flip: null,
+      new_vpoint: null,
     }
   },
 
@@ -32,12 +33,12 @@ export default {
   },
 
   created() {
-    this.new_flip = this.flip
+    this.new_vpoint = this.sp_vpoint
   },
 
   watch: {
-    flip(v)     { this.new_flip = v             }, // 外 -> 中
-    new_flip(v) { this.$emit("update:flip", v)  }, // 中 -> 外
+    sp_vpoint(v)  { this.new_vpoint = v               }, // 外 -> 中
+    new_vpoint(v) { this.$emit("update:sp_vpoint", v) }, // 中 -> 外
   },
 
   methods: {
@@ -171,12 +172,14 @@ export default {
     },
 
     board_flip_toggle() {
-      this.new_flip = !this.new_flip
+      this.new_vpoint = Location.fetch(this.new_vpoint).flip.key
       this.sound_play("flip_sound")
       this.turn_slider_focus()
     },
   },
   computed: {
+    fliped() { return this.new_vpoint === "white"  },
+
     //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, TurnSliderBlock.vue
 
     inside_controller_p() {

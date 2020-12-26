@@ -776,7 +776,7 @@ export default {
       const PieceTexture     = this.el_create(["PieceTexture"])
       const PieceTextureSelf = this.el_create(["PieceTextureSelf", ...soldier.to_class_list])
 
-      PieceTap.classList.add(soldier.location.flip_if(this.base.new_flip).position_key)
+      PieceTap.classList.add(soldier.location.flip_if(this.base.fliped).position_key)
 
       PieceTexture.appendChild(PieceTextureSelf)
       PieceTap.appendChild(PieceTexture)

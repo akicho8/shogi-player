@@ -49,7 +49,7 @@ export default {
     },
 
     hold_pieces() {
-      return this.base.mediator.realized_hold_pieces_of(this.location.flip_if(this.base.new_flip).key)
+      return this.base.mediator.realized_hold_pieces_of(this.location.flip_if(this.base.fliped).key)
     },
   },
 }

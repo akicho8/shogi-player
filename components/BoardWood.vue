@@ -49,7 +49,7 @@ export default {
     logical_xy(x, y) {
       x = x + Board.dimension - this.base.sp_board_dimension_w
       y = y + Board.dimension - this.base.sp_board_dimension_h
-      if (this.base.new_flip) {
+      if (this.base.fliped) {
         x = this.base.sp_board_dimension_w - x - 1
         y = this.base.sp_board_dimension_h - y - 1
       }

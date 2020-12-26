@@ -28,7 +28,7 @@ export default {
 
   methods: {
     location_of(key) {
-      return Location.fetch(key).flip_if(this.base.new_flip)
+      return Location.fetch(key).flip_if(this.base.fliped)
     },
   },
 

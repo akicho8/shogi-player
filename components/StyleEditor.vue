@@ -337,8 +337,8 @@
             b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_on") ON
 
           b-field(custom-class="is-small" label="視点")
-            b-radio-button(size="is-small" v-model="sp_flip" :native-value="false") ☗
-            b-radio-button(size="is-small" v-model="sp_flip" :native-value="true") ☖
+            b-radio-button(size="is-small" v-model="sp_vpoint" :native-value="false") ☗
+            b-radio-button(size="is-small" v-model="sp_vpoint" :native-value="true") ☖
 
           b-field(custom-class="is-small" label="コントローラー表示")
             b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_off") OFF
@@ -514,7 +514,7 @@ export default {
       sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
 
       sp_turn: -1,
-      sp_flip: false,
+      sp_vpoint: "is_vpoint_black",
       sp_piece_count_gap_right: 62.0,
       sp_piece_count_gap_bottom: 47.0,
       sp_piece_count_font_size: 8,
@@ -602,8 +602,8 @@ export default {
     if ("turn" in query) {
       this.sp_turn = Number(query.turn)
     }
-    if ("flip" in query) {
-      this.sp_flip = (query.flip == "true")
+    if ("vpoint" in query) {
+      this.sp_vpoint = query.vpoint
     }
 
     if (!body) {
@@ -743,7 +743,7 @@ export default {
       params.sp_mobile_fit       = this.sp_mobile_fit
       params.sp_mobile_vertical  = this.sp_mobile_vertical
       params.run_mode            = this.sp_run_mode
-      params.flip                = this.sp_flip
+      params.sp_vpoint           = this.sp_vpoint
       params.sp_debug            = "is_debug_off"
       params.start_turn          = this.sp_turn
       params.kifu_body           = this.sp_body

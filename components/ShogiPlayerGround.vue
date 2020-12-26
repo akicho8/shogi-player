@@ -32,7 +32,7 @@ export default {
         this.base.sp_bg_variant,
         this.base.sp_mobile_fit,
         this.base.sp_mobile_vertical,
-        this.base.new_flip ? "is_flip_on" : "is_flip_off",
+        this.base.fliped ? "is_flip_on" : "is_flip_off", // is_position_(north|south) を見るようにしてからは未使用
       ]
     },
     component_style() {

@@ -34,7 +34,7 @@ export default {
 
     // 反転状態の設定
     api_flip_set(flag) {
-      this.base.new_flip = flag
+      this.base.new_vpoint = flag ? "white" : "black"
     },
 
     // 反転(音がでる)
