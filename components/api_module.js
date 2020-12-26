@@ -1,6 +1,5 @@
-
-import Soldier from "./models/soldier"
-import Mediator from "./models/mediator"
+import Soldier from "./models/soldier.js"
+import Mediator from "./models/mediator.js"
 
 export default {
   methods: {

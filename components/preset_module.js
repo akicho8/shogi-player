@@ -1,5 +1,5 @@
-import Mediator from "./models/mediator"
-import PresetInfo from "./models/preset_info"
+import Mediator from "./models/mediator.js"
+import PresetInfo from "./models/preset_info.js"
 
 export default {
   props: {

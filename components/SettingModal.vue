@@ -56,9 +56,9 @@
 </template>
 
 <script>
-import RunModeInfo      from "./models/run_mode_info"
-import BgVariantInfo    from "./models/bg_variant_info"
-import PiVariantInfo from "./models/pi_variant_info"
+import RunModeInfo      from "./models/run_mode_info.js"
+import BgVariantInfo    from "./models/bg_variant_info.js"
+import PiVariantInfo from "./models/pi_variant_info.js"
 
 import { support } from "./support.js"
 
