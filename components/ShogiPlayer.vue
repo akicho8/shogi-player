@@ -265,7 +265,7 @@ export default {
 
     flip_if_white_run() {
       if (this.sp_flip_if_white) {
-        this.new_vpoint = this.mediator.data_source.location_base.key
+        this.new_viewpoint = this.mediator.data_source.location_base.key
       }
     },
 

@@ -54,8 +54,8 @@
             b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_on") ON
 
           b-field(custom-class="is-small" label="視点")
-            b-radio-button(size="is-small" v-model="sp_vpoint" native-value="black") ☗
-            b-radio-button(size="is-small" v-model="sp_vpoint" native-value="white") ☖
+            b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="black") ☗
+            b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="white") ☖
 
           b-field(custom-class="is-small" label="表示局面が☖なら反転")
             b-radio-button(size="is-small" v-model="sp_flip_if_white" :native-value="false") OFF
@@ -165,7 +165,7 @@
             :sp_hidden_if_piece_stand_blank="sp_hidden_if_piece_stand_blank"
             :sp_setting="sp_setting"
             :sp_op_disabled="sp_op_disabled"
-            :sp_vpoint.sync="sp_vpoint"
+            :sp_viewpoint.sync="sp_viewpoint"
             :sp_flip_if_white="sp_flip_if_white"
             :sp_player_info="sp_player_info"
             :sp_key_event_capture_enabled="sp_key_event_capture_enabled"
@@ -212,7 +212,7 @@
                 |   sp_op_disabled="{{sp_op_disabled}}"
                 |   sp_controller="{{sp_controller}}"
                 |   sp_human_side="{{sp_human_side}}"
-                |   sp_vpoint="{{sp_vpoint}}"
+                |   sp_viewpoint="{{sp_viewpoint}}"
                 |   :sp_turn="{{sp_turn}}"
                 |   :sp_sound_enabled="{{sp_sound_enabled}}"
                 |   :sp_sound_volume="{{sp_sound_volume}}"
@@ -266,7 +266,7 @@ export default {
       sp_setting: "is_setting_off",
       sp_summary: "is_summary_on",
       sp_op_disabled: "is_overlay_disable_off",
-      sp_vpoint: "black",
+      sp_viewpoint: "black",
       sp_flip_if_white: false,
       sp_layout: "is_horizontal",
 

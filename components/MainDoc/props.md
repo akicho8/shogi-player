@@ -4,7 +4,7 @@
 | `sp_slider`                          | スライダー表示                                                 | "is_slider_off"         |
 | `sp_setting`                         | 設定ボタンの表示                                               | "is_setting_off"        |
 | `sp_controller`                      | コントローラー表示                                             | "is_controller_off"     |
-| `sp_vpoint`                          | 視点                                                           | "black"                 |
+| `sp_viewpoint`                          | 視点                                                           | "black"                 |
 | `sp_op_disabled`                     | 全体の操作を無効化                                             | false                   |
 | `sp_hidden_if_piece_stand_blank`     | 駒がないときは駒台側を非表示                                   | false                   |
 | `sp_flip_if_white`                   | 最初に表示した局面が△なら反転                                 | false                   |

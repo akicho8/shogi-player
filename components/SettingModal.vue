@@ -12,8 +12,8 @@
 
     b-field(grouped)
       b-field(label="視点")
-        b-radio-button(v-model="base.new_vpoint" native-value="black") ☗
-        b-radio-button(v-model="base.new_vpoint" native-value="white") ☖
+        b-radio-button(v-model="base.new_viewpoint" native-value="black") ☗
+        b-radio-button(v-model="base.new_viewpoint" native-value="white") ☖
 
       b-field(label="デバッグモード")
         b-radio-button(v-model="base.new_debug" native-value="is_debug_off") OFF

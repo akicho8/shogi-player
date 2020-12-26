@@ -32,7 +32,7 @@ export default {
         this.base.sp_bg_variant,
         this.base.sp_mobile_fit,
         this.base.sp_mobile_vertical,
-        `is_vpoint_${this.base.new_vpoint}`, // システムテストで見ている
+        `is_viewpoint_${this.base.new_viewpoint}`, // システムテストで見ている
       ]
     },
     component_style() {

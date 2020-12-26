@@ -7,7 +7,7 @@ export default {
     sp_slider:                      { type: String,  default: "is_slider_off",     }, // スライダー表示
     sp_setting:                     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
     sp_controller:                  { type: String,  default: "is_controller_off", }, // コントローラー表示
-    sp_vpoint:                      { type: String,  default: "black",             }, // 視点
+    sp_viewpoint:                      { type: String,  default: "black",             }, // 視点
 
     sp_op_disabled:                 { type: Boolean, default: false,               }, // 全体の操作を無効化
     sp_hidden_if_piece_stand_blank: { type: Boolean, default: false,               }, // 駒がないときは駒台側を非表示
@@ -20,7 +20,7 @@ export default {
 
   data() {
     return {
-      new_vpoint: null,
+      new_viewpoint: null,
     }
   },
 
@@ -33,12 +33,12 @@ export default {
   },
 
   created() {
-    this.new_vpoint = this.sp_vpoint
+    this.new_viewpoint = this.sp_viewpoint
   },
 
   watch: {
-    sp_vpoint(v)  { this.new_vpoint = v               }, // 外 -> 中
-    new_vpoint(v) { this.$emit("update:sp_vpoint", v) }, // 中 -> 外
+    sp_viewpoint(v)  { this.new_viewpoint = v               }, // 外 -> 中
+    new_viewpoint(v) { this.$emit("update:sp_viewpoint", v) }, // 中 -> 外
   },
 
   methods: {
@@ -172,13 +172,13 @@ export default {
     },
 
     board_flip_toggle() {
-      this.new_vpoint = Location.fetch(this.new_vpoint).flip.key
+      this.new_viewpoint = Location.fetch(this.new_viewpoint).flip.key
       this.sound_play("flip_sound")
       this.turn_slider_focus()
     },
   },
   computed: {
-    fliped() { return this.new_vpoint === "white"  },
+    fliped() { return this.new_viewpoint === "white"  },
 
     //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, TurnSliderBlock.vue
 
