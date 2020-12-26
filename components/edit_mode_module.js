@@ -265,8 +265,10 @@ export default {
           // this.$forceUpdate()
         }
 
-        if (this.play_p && promotable_p) { // 入って成る or 出て成る
-
+        // 「入って成る」と「出て成る」の両方で発動
+        // 元々 play モードだけで発動だった
+        // しかし view モードでオーバーレイ操作を無効にしたときは play モード同様に成れないといけない
+        if ((this.view_p || this.play_p) && promotable_p) {
           let must_dialog = true
           if (this.sp_play_mode_auto_promote) {
             const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
