@@ -337,8 +337,8 @@
             b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_on") ON
 
           b-field(custom-class="is-small" label="視点")
-            b-radio-button(size="is-small" v-model="sp_viewpoint" :native-value="false") ☗
-            b-radio-button(size="is-small" v-model="sp_viewpoint" :native-value="true") ☖
+            b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="black") ☗
+            b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="white") ☖
 
           b-field(custom-class="is-small" label="コントローラー表示")
             b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_off") OFF
@@ -514,7 +514,7 @@ export default {
       sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
 
       sp_turn: -1,
-      sp_viewpoint: "is_viewpoint_black",
+      sp_viewpoint: "black",
       sp_piece_count_gap_right: 62.0,
       sp_piece_count_gap_bottom: 47.0,
       sp_piece_count_font_size: 8,
