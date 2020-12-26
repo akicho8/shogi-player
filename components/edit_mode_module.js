@@ -101,7 +101,7 @@ export default {
       // -------------------------------------------------------------------------------- Validation
 
       if (this.cpu_location_p) {
-        this.log("片方の手番だけを操作できるようにする human_side_key の指定があってCPU側なので無効とする")
+        this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
         return
       }
 
@@ -481,7 +481,7 @@ export default {
       }
 
       if (this.cpu_location_p) {
-        this.log("片方の手番だけを操作できるようにする human_side_key の指定があってCPU側なので無効とする")
+        this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
         return
       }
 
@@ -838,7 +838,7 @@ export default {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
     },
 
-    // 片方の手番だけを操作できるようにする human_side_key の指定があってCPUの手番？
+    // 片方の手番だけを操作できるようにする sp_human_side の指定があってCPUの手番？
     cpu_location_p() {
       if (this.play_p) {
         return !_.includes(this.human_locations, this.mediator.current_location)

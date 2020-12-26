@@ -14,8 +14,8 @@ export default {
     sp_flip_if_white:               { type: Boolean, default: false, }, // 最初に表示した局面が△なら反転
 
     sp_key_event_capture_enabled:   { type: Boolean, default: false, }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
-    sp_shift_key_mag:               { type: Number,  default: 10,    },
-    sp_system_key_mag:              { type: Number,  default: 50,    },
+    sp_shift_key_mag:               { type: Number,  default: 10,    }, // キーで左右するとき shift を押したときの倍率
+    sp_system_key_mag:              { type: Number,  default: 50,    }, // キーで左右するとき command などを押したときの倍率
   },
 
   data() {

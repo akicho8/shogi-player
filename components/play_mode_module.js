@@ -5,9 +5,8 @@ import Location from "./models/location"
 import HumanSideInfo from "./models/human_side_info"
 
 export default {
-
   props: {
-    human_side_key: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
+    sp_human_side: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
   },
 
   data() {
@@ -157,7 +156,7 @@ export default {
     },
 
     human_locations() {
-      return HumanSideInfo.fetch(this.human_side_key).locations
+      return HumanSideInfo.fetch(this.sp_human_side).locations
     },
 
     // moves.take(turn_offset) を返す

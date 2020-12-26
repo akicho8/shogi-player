@@ -99,9 +99,9 @@
             b-radio-button(size="is-small" v-model="sp_op_disabled" native-value="is_overlay_disable_off") OFF
             b-radio-button(size="is-small" v-model="sp_op_disabled" native-value="is_overlay_disable_on") ON
 
-          b-field(custom-class="is-small" label="human_side_key")
+          b-field(custom-class="is-small" label="sp_human_side")
             template(v-for="e in HumanSideInfo.values")
-              b-radio-button(size="is-small" v-model="human_side_key" :native-value="e.key") {{e.name}}
+              b-radio-button(size="is-small" v-model="sp_human_side" :native-value="e.key") {{e.name}}
 
         .box
           .title.is-5 操作モードのイベント受信内容
@@ -170,7 +170,7 @@
             :sp_overlay_nav="sp_overlay_nav"
             :sound_effect="sound_effect"
             :volume="volume"
-            :human_side_key="human_side_key"
+            :sp_human_side="sp_human_side"
 
             @update:edit_mode_snapshot_sfen="            e => trigger_check('edit_mode_snapshot_sfen', e)"
             @update:mediator_snapshot_sfen="             e => trigger_check('mediator_snapshot_sfen', e)"
@@ -208,7 +208,7 @@
                 |   sp_op_disabled="{{sp_op_disabled}}"
                 |   sp_controller="{{sp_controller}}"
                 |   :start_turn="{{start_turn}}"
-                |   :human_side_key="'{{human_side_key}}'"
+                |   :sp_human_side="'{{sp_human_side}}'"
                 |   :sound_effect="{{sound_effect}}"
                 |   :volume="{{volume}}"
                 |   :sp_key_event_capture_enabled="{{sp_key_event_capture_enabled}}"
@@ -253,7 +253,7 @@ export default {
       sp_overlay_nav: "is_overlay_nav_off",
       sp_controller: "is_controller_off",
       sp_sfen_show: "is_sfen_show_off",
-      human_side_key: 'both',
+      sp_human_side: 'both',
       sound_effect: true,
       volume: 0.5,
       sp_key_event_capture_enabled: false,
