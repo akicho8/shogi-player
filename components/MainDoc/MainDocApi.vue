@@ -14,7 +14,6 @@
             :hidden_if_piece_stand_blank="true"
             :board_cell_pointerdown_user_handle="board_cell_pointerdown_user_handle"
             :board_cell_left_click_user_handle="board_cell_left_click_user_handle"
-            :overlay_navi="false"
             sp_debug="is_debug_off"
           )
       .columns

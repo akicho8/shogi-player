@@ -84,12 +84,12 @@ export default {
     sp_location_behavior: { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
     sp_debug:             { type: String, default: "is_debug_off",          }, // デバッグモード
     sp_sfen_show:         { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
+    sp_overlay_nav:       { type: String, default: "is_overlay_nav_off",    }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
 
     // TODO ↑に合わせる
     run_mode:        { type: String,  default: "view_mode",         },
     kifu_body:       { type: String,  default: null,                },
     start_turn:      { type: Number,  default: -1,                  },
-    overlay_navi:    { type: Boolean, default: false,               }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     player_info:     { type: Object,  default: null,                },
 
     player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する

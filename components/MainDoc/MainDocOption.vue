@@ -72,12 +72,15 @@
 
         .box
           .title.is-5 その他
-          MainDocSwitch(v-model="overlay_navi" label="overlay_navi")
           MainDocSwitch(v-model="key_event_capture" label="key_event_capture")
 
           b-field(custom-class="is-small" label="デバッグモード")
             b-radio-button(size="is-small" v-model="sp_debug" native-value="is_debug_off") OFF
             b-radio-button(size="is-small" v-model="sp_debug" native-value="is_debug_on") ON
+
+          b-field(custom-class="is-small" label="デバッグモード")
+            b-radio-button(size="is-small" v-model="sp_overlay_nav" native-value="is_overlay_nav_off") OFF
+            b-radio-button(size="is-small" v-model="sp_overlay_nav" native-value="is_overlay_nav_on") ON
 
           MainDocSwitch(v-model="operation_disable" label="operation_disable")
           b-field(custom-class="is-small" label="human_side_key")
@@ -148,7 +151,7 @@
             :key_event_capture="key_event_capture"
             :controller_show="controller_show"
             :sp_sfen_show="sp_sfen_show"
-            :overlay_navi="overlay_navi"
+            :sp_overlay_nav="sp_overlay_nav"
             :sound_effect="sound_effect"
             :volume="volume"
             :human_side_key="human_side_key"
@@ -184,9 +187,9 @@
                 |   sp_debug="{{sp_debug}}"
                 |   sp_summary="{{sp_summary}}"
                 |   sp_sfen_show="{{sp_sfen_show}}"
+                |   sp_overlay_nav="{{sp_overlay_nav}}"
                 |   :start_turn="{{start_turn}}"
                 |   :controller_show="{{controller_show}}"
-                |   :overlay_navi="{{overlay_navi}}"
                 |   :human_side_key="'{{human_side_key}}'"
                 |   :sound_effect="{{sound_effect}}"
                 |   :volume="{{volume}}"
@@ -231,7 +234,7 @@ export default {
       sp_pi_variant: "is_pi_variant_a1by",
       start_turn: -1,
       sp_slider: "is_slider_off",
-      overlay_navi: true,
+      sp_overlay_nav: "is_overlay_nav_off",
       controller_show: false,
       sp_sfen_show: "is_sfen_show_off",
       human_side_key: 'both',
