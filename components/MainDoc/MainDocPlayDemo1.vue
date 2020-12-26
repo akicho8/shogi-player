@@ -8,7 +8,7 @@
     sp_slider="is_slider_on"
     sp_controller="is_controller_on"
     :sp_bg_variant="'is_bg_variant_a'"
-    :sound_effect="true"
+    :sp_sound_enabled="true"
     :volume="0.25"
     sp_debug="is_debug_off"
     :run_mode="'play_mode'"

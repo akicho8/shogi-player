@@ -3,14 +3,14 @@ import { Howl, Howler } from "howler"
 
 export default {
   props: {
-    sound_effect: { type: Boolean, default: false, },
+    sp_sound_enabled: { type: Boolean, default: false, },
     volume:       { type: Number,  default: 0.5,   },
   },
   methods: {
     sound_play(key, options = {}) {
       this.$emit("sound_play", key)
 
-      if (!this.sound_effect) {
+      if (!this.sp_sound_enabled) {
         return
       }
       const e = SoundPreset.fetch(key)

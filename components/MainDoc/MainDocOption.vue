@@ -58,17 +58,21 @@
             b-radio-button(size="is-small" v-model="sp_vpoint" native-value="white") ☖
 
           b-field(custom-class="is-small" label="表示局面が☖なら反転")
-            b-radio-button(size="is-small" v-model="sp_flip_if_white" :native-value="true") ON
             b-radio-button(size="is-small" v-model="sp_flip_if_white" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_flip_if_white" :native-value="true") ON
 
           b-field(custom-class="is-small" label="持駒が空なら駒台を表示しない")
-            b-radio-button(size="is-small" v-model="sp_hidden_if_piece_stand_blank" :native-value="true") ON
             b-radio-button(size="is-small" v-model="sp_hidden_if_piece_stand_blank" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_hidden_if_piece_stand_blank" :native-value="true") ON
 
         .box
-          .title.is-5 効果音
-          MainDocSwitch(v-model="sound_effect" label="sound_effect")
-          b-field(custom-class="is-small" label="volume")
+          .title.is-5 音
+
+          b-field(custom-class="is-small" label="効果音")
+            b-radio-button(size="is-small" v-model="sp_sound_enabled" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_sound_enabled" :native-value="true") ON
+
+          b-field(custom-class="is-small" label="ボリューム")
             b-slider(v-model="volume" :min="0" :max="1.0" step="0.01")
 
         .box
@@ -168,7 +172,7 @@
             :sp_controller="sp_controller"
             :sp_sfen_show="sp_sfen_show"
             :sp_overlay_nav="sp_overlay_nav"
-            :sound_effect="sound_effect"
+            :sp_sound_enabled="sp_sound_enabled"
             :volume="volume"
             :sp_human_side="sp_human_side"
 
@@ -209,7 +213,7 @@
                 |   sp_controller="{{sp_controller}}"
                 |   :sp_turn="{{sp_turn}}"
                 |   :sp_human_side="'{{sp_human_side}}'"
-                |   :sound_effect="{{sound_effect}}"
+                |   :sp_sound_enabled="{{sp_sound_enabled}}"
                 |   :volume="{{volume}}"
                 |   :sp_key_event_capture_enabled="{{sp_key_event_capture_enabled}}"
                 |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
@@ -254,7 +258,7 @@ export default {
       sp_controller: "is_controller_off",
       sp_sfen_show: "is_sfen_show_off",
       sp_human_side: 'both',
-      sound_effect: true,
+      sp_sound_enabled: true,
       volume: 0.5,
       sp_key_event_capture_enabled: false,
       sp_debug: "is_debug_off",

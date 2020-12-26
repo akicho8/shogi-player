@@ -6,7 +6,7 @@
     :preset_key="'詰将棋'"
     sp_slider="is_slider_on"
     :sp_bg_variant="'is_bg_variant_a'"
-    :sound_effect="true"
+    :sp_sound_enabled="true"
     :volume="0.25"
     sp_debug="is_debug_off"
     :run_mode="'edit_mode'"

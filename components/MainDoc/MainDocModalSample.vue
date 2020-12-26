@@ -25,7 +25,7 @@
                 :sp_key_event_capture_enabled="true"
                 sp_slider="is_slider_on"
                 sp_controller="is_controller_on"
-                :sound_effect="true"
+                :sp_sound_enabled="true"
               )
 
               .box.is-size-6
