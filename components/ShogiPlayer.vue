@@ -86,7 +86,7 @@ export default {
     // TODO ↑に合わせる
     run_mode:        { type: String,  default: "view_mode",         },
     kifu_body:       { type: String,  default: null,                },
-    start_turn:      { type: Number,  default: -1,                  },
+    sp_turn:      { type: Number,  default: -1,                  },
     player_info:     { type: Object,  default: null,                },
 
     player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する
@@ -126,11 +126,11 @@ export default {
 
   created() {
     if (this.view_p) {
-      this.mediator_setup(this.start_turn)
+      this.mediator_setup(this.sp_turn)
     }
 
     if (this.play_p) {
-      this.mediator_setup(this.start_turn)
+      this.mediator_setup(this.sp_turn)
       this.play_mode_setup_from("view_mode")
     }
 
@@ -148,8 +148,8 @@ export default {
       this.current_turn_set(this.turn_edit_value)
     },
 
-    start_turn() {
-      this.current_turn_set(this.start_turn)
+    sp_turn() {
+      this.current_turn_set(this.sp_turn)
     },
 
     kifu_source() {
@@ -162,7 +162,7 @@ export default {
       const before_sfen = this.mediator ? this.mediator.to_simple_sfen : ""
       this.log(`before turn_offset_max: ${this.turn_offset_max}`)
       this.log(`before sfen: ${before_sfen}`)
-      this.mediator_setup(this.start_turn)
+      this.mediator_setup(this.sp_turn)
       this.log(`after turn_offset_max: ${this.turn_offset_max}`)
       this.log(`after sfen: ${this.mediator.to_simple_sfen}`)
       const sfen_change_p = (before_sfen !== this.mediator.to_simple_sfen)
@@ -256,7 +256,7 @@ export default {
       this.init_location_key = this.mediator.current_location.key
 
       // そのあとで指定の手数に変更
-      this.mediator.current_turn = this.start_turn
+      this.mediator.current_turn = this.sp_turn
       this.mediator.run()
 
       // 不足駒を駒箱に生成

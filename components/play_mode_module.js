@@ -49,7 +49,7 @@ export default {
     },
 
     // 現在の手数を返す
-    // update:start_turn とは別にしてある
+    // update:sp_turn とは別にしてある
     turn_offset(v) {
       this.$emit("update:turn_offset", v)
     },

@@ -7,7 +7,7 @@
     .subtitle.is-6 57番指し第57局 (1711/2/28)
   ShogiPlayer(
     :kifu_body="kifu_body"
-    :start_turn="-1"
+    :sp_turn="-1"
     :sp_bg_variant="'is_bg_variant_a'"
     :sp_pi_variant="'is_pi_variant_a1by'"
     :sound_effect="true"

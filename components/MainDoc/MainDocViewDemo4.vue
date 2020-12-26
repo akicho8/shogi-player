@@ -8,7 +8,7 @@
   hr
   ShogiPlayer.is_book_like.type_a(
     :kifu_body="kifu_body"
-    :start_turn="121"
+    :sp_turn="121"
     sp_controller="is_controller_on"
     sp_slider="is_slider_on"
     :sp_pi_variant="'is_pi_variant_b'"

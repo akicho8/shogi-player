@@ -4,7 +4,7 @@
     | 駒落ちの場合は後手から始まる
   ShogiPlayer(
     :kifu_body="`position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1`"
-    :start_turn="-1"
+    :sp_turn="-1"
     :run_mode="'play_mode'"
     )
 </template>

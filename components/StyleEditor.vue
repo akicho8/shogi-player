@@ -745,13 +745,13 @@ export default {
       params.run_mode            = this.sp_run_mode
       params.sp_vpoint           = this.sp_vpoint
       params.sp_debug            = "is_debug_off"
-      params.start_turn          = this.sp_turn
+      params.sp_turn             = this.sp_turn
       params.kifu_body           = this.sp_body
       params.sound_effect        = true
-      params.sp_setting         = false
-      params.sp_summary        = this.sp_summary
-      params.sp_slider         = this.sp_slider
-      params.sp_controller     = this.sp_controller
+      params.sp_setting          = false
+      params.sp_summary          = this.sp_summary
+      params.sp_slider           = this.sp_slider
+      params.sp_controller       = this.sp_controller
       params.player_info         = this.sp_player_info
       return params
     },

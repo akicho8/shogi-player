@@ -16,9 +16,9 @@
           .title.is-5 棋譜
           b-field(custom-class="is-small" label="kifu_body")
             b-input(size="is-small" v-model="kifu_body" type="textarea")
-          b-field(custom-class="is-small" label="start_turn")
-            //- b-slider(v-model="start_turn" :min="-1" :max="256" step="1")
-            b-input(size="is-small" v-model="start_turn" type="number")
+          b-field(custom-class="is-small" label="sp_turn")
+            //- b-slider(v-model="sp_turn" :min="-1" :max="256" step="1")
+            b-input(size="is-small" v-model="sp_turn" type="number")
 
         .box
           .title.is-5 対局者情報
@@ -151,7 +151,7 @@
             :location_click_handle="(location) => $buefy.toast.open(location.name)"
             :run_mode.sync="run_mode"
             :kifu_body.sync="kifu_body"
-            :start_turn.sync="start_turn"
+            :sp_turn.sync="sp_turn"
             :sp_bg_variant.sync="sp_bg_variant"
             :sp_pi_variant.sync="sp_pi_variant"
             :sp_layout="sp_layout"
@@ -207,7 +207,7 @@
                 |   sp_setting="{{sp_setting}}"
                 |   sp_op_disabled="{{sp_op_disabled}}"
                 |   sp_controller="{{sp_controller}}"
-                |   :start_turn="{{start_turn}}"
+                |   :sp_turn="{{sp_turn}}"
                 |   :sp_human_side="'{{sp_human_side}}'"
                 |   :sound_effect="{{sound_effect}}"
                 |   :volume="{{volume}}"
@@ -248,7 +248,7 @@ export default {
       run_mode: "view_mode",   // play_mode
       sp_bg_variant: "is_bg_variant_a",
       sp_pi_variant: "is_pi_variant_a1by",
-      start_turn: -1,
+      sp_turn: -1,
       sp_slider: "is_slider_off",
       sp_overlay_nav: "is_overlay_nav_off",
       sp_controller: "is_controller_off",

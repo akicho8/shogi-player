@@ -144,7 +144,7 @@ export default {
           this.play_mode_mediator_seek_to(new_val)
         }
         this.sound_play("piece_put")
-        this.$emit("update:start_turn", this.turn_offset)
+        this.$emit("update:sp_turn", this.turn_offset)
       }
     },
 

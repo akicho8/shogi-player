@@ -29,8 +29,8 @@
 | `update:play_mode_advanced_moves`           | 操作モードで指した手の配列                     |                                                                   |
 | `update:moves_take_turn_offset`             | 操作モードでの現在の手の配列                   | turn_offset で take している                                      |
 | `update:edit_mode_snapshot_sfen`            | 編集モードの局面                               | play_mode でも呼ばれるので注意                                    |
-| `update:start_turn`                         | 手数が変更されたとき                           | start_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも |
-| `update:turn_offset`                        | 手数が変更されたとき                           | マイナスにはならない。start_turn と被るので追加。                 |
+| `update:sp_turn`                         | 手数が変更されたとき                           | sp_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも |
+| `update:turn_offset`                        | 手数が変更されたとき                           | マイナスにはならない。sp_turn と被るので追加。                 |
 | `update:turn_offset_max`                    | 最大手数が変更されたとき                       | 内部変数参照よりこっちの方が安全なはず                            |
 | `update:run_mode`                           | 設定ダイアログでモードが変更されたとき         |                                                                   |
 | `update:kifu_body`                          | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
@@ -57,7 +57,7 @@
 
 | 名前      | 意味                                                                             |
 |-----------|----------------------------------------------------------------------------------|
-| `turn_offset`     | 現在の局面の手数で start_turn に -1 を指定したときは最後の局面の手数になっている |
+| `turn_offset`     | 現在の局面の手数で sp_turn に -1 を指定したときは最後の局面の手数になっている |
 | `turn_offset_min` | 局面手数スライダーの最小値。常に0 |
 | `turn_offset_max` | 局面手数スライダーの最大値。指し手が 2 つあれば 2 |
 | `turn_base`       | 普通は 0 だけど sfen で 'b - 10' の指定があったときは 9 になっている。この変数は外から見る必要はない

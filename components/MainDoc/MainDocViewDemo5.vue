@@ -8,7 +8,7 @@
   hr
   ShogiPlayer.is_book_like(
     :sp_pi_variant="'is_pi_variant_b'"
-    :start_turn="-1"
+    :sp_turn="-1"
     sp_controller="is_controller_on"
     sp_slider="is_slider_on"
     sp_sfen_show="is_sfen_show_on"

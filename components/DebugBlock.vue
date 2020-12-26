@@ -18,8 +18,8 @@
         td mouseover_info
       tr
         th 開始局面番号
-        td {{base.start_turn}}
-        td start_turn
+        td {{base.sp_turn}}
+        td sp_turn
       tr
         th 初期配置
         td {{base.current_preset_key}}

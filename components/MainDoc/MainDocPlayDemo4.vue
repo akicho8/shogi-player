@@ -4,7 +4,7 @@
     | 2手目の盤面から開始する場合も後手から始まる
   ShogiPlayer(
     :kifu_body="`position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL w - 2`"
-    :start_turn="-1"
+    :sp_turn="-1"
     :run_mode="'play_mode'"
     )
 </template>
