@@ -36,6 +36,9 @@ export default {
     api_flip_set(flag) {
       this.base.new_vpoint = flag ? "white" : "black"
     },
+    api_vpoint_set(vpoint) {
+      this.base.new_vpoint = vpoint
+    },
 
     // 反転(音がでる)
     api_flip_toggle() {
