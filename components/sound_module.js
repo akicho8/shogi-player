@@ -10,18 +10,17 @@ export default {
     sound_play(key, options = {}) {
       this.$emit("sound_play", key)
 
-      if (!this.sp_sound_enabled) {
-        return
+      if (this.sp_sound_enabled) {
+        const e = SoundPreset.fetch(key)
+        const params = {
+          src: e.source,
+          volume: e.volume * this.sp_sound_volume,
+          autoplay: true,
+          ...options,
+        }
+        // https://github.com/goldfire/howler.js#documentation
+        return new Howl(params)
       }
-      const e = SoundPreset.fetch(key)
-      const params = {
-        src: e.source,
-        volume: e.volume * this.volume,
-        autoplay: true,
-        ...options,
-      }
-      // https://github.com/goldfire/howler.js#documentation
-      return new Howl(params)
     },
   },
 }
