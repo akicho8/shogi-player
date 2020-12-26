@@ -9,12 +9,12 @@ export default {
 
     sp_op_disabled:                 { type: Boolean, default: false, }, // 全体の操作を無効化
     sp_hidden_if_piece_stand_blank: { type: Boolean, default: false, }, // 駒がないときは駒台側を非表示
+    sp_flip_if_white:               { type: Boolean, default: false, }, // 最初に表示した局面が△なら反転
 
-    key_event_capture:           { type: Boolean, default: false, },
-    shift_key_mag:               { type: Number,  default: 10,    },
-    system_key_mag:              { type: Number,  default: 50,    },
+    sp_key_event_capture_enabled:   { type: Boolean, default: false, }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
+    sp_shift_key_mag:               { type: Number,  default: 10,    },
+    sp_system_key_mag:              { type: Number,  default: 50,    },
     flip:                        { type: Boolean, default: false, },
-    sp_flip_if_white:               { type: Boolean, default: false, },
   },
 
   data() {
@@ -59,15 +59,19 @@ export default {
         return
       }
 
-      if (!this.key_event_capture) {
-        return
-      }
-
-      if (this.view_p || this.play_p) {
+      if (this.sp_key_event_capture_enabled && (this.view_p || this.play_p)) {
         const dom = document.activeElement
-        const controllers = [this.$refs.first, this.$refs.previous, this.$refs.next, this.$refs.last] // FIXME: 指定DOMの下にあるか？の方法がわかればもっと簡潔になる
-        if (!(dom === undefined || dom.tagName === "BODY" || _.includes(controllers, dom))) {
-          return
+
+        if (this.$NavigateBlock) {
+          const controllers = [
+            this.$NavigateBlock.$refs.first,
+            this.$NavigateBlock.$refs.previous,
+            this.$NavigateBlock.$refs.next,
+            this.$NavigateBlock.$refs.last,
+          ]
+          if (!(dom === undefined || dom.tagName === "BODY" || _.includes(controllers, dom))) {
+            return
+          }
         }
 
         if (e.code === "Backspace" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.key === "k" || e.key === "p" || e.key === "b") {
@@ -80,52 +84,6 @@ export default {
           e.preventDefault()
         }
       }
-
-      // let gap = null
-      // let force_value = null
-      //
-      // if (e.code === "Space" || e.code === "Enter" || e.code === "ArrowDown" || e.code === "ArrowRight" || e.key === "j" || e.key === "n" || e.key === "f") {
-      //   gap = 1
-      // }
-      // if (e.code === "Backspace" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.key === "k" || e.key === "p" || e.key === "b") {
-      //   gap = -1
-      // }
-      // if (e.key === "PageUp") {
-      //   gap = -10
-      // }
-      // if (e.key === "PageDown") {
-      //   gap = 10
-      // }
-      // if (e.shiftKey || e.ctrlKey || e.altKey || e.metaKey) {
-      //   if (gap) {
-      //     gap *= 10
-      //   }
-      // }
-      // if (e.key === "[" || e.key === "Home" || e.code === "Escape") {
-      //   force_value = this.turn_offset_min
-      // }
-      // if (e.key === "]" || e.key === "End") {
-      //   force_value = this.turn_offset_max
-      // }
-      //
-      // let v = this.current_turn
-      // if (gap !== null) {
-      //   v += gap
-      // }
-      // if (force_value !== null) {
-      //   v = force_value
-      // }
-      // if (v < this.turn_offset_min) {
-      //   v = this.turn_offset_min
-      // }
-      // if (this.turn_offset_max < v) {
-      //   v = this.turn_offset_max
-      // }
-      // this.current_turn = v
-      //
-      // if (gap !== null || force_value !== null) {
-      //   e.preventDefault()
-      // }
     },
 
     navi_relative_move(v, event) {
@@ -135,13 +93,13 @@ export default {
     relative_move(v, event = null) {
       if (event) {
         if (event.shiftKey) {
-          if (this.shift_key_mag) {
-            v *= this.shift_key_mag
+          if (this.sp_shift_key_mag) {
+            v *= this.sp_shift_key_mag
           }
         }
         if (event.ctrlKey || event.altKey || event.metaKey) {
-          if (this.system_key_mag) {
-            v *= this.system_key_mag
+          if (this.sp_system_key_mag) {
+            v *= this.sp_system_key_mag
           }
         }
       }

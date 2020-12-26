@@ -77,7 +77,7 @@
 
         .box
           .title.is-5 その他
-          MainDocSwitch(v-model="key_event_capture" label="key_event_capture")
+          MainDocSwitch(v-model="sp_key_event_capture_enabled" label="sp_key_event_capture_enabled")
 
           b-field(custom-class="is-small" label="デバッグモード")
             b-radio-button(size="is-small" v-model="sp_debug" native-value="is_debug_off") OFF
@@ -156,7 +156,7 @@
             :flip.sync="flip"
             :sp_flip_if_white="sp_flip_if_white"
             :player_info="player_info"
-            :key_event_capture="key_event_capture"
+            :sp_key_event_capture_enabled="sp_key_event_capture_enabled"
             :sp_controller="sp_controller"
             :sp_sfen_show="sp_sfen_show"
             :sp_overlay_nav="sp_overlay_nav"
@@ -203,7 +203,7 @@
                 |   :human_side_key="'{{human_side_key}}'"
                 |   :sound_effect="{{sound_effect}}"
                 |   :volume="{{volume}}"
-                |   :key_event_capture="{{key_event_capture}}"
+                |   :sp_key_event_capture_enabled="{{sp_key_event_capture_enabled}}"
                 |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
                 |   :flip="{{flip}}"
                 |   :sp_flip_if_white="{{sp_flip_if_white}}"
@@ -248,7 +248,7 @@ export default {
       human_side_key: 'both',
       sound_effect: true,
       volume: 0.5,
-      key_event_capture: false,
+      sp_key_event_capture_enabled: false,
       sp_debug: "is_debug_off",
       sp_hidden_if_piece_stand_blank: false,
       sp_setting: "is_setting_off",
