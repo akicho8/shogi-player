@@ -1,5 +1,5 @@
 <template lang="pug">
-.OverlayDisableBlock(v-if="base.operation_disable")
+.OpDisabledBlock(v-if="base.sp_op_disabled")
 </template>
 
 <script>
@@ -16,12 +16,12 @@ export default {
 .ShogiPlayer
   &.run_mode-view_mode
     .ShogiPlayerWidth
-      .OverlayDisableBlock
+      .OpDisabledBlock
         position: absolute
         z-index: $overlay_for_disable_z
         width: 100%
         height: 100%
     .is_layer_on
-      .OverlayDisableBlock
+      .OpDisabledBlock
         background: change_color($primary, $alpha: 0.5)
 </style>

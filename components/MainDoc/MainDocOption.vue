@@ -81,11 +81,14 @@
             b-radio-button(size="is-small" v-model="sp_debug" native-value="is_debug_off") OFF
             b-radio-button(size="is-small" v-model="sp_debug" native-value="is_debug_on") ON
 
-          b-field(custom-class="is-small" label="デバッグモード")
+          b-field(custom-class="is-small" label="盤の上でも再生操作")
             b-radio-button(size="is-small" v-model="sp_overlay_nav" native-value="is_overlay_nav_off") OFF
             b-radio-button(size="is-small" v-model="sp_overlay_nav" native-value="is_overlay_nav_on") ON
 
-          MainDocSwitch(v-model="operation_disable" label="operation_disable")
+          b-field(custom-class="is-small" label="盤の上でも再生操作")
+            b-radio-button(size="is-small" v-model="sp_op_disabled" native-value="is_overlay_disable_off") OFF
+            b-radio-button(size="is-small" v-model="sp_op_disabled" native-value="is_overlay_disable_on") ON
+
           b-field(custom-class="is-small" label="human_side_key")
             template(v-for="e in HumanSideInfo.values")
               b-radio-button(size="is-small" v-model="human_side_key" :native-value="e.key") {{e.name}}
@@ -147,7 +150,7 @@
             :sp_debug.sync="sp_debug"
             :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
             :sp_setting="sp_setting"
-            :operation_disable="operation_disable"
+            :sp_op_disabled="sp_op_disabled"
             :flip.sync="flip"
             :flip_if_white="flip_if_white"
             :player_info="player_info"
@@ -191,6 +194,8 @@
                 |   sp_summary="{{sp_summary}}"
                 |   sp_sfen_show="{{sp_sfen_show}}"
                 |   sp_overlay_nav="{{sp_overlay_nav}}"
+                |   sp_setting="{{sp_setting}}"
+                |   sp_op_disabled="{{sp_op_disabled}}"
                 |   :start_turn="{{start_turn}}"
                 |   :controller_show="{{controller_show}}"
                 |   :human_side_key="'{{human_side_key}}'"
@@ -198,8 +203,6 @@
                 |   :volume="{{volume}}"
                 |   :key_event_capture="{{key_event_capture}}"
                 |   :hidden_if_piece_stand_blank="{{hidden_if_piece_stand_blank}}"
-                |   :sp_setting="{{sp_setting}}"
-                |   :operation_disable="{{operation_disable}}"
                 |   :flip="{{flip}}"
                 |   :flip_if_white="{{flip_if_white}}"
                 |   :player_info='{{JSON.stringify(player_info)}}'
@@ -248,7 +251,7 @@ export default {
       hidden_if_piece_stand_blank: false,
       sp_setting: "is_setting_off",
       sp_summary: "is_summary_on",
-      operation_disable: false,
+      sp_op_disabled: "is_overlay_disable_off",
       flip: false,
       flip_if_white: false,
       sp_layout: "is_horizontal",

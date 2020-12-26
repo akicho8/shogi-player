@@ -1,6 +1,6 @@
 <template lang="pug">
 .ShogiPlayer(:class="component_class")
-  //- OverlayDisableBlock(:base="base")
+  //- OpDisabledBlock(:base="base")
 
   i.fas.fa-spinner.fa-pulse(v-if="!mediator")
 
@@ -29,7 +29,7 @@ import Location   from "./models/location.js"
 import PieceBox          from "./PieceBox.vue"
 import SettingModal      from "./SettingModal.vue"
 import ErrorNotify       from "./ErrorNotify.vue"
-import OverlayDisableBlock from "./OverlayDisableBlock.vue"
+import OpDisabledBlock from "./OpDisabledBlock.vue"
 import ShogiPlayerGround from "./ShogiPlayerGround.vue"
 import EditToolBlock       from "./EditToolBlock.vue"
 import DebugBlock        from "./DebugBlock.vue"
@@ -103,7 +103,7 @@ export default {
     PieceBox,
     SettingModal,
     ErrorNotify,
-    OverlayDisableBlock,
+    OpDisabledBlock,
     EditToolBlock,
     DebugBlock,
     ShogiPlayerGround,

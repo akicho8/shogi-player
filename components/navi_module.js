@@ -2,9 +2,10 @@ import _ from "lodash"
 
 export default {
   props: {
-    sp_summary:                  { type: String,  default: "is_summary_on",  },  // 手数や結果の表示
-    sp_slider:                   { type: String,  default: "is_summary_off", }, // スライダー表示
-    sp_setting:      { type: String,  default: "is_setting_off", },
+    sp_summary:     { type: String,  default: "is_summary_on",  }, // 手数や結果の表示
+    sp_slider:      { type: String,  default: "is_slider_off",  }, // スライダー表示
+    sp_setting:     { type: String,  default: "is_setting_off", }, // 設定ボタンの表示
+    sp_op_disabled: { type: Boolean, default: false,            }, // 全体の操作を無効化
 
     controller_show:             { type: Boolean, default: false, },
     key_event_capture:           { type: Boolean, default: false, },
@@ -12,7 +13,6 @@ export default {
     system_key_mag:              { type: Number,  default: 50,    },
     flip:                        { type: Boolean, default: false, },
     hidden_if_piece_stand_blank: { type: Boolean, default: false, },
-    operation_disable:           { type: Boolean, default: false, },
     flip_if_white:               { type: Boolean, default: false, },
   },
 
@@ -50,7 +50,7 @@ export default {
         this.log("repeat", e.repeat)
       }
 
-      if (this.operation_disable) {
+      if (this.sp_op_disabled) {
         return
       }
 

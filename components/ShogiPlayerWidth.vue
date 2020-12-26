@@ -1,6 +1,6 @@
 <template lang="pug">
 .ShogiPlayerWidth
-  OverlayDisableBlock(:base="base")
+  OpDisabledBlock(:base="base")
   EditToolBlock(:base="base")
   TurnShowOrEdit(:base="base")
   .ShogiPlayerTransformBlock
@@ -19,7 +19,7 @@ import PieceBox        from "./PieceBox.vue"
 import NavigateBlock from "./NavigateBlock.vue"
 import SfenShowBlock   from "./SfenShowBlock.vue"
 import CommentBlock    from "./CommentBlock.vue"
-import OverlayDisableBlock from "./OverlayDisableBlock.vue"
+import OpDisabledBlock from "./OpDisabledBlock.vue"
 
 import { support } from "./support.js"
 
@@ -34,7 +34,7 @@ export default {
     NavigateBlock,
     SfenShowBlock,
     CommentBlock,
-    OverlayDisableBlock,
+    OpDisabledBlock,
   },
 }
 </script>
@@ -46,7 +46,7 @@ export default {
   +defvar(sp_body_max_width, none)  // 盤(駒台を含む)の最大幅     FIXME: とる
 
   .ShogiPlayerWidth
-    // これがないと OverlayDisableBlock の 100% は画面幅になってしまう
+    // これがないと OpDisabledBlock の 100% は画面幅になってしまう
     // また NavigateBlock や TurnShowOrEdit の border が画面全体に及んでしまう
     position: relative
 
