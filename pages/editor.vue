@@ -1,5 +1,5 @@
 <template lang="pug">
-//- StyleEditor(:sp_body="$route.query.body" :player_info="player_info")
+//- StyleEditor(:sp_body="$route.query.body" :sp_player_info="sp_player_info")
 StyleEditor
 </template>
 
@@ -8,13 +8,13 @@ export default {
   name: "PageEditor",
   data () {
     return {
-      // player_info: null,
+      // sp_player_info: null,
     }
   },
   // created() {
   //   // http://0.0.0.0:5000/editor?test=1
   //   if (this.$route.query.test) {
-  //     this.player_info = {
+  //     this.sp_player_info = {
   //       black: { name: "先手先手先手先手", time: "12:34", },
   //       white: { name: "後手後手後手後手", time: "56:78", },
   //     }

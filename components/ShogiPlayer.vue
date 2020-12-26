@@ -82,16 +82,14 @@ export default {
     sp_debug:             { type: String, default: "is_debug_off",          }, // デバッグモード
     sp_sfen_show:         { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
     sp_overlay_nav:       { type: String, default: "is_overlay_nav_off",    }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
-    sp_turn:              { type: Number, default: -1,                  }, // 局面(手数)
-    sp_run_mode:          { type: String, default: "view_mode",         }, // モード
-    sp_body:       { type: String,  default: null,                },
+    sp_turn:              { type: Number, default: -1,                      }, // 局面(手数)
+    sp_run_mode:          { type: String, default: "view_mode",             }, // モード
+    sp_body:              { type: String, default: null,                    }, // 棋譜 KIF or SFEN
+    sp_player_info:       { type: Object, default: null,                    }, // 対局者名と時間
 
-    // TODO ↑に合わせる
-    player_info:     { type: Object,  default: null,                },
-
-    sp_player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する
-    sp_location_click_handle: { type: Function, default: null, }, // ☗☖をタップしたときに実行する
-    sp_board_click_handle:    { type: Function, default: null, }, // 盤をタップしたときに実行する(駒よりも優先)
+    sp_player_click_handle:   { type: Function, default: null, },              // 名前(時間を含む)をタップしたときに実行する
+    sp_location_click_handle: { type: Function, default: null, },              // ☗☖をタップしたときに実行する
+    sp_board_click_handle:    { type: Function, default: null, },              // 盤をタップしたときに実行する(駒よりも優先)
 
     sp_board_piece_back_user_style:        { type: Function, default: null, }, // セルのスタイルを決める処理
     sp_board_piece_back_user_class:        { type: Function, default: null, }, // セルのクラスを決める処理

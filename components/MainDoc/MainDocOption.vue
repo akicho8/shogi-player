@@ -22,10 +22,10 @@
 
         .box
           .title.is-5 対局者情報
-          b-field(custom-class="is-small" label="player_info.black.name")
-            b-input(size="is-small" v-model.trim="player_info.black.name" type="text")
-          b-field(custom-class="is-small" label="player_info.white.name")
-            b-input(size="is-small" v-model.trim="player_info.white.name" type="text")
+          b-field(custom-class="is-small" label="sp_player_info.black.name")
+            b-input(size="is-small" v-model.trim="sp_player_info.black.name" type="text")
+          b-field(custom-class="is-small" label="sp_player_info.white.name")
+            b-input(size="is-small" v-model.trim="sp_player_info.white.name" type="text")
 
         .box
           .title.is-5 レイアウト
@@ -149,9 +149,9 @@
     .container
       form(action="/")
         .SpWrap
-          //- @player_info_click="(location, player_info) => $buefy.toast.open(location.name)"
+          //- @player_info_click="(location, sp_player_info) => $buefy.toast.open(location.name)"
           ShogiPlayer(
-            :sp_player_click_handle="(location, player_info) => $buefy.toast.open(location.name)"
+            :sp_player_click_handle="(location, sp_player_info) => $buefy.toast.open(location.name)"
             :sp_location_click_handle="(location) => $buefy.toast.open(location.name)"
             :sp_run_mode.sync="sp_run_mode"
             :sp_body.sync="sp_body"
@@ -167,7 +167,7 @@
             :sp_op_disabled="sp_op_disabled"
             :sp_vpoint.sync="sp_vpoint"
             :sp_flip_if_white="sp_flip_if_white"
-            :player_info="player_info"
+            :sp_player_info="sp_player_info"
             :sp_key_event_capture_enabled="sp_key_event_capture_enabled"
             :sp_controller="sp_controller"
             :sp_sfen_show="sp_sfen_show"
@@ -219,7 +219,7 @@
                 |   :sp_key_event_capture_enabled="{{sp_key_event_capture_enabled}}"
                 |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
                 |   :sp_flip_if_white="{{sp_flip_if_white}}"
-                |   :player_info='{{JSON.stringify(player_info)}}'
+                |   :sp_player_info='{{JSON.stringify(sp_player_info)}}'
                 |   sp_body="{{sp_body}}"
 
       MainDocMd(:body="options_md")
@@ -270,7 +270,7 @@ export default {
       sp_flip_if_white: false,
       sp_layout: "is_horizontal",
 
-      player_info: {
+      sp_player_info: {
         black: { name: "先手", time: "12:34:56", },
         white: { name: "後手", time: "56:78:90", },
       },

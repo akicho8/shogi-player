@@ -440,7 +440,7 @@ export default {
   },
   // props: {
   //   sp_body:   { type: String, required: false, default: null, },
-  //   player_info: { type: Object, required: false, default: null, },
+  //   sp_player_info: { type: Object, required: false, default: null, },
   // },
 
   data() {
@@ -752,7 +752,7 @@ export default {
       params.sp_summary          = this.sp_summary
       params.sp_slider           = this.sp_slider
       params.sp_controller       = this.sp_controller
-      params.player_info         = this.sp_player_info
+      params.sp_player_info         = this.sp_player_info
       return params
     },
 

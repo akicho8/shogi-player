@@ -15,14 +15,14 @@ export default {
   },
   methods: {
     player_attr_of(key) {
-      if (this.player_info) {
-        return this.player_info[key]
+      if (this.one_side_info) {
+        return this.one_side_info[key]
       }
     },
     click_handle() {
       if (this.base.sp_player_click_handle) {
-        this.base.sp_player_click_handle(this.location, this.player_info)
-        // this.$emit("player_info_click", this.location, this.player_info)
+        this.base.sp_player_click_handle(this.location, this.one_side_info)
+        // this.$emit("player_info_click", this.location, this.one_side_info)
       }
     },
   },
@@ -36,9 +36,9 @@ export default {
         this.player_class,
       ]
     },
-    player_info() {
-      if (this.base.player_info) {
-        return this.base.player_info[this.location.key]
+    one_side_info() {
+      if (this.base.sp_player_info) {
+        return this.base.sp_player_info[this.location.key]
       }
     },
     player_name()  { return this.player_attr_of("name")  },
