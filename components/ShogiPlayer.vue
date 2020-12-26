@@ -89,14 +89,14 @@ export default {
     sp_turn:      { type: Number,  default: -1,                  },
     player_info:     { type: Object,  default: null,                },
 
-    player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する
-    location_click_handle: { type: Function, default: null, }, // ☗☖をタップしたときに実行する
-    board_click_handle:    { type: Function, default: null, }, // 盤をタップしたときに実行する(駒よりも優先)
+    sp_player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する
+    sp_location_click_handle: { type: Function, default: null, }, // ☗☖をタップしたときに実行する
+    sp_board_click_handle:    { type: Function, default: null, }, // 盤をタップしたときに実行する(駒よりも優先)
 
-    board_piece_back_user_style:        { type: Function, default: place => { return {} }, }, // FIXME: add to README
-    board_piece_back_user_class:        { type: Function, default: place => { return [] }, },
-    board_cell_left_click_user_handle:  { type: Function, default: null, },
-    board_cell_pointerdown_user_handle: { type: Function, default: null, },
+    sp_board_piece_back_user_style:        { type: Function, default: null, }, // セルのスタイルを決める処理
+    sp_board_piece_back_user_class:        { type: Function, default: null, }, // セルのクラスを決める処理
+    sp_board_cell_left_click_user_handle:  { type: Function, default: null, }, // セルタップ時の処理(クリック後に呼ぶ)
+    sp_board_cell_pointerdown_user_handle: { type: Function, default: null, }, // セルタップ時の処理(クリックした瞬間に呼ぶ)
   },
 
   components: {
@@ -347,16 +347,16 @@ export default {
         list.push(soldier.location.flip_if(this.base.fliped).position_key)
       }
 
-      if (this.board_piece_back_user_class) {
-        list = _.concat(list, this.board_piece_back_user_class(place))
+      if (this.sp_board_piece_back_user_class) {
+        list = _.concat(list, this.sp_board_piece_back_user_class(place))
       }
 
       return list
     },
 
     board_piece_back_style(xy) {
-      if (this.board_piece_back_user_style) {
-        return this.board_piece_back_user_style(Place.fetch(xy))
+      if (this.sp_board_piece_back_user_style) {
+        return this.sp_board_piece_back_user_style(Place.fetch(xy))
       }
     },
   },

@@ -12,8 +12,8 @@
             ref="api_sp"
             sp_summary="is_summary_off"
             :sp_hidden_if_piece_stand_blank="true"
-            :board_cell_pointerdown_user_handle="board_cell_pointerdown_user_handle"
-            :board_cell_left_click_user_handle="board_cell_left_click_user_handle"
+            :sp_board_cell_pointerdown_user_handle="sp_board_cell_pointerdown_user_handle"
+            :sp_board_cell_left_click_user_handle="sp_board_cell_left_click_user_handle"
             sp_debug="is_debug_off"
           )
       .columns
@@ -39,11 +39,11 @@ export default {
   },
 
   methods: {
-    board_cell_left_click_user_handle(place, event) {
+    sp_board_cell_left_click_user_handle(place, event) {
       this.$buefy.toast.open({message: `${place.kanji_human}のセルをクリック`, queue: false})
       return true
     },
-    board_cell_pointerdown_user_handle(place, event) {
+    sp_board_cell_pointerdown_user_handle(place, event) {
       this.$buefy.toast.open({message: `${place.kanji_human}のセルをクリック(押した瞬間)`, queue: false})
       return true
     },

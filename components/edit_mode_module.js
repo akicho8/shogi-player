@@ -54,7 +54,7 @@ export default {
     // 盤を押した瞬間
     board_cell_pointerdown_handle(xy, e) {
       const place = Place.fetch(xy)
-      const handle = this.board_cell_pointerdown_user_handle
+      const handle = this.sp_board_cell_pointerdown_user_handle
       if (handle) {
         if (handle(place, e)) {
           return
@@ -69,7 +69,7 @@ export default {
 
       const place = Place.fetch(xy)
 
-      const handle = this.board_cell_left_click_user_handle
+      const handle = this.sp_board_cell_left_click_user_handle
       if (handle) {
         this.log(`ユーザー指定のクリックハンドル実行: ${place.human_digits}`)
         if (handle(place, e)) {

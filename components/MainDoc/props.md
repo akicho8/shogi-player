@@ -29,10 +29,10 @@
 | `sp_debug`                           | デバッグモード                                                 | "is_debug_off"          |
 | `sp_sfen_show`                       | SFENを下に表示する                                             | "is_sfen_show_off"      |
 | `sp_overlay_nav`                     | play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)      | "is_overlay_nav_off"    |
-| `player_click_handle`                | 名前(時間を含む)をタップしたときに実行する                     | null                    |
-| `location_click_handle`              | ☗☖をタップしたときに実行する                                 | null                    |
-| `board_click_handle`                 | 盤をタップしたときに実行する(駒よりも優先)                     | null                    |
-| `board_piece_back_user_style`        | FIXME: add to README                                           | place => { return {} }  |
+| `sp_player_click_handle`                | 名前(時間を含む)をタップしたときに実行する                     | null                    |
+| `sp_location_click_handle`              | ☗☖をタップしたときに実行する                                 | null                    |
+| `sp_board_click_handle`                 | 盤をタップしたときに実行する(駒よりも優先)                     | null                    |
+| `sp_board_piece_back_user_style`        | FIXME: add to README                                           | place => { return {} }  |
 | `sp_human_side`                      | 含まれる側だけ操作できるようにする                             | "both"                  |
 | `play_mode_legal_move_only`          | play_mode で合法手のみに絞る                                   | true                    |
 | `play_mode_auto_promote`             | play_mode で死に駒になるときは自動的に成る                     | true                    |

@@ -20,8 +20,8 @@ export default {
       }
     },
     click_handle() {
-      if (this.base.player_click_handle) {
-        this.base.player_click_handle(this.location, this.player_info)
+      if (this.base.sp_player_click_handle) {
+        this.base.sp_player_click_handle(this.location, this.player_info)
         // this.$emit("player_info_click", this.location, this.player_info)
       }
     },
@@ -32,7 +32,7 @@ export default {
     },
     component_class() {
       return [
-        { "is-clickable": this.base.player_click_handle },
+        { "is-clickable": this.base.sp_player_click_handle },
         this.player_class,
       ]
     },

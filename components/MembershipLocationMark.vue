@@ -17,15 +17,15 @@ export default {
       if (this.flipable) {
         this.base.board_flip_toggle()
       }
-      if (this.base.location_click_handle) {
-        this.base.location_click_handle(this.location)
+      if (this.base.sp_location_click_handle) {
+        this.base.sp_location_click_handle(this.location)
       }
     },
   },
   computed: {
     component_class() {
       return {
-        "is-clickable": this.base.location_click_handle || this.flipable
+        "is-clickable": this.base.sp_location_click_handle || this.flipable
       }
     },
     flipable() {

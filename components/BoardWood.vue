@@ -41,8 +41,8 @@ export default {
   },
   methods: {
     click_handle() {
-      if (this.base.board_click_handle) {
-        this.base.board_click_handle()
+      if (this.base.sp_board_click_handle) {
+        this.base.sp_board_click_handle()
       }
     },
 
