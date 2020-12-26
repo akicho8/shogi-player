@@ -99,7 +99,7 @@ export default class SfenSerializer {
 
 if (process.argv[1] === __filename) {
   const mediator = new Mediator()
-  mediator.kifu_body = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
+  mediator.source = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
   mediator.current_turn = 1
   mediator.run()
   const sfen_serializer = new SfenSerializer(mediator)

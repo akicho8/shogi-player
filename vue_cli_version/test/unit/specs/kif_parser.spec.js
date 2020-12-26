@@ -3,7 +3,7 @@ import KifParser from "@/KifParser"
 describe("KifParser", () => {
   it("基本", () => {
     const instance = new KifParser()
-    instance.kifu_body = `
+    instance.sp_body = `
 先手の囲い：銀矢倉
 後手の囲い：銀矢倉
 先手の戦型：角換わり腰掛け銀

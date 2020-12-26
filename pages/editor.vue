@@ -1,5 +1,5 @@
 <template lang="pug">
-//- StyleEditor(:kifu_body="$route.query.body" :player_info="player_info")
+//- StyleEditor(:sp_body="$route.query.body" :player_info="player_info")
 StyleEditor
 </template>
 

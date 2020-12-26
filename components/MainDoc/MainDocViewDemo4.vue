@@ -7,23 +7,23 @@
     p.subtitle 第43期棋王戦予選
   hr
   ShogiPlayer.is_book_like.type_a(
-    :kifu_body="kifu_body"
+    :sp_body="sp_body"
     :sp_turn="121"
     sp_controller="is_controller_on"
     sp_slider="is_slider_on"
-    :sp_pi_variant="'is_pi_variant_b'"
-    :sp_blink="'is_blink_on'"
+    sp_pi_variant="is_pi_variant_b"
+    sp_blink="is_blink_on"
     )
 </template>
 
 <script>
-import kifu_body from "./kif/藤井聡太四段_vs_澤田真吾六段.kif"
+import sp_body from "./kif/藤井聡太四段_vs_澤田真吾六段.kif"
 
 export default {
   name: "MainDocViewDemo4",
   data() {
     return {
-      kifu_body: kifu_body,
+      sp_body: sp_body,
     }
   },
 }

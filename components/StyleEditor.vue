@@ -439,7 +439,7 @@ export default {
     ImageUpload,
   },
   // props: {
-  //   kifu_body:   { type: String, required: false, default: null, },
+  //   sp_body:   { type: String, required: false, default: null, },
   //   player_info: { type: Object, required: false, default: null, },
   // },
 
@@ -627,7 +627,7 @@ export default {
 
     kifu_sample_key_input_handle() {
       if (this.kifu_book_info) {
-        this.sp_body = this.kifu_book_info.kifu_body
+        this.sp_body = this.kifu_book_info.sp_body
         this.sp_player_info.black.name = this.kifu_book_info.black
         this.sp_player_info.white.name = this.kifu_book_info.white
       }
@@ -746,7 +746,7 @@ export default {
       params.sp_vpoint           = this.sp_vpoint
       params.sp_debug            = "is_debug_off"
       params.sp_turn             = this.sp_turn
-      params.kifu_body           = this.sp_body
+      params.sp_body           = this.sp_body
       params.sp_sound_enabled        = true
       params.sp_setting          = false
       params.sp_summary          = this.sp_summary

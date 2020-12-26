@@ -2,8 +2,8 @@ import _ from "lodash"
 import Location from "./location"
 
 export default class ParserBase {
-  constructor(kifu_body = null) {
-    this.kifu_body = kifu_body
+  constructor(raw_body = null) {
+    this.raw_body = raw_body
     this.header = {}
   }
 

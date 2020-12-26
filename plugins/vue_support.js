@@ -1,7 +1,5 @@
 // 汎用コード
 
-// import SfenParser from "shogi-player/src/sfen_parser"
-
 const strip_tags = require('striptags')
 
 import Autolinker from 'autolinker'

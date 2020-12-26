@@ -5,7 +5,7 @@ import ParserBase from "./parser_base.js"
 import Piece      from "./piece.js"
 import Place      from "./place.js"
 import Location   from "./location.js"
-import SfenParser from "./sfen_parser.js"
+import { SfenParser } from "./SfenParser.js"
 import PresetInfo from "./preset_info.js"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ const MERGED_REGEXP = XRegExp(Object.values(REGEXP).join("|"), "x")
 export default class KifParser extends ParserBase {
   get board() {
     const sfen_parser = new SfenParser()
-    sfen_parser.kifu_body = this.preset_info.sfen
+    sfen_parser.raw_body = this.preset_info.sfen
     sfen_parser.parse()
     return sfen_parser.board
   }
@@ -54,7 +54,7 @@ export default class KifParser extends ParserBase {
 
     let before_place = null
 
-    this.kifu_body.split(/\n/).forEach(line => {
+    this.raw_body.split(/\n/).forEach(line => {
       const md = XRegExp.exec(line, MERGED_REGEXP)
       if (md) {
         if (md["key"]) {
@@ -111,7 +111,7 @@ export default class KifParser extends ParserBase {
 
 if (process.argv[1] === __filename) {
   const instance = new KifParser()
-//   instance.kifu_body = `
+//   instance.raw_body = `
 // # ----  Kifu for Windows V6.26 棋譜ファイル  ----
 // key：value
 // 手数----指手---------消費時間--
@@ -124,7 +124,7 @@ if (process.argv[1] === __filename) {
 //    3 投了         ( 0:00/00:00:00)
 // `
 
-  instance.kifu_body = `
+  instance.raw_body = `
    1 ２六歩(27)   ( 0:16/00:00:16)
    2 ３四歩(33)   ( 0:22/00:00:22)
    3 ７六歩(77)   ( 0:06/00:00:22)

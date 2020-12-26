@@ -9,17 +9,17 @@ import Place from "./place"
 import Soldier from "./soldier"
 import Location from "./location"
 
-export default class SfenParser extends ParserBase {
-  static parse(kifu_body) {
-    const object = new this(kifu_body)
+export class SfenParser extends ParserBase {
+  static parse(raw_body) {
+    const object = new this(raw_body)
     object.parse()
     return object
   }
 
   parse() {
-    this.kifu_body = this.kifu_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
+    this.raw_body = this.raw_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     const regex = XRegExp("sfen\\s+(?<board>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
-    this.attributes = XRegExp.exec(this.kifu_body, regex)
+    this.attributes = XRegExp.exec(this.raw_body, regex)
     if (process.env.NODE_ENV === "deveopment") {
       console.log(this.attributes)
     }

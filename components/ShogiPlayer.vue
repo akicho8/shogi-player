@@ -21,7 +21,7 @@ import Vue from 'vue'
 // Library
 import Mediator   from "./models/mediator.js"
 import Place      from "./models/place.js"
-import SfenParser from "./models/sfen_parser.js"
+import { SfenParser } from "./models/SfenParser.js"
 import KifParser  from "./models/KifParser.js"
 import Location   from "./models/location.js"
 
@@ -84,9 +84,9 @@ export default {
     sp_overlay_nav:       { type: String, default: "is_overlay_nav_off",    }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_turn:              { type: Number, default: -1,                  }, // 局面(手数)
     sp_run_mode:          { type: String, default: "view_mode",         }, // モード
+    sp_body:       { type: String,  default: null,                },
 
     // TODO ↑に合わせる
-    kifu_body:       { type: String,  default: null,                },
     player_info:     { type: Object,  default: null,                },
 
     sp_player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する
@@ -279,12 +279,12 @@ export default {
 
     data_source_by(str) {
       let data_source = null
-      if (/position/.test(str)) {
+      if (/position|sfen|moves/.test(str)) {
         data_source = new SfenParser()
       } else {
         data_source = new KifParser()
       }
-      data_source.kifu_body = str
+      data_source.raw_body = str
       data_source.parse()
       return data_source
     },
@@ -385,7 +385,7 @@ export default {
     },
 
     kifu_source() {
-      return this.kifu_body || this.init_preset_sfen || "position startpos"
+      return this.sp_body || this.init_preset_sfen || "position startpos"
     },
   },
 }

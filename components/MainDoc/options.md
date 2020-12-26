@@ -4,7 +4,7 @@
   </div>
   <div class="message-body">
     <ul>
-      <li>kifu_body も preset_key も指定がない場合は `position startpos` (平手) が初期配置になる</li>
+      <li>sp_body も preset_key も指定がない場合は `position startpos` (平手) が初期配置になる</li>
     </ul>
   </div>
 </article>
@@ -33,7 +33,7 @@
 | `update:turn_offset`                        | 手数が変更されたとき                           | マイナスにはならない。sp_turn と被るので追加。                 |
 | `update:turn_offset_max`                    | 最大手数が変更されたとき                       | 内部変数参照よりこっちの方が安全なはず                            |
 | `update:sp_run_mode`                           | 設定ダイアログでモードが変更されたとき         |                                                                   |
-| `update:kifu_body`                          | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
+| `update:sp_body`                          | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
 | `update:sp_debug`                       | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
 | `update:sp_vpoint`                               | 盤面を反転したとき                             |                                                                   |
 | `update:sp_layout`                          | レイアウトを変更したとき                       |                                                                   |
