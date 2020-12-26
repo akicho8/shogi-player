@@ -211,16 +211,16 @@
                 |   sp_setting="{{sp_setting}}"
                 |   sp_op_disabled="{{sp_op_disabled}}"
                 |   sp_controller="{{sp_controller}}"
+                |   sp_human_side="{{sp_human_side}}"
+                |   sp_vpoint="{{sp_vpoint}}"
                 |   :sp_turn="{{sp_turn}}"
-                |   :sp_human_side="'{{sp_human_side}}'"
                 |   :sp_sound_enabled="{{sp_sound_enabled}}"
                 |   :sp_sound_volume="{{sp_sound_volume}}"
                 |   :sp_key_event_capture_enabled="{{sp_key_event_capture_enabled}}"
                 |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
-                |   sp_vpoint="{{sp_vpoint}}"
                 |   :sp_flip_if_white="{{sp_flip_if_white}}"
                 |   :player_info='{{JSON.stringify(player_info)}}'
-                |   :sp_body="'{{sp_body}}'"
+                |   sp_body="{{sp_body}}"
 
       MainDocMd(:body="options_md")
       MainDocEditDesc2
