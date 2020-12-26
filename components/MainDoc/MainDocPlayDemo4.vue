@@ -5,7 +5,7 @@
   ShogiPlayer(
     :kifu_body="`position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/2P6/PP1PPPPPP/1B5R1/LNSGKGSNL w - 2`"
     :sp_turn="-1"
-    :run_mode="'play_mode'"
+    sp_run_mode="play_mode"
     )
 </template>
 

@@ -8,9 +8,9 @@
 
       .my_controls
         .box
-          b-field(custom-class="is-small" label="run_mode")
+          b-field(custom-class="is-small" label="sp_run_mode")
             template(v-for="e in RunModeInfo.values")
-              b-radio-button(size="is-small" v-model="run_mode" :native-value="e.key") {{e.name}}
+              b-radio-button(size="is-small" v-model="sp_run_mode" :native-value="e.key") {{e.name}}
 
         .box
           .title.is-5 棋譜
@@ -153,7 +153,7 @@
           ShogiPlayer(
             :sp_player_click_handle="(location, player_info) => $buefy.toast.open(location.name)"
             :sp_location_click_handle="(location) => $buefy.toast.open(location.name)"
-            :run_mode.sync="run_mode"
+            :sp_run_mode.sync="sp_run_mode"
             :kifu_body.sync="kifu_body"
             :sp_turn.sync="sp_turn"
             :sp_bg_variant.sync="sp_bg_variant"
@@ -199,7 +199,7 @@
             b-message.shogi_player_params(:closable="false" type="is-primary" title="引数")
               pre.is-size-6
                 | ShogiPlayer(
-                |   run_mode="{{run_mode}}"
+                |   sp_run_mode="{{sp_run_mode}}"
                 |   sp_bg_variant="{{sp_bg_variant}}"
                 |   sp_pi_variant="{{sp_pi_variant}}"
                 |   sp_slider="{{sp_slider}}"
@@ -249,7 +249,7 @@ export default {
       sp_body_max_width: 0,
 
       // カスタマイズ用
-      run_mode: "view_mode",   // play_mode
+      sp_run_mode: "view_mode",
       sp_bg_variant: "is_bg_variant_a",
       sp_pi_variant: "is_pi_variant_a1by",
       sp_turn: -1,

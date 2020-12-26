@@ -11,8 +11,8 @@
     :sp_sound_enabled="true"
     :sp_sound_volume="0.25"
     sp_debug="is_debug_off"
-    :run_mode="'play_mode'"
-    :sp_human_side="'black'"
+    sp_run_mode="play_mode"
+    sp_human_side="black"
     )
 </template>
 

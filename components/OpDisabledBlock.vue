@@ -14,7 +14,7 @@ export default {
 @import "./support.sass"
 // 上に被せてすべてを押せないようにする
 .ShogiPlayer
-  &.run_mode-view_mode
+  &.is_run_mode_view_mode
     .ShogiPlayerWidth
       .OpDisabledBlock
         position: absolute

@@ -32,7 +32,7 @@
 | `update:sp_turn`                         | 手数が変更されたとき                           | sp_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも |
 | `update:turn_offset`                        | 手数が変更されたとき                           | マイナスにはならない。sp_turn と被るので追加。                 |
 | `update:turn_offset_max`                    | 最大手数が変更されたとき                       | 内部変数参照よりこっちの方が安全なはず                            |
-| `update:run_mode`                           | 設定ダイアログでモードが変更されたとき         |                                                                   |
+| `update:sp_run_mode`                           | 設定ダイアログでモードが変更されたとき         |                                                                   |
 | `update:kifu_body`                          | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
 | `update:sp_debug`                       | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
 | `update:sp_vpoint`                               | 盤面を反転したとき                             |                                                                   |

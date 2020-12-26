@@ -184,7 +184,7 @@ export default {
 
 //////////////////////////////////////////////////////////////////////////////// edit_mode なら最初から駒台を確保する
 .ShogiPlayer
-  &.run_mode-edit_mode
+  &.is_run_mode_edit_mode
     // 駒がなくても駒が置けるようにする
     .ShogiPlayerGround
       +IS_HORIZONTAL

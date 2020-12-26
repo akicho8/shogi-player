@@ -742,7 +742,7 @@ export default {
       params.sp_bg_variant       = this.sp_bg_variant
       params.sp_mobile_fit       = this.sp_mobile_fit
       params.sp_mobile_vertical  = this.sp_mobile_vertical
-      params.run_mode            = this.sp_run_mode
+      params.sp_run_mode            = this.sp_run_mode
       params.sp_vpoint           = this.sp_vpoint
       params.sp_debug            = "is_debug_off"
       params.sp_turn             = this.sp_turn

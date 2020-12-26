@@ -82,11 +82,11 @@ export default {
     sp_debug:             { type: String, default: "is_debug_off",          }, // デバッグモード
     sp_sfen_show:         { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
     sp_overlay_nav:       { type: String, default: "is_overlay_nav_off",    }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
+    sp_turn:              { type: Number, default: -1,                  }, // 局面(手数)
+    sp_run_mode:          { type: String, default: "view_mode",         }, // モード
 
     // TODO ↑に合わせる
-    run_mode:        { type: String,  default: "view_mode",         },
     kifu_body:       { type: String,  default: null,                },
-    sp_turn:      { type: Number,  default: -1,                  },
     player_info:     { type: Object,  default: null,                },
 
     sp_player_click_handle:   { type: Function, default: null, }, // 名前(時間を含む)をタップしたときに実行する
@@ -112,7 +112,7 @@ export default {
   data() {
     return {
       new_debug:    this.sp_debug,
-      new_run_mode: this.run_mode,
+      new_run_mode: this.sp_run_mode,
 
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
@@ -188,11 +188,11 @@ export default {
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    run_mode(v) { this.new_run_mode = v            }, // 外から内への反映
+    sp_run_mode(v) { this.new_run_mode = v            }, // 外から内への反映
 
     // 外からまたはダイアログから変更されたとき
     new_run_mode(new_val, old_val) {
-      this.$emit("update:run_mode", this.new_run_mode)
+      this.$emit("update:sp_run_mode", this.new_run_mode)
 
       if (this.view_p) {
         this.log("new_run_mode: view_mode")
@@ -379,7 +379,7 @@ export default {
 
     component_class() {
       return [
-        ["run_mode", this.new_run_mode].join("-"),
+        `is_run_mode_${this.new_run_mode}`,
         this.new_debug,
       ]
     },
