@@ -3,17 +3,17 @@ import PresetInfo from "./models/preset_info"
 
 export default {
   props: {
-    preset_key: { type: String,  default: null, },
+    sp_preset_key: { type: String,  default: null, },
   },
 
   data() {
     return {
-      new_preset_key: this.preset_key, // 選択中の初期配置
+      new_preset_key: this.sp_preset_key, // 選択中の初期配置
     }
   },
 
   watch: {
-    preset_key(v) { this.new_preset_key = v },              // 引数の変更を反映
+    preset_key(v) { this.new_preset_key = v },              // 引数の変更を反映 (FIXME: 取る)
     new_preset_key(v) { this.mediator_setup_by_preset(v) }, // 設定での変更を反映
   },
 
@@ -47,8 +47,8 @@ export default {
 
     // 初期配置指定がある場合、その sfen を返す
     init_preset_sfen() {
-      if (this.preset_key) {
-        return PresetInfo.fetch(this.preset_key).sfen
+      if (this.sp_preset_key) {
+        return PresetInfo.fetch(this.sp_preset_key).sfen
       }
     },
   },

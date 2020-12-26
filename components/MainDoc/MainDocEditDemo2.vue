@@ -3,7 +3,7 @@
   b-message(type="is-info")
     | 詰将棋用の初期配置で開始
   ShogiPlayer(
-    :preset_key="'詰将棋'"
+    sp_preset_key="詰将棋"
     :sp_sound_enabled="true"
     :sp_sound_volume="0.25"
     sp_slider="is_slider_on"

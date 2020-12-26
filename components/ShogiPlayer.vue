@@ -135,8 +135,8 @@ export default {
     }
 
     if (this.edit_p) {
-      if (this.preset_key) {
-        this.mediator_setup_by_preset(this.preset_key) // 駒箱に「玉」を乗せたいため
+      if (this.sp_preset_key) {
+        this.mediator_setup_by_preset(this.sp_preset_key) // 駒箱に「玉」を乗せたいため
       } else {
         this.mediator_setup_for_edit_mode()
       }
