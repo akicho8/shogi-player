@@ -4,7 +4,7 @@ import { Howl, Howler } from "howler"
 export default {
   props: {
     sp_sound_enabled: { type: Boolean, default: false, },
-    volume:       { type: Number,  default: 0.5,   },
+    sp_sound_volume:  { type: Number,  default: 0.5,   },
   },
   methods: {
     sound_play(key, options = {}) {

@@ -11,7 +11,7 @@
     :sp_bg_variant="'is_bg_variant_a'"
     :sp_pi_variant="'is_pi_variant_a1by'"
     :sp_sound_enabled="true"
-    :volume="0.25"
+    :sp_sound_volume="0.25"
     :sp_layer="'is_layer_off'"
     :sp_blink="'is_blink_on'"
     :sp_layout="'is_horizontal'"
