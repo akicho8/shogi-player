@@ -551,7 +551,7 @@ export default {
       sp_body: null,
 
       sp_summary:    DEVELOPMENT_P ? "is_summary_on" : "is_summary_off",
-      sp_slider:     DEVELOPMENT_P ? "is_slider_on" : "is_slider_off",
+      sp_slider:     DEVELOPMENT_P ? "is_slider_on" : "is_slider_on",
       sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
 
       se_tf0_mode: "is_tf0_mode_off",
@@ -567,9 +567,9 @@ export default {
       se_tf1_mode: "is_tf1_mode_off",
       se_tf1_perspective: 200,
       se_tf1_translate_x: 0,
-      se_tf1_translate_y: -180,
+      se_tf1_translate_y: -55,
       se_tf1_translate_z: 0,
-      se_tf1_rotate_x: 0.05,
+      se_tf1_rotate_x: 0.015,
       se_tf1_rotate_y: 0,
       se_tf1_rotate_z: 0,
       se_tf1_scale: 1.0,
