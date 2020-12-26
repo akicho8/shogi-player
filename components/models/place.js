@@ -60,7 +60,7 @@ export default class Place {
     return Place.fetch([Board.dimension - 1 - this._x, this._y])
   }
 
-  flip_if_white(location) {
+  sp_flip_if_white(location) {
     if (location.key === "white") {
       return this.flip_all
     } else {

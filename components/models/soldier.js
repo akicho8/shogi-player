@@ -100,7 +100,7 @@ export default class Soldier {
 
   // 自分の側の一番上を0としてあとどれだけで突き当たるかの値
   get top_spaces() {
-    return this.place.flip_if_white(this.location).y
+    return this.place.sp_flip_if_white(this.location).y
   }
 }
 

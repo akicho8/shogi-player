@@ -5,15 +5,16 @@ export default {
     sp_summary:     { type: String,  default: "is_summary_on",     }, // 手数や結果の表示
     sp_slider:      { type: String,  default: "is_slider_off",     }, // スライダー表示
     sp_setting:     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
-    sp_op_disabled: { type: Boolean, default: false,               }, // 全体の操作を無効化
     sp_controller:  { type: String,  default: "is_controller_off", }, // コントローラー表示
+
+    sp_op_disabled:                 { type: Boolean, default: false, }, // 全体の操作を無効化
     sp_hidden_if_piece_stand_blank: { type: Boolean, default: false, }, // 駒がないときは駒台側を非表示
 
     key_event_capture:           { type: Boolean, default: false, },
     shift_key_mag:               { type: Number,  default: 10,    },
     system_key_mag:              { type: Number,  default: 50,    },
     flip:                        { type: Boolean, default: false, },
-    flip_if_white:               { type: Boolean, default: false, },
+    sp_flip_if_white:               { type: Boolean, default: false, },
   },
 
   data() {

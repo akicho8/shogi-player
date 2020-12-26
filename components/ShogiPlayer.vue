@@ -266,7 +266,7 @@ export default {
     },
 
     flip_if_white_run() {
-      if (this.flip_if_white) {
+      if (this.sp_flip_if_white) {
         this.new_flip = (this.mediator.data_source.location_base.key === "white")
       }
     },

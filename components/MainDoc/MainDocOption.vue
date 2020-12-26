@@ -54,7 +54,7 @@
             b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_on") ON
 
           MainDocSwitch(v-model="flip" label="flip")
-          MainDocSwitch(v-model="flip_if_white" label="flip_if_white")
+          MainDocSwitch(v-model="sp_flip_if_white" label="sp_flip_if_white")
           MainDocSwitch(v-model="sp_hidden_if_piece_stand_blank" label="sp_hidden_if_piece_stand_blank")
 
         .box
@@ -154,7 +154,7 @@
             :sp_setting="sp_setting"
             :sp_op_disabled="sp_op_disabled"
             :flip.sync="flip"
-            :flip_if_white="flip_if_white"
+            :sp_flip_if_white="sp_flip_if_white"
             :player_info="player_info"
             :key_event_capture="key_event_capture"
             :sp_controller="sp_controller"
@@ -206,7 +206,7 @@
                 |   :key_event_capture="{{key_event_capture}}"
                 |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
                 |   :flip="{{flip}}"
-                |   :flip_if_white="{{flip_if_white}}"
+                |   :sp_flip_if_white="{{sp_flip_if_white}}"
                 |   :player_info='{{JSON.stringify(player_info)}}'
                 |   :kifu_body="'{{kifu_body}}'"
 
@@ -255,7 +255,7 @@ export default {
       sp_summary: "is_summary_on",
       sp_op_disabled: "is_overlay_disable_off",
       flip: false,
-      flip_if_white: false,
+      sp_flip_if_white: false,
       sp_layout: "is_horizontal",
 
       player_info: {
