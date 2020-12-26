@@ -42,8 +42,12 @@
             b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_off") OFF
             b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_on") ON
 
+          b-field(custom-class="is-small" label="SFEN表示")
+            b-radio-button(size="is-small" v-model="sp_sfen_show" native-value="is_sfen_show_off") OFF
+            b-radio-button(size="is-small" v-model="sp_sfen_show" native-value="is_sfen_show_on") ON
+
           MainDocSwitch(v-model="controller_show" label="controller_show")
-          MainDocSwitch(v-model="sfen_show" label="sfen_show")
+
           MainDocSwitch(v-model="flip" label="flip")
           MainDocSwitch(v-model="flip_if_white" label="flip_if_white")
           MainDocSwitch(v-model="hidden_if_piece_stand_blank" label="hidden_if_piece_stand_blank")
@@ -143,7 +147,7 @@
             :player_info="player_info"
             :key_event_capture="key_event_capture"
             :controller_show="controller_show"
-            :sfen_show="sfen_show"
+            :sp_sfen_show="sp_sfen_show"
             :overlay_navi="overlay_navi"
             :sound_effect="sound_effect"
             :volume="volume"
@@ -179,9 +183,9 @@
                 |   sp_layout="{{sp_layout}}"
                 |   sp_debug="{{sp_debug}}"
                 |   sp_summary="{{sp_summary}}"
+                |   sp_sfen_show="{{sp_sfen_show}}"
                 |   :start_turn="{{start_turn}}"
                 |   :controller_show="{{controller_show}}"
-                |   :sfen_show="{{sfen_show}}"
                 |   :overlay_navi="{{overlay_navi}}"
                 |   :human_side_key="'{{human_side_key}}'"
                 |   :sound_effect="{{sound_effect}}"
@@ -229,7 +233,7 @@ export default {
       sp_slider: "is_slider_off",
       overlay_navi: true,
       controller_show: false,
-      sfen_show: false,
+      sp_sfen_show: "is_sfen_show_off",
       human_side_key: 'both',
       sound_effect: true,
       volume: 0.5,

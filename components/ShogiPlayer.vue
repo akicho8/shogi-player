@@ -83,12 +83,12 @@ export default {
     sp_mobile_vertical:   { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior: { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
     sp_debug:             { type: String, default: "is_debug_off",          }, // デバッグモード
+    sp_sfen_show:         { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
 
     // TODO ↑に合わせる
     run_mode:        { type: String,  default: "view_mode",         },
     kifu_body:       { type: String,  default: null,                },
     start_turn:      { type: Number,  default: -1,                  },
-    sfen_show:       { type: Boolean, default: false,               },
     overlay_navi:    { type: Boolean, default: false,               }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     player_info:     { type: Object,  default: null,                },
 

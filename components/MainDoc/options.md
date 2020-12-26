@@ -1,34 +1,3 @@
-| 名前                          | 意味                         | 備考                                                                       | 初期値        | .sync |
-|-------------------------------|------------------------------|----------------------------------------------------------------------------|---------------|-------|
-| `run_mode`                    | 実行モード                   | `view_mode`:再生 `play_mode`:操作 編集:`edit_mode`。                       | 'view_mode'   | ○    |
-| `human_side_key`              | 人間が操作する側             | play_mode 時のみ有効 `both`, `black`, `white`, `none`                      | 'both'        |       |
-| `kifu_body`                   | 棋譜の本体                   | KIF と SFEN に対応。駒落ちは SFEN のみ                                     | null          |       |
-| `sp_bg_variant`               | realテーマの背景             | a .. z                                                                     | 'a'           | ○    |
-| `sp_pi_variant`               | realテーマの駒種             | a .. b                                                                     | 'a'           | ○    |
-| `start_turn`                  | N手目の局面から表示          | 例 0:開始前 1:初手 -1:投了図 -2:投了一手前                                 | -1            | ○    |
-| `sp_slider`                   | 局面スライダー表示           |                                                                            | is_slider_off |       |
-| `controller_show`             | 前後移動用のボタン類の表示   |                                                                            | false         |       |
-| `sfen_show`                   | 局面を sfen で表示           | 主に局面ペディア用                                                         | false         |       |
-| `overlay_navi`                | 盤上の左右で前後操作         | 無効にするとview_modeで駒操作できる                                        |               |       |
-| `sound_effect`                | 駒音の有無                   |                                                                            | false         |       |
-| `volume`                      | 駒音の大きさ                 | 0 から 1.0                                                                 | 0.5           |       |
-| `key_event_capture`           | キーボード操作を監視         | どこにもフォーカスしていないときでも左右キーが反応                         | false         |       |
-| `shift_key_mag`               | shiftキー押下時の倍速        | 1 または null 指定で無効にできる                                           | 10            |       |
-| `system_key_mag`              | システムキー押下時の倍速     | 1 または null 指定で無効にできる                                           | 50            |       |
-| `sp_debug`                    | デバッグモード               | 主に開発用                                                                 | is_debug_off  | ○    |
-| `sp_layer`                    | レイヤー確認                 | 主に開発用                                                                 | false         | ○    |
-| `sp_blink`                    | 移動後の駒のセルを明滅       |                                                                            | false         | ○    |
-| `flip`                        | 盤面を反転する               | △が下にくる                                                               | false         | ○    |
-| `flip_if_white`               | △から始まる場合のみ反転する | △が下にくる                                                               | false         |       |
-| `preset_key`                  | 盤面の初期配置               | kifu_body の代わりに指定するとその配置になる                               | null          |       |
-| `hidden_if_piece_stand_blank` | 持駒がないときは駒台非表示   | view_mode のみ                                                             | false         |       |
-| `setting_button_show`         | 設定ボタンの表示             | 右端にあるドット3つのアレ(ボタンなのか？)                                  | true          |       |
-| `sp_summary`                  | まで○手で○の勝ちの表示     | 盤の上にある○手                                                           | is_summary_on |       |
-| `operation_disable`           | 操作をすべて無効化する       | 無効化すると @click イベントだけが反応する。ショートカットキーも無効化する | false         |       |
-| `player_info`                 | 対局者名                     | `{'black': {name: 'xxx'}, 'white': {name: 'xxx'}` 形式                     | null          |       |
-
-<br>
-
 <article class="message is-info">
   <div class="message-header">
     <p>備考</p>
@@ -82,7 +51,7 @@
 
 | 名前      | 引数           | 場所                                   |
 |-----------|----------------|----------------------------------------|
-| `sfen_part` | `sfen`, `mediator` | sfen_show のときに表示する sfen の部分 |
+| `sfen_part` | `sfen`, `mediator` | sp_sfen_show のときに表示する sfen の部分 |
 
 ## 内部変数 (読み取り専用)
 
