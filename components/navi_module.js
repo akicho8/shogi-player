@@ -2,12 +2,12 @@ import _ from "lodash"
 
 export default {
   props: {
-    sp_summary:     { type: String,  default: "is_summary_on",  }, // 手数や結果の表示
-    sp_slider:      { type: String,  default: "is_slider_off",  }, // スライダー表示
-    sp_setting:     { type: String,  default: "is_setting_off", }, // 設定ボタンの表示
-    sp_op_disabled: { type: Boolean, default: false,            }, // 全体の操作を無効化
+    sp_summary:     { type: String,  default: "is_summary_on",     }, // 手数や結果の表示
+    sp_slider:      { type: String,  default: "is_slider_off",     }, // スライダー表示
+    sp_setting:     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
+    sp_op_disabled: { type: Boolean, default: false,               }, // 全体の操作を無効化
+    sp_controller:  { type: String,  default: "is_controller_off", }, // コントローラー表示
 
-    controller_show:             { type: Boolean, default: false, },
     key_event_capture:           { type: Boolean, default: false, },
     shift_key_mag:               { type: Number,  default: 10,    },
     system_key_mag:              { type: Number,  default: 50,    },
@@ -220,19 +220,19 @@ export default {
   computed: {
     //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, TurnSliderBlock.vue
 
-    inside_controller_show_p() {
+    inside_controller_p() {
       if (this.sp_setting === "is_setting_on") {
         return true
       }
-      return this.controller_show && (this.view_p || this.play_p)
+      return this.sp_controller === "is_controller_on" && (this.view_p || this.play_p)
     },
 
-    inside_slider_enabled() {
+    inside_slider_p() {
       return this.sp_slider === "is_slider_on" && (this.view_p || this.play_p)
     },
 
     inside_navigate_p() {
-      return this.inside_controller_show_p || this.inside_slider_enabled
+      return this.inside_controller_p || this.inside_slider_p
     },
   },
 }

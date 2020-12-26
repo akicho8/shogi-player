@@ -15,7 +15,7 @@
     :sp_layer="'is_layer_off'"
     :sp_blink="'is_blink_on'"
     :sp_layout="'is_horizontal'"
-    :controller_show="true"
+    sp_controller="is_controller_on"
     sp_debug="is_debug_off"
   )
 </template>

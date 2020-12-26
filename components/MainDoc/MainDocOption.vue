@@ -49,7 +49,9 @@
             b-radio-button(size="is-small" v-model="sp_setting" native-value="is_setting_off") OFF
             b-radio-button(size="is-small" v-model="sp_setting" native-value="is_setting_on") ON
 
-          MainDocSwitch(v-model="controller_show" label="controller_show")
+          b-field(custom-class="is-small" label="コントローラー表示")
+            b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_off") OFF
+            b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_on") ON
 
           MainDocSwitch(v-model="flip" label="flip")
           MainDocSwitch(v-model="flip_if_white" label="flip_if_white")
@@ -155,7 +157,7 @@
             :flip_if_white="flip_if_white"
             :player_info="player_info"
             :key_event_capture="key_event_capture"
-            :controller_show="controller_show"
+            :sp_controller="sp_controller"
             :sp_sfen_show="sp_sfen_show"
             :sp_overlay_nav="sp_overlay_nav"
             :sound_effect="sound_effect"
@@ -196,8 +198,8 @@
                 |   sp_overlay_nav="{{sp_overlay_nav}}"
                 |   sp_setting="{{sp_setting}}"
                 |   sp_op_disabled="{{sp_op_disabled}}"
+                |   sp_controller="{{sp_controller}}"
                 |   :start_turn="{{start_turn}}"
-                |   :controller_show="{{controller_show}}"
                 |   :human_side_key="'{{human_side_key}}'"
                 |   :sound_effect="{{sound_effect}}"
                 |   :volume="{{volume}}"
@@ -241,7 +243,7 @@ export default {
       start_turn: -1,
       sp_slider: "is_slider_off",
       sp_overlay_nav: "is_overlay_nav_off",
-      controller_show: false,
+      sp_controller: "is_controller_off",
       sp_sfen_show: "is_sfen_show_off",
       human_side_key: 'both',
       sound_effect: true,
