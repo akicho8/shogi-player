@@ -2,26 +2,19 @@ import Mediator from "./models/mediator"
 import PresetInfo from "./models/preset_info"
 
 export default {
-
   props: {
     preset_key: { type: String,  default: null, },
   },
 
   data() {
     return {
-      current_preset_key: this.preset_key, // 選択中の初期配置
+      new_preset_key: this.preset_key, // 選択中の初期配置
     }
   },
 
-  created() {
-  },
-
-  mounted() {
-  },
-
   watch: {
-    preset_key(v) { this.current_preset_key = v },              // 引数の変更を反映
-    current_preset_key(v) { this.mediator_setup_by_preset(v) }, // 設定での変更を反映
+    preset_key(v) { this.new_preset_key = v },              // 引数の変更を反映
+    new_preset_key(v) { this.mediator_setup_by_preset(v) }, // 設定での変更を反映
   },
 
   methods: {

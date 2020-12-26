@@ -22,8 +22,8 @@
         td sp_turn
       tr
         th 初期配置
-        td {{base.current_preset_key}}
-        td current_preset_key
+        td {{base.new_preset_key}}
+        td new_preset_key
 
   table.table.is-narrow.is-hoverable.is-fullwidth(v-if="base.mediator")
     caption Mediator Methods
