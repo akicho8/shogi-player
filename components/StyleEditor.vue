@@ -748,7 +748,7 @@ export default {
       params.start_turn          = this.sp_turn
       params.kifu_body           = this.sp_body
       params.sound_effect        = true
-      params.sp_setting_button_show = false
+      params.sp_setting = false
       params.sp_summary        = this.sp_summary
       params.sp_slider         = this.sp_slider
       params.controller_show     = this.controller_show

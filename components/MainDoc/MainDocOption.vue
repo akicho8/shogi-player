@@ -46,8 +46,8 @@
             b-radio-button(size="is-small" v-model="sp_sfen_show" native-value="is_sfen_show_on") ON
 
           b-field(custom-class="is-small" label="設定ボタン表示")
-            b-radio-button(size="is-small" v-model="sp_setting_button_show" native-value="is_setting_button_show_off") OFF
-            b-radio-button(size="is-small" v-model="sp_setting_button_show" native-value="is_setting_button_show_on") ON
+            b-radio-button(size="is-small" v-model="sp_setting" native-value="is_setting_off") OFF
+            b-radio-button(size="is-small" v-model="sp_setting" native-value="is_setting_on") ON
 
           MainDocSwitch(v-model="controller_show" label="controller_show")
 
@@ -146,7 +146,7 @@
             :sp_slider="sp_slider"
             :sp_debug.sync="sp_debug"
             :hidden_if_piece_stand_blank="hidden_if_piece_stand_blank"
-            :sp_setting_button_show="sp_setting_button_show"
+            :sp_setting="sp_setting"
             :operation_disable="operation_disable"
             :flip.sync="flip"
             :flip_if_white="flip_if_white"
@@ -198,7 +198,7 @@
                 |   :volume="{{volume}}"
                 |   :key_event_capture="{{key_event_capture}}"
                 |   :hidden_if_piece_stand_blank="{{hidden_if_piece_stand_blank}}"
-                |   :sp_setting_button_show="{{sp_setting_button_show}}"
+                |   :sp_setting="{{sp_setting}}"
                 |   :operation_disable="{{operation_disable}}"
                 |   :flip="{{flip}}"
                 |   :flip_if_white="{{flip_if_white}}"
@@ -246,7 +246,7 @@ export default {
       key_event_capture: false,
       sp_debug: "is_debug_off",
       hidden_if_piece_stand_blank: false,
-      sp_setting_button_show: "is_setting_button_show_off",
+      sp_setting: "is_setting_off",
       sp_summary: "is_summary_on",
       operation_disable: false,
       flip: false,
