@@ -975,7 +975,13 @@ $sidebar_width_mobile:  100% * 3 / 4
     .ShogiPlayerTransformBlock
       transform: perspective(var(--se_tf1_perspective)) translate3d(var(--se_tf1_translate_x), var(--se_tf1_translate_y), var(--se_tf1_translate_z)) rotateX(var(--se_tf1_rotate_x)) rotateY(var(--se_tf1_rotate_y)) rotateZ(var(--se_tf1_rotate_z)) scale(var(--se_tf1_scale))
 
+  =def_tf2($dir)
+    transform: unquote('perspective(var(--se_tf2_perspective)) translate3d(calc(var(--se_tf2_translate_x) * #{$dir}), calc(var(--se_tf2_translate_y) * #{$dir}), var(--se_tf2_translate_z)) rotateX(calc(var(--se_tf2_rotate_x) * #{$dir})) rotateY(calc(var(--se_tf2_rotate_y) * 1)) rotateZ(calc(var(--se_tf2_rotate_z) * 1)) scale(var(--se_tf2_scale))')
   &.is_tf2_mode_on
-    .PieceTexture
-      transform: perspective(var(--se_tf2_perspective)) translate3d(var(--se_tf2_translate_x), var(--se_tf2_translate_y), var(--se_tf2_translate_z)) rotateX(var(--se_tf2_rotate_x)) rotateY(var(--se_tf2_rotate_y)) rotateZ(var(--se_tf2_rotate_z)) scale(var(--se_tf2_scale))
+    .is_position_north
+      .PieceTexture
+        +def_tf2(-1)
+    .is_position_south
+      .PieceTexture
+        +def_tf2(1)
 </style>
