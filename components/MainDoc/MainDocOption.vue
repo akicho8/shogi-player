@@ -29,10 +29,6 @@
 
         .box
           .title.is-5 レイアウト
-          b-field(custom-class="is-small" label="配置")
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
-
           b-field(custom-class="is-small" label="手数表示")
             b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
             b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_on") ON
@@ -73,19 +69,7 @@
             b-radio-button(size="is-small" v-model="sp_sound_enabled" :native-value="true") ON
 
           b-field(custom-class="is-small" label="ボリューム")
-            b-slider(v-model="sp_sound_volume" :min="0" :max="1.0" step="0.01")
-
-        .box
-          .title.is-5 テクスチャ
-          b-field(custom-class="is-small" label="sp_bg_variant")
-            b-select(size="is-small" v-model="sp_bg_variant")
-              template(v-for="e in BgVariantInfo.values")
-                option(:value="e.key") {{e.name}}
-
-          b-field(custom-class="is-small" label="sp_pi_variant")
-            b-select(size="is-small" v-model="sp_pi_variant")
-              template(v-for="e in PiVariantInfo.values")
-                option(:value="e.key") {{e.name}}
+            b-slider(v-model="sp_sound_volume" :min="0" :max="1.0" :step="0.01")
 
         .box
           .title.is-5 その他
@@ -99,9 +83,9 @@
             b-radio-button(size="is-small" v-model="sp_overlay_nav" native-value="is_overlay_nav_off") OFF
             b-radio-button(size="is-small" v-model="sp_overlay_nav" native-value="is_overlay_nav_on") ON
 
-          b-field(custom-class="is-small" label="盤の上でも再生操作")
-            b-radio-button(size="is-small" v-model="sp_op_disabled" native-value="is_overlay_disable_off") OFF
-            b-radio-button(size="is-small" v-model="sp_op_disabled" native-value="is_overlay_disable_on") ON
+          b-field(custom-class="is-small" label="操作禁止")
+            b-radio-button(size="is-small" v-model="sp_op_disabled" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_op_disabled" :native-value="true") ON
 
           b-field(custom-class="is-small" label="sp_human_side")
             template(v-for="e in HumanSideInfo.values")
@@ -156,9 +140,6 @@
             :sp_run_mode.sync="sp_run_mode"
             :sp_body.sync="sp_body"
             :sp_turn.sync="sp_turn"
-            :sp_bg_variant.sync="sp_bg_variant"
-            :sp_pi_variant.sync="sp_pi_variant"
-            :sp_layout="sp_layout"
             :sp_summary="sp_summary"
             :sp_slider="sp_slider"
             :sp_debug.sync="sp_debug"
@@ -200,16 +181,13 @@
               pre.is-size-6
                 | ShogiPlayer(
                 |   sp_run_mode="{{sp_run_mode}}"
-                |   sp_bg_variant="{{sp_bg_variant}}"
-                |   sp_pi_variant="{{sp_pi_variant}}"
                 |   sp_slider="{{sp_slider}}"
-                |   sp_layout="{{sp_layout}}"
                 |   sp_debug="{{sp_debug}}"
                 |   sp_summary="{{sp_summary}}"
                 |   sp_sfen_show="{{sp_sfen_show}}"
                 |   sp_overlay_nav="{{sp_overlay_nav}}"
                 |   sp_setting="{{sp_setting}}"
-                |   sp_op_disabled="{{sp_op_disabled}}"
+                |   :sp_op_disabled="{{sp_op_disabled}}"
                 |   sp_controller="{{sp_controller}}"
                 |   sp_human_side="{{sp_human_side}}"
                 |   sp_viewpoint="{{sp_viewpoint}}"
@@ -233,6 +211,7 @@ import HumanSideInfo      from "../models/human_side_info.js"
 import RunModeInfo   from "../models/run_mode_info.js"
 import BgVariantInfo from "../models/bg_variant_info.js"
 import PiVariantInfo from "../models/pi_variant_info.js"
+import KifuBookInfo from "../models/KifuBookInfo.js"
 
 export default {
   name: "MainDocOption",
@@ -250,8 +229,6 @@ export default {
 
       // カスタマイズ用
       sp_run_mode: "view_mode",
-      sp_bg_variant: "is_bg_variant_a",
-      sp_pi_variant: "is_pi_variant_a1by",
       sp_turn: -1,
       sp_slider: "is_slider_off",
       sp_overlay_nav: "is_overlay_nav_off",
@@ -265,17 +242,16 @@ export default {
       sp_hidden_if_piece_stand_blank: false,
       sp_setting: "is_setting_off",
       sp_summary: "is_summary_on",
-      sp_op_disabled: "is_overlay_disable_off",
+      sp_op_disabled: false,
       sp_viewpoint: "black",
       sp_flip_if_white: false,
-      sp_layout: "is_horizontal",
 
       sp_player_info: {
-        black: { name: "先手", time: "12:34:56", },
-        white: { name: "後手", time: "56:78:90", },
+        black: { name: "先手", time: "12:34", },
+        white: { name: "後手", time: "56:78", },
       },
 
-      sp_body: "position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 8c8d 7g7f 7a6b 5g5f 8d8e 8h7g 5c5d 2h5h 6b5c 7i6h 5a4b 5i4h 3a3b 4h3h 4c4d 5f5e 3b4c 5e5d 4c5d 6h5g 5d6e 5g5f 6e7f 5f5e 7f6g+ P*5d 5c6b 5h5f 6g7g 8i7g B*3d 5f6f P*5b 6i7i 8b8d 5e4d 8d7d P*7h 7d5d S*4c 3d4c 4d4c+ 4b4c B*7f 5b5c 7i6h 4c3b 6h5h P*4c 7f5d 5c5d 8g8f B*7i 8f8e P*8b 6f8f 7i3e+ 8e8d S*7b 8f8i 3e4e P*6g 7c7d 9g9f 4e5f 8i8f 5f5e 9f9e 5e6d 8f8i 7d7e 7g8e 5d5e 8e9c+ 8a9c 9e9d P*9h 9i9h 6d6e 8i8f 6e9h 9d9c+ 9a9c R*9a 9h6e 9a9c+ 5e5f 5h4h L*9b 9c8b P*8a N*7g 6e7d 8b9a S*8b 9a8b 8a8b S*6e 7d9f 8f5f 9f7h 7g8e 7h6g P*7c 7b8a P*9c 6c6d P*6h 6g8e 9c9b+ 8a9b 7c7b+ 6a7b 6e5d N*4b 5d5c+ P*5d 5c6b 7b6b L*2f R*6i L*2e N*3a 5f4f S*3d 3g3f 6b5c 2i3g 4c4d 4f5f 2c2d 2e2d P*2c 3f3e 3d3e 2d2c+ 3a2c 2f2c+ 3b2c P*3f 3e2d 5f5i 6i6h+ 1g1f L*3d N*2h 4d4e 5i5h 6h7g 2g2f 1c1d 2f2e 2d1c 3g4e 5c4d S*4f P*2f 4e5c+ L*4e 4f5g 8e7d P*6e 7d6e P*5f 5d5e 4h3g 5e5f 5g4h P*4f 3g4f 4e4f",
+      sp_body: KifuBookInfo.fetch("KIF_15733").sp_body,
 
       trigger_toast_p: false,
 
