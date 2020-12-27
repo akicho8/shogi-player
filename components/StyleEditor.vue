@@ -352,6 +352,10 @@
             b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
             b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_on") ON
 
+          b-field(custom-class="is-small" label="KIFコメ表示")
+            b-radio-button(size="is-small" v-model="sp_comment" native-value="is_comment_off") OFF
+            b-radio-button(size="is-small" v-model="sp_comment" native-value="is_comment_on") ON
+
         .box(v-if="false")
           .title.is-5 カスタムCSS
           b-field(custom-class="is-small" label="")
@@ -415,7 +419,8 @@
 
 <script>
 const DEVELOPMENT_P = process.env.NODE_ENV === "development"
-const IS_TRANSPARENT = "rgba(0,0,0,0)" // chroma は "transparent" をパースできないため
+const IS_TRANSPARENT = "rgba(0,0,0,0)"    // chroma は "transparent" をパースできないため
+const IS_WHITE       = "rgb(255,255,255)"
 
 import chroma from "chroma-js"
 import { Slider, Chrome } from "vue-color"
@@ -438,10 +443,6 @@ export default {
     ColorPicker,
     ImageUpload,
   },
-  // props: {
-  //   sp_body:   { type: String, required: false, default: null, },
-  //   sp_player_info: { type: Object, required: false, default: null, },
-  // },
 
   data() {
     return {
@@ -455,7 +456,7 @@ export default {
       se_ws_image: null,
       sp_board_image: null,
 
-      se_ws_color: "#C6E1B8",
+      se_ws_color: "hsl(100, 41%, 80%)",
       se_ws_blur: 0,
       se_ws_grayscale: 0,
       se_ws_contrast: 1.0,
@@ -533,6 +534,7 @@ export default {
       sp_piece_box_piece_h: 46,
       sp_piece_box_piece_rate: 90,
 
+      sp_comment: "is_comment_off",
       sp_common_gap: 12,
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_board_shadow: "is_board_shadow_drop",
@@ -549,7 +551,6 @@ export default {
       },
 
       sp_body: null,
-
       sp_summary:    DEVELOPMENT_P ? "is_summary_on" : "is_summary_off",
       sp_slider:     DEVELOPMENT_P ? "is_slider_on" : "is_slider_on",
       sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
@@ -644,12 +645,16 @@ export default {
       this.sp_bg_variant = "is_bg_variant_none" // 背景画像プリセットを選択してない状態に戻しておく
     },
     force_paper_style() {
-      this.sp_pi_variant        = "is_pi_variant_b" // 紙面風駒
-      this.sp_board_padding     = 0                 // 隙間なし
-      this.se_ws_color      = IS_TRANSPARENT    // 背景透過
-      this.sp_board_color       = IS_TRANSPARENT    // 盤透過
-      this.sp_grid_stroke       = 1                 // グリッド線(細)
-      this.sp_grid_outer_stroke = 1.5               // グリッド枠(細)
+      this.sp_pi_variant        = "is_pi_variant_b"      // 紙面風駒
+      this.sp_board_padding     = 0                      // 隙間なし
+      this.se_ws_color          = "rgb(255,255,255)"     // 背景
+      this.sp_board_color       = IS_WHITE               // 盤透過
+      this.sp_grid_stroke       = 1                      // グリッド線(細)
+      this.sp_grid_outer_stroke = 1.5                    // グリッド枠(細)
+
+      this.sp_shadow_blur       = 0
+      this.sp_shadow_offset     = 0
+      this.sp_board_shadow      = "is_board_shadow_none" // 影なし
     },
     hsla_format(v) {
       return chroma(v).css("hsla")
@@ -702,7 +707,7 @@ export default {
     chroma() { return chroma },
 
     ////////////////////////////////////////////////////////////////////////////////
-    
+
     slider_attrs() {
       return {
         indicator: true,
@@ -744,31 +749,32 @@ export default {
 
     sp_params() {
       let params = {}
-      params.sp_board_dimension_w      = this.sp_board_dimension_w
-      params.sp_board_dimension_h      = this.sp_board_dimension_h
-      params.sp_layout           = this.sp_layout
-      params.sp_blink            = this.sp_blink
-      params.sp_hpos             = this.sp_hpos
-      params.sp_vpos             = this.sp_vpos
-      params.sp_fullheight       = this.sp_fullheight
-      params.sp_balloon          = this.sp_balloon
-      params.sp_layer            = this.sp_layer
-      params.sp_board_shadow     = this.sp_board_shadow
-      params.sp_pi_variant       = this.sp_pi_variant
-      params.sp_bg_variant       = this.sp_bg_variant
-      params.sp_mobile_fit       = this.sp_mobile_fit
-      params.sp_mobile_vertical  = this.sp_mobile_vertical
-      params.sp_run_mode            = this.sp_run_mode
-      params.sp_viewpoint           = this.sp_viewpoint
-      params.sp_debug            = "is_debug_off"
-      params.sp_turn             = this.sp_turn
-      params.sp_body           = this.sp_body
-      params.sp_sound_enabled        = true
-      params.sp_setting          = false
-      params.sp_summary          = this.sp_summary
-      params.sp_slider           = this.sp_slider
-      params.sp_controller       = this.sp_controller
-      params.sp_player_info         = this.sp_player_info
+      params.sp_board_dimension_w = this.sp_board_dimension_w
+      params.sp_board_dimension_h = this.sp_board_dimension_h
+      params.sp_layout            = this.sp_layout
+      params.sp_blink             = this.sp_blink
+      params.sp_hpos              = this.sp_hpos
+      params.sp_vpos              = this.sp_vpos
+      params.sp_fullheight        = this.sp_fullheight
+      params.sp_balloon           = this.sp_balloon
+      params.sp_layer             = this.sp_layer
+      params.sp_board_shadow      = this.sp_board_shadow
+      params.sp_pi_variant        = this.sp_pi_variant
+      params.sp_bg_variant        = this.sp_bg_variant
+      params.sp_mobile_fit        = this.sp_mobile_fit
+      params.sp_mobile_vertical   = this.sp_mobile_vertical
+      params.sp_run_mode          = this.sp_run_mode
+      params.sp_viewpoint         = this.sp_viewpoint
+      params.sp_debug             = "is_debug_off"
+      params.sp_comment           = this.sp_comment,
+      params.sp_turn              = this.sp_turn
+      params.sp_body              = this.sp_body
+      params.sp_sound_enabled     = true
+      params.sp_setting           = "is_setting_off"
+      params.sp_summary           = this.sp_summary
+      params.sp_slider            = this.sp_slider
+      params.sp_controller        = this.sp_controller
+      params.sp_player_info       = this.sp_player_info
       return params
     },
 

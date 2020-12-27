@@ -86,6 +86,7 @@ export default {
     sp_run_mode:          { type: String, default: "view_mode",             }, // モード
     sp_body:              { type: String, default: null,                    }, // 棋譜 KIF or SFEN
     sp_player_info:       { type: Object, default: null,                    }, // 対局者名と時間
+    sp_comment:           { type: String, default: "is_comment_on",         }, // KIFのコメントを表示する
 
     sp_player_click_handle:   { type: Function, default: null, },              // 名前(時間を含む)をタップしたときに実行する
     sp_location_click_handle: { type: Function, default: null, },              // ☗☖をタップしたときに実行する

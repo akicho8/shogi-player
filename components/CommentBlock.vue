@@ -1,5 +1,5 @@
 <template lang="pug">
-.CommentBlock.columns(v-if="comments_pack && current_comments")
+.CommentBlock.columns(v-if="base.sp_comment === 'is_comment_on' && comments_pack && current_comments")
   .column
     .message.is-info.has-text-left
       .message-body
