@@ -10,7 +10,6 @@ export default class BgVariantInfo extends MemoryRecord {
       { key: "is_bg_variant_d",    name: "紙2",  },
       { key: "is_bg_variant_e",    name: "紙3",  },
       { key: "is_bg_variant_f",    name: "布1",  },
-      { key: "is_bg_variant_g",    name: "布2",  },
     ]
   }
 }
