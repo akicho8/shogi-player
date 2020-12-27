@@ -1,10 +1,9 @@
 <template lang="pug">
 .MainDocPlayDemo5.column
   b-message(type="is-info")
-    | SFENで72となっていても71手目の局面を表示している(後手番)
+    | 同様に w - 4 も後手番
   ShogiPlayer(
-    :sp_body="'position sfen lr4knl/3g2gs1/4ppP2/p4bNpp/2pSsN3/PPPP1P2P/2N1P1G2/2G6/L1K4RL w BPs3p 72'"
-    :sp_turn="-1"
+    sp_body="position sfen lnsgkgsnl/1r5b1/pppppp1pp/6p2/9/2P4P1/PP1PPPP1P/1B5R1/LNSGKGSNL w - 4"
     sp_run_mode="play_mode"
   )
 </template>

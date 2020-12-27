@@ -21,15 +21,12 @@
                 sp_run_mode="view_mode"
                 sp_debug="is_debug_off"
                 :sp_turn="0"
-                :sp_body="'position sfen 4R1gnk/6+Bsl/5+P1pp/9/9/9/9/9/9 b rb3g3s3n2l15p 1 moves 3b2a 3a2a 5a2a+ 1a2a G*3b 2a1a 3b2b 1a2b N*3d 2b1a S*2b'"
+                :sp_body="kifu_book_info.sp_body"
                 :sp_key_event_capture_enabled="true"
                 sp_slider="is_slider_on"
                 sp_controller="is_controller_on"
                 :sp_sound_enabled="true"
               )
-
-              .box.is-size-6
-                | 1手目と5手詰が重要
 
             footer.modal-card-foot
               //- b-tooltip(label="この局面から自分で操作")
@@ -40,10 +37,13 @@
 </template>
 
 <script>
+import KifuBookInfo from "../models/KifuBookInfo.js"
+
 export default {
   name: "MainDocModalSample",
   data() {
     return {
+      kifu_book_info: KifuBookInfo.fetch("KIF_16020"),
     }
   },
 }
