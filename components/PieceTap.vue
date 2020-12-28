@@ -146,7 +146,7 @@ export default {
   .PieceTexture
     +is_overlay_origin
     // 下に引く度合い
-    // top: var(--piece_pull, 0%)
+    // top: var(--piece_pull, 10%)
   .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
     +is_overlay_block
     mix-blend-mode: var(--sp_piece_blend)

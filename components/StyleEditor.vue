@@ -39,6 +39,8 @@
             b-slider(v-bind="slider_attrs" v-model="se_ws_hue" :min="-0.5" :max="0.5" :step="0.001")
           b-field(custom-class="is-small" label="彩度")
             b-slider(v-bind="slider_attrs" v-model="se_ws_saturate" :min="0" :max="4.0" :step="0.001")
+          b-field(custom-class="is-small" label="彩度(強)")
+            b-slider(v-bind="slider_attrs" v-model="se_ws_saturate2" :min="0" :max="5000" :step="1")
           b-field(custom-class="is-small" label="輝度")
             b-slider(v-bind="slider_attrs" v-model="se_ws_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
@@ -71,8 +73,10 @@
             b-slider(v-bind="slider_attrs" v-model="sp_board_hue" :min="-0.5" :max="0.5" :step="0.001")
           b-field(custom-class="is-small" label="彩度")
             b-slider(v-bind="slider_attrs" v-model="sp_board_saturate" :min="0" :max="4.0" :step="0.001")
+          b-field(custom-class="is-small" label="彩度(強)")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_saturate2" :min="0" :max="5000" :step="1")
           b-field(custom-class="is-small" label="輝度")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_saturate" :min="0" :max="4.0" :step="0.001")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_brightness" :min="0" :max="4.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
             b-slider(v-bind="slider_attrs" v-model="sp_board_blur" :min="0" :max="30" :step="0.001")
           b-field(custom-class="is-small" label="セピア")
@@ -136,6 +140,8 @@
             b-slider(v-bind="slider_attrs" v-model="sp_piece_hue" :min="-0.5" :max="0.5" :step="0.001")
           b-field(custom-class="is-small" label="彩度")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_saturate" :min="0" :max="4.0" :step="0.001")
+          b-field(custom-class="is-small" label="彩度(強)")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_saturate2" :min="0" :max="5000" :step="1")
           b-field(custom-class="is-small" label="輝度")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
@@ -469,6 +475,7 @@ export default {
       se_ws_invert: 0,
       se_ws_hue:        0,
       se_ws_saturate:   1.0,
+      se_ws_saturate2:   0,
       se_ws_brightness: 1.0,
       se_ws_sepia: 0,
 
@@ -479,6 +486,7 @@ export default {
       sp_piece_opacity: 1.0,
       sp_piece_hue:        0,
       sp_piece_saturate:   1.0,
+      sp_piece_saturate2:   0,
       sp_piece_brightness: 1.0,
       sp_piece_sepia: 0,
 
@@ -490,6 +498,7 @@ export default {
       sp_board_opacity: 1.0,
       sp_board_hue:        0,
       sp_board_saturate:   1.0,
+      sp_board_saturate2:   0,
       sp_board_brightness: 1.0,
       sp_board_sepia: 0,
 
@@ -818,7 +827,7 @@ export default {
           --se_ws_invert:            ${this.se_ws_invert};
 
           --se_ws_hue:               ${this.se_ws_hue};
-          --se_ws_saturate:          ${this.se_ws_saturate};
+          --se_ws_saturate:          ${this.se_ws_saturate + this.se_ws_saturate2};
           --se_ws_brightness:        ${this.se_ws_brightness};
           --se_ws_sepia:       ${this.se_ws_sepia};
 
@@ -831,7 +840,7 @@ export default {
           --sp_board_invert:             ${this.sp_board_invert};
           --sp_board_opacity:            ${this.sp_board_opacity};
           --sp_board_hue:                ${this.sp_board_hue};
-          --sp_board_saturate:           ${this.sp_board_saturate};
+          --sp_board_saturate:           ${this.sp_board_saturate + this.sp_board_saturate2};
           --sp_board_brightness:         ${this.sp_board_brightness};
           --sp_board_sepia:         ${this.sp_board_sepia};
           --sp_board_blend:          ${this.sp_board_blend};
@@ -857,7 +866,7 @@ export default {
           --sp_piece_invert:             ${this.sp_piece_invert};
           --sp_piece_opacity:            ${this.sp_piece_opacity};
           --sp_piece_hue:                ${this.sp_piece_hue};
-          --sp_piece_saturate:           ${this.sp_piece_saturate};
+          --sp_piece_saturate:           ${this.sp_piece_saturate + this.sp_piece_saturate2};
           --sp_piece_brightness:         ${this.sp_piece_brightness};
           --sp_piece_sepia:         ${this.sp_piece_sepia};
           --sp_piece_blend:              ${this.sp_piece_blend};
