@@ -1,4 +1,4 @@
-import { Place } from '@/place.js'
+import { Place } from '@/components/models/place.js'
 
 describe('Place', () => {
   it('SFENの座標を受け取る', () => {

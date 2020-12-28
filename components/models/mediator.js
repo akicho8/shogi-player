@@ -1,13 +1,13 @@
 import _ from "lodash"
 import Vue from "vue"
 
-import { Board } from "./board"
-import { Place } from "./place"
-import { Piece } from "./piece"
-import { Soldier } from "./soldier"
+import { Board } from "./board.js"
+import { Place } from "./place.js"
+import { Piece } from "./piece.js"
+import { Soldier } from "./soldier.js"
 import { SfenParser } from "./sfen_parser.js"
-import { SfenSerializer } from "./sfen_serializer"
-import { PresetInfo } from "./preset_info"
+import { SfenSerializer } from "./sfen_serializer.js"
+import { PresetInfo } from "./preset_info.js"
 import { Location } from "./location.js"
 
 export class Mediator {

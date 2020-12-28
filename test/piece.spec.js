@@ -1,4 +1,4 @@
-import { Piece } from '@/piece.js'
+import { Piece } from '@/components/models/piece.js'
 
 describe('Piece', () => {
   it('参照', () => {

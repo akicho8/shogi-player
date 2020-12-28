@@ -1,4 +1,4 @@
-import { Board } from "@/board.js"
+import { Board } from "@/components/models/board.js"
 
 describe("Board", () => {
   it("基本", () => {

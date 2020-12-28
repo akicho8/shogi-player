@@ -1,5 +1,5 @@
-import { Mediator } from "@/mediator.js"
-import { SfenParser } from "@/sfen_parser.js"
+import { Mediator } from "@/components/models/mediator.js"
+import { SfenParser } from "@/components/models/sfen_parser.js"
 
 describe("Mediator", () => {
   it("基本", () => {

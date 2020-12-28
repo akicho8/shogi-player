@@ -1,6 +1,6 @@
-import { Place } from '@/place.js'
-import { Piece } from '@/piece.js'
-import { Soldier } from '@/soldier.js'
+import { Place } from '@/components/models/place.js'
+import { Piece } from '@/components/models/piece.js'
+import { Soldier } from '@/components/models/soldier.js'
 
 describe('Soldier', () => {
   it('基本', () => {

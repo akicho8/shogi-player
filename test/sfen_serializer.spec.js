@@ -1,6 +1,6 @@
-import { SfenSerializer } from '@/sfen_serializer.'
-import { SfenParser } from '@/sfen_parser.js'
-import { Mediator } from '@/mediator.js'
+import { SfenSerializer } from '@/components/models/sfen_serializer.js'
+import { SfenParser } from '@/components/models/sfen_parser.js'
+import { Mediator } from '@/components/models/mediator.js'
 
 describe('SfenSerializer', () => {
   it('基本', () => {

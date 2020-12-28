@@ -1,4 +1,4 @@
-import { Location } from '@/location.js'
+import { Location } from '@/components/models/location.js'
 
 describe('Location', () => {
   it('fetch', () => {

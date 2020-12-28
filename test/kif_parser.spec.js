@@ -1,9 +1,9 @@
-import { KifParser } from "@/kif_parser.js"
+import { KifParser } from "@/components/models/kif_parser.js"
 
 describe("KifParser", () => {
   it("基本", () => {
     const instance = new KifParser()
-    instance.sp_body = `
+    instance.raw_body = `
 先手の囲い：銀矢倉
 後手の囲い：銀矢倉
 先手の戦型：角換わり腰掛け銀
