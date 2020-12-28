@@ -75,6 +75,7 @@ export default {
   +defvar(sp_piece_hue, 1.0)                // 駒色相
   +defvar(sp_piece_saturate, 1.0)           // 駒彩度
   +defvar(sp_piece_brightness, 1.0)         // 駒輝度
+  +defvar(sp_piece_sepia, 0)                // 駒色セピア度
   +defvar(sp_piece_blend, normal)           // 駒の mix-blend-mode の値
 
   ////////////////////////////////////////////////////////////////////////////////

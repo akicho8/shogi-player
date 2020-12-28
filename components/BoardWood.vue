@@ -74,15 +74,15 @@ export default {
 .ShogiPlayerGround
   // 全体背景と同じ構成
   +defvar(sp_board_color, rgba(0, 0, 0, 0.2))      // 盤の色
-  +defvar(sp_board_image, none)                    // 背景画像
-  +defvar(sp_board_blur, 0)                        // ぼかし
-  +defvar(sp_board_grayscale, 0%)                  // グレースケール
-  +defvar(sp_board_contrast, 1.0)                  // 駒コントラスト
-  +defvar(sp_board_invert, 0)                      // 駒色反転
-  +defvar(sp_board_hue, 1.0)                       // 色相
-  +defvar(sp_board_saturate, 1.0)                  // 彩度
-  +defvar(sp_board_brightness, 1.0)                // 輝度
-  +defvar(sp_board_sepia, 0)               // セピア
+  +defvar(sp_board_image, none)                    // 盤画像
+  +defvar(sp_board_blur, 0)                        // 盤ぼかし
+  +defvar(sp_board_grayscale, 0%)                  // 盤グレースケール
+  +defvar(sp_board_contrast, 1.0)                  // 盤コントラスト
+  +defvar(sp_board_invert, 0)                      // 盤色反転
+  +defvar(sp_board_hue, 1.0)                       // 盤色相
+  +defvar(sp_board_saturate, 1.0)                  // 盤彩度
+  +defvar(sp_board_brightness, 1.0)                // 盤輝度
+  +defvar(sp_board_sepia, 0)                       // 盤セピア
   +defvar(sp_board_blend, normal)                  // 盤の mix-blend-mode の値
 
   +defvar(sp_board_opacity, 1.0)                   // 非半透明度
