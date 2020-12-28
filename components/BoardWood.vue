@@ -95,7 +95,6 @@ export default {
   +defvar(sp_grid_stroke, 1)                       // グリッド太さ
   +defvar(sp_grid_outer_texture_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
   +defvar(sp_grid_star_size, 10%)                  // 星の大きさ
-  +defvar(sp_grid_star_color, var(--sp_grid_color)) // 星の色
 
   .BoardWood
     width: 100%
@@ -164,5 +163,5 @@ export default {
         width:  var(--sp_grid_star_size)
         height: var(--sp_grid_star_size)
         border-radius: 50%
-        background-color: var(--sp_grid_star_color)
+        background-color: var(--sp_grid_outer_color)
 </style>
