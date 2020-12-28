@@ -43,6 +43,8 @@
             b-slider(v-bind="slider_attrs" v-model="se_ws_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
             b-slider(v-bind="slider_attrs" v-model="se_ws_blur" :min="0" :max="30" :step="0.001")
+          b-field(custom-class="is-small" label="セピア")
+            b-slider(v-bind="slider_attrs" v-model="se_ws_sepia" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="グレースケール")
             b-slider(v-bind="slider_attrs" v-model="se_ws_grayscale" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="コントラスト")
@@ -70,9 +72,11 @@
           b-field(custom-class="is-small" label="彩度")
             b-slider(v-bind="slider_attrs" v-model="sp_board_saturate" :min="0" :max="4.0" :step="0.001")
           b-field(custom-class="is-small" label="輝度")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_brightness" :min="0" :max="2.0" :step="0.001")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_saturate" :min="0" :max="4.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
             b-slider(v-bind="slider_attrs" v-model="sp_board_blur" :min="0" :max="30" :step="0.001")
+          b-field(custom-class="is-small" label="セピア")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_sepia" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="グレースケール")
             b-slider(v-bind="slider_attrs" v-model="sp_board_grayscale" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="コントラスト")
@@ -136,6 +140,8 @@
             b-slider(v-bind="slider_attrs" v-model="sp_piece_brightness" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="ぼかし")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_blur" :min="0" :max="30" :step="0.001")
+          b-field(custom-class="is-small" label="セピア")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_sepia" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="グレースケール")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_grayscale" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="コントラスト")
@@ -464,6 +470,7 @@ export default {
       se_ws_hue:        0,
       se_ws_saturate:   1.0,
       se_ws_brightness: 1.0,
+      se_ws_sepia: 0,
 
       sp_piece_blur: 0,
       sp_piece_grayscale: 0,
@@ -473,6 +480,7 @@ export default {
       sp_piece_hue:        0,
       sp_piece_saturate:   1.0,
       sp_piece_brightness: 1.0,
+      sp_piece_sepia: 0,
 
       sp_board_color: "rgba(0, 0, 0, 0.2)",
       sp_board_blur: 0,
@@ -483,6 +491,7 @@ export default {
       sp_board_hue:        0,
       sp_board_saturate:   1.0,
       sp_board_brightness: 1.0,
+      sp_board_sepia: 0,
 
       sp_board_aspect_ratio: 1.097,
       sp_board_piece_rate: 90,
@@ -811,6 +820,7 @@ export default {
           --se_ws_hue:               ${this.se_ws_hue};
           --se_ws_saturate:          ${this.se_ws_saturate};
           --se_ws_brightness:        ${this.se_ws_brightness};
+          --se_ws_sepia:       ${this.se_ws_sepia};
 
           // 盤テクスチャ
           --sp_board_color:              ${this.hsla_format(this.sp_board_color)};
@@ -823,6 +833,7 @@ export default {
           --sp_board_hue:                ${this.sp_board_hue};
           --sp_board_saturate:           ${this.sp_board_saturate};
           --sp_board_brightness:         ${this.sp_board_brightness};
+          --sp_board_sepia:         ${this.sp_board_sepia};
           --sp_board_blend:          ${this.sp_board_blend};
 
           // 盤
@@ -848,6 +859,7 @@ export default {
           --sp_piece_hue:                ${this.sp_piece_hue};
           --sp_piece_saturate:           ${this.sp_piece_saturate};
           --sp_piece_brightness:         ${this.sp_piece_brightness};
+          --sp_piece_sepia:         ${this.sp_piece_sepia};
           --sp_piece_blend:              ${this.sp_piece_blend};
 
           // 駒数
@@ -981,7 +993,7 @@ $sidebar_width_mobile:  100% * 3 / 4
     background-position: center
     background-repeat: no-repeat
     background-size: cover
-    filter: unquote('invert(var(--se_ws_invert)) hue-rotate(calc(var(--se_ws_hue) * 1turn)) saturate(var(--se_ws_saturate)) grayscale(var(--se_ws_grayscale)) brightness(var(--se_ws_brightness)) contrast(var(--se_ws_contrast)) blur(calc(var(--se_ws_blur) * 1px))')
+    filter: unquote('invert(var(--se_ws_invert)) sepia(var(--se_ws_sepia)) hue-rotate(calc(var(--se_ws_hue) * 1turn)) saturate(var(--se_ws_saturate)) grayscale(var(--se_ws_grayscale)) brightness(var(--se_ws_brightness)) contrast(var(--se_ws_contrast)) blur(calc(var(--se_ws_blur) * 1px))')
 
   .ShogiPlayerWrap
     // width: 100%

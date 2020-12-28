@@ -84,7 +84,7 @@ $piece_count_z:             1
 
 // 盤に適用する filter パラメータ (drop-shadow を除く)
 @function board_filter_params_without_drop_shadow()
-  @return unquote('invert(var(--sp_board_invert)) hue-rotate(calc(var(--sp_board_hue) * 1turn)) saturate(var(--sp_board_saturate)) opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) contrast(var(--sp_board_contrast)) blur(calc(var(--sp_board_blur) * 1px))')
+  @return unquote('invert(var(--sp_board_invert)) sepia(var(--sp_board_sepia)) hue-rotate(calc(var(--sp_board_hue) * 1turn)) saturate(var(--sp_board_saturate)) opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) contrast(var(--sp_board_contrast)) blur(calc(var(--sp_board_blur) * 1px))')
 
 =filter_drop_shadow($dir, $prepend: "", $append: "")
   filter: #{$prepend} drop-shadow(shadow_args($dir)) #{$append}

@@ -82,6 +82,7 @@ export default {
   +defvar(sp_board_hue, 1.0)                       // 色相
   +defvar(sp_board_saturate, 1.0)                  // 彩度
   +defvar(sp_board_brightness, 1.0)                // 輝度
+  +defvar(sp_board_sepia, 0)               // セピア
   +defvar(sp_board_blend, normal)                  // 盤の mix-blend-mode の値
 
   +defvar(sp_board_opacity, 1.0)                   // 非半透明度
