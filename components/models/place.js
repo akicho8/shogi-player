@@ -1,8 +1,8 @@
 import _ from "lodash"
 
-import Board from "./board"
+import { Board } from "./board"
 
-export default class Place {
+export class Place {
   static fetch(v) {
     if (v instanceof this) {
       return v

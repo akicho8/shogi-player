@@ -1,11 +1,11 @@
 import Vue from "vue"
 import _ from 'lodash'
-import Board from './board'
-import Place from './place'
-import Piece from './piece'
-import Location from './location'
+import { Board } from './board'
+import { Place } from './place'
+import { Piece } from './piece'
+import { Location } from './location'
 
-export default class Soldier {
+export class Soldier {
   static random(params = {}) {
     let place = params.place
     if (!place) {

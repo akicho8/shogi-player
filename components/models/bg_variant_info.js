@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export default class BgVariantInfo extends MemoryRecord {
+export class BgVariantInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "is_bg_variant_none", name: "none", },

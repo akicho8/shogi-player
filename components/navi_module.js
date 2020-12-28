@@ -1,5 +1,5 @@
 import _ from "lodash"
-import Location from "./models/location.js"
+import { Location } from "./models/location.js"
 
 export default {
   props: {

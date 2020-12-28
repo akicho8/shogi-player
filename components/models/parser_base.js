@@ -1,7 +1,7 @@
 import _ from "lodash"
-import Location from "./location"
+import { Location } from "./location"
 
-export default class ParserBase {
+export class ParserBase {
   constructor(raw_body = null) {
     this.raw_body = raw_body
     this.header = {}

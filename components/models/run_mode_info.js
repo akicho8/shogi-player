@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export default class RunModeInfo extends MemoryRecord {
+export class RunModeInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "view_mode", name: "再生", },

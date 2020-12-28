@@ -1,10 +1,10 @@
 import _ from "lodash"
 
-import Place       from "./models/place.js"
-import Board       from "./models/board.js"
-import PieceVector from "./models/piece_vector.js"
-import Soldier     from "./models/soldier.js"
-import Location    from "./models/location.js"
+import { Place } from "./models/place.js"
+import { Board } from "./models/board.js"
+import { PieceVector } from "./models/piece_vector.js"
+import { Soldier } from "./models/soldier.js"
+import { Location } from "./models/location.js"
 
 export default {
   props: {

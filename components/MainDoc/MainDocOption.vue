@@ -207,11 +207,11 @@
 <script>
 import options_md from "./options.md"
 
-import HumanSideInfo      from "../models/human_side_info.js"
-import RunModeInfo   from "../models/run_mode_info.js"
-import BgVariantInfo from "../models/bg_variant_info.js"
-import PiVariantInfo from "../models/pi_variant_info.js"
-import KifuBookInfo from "../models/KifuBookInfo.js"
+import { HumanSideInfo } from "../models/human_side_info.js"
+import { RunModeInfo } from "../models/run_mode_info.js"
+import { BgVariantInfo } from "../models/bg_variant_info.js"
+import { PiVariantInfo } from "../models/pi_variant_info.js"
+import { KifuBookInfo } from "../models/kifu_book_info.js"
 
 export default {
   name: "MainDocOption",

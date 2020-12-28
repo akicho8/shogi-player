@@ -31,7 +31,7 @@
 <script>
 import { support } from "./support.js"
 import PieceTap from "./PieceTap.vue"
-import Board from "./models/board.js"
+import { Board } from "./models/board.js"
 
 export default {
   name: "BoardWood",

@@ -1,4 +1,4 @@
-import KifParser from "@/KifParser"
+import { KifParser } from "@/kif_parser.js"
 
 describe("KifParser", () => {
   it("基本", () => {

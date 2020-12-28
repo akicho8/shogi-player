@@ -1,5 +1,5 @@
 import Vue from "vue"
-import ShogiPlayer from "@/components/ShogiPlayer"
+import ShogiPlayer from "@/components/ShogiPlayer.vue"
 
 describe("ShogiPlayer", () => {
   it("should render correct contents", () => {

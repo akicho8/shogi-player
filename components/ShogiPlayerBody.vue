@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import Membership            from "./Membership.vue"
+import Membership from "./Membership.vue"
 import AspectRatioFixedBlock from "./AspectRatioFixedBlock.vue"
-import BoardWood             from "./BoardWood.vue"
-import OverlayNavigations    from "./OverlayNavigations.vue"
-import Location              from "./models/location.js"
+import BoardWood from "./BoardWood.vue"
+import OverlayNavigations from "./OverlayNavigations.vue"
+import { Location } from "./models/location.js"
 
 import { support } from "./support.js"
 

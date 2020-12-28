@@ -1,7 +1,7 @@
 import MemoryRecord from "js-memory-record"
-// import Location from "../location"
+// import { Location } from "../location"
 
-export default class PresetInfo extends MemoryRecord {
+export class PresetInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "詰将棋",                  sfen: "position sfen 4k4/9/9/9/9/9/9/9/9 b 2r2b4g4s4n4l18p 1",                                       first_location_key: "black", piece_box: [["K", 1]]},

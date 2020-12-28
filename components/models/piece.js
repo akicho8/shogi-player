@@ -1,7 +1,7 @@
 import MemoryRecord from "js-memory-record"
-import PieceVector from "./piece_vector.js"
+import { PieceVector } from "./piece_vector.js"
 
-export default class Piece extends MemoryRecord {
+export class Piece extends MemoryRecord {
   static get define() {
     return [
       // 順序について

@@ -1,4 +1,4 @@
-import HumanSideInfo from '@/human_side_info.js'
+import { HumanSideInfo } from '@/human_side_info.js'
 
 describe('HumanSideInfo', () => {
   it('locations', () => {

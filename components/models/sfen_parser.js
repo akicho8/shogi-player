@@ -2,12 +2,12 @@ import XRegExp from "xregexp"
 import Vue from "vue"
 import _ from "lodash"
 
-import Board from "./board"
-import ParserBase from "./parser_base"
-import Piece from "./piece"
-import Place from "./place"
-import Soldier from "./soldier"
-import Location from "./location"
+import { Board } from "./board"
+import { ParserBase } from "./parser_base"
+import { Piece } from "./piece"
+import { Place } from "./place"
+import { Soldier } from "./soldier"
+import { Location } from "./location"
 
 export class SfenParser extends ParserBase {
   static parse(raw_body) {

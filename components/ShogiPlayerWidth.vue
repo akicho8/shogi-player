@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import EditToolBlock     from "./EditToolBlock.vue"
-import TurnShowOrEdit  from "./TurnShowOrEdit.vue"
+import EditToolBlock from "./EditToolBlock.vue"
+import TurnShowOrEdit from "./TurnShowOrEdit.vue"
 import ShogiPlayerBody from "./ShogiPlayerBody.vue"
-import PieceBox        from "./PieceBox.vue"
+import PieceBox from "./PieceBox.vue"
 import NavigateBlock from "./NavigateBlock.vue"
-import SfenShowBlock   from "./SfenShowBlock.vue"
-import CommentBlock    from "./CommentBlock.vue"
+import SfenShowBlock from "./SfenShowBlock.vue"
+import CommentBlock from "./CommentBlock.vue"
 import OpDisabledBlock from "./OpDisabledBlock.vue"
 
 import { support } from "./support.js"

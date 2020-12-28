@@ -19,30 +19,30 @@ import _ from "lodash"
 import Vue from 'vue'
 
 // Library
-import Mediator   from "./models/mediator.js"
-import Place      from "./models/place.js"
-import { SfenParser } from "./models/SfenParser.js"
-import KifParser  from "./models/KifParser.js"
-import Location   from "./models/location.js"
+import { Mediator } from "./models/mediator.js"
+import { Place } from "./models/place.js"
+import { SfenParser } from "./models/sfen_parser.js"
+import { KifParser } from "./models/kif_parser.js"
+import { Location } from "./models/location.js"
 
 // components
-import PieceBox          from "./PieceBox.vue"
-import SettingModal      from "./SettingModal.vue"
-import ErrorNotify       from "./ErrorNotify.vue"
+import PieceBox from "./PieceBox.vue"
+import SettingModal from "./SettingModal.vue"
+import ErrorNotify from "./ErrorNotify.vue"
 import OpDisabledBlock from "./OpDisabledBlock.vue"
 import ShogiPlayerGround from "./ShogiPlayerGround.vue"
-import EditToolBlock       from "./EditToolBlock.vue"
-import DebugBlock        from "./DebugBlock.vue"
+import EditToolBlock from "./EditToolBlock.vue"
+import DebugBlock from "./DebugBlock.vue"
 
 // mixins modules
-import navi_module      from "./navi_module.js"
-import shortcut_module  from "./shortcut_module.js"
+import navi_module from "./navi_module.js"
+import shortcut_module from "./shortcut_module.js"
 import edit_mode_module from "./edit_mode_module.js"
 import play_mode_module from "./play_mode_module.js"
-import sound_module     from "./sound_module.js"
-import preset_module    from "./preset_module.js"
-import any_func_module  from "./any_func_module.js"
-import api_module       from "./api_module.js"
+import sound_module from "./sound_module.js"
+import preset_module from "./preset_module.js"
+import any_func_module from "./any_func_module.js"
+import api_module from "./api_module.js"
 
 import { root_support } from "./root_support.js"
 

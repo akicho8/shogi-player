@@ -2,7 +2,7 @@
 
 import MemoryRecord from "js-memory-record"
 
-export default class PieceVector extends MemoryRecord {
+export class PieceVector extends MemoryRecord {
   static get define() {
     return [
       { key: "K", basic_once_vectors: "pattern_king",   basic_repeat_vectors: null,           promoted_once_vectors: null,           promoted_repeat_vectors: null,           force_promote_length: null, },

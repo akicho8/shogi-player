@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import KifuBookInfo from "../models/KifuBookInfo.js"
+import { KifuBookInfo } from "../models/kifu_book_info.js"
 
 export default {
   name: "MainDocViewDemo5",

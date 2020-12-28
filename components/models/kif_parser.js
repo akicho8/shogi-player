@@ -1,12 +1,12 @@
 import XRegExp from "xregexp"
 import assert from "minimalistic-assert"
 
-import ParserBase from "./parser_base.js"
-import Piece      from "./piece.js"
-import Place      from "./place.js"
-import Location   from "./location.js"
-import { SfenParser } from "./SfenParser.js"
-import PresetInfo from "./preset_info.js"
+import { ParserBase } from "./parser_base.js"
+import { Piece } from "./piece.js"
+import { Place } from "./place.js"
+import { Location } from "./location.js"
+import { SfenParser } from "./sfen_parser.js"
+import { PresetInfo } from "./preset_info.js"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -27,7 +27,7 @@ const MERGED_REGEXP = XRegExp(Object.values(REGEXP).join("|"), "x")
 
 ////////////////////////////////////////////////////////////////////////////////
 
-export default class KifParser extends ParserBase {
+export class KifParser extends ParserBase {
   get board() {
     const sfen_parser = new SfenParser()
     sfen_parser.raw_body = this.preset_info.sfen

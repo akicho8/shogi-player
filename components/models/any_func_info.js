@@ -1,7 +1,7 @@
 import MemoryRecord from "js-memory-record"
-import Location from "./location"
+import { Location } from "./location"
 
-export default class AnyFuncInfo extends MemoryRecord {
+export class AnyFuncInfo extends MemoryRecord {
   static get define() {
     return [
 

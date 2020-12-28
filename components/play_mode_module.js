@@ -1,8 +1,8 @@
 import _ from "lodash"
 
-import Mediator from "./models/mediator.js"
-import Location from "./models/location.js"
-import HumanSideInfo from "./models/human_side_info.js"
+import { Mediator } from "./models/mediator.js"
+import { Location } from "./models/location.js"
+import { HumanSideInfo } from "./models/human_side_info.js"
 
 export default {
   props: {

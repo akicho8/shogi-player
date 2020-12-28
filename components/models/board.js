@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import Vue from 'vue'
-import Soldier from "./soldier"
-import Place from "./place.js"
+import { Soldier } from "./soldier"
+import { Place } from "./place.js"
 
-export default class Board {
+export class Board {
   static get dimension() {
     return 9
   }

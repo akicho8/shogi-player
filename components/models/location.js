@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export default class Location extends MemoryRecord {
+export class Location extends MemoryRecord {
   static get define() {
     return [
       // { key: "black", name: '☗', hirate_name: "先手", komaochi_name: "下手", char_key: "b", },

@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export default class PiVariantInfo extends MemoryRecord {
+export class PiVariantInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "is_pi_variant_none", name: "none",                        },

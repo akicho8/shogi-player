@@ -1,16 +1,16 @@
 import _ from "lodash"
 import Vue from "vue"
 
-import Board from "./board"
-import Place from "./place"
-import Piece from "./piece"
-import Soldier from "./soldier"
-import { SfenParser } from "./SfenParser.js"
-import SfenSerializer from "./sfen_serializer"
-import PresetInfo from "./preset_info"
-import Location from "./location.js"
+import { Board } from "./board"
+import { Place } from "./place"
+import { Piece } from "./piece"
+import { Soldier } from "./soldier"
+import { SfenParser } from "./sfen_parser.js"
+import { SfenSerializer } from "./sfen_serializer"
+import { PresetInfo } from "./preset_info"
+import { Location } from "./location.js"
 
-export default class Mediator {
+export class Mediator {
   constructor() {
     const data_source = new SfenParser()
     data_source.raw_body = "position startpos"

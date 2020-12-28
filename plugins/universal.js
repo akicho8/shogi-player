@@ -2,9 +2,9 @@
 
 import Vue from "vue"
 
-import vue_support    from "./vue_support.js"
-import vue_time       from "./vue_time.js"
-import vue_head       from "./vue_head.js"
+import vue_support from "./vue_support.js"
+import vue_time from "./vue_time.js"
+import vue_head from "./vue_head.js"
 
 import { mapState, mapGetters, mapMutations, mapActions } from "vuex"
 
