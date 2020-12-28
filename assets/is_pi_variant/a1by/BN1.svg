@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" style="overflow:visible" viewBox="-150 -150 300 300" height="300px" width="300px">
+  <rect fill-opacity="0" fill="rgb(0,0,0)" height="300" width="300" y="-150" x="-150"/>
+  <svg version="1.1" y="-250" x="-250" viewBox="-250 -250 500 500" height="500px" width="500px" style="overflow:visible">
+    <g transform="rotate(0,0,0)" stroke-linejoin="round" fill="#fff">
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(255,227,156)" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(239,69,74)" d="m79.425999-8.317001h-67.9466v-18.1067h53.3866v-20.9067h-53.3866v-23.3333h-23.7067v23.3333h-53.2v20.9067h53.2v18.1067h-67.3867v21.28h159.04zm-67.9466 84.56v-22.0267h57.3066v-21.0933h-57.3066v-16.0533h-23.7067v16.0533h-57.68v21.0933h57.68v22.0267h-72.0533v21.84h168.56v-21.84z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke-width="0" stroke-opacity="1" stroke="rgb(68,68,68)" fill="none" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
+    </g>
+  </svg>
+</svg>

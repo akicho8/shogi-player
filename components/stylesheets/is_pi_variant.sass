@@ -1,0 +1,58 @@
+@import "is_pi_variant/a1by.sass"
+@import "is_pi_variant/a2by.sass"
+@import "is_pi_variant/b.sass"
+@import "is_pi_variant/c.sass"
+@import "is_pi_variant/d.sass"
+@import "is_pi_variant/e.sass"
+@import "is_pi_variant/f.sass"
+
+=filter_drop_shadow_for_piece($dir)
+  +filter_drop_shadow($dir, unquote('invert(var(--sp_piece_invert)) sepia(var(--sp_piece_sepia)) hue-rotate(calc(var(--sp_piece_hue) * 1turn)) saturate(var(--sp_piece_saturate)) opacity(var(--sp_piece_opacity)) grayscale(var(--sp_piece_grayscale)) brightness(var(--sp_piece_brightness)) contrast(var(--sp_piece_contrast)) blur(calc(var(--sp_piece_blur) * 1px))'))
+
+%is_pi_black_only
+  .is_position_north
+    .PieceTextureSelf
+      @extend %is_flip
+      +filter_drop_shadow_for_piece(-1)
+  .is_position_south
+    .PieceTextureSelf
+      +filter_drop_shadow_for_piece(1)
+
+%is_pi_black_and_white
+  +filter_drop_shadow_for_piece(1)
+
+.ShogiPlayerGround
+  &.is_pi_variant_a1by
+    @extend %is_pi_black_only
+    .PieceTextureSelf
+      +is_pi_variant_a1by_pack
+
+  &.is_pi_variant_a2by
+    @extend %is_pi_black_only
+    .PieceTextureSelf
+      +is_pi_variant_a2by_pack
+
+  &.is_pi_variant_b
+    @extend %is_pi_black_only
+    .PieceTextureSelf
+      +is_pi_variant_b_pack
+
+  &.is_pi_variant_c
+    @extend %is_pi_black_only
+    .PieceTextureSelf
+      +is_pi_variant_c_pack
+
+  &.is_pi_variant_d
+    @extend %is_pi_black_only
+    .PieceTextureSelf
+      +is_pi_variant_d_pack
+
+  &.is_pi_variant_e
+    @extend %is_pi_black_only
+    .PieceTextureSelf
+      +is_pi_variant_e_pack
+
+  &.is_pi_variant_f
+    @extend %is_pi_black_only
+    .PieceTextureSelf
+      +is_pi_variant_f_pack

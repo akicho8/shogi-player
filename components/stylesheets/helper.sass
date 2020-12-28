@@ -1,0 +1,132 @@
+// 重複するのでCSSは定義しないこと
+
+$cursor_object_z:           256
+$overlay_for_disable_z:     2
+$overlay_navigation_item_z: 1
+$flip_trigger_cell_z:       2
+$piece_count_z:             1
+  
+// is_vertical の定義は +mobile のときにも適用する
+//
+// 冗長な書き方
+//
+//   +IS_VERTICAL
+//     .NavigateBlock
+//       margin: 0
+//   &.is_vertical
+//     +is_vertical_style
+//   +mobile
+//     &.is_mobile_fit_on
+//       +is_vertical_style
+//
+// 置き換え後
+//
+//   +IS_VERTICAL
+//     .NavigateBlock
+//       margin: 0
+//
+// 書き方
+//
+//   .ShogiPlayerGround
+//     +IS_HORIZONTAL
+//       ...
+//     +IS_VERTICAL
+//       ...
+//
+// 注意点
+// ・必ず .ShogiPlayerGround の直下で +IS_HORIZONTAL とのペアで定義すること
+=IS_HORIZONTAL
+  &.is_horizontal
+    @content
+=IS_VERTICAL
+  &.is_vertical
+    @content
+  &.is_mobile_vertical_on
+    +mobile
+      @content
+
+// is_layer_on のとき用
+=is_layer_border($color: $primary)
+  border: 1px dashed change_color($color, $alpha: 0.5)
+
+// 駒数の背景色とテキスト色を適用
+%is_piece_count_color_set
+  background-color: var(--sp_piece_count_bg_color)
+  color:            var(--sp_piece_count_font_color)
+
+// 領域を画像で埋める
+// cover は、画像の全体を表示するのではなく、領域を埋めることを優先する
+=is_background_cover_by_image
+  background-position: center
+  background-repeat: no-repeat
+  background-size: cover
+
+=is_flip
+  transform: rotate(180deg)
+  
+// 反転
+%is_flip
+  +is_flip
+  
+// 選択禁止
+%is_unselectable
+  user-select: none
+
+// is_layer_on 用
+=sp_xray_color($level)
+  $color: hsla((240 + 360 / 15) * $level, 50%, 50%, 0.4)
+  background-color: $color
+  border: 1px solid darken($color, 50%)
+
+// drop-shadow や box-shadow に渡すパラメータを返す
+@function shadow_args($dir)
+  @return calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_blur) * 1px) var(--sp_shadow_color)
+
+// 盤に適用する filter パラメータ (drop-shadow を除く)
+@function board_filter_params_without_drop_shadow()
+  @return unquote('invert(var(--sp_board_invert)) sepia(var(--sp_board_sepia)) hue-rotate(calc(var(--sp_board_hue) * 1turn)) saturate(var(--sp_board_saturate)) opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) contrast(var(--sp_board_contrast)) blur(calc(var(--sp_board_blur) * 1px))')
+
+=filter_drop_shadow($dir, $prepend: "", $append: "")
+  filter: #{$prepend} drop-shadow(shadow_args($dir)) #{$append}
+
+=filter_box_shadow($dir, $prepend: "", $append: "")
+  filter: #{$prepend} #{$append}
+  box-shadow: shadow_args($dir)
+
+// 簡潔にかけるが余計わかりにくくなるので使わない
+=filter_drop_shadow2($dir, $prepend: "", $append: "")
+  @at-root .is_board_shadow_drop &
+    +filter_drop_shadow($dir, $prepend, $append)
+  @at-root .is_board_shadow_box &
+    +filter_box_shadow($dir, $prepend, $append)
+
+// 本当は :root の下に定義したい
+// しかし node-sass だとエラーになる
+// dart-sass だとエラーにならない
+// しかし dart-sass は気が遠くなるほど遅い
+// それと空定義に警告がでまくる
+// なので :root のかわりに html にしている
+// defvar はもともと dart-sass で「--xxx: 1 // コメント」の値が「1 // コメント」になる災いために作った
+// node-sass の場合は「--xxx: 1 // コメント」としても「// コメント」を除去してくれるので必要ない
+// けどあとあと変更が楽なのと1行で書けるのは便利なので使う
+=defvar($key, $val)
+  @at-root
+    html
+      --#{$key}: #{$val}
+        
+// pug:
+//
+//   .Foo
+//     .FooTexture
+//
+// sass:
+//
+//   .Foo
+//     +is_overlay_origin  // ← 親に relative が必要なので忘れるな
+//     .FooTexture
+//       +is_overlay_block
+//
+=is_overlay_origin
+  position: relative
+=is_overlay_block
+  @extend %overlay

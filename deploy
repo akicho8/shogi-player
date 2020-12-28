@@ -1,4 +1,6 @@
 #!/bin/sh
-npm run release
-npm run deploy
-(cd ~/src/shogi-extend && update)
+nuxt generate --dotenv .env.production
+git add -A
+git commit -m "[chore][deploy] nuxt generate --dotenv .env.production"
+git push
+open https://akicho8.github.io/shogi-player/
