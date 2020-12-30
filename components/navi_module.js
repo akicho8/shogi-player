@@ -137,6 +137,8 @@ export default {
       const updated = this.turn_offset !== new_val
 
       if (updated) {
+        this.state_reset() // 駒を持った状態でコントローラーを操作したとき駒を持ち上げた状態が残るのを防ぐ
+
         if (this.view_p) {
           this.view_mode_mediator_update(new_val)
         }
