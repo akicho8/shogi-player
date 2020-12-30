@@ -58,7 +58,7 @@ export default {
     .b-slider
       margin: 0
       cursor: pointer
-      width: calc(3rem + 6rem + 6rem + 3rem)
+      width: 100%
     .b-slider-thumb
       &:focus
         outline: none // 青い枠を除去。フォーカスしているかどうかはサイズでわかるので不要

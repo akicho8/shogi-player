@@ -325,6 +325,24 @@
               b-field(custom-class="is-small")
                 .control
                   b-button(size="is-small" @click="se_tf2_reset") リセット
+
+        .box
+          .title.is-5 コントローラー＆スライダー
+
+          b-field(custom-class="is-small" label="横幅")
+            b-slider(v-bind="slider_attrs" v-model="sp_controller_width" :min="0" :max="1.0" :step="0.001")
+
+          b-field(custom-class="is-small" label="横幅(モバイル時)")
+            b-slider(v-bind="slider_attrs" v-model="sp_controller_width_mobile" :min="0" :max="1.0" :step="0.001")
+
+          b-field(custom-class="is-small" label="コントローラー表示")
+            b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_off") OFF
+            b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_on") ON
+
+          b-field(custom-class="is-small" label="スライダー表示")
+            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_off") OFF
+            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_on") ON
+
         .box
           .title.is-5 その他
 
@@ -351,14 +369,6 @@
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="black") ☗
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="white") ☖
-
-          b-field(custom-class="is-small" label="コントローラー表示")
-            b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_off") OFF
-            b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_on") ON
-
-          b-field(custom-class="is-small" label="スライダー表示")
-            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_off") OFF
-            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_on") ON
 
           b-field(custom-class="is-small" label="手数表示")
             b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
@@ -467,6 +477,8 @@ export default {
       se_frame_width: 80,
       se_ws_image: null,
       sp_board_image: null,
+      sp_controller_width:        0.5,
+      sp_controller_width_mobile: 0.8,
 
       se_ws_color: "hsl(100, 41%, 80%)",
       se_ws_blur: 0,
@@ -897,8 +909,10 @@ export default {
           --sp_shadow_color:             ${this.hsla_format(this.sp_shadow_color)};
 
           // Other
-          --sp_common_gap:            ${this.sp_common_gap}px;
-          --se_frame_width:           ${this.se_frame_width}vmin;
+          --sp_common_gap:              ${this.sp_common_gap}px;
+          --sp_controller_width:        ${this.sp_controller_width};
+          --sp_controller_width_mobile: ${this.sp_controller_width_mobile};
+          --se_frame_width:             ${this.se_frame_width}vmin;
 
           // Transform
           --se_tf0_perspective: ${this.se_tf0_perspective}px;
