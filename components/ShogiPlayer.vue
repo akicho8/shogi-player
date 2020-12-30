@@ -157,14 +157,24 @@ export default {
         return
       }
 
-      // const before_turn_offset_max = this.turn_offset_max
-      const before_sfen = this.mediator ? this.mediator.to_simple_sfen : ""
-      this.log(`before turn_offset_max: ${this.turn_offset_max}`)
-      this.log(`before sfen: ${before_sfen}`)
+      let sfen_change_p = false
+      let before_sfen = null
+
+      if (this.sp_sound_body_changed) {
+        // const before_turn_offset_max = this.turn_offset_max
+        before_sfen = this.mediator ? this.mediator.to_simple_sfen : ""
+        this.log(`before turn_offset_max: ${this.turn_offset_max}`)
+        this.log(`before sfen: ${before_sfen}`)
+      }
+
       this.mediator_setup(this.sp_turn)
-      this.log(`after turn_offset_max: ${this.turn_offset_max}`)
-      this.log(`after sfen: ${this.mediator.to_simple_sfen}`)
-      const sfen_change_p = (before_sfen !== this.mediator.to_simple_sfen)
+
+      if (this.sp_sound_body_changed) {
+        this.log(`after turn_offset_max: ${this.turn_offset_max}`)
+        this.log(`after sfen: ${this.mediator.to_simple_sfen}`)
+        sfen_change_p = (before_sfen !== this.mediator.to_simple_sfen)
+      }
+
       if (this.view_p) {
         if (sfen_change_p) {
           this.sound_play("piece_put")

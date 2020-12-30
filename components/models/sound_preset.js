@@ -7,7 +7,7 @@ export class SoundPreset extends MemoryRecord {
   static get define() {
     return [
       { key: "piece_put",  source: piece_put,  volume: 0.5, },
-      { key: "flip_sound", source: flip_sound, volume: 2.0, },
+      { key: "flip_sound", source: flip_sound, volume: 1.0, },
     ]
   }
 }
