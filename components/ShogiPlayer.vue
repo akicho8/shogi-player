@@ -84,6 +84,7 @@ export default {
     sp_overlay_nav:       { type: String, default: "is_overlay_nav_off",    }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_turn:              { type: Number, default: -1,                      }, // 局面(手数)
     sp_run_mode:          { type: String, default: "view_mode",             }, // モード
+
     sp_body:              { type: String, default: null,                    }, // 棋譜 KIF or SFEN
     sp_player_info:       { type: Object, default: null,                    }, // 対局者名と時間
     sp_comment:           { type: String, default: "is_comment_on",         }, // KIFのコメントを表示する
@@ -152,6 +153,8 @@ export default {
     },
 
     kifu_source() {
+      this.state_reset() // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
+
       if (this.edit_p) {
         this.mediator_setup_for_edit_mode()
         return
