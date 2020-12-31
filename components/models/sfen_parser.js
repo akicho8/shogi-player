@@ -47,7 +47,7 @@ export class SfenParser extends ParserBase {
     return board
   }
 
-  get location_base() {
+  get base_location() {
     let key = null
     if (this.attributes["b_or_w"] === "b") {
       key = "black"
@@ -91,7 +91,7 @@ export class SfenParser extends ParserBase {
   // // "b - 2" -> turn_offset_min:1 % 2 -> 1 && w
   // // "w - 3" -> turn_offset_min:2 % 2 -> 0 && w -> true
   // get komaochi_p() {
-  //   return (this.turn_offset_min % 2) === 0 && this.location_base.key === "white"
+  //   return (this.turn_offset_min % 2) === 0 && this.base_location.key === "white"
   // }
 
   get move_infos() {
@@ -103,7 +103,7 @@ export class SfenParser extends ParserBase {
       //   attrs["scene_index"] = this.turn_offset_min + i
       //   attrs["scene_offset"] = i
       // }
-      attrs["location"] = this.location_base.advance(i)
+      attrs["location"] = this.base_location.advance(i)
       const md = XRegExp.exec(e, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
       if (!md) {
         return false            // break
@@ -170,7 +170,7 @@ if (process.argv[1] === __filename) {
   // sfen_parser = new SfenParser("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
   // sfen_parser.parse()
   // console.log(sfen_parser.board)
-  // console.log(sfen_parser.location_base.key)
+  // console.log(sfen_parser.base_location.key)
   // console.log(sfen_parser.hold_pieces)
   // console.log(sfen_parser.move_infos)
   // console.log(sfen_parser.moves)

@@ -34,7 +34,7 @@ export class ParserBase {
   }
 
   location_by_offset(offset) {
-    return this.location_base.advance(offset)
+    return this.base_location.advance(offset)
 
     // 次のようにすると w - 2 から始まるときに後手番なのに先手番になってしまう ← いや、あってる
     // const index = this.turn_offset_min + offset + (this.komaochi_p ? 1 : 0)

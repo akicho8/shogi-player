@@ -44,7 +44,7 @@ export class KifParser extends ParserBase {
   }
 
   // 特別なメソッド
-  get location_base() {
+  get base_location() {
     return Location.fetch(this.preset_info.first_location_key)
   }
 
@@ -138,7 +138,7 @@ if (process.argv[1] === __filename) {
 `
   instance.parse()
   // console.log(instance.board)
-  // console.log(instance.location_base)
+  // console.log(instance.base_location)
   // console.log(instance.hold_pieces)
   console.log(instance.move_infos)
   console.log(instance.comments_pack)
