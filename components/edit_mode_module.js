@@ -34,7 +34,8 @@ export default {
 
       $CursorObject: null,        // 持ちあげている駒のDOM
       mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
-      dialog_p: false,          // 成り確認ダイアログ表示中か？
+
+      dialog_soldier: null,     // 成り確認ダイアログ表示中か？
 
       $double_tap_time: null,   // ダブルクリック判定用
     }
@@ -71,7 +72,7 @@ export default {
 
       const handle = this.sp_board_cell_left_click_user_handle
       if (handle) {
-        this.log(`ユーザー指定のクリックハンドル実行: ${place.human_digits}`)
+        this.log(`ユーザー指定のクリックハンドル実行: ${place.css_place_key}`)
         if (handle(place, e)) {
           return
         }
@@ -149,7 +150,7 @@ export default {
               this.log(`ダブルクリック判定: (${gap} ms < ${this.sp_edit_mode_double_click_time_ms}) -> ${enable}`)
               if (enable) {
                 this.log(`操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す`)
-                this.mediator.board.place_on(soldier.piece_transform)
+                this.mediator.board.place_on(soldier.transform_clone)
                 this.piece_hold_and_put_for_bug(place, e) // 不具合対策
                 return
               }
@@ -171,7 +172,7 @@ export default {
         if (this.meta_p(e)) {
           if (!this.holding_p && soldier) { // 持ってなくて、駒がある
             this.log("盤上の駒を裏返す")
-            this.mediator.board.place_on(soldier.piece_transform)
+            this.mediator.board.place_on(soldier.transform_clone)
             this.piece_hold_and_put_for_bug(place, e) // 不具合対策
             return
           }
@@ -282,14 +283,16 @@ export default {
 
           if (must_dialog) {
             this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
-            this.dialog_p = true
-            this.$buefy.dialog.confirm({
-              message: '成りますか？',
-              confirmText: '成る',
-              cancelText: '成らない',
-              onConfirm: () => { this.promotable_piece_moved(new_soldier, true)  },
-              onCancel:  () => { this.promotable_piece_moved(new_soldier, false) },
-            })
+            this.dialog_soldier = new_soldier
+            this.virtual_piece_destroy()
+
+            // this.$buefy.dialog.confirm({
+            //   message: '成りますか？',
+            //   confirmText: '成る',
+            //   cancelText: '成らない',
+            //   onConfirm: () => { this.promotable_piece_moved(new_soldier, true)  },
+            //   onCancel:  () => { this.promotable_piece_moved(new_soldier, false) },
+            // })
           }
         } else {
           if (this.play_p) {
@@ -348,7 +351,7 @@ export default {
     //     if (!this.holding_p) {
     //       if (soldier) {
     //         this.log("操作モードでダブルタップしたので裏返す")
-    //         // this.mediator.board.place_on(soldier.piece_transform)
+    //         // this.mediator.board.place_on(soldier.transform_clone)
     //         // this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //         return
     //       }
@@ -358,12 +361,13 @@ export default {
     //   return "eslint対策のreturn"
     // },
 
+    promotable_piece_moved2(promoted) {
+      this.promotable_piece_moved(this.dialog_soldier, promoted)
+    },
+
     // 成れる状態の駒をどうするか
     promotable_piece_moved(new_soldier, promoted) {
-      this.dialog_p = false
-
-      this.$set(new_soldier, "promoted", promoted)
-
+      new_soldier = new_soldier.clone_with_attrs({promoted: promoted})
       this.moves_set(this.origin_soldier1.place.to_sfen + new_soldier.place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
       this.mediator.board.place_on(new_soldier) // 置く
       this.mediator.board.delete_at(this.place_from)
@@ -388,7 +392,7 @@ export default {
       if (this.edit_p) {
         if (!this.holding_p && soldier) {
           this.log("盤上の駒を裏返す")
-          this.mediator.board.place_on(soldier.piece_transform)
+          this.mediator.board.place_on(soldier.transform_clone)
           this.piece_hold_and_put_for_bug(place, e) // 不具合対策
         }
       }
@@ -411,7 +415,7 @@ export default {
     //   if (this.edit_p) {
     //     if (!this.holding_p && soldier) {
     //       this.log("盤上の駒を裏返す")
-    //       this.mediator.board.place_on(soldier.piece_transform)
+    //       this.mediator.board.place_on(soldier.transform_clone)
     //       this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //     }
     //   }
@@ -542,10 +546,9 @@ export default {
       this.virtual_piece_create(e, this.origin_soldier2)
     },
 
-    // FIXME: click_hook のところだけで行いたい
-    // 成り選択ダイアログ表示中に Escape でこれが呼ばれるので dialog_p のときは実行しない
+    // 成り不成り選択ダイアログ表示中はキャンセルできない
     hold_cancel(e) {
-      if (!this.dialog_p) {
+      if (!this.dialog_soldier) {
         if (this.holding_p) {
           this.log("持ち上げた駒を元に戻す")
           this.state_reset()
@@ -625,10 +628,8 @@ export default {
 
     // 駒を持ってない状態にする
     state_reset() {
-      if (this.dialog_p) {
-        alert("ダイアログ表示中に state_reset が呼ばれてはいけない")
-      }
       this.log("state_reset")
+      this.dialog_soldier = null
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       this.have_piece_location = null
@@ -765,7 +766,7 @@ export default {
       window.addEventListener("click", this.click_hook, false)
     },
 
-    // 構造
+    // 構造 FIXME: コンポーネントにする
     //
     // .CursorObject                        // マウスの (x, y) を反映
     //   .PieceTap.is_position_north        // or is_position_south
@@ -776,7 +777,7 @@ export default {
       this.$CursorObject    = this.el_create(["CursorObject"])
       const PieceTap      = this.el_create(["PieceTap"])
       const PieceTexture     = this.el_create(["PieceTexture"])
-      const PieceTextureSelf = this.el_create(["PieceTextureSelf", ...soldier.to_class_list])
+      const PieceTextureSelf = this.el_create(["PieceTextureSelf", ...soldier.css_class_list])
 
       PieceTap.classList.add(soldier.location.flip_if(this.base.fliped).position_key)
 

@@ -253,6 +253,13 @@
         //-     b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
 
         .box
+          .title.is-5 成り不成り選択
+          b-field(custom-class="is-small" label="背景")
+            ColorPicker(v-model="sp_promote_select_modal_bg_color")
+          b-field(custom-class="is-small" label="hover色")
+            ColorPicker(v-model="sp_promote_select_modal_hover_color")
+
+        .box
           .title.is-5 Transform
           b-tabs(size="is-small" v-model="transform_tab_index" expanded)
             b-tab-item(label="背景")
@@ -536,6 +543,10 @@ export default {
       sp_shadow_blur: 3,
       sp_shadow_color: "rgba(0, 0, 0, 0.4)",
 
+      // 成り不成り選択
+      sp_promote_select_modal_bg_color: "rgba(0, 0, 0, 0.85)",
+      sp_promote_select_modal_hover_color: "hsla(0, 0%, 100%, 0.5)",
+
       sp_fullheight: "is_fullheight_off",
       sp_balloon: "is_balloon_on",
 
@@ -566,7 +577,7 @@ export default {
 
       sp_comment: "is_comment_off",
       sp_common_gap: 12,
-      sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
+      sp_layer: DEVELOPMENT_P ? "is_layer_on" : "is_layer_off",
       sp_board_shadow: "is_board_shadow_drop",
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a1by",
@@ -805,6 +816,7 @@ export default {
       params.sp_slider            = this.sp_slider
       params.sp_controller        = this.sp_controller
       params.sp_player_info       = this.sp_player_info
+      params.sp_play_mode_legal_move_only = false
       return params
     },
 
@@ -907,6 +919,10 @@ export default {
           --sp_shadow_offset:            ${this.sp_shadow_offset};
           --sp_shadow_blur:              ${this.sp_shadow_blur};
           --sp_shadow_color:             ${this.hsla_format(this.sp_shadow_color)};
+
+          // 成り不成り選択
+          --sp_promote_select_modal_bg_color:    ${this.hsla_format(this.sp_promote_select_modal_bg_color)};
+          --sp_promote_select_modal_hover_color: ${this.hsla_format(this.sp_promote_select_modal_hover_color)};
 
           // Other
           --sp_common_gap:              ${this.sp_common_gap}px;

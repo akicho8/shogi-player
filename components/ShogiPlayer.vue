@@ -33,6 +33,7 @@ import OpDisabledBlock from "./OpDisabledBlock.vue"
 import ShogiPlayerGround from "./ShogiPlayerGround.vue"
 import EditToolBlock from "./EditToolBlock.vue"
 import DebugBlock from "./DebugBlock.vue"
+import PromoteSelectModal from "./PromoteSelectModal.vue"
 
 // mixins modules
 import navi_module from "./navi_module.js"
@@ -107,6 +108,7 @@ export default {
     EditToolBlock,
     DebugBlock,
     ShogiPlayerGround,
+    PromoteSelectModal,
   },
 
   data() {
@@ -317,7 +319,7 @@ export default {
       const soldier = this.mediator.board.lookup(place)
       let list = []
 
-      list.push(place.to_css_class) // place_99
+      list.push(place.css_place_key) // place_9_9
 
       if (this.holding_p) {
         list.push("hoverable_p")
@@ -348,7 +350,7 @@ export default {
       }
 
       // if (soldier) {
-      //   list = _.concat(list, soldier.to_class_list)
+      //   list = _.concat(list, soldier.css_class_list)
       // }
 
       // 先後関係なく上か下かどちら側にいるかを表すクラスを指定

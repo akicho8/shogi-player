@@ -108,7 +108,7 @@ export class Mediator {
     const soldier = this.board.lookup(place)
 
     if (soldier) {
-      return soldier.to_class_list
+      return soldier.css_class_list
     }
 
     return []

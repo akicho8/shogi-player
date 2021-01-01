@@ -57,7 +57,7 @@ export class Soldier {
     return this.piece.name
   }
 
-  get piece_transform() {
+  get transform_clone() {
     let attrs = null
     if (this.piece.promotable_p) {
       if (this.promoted) {
@@ -68,7 +68,13 @@ export class Soldier {
     } else {
       attrs = {location: this.location.flip}
     }
-    return new Soldier(Object.assign({}, this.attributes, attrs)) // FIXME: this() でいける？
+    return this.clone_with_attrs(attrs)
+  }
+
+  // soldier.clone_with_attrs({promoted: true})
+  // soldier.clone_with_attrs({promoted: false})
+  clone_with_attrs(attrs = {}) {
+    return new Soldier({...this.attributes, ...attrs})
   }
 
   get promotable_p() {
@@ -85,9 +91,9 @@ export class Soldier {
     }
   }
 
-  get to_class_list() {
+  get css_class_list() {
     let list = []
-    list.push(`location_${this.location.key}`)
+    list.push(`location_${this.location.key}`) // 未使用?
     list.push(`promoted_${this.promoted}`)
     list = _.concat(list, this.piece.css_class_list)
     return list

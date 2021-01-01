@@ -87,16 +87,13 @@ export class Place {
     return [Board.dimension - this._x, y_table[this._y]].join("")
   }
 
-  get to_css_class() {
-    return `place_${this.human_digits}`
+  // "place_7_6"
+  get css_place_key() {
+    return ["place", this.human_x, this.human_y].join("_")
   }
 
   get human_xy_ary() {
     return [this.human_x, this.human_y]
-  }
-
-  get human_digits() {
-    return this.human_xy_ary.join("")
   }
 
   get kanji_human() {
