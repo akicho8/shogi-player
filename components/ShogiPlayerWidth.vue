@@ -1,5 +1,6 @@
 <template lang="pug">
 .ShogiPlayerWidth
+  PromoteSelectModal(:base="base" v-if="base.dialog_soldier")
   OpDisabledBlock(:base="base")
   EditToolBlock(:base="base")
   TurnShowOrEdit(:base="base")
@@ -20,6 +21,7 @@ import NavigateBlock from "./NavigateBlock.vue"
 import SfenShowBlock from "./SfenShowBlock.vue"
 import CommentBlock from "./CommentBlock.vue"
 import OpDisabledBlock from "./OpDisabledBlock.vue"
+import PromoteSelectModal from "./PromoteSelectModal.vue"
 
 import { support } from "./support.js"
 
@@ -35,6 +37,7 @@ export default {
     SfenShowBlock,
     CommentBlock,
     OpDisabledBlock,
+    PromoteSelectModal,
   },
 }
 </script>

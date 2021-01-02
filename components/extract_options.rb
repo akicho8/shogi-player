@@ -24,6 +24,8 @@ puts s
 Pathname("MainDoc/css_variable.md").write(s)
 # >> | 変数                                         | 初期値                    | 意味                                                                  |
 # >> |----------------------------------------------|---------------------------|-----------------------------------------------------------------------|
+# >> | `--sp_promote_select_modal_bg_color`              | hsla(0, 0%, 0%, 0.85)     | 成り不成り選択画面の背景色                                            |
+# >> | `--sp_promote_select_modal_hover_color`           | hsla(0, 0%, 100%, 0.5)    | 成り不成り選択でhoverした駒の背景色                                   |
 # >> | `--sp_piece_blur`                            |                         0 | 駒ぼかし                                                              |
 # >> | `--sp_piece_grayscale`                       |                         0 | 駒グレースケール                                                      |
 # >> | `--sp_piece_contrast`                        |                       1.0 | 駒コントラスト                                                        |
@@ -84,8 +86,8 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_grid_stroke`                           |                         1 | グリッド太さ                                                          |
 # >> | `--sp_grid_outer_texture_edge_stroke`        |                         0 | 盤背景の縁取りの太さ(影の影響あり)                                    |
 # >> | `--sp_grid_star_size`                        | 10%                       | 星の大きさ                                                            |
-# >> | `--sp_controller_width`                      | 50%                       | コントローラー横幅                                                    |
-# >> | `--sp_controller_width_mobile`               | 80%                       | コントローラー横幅(モバイル時)                                        |
+# >> | `--sp_controller_width`                      |                       0.5 | コントローラー横幅                                                    |
+# >> | `--sp_controller_width_mobile`               |                       0.8 | コントローラー横幅(モバイル時)                                        |
 # >> | `--sp_stand_hover_border_color`              | rgba(0, 0, 0, 0.2)        | 駒を持って駒箱の上にいるときのボーダー色                              |
 # >> | `--sp_stand_hover_border_stroke`             | 2px                       | 駒を持って駒箱の上にいるときのボーダーの太さ                          |
 # >> | `--sp_stand_horizontal_hoverable_min_height` |                         3 | edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分) |

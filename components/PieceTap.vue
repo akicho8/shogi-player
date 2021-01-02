@@ -174,6 +174,15 @@ export default {
     +touch
       display: none
 
+  //////////////////////////////////////////////////////////////////////////////// 成り不成り選択
+
+  .PromoteSelectModal
+    .PieceTap
+      &:hover
+        cursor: pointer
+        +desktop
+          background-color: var(--sp_promote_select_modal_hover_color)
+
   //////////////////////////////////////////////////////////////////////////////// サイズ (PC)
 
   // 盤面
@@ -214,4 +223,14 @@ export default {
     .PieceTexture
       width:  100%     // 縮小させない
       height: 100%
+
+  // 持ち上げ駒
+  // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceTexture は 100% 固定にする
+  .PromoteSelectModal
+    .PieceTap
+      width:  var(--sp_stand_piece_w)
+      height: var(--sp_stand_piece_h)
+    .PieceTexture
+      width:  80%
+      height: 80%
 </style>

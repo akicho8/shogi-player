@@ -145,6 +145,9 @@ export default {
     // 何もしなければ縦幅は均等になる
     border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color) // border-collapse: collapse の効果で重ならない
 
+    // Firefoxでは↓これを入れると見えるようになるが Chrome では縦幅が均等なので二重に指定することになってしまう、のでやめ
+    // height: calc(100% / 9)
+
   // border が BoardWoodTexture に負けるので入れ子にしている
   // td
   //   +is_overlay_origin
