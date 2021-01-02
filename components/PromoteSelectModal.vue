@@ -10,8 +10,6 @@
 import { support } from "./support.js"
 import _ from "lodash"
 import PieceTap from "./PieceTap.vue"
-import { Piece } from '@/components/models/piece.js'
-import { Soldier } from '@/components/models/soldier.js'
 
 export default {
   mixins: [support],
