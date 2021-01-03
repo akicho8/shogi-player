@@ -1,5 +1,5 @@
 <template lang="pug">
-.Membership(:class="component_class" v-if="component_show_p")
+.Membership(:class="component_class" v-if="component_show_p" @click.capture="click_handle")
   MembershipLocation(           :base="base" :location="location")
   MembershipLocationPlayerInfo( :base="base" :location="location")
   MembershipStand(              :base="base" :location="location")
@@ -25,6 +25,15 @@ export default {
     MembershipLocation,
     MembershipLocationPlayerInfo,
     MembershipStand,
+  },
+
+  methods: {
+    click_handle(e) {
+      if (this.base.membership_click_handle(this.location, e)) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+    },
   },
 
   computed: {

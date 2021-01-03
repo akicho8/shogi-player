@@ -22,7 +22,7 @@ export default {
         const key = e.key.toLowerCase()
         if (key === loc.char_key) {
           this.soldier_hold_unless_lifted_p(e)
-          if (this.piece_stand_click_shared(loc, e)) { // 駒台クリック
+          if (this.membership_click_handle(loc, e)) { // 駒台クリック
             e.preventDefault()
             return true
           }

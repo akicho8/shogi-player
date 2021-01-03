@@ -1,9 +1,5 @@
 <template lang="pug">
-.MembershipStand(
-  :class="component_class"
-  @click.stop.prevent="base.piece_stand_click(location, $event)"
-  @click.right.stop.prevent="base.hold_cancel"
-  )
+.MembershipStand(:class="component_class" @click.right.stop.prevent="base.hold_cancel")
   .MembershipStandTexture.is-overlay
   .MembershipStand2
     .PieceWithCount.is-flex(
@@ -15,7 +11,7 @@
       PieceTap(
         :base="base"
         :class="piece_tap_class(piece)"
-        :piece_texture_class="piece_fore_class(piece)"
+        :piece_texture_class="piece_texture_class(piece)"
         :count="count"
         )
 </template>
@@ -75,7 +71,7 @@ export default {
       return list
     },
 
-    piece_fore_class(piece) {
+    piece_texture_class(piece) {
       let list = []
       list = _.concat(list, piece.css_class_list)
       list.push(`location_${this.location.key}`)

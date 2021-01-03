@@ -422,7 +422,7 @@ export default {
     // },
 
     // 駒台 or 駒台の駒をクリックしたときの共通処理
-    piece_stand_click_shared(location, e) {
+    membership_click_handle(location, e) {
       // if (this.view_p) {
       //   this.log("再生モードなので無効")
       //   return true
@@ -461,18 +461,13 @@ export default {
       return false
     },
 
-    // 駒台クリック
-    piece_stand_click(location, e) {
-      this.piece_stand_click_shared(location, e)
-    },
-
     // 駒台の駒をクリック
     piece_stand_piece_click(location, piece, have_piece_promoted, e) {
       this.log("駒台の駒をクリック")
 
-      if (this.piece_stand_click_shared(location, e)) {
-        return
-      }
+      // if (this.membership_click_handle(location, e)) {
+      //   return
+      // }
 
       // クリックしたけど持駒がない
       if (this.mediator.hold_pieces_count(location, piece) <= 0) {
