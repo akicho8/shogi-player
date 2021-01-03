@@ -111,8 +111,8 @@ export default {
   +defvar(sp_stand_bg_color, hsla(0, 0%, 0%, 0))           // 駒台の背景色
 
   .MembershipStand
-    width: 100%
-    height: 100%
+    // width: 100%
+    // height: 100%
 
   .MembershipStand2
     display: flex
@@ -177,10 +177,12 @@ export default {
     .is_position_north
       .MembershipStand2
         flex-direction: row-reverse    // 「飛歩」→「歩飛」
+      .MembershipStand
         margin-left: auto              // 「△後手 飛歩…………」→「△後手…………飛歩」
     .is_position_south
       .MembershipStand2
         flex-direction: row            // 「飛歩」→「飛歩」
+      .MembershipStand
         margin-right: auto             // 「…………飛歩 先手▲」→「飛歩…………先手▲」
 
 // //////////////////////////////////////////////////////////////////////////////// edit_mode なら最初から駒台を確保する
