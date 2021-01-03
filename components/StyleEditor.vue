@@ -560,7 +560,7 @@ export default {
       sp_stand_piece_h: 50,
       sp_stand_piece_rate: 80,
       sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
-      sp_stand_bg_color: "rgba(0, 0, 0, 0.5)",
+      sp_stand_bg_color: "rgba(0, 0, 0, 0.0)",
 
       sp_turn: -1,
       sp_viewpoint: "black",

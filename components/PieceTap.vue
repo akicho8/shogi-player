@@ -56,24 +56,24 @@ export default {
   &.lifted_from_p
     // .PieceTapBG
     //   background-color: red
-    +touch
-      .PieceTapBG
-        background-color: var(--sp_lifted_origin_bg_color_if_touch)
-      // // さらに駒を持ったときは色を濃くする
-      // &:hover
-      //   background-color: var(--sp_lifted_origin_bg_color_if_touch)
-    +desktop
-      .PieceTexture
-        opacity: var(--sp_hold_origin_opacity_if_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
+    // +touch
+    //   .PieceTapBG
+    //     background-color: var(--sp_lifted_origin_bg_color_if_touch)
+    // +desktop
+    .PieceTapBG
+      background-color: var(--sp_lifted_origin_bg_color_if_touch)
+    .PieceTexture
+      opacity: var(--sp_hold_origin_opacity_if_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
 
   // 持って上空を移動したときの下のセルの反応
   // touchではタップしたときにhoverが反応してfocusしたような状態になってしまう
   // なので desktop 以上のときだけにする
   &.piece_lifted_hover_reaction
-    &:hover
-      +desktop
-        .PieceTapBG
-          background-color: var(--sp_piece_selectable_color)
+    &:not(.lifted_from_p)
+      &:hover
+        +desktop
+          .PieceTapBG
+            background-color: var(--sp_piece_selectable_color)
 
 .ShogiPlayerGround
   // 盤背景と同じ構成

@@ -112,7 +112,7 @@ export default {
   +defvar(sp_stand_hover_border_color, rgba(0, 0, 0, 0.2)) // 駒を持って駒箱の上にいるときのボーダー色
   +defvar(sp_stand_hover_border_stroke, 2px)               // 駒を持って駒箱の上にいるときのボーダーの太さ
   +defvar(sp_stand_horizontal_hoverable_min_height, 3)     // edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分)
-  +defvar(sp_stand_bg_color, hsla(0, 0%, 0%, 0.5))   // 駒台の背景色
+  +defvar(sp_stand_bg_color, hsla(0, 0%, 0%, 0))           // 駒台の背景色
 
   .MembershipStand
     width: 100%

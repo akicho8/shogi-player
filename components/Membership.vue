@@ -67,15 +67,15 @@ export default {
     .Membership
       +is_layer_border
 
-  .Membership
-    border: 3px dashed blue ! important
-
-  .MembershipLocation
-    // border: 1px dashed change_color($primary, $alpha: 0.5)
-  .MembershipLocationPlayerInfo
-    // border: 1px dashed change_color($primary, $alpha: 0.5)
-  .MembershipStand
-    border: 3px dashed red ! important
+  // .Membership
+  //   border: 3px dashed blue ! important
+  //
+  // .MembershipLocation
+  //   // border: 1px dashed change_color($primary, $alpha: 0.5)
+  // .MembershipLocationPlayerInfo
+  //   // border: 1px dashed change_color($primary, $alpha: 0.5)
+  // .MembershipStand
+  //   border: 3px dashed red ! important
 
   +IS_HORIZONTAL
     .Membership
