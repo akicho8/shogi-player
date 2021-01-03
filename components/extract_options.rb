@@ -42,8 +42,8 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_piece_blink_color1`                    | hsla(0, 0%, 0%, 0.10)     | 最後に動かした駒の背景色2(点滅:100%)                                  |
 # >> | `--sp_piece_origin_color`                    | hsla(0, 0%, 0%, 0.10)     | 最後に動かした駒の元の位置の背景色                                    |
 # >> | `--sp_piece_selectable_color`                | hsla(0, 0%, 0%, 0.10)     | 持ち上げれる駒の背景色                                                |
-# >> | `--sp_hold_color_if_touch`                   | hsla(0, 0%, 0%, 0.25)     | 持ち上げた駒の背景色                                                  |
-# >> | `--sp_hold_origin_opacity`                   |                       0.4 | 持ち上げた駒の元のセルの非透明度                                      |
+# >> | `--sp_lifted_origin_bg_color_if_touch`                   | hsla(0, 0%, 0%, 0.25)     | 持ち上げた駒の背景色                                                  |
+# >> | `--sp_hold_origin_opacity_if_desktop`                   |                       0.4 | 持ち上げた駒の元のセルの非透明度                                      |
 # >> | `--sp_stand_piece_w`                         | 47px                      | 駒台のセル(W)                                                         |
 # >> | `--sp_stand_piece_h`                         | 50px                      | 駒台のセル(H)                                                         |
 # >> | `--sp_stand_piece_rate`                      | 80%                       | 駒台のセル内の駒占有率                                                |

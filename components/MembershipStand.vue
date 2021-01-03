@@ -4,7 +4,7 @@
   @click.stop.prevent="base.piece_stand_click(location, $event)"
   @click.right.stop.prevent="base.hold_cancel"
   )
-  .MembershipStandTexture
+  .MembershipStandTexture.is-overlay
   .PieceWithCount.is-flex(
     v-for="[piece, count] in hold_pieces"
     @click.stop="base.piece_stand_piece_click(location, piece, false, $event)"
@@ -13,7 +13,7 @@
     )
     PieceTap(
       :base="base"
-      :class="piece_control_class(piece)"
+      :class="piece_tap_class(piece)"
       :piece_texture_class="piece_fore_class(piece)"
       :count="count"
       )
@@ -37,19 +37,19 @@ export default {
   },
 
   methods: {
-    hold_piece_holding_p(piece) {
+    hold_piece_lifted_p(piece) {
       return this.base.have_piece_location === this.location && this.base.have_piece === piece
     },
 
-    piece_control_class(piece) {
+    piece_tap_class(piece) {
       let list = []
 
-      // if (this.holding_p) {
-      //   list.push("hoverable_p")
+      // if (this.lifted_p) {
+      //   list.push("piece_lifted_hover_reaction")
       // }
 
-      if (this.hold_piece_holding_p(piece)) {
-        list.push("holding_p")
+      if (this.hold_piece_lifted_p(piece)) {
+        list.push("lifted_from_p")
       } else {
         let f = false
         if (this.base.edit_p) {
@@ -61,7 +61,7 @@ export default {
           }
         }
         if (f) {
-          if (!this.holding_p) {
+          if (!this.lifted_p) {
             list.push("selectable_p")
           }
         }
@@ -84,15 +84,15 @@ export default {
   },
 
   computed: {
-    holding_p() {
-      return this.base.holding_p
+    lifted_p() {
+      return this.base.lifted_p
     },
 
     component_class() {
       const list = []
       if (this.base.edit_p) {
-        if (this.holding_p) {
-          list.push("hoverable_p")
+        if (this.lifted_p) {
+          list.push("frame_boder_if_hover")
         }
       }
       return list
@@ -111,6 +111,7 @@ export default {
   +defvar(sp_stand_hover_border_color, rgba(0, 0, 0, 0.2)) // 駒を持って駒箱の上にいるときのボーダー色
   +defvar(sp_stand_hover_border_stroke, 2px)               // 駒を持って駒箱の上にいるときのボーダーの太さ
   +defvar(sp_stand_horizontal_hoverable_min_height, 3)     // edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分)
+  +defvar(sp_stand_bg_color, hsla(0, 0%, 0%, 0.5))   // 駒台の背景色
 
   .MembershipStand
     display: flex
@@ -131,28 +132,27 @@ export default {
   .MembershipStand
     +is_overlay_origin
   .MembershipStandTexture
-    // background-color などはここで指定
-    +is_overlay_block
+    background-color: var(--sp_stand_bg_color)
     border-radius: calc(var(--sp_board_radius) * 1px)
 
   //////////////////////////////////////////////////////////////////////////////// 駒を持って駒箱の上にいるとき
   .MembershipStand
-    &.hoverable_p
+    &.frame_boder_if_hover
       &:hover
         .MembershipStandTexture
           border: var(--sp_stand_hover_border_stroke) dashed var(--sp_stand_hover_border_color)
 
-  // 駒がなくても駒が置けるようにする ← hoverable_p になったときだけにすると駒台が拡縮して使いにくい
+  // 駒がなくても駒が置けるようにする ← piece_lifted_hover_reaction になったときだけにすると駒台が拡縮して使いにくい
   //
   // +IS_HORIZONTAL
   //   .MembershipStand
-  //     &.hoverable_p
+  //     &.piece_lifted_hover_reaction
   //       min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
   //       justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
   //       min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
   // &.is_vertical
   //   .MembershipStand
-  //     &.hoverable_p
+  //     &.piece_lifted_hover_reaction
   //       width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
   //       justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
   //       min-height: var(--sp_stand_piece_h) // 縦を最低限確保
@@ -189,13 +189,13 @@ export default {
     .ShogiPlayerGround
       +IS_HORIZONTAL
         .MembershipStand
-          // &.hoverable_p
+          // &.piece_lifted_hover_reaction
           min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
           justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
           min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
       +IS_VERTICAL
         .MembershipStand
-          // &.hoverable_p
+          // &.piece_lifted_hover_reaction
           min-height: var(--sp_stand_piece_h) // 縦を最低限確保
           width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
           justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ

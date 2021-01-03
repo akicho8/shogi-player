@@ -21,7 +21,7 @@ export default {
       for (const loc of Location.values) {
         const key = e.key.toLowerCase()
         if (key === loc.char_key) {
-          this.soldier_hold_unless_holding_p(e)
+          this.soldier_hold_unless_lifted_p(e)
           if (this.piece_stand_click_shared(loc, e)) { // 駒台クリック
             e.preventDefault()
             return true
@@ -32,7 +32,7 @@ export default {
       // 駒箱クリック
       if (this.edit_p) {
         if (e.code === "Backspace" || e.code === "Delete" || e.key.toLowerCase() === "t") {
-          this.soldier_hold_unless_holding_p(e)
+          this.soldier_hold_unless_lifted_p(e)
           if (this.piece_box_other_click(e)) {
             e.preventDefault()
             return true
@@ -53,7 +53,7 @@ export default {
       // https://wikiwiki.jp/factorio/%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95
       if (e.key === "q") {
         // 何か持っている状態ならキャンセルする
-        if (this.holding_p) {
+        if (this.lifted_p) {
           if (this.hold_cancel(e)) {
             e.preventDefault()
             return true
@@ -152,9 +152,9 @@ export default {
     },
 
     // 盤上にマウスがあって駒を持っていなかったら左クリック
-    soldier_hold_unless_holding_p(e) {
+    soldier_hold_unless_lifted_p(e) {
       if (this.mouseover_info) {                             // 盤上にマウスがあって
-        if (!this.holding_p) {                                // 駒を持っていなかったら
+        if (!this.lifted_p) {                                // 駒を持っていなかったら
           if (this.mouseover_info.type === "board") {
             this.board_cell_left_click(this.mouseover_info.xy, e) // 左クリック
           }

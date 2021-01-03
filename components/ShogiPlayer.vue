@@ -314,18 +314,18 @@ export default {
       }
     },
 
-    board_piece_control_class(xy) {
+    board_piece_tap_class(xy) {
       const place = Place.fetch(xy)
       const soldier = this.mediator.board.lookup(place)
       let list = []
 
       list.push(place.css_place_key) // place_9_9
 
-      if (this.holding_p) {
-        list.push("hoverable_p")
+      if (this.lifted_p) {
+        list.push("piece_lifted_hover_reaction")
       }
 
-      if (!this.holding_p) {
+      if (!this.lifted_p) {
         if (this.mediator.last_hand) {
           const origin_place = this.mediator.last_hand.origin_place
           if (origin_place) {
@@ -340,10 +340,10 @@ export default {
       }
 
       if (_.isEqual(this.place_from, place)) {
-        list.push("holding_p")
+        list.push("lifted_from_p")
       } else if (soldier) {
         if (this.edit_p || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
-          if (!this.holding_p) {
+          if (!this.lifted_p) {
             list.push("selectable_p")
           }
         }

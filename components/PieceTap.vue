@@ -50,20 +50,23 @@ export default {
         // background プロパティをつかうと他の設定をリセットしてしまうので注意
         background-color: var(--sp_piece_selectable_color)
 
-  // 持ち上げたとき
-  &.holding_p
-    +desktop
-      opacity: var(--sp_hold_origin_opacity)  // 駒を持ち上げたので元の駒を含めて薄くする
+  // 持ち上げた元のセル
+  &.lifted_from_p
     +touch
-      background-color: var(--sp_hold_color_if_touch)
-      // さらに駒を持ったときは色を濃くする
-      &:hover
-        background-color: var(--sp_hold_color_if_touch)
+      background-color: var(--sp_lifted_origin_bg_color_if_touch)
+      // // さらに駒を持ったときは色を濃くする
+      // &:hover
+      //   background-color: var(--sp_lifted_origin_bg_color_if_touch)
+    +desktop
+      opacity: var(--sp_hold_origin_opacity_if_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
 
-  // 持ち上げれる駒
-  &.hoverable_p
+  // 持って上空を移動したときの下のセルの反応
+  // touchではタップしたときにhoverが反応してfocusしたような状態になってしまう
+  // なので desktop 以上のときだけにする
+  &.piece_lifted_hover_reaction
     &:hover
-      background-color: var(--sp_piece_selectable_color)
+      +desktop
+        background-color: var(--sp_piece_selectable_color)
 
 .ShogiPlayerGround
   // 盤背景と同じ構成
@@ -87,9 +90,10 @@ export default {
   +defvar(sp_piece_blink_color1, hsla(0, 0%, 0%, 0.10))     // 最後に動かした駒の背景色2(点滅:100%)
 
   +defvar(sp_piece_origin_color, hsla(0, 0%, 0%, 0.10))     // 最後に動かした駒の元の位置の背景色
-  +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.10)) // 持ち上げれる駒の背景色
-  +defvar(sp_hold_color_if_touch, hsla(0, 0%, 0%, 0.25))    // 持ち上げた駒の背景色
-  +defvar(sp_hold_origin_opacity, 0.4)                      // 持ち上げた駒の元のセルの非透明度
+  +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.1))  // 持ち上げれる駒の背景色
+
+  +defvar(sp_lifted_origin_bg_color_if_touch, $primary)     // 持ち上げた駒の背景色
+  +defvar(sp_hold_origin_opacity_if_desktop, 0.4)                      // 持ち上げた駒の元のセルの非透明度
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_w, 47px)              // 駒台のセル(W)
@@ -102,7 +106,6 @@ export default {
 
   // 共通
   .PieceTap
-    // cursor: default // テキスト選択「I」ではなく矢印カーソルとする
     &.selectable_p
       &:hover
         cursor: pointer

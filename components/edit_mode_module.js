@@ -106,7 +106,7 @@ export default {
         return
       }
 
-      if (this.play_p && !this.holding_p && soldier && soldier.location !== this.mediator.current_location) {
+      if (this.play_p && !this.lifted_p && soldier && soldier.location !== this.mediator.current_location) {
         this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
         return
       }
@@ -127,7 +127,7 @@ export default {
         }
       }
 
-      if (!this.holding_p && !soldier) {
+      if (!this.lifted_p && !soldier) {
         this.log("持たずに何もないところをクリックしたので無効とする")
         return
       }
@@ -168,9 +168,9 @@ export default {
       // --------------------------------------------------------------------------------
 
       if (this.edit_p) {
-        this.log(`holding_p: ${this.holding_p}`)
+        this.log(`lifted_from_p: ${this.lifted_p}`)
         if (this.meta_p(e)) {
-          if (!this.holding_p && soldier) { // 持ってなくて、駒がある
+          if (!this.lifted_p && soldier) { // 持ってなくて、駒がある
             this.log("盤上の駒を裏返す")
             this.mediator.board.place_on(soldier.transform_clone)
             this.piece_hold_and_put_for_bug(place, e) // 不具合対策
@@ -180,7 +180,7 @@ export default {
       }
 
       // 盤上の駒を持ちあげる
-      if (!this.holding_p) {
+      if (!this.lifted_p) {
         this.log("盤上の駒を持ちあげる")
         this.soldier_hold(place, e)
         return
@@ -348,7 +348,7 @@ export default {
     //   const soldier = this.mediator.board.lookup(place)
     //
     //   if (this.edit_p) {
-    //     if (!this.holding_p) {
+    //     if (!this.lifted_p) {
     //       if (soldier) {
     //         this.log("操作モードでダブルタップしたので裏返す")
     //         // this.mediator.board.place_on(soldier.transform_clone)
@@ -390,7 +390,7 @@ export default {
       }
 
       if (this.edit_p) {
-        if (!this.holding_p && soldier) {
+        if (!this.lifted_p && soldier) {
           this.log("盤上の駒を裏返す")
           this.mediator.board.place_on(soldier.transform_clone)
           this.piece_hold_and_put_for_bug(place, e) // 不具合対策
@@ -413,7 +413,7 @@ export default {
     //   }
     //
     //   if (this.edit_p) {
-    //     if (!this.holding_p && soldier) {
+    //     if (!this.lifted_p && soldier) {
     //       this.log("盤上の駒を裏返す")
     //       this.mediator.board.place_on(soldier.transform_clone)
     //       this.piece_hold_and_put_for_bug(place, e) // 不具合対策
@@ -549,7 +549,7 @@ export default {
     // 成り不成り選択ダイアログ表示中はキャンセルできない
     hold_cancel(e) {
       if (!this.dialog_soldier) {
-        if (this.holding_p) {
+        if (this.lifted_p) {
           this.log("持ち上げた駒を元に戻す")
           this.state_reset()
           return true
@@ -610,7 +610,7 @@ export default {
 
     // 自分の駒の上に重ねた？ (移動元にある駒を含まない)
     put_on_my_soldier_p(soldier) {
-      if (this.holding_p) {
+      if (this.lifted_p) {
         if (soldier && soldier.location === this.mediator.current_location) {
           if (_.isEqual(this.place_from, soldier.place)) {
           } else {
@@ -647,35 +647,6 @@ export default {
     },
 
     // -------------------------------------------------------------------------------- PieceBox
-
-    // 駒箱の駒
-    piece_box_piece_control_class(piece) {
-      let list = []
-      if (this.piece_box_have_p(piece)) {
-        list.push("holding_p")
-      } else if (this.edit_p) {
-        if (!this.holding_p) {
-          list.push("selectable_p")
-        }
-      }
-
-      // list = _.concat(list, piece.css_class_list)
-      // list.push("location_black")
-      // list.push("promoted_false")
-
-      list.push("is_position_south") // 常に上向きにする
-
-      return list
-    },
-
-    // 駒箱の駒のテクスチャ
-    piece_box_piece_texture_class(piece) {
-      let list = []
-      list = _.concat(list, piece.css_class_list)
-      list.push("location_black")
-      list.push("promoted_false")
-      return list
-    },
 
     // --------------------------------------------------------------------------------
 
@@ -837,7 +808,7 @@ export default {
     },
 
     // 駒を持ち上げている状態？
-    holding_p() {
+    lifted_p() {
       return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
     },
 

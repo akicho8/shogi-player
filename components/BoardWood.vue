@@ -22,7 +22,7 @@
           )
           PieceTap(
             :base="base"
-            :class="base.board_piece_control_class(logical_xy(x, y))"
+            :class="base.board_piece_tap_class(logical_xy(x, y))"
             :style="base.board_piece_back_style(logical_xy(x, y))"
             :piece_texture_class="base.mediator.board_piece_fore_class(logical_xy(x, y))"
             )

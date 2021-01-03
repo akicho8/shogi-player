@@ -174,6 +174,8 @@
             b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
           b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色")
             ColorPicker(v-model="sp_stand_hover_border_color")
+          b-field(custom-class="is-small" label="背景色")
+            ColorPicker(v-model="sp_stand_bg_color")
 
         .box
           .title.is-5 駒数
@@ -385,6 +387,10 @@
             b-radio-button(size="is-small" v-model="sp_comment" native-value="is_comment_off") OFF
             b-radio-button(size="is-small" v-model="sp_comment" native-value="is_comment_on") ON
 
+          b-field(custom-class="is-small" label="操作モードでは合法手に絞る")
+            b-radio-button(size="is-small" v-model="sp_play_mode_legal_move_only" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_play_mode_legal_move_only" :native-value="true") ON
+
         .box(v-if="false")
           .title.is-5 カスタムCSS
           b-field(custom-class="is-small" label="")
@@ -554,6 +560,7 @@ export default {
       sp_stand_piece_h: 50,
       sp_stand_piece_rate: 80,
       sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
+      sp_stand_bg_color: "rgba(0, 0, 0, 0.5)",
 
       sp_turn: -1,
       sp_viewpoint: "black",
@@ -595,6 +602,7 @@ export default {
       sp_summary:    DEVELOPMENT_P ? "is_summary_on" : "is_summary_off",
       sp_slider:     DEVELOPMENT_P ? "is_slider_on" : "is_slider_on",
       sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
+      sp_play_mode_legal_move_only: false,
 
       se_tf0_mode: "is_tf0_mode_off",
       se_tf0_perspective: 200,
@@ -816,7 +824,7 @@ export default {
       params.sp_slider            = this.sp_slider
       params.sp_controller        = this.sp_controller
       params.sp_player_info       = this.sp_player_info
-      params.sp_play_mode_legal_move_only = false
+      params.sp_play_mode_legal_move_only = this.sp_play_mode_legal_move_only
       return params
     },
 
@@ -906,6 +914,7 @@ export default {
           // 駒台
           --sp_stand_piece_rate:         ${this.sp_stand_piece_rate}%;
           --sp_stand_hover_border_color: ${this.hsla_format(this.sp_stand_hover_border_color)};
+          --sp_stand_bg_color: ${this.hsla_format(this.sp_stand_bg_color)};
           --sp_stand_piece_w:            ${this.sp_stand_piece_w}px;
           --sp_stand_piece_h:            ${this.sp_stand_piece_h}px;
 

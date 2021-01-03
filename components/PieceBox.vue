@@ -5,20 +5,21 @@
   @click.stop.prevent="base.piece_box_other_click"
   @click.right.prevent="base.hold_cancel"
   )
-  .PieceBoxTexture
-  .PieceWithCount(
-    v-for="[piece, count] in base.mediator.piece_box_realize()"
-    :class="{holding_p: base.piece_box_have_p(piece)}"
-    @click.stop.prevent="base.piece_box_piece_click(piece, $event)"
-    @mouseover="base.piece_box_mouseover_handle(piece, $event)"
-    @mouseleave="base.mouseleave_handle"
-    )
-    PieceTap(
-      :base="base"
-      :class="base.piece_box_piece_control_class(piece)"
-      :piece_texture_class="base.piece_box_piece_texture_class(piece)"
-      :count="count"
+  // PieceBoxPieces を is-overlay にしないとPieceBoxPiecesの背景にPieceBoxTextureの色の非透明度が影響してしまう
+  .PieceBoxTexture.is-overlay
+  .PieceBoxPieces.is-overlay
+    .PieceWithCount(
+      v-for="[piece, count] in base.mediator.piece_box_realize()"
+      @click.stop.prevent="base.piece_box_piece_click(piece, $event)"
+      @mouseover="base.piece_box_mouseover_handle(piece, $event)"
+      @mouseleave="base.mouseleave_handle"
       )
+      PieceTap(
+        :base="base"
+        :class="piece_box_piece_tap_class(piece)"
+        :piece_texture_class="piece_box_piece_texture_class(piece)"
+        :count="count"
+        )
 </template>
 
 <script>
@@ -30,11 +31,47 @@ export default {
   components: {
     PieceTap,
   },
+  methods: {
+    // 駒箱の駒
+    piece_box_piece_tap_class(piece) {
+      let list = []
+
+      if (this.base.lifted_p) {
+        list.push("piece_lifted_hover_reaction")
+      }
+
+      if (this.base.piece_box_have_p(piece)) {
+        list.push("lifted_from_p")
+      } else if (this.base.edit_p) {
+        if (!this.base.lifted_p) {
+          list.push("selectable_p")
+        }
+      }
+
+      // list = _.concat(list, piece.css_class_list)
+      // list.push("location_black")
+      // list.push("promoted_false")
+
+      list.push("is_position_south") // 常に上向きにする
+
+      return list
+    },
+
+    // 駒箱の駒のテクスチャ
+    piece_box_piece_texture_class(piece) {
+      let list = []
+      list = _.concat(list, piece.css_class_list)
+      list.push("location_black")
+      list.push("promoted_false")
+      return list
+    },
+  },
+
   computed: {
     component_class() {
       const list = []
-      if (this.base.holding_p) {
-        list.push("hoverable_p")
+      if (this.base.lifted_p) {
+        list.push("frame_boder_if_hover")
       }
       return list
     },
@@ -50,12 +87,12 @@ export default {
 
   .PieceBox
     @extend %is_unselectable
-
-    display: flex
-    justify-content: flex-start
-    align-items: center
-
     min-height: var(--sp_piece_box_piece_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
+
+  .PieceBoxPieces
+    display: flex
+    justify-content: center
+    align-items: center
 
     .PieceWithCount
       display: flex
@@ -70,9 +107,9 @@ export default {
     .PieceBox
       margin-top: 0
 
-  //////////////////////////////////////////////////////////////////////////////// 駒持ってhoverしたとき
+  //////////////////////////////////////////////////////////////////////////////// 駒持ってhoverしたとき全体にborder
   .PieceBox
-    &.hoverable_p
+    &.frame_boder_if_hover
       &:hover
         .PieceBoxTexture
           border: var(--sp_stand_hover_border_stroke) dashed var(--sp_stand_hover_border_color)
@@ -81,7 +118,6 @@ export default {
   .PieceBox
     +is_overlay_origin
   .PieceBoxTexture
-    +is_overlay_block
     background-color: var(--sp_piece_box_color)
     border-radius: calc(var(--sp_board_radius) * 1px)
   &.is_board_shadow_box
