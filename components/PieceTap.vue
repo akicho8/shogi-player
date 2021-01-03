@@ -1,6 +1,7 @@
 <template lang="pug">
 .PieceTap(v-if="count >= 1")
   // 駒を押せる部分
+  .PieceTapBG.is-overlay
   .PieceTexture
     // PieceTexture の背景に画像を設定すると影が PieceCount にまで適用されるため個別にしている
     .PieceTextureSelf(:class="piece_texture_class")
@@ -48,17 +49,22 @@ export default {
       +desktop
         // 選択できる駒だけ反応する
         // background プロパティをつかうと他の設定をリセットしてしまうので注意
-        background-color: var(--sp_piece_selectable_color)
+        .PieceTapBG
+          background-color: var(--sp_piece_selectable_color)
 
   // 持ち上げた元のセル
   &.lifted_from_p
+    // .PieceTapBG
+    //   background-color: red
     +touch
-      background-color: var(--sp_lifted_origin_bg_color_if_touch)
+      .PieceTapBG
+        background-color: var(--sp_lifted_origin_bg_color_if_touch)
       // // さらに駒を持ったときは色を濃くする
       // &:hover
       //   background-color: var(--sp_lifted_origin_bg_color_if_touch)
     +desktop
-      opacity: var(--sp_hold_origin_opacity_if_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
+      .PieceTexture
+        opacity: var(--sp_hold_origin_opacity_if_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
 
   // 持って上空を移動したときの下のセルの反応
   // touchではタップしたときにhoverが反応してfocusしたような状態になってしまう
@@ -66,7 +72,8 @@ export default {
   &.piece_lifted_hover_reaction
     &:hover
       +desktop
-        background-color: var(--sp_piece_selectable_color)
+        .PieceTapBG
+          background-color: var(--sp_piece_selectable_color)
 
 .ShogiPlayerGround
   // 盤背景と同じ構成
@@ -116,6 +123,11 @@ export default {
       +is_layer_border
     .PieceTexture
       +is_layer_border($danger)
+
+  .PieceTap
+    +is_overlay_origin
+    .PieceTapBG
+      +is_overlay_block
 
   .PieceTap
     // セル内の PieceTexture の配置

@@ -5,18 +5,19 @@
   @click.right.stop.prevent="base.hold_cancel"
   )
   .MembershipStandTexture.is-overlay
-  .PieceWithCount.is-flex(
-    v-for="[piece, count] in hold_pieces"
-    @click.stop="base.piece_stand_piece_click(location, piece, false, $event)"
-    @mouseover="base.piece_stand_mouseover_handle(location, piece, $event)"
-    @mouseleave="base.mouseleave_handle"
-    )
-    PieceTap(
-      :base="base"
-      :class="piece_tap_class(piece)"
-      :piece_texture_class="piece_fore_class(piece)"
-      :count="count"
+  .MembershipStand2
+    .PieceWithCount.is-flex(
+      v-for="[piece, count] in hold_pieces"
+      @click.stop="base.piece_stand_piece_click(location, piece, false, $event)"
+      @mouseover="base.piece_stand_mouseover_handle(location, piece, $event)"
+      @mouseleave="base.mouseleave_handle"
       )
+      PieceTap(
+        :base="base"
+        :class="piece_tap_class(piece)"
+        :piece_texture_class="piece_fore_class(piece)"
+        :count="count"
+        )
 </template>
 
 <script>
@@ -114,6 +115,10 @@ export default {
   +defvar(sp_stand_bg_color, hsla(0, 0%, 0%, 0.5))   // 駒台の背景色
 
   .MembershipStand
+    width: 100%
+    height: 100%
+
+  .MembershipStand2
     display: flex
     justify-content: center // 駒台が広がったときに中央に寄るのを防ぎたいときは flex-start にする
     align-items: center
@@ -145,13 +150,13 @@ export default {
   // 駒がなくても駒が置けるようにする ← piece_lifted_hover_reaction になったときだけにすると駒台が拡縮して使いにくい
   //
   // +IS_HORIZONTAL
-  //   .MembershipStand
+  //   .MembershipStand2
   //     &.piece_lifted_hover_reaction
   //       min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
   //       justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
   //       min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
   // &.is_vertical
-  //   .MembershipStand
+  //   .MembershipStand2
   //     &.piece_lifted_hover_reaction
   //       width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
   //       justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
@@ -167,36 +172,36 @@ export default {
   ////////////////////////////////////////////////////////////////////////////////
   +IS_HORIZONTAL
     .is_position_north
-      .MembershipStand
+      .MembershipStand2
         flex-direction: column-reverse // 全体横並び → 後手 → 縦並び(昇順) △が下にあるので大駒順に並べるため
     .is_position_south
-      .MembershipStand
+      .MembershipStand2
         flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
   +IS_VERTICAL
     .is_position_north
-      .MembershipStand
+      .MembershipStand2
         flex-direction: row-reverse    // 「飛歩」→「歩飛」
         margin-left: auto              // 「△後手 飛歩…………」→「△後手…………飛歩」
     .is_position_south
-      .MembershipStand
+      .MembershipStand2
         flex-direction: row            // 「飛歩」→「飛歩」
         margin-right: auto             // 「…………飛歩 先手▲」→「飛歩…………先手▲」
 
-//////////////////////////////////////////////////////////////////////////////// edit_mode なら最初から駒台を確保する
-.ShogiPlayer
-  &.is_run_mode_edit_mode
-    // 駒がなくても駒が置けるようにする
-    .ShogiPlayerGround
-      +IS_HORIZONTAL
-        .MembershipStand
-          // &.piece_lifted_hover_reaction
-          min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
-          justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
-          min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
-      +IS_VERTICAL
-        .MembershipStand
-          // &.piece_lifted_hover_reaction
-          min-height: var(--sp_stand_piece_h) // 縦を最低限確保
-          width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
-          justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
+// //////////////////////////////////////////////////////////////////////////////// edit_mode なら最初から駒台を確保する
+// .ShogiPlayer
+//   &.is_run_mode_edit_mode
+//     // 駒がなくても駒が置けるようにする
+//     .ShogiPlayerGround
+//       +IS_HORIZONTAL
+//         .MembershipStand2
+//           // &.piece_lifted_hover_reaction
+//           min-height: calc(var(--sp_stand_piece_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
+//           justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
+//           min-width:  var(--sp_stand_piece_w)           // 横を最低限確保
+//       +IS_VERTICAL
+//         .MembershipStand2
+//           // &.piece_lifted_hover_reaction
+//           min-height: var(--sp_stand_piece_h) // 縦を最低限確保
+//           width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
+//           justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
 </style>

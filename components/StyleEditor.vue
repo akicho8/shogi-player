@@ -584,7 +584,7 @@ export default {
 
       sp_comment: "is_comment_off",
       sp_common_gap: 12,
-      sp_layer: DEVELOPMENT_P ? "is_layer_on" : "is_layer_off",
+      sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_board_shadow: "is_board_shadow_drop",
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a1by",
