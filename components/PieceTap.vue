@@ -58,12 +58,12 @@ export default {
     //   background-color: red
     // +touch
     //   .PieceTapBG
-    //     background-color: var(--sp_lifted_origin_bg_color_if_touch)
+    //     background-color: var(--sp_lifted_origin_bg_color)
     // +desktop
     .PieceTapBG
-      background-color: var(--sp_lifted_origin_bg_color_if_touch)
-    .PieceTexture
-      opacity: var(--sp_hold_origin_opacity_if_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
+      background-color: var(--sp_lifted_origin_bg_color)
+    .PieceTextureSelf
+      opacity: var(--sp_lifted_origin_opacity)  // 駒を持ち上げたので元の駒を含めて薄くする
 
   // 持って上空を移動したときの下のセルの反応
   // touchではタップしたときにhoverが反応してfocusしたような状態になってしまう
@@ -99,8 +99,8 @@ export default {
   +defvar(sp_piece_origin_color, hsla(0, 0%, 0%, 0.10))     // 最後に動かした駒の元の位置の背景色
   +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.1))  // 持ち上げれる駒の背景色
 
-  +defvar(sp_lifted_origin_bg_color_if_touch, $primary)     // 持ち上げた駒の背景色
-  +defvar(sp_hold_origin_opacity_if_desktop, 0.4)                      // 持ち上げた駒の元のセルの非透明度
+  +defvar(sp_lifted_origin_bg_color, hsla(0, 0%, 0%, 0.25))  // 持ち上げた駒の背景色
+  +defvar(sp_lifted_origin_opacity, 0.4)                     // 持ち上げた駒の元のセルの非透明度
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_w, 47px)              // 駒台のセル(W)

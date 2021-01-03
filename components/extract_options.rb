@@ -24,8 +24,9 @@ puts s
 Pathname("MainDoc/css_variable.md").write(s)
 # >> | 変数                                         | 初期値                    | 意味                                                                  |
 # >> |----------------------------------------------|---------------------------|-----------------------------------------------------------------------|
-# >> | `--sp_promote_select_modal_bg_color`              | hsla(0, 0%, 0%, 0.85)     | 成り不成り選択画面の背景色                                            |
-# >> | `--sp_promote_select_modal_hover_color`           | hsla(0, 0%, 100%, 0.5)    | 成り不成り選択でhoverした駒の背景色                                   |
+# >> | `--sp_promote_select_modal_bg_color`         | hsla(0, 0%, 0%, 0.85)     | 成り不成り選択画面の背景色                                            |
+# >> | `--sp_promote_select_modal_hover_color`      | hsla(0, 0%, 100%, 0.5)    | 成り不成り選択でhoverした駒の背景色                                   |
+# >> | `--sp_promote_select_modal_z`                | $promote_select_modal_z   | 成り不成り選択モーダルの z-index                                      |
 # >> | `--sp_piece_blur`                            |                         0 | 駒ぼかし                                                              |
 # >> | `--sp_piece_grayscale`                       |                         0 | 駒グレースケール                                                      |
 # >> | `--sp_piece_contrast`                        |                       1.0 | 駒コントラスト                                                        |
@@ -41,9 +42,9 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_piece_blink_color0`                    | hsla(0, 0%, 0%, 0.25)     | 最後に動かした駒の背景色1(点滅:0%)                                    |
 # >> | `--sp_piece_blink_color1`                    | hsla(0, 0%, 0%, 0.10)     | 最後に動かした駒の背景色2(点滅:100%)                                  |
 # >> | `--sp_piece_origin_color`                    | hsla(0, 0%, 0%, 0.10)     | 最後に動かした駒の元の位置の背景色                                    |
-# >> | `--sp_piece_selectable_color`                | hsla(0, 0%, 0%, 0.10)     | 持ち上げれる駒の背景色                                                |
-# >> | `--sp_lifted_origin_bg_color_if_touch`                   | hsla(0, 0%, 0%, 0.25)     | 持ち上げた駒の背景色                                                  |
-# >> | `--sp_hold_origin_opacity_if_desktop`                   |                       0.4 | 持ち上げた駒の元のセルの非透明度                                      |
+# >> | `--sp_piece_selectable_color`                | hsla(0, 0%, 0%, 0.1)      | 持ち上げれる駒の背景色                                                |
+# >> | `--sp_lifted_origin_bg_color`                | hsla(0, 0%, 0%, 0.25)     | 持ち上げた駒の背景色                                                  |
+# >> | `--sp_lifted_origin_opacity`                 |                       0.4 | 持ち上げた駒の元のセルの非透明度                                      |
 # >> | `--sp_stand_piece_w`                         | 47px                      | 駒台のセル(W)                                                         |
 # >> | `--sp_stand_piece_h`                         | 50px                      | 駒台のセル(H)                                                         |
 # >> | `--sp_stand_piece_rate`                      | 80%                       | 駒台のセル内の駒占有率                                                |
@@ -91,6 +92,7 @@ Pathname("MainDoc/css_variable.md").write(s)
 # >> | `--sp_stand_hover_border_color`              | rgba(0, 0, 0, 0.2)        | 駒を持って駒箱の上にいるときのボーダー色                              |
 # >> | `--sp_stand_hover_border_stroke`             | 2px                       | 駒を持って駒箱の上にいるときのボーダーの太さ                          |
 # >> | `--sp_stand_horizontal_hoverable_min_height` |                         3 | edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分) |
+# >> | `--sp_stand_bg_color`                        | hsla(0, 0%, 0%, 0)        | 駒台の背景色                                                          |
 # >> | `--sp_piece_count_gap_right`                 | 62%                       | 駒数の駒右端からのオフセット(横配置時)                                |
 # >> | `--sp_piece_count_gap_bottom`                | 32%                       | 駒数の駒底辺からのオフセット(縦配置時)                                |
 # >> | `--sp_piece_count_font_size`                 | 0.75rem                   | 駒数の文字サイズ                                                      |

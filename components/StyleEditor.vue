@@ -262,6 +262,13 @@
             ColorPicker(v-model="sp_promote_select_modal_hover_color")
 
         .box
+          .title.is-5 駒を操作中の移動元スタイル
+          b-field(custom-class="is-small" label="背景")
+            ColorPicker(v-model="sp_lifted_origin_bg_color")
+          b-field(custom-class="is-small" label="駒の非透明度")
+            b-slider(v-bind="slider_attrs" v-model="sp_lifted_origin_opacity" :min="0" :max="1.0" :step="0.001")
+
+        .box
           .title.is-5 Transform
           b-tabs(size="is-small" v-model="transform_tab_index" expanded)
             b-tab-item(label="背景")
@@ -552,6 +559,10 @@ export default {
       // 成り不成り選択
       sp_promote_select_modal_bg_color: "rgba(0, 0, 0, 0.85)",
       sp_promote_select_modal_hover_color: "hsla(0, 0%, 100%, 0.5)",
+
+      // 駒を操作中の移動元スタイル
+      sp_lifted_origin_bg_color: "hsla(0, 0%, 0%, 0.25)",
+      sp_lifted_origin_opacity: 0.4,
 
       sp_fullheight: "is_fullheight_off",
       sp_balloon: "is_balloon_on",
@@ -932,6 +943,10 @@ export default {
           // 成り不成り選択
           --sp_promote_select_modal_bg_color:    ${this.hsla_format(this.sp_promote_select_modal_bg_color)};
           --sp_promote_select_modal_hover_color: ${this.hsla_format(this.sp_promote_select_modal_hover_color)};
+
+          // 駒を操作中の移動元スタイル
+          --sp_lifted_origin_bg_color: ${this.hsla_format(this.sp_lifted_origin_bg_color)};
+          --sp_lifted_origin_opacity: ${this.sp_lifted_origin_opacity};
 
           // Other
           --sp_common_gap:              ${this.sp_common_gap}px;
