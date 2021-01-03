@@ -90,5 +90,4 @@ export default {
   &.is_layer_on
     .PromoteSelectModal
       +is_layer_border
-
 </style>
