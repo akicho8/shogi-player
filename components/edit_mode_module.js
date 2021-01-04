@@ -11,6 +11,8 @@ export default {
     sp_play_mode_legal_move_only:          { type: Boolean, default: true, }, // play_mode で合法手のみに絞る
     sp_play_mode_auto_promote:             { type: Boolean, default: true, }, // play_mode で死に駒になるときは自動的に成る
     sp_play_mode_not_put_if_death_soldier: { type: Boolean, default: true, }, // play_mode で死に駒になるときは置けないようにする
+    sp_play_mode_only_own_piece_to_move:       { type: Boolean, default: false, }, // play_mode では自分手番とき自分の駒しか動かせないようにする
+    sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: false, }, // play_mode では自分の駒で同じ仲間の駒を取れないようにする
     sp_edit_mode_double_click_time_ms:     { type: Number,  default: 350,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
   },
 
@@ -106,9 +108,17 @@ export default {
         return
       }
 
-      if (this.play_p && !this.lifted_p && soldier && soldier.location !== this.mediator.current_location) {
-        this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
-        return
+      if (this.sp_play_mode_only_own_piece_to_move) {
+        if (this.play_p) {
+          if (!this.lifted_p) {
+            if (soldier) {
+              if (soldier.location !== this.mediator.current_location) {
+                this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
+                return
+              }
+            }
+          }
+        }
       }
 
       if (this.play_p && this.have_piece && soldier) {
@@ -132,10 +142,14 @@ export default {
         return
       }
 
-      if (this.play_p && this.put_on_my_soldier_p(soldier)) {
-        this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
-        // this.state_reset() // ←元の位置に戻す場合
-        return
+      if (this.sp_play_mode_can_not_kill_same_team_soldier) {
+        if (this.play_p) {
+          if (this.put_on_my_soldier_p(soldier)) {
+            this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
+            // this.state_reset() // ←元の位置に戻す場合
+            return
+          }
+        }
       }
 
       // ダブルタップで裏返すとシングルクリックの遅延がすさまじいことになるためダブルタップは使ってはいけない

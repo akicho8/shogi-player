@@ -309,7 +309,7 @@ export default {
     },
 
     log(...v) {
-      if (this.debug_p) {
+      if (this.debug_p || process.env.NODE_ENV === "development") {
         console.log(...v)
       }
     },
