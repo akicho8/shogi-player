@@ -8,12 +8,12 @@ import { Location } from "./models/location.js"
 
 export default {
   props: {
-    sp_play_mode_legal_move_only:          { type: Boolean, default: true, }, // play_mode で合法手のみに絞る
-    sp_play_mode_auto_promote:             { type: Boolean, default: true, }, // play_mode で死に駒になるときは自動的に成る
-    sp_play_mode_not_put_if_death_soldier: { type: Boolean, default: true, }, // play_mode で死に駒になるときは置けないようにする
-    sp_play_mode_only_own_piece_to_move:       { type: Boolean, default: false, }, // play_mode では自分手番とき自分の駒しか動かせないようにする
-    sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: false, }, // play_mode では自分の駒で同じ仲間の駒を取れないようにする
-    sp_edit_mode_double_click_time_ms:     { type: Number,  default: 350,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
+    sp_play_mode_legal_move_only:                { type: Boolean, default: true, }, // play_mode で合法手のみに絞る
+    sp_play_mode_auto_promote:                   { type: Boolean, default: true, }, // play_mode で死に駒になるときは自動的に成る
+    sp_play_mode_not_put_if_death_soldier:       { type: Boolean, default: true, }, // play_mode で死に駒になるときは置けないようにする
+    sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },   // play_mode では自分手番とき自分の駒しか動かせないようにする
+    sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: true, }, // play_mode では自分の駒で同じ仲間の駒を取れないようにする
+    sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
   },
 
   data() {
@@ -490,9 +490,13 @@ export default {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.play_p && location !== this.mediator.current_location) {
-        this.log("相手の持駒を持とうとしたときは無効")
-        return
+      if (this.sp_play_mode_only_own_piece_to_move) {
+        if (this.play_p) {
+          if (location !== this.mediator.current_location) {
+            this.log("相手の持駒を持とうとしたときは無効")
+            return
+          }
+        }
       }
 
       if (this.cpu_location_p) {

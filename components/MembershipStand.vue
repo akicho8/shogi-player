@@ -48,17 +48,20 @@ export default {
       if (this.hold_piece_lifted_p(piece)) {
         list.push("lifted_from_p")
       } else {
-        let f = false
-        if (this.base.edit_p) {
-          f = true
-        }
-        if (this.base.play_p) {
-          if (!this.base.cpu_location_p && this.base.mediator.current_location === this.location) {
+        if (!this.lifted_p) {
+          let f = false
+          if (this.base.edit_p) {
             f = true
           }
-        }
-        if (f) {
-          if (!this.lifted_p) {
+          if (this.base.play_p) {
+            if (!this.base.cpu_location_p && this.base.mediator.current_location === this.location) {
+              f = true
+            }
+          }
+          if (this.base.play_p && !this.base.sp_play_mode_only_own_piece_to_move) {
+            f = true
+          }
+          if (f) {
             list.push("selectable_p")
           }
         }

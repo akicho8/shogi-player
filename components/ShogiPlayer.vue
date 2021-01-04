@@ -342,8 +342,16 @@ export default {
       if (_.isEqual(this.place_from, place)) {
         list.push("lifted_from_p")
       } else if (soldier) {
-        if (this.edit_p || (!this.cpu_location_p && this.mediator.current_location === soldier.location)) {
-          if (!this.lifted_p) {
+        if (!this.lifted_p) {
+          let f = false
+          if (this.edit_p) {
+            f = true
+          } else if (!this.cpu_location_p && this.mediator.current_location === soldier.location) {
+            f = true
+          } else if (this.play_p && !this.sp_play_mode_only_own_piece_to_move) {
+            f = true
+          }
+          if (f) {
             list.push("selectable_p")
           }
         }
