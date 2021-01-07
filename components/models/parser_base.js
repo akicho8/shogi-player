@@ -45,6 +45,11 @@ export class ParserBase {
     // return Location.fetch(Math.abs(index) % 2)
   }
 
+  // 最後に指した手数の手番
+  get performed_last_location() {
+    return this.location_by_offset(this.turn_offset_max - 1)
+  }
+
   get move_infos() {
     console.warn("not implemented")
   }
