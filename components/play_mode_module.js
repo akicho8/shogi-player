@@ -103,8 +103,8 @@ export default {
     },
 
     // 「待った」して指す場合を考慮してカレント以降の指し手を削除してから追加する
-    moves_set(value) {
-      this.moves = [...this.moves_take_turn_offset, value]
+    moves_set() {
+      this.moves = [...this.moves_take_turn_offset, this.last_move_info.to_sfen]
     },
 
     turn_next() {
@@ -116,6 +116,7 @@ export default {
         this.sound_play("piece_put")
 
         this.$emit("update:play_mode_advanced_full_moves_sfen", this.play_mode_full_moves_sfen)
+        this.$emit("update:play_mode_advanced_full_moves_sfen2", this.play_mode_full_moves_sfen, this.last_move_info)
         this.$emit("update:play_mode_advanced_last_move", _.last(this.moves))
         this.$emit("update:play_mode_advanced_moves", this.moves)
         this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_position_sfen)

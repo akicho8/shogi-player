@@ -8,8 +8,9 @@ describe('Soldier', () => {
       place: new Place([1, 2]),
       piece: Piece.fetch("R"),
       promoted: true,
-      location_key: "white",
+      location: "white",
     })
     expect(soldier.name).toEqual("龍")
+    expect(soldier.location.key).toEqual("white")
   })
 })

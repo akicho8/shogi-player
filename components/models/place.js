@@ -100,6 +100,10 @@ export class Place {
     return [this.kanji_human_x, this.kanji_human_y].join("")
   }
 
+  get digit_human() {
+    return [this.human_x, this.human_y].join("")
+  }
+
   // x, y を足した新しい位置を返す
   // はみでたのは反対側の座標とする
   rotate_add(x, y) {

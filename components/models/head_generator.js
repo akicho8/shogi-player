@@ -1,3 +1,4 @@
+
 // SEO関連パラメータの設定例
 //
 //   export default {

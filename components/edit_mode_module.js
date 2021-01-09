@@ -1,5 +1,6 @@
 import _ from "lodash"
 
+import { MoveInfo } from "./models/move_info.js"
 import { Place } from "./models/place.js"
 import { Board } from "./models/board.js"
 import { PieceVector } from "./models/piece_vector.js"
@@ -40,6 +41,8 @@ export default {
       dialog_soldier: null,     // 成り確認ダイアログ表示中か？
 
       $double_tap_time: null,   // ダブルクリック判定用
+
+      last_move_info: null, // 最後に動かした駒の情報
     }
   },
 
@@ -310,7 +313,8 @@ export default {
           }
         } else {
           if (this.play_p) {
-            this.moves_set(this.origin_soldier1.place.to_sfen + place.to_sfen) // 7g7f
+            this.last_move_info = new MoveInfo({type: "move", from: this.origin_soldier1, to: new_soldier})
+            this.moves_set()
           }
           this.mediator.board.place_on(new_soldier) // 置く
           this.mediator.board.delete_at(this.place_from)
@@ -344,7 +348,8 @@ export default {
         const new_soldier = this.soldier_create_from_stand_or_box_on(place)
         this.piece_decriment()
         this.mediator.board.place_on(new_soldier) // 置く
-        this.moves_set(new_soldier.piece.key + "*" + place.to_sfen) // P*7g
+        this.last_move_info = new MoveInfo({type: "put", to: new_soldier})
+        this.moves_set()
         this.state_reset()
         this.turn_next()
         return
@@ -382,7 +387,8 @@ export default {
     // 成れる状態の駒をどうするか
     promotable_piece_moved(new_soldier, promoted) {
       new_soldier = new_soldier.clone_with_attrs({promoted: promoted})
-      this.moves_set(this.origin_soldier1.place.to_sfen + new_soldier.place.to_sfen + (new_soldier.promoted ? "+" : "")) // 7g7f+
+      this.last_move_info = new MoveInfo({type: "promotable", from: this.origin_soldier1, to: new_soldier})
+      this.moves_set() // 7g7f+
       this.mediator.board.place_on(new_soldier) // 置く
       this.mediator.board.delete_at(this.place_from)
       this.state_reset()
