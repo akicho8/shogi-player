@@ -1,5 +1,5 @@
 <template lang="pug">
-.MembershipLocationMark(:class="component_class" @click="click_handle")
+.MembershipLocationMark(:class="component_class" :key="component_key" @click="click_handle")
   .MembershipLocationMarkTexture
 </template>
 
@@ -27,6 +27,9 @@ export default {
       return {
         "is-clickable": this.base.sp_location_click_handle || this.flipable
       }
+    },
+    component_key() {
+      return [this.$options.name, this.location.key].join(".")
     },
     flipable() {
       return this.base.sp_location_behavior === "is_location_flip_on"
