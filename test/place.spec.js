@@ -6,8 +6,8 @@ describe('Place', () => {
     expect(place.key).toEqual("7,2")
   })
 
-  it('to_css_class', () => {
+  it('css_place_key', () => {
     const place = new Place("2c")
-    expect(place.to_css_class).toEqual("place_23")
+    expect(place.css_place_key).toEqual("place_2_3")
   })
 })
