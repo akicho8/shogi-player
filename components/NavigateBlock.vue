@@ -53,6 +53,9 @@ export default {
     .buttons
       margin-bottom: 0
       .button
+        // &:focus-visible
+        &:focus
+          outline: none // Google Chrome では変化ない？
         margin-bottom: 0
         &.first, &.last
           width: 2rem
