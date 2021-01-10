@@ -25,4 +25,12 @@ describe("MoveInfo", () => {
     expect(new MoveInfo({type: "promotable", from: soldier_77P0, to: soldier_76P0}).to_kif).toEqual("☗7六歩不成(77)")
     expect(new MoveInfo({type: "put",                            to: soldier_76P0}).to_kif).toEqual("☗7六歩打")
   })
+
+  it("to_kif_without_from", () => {
+    expect(new MoveInfo({type: "move",       from: soldier_77P0, to: soldier_76P0}).to_kif_without_from).toEqual("☗7六歩")
+    expect(new MoveInfo({type: "move",       from: soldier_77P1, to: soldier_76P1}).to_kif_without_from).toEqual("☗7六と")
+    expect(new MoveInfo({type: "promotable", from: soldier_77P0, to: soldier_76P1}).to_kif_without_from).toEqual("☗7六歩成")
+    expect(new MoveInfo({type: "promotable", from: soldier_77P0, to: soldier_76P0}).to_kif_without_from).toEqual("☗7六歩不成")
+    expect(new MoveInfo({type: "put",                            to: soldier_76P0}).to_kif_without_from).toEqual("☗7六歩打")
+  })
 })
