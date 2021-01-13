@@ -1,6 +1,6 @@
 {
   "name": "shogi-player",
-  "version": "0.0.249",
+  "version": "0.0.250",
   "description": "shogi kifu player",
   "keywords": "shogi player editor viewer kifu kif ki2 sfen csa japanese-chess",
   "homepage": "https://akicho8.github.io/shogi-player/",
