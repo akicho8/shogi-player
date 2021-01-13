@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 const BUILD_VERSION = dayjs().format("YYYY-MM-DD HH:mm:ss")
-const SITE_DESC = "将棋に関連するツールを提供するサイトです"
+const SITE_DESC = "将棋盤のライブラリです"
 
 // /* nuxt.config.js */
 // // `DEPLOY_ENV` が `GH_PAGES` の場合のみ `router.base = '/<repository-name>/'` を追加する
