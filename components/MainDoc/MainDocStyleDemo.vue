@@ -4,14 +4,14 @@
   hr
   .columns
     .column
-      img(src="/style_editor_images/1.png")
+      img(src="style_editor_images/1.png")
     .column
-      img(src="/style_editor_images/2.png")
+      img(src="style_editor_images/2.png")
   .columns
     .column
-      img(src="/style_editor_images/3.png")
+      img(src="style_editor_images/3.png")
     .column
-      img(src="/style_editor_images/4.png")
+      img(src="style_editor_images/4.png")
 </template>
 
 <script>
