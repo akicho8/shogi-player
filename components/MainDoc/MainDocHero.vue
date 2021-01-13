@@ -18,7 +18,7 @@
         ul
           li: a(href="#summary") 概要
           li: a(href="#examples") デモ
-          li: nuxt-link(:to="{name: 'usage'}") 使い方
+          li: nuxt-link(:to="{name: 'usage'}") 組み込み方法
           li: nuxt-link(:to="{name: 'options'}") オプション
           li: nuxt-link(:to="{name: 'api'}") API
           li: nuxt-link(:to="{name: 'css-customize'}") CSS変数

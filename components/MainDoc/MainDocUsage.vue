@@ -3,7 +3,7 @@
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
-      b-navbar-item(tag="div").has-text-weight-bold 使い方
+      b-navbar-item(tag="div").has-text-weight-bold 組み込み方法
   .section
     a(name="usage")
     .container
