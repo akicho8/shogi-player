@@ -17,9 +17,10 @@
     Default ([Vue 2] babel, eslint) を選択
 
     % cd shogi-player-vue-cli-sample
+
     % yarn add shogi-player
 
-components/HelloWorld.vue はこのような感じにします
+既存の components/HelloWorld.vue をこのような内容に書き換えます
 
     <template lang="pug">
     .is-flex.is-justify-content-center
@@ -54,7 +55,7 @@ components/HelloWorld.vue はこのような感じにします
     </script>
 
     <style lang="sass">
-    // ShogiPlayer のスタイル
+    // ShogiPlayer のスタイルの読み込み
     $sp_assets_dir: "../../node_modules/shogi-player/assets"
     @import "../../node_modules/shogi-player/components/ShogiPlayer.sass"
 
@@ -78,7 +79,7 @@ components/HelloWorld.vue はこのような感じにします
 
 完成品は https://github.com/akicho8/shogi-player-vue-cli-sample に置いています
 
-実際の半自動生成スクリプトはこちら [shogi-player-vue-cli-sample-create.sh](https://raw.github.com/akicho8/shogi-player/shogi-player-vue-cli-sample-create.sh) をご覧ください
+上の手順をまとめた半自動生成スクリプトはこちら [shogi-player-vue-cli-sample-create.sh](https://github.com/akicho8/shogi-player/blob/master/shogi-player-vue-cli-sample-create.sh) です
 
 ## Nuxt.js への組み込み例
 
