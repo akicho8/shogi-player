@@ -108,7 +108,6 @@ export default {
     "~/plugins/mixin_mod.client.js",
 
     // 両方
-    "~/plugins/axios_mod.js",
     "~/plugins/universal.js",
   ],
   /*
