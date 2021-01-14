@@ -1,11 +1,12 @@
 <template lang="pug">
 .MainDocViewDemo1.column
   b-message(type="is-info")
-    | コメント付きの KIF 表示。駒音あり
+    | コメント付きのKIF表示。駒音あり。view_modeは再生用のモードだけど、継盤のような感じでデフォルトでは駒を動かせる。勝手に駒を動かした後でも手を進めると本線に戻る
   .has-text-centered
     .title.is-4 {{kifu_book_info.name}}
   ShogiPlayer(
     :sp_body="kifu_book_info.sp_body"
+    :sp_turn="4"
     :sp_player_info="sp_player_info"
     :sp_sound_enabled="true"
     :sp_sound_volume="0.25"

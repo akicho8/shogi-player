@@ -1,6 +1,7 @@
 <template lang="pug">
-.MainDocStyleDemo.section
-  .title.is-4.mt-6 スタイルカスタマイズ例
+.MainDocStyleDemo.mt-6
+  .title.is-4 スタイルカスタマイズ例
+  .subtitle.is-6 スタイルエディタでいろいろなスタイルを試せる
   hr
   .columns
     .column

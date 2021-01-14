@@ -1,7 +1,7 @@
 <template lang="pug">
 .MainDocViewDemo6.column
   b-message(type="is-info")
-    | 大きくしても滲まない
+    | SVG駒を使用時は巨大化しても滲まない
   .has-text-centered
     .title.is-4 {{kifu_book_info.name}}
   ShogiPlayer(
