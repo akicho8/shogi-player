@@ -54,6 +54,23 @@ export class MoveInfo {
     return this.to_custom_kif({from: false})
   }
 
+  // 7 6 ふ うつ
+  get to_yomiage() {
+    let v = null
+    if (this.type === "move") {
+      v = this.from.yomiage_name
+    } else if (this.type === "promotable") {
+      v = this.from.piece.piece_yomiage.prefix_name + "、" + (this.to.promoted ? "なりっ！" : "ふなりっ！")
+    } else if (this.type === "put") {
+      v = this.to.piece.piece_yomiage.prefix_name + "、" + "うつ！"
+    } else {
+      throw new Error("must not happen")
+    }
+    const x = this.to.place.human_x
+    const y = this.to.place.human_y
+    return [x, y, v].join(" ")
+  }
+
   // private
 
   get __from_xy() {

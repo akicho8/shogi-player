@@ -33,4 +33,12 @@ describe("MoveInfo", () => {
     expect(new MoveInfo({type: "promotable", from: soldier_77P0, to: soldier_76P0}).to_kif_without_from).toEqual("☗7六歩不成")
     expect(new MoveInfo({type: "put",                            to: soldier_76P0}).to_kif_without_from).toEqual("☗7六歩打")
   })
+
+  it("to_yomiage", () => {
+    expect(new MoveInfo({type: "move",       from: soldier_77P0, to: soldier_76P0}).to_yomiage).toEqual("7 6 ふーっ！")
+    expect(new MoveInfo({type: "move",       from: soldier_77P1, to: soldier_76P1}).to_yomiage).toEqual("7 6 ときんっ！")
+    expect(new MoveInfo({type: "promotable", from: soldier_77P0, to: soldier_76P1}).to_yomiage).toEqual("7 6 ふ、なりっ！")
+    expect(new MoveInfo({type: "promotable", from: soldier_77P0, to: soldier_76P0}).to_yomiage).toEqual("7 6 ふ、ふなりっ！")
+    expect(new MoveInfo({type: "put",                            to: soldier_76P0}).to_yomiage).toEqual("7 6 ふ、うつ！")
+  })
 })

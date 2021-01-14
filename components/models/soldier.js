@@ -57,6 +57,10 @@ export class Soldier {
     return this.piece.name
   }
 
+  get yomiage_name() {
+    return this.piece.piece_yomiage.yomiage(this.promoted)
+  }
+
   get transform_clone() {
     let attrs = null
     if (this.piece.promotable_p) {

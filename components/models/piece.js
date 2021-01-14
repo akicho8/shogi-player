@@ -1,5 +1,6 @@
 import MemoryRecord from "js-memory-record"
 import { PieceVector } from "./piece_vector.js"
+import { PieceYomiage } from "./piece_yomiage.js"
 
 export class Piece extends MemoryRecord {
   static get define() {
@@ -45,6 +46,9 @@ export class Piece extends MemoryRecord {
     return PieceVector.fetch(this.key)
   }
 
+  get piece_yomiage() {
+    return PieceYomiage.fetch(this.key)
+  }
 }
 
 if (process.argv[1] === __filename) {
