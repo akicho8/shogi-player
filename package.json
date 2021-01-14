@@ -18,6 +18,8 @@
     "autolinker": "latest",
     "buefy": "^0.9.4",
     "bulma": "^0.9.1",
+    "chroma-js": "^2.1.0",
+    "dayjs": "latest",
     "file-loader": "^6.2.0",
     "howler": "latest",
     "js-memory-record": "latest",
@@ -28,8 +30,6 @@
     "pug-plain-loader": "^1.1.0",
     "raw-loader": "^4.0.2",
     "sass-loader": "latest",
-    "chroma-js": "^2.1.0",
-    "dayjs": "latest",
     "vue-color": "^2.7.1",
     "xregexp": "^4.3.0"
   },
@@ -48,7 +48,6 @@
     "nuxt-buefy": "^0.4.4",
     "pattern.css": "^1.0.0",
     "rimraf": "^3.0.2",
-    "striptags": "^3.1.1",
     "vue-jest": "^4.0.0-0"
   }
 }

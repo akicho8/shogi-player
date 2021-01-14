@@ -1,7 +1,5 @@
 // 汎用コード
 
-const strip_tags = require('striptags')
-
 import Autolinker from 'autolinker'
 
 export default {
@@ -174,19 +172,6 @@ export default {
 
     simple_format(str) {
       return str.replace(/\n/g, "<br>")
-    },
-
-    // // sfen_parser.moves.length
-    // sfen_parse(sfen) {
-    //   return SfenParser.parse(sfen)
-    // },
-
-    // strip_tags(html)
-    // strip_tags(html, '<strong>')
-    // strip_tags(html, ['a'])
-    // strip_tags(html, [], '\n')
-    strip_tags(...args) {
-      return strip_tags(...args)
     },
   },
 
