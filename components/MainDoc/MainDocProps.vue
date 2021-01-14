@@ -3,7 +3,7 @@
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
-      b-navbar-item(tag="div").has-text-weight-bold Props
+      b-navbar-item(tag="div").has-text-weight-bold コンポーネント引数一覧
   .section
     .container
       MainDocMd(:body="props")

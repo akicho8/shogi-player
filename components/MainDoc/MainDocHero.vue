@@ -19,10 +19,10 @@
           li: a(href="#summary") 概要
           li: a(href="#examples") デモ
           li: nuxt-link(:to="{name: 'usage'}") 組み込み方法
-          li: nuxt-link(:to="{name: 'options'}") オプション
+          li: nuxt-link(:to="{name: 'props'}") コンポーネント引数一覧
+          li: nuxt-link(:to="{name: 'options'}") 引数とイベントチェック
           li: nuxt-link(:to="{name: 'api'}") API
-          li: nuxt-link(:to="{name: 'css-customize'}") CSS変数
-          li: nuxt-link(:to="{name: 'props'}") 引数
+          li: nuxt-link(:to="{name: 'css-customize'}") CSS変数一覧
           li: nuxt-link(:to="{name: 'editor'}") スタイルエディタ
           li: nuxt-link(:to="{name: 'credit'}") クレジット
 </template>

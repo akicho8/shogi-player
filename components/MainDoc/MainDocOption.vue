@@ -123,7 +123,7 @@
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
-      b-navbar-item(tag="div").has-text-weight-bold オプション
+      b-navbar-item(tag="div").has-text-weight-bold 引数とイベントチェック
     template(slot="end")
       b-navbar-item.has-text-weight-bold(@click="sidebar_toggle")
         | 動作テスト
@@ -251,7 +251,7 @@ export default {
         white: { name: "後手", time: "56:78", },
       },
 
-      sp_body: KifuBookInfo.fetch("KIF_15733").sp_body,
+      sp_body: KifuBookInfo.fetch("SFEN_15733").sp_body,
 
       trigger_toast_p: false,
 

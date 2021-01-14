@@ -23,6 +23,7 @@ import KIF_27489 from "./kifu_book_info/27489.kif"
 import KIF_27637 from "./kifu_book_info/27637.kif"
 import KIF_27490 from "./kifu_book_info/27490.kif"
 import KIF_15733 from "./kifu_book_info/15733.kif"
+import SFEN_15733 from "./kifu_book_info/15733.sfen"
 
 export class KifuBookInfo extends MemoryRecord {
   static get define() {
@@ -49,6 +50,7 @@ export class KifuBookInfo extends MemoryRecord {
       {"key":"KIF_27490","kif_code":"27490","generation":54,"name":"1710-03-19 宗銀印達57番指し54局","black":"六代大橋宗銀","white":"伊藤印達","sp_body":KIF_27490},
       {"key":"KIF_27585","kif_code":"27585","generation":null,"name":"1710-11-03 御城将棋 将棋絶妙第7番","black":"伊藤印達","white":"三代大橋宗与","sp_body":KIF_27585},
       {"key":"KIF_15733","kif_code":"15733","generation":57,"name":"1711-02-28 宗銀印達57番指し57局","black":"六代大橋宗銀","white":"伊藤印達","sp_body":KIF_15733},
+      {"key":"SFEN_15733","kif_code":"15733","generation":57,"name":"1711-02-28 宗銀印達57番指し57局","black":"六代大橋宗銀","white":"伊藤印達","sp_body": SFEN_15733 },
       {"key":"KIF_37368","kif_code":"37368","generation":null,"name":"1711-03-00 将棋絶妙第8番","black":"宮本印佐","white":"伊藤印達","sp_body":KIF_37368},
       {"key":"KIF_16217","kif_code":"16217","generation":null,"name":"1711-11-21 御城将棋 (印達の絶局)","black":"六代大橋宗銀","white":"伊藤印達","sp_body":KIF_16217},
       // { black: "先手",             white: "後手",                                 sfen: "position startpos" },
