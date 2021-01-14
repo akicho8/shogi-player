@@ -21,7 +21,7 @@ yarn add shogi-player
 cat <<'EOF' > src/components/HelloWorld.vue
 <template lang="pug">
 .is-flex.is-justify-content-center
-  .ShogiPlayerContainer
+  .MyShogiPlayerContainer
     ShogiPlayer(
       sp_layout="is_horizontal"
       sp_controller="is_controller_on"
@@ -63,7 +63,7 @@ $sp_assets_dir: "../../node_modules/shogi-player/assets"
 @import "~bulma/sass/utilities/_all"
 
 // ShogiPlayer は常に横100%まで広がるので外側で大きさを調整する
-.ShogiPlayerContainer
+.MyShogiPlayerContainer
   +mobile
     width: 100%
   +tablet
