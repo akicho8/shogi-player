@@ -2,19 +2,7 @@ import dayjs from "dayjs"
 const BUILD_VERSION = dayjs().format("YYYY-MM-DD HH:mm:ss")
 const SITE_DESC = "将棋盤のライブラリです"
 
-// /* nuxt.config.js */
-// // `DEPLOY_ENV` が `GH_PAGES` の場合のみ `router.base = '/<repository-name>/'` を追加する
-// const routerBase =
-//       process.env.DEPLOY_ENV === 'GH_PAGES'
-//       ? {
-//         router: {
-//           base: '/akicho8/'
-//         }
-//       }
-//       : {}
-
-const config = {
-// export default {
+export default {
   // debug: true,
 
   // https://ja.nuxtjs.org/guides/configuration-glossary/configuration-ssr/
@@ -64,23 +52,6 @@ const config = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: SITE_DESC },
-      { name: "action-cable-url", content: (process.env.NODE_ENV === 'development' ? "http://0.0.0.0:3000" : "") + "/maincable" },
-
-      // 「ホーム画面に追加」したあとアプリのような画面にする設定
-      //
-      //  ・画面は広くなる
-      //  ・が、iOS では localStorage がWEBと繋がっていない問題があったりなかったりする
-      //  ・ブラウザで使えた便利機能が一切使えなくなって困惑
-      //  ・何があっても他に遷移しない閉じたWEBサービスでしか使えない
-      //  ・のでいったんやめ
-      //
-      //   https://qiita.com/amishiro/items/e668be423a85c2b61696
-      //   https://pwa.nuxtjs.org/meta#mobileappios
-      //   https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
-      //   https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb
-      //
-      // { name: 'apple-mobile-web-app-capable',          content: 'yes'               },
-      // { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
 
       ////////////////////////////////////////////////////////////////////////////////
       { hid: "og:site_name",   property: "og:site_name",   content: process.env.APP_NAME },
@@ -90,12 +61,11 @@ const config = {
       // 重要なのはこの4つだけで各ページで上書きする
       { hid: "og:title",       property: "og:title",       content: process.env.APP_NAME },
       { hid: "og:description", property: "og:description", content: SITE_DESC },
-      { hid: "og:image",       property: "og:image",       content: process.env.MY_NUXT_URL + "/ogp/application.png" },
-      { hid: "twitter:card",   property: "twitter:card",   content: "summary_large_image" }, // summary or summary_large_image
+      // { hid: "og:image",       property: "og:image",       content: process.env.MY_NUXT_URL + "/ogp/application.png" },
+      // { hid: "twitter:card",   property: "twitter:card",   content: "summary_large_image" }, // summary or summary_large_image
 
       { hid: "twitter:site",       property: "twitter:site",       content: "@sgkinakomochi" }, // これいるのか？
       { hid: "twitter:creator",    property: "twitter:creator",    content: "@sgkinakomochi" }, // これいるのか？
-
     ],
     link: [
       { hid: "icon",             rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'          },
@@ -255,7 +225,6 @@ const config = {
   // SSR側での定義で publicRuntimeConfig を上書きする
   // 意味はよくわかっていない
   privateRuntimeConfig: {
-    SSR_BUILD_VERSION: BUILD_VERSION,
   },
 
   // 面倒な process.env.XXX の再定義
@@ -271,19 +240,3 @@ const config = {
     ENV_BUILD_VERSION: BUILD_VERSION,
   },
 }
-
-// :src="/rails/..." のときに 3000 に切り替えるための仕組みであって axios はなんも関係ない
-if (process.env.NODE_ENV === 'development') {
-  // // これがないと CORS にひっかかる
-  // // ↓これいらんはず
-  // config.proxy["/api"]        = "http://0.0.0.0:3000"
-
-  // ↓これはいる(たぶん)
-  config.proxy["/system"]     = "http://0.0.0.0:3000" // for mp3
-  config.proxy["/rails"]      = "http://0.0.0.0:3000" // for /rails/active_storage/*
-  config.proxy["/assets"]     = "http://0.0.0.0:3000" // for /assets/human/0005_fallback_avatar_icon-f076233f605139a9b8991160e1d79e6760fe6743d157446f88b12d9dae5f0e03.png
-  // config.proxy["/x.json"]     = "http://0.0.0.0:3000" // for /x.json
-  config.proxy["/admin"]     = "http://0.0.0.0:3000"
-}
-
-export default config
