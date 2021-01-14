@@ -177,24 +177,8 @@ const config = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    debug: process.env.NODE_ENV === 'development',
-    // proxy: process.env.NODE_ENV === 'development',
-
-    // baseURL の設定があれば、何を実行しても 3000 の方に行くので /api は 3000 のような proxy を設定する必要はないっぽい
-    // baseURL: process.env.MY_SITE_URL, // generate する staging では proxy が無効になり https://shogi-flow.xyz/api/* を叩かせる
-    // これ↓をみると API_URL が定義されていれば baseURL に勝つらしい
-    // https://github.com/nuxt-community/axios-module/blob/master/lib/module.js
-
-    headers: {
-      "Content-Type": "application/json", // ← これがあるとAPIを叩くときいちいち .json をつけなくてよくなる
-      // "X-Requested-With": "XMLHttpRequest", // ←これがあると $axios.$get("https://yesno.wtf/api") が動かない
-    },
-    // responseType: "json",
-
-    credentials: true,             // これを入れないと /api/talk のとき HTML が返ってきてしまう(？)
   },
 
-  // 下で設定している
   proxy: {},
 
   /*
