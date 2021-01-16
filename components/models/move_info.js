@@ -3,6 +3,11 @@ export class MoveInfo {
     Object.assign(this, attributes)
   }
 
+  // 指した側
+  get location() {
+    return this.to.location
+  }
+
   get to_sfen() {
     let v = null
     if (this.type === "move") {
@@ -41,7 +46,7 @@ export class MoveInfo {
     } else {
       throw new Error("must not happen")
     }
-    return [options.location ? this.to.location.name : "", this.__to_xy, v, from].join("")
+    return [options.location ? this.location.name : "", this.__to_xy, v, from].join("")
   }
 
   // ☗7六歩(77)
