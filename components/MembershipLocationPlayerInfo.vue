@@ -1,7 +1,7 @@
 <template lang="pug">
 .MembershipLocationPlayerInfo(v-if="show_p" :class="component_class" @click="click_handle")
   .MembershipLocationPlayerInfoName(v-html="player_name" v-if="player_name")
-  .MembershipLocationPlayerInfoTime(v-html="player_time" v-if="player_time")
+  .MembershipLocationPlayerInfoTime.is-family-monospace(v-html="player_time" v-if="player_time")
 </template>
 
 <script>
