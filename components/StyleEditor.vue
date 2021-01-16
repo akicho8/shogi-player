@@ -949,13 +949,17 @@ export default {
           --sp_lifted_origin_bg_color: ${this.hsla_format(this.sp_lifted_origin_bg_color)};
           --sp_lifted_origin_opacity: ${this.sp_lifted_origin_opacity};
 
-          // Other
+          // 駒台横配置のときの盤の上下の隙間
           --sp_common_gap:              ${this.sp_common_gap}px;
-          --sp_controller_width:        ${this.sp_controller_width};
-          --sp_controller_width_mobile: ${this.sp_controller_width_mobile};
+
+          // 将棋盤全体の外側の横幅(コンテナ幅)
           --se_frame_width:             ${this.se_frame_width}vmin;
 
-          // Transform
+          // コントローラー
+          --sp_controller_width:        ${this.sp_controller_width};
+          --sp_controller_width_mobile: ${this.sp_controller_width_mobile};
+
+          // Transform 背景
           --se_tf0_perspective: ${this.se_tf0_perspective}px;
           --se_tf0_translate_x: ${this.se_tf0_translate_x}px;
           --se_tf0_translate_y: ${this.se_tf0_translate_y}px;
@@ -965,6 +969,7 @@ export default {
           --se_tf0_rotate_z:    ${this.se_tf0_rotate_z}turn;
           --se_tf0_scale:       ${this.se_tf0_scale};
 
+          // Transform 盤
           --se_tf1_perspective: ${this.se_tf1_perspective}px;
           --se_tf1_translate_x: ${this.se_tf1_translate_x}px;
           --se_tf1_translate_y: ${this.se_tf1_translate_y}px;
@@ -974,6 +979,7 @@ export default {
           --se_tf1_rotate_z:    ${this.se_tf1_rotate_z}turn;
           --se_tf1_scale:       ${this.se_tf1_scale};
 
+          // Transform 駒
           --se_tf2_perspective: ${this.se_tf2_perspective}px;
           --se_tf2_translate_x: ${this.se_tf2_translate_x}px;
           --se_tf2_translate_y: ${this.se_tf2_translate_y}px;
