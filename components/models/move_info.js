@@ -65,7 +65,7 @@ export class MoveInfo {
     if (this.type === "move") {
       v = this.from.yomiage_name
     } else if (this.type === "promotable") {
-      v = this.from.piece.piece_yomiage.prefix_name + "、" + (this.to.promoted ? "なりっ！" : "ふなりっ！")
+      v = this.from.piece.piece_yomiage.prefix_name + "、" + (this.to.promoted ? "なりっ！" : "ならずっ！")
     } else if (this.type === "put") {
       v = this.to.piece.piece_yomiage.prefix_name + "、" + "うつ！"
     } else {
