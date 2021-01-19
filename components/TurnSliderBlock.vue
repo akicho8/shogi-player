@@ -8,7 +8,7 @@
     :min="base.turn_offset_min"
     :max="base.turn_offset_max"
     :tooltip="false"
-    :indicator="false"
+    :indicator="true"
     @dragstart="focus_handle"
     )
 </template>
@@ -62,6 +62,12 @@ export default {
     .b-slider-thumb
       &:focus
         outline: none // 青い枠を除去。フォーカスしているかどうかはサイズでわかるので不要
+
+    // indicator がでかすぎるのを調整
+    .b-slider-thumb-wrapper.has-indicator
+      .b-slider-thumb
+        padding: 8px 4px
+        font-size: 8px
 
   &.is_layer_on
     .TurnSliderBlock
