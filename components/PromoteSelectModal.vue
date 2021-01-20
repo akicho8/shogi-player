@@ -1,9 +1,9 @@
 <template lang="pug">
-.PromoteSelectModal
+.PromoteSelectModal(:class="position_key")
   .OverlayBackground
   .pieces_block(ref="pieces_block")
-    PieceTap.promote_on_button( :base="base" :class="piece_tap_class" :piece_texture_class="piece_texture_class(true)"  @click.native="base.promotable_piece_moved2(true)")
-    PieceTap.promote_off_button(:base="base" :class="piece_tap_class" :piece_texture_class="piece_texture_class(false)" @click.native="base.promotable_piece_moved2(false)")
+    PieceTap(:base="base" :piece_texture_class="piece_texture_class(true)"  @click.native="base.promotable_piece_moved2(true)")
+    PieceTap(:base="base" :piece_texture_class="piece_texture_class(false)" @click.native="base.promotable_piece_moved2(false)")
 </template>
 
 <script>
@@ -38,7 +38,7 @@ export default {
       return this.base.dialog_soldier
     },
     // 南北どちら側にあるか
-    piece_tap_class() {
+    position_key() {
       return this.soldier.location.flip_if(this.base.fliped).position_key
     },
     // 対処のセルの中央の座標
@@ -54,8 +54,40 @@ export default {
     pieces_block_v() {
       const el = this.$refs.pieces_block
       const rc = el.getBoundingClientRect()
-      const x = this.cell_v.x - rc.width / 2
-      const y = this.cell_v.y - rc.height / 2 / 2  // 縦に2あるので1つめの真ん中にする
+      let x = this.cell_v.x - rc.width  / 2
+      let y = this.cell_v.y - rc.height / 2
+      // |---||---|
+      // |   ||   |
+      // |v歩|| と|
+      // |   ||   |
+      // |---||---| <---
+      // |   ||   |
+      // |vと|| 歩|
+      // |   ||   |
+      // |---||---|
+      if (this.position_key === "is_position_north") {
+        y -= rc.height / 4
+        // |---|
+        // |   |
+        // |v歩|
+        // |   |
+        // |---|
+        // |   |
+        // |vと| <---
+        // |   |
+        // |---|
+      } else {
+        y += rc.height / 4
+        // |---|
+        // |   |
+        // | と|<---
+        // |   |
+        // |---|
+        // |   |
+        // | 歩|
+        // |   |
+        // |---|
+      }
       return {x, y}
     },
   },
@@ -85,7 +117,14 @@ export default {
       display: flex
       justify-content: center
       align-items: center
-      flex-direction: column // 縦に並べる
+
+    &.is_position_north
+      .pieces_block
+        flex-direction: column-reverse // 「歩」「と」の順
+
+    &.is_position_south
+      .pieces_block
+        flex-direction: column // 「と」「歩」の順
 
   &.is_layer_on
     .PromoteSelectModal
