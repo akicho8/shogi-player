@@ -24,15 +24,15 @@
           b-tag.ml-1(type="is-primary") Q
           b-tag.ml-3(type="") 右クリック
       tr
-        th カーソル下の駒を☗の駒台に移動
+        th カーソル下の駒を☗の駒台に<b>移動</b>
         td
           b-tag(type="is-primary") B
       tr
-        th カーソル下の駒を☖の駒台に移動
+        th カーソル下の駒を☖の駒台に<b>移動</b>
         td
           b-tag(type="is-primary") W
       tr
-        th カーソル下の駒を駒箱に移動
+        th カーソル下の駒を駒箱に<b>移動</b>
         td
           b-tag(type="is-primary") T
           b-tag.ml-1(type="is-primary") BACKSPACE
@@ -61,7 +61,7 @@
   hr.is-marginless.mt-2
   ul.mt-4.has-text-centered.is-size-7
     li
-      | 移動は
+      | <b>移動</b>は
       b-tag.mx-1(type="is-primary") 修飾キー
       | を合わせると
       b まとめて
