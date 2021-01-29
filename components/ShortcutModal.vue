@@ -10,11 +10,20 @@
           b-tag(type="is-primary") SPACE
           b-tag.ml-1(type="is-primary") V
           b-tag.ml-1(type="is-primary") R
-          b-tag.ml-3(type="") 修飾キー
-          span.mx-1 +
-          b-tag(type="") 左クリック
+          .mt-2
+            b-tag(type="") 修飾キー
+            span.mx-1 +
+            b-tag(type="") 左クリック
       tr
-        th カーソル下の駒と同じ駒を駒台から取り出す
+        th ｶｰｿﾙ下の駒を☗の駒台に<b>移動</b>
+        td
+          b-tag(type="is-primary") B
+      tr
+        th ｶｰｿﾙ下の駒を☖の駒台に<b>移動</b>
+        td
+          b-tag(type="is-primary") W
+      tr
+        th ｶｰｿﾙ下の駒と同じ駒を<br>駒台から取り出す
         td
           b-tag(type="is-primary") Q
       tr
@@ -22,17 +31,9 @@
         td
           b-tag(type="is-primary") ESC
           b-tag.ml-1(type="is-primary") Q
-          b-tag.ml-3(type="") 右クリック
+          b-tag.ml-1(type="") 右クリック
       tr
-        th カーソル下の駒を☗の駒台に<b>移動</b>
-        td
-          b-tag(type="is-primary") B
-      tr
-        th カーソル下の駒を☖の駒台に<b>移動</b>
-        td
-          b-tag(type="is-primary") W
-      tr
-        th カーソル下の駒を駒箱に<b>移動</b>
+        th ｶｰｿﾙ下の駒を駒箱に<b>移動</b>
         td
           b-tag(type="is-primary") T
           b-tag.ml-1(type="is-primary") BACKSPACE
@@ -54,12 +55,12 @@
           b-tag(type="is-primary")
             b-icon(icon="arrow-all" size="is-small")
       tr
-        th キーボードショートカットの表示
+        th ｷｰﾎﾞｰﾄﾞｼｮｰﾄｶｯﾄの表示
         td
           b-taglist
             b-tag(type="is-primary") ?
   hr.is-marginless.mt-2
-  ul.mt-4.has-text-centered.is-size-7
+  ul.mt-4.has-text-centered.is-size-6
     li
       | <b>移動</b>は
       b-tag.mx-1(type="is-primary") 修飾キー
