@@ -1,4 +1,5 @@
 import { SfenParser } from '@/components/models/sfen_parser.js'
+import _ from "lodash"
 
 describe('SfenParser', () => {
   it('基本', () => {
@@ -45,5 +46,22 @@ describe('SfenParser', () => {
     sfen_parser.raw_body = "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 3"
     sfen_parser.parse()
     expect(sfen_parser.location_by_offset(0).key).toEqual('white')
+  })
+
+  // it('指定の手数以降を求める例', () => {
+  //   const sfen_parser = new SfenParser()
+  //   sfen_parser.raw_body = "position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 1 moves S*2c 2b1c 2c1b+ 1c1b G*2c"
+  //   sfen_parser.parse()
+  //   const index = sfen_parser.base_location.code + 2
+  //   console.log(index)
+  //   const moves = _.takeRight(sfen_parser.moves, index)
+  //   console.log(moves)
+  // })
+
+  it('開始を1にする例', () => {
+    const sfen_parser = new SfenParser()
+    sfen_parser.raw_body = "position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 2"
+    sfen_parser.parse()
+    expect(sfen_parser.init_sfen_from_one).toEqual('position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 1')
   })
 })

@@ -128,6 +128,26 @@ export class SfenParser extends ParserBase {
     return moves.split(/\s+/)
   }
 
+  // 最初の局面(1から始まる)
+  //
+  //   以下のようにしてもよい
+  //   const sfen_parser = new SfenParser()
+  //   sfen_parser.raw_body = "position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 2"
+  //   sfen_parser.parse()
+  //   sfen_parser.attributes.turn_counter_next = 1
+  //   expect(sfen_parser.init_sfen).toEqual('position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 1')
+  //
+  get init_sfen_from_one() {
+    const parts = []
+    parts.push("position")
+    parts.push("sfen")
+    parts.push(this.attributes["board"])
+    parts.push(this.attributes["b_or_w"])
+    parts.push(this.attributes["hold_pieces"])
+    parts.push(1)
+    return parts.join(" ")
+  }
+
   // 最初の局面
   get init_sfen() {
     const parts = []
