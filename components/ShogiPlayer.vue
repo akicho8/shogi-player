@@ -82,7 +82,7 @@ export default {
     sp_location_behavior: { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
     sp_debug:             { type: String, default: "is_debug_off",          }, // デバッグモード
     sp_sfen_show:         { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
-    sp_overlay_nav:       { type: String, default: "is_overlay_nav_off",    }, // play_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
+    sp_overlay_nav:       { type: String, default: "is_overlay_nav_off",    }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_turn:              { type: Number, default: -1,                      }, // 局面(手数)
     sp_run_mode:          { type: String, default: "view_mode",             }, // モード
 
