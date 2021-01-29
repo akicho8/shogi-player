@@ -315,8 +315,15 @@ export class Mediator {
 
   //////////////////////////////////////////////////////////////////////////////// ランダム配置
 
-  
   //////////////////////////////////////////////////////////////////////////////// 指将棋用玉配置
+
+  king_formation_auto_set_on_off(v) {
+    if (v) {
+      return this.king_formation_auto_set()
+    } else {
+      return this.king_formation_auto_unset()
+    }
+  }
 
   // 指将棋用玉配置(自動)
   king_formation_auto_set() {
@@ -480,7 +487,6 @@ export class Mediator {
   }
 
   ////////////////////////////////////////////////////////////////////////////////
-  
 
   // 左右スライド
   slide_xy(x, y) {
