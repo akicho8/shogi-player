@@ -36,8 +36,10 @@
         th カーソル下の駒を<br>駒箱に<b>移動</b>
         td
           b-tag(type="is-primary") T
-          b-tag.ml-1(type="is-primary") BACKSPACE
-          b-tag.ml-1(type="is-primary") DELETE
+          br
+          b-tag(type="is-primary") BACKSPACE
+          br
+          b-tag(type="is-primary") DELETE
       tr
         th 盤面シャッフル
         td
@@ -56,7 +58,7 @@
           b-tag(type="is-primary")
             b-icon(icon="arrow-all" size="is-small")
       tr
-        th ｷｰﾎﾞｰﾄﾞｼｮｰﾄｶｯﾄの表示
+        th ｷｰﾎﾞｰﾄﾞｼｮｰﾄｶｯﾄ
         td
           b-taglist
             b-tag(type="is-primary") ?
