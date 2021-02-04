@@ -1,6 +1,6 @@
 <template lang="pug">
 .ShogiPlayer.ShortcutModal.modal-card.box.has-text-left(@click="delete_click_handle" style="width:auto")
-  .has-text-weight-bold.simple_title.is-size-5.pb-3
+  .has-text-weight-bold.simple_title.is-size-6.pb-3
     | キーボードショートカット
   table.modal-card-body.table.is-fullwidth.mt-3.mb-0
     tbody
@@ -15,11 +15,11 @@
             span.mx-1 +
             b-tag(type="") 左クリック
       tr
-        th ｶｰｿﾙ下の駒を☗の駒台に<b>移動</b>
+        th カーソル下の駒を<br>☗の駒台に<b>移動</b>
         td
           b-tag(type="is-primary") B
       tr
-        th ｶｰｿﾙ下の駒を☖の駒台に<b>移動</b>
+        th カーソル下の駒を<br>☖の駒台に<b>移動</b>
         td
           b-tag(type="is-primary") W
       tr
@@ -33,7 +33,7 @@
           b-tag.ml-1(type="is-primary") Q
           b-tag.ml-1(type="") 右クリック
       tr
-        th ｶｰｿﾙ下の駒を駒箱に<b>移動</b>
+        th カーソル下の駒を<br>駒箱に<b>移動</b>
         td
           b-tag(type="is-primary") T
           b-tag.ml-1(type="is-primary") BACKSPACE
@@ -43,6 +43,7 @@
         td
           b-tag(type="is-primary") !
           span.is-size-7.mx-1 で ON / OFF して
+          br
           b-tag(type="is-primary") 1
           span.is-size-7.mx-1 から
           b-tag(type="is-primary") 9
@@ -60,7 +61,7 @@
           b-taglist
             b-tag(type="is-primary") ?
   hr.is-marginless.mt-2
-  ul.mt-4.has-text-centered.is-size-6
+  ul.mt-4.has-text-centered.is-size-7
     li
       | <b>移動</b>は
       b-tag.mx-1(type="is-primary") 修飾キー
@@ -90,10 +91,13 @@ export default {
     .simple_title
       border-bottom: 1px solid $grey-lighter
     .table
+      th, td
+        vertical-align: middle
       th
         font-weight: normal
         text-align: right
         border-width: 0
+        font-size: $size-7
       td
         text-align: left
         border-width: 0
