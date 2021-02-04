@@ -6,11 +6,15 @@
       b-icon(icon="apps" size="is-small")
     b-dropdown-item(v-for="record in base.preset_info_values" :value="record.key" :key="record.key" @click="base.mediator_setup_by_preset(record)")
       | {{record.name}}
+    b-dropdown-item(separator)
+    b-dropdown-item キャンセル
   b-dropdown.mx-0(v-model="base.any_func_key" size="is-small")
     .button.is-small(slot="trigger")
       b-icon(icon="menu" size="is-small")
     b-dropdown-item(v-for="e in base.AnyFuncInfo.values" :value="e.key" :key="e.key" @click="base.any_func_click_handle(e)")
       | {{e.name}}
+    b-dropdown-item(separator)
+    b-dropdown-item キャンセル
   b-button(@click.stop.prevent="base.fn_flip_all" icon-left="pan-vertical" size="is-small")
   b-button(@click.stop.prevent="base.fn_flip_h"   icon-left="pan-horizontal" size="is-small")
   b-button(@click.stop.prevent="base.init_location_toggle" size="is-small")
