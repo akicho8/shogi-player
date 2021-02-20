@@ -56,6 +56,10 @@ export default {
         return
       }
 
+      if (this.focus_on_input_tag_p()) {
+        return
+      }
+
       if (this.shortcut_hook(e)) {
         return
       }
@@ -84,6 +88,13 @@ export default {
           this.relative_move(1, e)
           e.preventDefault()
         }
+      }
+    },
+
+    focus_on_input_tag_p() {
+      const dom = document.activeElement
+      if (dom.tagName === "TEXTAREA" || dom.tagName === "INPUT") {
+        return true
       }
     },
 
