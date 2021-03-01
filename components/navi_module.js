@@ -8,6 +8,7 @@ export default {
     sp_setting:                     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
     sp_controller:                  { type: String,  default: "is_controller_off", }, // コントローラー表示
     sp_viewpoint:                   { type: String,  default: "black",             }, // 視点
+    sp_turn_slider_focus:           { type: String,  default: "is_turn_slider_focus_on", }, // mountedしたらスライダーにフォーカスする？
 
     sp_op_disabled:                 { type: Boolean, default: false,               }, // 全体の操作を無効化
     sp_hidden_if_piece_stand_blank: { type: Boolean, default: false,               }, // 駒がないときは駒台側を非表示
@@ -25,6 +26,10 @@ export default {
   },
 
   mounted() {
+    if (this.sp_turn_slider_focus === "is_turn_slider_focus_on") {
+      this.turn_slider_focus()
+    }
+
     window.addEventListener("keydown", this.keydown_hook, false)
   },
 
