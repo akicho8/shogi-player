@@ -1,6 +1,7 @@
 import _ from "lodash"
 
 import { Board } from "./board"
+import { PlaceYomiageInfo } from "./place_yomiage_info.js"
 
 export class Place {
   static fetch(v) {
@@ -46,6 +47,14 @@ export class Place {
 
   get kanji_human_y() {
     return {1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九"}[this.human_y]
+  }
+
+  get yomiage_x() {
+    return PlaceYomiageInfo.fetch(this.human_x.toString()).yomiage
+  }
+
+  get yomiage_y() {
+    return PlaceYomiageInfo.fetch(this.human_y.toString()).yomiage
   }
 
   get human_y() {

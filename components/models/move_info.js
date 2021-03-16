@@ -71,8 +71,8 @@ export class MoveInfo {
     } else {
       throw new Error("must not happen")
     }
-    const x = this.to.place.human_x
-    const y = this.to.place.human_y
+    const x = this.to.place.yomiage_x
+    const y = this.to.place.yomiage_y
     return [x, y, v].join(" ")
   }
 
