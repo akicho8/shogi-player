@@ -31,7 +31,7 @@ export default {
       // this.mediator.piece_box_reset_by_preset(preset_info)
 
       // 自動的に駒箱を補充
-      this.mediator.piece_box_piece_couns_adjust()
+      this.mediator.piece_box_piece_counts_adjust()
 
       // 駒落ちのときは△の手番から始まるので edit_mode での手番に反映する
       // mediator の current_turn が 0 のまま run しているので mediator.current_location.key で最初の手番がわかる

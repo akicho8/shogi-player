@@ -284,7 +284,7 @@ export class Mediator {
   }
 
   // 駒箱に足りない駒だけにする
-  piece_box_piece_couns_adjust() {
+  piece_box_piece_counts_adjust() {
     this.piece_box_clear()
 
     const counts_hash = this.hold_piece_all_counts_hash       // 両者の持駒の合計

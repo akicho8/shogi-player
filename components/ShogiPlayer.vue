@@ -231,7 +231,7 @@ export default {
         this.mediator = new_mediator
         this.init_location_key = new_mediator.current_location.key
 
-        this.mediator.piece_box_piece_couns_adjust()
+        this.mediator.piece_box_piece_counts_adjust()
       }
     },
 
@@ -269,7 +269,7 @@ export default {
       this.mediator.run()
 
       // 不足駒を駒箱に生成
-      this.mediator.piece_box_piece_couns_adjust()
+      this.mediator.piece_box_piece_counts_adjust()
 
       this.flip_if_white_run()
     },
