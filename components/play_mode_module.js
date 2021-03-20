@@ -4,7 +4,7 @@ import { Mediator } from "./models/mediator.js"
 import { Location } from "./models/location.js"
 import { HumanSideInfo } from "./models/human_side_info.js"
 
-export default {
+export const play_mode_module = {
   props: {
     sp_human_side: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
   },

@@ -1,7 +1,7 @@
 import { Soldier } from "./models/soldier.js"
 import { Mediator } from "./models/mediator.js"
 
-export default {
+export const api_module = {
   methods: {
     // 盤を消してランダムに駒を配置する
     api_random_puton() {

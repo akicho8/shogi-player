@@ -1,7 +1,7 @@
 import { Mediator } from "./models/mediator.js"
 import { PresetInfo } from "./models/preset_info.js"
 
-export default {
+export const preset_module = {
   props: {
     sp_preset_key: { type: String,  default: null, },
   },

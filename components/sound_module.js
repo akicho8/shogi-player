@@ -1,7 +1,7 @@
 import { SoundPreset } from "./models/sound_preset.js"
 import { Howl, Howler } from "howler"
 
-export default {
+export const sound_module = {
   props: {
     sp_sound_enabled:      { type: Boolean, default: false, }, // サウンド
     sp_sound_body_changed: { type: Boolean, default: true,  }, // sp_body をあとから変更して内容が変わったときに音を出すか？

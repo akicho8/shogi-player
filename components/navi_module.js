@@ -1,7 +1,7 @@
 import _ from "lodash"
 import { Location } from "./models/location.js"
 
-export default {
+export const navi_module = {
   props: {
     sp_summary:                     { type: String,  default: "is_summary_on",     }, // 手数や結果の表示
     sp_slider:                      { type: String,  default: "is_slider_off",     }, // スライダー表示

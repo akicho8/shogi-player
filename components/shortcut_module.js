@@ -2,7 +2,7 @@ import { Location } from "./models/location.js"
 import { Place } from "./models/place.js"
 import ShortcutModal from "./ShortcutModal.vue"
 
-export default {
+export const shortcut_module = {
   data() {
     return {
       mouseover_info: null,    // マウスが hover している物
