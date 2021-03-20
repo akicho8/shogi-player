@@ -25,6 +25,8 @@
           li: nuxt-link(:to="{name: 'css-customize'}") CSS変数一覧
           li: nuxt-link(:to="{name: 'editor'}") スタイルエディタ
           li: nuxt-link(:to="{name: 'credit'}") クレジット
+          li(v-if="development_p")
+            nuxt-link(:to="{name: 'debug'}") デバッグ
 </template>
 
 <script>
