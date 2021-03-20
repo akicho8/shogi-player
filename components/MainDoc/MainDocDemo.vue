@@ -36,6 +36,7 @@
       MainDocPlayDemo3
       MainDocPlayDemo4
       MainDocPlayDemo5
+    MainDocPlayDemo6
     .columns.is-centered
       MainDocPlayDesc
 

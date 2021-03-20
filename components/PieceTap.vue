@@ -36,45 +36,6 @@ export default {
 //       .PieceTextureSelf(駒の種類を定義するクラスたち)
 //
 
-// 自分でもよくわからなくなっている
-// 選択できる駒に指定する
-=PieceTapSelectable
-  // 選択が可能
-  &.selectable_p
-    &:hover
-      // スマホでは手を離しても hover 状態を保持してしまう
-      // そのため2手目に1手目の指し手の hover の色がつきっぱなしになってしまう
-      // そうすると手目より1手目の方が目立って違和感がある
-      // なのでマウスが使える環境だけを対象にする
-      +desktop
-        // 選択できる駒だけ反応する
-        // background プロパティをつかうと他の設定をリセットしてしまうので注意
-        .PieceTapBG
-          background-color: var(--sp_piece_selectable_color)
-
-  // 持ち上げた元のセル
-  &.lifted_from_p
-    // .PieceTapBG
-    //   background-color: red
-    // +touch
-    //   .PieceTapBG
-    //     background-color: var(--sp_lifted_origin_bg_color)
-    // +desktop
-    .PieceTapBG
-      background-color: var(--sp_lifted_origin_bg_color)
-    .PieceTextureSelf
-      opacity: var(--sp_lifted_origin_opacity)  // 駒を持ち上げたので元の駒を含めて薄くする
-
-  // 持って上空を移動したときの下のセルの反応
-  // touchではタップしたときにhoverが反応してfocusしたような状態になってしまう
-  // なので desktop 以上のときだけにする
-  &.piece_lifted_hover_reaction
-    &:not(.lifted_from_p)
-      &:hover
-        +desktop
-          .PieceTapBG
-            background-color: var(--sp_piece_selectable_color)
-
 .ShogiPlayerGround
   // 盤背景と同じ構成
   +defvar(sp_piece_blur, 0)                 // 駒ぼかし
@@ -99,8 +60,10 @@ export default {
   +defvar(sp_piece_origin_color, hsla(0, 0%, 0%, 0.10))     // 最後に動かした駒の元の位置の背景色
   +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.1))  // 持ち上げれる駒の背景色
 
-  +defvar(sp_lifted_origin_bg_color, hsla(0, 0%, 0%, 0.25))  // 持ち上げた駒の背景色
-  +defvar(sp_lifted_origin_opacity, 0.4)                     // 持ち上げた駒の元のセルの非透明度
+  +defvar(sp_lifted_origin_bg_color_desktop, hsla(0, 0%, 0%, 0.1))  // 持ち上げた駒の背景色(desktop)
+  +defvar(sp_lifted_origin_opacity_desktop, 0.5)                     // 持ち上げた駒の元のセルの非透明度(desktop)
+  +defvar(sp_lifted_origin_bg_color_touch, #{$yellow})      // 持ち上げた駒の背景色(touch)
+  +defvar(sp_lifted_origin_opacity_touch, 0.5)              // 持ち上げた駒の元のセルの非透明度(touch)
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_w, 47px)              // 駒台のセル(W)
@@ -140,9 +103,46 @@ export default {
     align-items: center  // 先手の下を揃えて配置したいときは flex-end にする
 
   .PieceTap
-    +PieceTapSelectable
     &.origin_place
       background-color: var(--sp_piece_origin_color)
+
+  &.is_device_touch
+    .PieceTap
+      // 持ち上げた元のセル
+      &.lifted_from_p
+        .PieceTapBG
+          background-color: var(--sp_lifted_origin_bg_color_touch)
+        .PieceTextureSelf
+          opacity: var(--sp_lifted_origin_opacity_touch)  // 駒を持ち上げたので元の駒を含めて薄くする
+
+  &.is_device_desktop
+    .PieceTap
+      // 持ち上げた元のセル
+      &.lifted_from_p
+        .PieceTapBG
+          background-color: var(--sp_lifted_origin_bg_color_desktop)
+        .PieceTextureSelf
+          opacity: var(--sp_lifted_origin_opacity_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
+
+      // 選択が可能
+      &.selectable_p
+        &:hover
+          // スマホでは手を離しても hover 状態を保持してしまう
+          // そのため2手目に1手目の指し手の hover の色がつきっぱなしになってしまう
+          // そうすると2手目より1手目の方が目立って違和感がある
+          // なのでマウスが使える環境だけを対象にする
+          // 選択できる駒だけ反応する
+          // background プロパティをつかうと他の設定をリセットしてしまうので注意
+          .PieceTapBG
+            background-color: var(--sp_piece_selectable_color)
+      // 持って上空を移動したときの下のセルの反応
+      // touchではタップしたときにhoverが反応してfocusしたような状態になってしまう
+      // なので desktop 以上のときだけにする
+      &.piece_lifted_hover_reaction
+        &:not(.lifted_from_p)
+          &:hover
+            .PieceTapBG
+              background-color: var(--sp_piece_selectable_color)
 
   &.is_blink_off
     .PieceTap
@@ -174,28 +174,27 @@ export default {
     // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
 
   ////////////////////////////////////////////////////////////////////////////////
-  .CursorObject
-    position: fixed
-    z-index: $cursor_object_z     // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い。10だとsidebarに負ける
-    pointer-events: none          // 一切のイベントに反応させない
-
-    .PieceTap
-      // この要素の半分を左上に移動する
-      position: relative
-      top: -50%
-      left: -50%
-
-    // スマホとタブレットでは表示しない
-    +touch
-      display: none
+  &.is_device_desktop
+    .CursorObject
+      position: fixed
+      z-index: $cursor_object_z     // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い。10だとsidebarに負ける
+      pointer-events: none          // 一切のイベントに反応させない
+      .PieceTap
+        // この要素の半分を左上に移動する
+        position: relative
+        top: -50%
+        left: -50%
+  &.is_device_touch
+    .CursorObject
+      display: none // スマホとタブレットでは表示しない
 
   //////////////////////////////////////////////////////////////////////////////// 成り不成り選択中のセル背景色
 
-  .PromoteSelectModal
-    .PieceTap
-      &:hover
-        cursor: pointer
-        +desktop
+  &.is_device_desktop
+    .PromoteSelectModal
+      .PieceTap
+        &:hover
+          cursor: pointer
           background-color: var(--sp_promote_select_modal_hover_color)
 
   //////////////////////////////////////////////////////////////////////////////// サイズ (PC)

@@ -262,11 +262,11 @@
             ColorPicker(v-model="sp_promote_select_modal_hover_color")
 
         .box
-          .title.is-5 駒を操作中の移動元スタイル
+          .title.is-5 駒を操作中の移動元スタイル(desktop)
           b-field(custom-class="is-small" label="背景")
-            ColorPicker(v-model="sp_lifted_origin_bg_color")
+            ColorPicker(v-model="sp_lifted_origin_bg_color_desktop")
           b-field(custom-class="is-small" label="駒の非透明度")
-            b-slider(v-bind="slider_attrs" v-model="sp_lifted_origin_opacity" :min="0" :max="1.0" :step="0.001")
+            b-slider(v-bind="slider_attrs" v-model="sp_lifted_origin_opacity_desktop" :min="0" :max="1.0" :step="0.001")
 
         .box
           .title.is-5 Transform
@@ -561,8 +561,8 @@ export default {
       sp_promote_select_modal_hover_color: "hsla(0, 0%, 100%, 0.5)",
 
       // 駒を操作中の移動元スタイル
-      sp_lifted_origin_bg_color: "hsla(0, 0%, 0%, 0.25)",
-      sp_lifted_origin_opacity: 0.4,
+      sp_lifted_origin_bg_color_desktop: "hsla(0, 0%, 0%, 0.25)",
+      sp_lifted_origin_opacity_desktop: 0.4,
 
       sp_fullheight: "is_fullheight_off",
       sp_balloon: "is_balloon_on",
@@ -946,8 +946,8 @@ export default {
           --sp_promote_select_modal_hover_color: ${this.hsla_format(this.sp_promote_select_modal_hover_color)};
 
           // 駒を操作中の移動元スタイル
-          --sp_lifted_origin_bg_color: ${this.hsla_format(this.sp_lifted_origin_bg_color)};
-          --sp_lifted_origin_opacity: ${this.sp_lifted_origin_opacity};
+          --sp_lifted_origin_bg_color_desktop: ${this.hsla_format(this.sp_lifted_origin_bg_color_desktop)};
+          --sp_lifted_origin_opacity_desktop: ${this.sp_lifted_origin_opacity_desktop};
 
           // 駒台横配置のときの盤の上下の隙間
           --sp_common_gap:              ${this.sp_common_gap}px;

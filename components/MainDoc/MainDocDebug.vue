@@ -6,7 +6,13 @@
       b-navbar-item(tag="div").has-text-weight-bold デバッグ
   .section
     .container
-      ShogiPlayer(sp_debug="is_debug_on" sp_run_mode="play_mode")
+      .columns
+        .column
+          p sp_device="is_device_desktop"
+          ShogiPlayer(sp_debug="is_debug_on" sp_run_mode="play_mode" sp_device="is_device_desktop")
+        .column
+          p sp_device="is_device_touch"
+          ShogiPlayer(sp_debug="is_debug_on" sp_run_mode="play_mode" sp_device="is_device_touch")
 </template>
 
 <script>
@@ -22,6 +28,4 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .MainDocDebug
-  .ShogiPlayer
-    width: 25%
 </style>
