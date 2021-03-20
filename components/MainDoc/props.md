@@ -43,6 +43,7 @@
 | `sp_board_cell_left_click_user_handle`        | セルタップ時の処理(クリック後に呼ぶ)                           | null                      |
 | `sp_board_cell_pointerdown_user_handle`       | セルタップ時の処理(クリックした瞬間に呼ぶ)                     | null                      |
 | `sp_human_side`                               | 含まれる側だけ操作できるようにする                             | "both"                    |
+| `sp_device`                                   | デバイス is_device_(touch\|desktop)                            | null                      |
 | `sp_sound_enabled`                            | サウンド                                                       | false                     |
 | `sp_sound_body_changed`                       | sp_body をあとから変更して内容が変わったときに音を出すか？     | true                      |
 | `sp_sound_volume`                             | ボリューム                                                     |                       0.5 |
