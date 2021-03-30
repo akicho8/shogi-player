@@ -7,7 +7,7 @@ import { PieceVector } from "./models/piece_vector.js"
 import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
 
-const CURSOR_OBJECT_XY_UPDATE_60FPS = false
+const CURSOR_OBJECT_XY_UPDATE_60FPS = true
 
 export const edit_mode_module = {
   props: {
@@ -702,8 +702,6 @@ export const edit_mode_module = {
     },
 
     mousemove_hook(e) {
-      console.log("mousemove_hook()", e)
-
       this.$me_last_event = e
 
       // 連続で呼ばれるイベント処理を緩和する方法
@@ -737,7 +735,6 @@ export const edit_mode_module = {
       if (this.$CursorObject && this.$me_last_event && this.mouse_stick) {
         const x = this.$me_last_event.clientX
         const y = this.$me_last_event.clientY
-        console.log(`cursor_object_xy_update() ${x} ${y}`)
         this.$CursorObject.style.left = `${x}px`
         this.$CursorObject.style.top  = `${y}px`
       }
@@ -753,14 +750,12 @@ export const edit_mode_module = {
       // キーボードイベントの場合は null が来るようにしている
       // マウスを動かしてはじめて座標が取れるのでキーボードの場合はすぐに駒は表示されない
       if (event) {
-        console.log("virtual_piece_create で最初の座標更新")
         this.$me_last_event = event
         this.cursor_object_xy_update()
       }
 
-      console.log("document.addEventListener('mousemove', this.mousemove_hook)")
-      document.addEventListener("mousemove", this.mousemove_hook)
-      document.addEventListener("click", this.click_hook)
+      window.addEventListener("mousemove", this.mousemove_hook)
+      window.addEventListener("click", this.click_hook)
     },
 
     // 構造 FIXME: コンポーネントにする
@@ -796,16 +791,16 @@ export const edit_mode_module = {
     },
 
     virtual_piece_destroy() {
+      // console.log("virtual_piece_destroy")
+
       if (this.$CursorObject) {
-        console.log("virtual_piece_destroy()")
         this.$refs.ShogiPlayerGround.$el.removeChild(this.$CursorObject)
 
         this.$CursorObject = null
         this.mouse_stick = false
 
-        console.log("document.removeEventListener('mousemove', this.mousemove_hook)")
-        document.removeEventListener("mousemove", this.mousemove_hook)
-        document.removeEventListener("click", this.click_hook)
+        window.removeEventListener("mousemove", this.mousemove_hook)
+        window.removeEventListener("click", this.click_hook)
       }
     },
 
