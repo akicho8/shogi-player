@@ -754,8 +754,8 @@ export const edit_mode_module = {
         this.cursor_object_xy_update()
       }
 
-      window.addEventListener("mousemove", this.mousemove_hook)
-      window.addEventListener("click", this.click_hook)
+      this.$el.addEventListener("mousemove", this.mousemove_hook)
+      this.$el.addEventListener("click", this.click_hook)
     },
 
     // 構造 FIXME: コンポーネントにする
@@ -799,8 +799,8 @@ export const edit_mode_module = {
         this.$CursorObject = null
         this.mouse_stick = false
 
-        window.removeEventListener("mousemove", this.mousemove_hook)
-        window.removeEventListener("click", this.click_hook)
+        this.$el.removeEventListener("mousemove", this.mousemove_hook)
+        this.$el.removeEventListener("click", this.click_hook)
       }
     },
 
