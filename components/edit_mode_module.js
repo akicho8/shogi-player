@@ -7,6 +7,8 @@ import { PieceVector } from "./models/piece_vector.js"
 import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
 
+const CURSOR_OBJECT_XY_UPDATE_60FPS = true
+
 export const edit_mode_module = {
   props: {
     sp_play_mode_legal_move_only:                { type: Boolean, default: true, }, // play_mode で合法手のみに絞る
@@ -705,7 +707,7 @@ export const edit_mode_module = {
       // 連続で呼ばれるイベント処理を緩和する方法
       // https://qiita.com/noplan1989/items/9333faad731f5ecaaccd
       // ※試してみているけどあまり効果がない
-      if (true) {
+      if (CURSOR_OBJECT_XY_UPDATE_60FPS) {
         // 呼び出されるまで何もしない
         if (!this.me_running_p) {
           this.me_running_p = true
@@ -752,8 +754,8 @@ export const edit_mode_module = {
         this.cursor_object_xy_update()
       }
 
-      window.addEventListener("mousemove", this.mousemove_hook, false)
-      window.addEventListener("click", this.click_hook, false)
+      window.addEventListener("mousemove", this.mousemove_hook)
+      window.addEventListener("click", this.click_hook)
     },
 
     // 構造 FIXME: コンポーネントにする
@@ -789,14 +791,16 @@ export const edit_mode_module = {
     },
 
     virtual_piece_destroy() {
+      // console.log("virtual_piece_destroy")
+
       if (this.$CursorObject) {
         this.$refs.ShogiPlayerGround.$el.removeChild(this.$CursorObject)
 
         this.$CursorObject = null
         this.mouse_stick = false
 
-        window.removeEventListener("mousemove", this.mousemove_hook, false)
-        window.removeEventListener("click", this.click_hook, false)
+        window.removeEventListener("mousemove", this.mousemove_hook)
+        window.removeEventListener("click", this.click_hook)
       }
     },
 
