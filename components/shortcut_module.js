@@ -31,7 +31,7 @@ export const shortcut_module = {
 
       // 駒箱クリック
       if (this.edit_p) {
-        if (e.code === "Backspace" || e.code === "Delete" || e.key.toLowerCase() === "t") {
+        if (e.code === "Backspace" || e.code === "Delete" || (!this.meta_p(e) && e.key === "t")) {
           this.soldier_hold_unless_lifted_p(e)
           if (this.piece_box_other_click(e)) {
             e.preventDefault()
@@ -75,7 +75,8 @@ export const shortcut_module = {
       }
 
       // 反転
-      if (e.key === "v" || e.key === "r" || e.code === "Space") {
+      // command + r でリロードを優先したいため command が押されていないときだけ反応させる
+      if (!this.meta_p(e) && (e.key === "v" || e.key === "r" || e.code === "Space")) {
         if (this.mouseover_info) {
           if (this.mouseover_info.type === "board") {
             this.board_cell_right_click(this.mouseover_info.xy, e)
