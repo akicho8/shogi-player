@@ -23,36 +23,7 @@ export class SfenSerializer {
   }
 
   get to_board_sfen() {
-    const rows = []
-    _.times(Board.dimension, (y) => {
-      let str = ""
-      let space = 0
-      _.times(Board.dimension, (x) => {
-        const place = Place.fetch([x, y])
-        const soldier = this.mediator.board.lookup(place)
-        if (_.isNil(soldier)) {
-          space++
-        } else {
-          if (space >= 1) {
-            str += space
-            space = 0
-          }
-          if (soldier.promoted) {
-            str += "+"
-          }
-          let key = soldier.piece.key
-          if (soldier.location.key === "white") {
-            key = key.toLowerCase()
-          }
-          str += key
-        }
-      })
-      if (space >= 1) {
-        str += space
-      }
-      rows.push(str)
-    })
-    return rows.join("/")
+    return this.mediator.board.to_sfen
   }
 
   get to_hold_pieces() {

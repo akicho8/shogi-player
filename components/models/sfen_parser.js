@@ -10,6 +10,22 @@ import { Soldier } from "./soldier"
 import { Location } from "./location"
 
 export class SfenParser extends ParserBase {
+  static move_attrs_from(move_str) {
+    const attrs = {}
+    const md = XRegExp.exec(move_str, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
+    if (!md) {
+      return
+    }
+    attrs["promoted_trigger"] = (md.promoted === "+")
+    if (md["origin_y"] === "*") {
+      attrs["drop_piece"] = Piece.fetch(md["origin_x"])
+    } else {
+      attrs["origin_place"] = Place.fetch(`${md["origin_x"]}${md["origin_y"]}`)
+    }
+    attrs["place"] = Place.fetch(`${md["pos_x"]}${md["pos_y"]}`)
+    return attrs
+  }
+
   static parse(raw_body) {
     const object = new this(raw_body)
     object.parse()
@@ -98,23 +114,15 @@ export class SfenParser extends ParserBase {
     // this.moves.map((e, i) => { としたかったが break できないため lodash の forEach に変更。lodash のは false で break できる
     const ary = []
     _.forEach(this.moves, (e, i) => {
-      const attrs = {}
+      const attrs = SfenParser.move_attrs_from(e)
+      if (!attrs) {
+        return false  // break
+      }
       // if (true) {
       //   attrs["scene_index"] = this.turn_offset_min + i
       //   attrs["scene_offset"] = i
       // }
       attrs["location"] = this.base_location.advance(i)
-      const md = XRegExp.exec(e, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
-      if (!md) {
-        return false            // break
-      }
-      attrs["promoted_trigger"] = (md.promoted === "+")
-      if (md["origin_y"] === "*") {
-        attrs["drop_piece"] = Piece.fetch(md["origin_x"])
-      } else {
-        attrs["origin_place"] = Place.fetch(`${md["origin_x"]}${md["origin_y"]}`)
-      }
-      attrs["place"] = Place.fetch(`${md["pos_x"]}${md["pos_y"]}`)
       ary.push(attrs)
     })
     return ary
