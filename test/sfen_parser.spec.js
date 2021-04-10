@@ -1,4 +1,5 @@
 import { SfenParser } from '@/components/models/sfen_parser.js'
+import { Place      } from '@/components/models/place.js'
 import _ from "lodash"
 
 describe('SfenParser', () => {
@@ -63,5 +64,17 @@ describe('SfenParser', () => {
     sfen_parser.raw_body = "position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 2"
     sfen_parser.parse()
     expect(sfen_parser.init_sfen_from_one).toEqual('position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 1')
+  })
+
+  it('指し手1つの分解', () => {
+    const attrs = SfenParser.move_hash_from_move_str("7i6h")
+    expect(attrs["promoted_trigger"]).toEqual(false)
+    expect(attrs["origin_place"]).toEqual(Place.fetch([2, 8]))
+    expect(attrs["place"]).toEqual(Place.fetch([3, 7]))
+  })
+
+  it('movesのあとの複数の指し手の文字列を分解', () => {
+    const moves = SfenParser.move_hash_list_from_moves_str("7i6h S*2d")
+    expect(moves.length).toEqual(2)
   })
 })

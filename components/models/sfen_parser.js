@@ -10,11 +10,21 @@ import { Soldier } from "./soldier"
 import { Location } from "./location"
 
 export class SfenParser extends ParserBase {
-  static move_attrs_from(move_str) {
+  //////////////////////////////////////////////////////////////////////////////// SfenFliper でも使いたいシリーズ
+
+  static move_hash_list_from_moves_str(moves_str) {
+    const s = moves_str || ""
+    if (s === "") {
+      return []
+    }
+    return s.split(/\s+/).map(e => this.move_hash_from_move_str(e))
+  }
+
+  static move_hash_from_move_str(move_str) {
     const attrs = {}
     const md = XRegExp.exec(move_str, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
     if (!md) {
-      return
+      return null
     }
     attrs["promoted_trigger"] = (md.promoted === "+")
     if (md["origin_y"] === "*") {
@@ -25,6 +35,8 @@ export class SfenParser extends ParserBase {
     attrs["place"] = Place.fetch(`${md["pos_x"]}${md["pos_y"]}`)
     return attrs
   }
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   static parse(raw_body) {
     const object = new this(raw_body)
@@ -114,7 +126,7 @@ export class SfenParser extends ParserBase {
     // this.moves.map((e, i) => { としたかったが break できないため lodash の forEach に変更。lodash のは false で break できる
     const ary = []
     _.forEach(this.moves, (e, i) => {
-      const attrs = SfenParser.move_attrs_from(e)
+      const attrs = SfenParser.move_hash_from_move_str(e)
       if (!attrs) {
         return false  // break
       }
@@ -129,11 +141,14 @@ export class SfenParser extends ParserBase {
   }
 
   get moves() {
-    let moves = this.attributes["moves"]
-    if (_.isNil(moves) || moves === "") {
+    if (!this.moves_exist_p) {
       return []
     }
-    return moves.split(/\s+/)
+    return this.attributes["moves"].split(/\s+/)
+  }
+
+  get moves_exist_p() {
+    return (this.attributes["moves"] || "") !== ""
   }
 
   // 最初の局面(1から始まる)
@@ -172,6 +187,23 @@ export class SfenParser extends ParserBase {
     parts.push(this.attributes["b_or_w"])
     parts.push(this.attributes["hold_pieces"])
     parts.push(this.attributes["turn_counter_next"])
+    return parts.join(" ")
+  }
+
+  // 元の状態で返す
+  // このとき attributes を更新していれば違う形で返せる
+  get to_sfen() {
+    const parts = []
+    parts.push("position")
+    parts.push("sfen")
+    parts.push(this.attributes["board"])
+    parts.push(this.attributes["b_or_w"])
+    parts.push(this.attributes["hold_pieces"])
+    parts.push(this.attributes["turn_counter_next"])
+    if (this.moves_exist_p) {
+      parts.push("moves")
+      parts.push(this.attributes["moves"])
+    }
     return parts.join(" ")
   }
 
