@@ -2,41 +2,48 @@ import XRegExp from "xregexp"
 import Vue from "vue"
 import _ from "lodash"
 
-import { Board } from "./board"
-import { ParserBase } from "./parser_base"
-import { Piece } from "./piece"
-import { Place } from "./place"
-import { Soldier } from "./soldier"
-import { Location } from "./location"
+import { Board      } from "./board.js"
+import { ParserBase } from "./parser_base.js"
+import { Piece      } from "./piece.js"
+import { Place      } from "./place.js"
+import { Soldier    } from "./soldier.js"
+import { Location   } from "./location.js"
+import { MoveHash   } from "./move_hash.js"
+import { Mediator   } from "./mediator.js"
 
 export class SfenParser extends ParserBase {
-  //////////////////////////////////////////////////////////////////////////////// SfenFliper でも使いたいシリーズ
+  static sfen_hflip(sfen) {
+    const source = this.parse(sfen)
 
-  static move_hash_list_from_moves_str(moves_str) {
-    const s = moves_str || ""
-    if (s === "") {
-      return []
+    // 方法1. Mediator を仲介する方法
+    // 一応動くけど Mediator まで出動する必要はない
+    // もっと下位層のライブラリで行うべき
+    if (false) {
+      const mediator = new Mediator()
+      mediator.data_source = source
+      mediator.current_turn = 0
+      mediator.run()
+      mediator.board = mediator.board.flip_h
+
+      const parts = []
+      parts.push(mediator.to_position_sfen)
+
+      const v = source.move_infos
+      if (v.length >= 1) {
+        parts.push("moves")
+        parts.push(v.map(e => e.to_hflip_sfen).join(" "))
+      }
+
+      return parts.join(" ")
     }
-    return s.split(/\s+/).map(e => this.move_hash_from_move_str(e))
+
+    // 方法2. SFENパーサーで読み取ってそのままSFEN出力する間で属性を変更する方法
+    if (true) {
+      source.attributes["board"] = source.board.flip_h.to_sfen
+      source.attributes["moves"] = source.move_infos.map(e => e.to_hflip_sfen).join(" ")
+      return source.to_sfen
+    }
   }
-
-  static move_hash_from_move_str(move_str) {
-    const attrs = {}
-    const md = XRegExp.exec(move_str, XRegExp("(?<origin_x>\\S)(?<origin_y>\\S)(?<pos_x>\\S)(?<pos_y>\\S)(?<promoted>\\+?)?"))
-    if (!md) {
-      return null
-    }
-    attrs["promoted_trigger"] = (md.promoted === "+")
-    if (md["origin_y"] === "*") {
-      attrs["drop_piece"] = Piece.fetch(md["origin_x"])
-    } else {
-      attrs["origin_place"] = Place.fetch(`${md["origin_x"]}${md["origin_y"]}`)
-    }
-    attrs["place"] = Place.fetch(`${md["pos_x"]}${md["pos_y"]}`)
-    return attrs
-  }
-
-  ////////////////////////////////////////////////////////////////////////////////
 
   static parse(raw_body) {
     const object = new this(raw_body)
@@ -122,20 +129,21 @@ export class SfenParser extends ParserBase {
   //   return (this.turn_offset_min % 2) === 0 && this.base_location.key === "white"
   // }
 
+  // FIXME: move_hashes が正しい
   get move_infos() {
     // this.moves.map((e, i) => { としたかったが break できないため lodash の forEach に変更。lodash のは false で break できる
     const ary = []
     _.forEach(this.moves, (e, i) => {
-      const attrs = SfenParser.move_hash_from_move_str(e)
-      if (!attrs) {
+      const move_hash = MoveHash.parse(e)
+      if (!move_hash) {
         return false  // break
       }
       // if (true) {
-      //   attrs["scene_index"] = this.turn_offset_min + i
-      //   attrs["scene_offset"] = i
+      //   move_hash["scene_index"] = this.turn_offset_min + i
+      //   move_hash["scene_offset"] = i
       // }
-      attrs["location"] = this.base_location.advance(i)
-      ary.push(attrs)
+      move_hash["location"] = this.base_location.advance(i) // FIXME: これなくてもよくね？
+      ary.push(move_hash)
     })
     return ary
   }

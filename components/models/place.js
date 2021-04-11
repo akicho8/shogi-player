@@ -69,6 +69,14 @@ export class Place {
     return Place.fetch([Board.dimension - 1 - this._x, this._y])
   }
 
+  flip_h_if(v) {
+    if (v) {
+      return this.flip_h
+    } else {
+      return this
+    }
+  }
+
   sp_flip_if_white(location) {
     if (location.key === "white") {
       return this.flip_all

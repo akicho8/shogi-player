@@ -1,6 +1,8 @@
+import _ from "lodash"
+
 import { SfenParser } from '@/components/models/sfen_parser.js'
 import { Place      } from '@/components/models/place.js'
-import _ from "lodash"
+import { MoveHash   } from '@/components/models/move_hash.js'
 
 describe('SfenParser', () => {
   it('基本', () => {
@@ -66,15 +68,15 @@ describe('SfenParser', () => {
     expect(sfen_parser.init_sfen_from_one).toEqual('position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 1')
   })
 
-  it('指し手1つの分解', () => {
-    const attrs = SfenParser.move_hash_from_move_str("7i6h")
-    expect(attrs["promoted_trigger"]).toEqual(false)
-    expect(attrs["origin_place"]).toEqual(Place.fetch([2, 8]))
-    expect(attrs["place"]).toEqual(Place.fetch([3, 7]))
+  it('movesなしSFENの左右反転', () => {
+    const a = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1"
+    const b = "position sfen lnsgkgsn+l/1b5r1/ppppppppp/9/9/9/PPPPPPPPP/1R5B1/LNSGKGSNL b S2s 1"
+    expect(SfenParser.sfen_hflip(a)).toEqual(b)
   })
 
-  it('movesのあとの複数の指し手の文字列を分解', () => {
-    const moves = SfenParser.move_hash_list_from_moves_str("7i6h S*2d")
-    expect(moves.length).toEqual(2)
+  it('moves付きSFENの左右反転', () => {
+    const a = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
+    const b = "position sfen lnsgkgsn+l/1b5r1/ppppppppp/9/9/9/PPPPPPPPP/1R5B1/LNSGKGSNL b S2s 1 moves 3i4h S*8d"
+    expect(SfenParser.sfen_hflip(a)).toEqual(b)
   })
 })
