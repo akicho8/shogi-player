@@ -682,9 +682,9 @@ export const edit_mode_module = {
       }, {})
     },
 
-    fn_flip_h() {
+    fn_hflip() {
       // 盤面左右反転
-      this.mediator.board = this.mediator.board.flip_h
+      this.mediator.board = this.mediator.board.hflip
     },
 
     init_location_toggle() {

@@ -23,7 +23,7 @@ export class SfenParser extends ParserBase {
       mediator.data_source = source
       mediator.current_turn = 0
       mediator.run()
-      mediator.board = mediator.board.flip_h
+      mediator.board = mediator.board.hflip
 
       const parts = []
       parts.push(mediator.to_position_sfen)
@@ -39,7 +39,7 @@ export class SfenParser extends ParserBase {
 
     // 方法2. SFENパーサーで読み取ってそのままSFEN出力する間で属性を変更する方法
     if (true) {
-      source.attributes["board"] = source.board.flip_h.to_sfen
+      source.attributes["board"] = source.board.hflip.to_sfen
       source.attributes["moves"] = source.move_infos.map(e => e.to_hflip_sfen).join(" ")
       return source.to_sfen
     }

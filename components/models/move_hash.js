@@ -48,7 +48,7 @@ export class MoveHash {
   }
 
   get to_hflip_sfen() {
-    return this.to_custom_sfen({flip_h: true})
+    return this.to_custom_sfen({hflip: true})
   }
 
   // prviate
@@ -56,7 +56,7 @@ export class MoveHash {
   // SFEN変換
   //
   //  MoveHash.parse("S*2d").to_custom_sfen()               # => "S*2d"
-  //  MoveHash.parse("S*2d").to_custom_sfen({flip_h: true}) # => "S*8d"
+  //  MoveHash.parse("S*2d").to_custom_sfen({hflip: true}) # => "S*8d"
   //
   to_custom_sfen(options = {}) {
     const a = []
@@ -64,9 +64,9 @@ export class MoveHash {
       a.push(this["drop_piece"].key)
       a.push("*")
     } else {
-      a.push(this["origin_place"].flip_h_if(options.flip_h).to_sfen)
+      a.push(this["origin_place"].hflip_if(options.hflip).to_sfen)
     }
-    a.push(this["place"].flip_h_if(options.flip_h).to_sfen)
+    a.push(this["place"].hflip_if(options.hflip).to_sfen)
     if (this["promoted_trigger"]) {
       a.push("+")
     }

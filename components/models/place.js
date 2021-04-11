@@ -65,13 +65,13 @@ export class Place {
     return Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y])
   }
 
-  get flip_h() {
+  get hflip() {
     return Place.fetch([Board.dimension - 1 - this._x, this._y])
   }
 
-  flip_h_if(v) {
+  hflip_if(v) {
     if (v) {
-      return this.flip_h
+      return this.hflip
     } else {
       return this
     }
