@@ -3,6 +3,7 @@ import _ from "lodash"
 import { Mediator } from "./models/mediator.js"
 import { Location } from "./models/location.js"
 import { HumanSideInfo } from "./models/human_side_info.js"
+import { EffectInfo } from "./models/effect_info.js"
 
 export const play_mode_module = {
   props: {
@@ -109,6 +110,12 @@ export const play_mode_module = {
 
     turn_next() {
       if (this.play_p) {
+        if (this.sp_play_effect_type) {
+          if (this.$last_clicked_cell) {
+            EffectInfo.fetch(this.sp_play_effect_type).run({from_el: this.$last_clicked_cell})
+          }
+        }
+
         this.mediator = new Mediator()
         this.mediator.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
         this.mediator.current_turn = -1

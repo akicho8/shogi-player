@@ -6,6 +6,7 @@ import { Board } from "./models/board.js"
 import { PieceVector } from "./models/piece_vector.js"
 import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
+import { EffectInfo } from "./models/effect_info.js"
 
 const CURSOR_OBJECT_XY_UPDATE_60FPS = true
 
@@ -17,6 +18,7 @@ export const edit_mode_module = {
     sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },   // play_mode では自分手番とき自分の駒しか動かせないようにする
     sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: true, }, // play_mode では自分の駒で同じ仲間の駒を取れないようにする
     sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
+    sp_play_effect_type:                         { type: String, default: null,  }, // 指したときのエフェクトの種類
   },
 
   data() {
@@ -41,6 +43,7 @@ export const edit_mode_module = {
       mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
 
       dialog_soldier: null,     // 成り確認ダイアログ表示中か？
+      $last_clicked_cell: null,        // 最後にクリックした要素
 
       $double_tap_time: null,   // ダブルクリック判定用
 
@@ -74,6 +77,9 @@ export const edit_mode_module = {
     board_cell_left_click(xy, e) {
       this.log("board_cell_left_click")
       this.log(`shiftKey: ${e.shiftKey}`)
+      this.$last_clicked_cell = e.target
+
+      // EffectInfo.fetch('fw_type_2').run({from_el: e.target})
 
       const place = Place.fetch(xy)
 
