@@ -321,7 +321,7 @@ export const edit_mode_module = {
           }
         } else {
           if (this.play_p) {
-            this.last_move_info = new MoveInfo({type: "move", from: this.origin_soldier1, to: new_soldier})
+            this.move_info_create({type: "move", from: this.origin_soldier1, to: new_soldier})
             this.moves_set()
           }
           this.mediator.board.place_on(new_soldier) // 置く
@@ -356,7 +356,7 @@ export const edit_mode_module = {
         const new_soldier = this.soldier_create_from_stand_or_box_on(place)
         this.piece_decriment()
         this.mediator.board.place_on(new_soldier) // 置く
-        this.last_move_info = new MoveInfo({type: "put", to: new_soldier})
+        this.move_info_create({type: "put", to: new_soldier})
         this.moves_set()
         this.state_reset()
         this.turn_next()
@@ -395,12 +395,19 @@ export const edit_mode_module = {
     // 成れる状態の駒をどうするか
     promotable_piece_moved(new_soldier, promoted) {
       new_soldier = new_soldier.clone_with_attrs({promoted: promoted})
-      this.last_move_info = new MoveInfo({type: "promotable", from: this.origin_soldier1, to: new_soldier})
+      this.move_info_create({type: "promotable", from: this.origin_soldier1, to: new_soldier})
       this.moves_set() // 7g7f+
       this.mediator.board.place_on(new_soldier) // 置く
       this.mediator.board.delete_at(this.place_from)
       this.state_reset()
       this.turn_next()
+    },
+
+    move_info_create(attrs) {
+      this.last_move_info = new MoveInfo({
+        ...attrs,
+        turn_offset: this.turn_offset + 1,
+      })
     },
 
     board_cell_right_click(xy, e) {
