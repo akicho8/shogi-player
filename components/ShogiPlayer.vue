@@ -147,14 +147,9 @@ export default {
   },
 
   watch: {
-    turn_edit_value() {
-      this.current_turn_set(this.turn_edit_value)
-    },
-
-    sp_turn() {
-      this.current_turn_set(this.sp_turn)
-    },
-
+    // sp_turn の watch より先に記述すること
+    // そうしないと sp_turn と sp_body を同時に変更したとき
+    // sp_turn, sp_body の順に反映されて局面が1つ前になってしまう
     kifu_source() {
       this.state_reset() // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
 
@@ -194,6 +189,15 @@ export default {
           this.sound_play("piece_put")
         }
       }
+    },
+
+    // kifu_source の watch より後に記述すること
+    sp_turn() {
+      this.current_turn_set(this.sp_turn)
+    },
+
+    turn_edit_value() {
+      this.current_turn_set(this.turn_edit_value)
     },
 
     ////////////////////////////////////////////////////////////////////////////////
