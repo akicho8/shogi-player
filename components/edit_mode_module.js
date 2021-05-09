@@ -406,7 +406,8 @@ export const edit_mode_module = {
     move_info_create(attrs) {
       this.last_move_info = new MoveInfo({
         ...attrs,
-        turn_offset: this.turn_offset + 1,
+        next_turn_offset: this.turn_offset + 1,           // この手を指した直後の手数。初手76歩なら1
+        player_location: this.mediator.current_location,  // 指した人の色。駒の色ではない
       })
     },
 

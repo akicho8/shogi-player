@@ -1,11 +1,18 @@
+// |---------------------+---------------+--------------------------------------------------------------|
+// | method              | 意味          |                                                              |
+// |---------------------+---------------+--------------------------------------------------------------|
+// | next_turn_offset    | 1             | この手を指した直後の手数                                     |
+// | player_location     | <Location>    | 駒を動かしたプレイヤーの色であって駒の色とは異なる場合がある |
+// | from                | <移動元の駒>  |                                                              |
+// | to                  | <移動先の駒>  |                                                              |
+// | to_sfen             | "7g7f"        |                                                              |
+// | to_kif              | "☗7六歩(77)"  |                                                              |
+// | to_kif_without_from | "☗7六歩"      |                                                              |
+// | to_yomiage          | "7 6 ふ うつ" |                                                              |
+// |---------------------+---------------+--------------------------------------------------------------|
 export class MoveInfo {
   constructor(attributes) {
     Object.assign(this, attributes)
-  }
-
-  // 指した側
-  get location() {
-    return this.to.location
   }
 
   get to_sfen() {
@@ -20,33 +27,6 @@ export class MoveInfo {
       throw new Error("must not happen")
     }
     return v
-  }
-
-  // ☗7六歩(77)
-  to_custom_kif(options = {}) {
-    options = {
-      location: true,
-      from: true,
-      ...options,
-    }
-    let v = null
-    let from = ""
-    if (this.type === "move") {
-      v = this.from.name
-      if (options.from) {
-        from = this.__from_xy
-      }
-    } else if (this.type === "promotable") {
-      v = this.from.name + (this.to.promoted ? "成" : "不成")
-      if (options.from) {
-        from = this.__from_xy
-      }
-    } else if (this.type === "put") {
-      v = this.to.name + "打"
-    } else {
-      throw new Error("must not happen")
-    }
-    return [options.location ? this.location.name : "", this.__to_xy, v, from].join("")
   }
 
   // ☗7六歩(77)
@@ -77,6 +57,33 @@ export class MoveInfo {
   }
 
   // private
+
+  // ☗7六歩(77)
+  to_custom_kif(options = {}) {
+    options = {
+      location: true,
+      from: true,
+      ...options,
+    }
+    let v = null
+    let from = ""
+    if (this.type === "move") {
+      v = this.from.name
+      if (options.from) {
+        from = this.__from_xy
+      }
+    } else if (this.type === "promotable") {
+      v = this.from.name + (this.to.promoted ? "成" : "不成")
+      if (options.from) {
+        from = this.__from_xy
+      }
+    } else if (this.type === "put") {
+      v = this.to.name + "打"
+    } else {
+      throw new Error("must not happen")
+    }
+    return [options.location ? this.to.location.name : "", this.__to_xy, v, from].join("")
+  }
 
   get __from_xy() {
     return ["(", this.from.place.digit_human, ")"].join("")
