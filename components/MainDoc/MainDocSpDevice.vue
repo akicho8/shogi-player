@@ -1,5 +1,5 @@
 <template lang="pug">
-.MainDocDebug
+.MainDocSpDevice
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "MainDocDebug",
+  name: "MainDocSpDevice",
   data() {
     return {
     }
@@ -27,5 +27,5 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.MainDocDebug
+.MainDocSpDevice
 </style>
