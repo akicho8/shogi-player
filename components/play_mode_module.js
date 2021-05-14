@@ -122,8 +122,7 @@ export const play_mode_module = {
         this.mediator.run()
         this.sound_play("piece_put")
 
-        this.$emit("update:play_mode_advanced_full_moves_sfen", this.play_mode_full_moves_sfen)
-        this.$emit("update:play_mode_advanced_full_moves_sfen2", this.play_mode_full_moves_sfen, this.last_move_info)
+        this.$emit("update:play_mode_advanced_full_moves_sfen", {sfen: this.play_mode_full_moves_sfen, last_move_info: this.last_move_info})
         this.$emit("update:play_mode_advanced_last_move", _.last(this.moves))
         this.$emit("update:play_mode_advanced_moves", this.moves)
         this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_position_sfen)
