@@ -562,7 +562,7 @@ export default {
 
       // 駒を操作中の移動元スタイル
       sp_lifted_origin_bg_color_desktop: "hsla(0, 0%, 0%, 0.1)",
-      sp_lifted_origin_opacity_desktop: 0.3,
+      sp_lifted_origin_opacity_desktop: 0.0,
 
       sp_fullheight: "is_fullheight_off",
       sp_balloon: "is_balloon_on",

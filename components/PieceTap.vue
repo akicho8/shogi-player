@@ -61,7 +61,7 @@ export default {
   +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.1))  // 持ち上げれる駒の背景色
 
   +defvar(sp_lifted_origin_bg_color_desktop, hsla(0, 0%, 0%, 0.1))  // 持ち上げた駒の背景色(desktop)
-  +defvar(sp_lifted_origin_opacity_desktop, 0.3)                    // 持ち上げた駒の元のセルの非透明度(desktop)
+  +defvar(sp_lifted_origin_opacity_desktop, 0.0)                    // 持ち上げた駒の元のセルの非透明度(desktop)
   // +defvar(sp_lifted_origin_bg_color_touch, #{$yellow})      // 持ち上げた駒の背景色(touch)
   // +defvar(sp_lifted_origin_opacity_touch, 0.5)              // 持ち上げた駒の元のセルの非透明度(touch)
 
