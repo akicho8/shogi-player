@@ -262,7 +262,7 @@
             ColorPicker(v-model="sp_promote_select_modal_hover_color")
 
         .box
-          .title.is-5 駒を操作中の移動元スタイル(desktop)
+          .title.is-5 駒を操作中の移動元スタイル
           b-field(custom-class="is-small" label="背景")
             ColorPicker(v-model="sp_lifted_origin_bg_color_desktop")
           b-field(custom-class="is-small" label="駒の非透明度")
@@ -561,8 +561,8 @@ export default {
       sp_promote_select_modal_hover_color: "hsla(0, 0%, 100%, 0.5)",
 
       // 駒を操作中の移動元スタイル
-      sp_lifted_origin_bg_color_desktop: "hsla(0, 0%, 0%, 0.25)",
-      sp_lifted_origin_opacity_desktop: 0.4,
+      sp_lifted_origin_bg_color_desktop: "hsla(0, 0%, 0%, 0.1)",
+      sp_lifted_origin_opacity_desktop: 0.3,
 
       sp_fullheight: "is_fullheight_off",
       sp_balloon: "is_balloon_on",

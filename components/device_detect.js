@@ -9,6 +9,8 @@
 // |         | mousemove  | is_device_desktop |
 // |---------+------------+-------------------|
 //
+import { DeviseInfo } from "./models/devise_info.js"
+
 export const device_detect = {
   props: {
     sp_device: { type: String, default: null, }, // デバイス is_device_(touch|desktop) 自動判別するので明示的に設定しなくてよい
@@ -43,8 +45,11 @@ export const device_detect = {
     },
   },
   computed: {
-    new_devise() {
+    new_devise_key() {
       return this.sp_device || this.default_device || "is_device_desktop"
+    },
+    devise_info() {
+      return DeviseInfo.fetch(this.new_devise_key)
     },
   },
 }

@@ -46,6 +46,8 @@ import { any_func_module  } from "./any_func_module.js"
 import { api_module       } from "./api_module.js"
 import { device_detect    } from "./device_detect.js"
 import { root_support     } from "./root_support.js"
+import { app_chore        } from "./app_chore.js"
+import { app_vector       } from "./app_vector.js"
 
 export default {
   name: 'ShogiPlayer',
@@ -54,6 +56,8 @@ export default {
     root_support,
 
     // ここで直接 require("./xxx.js"), とは書けないので注意
+    app_chore,
+    app_vector,
     navi_module,
     shortcut_module,
     edit_mode_module,

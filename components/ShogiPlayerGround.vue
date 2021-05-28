@@ -32,7 +32,7 @@ export default {
         this.base.sp_bg_variant,
         this.base.sp_mobile_fit,
         this.base.sp_mobile_vertical,
-        this.base.new_devise,
+        this.base.devise_info.key,
         `is_viewpoint_${this.base.new_viewpoint}`, // システムテストで見ている
       ]
     },

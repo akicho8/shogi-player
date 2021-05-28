@@ -7,6 +7,7 @@ import { PieceVector } from "./models/piece_vector.js"
 import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
 import { EffectInfo } from "./models/effect_info.js"
+import { PositionInfo } from "./models/position_info.js"
 
 const CURSOR_OBJECT_XY_UPDATE_60FPS = true
 
@@ -747,10 +748,11 @@ export const edit_mode_module = {
 
     cursor_object_xy_update() {
       if (this.$CursorObject && this.$me_last_event && this.mouse_stick) {
-        const x = this.$me_last_event.clientX
-        const y = this.$me_last_event.clientY
-        this.$CursorObject.style.left = `${x}px`
-        this.$CursorObject.style.top  = `${y}px`
+        if (this.devise_info.key === "is_device_desktop") {
+          const x = this.$me_last_event.clientX
+          const y = this.$me_last_event.clientY
+          this.element_vector_set(this.$CursorObject, {x, y})
+        }
       }
     },
 
@@ -792,8 +794,17 @@ export const edit_mode_module = {
       this.$CursorObject.appendChild(PieceTap)
 
       // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
-      this.$CursorObject.style.left = "-50%"
-      this.$CursorObject.style.top  = "-50%"
+      if (false) {
+        this.$CursorObject.style.left = "-50%"
+        this.$CursorObject.style.top  = "-50%"
+      } else {
+        const position_key = soldier.location.flip_if(this.fliped).position_key
+        const position_info = PositionInfo.fetch(position_key)
+        const ci = this.place_to_cell_info(soldier.place)                                        // place から実際のセルの位置情報を取得
+        const gap = this.vector_scale(ci.radius, this.devise_info.gap * position_info.sign * -1) // 左上にずらす度合いを計算
+        const vec = this.vector_add(ci.center, gap)                                              // 中央から左上にずらす
+        this.element_vector_set(this.$CursorObject, vec)                                         // カーソル座標とする
+      }
 
       this.$refs.ShogiPlayerGround.$el.appendChild(this.$CursorObject)
     },
@@ -805,8 +816,6 @@ export const edit_mode_module = {
     },
 
     virtual_piece_destroy() {
-      // console.log("virtual_piece_destroy")
-
       if (this.$CursorObject) {
         this.$refs.ShogiPlayerGround.$el.removeChild(this.$CursorObject)
 
