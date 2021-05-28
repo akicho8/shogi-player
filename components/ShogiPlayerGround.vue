@@ -38,7 +38,8 @@ export default {
     },
     component_style() {
       return {
-        // "--sp_dimension": this.base.sp_dimension,
+        "--sp_board_dimension_w": this.base.sp_board_dimension_w,
+        "--sp_board_dimension_h": this.base.sp_board_dimension_h,
       }
     },
   },

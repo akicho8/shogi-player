@@ -583,7 +583,7 @@ export default {
       sp_piece_count_bg_color: "rgba(255, 255, 255, 0.75)",
       sp_piece_count_padding: 2,
 
-      sp_grid_outer_stroke: 1.5,
+      sp_grid_outer_stroke: 0,
       sp_grid_outer_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_stroke: 1,
@@ -711,7 +711,7 @@ export default {
       this.se_ws_color          = "rgb(255,255,255)"     // 背景
       this.sp_board_color       = IS_WHITE               // 盤透過
       this.sp_grid_stroke       = 1                      // グリッド線(細)
-      this.sp_grid_outer_stroke = 1.5                    // グリッド枠(細)
+      this.sp_grid_outer_stroke = 2                      // グリッド枠(細)
 
       this.sp_shadow_blur       = 0
       this.sp_shadow_offset     = 0

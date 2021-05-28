@@ -90,12 +90,15 @@ export default {
   +defvar(sp_board_padding, 1.5)                   // 盤の隅の隙間
   +defvar(sp_board_radius, 5)                      // 盤の隅の丸め度合い
 
-  +defvar(sp_grid_outer_stroke, 1.5)               // グリッドの外枠の太さ(紙面風のとき)
+  +defvar(sp_grid_outer_stroke, 0)                 // グリッドの外枠の太さ(紙面風のとき)
   +defvar(sp_grid_outer_color, rgba(0, 0, 0, 0.5)) // グリッド外枠色
   +defvar(sp_grid_color, rgba(0, 0, 0, 0.5))       // グリッド色
   +defvar(sp_grid_stroke, 1)                       // グリッド太さ
   +defvar(sp_grid_outer_texture_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
   +defvar(sp_grid_star_size, 10%)                  // 星の大きさ
+
+  +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w) CSS内では未使用
+  +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h) TDの縦幅を決めるのに必要
 
   .BoardWood
     width: 100%
@@ -146,8 +149,12 @@ export default {
     // 何もしなければ縦幅は均等になる
     border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color) // border-collapse: collapse の効果で重ならない
 
-    // Firefoxでは↓これを入れると見えるようになるが Chrome では縦幅が均等なので二重に指定することになってしまう、のでやめ
-    // height: calc(100% / 9)
+    // 縦幅はブラウザによって異なるので難しい
+    // Google Chrome 90.0.4430.216 までは指定なしで均等だったが、
+    // Google Chrome 91.0.4472.77  からは最初と最後の行だけ1.2倍ほど広がり均等でなくなった
+    // Firefox ではまったく均等にしないためセルが表示されない
+    // そのため明示的に指定するようにした。これによって対象外としていた Firefox でも見れるようになった
+    height: calc(100.0% / var(--sp_board_dimension_h))
 
   // border が BoardWoodTexture に負けるので入れ子にしている
   // td
