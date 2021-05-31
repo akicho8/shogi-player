@@ -20,7 +20,7 @@ export const edit_mode_module = {
     sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: true, }, // play_mode では自分の駒で同じ仲間の駒を取れないようにする
     sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_play_effect_type:                         { type: String,  default: null,  }, // 指したときのエフェクトの種類
-    sp_play_if_other_cell_tap_then_cancel:       { type: Boolean, default: true, }, // (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。ウォーズと同じようにするにはtrue。デメリットもあるのでfalseで良い。
+    sp_play_if_other_cell_tap_then_cancel:       { type: Boolean, default: false, }, // (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。ウォーズと同じようにするにはtrue。デメリットもあるのでfalseで良い。
   },
 
   data() {
