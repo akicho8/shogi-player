@@ -61,9 +61,9 @@ export default {
   +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.1))  // 持ち上げれる駒の背景色
 
   +defvar(sp_lifted_origin_bg_color_desktop, hsla(0, 0%, 0%, 0.1))  // 持ち上げた駒の背景色(desktop)
-  +defvar(sp_lifted_origin_opacity_desktop, 0.0)                    // 持ち上げた駒の元のセルの非透明度(desktop)
-  // +defvar(sp_lifted_origin_bg_color_touch, #{$yellow})      // 持ち上げた駒の背景色(touch)
-  // +defvar(sp_lifted_origin_opacity_touch, 0.5)              // 持ち上げた駒の元のセルの非透明度(touch)
+  +defvar(sp_lifted_origin_opacity_desktop, 0.1)                    // 持ち上げた駒の元のセルの非透明度(desktop)
+  +defvar(sp_lifted_origin_bg_color_touch, #{$yellow})      // 持ち上げた駒の背景色(touch)
+  +defvar(sp_lifted_origin_opacity_touch, 0.5)              // 持ち上げた駒の元のセルの非透明度(touch)
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_w, 47px)              // 駒台のセル(W)
@@ -106,26 +106,24 @@ export default {
     &.origin_place
       background-color: var(--sp_piece_origin_color)
 
-  // &.is_device_touch
-  //   .PieceTap
-  //     // 持ち上げた元のセル
-  //     &.lifted_from_p
-  //       .PieceTapBG
-  //         background-color: var(--sp_lifted_origin_bg_color_touch)
-  //       .PieceTextureSelf
-  //         opacity: var(--sp_lifted_origin_opacity_touch)  // 駒を持ち上げたので元の駒を含めて薄くする
-
-  // is_device_desktop と is_device_touch で同じスタイルを使う
-  .PieceTap
-    // 持ち上げた元のセル
-    &.lifted_from_p
-      .PieceTapBG
-        background-color: var(--sp_lifted_origin_bg_color_desktop)
-      .PieceTextureSelf
-        opacity: var(--sp_lifted_origin_opacity_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
+  &.is_device_touch
+    .PieceTap
+      // 持ち上げた元のセル
+      &.lifted_from_p
+        .PieceTapBG
+          background-color: var(--sp_lifted_origin_bg_color_touch)
+        .PieceTextureSelf
+          opacity: var(--sp_lifted_origin_opacity_touch)  // 駒を持ち上げたので元の駒を含めて薄くする
 
   &.is_device_desktop
     .PieceTap
+      // 持ち上げた元のセル
+      &.lifted_from_p
+        .PieceTapBG
+          background-color: var(--sp_lifted_origin_bg_color_desktop)
+        .PieceTextureSelf
+          opacity: var(--sp_lifted_origin_opacity_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
+
       // 選択が可能
       &.selectable_p
         &:hover
@@ -187,9 +185,9 @@ export default {
       left: -50%
 
   // タッチデバイスでは消す場合
-  // &.is_device_touch
-  //   .CursorObject
-  //     display: none // スマホとタブレットでは表示しない
+  &.is_device_touch
+    .CursorObject
+      display: none // スマホとタブレットでは表示しない
 
   //////////////////////////////////////////////////////////////////////////////// 成り不成り選択中のセル背景色
 

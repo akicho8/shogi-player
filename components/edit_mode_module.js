@@ -748,11 +748,11 @@ export const edit_mode_module = {
 
     cursor_object_xy_update() {
       if (this.$CursorObject && this.$me_last_event && this.mouse_stick) {
-        if (this.devise_info.key === "is_device_desktop") {
-          const x = this.$me_last_event.clientX
-          const y = this.$me_last_event.clientY
-          this.element_vector_set(this.$CursorObject, {x, y})
-        }
+        // if (this.devise_info.key === "is_device_desktop") {
+        const x = this.$me_last_event.clientX
+        const y = this.$me_last_event.clientY
+        this.element_vector_set(this.$CursorObject, {x, y})
+        // }
       }
     },
 
@@ -793,17 +793,20 @@ export const edit_mode_module = {
       PieceTap.appendChild(PieceTexture)
       this.$CursorObject.appendChild(PieceTap)
 
-      // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
-      if (false) {
-        this.$CursorObject.style.left = "-50%"
-        this.$CursorObject.style.top  = "-50%"
-      } else {
-        const position_key = soldier.location.flip_if(this.fliped).position_key
-        const position_info = PositionInfo.fetch(position_key)
+      const position_key = soldier.location.flip_if(this.fliped).position_key
+      const position_info = PositionInfo.fetch(position_key)
+      if (soldier.place) {
+        // 盤上から動かそうとしている駒
+        // devise_info.gap が 0.25 でちょうど左上にすこしずれる
         const ci = this.place_to_cell_info(soldier.place)                                        // place から実際のセルの位置情報を取得
         const gap = this.vector_scale(ci.radius, this.devise_info.gap * position_info.sign * -1) // 左上にずらす度合いを計算
         const vec = this.vector_add(ci.center, gap)                                              // 中央から左上にずらす
         this.element_vector_set(this.$CursorObject, vec)                                         // カーソル座標とする
+      } else {
+        // 駒箱や駒台から取り出した駒
+        // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
+        this.$CursorObject.style.left = "-50%"
+        this.$CursorObject.style.top  = "-50%"
       }
 
       this.$refs.ShogiPlayerGround.$el.appendChild(this.$CursorObject)
@@ -841,9 +844,12 @@ export const edit_mode_module = {
     },
 
     // 移動元の駒(駒台 or 駒箱から)
+    // place に中途半端なインスタンスを設定してはいけない
+    // null を設定することで盤上からではないことがわかる
     origin_soldier2() {
       if (this.have_piece) {
-        const place = Place.fetch([0, 0])
+        // const place = Place.fetch([0, 0])
+        const place = null
         return this.soldier_create_from_stand_or_box_on(place)
       }
     },
