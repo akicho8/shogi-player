@@ -20,7 +20,7 @@ export const edit_mode_module = {
     sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: true, }, // play_mode では自分の駒で同じ仲間の駒を取れないようにする
     sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_play_effect_type:                         { type: String,  default: null,  }, // 指したときのエフェクトの種類
-    sp_play_if_other_cell_tap_then_cancel:       { type: Boolean, default: false, }, // (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。ウォーズと同じようにするにはtrue。デメリットもあるのでfalseで良い。
+    sp_move_cancel:                              { type: String,  default: "is_move_cancel_easy", }, // is_move_cancel_easy: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_hard: キャンセルは元の位置をタップ
   },
 
   data() {
@@ -136,9 +136,7 @@ export const edit_mode_module = {
 
       if (this.play_p && this.have_piece && soldier) {
         this.log("駒台や駒箱から持ち上げた駒を盤上の駒の上に置こうとしたので無効とする")
-        if (this.sp_play_if_other_cell_tap_then_cancel) {
-          this.state_reset() // ←元の位置に戻す場合
-        }
+        this.state_reset2() // ←元の位置に戻す場合
         return
       }
 
@@ -162,9 +160,7 @@ export const edit_mode_module = {
         if (this.play_p) {
           if (this.put_on_my_soldier_p(soldier)) {
             this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
-            if (this.sp_play_if_other_cell_tap_then_cancel) {
-              this.state_reset() // ←元の位置に戻す場合
-            }
+            this.state_reset2() // ←元の位置に戻す場合
             return
           }
         }
@@ -287,9 +283,7 @@ export const edit_mode_module = {
 
         if (!found) {
           this.log("操作モードで盤上の駒を動かし中だが動けないセルをタップしたので無効")
-          if (this.sp_play_if_other_cell_tap_then_cancel) {
-            this.state_reset() // ←元の位置に戻す場合
-          }
+          this.state_reset2() // ←元の位置に戻す場合
           return
         }
       }
@@ -681,6 +675,14 @@ export const edit_mode_module = {
       this.have_piece_location = null
       this.have_piece_promoted = null
       this.virtual_piece_destroy()
+    },
+
+    // 持った状態で他の駒をタップするとキャンセルする場合はキャンセル
+    state_reset2() {
+      if (this.sp_move_cancel === "is_move_cancel_easy") {
+        this.log("持った状態で非合法セルタップでキャンセル")
+        this.state_reset()
+      }
     },
 
     // 駒を持つ → そのまま置く
