@@ -118,6 +118,7 @@ export const edit_mode_module = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
+        this.$emit("operation_invalid")
         return
       }
 
@@ -528,6 +529,7 @@ export const edit_mode_module = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
+        this.$emit("operation_invalid")
         return
       }
 
