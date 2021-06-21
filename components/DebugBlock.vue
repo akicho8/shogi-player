@@ -53,10 +53,17 @@
 
 <script>
 import { support } from "./support.js"
+import DebugBlockRow from "./DebugBlockRow.vue"
 
 export default {
   name: "DebugBlock",
   mixins: [support],
+  components: {
+    // 明示的に指定しないと shoig-exednd 側で次のエラーがでる
+    //- [Vue warn]: Unknown custom element: <DebugBlockRow> - did you register the component correctly? For recursive components, make sure to provide the "name" option.
+    // 原因不明
+    DebugBlockRow,
+  },
 }
 </script>
 
