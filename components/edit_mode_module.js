@@ -118,7 +118,7 @@ export const edit_mode_module = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.$emit("operation_invalid")
+        this.$emit("operation_invalid1")
         return
       }
 
@@ -128,6 +128,7 @@ export const edit_mode_module = {
             if (soldier) {
               if (soldier.location !== this.mediator.current_location) {
                 this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
+                this.$emit("operation_invalid2")
                 return
               }
             }
@@ -529,7 +530,7 @@ export const edit_mode_module = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.$emit("operation_invalid")
+        this.$emit("operation_invalid1")
         return
       }
 
