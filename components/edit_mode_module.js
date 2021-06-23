@@ -50,6 +50,7 @@ export const edit_mode_module = {
       $double_tap_time: null,   // ダブルクリック判定用
 
       last_move_info: null, // 最後に動かした駒の情報
+      killed_soldier: null, // 移動先にある相手の駒
     }
   },
 
@@ -98,7 +99,7 @@ export const edit_mode_module = {
       }
 
       // 移動後の取れる駒
-      const soldier = this.mediator.board.lookup(place)
+      this.killed_soldier = this.mediator.board.lookup(place)
 
       // 移動後の駒
       let new_soldier = null
@@ -125,8 +126,8 @@ export const edit_mode_module = {
       if (this.sp_play_mode_only_own_piece_to_move) {
         if (this.play_p) {
           if (!this.lifted_p) {
-            if (soldier) {
-              if (soldier.location !== this.mediator.current_location) {
+            if (this.killed_soldier) {
+              if (this.killed_soldier.location !== this.mediator.current_location) {
                 this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
                 this.$emit("operation_invalid2")
                 return
@@ -136,13 +137,13 @@ export const edit_mode_module = {
         }
       }
 
-      if (this.play_p && this.have_piece && soldier) {
+      if (this.play_p && this.have_piece && this.killed_soldier) {
         this.log("駒台や駒箱から持ち上げた駒を盤上の駒の上に置こうとしたので無効とする")
         this.state_reset2() // ←元の位置に戻す場合
         return
       }
 
-      if (this.sp_play_mode_not_put_if_death_soldier && this.play_p && this.have_piece && !soldier) {
+      if (this.sp_play_mode_not_put_if_death_soldier && this.play_p && this.have_piece && !this.killed_soldier) {
         const new_soldier = this.soldier_create_from_stand_or_box_on(place)
         const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
         if (force_promote_length != null) {                                              // チェックしない場合は null
@@ -153,14 +154,14 @@ export const edit_mode_module = {
         }
       }
 
-      if (!this.lifted_p && !soldier) {
+      if (!this.lifted_p && !this.killed_soldier) {
         this.log("持たずに何もないところをクリックしたので無効とする")
         return
       }
 
       if (this.sp_play_mode_can_not_kill_same_team_soldier) {
         if (this.play_p) {
-          if (this.put_on_my_soldier_p(soldier)) {
+          if (this.put_on_my_soldier_p(this.killed_soldier)) {
             this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
             this.state_reset2() // ←元の位置に戻す場合
             return
@@ -172,7 +173,7 @@ export const edit_mode_module = {
       if (this.edit_p) {
         const old = this.$double_tap_time
         this.$double_tap_time = Date.now()
-        if (soldier) {
+        if (this.killed_soldier) {
           if (_.isEqual(this.place_from, place)) { // この処理をスキップすると3連打で2回反転できるが誤操作が頻発するのでやめ
             if (old) {
               const gap = this.$double_tap_time - old
@@ -180,7 +181,7 @@ export const edit_mode_module = {
               this.log(`ダブルクリック判定: (${gap} ms < ${this.sp_edit_mode_double_click_time_ms}) -> ${enable}`)
               if (enable) {
                 this.log(`操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す`)
-                this.mediator.board.place_on(soldier.transform_clone)
+                this.mediator.board.place_on(this.killed_soldier.transform_clone)
                 this.piece_hold_and_put_for_bug(place, e) // 不具合対策
                 return
               }
@@ -200,9 +201,9 @@ export const edit_mode_module = {
       if (this.edit_p) {
         this.log(`lifted_from_p: ${this.lifted_p}`)
         if (this.meta_p(e)) {
-          if (!this.lifted_p && soldier) { // 持ってなくて、駒がある
+          if (!this.lifted_p && this.killed_soldier) { // 持ってなくて、駒がある
             this.log("盤上の駒を裏返す")
-            this.mediator.board.place_on(soldier.transform_clone)
+            this.mediator.board.place_on(this.killed_soldier.transform_clone)
             this.piece_hold_and_put_for_bug(place, e) // 不具合対策
             return
           }
@@ -293,8 +294,8 @@ export const edit_mode_module = {
       // 盤上から移動
       if (this.place_from) {
         this.log("盤上から移動")
-        if (soldier) {
-          this.mediator.hold_pieces_add(this.origin_soldier1.location, soldier.piece) // 相手の駒があれば取る
+        if (this.killed_soldier) {
+          this.mediator.hold_pieces_add(this.origin_soldier1.location, this.killed_soldier.piece) // 相手の駒があれば取る
           // this.$forceUpdate()
         }
 
@@ -328,7 +329,7 @@ export const edit_mode_module = {
           }
         } else {
           if (this.play_p) {
-            this.move_info_create({type: "move", from: this.origin_soldier1, to: new_soldier})
+            this.move_info_create({type: "move", from: this.origin_soldier1, to: new_soldier, killed_soldier: this.killed_soldier})
             this.moves_set()
           }
           this.mediator.board.place_on(new_soldier) // 置く
@@ -345,17 +346,17 @@ export const edit_mode_module = {
         this.log("持駒を置く")
 
         // 駒の上に置いた場合は取る
-        if (soldier) {
+        if (this.killed_soldier) {
           if (this.have_piece_location) {
             // have_piece_location の駒台から移動した駒で取ったので have_piece_location の方に置く
-            this.mediator.hold_pieces_add(this.have_piece_location, soldier.piece)
+            this.mediator.hold_pieces_add(this.have_piece_location, this.killed_soldier.piece)
           } else {
-            // 駒箱から移動した駒で取ったので soldier.location に返すとする場合
+            // 駒箱から移動した駒で取ったので this.killed_soldier.location に返すとする場合
             if (false) {
-              this.mediator.hold_pieces_add(soldier.location, soldier.piece)
+              this.mediator.hold_pieces_add(this.killed_soldier.location, this.killed_soldier.piece)
             } else {
               // 駒の向きは先手と同じなのでわかりやすいように 先手に返す
-              this.mediator.hold_pieces_add(Location.fetch("black"), soldier.piece)
+              this.mediator.hold_pieces_add(Location.fetch("black"), this.killed_soldier.piece)
             }
           }
         }
@@ -415,6 +416,7 @@ export const edit_mode_module = {
         ...attrs,
         next_turn_offset: this.turn_offset + 1,           // この手を指した直後の手数。初手76歩なら1
         player_location: this.mediator.current_location,  // 指した人の色。駒の色ではない
+        killed_soldier: this.killed_soldier,              // 取った駒 (無い場合もある)
       })
     },
 
@@ -677,6 +679,7 @@ export const edit_mode_module = {
       this.have_piece = null
       this.have_piece_location = null
       this.have_piece_promoted = null
+      this.killed_soldier = null
       this.virtual_piece_destroy()
     },
 

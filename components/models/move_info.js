@@ -56,6 +56,26 @@ export class MoveInfo {
     return [x, y, v].join(" ")
   }
 
+  // 挙動を効果音のキーに変換するため
+  get effect_key() {
+    if (this.killed_soldier) {
+      return "kill_attack"
+    }
+    if (this.type === "move") {
+      return "move_or_appear"
+    } else if (this.type === "promotable") {
+      if (this.to.promoted) {
+        return "move_or_appear"
+      } else {
+        return "move_or_appear"
+      }
+    } else if (this.type === "put") {
+      return "move_or_appear"
+    } else {
+      throw new Error("must not happen")
+    }
+  }
+
   // private
 
   // ☗7六歩(77)
