@@ -27,7 +27,7 @@
 | `sp_mobile_fit`                               | DEPRECATE                                                                    | "is_mobile_fit_on"        |
 | `sp_mobile_vertical`                          | モバイル時に自動的に縦配置に切り替える                                       | "is_mobile_vertical_on"   |
 | `sp_location_behavior`                        | ☗☖をタップしたとき視点を切り替える                                         | "is_location_flip_on"     |
-| `sp_debug`                                    | デバッグモード                                                               | "is_debug_off"            |
+| `sp_debug_mode`                                    | デバッグモード                                                               | "is_debug_mode_off"            |
 | `sp_sfen_show`                                | SFENを下に表示する                                                           | "is_sfen_show_off"        |
 | `sp_overlay_nav`                              | view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)                    | "is_overlay_nav_off"      |
 | `sp_turn`                                     | 局面(手数)                                                                   |                        -1 |

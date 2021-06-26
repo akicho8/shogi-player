@@ -14,7 +14,7 @@
             :sp_hidden_if_piece_stand_blank="true"
             :sp_board_cell_pointerdown_user_handle="sp_board_cell_pointerdown_user_handle"
             :sp_board_cell_left_click_user_handle="sp_board_cell_left_click_user_handle"
-            sp_debug="is_debug_off"
+            sp_debug_mode="is_debug_mode_off"
           )
       .columns
         .column

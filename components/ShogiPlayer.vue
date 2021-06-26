@@ -85,7 +85,7 @@ export default {
     sp_mobile_fit:        { type: String, default: "is_mobile_fit_on",      }, // DEPRECATE
     sp_mobile_vertical:   { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior: { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
-    sp_debug:             { type: String, default: "is_debug_off",          }, // デバッグモード
+    sp_debug_mode:             { type: String, default: "is_debug_mode_off",          }, // デバッグモード
     sp_sfen_show:         { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
     sp_overlay_nav:       { type: String, default: "is_overlay_nav_off",    }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_turn:              { type: Number, default: -1,                      }, // 局面(手数)
@@ -118,7 +118,7 @@ export default {
 
   data() {
     return {
-      new_debug:    this.sp_debug,
+      new_debug_mode:    this.sp_debug_mode,
       new_run_mode: this.sp_run_mode,
 
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
@@ -246,8 +246,8 @@ export default {
 
     //////////////////////////////////////////////////////////////////////////////// FIXME: これまとめて書けんのか？
 
-    sp_debug(v)  { this.new_debug = v               }, // 外 -> 内
-    new_debug(v) { this.$emit("update:sp_debug", v) }, // 内 -> 外
+    sp_debug_mode(v)  { this.new_debug_mode = v               }, // 外 -> 内
+    new_debug_mode(v) { this.$emit("update:sp_debug_mode", v) }, // 内 -> 外
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -394,7 +394,7 @@ export default {
     view_p()         { return this.new_run_mode === "view_mode" },
     play_p()         { return this.new_run_mode === "play_mode" },
     edit_p()         { return this.new_run_mode === "edit_mode" },
-    debug_p()        { return this.new_debug === "is_debug_on"  },
+    debug_p()        { return this.new_debug_mode === "is_debug_mode_on"  },
 
     // 本当は delegate したい。this.$watch を使えば動的になりそう？
     turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
@@ -406,7 +406,7 @@ export default {
     component_class() {
       return [
         `is_run_mode_${this.new_run_mode}`,
-        this.new_debug,
+        this.new_debug_mode,
       ]
     },
 

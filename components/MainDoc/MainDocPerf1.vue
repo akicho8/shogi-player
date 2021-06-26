@@ -8,7 +8,7 @@
     .container
       ShogiPlayer(
         sp_run_mode="play_mode"
-        sp_debug="is_debug_on"
+        sp_debug_mode="is_debug_mode_on"
         :sp_sound_enabled="true"
         :sp_sound_body_changed="true"
       )

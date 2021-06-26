@@ -16,8 +16,8 @@
         b-radio-button(v-model="base.new_viewpoint" native-value="white") ☖
 
       b-field(label="デバッグモード")
-        b-radio-button(v-model="base.new_debug" native-value="is_debug_off") OFF
-        b-radio-button(v-model="base.new_debug" native-value="is_debug_on") ON
+        b-radio-button(v-model="base.new_debug_mode" native-value="is_debug_mode_off") OFF
+        b-radio-button(v-model="base.new_debug_mode" native-value="is_debug_mode_on") ON
 
     template(v-if="false")
       b-dropdown(v-model="base.new_sp_bg_variant")

@@ -8,7 +8,7 @@
     :sp_sound_volume="0.25"
     sp_slider="is_slider_on"
     sp_bg_variant="is_bg_variant_a"
-    sp_debug="is_debug_off"
+    sp_debug_mode="is_debug_mode_off"
     sp_run_mode="edit_mode"
     )
 </template>

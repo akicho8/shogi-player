@@ -34,7 +34,7 @@
 | `update:turn_offset_max`                    | 最大手数が変更されたとき                       | 内部変数参照よりこっちの方が安全なはず                            |
 | `update:sp_run_mode`                           | 設定ダイアログでモードが変更されたとき         |                                                                   |
 | `update:sp_body`                          | 設定ダイアログで棋譜が変更されたとき           |                                                                   |
-| `update:sp_debug`                       | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
+| `update:sp_debug_mode`                       | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |
 | `update:sp_viewpoint`                               | 盤面を反転したとき                             |                                                                   |
 | `update:sp_layout`                          | レイアウトを変更したとき                       |                                                                   |
 | `update:sp_bg_variant`                      | 背景の種類変更                                 |                                                                   |

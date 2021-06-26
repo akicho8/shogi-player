@@ -575,7 +575,7 @@ export default {
 
       sp_turn: -1,
       sp_viewpoint: "black",
-      sp_debug: DEVELOPMENT_P ? "is_debug_off" : "is_debug_off",
+      sp_debug_mode: DEVELOPMENT_P ? "is_debug_mode_off" : "is_debug_mode_off",
       sp_piece_count_gap_right: 62.0,
       sp_piece_count_gap_bottom: 47.0,
       sp_piece_count_font_size: 8,
@@ -826,7 +826,7 @@ export default {
       params.sp_mobile_vertical   = this.sp_mobile_vertical
       params.sp_run_mode          = this.sp_run_mode
       params.sp_viewpoint         = this.sp_viewpoint
-      params.sp_debug             = this.sp_debug,
+      params.sp_debug_mode             = this.sp_debug_mode,
       params.sp_comment           = this.sp_comment,
       params.sp_turn              = this.sp_turn
       params.sp_body              = this.sp_body

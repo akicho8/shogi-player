@@ -19,7 +19,7 @@
             section.modal-card-body
               shogi-player(
                 sp_run_mode="view_mode"
-                sp_debug="is_debug_off"
+                sp_debug_mode="is_debug_mode_off"
                 :sp_turn="0"
                 :sp_body="kifu_book_info.sp_body"
                 :sp_key_event_capture_enabled="true"
