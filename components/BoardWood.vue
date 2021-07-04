@@ -40,6 +40,9 @@ export default {
   components: {
     PieceTap,
   },
+  beforeUpdate() {
+    this.base.$data._BoardWoodRenderCount += 1
+  },
   methods: {
     click_handle() {
       if (this.base.sp_board_click_handle) {

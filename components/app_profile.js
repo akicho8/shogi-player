@@ -5,10 +5,11 @@ export const app_profile = {
   // },
   data() {
     return {
-      _before_update_call_count: 0,
+      _ShogiPlayerRenderCount: 0,
+      _BoardWoodRenderCount: 0,
     }
   },
   beforeUpdate() {
-    this.$data._before_update_call_count += 1
+    this.$data._ShogiPlayerRenderCount += 1
   },
 }

@@ -8,7 +8,8 @@
         th Value
         th 参照方法
     tbody
-      DebugBlockRow(code="$data._before_update_call_count" name="beforeUpdate 呼び出し回数" :value="base.$data._before_update_call_count")
+      DebugBlockRow(code="$data._ShogiPlayerRenderCount" name="ShogiPlayer beforeUpdate 呼び出し回数" :value="base.$data._ShogiPlayerRenderCount")
+      DebugBlockRow(code="$data._BoardWoodRenderCount"   name="BoardWood beforeUpdate 呼び出し回数"   :value="base.$data._BoardWoodRenderCount")
 
   table.table.is-narrow.is-hoverable.is-fullwidth
     caption Global
