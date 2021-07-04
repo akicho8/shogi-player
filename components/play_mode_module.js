@@ -111,8 +111,8 @@ export const play_mode_module = {
     turn_next() {
       if (this.play_p) {
         if (this.sp_play_effect_type) {
-          if (this.$last_clicked_cell) {
-            EffectInfo.fetch(this.sp_play_effect_type).run({from_el: this.$last_clicked_cell})
+          if (this.$data._last_clicked_cell) {
+            EffectInfo.fetch(this.sp_play_effect_type).run({from_el: this.$data._last_clicked_cell})
           }
         }
 

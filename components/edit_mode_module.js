@@ -39,15 +39,15 @@ export const edit_mode_module = {
 
       // プレフィクスに_をつけるとVueに監視されない
       me_running_p: false,        // mousemove イベント緩和用
-      $me_last_event: null,        // mousemove イベント
+      _me_last_event: null,        // mousemove イベント
 
-      $CursorObject: null,        // 持ちあげている駒のDOM
+      _CursorObject: null,        // 持ちあげている駒のDOM
       mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
 
       dialog_soldier: null,     // 成り確認ダイアログ表示中か？
-      $last_clicked_cell: null,        // 最後にクリックした要素
+      _last_clicked_cell: null,        // 最後にクリックした要素
 
-      $double_tap_time: null,   // ダブルクリック判定用
+      _double_tap_time: null,   // ダブルクリック判定用
 
       last_move_info: null, // 最後に動かした駒の情報
       killed_soldier: null, // 移動先にある相手の駒
@@ -80,7 +80,7 @@ export const edit_mode_module = {
     board_cell_left_click(xy, e) {
       this.log("board_cell_left_click")
       this.log(`shiftKey: ${e.shiftKey}`)
-      this.$last_clicked_cell = e.target
+      this.$data._last_clicked_cell = e.target
 
       // EffectInfo.fetch('fw_type_2').run({from_el: e.target})
 
@@ -171,12 +171,12 @@ export const edit_mode_module = {
 
       // ダブルタップで裏返すとシングルクリックの遅延がすさまじいことになるためダブルタップは使ってはいけない
       if (this.edit_p) {
-        const old = this.$double_tap_time
-        this.$double_tap_time = Date.now()
+        const old = this.$data._double_tap_time
+        this.$data._double_tap_time = Date.now()
         if (this.killed_soldier) {
           if (_.isEqual(this.place_from, place)) { // この処理をスキップすると3連打で2回反転できるが誤操作が頻発するのでやめ
             if (old) {
-              const gap = this.$double_tap_time - old
+              const gap = this.$data._double_tap_time - old
               const enable = gap < this.sp_edit_mode_double_click_time_ms
               this.log(`ダブルクリック判定: (${gap} ms < ${this.sp_edit_mode_double_click_time_ms}) -> ${enable}`)
               if (enable) {
@@ -735,7 +735,7 @@ export const edit_mode_module = {
     },
 
     mousemove_hook(e) {
-      this.$me_last_event = e
+      this.$data._me_last_event = e
 
       // 連続で呼ばれるイベント処理を緩和する方法
       // https://qiita.com/noplan1989/items/9333faad731f5ecaaccd
@@ -765,11 +765,11 @@ export const edit_mode_module = {
     },
 
     cursor_object_xy_update() {
-      if (this.$CursorObject && this.$me_last_event && this.mouse_stick) {
+      if (this.$data._CursorObject && this.$data._me_last_event && this.mouse_stick) {
         // if (this.devise_info.key === "is_device_desktop") {
-        const x = this.$me_last_event.clientX
-        const y = this.$me_last_event.clientY
-        this.element_vector_set(this.$CursorObject, {x, y})
+        const x = this.$data._me_last_event.clientX
+        const y = this.$data._me_last_event.clientY
+        this.element_vector_set(this.$data._CursorObject, {x, y})
         // }
       }
     },
@@ -784,7 +784,7 @@ export const edit_mode_module = {
       // キーボードイベントの場合は null が来るようにしている
       // マウスを動かしてはじめて座標が取れるのでキーボードの場合はすぐに駒は表示されない
       if (event) {
-        this.$me_last_event = event
+        this.$data._me_last_event = event
         this.cursor_object_xy_update()
       }
 
@@ -800,7 +800,7 @@ export const edit_mode_module = {
     //       .PieceTextureSelf(駒の種類を定義するクラスたち)
     //
     virtual_piece_dom_create(soldier) {
-      this.$CursorObject    = this.el_create(["CursorObject"])
+      this.$data._CursorObject    = this.el_create(["CursorObject"])
       const PieceTap      = this.el_create(["PieceTap"])
       const PieceTexture     = this.el_create(["PieceTexture"])
       const PieceTextureSelf = this.el_create(["PieceTextureSelf", ...soldier.css_class_list])
@@ -809,7 +809,7 @@ export const edit_mode_module = {
 
       PieceTexture.appendChild(PieceTextureSelf)
       PieceTap.appendChild(PieceTexture)
-      this.$CursorObject.appendChild(PieceTap)
+      this.$data._CursorObject.appendChild(PieceTap)
 
       const position_key = soldier.location.flip_if(this.fliped).position_key
       const position_info = PositionInfo.fetch(position_key)
@@ -819,15 +819,15 @@ export const edit_mode_module = {
         const ci = this.place_to_cell_info(soldier.place)                                        // place から実際のセルの位置情報を取得
         const gap = this.vector_scale(ci.radius, this.devise_info.gap * position_info.sign * -1) // 左上にずらす度合いを計算
         const vec = this.vector_add(ci.center, gap)                                              // 中央から左上にずらす
-        this.element_vector_set(this.$CursorObject, vec)                                         // カーソル座標とする
+        this.element_vector_set(this.$data._CursorObject, vec)                                         // カーソル座標とする
       } else {
         // 駒箱や駒台から取り出した駒
         // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
-        this.$CursorObject.style.left = "-50%"
-        this.$CursorObject.style.top  = "-50%"
+        this.$data._CursorObject.style.left = "-50%"
+        this.$data._CursorObject.style.top  = "-50%"
       }
 
-      this.$refs.ShogiPlayerGround.$el.appendChild(this.$CursorObject)
+      this.$refs.ShogiPlayerGround.$el.appendChild(this.$data._CursorObject)
     },
 
     el_create(classes) {
@@ -837,10 +837,10 @@ export const edit_mode_module = {
     },
 
     virtual_piece_destroy() {
-      if (this.$CursorObject) {
-        this.$refs.ShogiPlayerGround.$el.removeChild(this.$CursorObject)
+      if (this.$data._CursorObject) {
+        this.$refs.ShogiPlayerGround.$el.removeChild(this.$data._CursorObject)
 
-        this.$CursorObject = null
+        this.$data._CursorObject = null
         this.mouse_stick = false
 
         this.$el.removeEventListener("mousemove", this.mousemove_hook)
