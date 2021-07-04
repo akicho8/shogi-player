@@ -41,6 +41,7 @@ import { shortcut_module  } from "./shortcut_module.js"
 import { edit_mode_module } from "./edit_mode_module.js"
 import { play_mode_module } from "./play_mode_module.js"
 import { sound_module     } from "./sound_module.js"
+import { app_profile     } from "./app_profile.js"
 import { preset_module    } from "./preset_module.js"
 import { any_func_module  } from "./any_func_module.js"
 import { api_module       } from "./api_module.js"
@@ -63,6 +64,7 @@ export default {
     edit_mode_module,
     play_mode_module,
     sound_module,
+    app_profile,
     preset_module,
     any_func_module,
     api_module,

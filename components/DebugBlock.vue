@@ -1,6 +1,16 @@
 <template lang="pug">
 .DebugBlock.box(v-if="base.debug_p")
   table.table.is-narrow.is-hoverable.is-fullwidth
+    caption 最適化
+    thead
+      tr
+        th
+        th Value
+        th 参照方法
+    tbody
+      DebugBlockRow(code="$data._before_update_call_count" name="beforeUpdate 呼び出し回数" :value="base.$data._before_update_call_count")
+
+  table.table.is-narrow.is-hoverable.is-fullwidth
     caption Global
     thead
       tr
