@@ -8,6 +8,7 @@ import { EffectInfo } from "./models/effect_info.js"
 export const play_mode_module = {
   props: {
     sp_human_side: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
+    play_mode_advanced_snapshot_sfen_emit: { type: Boolean, default: false, },
   },
 
   data() {
@@ -126,6 +127,10 @@ export const play_mode_module = {
         this.$emit("update:play_mode_advanced_last_move", _.last(this.moves))
         this.$emit("update:play_mode_advanced_moves", this.moves)
         this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_position_sfen)
+        // 遅いのでデフォルトではOFFにする。消してもいい
+        if (this.play_mode_advanced_snapshot_sfen_emit) {
+          this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_position_sfen) // 14 ms
+        }
 
         // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする
         this.turn_slider_focus()
