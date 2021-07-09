@@ -117,16 +117,16 @@ export const play_mode_module = {
           }
         }
 
+        // ↓FIXME: これも20msほどかかるので実行したくない
         this.mediator = new Mediator()
         this.mediator.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
         this.mediator.current_turn = -1
         this.mediator.run()
-        this.sound_play("piece_put")
+        this.$nextTick(() => this.sound_play("piece_put")) // 音がずれるため少し待つ 20ms 待たない場合は nextTick 不要
 
         this.$emit("update:play_mode_advanced_full_moves_sfen", {sfen: this.play_mode_full_moves_sfen, last_move_info: this.last_move_info})
-        this.$emit("update:play_mode_advanced_last_move", _.last(this.moves))
         this.$emit("update:play_mode_advanced_moves", this.moves)
-        this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_position_sfen)
+
         // 遅いのでデフォルトではOFFにする。消してもいい
         if (this.play_mode_advanced_snapshot_sfen_emit) {
           this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_position_sfen) // 14 ms
@@ -152,7 +152,7 @@ export const play_mode_module = {
     },
 
     emit_update_edit_mode_snapshot_sfen() {
-      this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
+      // this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
     },
   },
 

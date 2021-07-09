@@ -25,7 +25,6 @@
 | `update:mediator_snapshot_sfen`             | 操作モードの盤面の状態                         | コントローラーで手を戻しても変化する。view_mode でも呼ばれる      |
 | `update:play_mode_advanced_full_moves_sfen` | 操作モードで指した直後の局面を発行(movesあり)  |                                                                   |
 | `update:play_mode_advanced_snapshot_sfen`   | 操作モードで指した直後の局面を発行(movesなし)  |                                                                   |
-| `update:play_mode_advanced_last_move`       | 操作モードで指した手(sfenのmovesの最後の1つ)   |                                                                   |
 | `update:play_mode_advanced_moves`           | 操作モードで指した手の配列                     |                                                                   |
 | `update:moves_take_turn_offset`             | 操作モードでの現在の手の配列                   | turn_offset で take している                                      |
 | `update:edit_mode_snapshot_sfen`            | 編集モードの局面                               | play_mode でも呼ばれるので注意                                    |

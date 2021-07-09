@@ -102,8 +102,8 @@
           b-field(custom-class="is-small" label="@update:play_mode_advanced_snapshot_sfen: 操作モードで指した直後の局面を発行(movesなし)")
             b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_snapshot_sfen)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@update:play_mode_advanced_last_move: 操作モードで指した手(sfenのmovesの最後の1つ)")
-            b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_last_move)" readonly type="textarea")
+          //- b-field(custom-class="is-small" label="@update:play_mode_advanced_last_move: 操作モードで指した手(sfenのmovesの最後の1つ)")
+          //-   b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_last_move)" readonly type="textarea")
 
           b-field(custom-class="is-small" label="@update:play_mode_advanced_moves: 操作モードで指した手を含むmoves配列")
             b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_moves)" readonly type="textarea")
@@ -161,13 +161,13 @@
             @update:mediator_snapshot_sfen="             e => trigger_check('mediator_snapshot_sfen', e)"
             @update:play_mode_advanced_full_moves_sfen=" e => trigger_check('play_mode_advanced_full_moves_sfen', e)"
             @update:play_mode_advanced_snapshot_sfen="   e => trigger_check('play_mode_advanced_snapshot_sfen', e)"
-            @update:play_mode_advanced_last_move="       e => trigger_check('play_mode_advanced_last_move', e)"
             @update:play_mode_advanced_moves="           e => trigger_check('play_mode_advanced_moves', e)"
             @update:turn_offset="                        e => trigger_check('turn_offset', e)"
             @update:turn_offset_max="                    e => trigger_check('turn_offset_max', e)"
             @update:moves_take_turn_offset="             e => trigger_check('moves_take_turn_offset', e)"
 
             )
+            //- @update:play_mode_advanced_last_move="       e => trigger_check('play_mode_advanced_last_move', e)"
             //- @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
 
   .section
@@ -259,7 +259,7 @@ export default {
       mediator_snapshot_sfen: null,
       play_mode_advanced_full_moves_sfen: null,
       play_mode_advanced_snapshot_sfen: null,
-      play_mode_advanced_last_move: null,
+      // play_mode_advanced_last_move: null,
       play_mode_advanced_moves: null,
       turn_offset: null,
       moves_take_turn_offset: null,
