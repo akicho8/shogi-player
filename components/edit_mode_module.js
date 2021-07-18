@@ -21,6 +21,7 @@ export const edit_mode_module = {
     sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_play_effect_type:                         { type: String,  default: null, }, // 指したときのエフェクトの種類 fw_type_3
     sp_move_cancel:                              { type: String,  default: "is_move_cancel_easy", }, // is_move_cancel_easy: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_hard: キャンセルは元の位置をタップ
+    sp_view_mode_soldier_movable:                { type: Boolean, default: true, }, // view_mode でも駒を動かせる(ただし本筋は破壊しない)
   },
 
   data() {
@@ -94,7 +95,7 @@ export const edit_mode_module = {
         }
       }
 
-      if (this.if_view_mode_break) {
+      if (this.break_if_view_mode) {
         return
       }
 
@@ -375,7 +376,7 @@ export const edit_mode_module = {
     },
 
     // board_cell_left_dblclick(xy, e) {
-    //   if (this.if_view_mode_break) {
+    //   if (this.break_if_view_mode) {
     //     return
     //   }
     //
@@ -423,7 +424,7 @@ export const edit_mode_module = {
     board_cell_right_click(xy, e) {
       this.log("盤のセルを右クリック")
 
-      if (this.if_view_mode_break) {
+      if (this.break_if_view_mode) {
         return
       }
 
@@ -446,7 +447,7 @@ export const edit_mode_module = {
     // board_cell_right_click2(xy, e) {
     //   this.log("盤のセルを右クリック")
     //
-    //   if (this.if_view_mode_break) {
+    //   if (this.break_if_view_mode) {
     //     return
     //   }
     //
@@ -468,10 +469,9 @@ export const edit_mode_module = {
 
     // 駒台 or 駒台の駒をクリックしたときの共通処理
     membership_click_handle(location, e) {
-      // if (this.view_p) {
-      //   this.log("再生モードなので無効")
-      //   return true
-      // }
+      if (this.break_if_view_mode) {
+        return
+      }
 
       if (this.have_piece_location === location && this.have_piece) {
         this.log("自分の駒台から駒を持ち上げているならキャンセル")
@@ -509,6 +509,10 @@ export const edit_mode_module = {
     // 駒台の駒をクリック
     piece_stand_piece_click(location, piece, have_piece_promoted, e) {
       this.log("駒台の駒をクリック")
+
+      if (this.break_if_view_mode) {
+        return
+      }
 
       // if (this.membership_click_handle(location, e)) {
       //   return
@@ -889,9 +893,14 @@ export const edit_mode_module = {
       }
     },
 
-    if_view_mode_break() {
-      // return this.view_p
+    // view_mode のときは駒を動かせるようにしない
+    break_if_view_mode() {
+      if (this.view_p) {
+        if (this.sp_view_mode_soldier_movable) {
+        } else {
+          return true
+        }
+      }
     },
-
   },
 }

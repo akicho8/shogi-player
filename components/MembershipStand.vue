@@ -61,6 +61,9 @@ export default {
           if (this.base.play_p && !this.base.sp_play_mode_only_own_piece_to_move) {
             f = true
           }
+          if (this.break_if_view_mode) {
+            f = false
+          }
           if (f) {
             list.push("selectable_p")
           }
