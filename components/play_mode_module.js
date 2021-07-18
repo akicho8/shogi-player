@@ -45,6 +45,7 @@ export const play_mode_module = {
     // 操作モード(または再生モード)で盤面が変化したとき(常に更新)
     mediator: {
       handler(v) {
+        // FIXME: これも遅い？
         this.$emit("update:mediator_snapshot_sfen", v.to_position_sfen)
       },
       deep: true,
@@ -152,7 +153,9 @@ export const play_mode_module = {
     },
 
     emit_update_edit_mode_snapshot_sfen() {
-      // this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
+      if (this.edit_p) {
+        this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
+      }
     },
   },
 

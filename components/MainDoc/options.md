@@ -27,7 +27,7 @@
 | `update:play_mode_advanced_snapshot_sfen`   | 操作モードで指した直後の局面を発行(movesなし)  |                                                                   |
 | `update:play_mode_advanced_moves`           | 操作モードで指した手の配列                     |                                                                   |
 | `update:moves_take_turn_offset`             | 操作モードでの現在の手の配列                   | turn_offset で take している                                      |
-| `update:edit_mode_snapshot_sfen`            | 編集モードの局面                               | play_mode でも呼ばれるので注意                                    |
+| `update:edit_mode_snapshot_sfen`            | 編集モードの局面                               |                                     |
 | `update:sp_turn`                         | 手数が変更されたとき                           | sp_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも |
 | `update:turn_offset`                        | 手数が変更されたとき                           | マイナスにはならない。sp_turn と被るので追加。                 |
 | `update:turn_offset_max`                    | 最大手数が変更されたとき                       | 内部変数参照よりこっちの方が安全なはず                            |
