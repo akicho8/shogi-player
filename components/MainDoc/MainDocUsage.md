@@ -8,7 +8,7 @@
     % vue -V
     @vue/cli 4.5.9
 
-~/src/shogi-player-vue-cli-sample に作成することします
+~/src/shogi-player-vue-cli-sample に作成することにします
 
     % cd ~/src
 
