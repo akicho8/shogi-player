@@ -2,12 +2,34 @@
 
 import XRegExp from "xregexp"
 
+// クラスして使ってない
 export class KanjiNumber {
-  static get unit_size() { return 6 }
-  static get one_number_insert_level() { return 4 }
-  static get KANJI_TABLE() { return "〇一二三四五六七八九" }
-  static get UNIT_TABLE() { return "十百千万憶兆" }
-  static get NUMBER_TABLE() { return "0123456789" }
+  // 100までで良いなら2にしとくと気持ち程度速くなる
+  // 2なら百まで
+  // 3なら千まで
+  // 6なら兆まで
+  static unit_size = 6
+
+  // 万(4)を超えたら「万」ではなく「一万」とする
+  static one_number_insert_level = 4
+
+  static KANJI_TABLE  = "〇一二三四五六七八九"
+  static UNIT_TABLE   = "十百千万憶兆"
+  static NUMBER_TABLE = "0123456789"
+
+  // static TRANSRATE_TABLE = {
+  //   '〇': '0',
+  //   '一': '1',
+  //   '二': '2',
+  //   '三': '3',
+  //   '四': '4',
+  //   '五': '5',
+  //   '六': '6',
+  //   '七': '7',
+  //   '八': '8',
+  //   '九': '9'
+  // }
+  static TRANSRATE_TABLE = [...this.KANJI_TABLE].reduce((a, e, i) => ({...a, [e]: this.NUMBER_TABLE.charAt(i)}), {})
 
   // KanjiNumber.kanji_to_number_string("")         // => ""
   // KanjiNumber.kanji_to_number_string("歩")       // => "歩"
@@ -26,7 +48,7 @@ export class KanjiNumber {
   static kanji_to_number_string(s) {
     // XRegExp.install('astral namespacing');
     // s = str.tr(this.KANJI_TABLE, "0-9")
-    s = s.replace(new RegExp(`[${this.KANJI_TABLE}]`, "g"), e => this.tr_table[e])
+    s = s.replace(new RegExp(`[${this.KANJI_TABLE}]`, "g"), e => this.TRANSRATE_TABLE[e])
     // https://xregexp.com/
 
     for (let i = 0; i < this.unit_size; i++) {
@@ -74,28 +96,7 @@ export class KanjiNumber {
     return out.join("")
   }
 
-  // {
-  //   '〇': '0',
-  //   '一': '1',
-  //   '二': '2',
-  //   '三': '3',
-  //   '四': '4',
-  //   '五': '5',
-  //   '六': '6',
-  //   '七': '7',
-  //   '八': '8',
-  //   '九': '9'
-  // }
-  static get tr_table() {
-    return [...this.KANJI_TABLE].reduce((a, e, i) => {
-      return {...a, [e]: this.NUMBER_TABLE.charAt(i)}
-    }, {})
-
-    // static get KANJI_TABLE() { return "〇一二三四五六七八九" }
-    // static get UNIT_TABLE() { return "十百千万憶兆" }
-    // static get NUMBER_TABLE() { return "0123456789" }
-
-  }
+  // 未使用
 
   static get regexp() {
     return XRegExp(`[${this.KANJI_TABLE}${this.UNIT_TABLE}]+`)
@@ -108,7 +109,4 @@ export class KanjiNumber {
     })
     return list
   }
-}
-
-if (process.argv[1] === __filename) {
 }
