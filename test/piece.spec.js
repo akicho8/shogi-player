@@ -15,4 +15,9 @@ describe('Piece', () => {
       v.promoted = true
     }).toThrow()
   })
+
+  // it('all_names', () => {
+  //   console.log(Piece.all_names)
+  //   console.log(Piece.all_names)
+  // })
 })

@@ -37,6 +37,14 @@ export class Place {
     return this._y
   }
 
+  get to_a() {
+    return [this.x, this.y]
+  }
+
+  get to_h() {
+    return { x: this.x, y: this.y }
+  }
+
   get human_x() {
     return Board.dimension - this._x
   }
@@ -85,6 +93,7 @@ export class Place {
     }
   }
 
+  // FIXME: replace ではなく split する
   _parse_from_string(s) {
     s = s.replace(/([１-９一二三四五六七八九a-z])/g, (e) => this._replace_table[e])
     const [x, y] = s.split("").map((e) => Number(e))

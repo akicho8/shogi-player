@@ -28,6 +28,7 @@
           template(v-if="development_p")
             li: nuxt-link(:to="{name: 'test-sp_device'}") sp_device テスト
             li: nuxt-link(:to="{name: 'test-perf1'}") 高速化
+            li: nuxt-link(:to="{name: 'test-kif_parser'}") KIF読み込み
 </template>
 
 <script>

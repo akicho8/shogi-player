@@ -45,10 +45,9 @@ export class SfenParser extends ParserBase {
     }
   }
 
-  static parse(raw_body) {
-    const object = new this(raw_body)
-    object.parse()
-    return object
+  reset() {
+    super.reset()
+    this.attributes = {}
   }
 
   parse() {
@@ -93,17 +92,17 @@ export class SfenParser extends ParserBase {
   }
 
   get hold_pieces() {
-    const _hold_pieces = super.hold_pieces
+    const hash = this.hold_pieces_empty_hash()
     if (this.attributes["hold_pieces"] !== "-") {
       XRegExp.forEach(this.attributes["hold_pieces"], XRegExp("(?<count>\\d+)?(?<piece_char>\\S)"), (md, i) => {
         const piece = Piece.fetch(md.piece_char)
         let count = Number(md.count || 1)
         const location = this.__location_by_upper_or_lower_case(md.piece_char)
-        count += _hold_pieces[location.key][piece.key] || 0
-        Vue.set(_hold_pieces[location.key], piece.key, count)
+        count += hash[location.key][piece.key] || 0
+        Vue.set(hash[location.key], piece.key, count)
       })
     }
-    return _hold_pieces
+    return hash
   }
 
   // sfen_serializer 用
@@ -142,7 +141,7 @@ export class SfenParser extends ParserBase {
       //   move_hash["scene_index"] = this.turn_offset_min + i
       //   move_hash["scene_offset"] = i
       // }
-      move_hash["location"] = this.base_location.advance(i) // FIXME: これなくてもよくね？
+      move_hash["location"] = this.location_by_offset(i) // これいるのか？ → いる
       ary.push(move_hash)
     })
     return ary

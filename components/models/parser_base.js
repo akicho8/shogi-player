@@ -2,8 +2,19 @@ import _ from "lodash"
 import { Location } from "./location"
 
 export class ParserBase {
+  static parse(raw_body) {
+    const instance = new this(raw_body)
+    instance.parse()
+    return instance
+  }
+
   constructor(raw_body = null) {
+    this.reset()
     this.raw_body = raw_body
+  }
+
+  reset() {
+    this.raw_body = ""
     this.header = {}
   }
 
@@ -14,7 +25,12 @@ export class ParserBase {
     console.warn("not implemented")
   }
 
-  get hold_pieces() {
+  // get hold_pieces() {
+  //   return this.hold_pieces_empty_hash()
+  // }
+
+  // {"black" => {}, "white" => {}} を得る
+  hold_pieces_empty_hash() {
     return _.reduce(Location.values, (a, e) => {
       a[e.key] = {}
       return a
@@ -35,14 +51,6 @@ export class ParserBase {
 
   location_by_offset(offset) {
     return this.base_location.advance(offset)
-
-    // 次のようにすると w - 2 から始まるときに後手番なのに先手番になってしまう ← いや、あってる
-    // const index = this.turn_offset_min + offset + (this.komaochi_p ? 1 : 0)
-
-    // const index = this.turn_offset_min + (this.komaochi_p ? 1 : 0) + offset
-    // "position startpos" の場合 index が -1 になり (-1 % 2) が -1 になり Location.fetch(-1) でエラーになる
-    // なので Math.abs
-    // return Location.fetch(Math.abs(index) % 2)
   }
 
   // 最後の手番
