@@ -29,7 +29,7 @@ export class Place {
   constructor(value) {
     let x, y
     if (typeof value === "string") {
-      [x, y] = this._parse_from_string(value)
+      [x, y] = this.__parse_from_string(value)
     } else {
       [x, y] = value            // valus is array
     }
@@ -104,13 +104,6 @@ export class Place {
     }
   }
 
-  // FIXME: replace ではなく split する
-  _parse_from_string(s) {
-    s = s.replace(/([１-９一二三四五六七八九a-z])/g, (e) => Place.ANY_TO_NUMBER_REPLACE_TABLE[e])
-    const [x, y] = s.split("").map((e) => Number(e))
-    return [Board.dimension - x, y - 1]
-  }
-
   get to_sfen() {
     return [Board.dimension - this._x, Place.TO_SFEN_REPLACE_TABLE_Y[this._y]].join("")
   }
@@ -141,10 +134,15 @@ export class Place {
   }
 
   // private
+
   __new_pos(origin, v) {
     return Math.trunc((origin + v + Board.dimension) % Board.dimension) // (x + 1).modulo(dimension)
   }
 
+  __parse_from_string(s) {
+    const [x, y] = s.split("").map(e => Number(Place.ANY_TO_NUMBER_REPLACE_TABLE[e] ?? e))
+    return [Board.dimension - x, y - 1]
+  }
 }
 
 if (process.argv[1] === __filename) {
