@@ -27,51 +27,20 @@ export class Piece extends MemoryRecord {
   }
 
   // "歩" などで引く
-  static kif_lookup(key) {
-    if (!this._kif_lookup) {
-      this._kif_lookup = this.hash_table_build_by_columns(["name", "alias_name"])
+  static lookup_by_name(key) {
+    if (this._lookup_by_name == null) {
+      this._lookup_by_name = this.memory_record_create_index_or(["name", "alias_name"])
     }
-    return this._kif_lookup[key]
+    return this._lookup_by_name[key]
   }
 
   // "と" などで引く
-  static kif_promoted_lookup(key) {
-    if (!this._kif_promoted_lookup) {
-      this._kif_promoted_lookup = this.hash_table_build_by_columns(["promoted_name", "promoted_alias_name"])
+  static lookup_by_promoted_name(key) {
+    if (this._lookup_by_promoted_name == null) {
+      this._lookup_by_promoted_name = this.memory_record_create_index_or(["promoted_name", "promoted_alias_name"])
     }
-    return this._kif_promoted_lookup[key]
+    return this._lookup_by_promoted_name[key]
   }
-
-  // 指定のカラムをキーにしたハッシュテーブルを作る
-  static hash_table_build_by_columns(columns) {
-    return this.values.reduce((a, e) => {
-      columns.forEach(column => {
-        const v = e[column]
-        if (v != null) {
-          if (v in a) {
-            throw new Error([
-              `${this.name}#${column} ${JSON.stringify(v)} is duplicate`,
-              `Existing: ${JSON.stringify(Object.keys(a))}`,
-              `Conflict: ${JSON.stringify(e)}`,
-            ].join("\n"))
-          }
-          a[v] = e
-        }
-      })
-      return a
-    }, {})
-  }
-
-  // static get all_names() {
-  //   console.log("cache")
-  //   if ("_all_names" in this) {
-  //     return this._all_names
-  //   }
-  //   this._all_names = this.values.flatMap(e => [e.key, e.name, e.alias_name, e.promoted_name, e.promoted_alias_name])
-  //   console.log(this._all_names)
-  //   this._all_names.compact()
-  //   return this._all_names
-  // }
 
   get css_class_list() {
     return ["piece_name", `piece_${this.key}`]

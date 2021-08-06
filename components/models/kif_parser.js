@@ -16,7 +16,7 @@ import { KanjiNumber    } from "./kanji_number.js"
 const REGEXP = {
   header: "(?<key>.*)：\s*(?<value>.*)",                         // key：val
   board:  "\\|(?<board>.*)\\|",                                  // | 香 桂 銀 金 玉 金 銀 桂 香|九
-  direct_location: "(?<direct_location>^[上下先後]手番)",            // 上手番
+  direct_location: "(?<direct_location>^[上下先後]手番)",        // 上手番
   comment: "^\\*(?<comment>.*)",                                 // *コメント
   hand: `^\\s*(?<number>\\d+)\\s+                                # 1    ; 手数
          (?<to>[１-９1-9一二三四五六七八九]+)?                   # 76   ; 移動先
@@ -92,13 +92,13 @@ export class KifParser extends ParserBase {
           // ヘッダー部分
           const value = m.value.trim()
           this.header[m.key] = value
-          if (m.key.match(/[上下先後]手の持駒/)) {
+          if (m.key.match(/手の持駒/)) {
             if (value === "なし") {
             } else {
               let s = KanjiNumber.kanji_to_number_string(value)
               s = s.replace(/\s+/g, "")
               XRegExp.forEach(s, XRegExp("(?<piece_char>\\D)(?<count>\\d*)"), (m2, x) => {
-                const piece = Piece.kif_lookup(m2.piece_char)
+                const piece = Piece.lookup_by_name(m2.piece_char)
                 let count = Number(m2.count || 1)
                 const location_key = m.key.match(/[上後]/) ? "white" : "black"
                 count += this.hold_pieces[location_key][piece.key] || 0
@@ -115,7 +115,7 @@ export class KifParser extends ParserBase {
           // 盤
           this.board_lines.push(m["board"])
         } else if (m["direct_location"]) {
-          // 盤
+          // BODにある "○手番"
           if (/[上後]/.test(m["direct_location"])) {
             this.direct_location = Location.fetch("white")
           } else {
@@ -141,7 +141,7 @@ export class KifParser extends ParserBase {
             attrs["promoted_trigger"] = true
           }
           if (m["motion"] === "打") {
-            attrs["drop_piece"] = Piece.kif_lookup(m["piece"])
+            attrs["drop_piece"] = Piece.lookup_by_name(m["piece"])
           }
           this.move_infos.push(attrs)
         } else {
@@ -177,10 +177,10 @@ export class KifParser extends ParserBase {
         if (m.piece === "・") {
         } else {
           const location_key = m.arrow === "v" ? "white" : "black"
-          let piece = Piece.kif_lookup(m.piece)
+          let piece = Piece.lookup_by_name(m.piece)
           let promoted = false
           if (!piece) {
-            piece = Piece.kif_promoted_lookup(m.piece)
+            piece = Piece.lookup_by_promoted_name(m.piece)
             assert(piece)
             promoted = true
           }
