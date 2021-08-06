@@ -32,5 +32,14 @@ describe("KifParser", () => {
     expect(KifParser.parse("下手番").location_by_offset(0).key).toEqual("black")
     expect(KifParser.parse("先手番").location_by_offset(0).key).toEqual("black")
     expect(KifParser.parse("後手番").location_by_offset(0).key).toEqual("white")
+
+    expect(KifParser.parse("手数＝24 △５四歩 まで").location_by_offset(0).key).toEqual("black")
+    expect(KifParser.parse("手数＝24 ▲５四歩 まで").location_by_offset(0).key).toEqual("white")
+
+    // シンプルにするためあとに来た方が勝つことにしとく
+    expect(KifParser.parse("後手番\n手数＝24 △５四歩 まで").location_by_offset(0).key).toEqual("black")
+    expect(KifParser.parse("先手番\n手数＝24 ▲５四歩 まで").location_by_offset(0).key).toEqual("white")
+    expect(KifParser.parse("手数＝24 △５四歩 まで\n後手番").location_by_offset(0).key).toEqual("white")
+    expect(KifParser.parse("手数＝24 ▲５四歩 まで\n先手番").location_by_offset(0).key).toEqual("black")
   })
 })

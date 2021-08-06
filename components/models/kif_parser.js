@@ -17,6 +17,7 @@ const REGEXP = {
   header: "(?<key>.*)：\s*(?<value>.*)",                         // key：val
   board:  "\\|(?<board>.*)\\|",                                  // | 香 桂 銀 金 玉 金 銀 桂 香|九
   direct_location: "(?<direct_location>^[上下先後]手番)",        // 上手番
+  latest_triangle: "^手数＝.*(?<latest_triangle>[▲△])",               // 手数＝24 △５四歩 まで (TODO: 最終手を活用する)
   comment: "^\\*(?<comment>.*)",                                 // *コメント
   hand: `^\\s*(?<number>\\d+)\\s+                                # 1    ; 手数
          (?<to>[１-９1-9一二三四五六七八九]+)?                   # 76   ; 移動先
@@ -117,6 +118,9 @@ export class KifParser extends ParserBase {
         } else if (m["direct_location"]) {
           // BODにある "○手番"
           this.direct_location = Location.fetch(m["direct_location"].match(/[上後]/) ? "white" : "black")
+        } else if (m["latest_triangle"]) {
+          // BODにある "手数＝24 △５四歩 まで"
+          this.direct_location = Location.fetch(m["latest_triangle"] === "▲" ? "white" : "black")
         } else if (m["number"]) {
           // 棋譜部分
           const attrs = {}
