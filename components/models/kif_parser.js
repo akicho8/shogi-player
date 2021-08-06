@@ -116,11 +116,7 @@ export class KifParser extends ParserBase {
           this.board_lines.push(m["board"])
         } else if (m["direct_location"]) {
           // BODにある "○手番"
-          if (/[上後]/.test(m["direct_location"])) {
-            this.direct_location = Location.fetch("white")
-          } else {
-            this.direct_location = Location.fetch("black")
-          }
+          this.direct_location = Location.fetch(m["direct_location"].match(/[上後]/) ? "white" : "black")
         } else if (m["number"]) {
           // 棋譜部分
           const attrs = {}
