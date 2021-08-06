@@ -28,7 +28,7 @@ export class Place {
 
   constructor(value) {
     let x, y
-    if (_.isString(value)) {
+    if (typeof value === "string") {
       [x, y] = this._parse_from_string(value)
     } else {
       [x, y] = value            // valus is array
