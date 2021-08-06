@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+
+# これはもう使ってはいけない
+
 require "pathname"
 require "table_format"
 require "json"
@@ -10,7 +13,7 @@ rows = Pathname(".").glob("*.kif").sort.collect { |e|
     :key        => key,
     :kif_code   => e.basename('.*').to_s,
     :generation => s.slice(/\d+局/)&.to_i,
-    :name       => h["開始日時"].tr("/", "-") + " " + h["棋戦詳細"],
+    :name       => (h["開始日時"].to_s.tr("/", "-") + " " + h["棋戦詳細"].to_s).strip,
     :black      => h["先手"] || h["下手"],
     :white      => h["後手"] || h["上手"],
     :sp_body    => key,
@@ -18,7 +21,7 @@ rows = Pathname(".").glob("*.kif").sort.collect { |e|
 }.sort_by { |e| e[:name] || 0 }
 
 rows.each do |e|
-  puts %(import #{e[:key]} from "./KifuBookInfo/#{e[:kif_code]}.kif")
+  puts %(import #{e[:key]} from "./kifu_book_info/#{e[:kif_code]}.kif")
 end
 rows = rows.collect{|e|e.transform_keys(&:to_s)}
 rows.each do |e|

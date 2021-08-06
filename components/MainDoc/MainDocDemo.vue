@@ -17,6 +17,8 @@
       MainDocViewDemo5
     .columns.mt-6
       MainDocViewDemo6
+    .columns.mt-6.is-centered
+      MainDocViewDemo8.is-11-tablet.is-10-desktop.is-9-widescreen
 
     b-message.mt-6(type="is-info")
       | レスポンシブでたくさん表示。画面幅に応じて横に並ぶ個数が変わる

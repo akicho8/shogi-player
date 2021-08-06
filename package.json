@@ -1,8 +1,8 @@
 {
   "name": "shogi-player",
   "version": "0.0.293",
-  "description": "shogi kifu player",
-  "keywords": "shogi player editor viewer kifu kif ki2 sfen csa japanese-chess",
+  "description": "shogi kifu viewer player and editor (depends on vue.js, buefy)",
+  "keywords": "shogi kif sfen viewer editor player japanese-chess",
   "homepage": "https://akicho8.github.io/shogi-player/",
   "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
   "main": "components/ShogiPlayer.vue",

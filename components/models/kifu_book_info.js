@@ -23,7 +23,9 @@ import KIF_27489 from "./kifu_book_info/27489.kif"
 import KIF_27637 from "./kifu_book_info/27637.kif"
 import KIF_27490 from "./kifu_book_info/27490.kif"
 import KIF_15733 from "./kifu_book_info/15733.kif"
+
 import SFEN_15733 from "./kifu_book_info/15733.sfen"
+import KIF_BOD_LIKE_SAMPLE1 from "./kifu_book_info/BOD_LIKE_SAMPLE1.kif"
 
 export class KifuBookInfo extends MemoryRecord {
   static get define() {
@@ -53,6 +55,8 @@ export class KifuBookInfo extends MemoryRecord {
       {"key":"SFEN_15733","kif_code":"15733","generation":57,"name":"1711-02-28 宗銀印達57番指し57局","black":"六代大橋宗銀","white":"伊藤印達","sp_body": SFEN_15733 },
       {"key":"KIF_37368","kif_code":"37368","generation":null,"name":"1711-03-00 将棋絶妙第8番","black":"宮本印佐","white":"伊藤印達","sp_body":KIF_37368},
       {"key":"KIF_16217","kif_code":"16217","generation":null,"name":"1711-11-21 御城将棋 (印達の絶局)","black":"六代大橋宗銀","white":"伊藤印達","sp_body":KIF_16217},
+      {"key":"KIF_BOD_LIKE_SAMPLE1","kif_code":"BOD_LIKE_SAMPLE1","generation":null,"name":"BOD形式を含むKIF","black":null,"white":null,"sp_body":KIF_BOD_LIKE_SAMPLE1},
+
       // { black: "先手",             white: "後手",                                 sfen: "position startpos" },
       // { black: "a",                white: "b",                                    sfen: KIF_08731, },
       // { black: "鈴木英春",         white: "小池重明",                             sfen: "position startpos moves 7g7f 3c3d 3i4h 5c5d 5i6h 8b5b 6h7h 5a6b 4g4f 6b7b 4h4g 7b8b 4i5h 5d5e 7i6h 7a7b 9g9f 9c9d 6h7g 6c6d 7g6f 7b6c 3g3f 7c7d 2h3h 6d6e 6f7g 8a7c 7g6h 6a7b 3f3e 3d3e 3h3e 5b3b P*3d 4a5b 2i3g 1c1d 3e3f 2c2d 4f4e 3a4b 4g4f 5e5f 8h2b+ 3b2b B*8h 2b1b 3f2f P*3f 2f3f 5f5g+ 4f5g B*2h 1i1h 2h1i+ 3f2f 1b1c 2f2d P*2c 3g2e 2c2d 2e1c 1a1c R*1a R*3i 1a2a+ 3i3d+ 9f9e 1i1h 9e9d P*9b P*3c L*3a N*2c 3a3c 2c3a+ 4c4d 4e4d 1h2g 3a3b 2g5d 2a2b P*4a P*5c 5d5c 3b4a N*6d P*5d 6c5d 4a4b 5c4b 8h9g P*3b S*6a 5b6b 6a7b+ 6b7b P*5c 4b5c 2b3b P*4b 3b4a N*7a 6h7g 5d6c 4a5a S*6b 5a1a 5c4d 9g8f 7c8e 5g6h 3d3i P*5i 3c3h+ 1a3a 3i4i P*4e 4d5c 3a3c 3h4h 5h4h 4i4h 3c5c 6b5c B*2f 4h6h 6i6h P*5b L*5h S*8d 5h5c+ 5b5c 2f5c+ G*6b 8f6d 6c6d 5c6d B*7c 6d8f R*1h R*5h 1h5h+ 5i5h R*4i G*6i 7c4f S*5g 4f2h+ P*3g L*5a R*3a 5a5g+ 5h5g P*5h 6h5h 8e7g+ 8f7g S*6c L*9h 4i4f+ S*5f S*6d N*8f P*5e 5h4g 4f2f 5f5e 6d5c 4g4h 2h3i 4h5h 2f2h 7g6h 3i3h 8i7g 2h3g 3a3g+ 3h3g 5g5f 7d7e 7g6e 7e7f N*7d 8b8a P*7c 8d7c 7d6b+ 5c6b 9d9c+ 9b9c P*9b 9a9b 5e6f 7c8b R*3c 3g6d 3c1c+ N*8e G*8h P*5g 5h5g R*3h L*9f 7f7g+ 8h7g 8e7g+ 7h7g P*7f 7g7f 3h6h+ 6i6h B*8h P*7e P*7d 7e7d P*7e" },
