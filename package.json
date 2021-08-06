@@ -22,7 +22,7 @@
     "dayjs": "latest",
     "file-loader": "^6.2.0",
     "howler": "^2.2.1",
-    "js-memory-record": "^0.0.18",
+    "js-memory-record": "^0.0.19",
     "lodash": "latest",
     "node-sass": ">= 4.0.0 < 5.0.0",
     "pug": "^3.0.0",
