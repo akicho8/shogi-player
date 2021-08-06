@@ -4,6 +4,17 @@ import { Board } from "./board"
 import { PlaceYomiageInfo } from "./place_yomiage_info.js"
 
 export class Place {
+  static ANY_TO_NUMBER_REPLACE_TABLE = {
+    "１": 1, "２": 2, "３": 3, "４": 4, "５": 5, "６": 6, "７": 7, "８": 8, "９": 9,
+    "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9,
+    "a":  1, "b":  2, "c":  3, "d":  4, "e":  5, "f":  6, "g":  7, "h":  8, "i":  9,
+  }
+
+  static TO_KANJI_REPLACE_TABLE_X = {1: "１", 2: "２", 3: "３", 4: "４", 5: "５", 6: "６", 7: "７", 8: "８", 9: "９"}
+  static TO_KANJI_REPLACE_TABLE_Y = {1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九"}
+
+  static TO_SFEN_REPLACE_TABLE_Y = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
+
   static fetch(v) {
     if (v instanceof this) {
       return v
@@ -50,11 +61,11 @@ export class Place {
   }
 
   get kanji_human_x() {
-    return {1: "１", 2: "２", 3: "３", 4: "４", 5: "５", 6: "６", 7: "７", 8: "８", 9: "９"}[this.human_x]
+    return Place.TO_KANJI_REPLACE_TABLE_X[this.human_x]
   }
 
   get kanji_human_y() {
-    return {1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九"}[this.human_y]
+    return Place.TO_KANJI_REPLACE_TABLE_Y[this.human_y]
   }
 
   get yomiage_x() {
@@ -95,22 +106,13 @@ export class Place {
 
   // FIXME: replace ではなく split する
   _parse_from_string(s) {
-    s = s.replace(/([１-９一二三四五六七八九a-z])/g, (e) => this._replace_table[e])
+    s = s.replace(/([１-９一二三四五六七八九a-z])/g, (e) => Place.ANY_TO_NUMBER_REPLACE_TABLE[e])
     const [x, y] = s.split("").map((e) => Number(e))
     return [Board.dimension - x, y - 1]
   }
 
-  get _replace_table() {
-    return {
-      "１": 1, "２": 2, "３": 3, "４": 4, "５": 5, "６": 6, "７": 7, "８": 8, "９": 9,
-      "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9,
-      "a":  1, "b":  2, "c":  3, "d":  4, "e":  5, "f":  6, "g":  7, "h":  8, "i":  9,
-    }
-  }
-
   get to_sfen() {
-    const y_table = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
-    return [Board.dimension - this._x, y_table[this._y]].join("")
+    return [Board.dimension - this._x, Place.TO_SFEN_REPLACE_TABLE_Y[this._y]].join("")
   }
 
   // "place_7_6"
