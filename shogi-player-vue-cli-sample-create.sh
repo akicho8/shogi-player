@@ -3,10 +3,10 @@
 read -p "~/src/shogi-player-vue-cli-sample があればいったん削除してそこにサンプルを生成します。よければ ENTER してください"
 
 node -v
-# v12.6.0
+# v12.13.0
 
 vue -V
-# @vue/cli 4.5.9
+# @vue/cli 4.5.13
 
 rm -fr ~/src/shogi-player-vue-cli-sample
 cd ~/src

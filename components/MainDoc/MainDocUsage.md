@@ -3,10 +3,10 @@
 バージョン確認
 
     % node -v
-    v12.6.0
+    v12.13.0
 
     % vue -V
-    @vue/cli 4.5.9
+    @vue/cli 4.5.13
 
 ~/src/shogi-player-vue-cli-sample に作成することにします
 
@@ -76,6 +76,8 @@
 起動
 
     vue-cli-service serve --port 3100 --open
+
+※2021-09-12 ここ↑でクラス定数の部分がパースできなくて起動しません。なんで？
 
 完成品は https://github.com/akicho8/shogi-player-vue-cli-sample に置いています
 
