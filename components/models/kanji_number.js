@@ -8,14 +8,14 @@ export class KanjiNumber {
   // 2なら百まで
   // 3なら千まで
   // 6なら兆まで
-  static unit_size = 6
+  static get unit_size() { return 6 }
 
   // 万(4)を超えたら「万」ではなく「一万」とする
-  static one_number_insert_level = 4
+  static get one_number_insert_level() { return 4 }
 
-  static KANJI_TABLE  = "〇一二三四五六七八九"
-  static UNIT_TABLE   = "十百千万憶兆"
-  static NUMBER_TABLE = "0123456789"
+  static get KANJI_TABLE() { return "〇一二三四五六七八九" }
+  static get UNIT_TABLE() { return "十百千万憶兆" }
+  static get NUMBER_TABLE() { return "0123456789" }
 
   // static TRANSRATE_TABLE = {
   //   '〇': '0',
@@ -29,7 +29,7 @@ export class KanjiNumber {
   //   '八': '8',
   //   '九': '9'
   // }
-  static TRANSRATE_TABLE = [...this.KANJI_TABLE].reduce((a, e, i) => ({...a, [e]: this.NUMBER_TABLE.charAt(i)}), {})
+  static get TRANSRATE_TABLE() { return [...this.KANJI_TABLE].reduce((a, e, i) => ({...a, [e]: this.NUMBER_TABLE.charAt(i)}), {}) }
 
   // KanjiNumber.kanji_to_number_string("")         // => ""
   // KanjiNumber.kanji_to_number_string("歩")       // => "歩"
