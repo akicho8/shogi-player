@@ -1,4 +1,26 @@
-## Vue CLI への組み込み例
+## Nuxt.js への組み込み方法 (2021-10-09 こっちは動く)
+
+create-nuxt-app したときの選択肢
+
+- UI framework → Buefy
+- Programming language → JavaScript
+- Linting tools: → なし
+
+nuxt.config.js の build の所をこうする
+
+    build: {
+      transpile: ["shogi-player"],
+    },
+
+buefy で便利 mixin をグローバルで使えるようにする。nuxt.config.js も変更する必要あり。
+
+    yarn add --dev @nuxtjs/style-resources
+
+shogi-player のスタイルを読み込む
+
+書き切れないので https://github.com/akicho8/shogi-player-nuxt-sample を見てください
+
+## Vue CLI への組み込み方法 (2021-09-12 動かなくなりました。解決方法求む)
 
 バージョン確認
 
@@ -77,19 +99,13 @@
 
     vue-cli-service serve --port 3100 --open
 
-※2021-09-12 ここ↑でクラス定数の部分がパースできなくて起動しません。なんで？
+<div class="notification is-warning">
+2021-09-12
+ここ↑でクラス定数や "??" 構文がパースできなくて起動しなくなりました (昔はクラス定数などを使ってなかったのでたまたま動いていた)
+Nuxt だと nuxt.config.js の build の transpile で shogi-player を指定するとビルドできます
+しかし Vue CLI だとどうやって node_modules をビルドするのかわかりません。お手上げです (2021-09-12)
+</div>
 
 完成品は https://github.com/akicho8/shogi-player-vue-cli-sample に置いています
 
 上の手順をまとめた半自動生成スクリプトはこちら [shogi-player-vue-cli-sample-create.sh](https://github.com/akicho8/shogi-player/blob/master/shogi-player-vue-cli-sample-create.sh) です
-
-## Nuxt.js への組み込み例
-
-- だいたい Vue Cli の場合と同じです
-- nuxt 用の buefy があるので yarn add nuxt-buefy してください
-
-shogi-player がビルドできないと言われたときは、よくわかってないんですが nuxt.config.js の適切な個所に次の設定を追加してください
-
-    build: {
-      transpile: ["shogi-player/components"],
-    },
