@@ -10,9 +10,9 @@
 
   // BoardWoodTexture の兄弟として BoardField を置くと BoardWoodTexture に BoardField の border が負ける
   .BoardFieldWithPadding.is-overlay
-    table.BoardField
-      tr(v-for="(_, y) in base.sp_board_dimension_h")
-        td(
+    .BoardField
+      .BoardRow(v-for="(_, y) in base.sp_board_dimension_h")
+        .BoardColumn(
           v-for="(_, x) in base.sp_board_dimension_w"
           @pointerdown="base.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
           @click.stop.prevent="base.board_cell_left_click(logical_xy(x, y), $event)"
@@ -101,7 +101,7 @@ export default {
   +defvar(sp_grid_star_size, 10%)                  // 星の大きさ
 
   +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w) CSS内では未使用
-  +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h) TDの縦幅を決めるのに必要
+  +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h) BOARDFIELDCOLUMNの縦幅を決めるのに必要
 
   .BoardWood
     width: 100%
@@ -141,33 +141,54 @@ export default {
     width: 100%
     height: 100%
     border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_outer_color)
-    border-collapse: collapse // td同士のborderを共有する
+    // border-collapse: collapse // .BoardColumn同士のborderを共有する
+    background-color: var(--sp_grid_color)
+
+    display: flex
+    flex-direction: column
 
     // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
     @extend %is_unselectable
 
-    table-layout: fixed    // 横幅均等
+    // table-layout: fixed    // 横幅均等
 
-  td
+  .BoardRow
+    width: 100%
+    height: 100%
+
+    display: flex
+
+  .BoardColumn
+    width: 100%
+    height: 100%
+    background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
+
+    // &:hover
+    //   background-color: $white-ter
+
+  .BoardColumn
     // 何もしなければ縦幅は均等になる
-    border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color) // border-collapse: collapse の効果で重ならない
+    // border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color) // border-collapse: collapse の効果で重ならない
 
     // 縦幅はブラウザによって異なるので難しい
     // Google Chrome 90.0.4430.216 までは指定なしで均等だったが、
     // Google Chrome 91.0.4472.77  からは最初と最後の行だけ1.2倍ほど広がり均等でなくなった
     // Firefox ではまったく均等にしないためセルが表示されない
     // そのため明示的に指定するようにした。これによって対象外としていた Firefox でも見れるようになった
-    height: calc(100.0% / var(--sp_board_dimension_h))
+    // height: calc(100.0% / var(--sp_board_dimension_h))
+
+  .BoardField, .BoardRow
+    gap: calc(var(--sp_grid_stroke) * 1px)
 
   // border が BoardWoodTexture に負けるので入れ子にしている
-  // td
+  // .BoardColumn
   //   +is_overlay_origin
   //   .CellBorder
   //     +is_overlay_block
   //     // border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 
-  tr:nth-child(3n+4)
-    td:nth-child(3n+4)
+  .BoardRow:nth-child(3n+4)
+    .BoardColumn:nth-child(3n+4)
       position: relative
       &:after
         position: absolute
