@@ -1,15 +1,19 @@
 <template lang="pug">
-.BoardWood(@click.capture="click_handle")
-  // .BoardWood に設定した background-image に影をつけるために drop-shadow すると
-  // .BoardWood その子供である table にまで影が適用されてしまう
-  // table に影が適用されると、駒の影にも .BoardWood の影が加算されてしまい濃くなってしまう
-  // それを防ぐためには .BoardWood の :after に背景を指定すればよい
-  // が、わかりやすくするために背景専用の BoardWoodBG を追加した
-  // これなら BoardWoodTexture に適用した影が table に影響しない
-  .BoardWoodTexture.is-overlay
+.MainBoard(@click.capture="click_handle")
+  // .MainBoard に設定した background-image に影をつけるために drop-shadow すると
+  // .MainBoard その子供である table にまで影が適用されてしまう
+  // table に影が適用されると、駒の影にも .MainBoard の影が加算されてしまい濃くなってしまう
+  // それを防ぐためには .MainBoard の :after に背景を指定すればよい
+  // が、わかりやすくするために背景専用の MainBoardBG を追加した
+  // これなら MainBoardTexture に適用した影が table に影響しない
+  .MainBoardTexture.is-overlay
 
-  // BoardWoodTexture の兄弟として BoardField を置くと BoardWoodTexture に BoardField の border が負ける
+  // MainBoardTexture の兄弟として BoardField を置くと MainBoardTexture に BoardField の border が負ける
   .BoardFieldWithPadding.is-overlay
+    // flex ではなく table にしている理由
+    // ・罫線が実線ではなく隙間であるため、線を黒くしようとしたとき、背景に黒を敷き詰めておかないといけない
+    // ・そこでもし背景に画像を配置したとすると、その上の敷き詰めた黒は透明でなければならない
+    // ・つまり、黒を敷き詰める必要あるのと、画像盤の上は透明でないといけないことが両立できない
     table.BoardField
       tr.BoardRow(v-for="(_, y) in base.sp_board_dimension_h")
         td.BoardColumn(
@@ -35,13 +39,13 @@ import { Board   } from "./models/board.js"
 import PieceTap from "./PieceTap.vue"
 
 export default {
-  name: "BoardWood",
+  name: "MainBoard",
   mixins: [support],
   components: {
     PieceTap,
   },
   beforeUpdate() {
-    this.base.$data._BoardWoodRenderCount += 1
+    this.base.$data._MainBoardRenderCount += 1
   },
   methods: {
     click_handle() {
@@ -70,8 +74,8 @@ export default {
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 // | 場所              | よい                     | だめ                               | 備考                               | 結果 |
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
-// | BoardWood         | わかりやすい             | Chromeで隙間ができる               | わかりやすい気がしていただけ       |      |
-// | BoardWoodTexture  | 角を丸めても縁取りできる | 影の影響がある                     | 画像に縁取りできても別に嬉しくない |      |
+// | MainBoard         | わかりやすい             | Chromeで隙間ができる               | わかりやすい気がしていただけ       |      |
+// | MainBoardTexture  | 角を丸めても縁取りできる | 影の影響がある                     | 画像に縁取りできても別に嬉しくない |      |
 // | table.BoardField  | 普通に考えてここ         | グリッドと外枠に隙間が入れられない | 隙間を入れれても嬉しくない         | ←   |
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 
@@ -103,12 +107,12 @@ export default {
   +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w) CSS内では未使用
   +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h) TDの縦幅を決めるのに必要
 
-  .BoardWood
+  .MainBoard
     width: 100%
     height: 100%
     +is_overlay_origin
 
-  .BoardWoodTexture
+  .MainBoardTexture
     mix-blend-mode: var(--sp_board_blend)
 
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
@@ -120,20 +124,21 @@ export default {
     border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
 
   &.is_board_shadow_box
-    .BoardWoodTexture
+    .MainBoardTexture
       +filter_box_shadow(1, board_filter_params_without_drop_shadow())
   &.is_board_shadow_drop
-    .BoardWoodTexture
+    .MainBoardTexture
       +filter_drop_shadow(1, board_filter_params_without_drop_shadow())
   &.is_board_shadow_none
-    .BoardWoodTexture
+    .MainBoardTexture
       filter: board_filter_params_without_drop_shadow()
 
   .BoardFieldWithPadding
     padding: calc(var(--sp_board_padding) * 1%)
 
+  //- flex に移行しやすいように table, tr, td 使用禁止
   .BoardField
-    // これを指定するとオーバーレイの兄(BoardWoodTexture)の上に表示できる
+    // これを指定するとオーバーレイの兄(MainBoardTexture)の上に表示できる
     // が、駒のテクスチャに mix-blend-mode が効かなくなる
     // ので指定してはいけない
     // isolation: isolate
@@ -157,9 +162,10 @@ export default {
     // Google Chrome 91.0.4472.77  からは最初と最後の行だけ1.2倍ほど広がり均等でなくなった
     // Firefox ではまったく均等にしないためセルが表示されない
     // そのため明示的に指定するようにした。これによって対象外としていた Firefox でも見れるようになった
+    // ちなみに flex であれば height: 100% で均等になる
     height: calc(100.0% / var(--sp_board_dimension_h))
 
-  // border が BoardWoodTexture に負けるので入れ子にしている
+  // border が MainBoardTexture に負けるので入れ子にしている
   // td
   //   +is_overlay_origin
   //   .CellBorder

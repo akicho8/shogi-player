@@ -9,7 +9,7 @@
         th 参照方法
     tbody
       DebugBlockRow(code="$data._ShogiPlayerRenderCount" name="ShogiPlayer beforeUpdate 呼び出し回数" :value="base.$data._ShogiPlayerRenderCount")
-      DebugBlockRow(code="$data._BoardWoodRenderCount"   name="BoardWood beforeUpdate 呼び出し回数"   :value="base.$data._BoardWoodRenderCount")
+      DebugBlockRow(code="$data._MainBoardRenderCount"   name="MainBoard beforeUpdate 呼び出し回数"   :value="base.$data._MainBoardRenderCount")
 
   table.table.is-narrow.is-hoverable.is-fullwidth
     caption Global

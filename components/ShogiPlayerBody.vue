@@ -3,14 +3,14 @@
   Membership(:base="base" position="north" :location="location_of('white')")
   AspectRatioFixedBlock
     OverlayNavigations(:base="base")
-    BoardWood(:base="base")
+    MainBoard(:base="base")
   Membership(:base="base" position="south" :location="location_of('black')")
 </template>
 
 <script>
 import Membership from "./Membership.vue"
 import AspectRatioFixedBlock from "./AspectRatioFixedBlock.vue"
-import BoardWood from "./BoardWood.vue"
+import MainBoard from "./MainBoard.vue"
 import OverlayNavigations from "./OverlayNavigations.vue"
 import { Location } from "./models/location.js"
 
@@ -22,7 +22,7 @@ export default {
   components: {
     Membership,
     AspectRatioFixedBlock,
-    BoardWood,
+    MainBoard,
     OverlayNavigations,
   },
 
