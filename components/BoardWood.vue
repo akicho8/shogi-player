@@ -11,8 +11,8 @@
   // BoardWoodTexture の兄弟として BoardField を置くと BoardWoodTexture に BoardField の border が負ける
   .BoardFieldWithPadding.is-overlay
     table.BoardField
-      tr(v-for="(_, y) in base.sp_board_dimension_h")
-        td(
+      tr.BoardRow(v-for="(_, y) in base.sp_board_dimension_h")
+        td.BoardColumn(
           v-for="(_, x) in base.sp_board_dimension_w"
           @pointerdown="base.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
           @click.stop.prevent="base.board_cell_left_click(logical_xy(x, y), $event)"
@@ -148,7 +148,7 @@ export default {
 
     table-layout: fixed    // 横幅均等
 
-  td
+  .BoardColumn
     // 何もしなければ縦幅は均等になる
     border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color) // border-collapse: collapse の効果で重ならない
 
@@ -166,8 +166,8 @@ export default {
   //     +is_overlay_block
   //     // border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
 
-  tr:nth-child(3n+4)
-    td:nth-child(3n+4)
+  .BoardRow:nth-child(3n+4)
+    .BoardColumn:nth-child(3n+4)
       position: relative
       &:after
         position: absolute
