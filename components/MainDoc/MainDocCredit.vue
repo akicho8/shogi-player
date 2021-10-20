@@ -8,11 +8,10 @@
   .section
     .container
       .content
-        h5 背景
-        ul
-          MainDocExternalLink(href="https://www.beiz.jp/") BEIZ Graphics
-          MainDocExternalLink(href="http://free-paper-texture.com/") Paper-co
-
+        //- h5 背景
+        //- ul
+        //-   MainDocExternalLink(href="https://www.beiz.jp/") BEIZ Graphics
+        //-   MainDocExternalLink(href="http://free-paper-texture.com/") Paper-co
         h5 駒
         ul
           MainDocExternalLink(href="http://mucho.girly.jp/bona/") 将棋アプリ用クリエイティブコモンズ画像

@@ -1,5 +1,1 @@
 ../../components/stylesheets/is_bg_variant.sass
-
-wood-texture_00018.jpg
-https://www.beiz.jp/download_S/wood-texture/00018.html
-
