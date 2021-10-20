@@ -1,3 +1,6 @@
 * 変更点
 
+全置換
 - BoardWood -> MainBoard
+- hflip -> flop
+

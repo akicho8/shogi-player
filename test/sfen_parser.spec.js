@@ -71,12 +71,12 @@ describe('SfenParser', () => {
   it('movesなしSFENの左右反転', () => {
     const a = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1"
     const b = "position sfen lnsgkgsn+l/1b5r1/ppppppppp/9/9/9/PPPPPPPPP/1R5B1/LNSGKGSNL b S2s 1"
-    expect(SfenParser.sfen_hflip(a)).toEqual(b)
+    expect(SfenParser.sfen_flop(a)).toEqual(b)
   })
 
   it('moves付きSFENの左右反転', () => {
     const a = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
     const b = "position sfen lnsgkgsn+l/1b5r1/ppppppppp/9/9/9/PPPPPPPPP/1R5B1/LNSGKGSNL b S2s 1 moves 3i4h S*8d"
-    expect(SfenParser.sfen_hflip(a)).toEqual(b)
+    expect(SfenParser.sfen_flop(a)).toEqual(b)
   })
 })

@@ -68,12 +68,12 @@ export class Board {
   }
 
   // 左右反転
-  get hflip() {
+  get flop() {
     const new_board = new Board()
     _.forEach(this._surface, (soldier, place) => {
       const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
         location: soldier.location,
-        place: soldier.place.hflip,
+        place: soldier.place.flop,
       }))
       new_board.place_on(new_soldier)
     })

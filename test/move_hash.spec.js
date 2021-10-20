@@ -15,12 +15,12 @@ describe('MoveHash', () => {
     const a = "S*2d"
     const b = "S*8d"
     const move_attrs = MoveHash.parse(a)
-    expect(move_attrs.to_hflip_sfen).toEqual(b)
+    expect(move_attrs.to_flop_sfen).toEqual(b)
   })
 
   it('複数の指し手の左右反転', () => {
     const a = "7i6h+ S*2d"
     const b = "3i4h+ S*8d"
-    expect(MoveHash.line_hflip(a)).toEqual(b)
+    expect(MoveHash.line_flop(a)).toEqual(b)
   })
 })

@@ -719,9 +719,9 @@ export const edit_mode_module = {
       }, {})
     },
 
-    fn_hflip() {
+    fn_flop() {
       // 盤面左右反転
-      this.mediator.board = this.mediator.board.hflip
+      this.mediator.board = this.mediator.board.flop
     },
 
     init_location_toggle() {

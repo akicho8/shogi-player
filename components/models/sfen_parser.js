@@ -12,7 +12,7 @@ import { MoveHash   } from "./move_hash.js"
 import { Mediator   } from "./mediator.js"
 
 export class SfenParser extends ParserBase {
-  static sfen_hflip(sfen) {
+  static sfen_flop(sfen) {
     const source = this.parse(sfen)
 
     // 方法1. Mediator を仲介する方法
@@ -23,7 +23,7 @@ export class SfenParser extends ParserBase {
       mediator.data_source = source
       mediator.current_turn = 0
       mediator.run()
-      mediator.board = mediator.board.hflip
+      mediator.board = mediator.board.flop
 
       const parts = []
       parts.push(mediator.to_position_sfen)
@@ -31,7 +31,7 @@ export class SfenParser extends ParserBase {
       const v = source.move_infos
       if (v.length >= 1) {
         parts.push("moves")
-        parts.push(v.map(e => e.to_hflip_sfen).join(" "))
+        parts.push(v.map(e => e.to_flop_sfen).join(" "))
       }
 
       return parts.join(" ")
@@ -39,8 +39,8 @@ export class SfenParser extends ParserBase {
 
     // 方法2. SFENパーサーで読み取ってそのままSFEN出力する間で属性を変更する方法
     if (true) {
-      source.attributes["board"] = source.board.hflip.to_sfen
-      source.attributes["moves"] = source.move_infos.map(e => e.to_hflip_sfen).join(" ")
+      source.attributes["board"] = source.board.flop.to_sfen
+      source.attributes["moves"] = source.move_infos.map(e => e.to_flop_sfen).join(" ")
       return source.to_sfen
     }
   }

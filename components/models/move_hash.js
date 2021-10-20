@@ -4,16 +4,16 @@ import { Place } from "./place.js"
 
 export class MoveHash {
   // 複数の指し手の左右反転
-  static line_hflip(moves_str) {
+  static line_flop(moves_str) {
     const v = this.parse_line(moves_str)
-    return v.map(e => e.to_hflip_sfen).join(" ")
+    return v.map(e => e.to_flop_sfen).join(" ")
   }
 
   // 指し手1つの左右反転
-  static str_hflip(move_str) {
+  static str_flop(move_str) {
     const v = this.parse(move_str)
     if (v) {
-      return v.to_hflip_sfen
+      return v.to_flop_sfen
     }
   }
 
@@ -47,8 +47,8 @@ export class MoveHash {
     return this.to_custom_sfen()
   }
 
-  get to_hflip_sfen() {
-    return this.to_custom_sfen({hflip: true})
+  get to_flop_sfen() {
+    return this.to_custom_sfen({flop: true})
   }
 
   // prviate
@@ -56,7 +56,7 @@ export class MoveHash {
   // SFEN変換
   //
   //  MoveHash.parse("S*2d").to_custom_sfen()               # => "S*2d"
-  //  MoveHash.parse("S*2d").to_custom_sfen({hflip: true}) # => "S*8d"
+  //  MoveHash.parse("S*2d").to_custom_sfen({flop: true}) # => "S*8d"
   //
   to_custom_sfen(options = {}) {
     const a = []
@@ -64,9 +64,9 @@ export class MoveHash {
       a.push(this["drop_piece"].key)
       a.push("*")
     } else {
-      a.push(this["origin_place"].hflip_if(options.hflip).to_sfen)
+      a.push(this["origin_place"].flop_if(options.flop).to_sfen)
     }
-    a.push(this["place"].hflip_if(options.hflip).to_sfen)
+    a.push(this["place"].flop_if(options.flop).to_sfen)
     if (this["promoted_trigger"]) {
       a.push("+")
     }

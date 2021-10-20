@@ -16,7 +16,7 @@
     b-dropdown-item(separator)
     b-dropdown-item キャンセル
   b-button(@click.stop.prevent="base.fn_flip_all" icon-left="pan-vertical" size="is-small")
-  b-button(@click.stop.prevent="base.fn_hflip"   icon-left="pan-horizontal" size="is-small")
+  b-button(@click.stop.prevent="base.fn_flop"   icon-left="pan-horizontal" size="is-small")
   b-button(@click.stop.prevent="base.init_location_toggle" size="is-small")
     .is-size-7 {{base.init_location.name}}
   b-button.has-text-weight-bold(@click.stop.prevent="base.shortcut_modal_show_handle" size="is-small") ?
