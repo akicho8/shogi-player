@@ -1,4 +1,4 @@
-import { SoundPreset } from "./models/sound_preset.js"
+import { SoundPresetInfo } from "./models/sound_preset_info.js"
 import { Howl, Howler } from "howler"
 
 export const sound_module = {
@@ -12,7 +12,7 @@ export const sound_module = {
       this.$emit("sound_play", key)
 
       if (this.sp_sound_enabled) {
-        const e = SoundPreset.fetch(key)
+        const e = SoundPresetInfo.fetch(key)
         const params = {
           src: e.source,
           volume: e.volume * this.sp_sound_volume,

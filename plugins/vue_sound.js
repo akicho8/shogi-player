@@ -1,10 +1,10 @@
-import { SoundPreset } from "@/components/models/sound_preset.js"
+import { SoundPresetInfo } from "@/components/models/sound_preset_info.js"
 import { Howl, Howler } from "howler"
 
 export default {
   methods: {
     sound_play(key, options = {}) {
-      const e = SoundPreset.fetch(key)
+      const e = SoundPresetInfo.fetch(key)
       const params = {
         src: e.source,
         volume: e.volume,
