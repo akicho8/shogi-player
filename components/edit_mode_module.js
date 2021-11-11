@@ -68,10 +68,9 @@ export const edit_mode_module = {
   methods: {
     // 盤を押した瞬間
     board_cell_pointerdown_handle(xy, e) {
-      const place = Place.fetch(xy)
       const handle = this.sp_board_cell_pointerdown_user_handle
       if (handle) {
-        if (handle(place, e)) {
+        if (handle(Place.fetch(xy), e)) {
           return
         }
       }
