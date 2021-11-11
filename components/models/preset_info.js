@@ -23,7 +23,7 @@ export class PresetInfo extends MemoryRecord {
       { key: "十枚落ち",                sfen: "position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1",                         first_location_key: "white", piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2]]},
       { key: "十九枚落ち",              sfen: "position sfen 4k4/9/9/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1",                                 first_location_key: "white", piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2], ["P", 9]]},
       { key: "二十枚落ち",              sfen: "position sfen 9/9/9/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1",                                   first_location_key: "white", piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2], ["P", 9], ["K", 1]]},
-
+      { key: "青空将棋",                sfen: "position sfen lnsgkgsnl/1r5b1/9/9/9/9/9/1B5R1/LNSGKGSNL b - 1",                               first_location_key: "black", piece_box: []},
     ]
   }
 }
