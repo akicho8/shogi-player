@@ -103,6 +103,7 @@ export default {
   +defvar(sp_grid_stroke, 1)                       // グリッド太さ
   +defvar(sp_grid_outer_texture_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
   +defvar(sp_grid_star_size, 10%)                  // 星の大きさ
+  +defvar(sp_grid_star_z_index, 0)                 // 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)
 
   +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w) CSS内では未使用
   +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h) TDの縦幅を決めるのに必要
@@ -184,4 +185,5 @@ export default {
         height: var(--sp_grid_star_size)
         border-radius: 50%
         background-color: var(--sp_grid_outer_color)
+        z-index: var(--sp_grid_star_z_index)
 </style>

@@ -65,6 +65,7 @@
 | `--sp_grid_stroke`                           |                                      1 | グリッド太さ                                                          |
 | `--sp_grid_outer_texture_edge_stroke`        |                                      0 | 盤背景の縁取りの太さ(影の影響あり)                                    |
 | `--sp_grid_star_size`                        | 10%                                    | 星の大きさ                                                            |
+| `--sp_grid_star_z_index`                     |                                      0 | 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)       |
 | `--sp_board_dimension_w`                     |                                      9 | 盤のセル数(w) CSS内では未使用                                         |
 | `--sp_board_dimension_h`                     |                                      9 | 盤のセル数(h) TDの縦幅を決めるのに必要                                |
 | `--sp_controller_width`                      |                                    0.5 | コントローラー横幅                                                    |

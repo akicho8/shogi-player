@@ -1,7 +1,6 @@
 <template lang="pug">
 .StyleEditor.is-relative(:class="component_class")
-  .StyleEditor-Background.is-overlay.pattern-checks-md.has-text-black-bis.has-background-black-ter
-  //- .StyleEditor-Background.is-overlay
+  .StyleEditor-Background.is-overlay(:class="component_background_class")
 
   div(is="style" v-text="comment_removed_css")
   div(is="style" v-text="user_css")
@@ -31,7 +30,7 @@
           .title.is-5 背景
 
           b-field(custom-class="is-small" label="")
-            ColorPicker(v-model="se_ws_color" :disableAlpha="true")
+            ColorPicker(v-model="se_ws_color" :disableAlpha="false")
 
           ImageUpload(@input="se_ws_image_input_handle")
 
@@ -114,14 +113,17 @@
           .title.is-5 盤グリッド
           b-field(custom-class="is-small" label="グリッドカラー")
             ColorPicker(v-model="sp_grid_color")
-          b-field(custom-class="is-small" label="グリッド外枠カラー")
+          b-field(custom-class="is-small" label="星・グリッド外枠カラー")
             ColorPicker(v-model="sp_grid_outer_color")
           b-field(custom-class="is-small" label="グリッドの太さ")
             b-slider(v-bind="slider_attrs" v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線はブラウザ依存 Safari: 1.5px, Chrome: 2.0px")
             b-slider(v-bind="slider_attrs" v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
-          b-field(custom-class="is-small" label="星")
-            b-slider(v-bind="slider_attrs" v-model="sp_grid_star_size" :min="0" :max="100" :step="0.01")
+          b-field(custom-class="is-small" label="星の大きさ")
+            b-slider(v-bind="slider_attrs" v-model="sp_grid_star_size" :min="0" :max="200" :step="0.01")
+          b-field(custom-class="is-small" label="星の z-index" message="-1のときは盤の奥に描画するため盤が透明でなければ見えない点に注意。星が巨大でセルのイベントを奪ってしまうかつ盤が透明なときのみ-1にする")
+            b-radio-button(size="is-small" v-model="sp_grid_star_z_index" :native-value="-1") -1
+            b-radio-button(size="is-small" v-model="sp_grid_star_z_index" :native-value="0") 0
 
         .box
           .title.is-5 駒
@@ -398,6 +400,10 @@
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_move_only" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_move_only" :native-value="true") ON
 
+          b-field(custom-class="is-small" label="チェッカー背景")
+            b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="true") ON
+
         .box(v-if="false")
           .title.is-5 カスタムCSS
           b-field(custom-class="is-small" label="")
@@ -496,6 +502,7 @@ export default {
       ////////////////////////////////////////////////////////////////////////////////
       se_frame_width: 80,
       se_ws_image: null,
+      se_bg_pattern: true,
       sp_board_image: null,
       sp_controller_width:        0.5,
       sp_controller_width_mobile: 0.8,
@@ -588,6 +595,7 @@ export default {
       sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_stroke: 1,
       sp_grid_star_size: 10,
+      sp_grid_star_z_index: 0,
 
       sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
       sp_piece_box_piece_w: 38,
@@ -794,6 +802,13 @@ export default {
       ]
     },
 
+    // sp_grid_star_z_index が -1 のときこちらが勝ってしまうので se_bg_pattern を false にすること
+    component_background_class() {
+      if (this.se_bg_pattern) {
+        return ["pattern-checks-md", "has-text-black-bis", "has-background-black-ter"]
+      }
+    },
+
     sp_board_image_url() {
       if (!this.sp_board_image) {
         return "none"
@@ -898,10 +913,11 @@ export default {
 
           // 盤グリッド
           --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
-          --sp_grid_outer_color:              ${this.hsla_format(this.sp_grid_outer_color)};
+          --sp_grid_outer_color:         ${this.hsla_format(this.sp_grid_outer_color)};
           --sp_grid_stroke:              ${this.sp_grid_stroke};
           --sp_grid_outer_stroke:        ${this.sp_grid_outer_stroke};
-          --sp_grid_star_size:                ${this.sp_grid_star_size}%;
+          --sp_grid_star_size:           ${this.sp_grid_star_size}%;
+          --sp_grid_star_z_index:        ${this.sp_grid_star_z_index};
 
           // 駒
           --sp_piece_blur:               ${this.sp_piece_blur};
@@ -1050,6 +1066,7 @@ $sidebar_width_mobile:  100% * 3 / 4
 
   .StyleEditor-Background
     height: 100%
+    z-index: -200               // sp_grid_star_z_index が -1 のときチェッカー背景より前面になるようにするため -1 未満にする
 
   .Workspace
     display: flex
@@ -1058,6 +1075,7 @@ $sidebar_width_mobile:  100% * 3 / 4
     flex-direction: column
 
   .WorkspaceBackground
+    z-index: -100              // sp_grid_star_z_index が -1 のとき背景より前面なるようにするため -1 未満にする
     background-color: var(--se_ws_color)
     background-image: var(--se_ws_image)
     background-position: center
