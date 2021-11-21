@@ -164,8 +164,8 @@ export const navi_module = {
         this.sound_play("piece_put")
         this.$emit("update:sp_turn", this.turn_offset)
 
-        // ユーザーが故意に動かしたときのイベント
         if (event) {
+          this.log("局面を人が故意に変更")
           this.$emit("one_way:sp_turn_user_changed", this.turn_offset)
         }
       }

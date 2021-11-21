@@ -202,9 +202,9 @@ export default {
       this.current_turn_set(this.sp_turn)
     },
 
-    turn_edit_value() {
-      this.current_turn_set(this.turn_edit_value)
-    },
+    // turn_edit_value() {
+    //   this.current_turn_set(this.turn_edit_value)
+    // },
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -314,6 +314,11 @@ export default {
       this.turn_edit_value = this.turn_offset
     },
 
+    turn_edit_value_set(v) {
+      this.log(`ユーザーが局面番号指定:${v}`)
+      this.current_turn_set(v, true)
+    },
+
     log(...v) {
       if (this.debug_p || process.env.NODE_ENV === "development") {
         console.log(...v)
@@ -390,6 +395,7 @@ export default {
         return this.sp_board_piece_back_user_style(Place.fetch(xy))
       }
     },
+
   },
 
   computed: {
