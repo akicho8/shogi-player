@@ -121,11 +121,11 @@ export const navi_module = {
         }
       }
 
-      this.current_turn_add(v)
+      this.current_turn_add(v, event)
 
       // TurnSliderBlock → (next || previous) の順でフォーカスを試みる
       if (!this.turn_slider_focus()) {
-        // this.toast_ok("focusしてないのでフォーカスする")
+        // スライダーにはフォーカスできなかったのでボタンの方にフォーカスする
         if (v > 0) {
           this.nav_focus_to("next")
         } else {
@@ -134,21 +134,21 @@ export const navi_module = {
       }
     },
 
-    move_to_first() {
-      this.current_turn_set(this.turn_offset_min)
+    move_to_first(event = null) {
+      this.current_turn_set(this.turn_offset_min, event)
       this.turn_slider_focus() || this.nav_focus_to("first")
     },
 
-    move_to_last() {
-      this.current_turn_set(this.turn_offset_max)
+    move_to_last(event = null) {
+      this.current_turn_set(this.turn_offset_max, event)
       this.turn_slider_focus() || this.nav_focus_to("last")
     },
 
-    current_turn_add(v) {
-      this.current_turn_set(this.mediator.turn_offset + v)
+    current_turn_add(v, event = null) {
+      this.current_turn_set(this.mediator.turn_offset + v, event)
     },
 
-    current_turn_set(v) {
+    current_turn_set(v, event) {
       const new_val = this.mediator.turn_clamp(v)
       const updated = this.turn_offset !== new_val
 
@@ -163,7 +163,22 @@ export const navi_module = {
         }
         this.sound_play("piece_put")
         this.$emit("update:sp_turn", this.turn_offset)
+
+        // ユーザーが故意に動かしたときのイベント
+        if (event) {
+          this.$emit("one_way:sp_turn_user_changed", this.turn_offset)
+        }
       }
+    },
+
+    // by_user = true:ユーザーが離したときに呼ばれた
+    current_turn_set_by_slider(v, by_user) {
+      if (by_user) {
+        this.log(`スライダーをユーザーが動かした : ${v}`)
+      } else {
+        this.log(`スライダーは勝手に動いた : ${v}`)
+      }
+      this.current_turn_set(v, by_user)
     },
 
     nav_focus_to(key) {
