@@ -43,7 +43,7 @@
     "babel-core": "^6.26.3",
     "babel-jest": "^26.6.0",
     "jest": "^26.6.0",
-    "marked": "^1.2.5",
+    "marked": "^2.0.0",
     "nuxt": "^2.14.7",
     "nuxt-buefy": "^0.4.13",
     "pattern.css": "^1.0.0",
