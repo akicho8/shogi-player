@@ -400,6 +400,10 @@
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_move_only" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_move_only" :native-value="true") ON
 
+          b-field(custom-class="is-small" label="操作モードでは飛角香は駒を跨げない")
+            b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only" :native-value="true") ON
+
           b-field(custom-class="is-small" label="チェッカー背景")
             b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="true") ON
@@ -623,6 +627,7 @@ export default {
       sp_slider:     DEVELOPMENT_P ? "is_slider_on" : "is_slider_on",
       sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
       sp_play_mode_legal_move_only: false,
+      sp_play_mode_legal_jump_only: false,
 
       se_tf0_mode: "is_tf0_mode_off",
       se_tf0_perspective: 200,
@@ -852,6 +857,7 @@ export default {
       params.sp_controller        = this.sp_controller
       params.sp_player_info       = this.sp_player_info
       params.sp_play_mode_legal_move_only = this.sp_play_mode_legal_move_only
+      params.sp_play_mode_legal_jump_only = this.sp_play_mode_legal_jump_only
       return params
     },
 

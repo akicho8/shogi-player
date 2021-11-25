@@ -14,6 +14,7 @@ const CURSOR_OBJECT_XY_UPDATE_60FPS = true
 export const edit_mode_module = {
   props: {
     sp_play_mode_legal_move_only:                { type: Boolean, default: true, }, // play_mode で合法手のみに絞る
+    sp_play_mode_legal_jump_only:               { type: Boolean, default: true, }, // play_mode で飛角香は駒を跨げない (角ワープ禁止)
     sp_play_mode_auto_promote:                   { type: Boolean, default: true, }, // play_mode で死に駒になるときは自動的に成る
     sp_play_mode_not_put_if_death_soldier:       { type: Boolean, default: true, }, // play_mode で死に駒になるときは置けないようにする
     sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },   // play_mode では自分手番とき自分の駒しか動かせないようにする
@@ -247,7 +248,6 @@ export const edit_mode_module = {
           }
         }
 
-        //
         if (!found) {
           if (this.origin_soldier1.promoted) {
             method_key = piece_vector.promoted_repeat_vectors
@@ -274,7 +274,9 @@ export const edit_mode_module = {
                   const next_place = Place.fetch([x, y])
                   const next_soldier = this.mediator.board.lookup(next_place)
                   if (next_soldier) {
-                    break
+                    if (this.sp_play_mode_legal_jump_only) {
+                      break
+                    }
                   }
                   x += vx
                   y += vy
