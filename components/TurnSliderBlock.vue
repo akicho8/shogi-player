@@ -7,13 +7,14 @@
   //- | event    | 外部から変更したら呼ばれる | 自分で動かすと呼ばれる | 離したときだけ呼ばれる |
   //- |----------+----------------------------+------------------------+------------------------|
   //- | input    | o                          | o                      |                        |
-  //- | change   |                            |                        | o                      |
+  //- | change   |                            |                        | o                      |※キーボードにも反応する
   //- | dragging |                            | o                      |                        |
   //- |----------+----------------------------+------------------------+------------------------|
   b-slider(
     size="is-small"
     :value="base.turn_offset"
     @dragging="v => base.current_turn_set_by_slider(v, true)"
+    @change="v => base.current_turn_set_by_slider(v, true)"
     :min="base.turn_offset_min"
     :max="base.turn_offset_max"
     :tooltip="false"
