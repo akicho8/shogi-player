@@ -45,7 +45,7 @@
 | `sp_location_click_handle`                  | ☗☖をクリックしたとき                                     | (location) がくる                                              |   |
 | `xxx.native`                                | 任意のイベント (例: `click.native`)                      | click の場合はだいたい `sp_op_disabled` と組み合わせる         |   |
 | `operation_invalid1`                        | 手番が違うのに操作しようとした                           |                                                                |   |
-| `operation_invalid2`                        | 自分手番だが相手の駒を動かそうとした                     |                                                                |   |
+| `operation_invalid2`                        | 自分が手番だが相手の駒を動かそうとした                     |                                                                |   |
 | `sp_board_piece_back_user_style`            | ?                                                        |                                                                |   |
 | `sp_board_piece_back_user_class`            | ?                                                        |                                                                |   |
 
