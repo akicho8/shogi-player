@@ -125,7 +125,11 @@ export const play_mode_module = {
         this.mediator.run()
         this.$nextTick(() => this.sound_play("piece_put")) // 音がずれるため少し待つ 20ms 待たない場合は nextTick 不要
 
-        this.$emit("update:play_mode_advanced_full_moves_sfen", {sfen: this.play_mode_full_moves_sfen, last_move_info: this.last_move_info})
+        this.$emit("update:play_mode_advanced_full_moves_sfen", {
+          sfen:           this.play_mode_full_moves_sfen,
+          last_move_info: this.last_move_info,
+        })
+
         this.$emit("update:play_mode_advanced_moves", this.moves)
 
         // 遅いのでデフォルトではOFFにする。消してもいい
