@@ -503,6 +503,7 @@ export const edit_mode_module = {
       if (this.play_p) {
         if (this.origin_soldier1) {
           this.log("play_mode では盤上の駒を駒台に置くことはできない")
+          this.if_standard_then_unhold()
           return true
         }
       }
