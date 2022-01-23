@@ -28,6 +28,9 @@ export default {
   },
 
   methods: {
+    // これが capture によって子供の駒より先に反応しているため駒を持っているときに元に戻される
+    // capture にしなかったら駒台の駒を持ち替えることができる
+    // しかし一見便利なように見えて駒を離せなくなるので持ち替えはやらない方がよい
     click_handle(e) {
       if (this.base.membership_click_handle(this.location, e)) {
         e.preventDefault()

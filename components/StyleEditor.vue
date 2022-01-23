@@ -404,6 +404,10 @@
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only" :native-value="true") ON
 
+          b-field(custom-class="is-small" label="持駒のキャンセル方法")
+            b-radio-button(size="is-small" v-model="sp_move_cancel" native-value="is_move_cancel_hard") 元位置
+            b-radio-button(size="is-small" v-model="sp_move_cancel" native-value="is_move_cancel_easy") 別駒
+
           b-field(custom-class="is-small" label="チェッカー背景")
             b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="true") ON
@@ -628,6 +632,7 @@ export default {
       sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
       sp_play_mode_legal_move_only: false,
       sp_play_mode_legal_jump_only: false,
+      sp_move_cancel: "is_move_cancel_hard",
 
       se_tf0_mode: "is_tf0_mode_off",
       se_tf0_perspective: 200,
@@ -858,6 +863,7 @@ export default {
       params.sp_player_info       = this.sp_player_info
       params.sp_play_mode_legal_move_only = this.sp_play_mode_legal_move_only
       params.sp_play_mode_legal_jump_only = this.sp_play_mode_legal_jump_only
+      params.sp_move_cancel       = this.sp_move_cancel
       return params
     },
 

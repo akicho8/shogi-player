@@ -7,6 +7,7 @@ import { PieceVector } from "./models/piece_vector.js"
 import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
 import { EffectInfo } from "./models/effect_info.js"
+import { MoveCancelInfo } from "./models/move_cancel_info.js"
 import { PositionInfo } from "./models/position_info.js"
 
 const CURSOR_OBJECT_XY_UPDATE_60FPS = true
@@ -14,7 +15,7 @@ const CURSOR_OBJECT_XY_UPDATE_60FPS = true
 export const edit_mode_module = {
   props: {
     sp_play_mode_legal_move_only:                { type: Boolean, default: true, }, // play_mode で合法手のみに絞る
-    sp_play_mode_legal_jump_only:               { type: Boolean, default: true, }, // play_mode で飛角香は駒を跨げない (角ワープ禁止)
+    sp_play_mode_legal_jump_only:                { type: Boolean, default: true, }, // play_mode で飛角香は駒を跨げない (角ワープ禁止)
     sp_play_mode_auto_promote:                   { type: Boolean, default: true, }, // play_mode で死に駒になるときは自動的に成る
     sp_play_mode_not_put_if_death_soldier:       { type: Boolean, default: true, }, // play_mode で死に駒になるときは置けないようにする
     sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },   // play_mode では自分手番とき自分の駒しか動かせないようにする
@@ -160,10 +161,17 @@ export const edit_mode_module = {
         return
       }
 
-      if (this.sp_play_mode_can_not_kill_same_team_soldier) {
-        if (this.play_p) {
+      if (this.play_p) {
+        if (this.sp_play_mode_can_not_kill_same_team_soldier) {
           if (this.put_on_my_soldier_p(this.killed_soldier)) {
             this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
+
+            if (this.move_cancel_info.key === "is_move_cancel_rehold") {
+              this.log("盤上の駒を持って別の盤上の駒に持ち直した")
+              this.soldier_hold(place, e)
+              return
+            }
+
             this.state_reset2() // ←元の位置に戻す場合
             return
           }
@@ -474,10 +482,12 @@ export const edit_mode_module = {
         return
       }
 
-      if (this.have_piece_location === location && this.have_piece) {
-        this.log("自分の駒台から駒を持ち上げているならキャンセル")
-        this.state_reset()
-        return true
+      if (this.have_piece) {                         // 盤上からではない駒を持っているか？
+        if (this.have_piece_location === location) { // 駒台からの駒か？
+          this.log("自分の駒台から駒を持ち上げているならキャンセル")
+          this.state_reset()
+          return true
+        }
       }
 
       // 相手の駒台から自分の駒台、または駒箱から自分の駒台へ移動
@@ -659,12 +669,17 @@ export const edit_mode_module = {
     },
 
     // 自分の駒の上に重ねた？ (移動元にある駒を含まない)
+    // つまり27の歩を持った状態で28の飛を持ったとき
     put_on_my_soldier_p(soldier) {
       if (this.lifted_p) {
-        if (soldier && soldier.location === this.mediator.current_location) {
-          if (_.isEqual(this.place_from, soldier.place)) {
-          } else {
-            return true
+        if (soldier) {
+          if (soldier.location === this.mediator.current_location) {
+            if (_.isEqual(this.place_from, soldier.place)) {
+              // 持ち上げた駒と同じ位置
+            } else {
+              // 持ち上げた駒とは異なる
+              return true
+            }
           }
         }
       }
@@ -690,8 +705,8 @@ export const edit_mode_module = {
 
     // 持った状態で他の駒をタップするとキャンセルする場合はキャンセル
     state_reset2() {
-      if (this.sp_move_cancel === "is_move_cancel_easy") {
-        this.log("持った状態で非合法セルタップでキャンセル")
+      if (this.move_cancel_info.key === "is_move_cancel_easy") {
+        this.log("持った状態で自分の非合法セルタップでキャンセル")
         this.state_reset()
       }
     },
@@ -859,6 +874,9 @@ export const edit_mode_module = {
   },
 
   computed: {
+    MoveCancelInfo()   { return MoveCancelInfo },
+    move_cancel_info() { return this.MoveCancelInfo.fetch(this.sp_move_cancel) },
+
     // 移動元の駒(盤上から)
     origin_soldier1() {
       if (this.place_from) {
