@@ -22,7 +22,7 @@ export const edit_mode_module = {
     sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: true, }, // play_mode では自分の駒で同じ仲間の駒を取れないようにする
     sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_play_effect_type:                         { type: String,  default: null, }, // 指したときのエフェクトの種類 fw_type_3
-    sp_move_cancel:                              { type: String,  default: "is_move_cancel_easy", }, // is_move_cancel_easy: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_hard: キャンセルは元の位置をタップ
+    sp_move_cancel:                              { type: String,  default: "is_move_cancel_standard", }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
     sp_view_mode_soldier_movable:                { type: Boolean, default: true, }, // view_mode でも駒を動かせる(ただし本筋は破壊しない)
   },
 
@@ -141,7 +141,7 @@ export const edit_mode_module = {
 
       if (this.play_p && this.have_piece && this.killed_soldier) {
         this.log("駒台や駒箱から持ち上げた駒を盤上の駒の上に置こうとしたので無効とする")
-        this.state_reset2() // ←元の位置に戻す場合
+        this.if_standard_then_unhold() // ←元の位置に戻す場合
         return
       }
 
@@ -172,7 +172,7 @@ export const edit_mode_module = {
               return
             }
 
-            this.state_reset2() // ←元の位置に戻す場合
+            this.if_standard_then_unhold() // ←元の位置に戻す場合
             return
           }
         }
@@ -296,7 +296,7 @@ export const edit_mode_module = {
 
         if (!found) {
           this.log("操作モードで盤上の駒を動かし中だが動けないセルをタップしたので無効")
-          this.state_reset2() // ←元の位置に戻す場合
+          this.if_standard_then_unhold() // ←元の位置に戻す場合
           return
         }
       }
@@ -552,6 +552,21 @@ export const edit_mode_module = {
         return
       }
 
+      // 駒を持った状態で駒台を触るといったん離すにすれば↓これらは必要ない
+      //
+      // if (this.have_piece && this.have_piece.key === piece.key) {
+      //   if (this.have_piece_location === location) {
+      //     this.log("駒台の駒を持った状態で同じ駒台の同じ駒を持ったのでキャンセルする")
+      //     this.state_reset()
+      //     return
+      //   }
+      // }
+      //
+      // if (this.have_piece && this.have_piece_location) {
+      //   this.log("駒を持った状態で再び駒を持とうとしているため無効とする")
+      //   return
+      // }
+
       this.log("駒台の駒を持つ")
       this.have_piece = piece
       this.have_piece_location = location
@@ -705,8 +720,8 @@ export const edit_mode_module = {
     },
 
     // 持った状態で他の駒をタップするとキャンセルする場合はキャンセル
-    state_reset2() {
-      if (this.move_cancel_info.key === "is_move_cancel_easy") {
+    if_standard_then_unhold() {
+      if (this.move_cancel_info.smooth_cancel) {
         this.log("持った状態で自分の非合法セルタップでキャンセル")
         this.state_reset()
       }
