@@ -23,5 +23,11 @@ export const sound_module = {
         return new Howl(params)
       }
     },
+
+    // スマホで音が出なくなったのを直す
+    // これが必要だということは、ここの Howler と他で import した Howler は別ものなのか……？？？
+    sp_sound_resume_all() {
+      Howler.unload()
+    },
   },
 }
