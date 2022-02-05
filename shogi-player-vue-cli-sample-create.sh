@@ -30,6 +30,8 @@ cat <<'EOF' > src/components/HelloWorld.vue
 </template>
 
 <script>
+import "howler"
+
 import Vue from "vue"
 
 // Buefy

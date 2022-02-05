@@ -19,13 +19,8 @@ import { support } from "./support.js"
 export default {
   name: "CommentBlock",
   mixins: [support],
-  created() {
-    this.autolinker = new Autolinker()
-  },
   methods: {
-    auto_link(str) {
-      return this.autolinker.link(str)
-    },
+    auto_link(str) { return Autolinker.link(str) },
   },
   computed: {
     _()                { return _                                       },

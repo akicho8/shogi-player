@@ -55,6 +55,9 @@ shogi-player のスタイルを読み込む
     </template>
 
     <script>
+    // なくても良いがあると音が出る？
+    // import "howler"
+
     import Vue from "vue"
 
     // Buefy
