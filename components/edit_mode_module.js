@@ -16,6 +16,7 @@ export const edit_mode_module = {
   props: {
     sp_play_mode_legal_move_only:                { type: Boolean, default: true, }, // play_mode で合法手のみに絞る
     sp_play_mode_legal_jump_only:                { type: Boolean, default: true, }, // play_mode で飛角香は駒を跨げない (角ワープ禁止)
+    sp_play_mode_legal_jump_only2:               { type: Boolean, default: true, }, // play_mode で二歩禁止
     sp_play_mode_auto_promote:                   { type: Boolean, default: true, }, // play_mode で死に駒になるときは自動的に成る
     sp_play_mode_not_put_if_death_soldier:       { type: Boolean, default: true, }, // play_mode で死に駒になるときは置けないようにする
     sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },   // play_mode では自分手番とき自分の駒しか動かせないようにする
@@ -354,6 +355,22 @@ export const edit_mode_module = {
       // 持駒を置く
       if (this.have_piece) {
         this.log("持駒を置く")
+
+        // 二歩判定
+        if (this.sp_play_mode_legal_jump_only2) {
+          if (this.play_p) {
+            if (this.have_piece.key === "P") {
+              if (this.have_piece_location) {
+                if (this.mediator.board.piece_exist_by_x(place.x, this.have_piece_location, this.have_piece)) {
+                  this.log("二歩")
+                  this.$emit("operation_invalid3")
+                  this.state_reset()
+                  return
+                }
+              }
+            }
+          }
+        }
 
         // 駒の上に置いた場合は取る
         if (this.killed_soldier) {

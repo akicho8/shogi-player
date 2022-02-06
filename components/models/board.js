@@ -40,6 +40,26 @@ export class Board {
     this._surface = {}
   }
 
+  //////////////////////////////////////////////////////////////////////////////// 二歩判定用
+
+  // x 列に location の piece があるか？
+  piece_exist_by_x(x, location, piece) {
+    let found = false
+    for (let y = 0; y < Board.dimension; y++) {
+      const place = Place.fetch([x, y])
+      const soldier = this.lookup(place)
+      if (soldier) {
+        if (soldier.location.key === location.key) {
+          if (soldier.piece.key === piece.key) {
+            found = true
+            break
+          }
+        }
+      }
+    }
+    return found
+  }
+
   //////////////////////////////////////////////////////////////////////////////// Utilities
 
   get soldiers() {

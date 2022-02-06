@@ -396,13 +396,17 @@
             b-radio-button(size="is-small" v-model="sp_comment" native-value="is_comment_off") OFF
             b-radio-button(size="is-small" v-model="sp_comment" native-value="is_comment_on") ON
 
-          b-field(custom-class="is-small" label="操作モードでは合法手に絞る")
+          b-field(custom-class="is-small" label="操作モードでは合法手に絞る(二歩・ワープ・王手放置等を除く)")
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_move_only" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_move_only" :native-value="true") ON
 
           b-field(custom-class="is-small" label="操作モードでは飛角香は駒を跨げない")
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only" :native-value="true") ON
+
+          b-field(custom-class="is-small" label="操作モードでは二歩ができない")
+            b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only2" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only2" :native-value="true") ON
 
           b-field(custom-class="is-small" label="持駒のキャンセル方法")
             b-radio-button(size="is-small" v-model="sp_move_cancel" native-value="is_move_cancel_reality") 元位置
@@ -633,6 +637,7 @@ export default {
       sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
       sp_play_mode_legal_move_only: false,
       sp_play_mode_legal_jump_only: false,
+      sp_play_mode_legal_jump_only2: false,
       sp_move_cancel: "is_move_cancel_reality",
 
       se_tf0_mode: "is_tf0_mode_off",
@@ -864,6 +869,7 @@ export default {
       params.sp_player_info       = this.sp_player_info
       params.sp_play_mode_legal_move_only = this.sp_play_mode_legal_move_only
       params.sp_play_mode_legal_jump_only = this.sp_play_mode_legal_jump_only
+      params.sp_play_mode_legal_jump_only2 = this.sp_play_mode_legal_jump_only2
       params.sp_move_cancel       = this.sp_move_cancel
       return params
     },
