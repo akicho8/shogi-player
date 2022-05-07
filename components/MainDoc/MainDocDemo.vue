@@ -60,6 +60,6 @@ export default {
 </script>
 
 <style lang="sass">
-// @import "./support.sass"
-// .MainDocDemo
+@import "./support.sass"
+.MainDocDemo
 </style>

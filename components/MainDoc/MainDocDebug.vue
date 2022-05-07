@@ -26,6 +26,6 @@ export default {
 </script>
 
 <style lang="sass">
-// @import "./support.sass"
-// .MainDocDebug
+@import "./support.sass"
+.MainDocDebug
 </style>

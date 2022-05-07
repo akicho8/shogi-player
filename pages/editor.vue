@@ -32,5 +32,5 @@ export default {
 </script>
 
 <style lang="sass">
-// .PageEditor
+.PageEditor
 </style>

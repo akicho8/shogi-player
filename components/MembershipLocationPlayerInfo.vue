@@ -81,7 +81,7 @@ export default {
       @extend %is_flip
 
   .is_position_south
-    // .MembershipLocationPlayerInfo
+    .MembershipLocationPlayerInfo
 
   // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
   +IS_HORIZONTAL

@@ -56,6 +56,6 @@ export default {
 </script>
 
 <style lang="sass">
-// @import "./support.sass"
-// .MainDocApi
+@import "./support.sass"
+.MainDocApi
 </style>

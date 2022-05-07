@@ -23,6 +23,6 @@ export default {
 </script>
 
 <style lang="sass">
-// @import "./support.sass"
-// .MainDocCssVariable
+@import "./support.sass"
+.MainDocCssVariable
 </style>

@@ -1035,7 +1035,7 @@ export default {
 
 $sidebar_width_desktop: 30%
 $sidebar_width_tablet:  40%
-$sidebar_width_mobile:  calc(100% * 3 / 4)
+$sidebar_width_mobile:  100% * 3 / 4
 
 .StyleEditor-Sidebar
   .sidebar-content
