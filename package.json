@@ -24,7 +24,7 @@
     "howler": "^2.2.1",
     "js-memory-record": "^0.0.19",
     "lodash": "latest",
-    "node-sass": ">= 4.0.0 < 5.0.0",
+    "sass": "latest",
     "pug": "^3.0.2",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.1.0",
