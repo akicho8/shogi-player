@@ -30,7 +30,6 @@
     "raw-loader": "^4.0.2",
     "sass": "latest",
     "sass-loader": "^10.1.1",
-    "postcss": "latest",
     "vue-color": "^2.8.1",
     "vue": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
