@@ -20,5 +20,5 @@ export default {
 </script>
 
 <style lang="sass">
-.PageProps
+// .PageProps
 </style>

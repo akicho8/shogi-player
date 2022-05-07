@@ -127,5 +127,5 @@ export default {
     .PieceBoxTexture
       +filter_drop_shadow(1)
   &.is_board_shadow_none
-    .PieceBoxTexture
+    // .PieceBoxTexture
 </style>

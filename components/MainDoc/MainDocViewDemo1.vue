@@ -37,6 +37,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
-.MainDocViewDemo1
+// @import "./support.sass"
+// .MainDocViewDemo1
 </style>

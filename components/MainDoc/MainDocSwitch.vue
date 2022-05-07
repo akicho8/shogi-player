@@ -22,6 +22,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
-.MainDocSwitch
+// @import "./support.sass"
+// .MainDocSwitch
 </style>

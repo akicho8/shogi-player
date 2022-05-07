@@ -28,6 +28,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
-.MainDocViewDemo4
+// @import "./support.sass"
+// .MainDocViewDemo4
 </style>

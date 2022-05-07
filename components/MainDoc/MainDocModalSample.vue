@@ -50,6 +50,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
-.MainDocModalSample
+// @import "./support.sass"
+// .MainDocModalSample
 </style>

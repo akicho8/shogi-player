@@ -23,5 +23,5 @@ export default {
 </script>
 
 <style lang="sass">
-.PageIndex
+// .PageIndex
 </style>

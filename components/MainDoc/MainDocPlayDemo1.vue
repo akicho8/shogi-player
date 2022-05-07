@@ -29,6 +29,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
-.MainDocPlayDemo1
+// @import "./support.sass"
+// .MainDocPlayDemo1
 </style>
