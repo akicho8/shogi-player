@@ -30,7 +30,6 @@
     "pug-plain-loader": "^1.1.0",
     "raw-loader": "^4.0.2",
     "sass-loader": "^10.1.1",
-    "vue-color": "^2.7.1",
     "xregexp": "^4.3.0"
   },
   "devDependencies": {

@@ -44,13 +44,13 @@
 
 <script>
 import { support } from "./support.js"
-import ColorPicker from "./ColorPicker.vue"
+import MyColorPicker from "./MyColorPicker.vue"
 
 export default {
   name: "ImageUpload",
   mixins: [support],
   components: {
-    ColorPicker,
+    MyColorPicker,
   },
   props: {
     single_color: { type: String,  required: false, default: "#888888", },

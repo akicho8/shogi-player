@@ -30,7 +30,7 @@
           .title.is-5 背景
 
           b-field(custom-class="is-small" label="")
-            ColorPicker(v-model="se_ws_color" :disableAlpha="false")
+            MyColorPicker(v-model="se_ws_color" :has_alpha="false")
 
           ImageUpload(@input="se_ws_image_input_handle")
 
@@ -59,7 +59,7 @@
           .title.is-5 盤テクスチャ
 
           b-field(custom-class="is-small" label="")
-            ColorPicker(v-model="sp_board_color")
+            MyColorPicker(v-model="sp_board_color")
 
           b-field.my-4(custom-class="is-small" label="プリセット画像")
             b-select(size="is-small" v-model="sp_bg_variant")
@@ -112,9 +112,9 @@
         .box
           .title.is-5 盤グリッド
           b-field(custom-class="is-small" label="グリッドカラー")
-            ColorPicker(v-model="sp_grid_color")
+            MyColorPicker(v-model="sp_grid_color")
           b-field(custom-class="is-small" label="星・グリッド外枠カラー")
-            ColorPicker(v-model="sp_grid_outer_color")
+            MyColorPicker(v-model="sp_grid_outer_color")
           b-field(custom-class="is-small" label="グリッドの太さ")
             b-slider(v-bind="slider_attrs" v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線はブラウザ依存 Safari: 1.5px, Chrome: 2.0px")
@@ -175,18 +175,18 @@
           b-field(custom-class="is-small" label="セル内の駒の大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
           b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色")
-            ColorPicker(v-model="sp_stand_hover_border_color")
+            MyColorPicker(v-model="sp_stand_hover_border_color")
           b-field(custom-class="is-small" label="背景色")
-            ColorPicker(v-model="sp_stand_bg_color")
+            MyColorPicker(v-model="sp_stand_bg_color")
 
         .box
           .title.is-5 駒数
           b-field(custom-class="is-small" label="サイズ")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_font_size" :min="0" :max="20" :step="0.01")
           b-field(custom-class="is-small" label="フォント色")
-            ColorPicker(v-model="sp_piece_count_font_color")
+            MyColorPicker(v-model="sp_piece_count_font_color")
           b-field(custom-class="is-small" label="背景")
-            ColorPicker(v-model="sp_piece_count_bg_color")
+            MyColorPicker(v-model="sp_piece_count_bg_color")
           b-field(custom-class="is-small" label="余白")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
           b-field(custom-class="is-small" label="左右レイアウト時の位置")
@@ -197,7 +197,7 @@
         .box
           .title.is-5 駒箱
           b-field(custom-class="is-small" label="")
-            ColorPicker(v-model="sp_piece_box_color")
+            MyColorPicker(v-model="sp_piece_box_color")
           .columns.mt-4
             .column.py-0
               b-field(custom-class="is-small" label="セル(W)")
@@ -215,7 +215,7 @@
           b-field(custom-class="is-small" label="ぶれ度合い")
             b-slider(v-bind="slider_attrs" v-model="sp_shadow_blur" :min="-1" :max="20")
           b-field(custom-class="is-small" label="色")
-            ColorPicker(v-model="sp_shadow_color")
+            MyColorPicker(v-model="sp_shadow_color")
           b-field(custom-class="is-small" label="盤と駒台への適用方法" message="dropは透明度を継承するので元が透明だと影も薄い")
             b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_drop") drop
             b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_box") box
@@ -259,14 +259,14 @@
         .box
           .title.is-5 成り不成り選択
           b-field(custom-class="is-small" label="背景")
-            ColorPicker(v-model="sp_promote_select_modal_bg_color")
+            MyColorPicker(v-model="sp_promote_select_modal_bg_color")
           b-field(custom-class="is-small" label="hover色")
-            ColorPicker(v-model="sp_promote_select_modal_hover_color")
+            MyColorPicker(v-model="sp_promote_select_modal_hover_color")
 
         .box
           .title.is-5 駒を操作中の移動元スタイル
           b-field(custom-class="is-small" label="背景")
-            ColorPicker(v-model="sp_lifted_origin_bg_color_desktop")
+            MyColorPicker(v-model="sp_lifted_origin_bg_color_desktop")
           b-field(custom-class="is-small" label="駒の非透明度")
             b-slider(v-bind="slider_attrs" v-model="sp_lifted_origin_opacity_desktop" :min="0" :max="1.0" :step="0.001")
 
@@ -484,7 +484,6 @@ const IS_TRANSPARENT = "rgba(0,0,0,0)"    // chroma は "transparent" をパー�
 const IS_WHITE       = "rgb(255,255,255)"
 
 import chroma from "chroma-js"
-import { Slider, Chrome } from "vue-color"
 
 import { HumanSideInfo } from "./models/human_side_info.js"
 import { RunModeInfo } from "./models/run_mode_info.js"
@@ -494,14 +493,14 @@ import { KifuBookInfo } from "./models/kifu_book_info.js"
 import { MixBlendModeInfo } from "./models/mix_blend_mode_info.js"
 
 import ShogiPlayer from "./ShogiPlayer.vue"
-import ColorPicker from "./ColorPicker.vue"
+import MyColorPicker from "./MyColorPicker.vue"
 import ImageUpload from "./ImageUpload.vue"
 
 export default {
   name: "StyleEditor",
   components: {
     ShogiPlayer,
-    ColorPicker,
+    MyColorPicker,
     ImageUpload,
   },
 
