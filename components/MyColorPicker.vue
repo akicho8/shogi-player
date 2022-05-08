@@ -22,7 +22,7 @@ b-colorpicker.MyColorPicker(
 <script>
 import { support } from "./support.js"
 import chroma from "chroma-js"
-import BuefyColor from "../node_modules/buefy/src/utils/color"
+import BuefyColor from "@/node_modules/buefy/src/utils/color"
 
 export default {
   name: "MyColorPicker",
