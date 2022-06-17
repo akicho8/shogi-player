@@ -232,15 +232,15 @@ export const edit_mode_module = {
 
         // 1つだけ動ける系
         if (!found) {
-          found = this.soldier_movable_once_vectors_to_goal(this.origin_soldier1, place)
+          found = this.soldier_movable_once_vectors_to_goal(this.mediator.board, this.origin_soldier1, place)
         }
 
         // 連続で動ける系
         if (!found) {
-          if (this.soldier_movable_repeat_vectors_to_goal(this.origin_soldier1, place, {mode: "non_stop"})) {
+          if (this.soldier_movable_repeat_vectors_to_goal(this.mediator.board, this.origin_soldier1, place, {mode: "non_stop"})) {
             this.log("障害物を素通りすれば目的地に行ける")
             if (this.sp_play_mode_legal_jump_only) {
-              if (this.soldier_movable_repeat_vectors_to_goal(this.origin_soldier1, place, {mode: "stop"})) {
+              if (this.soldier_movable_repeat_vectors_to_goal(this.mediator.board, this.origin_soldier1, place)) {
                 this.log("障害物なく目的地に行ける")
                 found = true
               } else {
@@ -259,6 +259,14 @@ export const edit_mode_module = {
         if (!found) {
           this.log("操作モードで盤上の駒を動かし中だが動けないセルをタップしたので無効")
           this.if_standard_then_unhold() // ←元の位置に戻す場合
+          return
+        }
+      }
+
+      if (this.sp_play_mode_legal_move_only && this.play_p && this.place_from) {
+        if (this.gyokutorareru_p(this.mediator.board, this.origin_soldier1, new_soldier, place)) {
+          this.log("王手放置")
+          this.$emit("operation_king_suicide")
           return
         }
       }

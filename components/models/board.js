@@ -62,6 +62,12 @@ export class Board {
 
   //////////////////////////////////////////////////////////////////////////////// Utilities
 
+  get shallow_clone() {
+    const obj = new Board()
+    obj._surface = {...this._surface}
+    return obj
+  }
+
   get soldiers() {
     return Object.values(this._surface)
   }
@@ -75,6 +81,7 @@ export class Board {
     return counts
   }
 
+  // 前後反転
   get flip_all() {
     const new_board = new Board()
     _.forEach(this._surface, (soldier, place) => {
