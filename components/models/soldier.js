@@ -112,6 +112,14 @@ export class Soldier {
   get top_spaces() {
     return this.place.sp_flip_if_white(this.location).y
   }
+
+  get once_vectors() {
+    return this.piece.once_vectors(this.promoted)
+  }
+
+  get repeat_vectors() {
+    return this.piece.repeat_vectors(this.promoted)
+  }
 }
 
 if (process.argv[1] === __filename) {

@@ -39,6 +39,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 import { navi_module      } from "./navi_module.js"
 import { shortcut_module  } from "./shortcut_module.js"
 import { edit_mode_module } from "./edit_mode_module.js"
+import { legal_check      } from "./legal_check.js"
 import { play_mode_module } from "./play_mode_module.js"
 import { sound_module     } from "./sound_module.js"
 import { app_profile     } from "./app_profile.js"
@@ -62,6 +63,7 @@ export default {
     navi_module,
     shortcut_module,
     edit_mode_module,
+    legal_check,
     play_mode_module,
     sound_module,
     app_profile,

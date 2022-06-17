@@ -54,6 +54,14 @@ export class Piece extends MemoryRecord {
     return PieceVector.fetch(this.key)
   }
 
+  once_vectors(promoted) {
+    return this.piece_vector.once_vectors(promoted)
+  }
+
+  repeat_vectors(promoted) {
+    return this.piece_vector.repeat_vectors(promoted)
+  }
+
   get piece_yomiage() {
     return PieceYomiage.fetch(this.key)
   }

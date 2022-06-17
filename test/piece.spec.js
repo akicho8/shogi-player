@@ -26,4 +26,11 @@ describe('Piece', () => {
     expect(!!Piece.lookup_by_promoted_name("歩")).toEqual(false)
     expect(!!Piece.lookup_by_promoted_name("と")).toEqual(true)
   })
+
+  it('once_vectors, repeat_vectors', () => {
+    expect(!!Piece.fetch("L").once_vectors(false)).toEqual(false) // 香が成っていないとき1回ベクトルはない
+    expect(!!Piece.fetch("L").once_vectors(true)).toEqual(true)   // 香が成っているとき1回ベクトルあり(「と」なので)
+    expect(!!Piece.fetch("R").repeat_vectors(true)).toEqual(true)
+    expect(!!Piece.fetch("R").repeat_vectors(false)).toEqual(true)
+  })
 })

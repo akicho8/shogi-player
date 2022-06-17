@@ -16,6 +16,26 @@ export class PieceVector extends MemoryRecord {
     ]
   }
 
+  once_vectors(promoted) {
+    let method = null
+    if (promoted) {
+      method = this.promoted_once_vectors
+    } else {
+      method = this.basic_once_vectors
+    }
+    return this.constructor[method]
+  }
+
+  repeat_vectors(promoted) {
+    let method = null
+    if (promoted) {
+      method = this.promoted_repeat_vectors
+    } else {
+      method = this.basic_repeat_vectors
+    }
+    return this.constructor[method]
+  }
+
   static get pattern_plus() {
     return [
       null,    [0,-1],   null,
