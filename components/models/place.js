@@ -26,6 +26,10 @@ export class Place {
     return 0 <= x && x < Board.dimension && 0 <= y && y < Board.dimension
   }
 
+  static xy_invalid_p(x, y) {
+    return !this.xy_valid_p(x, y)
+  }
+
   constructor(value) {
     let x, y
     if (typeof value === "string") {
