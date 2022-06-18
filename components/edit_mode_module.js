@@ -14,8 +14,9 @@ const CURSOR_OBJECT_XY_UPDATE_60FPS = true
 export const edit_mode_module = {
   props: {
     sp_play_mode_legal_move_only:                { type: Boolean, default: true, },                      // play_mode で合法手のみに絞る
-    sp_play_mode_legal_jump_only:                { type: Boolean, default: true, },                      // play_mode で飛角香は駒を跨げない (角ワープ禁止)
-    sp_play_mode_legal_pawn_drop:                { type: Boolean, default: true, },                      // play_mode で二歩禁止
+    sp_play_mode_piece_warp_disabled:            { type: Boolean, default: true, },                      // play_mode で飛角香は駒を跨げない (角ワープ禁止)
+    sp_play_mode_death_king_disabled:            { type: Boolean, default: true, },                      // play_mode で王手放置禁止
+    sp_play_mode_two_pawn_disabled:              { type: Boolean, default: true, },                      // play_mode で二歩禁止
     sp_play_mode_auto_promote:                   { type: Boolean, default: true, },                      // play_mode で死に駒になるときは自動的に成る
     sp_play_mode_not_put_if_death_soldier:       { type: Boolean, default: true, },                      // play_mode で死に駒になるときは置けないようにする
     sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },                      // play_mode では自分手番とき自分の駒しか動かせないようにする
@@ -107,12 +108,13 @@ export const edit_mode_module = {
       let new_soldier = null
       let promotable_p = null
       if (this.origin_soldier1) {
-        new_soldier = new Soldier({
-          piece: this.origin_soldier1.piece,
-          place: place,
-          promoted: this.origin_soldier1.promoted,
-          location: this.origin_soldier1.location,
-        })
+        new_soldier = this.origin_soldier1.clone_with_attrs({place: place})
+        // new_soldier = new Soldier({
+        //   piece: this.origin_soldier1.piece,
+        //   place: place,
+        //   promoted: this.origin_soldier1.promoted,
+        //   location: this.origin_soldier1.location,
+        // })
         // 入って成る？ それとも出てなる？
         promotable_p = new_soldier.promotable_p || this.origin_soldier1.promotable_p
       }
@@ -232,20 +234,20 @@ export const edit_mode_module = {
 
         // 1つだけ動ける系
         if (!found) {
-          found = this.soldier_movable_once_vectors_to_goal(this.mediator.board, this.origin_soldier1, place)
+          found = this.mediator.board.once_reach(this.origin_soldier1, place)
         }
 
         // 連続で動ける系
         if (!found) {
-          if (this.soldier_movable_repeat_vectors_to_goal(this.mediator.board, this.origin_soldier1, place, {mode: "non_stop"})) {
+          if (this.mediator.board.repeat_reach(this.origin_soldier1, place, {mode: "non_stop"})) {
             this.log("障害物を素通りすれば目的地に行ける")
-            if (this.sp_play_mode_legal_jump_only) {
-              if (this.soldier_movable_repeat_vectors_to_goal(this.mediator.board, this.origin_soldier1, place)) {
+            if (this.sp_play_mode_piece_warp_disabled) {
+              if (this.mediator.board.repeat_reach(this.origin_soldier1, place)) {
                 this.log("障害物なく目的地に行ける")
                 found = true
               } else {
                 this.log("駒ワープ")
-                this.$emit("operation_piece_warp", this.origin_soldier1)
+                this.$emit("foul_piece_warp", this.origin_soldier1)
                 return
               }
             } else {
@@ -261,13 +263,13 @@ export const edit_mode_module = {
           this.if_standard_then_unhold() // ←元の位置に戻す場合
           return
         }
-      }
 
-      if (this.sp_play_mode_legal_move_only && this.play_p && this.place_from) {
-        if (this.gyokutorareru_p(this.mediator.board, this.origin_soldier1, new_soldier, place)) {
-          this.log("王手放置")
-          this.$emit("operation_king_suicide")
-          return
+        if (this.sp_play_mode_death_king_disabled) {
+          if (this.mediator.board.move_then_king_capture_p(this.origin_soldier1, place)) {
+            this.log("王手放置")
+            this.$emit("foul_death_king")
+            return
+          }
         }
       }
 
@@ -326,13 +328,13 @@ export const edit_mode_module = {
         this.log("持駒を置く")
 
         // 二歩判定
-        if (this.sp_play_mode_legal_pawn_drop) {
+        if (this.sp_play_mode_two_pawn_disabled) {
           if (this.play_p) {
             if (this.have_piece.key === "P") {
               if (this.have_piece_location) {
                 if (this.mediator.board.piece_exist_by_x(place.x, this.have_piece_location, this.have_piece)) {
                   this.log("二歩")
-                  this.$emit("operation_double_pawn")
+                  this.$emit("foul_two_pawn")
                   // 警告するだけで駒を元に戻すわけではないため this.state_reset() を呼んではいけない
                   return
                 }

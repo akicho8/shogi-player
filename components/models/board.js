@@ -23,17 +23,28 @@ export class Board {
     this._surface = {}
   }
 
+  delete_at(place) {
+    Vue.delete(this._surface, place.key)
+  }
+
   place_on(soldier) {
     this.delete_at(soldier.place) // リアクティブにするため「削除」→「追加」とする
     Vue.set(this._surface, soldier.place.key, soldier)
   }
 
-  lookup(place) {
-    return this._surface[place.key]
+  // new_soldier.place にはあらかじめ位置をセットしておくこと
+  move_m1(old_soldier, new_soldier) {
+    this.delete_at(old_soldier.place)
+    this.place_on(new_soldier)
   }
 
-  delete_at(place) {
-    Vue.delete(this._surface, place.key)
+  // soldier を goal に移動する
+  move_m2(soldier, goal) {
+    this.move_m1(soldier, soldier.clone_with_attrs({place: goal}))
+  }
+
+  lookup(place) {
+    return this._surface[place.key]
   }
 
   clear() {
@@ -60,6 +71,107 @@ export class Board {
     return found
   }
 
+  //////////////////////////////////////////////////////////////////////////////// 効き判定
+
+  // soldier を goal に移動できるか？(合法手のみ)
+  reach_p(soldier, goal, options = {}) {
+    return this.once_reach(soldier, goal) || this.repeat_reach(soldier, goal, options)
+  }
+
+  // soldier を goal に移動できるか？(合法手のみ・いっぽだけ)
+  once_reach(soldier, goal) {
+    let success = false
+    const vectors = soldier.once_vectors
+    if (vectors) {
+      success = vectors.some(e => {
+        if (e) {
+          return this.once_reach_vec(soldier, goal, e)
+        }
+      })
+    }
+    return success
+  }
+
+  once_reach_vec(soldier, goal, vector) {
+    const vx = vector[0]
+    const vy = vector[1] * soldier.location.value_sign
+    const x = soldier.place.x + vx
+    const y = soldier.place.y + vy
+    return x === goal.x && y === goal.y
+  }
+
+  // soldier を goal に移動できるか？(連続で動いたとき)
+  // mode: "non_stop" // 障害物を素通り
+  repeat_reach(soldier, goal, options = {}) {
+    let success = false
+    const vectors = soldier.repeat_vectors
+    if (vectors) {
+      success = vectors.some(e => {
+        if (e) {
+          return this.repeat_reach_vec(soldier, goal, e, options)
+        }
+      })
+    }
+    return success
+  }
+
+  // vector の方向に進んでいくと他の駒に衝突せずに goal まで一直線に進めるか？
+  // 言い替えると vector の方向の goal が見えるか？
+  repeat_reach_vec(soldier, goal, vector, options = {}) {
+    const ox = soldier.place.x
+    const oy = soldier.place.y
+
+    const vx = vector[0]
+    const vy = vector[1] * soldier.location.value_sign
+
+    let x = ox + vx
+    let y = oy + vy
+
+    let success = false
+    while (true) {
+      if (Place.xy_invalid_p(x, y)) { // 外に出てしまった
+        break
+      }
+      if (x === goal.x && y === goal.y) { // 目的地に着いた
+        success = true
+        break
+      }
+      if (options.mode == "non_stop") {
+      } else {
+        // 他の駒に衝突したら停止
+        const place = Place.fetch([x, y])
+        const other = this.lookup(place)
+        if (other) {
+          break
+        }
+      }
+      x += vx
+      y += vy
+    }
+    return success
+  }
+
+  // 仮に soldier を goal に移動させたとき soldier.location 側の玉が取られるか？
+  move_then_king_capture_p(soldier, goal) {
+    const board = this.shallow_clone
+    board.move_m2(soldier, goal)
+    return board.king_capture_p(soldier.location)
+  }
+
+  // 相手の盤上の駒をすべて動かしたとき location 側の king が取られるか？
+  king_capture_p(location) {
+    const king = this.king_find_by_location(location)
+    if (king) {
+      const soldiers = this.soldiers_by_location(location.flip)
+      return soldiers.some(e => this.reach_p(e, king.place)) // すべて動かして玉の位置に行けるか？
+    }
+  }
+
+  // location 側の king を得る
+  king_find_by_location(location) {
+    return this.soldiers.find(e => (e.piece.key == "K" && e.location.key == location.key))
+  }
+
   //////////////////////////////////////////////////////////////////////////////// Utilities
 
   get shallow_clone() {
@@ -70,6 +182,12 @@ export class Board {
 
   get soldiers() {
     return Object.values(this._surface)
+  }
+
+  // location 側の soldiers
+  soldiers_by_location(location) {
+    const key = location.key
+    return this.soldiers.filter(e => e.location.key == key)
   }
 
   // soldier を piece にしてその個数をハッシュにして返す

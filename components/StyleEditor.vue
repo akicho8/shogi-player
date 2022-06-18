@@ -401,12 +401,12 @@
             b-radio-button(size="is-small" v-model="sp_play_mode_legal_move_only" :native-value="true") ON
 
           b-field(custom-class="is-small" label="操作モードでは飛角香は駒を跨げない")
-            b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_play_mode_legal_jump_only" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_play_mode_piece_warp_disabled" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_play_mode_piece_warp_disabled" :native-value="true") ON
 
           b-field(custom-class="is-small" label="操作モードでは二歩ができない")
-            b-radio-button(size="is-small" v-model="sp_play_mode_legal_pawn_drop" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_play_mode_legal_pawn_drop" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_play_mode_two_pawn_disabled" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_play_mode_two_pawn_disabled" :native-value="true") ON
 
           b-field(custom-class="is-small" label="持駒のキャンセル方法")
             b-radio-button(size="is-small" v-model="sp_move_cancel" native-value="is_move_cancel_reality") 元位置
@@ -635,8 +635,8 @@ export default {
       sp_slider:     DEVELOPMENT_P ? "is_slider_on" : "is_slider_on",
       sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
       sp_play_mode_legal_move_only: false,
-      sp_play_mode_legal_jump_only: false,
-      sp_play_mode_legal_pawn_drop: false,
+      sp_play_mode_piece_warp_disabled: false,
+      sp_play_mode_two_pawn_disabled: false,
       sp_move_cancel: "is_move_cancel_reality",
 
       se_tf0_mode: "is_tf0_mode_off",
@@ -867,8 +867,8 @@ export default {
       params.sp_controller        = this.sp_controller
       params.sp_player_info       = this.sp_player_info
       params.sp_play_mode_legal_move_only = this.sp_play_mode_legal_move_only
-      params.sp_play_mode_legal_jump_only = this.sp_play_mode_legal_jump_only
-      params.sp_play_mode_legal_pawn_drop = this.sp_play_mode_legal_pawn_drop
+      params.sp_play_mode_piece_warp_disabled = this.sp_play_mode_piece_warp_disabled
+      params.sp_play_mode_two_pawn_disabled = this.sp_play_mode_two_pawn_disabled
       params.sp_move_cancel       = this.sp_move_cancel
       return params
     },
