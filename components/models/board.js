@@ -53,17 +53,19 @@ export class Board {
 
   //////////////////////////////////////////////////////////////////////////////// 二歩判定用
 
-  // x 列に location の piece があるか？
-  piece_exist_by_x(x, location, piece) {
+  // x 列に location の歩があるか？
+  pawn_exist_by_x(x, location) {
     let found = false
     for (let y = 0; y < Board.dimension; y++) {
       const place = Place.fetch([x, y])
       const soldier = this.lookup(place)
       if (soldier) {
         if (soldier.location.key === location.key) {
-          if (soldier.piece.key === piece.key) {
-            found = true
-            break
+          if (soldier.piece.key === "P") {
+            if (!soldier.promoted) {
+              found = true
+              break
+            }
           }
         }
       }

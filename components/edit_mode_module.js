@@ -332,7 +332,7 @@ export const edit_mode_module = {
           if (this.play_p) {
             if (this.have_piece.key === "P") {
               if (this.have_piece_location) {
-                if (this.mediator.board.piece_exist_by_x(place.x, this.have_piece_location, this.have_piece)) {
+                if (this.mediator.board.pawn_exist_by_x(place.x, this.have_piece_location)) {
                   this.log("二歩")
                   this.$emit("foul_two_pawn")
                   // 警告するだけで駒を元に戻すわけではないため this.state_reset() を呼んではいけない
