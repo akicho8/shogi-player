@@ -1,0 +1,38 @@
+=is_pi_variant_g($position, $piece_key, $promoted, $code)
+  .is_position_#{$position}
+    .PieceTextureSelf
+      &.piece_#{$piece_key}
+        &.promoted_#{$promoted}
+          background-image: url("#{$sp_assets_dir}/is_pi_variant/g/#{$code}.png")
+
+=is_pi_variant_g_pack
+  +is_pi_variant_g("north", "K", false, "WK0")
+  +is_pi_variant_g("north", "R", false, "WR0")
+  +is_pi_variant_g("north", "B", false, "WB0")
+  +is_pi_variant_g("north", "G", false, "WG0")
+  +is_pi_variant_g("north", "S", false, "WS0")
+  +is_pi_variant_g("north", "N", false, "WN0")
+  +is_pi_variant_g("north", "L", false, "WL0")
+  +is_pi_variant_g("north", "P", false, "WP0")
+  +is_pi_variant_g("north", "X", false, "WX0")
+  +is_pi_variant_g("north", "R", true,  "WR1")
+  +is_pi_variant_g("north", "B", true,  "WB1")
+  +is_pi_variant_g("north", "S", true,  "WS1")
+  +is_pi_variant_g("north", "N", true,  "WN1")
+  +is_pi_variant_g("north", "L", true,  "WL1")
+  +is_pi_variant_g("north", "P", true,  "WP1")
+  +is_pi_variant_g("south", "K", false, "BK0")
+  +is_pi_variant_g("south", "R", false, "BR0")
+  +is_pi_variant_g("south", "B", false, "BB0")
+  +is_pi_variant_g("south", "G", false, "BG0")
+  +is_pi_variant_g("south", "S", false, "BS0")
+  +is_pi_variant_g("south", "N", false, "BN0")
+  +is_pi_variant_g("south", "L", false, "BL0")
+  +is_pi_variant_g("south", "P", false, "BP0")
+  +is_pi_variant_g("south", "X", false, "BX0")
+  +is_pi_variant_g("south", "R", true,  "BR1")
+  +is_pi_variant_g("south", "B", true,  "BB1")
+  +is_pi_variant_g("south", "S", true,  "BS1")
+  +is_pi_variant_g("south", "N", true,  "BN1")
+  +is_pi_variant_g("south", "L", true,  "BL1")
+  +is_pi_variant_g("south", "P", true,  "BP1")

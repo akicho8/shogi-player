@@ -619,8 +619,8 @@ export default {
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_board_shadow: "is_board_shadow_drop",
       sp_blink: "is_blink_on",
-      sp_pi_variant: "is_pi_variant_a1by",
-      sp_bg_variant: "is_bg_variant_none",
+      sp_pi_variant: "is_pi_variant_g",
+      sp_bg_variant: "is_bg_variant_a",
       ////////////////////////////////////////////////////////////////////////////////
 
       ////////////////////////////////////////////////////////////////////////////////
