@@ -18,7 +18,7 @@ export const edit_mode_module = {
     sp_play_mode_death_king_disabled:            { type: Boolean, default: true, },                      // play_mode で王手放置禁止
     sp_play_mode_two_pawn_disabled:              { type: Boolean, default: true, },                      // play_mode で二歩禁止
     sp_play_mode_auto_promote:                   { type: Boolean, default: true, },                      // play_mode で死に駒になるときは自動的に成る
-    sp_play_mode_not_put_if_death_soldier:       { type: Boolean, default: true, },                      // play_mode で死に駒になるときは置けないようにする
+    sp_play_mode_dead_soldier_put_disabled:      { type: Boolean, default: true, },                      // play_mode で死に駒になるときは置けないようにする
     sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },                      // play_mode では自分手番とき自分の駒しか動かせないようにする
     sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: true, },                      // play_mode では自分の駒で同じ仲間の駒を取れないようにする
     sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  },                      // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
@@ -147,13 +147,16 @@ export const edit_mode_module = {
         return
       }
 
-      if (this.sp_play_mode_not_put_if_death_soldier && this.play_p && this.have_piece && !this.killed_soldier) {
+      if (this.play_p && this.have_piece && !this.killed_soldier) {
         const new_soldier = this.soldier_create_from_stand_or_box_on(place)
         const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
         if (force_promote_length != null) {                                              // チェックしない場合は null
           if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
-            this.log("駒台や駒箱から持ち上げた駒を置こうとしたけど死に駒なので無効とする")
-            return
+            if (this.sp_play_mode_dead_soldier_put_disabled) {
+              this.log("駒台や駒箱から持ち上げた駒を置こうとしたけど死に駒なので無効とする")
+              this.$emit("foul_dead_soldier_put", new_soldier)
+              return
+            }
           }
         }
       }

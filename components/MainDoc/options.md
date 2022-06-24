@@ -46,9 +46,10 @@
 | `xxx.native`                                | 任意のイベント (例: `click.native`)                      | click の場合はだいたい `sp_op_disabled` と組み合わせる         |   |
 | `operation_invalid1`                        | 手番が違うのに操作しようとした                           |                                                                |   |
 | `operation_invalid2`                        | 自分が手番だが相手の駒を動かそうとした                   |                                                                |   |
-| `foul_two_pawn`                     | 二歩                                                     |                                                                |   |
-| `foul_piece_warp`                      | 駒ワープ                                                 |                                                                |   |
-| `foul_death_king`                    | 王手放置                                                 |                                                                |   |
+| `foul_two_pawn`                             | 二歩                                                     |                                                                |   |
+| `foul_piece_warp`                           | 駒ワープ                                                 |                                                                |   |
+| `foul_death_king`                           | 王手放置                                                 |                                                                |   |
+| `foul_dead_soldier_put`                     | 打った駒が死に駒                                         |                                                                |   |
 | `sp_board_piece_back_user_style`            | ?                                                        |                                                                |   |
 | `sp_board_piece_back_user_class`            | ?                                                        |                                                                |   |
 

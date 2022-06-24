@@ -9,7 +9,7 @@
       //- sp_body="position sfen lnsgkgsnl/7b1/pppp1pppp/9/9/9/PPPPrPPPP/1B5R1/LNSGKGSNL b Pp 1"
       //- sp_body="position sfen k8/9/9/9/9/9/8l/9/r6NK b r2b4g4s3n3l18p 1"
       ShogiPlayer(
-        sp_body="position sfen k8/9/9/9/9/9/8l/9/r6NK b r2b4g4s3n3l18p 1"
+        sp_body="position sfen k8/9/9/9/9/9/8l/9/r6NK b 2Nr2b4g4s3n3l18p 1"
         sp_run_mode="play_mode"
         sp_debug_mode="is_debug_mode_on"
         :sp_sound_enabled="true"
