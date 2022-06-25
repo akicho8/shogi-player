@@ -84,7 +84,7 @@ export default {
     sp_layer:             { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
     sp_board_shadow:      { type: String, default: "is_board_shadow_drop",  }, // 盤の影適用方法 is_board_shadow_(drop|box|none)
     sp_blink:             { type: String, default: "is_blink_off",          }, // 最終手の表現方法 is_blink_(on|off)
-    sp_pi_variant:        { type: String, default: "is_pi_variant_a1by",    }, // 駒の種類
+    sp_pi_variant:        { type: String, default: "is_pi_variant_a",    }, // 駒の種類
     sp_bg_variant:        { type: String, default: "is_bg_variant_none",    }, // 盤の種類
     sp_mobile_fit:        { type: String, default: "is_mobile_fit_on",      }, // DEPRECATE
     sp_mobile_vertical:   { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
