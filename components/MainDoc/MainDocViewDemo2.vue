@@ -8,7 +8,7 @@
     :sp_body="kifu_book_info.sp_body"
     :sp_turn="-1"
     sp_bg_variant="is_bg_variant_b"
-    sp_pi_variant="is_pi_variant_a1by"
+    sp_pi_variant="is_pi_variant_a"
     sp_overlay_nav="is_overlay_nav_on"
     )
 </template>

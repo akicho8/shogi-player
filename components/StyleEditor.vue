@@ -132,7 +132,7 @@
               template(v-for="e in PiVariantInfo.values")
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="盤上のセルに対するテクスチャ領域の割合")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_piece_rate" :min="0" :max="100" :step="0.1")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_piece_rate" :min="-10" :max="150" :step="0.1")
           b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="下にすると駒の底辺が揃う(ただし駒の種類による)")
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
@@ -619,8 +619,8 @@ export default {
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_board_shadow: "is_board_shadow_drop",
       sp_blink: "is_blink_on",
-      sp_pi_variant: "is_pi_variant_a1by",
-      sp_bg_variant: "is_bg_variant_none",
+      sp_pi_variant: "is_pi_variant_g",
+      sp_bg_variant: "is_bg_variant_a",
       ////////////////////////////////////////////////////////////////////////////////
 
       ////////////////////////////////////////////////////////////////////////////////
