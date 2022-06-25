@@ -14,14 +14,14 @@
         //-   MainDocExternalLink(href="http://free-paper-texture.com/") Paper-co
         h5 駒
         ul
-          MainDocExternalLink() Portella
-          MainDocExternalLink(href="http://mucho.girly.jp/bona/") 将棋アプリ用クリエイティブコモンズ画像
+          //- MainDocExternalLink(href="http://mucho.girly.jp/bona/") 将棋アプリ用クリエイティブコモンズ画像
           MainDocExternalLink(href="https://nureyon.com/") ぬれよん - 色が塗れる無料イラスト素材
           MainDocExternalLink(href="https://twitter.com/Shogi_Zuan") 将棋図案駒
           MainDocExternalLink(href="https://glyphwiki.org/") グリフウィキ
           MainDocExternalLink(href="https://studio.beatnix.co.jp/kids-it/kids-programming/scratch/scratch-material/hiragana-katakana-minchyo/") コドモとアプリ
           MainDocExternalLink(href="https://github.com/orangain/shogi-piece-images") orangain/shogi-piece-images
           MainDocExternalLink(href="http://putiya.com/") かわいいフリー素材、無料イラスト、素材のプチッチ
+          MainDocExternalLink() Portella
           //- MainDocExternalLink(href="https://www.photolibrary.jp/") 写真素材 - フォトライブラリー photolibrary
 
         h5 効果音
