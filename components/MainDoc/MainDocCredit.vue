@@ -15,18 +15,20 @@
         h5 駒
         ul
           //- MainDocExternalLink(href="http://mucho.girly.jp/bona/") 将棋アプリ用クリエイティブコモンズ画像
-          MainDocExternalLink(href="https://nureyon.com/") ぬれよん - 色が塗れる無料イラスト素材
-          MainDocExternalLink(href="https://twitter.com/Shogi_Zuan") 将棋図案駒
-          MainDocExternalLink(href="https://glyphwiki.org/") グリフウィキ
-          MainDocExternalLink(href="https://studio.beatnix.co.jp/kids-it/kids-programming/scratch/scratch-material/hiragana-katakana-minchyo/") コドモとアプリ
-          MainDocExternalLink(href="https://github.com/orangain/shogi-piece-images") orangain/shogi-piece-images
-          MainDocExternalLink(href="http://putiya.com/") かわいいフリー素材、無料イラスト、素材のプチッチ
-          MainDocExternalLink() Portella
+          li: MainDocExternalLink(href="https://nureyon.com/") ぬれよん
+          li
+            MainDocExternalLink(href="https://www.google.co.jp/search?q=Portella+lishogi") Portella
+            MainDocExternalLink.mx-2(href="https://creativecommons.org/licenses/by-nc-sa/4.0/") (CC BY-NC-SA 4.0)
+          li: MainDocExternalLink(href="https://twitter.com/Shogi_Zuan") 将棋図案駒 (404)
+          li: MainDocExternalLink(href="https://glyphwiki.org/") グリフウィキ
+          li: MainDocExternalLink(href="https://studio.beatnix.co.jp/kids-it/kids-programming/scratch/scratch-material/hiragana-katakana-minchyo/") コドモとアプリ
+          li: MainDocExternalLink(href="https://github.com/orangain/shogi-piece-images") orangain/shogi-piece-images
+          li: MainDocExternalLink(href="http://putiya.com/") かわいいフリー素材、無料イラスト、素材のプチッチ
           //- MainDocExternalLink(href="https://www.photolibrary.jp/") 写真素材 - フォトライブラリー photolibrary
 
         h5 効果音
         ul
-          MainDocExternalLink(href="https://assetstore.unity.com/packages/audio/sound-fx/universal-sound-fx-17256") UNIVERSAL SOUND FX
+          li: MainDocExternalLink(href="https://assetstore.unity.com/packages/audio/sound-fx/universal-sound-fx-17256") UNIVERSAL SOUND FX
 </template>
 
 <script>
