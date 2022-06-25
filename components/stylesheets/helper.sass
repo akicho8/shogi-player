@@ -6,7 +6,7 @@ $overlay_navigation_item_z: 1
 $flip_trigger_cell_z:       2
 $piece_count_z:             1
 $promote_select_modal_z:    30 // b-navbar より上にする
-  
+
 // is_vertical の定義は +mobile のときにも適用する
 //
 // 冗長な書き方
@@ -64,11 +64,11 @@ $promote_select_modal_z:    30 // b-navbar より上にする
 
 =is_flip
   transform: rotate(180deg)
-  
+
 // 反転
 %is_flip
   +is_flip
-  
+
 // 選択禁止
 %is_unselectable
   user-select: none
@@ -83,9 +83,13 @@ $promote_select_modal_z:    30 // b-navbar より上にする
 @function shadow_args($dir)
   @return calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_offset) * #{$dir}px) calc(var(--sp_shadow_blur) * 1px) var(--sp_shadow_color)
 
-// 盤に適用する filter パラメータ (drop-shadow を除く)
+// 「盤」に適用する filter パラメータ (drop-shadow を除く)
 @function board_filter_params_without_drop_shadow()
   @return unquote('invert(var(--sp_board_invert)) sepia(var(--sp_board_sepia)) hue-rotate(calc(var(--sp_board_hue) * 1turn)) saturate(var(--sp_board_saturate)) opacity(var(--sp_board_opacity)) grayscale(var(--sp_board_grayscale)) brightness(var(--sp_board_brightness)) contrast(var(--sp_board_contrast)) blur(calc(var(--sp_board_blur) * 1px))')
+
+// 「駒」に適用する filter パラメータ (drop-shadow を除く)
+@function piece_filter_params_without_drop_shadow()
+  @return unquote('invert(var(--sp_piece_invert)) sepia(var(--sp_piece_sepia)) hue-rotate(calc(var(--sp_piece_hue) * 1turn)) saturate(var(--sp_piece_saturate)) opacity(var(--sp_piece_opacity)) grayscale(var(--sp_piece_grayscale)) brightness(var(--sp_piece_brightness)) contrast(var(--sp_piece_contrast)) blur(calc(var(--sp_piece_blur) * 1px))')
 
 =filter_drop_shadow($dir, $prepend: "", $append: "")
   filter: #{$prepend} drop-shadow(shadow_args($dir)) #{$append}
@@ -114,7 +118,7 @@ $promote_select_modal_z:    30 // b-navbar より上にする
   @at-root
     html
       --#{$key}: #{$val}
-        
+
 // pug:
 //
 //   .Foo
