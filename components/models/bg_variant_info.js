@@ -6,8 +6,6 @@ export class BgVariantInfo extends MemoryRecord {
       { key: "is_bg_variant_none", name: "none", },
       { key: "is_bg_variant_a",    name: "木1",  },
       { key: "is_bg_variant_b",    name: "木2",  },
-      { key: "is_bg_variant_c",    name: "木3",  },
-      { key: "is_bg_variant_d",    name: "木4",  },
     ]
   }
 }
