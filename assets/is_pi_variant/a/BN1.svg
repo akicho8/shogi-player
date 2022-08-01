@@ -5,7 +5,7 @@
     <g transform="rotate(0,0,0)" stroke-linejoin="round" fill="#fff">
       <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(255,227,156)" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
       <path stroke-linecap="butt" stroke-linejoin="round" stroke="none" fill="rgb(239,69,74)" d="m79.425999-8.317001h-67.9466v-18.1067h53.3866v-20.9067h-53.3866v-23.3333h-23.7067v23.3333h-53.2v20.9067h53.2v18.1067h-67.3867v21.28h159.04zm-67.9466 84.56v-22.0267h57.3066v-21.0933h-57.3066v-16.0533h-23.7067v16.0533h-57.68v21.0933h57.68v22.0267h-72.0533v21.84h168.56v-21.84z"/>
-      <path stroke-linecap="butt" stroke-linejoin="round" stroke-width="0" stroke-opacity="1" stroke="rgb(68,68,68)" fill="none" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
+      <path stroke-linecap="butt" stroke-linejoin="round" stroke-width="0" stroke-opacity="1" stroke="rgb(48,48,48)" fill="none" d="m0.002-147l-98.2634 51.815l-24.5653 242.185h245.653l-24.5653-242.185z"/>
     </g>
   </svg>
 </svg>

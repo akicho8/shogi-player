@@ -6,7 +6,7 @@ require "nokogiri"
 NEW_RED  = "rgb(239,69,74)" # 朱色 (https://www.color-sample.com/colors/257/)
 NEW_EDGE = 0
 
-BLACK_DEFAULT = "rgb(68,68,68)"
+BLACK_DEFAULT = "rgb(48,48,48)"
 
 Pathname(".").glob("*.svg") do |e|
   puts e
