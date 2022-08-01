@@ -124,12 +124,12 @@ export default {
     border-radius: calc(var(--sp_board_radius) * 1px)
     border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
 
-  &.is_board_shadow_box
-    .MainBoardTexture
-      +filter_box_shadow(1, board_filter_params_without_drop_shadow())
   &.is_board_shadow_drop
     .MainBoardTexture
       +filter_drop_shadow(1, board_filter_params_without_drop_shadow())
+  &.is_board_shadow_box
+    .MainBoardTexture
+      +filter_box_shadow(1, board_filter_params_without_drop_shadow())
   &.is_board_shadow_none
     .MainBoardTexture
       filter: board_filter_params_without_drop_shadow()
