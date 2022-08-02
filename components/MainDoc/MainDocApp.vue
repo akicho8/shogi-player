@@ -33,6 +33,6 @@ export default {
     --sp_board_padding: 0
     --sp_board_color: transparent
 
-  .is_pi_variant_g
+  .is_pi_variant_d
     --sp_board_piece_rate: 100%
 </style>

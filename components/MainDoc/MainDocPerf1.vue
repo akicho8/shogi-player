@@ -19,7 +19,7 @@
         sp_controller="is_controller_on"
         sp_slider="is_slider_on"
         sp_bg_variant="is_bg_variant_b"
-        sp_pi_variant="is_pi_variant_g"
+        sp_pi_variant="is_pi_variant_d"
       )
 </template>
 

@@ -1,7 +1,7 @@
 @import "is_pi_variant/a.sass"
 @import "is_pi_variant/b.sass"
 @import "is_pi_variant/c.sass"
-@import "is_pi_variant/g.sass"
+@import "is_pi_variant/d.sass"
 
 =filter_drop_shadow_for_piece($dir)
   filter: piece_filter_params_without_drop_shadow() drop-shadow(shadow_args($dir))
@@ -42,6 +42,6 @@
       +is_pi_variant_c_pack
 
   // 画像自体に影が付いている
-  &.is_pi_variant_g
+  &.is_pi_variant_d
     @extend %is_pi_black_and_white_without_drop_shadow
-    +is_pi_variant_g_pack
+    +is_pi_variant_d_pack
