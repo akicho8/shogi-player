@@ -22,7 +22,6 @@
           li: MainDocExternalLink(href="https://twitter.com/Shogi_Zuan") 将棋図案駒 (404)
           li: MainDocExternalLink(href="https://glyphwiki.org/") グリフウィキ
           li: MainDocExternalLink(href="https://studio.beatnix.co.jp/kids-it/kids-programming/scratch/scratch-material/hiragana-katakana-minchyo/") コドモとアプリ
-          li: MainDocExternalLink(href="https://github.com/orangain/shogi-piece-images") orangain/shogi-piece-images
           //- MainDocExternalLink(href="https://www.photolibrary.jp/") 写真素材 - フォトライブラリー photolibrary
 
         h5 効果音

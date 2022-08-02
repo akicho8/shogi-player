@@ -7,7 +7,6 @@ export class PiVariantInfo extends MemoryRecord {
       { key: "is_pi_variant_a",    name: "ぬれよん(svg)",               },
       { key: "is_pi_variant_b",    name: "紙面風(svg)",                 },
       { key: "is_pi_variant_c",    name: "図案駒(png)",                 },
-      { key: "is_pi_variant_d",    name: "orangain/shogi-piece-images", },
       { key: "is_pi_variant_g",    name: "Portella(png)",               },
     ]
   }
