@@ -620,7 +620,7 @@ export default {
       sp_board_shadow: "is_board_shadow_drop",
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_g",
-      sp_bg_variant: "is_bg_variant_a",
+      sp_bg_variant: "is_bg_variant_none", // is_bg_variant_a
       ////////////////////////////////////////////////////////////////////////////////
 
       ////////////////////////////////////////////////////////////////////////////////

@@ -23,7 +23,6 @@
           li: MainDocExternalLink(href="https://glyphwiki.org/") グリフウィキ
           li: MainDocExternalLink(href="https://studio.beatnix.co.jp/kids-it/kids-programming/scratch/scratch-material/hiragana-katakana-minchyo/") コドモとアプリ
           li: MainDocExternalLink(href="https://github.com/orangain/shogi-piece-images") orangain/shogi-piece-images
-          li: MainDocExternalLink(href="http://putiya.com/") かわいいフリー素材、無料イラスト、素材のプチッチ
           //- MainDocExternalLink(href="https://www.photolibrary.jp/") 写真素材 - フォトライブラリー photolibrary
 
         h5 効果音
