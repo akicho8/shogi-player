@@ -57,6 +57,12 @@ export default {
     font-weight: bold
     flex-shrink: 0 // 縮小しない(縦置き時に駒台の横幅を100%にするとここが縮小しようとして1文字ずつ折り返しになる、のを防ぐ)
 
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+    gap: 0.2em                   // 名前と時間の隙間
+
   .MembershipLocationPlayerInfoTime
     white-space: nowrap
 
@@ -87,7 +93,7 @@ export default {
   +IS_HORIZONTAL
     .MembershipLocationPlayerInfo
       max-width: var(--sp_stand_piece_w)
-      line-height: 100%
+      line-height: 110%         // 元々100%にしていたくっつきすぎな印象がある
 
   // 縦幅がわりと自由につかえるので隙間をあける
   +IS_VERTICAL
