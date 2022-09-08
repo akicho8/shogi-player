@@ -1,0 +1,9 @@
+@import "bulma_init.scss"
+
+@import "~bulma"
+@import "~buefy/src/scss/buefy"
+
+// shogi-player 側のスタイルを読み込む
+// shogi-player 側の assets に届かないので仕方なく $sp_assets_dir をいれてごまかしている
+$sp_assets_dir: "../../node_modules/shogi-player/assets"
+@import "shogi-player/components/ShogiPlayer.sass"
