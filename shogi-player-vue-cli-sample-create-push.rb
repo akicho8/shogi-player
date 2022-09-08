@@ -22,7 +22,7 @@ class App
     Capybara.current_driver = :selenium_chrome
     Capybara.visit("http://0.0.0.0:3100/")
     Capybara.current_window.resize_to(800, 900)
-    Capybara.save_screenshot("application")
+    Capybara.save_screenshot("application.png")
   end
 
   def readme_output
