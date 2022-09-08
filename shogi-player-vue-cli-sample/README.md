@@ -1,6 +1,6 @@
 # shogi-player-vue-cli-sample
 
-<p><a href="https://akicho8.github.io/shogi-player/"><img src="https://raw.githubusercontent.com/akicho8/shogi-player/shogi-player-vue-cli-sample/main/shogi-player/application.png" height="640" /></a></p>
+<p><a href="https://akicho8.github.io/shogi-player/"><img src="https://github.com/akicho8/shogi-player/raw/master/shogi-player-vue-cli-sample/application.png" height="640" /></a></p>
 
 これは [shogi-player](https://akicho8.github.io/shogi-player/) を vue cli で使うサンプルです
 
