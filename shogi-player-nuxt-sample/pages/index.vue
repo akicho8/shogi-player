@@ -1,9 +1,9 @@
 <template lang="pug">
-.SpSample.section
+.IndexApp.section
   .is-flex.is-justify-content-center
     .MyShogiPlayerContainer
       ShogiPlayer(
-        sp_run_mode="play_mode"
+        sp_run_mode="view_mode"
         sp_layout="is_horizontal"
         sp_controller="is_controller_on"
         sp_slider="is_slider_on"
@@ -18,7 +18,7 @@
 import ShogiPlayer from "shogi-player/components/ShogiPlayer.vue"
 
 export default {
-  name: "SpSample",
+  name: "IndexApp",
   components: {
     ShogiPlayer,
   },
@@ -26,11 +26,11 @@ export default {
 </script>
 
 <style lang="sass">
-.SpSample
+.IndexApp
   // ShogiPlayer は常に横100%まで広がるので外側で大きさを調整する
   .MyShogiPlayerContainer
     +mobile
       width: 100%
     +tablet
-      width: 80vmin
+      width: 70vmin
 </style>
