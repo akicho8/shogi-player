@@ -19,6 +19,7 @@ $ cd ~/src
 $ NODENV_VERSION=12.22.0 npx create-nuxt-app shogi-player-nuxt-sample
 # create-nuxt-app v3.7.1
 
+# 次の通りに選択する
 # | 項目                 | 選択                     |
 # |----------------------|--------------------------|
 # | Project name         | shogi-player-nuxt-sample |

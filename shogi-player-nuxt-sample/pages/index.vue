@@ -1,6 +1,7 @@
 <template lang="pug">
 .IndexApp.section
-  .is-flex.is-justify-content-center
+  .is-flex.is-flex-direction-column.is-align-items-center
+    NuxtLogo
     .MyShogiPlayerContainer
       ShogiPlayer(
         sp_run_mode="view_mode"
@@ -32,5 +33,5 @@ export default {
     +mobile
       width: 100%
     +tablet
-      width: 70vmin
+      width: 60vmin
 </style>

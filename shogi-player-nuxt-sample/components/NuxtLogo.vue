@@ -4,8 +4,8 @@
   </svg>
 </template>
 
-<style>
-.nuxt-logo {
-  height: 180px;
-}
+<style lang="sass">
+.nuxt-logo
+  height: 64px
+  margin: 16px
 </style>
