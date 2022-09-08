@@ -13,6 +13,9 @@ class App
     Dir.chdir(Pathname("~/src/shogi-player/shogi-player-vue-cli-sample").expand_path)
     screen_shot
     readme_output
+    system "git add -A"
+    system "git commit -m '[chore] Update shogi-player-vue-cli-sample/*'"
+    system "git push"
   end
 
   def screen_shot

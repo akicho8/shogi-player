@@ -12,19 +12,21 @@
 
 <script>
 /* eslint-disable */
-// window.Howl, window.Howler を定義することで shogi-player 側で音を出せる
+// サウンド再生用のライブラリ Howler を window に登録する
+// shogi-player 側では次の条件で駒移動時の音が出る
+//   1. window.Howl 等が定義されている
+//   2. コンポンーネントに :sp_sound_enabled="true" の引数がある
 import { Howl, Howler } from "howler"
 /* eslint-enable */
 
-import Vue from "vue"
-
 // Buefy
 // これは全体で使うことになるので本当は index.js で読み込んだ方がよい
+import Vue from "vue"
 import Buefy from "buefy"
 import "buefy/dist/buefy.css"
 Vue.use(Buefy)
 
-// 本体
+// shogi-player 本体
 import ShogiPlayer from "shogi-player/components/ShogiPlayer.vue"
 
 export default {
@@ -39,15 +41,16 @@ export default {
 </script>
 
 <style lang="sass">
-// ShogiPlayer のスタイル
-// $sp_assets_dir: "shogi-player/assets"
+// ShogiPlayer のスタイルを読み込む
+// できれば $sp_assets_dir は取りたい
+// 本当は ShogiPlayer.sass からの相対パスで assets の場所が指定できればいいけどわからないので新たに設定してもらう形にしている
 $sp_assets_dir: "shogi-player/assets"
 @import "shogi-player/components/ShogiPlayer.sass"
 
-// これは public/index.html で読み込んだ方がいいかもしれない
+// これは public/index.html で普通に読み込んだ方がいい
 @import url("https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css")
 
-// +mobile などを使いたいため
+// このあとで +mobile などを使いたいため
 @import "~bulma/sass/utilities/_all"
 
 // ShogiPlayer は常に横100%まで広がるので外側で大きさを調整する
