@@ -4,13 +4,6 @@
 
 これは [shogi-player](https://akicho8.github.io/shogi-player/) を Nuxt.js で使うサンプルです
 
-## このサンプルの実行方法
-
-```shell
-yarn
-yarn dev --open --port 3200
-```
-
 ## 最初の段階の構築手順
 
 ```shell
@@ -44,6 +37,11 @@ $ nodenv local 12.22.0
 
 $ yarn add --dev @nuxtjs/style-resources
 $ yarn add shogi-player
+```
 
-$ yarn dev --open --port 3200
+## このサンプルの実行方法
+
+```shell
+yarn
+yarn dev --open --port 3200
 ```
