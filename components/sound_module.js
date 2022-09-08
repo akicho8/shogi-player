@@ -15,7 +15,6 @@ export const sound_module = {
     sp_sound_enabled:      { type: Boolean, default: false, }, // サウンド
     sp_sound_body_changed: { type: Boolean, default: true,  }, // sp_body をあとから変更して内容が変わったときに音を出すか？
     sp_sound_volume:       { type: Number,  default: 0.5,   }, // ボリューム
-    // sp_sound_howl:         { type: Object,  default: null,  }, // Howl を渡してもらう
   },
   methods: {
     sound_play(key, options = {}) {

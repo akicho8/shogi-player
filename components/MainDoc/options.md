@@ -50,13 +50,12 @@
 | `foul_piece_warp`                           | 駒ワープ                                                 |                                                                |   |
 | `foul_death_king`                           | 王手放置                                                 |                                                                |   |
 | `foul_dead_soldier_put`                     | 打った駒が死に駒                                         |                                                                |   |
-| `sp_board_piece_back_user_style`            | ?                                                        |                                                                |   |
-| `sp_board_piece_back_user_class`            | ?                                                        |                                                                |   |
+| `sound_play`                                | 音を慣らす直前に piece_put か flip_sound が来る          | 独自の音を慣らしたいとか制御したいとき用                                                               |   |
 
 ## Slot
 
-| 名前      | 引数           | 場所                                   |
-|-----------|----------------|----------------------------------------|
+| 名前        | 引数               | 場所                                      |
+|-------------|--------------------|-------------------------------------------|
 | `sfen_part` | `sfen`, `mediator` | sp_sfen_show のときに表示する sfen の部分 |
 
 ## 内部変数 (読み取り専用)
