@@ -1,7 +1,5 @@
 # shogi-player
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/4de340004a69572e32a0/maintainability)](https://codeclimate.com/github/akicho8/shogi-player/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/4de340004a69572e32a0/test_coverage)](https://codeclimate.com/github/akicho8/shogi-player/test_coverage)
 [![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
 [![GitHub version](https://badge.fury.io/gh/akicho8%2Fshogi-player.svg)](https://badge.fury.io/gh/akicho8%2Fshogi-player)
 
