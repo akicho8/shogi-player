@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 const BUILD_VERSION = dayjs().format("YYYY-MM-DD HH:mm:ss")
-const SITE_DESC = "将棋盤のライブラリです"
+const SITE_DESC = "将棋の棋譜再生・対局・盤面編集等が可能なVue.js用将棋盤コンポーネント"
 
 export default {
   // debug: true,
