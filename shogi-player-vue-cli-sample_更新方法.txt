@@ -1,3 +1,6 @@
-shogi-player-vue-cli-sample-create.sh でまるごと生成すると http://localhost:3100/ が起動する
-shogi-player-vue-cli-sample-create-push.rb で上書きで README.md を生成してプッシュ
+shogi-player-vue-cli-sample-create.sh
+でまるごと生成すると http://localhost:3100/ が起動する
+そこで
+shogi-player-vue-cli-sample-create-push.rb
+を実行すると上書きで README.md を生成しスクショをとってプッシュ
 
