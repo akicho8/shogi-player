@@ -56,8 +56,6 @@ export default {
 
   mixins: [
     root_support,
-
-    // ここで直接 require("./xxx.js"), とは書けないので注意
     app_chore,
     app_vector,
     navi_module,
@@ -74,39 +72,36 @@ export default {
   ],
 
   props: {
-    sp_board_dimension_w: { type: Number, default: 9,                       }, // 盤のセル数(W)
-    sp_board_dimension_h: { type: Number, default: 9,                       }, // 盤のセル数(H)
-    sp_layout:            { type: String, default: "is_vertical",           }, // レイアウト is_(vertical|horizontal)
-    sp_hpos:              { type: String, default: "is_hcentered",          }, // DEPRECATE
-    sp_vpos:              { type: String, default: "is_vcentered",          }, // DEPRECATE
-    sp_fullheight:        { type: String, default: "is_fullheight_off",     }, // DEPRECATE
-    sp_balloon:           { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
-    sp_layer:             { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
-    sp_board_shadow:      { type: String, default: "is_board_shadow_drop",  }, // 盤の影適用方法 is_board_shadow_(drop|box|none)
-    sp_blink:             { type: String, default: "is_blink_off",          }, // 最終手の表現方法 is_blink_(on|off)
-    sp_pi_variant:        { type: String, default: "is_pi_variant_a",    }, // 駒の種類
-    sp_bg_variant:        { type: String, default: "is_bg_variant_none",    }, // 盤の種類
-    sp_mobile_fit:        { type: String, default: "is_mobile_fit_on",      }, // DEPRECATE
-    sp_mobile_vertical:   { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
-    sp_location_behavior: { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
-    sp_debug_mode:             { type: String, default: "is_debug_mode_off",          }, // デバッグモード
-    sp_sfen_show:         { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
-    sp_overlay_nav:       { type: String, default: "is_overlay_nav_off",    }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
-    sp_turn:              { type: Number, default: -1,                      }, // 局面(手数)
-    sp_run_mode:          { type: String, default: "view_mode",             }, // モード
-
-    sp_body:              { type: String, default: null,                    }, // 棋譜 KIF or SFEN
-    sp_player_info:       { type: Object, default: null,                    }, // 対局者名と時間
-    sp_comment:           { type: String, default: "is_comment_on",         }, // KIFのコメントを表示する
-
-    sp_player_click_handle:   { type: Function, default: null, },              // 名前(時間を含む)をタップしたときに実行する
-    sp_location_click_handle: { type: Function, default: null, },              // ☗☖をタップしたときに実行する
-    sp_board_click_handle:    { type: Function, default: null, },              // 盤をタップしたときに実行する(駒よりも優先)
-
-    sp_board_piece_back_user_style:        { type: Function, default: null, }, // セルのスタイルを決める処理
-    sp_board_piece_back_user_class:        { type: Function, default: null, }, // セルのクラスを決める処理
-    sp_board_cell_left_click_user_handle:  { type: Function, default: null, }, // セルタップ時の処理(クリック後に呼ぶ)
-    sp_board_cell_pointerdown_user_handle: { type: Function, default: null, }, // セルタップ時の処理(クリックした瞬間に呼ぶ)
+    sp_board_dimension_w:                  { type: Number, default: 9,                       }, // 盤のセル数(W)
+    sp_board_dimension_h:                  { type: Number, default: 9,                       }, // 盤のセル数(H)
+    sp_layout:                             { type: String, default: "is_vertical",           }, // レイアウト is_(vertical|horizontal)
+    sp_hpos:                               { type: String, default: "is_hcentered",          }, // DEPRECATE
+    sp_vpos:                               { type: String, default: "is_vcentered",          }, // DEPRECATE
+    sp_fullheight:                         { type: String, default: "is_fullheight_off",     }, // DEPRECATE
+    sp_balloon:                            { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
+    sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
+    sp_board_shadow:                       { type: String, default: "is_board_shadow_drop",  }, // 盤の影適用方法 is_board_shadow_(drop|box|none)
+    sp_blink:                              { type: String, default: "is_blink_off",          }, // 最終手の表現方法 is_blink_(on|off)
+    sp_pi_variant:                         { type: String, default: "is_pi_variant_a",       }, // 駒の種類
+    sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
+    sp_mobile_fit:                         { type: String, default: "is_mobile_fit_on",      }, // DEPRECATE
+    sp_mobile_vertical:                    { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
+    sp_location_behavior:                  { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
+    sp_debug_mode:                         { type: String, default: "is_debug_mode_off",     }, // デバッグモード
+    sp_sfen_show:                          { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
+    sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
+    sp_turn:                               { type: Number, default: -1,                      }, // 局面(手数)
+    sp_run_mode:                           { type: String, default: "view_mode",             }, // モード
+    sp_body:                               { type: String, default: null,                    }, // 棋譜 KIF or SFEN
+    sp_player_info:                        { type: Object, default: null,                    }, // 対局者名と時間
+    sp_comment:                            { type: String, default: "is_comment_on",         }, // KIFのコメントを表示する
+    sp_player_click_handle:                { type: Function, default: null,                  }, // 名前(時間を含む)をタップしたときに実行する
+    sp_location_click_handle:              { type: Function, default: null,                  }, // ☗☖をタップしたときに実行する
+    sp_board_click_handle:                 { type: Function, default: null,                  }, // 盤をタップしたときに実行する(駒よりも優先)
+    sp_board_piece_back_user_style:        { type: Function, default: null,                  }, // セルのスタイルを決める処理
+    sp_board_piece_back_user_class:        { type: Function, default: null,                  }, // セルのクラスを決める処理
+    sp_board_cell_left_click_user_handle:  { type: Function, default: null,                  }, // セルタップ時の処理(クリック後に呼ぶ)
+    sp_board_cell_pointerdown_user_handle: { type: Function, default: null,                  }, // セルタップ時の処理(クリックした瞬間に呼ぶ)
   },
 
   components: {
@@ -122,12 +117,11 @@ export default {
 
   data() {
     return {
-      new_debug_mode:    this.sp_debug_mode,
+      new_debug_mode: this.sp_debug_mode,
       new_run_mode: this.sp_run_mode,
-
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       mediator: null,           // 局面管理
-      turn_edit_p: false,         // N手目編集中
+      turn_edit_p: false,       // N手目編集中
       update_counter: 0,
       setting_modal_p: false,
       env: process.env.NODE_ENV,
@@ -139,12 +133,10 @@ export default {
     if (this.view_p) {
       this.mediator_setup(this.sp_turn)
     }
-
     if (this.play_p) {
       this.mediator_setup(this.sp_turn)
       this.play_mode_setup_from("view_mode")
     }
-
     if (this.edit_p) {
       if (this.sp_preset_key) {
         this.mediator_setup_by_preset(this.sp_preset_key) // 駒箱に「玉」を乗せたいため
