@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { support } from "./support.js"
+import { support } from "../support.js"
 
 export default {
   name: "MembershipLocationPlayerInfo",
@@ -22,7 +22,9 @@ export default {
     click_handle() {
       if (this.TheSp.sp_player_click_handle) {
         this.TheSp.sp_player_click_handle(this.location, this.one_side_info)
-        // this.$emit("player_info_click", this.location, this.one_side_info)
+        if (false) {
+          this.$emit("player_info_click", this.location, this.one_side_info)
+        }
       }
     },
   },
@@ -49,7 +51,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "../support.sass"
 .ShogiPlayerGround
   .MembershipLocationPlayerInfo
     font-size: $size-7

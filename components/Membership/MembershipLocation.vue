@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { support } from "./support.js"
+import { support } from "../support.js"
 import MembershipLocationMark from "./MembershipLocationMark.vue"
 
 export default {
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "../support.sass"
 .ShogiPlayerGround
   &.is_layer_on
     .MembershipLocation

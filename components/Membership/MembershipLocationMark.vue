@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { support } from "./support.js"
+import { support } from "../support.js"
 
 export default {
   name: "MembershipLocationMark",
@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "../support.sass"
 .ShogiPlayerGround
   +defvar(sp_location_mark_inactive_rate, 0.5) // 手番ではないときの☗サイズの倍率
 
@@ -65,11 +65,11 @@ export default {
 
   .is_white
     .MembershipLocationMarkTexture
-      background-image: url("../assets/location/location_white.svg")
+      background-image: url("../../assets/location/location_white.svg")
 
   .is_black
     .MembershipLocationMarkTexture
-      background-image: url("../assets/location/location_black.svg")
+      background-image: url("../../assets/location/location_black.svg")
 
   .is_position_north
     .MembershipLocationMarkTexture

@@ -8,9 +8,10 @@
 
 <script>
 import _ from "lodash"
-import { support } from "./support.js"
-import MembershipLocation from "./MembershipLocation.vue"
-import MembershipStand from "./MembershipStand.vue"
+import { support } from "../support.js"
+
+import MembershipLocation           from "./MembershipLocation.vue"
+import MembershipStand              from "./MembershipStand.vue"
 import MembershipLocationPlayerInfo from "./MembershipLocationPlayerInfo.vue"
 
 export default {
@@ -68,7 +69,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "../support.sass"
 
 .ShogiPlayerGround
   .Membership

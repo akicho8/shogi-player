@@ -1,20 +1,21 @@
 <template lang="pug">
 .ShogiPlayerBody(:class="component_class")
-  Membership( position="north" :location="location_of('white')")
+  Membership(position="north" :location="location_of('white')")
   AspectRatioFixedBlock
-    OverlayNavigations()
-    MainBoard()
-  Membership( position="south" :location="location_of('black')")
+    OverlayNavigations
+    MainBoard
+  Membership(position="south" :location="location_of('black')")
 </template>
 
 <script>
-import Membership from "./Membership.vue"
-import AspectRatioFixedBlock from "./AspectRatioFixedBlock.vue"
-import MainBoard from "./MainBoard.vue"
-import OverlayNavigations from "./OverlayNavigations.vue"
+import { support } from "./support.js"
+
 import { Location } from "./models/location.js"
 
-import { support } from "./support.js"
+import Membership            from "./Membership/Membership.vue"
+import AspectRatioFixedBlock from "./AspectRatioFixedBlock.vue"
+import MainBoard             from "./MainBoard.vue"
+import OverlayNavigations    from "./OverlayNavigations.vue"
 
 export default {
   name: "ShogiPlayerBody",
