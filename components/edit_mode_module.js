@@ -832,7 +832,7 @@ export const edit_mode_module = {
       const PieceTexture     = this.el_create(["PieceTexture"])
       const PieceTextureSelf = this.el_create(["PieceTextureSelf", ...soldier.css_class_list])
 
-      PieceTap.classList.add(soldier.location.flip_if(this.base.fliped).position_key)
+      PieceTap.classList.add(soldier.location.flip_if(this.fliped).position_key)
 
       PieceTexture.appendChild(PieceTextureSelf)
       PieceTap.appendChild(PieceTexture)

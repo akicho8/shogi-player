@@ -1,17 +1,17 @@
 <template lang="pug">
-.NavigateBlock(v-if="base.inside_navigate_p")
+.NavigateBlock(v-if="TheSp.inside_navigate_p")
   .NavigateBlockInside
-    .buttons.are-small.has-addons.is-centered.is-paddingless(v-if="base.inside_controller_p")
-      template(v-if="base.inside_controller_p")
-        button.button.first(    ref="first"    @click.stop.prevent="base.move_to_first"):             b-icon(icon="menu-left")
-        button.button.previous( ref="previous" @click.stop.prevent="base.relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
-        button.button.next(     ref="next"     @click.stop.prevent="base.relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
-        button.button.last(     ref="last"     @click.stop.prevent="base.move_to_last"):              b-icon(icon="menu-right")
+    .buttons.are-small.has-addons.is-centered.is-paddingless(v-if="TheSp.inside_controller_p")
+      template(v-if="TheSp.inside_controller_p")
+        button.button.first(    ref="first"    @click.stop.prevent="TheSp.move_to_first"):             b-icon(icon="menu-left")
+        button.button.previous( ref="previous" @click.stop.prevent="TheSp.relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
+        button.button.next(     ref="next"     @click.stop.prevent="TheSp.relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
+        button.button.last(     ref="last"     @click.stop.prevent="TheSp.move_to_last"):              b-icon(icon="menu-right")
       template(v-if="false")
-        button.button.flip(                    @click.stop.prevent="base.board_flip_toggle"):            b-icon(icon="swap-vertical" size="is-small")
-      template(v-if="base.sp_setting === 'is_setting_on'")
-        button.button.setting(                 @click.stop.prevent="base.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
-    TurnSliderBlock(:base="base" ref="TurnSliderBlock")
+        button.button.flip(                    @click.stop.prevent="TheSp.board_flip_toggle"):            b-icon(icon="swap-vertical" size="is-small")
+      template(v-if="TheSp.sp_setting === 'is_setting_on'")
+        button.button.setting(                 @click.stop.prevent="TheSp.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
+    TurnSliderBlock( ref="TurnSliderBlock")
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default {
     TurnSliderBlock,
   },
   mounted() {
-    this.base.$NavigateBlock = this // どこからでも refs するための荒技
+    this.TheSp.$NavigateBlock = this // どこからでも refs するための荒技
   },
 }
 </script>

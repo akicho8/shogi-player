@@ -2,8 +2,8 @@
 .PromoteSelectModal(:class="position_key")
   .OverlayBackground
   .pieces_block(ref="pieces_block")
-    PieceTap(:base="base" :piece_texture_class="piece_texture_class(true)"  @click.native="base.promotable_piece_moved2(true)")
-    PieceTap(:base="base" :piece_texture_class="piece_texture_class(false)" @click.native="base.promotable_piece_moved2(false)")
+    PieceTap(:piece_texture_class="piece_texture_class(true)"  @click.native="TheSp.promotable_piece_moved2(true)")
+    PieceTap(:piece_texture_class="piece_texture_class(false)" @click.native="TheSp.promotable_piece_moved2(false)")
 </template>
 
 <script>
@@ -35,16 +35,16 @@ export default {
   computed: {
     // 対象の駒
     soldier() {
-      return this.base.dialog_soldier
+      return this.TheSp.dialog_soldier
     },
     // 南北どちら側にあるか
     position_key() {
-      return this.soldier.location.flip_if(this.base.fliped).position_key
+      return this.soldier.location.flip_if(this.TheSp.fliped).position_key
     },
     // 対処のセルの中央の座標
     cell_v() {
       const key = this.soldier.place.css_place_key      // "place_2_3"
-      const el = this.base.$el.querySelector("." + key) // querySelector(".place_2_3")
+      const el = this.TheSp.$el.querySelector("." + key) // querySelector(".place_2_3")
       const rc = el.getBoundingClientRect()             // ビューポートの左上を基準とした座標を取得
       const x = rc.left + rc.width  / 2                 // 本当は rc.x を使いたいが iOS11未満の Safari にはない
       const y = rc.top  + rc.height / 2

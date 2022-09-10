@@ -1,15 +1,15 @@
 <template lang="pug">
 .ShogiPlayerWidth
-  PromoteSelectModal(:base="base" v-if="base.dialog_soldier")
-  OpDisabledBlock(:base="base")
-  EditToolBlock(:base="base")
-  TurnShowOrEdit(:base="base")
+  PromoteSelectModal( v-if="TheSp.dialog_soldier")
+  OpDisabledBlock()
+  EditToolBlock()
+  TurnShowOrEdit()
   .ShogiPlayerTransformBlock
-    ShogiPlayerBody(:base="base" ref="ShogiPlayerBody")
-  PieceBox(:base="base")
-  NavigateBlock(:base="base")
-  SfenShowBlock(:base="base")
-  CommentBlock(:base="base")
+    ShogiPlayerBody( ref="ShogiPlayerBody")
+  PieceBox()
+  NavigateBlock()
+  SfenShowBlock()
+  CommentBlock()
 </template>
 
 <script>

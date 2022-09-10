@@ -1,16 +1,10 @@
 <template lang="pug">
 .ShogiPlayer(:class="component_class")
-  //- OpDisabledBlock(:base="base")
-
   i.fas.fa-spinner.fa-pulse(v-if="!mediator")
-
-  ShogiPlayerGround(:base="base" ref="ShogiPlayerGround")
-
-  DebugBlock(:base="base")
-
+  ShogiPlayerGround(ref="ShogiPlayerGround")
+  DebugBlock
   b-modal(:active.sync="setting_modal_p" has-modal-card v-if="mediator")
-    SettingModal(:base="base")
-
+    SettingModal
   pre(v-if="debug_p") {{$props}}
 </template>
 
@@ -385,7 +379,7 @@ export default {
       //   black -> is_position_south
       // もし反転しているなら逆になる
       if (soldier) {
-        list.push(soldier.location.flip_if(this.base.fliped).position_key)
+        list.push(soldier.location.flip_if(this.fliped).position_key)
       }
 
       if (this.sp_board_piece_back_user_class) {
@@ -409,13 +403,12 @@ export default {
   },
 
   computed: {
-    base()           { return this                              },
-    location_black() { return Location.fetch("black")           },
-    location_white() { return Location.fetch("white")           },
-    view_p()         { return this.new_run_mode === "view_mode" },
-    play_p()         { return this.new_run_mode === "play_mode" },
-    edit_p()         { return this.new_run_mode === "edit_mode" },
-    debug_p()        { return this.new_debug_mode === "is_debug_mode_on"  },
+    location_black() { return Location.fetch("black")                    },
+    location_white() { return Location.fetch("white")                    },
+    view_p()         { return this.new_run_mode === "view_mode"          },
+    play_p()         { return this.new_run_mode === "play_mode"          },
+    edit_p()         { return this.new_run_mode === "edit_mode"          },
+    debug_p()        { return this.new_debug_mode === "is_debug_mode_on" },
 
     turn_base()       { return this.delegate_to_mediator("turn_base")       }, // 表示する上での開始手数で普通は 0
     turn_offset()     { return this.delegate_to_mediator("turn_offset")     }, // 手数のオフセット

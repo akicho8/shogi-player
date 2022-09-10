@@ -1,19 +1,19 @@
 <template lang="pug">
 .TurnShowOrEdit.is-unselectable(v-if="component_alive_p")
-  template(v-if="base.turn_edit_p")
-    b-input(size="is-small" type="number" v-model.number="base.turn_edit_value" @input="base.turn_edit_value_set" @blur="blur_handle" ref="turn_edit_input")
+  template(v-if="TheSp.turn_edit_p")
+    b-input(size="is-small" type="number" v-model.number="TheSp.turn_edit_value" @input="TheSp.turn_edit_value_set" @blur="blur_handle" ref="turn_edit_input")
   template(v-else)
     // is-inline-block にすることで縦の margin が効く
     .SpTurnText.is-inline-block(@click.stop.prevent="turn_edit_handle")
-      template(v-if="base.view_p")
-        | {{base.mediator.current_turn_label}}
-      template(v-if="base.play_p")
-        template(v-if="base.turn_base === 0")
-          | {{base.turn_offset}}
-        template(v-if="base.turn_base >= 1")
-          | {{base.turn_base}}
-          template(v-if="base.turn_offset >= 1")
-            | +{{base.turn_offset}}
+      template(v-if="TheSp.view_p")
+        | {{TheSp.mediator.current_turn_label}}
+      template(v-if="TheSp.play_p")
+        template(v-if="TheSp.turn_base === 0")
+          | {{TheSp.turn_offset}}
+        template(v-if="TheSp.turn_base >= 1")
+          | {{TheSp.turn_base}}
+          template(v-if="TheSp.turn_offset >= 1")
+            | +{{TheSp.turn_offset}}
         | 手
 </template>
 
@@ -25,16 +25,16 @@ export default {
   mixins: [support],
   methods: {
     blur_handle() {
-      this.base.turn_edit_p = false
+      this.TheSp.turn_edit_p = false
     },
     turn_edit_handle() {
-      this.base.turn_edit_handle()
+      this.TheSp.turn_edit_handle()
       this.$nextTick(() => this.$refs.turn_edit_input.focus())
     },
   },
   computed: {
     component_alive_p() {
-      return this.base.mediator && this.base.sp_summary === "is_summary_on" && (this.base.view_p || this.base.play_p)
+      return this.TheSp.mediator && this.TheSp.sp_summary === "is_summary_on" && (this.TheSp.view_p || this.TheSp.play_p)
     },
   },
 }

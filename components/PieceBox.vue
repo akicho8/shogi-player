@@ -1,21 +1,21 @@
 <template lang="pug">
 .PieceBox(
-  v-if="base.edit_p"
+  v-if="TheSp.edit_p"
   :class="component_class"
-  @click.stop.prevent="base.piece_box_other_click"
-  @click.right.prevent="base.hold_cancel"
+  @click.stop.prevent="TheSp.piece_box_other_click"
+  @click.right.prevent="TheSp.hold_cancel"
   )
   // PieceBoxPieces を is-overlay にしないとPieceBoxPiecesの背景にPieceBoxTextureの色の非透明度が影響してしまう
   .PieceBoxTexture.is-overlay
   .PieceBoxPieces.is-overlay
     .PieceWithCount(
-      v-for="[piece, count] in base.mediator.piece_box_realize()"
-      @click.stop.prevent="base.piece_box_piece_click(piece, $event)"
-      @mouseover="base.piece_box_mouseover_handle(piece, $event)"
-      @mouseleave="base.mouseleave_handle"
+      v-for="[piece, count] in TheSp.mediator.piece_box_realize()"
+      @click.stop.prevent="TheSp.piece_box_piece_click(piece, $event)"
+      @mouseover="TheSp.piece_box_mouseover_handle(piece, $event)"
+      @mouseleave="TheSp.mouseleave_handle"
       )
       PieceTap(
-        :base="base"
+        
         :class="piece_box_piece_tap_class(piece)"
         :piece_texture_class="piece_box_piece_texture_class(piece)"
         :count="count"
@@ -36,14 +36,14 @@ export default {
     piece_box_piece_tap_class(piece) {
       let list = []
 
-      if (this.base.lifted_p) {
+      if (this.TheSp.lifted_p) {
         list.push("piece_lifted_hover_reaction")
       }
 
-      if (this.base.piece_box_have_p(piece)) {
+      if (this.TheSp.piece_box_have_p(piece)) {
         list.push("lifted_from_p")
-      } else if (this.base.edit_p) {
-        if (!this.base.lifted_p) {
+      } else if (this.TheSp.edit_p) {
+        if (!this.TheSp.lifted_p) {
           list.push("selectable_p")
         }
       }
@@ -70,7 +70,7 @@ export default {
   computed: {
     component_class() {
       const list = []
-      if (this.base.lifted_p) {
+      if (this.TheSp.lifted_p) {
         list.push("frame_boder_if_hover")
       }
       return list

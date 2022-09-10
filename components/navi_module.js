@@ -199,8 +199,8 @@ export const navi_module = {
     },
 
     navigate_block_element_refs(key) {
-      if (this.base.$NavigateBlock) {
-        return this.base.$NavigateBlock.$refs[key]
+      if (this.$NavigateBlock) {
+        return this.$NavigateBlock.$refs[key]
       }
     },
 

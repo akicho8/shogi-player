@@ -15,17 +15,17 @@ export default {
   methods: {
     click_handle() {
       if (this.flipable) {
-        this.base.board_flip_toggle()
+        this.TheSp.board_flip_toggle()
       }
-      if (this.base.sp_location_click_handle) {
-        this.base.sp_location_click_handle(this.location)
+      if (this.TheSp.sp_location_click_handle) {
+        this.TheSp.sp_location_click_handle(this.location)
       }
     },
   },
   computed: {
     component_class() {
       return {
-        "is-clickable": this.base.sp_location_click_handle || this.flipable
+        "is-clickable": this.TheSp.sp_location_click_handle || this.flipable
       }
     },
     // inactiveになったとき影が残ってしまう問題があった。
@@ -39,10 +39,10 @@ export default {
       ].join(".")
     },
     is_turn_key() {
-      return this.base.mediator.current_location === this.location ? "active" : "inactive"
+      return this.TheSp.mediator.current_location === this.location ? "active" : "inactive"
     },
     flipable() {
-      return this.base.sp_location_behavior === "is_location_flip_on"
+      return this.TheSp.sp_location_behavior === "is_location_flip_on"
     },
   },
 }

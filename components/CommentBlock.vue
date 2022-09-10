@@ -1,5 +1,5 @@
 <template lang="pug">
-.CommentBlock.columns(v-if="base.sp_comment === 'is_comment_on' && comments_pack && current_comments")
+.CommentBlock.columns(v-if="TheSp.sp_comment === 'is_comment_on' && comments_pack && current_comments")
   .column
     .message.is-info.has-text-left
       .message-body
@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     _()                { return _                                       },
-    mediator()         { return this.base.mediator                      },
+    mediator()         { return this.TheSp.mediator                      },
     comments_pack()    { return this.mediator.data_source.comments_pack },
     current_comments() { return this.mediator.current_comments          },
   },

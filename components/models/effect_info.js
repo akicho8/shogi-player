@@ -9,13 +9,13 @@ import MemoryRecord from "js-memory-record"
 import { Random } from "./random.js"
 
 class FireBall {
-  static run(base, params = {}) {
-    const object = new this(base, params)
+  static run(TheSp, params = {}) {
+    const object = new this(TheSp, params)
     object.run()
   }
 
-  constructor(base, params) {
-    this.base = base
+  constructor(TheSp, params) {
+    this.TheSp = TheSp
     this.params = {...params}
   }
 
@@ -23,10 +23,10 @@ class FireBall {
     this.current = document.createElement("div")
     this.current.classList.add("fireball", this.params.css_class)
     this.current.style.transitionDuration = `${this.params.duration}ms`
-    this.base.body_el.appendChild(this.current)
+    this.TheSp.body_el.appendChild(this.current)
 
     // 原点
-    const rc = this.base.from_rc
+    const rc = this.TheSp.from_rc
     const cx = rc.left + rc.width  / 2
     const cy = rc.top  + rc.height / 2
 
@@ -50,7 +50,7 @@ class FireBall {
   }
 
   current_destroy() {
-    this.base.body_el.removeChild(this.current)
+    this.TheSp.body_el.removeChild(this.current)
   }
 }
 

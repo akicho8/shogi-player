@@ -1,8 +1,8 @@
 <template lang="pug">
 .Membership(:class="component_class" v-if="component_show_p" @click.capture="click_handle")
-  MembershipLocation(           :base="base" :location="location")
-  MembershipLocationPlayerInfo( :base="base" :location="location")
-  MembershipStand(              :base="base" :location="location")
+  MembershipLocation(            :location="location")
+  MembershipLocationPlayerInfo(  :location="location")
+  MembershipStand(               :location="location")
   slot
 </template>
 
@@ -32,7 +32,7 @@ export default {
     // capture にしなかったら駒台の駒を持ち替えることができる
     // しかし一見便利なように見えて駒を離せなくなるので持ち替えはやらない方がよい
     click_handle(e) {
-      if (this.base.membership_click_handle(this.location, e)) {
+      if (this.TheSp.membership_click_handle(this.location, e)) {
         e.preventDefault()
         e.stopPropagation()
       }
@@ -44,7 +44,7 @@ export default {
       const list = []
       list.push(`is_position_${this.position}`) // 一番上で定義してあるので子には渡す必要なし
       list.push(`is_${this.location.key}`)
-      if (this.base.mediator.current_location === this.location) {
+      if (this.TheSp.mediator.current_location === this.location) {
         list.push("is_turn_active")
       } else {
         list.push("is_turn_inactive")
@@ -54,14 +54,14 @@ export default {
 
     // 持駒が空なら駒台を表示しない
     component_show_p() {
-      if (this.base.sp_hidden_if_piece_stand_blank && _.isEmpty(this.hold_pieces)) {
+      if (this.TheSp.sp_hidden_if_piece_stand_blank && _.isEmpty(this.hold_pieces)) {
         return false
       }
       return true
     },
 
     hold_pieces() {
-      return this.base.mediator.realized_hold_pieces_of(this.location.flip_if(this.base.fliped).key)
+      return this.TheSp.mediator.realized_hold_pieces_of(this.location.flip_if(this.TheSp.fliped).key)
     },
   },
 }

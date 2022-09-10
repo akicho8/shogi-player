@@ -1,25 +1,25 @@
 <template lang="pug">
-.EditToolBlock(v-if="base.edit_p")
-  b-dropdown(v-model="base.new_preset_key")
+.EditToolBlock(v-if="TheSp.edit_p")
+  b-dropdown(v-model="TheSp.new_preset_key")
     //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
     .button.is-small(slot="trigger")
       b-icon(icon="apps" size="is-small")
-    b-dropdown-item(v-for="record in base.preset_info_values" :value="record.key" :key="record.key" @click="base.mediator_setup_by_preset(record)")
+    b-dropdown-item(v-for="record in TheSp.preset_info_values" :value="record.key" :key="record.key" @click="TheSp.mediator_setup_by_preset(record)")
       | {{record.name}}
     b-dropdown-item(separator)
     b-dropdown-item キャンセル
-  b-dropdown.mx-0(v-model="base.any_func_key" size="is-small")
+  b-dropdown.mx-0(v-model="TheSp.any_func_key" size="is-small")
     .button.is-small(slot="trigger")
       b-icon(icon="menu" size="is-small")
-    b-dropdown-item(v-for="e in base.AnyFuncInfo.values" :value="e.key" :key="e.key" @click="base.any_func_click_handle(e)")
+    b-dropdown-item(v-for="e in TheSp.AnyFuncInfo.values" :value="e.key" :key="e.key" @click="TheSp.any_func_click_handle(e)")
       | {{e.name}}
     b-dropdown-item(separator)
     b-dropdown-item キャンセル
-  b-button(@click.stop.prevent="base.fn_flip_all" icon-left="pan-vertical" size="is-small")
-  b-button(@click.stop.prevent="base.fn_flop"   icon-left="pan-horizontal" size="is-small")
-  b-button(@click.stop.prevent="base.init_location_toggle" size="is-small")
-    .is-size-7 {{base.init_location.name}}
-  b-button.has-text-weight-bold(@click.stop.prevent="base.shortcut_modal_show_handle" size="is-small") ?
+  b-button(@click.stop.prevent="TheSp.fn_flip_all" icon-left="pan-vertical" size="is-small")
+  b-button(@click.stop.prevent="TheSp.fn_flop"   icon-left="pan-horizontal" size="is-small")
+  b-button(@click.stop.prevent="TheSp.init_location_toggle" size="is-small")
+    .is-size-7 {{TheSp.init_location.name}}
+  b-button.has-text-weight-bold(@click.stop.prevent="TheSp.shortcut_modal_show_handle" size="is-small") ?
 </template>
 
 <script>

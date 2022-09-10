@@ -15,20 +15,19 @@
     // ・そこでもし背景に画像を配置したとすると、その上の敷き詰めた黒は透明でなければならない
     // ・つまり、黒を敷き詰める必要あるのと、画像盤の上は透明でないといけないことが両立できない
     table.BoardField
-      tr.BoardRow(v-for="(_, y) in base.sp_board_dimension_h")
+      tr.BoardRow(v-for="(_, y) in TheSp.sp_board_dimension_h")
         td.BoardColumn(
-          v-for="(_, x) in base.sp_board_dimension_w"
-          @pointerdown="base.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
-          @click.stop.prevent="base.board_cell_left_click(logical_xy(x, y), $event)"
-          @click.stop.prevent.right="base.board_cell_right_click(logical_xy(x, y), $event)"
-          @mouseover="base.board_mouseover_handle(logical_xy(x, y), $event)"
-          @mouseleave="base.mouseleave_handle"
+          v-for="(_, x) in TheSp.sp_board_dimension_w"
+          @pointerdown="TheSp.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
+          @click.stop.prevent="TheSp.board_cell_left_click(logical_xy(x, y), $event)"
+          @click.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), $event)"
+          @mouseover="TheSp.board_mouseover_handle(logical_xy(x, y), $event)"
+          @mouseleave="TheSp.mouseleave_handle"
           )
           PieceTap(
-            :base="base"
-            :class="base.board_piece_tap_class(logical_xy(x, y))"
-            :style="base.board_piece_back_style(logical_xy(x, y))"
-            :piece_texture_class="base.mediator.board_piece_fore_class(logical_xy(x, y))"
+            :class="TheSp.board_piece_tap_class(logical_xy(x, y))"
+            :style="TheSp.board_piece_back_style(logical_xy(x, y))"
+            :piece_texture_class="TheSp.mediator.board_piece_fore_class(logical_xy(x, y))"
             )
 </template>
 
@@ -45,21 +44,21 @@ export default {
     PieceTap,
   },
   beforeUpdate() {
-    this.base.$data._MainBoardRenderCount += 1
+    this.TheSp.$data._MainBoardRenderCount += 1
   },
   methods: {
     click_handle() {
-      if (this.base.sp_board_click_handle) {
-        this.base.sp_board_click_handle()
+      if (this.TheSp.sp_board_click_handle) {
+        this.TheSp.sp_board_click_handle()
       }
     },
 
     logical_xy(x, y) {
-      x = x + Board.dimension - this.base.sp_board_dimension_w
-      y = y + Board.dimension - this.base.sp_board_dimension_h
-      if (this.base.fliped) {
-        x = this.base.sp_board_dimension_w - x - 1
-        y = this.base.sp_board_dimension_h - y - 1
+      x = x + Board.dimension - this.TheSp.sp_board_dimension_w
+      y = y + Board.dimension - this.TheSp.sp_board_dimension_h
+      if (this.TheSp.fliped) {
+        x = this.TheSp.sp_board_dimension_w - x - 1
+        y = this.TheSp.sp_board_dimension_h - y - 1
       }
       return [x, y]
     },

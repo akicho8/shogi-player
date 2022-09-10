@@ -1,15 +1,15 @@
 <template lang="pug">
-.MembershipStand(:class="component_class" @click.right.stop.prevent="base.hold_cancel")
+.MembershipStand(:class="component_class" @click.right.stop.prevent="TheSp.hold_cancel")
   .MembershipStandTexture.is-overlay
   .MembershipStand2
     .PieceWithCount.is-flex(
       v-for="[piece, count] in hold_pieces"
-      @click.stop="base.piece_stand_piece_click(location, piece, false, $event)"
-      @mouseover="base.piece_stand_mouseover_handle(location, piece, $event)"
-      @mouseleave="base.mouseleave_handle"
+      @click.stop="TheSp.piece_stand_piece_click(location, piece, false, $event)"
+      @mouseover="TheSp.piece_stand_mouseover_handle(location, piece, $event)"
+      @mouseleave="TheSp.mouseleave_handle"
       )
       PieceTap(
-        :base="base"
+        
         :class="piece_tap_class(piece)"
         :piece_texture_class="piece_texture_class(piece)"
         :count="count"
@@ -35,7 +35,7 @@ export default {
 
   methods: {
     hold_piece_lifted_p(piece) {
-      return this.base.have_piece_location === this.location && this.base.have_piece === piece
+      return this.TheSp.have_piece_location === this.location && this.TheSp.have_piece === piece
     },
 
     piece_tap_class(piece) {
@@ -50,15 +50,15 @@ export default {
       } else {
         if (!this.lifted_p) {
           let f = false
-          if (this.base.edit_p) {
+          if (this.TheSp.edit_p) {
             f = true
           }
-          if (this.base.play_p) {
-            if (!this.base.cpu_location_p && this.base.mediator.current_location === this.location) {
+          if (this.TheSp.play_p) {
+            if (!this.TheSp.cpu_location_p && this.TheSp.mediator.current_location === this.location) {
               f = true
             }
           }
-          if (this.base.play_p && !this.base.sp_play_mode_only_own_piece_to_move) {
+          if (this.TheSp.play_p && !this.TheSp.sp_play_mode_only_own_piece_to_move) {
             f = true
           }
           if (this.break_if_view_mode) {
@@ -88,12 +88,12 @@ export default {
 
   computed: {
     lifted_p() {
-      return this.base.lifted_p
+      return this.TheSp.lifted_p
     },
 
     component_class() {
       const list = []
-      if (this.base.edit_p) {
+      if (this.TheSp.edit_p) {
         if (this.lifted_p) {
           list.push("frame_boder_if_hover")
         }
@@ -102,7 +102,7 @@ export default {
     },
 
     hold_pieces() {
-      return this.base.mediator.realized_hold_pieces_of(this.location.key)
+      return this.TheSp.mediator.realized_hold_pieces_of(this.location.key)
     },
   },
 }

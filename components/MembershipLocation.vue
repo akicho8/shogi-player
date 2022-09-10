@@ -1,6 +1,6 @@
 <template lang="pug">
 .MembershipLocation
-  MembershipLocationMark(:base="base" :location="location")
+  MembershipLocationMark(:location="location")
 </template>
 
 <script>

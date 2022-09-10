@@ -20,8 +20,8 @@ export default {
       }
     },
     click_handle() {
-      if (this.base.sp_player_click_handle) {
-        this.base.sp_player_click_handle(this.location, this.one_side_info)
+      if (this.TheSp.sp_player_click_handle) {
+        this.TheSp.sp_player_click_handle(this.location, this.one_side_info)
         // this.$emit("player_info_click", this.location, this.one_side_info)
       }
     },
@@ -32,13 +32,13 @@ export default {
     },
     component_class() {
       return [
-        { "is-clickable": this.base.sp_player_click_handle },
+        { "is-clickable": this.TheSp.sp_player_click_handle },
         this.player_class,
       ]
     },
     one_side_info() {
-      if (this.base.sp_player_info) {
-        return this.base.sp_player_info[this.location.key]
+      if (this.TheSp.sp_player_info) {
+        return this.TheSp.sp_player_info[this.location.key]
       }
     },
     player_name()  { return this.player_attr_of("name")  },

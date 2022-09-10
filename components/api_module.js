@@ -33,15 +33,15 @@ export const api_module = {
 
     // 反転状態の設定
     api_flip_set(flag) {
-      this.base.new_viewpoint = flag ? "white" : "black"
+      this.new_viewpoint = flag ? "white" : "black"
     },
     api_viewpoint_set(viewpoint) {
-      this.base.new_viewpoint = viewpoint
+      this.new_viewpoint = viewpoint
     },
 
     // 反転(音がでる)
     api_flip_toggle() {
-      this.base.board_flip_toggle()
+      this.board_flip_toggle()
     },
 
     // 待った

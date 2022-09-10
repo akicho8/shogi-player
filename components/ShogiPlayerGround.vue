@@ -2,7 +2,7 @@
 // ShogiPlayerGround は ShogiPlayerWidth の位置を調整するためにあるので他のものを入れてはいけない
 .ShogiPlayerGround(:class="component_class" :style="component_style")
   .ShogiPlayerGroundTexture
-  ShogiPlayerWidth(:base="base" v-if="base.mediator" ref="ShogiPlayerWidth")
+  ShogiPlayerWidth( v-if="TheSp.mediator" ref="ShogiPlayerWidth")
 </template>
 
 <script>
@@ -20,26 +20,26 @@ export default {
   computed: {
     component_class() {
       return [
-        this.base.sp_layout,
-        this.base.sp_hpos,
-        this.base.sp_vpos,
-        this.base.sp_fullheight,
-        this.base.sp_balloon,
-        this.base.sp_layer,
-        this.base.sp_board_shadow,
-        this.base.sp_blink,
-        this.base.sp_pi_variant,
-        this.base.sp_bg_variant,
-        this.base.sp_mobile_fit,
-        this.base.sp_mobile_vertical,
-        this.base.devise_info.key,
-        `is_viewpoint_${this.base.new_viewpoint}`, // システムテストで見ている
+        this.TheSp.sp_layout,
+        this.TheSp.sp_hpos,
+        this.TheSp.sp_vpos,
+        this.TheSp.sp_fullheight,
+        this.TheSp.sp_balloon,
+        this.TheSp.sp_layer,
+        this.TheSp.sp_board_shadow,
+        this.TheSp.sp_blink,
+        this.TheSp.sp_pi_variant,
+        this.TheSp.sp_bg_variant,
+        this.TheSp.sp_mobile_fit,
+        this.TheSp.sp_mobile_vertical,
+        this.TheSp.devise_info.key,
+        `is_viewpoint_${this.TheSp.new_viewpoint}`, // システムテストで見ている
       ]
     },
     component_style() {
       return {
-        "--sp_board_dimension_w": this.base.sp_board_dimension_w,
-        "--sp_board_dimension_h": this.base.sp_board_dimension_h,
+        "--sp_board_dimension_w": this.TheSp.sp_board_dimension_w,
+        "--sp_board_dimension_h": this.TheSp.sp_board_dimension_h,
       }
     },
   },

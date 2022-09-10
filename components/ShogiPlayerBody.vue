@@ -1,10 +1,10 @@
 <template lang="pug">
 .ShogiPlayerBody(:class="component_class")
-  Membership(:base="base" position="north" :location="location_of('white')")
+  Membership( position="north" :location="location_of('white')")
   AspectRatioFixedBlock
-    OverlayNavigations(:base="base")
-    MainBoard(:base="base")
-  Membership(:base="base" position="south" :location="location_of('black')")
+    OverlayNavigations()
+    MainBoard()
+  Membership( position="south" :location="location_of('black')")
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
 
   methods: {
     location_of(key) {
-      return Location.fetch(key).flip_if(this.base.fliped)
+      return Location.fetch(key).flip_if(this.TheSp.fliped)
     },
   },
 
