@@ -20,7 +20,7 @@ b-colorpicker.MyColorPicker(
 </template>
 
 <script>
-import { support } from "./support.js"
+import { support } from "../support.js"
 import chroma from "chroma-js"
 import BuefyColor from "@/node_modules/buefy/src/utils/color"
 
@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "../support.sass"
 .MyColorPicker
   input
     text-align: unset ! important // R,G,Bの各入力フィールドをばらばらに数値で入れる想定で右寄せになっているのを解除する

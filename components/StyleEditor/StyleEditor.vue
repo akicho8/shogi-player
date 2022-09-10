@@ -485,16 +485,16 @@ const IS_WHITE       = "rgb(255,255,255)"
 
 import chroma from "chroma-js"
 
-import { HumanSideInfo } from "./models/human_side_info.js"
-import { RunModeInfo } from "./models/run_mode_info.js"
-import { BgVariantInfo } from "./models/bg_variant_info.js"
-import { PiVariantInfo } from "./models/pi_variant_info.js"
-import { KifuBookInfo } from "./models/kifu_book_info.js"
-import { MixBlendModeInfo } from "./models/mix_blend_mode_info.js"
+import { HumanSideInfo }    from "../models/human_side_info.js"
+import { RunModeInfo }      from "../models/run_mode_info.js"
+import { BgVariantInfo }    from "../models/bg_variant_info.js"
+import { PiVariantInfo }    from "../models/pi_variant_info.js"
+import { KifuBookInfo }     from "../models/kifu_book_info.js"
+import { MixBlendModeInfo } from "../models/mix_blend_mode_info.js"
 
-import ShogiPlayer from "./ShogiPlayer.vue"
+import ShogiPlayer   from "../ShogiPlayer.vue"
 import MyColorPicker from "./MyColorPicker.vue"
-import ImageUpload from "./ImageUpload.vue"
+import ImageUpload   from "./ImageUpload.vue"
 
 export default {
   name: "StyleEditor",

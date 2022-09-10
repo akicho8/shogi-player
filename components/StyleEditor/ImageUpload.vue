@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { support } from "./support.js"
+import { support } from "../support.js"
 import MyColorPicker from "./MyColorPicker.vue"
 
 export default {
@@ -104,7 +104,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "../support.sass"
 .ImageUpload
   .file
     .button
