@@ -1,5 +1,5 @@
 <template lang="pug">
-.MainDocTestKifParser
+.test-test_bod_parse
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
@@ -48,7 +48,7 @@ export default {
 
 <style lang="sass">
 //- @import "./support.sass"
-.MainDocTestKifParser
+.test-test_bod_parse
   .ShogiPlayer
     width: 25%
 </style>

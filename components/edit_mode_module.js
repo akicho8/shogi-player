@@ -11,11 +11,8 @@ import { MoveCancelInfo } from "./models/move_cancel_info.js"
 export const edit_mode_module = {
   props: {
     sp_play_mode_legal_move_only:                { type: Boolean, default: true, },                      // play_mode で合法手のみに絞る
-    sp_play_mode_piece_warp_disabled:            { type: Boolean, default: true, },                      // play_mode で飛角香は駒を跨げない (角ワープ禁止)
-    sp_play_mode_death_king_disabled:            { type: Boolean, default: true, },                      // play_mode で王手放置禁止
-    sp_play_mode_two_pawn_disabled:              { type: Boolean, default: true, },                      // play_mode で二歩禁止
+
     sp_play_mode_auto_promote:                   { type: Boolean, default: true, },                      // play_mode で死に駒になるときは自動的に成る
-    sp_play_mode_dead_soldier_put_disabled:      { type: Boolean, default: true, },                      // play_mode で死に駒になるときは置けないようにする
     sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },                      // play_mode では自分手番とき自分の駒しか動かせないようにする
     sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: true, },                      // play_mode では自分の駒で同じ仲間の駒を取れないようにする
     sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  },                      // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
@@ -54,10 +51,6 @@ export const edit_mode_module = {
     },
   },
 
-  beforeDestroy() {
-    this.hover_piece_element_destroy()
-  },
-
   methods: {
     // 盤を押した瞬間
     board_cell_pointerdown_handle(xy, e) {
@@ -74,6 +67,7 @@ export const edit_mode_module = {
       this.log("board_cell_left_click")
       this.log(`shiftKey: ${e.shiftKey}`)
       this.$data._last_clicked_cell = e.target
+      this.foul_init()
 
       // EffectInfo.fetch('fw_type_2').run({from_el: e.target})
 
@@ -137,15 +131,16 @@ export const edit_mode_module = {
         return
       }
 
-      if (this.play_p && this.have_piece && !this.killed_soldier) {
-        const new_soldier = this.soldier_create_from_stand_or_box_on(place)
-        const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
-        if (force_promote_length != null) {                                              // チェックしない場合は null
-          if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
-            if (this.sp_play_mode_dead_soldier_put_disabled) {
+      if (this.sp_play_mode_foul_check_p) {
+        if (this.play_p && this.have_piece && !this.killed_soldier) {
+          const new_soldier = this.soldier_create_from_stand_or_box_on(place)
+          const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
+          if (force_promote_length != null) {                                              // チェックしない場合は null
+            if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
               this.log("駒台や駒箱から持ち上げた駒を置こうとしたけど死に駒なので無効とする")
-              this.$emit("foul_dead_soldier_put", new_soldier)
-              return
+              if (this.foul_add("foul_dead_soldier", {soldier: new_soldier}) === "__cancel__") { // 死に駒
+                return
+              }
             }
           }
         }
@@ -234,18 +229,17 @@ export const edit_mode_module = {
         if (!found) {
           if (this.mediator.board.repeat_reach(this.origin_soldier1, place, {mode: "non_stop"})) {
             this.log("障害物を素通りすれば目的地に行ける")
-            if (this.sp_play_mode_piece_warp_disabled) {
+            if (this.sp_play_mode_foul_check_p) {
               if (this.mediator.board.repeat_reach(this.origin_soldier1, place)) {
                 this.log("障害物なく目的地に行ける")
-                found = true
               } else {
-                this.log("駒ワープ")
-                this.$emit("foul_piece_warp", this.origin_soldier1)
-                return
+                this.log("障害物を飛び越えれば目的地に行ける")
+                if (this.foul_add("foul_piece_warp", {soldier: this.origin_soldier1}) === "__cancel__") { // 駒ワープ
+                  return
+                }
               }
-            } else {
-              found = true
             }
+            found = true
           } else {
             this.log("目的地に対して効きがずれている")
           }
@@ -257,11 +251,11 @@ export const edit_mode_module = {
           return
         }
 
-        if (this.sp_play_mode_death_king_disabled) {
+        if (this.sp_play_mode_foul_check_p) {
           if (this.mediator.board.move_then_king_capture_p(this.origin_soldier1, place)) {
-            this.log("王手放置")
-            this.$emit("foul_death_king")
-            return
+            if (this.foul_add("foul_death_king", {soldier: this.origin_soldier1, place: place}) === "__cancel__") { // 王手放置
+              return
+            }
           }
         }
       }
@@ -321,15 +315,14 @@ export const edit_mode_module = {
         this.log("持駒を置く")
 
         // 二歩判定
-        if (this.sp_play_mode_two_pawn_disabled) {
+        if (this.sp_play_mode_foul_check_p) {
           if (this.play_p) {
             if (this.have_piece.key === "P") {
               if (this.have_piece_location) {
                 if (this.mediator.board.pawn_exist_by_x(place.x, this.have_piece_location)) {
-                  this.log("二歩")
-                  this.$emit("foul_two_pawn")
-                  // 警告するだけで駒を元に戻すわけではないため this.state_reset() を呼んではいけない
-                  return
+                  if (this.foul_add("foul_two_pawn") === "__cancel__") { // 二歩
+                    return
+                  }
                 }
               }
             }
@@ -402,12 +395,14 @@ export const edit_mode_module = {
       this.turn_next()
     },
 
+    // 最後に操作した駒の情報を作る
     move_info_create(attrs) {
       this.last_move_info = new MoveInfo({
         ...attrs,
         next_turn_offset: this.turn_offset + 1,           // この手を指した直後の手数。初手76歩なら1
         player_location: this.mediator.current_location,  // 指した人の色。駒の色ではない
         killed_soldier: this.killed_soldier,              // 取った駒 (無い場合もある)
+        foul_list: this.foul_list,
       })
     },
 
@@ -697,6 +692,7 @@ export const edit_mode_module = {
       this.have_piece_location = null
       this.have_piece_promoted = null
       this.killed_soldier = null
+      this.foul_clear()
       this.hover_piece_element_destroy()
     },
 

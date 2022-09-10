@@ -41,7 +41,6 @@
 | `--sp_ground_saturate`                       |                                    1.0 | 彩度                                                                  |
 | `--sp_ground_brightness`                     |                                    1.0 | 輝度                                                                  |
 | `--sp_ground_sepia`                          |                                      0 | セピア                                                                |
-| `--sp_location_mark_inactive_rate`           |                                    0.5 | 手番ではないときの☗サイズの倍率                                      |
 | `--sp_piece_box_color`                       | rgba(0, 0, 0, 0.2)                     | 駒箱背景                                                              |
 | `--sp_common_gap`                            | 12px                                   | 共通の隙間                                                            |
 | `--sp_turn_slider_block_margin_top`          | 0.75rem                                | 手数スライダーの上マージン                                            |
@@ -70,10 +69,6 @@
 | `--sp_board_dimension_h`                     |                                      9 | 盤のセル数(h) TDの縦幅を決めるのに必要                                |
 | `--sp_controller_width`                      |                                    0.5 | コントローラー横幅                                                    |
 | `--sp_controller_width_mobile`               |                                    0.8 | コントローラー横幅(モバイル時)                                        |
-| `--sp_stand_hover_border_color`              | rgba(0, 0, 0, 0.2)                     | 駒を持って駒箱の上にいるときのボーダー色                              |
-| `--sp_stand_hover_border_stroke`             | 2px                                    | 駒を持って駒箱の上にいるときのボーダーの太さ                          |
-| `--sp_stand_horizontal_hoverable_min_height` |                                      3 | edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分) |
-| `--sp_stand_bg_color`                        | hsla(0, 0%, 0%, 0)                     | 駒台の背景色                                                          |
 | `--sp_piece_count_gap_right`                 | 62%                                    | 駒数の駒右端からのオフセット(横配置時)                                |
 | `--sp_piece_count_gap_bottom`                | 32%                                    | 駒数の駒底辺からのオフセット(縦配置時)                                |
 | `--sp_piece_count_font_size`                 | 0.75rem                                | 駒数の文字サイズ                                                      |
@@ -81,6 +76,11 @@
 | `--sp_piece_count_bg_color`                  | rgba(255, 255, 255, 0.75)              | 駒数の文字色背景                                                      |
 | `--sp_piece_count_padding`                   | 3px                                    | 駒数のパディング                                                      |
 | `--sp_board_aspect_ratio`                    |                                  1.097 | 盤の横を1.0としたときの縦の比率                                       |
+| `--sp_location_mark_inactive_rate`           |                                    0.5 | 手番ではないときの☗サイズの倍率                                      |
+| `--sp_stand_hover_border_color`              | rgba(0, 0, 0, 0.2)                     | 駒を持って駒箱の上にいるときのボーダー色                              |
+| `--sp_stand_hover_border_stroke`             | 2px                                    | 駒を持って駒箱の上にいるときのボーダーの太さ                          |
+| `--sp_stand_horizontal_hoverable_min_height` |                                      3 | edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分) |
+| `--sp_stand_bg_color`                        | hsla(0, 0%, 0%, 0)                     | 駒台の背景色                                                          |
 | `--sp_invisible_dimension`                   |                                      9 | 天王山の付近を求めるための盤の縦辺のセル数                            |
 | `--sp_shadow_offset`                         |                                      2 | 影の右下方法への長さ                                                  |
 | `--sp_shadow_blur`                           |                                      3 | 影の範囲                                                              |

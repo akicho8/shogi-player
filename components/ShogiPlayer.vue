@@ -33,6 +33,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 import { navi_module        } from "./navi_module.js"
 import { shortcut_module    } from "./shortcut_module.js"
 import { edit_mode_module   } from "./edit_mode_module.js"
+import { foul_module     } from "./foul_module.js"
 import { hover_piece_module } from "./hover_piece_module.js"
 import { legal_check        } from "./legal_check.js"
 import { play_mode_module   } from "./play_mode_module.js"
@@ -54,6 +55,8 @@ export default {
     navi_module,
     shortcut_module,
     edit_mode_module,
+    foul_module,
+    hover_piece_module,
     legal_check,
     play_mode_module,
     sound_module,

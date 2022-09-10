@@ -46,10 +46,7 @@
 | `xxx.native`                                | 任意のイベント (例: `click.native`)                      | click の場合はだいたい `sp_op_disabled` と組み合わせる         |   |
 | `operation_invalid1`                        | 手番が違うのに操作しようとした                           |                                                                |   |
 | `operation_invalid2`                        | 自分が手番だが相手の駒を動かそうとした                   |                                                                |   |
-| `foul_two_pawn`                             | 二歩                                                     |                                                                |   |
-| `foul_piece_warp`                           | 駒ワープ                                                 |                                                                |   |
-| `foul_death_king`                           | 王手放置                                                 |                                                                |   |
-| `foul_dead_soldier_put`                     | 打った駒が死に駒                                         |                                                                |   |
+| `foul_accident`                             | 反則が発生したとき                                       | sp_play_mode_foul_check_p && sp_play_mode_foul_break_p のときのみ                                                                             |   |
 | `sound_play`                                | 音を慣らす直前に piece_put か flip_sound が来る          | 独自の音を慣らしたいとか制御したいとき用                                                               |   |
 
 ## Slot

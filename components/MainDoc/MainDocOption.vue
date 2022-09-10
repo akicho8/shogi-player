@@ -18,7 +18,9 @@
             b-input(size="is-small" v-model="sp_body" type="textarea")
           b-field(custom-class="is-small" label="sp_turn")
             //- b-slider(v-model="sp_turn" :min="-1" :max="256" step="1")
-            b-input(size="is-small" v-model="sp_turn" type="number")
+            b-input(size="is-small" v-model.number="sp_turn" type="number")
+          b-field(custom-class="is-small" label="棋譜変更")
+            b-button(size="is-small" @click="sp_body = KifuBookInfo.fetch('foul_check').sp_body") 反則確認用
 
         .box
           .title.is-5 対局者情報
@@ -72,6 +74,17 @@
             b-slider(v-model="sp_sound_volume" :min="0" :max="1.0" :step="0.01")
 
         .box
+          .title.is-5 反則判定
+
+          b-field(custom-class="is-small" label="反則判定" message="OFFなら気持ち程度処理も軽くなる")
+            b-radio-button(size="is-small" v-model="sp_play_mode_foul_check_p" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_play_mode_foul_check_p" :native-value="true") ON
+
+          b-field(custom-class="is-small" label="操作無効" message="ONは初心者向けで判定にひっかかったら操作を無効にする")
+            b-radio-button(size="is-small" v-model="sp_play_mode_foul_break_p" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_play_mode_foul_break_p" :native-value="true") ON
+
+        .box
           .title.is-5 その他
           MainDocSwitch(v-model="sp_key_event_capture_enabled" label="sp_key_event_capture_enabled")
 
@@ -120,6 +133,9 @@
           b-field(custom-class="is-small" label="@update:moves_take_turn_offset: 操作モードでmovesをturn_offsetでtakeしたもの")
             b-input(size="is-small" :value="JSON.stringify(moves_take_turn_offset)" readonly type="text")
 
+          b-field(custom-class="is-small" label="@foul_accident: 反則があって無効化したとき")
+            b-input(size="is-small" :value="JSON.stringify(foul_accident)" readonly type="textarea")
+
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
@@ -165,7 +181,10 @@
             @update:turn_offset="                        e => trigger_check('turn_offset', e)"
             @update:turn_offset_max="                    e => trigger_check('turn_offset_max', e)"
             @update:moves_take_turn_offset="             e => trigger_check('moves_take_turn_offset', e)"
+            @foul_accident="                             e => trigger_check('foul_accident', e)"
 
+            :sp_play_mode_foul_check_p="sp_play_mode_foul_check_p"
+            :sp_play_mode_foul_break_p="sp_play_mode_foul_break_p"
             )
             //- @update:play_mode_advanced_last_move="       e => trigger_check('play_mode_advanced_last_move', e)"
             //- @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
@@ -198,6 +217,8 @@
                 |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
                 |   :sp_flip_if_white="{{sp_flip_if_white}}"
                 |   :sp_player_info='{{JSON.stringify(sp_player_info)}}'
+                |   :sp_play_mode_foul_check_p="{{sp_play_mode_foul_check_p}}"
+                |   :sp_play_mode_foul_break_p="{{sp_play_mode_foul_break_p}}"
                 |   sp_body="{{sp_body}}"
 
       MainDocMd(:body="options_md")
@@ -246,6 +267,11 @@ export default {
       sp_viewpoint: "black",
       sp_flip_if_white: false,
 
+      // 反則判定用
+      sp_play_mode_foul_check_p: true,
+      sp_play_mode_foul_break_p: false,
+      foul_accident: null,
+
       sp_player_info: {
         black: { name: "先手", time: "12:34", },
         white: { name: "後手", time: "56:78", },
@@ -277,6 +303,7 @@ export default {
     },
   },
   computed: {
+    KifuBookInfo() { return KifuBookInfo },
     component_class() {
       return {
         sidebar_p: this.sidebar_p,

@@ -17,6 +17,10 @@ export const hover_piece_module = {
     }
   },
 
+  beforeDestroy() {
+    this.hover_piece_element_destroy()
+  },
+
   methods: {
     // 持ち上げた駒の位置を更新する
     hover_piece_element_position_update() {

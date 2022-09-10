@@ -26,6 +26,7 @@ import KIF_15733 from "./kifu_book_info/15733.kif"
 
 import SFEN_15733 from "./kifu_book_info/15733.sfen"
 import KIF_BOD_LIKE_SAMPLE1 from "./kifu_book_info/BOD_LIKE_SAMPLE1.kif"
+import foul_check from "./kifu_book_info/foul_check.kif"
 
 export class KifuBookInfo extends MemoryRecord {
   static get define() {
@@ -56,6 +57,7 @@ export class KifuBookInfo extends MemoryRecord {
       {"key": "KIF_37368", "kif_code": "37368", "generation": null, "name": "1711-03-00 将棋絶妙第8番", "black": "宮本印佐", "white": "伊藤印達", "sp_body": KIF_37368},
       {"key": "KIF_16217", "kif_code": "16217", "generation": null, "name": "1711-11-21 御城将棋 (印達の絶局)", "black": "六代大橋宗銀", "white": "伊藤印達", "sp_body": KIF_16217},
       {"key": "KIF_BOD_LIKE_SAMPLE1", "kif_code": "BOD_LIKE_SAMPLE1", "generation": null, "name": "BOD形式を含むKIF", "black": null, "white": null, "sp_body": KIF_BOD_LIKE_SAMPLE1},
+      {"key": "foul_check",           "kif_code": "foul_check",       "generation": null, "name": "反則判定用", "black": null, "white": null, "sp_body": foul_check},
     ]
   }
 
