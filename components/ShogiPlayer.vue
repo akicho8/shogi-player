@@ -405,6 +405,11 @@ export default {
       }
     },
 
+    delegate_to_mediator(method) {
+      if (this.mediator) {
+        return this.mediator[method]
+      }
+    },
   },
 
   computed: {
@@ -416,12 +421,11 @@ export default {
     edit_p()         { return this.new_run_mode === "edit_mode" },
     debug_p()        { return this.new_debug_mode === "is_debug_mode_on"  },
 
-    // 本当は delegate したい。this.$watch を使えば動的になりそう？
-    turn_base()       { if (this.mediator) { return this.mediator.turn_base       } }, // 表示する上での開始手数で普通は 0
-    turn_offset()     { if (this.mediator) { return this.mediator.turn_offset     } }, // 手数のオフセット
-    display_turn()    { if (this.mediator) { return this.mediator.display_turn    } }, // turn_base + turn_offset
-    turn_offset_min() { if (this.mediator) { return this.mediator.turn_offset_min } }, // 必ず 0
-    turn_offset_max() { if (this.mediator) { return this.mediator.turn_offset_max } }, // moves.length が 2 なら 2
+    turn_base()       { return this.delegate_to_mediator("turn_base")       }, // 表示する上での開始手数で普通は 0
+    turn_offset()     { return this.delegate_to_mediator("turn_offset")     }, // 手数のオフセット
+    display_turn()    { return this.delegate_to_mediator("display_turn")    }, // turn_base + turn_offset
+    turn_offset_min() { return this.delegate_to_mediator("turn_offset_min") }, // 必ず 0
+    turn_offset_max() { return this.delegate_to_mediator("turn_offset_max") }, // moves.length が 2 なら 2
 
     component_class() {
       return [
