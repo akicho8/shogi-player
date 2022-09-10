@@ -9,7 +9,6 @@
       @mouseleave="TheSp.mouseleave_handle"
       )
       PieceTap(
-        
         :class="piece_tap_class(piece)"
         :piece_texture_class="piece_texture_class(piece)"
         :count="count"

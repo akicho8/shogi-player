@@ -7,9 +7,6 @@ import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
 import { EffectInfo } from "./models/effect_info.js"
 import { MoveCancelInfo } from "./models/move_cancel_info.js"
-import { PositionInfo } from "./models/position_info.js"
-
-const CURSOR_OBJECT_XY_UPDATE_60FPS = true
 
 export const edit_mode_module = {
   props: {
@@ -41,13 +38,6 @@ export const edit_mode_module = {
       have_piece_location: null,  // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
       have_piece_promoted: null,    // 持ったとき成った状態にするか？
 
-      // プレフィクスに_をつけるとVueに監視されない
-      me_running_p: false,        // mousemove イベント緩和用
-      _me_last_event: null,        // mousemove イベント
-
-      _CursorObject: null,        // 持ちあげている駒のDOM
-      mouse_stick: false,       // 持ち上げている駒をマウスに追随させるか？
-
       dialog_soldier: null,     // 成り確認ダイアログ表示中か？
       _last_clicked_cell: null,        // 最後にクリックした要素
 
@@ -65,7 +55,7 @@ export const edit_mode_module = {
   },
 
   beforeDestroy() {
-    this.virtual_piece_destroy()
+    this.hover_piece_element_destroy()
   },
 
   methods: {
@@ -300,9 +290,9 @@ export const edit_mode_module = {
           }
 
           if (must_dialog) {
-            this.mouse_stick = false // ダイアログ選択時時は動かしている駒を止める
+            this.mouse_stick_p = false // ダイアログ選択時時は動かしている駒を止める
             this.dialog_soldier = new_soldier
-            this.virtual_piece_destroy()
+            this.hover_piece_element_destroy()
 
             // this.$buefy.dialog.confirm({
             //   message: '成りますか？',
@@ -562,7 +552,7 @@ export const edit_mode_module = {
       this.have_piece = piece
       this.have_piece_location = location
       this.have_piece_promoted = have_piece_promoted
-      this.virtual_piece_create(e, this.origin_soldier2)
+      this.hover_piece_element_create(e, this.origin_soldier2)
     },
 
     // 駒箱の駒を持ち上げている？
@@ -610,7 +600,7 @@ export const edit_mode_module = {
       this.have_piece = piece
       this.have_piece_location = null
       this.have_piece_promoted = false
-      this.virtual_piece_create(e, this.origin_soldier2)
+      this.hover_piece_element_create(e, this.origin_soldier2)
     },
 
     // 成り不成り選択ダイアログ表示中はキャンセルできない
@@ -695,7 +685,7 @@ export const edit_mode_module = {
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
       this.place_from = place
-      this.virtual_piece_create(e, this.origin_soldier1)
+      this.hover_piece_element_create(e, this.origin_soldier1)
     },
 
     // 駒を持ってない状態にする
@@ -707,7 +697,7 @@ export const edit_mode_module = {
       this.have_piece_location = null
       this.have_piece_promoted = null
       this.killed_soldier = null
-      this.virtual_piece_destroy()
+      this.hover_piece_element_destroy()
     },
 
     // 持った状態で他の駒をタップするとキャンセルする場合はキャンセル
@@ -759,120 +749,6 @@ export const edit_mode_module = {
         promoted: this.have_piece_promoted || false,
         location: this.have_piece_location || Location.fetch("black"),
       })
-    },
-
-    mousemove_hook(e) {
-      this.$data._me_last_event = e
-
-      // 連続で呼ばれるイベント処理を緩和する方法
-      // https://qiita.com/noplan1989/items/9333faad731f5ecaaccd
-      // ※試してみているけどあまり効果がない
-      if (CURSOR_OBJECT_XY_UPDATE_60FPS) {
-        // 呼び出されるまで何もしない
-        if (!this.me_running_p) {
-          this.me_running_p = true
-
-          // 描画する前のタイミングで呼び出してもらう
-          window.requestAnimationFrame(() => {
-            this.cursor_object_xy_update()
-
-            this.me_running_p = false
-          })
-        }
-      } else {
-        this.cursor_object_xy_update()
-      }
-    },
-
-    // 右クリックならキャンセル(動いてないっぽい)
-    click_hook(e) {
-      if (e.which !== 1) {
-        this.state_reset()
-      }
-    },
-
-    cursor_object_xy_update() {
-      if (this.$data._CursorObject && this.$data._me_last_event && this.mouse_stick) {
-        // if (this.devise_info.key === "is_device_desktop") {
-        const x = this.$data._me_last_event.clientX
-        const y = this.$data._me_last_event.clientY
-        this.element_vector_set(this.$data._CursorObject, {x, y})
-        // }
-      }
-    },
-
-    // マウス位置に表示する駒の生成
-    virtual_piece_create(event, soldier) {
-      this.virtual_piece_destroy()
-      this.virtual_piece_dom_create(soldier)
-
-      this.mouse_stick = true   // マウスに追随する
-
-      // キーボードイベントの場合は null が来るようにしている
-      // マウスを動かしてはじめて座標が取れるのでキーボードの場合はすぐに駒は表示されない
-      if (event) {
-        this.$data._me_last_event = event
-        this.cursor_object_xy_update()
-      }
-
-      this.$el.addEventListener("mousemove", this.mousemove_hook)
-      this.$el.addEventListener("click", this.click_hook)
-    },
-
-    // 構造 FIXME: コンポーネントにする
-    //
-    // .CursorObject                        // マウスの (x, y) を反映
-    //   .PieceTap.is_position_north        // or is_position_south
-    //     .PieceTexture
-    //       .PieceTextureSelf(駒の種類を定義するクラスたち)
-    //
-    virtual_piece_dom_create(soldier) {
-      this.$data._CursorObject    = this.el_create(["CursorObject"])
-      const PieceTap      = this.el_create(["PieceTap"])
-      const PieceTexture     = this.el_create(["PieceTexture"])
-      const PieceTextureSelf = this.el_create(["PieceTextureSelf", ...soldier.css_class_list])
-
-      PieceTap.classList.add(soldier.location.flip_if(this.fliped).position_key)
-
-      PieceTexture.appendChild(PieceTextureSelf)
-      PieceTap.appendChild(PieceTexture)
-      this.$data._CursorObject.appendChild(PieceTap)
-
-      const position_key = soldier.location.flip_if(this.fliped).position_key
-      const position_info = PositionInfo.fetch(position_key)
-      if (soldier.place) {
-        // 盤上から動かそうとしている駒
-        // devise_info.gap が 0.25 でちょうど左上にすこしずれる
-        const ci = this.place_to_cell_info(soldier.place)                                        // place から実際のセルの位置情報を取得
-        const gap = this.vector_scale(ci.radius, this.devise_info.gap * position_info.sign * -1) // 左上にずらす度合いを計算
-        const vec = this.vector_add(ci.center, gap)                                              // 中央から左上にずらす
-        this.element_vector_set(this.$data._CursorObject, vec)                                         // カーソル座標とする
-      } else {
-        // 駒箱や駒台から取り出した駒
-        // マウスイベントが発生するまでは画面内に表示されてしまうので画面外に出す
-        this.$data._CursorObject.style.left = "-50%"
-        this.$data._CursorObject.style.top  = "-50%"
-      }
-
-      this.$refs.ShogiPlayerGround.$el.appendChild(this.$data._CursorObject)
-    },
-
-    el_create(classes) {
-      const e = document.createElement("div")
-      e.classList.add(...classes)
-      return e
-    },
-
-    virtual_piece_destroy() {
-      if (this.$data._CursorObject) {
-        this.$refs.ShogiPlayerGround.$el.removeChild(this.$data._CursorObject)
-
-        this.$data._CursorObject = null
-        this.mouse_stick = false
-
-        this.$el.removeEventListener("mousemove", this.mousemove_hook)
-        this.$el.removeEventListener("click", this.click_hook)
-      }
     },
 
     meta_p(e) {
