@@ -105,7 +105,7 @@
               b-radio-button(size="is-small" v-model="sp_human_side" :native-value="e.key") {{e.name}}
 
         .box
-          .title.is-5 操作モードのイベント受信内容
+          .title.is-5 操作モード(とは限らない)イベント受信内容
 
           MainDocSwitch(v-model="trigger_toast_p" label="イベント確認")
 
@@ -121,7 +121,7 @@
           b-field(custom-class="is-small" label="@update:play_mode_advanced_moves: 操作モードで指した手を含むmoves配列")
             b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_moves)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@update:short_sfen: 操作モード(または再生モード)で盤面が変化したとき(常に更新)")
+          b-field(custom-class="is-small" label="@update:short_sfen: 盤面が変化したとき(常時更新)")
             b-input(size="is-small" :value="JSON.stringify(short_sfen)" readonly type="textarea")
 
           b-field(custom-class="is-small" label="@update:edit_mode_short_sfen: 編集モードで盤面が変化したとき")
