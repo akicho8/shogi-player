@@ -2,18 +2,18 @@ import _ from "lodash"
 
 import { Piece } from "./piece"
 import { Place } from "./place"
-import { Mediator } from "./mediator"
+import { Xcontainer } from "./xcontainer"
 import { Location } from "./location"
 import { Board } from "./board"
 
 export class SfenSerializer {
-  constructor(mediator) {
-    this.mediator = mediator
+  constructor(xcontainer) {
+    this.xcontainer = xcontainer
   }
 
   get to_s() {
     const parts = this.__base_parts
-    parts.push(this.mediator.display_turn + 1)           // 1
+    parts.push(this.xcontainer.display_turn + 1)           // 1
     return parts.join(" ")
   }
 
@@ -23,12 +23,12 @@ export class SfenSerializer {
   }
 
   get to_board_sfen() {
-    return this.mediator.board.to_sfen
+    return this.xcontainer.board.to_sfen
   }
 
   get to_hold_pieces() {
     let str = Location.values.map((location_info) => {
-      const hold_pieces = this.mediator.hold_pieces[location_info.key]
+      const hold_pieces = this.xcontainer.hold_pieces[location_info.key]
       const values = Piece.values.map((e) => { // 玉から歩の順になっている
         let count = hold_pieces[e.key] || 0
         let str = ""
@@ -62,17 +62,17 @@ export class SfenSerializer {
   get __base_parts() {
     const parts = []
     parts.push(this.to_board_sfen)                    // 9/9/9/9...
-    parts.push(this.mediator.current_location.key[0]) // "b"
+    parts.push(this.xcontainer.current_location.key[0]) // "b"
     parts.push(this.to_hold_pieces)                   // "-"
     return parts
   }
 }
 
 if (process.argv[1] === __filename) {
-  const mediator = new Mediator()
-  mediator.source = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
-  mediator.current_turn = 1
-  mediator.run()
-  const sfen_serializer = new SfenSerializer(mediator)
+  const xcontainer = new Xcontainer()
+  xcontainer.source = "position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d"
+  xcontainer.current_turn = 1
+  xcontainer.run()
+  const sfen_serializer = new SfenSerializer(xcontainer)
   console.log(sfen_serializer.to_s)
 }

@@ -53,7 +53,7 @@ export default {
             f = true
           }
           if (this.TheSp.play_p) {
-            if (!this.TheSp.cpu_location_p && this.TheSp.mediator.current_location === this.location) {
+            if (!this.TheSp.cpu_location_p && this.TheSp.xcontainer.current_location === this.location) {
               f = true
             }
           }
@@ -101,7 +101,7 @@ export default {
     },
 
     hold_pieces() {
-      return this.TheSp.mediator.realized_hold_pieces_of(this.location.key)
+      return this.TheSp.xcontainer.realized_hold_pieces_of(this.location.key)
     },
   },
 }

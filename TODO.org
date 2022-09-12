@@ -1,1 +1,1 @@
-* mediator のなまえは container とかにかえる予定
+* xcontainer のなまえは container とかにかえる予定

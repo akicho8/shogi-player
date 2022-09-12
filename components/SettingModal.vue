@@ -38,9 +38,9 @@
     //-   template(v-for="e in PiVariantInfo.values")
     //-     b-radio-button(v-model="TheSp.new_sp_pi_variant" :native-value="e.key") {{e.name}}
 
-    template(v-if="TheSp.mediator")
+    template(v-if="TheSp.xcontainer")
       b-field(label="再生モードの現局面(Readonly)")
-        b-input(:value="TheSp.mediator.to_short_sfen" type="input" size="is-small" readonly)
+        b-input(:value="TheSp.xcontainer.to_short_sfen" type="input" size="is-small" readonly)
 
     b-field(label="編集モードの現局面(Readonly) ※BUG:駒を反転したときに反映されない場合がある")
       b-input(:value="TheSp.edit_mode_short_sfen2" type="input" size="is-small" readonly)

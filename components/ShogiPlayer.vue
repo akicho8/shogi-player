@@ -1,9 +1,9 @@
 <template lang="pug">
 .ShogiPlayer(:class="component_class")
-  i.fas.fa-spinner.fa-pulse(v-if="!mediator")
+  i.fas.fa-spinner.fa-pulse(v-if="!xcontainer")
   ShogiPlayerGround(ref="ShogiPlayerGround")
   DebugBlock
-  b-modal(:active.sync="setting_modal_p" has-modal-card v-if="mediator")
+  b-modal(:active.sync="setting_modal_p" has-modal-card v-if="xcontainer")
     SettingModal
   pre(v-if="debug_p") {{$props}}
 </template>
@@ -13,7 +13,7 @@ import _ from "lodash"
 import Vue from 'vue'
 
 // Library
-import { Mediator   } from "./models/mediator.js"
+import { Xcontainer   } from "./models/xcontainer.js"
 import { Place      } from "./models/place.js"
 import { SfenParser } from "./models/sfen_parser.js"
 import { KifParser  } from "./models/kif_parser.js"
@@ -116,7 +116,7 @@ export default {
       new_debug_mode: this.sp_debug_mode,
       new_run_mode: this.sp_run_mode,
       turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
-      mediator: null,           // 局面管理
+      xcontainer: null,           // 局面管理
       turn_edit_p: false,       // N手目編集中
       update_counter: 0,
       setting_modal_p: false,
@@ -133,17 +133,17 @@ export default {
 
   created() {
     if (this.view_p) {
-      this.mediator_setup(this.sp_turn)
+      this.xcontainer_setup(this.sp_turn)
     }
     if (this.play_p) {
-      this.mediator_setup(this.sp_turn)
+      this.xcontainer_setup(this.sp_turn)
       this.play_mode_setup_from("view_mode")
     }
     if (this.edit_p) {
       if (this.sp_preset_key) {
-        this.mediator_setup_by_preset(this.sp_preset_key) // 駒箱に「玉」を乗せたいため
+        this.xcontainer_setup_by_preset(this.sp_preset_key) // 駒箱に「玉」を乗せたいため
       } else {
-        this.mediator_setup_for_edit_mode()
+        this.xcontainer_setup_for_edit_mode()
       }
     }
   },
@@ -156,7 +156,7 @@ export default {
       this.state_reset() // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
 
       if (this.edit_p) {
-        this.mediator_setup_for_edit_mode()
+        this.xcontainer_setup_for_edit_mode()
         return
       }
 
@@ -164,13 +164,13 @@ export default {
       let before_sfen = null
 
       if (this.sp_sound_body_changed) {
-        before_sfen = this.mediator ? this.mediator.to_simple_sfen : ""
+        before_sfen = this.xcontainer ? this.xcontainer.to_simple_sfen : ""
       }
 
-      this.mediator_setup(this.sp_turn)
+      this.xcontainer_setup(this.sp_turn)
 
       if (this.sp_sound_body_changed) {
-        sfen_change_p = (before_sfen !== this.mediator.to_simple_sfen)
+        sfen_change_p = (before_sfen !== this.xcontainer.to_simple_sfen)
       }
 
       if (this.view_p) {
@@ -213,10 +213,10 @@ export default {
       if (this.view_p) {
         this.log("new_run_mode: view_mode")
         // alert(`復元:${this.view_mode_turn_offset_save}`)
-        this.view_mode_mediator_update(this.view_mode_turn_offset_save)
+        this.view_mode_xcontainer_update(this.view_mode_turn_offset_save)
         this.view_mode_turn_offset_save = null
       } else {
-        // view_mode ではなくなったときの最初だけ保存しておく(mediatorをまるごと保存しておく手もあるかも)
+        // view_mode ではなくなったときの最初だけ保存しておく(xcontainerをまるごと保存しておく手もあるかも)
         if (this.view_mode_turn_offset_save === null) {
           this.view_mode_turn_offset_save = this.turn_offset
           // alert(`保存:${this.view_mode_turn_offset_save}`)
@@ -230,15 +230,15 @@ export default {
       if (this.edit_p) {
         this.log("new_run_mode: edit_mode")
 
-        const new_mediator = new Mediator()
-        new_mediator.data_source = this.data_source_by(this.mediator.to_short_sfen)
-        new_mediator.current_turn = 0
-        new_mediator.run()
+        const new_xcontainer = new Xcontainer()
+        new_xcontainer.data_source = this.data_source_by(this.xcontainer.to_short_sfen)
+        new_xcontainer.current_turn = 0
+        new_xcontainer.run()
 
-        this.mediator = new_mediator
-        this.init_location_key = new_mediator.current_location.key
+        this.xcontainer = new_xcontainer
+        this.init_location_key = new_xcontainer.current_location.key
 
-        this.mediator.piece_box_piece_counts_adjust()
+        this.xcontainer.piece_box_piece_counts_adjust()
       }
     },
 
@@ -260,42 +260,42 @@ export default {
   },
 
   methods: {
-    mediator_setup(turn) {
-      this.mediator = new Mediator()
-      this.mediator.data_source = this.data_source_by(this.kifu_source)
-      this.mediator.current_turn = turn
-      this.mediator.run()
+    xcontainer_setup(turn) {
+      this.xcontainer = new Xcontainer()
+      this.xcontainer.data_source = this.data_source_by(this.kifu_source)
+      this.xcontainer.current_turn = turn
+      this.xcontainer.run()
       this.flip_if_white_run()
     },
 
-    mediator_setup_for_edit_mode() {
+    xcontainer_setup_for_edit_mode() {
       // まず0手目の状態を作る
-      this.mediator = new Mediator()
-      this.mediator.data_source = this.data_source_by(this.kifu_source)
-      this.mediator.current_turn = 0
-      this.mediator.run()
+      this.xcontainer = new Xcontainer()
+      this.xcontainer.data_source = this.data_source_by(this.kifu_source)
+      this.xcontainer.current_turn = 0
+      this.xcontainer.run()
 
       // 0手目の手番を反映
-      this.init_location_key = this.mediator.current_location.key
+      this.init_location_key = this.xcontainer.current_location.key
 
       // そのあとで指定の手数に変更
-      this.mediator.current_turn = this.sp_turn
-      this.mediator.run()
+      this.xcontainer.current_turn = this.sp_turn
+      this.xcontainer.run()
 
       // 不足駒を駒箱に生成
-      this.mediator.piece_box_piece_counts_adjust()
+      this.xcontainer.piece_box_piece_counts_adjust()
 
       this.flip_if_white_run()
     },
 
     flip_if_white_run() {
       if (this.sp_flip_if_white) {
-        this.new_viewpoint = this.mediator.data_source.base_location.key
+        this.new_viewpoint = this.xcontainer.data_source.base_location.key
       }
     },
 
-    view_mode_mediator_update(turn) {
-      this.mediator_setup(turn)
+    view_mode_xcontainer_update(turn) {
+      this.xcontainer_setup(turn)
       // this.sound_play("piece_put")
       this.update_counter++
     },
@@ -330,7 +330,7 @@ export default {
 
     board_piece_tap_class(xy) {
       const place = Place.fetch(xy)
-      const soldier = this.mediator.board.lookup(place)
+      const soldier = this.xcontainer.board.lookup(place)
       let list = []
 
       list.push(place.css_place_key) // place_9_9
@@ -340,14 +340,14 @@ export default {
       }
 
       if (!this.lifted_p) {
-        if (this.mediator.last_hand) {
-          const origin_place = this.mediator.last_hand.origin_place
+        if (this.xcontainer.last_hand) {
+          const origin_place = this.xcontainer.last_hand.origin_place
           if (origin_place) {
             if (_.isEqual(origin_place, place)) {
               list.push("origin_place")
             }
           }
-          if (_.isEqual(this.mediator.last_hand.place, place)) {
+          if (_.isEqual(this.xcontainer.last_hand.place, place)) {
             list.push("current")
           }
         }
@@ -360,7 +360,7 @@ export default {
           let f = false
           if (this.edit_p) {
             f = true
-          } else if (!this.cpu_location_p && this.mediator.current_location === soldier.location) {
+          } else if (!this.cpu_location_p && this.xcontainer.current_location === soldier.location) {
             f = true
           } else if (this.play_p && !this.sp_play_mode_only_own_piece_to_move) {
             f = true
@@ -399,9 +399,9 @@ export default {
       }
     },
 
-    delegate_to_mediator(method) {
-      if (this.mediator) {
-        return this.mediator[method]
+    delegate_to_xcontainer(method) {
+      if (this.xcontainer) {
+        return this.xcontainer[method]
       }
     },
   },
@@ -414,11 +414,11 @@ export default {
     edit_p()         { return this.new_run_mode === "edit_mode"          },
     debug_p()        { return this.new_debug_mode === "is_debug_mode_on" },
 
-    turn_base()       { return this.delegate_to_mediator("turn_base")       }, // 表示する上での開始手数で普通は 0
-    turn_offset()     { return this.delegate_to_mediator("turn_offset")     }, // 手数のオフセット
-    display_turn()    { return this.delegate_to_mediator("display_turn")    }, // turn_base + turn_offset
-    turn_offset_min() { return this.delegate_to_mediator("turn_offset_min") }, // 必ず 0
-    turn_offset_max() { return this.delegate_to_mediator("turn_offset_max") }, // moves.length が 2 なら 2
+    turn_base()       { return this.delegate_to_xcontainer("turn_base")       }, // 表示する上での開始手数で普通は 0
+    turn_offset()     { return this.delegate_to_xcontainer("turn_offset")     }, // 手数のオフセット
+    display_turn()    { return this.delegate_to_xcontainer("display_turn")    }, // turn_base + turn_offset
+    turn_offset_min() { return this.delegate_to_xcontainer("turn_offset_min") }, // 必ず 0
+    turn_offset_max() { return this.delegate_to_xcontainer("turn_offset_max") }, // moves.length が 2 なら 2
 
     component_class() {
       return [

@@ -64,7 +64,7 @@ export const shortcut_module = {
         if (this.mouseover_info) {
           if (this.mouseover_info.type === "board") {
             const place = Place.fetch(this.mouseover_info.xy)
-            const soldier = this.mediator.board.lookup(place)
+            const soldier = this.xcontainer.board.lookup(place)
             if (soldier) {
               this.piece_stand_piece_click(soldier.location, soldier.piece, soldier.promoted, null) // キーボードのイベントなので null 指定
               e.preventDefault()
@@ -99,7 +99,7 @@ export const shortcut_module = {
         if (this.meta_p(e)) {
           const vector = this.arrow_vector_table[e.key]
           if (vector) {
-            this.mediator.slide_xy(...vector)
+            this.xcontainer.slide_xy(...vector)
             e.preventDefault()
             return true
           }
@@ -126,7 +126,7 @@ export const shortcut_module = {
         // if (this.meta_p(e)) {
         //   const vector = this.arrow_vector_table[e.key]
         //   if (vector) {
-        //     this.mediator.slide_xy(...vector)
+        //     this.xcontainer.slide_xy(...vector)
         //     e.preventDefault()
         //     return true
         //   }

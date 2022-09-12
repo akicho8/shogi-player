@@ -2,7 +2,7 @@
 // ShogiPlayerGround は ShogiPlayerWidth の位置を調整するためにあるので他のものを入れてはいけない
 .ShogiPlayerGround(:class="component_class" :style="component_style")
   .ShogiPlayerGroundTexture
-  ShogiPlayerWidth( v-if="TheSp.mediator" ref="ShogiPlayerWidth")
+  ShogiPlayerWidth( v-if="TheSp.xcontainer" ref="ShogiPlayerWidth")
 </template>
 
 <script>

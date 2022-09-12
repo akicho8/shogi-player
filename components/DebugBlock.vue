@@ -23,18 +23,18 @@
       DebugBlockRow(code="mouseover_info" name="mouseの直前までの参照要素" :value="TheSp.mouseover_info")
       DebugBlockRow(code="sp_turn"        name="開始局面番号"              :value="TheSp.sp_turn")
       DebugBlockRow(code="new_preset_key" name="初期配置"                  :value="TheSp.new_preset_key")
-  table.table.is-narrow.is-hoverable.is-fullwidth(v-if="TheSp.mediator")
-    caption Mediator Methods
+  table.table.is-narrow.is-hoverable.is-fullwidth(v-if="TheSp.xcontainer")
+    caption Xcontainer Methods
     thead
       tr
         th
         th Value
         th 参照方法
     tbody
-      DebugBlockRow(code="piece_box_realize()"  name="駒箱"         :value="TheSp.mediator.piece_box_realize()")
-      DebugBlockRow(code="hold_pieces"          name="持駒"         :value="TheSp.mediator.hold_pieces")
-      DebugBlockRow(code="current_location.key" name="次の手番"     :value="TheSp.mediator.current_location.key")
-      DebugBlockRow(code="to_simple_sfen"       name="現局面のSFEN" :value="TheSp.mediator.to_simple_sfen")
+      DebugBlockRow(code="piece_box_realize()"  name="駒箱"         :value="TheSp.xcontainer.piece_box_realize()")
+      DebugBlockRow(code="hold_pieces"          name="持駒"         :value="TheSp.xcontainer.hold_pieces")
+      DebugBlockRow(code="current_location.key" name="次の手番"     :value="TheSp.xcontainer.current_location.key")
+      DebugBlockRow(code="to_simple_sfen"       name="現局面のSFEN" :value="TheSp.xcontainer.to_simple_sfen")
       DebugBlockRow(code="turn_offset"          name="正規化手番"   :value="TheSp.turn_offset")
   table.table.is-narrow.is-hoverable.is-fullwidth
     caption play_mode

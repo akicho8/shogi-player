@@ -10,7 +10,7 @@ import { SfenSerializer } from "./sfen_serializer.js"
 import { PresetInfo } from "./preset_info.js"
 import { Location } from "./location.js"
 
-export class Mediator {
+export class Xcontainer {
   constructor() {
     const data_source = new SfenParser()
     data_source.raw_body = "position startpos"

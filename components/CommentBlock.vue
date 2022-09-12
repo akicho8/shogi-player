@@ -24,9 +24,9 @@ export default {
   },
   computed: {
     _()                { return _                                       },
-    mediator()         { return this.TheSp.mediator                      },
-    comments_pack()    { return this.mediator.data_source.comments_pack },
-    current_comments() { return this.mediator.current_comments          },
+    xcontainer()         { return this.TheSp.xcontainer                      },
+    comments_pack()    { return this.xcontainer.data_source.comments_pack },
+    current_comments() { return this.xcontainer.current_comments          },
   },
 }
 </script>

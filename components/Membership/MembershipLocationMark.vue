@@ -39,7 +39,7 @@ export default {
       ].join(".")
     },
     is_turn_key() {
-      return this.TheSp.mediator.current_location === this.location ? "active" : "inactive"
+      return this.TheSp.xcontainer.current_location === this.location ? "active" : "inactive"
     },
     flipable() {
       return this.TheSp.sp_location_behavior === "is_location_flip_on"

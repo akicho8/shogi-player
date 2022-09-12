@@ -4,7 +4,7 @@
     //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
     .button.is-small(slot="trigger")
       b-icon(icon="apps" size="is-small")
-    b-dropdown-item(v-for="record in TheSp.preset_info_values" :value="record.key" :key="record.key" @click="TheSp.mediator_setup_by_preset(record)")
+    b-dropdown-item(v-for="record in TheSp.preset_info_values" :value="record.key" :key="record.key" @click="TheSp.xcontainer_setup_by_preset(record)")
       | {{record.name}}
     b-dropdown-item(separator)
     b-dropdown-item キャンセル

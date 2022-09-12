@@ -86,7 +86,7 @@ export const edit_mode_module = {
       }
 
       // 移動後の取れる駒
-      this.killed_soldier = this.mediator.board.lookup(place)
+      this.killed_soldier = this.xcontainer.board.lookup(place)
 
       // 移動後の駒
       let new_soldier = null
@@ -115,7 +115,7 @@ export const edit_mode_module = {
         if (this.play_p) {
           if (!this.lifted_p) {
             if (this.killed_soldier) {
-              if (this.killed_soldier.location !== this.mediator.current_location) {
+              if (this.killed_soldier.location !== this.xcontainer.current_location) {
                 this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
                 this.$emit("operation_invalid2")
                 return
@@ -180,7 +180,7 @@ export const edit_mode_module = {
               this.log(`ダブルクリック判定: (${gap} ms < ${this.sp_edit_mode_double_click_time_ms}) -> ${enable}`)
               if (enable) {
                 this.log(`操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す`)
-                this.mediator.board.place_on(this.killed_soldier.transform_clone)
+                this.xcontainer.board.place_on(this.killed_soldier.transform_clone)
                 this.piece_hold_and_put_for_bug(place, e) // 不具合対策
                 return
               }
@@ -202,7 +202,7 @@ export const edit_mode_module = {
         if (this.meta_p(e)) {
           if (!this.lifted_p && this.killed_soldier) { // 持ってなくて、駒がある
             this.log("盤上の駒を裏返す")
-            this.mediator.board.place_on(this.killed_soldier.transform_clone)
+            this.xcontainer.board.place_on(this.killed_soldier.transform_clone)
             this.piece_hold_and_put_for_bug(place, e) // 不具合対策
             return
           }
@@ -222,15 +222,15 @@ export const edit_mode_module = {
 
         // 1つだけ動ける系
         if (!found) {
-          found = this.mediator.board.once_reach(this.origin_soldier1, place)
+          found = this.xcontainer.board.once_reach(this.origin_soldier1, place)
         }
 
         // 連続で動ける系
         if (!found) {
-          if (this.mediator.board.repeat_reach(this.origin_soldier1, place, {mode: "non_stop"})) {
+          if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place, {mode: "non_stop"})) {
             this.log("障害物を素通りすれば目的地に行ける")
             if (this.sp_play_mode_foul_check_p) {
-              if (this.mediator.board.repeat_reach(this.origin_soldier1, place)) {
+              if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place)) {
                 this.log("障害物なく目的地に行ける")
               } else {
                 this.log("障害物を飛び越えれば目的地に行ける")
@@ -252,7 +252,7 @@ export const edit_mode_module = {
         }
 
         if (this.sp_play_mode_foul_check_p) {
-          if (this.mediator.board.move_then_king_capture_p(this.origin_soldier1, place)) {
+          if (this.xcontainer.board.move_then_king_capture_p(this.origin_soldier1, place)) {
             if (this.foul_add("foul_death_king", {soldier: this.origin_soldier1, place: place}) === "__cancel__") { // 王手放置
               return
             }
@@ -264,7 +264,7 @@ export const edit_mode_module = {
       if (this.place_from) {
         this.log("盤上から移動")
         if (this.killed_soldier) {
-          this.mediator.hold_pieces_add(this.origin_soldier1.location, this.killed_soldier.piece) // 相手の駒があれば取る
+          this.xcontainer.hold_pieces_add(this.origin_soldier1.location, this.killed_soldier.piece) // 相手の駒があれば取る
           // this.$forceUpdate()
         }
 
@@ -301,8 +301,8 @@ export const edit_mode_module = {
             this.move_info_create({type: "move", from: this.origin_soldier1, to: new_soldier, killed_soldier: this.killed_soldier})
             this.moves_set()
           }
-          this.mediator.board.place_on(new_soldier) // 置く
-          this.mediator.board.delete_at(this.place_from)
+          this.xcontainer.board.place_on(new_soldier) // 置く
+          this.xcontainer.board.delete_at(this.place_from)
           this.state_reset()
           this.turn_next()
         }
@@ -319,7 +319,7 @@ export const edit_mode_module = {
           if (this.play_p) {
             if (this.have_piece.key === "P") {
               if (this.have_piece_location) {
-                if (this.mediator.board.pawn_exist_by_x(place.x, this.have_piece_location)) {
+                if (this.xcontainer.board.pawn_exist_by_x(place.x, this.have_piece_location)) {
                   if (this.foul_add("foul_two_pawn") === "__cancel__") { // 二歩
                     return
                   }
@@ -333,21 +333,21 @@ export const edit_mode_module = {
         if (this.killed_soldier) {
           if (this.have_piece_location) {
             // have_piece_location の駒台から移動した駒で取ったので have_piece_location の方に置く
-            this.mediator.hold_pieces_add(this.have_piece_location, this.killed_soldier.piece)
+            this.xcontainer.hold_pieces_add(this.have_piece_location, this.killed_soldier.piece)
           } else {
             // 駒箱から移動した駒で取ったので this.killed_soldier.location に返すとする場合
             if (false) {
-              this.mediator.hold_pieces_add(this.killed_soldier.location, this.killed_soldier.piece)
+              this.xcontainer.hold_pieces_add(this.killed_soldier.location, this.killed_soldier.piece)
             } else {
               // 駒の向きは先手と同じなのでわかりやすいように 先手に返す
-              this.mediator.hold_pieces_add(Location.fetch("black"), this.killed_soldier.piece)
+              this.xcontainer.hold_pieces_add(Location.fetch("black"), this.killed_soldier.piece)
             }
           }
         }
 
         const new_soldier = this.soldier_create_from_stand_or_box_on(place)
         this.piece_decriment()
-        this.mediator.board.place_on(new_soldier) // 置く
+        this.xcontainer.board.place_on(new_soldier) // 置く
         this.move_info_create({type: "put", to: new_soldier})
         this.moves_set()
         this.state_reset()
@@ -364,13 +364,13 @@ export const edit_mode_module = {
     //   }
     //
     //   const place = Place.fetch(xy)
-    //   const soldier = this.mediator.board.lookup(place)
+    //   const soldier = this.xcontainer.board.lookup(place)
     //
     //   if (this.edit_p) {
     //     if (!this.lifted_p) {
     //       if (soldier) {
     //         this.log("操作モードでダブルタップしたので裏返す")
-    //         // this.mediator.board.place_on(soldier.transform_clone)
+    //         // this.xcontainer.board.place_on(soldier.transform_clone)
     //         // this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //         return
     //       }
@@ -389,8 +389,8 @@ export const edit_mode_module = {
       new_soldier = new_soldier.clone_with_attrs({promoted: promoted})
       this.move_info_create({type: "promotable", from: this.origin_soldier1, to: new_soldier})
       this.moves_set() // 7g7f+
-      this.mediator.board.place_on(new_soldier) // 置く
-      this.mediator.board.delete_at(this.place_from)
+      this.xcontainer.board.place_on(new_soldier) // 置く
+      this.xcontainer.board.delete_at(this.place_from)
       this.state_reset()
       this.turn_next()
     },
@@ -400,7 +400,7 @@ export const edit_mode_module = {
       this.last_move_info = new MoveInfo({
         ...attrs,
         next_turn_offset: this.turn_offset + 1,           // この手を指した直後の手数。初手76歩なら1
-        player_location: this.mediator.current_location,  // 指した人の色。駒の色ではない
+        player_location: this.xcontainer.current_location,  // 指した人の色。駒の色ではない
         killed_soldier: this.killed_soldier,              // 取った駒 (無い場合もある)
         foul_list: this.foul_list,
       })
@@ -414,7 +414,7 @@ export const edit_mode_module = {
       }
 
       const place = Place.fetch(xy)
-      const soldier = this.mediator.board.lookup(place)
+      const soldier = this.xcontainer.board.lookup(place)
 
       if (this.hold_cancel(e)) {
         return
@@ -423,7 +423,7 @@ export const edit_mode_module = {
       if (this.edit_p) {
         if (!this.lifted_p && soldier) {
           this.log("盤上の駒を裏返す")
-          this.mediator.board.place_on(soldier.transform_clone)
+          this.xcontainer.board.place_on(soldier.transform_clone)
           this.piece_hold_and_put_for_bug(place, e) // 不具合対策
         }
       }
@@ -437,7 +437,7 @@ export const edit_mode_module = {
     //   }
     //
     //   const place = Place.fetch(xy)
-    //   const soldier = this.mediator.board.lookup(place)
+    //   const soldier = this.xcontainer.board.lookup(place)
     //
     //   if (this.hold_cancel(e)) {
     //     return
@@ -446,7 +446,7 @@ export const edit_mode_module = {
     //   if (this.edit_p) {
     //     if (!this.lifted_p && soldier) {
     //       this.log("盤上の駒を裏返す")
-    //       this.mediator.board.place_on(soldier.transform_clone)
+    //       this.xcontainer.board.place_on(soldier.transform_clone)
     //       this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //     }
     //   }
@@ -507,7 +507,7 @@ export const edit_mode_module = {
       // }
 
       // クリックしたけど持駒がない
-      if (this.mediator.hold_pieces_count(location, piece) <= 0) {
+      if (this.xcontainer.hold_pieces_count(location, piece) <= 0) {
         this.log("クリックしたけど持駒がない")
         return
       }
@@ -515,7 +515,7 @@ export const edit_mode_module = {
       // 相手の持駒を持とうとしたときは無効
       if (this.sp_play_mode_only_own_piece_to_move) {
         if (this.play_p) {
-          if (location !== this.mediator.current_location) {
+          if (location !== this.xcontainer.current_location) {
             this.log("相手の持駒を持とうとしたときは無効")
             return
           }
@@ -568,15 +568,15 @@ export const edit_mode_module = {
       if (this.have_piece_location && this.have_piece) {
         this.log("駒台から駒箱に移動")
         const count = this.hold_piece_source_cut(e)               // 相手の持駒を減らして減らした分だけ
-        this.mediator.piece_box_add(this.have_piece, count) // 駒箱に加算する
+        this.xcontainer.piece_box_add(this.have_piece, count) // 駒箱に加算する
         this.state_reset()
         return true
       }
 
       if (this.origin_soldier1) {
         this.log("盤上の駒を駒箱に移動")
-        this.mediator.piece_box_add(this.origin_soldier1.piece)
-        this.mediator.board.delete_at(this.origin_soldier1.place)
+        this.xcontainer.piece_box_add(this.origin_soldier1.piece)
+        this.xcontainer.board.delete_at(this.origin_soldier1.place)
         this.state_reset()
         return true
       }
@@ -613,15 +613,15 @@ export const edit_mode_module = {
 
     // 盤上の駒を駒台に置く
     board_soldir_to_hold_pieces(location) {
-      this.mediator.hold_pieces_add(location, this.origin_soldier1.piece) // 駒台にプラス
-      this.mediator.board.delete_at(this.origin_soldier1.place)
+      this.xcontainer.hold_pieces_add(location, this.origin_soldier1.piece) // 駒台にプラス
+      this.xcontainer.board.delete_at(this.origin_soldier1.place)
       this.state_reset()
     },
 
     hold_pieces_move_to_my_hold_pieces(e, location) {
       this.log("相手の持駒を自分の駒台に移動")
       const count = this.hold_piece_source_cut(e)                           // 相手の持駒を減らして減らした分だけ
-      this.mediator.hold_pieces_add(location, this.have_piece, count) // 自分に加算する
+      this.xcontainer.hold_pieces_add(location, this.have_piece, count) // 自分に加算する
       this.state_reset()
     },
 
@@ -633,18 +633,18 @@ export const edit_mode_module = {
         this.log("相手の駒箱から移動")
         if (this.meta_p(e)) {
           this.log("シフトが押されていたので全部移動")
-          count = this.mediator.hold_pieces_count(this.have_piece_location, this.have_piece)
+          count = this.xcontainer.hold_pieces_count(this.have_piece_location, this.have_piece)
         }
-        count = this.mediator.hold_pieces_can_be_reduced_count(this.have_piece_location, this.have_piece, count)
-        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -count)
+        count = this.xcontainer.hold_pieces_can_be_reduced_count(this.have_piece_location, this.have_piece, count)
+        this.xcontainer.hold_pieces_add(this.have_piece_location, this.have_piece, -count)
       } else {
         this.log("駒箱から移動")
         if (this.meta_p(e)) {
           this.log("シフトが押されていたので全部移動")
-          count = this.mediator.piece_box_count(this.have_piece)
+          count = this.xcontainer.piece_box_count(this.have_piece)
         }
-        count = this.mediator.piece_box_can_be_reduced_count(this.have_piece, count) // 減らせる数を clamp する。そうしないと駒箱から移動するときに駒が増えいく
-        this.mediator.piece_box_add(this.have_piece, -count)
+        count = this.xcontainer.piece_box_can_be_reduced_count(this.have_piece, count) // 減らせる数を clamp する。そうしないと駒箱から移動するときに駒が増えいく
+        this.xcontainer.piece_box_add(this.have_piece, -count)
       }
 
       // 実際に減らせれた数を返す(重要)
@@ -654,9 +654,9 @@ export const edit_mode_module = {
     // 駒を1つ減らす
     piece_decriment() {
       if (this.have_piece_location) {
-        this.mediator.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
+        this.xcontainer.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
       } else {
-        this.mediator.piece_box_add(this.have_piece, -1)
+        this.xcontainer.piece_box_add(this.have_piece, -1)
       }
     },
 
@@ -665,7 +665,7 @@ export const edit_mode_module = {
     put_on_my_soldier_p(soldier) {
       if (this.lifted_p) {
         if (soldier) {
-          if (soldier.location === this.mediator.current_location) {
+          if (soldier.location === this.xcontainer.current_location) {
             if (_.isEqual(this.place_from, soldier.place)) {
               // 持ち上げた駒と同じ位置
             } else {
@@ -719,18 +719,18 @@ export const edit_mode_module = {
 
     fn_flip_all() {
       // 盤面反転
-      this.mediator.board = this.mediator.board.flip_all
+      this.xcontainer.board = this.xcontainer.board.flip_all
 
       // 持駒反転
-      this.mediator.hold_pieces = _.reduce(Location.values, (a, e) => {
-        a[e.key] = this.mediator.hold_pieces[e.flip.key]
+      this.xcontainer.hold_pieces = _.reduce(Location.values, (a, e) => {
+        a[e.key] = this.xcontainer.hold_pieces[e.flip.key]
         return a
       }, {})
     },
 
     fn_flop() {
       // 盤面左右反転
-      this.mediator.board = this.mediator.board.flop
+      this.xcontainer.board = this.xcontainer.board.flop
     },
 
     init_location_toggle() {
@@ -759,7 +759,7 @@ export const edit_mode_module = {
     // 移動元の駒(盤上から)
     origin_soldier1() {
       if (this.place_from) {
-        return this.mediator.board.lookup(this.place_from)
+        return this.xcontainer.board.lookup(this.place_from)
       }
     },
 
@@ -787,7 +787,7 @@ export const edit_mode_module = {
     // 片方の手番だけを操作できるようにする sp_human_side の指定があってCPUの手番？
     cpu_location_p() {
       if (this.play_p) {
-        return !_.includes(this.human_locations, this.mediator.current_location)
+        return !_.includes(this.human_locations, this.xcontainer.current_location)
       }
     },
 

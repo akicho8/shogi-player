@@ -1,6 +1,6 @@
 import _ from "lodash"
 
-import { Mediator } from "./models/mediator.js"
+import { Xcontainer } from "./models/xcontainer.js"
 import { Location } from "./models/location.js"
 import { HumanSideInfo } from "./models/human_side_info.js"
 import { EffectInfo } from "./models/effect_info.js"
@@ -20,13 +20,13 @@ export const play_mode_module = {
   },
 
   created() {
-    // this.$watch("mediator", () => this.emit_update_edit_mode_short_sfen(), {deep: true})
+    // this.$watch("xcontainer", () => this.emit_update_edit_mode_short_sfen(), {deep: true})
     // this.$watch("init_location_key", () => this.emit_update_edit_mode_short_sfen(), {deep: true})
 
     this.$watch(() => [
-      this.mediator,
+      this.xcontainer,
       this.init_location_key,
-      // this.mediator.hold_pieces,
+      // this.xcontainer.hold_pieces,
     ], () => {
       this.emit_update_edit_mode_short_sfen()
       // this.$emit("update:edit_mode_short_sfen", this.edit_mode_short_sfen())
@@ -42,9 +42,9 @@ export const play_mode_module = {
       this.$emit("update:edit_mode_short_sfen2", v)
     },
 
-    // もともと mediator を watch していたがそれだと to_short_sfen が変化しているかどうかにかかわらず呼ばれてしまっていた
+    // もともと xcontainer を watch していたがそれだと to_short_sfen が変化しているかどうかにかかわらず呼ばれてしまっていた
     // to_short_sfen の変化を監視したいのだからそれを指定しないといけない
-    "mediator.to_short_sfen": {
+    "xcontainer.to_short_sfen": {
       handler(v) {
         this.$emit("update:short_sfen", v)
       },
@@ -68,12 +68,12 @@ export const play_mode_module = {
     play_mode_setup_from(old_val) {
       this.log("play_mode_setup_from")
 
-      if (this.mediator.data_source.init_sfen !== undefined) {
+      if (this.xcontainer.data_source.init_sfen !== undefined) {
         // 棋譜の最初からの指し手をすべて保持
         // view_mode -> play_mode
         if (old_val === "view_mode") {
-          this.init_sfen = this.mediator.data_source.init_sfen
-          this.moves = this.mediator.data_source.moves
+          this.init_sfen = this.xcontainer.data_source.init_sfen
+          this.moves = this.xcontainer.data_source.moves
         }
         // edit_mode -> play_mode
         if (old_val === "edit_mode") {
@@ -82,12 +82,12 @@ export const play_mode_module = {
       } else {
         // 現時点の状態から始める (KIFの場合)
         if (old_val === "view_mode") {
-          this.init_location_key = this.mediator.current_location.key
+          this.init_location_key = this.xcontainer.current_location.key
         }
         this.init_sfen_set()
       }
 
-      this.play_mode_mediator_seek_to(this.turn_offset)
+      this.play_mode_xcontainer_seek_to(this.turn_offset)
     },
 
     // 現在の状態を基点として play_mode に入る
@@ -96,11 +96,11 @@ export const play_mode_module = {
       this.moves = []
     },
 
-    play_mode_mediator_seek_to(turn) {
-      this.mediator = new Mediator()
-      this.mediator.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
-      this.mediator.current_turn = turn
-      this.mediator.run()
+    play_mode_xcontainer_seek_to(turn) {
+      this.xcontainer = new Xcontainer()
+      this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
+      this.xcontainer.current_turn = turn
+      this.xcontainer.run()
       this.flip_if_white_run()
     },
 
@@ -118,10 +118,10 @@ export const play_mode_module = {
         }
 
         // ↓FIXME: これも20msほどかかるので実行したくない
-        this.mediator = new Mediator()
-        this.mediator.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
-        this.mediator.current_turn = -1
-        this.mediator.run()
+        this.xcontainer = new Xcontainer()
+        this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
+        this.xcontainer.current_turn = -1
+        this.xcontainer.run()
         this.$nextTick(() => this.sound_play("piece_put")) // 音がずれるため少し待つ 20ms 待たない場合は nextTick 不要
 
         this.$emit("update:play_mode_advanced_full_moves_sfen", {
@@ -134,7 +134,7 @@ export const play_mode_module = {
 
         // 遅いのでデフォルトではOFFにする。消してもいい
         if (this.play_mode_advanced_short_sfen_emit) {
-          this.$emit("update:play_mode_advanced_short_sfen", this.mediator.to_short_sfen) // 14 ms
+          this.$emit("update:play_mode_advanced_short_sfen", this.xcontainer.to_short_sfen) // 14 ms
         }
 
         // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする
@@ -144,8 +144,8 @@ export const play_mode_module = {
 
     // 現在の状態を基点とした moves がない棋譜 (init_location が反映されていることが重要)
     edit_mode_short_sfen() {
-      if (this.mediator) {
-        const serializer = this.mediator.sfen_serializer
+      if (this.xcontainer) {
+        const serializer = this.xcontainer.sfen_serializer
         return [
           "position sfen",
           serializer.to_board_sfen,
@@ -192,18 +192,18 @@ export const play_mode_module = {
     // 不具合再現手順
     // 1. 編集モード→詰将棋
     // 2. 51の玉をvで反転(OK)
-    //    → this.mediator.sfen_serializer.to_board_sfen は変化する
+    //    → this.xcontainer.sfen_serializer.to_board_sfen は変化する
     //    → edit_mode_short_sfen2 も変化する
     // 3. 駒台の玉を11に置いてvで反転(ここがおかしい)
-    //    → this.mediator.sfen_serializer.to_board_sfen は変化する
+    //    → this.xcontainer.sfen_serializer.to_board_sfen は変化する
     //    → edit_mode_short_sfen2 が変化しない
     //
-    // 暫定策として mediator と init_location_key だけを監視する watch を入れてそのなかで edit_mode_short_sfen() を実行している
+    // 暫定策として xcontainer と init_location_key だけを監視する watch を入れてそのなかで edit_mode_short_sfen() を実行している
     //
     edit_mode_short_sfen2() {
       return this.edit_mode_short_sfen()
-      // if (this.mediator) {
-      //   const serializer = this.mediator.sfen_serializer
+      // if (this.xcontainer) {
+      //   const serializer = this.xcontainer.sfen_serializer
       //   return [
       //     "position sfen",
       //     serializer.to_board_sfen,

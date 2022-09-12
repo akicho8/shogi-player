@@ -145,21 +145,21 @@ export const navi_module = {
     },
 
     current_turn_add(v, event = null) {
-      this.current_turn_set(this.mediator.turn_offset + v, event)
+      this.current_turn_set(this.xcontainer.turn_offset + v, event)
     },
 
     current_turn_set(v, event) {
-      const new_val = this.mediator.turn_clamp(v)
+      const new_val = this.xcontainer.turn_clamp(v)
       const updated = this.turn_offset !== new_val
 
       if (updated) {
         this.state_reset() // 駒を持った状態でコントローラーを操作したとき駒を持ち上げた状態が残るのを防ぐ
 
         if (this.view_p) {
-          this.view_mode_mediator_update(new_val)
+          this.view_mode_xcontainer_update(new_val)
         }
         if (this.play_p) {
-          this.play_mode_mediator_seek_to(new_val)
+          this.play_mode_xcontainer_seek_to(new_val)
         }
         this.sound_play("piece_put")
         this.$emit("update:sp_turn", this.turn_offset)

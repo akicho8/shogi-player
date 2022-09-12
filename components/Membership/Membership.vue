@@ -45,7 +45,7 @@ export default {
       const list = []
       list.push(`is_position_${this.position}`) // 一番上で定義してあるので子には渡す必要なし
       list.push(`is_${this.location.key}`)
-      if (this.TheSp.mediator.current_location === this.location) {
+      if (this.TheSp.xcontainer.current_location === this.location) {
         list.push("is_turn_active")
       } else {
         list.push("is_turn_inactive")
@@ -62,7 +62,7 @@ export default {
     },
 
     hold_pieces() {
-      return this.TheSp.mediator.realized_hold_pieces_of(this.location.flip_if(this.TheSp.fliped).key)
+      return this.TheSp.xcontainer.realized_hold_pieces_of(this.location.flip_if(this.TheSp.fliped).key)
     },
   },
 }

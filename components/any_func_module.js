@@ -28,7 +28,7 @@ export const any_func_module = {
 
     shuffle_run(size) {
       size = parseInt(size)
-      if (!this.mediator.shuffle_apply(size)) {
+      if (!this.xcontainer.shuffle_apply(size)) {
         this.$buefy.toast.open({message: `${size} x ${size} が盤上の駒の数より少ないため何もしませんでした`, position: "is-bottom", queue: false, duration: 1000 * 2.0, type: "is-warning"})
       }
     },

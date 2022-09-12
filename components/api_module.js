@@ -1,34 +1,34 @@
 import { Soldier } from "./models/soldier.js"
-import { Mediator } from "./models/mediator.js"
+import { Xcontainer } from "./models/xcontainer.js"
 
 export const api_module = {
   methods: {
     // 盤を消してランダムに駒を配置する
     api_random_puton() {
       const soldier = Soldier.random()
-      this.mediator.board.clear()
-      this.mediator.board.place_on(soldier)
+      this.xcontainer.board.clear()
+      this.xcontainer.board.place_on(soldier)
       return soldier
     },
 
     // 駒を置く
     api_place_on(soldier) {
-      this.mediator.board.place_on(soldier)
+      this.xcontainer.board.place_on(soldier)
     },
 
     // 盤面クリア
     api_board_clear() {
-      this.mediator.board.clear()
+      this.xcontainer.board.clear()
     },
 
     // 指定手数の局面に設定
     api_board_turn_set(turn) {
-      this.mediator_setup(turn)
+      this.xcontainer_setup(turn)
     },
 
     // 指定手数の局面に設定(play_mode専用・音が出ない)
-    api_play_mode_mediator_seek_to(turn) {
-      this.play_mode_mediator_seek_to(turn)
+    api_play_mode_xcontainer_seek_to(turn) {
+      this.play_mode_xcontainer_seek_to(turn)
     },
 
     // 反転状態の設定
@@ -55,10 +55,10 @@ export const api_module = {
 
     // 棋譜の反映
     api_sfen_or_kif_set(sfen_or_kif, options = {}) {
-      this.mediator = new Mediator()
-      this.mediator.data_source = this.data_source_by(sfen_or_kif)
-      this.mediator.current_turn = options.turn || 0
-      this.mediator.run()
+      this.xcontainer = new Xcontainer()
+      this.xcontainer.data_source = this.data_source_by(sfen_or_kif)
+      this.xcontainer.current_turn = options.turn || 0
+      this.xcontainer.run()
     },
 
     // slider にフォーカスする

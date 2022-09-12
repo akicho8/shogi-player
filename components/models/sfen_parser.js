@@ -9,24 +9,24 @@ import { Place      } from "./place.js"
 import { Soldier    } from "./soldier.js"
 import { Location   } from "./location.js"
 import { MoveHash   } from "./move_hash.js"
-import { Mediator   } from "./mediator.js"
+import { Xcontainer   } from "./xcontainer.js"
 
 export class SfenParser extends ParserBase {
   static sfen_flop(sfen) {
     const source = this.parse(sfen)
 
-    // 方法1. Mediator を仲介する方法
-    // 一応動くけど Mediator まで出動する必要はない
+    // 方法1. Xcontainer を仲介する方法
+    // 一応動くけど Xcontainer まで出動する必要はない
     // もっと下位層のライブラリで行うべき
     if (false) {
-      const mediator = new Mediator()
-      mediator.data_source = source
-      mediator.current_turn = 0
-      mediator.run()
-      mediator.board = mediator.board.flop
+      const xcontainer = new Xcontainer()
+      xcontainer.data_source = source
+      xcontainer.current_turn = 0
+      xcontainer.run()
+      xcontainer.board = xcontainer.board.flop
 
       const parts = []
-      parts.push(mediator.to_short_sfen)
+      parts.push(xcontainer.to_short_sfen)
 
       const v = source.move_infos
       if (v.length >= 1) {

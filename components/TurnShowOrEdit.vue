@@ -6,7 +6,7 @@
     // is-inline-block にすることで縦の margin が効く
     .SpTurnText.is-inline-block(@click.stop.prevent="turn_edit_handle")
       template(v-if="TheSp.view_p")
-        | {{TheSp.mediator.current_turn_label}}
+        | {{TheSp.xcontainer.current_turn_label}}
       template(v-if="TheSp.play_p")
         template(v-if="TheSp.turn_base === 0")
           | {{TheSp.turn_offset}}
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     component_alive_p() {
-      return this.TheSp.mediator && this.TheSp.sp_summary === "is_summary_on" && (this.TheSp.view_p || this.TheSp.play_p)
+      return this.TheSp.xcontainer && this.TheSp.sp_summary === "is_summary_on" && (this.TheSp.view_p || this.TheSp.play_p)
     },
   },
 }
