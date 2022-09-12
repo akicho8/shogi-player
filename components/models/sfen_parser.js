@@ -26,7 +26,7 @@ export class SfenParser extends ParserBase {
       mediator.board = mediator.board.flop
 
       const parts = []
-      parts.push(mediator.to_position_sfen)
+      parts.push(mediator.to_short_sfen)
 
       const v = source.move_infos
       if (v.length >= 1) {

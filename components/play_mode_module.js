@@ -42,9 +42,9 @@ export const play_mode_module = {
       this.$emit("update:edit_mode_snapshot_sfen2", v)
     },
 
-    // もともと mediator を watch していたがそれだと to_position_sfen が変化しているかどうかにかかわらず呼ばれてしまっていた
-    // to_position_sfen の変化を監視したいのだからそれを指定しないといけない
-    "mediator.to_position_sfen": {
+    // もともと mediator を watch していたがそれだと to_short_sfen が変化しているかどうかにかかわらず呼ばれてしまっていた
+    // to_short_sfen の変化を監視したいのだからそれを指定しないといけない
+    "mediator.to_short_sfen": {
       handler(v) {
         this.$emit("update:mediator_snapshot_sfen", v)
       },
@@ -134,7 +134,7 @@ export const play_mode_module = {
 
         // 遅いのでデフォルトではOFFにする。消してもいい
         if (this.play_mode_advanced_snapshot_sfen_emit) {
-          this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_position_sfen) // 14 ms
+          this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_short_sfen) // 14 ms
         }
 
         // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする

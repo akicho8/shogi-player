@@ -213,7 +213,7 @@ export class Mediator {
   }
 
   // position sfen 4k4/9/4G4/9/9/9/9/9/9 b G2r2b2g4s4n4l18p 1
-  get to_position_sfen() {
+  get to_short_sfen() {
     return `position sfen ${this.to_simple_sfen}`
   }
 

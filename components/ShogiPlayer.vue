@@ -231,7 +231,7 @@ export default {
         this.log("new_run_mode: edit_mode")
 
         const new_mediator = new Mediator()
-        new_mediator.data_source = this.data_source_by(this.mediator.to_position_sfen)
+        new_mediator.data_source = this.data_source_by(this.mediator.to_short_sfen)
         new_mediator.current_turn = 0
         new_mediator.run()
 

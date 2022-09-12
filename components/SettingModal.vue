@@ -40,7 +40,7 @@
 
     template(v-if="TheSp.mediator")
       b-field(label="再生モードの現局面(Readonly)")
-        b-input(:value="TheSp.mediator.to_position_sfen" type="input" size="is-small" readonly)
+        b-input(:value="TheSp.mediator.to_short_sfen" type="input" size="is-small" readonly)
 
     b-field(label="編集モードの現局面(Readonly) ※BUG:駒を反転したときに反映されない場合がある")
       b-input(:value="TheSp.edit_mode_snapshot_sfen2" type="input" size="is-small" readonly)
