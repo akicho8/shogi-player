@@ -42,13 +42,12 @@ export const play_mode_module = {
       this.$emit("update:edit_mode_snapshot_sfen2", v)
     },
 
-    // 操作モード(または再生モード)で盤面が変化したとき(常に更新)
-    mediator: {
+    // もともと mediator を watch していたがそれだと to_position_sfen が変化しているかどうかにかかわらず呼ばれてしまっていた
+    // to_position_sfen の変化を監視したいのだからそれを指定しないといけない
+    "mediator.to_position_sfen": {
       handler(v) {
-        // FIXME: これも遅い？
-        this.$emit("update:mediator_snapshot_sfen", v.to_position_sfen)
+        this.$emit("update:mediator_snapshot_sfen", v)
       },
-      deep: true,
     },
 
     // 現在の手数を返す
@@ -126,7 +125,8 @@ export const play_mode_module = {
         this.$nextTick(() => this.sound_play("piece_put")) // 音がずれるため少し待つ 20ms 待たない場合は nextTick 不要
 
         this.$emit("update:play_mode_advanced_full_moves_sfen", {
-          sfen:           this.play_mode_full_moves_sfen,
+          sfen:           this.play_mode_full_moves_sfen, // sfen と
+          turn:           this.turn_offset,               // turn を同時に更新するの重要
           last_move_info: this.last_move_info,
         })
 
