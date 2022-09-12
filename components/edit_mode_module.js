@@ -710,7 +710,7 @@ export const edit_mode_module = {
       // this.soldier_hold(place, e)
       this.state_reset() // ←これは絶対にいる
       // emitされない不具合の暫定対策でちょうどここが共通処理になっているのでつっこんでおく
-      // this.emit_update_edit_mode_snapshot_sfen()
+      // this.emit_update_edit_mode_short_sfen()
     },
 
     // -------------------------------------------------------------------------------- PieceBox

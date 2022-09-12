@@ -59,7 +59,7 @@
     tbody
       DebugBlockRow(code="update_counter"          name="view_modeでの棋譜更新回数"        :value="TheSp.update_counter")
       DebugBlockRow(code="init_location_key"       name="編集モード時の手番"               :value="TheSp.init_location_key")
-      DebugBlockRow(code="edit_mode_snapshot_sfen()" name="編集モード時の手番を反映したSFEN" :value="TheSp.edit_mode_snapshot_sfen()")
+      DebugBlockRow(code="edit_mode_short_sfen()" name="編集モード時の手番を反映したSFEN" :value="TheSp.edit_mode_short_sfen()")
 </template>
 
 <script>

@@ -112,8 +112,8 @@
           b-field(custom-class="is-small" label="@update:play_mode_advanced_full_moves_sfen: 操作モードで指した直後の局面を発行(movesあり)")
             b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_full_moves_sfen)" readonly type="textarea" rows="1")
 
-          b-field(custom-class="is-small" label="@update:play_mode_advanced_snapshot_sfen: 操作モードで指した直後の局面を発行(movesなし)")
-            b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_snapshot_sfen)" readonly type="textarea")
+          b-field(custom-class="is-small" label="@update:play_mode_advanced_short_sfen: 操作モードで指した直後の局面を発行(movesなし)")
+            b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_short_sfen)" readonly type="textarea")
 
           //- b-field(custom-class="is-small" label="@update:play_mode_advanced_last_move: 操作モードで指した手(sfenのmovesの最後の1つ)")
           //-   b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_last_move)" readonly type="textarea")
@@ -121,11 +121,11 @@
           b-field(custom-class="is-small" label="@update:play_mode_advanced_moves: 操作モードで指した手を含むmoves配列")
             b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_moves)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@update:mediator_snapshot_sfen: 操作モード(または再生モード)で盤面が変化したとき(常に更新)")
-            b-input(size="is-small" :value="JSON.stringify(mediator_snapshot_sfen)" readonly type="textarea")
+          b-field(custom-class="is-small" label="@update:short_sfen: 操作モード(または再生モード)で盤面が変化したとき(常に更新)")
+            b-input(size="is-small" :value="JSON.stringify(short_sfen)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@update:edit_mode_snapshot_sfen: 編集モードで盤面が変化したとき")
-            b-input(size="is-small" :value="JSON.stringify(edit_mode_snapshot_sfen)" readonly type="textarea")
+          b-field(custom-class="is-small" label="@update:edit_mode_short_sfen: 編集モードで盤面が変化したとき")
+            b-input(size="is-small" :value="JSON.stringify(edit_mode_short_sfen)" readonly type="textarea")
 
           b-field(custom-class="is-small" label="@update:turn_offset: 手数が変化したとき")
             b-input(size="is-small" :value="JSON.stringify(turn_offset)" readonly type="text")
@@ -173,10 +173,10 @@
             :sp_sound_volume="sp_sound_volume"
             :sp_human_side="sp_human_side"
 
-            @update:edit_mode_snapshot_sfen="            e => trigger_check('edit_mode_snapshot_sfen', e)"
-            @update:mediator_snapshot_sfen="             e => trigger_check('mediator_snapshot_sfen', e)"
+            @update:edit_mode_short_sfen="            e => trigger_check('edit_mode_short_sfen', e)"
+            @update:short_sfen="             e => trigger_check('short_sfen', e)"
             @update:play_mode_advanced_full_moves_sfen=" e => trigger_check('play_mode_advanced_full_moves_sfen', e)"
-            @update:play_mode_advanced_snapshot_sfen="   e => trigger_check('play_mode_advanced_snapshot_sfen', e)"
+            @update:play_mode_advanced_short_sfen="   e => trigger_check('play_mode_advanced_short_sfen', e)"
             @update:play_mode_advanced_moves="           e => trigger_check('play_mode_advanced_moves', e)"
             @update:turn_offset="                        e => trigger_check('turn_offset', e)"
             @update:turn_offset_max="                    e => trigger_check('turn_offset_max', e)"
@@ -281,10 +281,10 @@ export default {
 
       trigger_toast_p: false,
 
-      edit_mode_snapshot_sfen: null,
-      mediator_snapshot_sfen: null,
+      edit_mode_short_sfen: null,
+      short_sfen: null,
       play_mode_advanced_full_moves_sfen: null,
-      play_mode_advanced_snapshot_sfen: null,
+      play_mode_advanced_short_sfen: null,
       // play_mode_advanced_last_move: null,
       play_mode_advanced_moves: null,
       turn_offset: null,

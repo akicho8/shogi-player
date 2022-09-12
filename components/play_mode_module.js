@@ -8,7 +8,7 @@ import { EffectInfo } from "./models/effect_info.js"
 export const play_mode_module = {
   props: {
     sp_human_side: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
-    play_mode_advanced_snapshot_sfen_emit: { type: Boolean, default: false, },
+    play_mode_advanced_short_sfen_emit: { type: Boolean, default: false, },
   },
 
   data() {
@@ -20,16 +20,16 @@ export const play_mode_module = {
   },
 
   created() {
-    // this.$watch("mediator", () => this.emit_update_edit_mode_snapshot_sfen(), {deep: true})
-    // this.$watch("init_location_key", () => this.emit_update_edit_mode_snapshot_sfen(), {deep: true})
+    // this.$watch("mediator", () => this.emit_update_edit_mode_short_sfen(), {deep: true})
+    // this.$watch("init_location_key", () => this.emit_update_edit_mode_short_sfen(), {deep: true})
 
     this.$watch(() => [
       this.mediator,
       this.init_location_key,
       // this.mediator.hold_pieces,
     ], () => {
-      this.emit_update_edit_mode_snapshot_sfen()
-      // this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
+      this.emit_update_edit_mode_short_sfen()
+      // this.$emit("update:edit_mode_short_sfen", this.edit_mode_short_sfen())
     }, {deep: true})
   },
 
@@ -38,15 +38,15 @@ export const play_mode_module = {
 
   watch: {
     // 不具合確認用
-    edit_mode_snapshot_sfen2(v) {
-      this.$emit("update:edit_mode_snapshot_sfen2", v)
+    edit_mode_short_sfen2(v) {
+      this.$emit("update:edit_mode_short_sfen2", v)
     },
 
     // もともと mediator を watch していたがそれだと to_short_sfen が変化しているかどうかにかかわらず呼ばれてしまっていた
     // to_short_sfen の変化を監視したいのだからそれを指定しないといけない
     "mediator.to_short_sfen": {
       handler(v) {
-        this.$emit("update:mediator_snapshot_sfen", v)
+        this.$emit("update:short_sfen", v)
       },
     },
 
@@ -92,7 +92,7 @@ export const play_mode_module = {
 
     // 現在の状態を基点として play_mode に入る
     init_sfen_set() {
-      this.init_sfen = this.edit_mode_snapshot_sfen()
+      this.init_sfen = this.edit_mode_short_sfen()
       this.moves = []
     },
 
@@ -133,8 +133,8 @@ export const play_mode_module = {
         this.$emit("update:play_mode_advanced_moves", this.moves)
 
         // 遅いのでデフォルトではOFFにする。消してもいい
-        if (this.play_mode_advanced_snapshot_sfen_emit) {
-          this.$emit("update:play_mode_advanced_snapshot_sfen", this.mediator.to_short_sfen) // 14 ms
+        if (this.play_mode_advanced_short_sfen_emit) {
+          this.$emit("update:play_mode_advanced_short_sfen", this.mediator.to_short_sfen) // 14 ms
         }
 
         // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする
@@ -143,7 +143,7 @@ export const play_mode_module = {
     },
 
     // 現在の状態を基点とした moves がない棋譜 (init_location が反映されていることが重要)
-    edit_mode_snapshot_sfen() {
+    edit_mode_short_sfen() {
       if (this.mediator) {
         const serializer = this.mediator.sfen_serializer
         return [
@@ -156,9 +156,9 @@ export const play_mode_module = {
       }
     },
 
-    emit_update_edit_mode_snapshot_sfen() {
+    emit_update_edit_mode_short_sfen() {
       if (this.edit_p) {
-        this.$emit("update:edit_mode_snapshot_sfen", this.edit_mode_snapshot_sfen())
+        this.$emit("update:edit_mode_short_sfen", this.edit_mode_short_sfen())
       }
     },
   },
@@ -193,15 +193,15 @@ export const play_mode_module = {
     // 1. 編集モード→詰将棋
     // 2. 51の玉をvで反転(OK)
     //    → this.mediator.sfen_serializer.to_board_sfen は変化する
-    //    → edit_mode_snapshot_sfen2 も変化する
+    //    → edit_mode_short_sfen2 も変化する
     // 3. 駒台の玉を11に置いてvで反転(ここがおかしい)
     //    → this.mediator.sfen_serializer.to_board_sfen は変化する
-    //    → edit_mode_snapshot_sfen2 が変化しない
+    //    → edit_mode_short_sfen2 が変化しない
     //
-    // 暫定策として mediator と init_location_key だけを監視する watch を入れてそのなかで edit_mode_snapshot_sfen() を実行している
+    // 暫定策として mediator と init_location_key だけを監視する watch を入れてそのなかで edit_mode_short_sfen() を実行している
     //
-    edit_mode_snapshot_sfen2() {
-      return this.edit_mode_snapshot_sfen()
+    edit_mode_short_sfen2() {
+      return this.edit_mode_short_sfen()
       // if (this.mediator) {
       //   const serializer = this.mediator.sfen_serializer
       //   return [

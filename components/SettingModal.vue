@@ -43,7 +43,7 @@
         b-input(:value="TheSp.mediator.to_short_sfen" type="input" size="is-small" readonly)
 
     b-field(label="編集モードの現局面(Readonly) ※BUG:駒を反転したときに反映されない場合がある")
-      b-input(:value="TheSp.edit_mode_snapshot_sfen2" type="input" size="is-small" readonly)
+      b-input(:value="TheSp.edit_mode_short_sfen2" type="input" size="is-small" readonly)
 
     b-field(label="再生モードの棋譜(Readonly)")
       b-input(:value="TheSp.kifu_source" type="textarea" size="is-small" readonly)
