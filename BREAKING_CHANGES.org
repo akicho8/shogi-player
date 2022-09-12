@@ -1,6 +1,11 @@
 * 変更点
 
-全置換
-- BoardWood -> MainBoard
-- hflip -> flop
-
+|------------------------+---------------+
+| 置換前                 | 後            |
+|------------------------+---------------+
+| BoardWood              | MainBoard     |
+| hflip                  | flop          |
+| snapshot_sfen          | short_sfen    |
+| to_position_sfen       | to_short_sfen |
+| mediator_snapshot_sfen | short_sfen    |
+|------------------------+---------------+
