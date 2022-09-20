@@ -193,6 +193,10 @@ export default {
         loader: "file-loader",
         options: {
           name: "[path][name].[ext]",
+          // require("path/to/xxx.wav") が { default: "/_nuxt/blob/xxx.wav", __esModule: true, ...} になってしまう対策
+          // https://github.com/webpack-contrib/file-loader#esmodule
+          // false にすると単にパス "/_nuxt/blob/xxx.wav" になる
+          esModule: false,
         },
       })
 
