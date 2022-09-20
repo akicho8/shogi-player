@@ -19,7 +19,7 @@
     "buefy": "^0.9.22",
     "bulma": "^0.9.4",
     "chroma-js": "^2.1.0",
-    "dayjs": "latest",
+    "dayjs": "^1.11.5",
     "file-loader": "^6.2.0",
     "howler": "^2.2.1",
     "js-memory-record": "^0.0.22",
