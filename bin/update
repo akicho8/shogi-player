@@ -1,8 +1,10 @@
 #!/bin/sh
+yarn global add npm-check-updates
 ncu /router/ -u
-ncu /lodash/ -u
-ncu /buefy/ -u
-ncu /bulma/ -u
-ncu /pug/ -u
-ncu /js-memory-record/ -u
+ncu lodash -u
+ncu buefy -u
+ncu bulma -u
+ncu pug -u
+ncu nuxt -u
+ncu js-memory-record -u
 yarn
