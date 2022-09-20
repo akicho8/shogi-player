@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 // 上に被せてすべてを押せないようにする
 .ShogiPlayer
   &.is_run_mode_view_mode

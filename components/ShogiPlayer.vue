@@ -435,7 +435,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "support.sass"
+@use "support.sass"
 .ShogiPlayer
   width: 100%
 </style>

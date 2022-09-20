@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 .ShogiPlayerGround
   +defvar(sp_body_width, 100%)      // 盤(駒台を含む)の幅         FIXME: とる
   +defvar(sp_body_max_width, none)  // 盤(駒台を含む)の最大幅     FIXME: とる

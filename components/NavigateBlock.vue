@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 
 .ShogiPlayerGround
   +defvar(sp_controller_width, 0.5)        // コントローラー横幅

@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
+@use "../support.sass"
 .ShogiPlayerGround
   .MembershipLocationPlayerInfo
     font-size: $size-7

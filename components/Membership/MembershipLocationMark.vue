@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
+@use "../support.sass"
 .ShogiPlayerGround
   +defvar(sp_location_mark_inactive_rate, 0.5) // 手番ではないときの☗サイズの倍率
 

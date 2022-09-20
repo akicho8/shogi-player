@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 .MainDocApp
   +mobile
     font-size: 15px

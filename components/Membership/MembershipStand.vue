@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
+@use "../support.sass"
 .ShogiPlayerGround
   +defvar(sp_stand_hover_border_color, rgba(0, 0, 0, 0.2)) // 駒を持って駒箱の上にいるときのボーダー色
   +defvar(sp_stand_hover_border_stroke, 2px)               // 駒を持って駒箱の上にいるときのボーダーの太さ

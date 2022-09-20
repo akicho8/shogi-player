@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 .ShogiPlayerGround
   .ShogiPlayerBody
     // 縦横関係なく中央に寄せる

@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 .ShogiPlayer
   .DebugBlock
     font-size: $size-7

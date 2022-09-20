@@ -95,7 +95,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 .ShogiPlayerGround
   +defvar(sp_promote_select_modal_bg_color, hsla(0, 0%, 0%, 0.85))     // 成り不成り選択画面の背景色
   +defvar(sp_promote_select_modal_hover_color, hsla(0, 0%, 100%, 0.5)) // 成り不成り選択でhoverした駒の背景色

@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
+@use "../support.sass"
 .ShogiPlayerGround
   &.is_layer_on
     .MembershipLocation

@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 
 .ShogiPlayerGround
   +defvar(sp_piece_count_gap_right, 62%)                      // 駒数の駒右端からのオフセット(横配置時)

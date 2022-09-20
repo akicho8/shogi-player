@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 .ShogiPlayerGround
   +defvar(sp_piece_box_color, rgba(0, 0, 0, 0.2)) // 駒箱背景
   +defvar(sp_common_gap, 12px)          // 共通の隙間

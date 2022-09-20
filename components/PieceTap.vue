@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 //
 // .HoverPieceElement // マウスの (x, y) を反映
 //   .PieceTap.is_position_north

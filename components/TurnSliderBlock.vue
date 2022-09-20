@@ -54,7 +54,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@use "./support.sass"
 .ShogiPlayerGround
   +defvar(sp_turn_slider_block_margin_top, 0.75rem) // 手数スライダーの上マージン
 
