@@ -64,16 +64,10 @@ export default {
   ** Global CSS
   */
   css: [
-    // "application.sass"
-    // "~/assets/css/buefy.scss",
-    // "~/assets/sass/application.sass",
-    // "../app/javascript/stylesheets/application.sass",
     "./assets/sass/application.sass",
-    // "@/assets/custom-styles.scss"
   ],
   styleResources: {
     sass: [
-      "./assets/sass/styleResources.scss", // sass の項目に scss のファイルを与えないと読み込まれないのは謎
     ],
     // scss: [
     //   // "~assets/vars/*.scss",
@@ -110,6 +104,7 @@ export default {
     // experimentWarning: false // hide experimental warning message (disabled by default for tests)
     vue: {
       /* options for vite-plugin-vue2 */
+      
     },
   },
   /*

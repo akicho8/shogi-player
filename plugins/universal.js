@@ -1,11 +1,11 @@
 // 両方で定義したいものはここに入れる
 
 import Vue from "vue"
-import vue_support from "./vue_support.js"
+// import vue_support from "./vue_support.js"
 
 Vue.mixin({
   mixins: [
-    vue_support,
+    // vue_support,
   ],
   computed: {
     development_p() {

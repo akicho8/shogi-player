@@ -1,5 +1,5 @@
 <template lang="pug">
-MainDocApp
+HelloApp
 </template>
 
 <script>
