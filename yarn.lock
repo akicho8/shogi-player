@@ -3118,13 +3118,6 @@ bser@2.1.1:
   dependencies:
     node-int64 "^0.4.0"
 
-buefy@^0.9.21:
-  version "0.9.21"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.9.21.tgz#1b01f4dafefe958ca7934447dfe821dfef18d2fe"
-  integrity sha512-geOJgzi5jFDyRJ9Zl0379yyRBatZ6Qg83kRnCJTb7/nCuXcfXd/eis3tFaDTGuntnfv2MezHzc092OIHwgRwAg==
-  dependencies:
-    bulma "0.9.3"
-
 buefy@^0.9.22:
   version "0.9.22"
   resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.9.22.tgz#6172dd498b138f5689c9e12671235db772c1f66c"
@@ -3173,11 +3166,6 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha512-HpGFw18DgFWlncDfjTa2rcQ4W88O1mC8e8yZ2AvQY5KDaktSTwo+KRf6nHK6FRI5FyRyb/5T6+TSxfP7QyGsmQ==
-
-bulma@0.9.3:
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.9.3.tgz#ddccb7436ebe3e21bf47afe01d3c43a296b70243"
-  integrity sha512-0d7GNW1PY4ud8TWxdNcP6Cc8Bu7MxcntD/RRLGWuiw/s0a9P+XlH/6QoOIrmbj6o8WWJzJYhytiu9nFjTszk1g==
 
 bulma@0.9.4, bulma@^0.9.4:
   version "0.9.4"
@@ -7840,11 +7828,11 @@ number-is-nan@^1.0.0:
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
 nuxt-buefy@^0.4.23:
-  version "0.4.23"
-  resolved "https://registry.yarnpkg.com/nuxt-buefy/-/nuxt-buefy-0.4.23.tgz#d2283e043df786358626d51f875df592312c1870"
-  integrity sha512-3qvYogNPQ/xO1xjgyVnQViKcnCWTUUgqBGwfdYQhk9QlDqECsaOUt4ri9PVfRjAkD/Zpjg7RNM5gS105STZYoA==
+  version "0.4.24"
+  resolved "https://registry.yarnpkg.com/nuxt-buefy/-/nuxt-buefy-0.4.24.tgz#f7a9c95071f1f199d03675bac2959e75e2c48fc6"
+  integrity sha512-H+lwMEHj3Qbhz16PycAVAYXCbm0tRnP139g6A9uzcEYA1/KVui0CZrzJp3nX+6woJ1AAe8WoLjsb8FXJ2wEsmA==
   dependencies:
-    buefy "^0.9.21"
+    buefy "^0.9.22"
 
 nuxt@^2.15.8:
   version "2.15.8"
