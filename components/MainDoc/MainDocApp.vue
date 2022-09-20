@@ -1,11 +1,9 @@
 <template lang="pug">
 .MainDocApp
-  MainDocHero
-  MainDocSummary
-  MainDocDemo
-  //- MainDocUsage
-  //- MainDocApi
-  //- MainDocCredit
+  .section
+    .container
+      .columns
+        MainDocViewDemo1
 </template>
 
 <script>
@@ -19,20 +17,4 @@ export default {
 .MainDocApp
   +mobile
     font-size: 15px
-
-  .content
-    word-break: break-all
-
-  .section
-    +mobile
-      margin: 2em 0em 1rem
-      padding: 0
-
-  .is_book_like
-    --sp_grid_outer_stroke: 2
-    --sp_board_padding: 0
-    --sp_board_color: transparent
-
-  .is_pi_variant_d
-    --sp_board_piece_rate: 100%
 </style>

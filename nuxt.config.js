@@ -22,7 +22,7 @@ export default {
   target: "static",
 
   router: {
-    base: process.env.NODE_ENV === "production" ? "/shogi-player/" : "/",
+    base: "/",
     // https://ja.nuxtjs.org/api/configuration-router/#trailingslash
     // trailingSlash: false,
   },
@@ -38,10 +38,6 @@ export default {
   head: {
     title: process.env.APP_NAME,
     titleTemplate: `%s - ${process.env.APP_NAME}`,
-    // titleTemplate(title) {
-    //   return (title ? `${title} | ` : "") + process.env.APP_NAME
-    // },
-
     htmlAttrs: {
       lang: "ja",
       prefix: "og: http://ogp.me/ns#",
@@ -51,18 +47,6 @@ export default {
       // https://ja.nuxtjs.org/faq/duplicated-meta-tags/
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: SITE_DESC },
-
-      ////////////////////////////////////////////////////////////////////////////////
-      { hid: "og:site_name",    property: "og:site_name",    content: process.env.APP_NAME                             },
-      { hid: "og:type",         property: "og:type",         content: "website"                                        },
-      { hid: "og:url",          property: "og:url",          content: process.env.MY_SITE_URL                          }, // これいるのか？
-      { hid: "og:title",        property: "og:title",        content: process.env.APP_NAME                             },
-      { hid: "og:description",  property: "og:description",  content: SITE_DESC                                        },
-      { hid: "og:image",        property: "og:image",        content: process.env.MY_NUXT_URL + "/ogp/application.png" },
-      { hid: "twitter:card",    property: "twitter:card",    content: "summary_large_image"                            }, // summary or summary_large_image
-      { hid: "twitter:site",    property: "twitter:site",    content: "@sgkinakomochi"                                 }, // これいるのか？
-      { hid: "twitter:creator", property: "twitter:creator", content: "@sgkinakomochi"                                 }, // これいるのか？
     ],
     link: [
       { hid: "icon",             rel: "icon", type: "image/x-icon", href: "/favicon.ico"          },
@@ -75,7 +59,7 @@ export default {
   */
   // loading: { color: "hsl(348, 100%, 61%)" }, // bulma red color
   // loading: { color: "hsl(48,  100%, 67%)" }, // bulma yellow color
-  loading: { color: "hsl(0, 0%, 21%)" }, // bulma grey-daker color
+  // loading: { color: "hsl(0, 0%, 21%)" }, // bulma grey-daker color
   /*
   ** Global CSS
   */
@@ -116,7 +100,18 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    // https://qiita.com/nakazawaken1/items/8f25ce58a27be092f7bc
+    "nuxt-vite",
   ],
+  // https://vite.nuxtjs.org/
+  vite: {
+    /* options for vite */
+    // ssr: true // enable unstable server-side rendering for development (false by default)
+    // experimentWarning: false // hide experimental warning message (disabled by default for tests)
+    vue: {
+      /* options for vite-plugin-vue2 */
+    },
+  },
   /*
   ** Nuxt.js modules
   */
@@ -131,10 +126,6 @@ export default {
         materialDesignIconsHRef: "https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css",
       }
     ],
-    // Doc: https://axios.nuxtjs.org/usage
-    "@nuxtjs/axios",
-    "@nuxtjs/proxy",
-
     "@nuxtjs/style-resources",
   ],
 
