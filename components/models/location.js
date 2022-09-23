@@ -10,13 +10,13 @@ export class Location extends MemoryRecord {
 
   static cycle_lookup(value) {
     if (typeof value !== "number") {
-      alert(`ArgumentError: ${value}`)
+      throw new Error(`ArgumentError: ${this.name}.cycle_lookup(${JSON.stringify(value)})`)
     }
-    return Location.lookup(Math.abs(value) % Location.values.length)
+    return this.lookup(Math.abs(value) % this.values.length)
   }
 
   get flip() {
-    return Location.cycle_lookup(this.code + 1)
+    return this.constructor.cycle_lookup(this.code + 1)
   }
 
   // shogi-player のなかでは使っていないが別のところで使っているので消しはいけない
@@ -29,7 +29,7 @@ export class Location extends MemoryRecord {
   }
 
   advance(value) {
-    return Location.cycle_lookup(this.code + value)
+    return this.constructor.cycle_lookup(this.code + value)
   }
 
   flip_if(flip) {
