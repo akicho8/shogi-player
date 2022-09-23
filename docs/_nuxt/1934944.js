@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{273:function(n,e,o){"use strict";o.r(e),o.d(e,"app_profile",(function(){return r}));var r={data:function(){return{_ShogiPlayerRenderCount:0,_MainBoardRenderCount:0}},beforeUpdate:function(){this.$data._ShogiPlayerRenderCount+=1}}}}]);
