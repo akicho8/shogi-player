@@ -13,9 +13,9 @@ describe('Location', () => {
     expect(Location.fetch("black").flip.key).toEqual("white")
   })
 
-  it('any_logn_name', () => {
-    expect(Location.fetch("black").any_name(false)).toEqual("先手")
-    expect(Location.fetch("black").any_name(true)).toEqual("下手")
+  it('any_long_name', () => {
+    expect(Location.fetch("black").any_long_name(false)).toEqual("先手")
+    expect(Location.fetch("black").any_long_name(true)).toEqual("下手")
   })
 
   it('advance', () => {
