@@ -3,7 +3,7 @@ import MemoryRecord from "js-memory-record"
 export class PieceYomiage extends MemoryRecord {
   static get define() {
     return [
-      { key: "K", prefix_name: "ぎょく", name: "ぎょくっ！", promoted_name: null,           },
+      { key: "K", prefix_name: "gyoku",  name: "gyoku",      promoted_name: null,           },
       { key: "R", prefix_name: "ひしゃ", name: "ひしゃっ！", promoted_name: "りゅー！",     },
       { key: "B", prefix_name: "かく",   name: "かくっ！",   promoted_name: "うまっ！",     },
       { key: "G", prefix_name: "きん",   name: "きんっ！",   promoted_name: null,           },
