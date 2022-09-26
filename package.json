@@ -15,6 +15,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.12.17",
     "autolinker": "latest",
     "buefy": "^0.9.22",
     "bulma": "^0.9.4",
@@ -33,6 +34,9 @@
     "xregexp": "^4.3.0"
   },
   "devDependencies": {
+    "vue": "~2.6",
+    "vue-template-compiler": "~2.6",
+    "vue-server-renderer": "~2.6",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/pwa": "^3.2.2",
@@ -43,7 +47,7 @@
     "babel-jest": "^26.6.0",
     "jest": "^26.6.0",
     "marked": "^1.2.5",
-    "nuxt": "^2.15.8",
+    "nuxt": "~2.14",
     "nuxt-buefy": "^0.4.23",
     "pattern.css": "^1.0.0",
     "rimraf": "^3.0.2",
