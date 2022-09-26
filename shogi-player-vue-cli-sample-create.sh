@@ -1,4 +1,8 @@
 #!/bin/sh
+# 本当は npm で動かしたいが @vue/vue-loader-v15@15.10.0' is not in the npm registry. の問題があって動かない
+# vue-loader-v15 は悪意のあるコードが仕込まれたため npm に削除された
+# でも yarn はなぜかその問題を回避できる
+
 echo "~/src/shogi-player/shogi-player-vue-cli-sample があればいったん削除してそこにサンプルを生成します"
 read -p "よろしければ ENTER を押してください"
 

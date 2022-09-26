@@ -4,4 +4,4 @@ npm publish
 git push --tags
 git push
 
-(cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && yarn)
+(cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i)
