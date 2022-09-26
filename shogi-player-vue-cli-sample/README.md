@@ -8,6 +8,6 @@
 
 ## このサンプルの実行方法
 ```
-npm i
-npm run serve -- --open --port 3100
+yarn
+yarn serve --open --port 3100
 ```
