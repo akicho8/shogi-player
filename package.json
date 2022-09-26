@@ -16,8 +16,7 @@
   },
   "dependencies": {
     "autolinker": "latest",
-    "buefy": "^0.9.22",
-    "bulma": "^0.9.4",
+    "nuxt-buefy": "0.4.23",
     "chroma-js": "^2.1.0",
     "dayjs": "^1.11.5",
     "file-loader": "^6.2.0",
@@ -44,7 +43,6 @@
     "jest": "^26.6.0",
     "marked": "^1.2.5",
     "nuxt": "^2.15.8",
-    "nuxt-buefy": "^0.4.23",
     "pattern.css": "^1.0.0",
     "rimraf": "^3.0.2",
     "vue-jest": "^4.0.0-0"
