@@ -128,13 +128,13 @@ export default {
 
   &.is_board_shadow_drop
     .MainBoardTexture
-      +filter_drop_shadow(1, board_filter_params_without_drop_shadow())
+      // +filter_drop_shadow(1, board_filter_params_without_drop_shadow())
   &.is_board_shadow_box
     .MainBoardTexture
-      +filter_box_shadow(1, board_filter_params_without_drop_shadow())
+      // +filter_box_shadow(1, board_filter_params_without_drop_shadow())
   &.is_board_shadow_none
     .MainBoardTexture
-      filter: board_filter_params_without_drop_shadow()
+      // filter: board_filter_params_without_drop_shadow()
 
   .BoardFieldWithPadding
     padding: calc(var(--sp_board_padding) * 1%)

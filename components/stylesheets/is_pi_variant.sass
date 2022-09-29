@@ -15,10 +15,10 @@
   .is_position_north
     .PieceTextureSelf
       @extend %is_flip
-      +filter_drop_shadow_for_piece(-1)
+      // +filter_drop_shadow_for_piece(-1)
   .is_position_south
     .PieceTextureSelf
-      +filter_drop_shadow_for_piece(1)
+      // +filter_drop_shadow_for_piece(1)
 
 %is_pi_black_and_white_without_drop_shadow
   .is_position_north, .is_position_south
@@ -43,5 +43,5 @@
 
   // 画像自体に影が付いている
   &.is_pi_variant_d
-    @extend %is_pi_black_and_white_without_drop_shadow
+    // @extend %is_pi_black_and_white_without_drop_shadow
     +is_pi_variant_d_pack
