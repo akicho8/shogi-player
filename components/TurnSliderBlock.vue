@@ -10,7 +10,7 @@
   //- | change   |                            |                        | o                      |※キーボードにも反応する
   //- | dragging |                            | o                      |                        |
   //- |----------+----------------------------+------------------------+------------------------|
-  b-slider(
+  b-slider.is-unselectable(
     size="is-small"
     :value="TheSp.turn_offset"
     @dragging="v => TheSp.current_turn_set_by_slider(v, true)"
