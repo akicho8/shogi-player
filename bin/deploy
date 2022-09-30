@@ -1,4 +1,5 @@
 #!/bin/sh
+cd $(dirname $0)/..
 nuxt generate --dotenv .env.production
 git add -A
 git commit -m "[chore][deploy] nuxt generate --dotenv .env.production"
