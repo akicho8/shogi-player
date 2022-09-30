@@ -5,7 +5,6 @@ import { Place } from "./models/place.js"
 import { Board } from "./models/board.js"
 import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
-import { EffectInfo } from "./models/effect_info.js"
 import { MoveCancelInfo } from "./models/move_cancel_info.js"
 
 export const edit_mode_module = {
@@ -16,7 +15,6 @@ export const edit_mode_module = {
     sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },                      // play_mode では自分手番とき自分の駒しか動かせないようにする
     sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: true, },                      // play_mode では自分の駒で同じ仲間の駒を取れないようにする
     sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  },                      // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
-    sp_play_effect_type:                         { type: String,  default: null, },                      // 指したときのエフェクトの種類 fw_type_3
     sp_move_cancel:                              { type: String,  default: "is_move_cancel_standard", }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
     sp_view_mode_soldier_movable:                { type: Boolean, default: true, },                      // view_mode でも駒を動かせる(ただし本筋は破壊しない)
   },
@@ -68,8 +66,6 @@ export const edit_mode_module = {
       this.log(`shiftKey: ${e.shiftKey}`)
       this.$data._last_clicked_cell = e.target
       this.foul_init()
-
-      // EffectInfo.fetch('fw_type_2').run({from_el: e.target})
 
       const place = Place.fetch(xy)
 
