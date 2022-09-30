@@ -114,9 +114,9 @@ export default {
 
   .MainBoardTexture
     // https://postd.cc/css-will-change-property/
-    // will-change: filter
+    will-change: filter
 
-    // mix-blend-mode: var(--sp_board_blend)
+    mix-blend-mode: var(--sp_board_blend)
 
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
     +is_background_cover_by_image
