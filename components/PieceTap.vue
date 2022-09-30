@@ -166,7 +166,7 @@ export default {
     // top: var(--piece_pull, 10%)
   .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
     +is_overlay_block
-    // mix-blend-mode: var(--sp_piece_blend)
+    mix-blend-mode: var(--sp_piece_blend)
 
     background-position: var(--sp_board_piece_position)
     background-repeat: no-repeat
