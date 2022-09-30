@@ -76,7 +76,6 @@ export default {
     sp_fullheight:                         { type: String, default: "is_fullheight_off",     }, // DEPRECATE
     sp_balloon:                            { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
-    sp_blink:                              { type: String, default: "is_blink_off",          }, // 最終手の表現方法 is_blink_(on|off)
     sp_pi_variant:                         { type: String, default: "is_pi_variant_a",       }, // 駒の種類
     sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
     sp_mobile_fit:                         { type: String, default: "is_mobile_fit_on",      }, // DEPRECATE

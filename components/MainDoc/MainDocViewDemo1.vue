@@ -12,7 +12,6 @@
     :sp_sound_volume="0.25"
     sp_bg_variant="is_bg_variant_a"
     sp_pi_variant="is_pi_variant_d"
-    sp_blink="is_blink_on"
     sp_layout="is_horizontal"
     sp_controller="is_controller_on"
     sp_slider="is_slider_on"

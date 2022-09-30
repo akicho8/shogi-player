@@ -317,10 +317,6 @@
             b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_off") OFF
             b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_on") ON
 
-          b-field(custom-class="is-small" label="移動先セルの明滅")
-            b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_off") OFF
-            b-radio-button(size="is-small" v-model="sp_blink" native-value="is_blink_on") ON
-
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="black") ☗
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="white") ☖
@@ -526,7 +522,6 @@ export default {
       sp_comment: "is_comment_off",
       sp_common_gap: 12,
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
-      sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a",    // is_pi_variant_d
       sp_bg_variant: "is_bg_variant_none", // is_bg_variant_a
       ////////////////////////////////////////////////////////////////////////////////
@@ -747,7 +742,6 @@ export default {
       params.sp_board_dimension_w = this.sp_board_dimension_w
       params.sp_board_dimension_h = this.sp_board_dimension_h
       params.sp_layout            = this.sp_layout
-      params.sp_blink             = this.sp_blink
       params.sp_hpos              = this.sp_hpos
       params.sp_vpos              = this.sp_vpos
       params.sp_fullheight        = this.sp_fullheight

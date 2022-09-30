@@ -26,7 +26,6 @@ export default {
         this.TheSp.sp_fullheight,
         this.TheSp.sp_balloon,
         this.TheSp.sp_layer,
-        this.TheSp.sp_blink,
         this.TheSp.sp_pi_variant,
         this.TheSp.sp_bg_variant,
         this.TheSp.sp_mobile_fit,

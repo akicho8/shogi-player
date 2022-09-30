@@ -42,9 +42,6 @@ export default {
   +defvar(sp_board_piece_rate, 90%)                         // 盤のセル内の駒占有率
   +defvar(sp_board_piece_position, center)                  // 駒を選択できる範囲内の駒の縦位置
 
-  +defvar(sp_piece_blink_color0, hsla(0, 0%, 0%, 0.25))     // 最後に動かした駒の背景色1(点滅:0%)
-  +defvar(sp_piece_blink_color1, hsla(0, 0%, 0%, 0.10))     // 最後に動かした駒の背景色2(点滅:100%)
-
   +defvar(sp_piece_origin_color, hsla(0, 0%, 0%, 0.1))     // 最後に動かした駒の元の位置の背景色
   +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.1))  // 持ち上げれる駒の背景色
 
@@ -133,19 +130,9 @@ export default {
             .PieceTapBG
               background-color: var(--sp_piece_selectable_color)
 
-  &.is_blink_off
-    .PieceTap
-      &.current
-        background-color: var(--sp_piece_origin_color)
-  &.is_blink_on
-    .PieceTap
-      &.current
-        animation: blink_keyframes 0.5s ease-in-out infinite alternate
-        @keyframes blink_keyframes
-          0%
-            background-color: var(--sp_piece_blink_color0)
-          100%
-            background-color: var(--sp_piece_blink_color1)
+  .PieceTap
+    &.current
+      background-color: var(--sp_piece_origin_color)
 
   ////////////////////////////////////////////////////////////////////////////////
   .PieceTexture
