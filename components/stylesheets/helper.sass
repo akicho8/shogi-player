@@ -92,11 +92,11 @@ $promote_select_modal_z:    30 // b-navbar より上にする
   @return unquote('invert(var(--sp_piece_invert)) sepia(var(--sp_piece_sepia)) hue-rotate(calc(var(--sp_piece_hue) * 1turn)) saturate(var(--sp_piece_saturate)) opacity(var(--sp_piece_opacity)) grayscale(var(--sp_piece_grayscale)) brightness(var(--sp_piece_brightness)) contrast(var(--sp_piece_contrast)) blur(calc(var(--sp_piece_blur) * 1px))')
 
 =filter_drop_shadow($dir, $prepend: "", $append: "")
-  // filter: #{$prepend} drop-shadow(shadow_args($dir)) #{$append}
+  filter: #{$prepend} drop-shadow(shadow_args($dir)) #{$append}
 
 =filter_box_shadow($dir, $prepend: "", $append: "")
-  // filter: #{$prepend} #{$append}
-  // box-shadow: shadow_args($dir)
+  filter: #{$prepend} #{$append}
+  box-shadow: shadow_args($dir)
 
 // 簡潔にかけるが余計わかりにくくなるので使わない
 =filter_drop_shadow2($dir, $prepend: "", $append: "")
