@@ -166,10 +166,6 @@
           //-     b-field(custom-class="is-small" label="持駒画像(H)")
           //-       b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
 
-          b-field(custom-class="is-small" label="領域縦幅")
-            b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_on") 画面サイズ
-            b-radio-button(size="is-small" v-model="sp_fullheight" native-value="is_fullheight_off") none
-
         //- .box
         //-   .title.is-5 モバイル
         //-   b-field(custom-class="is-small" label="持駒等のサイズを縮小する" v-if="false")
@@ -472,7 +468,6 @@ export default {
       sp_lifted_origin_bg_color_desktop: "hsla(0, 0%, 0%, 0.1)",
       sp_lifted_origin_opacity_desktop: 0.0,
 
-      sp_fullheight: "is_fullheight_off",
       sp_balloon: "is_balloon_on",
 
       sp_stand_piece_w: 47,
@@ -726,7 +721,6 @@ export default {
       params.sp_board_dimension_w = this.sp_board_dimension_w
       params.sp_board_dimension_h = this.sp_board_dimension_h
       params.sp_layout            = this.sp_layout
-      params.sp_fullheight        = this.sp_fullheight
       params.sp_balloon           = this.sp_balloon
       params.sp_layer             = this.sp_layer
       params.sp_pi_variant        = this.sp_pi_variant

@@ -21,7 +21,6 @@ export default {
     component_class() {
       return [
         this.TheSp.sp_layout,
-        this.TheSp.sp_fullheight,
         this.TheSp.sp_balloon,
         this.TheSp.sp_layer,
         this.TheSp.sp_pi_variant,
