@@ -21,8 +21,6 @@ export default {
     component_class() {
       return [
         this.TheSp.sp_layout,
-        this.TheSp.sp_hpos,
-        this.TheSp.sp_vpos,
         this.TheSp.sp_fullheight,
         this.TheSp.sp_balloon,
         this.TheSp.sp_layer,
@@ -81,24 +79,8 @@ export default {
     min-height: 100vh
 
   display: flex
-  flex-direction: row  // 要素は1つだからといって column してはいけない(justify-content が縦位置になってまぎらわしくなる)
-
-  //////////////////////////////////////////////////////////////////////////////// for position (tablet以上)
-
-  &.is_left
-    justify-content: flex-start
-  &.is_hcentered
-    justify-content: center
-  &.is_right
-    justify-content: flex-end
-
-  // is_fullheight_on のときは合わせて is_vcentered にするのがおすすめ
-  &.is_top
-    align-items: flex-start
-  &.is_vcentered
-    align-items: center
-  &.is_bottom
-    align-items: flex-end
+  align-items: center
+  justify-content: center
 
   //////////////////////////////////////////////////////////////////////////////// for mobile
   +mobile

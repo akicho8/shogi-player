@@ -71,8 +71,6 @@ export default {
     sp_board_dimension_w:                  { type: Number, default: 9,                       }, // 盤のセル数(W)
     sp_board_dimension_h:                  { type: Number, default: 9,                       }, // 盤のセル数(H)
     sp_layout:                             { type: String, default: "is_vertical",           }, // レイアウト is_(vertical|horizontal)
-    sp_hpos:                               { type: String, default: "is_hcentered",          }, // DEPRECATE
-    sp_vpos:                               { type: String, default: "is_vcentered",          }, // DEPRECATE
     sp_fullheight:                         { type: String, default: "is_fullheight_off",     }, // DEPRECATE
     sp_balloon:                            { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)

@@ -158,20 +158,6 @@
           b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
 
-        .box(v-if="false")
-          .title.is-5 画面位置
-          .columns
-            .column
-              b-field(custom-class="is-small" label="垂直位置" expanded)
-                b-radio-button(size="is-small" v-model="sp_vpos" native-value="is_top") ↑
-                b-radio-button(size="is-small" v-model="sp_vpos" native-value="is_vcentered") ・
-                b-radio-button(size="is-small" v-model="sp_vpos" native-value="is_bottom") ↓
-            .column
-              b-field(custom-class="is-small" label="水平位置" expanded)
-                b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_left") ←
-                b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_hcentered") ・
-                b-radio-button(size="is-small" v-model="sp_hpos" native-value="is_right") →
-
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(W)")
@@ -473,8 +459,6 @@ export default {
 
       sp_board_dimension_w: 9,
       sp_board_dimension_h: 9,
-      sp_hpos: "is_hcentered",
-      sp_vpos: "is_vcentered",
       sp_layout: "is_horizontal",
       sp_run_mode: DEVELOPMENT_P ? "edit_mode" : "view_mode",
       sp_mobile_fit: "is_mobile_fit_on",
@@ -742,8 +726,6 @@ export default {
       params.sp_board_dimension_w = this.sp_board_dimension_w
       params.sp_board_dimension_h = this.sp_board_dimension_h
       params.sp_layout            = this.sp_layout
-      params.sp_hpos              = this.sp_hpos
-      params.sp_vpos              = this.sp_vpos
       params.sp_fullheight        = this.sp_fullheight
       params.sp_balloon           = this.sp_balloon
       params.sp_layer             = this.sp_layer
