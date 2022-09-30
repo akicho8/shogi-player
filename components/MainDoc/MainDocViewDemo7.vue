@@ -35,8 +35,6 @@ export default {
 @import "./support.sass"
 .MainDocViewDemo7
   +tablet
-    --sp_shadow_offset: 0
-    --sp_shadow_blur: 0
     --sp_grid_color: hsl(0, 0%, 70%)
     --sp_stand_piece_w: 20px
     --sp_stand_piece_h: 25px

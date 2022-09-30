@@ -1,4 +1,5 @@
 #!/bin/sh
+cd $(dirname $0)/..
 yarn global add npm-check-updates
 ncu /router/ -u
 ncu lodash -u

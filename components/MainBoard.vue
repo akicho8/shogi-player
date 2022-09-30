@@ -82,15 +82,6 @@ export default {
   // 全体背景と同じ構成
   +defvar(sp_board_color, rgba(0, 0, 0, 0.2))      // 盤の色
   +defvar(sp_board_image, none)                    // 盤画像
-  +defvar(sp_board_blur, 0)                        // 盤ぼかし
-  +defvar(sp_board_grayscale, 0%)                  // 盤グレースケール
-  +defvar(sp_board_contrast, 1.0)                  // 盤コントラスト
-  +defvar(sp_board_invert, 0)                      // 盤色反転
-  +defvar(sp_board_hue, 1.0)                       // 盤色相
-  +defvar(sp_board_saturate, 1.0)                  // 盤彩度
-  +defvar(sp_board_brightness, 1.0)                // 盤輝度
-  +defvar(sp_board_sepia, 0)                       // 盤セピア
-  +defvar(sp_board_blend, normal)                  // 盤の mix-blend-mode の値
 
   +defvar(sp_board_opacity, 1.0)                   // 非半透明度
   +defvar(sp_board_padding, 1.5)                   // 盤の隅の隙間
@@ -113,11 +104,6 @@ export default {
     +is_overlay_origin
 
   .MainBoardTexture
-    // https://postd.cc/css-will-change-property/
-    will-change: filter
-
-    mix-blend-mode: var(--sp_board_blend)
-
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
     +is_background_cover_by_image
     background-image: var(--sp_board_image)  // none でスルーする
@@ -126,26 +112,11 @@ export default {
     border-radius: calc(var(--sp_board_radius) * 1px)
     border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
 
-  &.is_board_shadow_drop
-    .MainBoardTexture
-      +filter_drop_shadow(1, board_filter_params_without_drop_shadow())
-  &.is_board_shadow_box
-    .MainBoardTexture
-      +filter_box_shadow(1, board_filter_params_without_drop_shadow())
-  &.is_board_shadow_none
-    .MainBoardTexture
-      filter: board_filter_params_without_drop_shadow()
-
   .BoardFieldWithPadding
     padding: calc(var(--sp_board_padding) * 1%)
 
   //- flex に移行しやすいように table, tr, td 使用禁止
   .BoardField
-    // これを指定するとオーバーレイの兄(MainBoardTexture)の上に表示できる
-    // が、駒のテクスチャに mix-blend-mode が効かなくなる
-    // ので指定してはいけない
-    // isolation: isolate
-
     width: 100%
     height: 100%
     border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_outer_color)

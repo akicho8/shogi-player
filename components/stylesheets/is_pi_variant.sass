@@ -3,27 +3,12 @@
 @import "is_pi_variant/c.sass"
 @import "is_pi_variant/d.sass"
 
-=filter_drop_shadow_for_piece($dir)
-  filter: piece_filter_params_without_drop_shadow() drop-shadow(shadow_args($dir))
-
-// 元から影がついている画像駒に対して影を抜いたエフェクトを適用する
-// 影がないので $dir もない
-=piece_filter_for_image
-  filter: piece_filter_params_without_drop_shadow()
-
 %is_pi_black_only
   .is_position_north
     .PieceTextureSelf
       @extend %is_flip
-      +filter_drop_shadow_for_piece(-1)
   .is_position_south
     .PieceTextureSelf
-      +filter_drop_shadow_for_piece(1)
-
-%is_pi_black_and_white_without_drop_shadow
-  .is_position_north, .is_position_south
-    .PieceTextureSelf
-      +piece_filter_for_image
 
 .ShogiPlayerGround
   &.is_pi_variant_a
@@ -43,5 +28,4 @@
 
   // 画像自体に影が付いている
   &.is_pi_variant_d
-    @extend %is_pi_black_and_white_without_drop_shadow
     +is_pi_variant_d_pack

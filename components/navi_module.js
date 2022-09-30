@@ -161,12 +161,11 @@ export const navi_module = {
         if (this.play_p) {
           this.play_mode_xcontainer_seek_to(new_val)
         }
-        this.sound_play("piece_put")
         this.$emit("update:sp_turn", this.turn_offset)
 
         if (event) {
           this.log("局面を人が故意に変更")
-          this.$emit("one_way:sp_turn_user_changed", this.turn_offset)
+          this.$emit("one_way:sp_turn_user_changed", this.turn_offset) // b-slider で変更
         }
       }
     },
@@ -206,7 +205,6 @@ export const navi_module = {
 
     board_flip_toggle() {
       this.new_viewpoint = Location.fetch(this.new_viewpoint).flip.key
-      this.sound_play("flip_sound")
       this.turn_slider_focus()
     },
   },

@@ -3,7 +3,6 @@ import _ from "lodash"
 import { Xcontainer } from "./models/xcontainer.js"
 import { Location } from "./models/location.js"
 import { HumanSideInfo } from "./models/human_side_info.js"
-import { EffectInfo } from "./models/effect_info.js"
 
 export const play_mode_module = {
   props: {
@@ -111,12 +110,6 @@ export const play_mode_module = {
 
     turn_next() {
       if (this.play_p) {
-        if (this.sp_play_effect_type) {
-          if (this.$data._last_clicked_cell) {
-            EffectInfo.fetch(this.sp_play_effect_type).run({from_el: this.$data._last_clicked_cell})
-          }
-        }
-
         // ↓FIXME: これも20msほどかかるので実行したくない
         this.xcontainer = new Xcontainer()
         this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)

@@ -1,6 +1,5 @@
 <template lang="pug">
 .ShogiPlayer(:class="component_class")
-  i.fas.fa-spinner.fa-pulse(v-if="!xcontainer")
   ShogiPlayerGround(ref="ShogiPlayerGround")
   DebugBlock
   b-modal(:active.sync="setting_modal_p" has-modal-card v-if="xcontainer")
@@ -10,10 +9,10 @@
 
 <script>
 import _ from "lodash"
-import Vue from 'vue'
+import Vue from "vue"
 
 // Library
-import { Xcontainer   } from "./models/xcontainer.js"
+import { Xcontainer } from "./models/xcontainer.js"
 import { Place      } from "./models/place.js"
 import { SfenParser } from "./models/sfen_parser.js"
 import { KifParser  } from "./models/kif_parser.js"
@@ -33,7 +32,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 import { navi_module        } from "./navi_module.js"
 import { shortcut_module    } from "./shortcut_module.js"
 import { edit_mode_module   } from "./edit_mode_module.js"
-import { foul_module     } from "./foul_module.js"
+import { foul_module        } from "./foul_module.js"
 import { hover_piece_module } from "./hover_piece_module.js"
 import { legal_check        } from "./legal_check.js"
 import { play_mode_module   } from "./play_mode_module.js"
@@ -47,7 +46,7 @@ import { app_chore          } from "./app_chore.js"
 import { app_vector         } from "./app_vector.js"
 
 export default {
-  name: 'ShogiPlayer',
+  name: "ShogiPlayer",
 
   mixins: [
     app_chore,
@@ -71,13 +70,8 @@ export default {
     sp_board_dimension_w:                  { type: Number, default: 9,                       }, // 盤のセル数(W)
     sp_board_dimension_h:                  { type: Number, default: 9,                       }, // 盤のセル数(H)
     sp_layout:                             { type: String, default: "is_vertical",           }, // レイアウト is_(vertical|horizontal)
-    sp_hpos:                               { type: String, default: "is_hcentered",          }, // DEPRECATE
-    sp_vpos:                               { type: String, default: "is_vcentered",          }, // DEPRECATE
-    sp_fullheight:                         { type: String, default: "is_fullheight_off",     }, // DEPRECATE
     sp_balloon:                            { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
-    sp_board_shadow:                       { type: String, default: "is_board_shadow_drop",  }, // 盤の影適用方法 is_board_shadow_(drop|box|none)
-    sp_blink:                              { type: String, default: "is_blink_off",          }, // 最終手の表現方法 is_blink_(on|off)
     sp_pi_variant:                         { type: String, default: "is_pi_variant_a",       }, // 駒の種類
     sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
     sp_mobile_fit:                         { type: String, default: "is_mobile_fit_on",      }, // DEPRECATE
@@ -115,9 +109,9 @@ export default {
     return {
       new_debug_mode: this.sp_debug_mode,
       new_run_mode: this.sp_run_mode,
-      turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
-      xcontainer: null,           // 局面管理
-      turn_edit_p: false,       // N手目編集中
+      turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
+      xcontainer: null,                 // 局面管理
+      turn_edit_p: false,               // N手目編集中
       update_counter: 0,
       setting_modal_p: false,
       env: process.env.NODE_ENV,
@@ -160,36 +154,10 @@ export default {
         return
       }
 
-      let sfen_change_p = false
-      let before_sfen = null
-
-      if (this.sp_sound_body_changed) {
-        before_sfen = this.xcontainer ? this.xcontainer.to_simple_sfen : ""
-      }
-
       this.xcontainer_setup(this.sp_turn)
 
-      if (this.sp_sound_body_changed) {
-        sfen_change_p = (before_sfen !== this.xcontainer.to_simple_sfen)
-      }
-
-      if (this.view_p) {
-        if (sfen_change_p) {
-          this.sound_play("piece_put")
-        }
-      }
       if (this.play_p) {
         this.play_mode_setup_from("view_mode")
-        // 棋譜を反映された側は
-        // 1. 相手が指したのか → 駒音だす
-        // 2. 自分の指し手が正しい指し手だと判断された棋譜が返って反映されたのか → 駒音なし
-        // この区別が付かない。なのでここで成らさない方がよい
-        // this.sound_play("piece_put")
-        // ……と思ったが 1 は turn_offset_max が変化したかどうかで判断できる。いや sfen を見ればわかる？ → そこまでする必要ない
-        // if (before_turn_offset_max !== this.turn_offset_max) {
-        if (sfen_change_p) {
-          this.sound_play("piece_put")
-        }
       }
     },
 
@@ -296,7 +264,6 @@ export default {
 
     view_mode_xcontainer_update(turn) {
       this.xcontainer_setup(turn)
-      // this.sound_play("piece_put")
       this.update_counter++
     },
 

@@ -73,12 +73,10 @@ export default {
 
   .is_position_north
     .MembershipLocationMarkTexture
-      +filter_drop_shadow(-1)
       @extend %is_flip
 
   .is_position_south
     .MembershipLocationMarkTexture
-      +filter_drop_shadow(1)
 
   //////////////////////////////////////////////////////////////////////////////// サイズ (基本)
 

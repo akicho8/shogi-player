@@ -23,10 +23,6 @@
           li: MainDocExternalLink(href="https://glyphwiki.org/") グリフウィキ
           li: MainDocExternalLink(href="https://studio.beatnix.co.jp/kids-it/kids-programming/scratch/scratch-material/hiragana-katakana-minchyo/") コドモとアプリ
           //- MainDocExternalLink(href="https://www.photolibrary.jp/") 写真素材 - フォトライブラリー photolibrary
-
-        h5 効果音
-        ul
-          li: MainDocExternalLink(href="https://assetstore.unity.com/packages/audio/sound-fx/universal-sound-fx-17256") UNIVERSAL SOUND FX
 </template>
 
 <script>

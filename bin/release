@@ -1,4 +1,5 @@
 #!/bin/sh
+cd $(dirname $0)/..
 npm version patch
 npm publish
 git push --tags
