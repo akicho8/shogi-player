@@ -1,6 +1,5 @@
 <template lang="pug">
 .ShogiPlayer(:class="component_class")
-  i.fas.fa-spinner.fa-pulse(v-if="!xcontainer")
   ShogiPlayerGround(ref="ShogiPlayerGround")
   DebugBlock
   b-modal(:active.sync="setting_modal_p" has-modal-card v-if="xcontainer")
