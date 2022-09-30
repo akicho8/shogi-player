@@ -68,31 +68,6 @@
 
           ImageUpload(@input="sp_board_image_input_handle")
 
-          b-field(custom-class="is-small" label="色相")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_hue" :min="-0.5" :max="0.5" :step="0.001")
-          b-field(custom-class="is-small" label="彩度")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_saturate" :min="0" :max="4.0" :step="0.001")
-          b-field(custom-class="is-small" label="彩度(強)")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_saturate2" :min="0" :max="5000" :step="1")
-          b-field(custom-class="is-small" label="輝度")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_brightness" :min="0" :max="4.0" :step="0.001")
-          b-field(custom-class="is-small" label="ぼかし")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_blur" :min="0" :max="30" :step="0.001")
-          b-field(custom-class="is-small" label="セピア")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_sepia" :min="0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="グレースケール")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_grayscale" :min="0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="コントラスト")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_contrast" :min="0" :max="2.0" :step="0.001")
-          b-field(custom-class="is-small" label="反転")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_invert" :min="0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="非透輝度")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_opacity" :min="0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="ブレンドモード")
-            b-select(size="is-small" v-model="sp_board_blend")
-              template(v-for="e in MixBlendModeInfo.values")
-                option(:value="e.key") {{e.key}}
-
         .box
           .title.is-5 盤
           b-field(custom-class="is-small" label="角丸め")
@@ -138,31 +113,6 @@
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="bottom") ↓
 
-          b-field(custom-class="is-small" label="色相")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_hue" :min="-0.5" :max="0.5" :step="0.001")
-          b-field(custom-class="is-small" label="彩度")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_saturate" :min="0" :max="4.0" :step="0.001")
-          b-field(custom-class="is-small" label="彩度(強)")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_saturate2" :min="0" :max="5000" :step="1")
-          b-field(custom-class="is-small" label="輝度")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_brightness" :min="0" :max="2.0" :step="0.001")
-          b-field(custom-class="is-small" label="ぼかし")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_blur" :min="0" :max="30" :step="0.001")
-          b-field(custom-class="is-small" label="セピア")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_sepia" :min="0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="グレースケール")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_grayscale" :min="0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="コントラスト")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_contrast" :min="0" :max="2.0" :step="0.001")
-          b-field(custom-class="is-small" label="反転")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_invert" :min="0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="非透輝度")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_opacity" :min="0" :max="1.0" :step="0.001")
-          b-field(custom-class="is-small" label="ブレンドモード")
-            b-select(size="is-small" v-model="sp_piece_blend")
-              template(v-for="e in MixBlendModeInfo.values")
-                option(:value="e.key") {{e.key}}
-
         .box
           .title.is-5 駒台
           .columns.mt-4
@@ -207,19 +157,6 @@
                 b-slider(v-bind="slider_attrs" v-model="sp_piece_box_piece_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
-
-        .box
-          .title.is-5 影
-          b-field(custom-class="is-small" label="右下方向へのずれ")
-            b-slider(v-bind="slider_attrs" v-model="sp_shadow_offset" :min="-10" :max="10")
-          b-field(custom-class="is-small" label="ぶれ度合い")
-            b-slider(v-bind="slider_attrs" v-model="sp_shadow_blur" :min="-1" :max="20")
-          b-field(custom-class="is-small" label="色")
-            MyColorPicker(v-model="sp_shadow_color")
-          b-field(custom-class="is-small" label="盤と駒台への適用方法" message="dropは透明度を継承するので元が透明だと影も薄い")
-            b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_drop") drop
-            b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_box") box
-            b-radio-button(size="is-small" v-model="sp_board_shadow" native-value="is_board_shadow_none") none
 
         .box(v-if="false")
           .title.is-5 画面位置
@@ -530,34 +467,11 @@ export default {
       se_ws_brightness: 1.0,
       se_ws_sepia: 0,
 
-      sp_piece_blur: 0,
-      sp_piece_grayscale: 0,
-      sp_piece_contrast: 1.0,
-      sp_piece_invert: 0,
-      sp_piece_opacity: 1.0,
-      sp_piece_hue:        0,
-      sp_piece_saturate:   1.0,
-      sp_piece_saturate2:   0,
-      sp_piece_brightness: 1.0,
-      sp_piece_sepia: 0,
-
       sp_board_color: "rgba(0, 0, 0, 0.2)",
-      sp_board_blur: 0,
-      sp_board_grayscale: 0,
-      sp_board_contrast: 1.0,
-      sp_board_invert: 0,
-      sp_board_opacity: 1.0,
-      sp_board_hue:        0,
-      sp_board_saturate:   1.0,
-      sp_board_saturate2:   0,
-      sp_board_brightness: 1.0,
-      sp_board_sepia: 0,
 
       sp_board_aspect_ratio: 1.097,
       sp_board_piece_rate: 90,
       sp_board_piece_position: "center",
-      sp_piece_blend: "normal",
-      sp_board_blend: "normal",
       sp_board_radius: 5,
       sp_board_padding: 1.5,
 
@@ -569,11 +483,6 @@ export default {
       sp_run_mode: DEVELOPMENT_P ? "edit_mode" : "view_mode",
       sp_mobile_fit: "is_mobile_fit_on",
       sp_mobile_vertical: "is_mobile_vertical_on",
-
-      // 影
-      sp_shadow_offset: 2,
-      sp_shadow_blur: 3,
-      sp_shadow_color: "rgba(0, 0, 0, 0.4)",
 
       // 成り不成り選択
       sp_promote_select_modal_bg_color: "rgba(0, 0, 0, 0.85)",
@@ -617,7 +526,6 @@ export default {
       sp_comment: "is_comment_off",
       sp_common_gap: 12,
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
-      sp_board_shadow: "is_board_shadow_drop",
       sp_blink: "is_blink_on",
       sp_pi_variant: "is_pi_variant_a",    // is_pi_variant_d
       sp_bg_variant: "is_bg_variant_none", // is_bg_variant_a
@@ -735,10 +643,6 @@ export default {
       this.sp_board_color       = IS_WHITE               // 盤透過
       this.sp_grid_stroke       = 1                      // グリッド線(細)
       this.sp_grid_outer_stroke = 2                      // グリッド枠(細)
-
-      this.sp_shadow_blur       = 0
-      this.sp_shadow_offset     = 0
-      this.sp_board_shadow      = "is_board_shadow_none" // 影なし
     },
     hsla_format(v) {
       return chroma(v).css("hsla")
@@ -849,7 +753,6 @@ export default {
       params.sp_fullheight        = this.sp_fullheight
       params.sp_balloon           = this.sp_balloon
       params.sp_layer             = this.sp_layer
-      params.sp_board_shadow      = this.sp_board_shadow
       params.sp_pi_variant        = this.sp_pi_variant
       params.sp_bg_variant        = this.sp_bg_variant
       params.sp_mobile_fit        = this.sp_mobile_fit
@@ -911,16 +814,6 @@ export default {
           // 盤テクスチャ
           --sp_board_color:              ${this.hsla_format(this.sp_board_color)};
           --sp_board_image:              ${this.sp_board_image_url};
-          --sp_board_blur:               ${this.sp_board_blur};
-          --sp_board_grayscale:          ${this.sp_board_grayscale};
-          --sp_board_contrast:           ${this.sp_board_contrast};
-          --sp_board_invert:             ${this.sp_board_invert};
-          --sp_board_opacity:            ${this.sp_board_opacity};
-          --sp_board_hue:                ${this.sp_board_hue};
-          --sp_board_saturate:           ${this.sp_board_saturate + this.sp_board_saturate2};
-          --sp_board_brightness:         ${this.sp_board_brightness};
-          --sp_board_sepia:         ${this.sp_board_sepia};
-          --sp_board_blend:          ${this.sp_board_blend};
 
           // 盤
           --sp_board_padding:            ${this.sp_board_padding};
@@ -936,18 +829,6 @@ export default {
           --sp_grid_outer_stroke:        ${this.sp_grid_outer_stroke};
           --sp_grid_star_size:           ${this.sp_grid_star_size}%;
           --sp_grid_star_z_index:        ${this.sp_grid_star_z_index};
-
-          // 駒
-          --sp_piece_blur:               ${this.sp_piece_blur};
-          --sp_piece_grayscale:          ${this.sp_piece_grayscale};
-          --sp_piece_contrast:           ${this.sp_piece_contrast};
-          --sp_piece_invert:             ${this.sp_piece_invert};
-          --sp_piece_opacity:            ${this.sp_piece_opacity};
-          --sp_piece_hue:                ${this.sp_piece_hue};
-          --sp_piece_saturate:           ${this.sp_piece_saturate + this.sp_piece_saturate2};
-          --sp_piece_brightness:         ${this.sp_piece_brightness};
-          --sp_piece_sepia:         ${this.sp_piece_sepia};
-          --sp_piece_blend:              ${this.sp_piece_blend};
 
           // 駒数
           --sp_piece_count_gap_right:    ${this.sp_piece_count_gap_right}%;
@@ -969,11 +850,6 @@ export default {
           --sp_piece_box_piece_h:        ${this.sp_piece_box_piece_h}px;
           --sp_piece_box_piece_rate:     ${this.sp_piece_box_piece_rate}%;
           --sp_piece_box_color:          ${this.hsla_format(this.sp_piece_box_color)};
-
-          // 影
-          --sp_shadow_offset:            ${this.sp_shadow_offset};
-          --sp_shadow_blur:              ${this.sp_shadow_blur};
-          --sp_shadow_color:             ${this.hsla_format(this.sp_shadow_color)};
 
           // 成り不成り選択
           --sp_promote_select_modal_bg_color:    ${this.hsla_format(this.sp_promote_select_modal_bg_color)};

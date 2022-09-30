@@ -29,7 +29,4 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .MainDocViewDemo5
-  .is_book_like
-    --sp_shadow_offset: 0
-    --sp_shadow_blur: 0
 </style>

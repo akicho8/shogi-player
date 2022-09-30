@@ -37,18 +37,6 @@ export default {
 //
 
 .ShogiPlayerGround
-  // 盤背景と同じ構成
-  +defvar(sp_piece_blur, 0)                 // 駒ぼかし
-  +defvar(sp_piece_grayscale, 0)            // 駒グレースケール
-  +defvar(sp_piece_contrast, 1.0)           // 駒コントラスト
-  +defvar(sp_piece_invert, 0)               // 駒色反転
-  +defvar(sp_piece_opacity, 1.0)            // 駒不透明度
-  +defvar(sp_piece_hue, 1.0)                // 駒色相
-  +defvar(sp_piece_saturate, 1.0)           // 駒彩度
-  +defvar(sp_piece_brightness, 1.0)         // 駒輝度
-  +defvar(sp_piece_sepia, 0)                // 駒色セピア度
-  +defvar(sp_piece_blend, normal)           // 駒の mix-blend-mode の値
-
   ////////////////////////////////////////////////////////////////////////////////
 
   +defvar(sp_board_piece_rate, 90%)                         // 盤のセル内の駒占有率
@@ -166,12 +154,10 @@ export default {
     // top: var(--piece_pull, 10%)
   .PieceTextureSelf // .PieceTexture:after の alias みたいなもの
     +is_overlay_block
-    mix-blend-mode: var(--sp_piece_blend)
 
     background-position: var(--sp_board_piece_position)
     background-repeat: no-repeat
     background-size: contain      // 必ず駒の全体が表示されるようにする
-    // filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5))
     // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
 
   //////////////////////////////////////////////////////////////////////////////// カーソル

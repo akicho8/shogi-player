@@ -120,12 +120,4 @@ export default {
   .PieceBoxTexture
     background-color: var(--sp_piece_box_color)
     border-radius: calc(var(--sp_board_radius) * 1px)
-  &.is_board_shadow_box
-    .PieceBoxTexture
-      +filter_box_shadow(1)
-  &.is_board_shadow_drop
-    .PieceBoxTexture
-      +filter_drop_shadow(1)
-  &.is_board_shadow_none
-    .PieceBoxTexture
 </style>
