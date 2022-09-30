@@ -9,10 +9,10 @@
 
 <script>
 import _ from "lodash"
-import Vue from 'vue'
+import Vue from "vue"
 
 // Library
-import { Xcontainer   } from "./models/xcontainer.js"
+import { Xcontainer } from "./models/xcontainer.js"
 import { Place      } from "./models/place.js"
 import { SfenParser } from "./models/sfen_parser.js"
 import { KifParser  } from "./models/kif_parser.js"
@@ -32,7 +32,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 import { navi_module        } from "./navi_module.js"
 import { shortcut_module    } from "./shortcut_module.js"
 import { edit_mode_module   } from "./edit_mode_module.js"
-import { foul_module     } from "./foul_module.js"
+import { foul_module        } from "./foul_module.js"
 import { hover_piece_module } from "./hover_piece_module.js"
 import { legal_check        } from "./legal_check.js"
 import { play_mode_module   } from "./play_mode_module.js"
@@ -46,7 +46,7 @@ import { app_chore          } from "./app_chore.js"
 import { app_vector         } from "./app_vector.js"
 
 export default {
-  name: 'ShogiPlayer',
+  name: "ShogiPlayer",
 
   mixins: [
     app_chore,
@@ -109,9 +109,9 @@ export default {
     return {
       new_debug_mode: this.sp_debug_mode,
       new_run_mode: this.sp_run_mode,
-      turn_edit_value: null,    // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
-      xcontainer: null,           // 局面管理
-      turn_edit_p: false,       // N手目編集中
+      turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
+      xcontainer: null,                 // 局面管理
+      turn_edit_p: false,               // N手目編集中
       update_counter: 0,
       setting_modal_p: false,
       env: process.env.NODE_ENV,
