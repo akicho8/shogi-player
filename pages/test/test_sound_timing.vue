@@ -32,6 +32,15 @@ export default {
   methods: {
     sound_play(key) {
       this.$buefy.toast.open({message: key, queue: false})
+
+      // https://zenn.dev/terrierscript/articles/2022-07-15-audio-context-sound-effect
+      const audioCtx = new window.AudioContext()
+      const oscillator = audioCtx.createOscillator()
+      oscillator.type = "sine"
+      oscillator.frequency.setValueAtTime(432, audioCtx.currentTime)
+      oscillator.connect(audioCtx.destination)
+      oscillator.start(audioCtx.currentTime)
+      oscillator.stop(audioCtx.currentTime + 0.05)
     },
   },
 
