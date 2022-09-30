@@ -47,7 +47,6 @@
 | `operation_invalid1`                        | 手番が違うのに操作しようとした                           |                                                                |   |
 | `operation_invalid2`                        | 自分が手番だが相手の駒を動かそうとした                   |                                                                |   |
 | `foul_accident`                             | 反則が発生したとき                                       | sp_play_mode_foul_check_p && sp_play_mode_foul_break_p のときのみ                                                                             |   |
-| `sound_play`                                | 音を慣らす直前に piece_put か flip_sound が来る          | 独自の音を慣らしたいとか制御したいとき用                                                               |   |
 
 ## Slot
 

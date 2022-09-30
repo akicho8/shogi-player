@@ -25,7 +25,6 @@
                 :sp_key_event_capture_enabled="true"
                 sp_slider="is_slider_on"
                 sp_controller="is_controller_on"
-                :sp_sound_enabled="true"
               )
 
             footer.modal-card-foot

@@ -154,36 +154,10 @@ export default {
         return
       }
 
-      let sfen_change_p = false
-      let before_sfen = null
-
-      if (this.sp_sound_body_changed) {
-        before_sfen = this.xcontainer ? this.xcontainer.to_simple_sfen : ""
-      }
-
       this.xcontainer_setup(this.sp_turn)
 
-      if (this.sp_sound_body_changed) {
-        sfen_change_p = (before_sfen !== this.xcontainer.to_simple_sfen)
-      }
-
-      if (this.view_p) {
-        if (sfen_change_p) {
-          this.sound_play("piece_put")
-        }
-      }
       if (this.play_p) {
         this.play_mode_setup_from("view_mode")
-        // 棋譜を反映された側は
-        // 1. 相手が指したのか → 駒音だす
-        // 2. 自分の指し手が正しい指し手だと判断された棋譜が返って反映されたのか → 駒音なし
-        // この区別が付かない。なのでここで成らさない方がよい
-        // this.sound_play("piece_put")
-        // ……と思ったが 1 は turn_offset_max が変化したかどうかで判断できる。いや sfen を見ればわかる？ → そこまでする必要ない
-        // if (before_turn_offset_max !== this.turn_offset_max) {
-        if (sfen_change_p) {
-          this.sound_play("piece_put")
-        }
       }
     },
 
@@ -290,7 +264,6 @@ export default {
 
     view_mode_xcontainer_update(turn) {
       this.xcontainer_setup(turn)
-      // this.sound_play("piece_put")
       this.update_counter++
     },
 

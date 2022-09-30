@@ -64,16 +64,6 @@
             b-radio-button(size="is-small" v-model="sp_hidden_if_piece_stand_blank" :native-value="true") ON
 
         .box
-          .title.is-5 音
-
-          b-field(custom-class="is-small" label="効果音")
-            b-radio-button(size="is-small" v-model="sp_sound_enabled" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_sound_enabled" :native-value="true") ON
-
-          b-field(custom-class="is-small" label="ボリューム")
-            b-slider(v-model="sp_sound_volume" :min="0" :max="1.0" :step="0.01")
-
-        .box
           .title.is-5 反則判定
 
           b-field(custom-class="is-small" label="反則判定" message="OFFなら気持ち程度処理も軽くなる")
@@ -169,8 +159,6 @@
             :sp_controller="sp_controller"
             :sp_sfen_show="sp_sfen_show"
             :sp_overlay_nav="sp_overlay_nav"
-            :sp_sound_enabled="sp_sound_enabled"
-            :sp_sound_volume="sp_sound_volume"
             :sp_human_side="sp_human_side"
 
             @update:edit_mode_short_sfen="            e => trigger_check('edit_mode_short_sfen', e)"
@@ -211,8 +199,6 @@
                 |   sp_human_side="{{sp_human_side}}"
                 |   sp_viewpoint="{{sp_viewpoint}}"
                 |   :sp_turn="{{sp_turn}}"
-                |   :sp_sound_enabled="{{sp_sound_enabled}}"
-                |   :sp_sound_volume="{{sp_sound_volume}}"
                 |   :sp_key_event_capture_enabled="{{sp_key_event_capture_enabled}}"
                 |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
                 |   :sp_flip_if_white="{{sp_flip_if_white}}"
@@ -256,8 +242,6 @@ export default {
       sp_controller: "is_controller_off",
       sp_sfen_show: "is_sfen_show_off",
       sp_human_side: 'both',
-      sp_sound_enabled: true,
-      sp_sound_volume: 0.5,
       sp_key_event_capture_enabled: false,
       sp_debug_mode: "is_debug_mode_off",
       sp_hidden_if_piece_stand_blank: false,

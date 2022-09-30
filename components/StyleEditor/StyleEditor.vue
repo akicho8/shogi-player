@@ -733,7 +733,6 @@ export default {
       params.sp_comment           = this.sp_comment,
       params.sp_turn              = this.sp_turn
       params.sp_body              = this.sp_body
-      params.sp_sound_enabled     = true
       params.sp_setting           = "is_setting_off"
       params.sp_summary           = this.sp_summary
       params.sp_slider            = this.sp_slider

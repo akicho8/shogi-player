@@ -22,7 +22,6 @@
     "chroma-js": "^2.1.0",
     "dayjs": "^1.11.5",
     "file-loader": "^6.2.0",
-    "howler": "^2.2.1",
     "js-memory-record": "^0.0.22",
     "lodash": "latest",
     "node-sass": ">= 4.0.0 < 5.0.0",
