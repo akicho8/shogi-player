@@ -10,7 +10,7 @@ export class PieceYomiage extends MemoryRecord {
       { key: "S", prefix_name: "ぎん",   name: "ぎんっ！",   promoted_name: "なりぎんっ！", },
       { key: "N", prefix_name: "けい",   name: "けいっ！",   promoted_name: "なりけいっ！", },
       { key: "L", prefix_name: "きょー", name: "きょー！",   promoted_name: "なりきょー！", },
-      { key: "P", prefix_name: "ふ",     name: "ふーっ！",   promoted_name: "ときんっ！",   },
+      { key: "P", prefix_name: "ふ",     name: "ふ！",       promoted_name: "ときんっ！",   },
     ]
   }
 
