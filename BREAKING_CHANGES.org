@@ -9,3 +9,6 @@
 | mediator_snapshot_sfen | short_sfen    |
 | mediator               | xcontainer    |
 |------------------------+---------------|
+
+サウンド関連 → 全削除
+CSS filter → 全削除
