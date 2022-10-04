@@ -29,7 +29,9 @@
 | `update:moves_take_turn_offset`             | 操作モードでの現在の手の配列                             | turn_offset で take している                                   |   |
 | `update:edit_mode_short_sfen`            | 編集モードの局面                                         |                                                                |   |
 | `update:sp_turn`                            | 手数が変更されたとき                                     | sp_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも |   |
-| `one_way:sp_turn_user_changed`              | ユーザーがコントローラーやスライダーで手数を変更したとき |                                                                |   |
+| `user_piece_put`                             | ユーザーが意図して駒を盤に置いた                        | 指したとき                                                               |   |
+| `user_viewpoint_flip`                       | ユーザーが意図して盤の視点を変更した                     | ☗☖をクリックして反転したとき                                                               |   |
+| `user_turn_change`                          | ユーザーが意図して手数を変更した                        | スライダーを動かして手数を変更したとき。(引数は新しい手数)     |   |
 | `update:turn_offset`                        | 手数が変更されたとき                                     | マイナスにはならない。sp_turn と被るので追加。                 |   |
 | `update:turn_offset_max`                    | 最大手数が変更されたとき                                 | 内部変数参照よりこっちの方が安全なはず                         |   |
 | `update:sp_run_mode`                        | 設定ダイアログでモードが変更されたとき                   |                                                                |   |

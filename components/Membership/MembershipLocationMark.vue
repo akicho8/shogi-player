@@ -15,7 +15,7 @@ export default {
   methods: {
     click_handle() {
       if (this.flipable) {
-        this.TheSp.board_flip_toggle()
+        this.TheSp.viewpoint_flip_handle()
       }
       if (this.TheSp.sp_location_click_handle) {
         this.TheSp.sp_location_click_handle(this.location)

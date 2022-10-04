@@ -15,7 +15,9 @@
             sp_debug_mode="is_debug_mode_on"
             sp_controller="is_controller_on"
             sp_slider="is_slider_on"
-            @sound_play="sound_play"
+            @user_piece_put="     user_event_check('user_piece_put')"
+            @user_viewpoint_flip="user_event_check('user_viewpoint_flip')"
+            @user_turn_change="   user_event_check('user_turn_change')"
           )
         .column
           pre
@@ -30,7 +32,7 @@ export default {
     }
   },
   methods: {
-    sound_play(key) {
+    user_event_check(key) {
       this.$buefy.toast.open({message: key, queue: false})
 
       // https://zenn.dev/terrierscript/articles/2022-07-15-audio-context-sound-effect

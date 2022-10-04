@@ -39,9 +39,9 @@ export const api_module = {
       this.new_viewpoint = viewpoint
     },
 
-    // 反転(音がでる)
+    // 反転
     api_flip_toggle() {
-      this.board_flip_toggle()
+      this.viewpoint_flip()
     },
 
     // 待った

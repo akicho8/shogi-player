@@ -115,7 +115,7 @@ export const play_mode_module = {
         this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
         this.xcontainer.current_turn = -1
         this.xcontainer.run()
-        this.$nextTick(() => this.sound_play("piece_put")) // 音がずれるため少し待つ 20ms 待たない場合は nextTick 不要
+        this.$emit("user_piece_put")
 
         this.$emit("update:play_mode_advanced_full_moves_sfen", {
           sfen:           this.play_mode_full_moves_sfen, // sfen と

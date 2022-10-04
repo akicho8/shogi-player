@@ -36,7 +36,6 @@ import { foul_module        } from "./foul_module.js"
 import { hover_piece_module } from "./hover_piece_module.js"
 import { legal_check        } from "./legal_check.js"
 import { play_mode_module   } from "./play_mode_module.js"
-import { sound_module       } from "./sound_module.js"
 import { app_profile        } from "./app_profile.js"
 import { preset_module      } from "./preset_module.js"
 import { any_func_module    } from "./any_func_module.js"
@@ -58,7 +57,6 @@ export default {
     hover_piece_module,
     legal_check,
     play_mode_module,
-    sound_module,
     app_profile,
     preset_module,
     any_func_module,

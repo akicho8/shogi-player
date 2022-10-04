@@ -165,7 +165,7 @@ export const navi_module = {
 
         if (event) {
           this.log("局面を人が故意に変更")
-          this.$emit("one_way:sp_turn_user_changed", this.turn_offset) // b-slider で変更
+          this.$emit("user_turn_change", this.turn_offset) // b-slider で変更
         }
       }
     },
@@ -203,9 +203,14 @@ export const navi_module = {
       }
     },
 
-    board_flip_toggle() {
-      this.new_viewpoint = Location.fetch(this.new_viewpoint).flip.key
+    viewpoint_flip_handle() {
+      this.viewpoint_flip()
+      this.$emit("user_viewpoint_flip")
       this.turn_slider_focus()
+    },
+
+    viewpoint_flip() {
+      this.new_viewpoint = Location.fetch(this.new_viewpoint).flip.key
     },
   },
   computed: {
