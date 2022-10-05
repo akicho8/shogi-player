@@ -18,6 +18,8 @@
             @user_piece_put="     user_event_check('user_piece_put')"
             @user_viewpoint_flip="user_event_check('user_viewpoint_flip')"
             @user_turn_change="   user_event_check('user_turn_change')"
+            @user_piece_lift="    user_event_check('user_piece_lift')"
+            @user_piece_cancel="  user_event_check('user_piece_cancel')"
           )
         .column
           pre

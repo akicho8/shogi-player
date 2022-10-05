@@ -187,6 +187,7 @@ export const edit_mode_module = {
 
       if (_.isEqual(this.place_from, place)) {
         this.log("盤上の駒を持って同じ位置に戻したので状況キャンセル")
+        this.$emit("user_piece_cancel")
         this.state_reset()
         return
       }
@@ -457,6 +458,7 @@ export const edit_mode_module = {
       if (this.have_piece) {                         // 盤上からではない駒を持っているか？
         if (this.have_piece_location === location) { // 駒台からの駒か？
           this.log("自分の駒台から駒を持ち上げているならキャンセル")
+          this.$emit("user_piece_cancel")
           this.state_reset()
           return true
         }
@@ -696,6 +698,7 @@ export const edit_mode_module = {
     if_standard_then_unhold() {
       if (this.move_cancel_info.smooth_cancel) {
         this.log("持った状態で自分の非合法セルタップでキャンセル")
+        this.$emit("user_piece_cancel")
         this.state_reset()
       }
     },

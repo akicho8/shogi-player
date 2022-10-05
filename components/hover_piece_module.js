@@ -35,6 +35,8 @@ export const hover_piece_module = {
 
     // マウス位置に表示する駒の生成
     hover_piece_element_create(event, soldier) {
+      this.$emit("user_piece_lift")
+
       this.hover_piece_element_destroy()
       this.hover_piece_dom_create_by(soldier)
 
