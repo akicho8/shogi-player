@@ -42,13 +42,13 @@ export default {
   +defvar(sp_board_piece_rate, 90%)                         // 盤のセル内の駒占有率
   +defvar(sp_board_piece_position, center)                  // 駒を選択できる範囲内の駒の縦位置
 
-  +defvar(sp_piece_origin_color, hsla(0, 0%, 0%, 0.1))     // 最後に動かした駒の元の位置の背景色
-  +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.1))  // 持ち上げれる駒の背景色
+  +defvar(sp_piece_origin_color, hsla(0, 0%, 0%, 0.15))     // 最後に動かした駒の元の位置の背景色
+  +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.15))  // 持ち上げれる駒の背景色
 
-  +defvar(sp_lifted_origin_bg_color_desktop, hsla(0, 0%, 0%, 0.1)) // 持ち上げた駒の背景色(desktop)
+  +defvar(sp_lifted_origin_bg_color_desktop, hsla(0, 0%, 0%, 0.15)) // 持ち上げた駒の背景色(desktop)
   +defvar(sp_lifted_origin_opacity_desktop, 0.0)                   // 持ち上げた駒の元のセルの非透明度(desktop)
 
-  +defvar(sp_lifted_origin_bg_color_touch, hsla(0, 0%, 0%, 0.1))   // 持ち上げた駒の背景色(touch)
+  +defvar(sp_lifted_origin_bg_color_touch, hsla(0, 0%, 0%, 0.15))   // 持ち上げた駒の背景色(touch)
   +defvar(sp_lifted_origin_opacity_touch, 1.0)                     // 持ち上げた駒の元のセルの非透明度(touch)
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet

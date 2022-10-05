@@ -465,7 +465,7 @@ export default {
       sp_promote_select_modal_hover_color: "hsla(0, 0%, 100%, 0.5)",
 
       // 駒を操作中の移動元スタイル
-      sp_lifted_origin_bg_color_desktop: "hsla(0, 0%, 0%, 0.1)",
+      sp_lifted_origin_bg_color_desktop: "hsla(0, 0%, 0%, 0.15)",
       sp_lifted_origin_opacity_desktop: 0.0,
 
       sp_balloon: "is_balloon_on",
