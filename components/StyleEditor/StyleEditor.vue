@@ -461,7 +461,7 @@ export default {
       sp_mobile_vertical: "is_mobile_vertical_on",
 
       // 成り不成り選択
-      sp_promote_select_modal_bg_color: "rgba(0, 0, 0, 0.85)",
+      sp_promote_select_modal_bg_color: "rgba(0, 0, 0, 0.5)",
       sp_promote_select_modal_hover_color: "hsla(0, 0%, 100%, 0.5)",
 
       // 駒を操作中の移動元スタイル
