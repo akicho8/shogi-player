@@ -43,12 +43,10 @@
 </template>
 
 <script>
-import { support } from "../support.js"
 import MyColorPicker from "./MyColorPicker.vue"
 
 export default {
   name: "ImageUpload",
-  mixins: [support],
   components: {
     MyColorPicker,
   },

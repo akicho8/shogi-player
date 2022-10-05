@@ -20,13 +20,11 @@ b-colorpicker.MyColorPicker(
 </template>
 
 <script>
-import { support } from "../support.js"
 import chroma from "chroma-js"
 import BuefyColor from "@/node_modules/buefy/src/utils/color"
 
 export default {
   name: "MyColorPicker",
-  mixins: [support],
   props: {
     value:     { type: String, required: true },
     has_alpha: { type: Boolean, default: true },
