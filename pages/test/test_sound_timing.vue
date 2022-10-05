@@ -21,9 +21,6 @@
             @user_piece_lift="    user_event_check('user_piece_lift')"
             @user_piece_cancel="  user_event_check('user_piece_cancel')"
           )
-        .column
-          pre
-            | {{foul_accident}}
 </template>
 
 <script>
