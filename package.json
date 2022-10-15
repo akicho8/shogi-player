@@ -46,7 +46,7 @@
     "babel-jest": "^26.6.0",
     "jest": "^26.6.0",
     "marked": "^1.2.5",
-    "nuxt": "~2.14",
+    "nuxt": "^2.15.8",
     "nuxt-buefy": "^0.4.23",
     "pattern.css": "^1.0.0",
     "rimraf": "^3.0.2",
