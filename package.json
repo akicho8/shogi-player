@@ -25,7 +25,7 @@
     "ismobilejs": "^1.1.1",
     "js-memory-record": "^0.0.22",
     "lodash": "latest",
-    "node-sass": ">= 4.0.0 < 5.0.0",
+    "node-sass": ">= 4.0.0 < 8.0.0",
     "pug": "^2.0.4",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.1.0",
