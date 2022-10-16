@@ -40,6 +40,7 @@ export default {
     // フォーカスさせた状態で document.activeElement を見ると何にフォーカスするべきかわかる
     // v-if="false" のときは querySelector が取れないので注意
     focus_to_self() {
+      if (this.TheSp.focus_disable_p) { return false }
       if (this.$el.querySelector) {
         const el = this.$el.querySelector(".b-slider-thumb")
         if (el) {

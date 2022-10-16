@@ -29,6 +29,7 @@ import DebugBlock         from "./DebugBlock.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
 
 // mixins modules
+import { app_focus          } from "./app_focus.js"
 import { navi_module        } from "./navi_module.js"
 import { shortcut_module    } from "./shortcut_module.js"
 import { edit_mode_module   } from "./edit_mode_module.js"
@@ -50,6 +51,7 @@ export default {
   mixins: [
     app_chore,
     app_vector,
+    app_focus,
     navi_module,
     shortcut_module,
     edit_mode_module,

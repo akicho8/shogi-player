@@ -1,6 +1,8 @@
 import _ from "lodash"
 import { Location } from "./models/location.js"
 
+const FOCUS_FUNCTION = false
+
 export const navi_module = {
   props: {
     sp_summary:                     { type: String,  default: "is_summary_on",     }, // 手数や結果の表示
@@ -8,7 +10,6 @@ export const navi_module = {
     sp_setting:                     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
     sp_controller:                  { type: String,  default: "is_controller_off", }, // コントローラー表示
     sp_viewpoint:                   { type: String,  default: "black",             }, // 視点
-    sp_turn_slider_focus:           { type: String,  default: "is_turn_slider_focus_on", }, // mountedしたらスライダーにフォーカスする？
 
     sp_op_disabled:                 { type: Boolean, default: false,               }, // 全体の操作を無効化
     sp_hidden_if_piece_stand_blank: { type: Boolean, default: false,               }, // 駒がないときは駒台側を非表示
@@ -26,10 +27,6 @@ export const navi_module = {
   },
 
   mounted() {
-    if (this.sp_turn_slider_focus === "is_turn_slider_focus_on") {
-      this.turn_slider_focus()
-    }
-
     window.addEventListener("keydown", this.keydown_hook, false)
   },
 
@@ -93,13 +90,6 @@ export const navi_module = {
           this.relative_move(1, e)
           e.preventDefault()
         }
-      }
-    },
-
-    focus_on_input_tag_p() {
-      const dom = document.activeElement
-      if (dom.tagName === "TEXTAREA" || dom.tagName === "INPUT") {
-        return true
       }
     },
 
@@ -178,29 +168,6 @@ export const navi_module = {
         this.log(`スライダーは勝手に動いた : ${v}`)
       }
       this.current_turn_set(v, by_user)
-    },
-
-    nav_focus_to(key) {
-      const el = this.navigate_block_element_refs(key)
-      if (el) {
-        el.focus()
-        return true
-      }
-      return false
-    },
-
-    turn_slider_focus() {
-      const TurnSliderBlock = this.navigate_block_element_refs("TurnSliderBlock")
-      if (TurnSliderBlock) {
-        return TurnSliderBlock.focus_to_self()
-      }
-      return false
-    },
-
-    navigate_block_element_refs(key) {
-      if (this.$NavigateBlock) {
-        return this.$NavigateBlock.$refs[key]
-      }
     },
 
     viewpoint_flip_handle() {
