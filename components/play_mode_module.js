@@ -121,6 +121,7 @@ export const play_mode_module = {
           sfen:           this.play_mode_full_moves_sfen, // sfen と
           turn:           this.turn_offset,               // turn を同時に更新するの重要
           last_move_info: this.last_move_info,
+          snapshot_hash:  this.xcontainer.to_sfen_without_turn, // 履歴を含まない現在の状態
         })
 
         this.$emit("update:play_mode_advanced_moves", this.moves)

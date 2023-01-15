@@ -17,7 +17,8 @@ export class SfenSerializer {
     return parts.join(" ")
   }
 
-  // 局面ペディア用(ターンを指定するとエラーになるため)
+  // 局面ペディアのようにターンを指定するとエラーになるものに用いる
+  // 千日手判定用のハッシュとしても使える
   get to_s_without_turn() {
     return this.__base_parts.join(" ")
   }
