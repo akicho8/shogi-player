@@ -120,6 +120,9 @@
 
         .box
           SeTitle(name="駒台")
+          b-field(custom-class="is-small" label="レイアウト")
+            b-radio-button(size="is-small" v-model="sp_stand_layout" native-value="is_stand_layout_to_bottom") 下寄せ
+            b-radio-button(size="is-small" v-model="sp_stand_layout" native-value="is_stand_layout_to_top") 上寄せ
           .columns.mt-4
             .column.py-0
               b-field(custom-class="is-small" label="セル(W)")
@@ -201,14 +204,14 @@
             b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_off") OFF
             b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_on") ON
 
-          b-field(custom-class="is-small" label="テキスト色")
-            MyColorPicker(v-model="sp_digit_label_font_color")
-
           b-field(custom-class="is-small" label="座標位置")
-            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_position" :min="-10" :max="50" :step="1")
+            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_position" :min="-50" :max="50" :step="1")
 
           b-field(custom-class="is-small" label="テキストサイズ")
             b-slider(v-bind="slider_attrs" v-model="sp_digit_label_font_size" :min="0" :max="50" :step="0.5")
+
+          b-field(custom-class="is-small" label="テキスト色")
+            MyColorPicker(v-model="sp_digit_label_font_color")
 
         .box
           SeTitle(name="Transform")
@@ -493,11 +496,13 @@ export default {
 
       sp_balloon: "is_balloon_on",
 
+      //////////////////////////////////////////////////////////////////////////////// 駒台
       sp_stand_piece_w: 47,
       sp_stand_piece_h: 50,
       sp_stand_piece_rate: 80,
       sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
       sp_stand_bg_color: "rgba(0, 0, 0, 0.0)",
+      sp_stand_layout: DEVELOPMENT_P ? "is_stand_layout_to_top" : "is_stand_layout_to_bottom",
 
       sp_turn: -1,
       sp_viewpoint: "black",
@@ -532,6 +537,7 @@ export default {
       sp_digit_label_font_size:  7.3,
       sp_digit_label_position: 3,
       sp_digit_label_font_color: "hsla(0,0%,0%,0.75)",
+
 
       ////////////////////////////////////////////////////////////////////////////////
 
@@ -648,6 +654,7 @@ export default {
       this.sp_grid_stroke       = 1                      // グリッド線(細)
       this.sp_grid_outer_stroke = 2                      // グリッド枠(細)
       this.sp_digit_label       = "is_digit_label_on"    // 座標を表示する
+      this.sp_stand_layout      = "is_stand_layout_to_top"    // 駒台の位置
     },
     hsla_format(v) {
       return chroma(v).css("hsla")
@@ -768,6 +775,7 @@ export default {
       params.sp_setting           = "is_setting_off"
       params.sp_summary           = this.sp_summary
       params.sp_digit_label             = this.sp_digit_label
+      params.sp_stand_layout             = this.sp_stand_layout
       params.sp_slider            = this.sp_slider
       params.sp_controller        = this.sp_controller
       params.sp_player_info       = this.sp_player_info
