@@ -65,8 +65,15 @@ export default {
     flex-direction: column
     gap: 0.2em                   // 名前と時間の隙間
 
+  &.is_stand_layout2_to_top
+    .MembershipLocationPlayerInfoName
+      writing-mode: vertical-rl
+  &.is_stand_layout2_to_bottom
+    .MembershipLocationPlayerInfoName
+      writing-mode: horizontal-tb
+
   .MembershipLocationPlayerInfoTime
-    white-space: nowrap
+    white-space: nowrap         // 時間は絶対に折り返させない
 
   &.is_balloon_on
     .MembershipLocationPlayerInfo

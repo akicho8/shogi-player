@@ -153,6 +153,27 @@
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_gap_bottom" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_horizontal'")
 
         .box
+          SeTitle(name="対局者名")
+          b-field(custom-class="is-small" label="縦・横書き" message="英字も考慮して縦書きにするなら横書きのままで1文字ずつ<br>を入れた方が正しく縦書きになる。日本語しか使わないのであれば単に縦書きでもよい。モバイルの場合は狭いので横書きの方がよい")
+            b-radio-button(size="is-small" v-model="sp_stand_layout2" native-value="is_stand_layout2_to_bottom") 横書き
+            b-radio-button(size="is-small" v-model="sp_stand_layout2" native-value="is_stand_layout2_to_top") 縦書き
+
+          .columns
+            .column
+              b-field(custom-class="is-small" label="☗")
+                b-input(size="is-small" v-model.trim="sp_player_info.black.name" type="text")
+            .column
+              b-field(custom-class="is-small" label="時間")
+                b-input(size="is-small" v-model.trim="sp_player_info.black.time" type="text")
+          .columns
+            .column
+              b-field(custom-class="is-small" label="☖")
+                b-input(size="is-small" v-model.trim="sp_player_info.white.name" type="text")
+            .column
+              b-field(custom-class="is-small" label="時間")
+                b-input(size="is-small" v-model.trim="sp_player_info.white.time" type="text")
+
+        .box
           SeTitle(name="駒箱")
           b-field(custom-class="is-small" label="")
             MyColorPicker(v-model="sp_piece_box_color")
@@ -367,23 +388,6 @@
             b-input(size="is-small" v-model="sp_body" type="textarea" :rows="8")
 
         .box
-          SeTitle(name="対局者情報")
-          .columns
-            .column
-              b-field(custom-class="is-small" label="☗")
-                b-input(size="is-small" v-model.trim="sp_player_info.black.name" type="text")
-            .column
-              b-field(custom-class="is-small" label="時間")
-                b-input(size="is-small" v-model.trim="sp_player_info.black.time" type="text")
-          .columns
-            .column
-              b-field(custom-class="is-small" label="☖")
-                b-input(size="is-small" v-model.trim="sp_player_info.white.name" type="text")
-            .column
-              b-field(custom-class="is-small" label="時間")
-                b-input(size="is-small" v-model.trim="sp_player_info.white.time" type="text")
-
-        .box
           SeTitle(name="コンポーネント引数確認")
           pre
             | {{sp_params}}
@@ -538,13 +542,14 @@ export default {
       sp_digit_label_position: 3,
       sp_digit_label_font_color: "hsla(0,0%,0%,0.75)",
 
-
       ////////////////////////////////////////////////////////////////////////////////
 
       sp_player_info: {
         black: { name: "先手", time: "", },
         white: { name: "後手", time: "", },
       },
+      sp_stand_layout2: DEVELOPMENT_P ? "is_stand_layout2_to_top" : "is_stand_layout2_to_bottom",
+      ////////////////////////////////////////////////////////////////////////////////
 
       sp_body: null,
 
@@ -655,6 +660,7 @@ export default {
       this.sp_grid_outer_stroke = 2                      // グリッド枠(細)
       this.sp_digit_label       = "is_digit_label_on"    // 座標を表示する
       this.sp_stand_layout      = "is_stand_layout_to_top"    // 駒台の位置
+      this.sp_stand_layout2      = "is_stand_layout2_to_top"    // 縦横書き
     },
     hsla_format(v) {
       return chroma(v).css("hsla")
@@ -776,6 +782,7 @@ export default {
       params.sp_summary           = this.sp_summary
       params.sp_digit_label             = this.sp_digit_label
       params.sp_stand_layout             = this.sp_stand_layout
+      params.sp_stand_layout2             = this.sp_stand_layout2
       params.sp_slider            = this.sp_slider
       params.sp_controller        = this.sp_controller
       params.sp_player_info       = this.sp_player_info

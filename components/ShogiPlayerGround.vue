@@ -27,6 +27,7 @@ export default {
         this.TheSp.sp_bg_variant,
         this.TheSp.sp_digit_label,
         this.TheSp.sp_stand_layout,
+        this.TheSp.sp_stand_layout2,
         this.TheSp.sp_mobile_fit,
         this.TheSp.sp_mobile_vertical,
         this.TheSp.devise_info.key,
