@@ -25,6 +25,7 @@ export default {
         this.TheSp.sp_layer,
         this.TheSp.sp_pi_variant,
         this.TheSp.sp_bg_variant,
+        this.TheSp.sp_digit_label,
         this.TheSp.sp_mobile_fit,
         this.TheSp.sp_mobile_vertical,
         this.TheSp.devise_info.key,

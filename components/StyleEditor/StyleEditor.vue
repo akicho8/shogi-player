@@ -13,7 +13,12 @@
 
       .my_controls
         .box
-          .title.is-5 基本
+          .short_cut_buttons
+            template(v-for="e in SeConfig.section_names")
+              a.button.is-small.is-marginless(:href="`${$route.path}#${e}`") {{e}}
+
+        .box
+          SeTitle(name="基本")
           b-field(custom-class="is-small" label="コンテナ幅")
             b-slider(v-bind="slider_attrs" v-model="se_frame_width" :min="1" :max="100")
           b-field(custom-class="is-small" label="レイアウト")
@@ -27,7 +32,7 @@
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
         .box
-          .title.is-5 背景
+          SeTitle(name="背景")
 
           b-field(custom-class="is-small" label="")
             MyColorPicker(v-model="se_ws_color" :has_alpha="false")
@@ -56,7 +61,7 @@
           //-   b-slider(v-bind="slider_attrs" v-model="se_ws_opacity" :min="0" :max="1.0" :step="0.001")
 
         .box
-          .title.is-5 盤テクスチャ
+          SeTitle(name="盤テクスチャ")
 
           b-field(custom-class="is-small" label="")
             MyColorPicker(v-model="sp_board_color")
@@ -69,7 +74,7 @@
           ImageUpload(@input="sp_board_image_input_handle")
 
         .box
-          .title.is-5 盤
+          SeTitle(name="盤")
           b-field(custom-class="is-small" label="角丸め")
             b-slider(v-bind="slider_attrs" v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
           b-field(custom-class="is-small" label="余白")
@@ -85,7 +90,7 @@
                 b-slider(v-bind="slider_attrs" v-model="sp_board_dimension_h" :min="0" :max="12")
 
         .box
-          .title.is-5 盤グリッド
+          SeTitle(name="盤グリッド")
           b-field(custom-class="is-small" label="グリッドカラー")
             MyColorPicker(v-model="sp_grid_color")
           b-field(custom-class="is-small" label="星・グリッド外枠カラー")
@@ -101,7 +106,7 @@
             b-radio-button(size="is-small" v-model="sp_grid_star_z_index" :native-value="0") 0
 
         .box
-          .title.is-5 駒
+          SeTitle(name="駒")
           b-field(custom-class="is-small" label="プリセット")
             b-select(size="is-small" v-model="sp_pi_variant")
               template(v-for="e in PiVariantInfo.values")
@@ -114,7 +119,7 @@
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="bottom") ↓
 
         .box
-          .title.is-5 駒台
+          SeTitle(name="駒台")
           .columns.mt-4
             .column.py-0
               b-field(custom-class="is-small" label="セル(W)")
@@ -130,7 +135,7 @@
             MyColorPicker(v-model="sp_stand_bg_color")
 
         .box
-          .title.is-5 駒数
+          SeTitle(name="駒数")
           b-field(custom-class="is-small" label="サイズ")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_font_size" :min="0" :max="20" :step="0.01")
           b-field(custom-class="is-small" label="フォント色")
@@ -145,7 +150,7 @@
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_gap_bottom" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_horizontal'")
 
         .box
-          .title.is-5 駒箱
+          SeTitle(name="駒箱")
           b-field(custom-class="is-small" label="")
             MyColorPicker(v-model="sp_piece_box_color")
           .columns.mt-4
@@ -167,7 +172,7 @@
           //-       b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
 
         //- .box
-        //-   .title.is-5 モバイル
+        //-   SeTitle(name="モバイル
         //-   b-field(custom-class="is-small" label="持駒等のサイズを縮小する" v-if="false")
         //-     b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_off") OFF
         //-     b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_on") ON
@@ -176,21 +181,37 @@
         //-     b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
 
         .box
-          .title.is-5 成り不成り選択
+          SeTitle(name="成り不成り選択")
           b-field(custom-class="is-small" label="背景")
             MyColorPicker(v-model="sp_promote_select_modal_bg_color")
           b-field(custom-class="is-small" label="hover色")
             MyColorPicker(v-model="sp_promote_select_modal_hover_color")
 
         .box
-          .title.is-5 駒を操作中の移動元スタイル
+          SeTitle(name="駒を操作中の移動元スタイル")
           b-field(custom-class="is-small" label="背景")
             MyColorPicker(v-model="sp_lifted_origin_bg_color_desktop")
           b-field(custom-class="is-small" label="駒の非透明度")
             b-slider(v-bind="slider_attrs" v-model="sp_lifted_origin_opacity_desktop" :min="0" :max="1.0" :step="0.001")
 
         .box
-          .title.is-5 Transform
+          SeTitle(name="座標")
+
+          b-field(custom-class="is-small" label="座標表示")
+            b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_off") OFF
+            b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_on") ON
+
+          b-field(custom-class="is-small" label="テキスト色")
+            MyColorPicker(v-model="sp_digit_label_font_color")
+
+          b-field(custom-class="is-small" label="座標位置")
+            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_position" :min="-10" :max="50" :step="1")
+
+          b-field(custom-class="is-small" label="テキストサイズ")
+            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_font_size" :min="0" :max="50" :step="0.5")
+
+        .box
+          SeTitle(name="Transform")
           b-tabs(size="is-small" v-model="transform_tab_index" expanded)
             b-tab-item(label="背景")
               b-field(custom-class="is-small" label="")
@@ -264,7 +285,7 @@
                   b-button(size="is-small" @click="se_tf2_reset") リセット
 
         .box
-          .title.is-5 コントローラー＆スライダー
+          SeTitle(name="コントローラー＆スライダー")
 
           b-field(custom-class="is-small" label="横幅")
             b-slider(v-bind="slider_attrs" v-model="sp_controller_width" :min="0" :max="1.0" :step="0.001")
@@ -281,7 +302,7 @@
             b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_on") ON
 
         .box
-          .title.is-5 その他
+          SeTitle(name="その他")
 
           b-field(custom-class="is-small" label="共通の隙間")
             b-slider(v-bind="slider_attrs" v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
@@ -333,12 +354,12 @@
             b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="true") ON
 
         .box(v-if="false")
-          .title.is-5 カスタムCSS
+          SeTitle(name="カスタムCSS")
           b-field(custom-class="is-small" label="")
             b-input(size="is-small" v-model="user_css" type="textarea" :rows="8")
 
         .box
-          .title.is-5 棋譜
+          SeTitle(name="棋譜")
           b-field.my-4(custom-class="is-small" label="プリセット")
             b-select(size="is-small" v-model="kifu_sample_key" @input="kifu_sample_key_input_handle")
               option(:value="null")
@@ -348,7 +369,7 @@
             b-input(size="is-small" v-model="sp_body" type="textarea" :rows="8")
 
         .box
-          .title.is-5 対局者情報
+          SeTitle(name="対局者情報")
           .columns
             .column
               b-field(custom-class="is-small" label="☗")
@@ -365,11 +386,11 @@
                 b-input(size="is-small" v-model.trim="sp_player_info.white.time" type="text")
 
         .box
-          .title.is-5 コンポーネント引数確認
+          SeTitle(name="コンポーネント引数確認")
           pre
             | {{sp_params}}
         .box
-          .title.is-5 CSS変数確認
+          SeTitle(name="CSS変数確認")
           pre
             | {{human_css}}
 
@@ -410,6 +431,8 @@ import { MixBlendModeInfo } from "../models/mix_blend_mode_info.js"
 import ShogiPlayer   from "../ShogiPlayer.vue"
 import MyColorPicker from "./MyColorPicker.vue"
 import ImageUpload   from "./ImageUpload.vue"
+import SeTitle   from "./SeTitle.vue"
+import { SeConfig }   from "./SeConfig.js"
 
 export default {
   name: "StyleEditor",
@@ -417,6 +440,7 @@ export default {
     ShogiPlayer,
     MyColorPicker,
     ImageUpload,
+    SeTitle,
   },
 
   data() {
@@ -503,7 +527,12 @@ export default {
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_pi_variant: "is_pi_variant_a",    // is_pi_variant_d
       sp_bg_variant: "is_bg_variant_none", // is_bg_variant_a
-      ////////////////////////////////////////////////////////////////////////////////
+
+      //////////////////////////////////////////////////////////////////////////////// 座標
+      sp_digit_label: DEVELOPMENT_P ? "is_digit_label_on" : "is_digit_label_off",
+      sp_digit_label_font_size:  7.3,
+      sp_digit_label_position: 3,
+      sp_digit_label_font_color: "hsla(0,0%,0%,0.75)",
 
       ////////////////////////////////////////////////////////////////////////////////
 
@@ -513,7 +542,9 @@ export default {
       },
 
       sp_body: null,
+
       sp_summary:    DEVELOPMENT_P ? "is_summary_on" : "is_summary_off",
+
       sp_slider:     DEVELOPMENT_P ? "is_slider_on" : "is_slider_on",
       sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
       sp_play_mode_legal_move_only: false,
@@ -659,6 +690,7 @@ export default {
     PiVariantInfo()  { return PiVariantInfo  },
     KifuBookInfo() { return KifuBookInfo },
     MixBlendModeInfo() { return MixBlendModeInfo },
+    SeConfig() { return SeConfig },
 
     kifu_book_info() {
       if (this.kifu_sample_key) {
@@ -735,6 +767,7 @@ export default {
       params.sp_body              = this.sp_body
       params.sp_setting           = "is_setting_off"
       params.sp_summary           = this.sp_summary
+      params.sp_digit_label             = this.sp_digit_label
       params.sp_slider            = this.sp_slider
       params.sp_controller        = this.sp_controller
       params.sp_player_info       = this.sp_player_info
@@ -751,10 +784,10 @@ export default {
       s = s.replace(/\s*.Workspace.*\n/, "")
       s = s.replace(/\s}\s*\n/, "")
       s = s.replace(/;/g, "")
-      s = s.replace(/^\s*/gm, "")
+      s = s.replace(/^ +/mg, "")
       s = s.replace(/:\s*/g, ": ")
       // s = s.replace(/^--/gm, "")
-      s = s.replace(/^\/\//gm, "\n//")
+      // s = s.replace(/^\/\//gm, "\n//")
       return s.trim()
     },
 
@@ -767,18 +800,9 @@ export default {
     raw_css() {
       return `
         .Workspace {
-          // 背景
-          --se_ws_color:             ${this.hsla_format(this.se_ws_color)};
-          --se_ws_image:             ${this.se_ws_bg_url};
-          --se_ws_blur:              ${this.se_ws_blur};
-          --se_ws_grayscale:         ${this.se_ws_grayscale};
-          --se_ws_contrast:          ${this.se_ws_contrast};
-          --se_ws_invert:            ${this.se_ws_invert};
-
-          --se_ws_hue:               ${this.se_ws_hue};
-          --se_ws_saturate:          ${this.se_ws_saturate + this.se_ws_saturate2};
-          --se_ws_brightness:        ${this.se_ws_brightness};
-          --se_ws_sepia:       ${this.se_ws_sepia};
+          // --sp_* は ShogiPlayer のスタイル
+          // --se_* はスタイルエディタ自身のスタイル
+          // なので他で ShogiPlayer を組み込むときは --sp_* のものだけで良い
 
           // 盤テクスチャ
           --sp_board_color:              ${this.hsla_format(this.sp_board_color)};
@@ -838,6 +862,28 @@ export default {
           --sp_controller_width:        ${this.sp_controller_width};
           --sp_controller_width_mobile: ${this.sp_controller_width_mobile};
 
+          // 座標表記
+          --sp_digit_label_font_size: ${this.sp_digit_label_font_size}px;
+          --sp_digit_label_font_color: ${this.sp_digit_label_font_color};
+          --sp_digit_label_position: ${this.sp_digit_label_position};
+
+          //////////////////////////////////////////////////////////////////////////////// スタイルエディタ側
+          // --se_* で始まるものはスタイルエディタ側で用意したスタイルなので
+          // 別で ShogiPlayer 使う場合は定義する必要はない
+
+          // 背景
+          --se_ws_color:             ${this.hsla_format(this.se_ws_color)};
+          --se_ws_image:             ${this.se_ws_bg_url};
+          --se_ws_blur:              ${this.se_ws_blur};
+          --se_ws_grayscale:         ${this.se_ws_grayscale};
+          --se_ws_contrast:          ${this.se_ws_contrast};
+          --se_ws_invert:            ${this.se_ws_invert};
+
+          --se_ws_hue:               ${this.se_ws_hue};
+          --se_ws_saturate:          ${this.se_ws_saturate + this.se_ws_saturate2};
+          --se_ws_brightness:        ${this.se_ws_brightness};
+          --se_ws_sepia:       ${this.se_ws_sepia};
+
           // Transform 背景
           --se_tf0_perspective: ${this.se_tf0_perspective}px;
           --se_tf0_translate_x: ${this.se_tf0_translate_x}px;
@@ -894,9 +940,12 @@ $sidebar_width_mobile:  100% * 3 / 4
     margin-top: 1rem
     margin-bottom: 0
 
-  .title
-    margin-top: 0.4rem
-    margin-bottom: 1rem
+  .short_cut_buttons
+    display: flex
+    flex-wrap: wrap
+    gap: 8px
+    a
+      display: inline
 
   .field:not(:last-child)
     margin-bottom: 1.25rem

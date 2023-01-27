@@ -1,15 +1,15 @@
 | 変数                                         | 初期値                    | 意味                                                                  |
 |----------------------------------------------|---------------------------|-----------------------------------------------------------------------|
-| `--sp_promote_select_modal_bg_color`         | hsla(0, 0%, 0%, 0.85)     | 成り不成り選択画面の背景色                                            |
+| `--sp_promote_select_modal_bg_color`         | hsla(0, 0%, 0%, 0.5)      | 成り不成り選択画面の背景色                                            |
 | `--sp_promote_select_modal_hover_color`      | hsla(0, 0%, 100%, 0.5)    | 成り不成り選択でhoverした駒の背景色                                   |
 | `--sp_promote_select_modal_z`                | $promote_select_modal_z   | 成り不成り選択モーダルの z-index                                      |
 | `--sp_board_piece_rate`                      | 90%                       | 盤のセル内の駒占有率                                                  |
 | `--sp_board_piece_position`                  | center                    | 駒を選択できる範囲内の駒の縦位置                                      |
-| `--sp_piece_origin_color`                    | hsla(0, 0%, 0%, 0.1)      | 最後に動かした駒の元の位置の背景色                                    |
-| `--sp_piece_selectable_color`                | hsla(0, 0%, 0%, 0.1)      | 持ち上げれる駒の背景色                                                |
-| `--sp_lifted_origin_bg_color_desktop`        | hsla(0, 0%, 0%, 0.1)      | 持ち上げた駒の背景色(desktop)                                         |
+| `--sp_piece_origin_color`                    | hsla(0, 0%, 0%, 0.15)     | 最後に動かした駒の元の位置の背景色                                    |
+| `--sp_piece_selectable_color`                | hsla(0, 0%, 0%, 0.15)     | 持ち上げれる駒の背景色                                                |
+| `--sp_lifted_origin_bg_color_desktop`        | hsla(0, 0%, 0%, 0.15)     | 持ち上げた駒の背景色(desktop)                                         |
 | `--sp_lifted_origin_opacity_desktop`         |                       0.0 | 持ち上げた駒の元のセルの非透明度(desktop)                             |
-| `--sp_lifted_origin_bg_color_touch`          | hsla(0, 0%, 0%, 0.1)      | 持ち上げた駒の背景色(touch)                                           |
+| `--sp_lifted_origin_bg_color_touch`          | hsla(0, 0%, 0%, 0.15)     | 持ち上げた駒の背景色(touch)                                           |
 | `--sp_lifted_origin_opacity_touch`           |                       1.0 | 持ち上げた駒の元のセルの非透明度(touch)                               |
 | `--sp_stand_piece_w`                         | 47px                      | 駒台のセル(W)                                                         |
 | `--sp_stand_piece_h`                         | 50px                      | 駒台のセル(H)                                                         |
@@ -40,6 +40,9 @@
 | `--sp_board_dimension_h`                     |                         9 | 盤のセル数(h) TDの縦幅を決めるのに必要                                |
 | `--sp_controller_width`                      |                       0.5 | コントローラー横幅                                                    |
 | `--sp_controller_width_mobile`               |                       0.8 | コントローラー横幅(モバイル時)                                        |
+| `--sp_digit_label_font_size`                 | 7.5px                     | 座標表記の文字サイズ                                                  |
+| `--sp_digit_label_position`                  |                         3 | 座標表記の位置調整(%)                                                 |
+| `--sp_digit_label_font_color`                | hsla(0,0%,0%,0.75)        | 座標表記の文字色                                                      |
 | `--sp_piece_count_gap_right`                 | 62%                       | 駒数の駒右端からのオフセット(横配置時)                                |
 | `--sp_piece_count_gap_bottom`                | 32%                       | 駒数の駒底辺からのオフセット(縦配置時)                                |
 | `--sp_piece_count_font_size`                 | 0.75rem                   | 駒数の文字サイズ                                                      |

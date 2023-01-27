@@ -20,37 +20,37 @@
 
 ## イベント
 
-| 名前                                        | 意味                                                     | 備考                                                           |   |
-|---------------------------------------------|----------------------------------------------------------|----------------------------------------------------------------|---|
-| `update:short_sfen`                         | 盤面の状態                                   | コントローラーで手を戻しても変化する   |   |
-| `update:play_mode_advanced_full_moves_sfen` | 操作モードで指した直後の局面を発行(movesあり)            |                                                                |   |
-| `update:play_mode_advanced_short_sfen`   | 操作モードで指した直後の局面を発行(movesなし)            |                                                                |   |
-| `update:play_mode_advanced_moves`           | 操作モードで指した手の配列                               |                                                                |   |
-| `update:moves_take_turn_offset`             | 操作モードでの現在の手の配列                             | turn_offset で take している                                   |   |
-| `update:edit_mode_short_sfen`            | 編集モードの局面                                         |                                                                |   |
-| `update:sp_turn`                            | 手数が変更されたとき                                     | sp_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも |   |
-| `user_piece_put`                             | ユーザーが意図して駒を盤に置いた                        | 指したとき                                                               |   |
-| `user_viewpoint_flip`                       | ユーザーが意図して盤の視点を変更した                     | ☗☖をクリックして反転したとき                                                               |   |
-| `user_turn_change`                          | ユーザーが意図して手数を変更した                        | スライダーを動かして手数を変更したとき。(引数は新しい手数)     |   |
-| `user_piece_lift`                           | ユーザーが意図して駒を持ち上げた                        |     |   |
-| `user_piece_cancel`                          | ユーザーが意図して持ち上げた駒を元に戻した              |     |   |
-| `update:turn_offset`                        | 手数が変更されたとき                                     | マイナスにはならない。sp_turn と被るので追加。                 |   |
-| `update:turn_offset_max`                    | 最大手数が変更されたとき                                 | 内部変数参照よりこっちの方が安全なはず                         |   |
-| `update:sp_run_mode`                        | 設定ダイアログでモードが変更されたとき                   |                                                                |   |
-| `update:sp_body`                            | 設定ダイアログで棋譜が変更されたとき                     |                                                                |   |
-| `update:sp_debug_mode`                      | 設定ダイアログでデバッグモードが変更されたとき           |                                                                |   |
-| `update:sp_viewpoint`                       | 盤面を反転したとき                                       |                                                                |   |
-| `update:sp_layout`                          | レイアウトを変更したとき                                 |                                                                |   |
-| `update:sp_bg_variant`                      | 背景の種類変更                                           |                                                                |   |
-| `update:sp_pi_variant`                      | 駒の種類変更                                             |                                                                |   |
-| `sp_board_cell_left_click_user_handle`      | セルをクリックしたとき                                   | place が来るのでどこをクリックしたかわかる                     |   |
-| `sp_board_cell_pointerdown_user_handle`     | セルをクリックしたとき(スマホの場合押した瞬間)           | place が来るのでどこをクリックしたかわかる                     |   |
-| `sp_player_click_handle`                    | プレイヤー名をクリックしたとき                           | (location, sp_player_infoの片側) がくる                        |   |
-| `sp_location_click_handle`                  | ☗☖をクリックしたとき                                     | (location) がくる                                              |   |
-| `xxx.native`                                | 任意のイベント (例: `click.native`)                      | click の場合はだいたい `sp_op_disabled` と組み合わせる         |   |
-| `operation_invalid1`                        | 手番が違うのに操作しようとした                           |                                                                |   |
-| `operation_invalid2`                        | 自分が手番だが相手の駒を動かそうとした                   |                                                                |   |
-| `foul_accident`                             | 反則が発生したとき                                       | sp_play_mode_foul_check_p && sp_play_mode_foul_break_p のときのみ                                                                             |   |
+| 名前                                        | 意味                                           | 備考                                                              |   |
+|---------------------------------------------|------------------------------------------------|-------------------------------------------------------------------|---|
+| `update:short_sfen`                         | 盤面の状態                                     | コントローラーで手を戻しても変化する                              |   |
+| `update:play_mode_advanced_full_moves_sfen` | 操作モードで指した直後の局面を発行(movesあり)  |                                                                   |   |
+| `update:play_mode_advanced_short_sfen`      | 操作モードで指した直後の局面を発行(movesなし)  |                                                                   |   |
+| `update:play_mode_advanced_moves`           | 操作モードで指した手の配列                     |                                                                   |   |
+| `update:moves_take_turn_offset`             | 操作モードでの現在の手の配列                   | turn_offset で take している                                      |   |
+| `update:edit_mode_short_sfen`               | 編集モードの局面                               |                                                                   |   |
+| `update:sp_turn`                            | 手数が変更されたとき                           | sp_turn に -1 が指定されたとき必ず呼ばれるので名前変更するかも    |   |
+| `user_piece_put`                            | ユーザーが意図して駒を盤に置いた               | 指したとき                                                        |   |
+| `user_viewpoint_flip`                       | ユーザーが意図して盤の視点を変更した           | ☗☖をクリックして反転したとき                                      |   |
+| `user_turn_change`                          | ユーザーが意図して手数を変更した               | スライダーを動かして手数を変更したとき。(引数は新しい手数)        |   |
+| `user_piece_lift`                           | ユーザーが意図して駒を持ち上げた               |                                                                   |   |
+| `user_piece_cancel`                         | ユーザーが意図して持ち上げた駒を元に戻した     |                                                                   |   |
+| `update:turn_offset`                        | 手数が変更されたとき                           | マイナスにはならない。sp_turn と被るので追加。                    |   |
+| `update:turn_offset_max`                    | 最大手数が変更されたとき                       | 内部変数参照よりこっちの方が安全なはず                            |   |
+| `update:sp_run_mode`                        | 設定ダイアログでモードが変更されたとき         |                                                                   |   |
+| `update:sp_body`                            | 設定ダイアログで棋譜が変更されたとき           |                                                                   |   |
+| `update:sp_debug_mode`                      | 設定ダイアログでデバッグモードが変更されたとき |                                                                   |   |
+| `update:sp_viewpoint`                       | 盤面を反転したとき                             |                                                                   |   |
+| `update:sp_layout`                          | レイアウトを変更したとき                       |                                                                   |   |
+| `update:sp_bg_variant`                      | 背景の種類変更                                 |                                                                   |   |
+| `update:sp_pi_variant`                      | 駒の種類変更                                   |                                                                   |   |
+| `sp_board_cell_left_click_user_handle`      | セルをクリックしたとき                         | place が来るのでどこをクリックしたかわかる                        |   |
+| `sp_board_cell_pointerdown_user_handle`     | セルをクリックしたとき(スマホの場合押した瞬間) | place が来るのでどこをクリックしたかわかる                        |   |
+| `sp_player_click_handle`                    | プレイヤー名をクリックしたとき                 | (location, sp_player_infoの片側) がくる                           |   |
+| `sp_location_click_handle`                  | ☗☖をクリックしたとき                           | (location) がくる                                                 |   |
+| `xxx.native`                                | 任意のイベント (例: `click.native`)            | click の場合はだいたい `sp_op_disabled` と組み合わせる            |   |
+| `operation_invalid1`                        | 手番が違うのに操作しようとした                 |                                                                   |   |
+| `operation_invalid2`                        | 自分が手番だが相手の駒を動かそうとした         |                                                                   |   |
+| `foul_accident`                             | 反則が発生したとき                             | sp_play_mode_foul_check_p && sp_play_mode_foul_break_p のときのみ |   |
 
 ## Slot
 

@@ -1,0 +1,99 @@
+// 座標
+//
+// TDタグの前後で表記を入れている
+//
+// |--------+--------|
+// | 指定   | 用途   |
+// |--------+--------|
+// | before | 横軸用 |
+// | after  | 縦軸用 |
+// |--------+--------|
+//
+.ShogiPlayerGround
+  +defvar(sp_digit_label_font_size, 7.5px)               // 座標表記の文字サイズ
+  +defvar(sp_digit_label_position, 3)                    // 座標表記の位置調整(%)
+  +defvar(sp_digit_label_font_color, hsla(0,0%,0%,0.75)) // 座標表記の文字色
+
+  &.is_layer_on
+    &.is_digit_label_on
+      td:before, td:after
+        border: 1px dashed change_color($primary, $alpha: 0.5)
+        background-color: change_color($primary, $alpha: 0.2)
+
+  &.is_digit_label_on
+    .BoardField
+      // 共通のサイズ・色
+      td:before, td:after
+        line-height: 100%    // フォントの上の隙間を取る
+        font-size: var(--sp_digit_label_font_size)
+        color:     var(--sp_digit_label_font_color)
+
+      // 横軸表記の位置調整
+      td:before
+        justify-content: center // 左右中央に合わせる
+        align-items: flex-end   // いったん一行の下に合わせる
+
+        // 下から100%押して上外に飛び出す
+        bottom: calc((100 + var(--sp_digit_label_position)) * 1%)
+
+      // 縦軸表記の位置調整
+      td:after
+        justify-content: flex-start // いったん1列の左端に合わせる
+        align-items: center         // 上下中央に合わせる
+
+        // TDの左上基点を同じにする
+        top: 0
+
+        // 左から100%押し出して右外に飛び出す
+        left: calc((100 + var(--sp_digit_label_position)) * 1%)
+
+      // 以降はそのままで良い
+
+      // 両方TDの元の大きさに収める
+      td:before, td:after
+        height: 100%
+        width: 100%
+        display: flex
+
+      td
+        position: relative
+      td:before, td:after
+        position: absolute
+
+      tr:first-child
+        td:nth-child(1):before
+          content: "9"
+        td:nth-child(2):before
+          content: "8"
+        td:nth-child(3):before
+          content: "7"
+        td:nth-child(4):before
+          content: "6"
+        td:nth-child(5):before
+          content: "5"
+        td:nth-child(6):before
+          content: "4"
+        td:nth-child(7):before
+          content: "3"
+        td:nth-child(8):before
+          content: "2"
+        td:nth-child(9):before
+          content: "1"
+      tr:nth-child(1) td:last-child:after
+        content: "一"
+      tr:nth-child(2) td:last-child:after
+        content: "二"
+      tr:nth-child(3) td:last-child:after
+        content: "三"
+      tr:nth-child(4) td:last-child:after
+        content: "四"
+      tr:nth-child(5) td:last-child:after
+        content: "五"
+      tr:nth-child(6) td:last-child:after
+        content: "六"
+      tr:nth-child(7) td:last-child:after
+        content: "七"
+      tr:nth-child(8) td:last-child:after
+        content: "八"
+      tr:nth-child(9) td:last-child:after
+        content: "九"

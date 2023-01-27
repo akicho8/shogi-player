@@ -31,6 +31,7 @@
             li: nuxt-link(:to="{name: 'test-test_bod_parse'}") BOD読み込み
             li: nuxt-link(:to="{name: 'test-test_foul'}") 反則判定
             li: nuxt-link(:to="{name: 'test-test_sound_timing'}") 音タイミング
+            li: nuxt-link(:to="{name: 'test-test_simple_paper_style'}") シンプルな紙スタイル
 </template>
 
 <script>
