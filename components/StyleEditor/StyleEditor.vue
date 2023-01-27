@@ -353,11 +353,6 @@
             b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="true") ON
 
-        .box(v-if="false")
-          SeTitle(name="カスタムCSS")
-          b-field(custom-class="is-small" label="")
-            b-input(size="is-small" v-model="user_css" type="textarea" :rows="8")
-
         .box
           SeTitle(name="棋譜")
           b-field.my-4(custom-class="is-small" label="プリセット")
@@ -393,6 +388,10 @@
           SeTitle(name="CSS変数確認")
           pre
             | {{human_css}}
+        .box
+          SeTitle(name="カスタムCSS")
+          b-field(custom-class="is-small" label="")
+            b-input(size="is-small" v-model="user_css" type="textarea" :rows="8")
 
   b-button.sidebar_toggle_button(@click="sidebar_toggle_handle" icon-left="menu" size="is-medium" type="is-text")
 
@@ -642,12 +641,13 @@ export default {
       this.sp_bg_variant = "is_bg_variant_none" // 背景画像プリセットを選択してない状態に戻しておく
     },
     force_paper_style() {
+      this.se_ws_color          = "rgb(255,255,255)"     // 背景
       this.sp_pi_variant        = "is_pi_variant_b"      // 紙面風駒
       this.sp_board_padding     = 0                      // 隙間なし
-      this.se_ws_color          = "rgb(255,255,255)"     // 背景
       this.sp_board_color       = IS_WHITE               // 盤透過
       this.sp_grid_stroke       = 1                      // グリッド線(細)
       this.sp_grid_outer_stroke = 2                      // グリッド枠(細)
+      this.sp_digit_label       = "is_digit_label_on"    // 座標を表示する
     },
     hsla_format(v) {
       return chroma(v).css("hsla")

@@ -27,9 +27,12 @@
         line-height: 100%    // フォントの上の隙間を取る
         font-size: var(--sp_digit_label_font_size)
         color:     var(--sp_digit_label_font_color)
+        z-index: 0
 
       // 横軸表記の位置調整
       td:before
+        display: flex
+        width: 100%             // height: 100% は入れてはいけない(入れると重なって押せない要素が出てくる)
         justify-content: center // 左右中央に合わせる
         align-items: flex-end   // いったん一行の下に合わせる
 
@@ -38,6 +41,9 @@
 
       // 縦軸表記の位置調整
       td:after
+        display: flex
+        height: 100%                // width: 100% は入れてはいけない(入れると先後のマークが押せなくなる)
+      
         justify-content: flex-start // いったん1列の左端に合わせる
         align-items: center         // 上下中央に合わせる
 
@@ -48,12 +54,6 @@
         left: calc((100 + var(--sp_digit_label_position)) * 1%)
 
       // 以降はそのままで良い
-
-      // 両方TDの元の大きさに収める
-      td:before, td:after
-        height: 100%
-        width: 100%
-        display: flex
 
       td
         position: relative

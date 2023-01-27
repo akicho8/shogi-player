@@ -68,7 +68,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-@import "./digit.sass"
+@import "./digit_label.sass"
 
 // 外枠 border をどこに適用するか？
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
