@@ -51,6 +51,8 @@
 | `--sp_piece_count_padding`                   | 3px                       | 駒数のパディング                                                      |
 | `--sp_board_aspect_ratio`                    |                     1.097 | 盤の横を1.0としたときの縦の比率                                       |
 | `--sp_location_mark_inactive_rate`           |                       0.5 | 手番ではないときの☗サイズの倍率                                      |
+| `--sp_player_name_font_size`                 | 0.75rem                   | 対局者の名前の表示サイズ                                              |
+| `--sp_player_time_font_size`                 | 0.75rem                   | 対局者の時間の表示サイズ                                              |
 | `--sp_stand_hover_border_color`              | rgba(0, 0, 0, 0.2)        | 駒を持って駒箱の上にいるときのボーダー色                              |
 | `--sp_stand_hover_border_stroke`             | 2px                       | 駒を持って駒箱の上にいるときのボーダーの太さ                          |
 | `--sp_stand_horizontal_hoverable_min_height` |                         3 | edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分) |
