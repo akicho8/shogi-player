@@ -45,6 +45,9 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
+  +defvar(sp_board_horizontal_gap, 0px) // 盤の左右の隙間(横配置時)
+  +defvar(sp_board_vertical_gap, 0px) // 盤の上下の隙間(縦配置時)
+
   .ShogiPlayerBody
     // 縦横関係なく中央に寄せる
     display: flex
@@ -65,7 +68,9 @@ export default {
   +IS_HORIZONTAL
     .ShogiPlayerBody
       flex-direction: row
+      gap: var(--sp_board_horizontal_gap)
   +IS_VERTICAL
     .ShogiPlayerBody
       flex-direction: column
+      gap: var(--sp_board_vertical_gap)
 </style>

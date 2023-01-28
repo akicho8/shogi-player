@@ -81,6 +81,10 @@
             b-slider(v-bind="slider_attrs" v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
           b-field(custom-class="is-small" label="アスペクト比(縦長度合)")
             b-slider(v-bind="slider_attrs" v-model="sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
+          b-field(custom-class="is-small" label="左右余白(横レイアウト時有効)" message="基本0で良い")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_horizontal_gap" :min="0" :max="50")
+          b-field(custom-class="is-small" label="上下余白(縦レイアウト時有効)" message="基本0で良い")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_vertical_gap" :min="0" :max="50")
           .columns.mt-4.mb-2
             .column.py-0
               b-field(custom-class="is-small" label="セル数(W)")
@@ -170,14 +174,36 @@
 
         .box
           SeTitle(name="駒数")
+
+          .columns.mt-4.is-multiline
+            .column.is-12.py-0
+              b-field(custom-class="is-small" label="横レイアウト時の相対位置")
+            .column.is-6.py-0
+              b-field(custom-class="is-small" label="X")
+                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_horizontal_x" :min="-100" :max="100" :step="1")
+            .column.is-6.py-0
+              b-field(custom-class="is-small" label="Y")
+                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_horizontal_y" :min="-100" :max="100" :step="1")
+
+          .columns.mt-4.is-multiline
+            .column.is-12.py-0
+              b-field(custom-class="is-small" label="縦レイアウト時の相対位置")
+            .column.is-6.py-0
+              b-field(custom-class="is-small" label="X")
+                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_vertical_x" :min="-100" :max="100" :step="1")
+            .column.is-6.py-0
+              b-field(custom-class="is-small" label="Y")
+                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_vertical_y" :min="-100" :max="100" :step="1")
+
+          b-field(custom-class="is-small" label="余白")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
+
           b-field(custom-class="is-small" label="サイズ")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_font_size" :min="0" :max="20" :step="0.01")
           b-field(custom-class="is-small" label="フォント色")
             MyColorPicker(v-model="sp_piece_count_font_color")
           b-field(custom-class="is-small" label="背景")
             MyColorPicker(v-model="sp_piece_count_bg_color")
-          b-field(custom-class="is-small" label="余白")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
 
         .box
           SeTitle(name="駒箱")
@@ -479,6 +505,8 @@ export default {
 
       sp_board_color: "rgba(0, 0, 0, 0.2)",
 
+      sp_board_horizontal_gap: 0,
+      sp_board_vertical_gap: 0,
       sp_board_aspect_ratio: 1.097,
       sp_board_piece_rate: 90,
       sp_board_piece_position: "center",
@@ -517,6 +545,11 @@ export default {
       sp_piece_count_font_color:  "rgba(0, 0, 0, 0.75)",
       sp_piece_count_bg_color: "rgba(255, 255, 255, 0.75)",
       sp_piece_count_padding: 2,
+
+      sp_piece_count_horizontal_x: 43,
+      sp_piece_count_horizontal_y: 30,
+      sp_piece_count_vertical_x:  0,
+      sp_piece_count_vertical_y: 47,
 
       sp_grid_outer_stroke: 0,
       sp_grid_outer_color: "rgba(0, 0, 0, 0.5)",
@@ -834,6 +867,8 @@ export default {
           --sp_board_aspect_ratio:       ${this.sp_board_aspect_ratio};
           --sp_board_piece_rate:         ${this.sp_board_piece_rate}%;
           --sp_board_piece_position:     ${this.sp_board_piece_position};
+          --sp_board_horizontal_gap:              ${this.sp_board_horizontal_gap}px;
+          --sp_board_vertical_gap:              ${this.sp_board_vertical_gap}px;
 
           // 盤グリッド
           --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
@@ -848,6 +883,10 @@ export default {
           --sp_piece_count_font_color:   ${this.hsla_format(this.sp_piece_count_font_color)};
           --sp_piece_count_bg_color:     ${this.hsla_format(this.sp_piece_count_bg_color)};
           --sp_piece_count_padding:      ${this.sp_piece_count_padding}px;
+          --sp_piece_count_horizontal_x:            ${this.sp_piece_count_horizontal_x};
+          --sp_piece_count_horizontal_y:            ${this.sp_piece_count_horizontal_y};
+          --sp_piece_count_vertical_x:           ${this.sp_piece_count_vertical_x};
+          --sp_piece_count_vertical_y:           ${this.sp_piece_count_vertical_y};
 
           // 駒台
           --sp_stand_piece_rate:         ${this.sp_stand_piece_rate}%;

@@ -75,7 +75,11 @@ export default {
   +IS_HORIZONTAL                            // 横書きなら
     &.is_player_name_dir_vertical           // 縦書き
       .MembershipLocationPlayerInfoName
-        writing-mode: vertical-rl           // 横:vertical-rl 縦:horizontal-tb
+        writing-mode: vertical-rl
+  +IS_VERTICAL                              // 縦の場合は(自動で縦にした場合も含めて)横にする
+    &.is_player_name_dir_vertical           // 詳細度で負けないように必要
+      .MembershipLocationPlayerInfoName
+        writing-mode: horizontal-tb         // 明示的に横にする
 
   .MembershipLocationPlayerInfoTime
     white-space: nowrap         // 時間は絶対に折り返させない

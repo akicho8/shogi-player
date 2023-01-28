@@ -19,6 +19,10 @@ export default {
 @import "./support.sass"
 
 .ShogiPlayerGround
+  +defvar(sp_piece_count_horizontal_x, 43)                              // 駒数の中央からの相対位置X(%) (横配置時)
+  +defvar(sp_piece_count_horizontal_y, 30)                              // 駒数の中央からの相対位置Y(%) (横配置時)
+  +defvar(sp_piece_count_vertical_x, 0)                               // 駒数の中央からの相対位置X(%) (縦配置時)
+  +defvar(sp_piece_count_vertical_y, 47)                              // 駒数の中央からの相対位置y(%) (縦配置時)
   +defvar(sp_piece_count_font_size, 0.75rem)                  // 駒数の文字サイズ
   +defvar(sp_piece_count_font_color, rgba(0, 0, 0, 0.75))     // 駒数の文字色
   +defvar(sp_piece_count_bg_color, rgba(255, 255, 255, 0.75)) // 駒数の文字色背景
@@ -44,32 +48,39 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
   +IS_HORIZONTAL
     .Membership
+      .PieceTexture
+        +flex_center
       &.is_position_north
-        .PieceTexture
-          +flex_top_left
-          .PieceCount
-            +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+        .PieceCount
+          +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+          right:   calc(var(--sp_piece_count_horizontal_x) * 1%)
+          bottom:  calc(var(--sp_piece_count_horizontal_y) * 1%)
       &.is_position_south
-        .PieceTexture
-          +flex_bottom_right
-          .PieceCount
+        .PieceCount
+          left:  calc(var(--sp_piece_count_horizontal_x) * 1%)
+          top:   calc(var(--sp_piece_count_horizontal_y) * 1%)
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
   +IS_VERTICAL
     .Membership
+      .PieceTexture
+        +flex_center
       &.is_position_north
-        .PieceTexture
-          +flex_top_left
-          .PieceCount
-            +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+        .PieceCount
+          +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+          right:  calc(var(--sp_piece_count_vertical_x) * 1%)
+          bottom: calc(var(--sp_piece_count_vertical_y) * 1%)
       &.is_position_south
-        .PieceTexture
-          +flex_bottom_right
-          .PieceCount
+        .PieceCount
+          left: calc(var(--sp_piece_count_vertical_x) * 1%)
+          top:  calc(var(--sp_piece_count_vertical_y) * 1%)
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
   .PieceBox
     .PieceTexture
-      +flex_bottom_right
+      +flex_center
+      .PieceCount
+        left: calc(var(--sp_piece_count_vertical_x) * 1%)
+        top:  calc(var(--sp_piece_count_vertical_y) * 1%)
 </style>
