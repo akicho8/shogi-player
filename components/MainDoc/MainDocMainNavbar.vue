@@ -14,10 +14,12 @@ export default {
   computed: {
     navbar_attrs() {
       return {
-        "type": "is-primary",
-        "mobile-burger": false,
+        // https://buefy.org/documentation/navbar
+        centered: true,
+        type: "is-dark",
+        "mobile-burger": true,
         "wrapper-class": "container",
-        "spaced": true,
+        spaced: true,
         ...this.$attrs,
       }
     },
@@ -45,14 +47,14 @@ export default {
     border: 1px dashed $primary
     .navbar-item
       border: 1px dashed $danger
-    +touch
-      background: $purple
-    +mobile
-      background: $green
-    +desktop
-      background: $blue
-    +widescreen
-      background: $danger
-    +fullhd
-      background: $turquoise
+    // +touch
+    //   background: $purple
+    // +mobile
+    //   background: $green
+    // +desktop
+    //   background: $blue
+    // +widescreen
+    //   background: $danger
+    // +fullhd
+    //   background: $turquoise
 </style>

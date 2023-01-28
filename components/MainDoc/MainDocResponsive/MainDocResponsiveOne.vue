@@ -1,9 +1,5 @@
 <template lang="pug">
-// https://bulma.io/documentation/columns/responsiveness/
-// widescreen 1/5 (is-one-fifth-widescreen)
-// desktop    1/4 (is-one-quarter-desktop)
-// tablet     1/3 (is-one-third-tablet)
-.MainDocViewDemo7.column.is-one-fifth-widescreen.is-one-quarter-desktop.is-one-third-tablet
+.MainDocResponsiveOne.column.is-6-tablet.is-4-desktop.is-3-widescreen.is-2-fullhd
   ShogiPlayer.is_book_like(
     is_layer="is_layer_on"
     sp_pi_variant="is_pi_variant_b"
@@ -15,10 +11,10 @@
 </template>
 
 <script>
-import { KifuBookInfo } from "../models/kifu_book_info.js"
+import { KifuBookInfo } from "../../models/kifu_book_info.js"
 
 export default {
-  name: "MainDocViewDemo7",
+  name: "MainDocResponsiveOne",
   data() {
     return {
       kifu_book_info: KifuBookInfo.fetch("KIF_27489"),
@@ -32,8 +28,8 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
-.MainDocViewDemo7
+@import "../support.sass"
+.MainDocResponsiveOne
   +tablet
     --sp_grid_color: hsl(0, 0%, 70%)
     --sp_stand_piece_w: 20px

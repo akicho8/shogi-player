@@ -1,6 +1,6 @@
 <template lang="pug">
 //- StyleEditor(:sp_body="$route.query.body" :sp_player_info="sp_player_info")
-StyleEditor
+MainDocStyleEditor
 </template>
 
 <script>

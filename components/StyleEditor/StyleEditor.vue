@@ -178,9 +178,9 @@
             MyColorPicker(v-model="sp_piece_count_bg_color")
           b-field(custom-class="is-small" label="余白")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
-          b-field(custom-class="is-small" label="横レイアウト時の位置")
+          b-field(custom-class="is-small" label="横レイアウト時の位置(px)")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_gap_right" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_vertical'")
-          b-field(custom-class="is-small" label="縦レイアウト時の位置")
+          b-field(custom-class="is-small" label="縦レイアウト時の位置(px)")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_gap_bottom" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_horizontal'")
 
         .box
@@ -850,8 +850,8 @@ export default {
           --sp_grid_star_z_index:        ${this.sp_grid_star_z_index};
 
           // 駒数
-          --sp_piece_count_gap_right:    ${this.sp_piece_count_gap_right}%;
-          --sp_piece_count_gap_bottom:   ${this.sp_piece_count_gap_bottom}%;
+          --sp_piece_count_gap_right:    ${this.sp_piece_count_gap_right}px;
+          --sp_piece_count_gap_bottom:   ${this.sp_piece_count_gap_bottom}px;
           --sp_piece_count_font_size:    ${this.sp_piece_count_font_size}px;
           --sp_piece_count_font_color:   ${this.hsla_format(this.sp_piece_count_font_color)};
           --sp_piece_count_bg_color:     ${this.hsla_format(this.sp_piece_count_bg_color)};

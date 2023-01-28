@@ -1,7 +1,7 @@
 <template lang="pug">
 .MainDocDemo.section
-  a(name="examples")
   .container
+    a(name="examples")
     .title.is-3 デモ
     hr
 
@@ -19,13 +19,6 @@
       MainDocViewDemo6
     .columns.mt-6.is-centered
       MainDocViewDemo8.is-11-tablet.is-10-desktop.is-9-widescreen
-
-    b-message.mt-6(type="is-info")
-      | レスポンシブでたくさん表示。画面幅に応じて横に並ぶ個数が変わる
-    .columns.is-multiline
-      template(v-for="i in 15")
-        MainDocViewDemo7
-
     .columns.mt-6
       MainDocViewDesc
 
@@ -50,6 +43,10 @@
     .columns.mt-6
       MainDocEditDesc1
 
+    a(name="style")
+    .title.is-3.mt-6 スタイル
+    hr
+    MainDocPaperStyle
     MainDocStyleDemo
 </template>
 

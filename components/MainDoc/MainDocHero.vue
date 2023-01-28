@@ -1,37 +1,31 @@
 <template lang="pug">
-.hero.is-primary.is-medium.MainDocHero
-  .hero-head
-    b-navbar(:mobile-burger="false" wrapper-class="container")
-      template(slot="end")
-        b-navbar-item(href="https://github.com/akicho8/shogi-player")
-          b-icon(icon="github")
-          .ml-2 GitHub
-
-  .hero-body
-    .container.has-text-centered
-      h1.title
-        | shogi-player
-
-  .hero-foot
-    nav.tabs
-      .container
-        ul
-          li: a(href="#summary") 概要
-          li: a(href="#examples") デモ
-          li: nuxt-link(:to="{name: 'usage'}") 組み込み方法
-          li: nuxt-link(:to="{name: 'props'}") コンポーネント引数一覧
-          li: nuxt-link(:to="{name: 'options'}") 引数とイベントチェック
-          li: nuxt-link(:to="{name: 'api'}") API
-          li: nuxt-link(:to="{name: 'css-customize'}") CSS変数一覧
-          li: nuxt-link(:to="{name: 'editor'}") スタイルエディタ
-          li: nuxt-link(:to="{name: 'credit'}") クレジット
-          template(v-if="development_p")
-            li: nuxt-link(:to="{name: 'test-sp_device'}") sp_device テスト
-            li: nuxt-link(:to="{name: 'test-perf1'}") 高速化
-            li: nuxt-link(:to="{name: 'test-test_bod_parse'}") BOD読み込み
-            li: nuxt-link(:to="{name: 'test-test_foul'}") 反則判定
-            li: nuxt-link(:to="{name: 'test-test_sound_timing'}") 音タイミング
-            li: nuxt-link(:to="{name: 'test-test_simple_paper_style'}") シンプルな紙スタイル
+MainDocMainNavbar
+  template(slot="brand")
+    b-navbar-item(tag="nuxt-link" :to="{name: 'index'}")
+      b
+        | ShogiPlayer
+  template(slot="start")
+    b-navbar-item(tag="a" href="#summary") 概要
+    b-navbar-item(tag="a" href="#examples") デモ
+    b-navbar-item(tag="a" href="#style") スタイル
+    b-navbar-item(tag="nuxt-link" :to="{name: 'usage'}") 組み込み方法
+    b-navbar-item(tag="nuxt-link" :to="{name: 'editor'}") スタイルエディタ
+    b-navbar-dropdown(hoverable arrowless)
+      b-icon(icon="dots-vertical" slot="label")
+      b-navbar-item(tag="nuxt-link" :to="{name: 'props'}") コンポーネント引数一覧
+      b-navbar-item(tag="nuxt-link" :to="{name: 'css-customize'}") CSS変数一覧
+      b-navbar-item(tag="nuxt-link" :to="{name: 'options'}") 引数とイベントチェック
+      b-navbar-item(tag="nuxt-link" :to="{name: 'api'}") API
+      b-navbar-item(tag="nuxt-link" :to="{name: 'responsive'}") レスポンシブ
+      b-navbar-item(tag="nuxt-link" :to="{name: 'credit'}") クレジット
+  template(slot="end")
+    b-navbar-dropdown(label="実験" hoverable)
+      b-navbar-item(tag="nuxt-link" :to="{name: 'test-sp_device'}") sp_device テスト
+      b-navbar-item(tag="nuxt-link" :to="{name: 'test-perf1'}") 高速化
+      b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_bod_parse'}") BOD読み込み
+      b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_foul'}") 反則判定
+      b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_sound_timing'}") 音タイミング
+      b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_simple_paper_style'}") シンプルな紙スタイル
 </template>
 
 <script>

@@ -19,8 +19,8 @@ export default {
 @import "./support.sass"
 
 .ShogiPlayerGround
-  +defvar(sp_piece_count_gap_right, 62%)                      // 駒数の駒右端からのオフセット(横配置時)
-  +defvar(sp_piece_count_gap_bottom, 32%)                     // 駒数の駒底辺からのオフセット(縦配置時)
+  +defvar(sp_piece_count_gap_right, 62px)                     // 駒数の駒右端からのオフセット(横配置時)
+  +defvar(sp_piece_count_gap_bottom, 32px)                    // 駒数の駒底辺からのオフセット(縦配置時)
   +defvar(sp_piece_count_font_size, 0.75rem)                  // 駒数の文字サイズ
   +defvar(sp_piece_count_font_color, rgba(0, 0, 0, 0.75))     // 駒数の文字色
   +defvar(sp_piece_count_bg_color, rgba(255, 255, 255, 0.75)) // 駒数の文字色背景
@@ -62,7 +62,7 @@ export default {
           top:    unset
           bottom: unset
           right:  unset
-          left: var(--sp_piece_count_gap_right)  // 左端から横幅分押すと右端の外になる
+          left: calc(var(--sp_piece_count_gap_right) * 1px)  // 左端から横幅分押すと右端の外になる
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
