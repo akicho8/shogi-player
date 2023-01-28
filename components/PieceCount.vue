@@ -29,6 +29,12 @@ export default {
   +defvar(sp_piece_count_padding, 3px)                        // 駒数のパディング
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
+
+  .PieceTexture
+    display: flex               // PieceCount を中央配置させるため
+    justify-content: center
+    align-items: center
+
   .PieceCount
     @extend %is_piece_count_color_set
     font-size:        var(--sp_piece_count_font_size)
@@ -48,8 +54,6 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
   +IS_HORIZONTAL
     .Membership
-      .PieceTexture
-        +flex_center
       &.is_position_north
         .PieceCount
           +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
@@ -64,8 +68,6 @@ export default {
 
   +IS_VERTICAL
     .Membership
-      .PieceTexture
-        +flex_center
       &.is_position_north
         .PieceCount
           +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
@@ -78,9 +80,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
   .PieceBox
-    .PieceTexture
-      +flex_center
-      .PieceCount
-        left: calc(var(--sp_piece_count_vertical_x) * 1%)
-        top:  calc(var(--sp_piece_count_vertical_y) * 1%)
+    .PieceCount
+      left: calc(var(--sp_piece_count_vertical_x) * 1%)
+      top:  calc(var(--sp_piece_count_vertical_y) * 1%)
 </style>
