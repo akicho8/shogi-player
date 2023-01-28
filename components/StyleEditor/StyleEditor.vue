@@ -143,8 +143,11 @@
             b-radio-button(size="is-small" v-model="sp_player_name_dir" native-value="is_player_name_dir_horizontal") 横書き
             b-radio-button(size="is-small" v-model="sp_player_name_dir" native-value="is_player_name_dir_vertical") 縦書き
 
-          b-field(custom-class="is-small" label="文字サイズ")
+          b-field(custom-class="is-small" label="文字サイズ (名前)")
             b-slider(v-bind="slider_attrs" v-model="sp_player_name_font_size" :min="0" :max="50" :step="0.5")
+
+          b-field(custom-class="is-small" label="文字サイズ (時間)")
+            b-slider(v-bind="slider_attrs" v-model="sp_player_time_font_size" :min="0" :max="50" :step="0.5")
 
           b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
             b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_off") OFF
@@ -553,6 +556,7 @@ export default {
       },
       sp_player_name_dir: DEVELOPMENT_P ? "is_player_name_dir_vertical" : "is_player_name_dir_horizontal",
       sp_player_name_font_size: 14,
+      sp_player_time_font_size: 14,
       ////////////////////////////////////////////////////////////////////////////////
 
       sp_body: null,
@@ -860,8 +864,8 @@ export default {
           --sp_stand_piece_w:            ${this.sp_stand_piece_w}px;
           --sp_stand_piece_h:            ${this.sp_stand_piece_h}px;
 
-          // 対局者名
-          --sp_player_name_font_size: ${this.sp_player_name_font_size}px;
+          --sp_player_name_font_size: ${this.sp_player_name_font_size}px; // 対局者の名前のフォントサイズ
+          --sp_player_time_font_size: ${this.sp_player_time_font_size}px; // 対局者の時間のフォントサイズ
 
           // 駒箱
           --sp_piece_box_piece_w:        ${this.sp_piece_box_piece_w}px;

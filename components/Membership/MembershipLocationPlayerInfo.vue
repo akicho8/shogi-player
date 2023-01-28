@@ -53,7 +53,8 @@ export default {
 <style lang="sass">
 @import "../support.sass"
 .ShogiPlayerGround
-  +defvar(sp_player_name_font_size, 0.75rem)       // フォントサイズ
+  +defvar(sp_player_name_font_size, 0.75rem)       // 対局者の名前の表示サイズ
+  +defvar(sp_player_time_font_size, 0.75rem)       // 対局者の時間の表示サイズ
 
   .MembershipLocationPlayerInfo
     font-size: var(--sp_player_name_font_size)
@@ -74,13 +75,11 @@ export default {
   +IS_HORIZONTAL                            // 横書きなら
     &.is_player_name_dir_vertical           // 縦書き
       .MembershipLocationPlayerInfoName
-        writing-mode: vertical-rl
-    // &.is_player_name_dir_horizontal         // 縦書き
-    //   .MembershipLocationPlayerInfoName
-    //     writing-mode: horizontal-tb
+        writing-mode: vertical-rl           // 横:vertical-rl 縦:horizontal-tb
 
   .MembershipLocationPlayerInfoTime
     white-space: nowrap         // 時間は絶対に折り返させない
+    font-size: var(--sp_player_time_font_size)
 
   &.is_balloon_on
     .MembershipLocationPlayerInfo
