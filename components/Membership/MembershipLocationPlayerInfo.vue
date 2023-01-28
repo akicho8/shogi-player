@@ -53,10 +53,11 @@ export default {
 <style lang="sass">
 @import "../support.sass"
 .ShogiPlayerGround
+  +defvar(sp_player_name_font_size, 0.75rem)       // フォントサイズ
+
   .MembershipLocationPlayerInfo
-    font-size: $size-7
+    font-size: var(--sp_player_name_font_size)
     word-break: break-all
-    font-weight: bold
     flex-shrink: 0 // 縮小しない(縦置き時に駒台の横幅を100%にするとここが縮小しようとして1文字ずつ折り返しになる、のを防ぐ)
 
     display: flex
@@ -65,12 +66,18 @@ export default {
     flex-direction: column
     gap: 0.2em                   // 名前と時間の隙間
 
-  &.is_stand_layout2_to_top
-    .MembershipLocationPlayerInfoName
-      writing-mode: vertical-rl
-  &.is_stand_layout2_to_bottom
-    .MembershipLocationPlayerInfoName
-      writing-mode: horizontal-tb
+  .Membership
+    &.is_turn_active
+      .MembershipLocationPlayerInfo
+        font-weight: bold
+
+  +IS_HORIZONTAL                            // 横書きなら
+    &.is_player_name_dir_vertical           // 縦書き
+      .MembershipLocationPlayerInfoName
+        writing-mode: vertical-rl
+    // &.is_player_name_dir_horizontal         // 縦書き
+    //   .MembershipLocationPlayerInfoName
+    //     writing-mode: horizontal-tb
 
   .MembershipLocationPlayerInfoTime
     white-space: nowrap         // 時間は絶対に折り返させない

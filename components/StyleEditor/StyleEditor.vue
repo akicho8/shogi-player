@@ -21,9 +21,9 @@
           SeTitle(name="基本")
           b-field(custom-class="is-small" label="コンテナ幅")
             b-slider(v-bind="slider_attrs" v-model="se_frame_width" :min="1" :max="100")
-          b-field(custom-class="is-small" label="レイアウト")
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
+          b-field(custom-class="is-small" label="レイアウト" message="スマホの縦持ちの場合自動的に縦レイアウトになる")
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 横
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 縦
           b-field(custom-class="is-small" label="モード")
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") 再生
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") 操作
@@ -125,10 +125,10 @@
             b-radio-button(size="is-small" v-model="sp_stand_layout" native-value="is_stand_layout_to_top") 上寄せ
           .columns.mt-4
             .column.py-0
-              b-field(custom-class="is-small" label="セル(W)")
+              b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
                 b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
             .column.py-0
-              b-field(custom-class="is-small" label="セル(H)")
+              b-field(custom-class="is-small" label="セル(H)" message="駒と駒の隙間に影響する")
                 b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
@@ -138,25 +138,17 @@
             MyColorPicker(v-model="sp_stand_bg_color")
 
         .box
-          SeTitle(name="駒数")
-          b-field(custom-class="is-small" label="サイズ")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_font_size" :min="0" :max="20" :step="0.01")
-          b-field(custom-class="is-small" label="フォント色")
-            MyColorPicker(v-model="sp_piece_count_font_color")
-          b-field(custom-class="is-small" label="背景")
-            MyColorPicker(v-model="sp_piece_count_bg_color")
-          b-field(custom-class="is-small" label="余白")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
-          b-field(custom-class="is-small" label="左右レイアウト時の位置")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_gap_right" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_vertical'")
-          b-field(custom-class="is-small" label="上下レイアウト時の位置")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_gap_bottom" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_horizontal'")
-
-        .box
           SeTitle(name="対局者名")
-          b-field(custom-class="is-small" label="縦・横書き" message="英字も考慮して縦書きにするなら横書きのままで1文字ずつ<br>を入れた方が正しく縦書きになる。日本語しか使わないのであれば単に縦書きでもよい。モバイルの場合は狭いので横書きの方がよい")
-            b-radio-button(size="is-small" v-model="sp_stand_layout2" native-value="is_stand_layout2_to_bottom") 横書き
-            b-radio-button(size="is-small" v-model="sp_stand_layout2" native-value="is_stand_layout2_to_top") 縦書き
+          b-field(custom-class="is-small" label="縦・横書き(全体レイアウトが横の場合のみ有効)" message="英字も考慮して縦書きにするなら横書きのままで1文字ずつ<br>を入れた方が正しく縦書きになる。日本語しか使わないのであれば単に縦書きでもよい。モバイルの場合は狭いので横書きの方がよい")
+            b-radio-button(size="is-small" v-model="sp_player_name_dir" native-value="is_player_name_dir_horizontal") 横書き
+            b-radio-button(size="is-small" v-model="sp_player_name_dir" native-value="is_player_name_dir_vertical") 縦書き
+
+          b-field(custom-class="is-small" label="文字サイズ")
+            b-slider(v-bind="slider_attrs" v-model="sp_player_name_font_size" :min="0" :max="50" :step="0.5")
+
+          b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
+            b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_off") OFF
+            b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_on") ON
 
           .columns
             .column
@@ -172,6 +164,21 @@
             .column
               b-field(custom-class="is-small" label="時間")
                 b-input(size="is-small" v-model.trim="sp_player_info.white.time" type="text")
+
+        .box
+          SeTitle(name="駒数")
+          b-field(custom-class="is-small" label="サイズ")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_font_size" :min="0" :max="20" :step="0.01")
+          b-field(custom-class="is-small" label="フォント色")
+            MyColorPicker(v-model="sp_piece_count_font_color")
+          b-field(custom-class="is-small" label="背景")
+            MyColorPicker(v-model="sp_piece_count_bg_color")
+          b-field(custom-class="is-small" label="余白")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
+          b-field(custom-class="is-small" label="横レイアウト時の位置")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_gap_right" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_vertical'")
+          b-field(custom-class="is-small" label="縦レイアウト時の位置")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_gap_bottom" :min="-100" :max="100" :step="0.1" :disabled="sp_layout === 'is_horizontal'")
 
         .box
           SeTitle(name="駒箱")
@@ -338,11 +345,7 @@
           b-field(custom-class="is-small" label="プリセット")
             .control
               .buttons
-                b-button(@click="force_paper_style" size="is-small") 紙面風
-
-          b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
-            b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_off") OFF
-            b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_on") ON
+                b-button(@click="paper_style_handle" size="is-small") 紙面風
 
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="black") ☗
@@ -548,7 +551,8 @@ export default {
         black: { name: "先手", time: "", },
         white: { name: "後手", time: "", },
       },
-      sp_stand_layout2: DEVELOPMENT_P ? "is_stand_layout2_to_top" : "is_stand_layout2_to_bottom",
+      sp_player_name_dir: DEVELOPMENT_P ? "is_player_name_dir_vertical" : "is_player_name_dir_horizontal",
+      sp_player_name_font_size: 14,
       ////////////////////////////////////////////////////////////////////////////////
 
       sp_body: null,
@@ -651,16 +655,19 @@ export default {
       this.sp_board_image = v
       this.sp_bg_variant = "is_bg_variant_none" // 背景画像プリセットを選択してない状態に戻しておく
     },
-    force_paper_style() {
-      this.se_ws_color          = "rgb(255,255,255)"     // 背景
-      this.sp_pi_variant        = "is_pi_variant_b"      // 紙面風駒
-      this.sp_board_padding     = 0                      // 隙間なし
-      this.sp_board_color       = IS_WHITE               // 盤透過
-      this.sp_grid_stroke       = 1                      // グリッド線(細)
-      this.sp_grid_outer_stroke = 2                      // グリッド枠(細)
-      this.sp_digit_label       = "is_digit_label_on"    // 座標を表示する
-      this.sp_stand_layout      = "is_stand_layout_to_top"    // 駒台の位置
-      this.sp_stand_layout2      = "is_stand_layout2_to_top"    // 縦横書き
+    paper_style_handle() {
+      this.se_ws_color               = "rgb(255,255,255)"            // 背景
+      this.sp_pi_variant             = "is_pi_variant_b"             // 紙面風駒
+      this.sp_board_padding          = 0                             // 隙間なし
+      this.sp_board_color            = IS_WHITE                      // 盤透過
+      this.sp_grid_stroke            = 1                             // グリッド線(細)
+      this.sp_grid_outer_stroke      = 2                             // グリッド枠(太)
+      this.sp_digit_label            = "is_digit_label_on"           // 座標を表示する
+      this.sp_stand_layout           = "is_stand_layout_to_top"      // 駒台の位置
+      this.sp_player_name_dir        = "is_player_name_dir_vertical" // 縦横書き
+      this.sp_balloon                = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
+      this.sp_player_info.black.name = "先手"
+      this.sp_player_info.white.name = "後手"
     },
     hsla_format(v) {
       return chroma(v).css("hsla")
@@ -782,7 +789,7 @@ export default {
       params.sp_summary           = this.sp_summary
       params.sp_digit_label             = this.sp_digit_label
       params.sp_stand_layout             = this.sp_stand_layout
-      params.sp_stand_layout2             = this.sp_stand_layout2
+      params.sp_player_name_dir             = this.sp_player_name_dir
       params.sp_slider            = this.sp_slider
       params.sp_controller        = this.sp_controller
       params.sp_player_info       = this.sp_player_info
@@ -852,6 +859,9 @@ export default {
           --sp_stand_bg_color: ${this.hsla_format(this.sp_stand_bg_color)};
           --sp_stand_piece_w:            ${this.sp_stand_piece_w}px;
           --sp_stand_piece_h:            ${this.sp_stand_piece_h}px;
+
+          // 対局者名
+          --sp_player_name_font_size: ${this.sp_player_name_font_size}px;
 
           // 駒箱
           --sp_piece_box_piece_w:        ${this.sp_piece_box_piece_w}px;
