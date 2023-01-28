@@ -43,8 +43,6 @@
 | `--sp_digit_label_font_size`                 | 7.5px                     | 座標表記の文字サイズ                                                  |
 | `--sp_digit_label_position`                  |                         3 | 座標表記の位置調整(%)                                                 |
 | `--sp_digit_label_font_color`                | hsla(0,0%,0%,0.75)        | 座標表記の文字色                                                      |
-| `--sp_piece_count_gap_right`                 | 62%                       | 駒数の駒右端からのオフセット(横配置時)                                |
-| `--sp_piece_count_gap_bottom`                | 32%                       | 駒数の駒底辺からのオフセット(縦配置時)                                |
 | `--sp_piece_count_font_size`                 | 0.75rem                   | 駒数の文字サイズ                                                      |
 | `--sp_piece_count_font_color`                | rgba(0, 0, 0, 0.75)       | 駒数の文字色                                                          |
 | `--sp_piece_count_bg_color`                  | rgba(255, 255, 255, 0.75) | 駒数の文字色背景                                                      |

@@ -19,8 +19,6 @@ export default {
 @import "./support.sass"
 
 .ShogiPlayerGround
-  +defvar(sp_piece_count_gap_right, 62px)                     // 駒数の駒右端からのオフセット(横配置時)
-  +defvar(sp_piece_count_gap_bottom, 32px)                    // 駒数の駒底辺からのオフセット(縦配置時)
   +defvar(sp_piece_count_font_size, 0.75rem)                  // 駒数の文字サイズ
   +defvar(sp_piece_count_font_color, rgba(0, 0, 0, 0.75))     // 駒数の文字色
   +defvar(sp_piece_count_bg_color, rgba(255, 255, 255, 0.75)) // 駒数の文字色背景
@@ -46,52 +44,32 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
   +IS_HORIZONTAL
     .Membership
-      .PieceTexture
-        display: flex
-        justify-content: center
-        align-items: center
       &.is_position_north
-        .PieceCount
-          top:    unset
-          bottom: unset
-          right: var(--sp_piece_count_gap_right) // 右端から横幅分押すと左端の外になる
-          left:   unset
-          +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+        .PieceTexture
+          +flex_top_left
+          .PieceCount
+            +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
       &.is_position_south
-        .PieceCount
-          top:    unset
-          bottom: unset
-          right:  unset
-          left: calc(var(--sp_piece_count_gap_right) * 1px)  // 左端から横幅分押すと右端の外になる
+        .PieceTexture
+          +flex_bottom_right
+          .PieceCount
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
   +IS_VERTICAL
     .Membership
-      .PieceTexture
-        display: flex
-        justify-content: center
-        align-items: center
       &.is_position_north
-        .PieceCount
-          top:    unset
-          bottom: var(--sp_piece_count_gap_bottom)
-          right:  unset
-          left:   unset
-          +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+        .PieceTexture
+          +flex_top_left
+          .PieceCount
+            +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
       &.is_position_south
-        .PieceCount
-          top: var(--sp_piece_count_gap_bottom)
-          bottom: unset
-          right:  unset
-          left:   unset
+        .PieceTexture
+          +flex_bottom_right
+          .PieceCount
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
   .PieceBox
     .PieceTexture
-      display: flex
-      justify-content: center
-      align-items: center
-    .PieceCount
-      top: var(--sp_piece_count_gap_bottom)
+      +flex_bottom_right
 </style>
