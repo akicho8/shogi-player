@@ -5,7 +5,7 @@ const FOCUS_FUNCTION = false
 
 export const navi_module = {
   props: {
-    sp_summary:                     { type: String,  default: "is_summary_on",     }, // 手数や結果の表示
+    sp_summary:                     { type: String,  default: "is_summary_on",     }, // 手数や結果の表示(再生モード時)
     sp_slider:                      { type: String,  default: "is_slider_off",     }, // スライダー表示
     sp_setting:                     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
     sp_controller:                  { type: String,  default: "is_controller_off", }, // コントローラー表示
