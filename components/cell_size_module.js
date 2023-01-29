@@ -1,3 +1,5 @@
+// 常時盤上の升の大きさを持つ
+
 const TARGET_SELECTOR = ".BoardField .PieceTap.place_1_1" // 「１一」の位置を基準とする
 const THRESHOLD       = 1.5                               // 指定ピクセル以上変化したら更新する(画面震え対策)
 
@@ -19,7 +21,7 @@ export const cell_size_module = {
       this.ro_stop()
       this.$ro = new ResizeObserver((entries, observer) => {
         entries.forEach(entry => {
-          if (this.development_p) {
+          if (this.debug_p) {
             console.log(`ResizeObserver: [${entry.contentRect.width}, ${entry.contentRect.height}]`)
           }
           const w = entry.contentRect.width
