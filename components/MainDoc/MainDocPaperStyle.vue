@@ -46,10 +46,10 @@
         |   --sp_grid_stroke: 0.5                  // グリッド内線は細くする(お好みで調整)
         |   --sp_grid_outer_stroke: 2              // グリッド外枠を内線より太くする(お好みで調整)
         |   --sp_player_name_size: 0.4             // "先手" "後手" の文字サイズ調整
-        |   --sp_location_mark_inactive_rate: 1.0  // 手番でない方の☗☖の比率を変更しない
+        |   --sp_location_mark_inactive_size: 1.0  // 手番でない方の☗☖の比率を変更しない
         |
         |   // 駒数
-        |   --sp_piece_count_font_size_rate: 0.4   // 駒数の大きさ調整
+        |   --sp_piece_count_size: 0.4   // 駒数の大きさ調整
         |   --sp_piece_count_horizontal_x: 0.70    // 右に寄せる
         |   --sp_piece_count_horizontal_y: 0.03    // 少し下げる
         |   --sp_piece_count_bg_color: transparent // 背景を透過させる
@@ -87,10 +87,10 @@ export default {
     --sp_grid_stroke: 0.5                 // グリッド内線は細くする(お好みで調整)
     --sp_grid_outer_stroke: 2             // グリッド外枠を内線より太くする(お好みで調整)
     --sp_player_name_size: 0.4       // "先手" "後手" の文字サイズ調整
-    --sp_location_mark_inactive_rate: 1.0 // 手番でない方の☗☖の比率を変更しない
+    --sp_location_mark_inactive_size: 1.0 // 手番でない方の☗☖の比率を変更しない
 
     // 駒数
-    --sp_piece_count_font_size_rate: 0.4      // 駒数の大きさ調整
+    --sp_piece_count_size: 0.4      // 駒数の大きさ調整
     --sp_piece_count_horizontal_x: 0.70       // 右に寄せる
     --sp_piece_count_horizontal_y: 0.03       // 少し下げる
     --sp_piece_count_bg_color: transparent    // 背景を透過させる

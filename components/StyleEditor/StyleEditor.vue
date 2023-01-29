@@ -196,10 +196,10 @@
                 b-slider(v-bind="slider_attrs" v-model="sp_piece_count_vertical_y" :min="-1.0" :max="1.0" :step="0.001")
 
           b-field(custom-class="is-small" label="余白")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding_rate" :min="0" :max="1.0" :step="0.01")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding" :min="0" :max="1.0" :step="0.01")
 
           b-field(custom-class="is-small" label="大きさ")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_font_size_rate" :min="0" :max="1.0" :step="0.01")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_size" :min="0" :max="1.0" :step="0.01")
           b-field(custom-class="is-small" label="テキスト色 (対局者名にも適用)")
             MyColorPicker(v-model="sp_piece_count_font_color")
           b-field(custom-class="is-small" label="背景")
@@ -354,10 +354,10 @@
           SeTitle(name="その他")
 
           b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ(%)")
-            b-slider(v-bind="slider_attrs" v-model="sp_location_mark_inactive_rate" :min="0" :max="1.5" :step="0.01")
+            b-slider(v-bind="slider_attrs" v-model="sp_location_mark_inactive_size" :min="0" :max="1.5" :step="0.01")
 
           b-field(custom-class="is-small" label="共通の隙間" message="駒セル縦幅に対する割合")
-            b-slider(v-bind="slider_attrs" v-model="sp_common_gap_rate" :min="0" :max="1.0" :step="0.01")
+            b-slider(v-bind="slider_attrs" v-model="sp_common_gap" :min="0" :max="1.0" :step="0.01")
 
           b-field(custom-class="is-small" label="モバイル時に縦配置にする")
             b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
@@ -538,10 +538,10 @@ export default {
       sp_turn: -1,
       sp_viewpoint: "black",
       sp_debug_mode: DEVELOPMENT_P ? "is_debug_mode_off" : "is_debug_mode_off",
-      sp_piece_count_font_size_rate: 0.2,
+      sp_piece_count_size: 0.2,
       sp_piece_count_font_color:  "rgba(0, 0, 0, 0.75)",
       sp_piece_count_bg_color: "rgba(255, 255, 255, 0.9)",
-      sp_piece_count_padding_rate: 0.08,
+      sp_piece_count_padding: 0.08,
 
       sp_piece_count_horizontal_x: 0.43,
       sp_piece_count_horizontal_y: 0.30,
@@ -558,10 +558,10 @@ export default {
       sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
       sp_piece_box_piece_size: 0.8,
 
-      sp_location_mark_inactive_rate: 0.5,
+      sp_location_mark_inactive_size: 0.5,
 
       sp_comment: "is_comment_off",
-      sp_common_gap_rate: 0.18,
+      sp_common_gap: 0.18,
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_pi_variant: "is_pi_variant_a",    // is_pi_variant_d
       sp_bg_variant: "is_bg_variant_none", // is_bg_variant_a
@@ -695,7 +695,7 @@ export default {
       this.sp_stand_layout           = "is_stand_layout_to_top"      // 駒台の位置
       this.sp_player_name_dir        = "is_player_name_dir_vertical" // 縦横書き
       this.sp_balloon                = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
-      this.sp_location_mark_inactive_rate = 1.0                      // 手番でないときの☗☖を小さくしない
+      this.sp_location_mark_inactive_size = 1.0                      // 手番でないときの☗☖を小さくしない
       this.sp_player_info.black.name = "先手"
       this.sp_player_info.white.name = "後手"
     },
@@ -877,10 +877,10 @@ export default {
           --sp_grid_star_z_index:        ${this.sp_grid_star_z_index};
 
           // 駒数
-          --sp_piece_count_font_size_rate: ${this.sp_piece_count_font_size_rate};
+          --sp_piece_count_size: ${this.sp_piece_count_size};
           --sp_piece_count_font_color:     ${this.hsla_format(this.sp_piece_count_font_color)};
           --sp_piece_count_bg_color:       ${this.hsla_format(this.sp_piece_count_bg_color)};
-          --sp_piece_count_padding_rate:   ${this.sp_piece_count_padding_rate};
+          --sp_piece_count_padding:   ${this.sp_piece_count_padding};
           --sp_piece_count_horizontal_x:   ${this.sp_piece_count_horizontal_x};
           --sp_piece_count_horizontal_y:   ${this.sp_piece_count_horizontal_y};
           --sp_piece_count_vertical_x:     ${this.sp_piece_count_vertical_x};
@@ -899,7 +899,7 @@ export default {
           --sp_piece_box_color:          ${this.hsla_format(this.sp_piece_box_color)};
 
           // ☗☖の大きさ
-          --sp_location_mark_inactive_rate: ${this.sp_location_mark_inactive_rate};
+          --sp_location_mark_inactive_size: ${this.sp_location_mark_inactive_size};
 
           // 成り不成り選択
           --sp_promote_select_modal_bg_color:    ${this.hsla_format(this.sp_promote_select_modal_bg_color)};
@@ -910,7 +910,7 @@ export default {
           --sp_lifted_origin_opacity_desktop: ${this.sp_lifted_origin_opacity_desktop};
 
           // 駒台横配置のときの盤の上下の隙間
-          --sp_common_gap_rate:              ${this.sp_common_gap_rate};
+          --sp_common_gap:              ${this.sp_common_gap};
 
           // 将棋盤全体の外側の横幅(コンテナ幅)
           --se_frame_width:             ${this.se_frame_width}vmin;

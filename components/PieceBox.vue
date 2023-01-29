@@ -82,11 +82,11 @@ export default {
 @import "./support.sass"
 .ShogiPlayerGround
   +defvar(sp_piece_box_color, rgba(0, 0, 0, 0.2)) // 駒箱背景
-  +defvar(sp_common_gap_rate, 0.18)               // 共通の隙間(駒セルの縦幅に対する割合)
+  +defvar(sp_common_gap, 0.18)               // 共通の隙間(駒セルの縦幅に対する割合)
 
   // あまり重要ではないところでの縦のマージンが必要なときに使う
-  // sp_common_gap_rate を直接使ってはいけない
-  --sp_common_gap_real_px: calc(var(--sp_base_h) * var(--sp_common_gap_rate))
+  // sp_common_gap を直接使ってはいけない
+  --sp_common_gap_real_px: calc(var(--sp_base_h) * var(--sp_common_gap))
 
   .PieceBox
     @extend %is_unselectable
