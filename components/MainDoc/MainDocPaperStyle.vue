@@ -11,7 +11,6 @@
           sp_layer="is_layer_off"
           sp_layout="is_horizontal"
           sp_pi_variant="is_pi_variant_b"
-          sp_summary="is_summary_off"
           sp_digit_label="is_digit_label_on"
           sp_stand_layout="is_stand_layout_to_top"
           sp_player_name_dir="is_player_name_dir_vertical"
@@ -26,7 +25,6 @@
         |   ShogiPlayer(
         |     sp_layout="is_horizontal"                        // 横配置にする
         |     sp_pi_variant="is_pi_variant_b"                  // 紙面用駒に切り替る
-        |     sp_summary="is_summary_off"                      // 手数を表示しない
         |     sp_digit_label="is_digit_label_on"               // 座標を表示する
         |     sp_stand_layout="is_stand_layout_to_top"         // 駒台を上寄せ配置する
         |     sp_player_name_dir="is_player_name_dir_vertical" // 名前を縦書きにする
@@ -38,7 +36,7 @@
       pre.is-size-7
         | .ShogiPlayerContainer
         |   font-family: serif                     // 明朝体(座標と "先手" "後手" に適用)
-        |   color: black                           // "先手" "後手" の色
+        |   color: black                           // 座標と "先手" "後手" の色
         |
         |   --sp_board_color: white                // 盤の色を白にする
         |   --sp_board_padding: 0                  // グリッド外周と縁の隙間を無くす
