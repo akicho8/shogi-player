@@ -49,8 +49,9 @@
         |   --sp_location_mark_inactive_rate: 1.0  // 手番でない方の☗☖の比率を変更しない
         |
         |   // 駒数
+        |   --sp_piece_count_font_size_rate: 0.4   // 駒数の大きさ調整
         |   --sp_piece_count_horizontal_x: 0.70    // 右に寄せる
-        |   --sp_piece_count_horizontal_y: 0.02    // 少し下げる(錯視を考慮)
+        |   --sp_piece_count_horizontal_y: 0.03    // 少し下げる
         |   --sp_piece_count_bg_color: transparent // 背景を透過させる
         |
         |   // 座標
@@ -89,9 +90,10 @@ export default {
     --sp_location_mark_inactive_rate: 1.0 // 手番でない方の☗☖の比率を変更しない
 
     // 駒数
-    --sp_piece_count_horizontal_x: 0.70      // 右に寄せる
-    --sp_piece_count_horizontal_y: 0.02       // 少し下げる(錯視を考慮)
-    --sp_piece_count_bg_color: transparent // 背景を透過させる
+    --sp_piece_count_font_size_rate: 0.4      // 駒数の大きさ調整
+    --sp_piece_count_horizontal_x: 0.70       // 右に寄せる
+    --sp_piece_count_horizontal_y: 0.03       // 少し下げる
+    --sp_piece_count_bg_color: transparent    // 背景を透過させる
 
     // 座標
     --sp_digit_label_color: black  // 座標の色を黒にする
