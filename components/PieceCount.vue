@@ -23,10 +23,10 @@ export default {
   +defvar(sp_piece_count_horizontal_y, 30)                              // 駒数の中央からの相対位置Y(%) (横配置時)
   +defvar(sp_piece_count_vertical_x, 0)                               // 駒数の中央からの相対位置X(%) (縦配置時)
   +defvar(sp_piece_count_vertical_y, 47)                              // 駒数の中央からの相対位置y(%) (縦配置時)
-  +defvar(sp_piece_count_font_size, 0.75rem)                  // 駒数の文字サイズ
+  +defvar(sp_piece_count_font_size_rate, 0.2)                      // 駒数の文字サイズ(駒セル縦幅に対する比率)
   +defvar(sp_piece_count_font_color, rgba(0, 0, 0, 0.75))     // 駒数の文字色
-  +defvar(sp_piece_count_bg_color, rgba(255, 255, 255, 0.75)) // 駒数の文字色背景
-  +defvar(sp_piece_count_padding, 3px)                        // 駒数のパディング
+  +defvar(sp_piece_count_bg_color, rgba(255, 255, 255, 0.9))  // 駒数の文字色背景
+  +defvar(sp_piece_count_padding_rate, 0.08)                        // 駒数のパディング(駒セル縦幅に対する比率)
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
 
@@ -37,8 +37,8 @@ export default {
 
   .PieceCount
     @extend %is_piece_count_color_set
-    font-size:        var(--sp_piece_count_font_size)
-    padding:          var(--sp_piece_count_padding)
+    font-size: calc(var(--sp_auto_cell_h) * var(--sp_piece_count_font_size_rate))
+    padding:   calc(var(--sp_auto_cell_w) * var(--sp_piece_count_padding_rate)) calc(var(--sp_auto_cell_h) * var(--sp_piece_count_padding_rate))
 
     line-height: 100%
     border-radius: 50%

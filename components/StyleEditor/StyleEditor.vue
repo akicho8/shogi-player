@@ -195,11 +195,11 @@
               b-field(custom-class="is-small" label="Y")
                 b-slider(v-bind="slider_attrs" v-model="sp_piece_count_vertical_y" :min="-100" :max="100" :step="1")
 
-          b-field(custom-class="is-small" label="余白")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding" :min="0" :max="20" :step="0.01")
+          b-field(custom-class="is-small" label="余白(%)" message="駒セルに対する割合")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding_rate" :min="0" :max="1.0" :step="0.01")
 
-          b-field(custom-class="is-small" label="サイズ")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_font_size" :min="0" :max="20" :step="0.01")
+          b-field(custom-class="is-small" label="サイズ(%)" message="駒セル縦幅に対する割合")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_count_font_size_rate" :min="0" :max="1.0" :step="0.01")
           b-field(custom-class="is-small" label="フォント色")
             MyColorPicker(v-model="sp_piece_count_font_color")
           b-field(custom-class="is-small" label="背景")
@@ -542,10 +542,10 @@ export default {
       sp_turn: -1,
       sp_viewpoint: "black",
       sp_debug_mode: DEVELOPMENT_P ? "is_debug_mode_off" : "is_debug_mode_off",
-      sp_piece_count_font_size: 8,
+      sp_piece_count_font_size_rate: 0.2,
       sp_piece_count_font_color:  "rgba(0, 0, 0, 0.75)",
-      sp_piece_count_bg_color: "rgba(255, 255, 255, 0.75)",
-      sp_piece_count_padding: 2,
+      sp_piece_count_bg_color: "rgba(255, 255, 255, 0.9)",
+      sp_piece_count_padding_rate: 0.08,
 
       sp_piece_count_horizontal_x: 43,
       sp_piece_count_horizontal_y: 30,
@@ -882,10 +882,10 @@ export default {
           --sp_grid_star_z_index:        ${this.sp_grid_star_z_index};
 
           // 駒数
-          --sp_piece_count_font_size:    ${this.sp_piece_count_font_size}px;
+          --sp_piece_count_font_size_rate:    ${this.sp_piece_count_font_size_rate};
           --sp_piece_count_font_color:   ${this.hsla_format(this.sp_piece_count_font_color)};
           --sp_piece_count_bg_color:     ${this.hsla_format(this.sp_piece_count_bg_color)};
-          --sp_piece_count_padding:      ${this.sp_piece_count_padding}px;
+          --sp_piece_count_padding_rate:      ${this.sp_piece_count_padding_rate};
           --sp_piece_count_horizontal_x:            ${this.sp_piece_count_horizontal_x};
           --sp_piece_count_horizontal_y:            ${this.sp_piece_count_horizontal_y};
           --sp_piece_count_vertical_x:           ${this.sp_piece_count_vertical_x};

@@ -47,10 +47,10 @@
 | `--sp_piece_count_horizontal_y`              |                        30 | 駒数の中央からの相対位置Y(%) (横配置時)                               |
 | `--sp_piece_count_vertical_x`                |                         0 | 駒数の中央からの相対位置X(%) (縦配置時)                               |
 | `--sp_piece_count_vertical_y`                |                        47 | 駒数の中央からの相対位置y(%) (縦配置時)                               |
-| `--sp_piece_count_font_size`                 | 0.75rem                   | 駒数の文字サイズ                                                      |
+| `--sp_piece_count_font_size_rate`                 | 0.75rem                   | 駒数の文字サイズ                                                      |
 | `--sp_piece_count_font_color`                | rgba(0, 0, 0, 0.75)       | 駒数の文字色                                                          |
 | `--sp_piece_count_bg_color`                  | rgba(255, 255, 255, 0.75) | 駒数の文字色背景                                                      |
-| `--sp_piece_count_padding`                   | 3px                       | 駒数のパディング                                                      |
+| `--sp_piece_count_padding_rate`                   | 3px                       | 駒数のパディング                                                      |
 | `--sp_board_aspect_ratio`                    |                     1.097 | 盤の横を1.0としたときの縦の比率                                       |
 | `--sp_location_mark_inactive_rate`           |                       0.5 | 手番ではないときの☗サイズの倍率                                      |
 | `--sp_player_name_font_size`                 | 0.75rem                   | 対局者の名前の表示サイズ                                              |
