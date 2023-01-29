@@ -87,7 +87,7 @@ export default {
 
   .PieceBox
     @extend %is_unselectable
-    min-height: var(--sp_piece_box_piece_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
+    min-height: var(--sp_auto_cell_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
 
   .PieceBoxPieces
     display: flex

@@ -31,6 +31,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 // mixins modules
 import { app_focus          } from "./app_focus.js"
 import { navi_module        } from "./navi_module.js"
+import { cell_size_module        } from "./cell_size_module.js"
 import { shortcut_module    } from "./shortcut_module.js"
 import { edit_mode_module   } from "./edit_mode_module.js"
 import { foul_module        } from "./foul_module.js"
@@ -53,6 +54,7 @@ export default {
     app_vector,
     app_focus,
     navi_module,
+    cell_size_module,
     shortcut_module,
     edit_mode_module,
     foul_module,

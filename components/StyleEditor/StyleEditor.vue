@@ -77,11 +77,11 @@
           SeTitle(name="盤")
           b-field(custom-class="is-small" label="角丸め")
             b-slider(v-bind="slider_attrs" v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
-          b-field(custom-class="is-small" label="余白")
+          b-field(custom-class="is-small" label="余白(%)" message="罫線外周と木目盤端との隙間のこと。紙面風なら0でよい")
             b-slider(v-bind="slider_attrs" v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
           b-field(custom-class="is-small" label="アスペクト比(縦長度合)")
             b-slider(v-bind="slider_attrs" v-model="sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
-          b-field(custom-class="is-small" label="左右余白(横レイアウト時有効)" message="基本0で良い")
+          b-field(custom-class="is-small" label="左右余白(横レイアウト時有効)" message="盤と持駒の間にタップできない領域ができてしまうため基本0で良い。座標を表示するときのみ少し空けると良いかもしれない")
             b-slider(v-bind="slider_attrs" v-model="sp_board_horizontal_gap" :min="0" :max="50")
           b-field(custom-class="is-small" label="上下余白(縦レイアウト時有効)" message="基本0で良い")
             b-slider(v-bind="slider_attrs" v-model="sp_board_vertical_gap" :min="0" :max="50")
@@ -115,7 +115,7 @@
             b-select(size="is-small" v-model="sp_pi_variant")
               template(v-for="e in PiVariantInfo.values")
                 option(:value="e.key") {{e.name}}
-          b-field(custom-class="is-small" label="盤上のセルに対するテクスチャ領域の割合")
+          b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
             b-slider(v-bind="slider_attrs" v-model="sp_board_piece_rate" :min="-10" :max="150" :step="0.1")
           b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="下にすると駒の底辺が揃う(ただし駒の種類による)")
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
@@ -127,14 +127,14 @@
           b-field(custom-class="is-small" label="レイアウト")
             b-radio-button(size="is-small" v-model="sp_stand_layout" native-value="is_stand_layout_to_bottom") 下寄せ
             b-radio-button(size="is-small" v-model="sp_stand_layout" native-value="is_stand_layout_to_top") 上寄せ
-          .columns.mt-4
-            .column.py-0
-              b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
-                b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
-            .column.py-0
-              b-field(custom-class="is-small" label="セル(H)" message="駒と駒の隙間に影響する")
-                b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
-          b-field(custom-class="is-small" label="セル内の駒の大きさ")
+          //- .columns.mt-4
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_w" :min="1" :max="80" :step="1")
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="セル(H)" message="駒と駒の隙間に影響する")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_h" :min="1" :max="80" :step="1")
+          b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
             b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
           b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色")
             MyColorPicker(v-model="sp_stand_hover_border_color")
@@ -207,25 +207,25 @@
 
         .box
           SeTitle(name="駒箱")
-          b-field(custom-class="is-small" label="")
-            MyColorPicker(v-model="sp_piece_box_color")
-          .columns.mt-4
-            .column.py-0
-              b-field(custom-class="is-small" label="セル(W)")
-                b-slider(v-bind="slider_attrs" v-model="sp_piece_box_piece_w" :min="1" :max="80" :step="1")
-            .column.py-0
-              b-field(custom-class="is-small" label="セル(H)")
-                b-slider(v-bind="slider_attrs" v-model="sp_piece_box_piece_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
+          b-field(custom-class="is-small" label="")
+            MyColorPicker(v-model="sp_piece_box_color")
+          //- .columns.mt-4
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="セル(W)")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_w" :min="1" :max="80" :step="1")
+          //-   .column.py-0
+          //-     b-field(custom-class="is-small" label="セル(H)")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_h" :min="1" :max="80" :step="1")
 
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(W)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_w" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_w" :min="1" :max="80" :step="1")
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(H)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_h" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_h" :min="1" :max="80" :step="1")
 
         //- .box
         //-   SeTitle(name="モバイル
@@ -360,6 +360,9 @@
         .box
           SeTitle(name="その他")
 
+          b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ(%)")
+            b-slider(v-bind="slider_attrs" v-model="sp_location_mark_inactive_rate" :min="0" :max="1.5" :step="0.01")
+
           b-field(custom-class="is-small" label="共通の隙間")
             b-slider(v-bind="slider_attrs" v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
 
@@ -423,6 +426,8 @@
           SeTitle(name="CSS変数確認")
           pre
             | {{human_css}}
+          pre(v-if="development_p")
+            | {{comment_removed_css}}
         .box
           SeTitle(name="カスタムCSS")
           b-field(custom-class="is-small" label="")
@@ -531,8 +536,8 @@ export default {
       sp_balloon: "is_balloon_on",
 
       //////////////////////////////////////////////////////////////////////////////// 駒台
-      sp_stand_piece_w: 47,
-      sp_stand_piece_h: 50,
+      //- sp_auto_cell_w: 1,
+      //- sp_auto_cell_h: 1,
       sp_stand_piece_rate: 80,
       sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
       sp_stand_bg_color: "rgba(0, 0, 0, 0.0)",
@@ -559,9 +564,11 @@ export default {
       sp_grid_star_z_index: 0,
 
       sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
-      sp_piece_box_piece_w: 38,
-      sp_piece_box_piece_h: 46,
-      sp_piece_box_piece_rate: 90,
+      //- sp_auto_cell_w: 38,
+      //- sp_auto_cell_h: 46,
+      sp_piece_box_piece_rate: 80,
+
+      sp_location_mark_inactive_rate: 0.5,
 
       sp_comment: "is_comment_off",
       sp_common_gap: 12,
@@ -697,6 +704,7 @@ export default {
       this.sp_stand_layout           = "is_stand_layout_to_top"      // 駒台の位置
       this.sp_player_name_dir        = "is_player_name_dir_vertical" // 縦横書き
       this.sp_balloon                = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
+      this.sp_location_mark_inactive_rate = 1.0                      // 手番でないときの☗☖を小さくしない
       this.sp_player_info.black.name = "先手"
       this.sp_player_info.white.name = "後手"
     },
@@ -846,7 +854,7 @@ export default {
 
     comment_removed_css() {
       let s = this.raw_css
-      s = s.replace(/^\s*\/\/.*\n/gm, "")
+      s = s.replace(/ *\/\/.*\n/gm, "")
       return s
     },
 
@@ -892,17 +900,16 @@ export default {
           --sp_stand_piece_rate:         ${this.sp_stand_piece_rate}%;
           --sp_stand_hover_border_color: ${this.hsla_format(this.sp_stand_hover_border_color)};
           --sp_stand_bg_color: ${this.hsla_format(this.sp_stand_bg_color)};
-          --sp_stand_piece_w:            ${this.sp_stand_piece_w}px;
-          --sp_stand_piece_h:            ${this.sp_stand_piece_h}px;
 
           --sp_player_name_font_size: ${this.sp_player_name_font_size}px; // 対局者の名前のフォントサイズ
           --sp_player_time_font_size: ${this.sp_player_time_font_size}px; // 対局者の時間のフォントサイズ
 
           // 駒箱
-          --sp_piece_box_piece_w:        ${this.sp_piece_box_piece_w}px;
-          --sp_piece_box_piece_h:        ${this.sp_piece_box_piece_h}px;
           --sp_piece_box_piece_rate:     ${this.sp_piece_box_piece_rate}%;
           --sp_piece_box_color:          ${this.hsla_format(this.sp_piece_box_color)};
+
+          // ☗☖の大きさ
+          --sp_location_mark_inactive_rate: ${this.sp_location_mark_inactive_rate};
 
           // 成り不成り選択
           --sp_promote_select_modal_bg_color:    ${this.hsla_format(this.sp_promote_select_modal_bg_color)};

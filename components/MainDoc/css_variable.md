@@ -11,11 +11,9 @@
 | `--sp_lifted_origin_opacity_desktop`         |                       0.0 | 持ち上げた駒の元のセルの非透明度(desktop)                             |
 | `--sp_lifted_origin_bg_color_touch`          | hsla(0, 0%, 0%, 0.15)     | 持ち上げた駒の背景色(touch)                                           |
 | `--sp_lifted_origin_opacity_touch`           |                       1.0 | 持ち上げた駒の元のセルの非透明度(touch)                               |
-| `--sp_stand_piece_w`                         | 47px                      | 駒台のセル(W)                                                         |
-| `--sp_stand_piece_h`                         | 50px                      | 駒台のセル(H)                                                         |
+| `--sp_auto_cell_w`                           | 47px                      | 盤上以外の駒セル(W) ※内部で使用                                      |
+| `--sp_auto_cell_h`                           | 50px                      | 盤上以外の駒セル(H) ※内部で使用                                      |
 | `--sp_stand_piece_rate`                      | 80%                       | 駒台のセル内の駒占有率                                                |
-| `--sp_piece_box_piece_w`                     | 47px                      | 駒箱のセル(W)                                                         |
-| `--sp_piece_box_piece_h`                     | 50px                      | 駒箱のセル(H)                                                         |
 | `--sp_piece_box_piece_rate`                  | 80%                       | 駒箱のセル内の駒占有率                                                |
 | `--sp_body_width`                            | 100%                      | 盤(駒台を含む)の幅         FIXME: とる                                |
 | `--sp_body_max_width`                        | none                      | 盤(駒台を含む)の最大幅     FIXME: とる                                |

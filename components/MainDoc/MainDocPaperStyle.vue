@@ -37,15 +37,12 @@
       .is-size-7 CSS (sass)
       pre.is-size-7
         | .ShogiPlayerContainer
-        |   --sp_board_color: white          // 盤の色を白にする
-        |   --sp_board_padding: 0            // グリッド外周と縁の隙間を無くす
-        |   --sp_grid_stroke: 1              // グリッド内線は細くする
-        |   --sp_grid_outer_stroke: 2        // グリッド外枠を内線より太くする
-        |   --sp_player_name_font_size: 16px // "先手" "後手" の文字サイズを調整する
-        |
-        |   // 持駒サイズ調整
-        |   --sp_stand_piece_w: 30px
-        |   --sp_stand_piece_h: 30px
+        |   --sp_board_color: white               // 盤の色を白にする
+        |   --sp_board_padding: 0                 // グリッド外周と縁の隙間を無くす
+        |   --sp_grid_stroke: 1                   // グリッド内線は細くする
+        |   --sp_grid_outer_stroke: 2             // グリッド外枠を内線より太くする
+        |   --sp_player_name_font_size: 16px      // "先手" "後手" の文字サイズを調整する
+        |   --sp_location_mark_inactive_rate: 1.0 // 手番でない方の☗☖を小さくしない
         |
         |   // 駒数
         |   --sp_piece_count_horizontal_x: 70      // 右に寄せる
@@ -82,10 +79,7 @@ export default {
     --sp_grid_stroke: 1              // グリッド内線は細くする
     --sp_grid_outer_stroke: 2        // グリッド外枠を内線より太くする
     --sp_player_name_font_size: 16px // "先手" "後手" の文字サイズ調整
-
-    // 持駒サイズ調整
-    --sp_stand_piece_w: 30px
-    --sp_stand_piece_h: 30px
+    --sp_location_mark_inactive_rate: 1.0 // 手番でない方の☗☖の比率を変更しない
 
     // 駒数
     --sp_piece_count_horizontal_x: 70      // 右に寄せる

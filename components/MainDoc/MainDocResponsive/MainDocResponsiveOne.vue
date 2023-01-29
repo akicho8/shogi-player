@@ -32,7 +32,5 @@ export default {
 .MainDocResponsiveOne
   +tablet
     --sp_grid_color: hsl(0, 0%, 70%)
-    --sp_stand_piece_w: 20px
-    --sp_stand_piece_h: 25px
     --sp_piece_count_gap_bottom: 70%
 </style>

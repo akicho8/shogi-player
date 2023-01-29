@@ -111,7 +111,7 @@ export default {
   // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
   +IS_HORIZONTAL
     .MembershipLocationPlayerInfo
-      max-width: var(--sp_stand_piece_w)
+      max-width: var(--sp_auto_cell_w)
       line-height: 110%         // 元々100%にしていたくっつきすぎな印象がある
 
   // 縦幅がわりと自由につかえるので隙間をあける
