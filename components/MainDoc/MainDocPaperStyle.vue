@@ -37,24 +37,27 @@
       .is-size-7 CSS (sass)
       pre.is-size-7
         | .ShogiPlayerContainer
-        |   --sp_board_color: white               // 盤の色を白にする
-        |   --sp_board_padding: 0                 // グリッド外周と縁の隙間を無くす
-        |   --sp_grid_stroke: 1                   // グリッド内線は細くする
-        |   --sp_grid_outer_stroke: 2             // グリッド外枠を内線より太くする
-        |   --sp_player_name_font_size: 16px      // "先手" "後手" の文字サイズを調整する
-        |   --sp_location_mark_inactive_rate: 1.0 // 手番でない方の☗☖を小さくしない
+        |   font-family: serif                     // 明朝体(座標と "先手" "後手" に適用)
+        |   color: black                           // "先手" "後手" の色
+        |
+        |   --sp_board_color: white                // 盤の色を白にする
+        |   --sp_board_padding: 0                  // グリッド外周と縁の隙間を無くす
+        |   --sp_board_radius: 0                   // 角を丸めない
+        |   --sp_grid_stroke: 0.5                  // グリッド内線は細くする(お好みで調整)
+        |   --sp_grid_outer_stroke: 2              // グリッド外枠を内線より太くする(お好みで調整)
+        |   --sp_player_name_size: 0.4             // "先手" "後手" の文字サイズ調整
+        |   --sp_location_mark_inactive_rate: 1.0  // 手番でない方の☗☖の比率を変更しない
         |
         |   // 駒数
-        |   --sp_piece_count_horizontal_x: 70      // 右に寄せる
-        |   --sp_piece_count_horizontal_y: 2       // 少し下げる(錯視を考慮)
+        |   --sp_piece_count_horizontal_x: 0.70    // 右に寄せる
+        |   --sp_piece_count_horizontal_y: 0.02    // 少し下げる(錯視を考慮)
         |   --sp_piece_count_bg_color: transparent // 背景を透過させる
         |
         |   // 座標
-        |   font-family: serif                 // 明朝体にする
-        |   --sp_digit_label_font_color: black // 座標の色を黒にする
-        |   --sp_digit_label_font_size: 12px   // 座標のフォントサイズの調整
-        |   --sp_digit_label_position: 14      // 座標を14%盤の外に押し出す
-        |   --sp_board_horizontal_gap: 4%      // 座標があるため盤と駒台との隙間を空ける
+        |   --sp_digit_label_color: black          // 座標の色を黒にする
+        |   --sp_digit_label_size: 0.35            // 座標のフォントサイズの調整
+        |   --sp_digit_label_push: 0.14            // 座標を14%盤の外に押し出す
+        |   --sp_board_horizontal_gap: 0.5         // 座標があるため盤と駒台との隙間を空ける
 </template>
 
 <script>
@@ -74,24 +77,27 @@ export default {
 @import "./support.sass"
 .MainDocPaperStyle
   .ShogiPlayerContainer
-    --sp_board_color: white          // 盤の色を白にする
-    --sp_board_padding: 0            // グリッド外周と縁の隙間を無くす
-    --sp_grid_stroke: 1              // グリッド内線は細くする
-    --sp_grid_outer_stroke: 2        // グリッド外枠を内線より太くする
-    --sp_player_name_font_size: 16px // "先手" "後手" の文字サイズ調整
+    font-family: serif                    // 明朝体
+    color: black                          // "先手" "後手" の色
+
+    --sp_board_color: white               // 盤の色を白にする
+    --sp_board_padding: 0                 // グリッド外周と縁の隙間を無くす
+    --sp_board_radius: 0                  // 角を丸めない
+    --sp_grid_stroke: 0.5                 // グリッド内線は細くする(お好みで調整)
+    --sp_grid_outer_stroke: 2             // グリッド外枠を内線より太くする(お好みで調整)
+    --sp_player_name_size: 0.4       // "先手" "後手" の文字サイズ調整
     --sp_location_mark_inactive_rate: 1.0 // 手番でない方の☗☖の比率を変更しない
 
     // 駒数
-    --sp_piece_count_horizontal_x: 70      // 右に寄せる
-    --sp_piece_count_horizontal_y: 2       // 少し下げる(錯視を考慮)
+    --sp_piece_count_horizontal_x: 0.70      // 右に寄せる
+    --sp_piece_count_horizontal_y: 0.02       // 少し下げる(錯視を考慮)
     --sp_piece_count_bg_color: transparent // 背景を透過させる
 
     // 座標
-    font-family: serif                 // 明朝体
-    --sp_digit_label_font_color: black // 座標の色を黒にする
-    --sp_digit_label_font_size: 12px   // 座標のフォントサイズの調整
-    --sp_digit_label_position: 14      // 座標を14%盤の外に押し出す
-    --sp_board_horizontal_gap: 4%      // 座標があるため盤と駒台との隙間を空ける
+    --sp_digit_label_color: black  // 座標の色を黒にする
+    --sp_digit_label_size: 0.35    // 座標のフォントサイズの調整
+    --sp_digit_label_push: 0.14    // 座標を14%盤の外に押し出す
+    --sp_board_horizontal_gap: 0.5 // 座標があるため盤と駒台との隙間を空ける
 
   // .ShogiPlayerColumn
   //   max-width: 480px

@@ -72,8 +72,8 @@ export default {
   ////////////////////////////////////////////////////////////////////////////////
   +IS_HORIZONTAL
     .NavigateBlock
-      margin-top: var(--sp_common_gap)
+      margin-top: var(--sp_common_gap_real_px)
   +IS_VERTICAL
     .NavigateBlock
-      margin-top: 0 // 少し開けた方がいいかな？
+      margin-top: var(--sp_common_gap_real_px)
 </style>

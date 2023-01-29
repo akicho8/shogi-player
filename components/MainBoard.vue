@@ -85,7 +85,7 @@ export default {
   +defvar(sp_board_image, none)                    // 盤画像
 
   +defvar(sp_board_opacity, 1.0)                   // 非半透明度
-  +defvar(sp_board_padding, 1.5)                   // 盤の隅の隙間
+  +defvar(sp_board_padding, 0.015)                 // 盤の隅の隙間
   +defvar(sp_board_radius, 5)                      // 盤の隅の丸め度合い
 
   +defvar(sp_grid_outer_stroke, 0)                 // グリッドの外枠の太さ(紙面風のとき)
@@ -93,7 +93,7 @@ export default {
   +defvar(sp_grid_color, rgba(0, 0, 0, 0.5))       // グリッド色
   +defvar(sp_grid_stroke, 1)                       // グリッド太さ
   +defvar(sp_grid_outer_texture_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
-  +defvar(sp_grid_star_size, 10%)                  // 星の大きさ
+  +defvar(sp_grid_star_size, 0.1)                  // 星の大きさ
   +defvar(sp_grid_star_z_index, 0)                 // 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)
 
   +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w) CSS内では未使用
@@ -114,7 +114,7 @@ export default {
     border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
 
   .BoardFieldWithPadding
-    padding: calc(var(--sp_board_padding) * 1%)
+    padding: calc(var(--sp_board_padding) * 100%)
 
   //- flex に移行しやすいように table, tr, td 使用禁止
   .BoardField
@@ -153,10 +153,13 @@ export default {
       &:after
         position: absolute
         content: ""
-        top:  calc(var(--sp_grid_star_size) * -0.5)
-        left: calc(var(--sp_grid_star_size) * -0.5)
-        width:  var(--sp_grid_star_size)
-        height: var(--sp_grid_star_size)
+        // "%" で指定すると長方形になってしまう
+        // sp_base_h だけを基準にすると正方形になる
+        // 中央が右下にずれているので半ピクセル調整する
+        top:    calc(var(--sp_base_h) * var(--sp_grid_star_size) * -0.5 - 0.5px)
+        left:   calc(var(--sp_base_h) * var(--sp_grid_star_size) * -0.5 - 0.5px)
+        width:  calc(var(--sp_base_h) * var(--sp_grid_star_size))
+        height: calc(var(--sp_base_h) * var(--sp_grid_star_size))
         border-radius: 50%
         background-color: var(--sp_grid_outer_color)
         z-index: var(--sp_grid_star_z_index)

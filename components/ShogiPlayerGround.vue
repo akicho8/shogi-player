@@ -37,7 +37,7 @@ export default {
       return {
         "--sp_board_dimension_w": this.TheSp.sp_board_dimension_w,
         "--sp_board_dimension_h": this.TheSp.sp_board_dimension_h,
-        ...this.TheSp.css_variables_sp_auto_cell_wh,
+        ...this.TheSp.css_variables_sp_base_wh,
       }
     },
   },

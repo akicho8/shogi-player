@@ -16,5 +16,4 @@ sp_piece_count_gap_bottom → 削除
 sp_piece_count_gap_right → 削除
 sp_piece_count_padding -> sp_piece_count_padding_rate に変更 (割合を指定する)
 sp_piece_count_font_size -> sp_piece_count_font_size_rate に変更 (割合を指定する)
-
-
+sp_common_gap -> sp_common_gap_rate (割合を指定する)

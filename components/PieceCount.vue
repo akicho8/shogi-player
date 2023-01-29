@@ -19,10 +19,10 @@ export default {
 @import "./support.sass"
 
 .ShogiPlayerGround
-  +defvar(sp_piece_count_horizontal_x, 43)                              // 駒数の中央からの相対位置X(%) (横配置時)
-  +defvar(sp_piece_count_horizontal_y, 30)                              // 駒数の中央からの相対位置Y(%) (横配置時)
-  +defvar(sp_piece_count_vertical_x, 0)                               // 駒数の中央からの相対位置X(%) (縦配置時)
-  +defvar(sp_piece_count_vertical_y, 47)                              // 駒数の中央からの相対位置y(%) (縦配置時)
+  +defvar(sp_piece_count_horizontal_x, 0.43)                              // 駒数の中央からの相対位置X(%) (横配置時)
+  +defvar(sp_piece_count_horizontal_y, 0.30)                              // 駒数の中央からの相対位置Y(%) (横配置時)
+  +defvar(sp_piece_count_vertical_x, 0.0)                               // 駒数の中央からの相対位置X(%) (縦配置時)
+  +defvar(sp_piece_count_vertical_y, 0.47)                              // 駒数の中央からの相対位置y(%) (縦配置時)
   +defvar(sp_piece_count_font_size_rate, 0.2)                      // 駒数の文字サイズ(駒セル縦幅に対する比率)
   +defvar(sp_piece_count_font_color, rgba(0, 0, 0, 0.75))     // 駒数の文字色
   +defvar(sp_piece_count_bg_color, rgba(255, 255, 255, 0.9))  // 駒数の文字色背景
@@ -37,8 +37,8 @@ export default {
 
   .PieceCount
     @extend %is_piece_count_color_set
-    font-size: calc(var(--sp_auto_cell_h) * var(--sp_piece_count_font_size_rate))
-    padding:   calc(var(--sp_auto_cell_w) * var(--sp_piece_count_padding_rate)) calc(var(--sp_auto_cell_h) * var(--sp_piece_count_padding_rate))
+    font-size: calc(var(--sp_base_h) * var(--sp_piece_count_font_size_rate))
+    padding:   calc(var(--sp_base_w) * var(--sp_piece_count_padding_rate)) calc(var(--sp_base_h) * var(--sp_piece_count_padding_rate))
 
     line-height: 100%
     border-radius: 50%
@@ -57,12 +57,12 @@ export default {
       &.is_position_north
         .PieceCount
           +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
-          right:   calc(var(--sp_piece_count_horizontal_x) * 1%)
-          bottom:  calc(var(--sp_piece_count_horizontal_y) * 1%)
+          right:   calc(var(--sp_piece_count_horizontal_x) * 100%)
+          bottom:  calc(var(--sp_piece_count_horizontal_y) * 100%)
       &.is_position_south
         .PieceCount
-          left:  calc(var(--sp_piece_count_horizontal_x) * 1%)
-          top:   calc(var(--sp_piece_count_horizontal_y) * 1%)
+          left:  calc(var(--sp_piece_count_horizontal_x) * 100%)
+          top:   calc(var(--sp_piece_count_horizontal_y) * 100%)
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
@@ -71,16 +71,16 @@ export default {
       &.is_position_north
         .PieceCount
           +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
-          right:  calc(var(--sp_piece_count_vertical_x) * 1%)
-          bottom: calc(var(--sp_piece_count_vertical_y) * 1%)
+          right:  calc(var(--sp_piece_count_vertical_x) * 100%)
+          bottom: calc(var(--sp_piece_count_vertical_y) * 100%)
       &.is_position_south
         .PieceCount
-          left: calc(var(--sp_piece_count_vertical_x) * 1%)
-          top:  calc(var(--sp_piece_count_vertical_y) * 1%)
+          left: calc(var(--sp_piece_count_vertical_x) * 100%)
+          top:  calc(var(--sp_piece_count_vertical_y) * 100%)
 
   //////////////////////////////////////////////////////////////////////////////// 駒箱
   .PieceBox
     .PieceCount
-      left: calc(var(--sp_piece_count_vertical_x) * 1%)
-      top:  calc(var(--sp_piece_count_vertical_y) * 1%)
+      left: calc(var(--sp_piece_count_vertical_x) * 100%)
+      top:  calc(var(--sp_piece_count_vertical_y) * 100%)
 </style>

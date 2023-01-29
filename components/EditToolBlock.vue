@@ -48,7 +48,7 @@ export default {
   ////////////////////////////////////////////////////////////////////////////////
   +IS_HORIZONTAL
     .EditToolBlock
-      margin-bottom: var(--sp_common_gap)
+      margin-bottom: var(--sp_common_gap_real_px)
   +IS_VERTICAL
     .EditToolBlock
       margin-bottom: 0

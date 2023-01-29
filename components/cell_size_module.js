@@ -1,13 +1,13 @@
 // 常時盤上の升の大きさを持つ
 
-const TARGET_SELECTOR = ".BoardField .PieceTap.place_1_1" // 「１一」の位置を基準とする
-const THRESHOLD       = 1.5                               // 指定ピクセル以上変化したら更新する(画面震え対策)
+const TARGET_SELECTOR = ".BoardField .PieceTap" // 左上のセル
+const THRESHOLD       = 1.5                     // 指定ピクセル以上変化したら更新する(画面震え対策)
 
 export const cell_size_module = {
   data() {
     return {
-      sp_auto_cell_w: 1,
-      sp_auto_cell_h: 1,
+      sp_base_w: 1,
+      sp_base_h: 1,
     }
   },
   mounted() {
@@ -26,11 +26,13 @@ export const cell_size_module = {
           }
           const w = entry.contentRect.width
           const h = entry.contentRect.height
-          const dw = Math.abs(this.sp_auto_cell_w - w)
-          const dh = Math.abs(this.sp_auto_cell_h - h)
-          if (dw >= THRESHOLD || dh >= THRESHOLD) {
-            this.sp_auto_cell_w = w
-            this.sp_auto_cell_h = h
+          if (w > 0 && h > 0) {
+            const dw = Math.abs(this.sp_base_w - w)
+            const dh = Math.abs(this.sp_base_h - h)
+            if (dw >= THRESHOLD || dh >= THRESHOLD) {
+              this.sp_base_w = w
+              this.sp_base_h = h
+            }
           }
         })
       })
@@ -49,10 +51,10 @@ export const cell_size_module = {
     },
   },
   computed: {
-    css_variables_sp_auto_cell_wh() {
+    css_variables_sp_base_wh() {
       return {
-        "--sp_auto_cell_w": `${this.sp_auto_cell_w}px`,
-        "--sp_auto_cell_h": `${this.sp_auto_cell_h}px`,
+        "--sp_base_w": `${this.sp_base_w}px`,
+        "--sp_base_h": `${this.sp_base_h}px`,
       }
     },
   },

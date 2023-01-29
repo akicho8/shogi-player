@@ -36,5 +36,5 @@ export default {
 .MainDocPerf1
   .ShogiPlayer
     width: 50%
-    --sp_board_piece_rate: 100%
+    --sp_board_piece_size: 1.0
 </style>

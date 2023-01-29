@@ -21,9 +21,9 @@
           SeTitle(name="基本")
           b-field(custom-class="is-small" label="コンテナ幅")
             b-slider(v-bind="slider_attrs" v-model="se_frame_width" :min="1" :max="100")
-          b-field(custom-class="is-small" label="レイアウト" message="スマホの縦持ちの場合自動的に縦レイアウトになる")
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 横
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 縦
+          b-field(custom-class="is-small" label="レイアウト")
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
           b-field(custom-class="is-small" label="モード")
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") 再生
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") 操作
@@ -75,23 +75,23 @@
 
         .box
           SeTitle(name="盤")
-          b-field(custom-class="is-small" label="角丸め")
+          b-field(custom-class="is-small" label="角丸め" message="紙面風なら0にする")
             b-slider(v-bind="slider_attrs" v-model="sp_board_radius" :min="0" :max="50" :step="0.01")
-          b-field(custom-class="is-small" label="余白(%)" message="罫線外周と木目盤端との隙間のこと。紙面風なら0でよい")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_padding" :min="0" :max="10" :step="0.01")
-          b-field(custom-class="is-small" label="アスペクト比(縦長度合)")
+          b-field(custom-class="is-small" label="余白" message="紙面風なら0にする")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_padding" :min="0" :max="0.05" :step="0.001")
+          b-field(custom-class="is-small" label="アスペクト比")
             b-slider(v-bind="slider_attrs" v-model="sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
           b-field(custom-class="is-small" label="左右余白(横レイアウト時有効)" message="盤と持駒の間にタップできない領域ができてしまうため基本0で良い。座標を表示するときのみ少し空けると良いかもしれない")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_horizontal_gap" :min="0" :max="50")
-          b-field(custom-class="is-small" label="上下余白(縦レイアウト時有効)" message="基本0で良い")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_vertical_gap" :min="0" :max="50")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_horizontal_gap" :min="0" :max="1.0" :step="0.01")
+          b-field(custom-class="is-small" label="上下余白(縦レイアウト時有効)" message="基本0で良い" v-if="development_p")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_vertical_gap" :min="0" :max="1.0" :step="0.01")
           .columns.mt-4.mb-2
             .column.py-0
               b-field(custom-class="is-small" label="セル数(W)")
-                b-slider(v-bind="slider_attrs" v-model="sp_board_dimension_w" :min="0" :max="12")
+                b-slider(v-bind="slider_attrs" v-model="sp_board_dimension_w" :min="1" :max="12")
             .column.py-0
               b-field(custom-class="is-small" label="セル数(H)")
-                b-slider(v-bind="slider_attrs" v-model="sp_board_dimension_h" :min="0" :max="12")
+                b-slider(v-bind="slider_attrs" v-model="sp_board_dimension_h" :min="1" :max="12")
 
         .box
           SeTitle(name="盤グリッド")
@@ -104,7 +104,7 @@
           b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線はブラウザ依存 Safari: 1.5px, Chrome: 2.0px")
             b-slider(v-bind="slider_attrs" v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
           b-field(custom-class="is-small" label="星の大きさ")
-            b-slider(v-bind="slider_attrs" v-model="sp_grid_star_size" :min="0" :max="200" :step="0.01")
+            b-slider(v-bind="slider_attrs" v-model="sp_grid_star_size" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="星の z-index" message="-1のときは盤の奥に描画するため盤が透明でなければ見えない点に注意。星が巨大でセルのイベントを奪ってしまうかつ盤が透明なときのみ-1にする")
             b-radio-button(size="is-small" v-model="sp_grid_star_z_index" :native-value="-1") -1
             b-radio-button(size="is-small" v-model="sp_grid_star_z_index" :native-value="0") 0
@@ -115,8 +115,8 @@
             b-select(size="is-small" v-model="sp_pi_variant")
               template(v-for="e in PiVariantInfo.values")
                 option(:value="e.key") {{e.name}}
-          b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
-            b-slider(v-bind="slider_attrs" v-model="sp_board_piece_rate" :min="-10" :max="150" :step="0.1")
+          b-field(custom-class="is-small" label="大きさ")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_piece_size" :min="0" :max="1.0" :step="0.001")
           b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="下にすると駒の底辺が揃う(ただし駒の種類による)")
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="top") ↑
             b-radio-button(size="is-small" v-model="sp_board_piece_position" native-value="center") ・
@@ -130,12 +130,12 @@
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_w" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_w" :min="1" :max="80" :step="1")
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(H)" message="駒と駒の隙間に影響する")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_h" :min="1" :max="80" :step="1")
-          b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
-            b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_rate" :min="0" :max="100" :step="0.1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_h" :min="1" :max="80" :step="1")
+          b-field(custom-class="is-small" label="駒の大きさ")
+            b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
           b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色")
             MyColorPicker(v-model="sp_stand_hover_border_color")
           b-field(custom-class="is-small" label="背景色")
@@ -147,11 +147,11 @@
             b-radio-button(size="is-small" v-model="sp_player_name_dir" native-value="is_player_name_dir_horizontal") 横書き
             b-radio-button(size="is-small" v-model="sp_player_name_dir" native-value="is_player_name_dir_vertical") 縦書き
 
-          b-field(custom-class="is-small" label="文字サイズ (名前)")
-            b-slider(v-bind="slider_attrs" v-model="sp_player_name_font_size" :min="0" :max="50" :step="0.5")
+          b-field(custom-class="is-small" label="名前の大きさ")
+            b-slider(v-bind="slider_attrs" v-model="sp_player_name_size" :min="0" :max="0.5" :step="0.001")
 
-          b-field(custom-class="is-small" label="文字サイズ (時間)")
-            b-slider(v-bind="slider_attrs" v-model="sp_player_time_font_size" :min="0" :max="50" :step="0.5")
+          b-field(custom-class="is-small" label="時間の大きさ")
+            b-slider(v-bind="slider_attrs" v-model="sp_player_time_size" :min="0" :max="0.5" :step="0.001")
 
           b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
             b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_off") OFF
@@ -180,52 +180,52 @@
               b-field(custom-class="is-small" label="横レイアウト時の相対位置")
             .column.is-6.py-0
               b-field(custom-class="is-small" label="X")
-                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_horizontal_x" :min="-100" :max="100" :step="1")
+                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_horizontal_x" :min="-1.0" :max="1.0" :step="0.001")
             .column.is-6.py-0
               b-field(custom-class="is-small" label="Y")
-                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_horizontal_y" :min="-100" :max="100" :step="1")
+                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_horizontal_y" :min="-1.0" :max="1.0" :step="0.001")
 
           .columns.mt-4.is-multiline
             .column.is-12.py-0
               b-field(custom-class="is-small" label="縦レイアウト時の相対位置")
             .column.is-6.py-0
               b-field(custom-class="is-small" label="X")
-                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_vertical_x" :min="-100" :max="100" :step="1")
+                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_vertical_x" :min="-1.0" :max="1.0" :step="0.001")
             .column.is-6.py-0
               b-field(custom-class="is-small" label="Y")
-                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_vertical_y" :min="-100" :max="100" :step="1")
+                b-slider(v-bind="slider_attrs" v-model="sp_piece_count_vertical_y" :min="-1.0" :max="1.0" :step="0.001")
 
-          b-field(custom-class="is-small" label="余白(%)" message="駒セルに対する割合")
+          b-field(custom-class="is-small" label="余白")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_padding_rate" :min="0" :max="1.0" :step="0.01")
 
-          b-field(custom-class="is-small" label="サイズ(%)" message="駒セル縦幅に対する割合")
+          b-field(custom-class="is-small" label="大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_piece_count_font_size_rate" :min="0" :max="1.0" :step="0.01")
-          b-field(custom-class="is-small" label="フォント色")
+          b-field(custom-class="is-small" label="テキスト色 (対局者名にも適用)")
             MyColorPicker(v-model="sp_piece_count_font_color")
           b-field(custom-class="is-small" label="背景")
             MyColorPicker(v-model="sp_piece_count_bg_color")
 
         .box
           SeTitle(name="駒箱")
-          b-field(custom-class="is-small" label="セル内の駒の大きさ(%)")
-            b-slider(v-bind="slider_attrs" v-model="sp_piece_box_piece_rate" :min="0" :max="100" :step="0.1")
+          b-field(custom-class="is-small" label="駒の大きさ")
+            b-slider(v-bind="slider_attrs" v-model="sp_piece_box_piece_size" :min="0" :max="1.0" :step="0.01")
           b-field(custom-class="is-small" label="")
             MyColorPicker(v-model="sp_piece_box_color")
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(W)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_w" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_w" :min="1" :max="80" :step="1")
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(H)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_h" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_h" :min="1" :max="80" :step="1")
 
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(W)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_w" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_w" :min="1" :max="80" :step="1")
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(H)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_auto_cell_h" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_h" :min="1" :max="80" :step="1")
 
         //- .box
         //-   SeTitle(name="モバイル
@@ -249,19 +249,15 @@
 
         .box
           SeTitle(name="座標")
-
-          b-field(custom-class="is-small" label="座標表示")
+          b-field(custom-class="is-small" label="表示")
             b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_off") OFF
             b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_on") ON
-
-          b-field(custom-class="is-small" label="座標位置")
-            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_position" :min="-50" :max="50" :step="1")
-
-          b-field(custom-class="is-small" label="テキストサイズ")
-            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_font_size" :min="0" :max="50" :step="0.5")
-
-          b-field(custom-class="is-small" label="テキスト色")
-            MyColorPicker(v-model="sp_digit_label_font_color")
+          b-field(custom-class="is-small" label="位置")
+            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_push" :min="-0.5" :max="0.5" :step="0.01")
+          b-field(custom-class="is-small" label="大きさ")
+            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_size" :min="0" :max="1.0" :step="0.01")
+          b-field(custom-class="is-small" label="色")
+            MyColorPicker(v-model="sp_digit_label_color")
 
         .box
           SeTitle(name="Transform")
@@ -360,8 +356,8 @@
           b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ(%)")
             b-slider(v-bind="slider_attrs" v-model="sp_location_mark_inactive_rate" :min="0" :max="1.5" :step="0.01")
 
-          b-field(custom-class="is-small" label="共通の隙間")
-            b-slider(v-bind="slider_attrs" v-model="sp_common_gap" :min="0" :max="100" :step="0.1")
+          b-field(custom-class="is-small" label="共通の隙間" message="駒セル縦幅に対する割合")
+            b-slider(v-bind="slider_attrs" v-model="sp_common_gap_rate" :min="0" :max="1.0" :step="0.01")
 
           b-field(custom-class="is-small" label="モバイル時に縦配置にする")
             b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
@@ -510,10 +506,10 @@ export default {
       sp_board_horizontal_gap: 0,
       sp_board_vertical_gap: 0,
       sp_board_aspect_ratio: 1.097,
-      sp_board_piece_rate: 90,
+      sp_board_piece_size: 0.9,
       sp_board_piece_position: "center",
       sp_board_radius: 5,
-      sp_board_padding: 1.5,
+      sp_board_padding: 0.015,
 
       sp_board_dimension_w: 9,
       sp_board_dimension_h: 9,
@@ -532,9 +528,9 @@ export default {
       sp_balloon: "is_balloon_on",
 
       //////////////////////////////////////////////////////////////////////////////// 駒台
-      //- sp_auto_cell_w: 1,
-      //- sp_auto_cell_h: 1,
-      sp_stand_piece_rate: 80,
+      //- sp_base_w: 1,
+      //- sp_base_h: 1,
+      sp_stand_piece_size: 0.8,
       sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
       sp_stand_bg_color: "rgba(0, 0, 0, 0.0)",
       sp_stand_layout: DEVELOPMENT_P ? "is_stand_layout_to_top" : "is_stand_layout_to_bottom",
@@ -547,36 +543,34 @@ export default {
       sp_piece_count_bg_color: "rgba(255, 255, 255, 0.9)",
       sp_piece_count_padding_rate: 0.08,
 
-      sp_piece_count_horizontal_x: 43,
-      sp_piece_count_horizontal_y: 30,
-      sp_piece_count_vertical_x:  0,
-      sp_piece_count_vertical_y: 47,
+      sp_piece_count_horizontal_x: 0.43,
+      sp_piece_count_horizontal_y: 0.30,
+      sp_piece_count_vertical_x:   0.00,
+      sp_piece_count_vertical_y:   0.47,
 
       sp_grid_outer_stroke: 0,
       sp_grid_outer_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_color: "rgba(0, 0, 0, 0.5)",
       sp_grid_stroke: 1,
-      sp_grid_star_size: 10,
+      sp_grid_star_size: 0.1,
       sp_grid_star_z_index: 0,
 
       sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
-      //- sp_auto_cell_w: 38,
-      //- sp_auto_cell_h: 46,
-      sp_piece_box_piece_rate: 80,
+      sp_piece_box_piece_size: 0.8,
 
       sp_location_mark_inactive_rate: 0.5,
 
       sp_comment: "is_comment_off",
-      sp_common_gap: 12,
+      sp_common_gap_rate: 0.18,
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_pi_variant: "is_pi_variant_a",    // is_pi_variant_d
       sp_bg_variant: "is_bg_variant_none", // is_bg_variant_a
 
       //////////////////////////////////////////////////////////////////////////////// 座標
       sp_digit_label: DEVELOPMENT_P ? "is_digit_label_on" : "is_digit_label_off",
-      sp_digit_label_font_size:  7.3,
-      sp_digit_label_position: 3,
-      sp_digit_label_font_color: "hsla(0,0%,0%,0.75)",
+      sp_digit_label_size: 0.1,
+      sp_digit_label_push: 0.03,
+      sp_digit_label_color: "hsla(0,0%,0%,0.75)",
 
       ////////////////////////////////////////////////////////////////////////////////
 
@@ -585,8 +579,8 @@ export default {
         white: { name: "後手", time: "", },
       },
       sp_player_name_dir: DEVELOPMENT_P ? "is_player_name_dir_vertical" : "is_player_name_dir_horizontal",
-      sp_player_name_font_size: 14,
-      sp_player_time_font_size: 14,
+      sp_player_name_size: 0.25,
+      sp_player_time_size: 0.25,
       ////////////////////////////////////////////////////////////////////////////////
 
       sp_body: null,
@@ -692,6 +686,7 @@ export default {
     paper_style_handle() {
       this.se_ws_color               = "rgb(255,255,255)"            // 背景
       this.sp_pi_variant             = "is_pi_variant_b"             // 紙面風駒
+      this.sp_board_radius           = 0                             // 角を丸くしない
       this.sp_board_padding          = 0                             // 隙間なし
       this.sp_board_color            = IS_WHITE                      // 盤透過
       this.sp_grid_stroke            = 1                             // グリッド線(細)
@@ -868,39 +863,39 @@ export default {
           --sp_board_padding:            ${this.sp_board_padding};
           --sp_board_radius:             ${this.sp_board_radius};
           --sp_board_aspect_ratio:       ${this.sp_board_aspect_ratio};
-          --sp_board_piece_rate:         ${this.sp_board_piece_rate}%;
+          --sp_board_piece_size:         ${this.sp_board_piece_size};
           --sp_board_piece_position:     ${this.sp_board_piece_position};
-          --sp_board_horizontal_gap:              ${this.sp_board_horizontal_gap}px;
-          --sp_board_vertical_gap:              ${this.sp_board_vertical_gap}px;
+          --sp_board_horizontal_gap:     ${this.sp_board_horizontal_gap};
+          --sp_board_vertical_gap:       ${this.sp_board_vertical_gap};
 
           // 盤グリッド
           --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
           --sp_grid_outer_color:         ${this.hsla_format(this.sp_grid_outer_color)};
           --sp_grid_stroke:              ${this.sp_grid_stroke};
           --sp_grid_outer_stroke:        ${this.sp_grid_outer_stroke};
-          --sp_grid_star_size:           ${this.sp_grid_star_size}%;
+          --sp_grid_star_size:           ${this.sp_grid_star_size};
           --sp_grid_star_z_index:        ${this.sp_grid_star_z_index};
 
           // 駒数
-          --sp_piece_count_font_size_rate:    ${this.sp_piece_count_font_size_rate};
-          --sp_piece_count_font_color:   ${this.hsla_format(this.sp_piece_count_font_color)};
-          --sp_piece_count_bg_color:     ${this.hsla_format(this.sp_piece_count_bg_color)};
-          --sp_piece_count_padding_rate:      ${this.sp_piece_count_padding_rate};
-          --sp_piece_count_horizontal_x:            ${this.sp_piece_count_horizontal_x};
-          --sp_piece_count_horizontal_y:            ${this.sp_piece_count_horizontal_y};
-          --sp_piece_count_vertical_x:           ${this.sp_piece_count_vertical_x};
-          --sp_piece_count_vertical_y:           ${this.sp_piece_count_vertical_y};
+          --sp_piece_count_font_size_rate: ${this.sp_piece_count_font_size_rate};
+          --sp_piece_count_font_color:     ${this.hsla_format(this.sp_piece_count_font_color)};
+          --sp_piece_count_bg_color:       ${this.hsla_format(this.sp_piece_count_bg_color)};
+          --sp_piece_count_padding_rate:   ${this.sp_piece_count_padding_rate};
+          --sp_piece_count_horizontal_x:   ${this.sp_piece_count_horizontal_x};
+          --sp_piece_count_horizontal_y:   ${this.sp_piece_count_horizontal_y};
+          --sp_piece_count_vertical_x:     ${this.sp_piece_count_vertical_x};
+          --sp_piece_count_vertical_y:     ${this.sp_piece_count_vertical_y};
 
           // 駒台
-          --sp_stand_piece_rate:         ${this.sp_stand_piece_rate}%;
+          --sp_stand_piece_size:         ${this.sp_stand_piece_size};
           --sp_stand_hover_border_color: ${this.hsla_format(this.sp_stand_hover_border_color)};
           --sp_stand_bg_color: ${this.hsla_format(this.sp_stand_bg_color)};
 
-          --sp_player_name_font_size: ${this.sp_player_name_font_size}px; // 対局者の名前のフォントサイズ
-          --sp_player_time_font_size: ${this.sp_player_time_font_size}px; // 対局者の時間のフォントサイズ
+          --sp_player_name_size: ${this.sp_player_name_size}; // 対局者の名前のフォントサイズ
+          --sp_player_time_size: ${this.sp_player_time_size}; // 対局者の時間のフォントサイズ
 
           // 駒箱
-          --sp_piece_box_piece_rate:     ${this.sp_piece_box_piece_rate}%;
+          --sp_piece_box_piece_size:     ${this.sp_piece_box_piece_size};
           --sp_piece_box_color:          ${this.hsla_format(this.sp_piece_box_color)};
 
           // ☗☖の大きさ
@@ -915,7 +910,7 @@ export default {
           --sp_lifted_origin_opacity_desktop: ${this.sp_lifted_origin_opacity_desktop};
 
           // 駒台横配置のときの盤の上下の隙間
-          --sp_common_gap:              ${this.sp_common_gap}px;
+          --sp_common_gap_rate:              ${this.sp_common_gap_rate};
 
           // 将棋盤全体の外側の横幅(コンテナ幅)
           --se_frame_width:             ${this.se_frame_width}vmin;
@@ -925,9 +920,9 @@ export default {
           --sp_controller_width_mobile: ${this.sp_controller_width_mobile};
 
           // 座標表記
-          --sp_digit_label_font_size: ${this.sp_digit_label_font_size}px;
-          --sp_digit_label_font_color: ${this.sp_digit_label_font_color};
-          --sp_digit_label_position: ${this.sp_digit_label_position};
+          --sp_digit_label_size: ${this.sp_digit_label_size};
+          --sp_digit_label_color: ${this.sp_digit_label_color};
+          --sp_digit_label_push: ${this.sp_digit_label_push};
 
           //////////////////////////////////////////////////////////////////////////////// スタイルエディタ側
           // --se_* で始まるものはスタイルエディタ側で用意したスタイルなので

@@ -1,26 +1,26 @@
 <template lang="pug">
 .ShogiPlayerWidth
-  PromoteSelectModal( v-if="TheSp.dialog_soldier")
-  OpDisabledBlock()
-  EditToolBlock()
-  TurnShowOrEdit()
+  PromoteSelectModal(v-if="TheSp.dialog_soldier")
+  OpDisabledBlock
+  EditToolBlock
+  TurnShowOrEdit
   .ShogiPlayerTransformBlock
-    ShogiPlayerBody( ref="ShogiPlayerBody")
-  PieceBox()
-  NavigateBlock()
-  SfenShowBlock()
-  CommentBlock()
+    ShogiPlayerBody(ref="ShogiPlayerBody")
+  PieceBox
+  NavigateBlock
+  SfenShowBlock
+  CommentBlock
 </template>
 
 <script>
-import EditToolBlock from "./EditToolBlock.vue"
-import TurnShowOrEdit from "./TurnShowOrEdit.vue"
-import ShogiPlayerBody from "./ShogiPlayerBody.vue"
-import PieceBox from "./PieceBox.vue"
-import NavigateBlock from "./NavigateBlock.vue"
-import SfenShowBlock from "./SfenShowBlock.vue"
-import CommentBlock from "./CommentBlock.vue"
-import OpDisabledBlock from "./OpDisabledBlock.vue"
+import EditToolBlock      from "./EditToolBlock.vue"
+import TurnShowOrEdit     from "./TurnShowOrEdit.vue"
+import ShogiPlayerBody    from "./ShogiPlayerBody.vue"
+import PieceBox           from "./PieceBox.vue"
+import NavigateBlock      from "./NavigateBlock.vue"
+import SfenShowBlock      from "./SfenShowBlock.vue"
+import CommentBlock       from "./CommentBlock.vue"
+import OpDisabledBlock    from "./OpDisabledBlock.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
 
 import { support } from "./support.js"

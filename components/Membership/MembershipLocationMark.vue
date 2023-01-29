@@ -81,13 +81,13 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// サイズ (基本)
 
   .MembershipLocationMark
-    width:  var(--sp_auto_cell_w)
-    height: var(--sp_auto_cell_h)
+    width:  var(--sp_base_w)
+    height: var(--sp_base_h)
   .MembershipLocationMarkTexture
-    width:  var(--sp_stand_piece_rate)
-    height: var(--sp_stand_piece_rate)
+    width:  calc(var(--sp_stand_piece_size) * 100%)
+    height: calc(var(--sp_stand_piece_size) * 100%)
   .is_turn_inactive
     .MembershipLocationMarkTexture
-      width:  calc(var(--sp_stand_piece_rate) * var(--sp_location_mark_inactive_rate))
-      height: calc(var(--sp_stand_piece_rate) * var(--sp_location_mark_inactive_rate))
+      width:  calc(var(--sp_stand_piece_size) * var(--sp_location_mark_inactive_rate) * 100%)
+      height: calc(var(--sp_stand_piece_size) * var(--sp_location_mark_inactive_rate) * 100%)
 </style>

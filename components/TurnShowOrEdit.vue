@@ -72,8 +72,8 @@ export default {
   ////////////////////////////////////////////////////////////////////////////////
   +IS_HORIZONTAL
     .TurnShowOrEdit
-      margin-bottom: var(--sp_common_gap)
+      margin-bottom: var(--sp_common_gap_real_px)
   +IS_VERTICAL
     .TurnShowOrEdit
-      margin-bottom: 0
+      margin-bottom: var(--sp_common_gap_real_px)
 </style>

@@ -29,5 +29,5 @@ export default {
       padding: 0
 
   .is_pi_variant_d
-    --sp_board_piece_rate: 100%
+    --sp_board_piece_size: 1.0
 </style>
