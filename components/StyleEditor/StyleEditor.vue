@@ -229,9 +229,6 @@
 
         //- .box
         //-   SeTitle(name="モバイル
-        //-   b-field(custom-class="is-small" label="持駒等のサイズを縮小する" v-if="false")
-        //-     b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_off") OFF
-        //-     b-radio-button(size="is-small" v-model="sp_mobile_fit" native-value="is_mobile_fit_on") ON
         //-   b-field(custom-class="is-small" label="縦配置にする")
         //-     b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
         //-     b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
@@ -522,7 +519,6 @@ export default {
       sp_board_dimension_h: 9,
       sp_layout: "is_horizontal",
       sp_run_mode: DEVELOPMENT_P ? "edit_mode" : "view_mode",
-      sp_mobile_fit: "is_mobile_fit_on",
       sp_mobile_vertical: "is_mobile_vertical_on",
 
       // 成り不成り選択
@@ -816,7 +812,6 @@ export default {
       params.sp_layer             = this.sp_layer
       params.sp_pi_variant        = this.sp_pi_variant
       params.sp_bg_variant        = this.sp_bg_variant
-      params.sp_mobile_fit        = this.sp_mobile_fit
       params.sp_mobile_vertical   = this.sp_mobile_vertical
       params.sp_run_mode          = this.sp_run_mode
       params.sp_viewpoint         = this.sp_viewpoint

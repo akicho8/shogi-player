@@ -76,7 +76,6 @@ export default {
     sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
     sp_pi_variant:                         { type: String, default: "is_pi_variant_a",       }, // 駒の種類
     sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
-    sp_mobile_fit:                         { type: String, default: "is_mobile_fit_on",      }, // DEPRECATE
     sp_mobile_vertical:                    { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior:                  { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
     sp_debug_mode:                         { type: String, default: "is_debug_mode_off",     }, // デバッグモード

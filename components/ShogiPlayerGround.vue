@@ -28,7 +28,6 @@ export default {
         this.TheSp.sp_digit_label,
         this.TheSp.sp_stand_layout,
         this.TheSp.sp_player_name_dir,
-        this.TheSp.sp_mobile_fit,
         this.TheSp.sp_mobile_vertical,
         this.TheSp.devise_info.key,
         `is_viewpoint_${this.TheSp.new_viewpoint}`, // システムテストで見ている
