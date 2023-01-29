@@ -32,5 +32,4 @@ export default {
 .MainDocResponsiveWithBulmaOne
   +tablet
     --sp_grid_color: hsl(0, 0%, 70%)
-    --sp_piece_count_gap_bottom: 70%
 </style>
