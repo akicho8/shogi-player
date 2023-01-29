@@ -1,6 +1,7 @@
-#!/usr/bin/env ruby
 require "pathname"
 require "table_format"
+
+Dir.chdir(__dir__)
 
 rows = []
 Pathname(".").glob("**/*.{vue,scss,sass}") do |file|
@@ -20,4 +21,7 @@ end
 # rows = rows.sort_by { |e| e["変数"] }
 
 s = rows.to_t(markdown: true)
-Pathname("MainDoc/css_variable.md").write(s)
+file = Pathname("MainDoc/css_variable.md").expand_path
+file.write(s)
+puts file
+

@@ -2,8 +2,8 @@ task :default => [:generate]
 
 desc "generate"
 task :generate do
-  system %(cd components && ruby extract_options.rb)
-  system %(cd components && ruby extract_props.rb)
+  system %(ruby components/extract_options.rb)
+  system %(ruby components/extract_props.rb)
 end
 
 desc "clean"

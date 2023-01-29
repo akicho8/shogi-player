@@ -24,8 +24,8 @@
 | `--sp_piece_box_color`                       | rgba(0, 0, 0, 0.2)        | 駒箱背景                                                              |
 | `--sp_common_gap`                            | 12px                      | 共通の隙間                                                            |
 | `--sp_turn_slider_block_margin_top`          | 0.75rem                   | 手数スライダーの上マージン                                            |
-| `--sp_board_horizontal_gap`                           | 0px                       | 盤の左右の隙間(横配置時)                                              |
-| `--sp_board_vertical_gap`                           | 0px                       | 盤の上下の隙間(縦配置時)                                              |
+| `--sp_board_horizontal_gap`                  | 0px                       | 盤の左右の隙間(横配置時)                                              |
+| `--sp_board_vertical_gap`                    | 0px                       | 盤の上下の隙間(縦配置時)                                              |
 | `--sp_board_color`                           | rgba(0, 0, 0, 0.2)        | 盤の色                                                                |
 | `--sp_board_image`                           | none                      | 盤画像                                                                |
 | `--sp_board_opacity`                         |                       1.0 | 非半透明度                                                            |
@@ -45,10 +45,10 @@
 | `--sp_digit_label_font_size`                 | 7.5px                     | 座標表記の文字サイズ                                                  |
 | `--sp_digit_label_position`                  |                         3 | 座標表記の位置調整(%)                                                 |
 | `--sp_digit_label_font_color`                | hsla(0,0%,0%,0.75)        | 座標表記の文字色                                                      |
-| `--sp_piece_count_horizontal_x`                        |                        43 | 駒数の中央からの相対位置X(%) (横配置時)                               |
-| `--sp_piece_count_horizontal_y`                        |                        30 | 駒数の中央からの相対位置Y(%) (横配置時)                               |
-| `--sp_piece_count_vertical_x`                        |                         0 | 駒数の中央からの相対位置X(%) (縦配置時)                               |
-| `--sp_piece_count_vertical_y`                        |                        47 | 駒数の中央からの相対位置y(%) (縦配置時)                               |
+| `--sp_piece_count_horizontal_x`              |                        43 | 駒数の中央からの相対位置X(%) (横配置時)                               |
+| `--sp_piece_count_horizontal_y`              |                        30 | 駒数の中央からの相対位置Y(%) (横配置時)                               |
+| `--sp_piece_count_vertical_x`                |                         0 | 駒数の中央からの相対位置X(%) (縦配置時)                               |
+| `--sp_piece_count_vertical_y`                |                        47 | 駒数の中央からの相対位置y(%) (縦配置時)                               |
 | `--sp_piece_count_font_size`                 | 0.75rem                   | 駒数の文字サイズ                                                      |
 | `--sp_piece_count_font_color`                | rgba(0, 0, 0, 0.75)       | 駒数の文字色                                                          |
 | `--sp_piece_count_bg_color`                  | rgba(255, 255, 255, 0.75) | 駒数の文字色背景                                                      |
