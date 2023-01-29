@@ -19,7 +19,7 @@ MainDocMainNavbar
       b-navbar-item(tag="nuxt-link" :to="{name: 'responsive'}") レスポンシブ
       b-navbar-item(tag="nuxt-link" :to="{name: 'credit'}") クレジット
   template(slot="end")
-    b-navbar-dropdown(label="実験" hoverable)
+    b-navbar-dropdown(label="実験" hoverable v-if="development_p")
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-sp_device'}") sp_device テスト
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-perf1'}") 高速化
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_bod_parse'}") BOD読み込み
