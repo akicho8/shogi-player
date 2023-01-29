@@ -1,8 +1,0 @@
-#!/bin/sh
-cd $(dirname $0)/..
-npm version patch
-npm publish
-git push --tags
-git push
-
-(cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i)
