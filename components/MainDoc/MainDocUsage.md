@@ -17,7 +17,7 @@
 
   * `node_modules/shogi-player` 以下を babel のビルド対象に含める
     * これをやらないと JavaScript のクラス定数や `??` 演算子が解釈できずビルドできない
-  * file-loader で *.wav をファイル化するときに `esModule: false` オプションをつける
-    * これをやらないと wav ファイルへのパスが文字列にならず、ビルドできない
   * process 定数がグローバルに存在するようにする
     * これをやらないと `process` を参照しているライブラリがビルドできない
+  * wav を使う場合 file-loader で *.wav をファイル化するときに `esModule: false` オプションをつける
+    * これをやらないと wav ファイルへのパスが文字列にならず、ビルドできない

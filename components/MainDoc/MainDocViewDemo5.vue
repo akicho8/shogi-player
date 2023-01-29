@@ -1,7 +1,7 @@
 <template lang="pug">
 .MainDocViewDemo5.column
   b-message(type="is-info")
-    | 最終手から表示。SFEN表示。影なし。最終手の点滅なし
+    | 最終手から表示。SFEN表示
   .has-text-centered
     .title.is-4 {{kifu_book_info.name}}
   ShogiPlayer.is_book_like(
