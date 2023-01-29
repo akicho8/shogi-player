@@ -5,6 +5,7 @@ task :generate do
   system %(ruby components/extract_options.rb)
   system %(ruby components/extract_props.rb)
 end
+task :g => :generate
 
 desc "clean"
 task :clean do
@@ -47,3 +48,4 @@ desc "copy"
 task :copy do
   system %(rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/)
 end
+task :cp => :copy
