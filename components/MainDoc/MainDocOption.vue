@@ -129,7 +129,7 @@
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
-      b-navbar-item(tag="div").has-text-weight-bold 引数とイベントチェック
+      b-navbar-item(tag="div").has-text-weight-bold イベント
     template(slot="end")
       b-navbar-item.has-text-weight-bold(@click="sidebar_toggle")
         | 動作テスト

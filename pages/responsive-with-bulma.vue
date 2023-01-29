@@ -1,14 +1,13 @@
 <template lang="pug">
-MainDocCredit
+MainDocResponsiveWithBulma
 </template>
 
 <script>
 export default {
-  name: "PageCredit",
   computed: {
     meta() {
       return {
-        title: "クレジット",
+        title: "レスポンシブ",
       }
     },
   },

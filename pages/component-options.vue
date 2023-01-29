@@ -1,14 +1,13 @@
 <template lang="pug">
-MainDocCredit
+MainDocComponentOptions
 </template>
 
 <script>
 export default {
-  name: "PageCredit",
   computed: {
     meta() {
       return {
-        title: "クレジット",
+        title: "コンポーネント引数",
       }
     },
   },

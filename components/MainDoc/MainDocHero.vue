@@ -8,15 +8,15 @@ MainDocMainNavbar
     b-navbar-item(tag="a" href="#summary") 概要
     b-navbar-item(tag="a" href="#examples") デモ
     b-navbar-item(tag="a" href="#style") スタイル
-    b-navbar-item(tag="nuxt-link" :to="{name: 'usage'}") 組み込み方法
-    b-navbar-item(tag="nuxt-link" :to="{name: 'editor'}") スタイルエディタ
+    b-navbar-item(tag="nuxt-link" :to="{name: 'how-to-embed'}") 組み込み方法
+    b-navbar-item(tag="nuxt-link" :to="{name: 'style-editor'}") スタイルエディタ
     b-navbar-dropdown(hoverable arrowless)
       b-icon(icon="dots-vertical" slot="label")
-      b-navbar-item(tag="nuxt-link" :to="{name: 'props'}") コンポーネント引数一覧
-      b-navbar-item(tag="nuxt-link" :to="{name: 'css-customize'}") CSS変数一覧
-      b-navbar-item(tag="nuxt-link" :to="{name: 'options'}") 引数とイベントチェック
+      b-navbar-item(tag="nuxt-link" :to="{name: 'component-options'}") コンポーネント引数一覧
+      b-navbar-item(tag="nuxt-link" :to="{name: 'css-variables'}") CSS変数一覧
+      b-navbar-item(tag="nuxt-link" :to="{name: 'event-observe'}") イベント
       b-navbar-item(tag="nuxt-link" :to="{name: 'api'}") API
-      b-navbar-item(tag="nuxt-link" :to="{name: 'responsive'}") レスポンシブ
+      b-navbar-item(tag="nuxt-link" :to="{name: 'responsive-with-bulma'}") レスポンシブ
       b-navbar-item(tag="nuxt-link" :to="{name: 'credit'}") クレジット
   template(slot="end")
     b-navbar-dropdown(label="実験" hoverable v-if="development_p")

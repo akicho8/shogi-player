@@ -1,14 +1,13 @@
 <template lang="pug">
-MainDocCredit
+MainDocHowToEmbed
 </template>
 
 <script>
 export default {
-  name: "PageCredit",
   computed: {
     meta() {
       return {
-        title: "クレジット",
+        title: "使い方",
       }
     },
   },

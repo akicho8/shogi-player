@@ -18,6 +18,6 @@ Pathname(".").glob("**/*.{vue,js}") do |file|
 end
 
 s = rows.to_t(markdown: true)
-file = Pathname("MainDoc/props.md").expand_path
+file = Pathname("MainDoc/component_options.md").expand_path
 file.write(s)
 puts file

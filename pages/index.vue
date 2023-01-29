@@ -1,14 +1,9 @@
 <template lang="pug">
-MainDocApp
+MainDocIndex
 </template>
 
 <script>
 export default {
-  name: "PageIndex",
-  data () {
-    return {
-    }
-  },
   computed: {
     // 内容は nuxt.config.js と同じだけど設定は必要
     // 他のページから遷移してきたとき設定していないと title が undefined になってしまう
@@ -21,7 +16,3 @@ export default {
   },
 }
 </script>
-
-<style lang="sass">
-.PageIndex
-</style>

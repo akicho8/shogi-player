@@ -4,11 +4,6 @@ MainDocApi
 
 <script>
 export default {
-  name: "PageApi",
-  data () {
-    return {
-    }
-  },
   computed: {
     meta() {
       return {
@@ -18,7 +13,3 @@ export default {
   },
 }
 </script>
-
-<style lang="sass">
-.PageApi
-</style>

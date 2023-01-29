@@ -13,7 +13,7 @@ import { DeviseInfo } from "./models/devise_info.js"
 
 export const device_detect = {
   props: {
-    sp_device: { type: String, default: null, }, // デバイス is_device_(touch|desktop) 自動判別するので明示的に設定しなくてよい
+    sp_device: { type: String, default: null, }, // デバイスを強制的に指定する (is_device_touch is_device_desktop) 自動判別するので基本そのままでよい
   },
   data() {
     return {
