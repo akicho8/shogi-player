@@ -31,9 +31,12 @@
       // 横軸表記の位置調整
       td:before
         display: flex
+
+        height: 1rem            // 1文字分の高さにした上で
+        align-items: center     // 中央に合わせると拡縮の基点が中央になる
+
         width: 100%             // height: 100% は入れてはいけない(入れると重なって押せない要素が出てくる)
         justify-content: center // 左右中央に合わせる
-        align-items: flex-end   // いったん一行の下に合わせる
 
         // 下から100%押して上外に飛び出す
         bottom: var(--sp_digit_label_push_real_value)
