@@ -40,8 +40,8 @@
 | `--sp_board_dimension_h`                     |                        9 | 盤のセル数(h) TDの縦幅を決めるのに必要                                |
 | `--sp_controller_width`                      |                      0.5 | コントローラー横幅                                                    |
 | `--sp_controller_width_mobile`               |                      0.8 | コントローラー横幅(モバイル時)                                        |
-| `--sp_digit_label_size`                      |                      0.1 | 座標表記の文字サイズ                                                  |
-| `--sp_digit_label_push`                      |                     0.03 | 座標表記の位置調整(%)                                                 |
+| `--sp_digit_xlabel_size`                      |                      0.1 | 座標表記の文字サイズ                                                  |
+| `--sp_digit_xlabel_push`                      |                     0.03 | 座標表記の位置調整(%)                                                 |
 | `--sp_digit_label_color`                     | hsla(0,0%,0%,0.75)       | 座標表記の文字色                                                      |
 | `--sp_piece_count_horizontal_x`              |                     0.43 | 駒数の中央からの相対位置X(%) (横配置時)                               |
 | `--sp_piece_count_horizontal_y`              |                     0.30 | 駒数の中央からの相対位置Y(%) (横配置時)                               |

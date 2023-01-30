@@ -12,6 +12,7 @@
           sp_layout="is_horizontal"
           sp_pi_variant="is_pi_variant_b"
           sp_digit_label="is_digit_label_on"
+          sp_digit_label_variant="is_digit_label_variant_number"
           sp_stand_layout="is_stand_layout_to_top"
           sp_player_name_dir="is_player_name_dir_vertical"
           sp_balloon="is_balloon_off"
@@ -23,12 +24,13 @@
       pre.is-size-7
         | .ShogiPlayerContainer
         |   ShogiPlayer(
-        |     sp_layout="is_horizontal"                        // 横配置にする
-        |     sp_pi_variant="is_pi_variant_b"                  // 紙面用駒に切り替る
-        |     sp_digit_label="is_digit_label_on"               // 座標を表示する
-        |     sp_stand_layout="is_stand_layout_to_top"         // 駒台を上寄せ配置する
-        |     sp_player_name_dir="is_player_name_dir_vertical" // 名前を縦書きにする
-        |     sp_balloon="is_balloon_off"                      // 名前の下の吹き出しを表示しない
+        |     sp_layout="is_horizontal"                              // 横配置にする
+        |     sp_pi_variant="is_pi_variant_b"                        // 紙面用駒に切り替る
+        |     sp_digit_label="is_digit_label_on"                     // 座標を表示する
+        |     sp_digit_label_variant="is_digit_label_variant_number" // 右側の座標を「数値」表記に変更する
+        |     sp_stand_layout="is_stand_layout_to_top"               // 駒台を上寄せ配置する
+        |     sp_player_name_dir="is_player_name_dir_vertical"       // 名前を縦書きにする
+        |     sp_balloon="is_balloon_off"                            // 名前の下の吹き出しを表示しない
         |     :sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
         |   )
     .column.is-6
@@ -41,8 +43,8 @@
         |   --sp_board_color: white                // 盤の色を白にする
         |   --sp_board_padding: 0                  // グリッド外周と縁の隙間を無くす
         |   --sp_board_radius: 0                   // 角を丸めない
-        |   --sp_grid_stroke: 0.5                  // グリッド内線は細くする(お好みで調整)
-        |   --sp_grid_outer_stroke: 2              // グリッド外枠を内線より太くする(お好みで調整)
+        |   --sp_grid_stroke: 0.5                  // グリッド内線(お好みで調整・かなり印象変わる)
+        |   --sp_grid_outer_stroke: 2              // グリッド外枠(お好みで調整・かなり印象変わる)
         |   --sp_player_name_size: 0.4             // "先手" "後手" の文字サイズ調整
         |   --sp_location_mark_inactive_size: 1.0  // 手番でない方の☗☖の比率を変更しない
         |
@@ -50,12 +52,14 @@
         |   --sp_piece_count_size: 0.4             // 駒数の大きさ調整
         |   --sp_piece_count_horizontal_x: 0.70    // 右に寄せる
         |   --sp_piece_count_horizontal_y: 0.03    // 少し下げる
-        |   --sp_piece_count_bg_color: transparent // 背景を透過させる
+        |   --sp_piece_count_bg_color: transparent // 背景を透明にする
         |
         |   // 座標
         |   --sp_digit_label_color: black          // 座標の色を黒にする
-        |   --sp_digit_label_size: 0.35            // 座標のフォントサイズの調整
-        |   --sp_digit_label_push: 0.14            // 座標を14%盤の外に押し出す
+        |   --sp_digit_xlabel_size: 0.3            // 上X座標の大きさ
+        |   --sp_digit_xlabel_push: 0.073          // 上X座標の位置調整
+        |   --sp_digit_ylabel_size: 0.3            // 右Y座標の大きさ
+        |   --sp_digit_ylabel_push: -0.009         // 右Y座標の位置調
         |   --sp_board_horizontal_gap: 0.5         // 座標があるため盤と駒台との隙間を空ける
 </template>
 
@@ -94,10 +98,12 @@ export default {
     --sp_piece_count_bg_color: transparent // 背景を透過させる
 
     // 座標
-    --sp_digit_label_color: black  // 座標の色を黒にする
-    --sp_digit_label_size: 0.35    // 座標のフォントサイズの調整
-    --sp_digit_label_push: 0.14    // 座標を14%盤の外に押し出す
-    --sp_board_horizontal_gap: 0.5 // 座標があるため盤と駒台との隙間を空ける
+    --sp_digit_label_color: black   // 座標の色を黒にする
+    --sp_digit_xlabel_size: 0.3     // 座標の大きさ(上側)
+    --sp_digit_xlabel_push: 0.073   // 位置を調整する(上側)
+    --sp_digit_ylabel_size: 0.3     // 座標の大きさ(右側)
+    --sp_digit_ylabel_push: -0.009  // 位置を調整する(右側)
+    --sp_board_horizontal_gap: 0.5  // 座標があるため盤と駒台との隙間を空ける
 
   // .ShogiPlayerColumn
   //   max-width: 480px

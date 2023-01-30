@@ -30,6 +30,11 @@
           b-field(custom-class="is-small" label="レイヤー確認")
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
+          b-field(custom-class="is-small" label="プリセット")
+            .control
+              .buttons
+                b-button(@click="paper_style_handle" size="is-small") 紙面風
+                //- b-button(@click="all_reset_handle" size="is-small") 初期化
         .box
           SeTitle(name="背景")
 
@@ -100,7 +105,7 @@
             MyColorPicker(v-model="sp_grid_outer_color")
           b-field(custom-class="is-small" label="グリッドの太さ")
             b-slider(v-bind="slider_attrs" v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
-          b-field(custom-class="is-small" label="グリッド外枠の太さ" message="最も細い線はブラウザ依存 Safari: 1.5px, Chrome: 2.0px")
+          b-field(custom-class="is-small" label="グリッド外枠の太さ")
             b-slider(v-bind="slider_attrs" v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
           b-field(custom-class="is-small" label="星の大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_grid_star_size" :min="0" :max="2.0" :step="0.001")
@@ -251,15 +256,27 @@
           b-field(custom-class="is-small" label="表示")
             b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_off") OFF
             b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_on") ON
-          b-field(custom-class="is-small" label="縦表記")
-            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_v_kanji") 漢字
-            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_v_number") 数字
-            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_v_alphabet") アルファベット
+          b-field(custom-class="is-small" label="右の表記")
+            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_kanji") 漢字
+            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_number") 数字
+            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_alphabet") アルファベット
 
-          b-field(custom-class="is-small" label="位置")
-            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_push" :min="-0.5" :max="0.5" :step="0.01")
-          b-field(custom-class="is-small" label="大きさ")
-            b-slider(v-bind="slider_attrs" v-model="sp_digit_label_size" :min="0" :max="1.0" :step="0.01")
+          .columns.mt-5
+            .column.py-0
+              b-field(custom-class="is-small" label="上の大きさ")
+                b-slider(v-bind="slider_attrs" v-model="sp_digit_xlabel_size" :min="0" :max="1.0" :step="0.001")
+            .column.py-0
+              b-field(custom-class="is-small" label="右の大きさ")
+                b-slider(v-bind="slider_attrs" v-model="sp_digit_ylabel_size" :min="0" :max="1.0" :step="0.001")
+
+          .columns.mt-5
+            .column.py-0
+              b-field(custom-class="is-small" label="上の位置")
+                b-slider(v-bind="slider_attrs" v-model="sp_digit_xlabel_push" :min="-0.5" :max="0.5" :step="0.001")
+            .column.py-0
+              b-field(custom-class="is-small" label="右の位置")
+                b-slider(v-bind="slider_attrs" v-model="sp_digit_ylabel_push" :min="-0.5" :max="0.5" :step="0.001")
+
           b-field(custom-class="is-small" label="色")
             MyColorPicker(v-model="sp_digit_label_color")
 
@@ -366,11 +383,6 @@
           b-field(custom-class="is-small" label="モバイル時に縦配置にする")
             b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
             b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
-
-          b-field(custom-class="is-small" label="プリセット")
-            .control
-              .buttons
-                b-button(@click="paper_style_handle" size="is-small") 紙面風
 
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="black") ☗
@@ -572,9 +584,11 @@ export default {
 
       //////////////////////////////////////////////////////////////////////////////// 座標
       sp_digit_label: DEVELOPMENT_P ? "is_digit_label_on" : "is_digit_label_off",
-      sp_digit_label_variant: DEVELOPMENT_P ? "is_digit_label_variant_v_alphabet" : "is_digit_label_variant_v_kanji",
-      sp_digit_label_size: 0.1,
-      sp_digit_label_push: 0.03,
+      sp_digit_label_variant: DEVELOPMENT_P ? "is_digit_label_variant_alphabet" : "is_digit_label_variant_kanji",
+      sp_digit_xlabel_size: 0.125,
+      sp_digit_ylabel_size: 0.168,
+      sp_digit_xlabel_push: 0.014,
+      sp_digit_ylabel_push: -0.034,
       sp_digit_label_color: "hsla(0,0%,0%,0.75)",
 
       ////////////////////////////////////////////////////////////////////////////////
@@ -701,22 +715,28 @@ export default {
       this.sp_board_image = v
       this.sp_bg_variant = "is_bg_variant_none" // 背景画像プリセットを選択してない状態に戻しておく
     },
+    all_reset_handle() {
+    },
     paper_style_handle() {
-      this.se_ws_color               = "rgb(255,255,255)"            // 背景
-      this.sp_pi_variant             = "is_pi_variant_b"             // 紙面風駒
-      this.sp_board_radius           = 0                             // 角を丸くしない
-      this.sp_board_padding          = 0                             // 隙間なし
-      this.sp_board_color            = IS_WHITE                      // 盤透過
-      this.sp_grid_stroke            = 1                             // グリッド線(細)
-      this.sp_grid_outer_stroke      = 2                             // グリッド枠(太)
-      this.sp_digit_label            = "is_digit_label_on"           // 座標を表示する
-      this.sp_digit_label_variant    = "is_digit_label_variant_v_kanji" // 座標の種類
-      this.sp_stand_layout           = "is_stand_layout_to_top"      // 駒台の位置
-      this.sp_player_name_dir        = "is_player_name_dir_vertical" // 縦横書き
-      this.sp_balloon                = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
+      this.se_ws_color                    = "rgb(255,255,255)"            // 背景
+      this.sp_pi_variant                  = "is_pi_variant_b"             // 紙面風駒
+      this.sp_board_radius                = 0                             // 角を丸くしない
+      this.sp_board_padding               = 0                             // 隙間なし
+      this.sp_board_color                 = IS_WHITE                      // 盤透過
+      this.sp_grid_stroke                 = 1                             // グリッド線(細)
+      this.sp_grid_outer_stroke           = 2                             // グリッド枠(太)
+      this.sp_stand_layout                = "is_stand_layout_to_top"      // 駒台の位置
+      this.sp_player_name_dir             = "is_player_name_dir_vertical" // 縦横書き
+      this.sp_balloon                     = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
       this.sp_location_mark_inactive_size = 1.0                      // 手番でないときの☗☖を小さくしない
-      this.sp_player_info.black.name = "先手"
-      this.sp_player_info.white.name = "後手"
+      this.sp_player_info.black.name      = "先手"
+      this.sp_player_info.white.name      = "後手"
+
+      this.sp_digit_label                 = "is_digit_label_on"            // 座標を表示する
+      this.sp_digit_label_variant         = "is_digit_label_variant_kanji" // 座標の種類
+      this.sp_board_horizontal_gap        = 0.2                            // 座標があるため盤面の左右を空ける
+      this.sp_digit_xlabel_push           = 0.05                          // 座標調整
+      this.sp_digit_ylabel_push           = 0.01                           // 座標調整
     },
     hsla_format(v) {
       return chroma(v).css("hsla")
@@ -940,9 +960,11 @@ export default {
           --sp_controller_width_mobile: ${this.sp_controller_width_mobile};
 
           // 座標表記
-          --sp_digit_label_size: ${this.sp_digit_label_size};
+          --sp_digit_xlabel_size: ${this.sp_digit_xlabel_size};
+          --sp_digit_xlabel_push: ${this.sp_digit_xlabel_push};
+          --sp_digit_ylabel_size: ${this.sp_digit_ylabel_size};
+          --sp_digit_ylabel_push: ${this.sp_digit_ylabel_push};
           --sp_digit_label_color: ${this.sp_digit_label_color};
-          --sp_digit_label_push: ${this.sp_digit_label_push};
 
           //////////////////////////////////////////////////////////////////////////////// スタイルエディタ側
           // --se_* で始まるものはスタイルエディタ側で用意したスタイルなので
