@@ -96,13 +96,13 @@ export default {
         flex-direction: column-reverse // 全体が横並び → 持駒は縦並び(△が下に来るため反転)
       &.is_position_south
         flex-direction: column         // 全体が横並び → 持駒は縦並び(▲が上に来るためそのまま)
-    &.is_stand_layout_to_top               // 左↓ 右↑
+    &.is_stand_gravity_top               // 左↓ 右↑
       .Membership
         &.is_position_north
           align-self: flex-end         // 全体が横並び → 持駒は縦並び → 後手は下寄せ
         &.is_position_south
           align-self: flex-start       // 全体が横並び → 持駒は縦並び → 先手は上寄せ
-    &.is_stand_layout_to_bottom              // 左↑ 右↓
+    &.is_stand_gravity_bottom              // 左↑ 右↓
       .Membership
         &.is_position_north
           align-self: flex-start       // 全体が横並び → 持駒は縦並び → 後手は上寄せ

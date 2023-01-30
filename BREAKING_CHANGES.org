@@ -16,5 +16,6 @@ sp_piece_count_gap_bottom → 削除
 sp_piece_count_gap_right → 削除
 sp_piece_count_font_size -> sp_piece_count_size に変更 (割合を指定する)
 sp_common_gap (割合を指定する)
-他多数
+stand_layout -> stand_gravity
+
 

@@ -129,8 +129,8 @@
         .box
           SeTitle(name="駒台")
           b-field(custom-class="is-small" label="レイアウト")
-            b-radio-button(size="is-small" v-model="sp_stand_layout" native-value="is_stand_layout_to_bottom") 下寄せ
-            b-radio-button(size="is-small" v-model="sp_stand_layout" native-value="is_stand_layout_to_top") 上寄せ
+            b-radio-button(size="is-small" v-model="sp_stand_gravity" native-value="is_stand_gravity_bottom") 下寄せ
+            b-radio-button(size="is-small" v-model="sp_stand_gravity" native-value="is_stand_gravity_top") 上寄せ
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
@@ -549,7 +549,7 @@ export default {
       sp_stand_piece_size: 0.8,
       sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
       sp_stand_bg_color: "rgba(0, 0, 0, 0.0)",
-      sp_stand_layout: DEVELOPMENT_P ? "is_stand_layout_to_top" : "is_stand_layout_to_bottom",
+      sp_stand_gravity: DEVELOPMENT_P ? "is_stand_gravity_top" : "is_stand_gravity_bottom",
 
       sp_turn: -1,
       sp_viewpoint: "black",
@@ -725,7 +725,7 @@ export default {
       this.sp_board_color                 = IS_WHITE                      // 盤透過
       this.sp_grid_stroke                 = 1                             // グリッド線(細)
       this.sp_grid_outer_stroke           = 2                             // グリッド枠(太)
-      this.sp_stand_layout                = "is_stand_layout_to_top"      // 駒台の位置
+      this.sp_stand_gravity                = "is_stand_gravity_top"      // 駒台の位置
       this.sp_player_name_dir             = "is_player_name_dir_vertical" // 縦横書き
       this.sp_balloon                     = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
       this.sp_location_mark_inactive_size = 1.0                      // 手番でないときの☗☖を小さくしない
@@ -857,7 +857,7 @@ export default {
       params.sp_summary           = this.sp_summary
       params.sp_digit_label             = this.sp_digit_label
       params.sp_digit_label_variant = this.sp_digit_label_variant
-      params.sp_stand_layout             = this.sp_stand_layout
+      params.sp_stand_gravity             = this.sp_stand_gravity
       params.sp_player_name_dir             = this.sp_player_name_dir
       params.sp_slider            = this.sp_slider
       params.sp_controller        = this.sp_controller

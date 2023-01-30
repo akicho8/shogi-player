@@ -13,7 +13,7 @@
           sp_pi_variant="is_pi_variant_b"
           sp_digit_label="is_digit_label_on"
           sp_digit_label_variant="is_digit_label_variant_number"
-          sp_stand_layout="is_stand_layout_to_top"
+          sp_stand_gravity="is_stand_gravity_top"
           sp_player_name_dir="is_player_name_dir_vertical"
           sp_balloon="is_balloon_off"
           :sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
@@ -28,7 +28,7 @@
         |     sp_pi_variant="is_pi_variant_b"                        // 紙面用駒に切り替る
         |     sp_digit_label="is_digit_label_on"                     // 座標を表示する
         |     sp_digit_label_variant="is_digit_label_variant_number" // 右側の座標を「数値」表記に変更する
-        |     sp_stand_layout="is_stand_layout_to_top"               // 駒台を上寄せ配置する
+        |     sp_stand_gravity="is_stand_gravity_top"                // 駒台を上寄せ配置する
         |     sp_player_name_dir="is_player_name_dir_vertical"       // 名前を縦書きにする
         |     sp_balloon="is_balloon_off"                            // 名前の下の吹き出しを表示しない
         |     :sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
@@ -61,6 +61,15 @@
         |   --sp_digit_ylabel_size: 0.3            // 右Y座標の大きさ
         |   --sp_digit_ylabel_push: -0.009         // 右Y座標の位置調
         |   --sp_board_horizontal_gap: 0.5         // 座標があるため盤と駒台との隙間を空ける
+  .columns.is-centered
+    .column
+      b-message(:closable="false" title="ポイント")
+        .content
+          ul.mt-0
+            li sp_digit_label_variant の値で右側の座標を「漢字」「数字」「アルファベット」に変更できる
+            li 線の太さに関する sp_grid_stroke と sp_grid_outer_stroke は設定値によってかなり印象が変わるためお好みで調整しよう
+            li .ShogiPlayer は 100% の大きさになるので外側(上の例では.ShogiPlayerContainer)で大きさを調整しよう
+            li さらにカスタマイズしたい場合はスタイルエディタを使おう
 </template>
 
 <script>
