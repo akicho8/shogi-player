@@ -40,6 +40,13 @@ $ yarn add --dev @nuxtjs/style-resources
 $ yarn add shogi-player
 ```
 
+## shogi-player 更新方法
+
+```shell
+$ ncu -u shogi-player
+$ yarn
+```
+
 ## このサンプルの実行方法
 
 ```shell

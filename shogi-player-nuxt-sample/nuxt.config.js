@@ -50,6 +50,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/buefy
     "nuxt-buefy",
+    // https://github.com/rigor789/vue-scrollTo
+    "vue-scrollto/nuxt",
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

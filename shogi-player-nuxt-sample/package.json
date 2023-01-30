@@ -12,7 +12,7 @@
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
     "nuxt-buefy": "^0.4.8",
-    "shogi-player": "^0.0.363"
+    "shogi-player": "^0.0.364"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.2.1"
