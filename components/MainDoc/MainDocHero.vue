@@ -5,9 +5,9 @@ MainDocMainNavbar
       b
         | ShogiPlayer
   template(slot="start")
-    b-navbar-item(tag="a" href="#summary") 概要
-    b-navbar-item(tag="a" href="#examples") デモ
-    b-navbar-item(tag="a" href="#style") スタイル
+    b-navbar-item(tag="a" href="#summary"  v-scroll-to="{element: '#summary'}") 概要
+    b-navbar-item(tag="a" href="#examples" v-scroll-to="{element: '#examples'}") デモ
+    b-navbar-item(tag="a" href="#style"    v-scroll-to="{element: '#style'}") スタイル
     b-navbar-item(tag="nuxt-link" :to="{name: 'how-to-embed'}") 組み込み方法
     b-navbar-item(tag="nuxt-link" :to="{name: 'style-editor'}") スタイルエディタ
     b-navbar-dropdown(hoverable arrowless)

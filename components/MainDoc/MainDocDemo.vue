@@ -1,8 +1,7 @@
 <template lang="pug">
 .MainDocDemo.section
   .container
-    a(name="examples")
-    .title.is-3 デモ
+    #examples.title.is-3 デモ
     hr
 
     .title.is-4.mt-6 1. 再生モード (view_mode)
@@ -43,8 +42,7 @@
     .columns.mt-6
       MainDocEditDesc1
 
-    a(name="style")
-    .title.is-3.mt-6 スタイル
+    #style.title.is-3.mt-6 スタイル
     hr
     MainDocPaperStyle
     MainDocStyleDemo

@@ -1,8 +1,7 @@
 <template lang="pug">
 .MainDocModalSample.section
-  a(name="modal_in_style")
   .container
-    .title.is-3 モーダル内表示の例
+    #modal_in_style.title.is-3 モーダル内表示の例
     hr
     .columns
       .column

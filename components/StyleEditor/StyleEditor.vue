@@ -15,8 +15,7 @@
         .box
           .short_cut_buttons
             template(v-for="e in SeConfig.section_names")
-              a.button.is-small.is-marginless(:href="`${$route.path}#${e}`") {{e}}
-
+              a.button.is-small.is-marginless(v-scroll-to="{container: '.sidebar-content', element: `#${e}`}") {{e}}
         .box
           SeTitle(name="基本")
           b-field(custom-class="is-small" label="コンテナ幅")
@@ -656,6 +655,19 @@ export default {
       this.sp_player_info = {
         black: { name: "先手", time: "12:34", },
         white: { name: "後手", time: "56:78", },
+      }
+    }
+  },
+
+  mounted() {
+    // FIXME: 動かない
+    if (true) {
+      const hash = this.$route.hash
+      if (hash.length > 0) {
+        this.sidebar_p = true
+        this.$nextTick(() => {
+          this.$scrollTo({container: '.sidebar-content', element: hash})
+        })
       }
     }
   },

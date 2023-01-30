@@ -1,9 +1,8 @@
 <template lang="pug">
 .MainDocSummary
   .section
-    a(name="summary")
     .container
-      .title.is-3 概要
+      #summary.title.is-3 概要
       hr
       .content
         p.mt-5
