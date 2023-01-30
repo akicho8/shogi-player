@@ -142,22 +142,21 @@ export default {
     ],
 
     // https://github.com/rigor789/vue-scrollTo
-    "vue-scrollto/nuxt",
-    // [
-    //   "vue-scrollto/nuxt",
-    //   // {
-    //   //   // duration: 500,
-    //   //   // easing: "ease",
-    //   //   // offset: 0,
-    //   //   // force: true,
-    //   //   // cancelable: true,
-    //   //   // onStart: false,
-    //   //   // onDone: false,
-    //   //   // onCancel: false,
-    //   //   // x: false,
-    //   //   // y: true,
-    //   // },
-    // ],
+    [
+      "vue-scrollto/nuxt",
+      {
+        duration: 100,
+        // easing: "ease",
+        // offset: 0,
+        // force: true,
+        // cancelable: true,
+        // onStart: false,
+        // onDone: false,
+        // onCancel: false,
+        // x: false,
+        // y: true,
+      },
+    ],
 
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
