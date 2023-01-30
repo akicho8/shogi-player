@@ -251,6 +251,11 @@
           b-field(custom-class="is-small" label="表示")
             b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_off") OFF
             b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_on") ON
+          b-field(custom-class="is-small" label="縦表記")
+            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_v_kanji") 漢字
+            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_v_number") 数字
+            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_v_alphabet") アルファベット
+
           b-field(custom-class="is-small" label="位置")
             b-slider(v-bind="slider_attrs" v-model="sp_digit_label_push" :min="-0.5" :max="0.5" :step="0.01")
           b-field(custom-class="is-small" label="大きさ")
@@ -567,6 +572,7 @@ export default {
 
       //////////////////////////////////////////////////////////////////////////////// 座標
       sp_digit_label: DEVELOPMENT_P ? "is_digit_label_on" : "is_digit_label_off",
+      sp_digit_label_variant: DEVELOPMENT_P ? "is_digit_label_variant_v_alphabet" : "is_digit_label_variant_v_kanji",
       sp_digit_label_size: 0.1,
       sp_digit_label_push: 0.03,
       sp_digit_label_color: "hsla(0,0%,0%,0.75)",
@@ -704,6 +710,7 @@ export default {
       this.sp_grid_stroke            = 1                             // グリッド線(細)
       this.sp_grid_outer_stroke      = 2                             // グリッド枠(太)
       this.sp_digit_label            = "is_digit_label_on"           // 座標を表示する
+      this.sp_digit_label_variant    = "is_digit_label_variant_v_kanji" // 座標の種類
       this.sp_stand_layout           = "is_stand_layout_to_top"      // 駒台の位置
       this.sp_player_name_dir        = "is_player_name_dir_vertical" // 縦横書き
       this.sp_balloon                = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
@@ -829,6 +836,7 @@ export default {
       params.sp_setting           = "is_setting_off"
       params.sp_summary           = this.sp_summary
       params.sp_digit_label             = this.sp_digit_label
+      params.sp_digit_label_variant = this.sp_digit_label_variant
       params.sp_stand_layout             = this.sp_stand_layout
       params.sp_player_name_dir             = this.sp_player_name_dir
       params.sp_slider            = this.sp_slider

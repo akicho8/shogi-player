@@ -82,6 +82,7 @@ export default {
     sp_sfen_show:                          { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
     sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_digit_label:                        { type: String, default: "is_digit_label_off",    }, // 座標の表示
+    sp_digit_label_variant:                { type: String, default: "is_digit_label_variant_v_kanji",   }, // 座標の表記
     sp_stand_layout:                       { type: String, default: "is_stand_layout_to_bottom",  }, // 駒台の位置
     sp_player_name_dir:                    { type: String, default: "is_player_name_dir_horizontal",  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                               { type: Number, default: -1,                      }, // 局面(手数)

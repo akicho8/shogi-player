@@ -26,6 +26,7 @@ export default {
         this.TheSp.sp_pi_variant,
         this.TheSp.sp_bg_variant,
         this.TheSp.sp_digit_label,
+        this.TheSp.sp_digit_label_variant,
         this.TheSp.sp_stand_layout,
         this.TheSp.sp_player_name_dir,
         this.TheSp.sp_mobile_vertical,

@@ -10,50 +10,13 @@
 // |--------+--------|
 //
 
-=all_digit_insert
-  tr:first-child
-    td:nth-child(1):before
-      content: "9"
-    td:nth-child(2):before
-      content: "8"
-    td:nth-child(3):before
-      content: "7"
-    td:nth-child(4):before
-      content: "6"
-    td:nth-child(5):before
-      content: "5"
-    td:nth-child(6):before
-      content: "4"
-    td:nth-child(7):before
-      content: "3"
-    td:nth-child(8):before
-      content: "2"
-    td:nth-child(9):before
-      content: "1"
-  tr:nth-child(1) td:last-child:after
-    content: "一"
-  tr:nth-child(2) td:last-child:after
-    content: "二"
-  tr:nth-child(3) td:last-child:after
-    content: "三"
-  tr:nth-child(4) td:last-child:after
-    content: "四"
-  tr:nth-child(5) td:last-child:after
-    content: "五"
-  tr:nth-child(6) td:last-child:after
-    content: "六"
-  tr:nth-child(7) td:last-child:after
-    content: "七"
-  tr:nth-child(8) td:last-child:after
-    content: "八"
-  tr:nth-child(9) td:last-child:after
-    content: "九"
+@import "digit_label_variant"
 
 .ShogiPlayerGround
   +defvar(sp_digit_label_size, 0.1)                 // 座標表記の文字サイズ
   +defvar(sp_digit_label_push, 0.03)                // 座標表記の位置調整(%)
   +defvar(sp_digit_label_color, hsla(0,0%,0%,0.75)) // 座標表記の文字色
-    
+
   --sp_digit_label_push_real_value: calc((1.0 + var(--sp_digit_label_push)) * 100%)
 
   &.is_digit_label_on
@@ -63,7 +26,7 @@
         line-height: 100%    // フォントの上の隙間を取る
         font-size: calc(var(--sp_base_h) * var(--sp_digit_label_size))
         color:     var(--sp_digit_label_color)
-        z-index: 0
+        z-index: 0  // -1 だと盤の裏にいってしまう
 
       // 横軸表記の位置調整
       td:before
@@ -78,13 +41,15 @@
       // 縦軸表記の位置調整
       td:after
         display: flex
-        height: 100%                // width: 100% は入れてはいけない(入れると先後のマークが押せなくなる)
 
-        justify-content: flex-start // いったん1列の左端に合わせる
+        height: 100%                // width: 100% は入れてはいけない(入れると先後のマークが押せなくなる)
         align-items: center         // 上下中央に合わせる
 
+        width: 1rem                 // fやiがの文字が左寄りになるのを防ぐため1文字分の幅を確保する(超重要)
+        justify-content: center     // 共通の1rem幅の中で中央配置すれば f や i が中央に寄る
+
         // TDの左上基点を同じにする
-        top: 0
+        top: 0                      // これがないと1セル分に下に移動する
 
         // 左から100%押し出して右外に飛び出す
         left: var(--sp_digit_label_push_real_value)
@@ -96,7 +61,16 @@
       td:before, td:after
         position: absolute
 
-      +all_digit_insert
+  &.is_digit_label_on
+    // 横は1種類
+    +is_digit_label_variant_h_number
+    // 縦は3種類
+    &.is_digit_label_variant_v_kanji
+      +is_digit_label_variant_v_kanji
+    &.is_digit_label_variant_v_alphabet
+      +is_digit_label_variant_v_alphabet
+    &.is_digit_label_variant_v_number
+      +is_digit_label_variant_v_number
 
   &.is_layer_on
     &.is_digit_label_on
