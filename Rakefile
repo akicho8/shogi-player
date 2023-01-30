@@ -54,3 +54,9 @@ task :copy do
   system %(rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/)
 end
 task :cp => :copy
+
+desc "sample-sp-update"
+task "sample-sp-update" do
+  system %(cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && yarn)
+  system %(cd shogi-player-vue-cli-sample && ncu /shogi-player/ -u && npm i)
+end

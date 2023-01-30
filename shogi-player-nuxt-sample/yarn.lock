@@ -2477,6 +2477,11 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+bezier-easing@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/bezier-easing/-/bezier-easing-2.1.0.tgz#c04dfe8b926d6ecaca1813d69ff179b7c2025d86"
+  integrity sha512-gbIqZ/eslnUFC1tjEvtz0sgx+xTK20wDnYMIA27VA04R7w6xxXQPZDbibjA9DTWZRA2CXtwHykkVzlCaAJAZig==
+
 big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
@@ -8040,11 +8045,6 @@ require-main-filename@^2.0.0:
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
   integrity sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==
 
-resize-observer-polyfill@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
-  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
-
 resolve-from@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748"
@@ -8389,10 +8389,10 @@ shell-quote@^1.7.3:
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.3.tgz#aa40edac170445b9a431e17bb62c0b881b9c4123"
   integrity sha512-Vpfqwm4EnqGdlsBFNmHhxhElJYrdfcxPThu+ryKS5J8L/fhAwLazFZtq+S+TWZ9ANj2piSQLGj6NQg+lKPmxrw==
 
-shogi-player@^0.0.363:
-  version "0.0.363"
-  resolved "https://registry.yarnpkg.com/shogi-player/-/shogi-player-0.0.363.tgz#33afb8e7af8aa2027246071142e1becd9abeea41"
-  integrity sha512-VscXmupWayT5b8EBFx7Zc2XNG54k4ki4aKqnVJu8Cb/UU1qE/rGN5yhNBo6VZxTRH7d/7SFXlCC0u8FA7tKx6w==
+shogi-player@^0.0.366:
+  version "0.0.366"
+  resolved "https://registry.yarnpkg.com/shogi-player/-/shogi-player-0.0.366.tgz#f41f0c2daab67eadb94a00b405bc924525f5e5d3"
+  integrity sha512-GDaEnegsH4eEqX5PhpDrIL8ZdGQ1ZoDeHm7X6FgIXLEGTlu/Rg3/nGSuq4gu/8j5A4oEZzhMM6Jt4cH5Lk28QA==
   dependencies:
     "@babel/preset-env" "^7.12.17"
     autolinker latest
@@ -8409,8 +8409,8 @@ shogi-player@^0.0.363:
     pug-loader "^2.4.0"
     pug-plain-loader "^1.1.0"
     raw-loader "^4.0.2"
-    resize-observer-polyfill "^1.5.1"
     sass-loader "^10.1.1"
+    vue-scrollto "^2.20.0"
     xregexp "^4.3.0"
 
 side-channel@^1.0.4:
@@ -9468,6 +9468,13 @@ vue-router@^3.5.1:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.6.5.tgz#95847d52b9a7e3f1361cb605c8e6441f202afad8"
   integrity sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ==
+
+vue-scrollto@^2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/vue-scrollto/-/vue-scrollto-2.20.0.tgz#3ba52239a62710c97003d12d4393f1f3393cd5cc"
+  integrity sha512-7i+AGKJTThZnMEkhIPgrZjyAX+fXV7/rGdg+CV283uZZwCxwiMXaBLTmIc5RTA4uwGnT+E6eJle3mXQfM2OD3A==
+  dependencies:
+    bezier-easing "2.1.0"
 
 vue-server-renderer@^2.6.12:
   version "2.7.10"
