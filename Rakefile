@@ -1,4 +1,9 @@
-task :default => [:generate]
+task :default => :test
+
+desc "test"
+task :test do
+  system %(jest)
+end
 
 desc "generate"
 task :generate do
