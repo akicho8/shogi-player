@@ -20,7 +20,7 @@
 | `--sp_ground_color`                          | transparent              | グラウンド背景色                                                      |
 | `--sp_ground_image`                          | none                     | グラウンド背景画像                                                    |
 | `--sp_piece_box_color`                       | rgba(0, 0, 0, 0.2)       | 駒箱背景                                                              |
-| `--sp_common_gap`                       |                     0.18 | 共通の隙間(駒セルの縦幅に対する割合)                                  |
+| `--sp_common_gap`                            |                     0.18 | 共通の隙間(駒セルの縦幅に対する割合)                                  |
 | `--sp_turn_slider_block_margin_top`          | 0.75rem                  | 手数スライダーの上マージン                                            |
 | `--sp_board_horizontal_gap`                  |                        0 | 盤の左右の隙間(横配置時)                                              |
 | `--sp_board_vertical_gap`                    |                        0 | 盤の上下の隙間(縦配置時)                                              |
@@ -40,17 +40,19 @@
 | `--sp_board_dimension_h`                     |                        9 | 盤のセル数(h) TDの縦幅を決めるのに必要                                |
 | `--sp_controller_width`                      |                      0.5 | コントローラー横幅                                                    |
 | `--sp_controller_width_mobile`               |                      0.8 | コントローラー横幅(モバイル時)                                        |
-| `--sp_digit_xlabel_size`                      |                      0.1 | 座標表記の文字サイズ                                                  |
-| `--sp_digit_xlabel_push`                      |                     0.03 | 座標表記の位置調整(%)                                                 |
+| `--sp_digit_xlabel_size`                     |                    0.125 | 座標表記の文字サイズ(右)                                              |
+| `--sp_digit_ylabel_size`                     |                    0.168 | 座標表記の文字サイズ(上)                                              |
+| `--sp_digit_xlabel_push`                     |                    0.014 | 座標表記の位置調整(右)                                                |
+| `--sp_digit_ylabel_push`                     |                   -0.034 | 座標表記の位置調整(上)                                                |
 | `--sp_digit_label_color`                     | hsla(0,0%,0%,0.75)       | 座標表記の文字色                                                      |
 | `--sp_piece_count_horizontal_x`              |                     0.43 | 駒数の中央からの相対位置X(%) (横配置時)                               |
 | `--sp_piece_count_horizontal_y`              |                     0.30 | 駒数の中央からの相対位置Y(%) (横配置時)                               |
 | `--sp_piece_count_vertical_x`                |                      0.0 | 駒数の中央からの相対位置X(%) (縦配置時)                               |
 | `--sp_piece_count_vertical_y`                |                     0.47 | 駒数の中央からの相対位置y(%) (縦配置時)                               |
-| `--sp_piece_count_size`            |                      0.2 | 駒数の文字サイズ(駒セル縦幅に対する比率)                              |
+| `--sp_piece_count_size`                      |                      0.2 | 駒数の文字サイズ(駒セル縦幅に対する比率)                              |
 | `--sp_piece_count_font_color`                | rgba(0, 0, 0, 0.75)      | 駒数の文字色                                                          |
 | `--sp_piece_count_bg_color`                  | rgba(255, 255, 255, 0.9) | 駒数の文字色背景                                                      |
-| `--sp_piece_count_padding`              |                     0.08 | 駒数のパディング(駒セル縦幅に対する比率)                              |
+| `--sp_piece_count_padding`                   |                     0.08 | 駒数のパディング(駒セル縦幅に対する比率)                              |
 | `--sp_board_aspect_ratio`                    |                    1.097 | 盤の横を1.0としたときの縦の比率                                       |
 | `--sp_location_mark_inactive_size`           |                      0.5 | 手番ではないときの☗サイズの倍率                                      |
 | `--sp_player_name_size`                      |                     0.25 | 対局者の名前の表示サイズ                                              |
