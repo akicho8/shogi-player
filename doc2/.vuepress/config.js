@@ -27,7 +27,7 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    repo: '',
+    repo: 'akicho8/shogi-player',
     editLinks: false,
     docsDir: '',
     editLinkText: '',
@@ -38,13 +38,13 @@ module.exports = {
         link: '/guide/',
       },
       {
-        text: 'Config',
-        link: '/config/'
+        text: 'コンポーネント引数',
+        link: '/config/',
       },
-      {
-        text: 'VuePress',
-        link: 'https://v1.vuepress.vuejs.org'
-      }
+      // {
+      //   text: 'VuePress',
+      //   link: 'https://v1.vuepress.vuejs.org',
+      // },
     ],
     sidebar: {
       '/guide/': [
@@ -58,6 +58,11 @@ module.exports = {
         }
       ],
     }
+  },
+
+  // https://github.com/markdown-it/markdown-it
+  markdown: {
+    breaks: true, // Convert '\n' in paragraphs into <br>
   },
 
   /**

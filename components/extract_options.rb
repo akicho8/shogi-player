@@ -24,4 +24,3 @@ s = rows.to_t(markdown: true)
 file = Pathname("MainDoc/css_variable.md").expand_path
 file.write(s)
 puts file
-

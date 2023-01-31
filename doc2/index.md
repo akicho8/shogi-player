@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: https://raw.github.com/akicho8/shogi-player/master/application.png
-tagline: ブラウザ上で動作する将棋盤
+tagline: ブラウザ上で動作する将棋盤コンポーネント
 actionText: Quick Start →
 actionLink: /guide/
 features:

@@ -21,3 +21,22 @@ s = rows.to_t(markdown: true)
 file = Pathname("MainDoc/component_options.md").expand_path
 file.write(s)
 puts file
+
+s = rows.collect { |e|
+  o = []
+  o << "## " + e["Name"].gsub("`", "")
+  o << ""
+  o << "Type: `string`"
+  o << "Default: `#{e['Default']}`"
+  o << ""
+  o << e["Description"]
+  o << ""
+  o << "| 値 | 意味   |"
+  o << "|----+--------|"
+  o << "|    | する   |"
+  o << "|    | しない |"
+  o.join("\n")
+}.join("\n\n")
+file = Pathname("MainDoc/component_options_for_vueprss.md").expand_path
+file.write(s)
+puts file
