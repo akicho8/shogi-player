@@ -60,3 +60,29 @@ task "sample-sp-update" do
   system %(cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && yarn)
   system %(cd shogi-player-vue-cli-sample && ncu /shogi-player/ -u && npm i)
 end
+
+task :doc2 => "doc2:dev"
+namespace :doc2 do
+  desc "dev"
+  task :dev do
+    system %(vuepress dev -p 3900 --open doc2)
+  end
+
+  desc "build"
+  task :build do
+    system %(vuepress build doc2)
+  end
+end
+
+task :vps => "vuepress-site:dev"
+namespace "vuepress-site" do
+  desc "dev"
+  task :dev do
+    system %(cd test-of-create-vuepress-site/docs && vuepress dev -p 3899 --open src)
+  end
+
+  desc "build"
+  task :build do
+    system %(cd test-of-create-vuepress-site/docs && vuepress build src)
+  end
+end
