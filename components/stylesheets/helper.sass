@@ -88,9 +88,11 @@ $promote_select_modal_z:    30 // b-navbar より上にする
 // defvar はもともと dart-sass で「--xxx: 1 // コメント」の値が「1 // コメント」になる災いために作った
 // node-sass の場合は「--xxx: 1 // コメント」としても「// コメント」を除去してくれるので必要ない
 // けどあとあと変更が楽なのと1行で書けるのは便利なので使う
+// sp_css_root は Web Components 用で初期値を Web Components 内に変更するためにある
+$sp_css_root: html !default
 =defvar($key, $val)
   @at-root
-    html
+    #{$sp_css_root}
       --#{$key}: #{$val}
 
 // pug:
