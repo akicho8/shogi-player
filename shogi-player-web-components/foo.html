@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+    <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://unpkg.com/buefy"></script>
+  </head>
+  <body>
+    <div id="app">
+      <b-button @click="count += 1">{{count}}</b-button>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          count: 0,
+        },
+        mounted() {
+          this.$buefy.modal.open({
+            parent: this,
+            props: {},
+            hasModalCard: true,
+            animation: "",
+            fullScreen: false,
+            component: {
+              template: `
+<div class="modal-card">
+  <div class="modal-card-head">
+    <div class="modal-card-title">TITLE</div>
+  </div>
+  <div class="modal-card-body">
+    <div class="level">
+      <div class="level-item">
+        <canvas id="my_chart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>`,
+              mounted() {
+                var ctx = document.getElementById("my_chart")
+                var myChart = new Chart(ctx, {
+                  type: "doughnut",
+                  data: {
+                    labels: ["a", "b", "c"],
+                    datasets: [ { data: [1, 1, 1] } ],
+                  },
+                })
+              },
+            },
+          })
+        },
+        methods() {
+        },
+        computed() {
+        },
+      })
+    </script>
+  </body>
+</html>
