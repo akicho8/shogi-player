@@ -1,4 +1,4 @@
-# shogi-player-vue-cli-sample
+# Web Components
 
 <p><a href="https://akicho8.github.io/shogi-player/"><img src="https://github.com/akicho8/shogi-player/raw/master/shogi-player-vue-cli-sample/application.png" height="640" /></a></p>
 

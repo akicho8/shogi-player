@@ -26,4 +26,14 @@ module.exports = {
       }),
     ],
   },
+
+  // https://cli.vuejs.org/config/#css-loaderoptions
+  // https://github.com/webpack-contrib/sass-loader#additionaldata
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `@import "@/sp_sass_variables.sass"`
+      }
+    }
+  },
 }

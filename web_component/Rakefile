@@ -1,0 +1,16 @@
+task :default => :s
+
+desc "[s] server"
+task :server do
+  system %(vue-cli-service serve --port 3995 --open)
+end
+task :s => "server"
+
+desc "[b] build"
+task :build do
+  # system %(npm cache clean --force)
+  # system %(rm -fr dist)
+  system %(vue-cli-service build --report --dest dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcInside.vue)
+  system %(open examples/demo.html)
+end
+task :b => "build"

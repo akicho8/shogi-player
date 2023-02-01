@@ -1,5 +1,5 @@
 {
-  "name": "shogi-player-vue-cli-sample",
+  "name": "web_component",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "process": "^0.11.10",
-    "shogi-player": "^0.0.366",
+    "shogi-player": "..",
     "vue": "^2.6.14"
   },
   "devDependencies": {
