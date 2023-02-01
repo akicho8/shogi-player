@@ -1,6 +1,9 @@
 <template lang="pug">
 .ShogiPlayerWcInside
   hr
+  i.mdi.mdi-dots-vertical.mdi-18px
+  hr
+  hr
   | {{JSON.stringify($attrs)}}
   hr
   | {{JSON.stringify($props)}}
@@ -46,11 +49,8 @@ export default {
 </script>
 
 <style lang="sass">
-// @import "https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css"
-
-// コントローラー等で使っている記号のためのフォント読み込み
-// なぜかここで呼んでも反映されない
-// @import url("https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css")
+// Shadow DOM 内で読み込まないと届かない
+@import url("https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css")
 
 // ShogiPlayer のスタイルを読み込む
 //
