@@ -1,11 +1,12 @@
 task :default => :s
 
+task :s => "server"
 desc "[s] server"
 task :server do
   system %(vue-cli-service serve --port 3995 --open)
 end
-task :s => "server"
 
+task :b => "build"
 desc "[b] build"
 task :build do
   require "pathname"
@@ -13,13 +14,6 @@ task :build do
   package = JSON.parse(Pathname("../package.json").read)
   version = package["version"]
 
-  # system %(npm cache clean --force)
-  # system %(rm -fr dist)
-
-  # --inline-vue
-  # ない場合は <script src="https://unpkg.com/vue@2"></script> が必要になる
-
   system %(vue-cli-service build --report --dest top/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
-  system %(open examples/demo.html)
+  system %(open top/index.html)
 end
-task :b => "build"

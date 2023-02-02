@@ -93,5 +93,5 @@ sw.*
 # Node.js error report
 /report.*.json
 
-# doc2
-/doc2/.vuepress/dist
+# vp_doc
+/vp_doc/.vuepress/dist

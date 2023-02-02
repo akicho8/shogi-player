@@ -22,7 +22,7 @@ module.exports = {
 
     // for shogi-player-wc
     ['link', { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" }],
-    ['script', { src: 'dist/shogi-player-wc.js' }],
+    ['script', { src: 'dist/shogi-player-wc.min.js' }],
   ],
 
   /**

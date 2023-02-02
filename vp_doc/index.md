@@ -16,5 +16,16 @@ footer: MIT Licensed
 
 <shogi-player-wc sp_controller="is_controller_on" />
 
+あいうえお
+
+<style>
+shogi-player-wc::part(title) {
+  color: green;
+}
+
+</style>
+
+
+
 <hr>
 <OtherComponent/>

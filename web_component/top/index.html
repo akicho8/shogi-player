@@ -4,7 +4,7 @@
   <title>shogi-player-wc demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
-  <script src="dist/shogi-player-wc.js"></script>
+  <script src="dist/shogi-player-wc.min.js"></script>
   <style type="text/css">
     .shogi-player-wc-container {
       display: flex;
@@ -15,6 +15,18 @@
       width: 50vmin;
       border: 1px dashed blue;
     }
+    /* shogi-player-wc { */
+    /*   --sp_controller_width: 0.9; */
+    /* } */
+    /* .foo { */
+    /*   --sp_controller_width: 0.9; */
+    /* } */
+    shogi-player-wc::part(sp_css_variables) {
+      --sp_controller_width: 1.0;
+    }
+
+        /*   --sp_controller_width: 0.9; */
+
   </style>
 
   <script>
@@ -25,6 +37,7 @@
   </script>
 </head>
 <body>
+  <pre>Web Components 版 (dist/shogi-player-wc.min.js)</pre>
   <div class="shogi-player-wc-container">
     <shogi-player-wc
       class="foo"

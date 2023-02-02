@@ -1,22 +1,15 @@
 <template lang="pug">
-.ShogiPlayerWcRoot
-  //- ShogiPlayer.ShogiPlayerWcRoot(v-bind="$props" v-on="$listeners")
-  //-   //- hr
-  //-   //- i.mdi.mdi-dots-vertical.mdi-18px
-  //-   //- hr
-  //-   //- hr
-  //-   //- | {{JSON.stringify($attrs)}}
-  //-   //- hr
-  //-   //- | {{JSON.stringify($props)}}
-  //-   //- hr
-  //-   //- | msg={{msg}}
-  //-   //- hr
-  //-   //- ShogiPlayer(v-bind="$props" v-on="$listeners")
-  ShogiPlayer(
-    v-bind="$props"
-    v-on="$listeners"
-    @update:sp_turn="e => $emit('update:sp_turn', e)"
-  )
+.ShogiPlayerWcRoot(part="__root__")
+  // CSS変数の初期値はここに定義する
+  // __root__ は実験のため
+  .ShogiPlayerCssVariablesOverride(part="sp_css_variables")
+    // 上書きする場合のCSS変数は shogi-player-wc::part(sp_css_variables) {} でここに定義してもらう
+    // ShogiPlayerWcRoot でも上書きできたが優先度が曖昧なため階層化している
+    ShogiPlayer(
+      v-bind="$props"
+      v-on="$listeners"
+      @update:sp_turn="e => $emit('update:sp_turn', e)"
+    )
 </template>
 
 <script>
