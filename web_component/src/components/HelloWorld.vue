@@ -1,7 +1,7 @@
 <template lang="pug">
 .HelloWorld.is-flex.is-justify-content-center
   .ShogiPlayerContainer
-    ShogiPlayerWcInside(
+    ShogiPlayerWcRoot(
       sp_layout="is_horizontal"
       sp_controller="is_controller_on"
       sp_slider="is_slider_on"
@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import ShogiPlayerWcInside from "./ShogiPlayerWcInside.vue"
+import ShogiPlayerWcRoot from "./ShogiPlayerWcRoot.vue"
 
 export default {
   name: "HelloWorld",
   components: {
-    ShogiPlayerWcInside,
+    ShogiPlayerWcRoot,
   },
   props: {
     msg: String,

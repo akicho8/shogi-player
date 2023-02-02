@@ -4,21 +4,37 @@
   <title>shogi-player-wc demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
-  <script src="https://unpkg.com/vue@2"></script>
   <script src="../dist/shogi-player-wc.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style type="text/css">
-    shogi-player-wc {
+    .shogi-player-wc-container {
+      display: flex;
+      justify-content: center;
       width: 100%;
-      max-width: 50vmin;
+    }
+    .shogi-player-wc-container shogi-player-wc {
+      width: 50vmin;
+      border: 1px dashed blue;
     }
   </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const spwc = document.querySelector("shogi-player-wc");
+      spwc.addEventListener("update:sp_turn", e => console.log(e.detail[0]))
+    })
+  </script>
 </head>
-<body class="flex justify-center">
-  <shogi-player-wc
-    sp_layout="is_horizontal"
-    sp_controller="is_controller_on"
-    sp_slider="is_slider_on"
-  />
+<body>
+  <div class="shogi-player-wc-container">
+    <shogi-player-wc
+      class="foo"
+      :foo1.prop1="123"
+      .foo2="def"
+      sp_layout="is_horizontal"
+      sp_controller="is_controller_on"
+      sp_slider="is_slider_on"
+      sp_body="position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f"
+      />
+  </div>
 </body>
 </html>
