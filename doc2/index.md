@@ -13,3 +13,8 @@ features:
   details: コンポーネントオプションで調整が可能。見た目に関してはあらかじめ用意してあるCSS変数で対応する
 footer: MIT Licensed
 ---
+
+<shogi-player-wc sp_controller="is_controller_on" />
+
+<hr>
+<OtherComponent/>

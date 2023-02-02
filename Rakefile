@@ -86,3 +86,21 @@ namespace "vuepress-site" do
     system %(cd test-of-create-vuepress-site/docs && vuepress build src)
   end
 end
+
+task "w"    => "wc:build"
+task "wc:s" => "wc:server"
+task "wc:b" => "wc:build"
+task "wc"   => "wc:build"
+namespace "wc" do
+  desc "server"
+  task :server do
+    system %(cd web_component && vue-cli-service serve --port 3995 --open)
+  end
+
+  desc "build"
+  task :build do
+    system %(cd web_component && vue-cli-service build --report --dest ../doc2/.vuepress/public/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
+  end
+end
+
+task :netlify => ["wc:build", "doc2:build"]
