@@ -12,5 +12,5 @@
 #   NODE_ENV = "production"
 
 [build]
-  publish = "top/"
-  command = "rake wc"
+  publish = "doc2/.vuepress/dist/"
+  command = "rake netlify"
