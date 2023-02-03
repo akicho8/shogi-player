@@ -95,3 +95,4 @@ sw.*
 
 # vp_doc
 /vp_doc/.vuepress/dist
+.byebug_history

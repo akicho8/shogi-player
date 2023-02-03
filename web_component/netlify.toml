@@ -11,6 +11,6 @@
 # [context.production.environment]
 #   NODE_ENV = "production"
 
-[[build]]
+[build]
   publish = "top/"
   command = "rake build"
