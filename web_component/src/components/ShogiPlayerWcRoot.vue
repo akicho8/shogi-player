@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import _ from "lodash"
 import JSON5 from "json5"
 
 // Buefy
@@ -37,6 +36,10 @@ export default {
   components: { ShogiPlayer },
   inheritAttrs: false,
   props: {
+    // ここで style を受けていると v-bind="$props" でそのまま渡すことができる
+    // が、ちょっとわかりづらい
+    style: { type: String, },
+
     sp_css_variables: { type: String, },
 
     sp_layout:     { type: String, },
@@ -101,6 +104,6 @@ export default {
 // shogi-player-wc
 //   width: 100%
 
-.ShogiPlayerWcRoot
-  width: 100%
+// .ShogiPlayerWcRoot
+//   width: 100%
 </style>
