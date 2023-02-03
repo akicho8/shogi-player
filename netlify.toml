@@ -14,3 +14,7 @@
 [build]
   publish = "vp_doc/.vuepress/dist/"
   command = "rake netlify"
+
+[build]
+  publish = "vp_component/top/"
+  command = "cd web_component && rake build"
