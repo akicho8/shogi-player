@@ -11,6 +11,6 @@
 # [context.production.environment]
 #   NODE_ENV = "production"
 
-[build]
-  publish = "vp_doc/.vuepress/dist/"
-  command = "rake netlify"
+[[build]]
+  publish = "top/"
+  command = "rake build"
