@@ -103,5 +103,5 @@ namespace "wc" do
   end
 end
 
-desc "netlify (wc:build + vp_doc:build)"
-task :netlify => ["wc:build", "vp_doc:build"]
+desc "netlify (wc:build + doc:build)"
+task :netlify => ["wc:build", "doc:build"]
