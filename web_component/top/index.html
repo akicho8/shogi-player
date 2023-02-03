@@ -9,7 +9,7 @@
     .shogi-player-wc-container {
       display: flex;
       justify-content: center;
-      width: 100%;
+      align-items: center;
     }
     .shogi-player-wc-container shogi-player-wc {
       width: 50vmin;
@@ -23,6 +23,7 @@
     /* } */
     shogi-player-wc::part(sp_css_variables) {
       --sp_controller_width: 0.1;
+      --sp_board_color: hsla(180, 30%, 30%, 0.5);
     }
 
     /*   --sp_controller_width: 0.9; */

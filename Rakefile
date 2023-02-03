@@ -99,7 +99,7 @@ namespace "wc" do
 
   desc "build"
   task :build do
-    system %(cd web_component && vue-cli-service build --report --dest ../vp_doc/.vuepress/public/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
+    system %(cd web_component && vue-cli-service build --dest ../vp_doc/.vuepress/public/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
   end
 end
 

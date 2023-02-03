@@ -45,6 +45,10 @@ module.exports = {
         text: 'コンポーネント引数',
         link: '/config/',
       },
+      {
+        text: 'Web Components',
+        link: '/web-components/',
+      },
       // {
       //   text: 'VuePress',
       //   link: 'https://v1.vuepress.vuejs.org',
