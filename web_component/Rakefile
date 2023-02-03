@@ -13,7 +13,8 @@ task :build do
   require "json"
   package = JSON.parse(Pathname("../package.json").read)
   version = package["version"]
+  p version
 
-  system %(vue-cli-service build --report --dest top/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
+  system %(vue-cli-service build --dest top/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
   system %(open top/index.html)
 end

@@ -22,10 +22,10 @@
     /*   --sp_controller_width: 0.9; */
     /* } */
     shogi-player-wc::part(sp_css_variables) {
-      --sp_controller_width: 1.0;
+      --sp_controller_width: 0.1;
     }
 
-        /*   --sp_controller_width: 0.9; */
+    /*   --sp_controller_width: 0.9; */
 
   </style>
 
@@ -41,6 +41,7 @@
   <div class="shogi-player-wc-container">
     <shogi-player-wc
       class="foo"
+      sp_css_variables="{'--sp_controller_width':1.0}"
       :foo1.prop1="123"
       .foo2="def"
       sp_layout="is_horizontal"
