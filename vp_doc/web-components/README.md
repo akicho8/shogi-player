@@ -4,12 +4,9 @@ sidebar: auto
 
 # Web Components
 
-<shogi-player-wc />
+## 動作サンプル
 
-## Example
-
-<shogi-player-wc sp_controller="is_controller_on" />
-
+<!-- <shogi-player-wc sp_controller="is_controller_on" /> -->
 
 ```html
 <!DOCTYPE html>
@@ -63,3 +60,20 @@ sidebar: auto
 ```html
 <shogi-player-wc sp_turn="5" />
 ```
+
+## スタイルを外部CSSで変更するには？ ##
+
+<!-- <shogi-player-wc sp_controller="is_controller_on" /> -->
+
+```css
+shogi-player-wc::part(sp_css_variables) {
+  --sp_board_color: hsl(38, 30%, 30%);
+}
+```
+
+<SpContainer class="b441958504b7c7af3ef62a47fafe8d21 is-small" />
+<style lang="stylus">
+.SpContainer.b441958504b7c7af3ef62a47fafe8d21
+  shogi-player-wc::part(sp_css_variables)
+    --sp_board_color: hsl(180, 80%, 30%)
+</style>

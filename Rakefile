@@ -61,16 +61,16 @@ task "sample-sp-update" do
   system %(cd shogi-player-vue-cli-sample && ncu /shogi-player/ -u && npm i)
 end
 
-task :vp_doc => "vp_doc:dev"
-namespace :vp_doc do
-  desc "dev"
-  task :dev do
-    system %(vuepress dev -p 3900 --open vp_doc)
+task "doc" => "doc:server"
+namespace :doc do
+  desc "[doc] server"
+  task :server do
+    system %(cd vp_doc && vuepress dev -p 3900 --open)
   end
 
   desc "build"
   task :build do
-    system %(vuepress build vp_doc)
+    system %(cd vp_doc && vuepress build)
   end
 end
 
@@ -92,15 +92,16 @@ task "wc:s" => "wc:server"
 task "wc:b" => "wc:build"
 task "wc"   => "wc:build"
 namespace "wc" do
-  desc "server"
+  desc "[wc:s] server"
   task :server do
     system %(cd web_component && vue-cli-service serve --port 3995 --open)
   end
 
-  desc "build"
+  desc "[wc:b][wc][w] build"
   task :build do
     system %(cd web_component && vue-cli-service build --dest ../vp_doc/.vuepress/public/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
   end
 end
 
+desc "netlify (wc:build + vp_doc:build)"
 task :netlify => ["wc:build", "vp_doc:build"]

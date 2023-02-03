@@ -1,0 +1,23 @@
+{
+  "name": "doc3",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "authors": {
+    "name": "Akira Ikeda",
+    "email": "pinpon.ikeda@gmail.com"
+  },
+  "repository": "/doc3",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  },
+  "dependencies": {
+    "process": "^0.11.10",
+    "shogi-player": "^0.0.366"
+  }
+}

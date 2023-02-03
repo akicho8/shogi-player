@@ -4,7 +4,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'shogi-player',
+  title: 'Vuepress Docs Boilerplate',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
@@ -18,13 +18,7 @@ module.exports = {
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
-
-    // ['link', { rel: 'stylesheet', href: 'https://unpkg.com/tailwindcss@2.0.4/dist/tailwind.min.css' }],
-
-    // for shogi-player-wc
-    ['link', { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" }],
-    ['script', { src: '/dist/shogi-player-wc.min.js' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
   ],
 
   /**
@@ -33,7 +27,7 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    repo: 'akicho8/shogi-player',
+    repo: '',
     editLinks: false,
     docsDir: '',
     editLinkText: '',
@@ -44,17 +38,13 @@ module.exports = {
         link: '/guide/',
       },
       {
-        text: 'コンポーネント引数',
-        link: '/config/',
+        text: 'Config',
+        link: '/config/'
       },
       {
-        text: 'Web Components',
-        link: '/web-components/',
-      },
-      // {
-      //   text: 'VuePress',
-      //   link: 'https://v1.vuepress.vuejs.org',
-      // },
+        text: 'VuePress',
+        link: 'https://v1.vuepress.vuejs.org'
+      }
     ],
     sidebar: {
       '/guide/': [
@@ -70,34 +60,11 @@ module.exports = {
     }
   },
 
-  // https://github.com/markdown-it/markdown-it
-  markdown: {
-    breaks: true, // Convert '\n' in paragraphs into <br>
-  },
-
   /**
    * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
    */
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
-    // require('tailwindcss'),
-    // require('autoprefixer'),
-  ],
-
-  // postcss: {
-  //   plugins: [
-  //     require("autoprefixer"),
-  //     require("tailwindcss")("./tailwind.config.js")
-  //   ]
-  // }
-
-  // postcss: {
-  //   plugins: [
-  //     // require('tailwindcss')('./tailwind.config.js'),
-  //     // require('autoprefixer'),
-  //     require('tailwindcss'),
-  //     require('autoprefixer'),
-  //   ]
-  // }
+  ]
 }
