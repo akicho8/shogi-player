@@ -1,15 +1,5 @@
-# Doc: https://docs.netlify.com/configure-builds/file-based-configuration/
-# ビルド設定
-# [build]
-#   # 公開ディレクトリ
-#   publish = "dist"
-#   # デプロイ前実行コマンド
-#   command = "yarn build"
-#
-# [build]
-#   publish = "top/"
-# [context.production.environment]
-#   NODE_ENV = "production"
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+# https://app.netlify.com/sites/shogi-player-wc/overview
 
 [build]
   publish = "top/"
