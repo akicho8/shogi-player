@@ -21,28 +21,28 @@ sidebar: auto
 </body>
 </html>
 ```
-<a href="/examples/1.html" target="_blank">上のサンプルをHTML単体で開く</a>
+
+<!-- ../.vuepress/public/examples/simple.html -->
+<a href="/examples/simple.html" target="_blank">上のサンプルをHTML単体で開く</a>
 
 ::: tip
 * UTF-8 を明示する: 棋譜を正しく読むために必要になる
 * スマホを考慮する: 将棋盤をタップしたときの反応遅延や意図しない画面ズームを防ぐために適切な viewport の指定をする
 :::
 
-<!-- <shogi-player-wc/> -->
-
 ## 棋譜再生 ##
+
+盤面タップで局面を進める例
 
 ```html
 <shogi-player-wc
-  sp_run_mode="view_mode"
   sp_overlay_nav="is_overlay_nav_on"
   sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
 />
 ```
 
-<ShogiPlayer2
+<ShogiPlayerWcWrapper
   class="is-small"
-  sp_run_mode="view_mode"
   sp_overlay_nav="is_overlay_nav_on"
   sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
 />
@@ -53,10 +53,44 @@ sidebar: auto
 * sp_body: KIF・BOD・SFEN 形式のコンテンツを指定する
 :::
 
-## スタイル変更 ##
+## コントローラーを表示する ##
+
+1. `sp_controller="is_controller_on"` を指定する
+1. Material Design Icons の CSS を読み込む
+
+```html{5}
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+  <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+</head>
+<body>
+  <shogi-player-wc
+    sp_controller="is_controller_on"
+    sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
+  />
+</body>
+</html>
+```
+
+<!-- ../.vuepress/public/examples/mdi.html -->
+<a href="/examples/mdi.html" target="_blank">上のサンプルを単体で開く</a>
+
+<ShogiPlayerWcWrapper
+  sp_controller="is_controller_on"
+  sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
+/>
+
+::: warning 謎
+Material Design Icons の CSS は Web Components 内ですでに読み込んでいる。にもかかわらず外でも読み込まないとコントローラーの矢印アイコンが正しく表示されない。なぜかはわからない。
+:::
+
+## スタイル変更 (王道) ##
 
 CSS変数は普通に定義しても Shadow DOM 内には届かない
-用意してある `sp_css_variables` に対して適用する
+用意した `sp_css_variables` に対して適用する
 
 ```css
 shogi-player-wc::part(sp_css_variables) {
@@ -64,36 +98,65 @@ shogi-player-wc::part(sp_css_variables) {
 }
 ```
 
-<ShogiPlayer2 class="b441958504b7c7af3ef62a47fafe8d21 is-small" />
+<ShogiPlayerWcWrapper class="b441958504b7c7af3ef62a47fafe8d21 is-small" />
 <style lang="stylus">
-.ShogiPlayer2.b441958504b7c7af3ef62a47fafe8d21
+.ShogiPlayerWcWrapper.b441958504b7c7af3ef62a47fafe8d21
   shogi-player-wc::part(sp_css_variables)
     --sp_board_color: lightskyblue
 </style>
 
+## スタイル変更 (実験的) ##
+
+Web Components の引数の sp_css_variables にハッシュで書いても変更できる (ようにした)
+これはタグの style を直接書くのに似ていて王道な方法より適用優先度が高い
+綺麗ごとを言うなら機能とスタイルは分けるべきだが、そんなことにはかまわず一箇所で一括で設定したい場合もあるかもしれないので入れてある
+
+```html
+<shogi-player-wc sp_css_variables="{'--sp_board_color': 'lightskyblue'}" />
+```
+
+<ShogiPlayerWcWrapper sp_css_variables="{'--sp_board_color': 'lightskyblue'}" class="is-small" />
 
 ## イベント受信 ##
 
-<ShogiPlayer2
-  class="d5f36983505e66de8dc8ece28a7da9cf is-small"
-  sp_slider="is_slider_on"
-  sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
+指し手の情報を表示する例
+
+```js
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const el = document.querySelector("shogi-player-wc");
+      el.addEventListener("update:play_mode_advanced_full_moves_sfen", e => {
+        alert(e.detail[0].last_move_info.to_kif)
+      })
+    })
+  </script>
+</head>
+<body>
+  <shogi-player-wc sp_run_mode="play_mode" />
+</body>
+</html>
+```
+
+<!-- ../.vuepress/public/examples/event.html -->
+<a href="/examples/event.html" target="_blank">上のサンプルを単体で開く</a>
+
+<ShogiPlayerWcWrapperEventTest />
+
+Vue.js が使える環境であれば直接ひっかける
+
+```html
+<shogi-player-wc
+  sp_run_mode="play_mode"
+  @update:play_mode_advanced_full_moves_sfen="e => {}"
 />
+```
 
-<style lang="stylus">
-.ShogiPlayer2.d5f36983505e66de8dc8ece28a7da9cf
-  shogi-player-wc::part(sp_css_variables)
-    --sp_board_color: red
-</style>
-
-::: demo
-<div @click="onClick">Click me!</div>
-
-<script>
-export default {
-  methods: {
-    onClick: () => { window.alert(1) },
-  },
-}
-</script>
+::: warning データ欠損？
+ `detail[0]` に含む情報が一部欠けている
+インスタンスを Plain Object 化しないまま Vue.js のコンテキストから出たのが原因と思われる
 :::
