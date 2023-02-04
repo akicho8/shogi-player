@@ -4,52 +4,26 @@ sidebar: auto
 
 # Web Components
 
-## 動作サンプル
+## 使い方
 
-<!-- <shogi-player-wc sp_controller="is_controller_on" /> -->
+1. <https://shogi-player.netlify.app/dist/shogi-player-wc.min.js> を読み込む
+1. `<shogi-player-wc/>` で表示する
 
 ```html
 <!DOCTYPE html>
 <head>
-  <meta charset="utf-8">
-  <title>shogi-player-wc demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
+  <meta charset="UTF-8">
   <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
-  <style type="text/css">
-    .shogi-player-wc-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .shogi-player-wc-container shogi-player-wc {
-      width: 50vmin;
-      border: 1px dashed blue;
-    }
-    shogi-player-wc::part(sp_css_variables) {
-      --sp_board_color: hsla(180, 30%, 30%, 0.5);
-    }
-  </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const spwc = document.querySelector("shogi-player-wc");
-      spwc.addEventListener("update:sp_turn", e => console.log(e.detail[0]))
-    })
-  </script>
 </head>
 <body>
-  <div class="shogi-player-wc-container">
-    <shogi-player-wc
-      sp_css_variables="{'--sp_controller_width':1.0}"
-      sp_layout="is_horizontal"
-      sp_controller="is_controller_on"
-      sp_slider="is_slider_on"
-      sp_body="position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f"
-      />
-  </div>
+  <shogi-player-wc/>
 </body>
 </html>
 ```
+
+<a href="/examples/1.html" target="_blank">単体HTMLで開く</a>
+
+<shogi-player-wc/>
 
 ## 引数に v-bind は使えないがなんとかなる ##
 
@@ -63,11 +37,11 @@ sidebar: auto
 
 ## スタイルを外部CSSで変更するには？ ##
 
-<!-- <shogi-player-wc sp_controller="is_controller_on" /> -->
+Web Components 内の `sp_css_variables` に対してCSS変数をオーバーライドする
 
 ```css
 shogi-player-wc::part(sp_css_variables) {
-  --sp_board_color: hsl(38, 30%, 30%);
+  --sp_board_color: lightskyblue;
 }
 ```
 
@@ -75,5 +49,5 @@ shogi-player-wc::part(sp_css_variables) {
 <style lang="stylus">
 .SpContainer.b441958504b7c7af3ef62a47fafe8d21
   shogi-player-wc::part(sp_css_variables)
-    --sp_board_color: hsl(180, 80%, 30%)
+    --sp_board_color: lightskyblue
 </style>
