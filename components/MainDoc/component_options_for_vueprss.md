@@ -169,7 +169,7 @@ Default: `9`
 ## sp_layout
 
 Type: `string`
-Default: `"is_vertical"`
+Default: `"is_layout_vertical"`
 
 レイアウト is_(vertical\|horizontal)
 

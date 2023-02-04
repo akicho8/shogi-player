@@ -21,8 +21,8 @@
           b-field(custom-class="is-small" label="コンテナ幅")
             b-slider(v-bind="slider_attrs" v-model="se_frame_width" :min="1" :max="100")
           b-field(custom-class="is-small" label="レイアウト")
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_horizontal") 左右
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_vertical") 上下
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_layout_horizontal") 左右
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_layout_vertical") 上下
           b-field(custom-class="is-small" label="モード")
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") 再生
             b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") 操作
@@ -529,7 +529,7 @@ export default {
 
       sp_board_dimension_w: 9,
       sp_board_dimension_h: 9,
-      sp_layout: "is_horizontal",
+      sp_layout: "is_layout_horizontal",
       sp_run_mode: DEVELOPMENT_P ? "edit_mode" : "view_mode",
       sp_mobile_vertical: "is_mobile_vertical_on",
 

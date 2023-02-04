@@ -156,7 +156,7 @@ export default {
   //       min-height: calc(var(--sp_base_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
   //       justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
   //       min-width:  var(--sp_base_w)           // 横を最低限確保
-  // &.is_vertical
+  // &.is_layout_vertical
   //   .MembershipStand2
   //     &.piece_lifted_hover_reaction
   //       width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化

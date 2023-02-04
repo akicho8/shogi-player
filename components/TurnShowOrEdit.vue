@@ -62,7 +62,7 @@ export default {
     .TurnShowOrEdit
       +is_layer_border
 
-  // &.is_vertical
+  // &.is_layout_vertical
   //   .TurnShowOrEdit
   //     margin: 0.2rem 0
   // +IS_HORIZONTAL

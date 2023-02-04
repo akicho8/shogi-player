@@ -11,14 +11,14 @@ $flip_trigger_cell_z:       2
 $piece_count_z:             1
 $promote_select_modal_z:    30 // b-navbar より上にする
 
-// is_vertical の定義は +mobile のときにも適用する
+// is_layout_vertical の定義は +mobile のときにも適用する
 //
 // 冗長な書き方
 //
 //   +IS_VERTICAL
 //     .NavigateBlock
 //       margin: 0
-//   &.is_vertical
+//   &.is_layout_vertical
 //     +is_vertical_style
 //   +mobile
 //     &.is_mobile_fit_on
@@ -41,10 +41,10 @@ $promote_select_modal_z:    30 // b-navbar より上にする
 // 注意点
 // ・必ず .ShogiPlayerGround の直下で +IS_HORIZONTAL とのペアで定義すること
 =IS_HORIZONTAL
-  &.is_horizontal
+  &.is_layout_horizontal
     @content
 =IS_VERTICAL
-  &.is_vertical
+  &.is_layout_vertical
     @content
   &.is_mobile_vertical_on
     +mobile

@@ -9,7 +9,7 @@
           :sp_body="kifu_book_info.sp_body"
           :sp_turn="-1"
           sp_layer="is_layer_off"
-          sp_layout="is_horizontal"
+          sp_layout="is_layout_horizontal"
           sp_pi_variant="is_pi_variant_b"
           sp_digit_label="is_digit_label_on"
           sp_digit_label_variant="is_digit_label_variant_number"
@@ -24,7 +24,7 @@
       pre.is-size-7
         | .ShogiPlayerContainer
         |   ShogiPlayer(
-        |     sp_layout="is_horizontal"                              // 横配置にする
+        |     sp_layout="is_layout_horizontal"                              // 横配置にする
         |     sp_pi_variant="is_pi_variant_b"                        // 紙面用駒に切り替る
         |     sp_digit_label="is_digit_label_on"                     // 座標を表示する
         |     sp_digit_label_variant="is_digit_label_variant_number" // 右側の座標を「数値」表記に変更する
