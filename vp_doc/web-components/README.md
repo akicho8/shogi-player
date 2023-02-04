@@ -58,7 +58,7 @@ sidebar: auto
 1. `sp_controller="is_controller_on"` を指定する
 1. Material Design Icons の CSS を読み込む
 
-```html{5}
+```html{5,10}
 <!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
