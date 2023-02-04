@@ -71,7 +71,7 @@ export default {
   props: {
     sp_board_dimension_w:                  { type: Number, default: 9,                       }, // 盤のセル数(W)
     sp_board_dimension_h:                  { type: Number, default: 9,                       }, // 盤のセル数(H)
-    sp_layout:                             { type: String, default: "is_vertical",           }, // レイアウト is_(vertical|horizontal)
+    sp_layout:                             { type: String, default: "is_horizontal",         }, // レイアウト is_(vertical|horizontal)
     sp_balloon:                            { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
     sp_pi_variant:                         { type: String, default: "is_pi_variant_a",       }, // 駒の種類
