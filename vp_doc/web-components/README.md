@@ -22,6 +22,7 @@ sidebar: auto
 ```
 
 <a href="/examples/1.html" target="_blank">単体HTMLで開く</a>
+<a href="/examples/2.html" target="_blank">単体HTMLで開く2</a>
 
 <shogi-player-wc/>
 
