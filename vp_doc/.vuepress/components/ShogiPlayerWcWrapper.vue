@@ -1,5 +1,5 @@
 <template>
-<div :class="['ShogiPlayer2', STAGE_ENV]">
+<div :class="['ShogiPlayerWcWrapper', STAGE_ENV]">
   <!-- @update:sp_turn="foo"  -->
   <shogi-player-wc v-bind="params" v-on="$listeners" />
 </div>
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "ShogiPlayer2",
+  name: "ShogiPlayerWcWrapper",
   inheritAttrs: false,
   methods: {
     foo(v) {
@@ -17,9 +17,14 @@ export default {
 
   computed: {
     STAGE_ENV() { return `STAGE-${process.env.NODE_ENV}` },
+    params_default() {
+      return {
+        // sp_layout: "is_horizontal",
+      }
+    },
     params() {
       return {
-        sp_layout: "is_horizontal",
+        ...this.params_default,
         ...this.$attrs,
       }
     },
@@ -34,7 +39,7 @@ export default {
 shogi-player-wc::part(sp_css_variables)
   --sp_board_radius: 0
 
-.ShogiPlayer2
+.ShogiPlayerWcWrapper
   &.is-small
     --width: 40%
   --width: 50%

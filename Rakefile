@@ -99,10 +99,13 @@ namespace "wc" do
 
   desc "[wc:b][wc][w] build"
   task :build do
-    system %(which vue-cli-service)
+    tp "ここはローカルで実行する"
     system %(cd web_component && vue-cli-service build --dest ../vp_doc/.vuepress/public/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
   end
 end
 
 desc "netlify (wc:build + doc:build)"
-task :netlify => ["wc:build", "doc:build"]
+task :netlify => [
+  # "wc:build",
+  "doc:build",
+]
