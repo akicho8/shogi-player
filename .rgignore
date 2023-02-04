@@ -1,1 +1,3 @@
 /docs/_nuxt
+**/dist/*.js
+**/dist/*.js.map

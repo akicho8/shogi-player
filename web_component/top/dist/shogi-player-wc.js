@@ -31808,15 +31808,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 55208:
+/***/ 94590:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_2f71adbe_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42358);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_2f71adbe_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_2f71adbe_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_440466b1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41899);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_440466b1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_440466b1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_2f71adbe_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = function(key) { return _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_2f71adbe_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__[key]; }.bind(0, __WEBPACK_IMPORT_KEY__)
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_440466b1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = function(key) { return _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_440466b1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__[key]; }.bind(0, __WEBPACK_IMPORT_KEY__)
 /* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 
 
@@ -32412,7 +32412,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".ShogiPlayerWcRoot{--sp_turn_slider_bl
 
 /***/ }),
 
-/***/ 21862:
+/***/ 29024:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34940,20 +34940,20 @@ module.exports.__inject__ = function (shadowRoot) {
 
 /***/ }),
 
-/***/ 42358:
+/***/ 41899:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(21862);
+var content = __webpack_require__(29024);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.id, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to Shadow Root
 var add = (__webpack_require__(42339)/* ["default"] */ .Z)
 module.exports.__inject__ = function (shadowRoot) {
-  add("0ac4db44", content, shadowRoot)
+  add("649676c5", content, shadowRoot)
 };
 
 /***/ }),
@@ -44613,7 +44613,7 @@ function wrap (Vue, Component) {
 
 // EXTERNAL MODULE: ./node_modules/css-loader/dist/runtime/api.js
 var api = __webpack_require__(23645);
-;// CONCATENATED MODULE: ../node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6cf82def-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/pug-plain-loader/index.js!../node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/ShogiPlayerWcRoot.vue?vue&type=template&id=2f71adbe&lang=pug&shadow
+;// CONCATENATED MODULE: ../node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"6cf82def-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/pug-plain-loader/index.js!../node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/ShogiPlayerWcRoot.vue?vue&type=template&id=440466b1&lang=pug&shadow
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -84942,25 +84942,225 @@ Vue.use(esm);
   props: {
     // ここで style を受けていると v-bind="$props" でそのまま渡すことができる
     // が、ちょっとわかりづらい
+    // 裏技的に入れておく
     style: {
       type: String
     },
+    ////////////////////////////////////////////////////////////////////////////////
     sp_css_variables: {
       type: String
     },
-    sp_layout: {
+    ////////////////////////////////////////////////////////////////////////////////
+    // sp_layout:     { type: String, },
+    // sp_slider:     { type: String, },
+    // sp_controller: { type: String, },
+    // sp_body:       { type: String, },
+
+    sp_turn_slider_focus: {
       type: String
     },
+    // mountedしたらスライダーにフォーカスする？
+    sp_summary: {
+      type: String
+    },
+    // 手数や結果の表示(再生モード時) (is_summary_on is_summary_off)
     sp_slider: {
       type: String
     },
+    // スライダー表示
+    sp_setting: {
+      type: String
+    },
+    // 設定ボタンの表示
     sp_controller: {
       type: String
     },
+    // コントローラー表示
+    sp_viewpoint: {
+      type: String
+    },
+    // 視点
+    sp_op_disabled: {
+      type: Boolean
+    },
+    // 全体の操作を無効化
+    sp_hidden_if_piece_stand_blank: {
+      type: Boolean
+    },
+    // 駒がないときは駒台側を非表示
+    sp_flip_if_white: {
+      type: Boolean
+    },
+    // 最初に表示した局面が△なら反転
+    sp_key_event_capture_enabled: {
+      type: Boolean
+    },
+    // スライダーにフォーカスしていなくても左右キーで手数を動かす
+    sp_shift_key_mag: {
+      type: Number
+    },
+    // キーで左右するとき shift を押したときの倍率
+    sp_system_key_mag: {
+      type: Number
+    },
+    // キーで左右するとき command などを押したときの倍率
+    sp_board_dimension_w: {
+      type: Number
+    },
+    // 盤のセル数(W)
+    sp_board_dimension_h: {
+      type: Number
+    },
+    // 盤のセル数(H)
+    sp_layout: {
+      type: String
+    },
+    // レイアウト is_(vertical\|horizontal)
+    sp_balloon: {
+      type: String
+    },
+    // 対局者名の下に駒数スタイルと同じ背景色を置く
+    sp_layer: {
+      type: String
+    },
+    // レイヤー確認(デバッグ用)
+    sp_pi_variant: {
+      type: String
+    },
+    // 駒の種類
+    sp_bg_variant: {
+      type: String
+    },
+    // 盤の種類
+    sp_mobile_vertical: {
+      type: String
+    },
+    // モバイル時に自動的に縦配置に切り替える
+    sp_location_behavior: {
+      type: String
+    },
+    // ☗☖をタップしたとき視点を切り替える
+    sp_debug_mode: {
+      type: String
+    },
+    // デバッグモード
+    sp_sfen_show: {
+      type: String
+    },
+    // SFENを下に表示する
+    sp_overlay_nav: {
+      type: String
+    },
+    // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
+    sp_digit_label: {
+      type: String
+    },
+    // 座標の表示
+    sp_digit_label_variant: {
+      type: String
+    },
+    // 座標の表記
+    sp_stand_gravity: {
+      type: String
+    },
+    // 駒台の位置
+    sp_player_name_dir: {
+      type: String
+    },
+    // 名前の縦横書き切り替え(縦は横配置時のみ有効)
+    sp_turn: {
+      type: Number
+    },
+    // 局面(手数)
+    sp_run_mode: {
+      type: String
+    },
+    // モード
     sp_body: {
       type: String
-    }
+    },
+    // 棋譜 KIF or SFEN
+    sp_player_info: {
+      type: Object
+    },
+    // 対局者名と時間
+    sp_comment: {
+      type: String
+    },
+    // KIFのコメントを表示する
+    sp_player_click_handle: {
+      type: Function
+    },
+    // 名前(時間を含む)をタップしたときに実行する
+    sp_location_click_handle: {
+      type: Function
+    },
+    // ☗☖をタップしたときに実行する
+    sp_board_click_handle: {
+      type: Function
+    },
+    // 盤をタップしたときに実行する(駒よりも優先)
+    sp_board_piece_back_user_style: {
+      type: Function
+    },
+    // セルのスタイルを決める処理
+    sp_board_piece_back_user_class: {
+      type: Function
+    },
+    // セルのクラスを決める処理
+    sp_board_cell_left_click_user_handle: {
+      type: Function
+    },
+    // セルタップ時の処理(クリック後に呼ぶ)
+    sp_board_cell_pointerdown_user_handle: {
+      type: Function
+    },
+    // セルタップ時の処理(クリックした瞬間に呼ぶ)
+    sp_human_side: {
+      type: String
+    },
+    // 含まれる側だけ操作できるようにする
+    sp_device: {
+      type: String
+    },
+    // デバイスを強制的に指定する (is_device_touch is_device_desktop) 自動判別するので基本そのままでよい
+    sp_play_mode_foul_check_p: {
+      type: Boolean
+    },
+    // play_mode で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
+    sp_play_mode_foul_break_p: {
+      type: Boolean
+    },
+    // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
+    sp_play_mode_legal_move_only: {
+      type: Boolean
+    },
+    // play_mode で合法手のみに絞る
+    sp_play_mode_auto_promote: {
+      type: Boolean
+    },
+    // play_mode で死に駒になるときは自動的に成る
+    sp_play_mode_only_own_piece_to_move: {
+      type: Boolean
+    },
+    // play_mode では自分手番とき自分の駒しか動かせないようにする
+    sp_play_mode_can_not_kill_same_team_soldier: {
+      type: Boolean
+    },
+    // play_mode では自分の駒で同じ仲間の駒を取れないようにする
+    sp_edit_mode_double_click_time_ms: {
+      type: Number
+    },
+    // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
+    sp_move_cancel: {
+      type: String
+    },
+    // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
+    sp_view_mode_soldier_movable: {
+      type: Boolean
+    } // view_mode でも駒を動かせる(ただし本筋は破壊しない)
   },
+
   mounted() {
     // console.log(JSON5.parse(""))
 
@@ -84999,7 +85199,7 @@ Vue.use(esm);
 
 function ShogiPlayerWcRootshadow_injectStyles (context) {
   
-  var style0 = __webpack_require__(55208)
+  var style0 = __webpack_require__(94590)
 if (style0.__inject__) style0.__inject__(context)
 
 }

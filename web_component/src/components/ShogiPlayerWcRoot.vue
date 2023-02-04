@@ -8,10 +8,38 @@
     .ShogiPlayerCssVariablesOverride2(:style="sp_css_variables_hash")
       // ここに定義すると shogi-player-wc::part(sp_css_variables) {} に勝つ
       // 例: sp_css_variables="{'--sp_controller_width':0.8}"
+      //- @update:sp_turn="e => $emit('update:sp_turn', e)"
       ShogiPlayer(
         v-bind="$props"
         v-on="$listeners"
-        @update:sp_turn="e => $emit('update:sp_turn', e)"
+        @update:short_sfen="                         e => $emit('update:short_sfen', e)"
+        @update:play_mode_advanced_full_moves_sfen=" e => $emit('update:play_mode_advanced_full_moves_sfen', e)"
+        @update:play_mode_advanced_short_sfen="      e => $emit('update:play_mode_advanced_short_sfen', e)"
+        @update:play_mode_advanced_moves="           e => $emit('update:play_mode_advanced_moves', e)"
+        @update:moves_take_turn_offset="             e => $emit('update:moves_take_turn_offset', e)"
+        @update:edit_mode_short_sfen="               e => $emit('update:edit_mode_short_sfen', e)"
+        @update:sp_turn="                            e => $emit('update:sp_turn', e)"
+        @user_piece_put="                            e => $emit('user_piece_put', e)"
+        @user_viewpoint_flip="                       e => $emit('user_viewpoint_flip', e)"
+        @user_turn_change="                          e => $emit('user_turn_change', e)"
+        @user_piece_lift="                           e => $emit('user_piece_lift', e)"
+        @user_piece_cancel="                         e => $emit('user_piece_cancel', e)"
+        @update:turn_offset="                        e => $emit('update:turn_offset', e)"
+        @update:turn_offset_max="                    e => $emit('update:turn_offset_max', e)"
+        @update:sp_run_mode="                        e => $emit('update:sp_run_mode', e)"
+        @update:sp_body="                            e => $emit('update:sp_body', e)"
+        @update:sp_debug_mode="                      e => $emit('update:sp_debug_mode', e)"
+        @update:sp_viewpoint="                       e => $emit('update:sp_viewpoint', e)"
+        @update:sp_layout="                          e => $emit('update:sp_layout', e)"
+        @update:sp_bg_variant="                      e => $emit('update:sp_bg_variant', e)"
+        @update:sp_pi_variant="                      e => $emit('update:sp_pi_variant', e)"
+        @sp_board_cell_left_click_user_handle="      e => $emit('sp_board_cell_left_click_user_handle', e)"
+        @sp_board_cell_pointerdown_user_handle="     e => $emit('sp_board_cell_pointerdown_user_handle', e)"
+        @sp_player_click_handle="                    e => $emit('sp_player_click_handle', e)"
+        @sp_location_click_handle="                  e => $emit('sp_location_click_handle', e)"
+        @operation_invalid1="                        e => $emit('operation_invalid1', e)"
+        @operation_invalid2="                        e => $emit('operation_invalid2', e)"
+        @foul_accident="                             e => $emit('foul_accident', e)"
       )
 </template>
 
@@ -38,14 +66,69 @@ export default {
   props: {
     // ここで style を受けていると v-bind="$props" でそのまま渡すことができる
     // が、ちょっとわかりづらい
+    // 裏技的に入れておく
     style: { type: String, },
 
+    ////////////////////////////////////////////////////////////////////////////////
     sp_css_variables: { type: String, },
 
-    sp_layout:     { type: String, },
-    sp_slider:     { type: String, },
-    sp_controller: { type: String, },
-    sp_body:       { type: String, },
+    ////////////////////////////////////////////////////////////////////////////////
+    // sp_layout:     { type: String, },
+    // sp_slider:     { type: String, },
+    // sp_controller: { type: String, },
+    // sp_body:       { type: String, },
+
+    sp_turn_slider_focus:                        { type: String,   }, // mountedしたらスライダーにフォーカスする？
+    sp_summary:                                  { type: String,   }, // 手数や結果の表示(再生モード時) (is_summary_on is_summary_off)
+    sp_slider:                                   { type: String,   }, // スライダー表示
+    sp_setting:                                  { type: String,   }, // 設定ボタンの表示
+    sp_controller:                               { type: String,   }, // コントローラー表示
+    sp_viewpoint:                                { type: String,   }, // 視点
+    sp_op_disabled:                              { type: Boolean,  }, // 全体の操作を無効化
+    sp_hidden_if_piece_stand_blank:              { type: Boolean,  }, // 駒がないときは駒台側を非表示
+    sp_flip_if_white:                            { type: Boolean,  }, // 最初に表示した局面が△なら反転
+    sp_key_event_capture_enabled:                { type: Boolean,  }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
+    sp_shift_key_mag:                            { type: Number,   }, // キーで左右するとき shift を押したときの倍率
+    sp_system_key_mag:                           { type: Number,   }, // キーで左右するとき command などを押したときの倍率
+    sp_board_dimension_w:                        { type: Number,   }, // 盤のセル数(W)
+    sp_board_dimension_h:                        { type: Number,   }, // 盤のセル数(H)
+    sp_layout:                                   { type: String,   }, // レイアウト is_(vertical\|horizontal)
+    sp_balloon:                                  { type: String,   }, // 対局者名の下に駒数スタイルと同じ背景色を置く
+    sp_layer:                                    { type: String,   }, // レイヤー確認(デバッグ用)
+    sp_pi_variant:                               { type: String,   }, // 駒の種類
+    sp_bg_variant:                               { type: String,   }, // 盤の種類
+    sp_mobile_vertical:                          { type: String,   }, // モバイル時に自動的に縦配置に切り替える
+    sp_location_behavior:                        { type: String,   }, // ☗☖をタップしたとき視点を切り替える
+    sp_debug_mode:                               { type: String,   }, // デバッグモード
+    sp_sfen_show:                                { type: String,   }, // SFENを下に表示する
+    sp_overlay_nav:                              { type: String,   }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
+    sp_digit_label:                              { type: String,   }, // 座標の表示
+    sp_digit_label_variant:                      { type: String,   }, // 座標の表記
+    sp_stand_gravity:                            { type: String,   }, // 駒台の位置
+    sp_player_name_dir:                          { type: String,   }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
+    sp_turn:                                     { type: Number,   }, // 局面(手数)
+    sp_run_mode:                                 { type: String,   }, // モード
+    sp_body:                                     { type: String,   }, // 棋譜 KIF or SFEN
+    sp_player_info:                              { type: Object,   }, // 対局者名と時間
+    sp_comment:                                  { type: String,   }, // KIFのコメントを表示する
+    sp_player_click_handle:                      { type: Function, }, // 名前(時間を含む)をタップしたときに実行する
+    sp_location_click_handle:                    { type: Function, }, // ☗☖をタップしたときに実行する
+    sp_board_click_handle:                       { type: Function, }, // 盤をタップしたときに実行する(駒よりも優先)
+    sp_board_piece_back_user_style:              { type: Function, }, // セルのスタイルを決める処理
+    sp_board_piece_back_user_class:              { type: Function, }, // セルのクラスを決める処理
+    sp_board_cell_left_click_user_handle:        { type: Function, }, // セルタップ時の処理(クリック後に呼ぶ)
+    sp_board_cell_pointerdown_user_handle:       { type: Function, }, // セルタップ時の処理(クリックした瞬間に呼ぶ)
+    sp_human_side:                               { type: String,   }, // 含まれる側だけ操作できるようにする
+    sp_device:                                   { type: String,   }, // デバイスを強制的に指定する (is_device_touch is_device_desktop) 自動判別するので基本そのままでよい
+    sp_play_mode_foul_check_p:                   { type: Boolean,  }, // play_mode で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
+    sp_play_mode_foul_break_p:                   { type: Boolean,  }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
+    sp_play_mode_legal_move_only:                { type: Boolean,  }, // play_mode で合法手のみに絞る
+    sp_play_mode_auto_promote:                   { type: Boolean,  }, // play_mode で死に駒になるときは自動的に成る
+    sp_play_mode_only_own_piece_to_move:         { type: Boolean,  }, // play_mode では自分手番とき自分の駒しか動かせないようにする
+    sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean,  }, // play_mode では自分の駒で同じ仲間の駒を取れないようにする
+    sp_edit_mode_double_click_time_ms:           { type: Number,   }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
+    sp_move_cancel:                              { type: String,   }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
+    sp_view_mode_soldier_movable:                { type: Boolean,  }, // view_mode でも駒を動かせる(ただし本筋は破壊しない)
   },
   mounted() {
     // console.log(JSON5.parse(""))
@@ -58,7 +141,7 @@ export default {
   methods: {
     foo(v) {
       console.log(v)
-      this.$emit("update:sp_turn", v)
+      // this.$emit('"update:sp_turn", v)
 
       // this.$el.dispatchEvent(
       //   new CustomEvent("foo", {})

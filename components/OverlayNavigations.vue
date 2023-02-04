@@ -34,10 +34,14 @@ export default {
         right: 0                // 右端から50%
       &.flip_trigger_cell       // 天王山あたり(パディングを考慮していないため正確に合っているわけではない)
         z-index: $flip_trigger_cell_z
-        left: calc(50% - ((100% / var(--sp_invisible_dimension)) / 2))
-        width: calc((100% / var(--sp_invisible_dimension)))
-        top:  calc(50% - ((100% / var(--sp_invisible_dimension)) / 2))
-        height: calc((100% / var(--sp_invisible_dimension)))
+
+        // (100% / 9) は間違い。テーブルのパディングがあるため正しいセルのサイズは出ない
+        // 中心の左上半分から [sp_base_w, sp_base_h] のサイズとするのが正しい
+
+        left: calc(50% - var(--sp_base_w) / 2)    // 中央からセルの横半分左に移動する
+        width: var(--sp_base_w)
+        top: calc(50% - var(--sp_base_h) / 2)     // 中央からセルの縦半分上に移動する
+        hidth: var(--sp_base_h)
 
       //////////////////////////////////////////////////////////////////////////////// cursor
       cursor: pointer

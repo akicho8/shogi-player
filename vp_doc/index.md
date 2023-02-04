@@ -14,7 +14,7 @@ features:
 footer: MIT Licensed
 ---
 
-<SpContainer
+<ShogiPlayer2
   sp_layout="is_horizontal"
   sp_controller="is_controller_on"
   sp_slider="is_slider_on"

@@ -21,629 +21,555 @@ sidebar: auto
 
 ## 共通
 
-### `sp_controller`
+## `sp_turn_slider_focus`
 
-- Type: `string`
-- Default: `is_controller_off`
+Type: `String`
+Default: `"is_turn_slider_focus_on"`
 
-盤の下にコントローラーを表示するか？
-
-| 値                | 意味   |
-|-------------------|--------|
-| is_controller_off | しない |
-| is_controller_on  | する   |
-
-### `sp_viewpoint`
-
-- Type: `string`
-- Default: `black`
-
-視点を決める。
-後手または上手視点にするには `white` を指定する。
-
-| 値 | 意味  |
-|----|-------|
-| ☗  | black |
-| ☖  | white |
-
-### `sp_op_disabled`
-
-- Type: `boolean`
-- Default: `false`
-
-全体の操作を無効化するか？
-画像のような状態であってほしいときに使う。
-
-| 値    | 意味   |
-|-------|--------|
-| false | しない |
-| true  | する   |
-
-### `sp_hidden_if_piece_stand_blank`
-
-- Type: `boolean`
-- Default: `false`
-
-持駒がないときは駒台側の領域を消すか？
-一覧でより小さくたくさん表示したい場合に使う。
-
-| 値    | 意味     |
-|-------|----------|
-| false | 消さない |
-| true  | 消す     |
-
-### `sp_flip_if_white`
-
-- Type: `boolean`
-- Default: `false`
-
-最初に表示した局面が△側なら反転するか？
-
-| 値    | 意味   |
-|-------|--------|
-| false | しない |
-| true  | する   |
-
-### `sp_key_event_capture_enabled`
-
-- Type: `boolean`
-- Default: `false`
-
-スライダーにフォーカスしていなくても左右キーで手数を動かす
+mountedしたらスライダーにフォーカスする？
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_turn_slider_focus_off   | しない   |
+| is_turn_slider_focus_on   | する   |
 
-### `sp_shift_key_mag`
+## `sp_summary`
 
-- Type: `string`
-- Default: `10`
+Type: `String`
+Default: `"is_summary_off"`
+
+手数や結果の表示(再生モード時) (is_summary_on is_summary_off)
+
+| 値 | 意味   |
+|----|--------|
+| is_summary_off   | しない   |
+| is_summary_on   | する   |
+
+## `sp_slider`
+
+Type: `String`
+Default: `"is_slider_off"`
+
+スライダー表示
+
+| 値 | 意味   |
+|----|--------|
+| is_slider_off   | しない   |
+| is_slider_on   | する   |
+
+## `sp_setting`
+
+Type: `String`
+Default: `"is_setting_off"`
+
+設定ボタンの表示
+
+| 値 | 意味   |
+|----|--------|
+| is_setting_off   | しない   |
+| is_setting_on   | する   |
+
+## `sp_controller`
+
+Type: `String`
+Default: `"is_controller_off"`
+
+コントローラー表示
+
+| 値 | 意味   |
+|----|--------|
+| is_controller_off   | しない   |
+| is_controller_on   | する   |
+
+## `sp_viewpoint`
+
+Type: `String`
+Default: `"black"`
+
+視点
+
+| 値 | 意味   |
+|----|--------|
+| is_viewpoint_off   | しない   |
+| is_viewpoint_on   | する   |
+
+## `sp_op_disabled`
+
+Type: `Boolean`
+Default: `false`
+
+全体の操作を無効化
+
+
+## `sp_hidden_if_piece_stand_blank`
+
+Type: `Boolean`
+Default: `false`
+
+駒がないときは駒台側を非表示
+
+
+## `sp_flip_if_white`
+
+Type: `Boolean`
+Default: `false`
+
+最初に表示した局面が△なら反転
+
+
+## `sp_key_event_capture_enabled`
+
+Type: `Boolean`
+Default: `false`
+
+スライダーにフォーカスしていなくても左右キーで手数を動かす
+
+
+## `sp_shift_key_mag`
+
+Type: `Number`
+Default: `10`
 
 キーで左右するとき shift を押したときの倍率
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_system_key_mag`
+## `sp_system_key_mag`
 
-- Type: `string`
-- Default: `50`
+Type: `Number`
+Default: `50`
 
 キーで左右するとき command などを押したときの倍率
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_board_dimension_w`
+## `sp_board_dimension_w`
 
-- Type: `string`
-- Default: `9`
+Type: `Number`
+Default: `9`
 
 盤のセル数(W)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_board_dimension_h`
+## `sp_board_dimension_h`
 
-- Type: `string`
-- Default: `9`
+Type: `Number`
+Default: `9`
 
 盤のセル数(H)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_layout`
+## `sp_layout`
 
-- Type: `string`
-- Default: `is_vertical`
+Type: `String`
+Default: `"is_vertical"`
 
 レイアウト is_(vertical\|horizontal)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_layout_off   | しない   |
+| is_layout_on   | する   |
 
-### `sp_balloon`
+## `sp_balloon`
 
-- Type: `string`
-- Default: `is_balloon_on`
+Type: `String`
+Default: `"is_balloon_on"`
 
 対局者名の下に駒数スタイルと同じ背景色を置く
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_balloon_off   | しない   |
+| is_balloon_on   | する   |
 
-### `sp_layer`
+## `sp_layer`
 
-- Type: `string`
-- Default: `is_layer_off`
+Type: `String`
+Default: `"is_layer_off"`
 
 レイヤー確認(デバッグ用)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_layer_off   | しない   |
+| is_layer_on   | する   |
 
-### `sp_pi_variant`
+## `sp_pi_variant`
 
-- Type: `string`
-- Default: `is_pi_variant_a`
+Type: `String`
+Default: `"is_pi_variant_a"`
 
 駒の種類
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_pi_variant_off   | しない   |
+| is_pi_variant_on   | する   |
 
-### `sp_bg_variant`
+## `sp_bg_variant`
 
-- Type: `string`
-- Default: `is_bg_variant_none`
+Type: `String`
+Default: `"is_bg_variant_none"`
 
 盤の種類
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_bg_variant_off   | しない   |
+| is_bg_variant_on   | する   |
 
-### `sp_mobile_vertical`
+## `sp_mobile_vertical`
 
-- Type: `string`
-- Default: `is_mobile_vertical_on`
+Type: `String`
+Default: `"is_mobile_vertical_on"`
 
 モバイル時に自動的に縦配置に切り替える
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_mobile_vertical_off   | しない   |
+| is_mobile_vertical_on   | する   |
 
-### `sp_location_behavior`
+## `sp_location_behavior`
 
-- Type: `string`
-- Default: `is_location_flip_on`
+Type: `String`
+Default: `"is_location_flip_on"`
 
 ☗☖をタップしたとき視点を切り替える
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_location_behavior_off   | しない   |
+| is_location_behavior_on   | する   |
 
-### `sp_debug_mode`
+## `sp_debug_mode`
 
-- Type: `string`
-- Default: `is_debug_mode_off`
+Type: `String`
+Default: `"is_debug_mode_off"`
 
 デバッグモード
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_debug_mode_off   | しない   |
+| is_debug_mode_on   | する   |
 
-### `sp_sfen_show`
+## `sp_sfen_show`
 
-- Type: `string`
-- Default: `is_sfen_show_off`
+Type: `String`
+Default: `"is_sfen_show_off"`
 
 SFENを下に表示する
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_sfen_show_off   | しない   |
+| is_sfen_show_on   | する   |
 
-### `sp_overlay_nav`
+## `sp_overlay_nav`
 
-- Type: `string`
-- Default: `is_overlay_nav_off`
+Type: `String`
+Default: `"is_overlay_nav_off"`
 
 view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_overlay_nav_off   | しない   |
+| is_overlay_nav_on   | する   |
 
-### `sp_digit_label`
+## `sp_digit_label`
 
-- Type: `string`
-- Default: `is_digit_label_off`
+Type: `String`
+Default: `"is_digit_label_off"`
 
 座標の表示
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_digit_label_off   | しない   |
+| is_digit_label_on   | する   |
 
-### `sp_digit_label_variant`
+## `sp_digit_label_variant`
 
-- Type: `string`
-- Default: `is_digit_label_variant_kanji`
+Type: `String`
+Default: `"is_digit_label_variant_kanji"`
 
 座標の表記
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_digit_label_variant_off   | しない   |
+| is_digit_label_variant_on   | する   |
 
-### `sp_stand_gravity`
+## `sp_stand_gravity`
 
-- Type: `string`
-- Default: `is_stand_gravity_bottom`
+Type: `String`
+Default: `"is_stand_gravity_bottom"`
 
 駒台の位置
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_stand_gravity_off   | しない   |
+| is_stand_gravity_on   | する   |
 
-### `sp_player_name_dir`
+## `sp_player_name_dir`
 
-- Type: `string`
-- Default: `is_player_name_dir_horizontal`
+Type: `String`
+Default: `"is_player_name_dir_horizontal"`
 
 名前の縦横書き切り替え(縦は横配置時のみ有効)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_player_name_dir_off   | しない   |
+| is_player_name_dir_on   | する   |
 
-### `sp_turn`
+## `sp_turn`
 
-- Type: `string`
-- Default: `-1`
+Type: `Number`
+Default: `-1`
 
 局面(手数)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_run_mode`
+## `sp_run_mode`
 
-- Type: `string`
-- Default: `view_mode`
+Type: `String`
+Default: `"view_mode"`
 
 モード
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_run_mode_off   | しない   |
+| is_run_mode_on   | する   |
 
-### `sp_body`
+## `sp_body`
 
-- Type: `string`
-- Default: `null`
+Type: `String`
+Default: `null`
 
 棋譜 KIF or SFEN
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_body_off   | しない   |
+| is_body_on   | する   |
 
-### `sp_player_info`
+## `sp_player_info`
 
-- Type: `string`
-- Default: `null`
+Type: `Object`
+Default: `null`
 
 対局者名と時間
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_comment`
+## `sp_comment`
 
-- Type: `string`
-- Default: `is_comment_on`
+Type: `String`
+Default: `"is_comment_on"`
 
 KIFのコメントを表示する
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_comment_off   | しない   |
+| is_comment_on   | する   |
 
-### `sp_player_click_handle`
+## `sp_player_click_handle`
 
-- Type: `string`
-- Default: `null`
+Type: `Function`
+Default: `null`
 
 名前(時間を含む)をタップしたときに実行する
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_location_click_handle`
+## `sp_location_click_handle`
 
-- Type: `string`
-- Default: `null`
+Type: `Function`
+Default: `null`
 
 ☗☖をタップしたときに実行する
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_board_click_handle`
+## `sp_board_click_handle`
 
-- Type: `string`
-- Default: `null`
+Type: `Function`
+Default: `null`
 
 盤をタップしたときに実行する(駒よりも優先)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_board_piece_back_user_style`
+## `sp_board_piece_back_user_style`
 
-- Type: `string`
-- Default: `null`
+Type: `Function`
+Default: `null`
 
 セルのスタイルを決める処理
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_board_piece_back_user_class`
+## `sp_board_piece_back_user_class`
 
-- Type: `string`
-- Default: `null`
+Type: `Function`
+Default: `null`
 
 セルのクラスを決める処理
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_board_cell_left_click_user_handle`
+## `sp_board_cell_left_click_user_handle`
 
-- Type: `string`
-- Default: `null`
+Type: `Function`
+Default: `null`
 
 セルタップ時の処理(クリック後に呼ぶ)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_board_cell_pointerdown_user_handle`
+## `sp_board_cell_pointerdown_user_handle`
 
-- Type: `string`
-- Default: `null`
+Type: `Function`
+Default: `null`
 
 セルタップ時の処理(クリックした瞬間に呼ぶ)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_human_side`
+## `sp_human_side`
 
-- Type: `string`
-- Default: `both`
+Type: `String`
+Default: `"both"`
 
 含まれる側だけ操作できるようにする
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_human_side_off   | しない   |
+| is_human_side_on   | する   |
 
-### `sp_device`
+## `sp_device`
 
-- Type: `string`
-- Default: `null`
+Type: `String`
+Default: `null`
 
 デバイスを強制的に指定する (is_device_touch is_device_desktop) 自動判別するので基本そのままでよい
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_device_off   | しない   |
+| is_device_on   | する   |
 
-### `sp_play_mode_foul_check_p`
+## `sp_play_mode_foul_check_p`
 
-- Type: `string`
-- Default: `true`
+Type: `Boolean`
+Default: `true`
 
 play_mode で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
 
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
 
-### `sp_play_mode_foul_break_p`
+## `sp_play_mode_foul_break_p`
 
-- Type: `boolean`
-- Default: `false`
+Type: `Boolean`
+Default: `false`
 
 判定で反則だったら emit して抜けるか？(true: 初心者向け)
 
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
 
-### `sp_play_mode_legal_move_only`
+## `sp_play_mode_legal_move_only`
 
-- Type: `string`
-- Default: `true`
+Type: `Boolean`
+Default: `true`
 
 play_mode で合法手のみに絞る
 
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
 
-### `sp_play_mode_auto_promote`
+## `sp_play_mode_auto_promote`
 
-- Type: `string`
-- Default: `true`
+Type: `Boolean`
+Default: `true`
 
 play_mode で死に駒になるときは自動的に成る
 
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
 
-### `sp_play_mode_only_own_piece_to_move`
+## `sp_play_mode_only_own_piece_to_move`
 
-- Type: `string`
-- Default: `true`
+Type: `Boolean`
+Default: `true`
 
 play_mode では自分手番とき自分の駒しか動かせないようにする
 
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
 
-### `sp_play_mode_can_not_kill_same_team_soldier`
+## `sp_play_mode_can_not_kill_same_team_soldier`
 
-- Type: `string`
-- Default: `true`
+Type: `Boolean`
+Default: `true`
 
 play_mode では自分の駒で同じ仲間の駒を取れないようにする
 
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
 
-### `sp_edit_mode_double_click_time_ms`
+## `sp_edit_mode_double_click_time_ms`
 
-- Type: `string`
-- Default: `350`
+Type: `Number`
+Default: `350`
 
 edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| FIXME  | FIXME   |
 
-### `sp_move_cancel`
+## `sp_move_cancel`
 
-- Type: `string`
-- Default: `is_move_cancel_standard`
+Type: `String`
+Default: `"is_move_cancel_standard"`
 
 is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
 
 | 値 | 意味   |
 |----|--------|
-|    | しない   |
-|    | する |
+| is_move_cancel_off   | しない   |
+| is_move_cancel_on   | する   |
 
-### `sp_view_mode_soldier_movable`
+## `sp_view_mode_soldier_movable`
 
-- Type: `string`
-- Default: `true`
+Type: `Boolean`
+Default: `true`
 
 view_mode でも駒を動かせる(ただし本筋は破壊しない)
-
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
-
-### `sp_summary`
-
-- Type: `string`
-- Default: `is_summary_off`
-
-再生モード時に手数の表示をするか？
-盤の上部に表示する。
-それをクリックすると入力フィールドに切り替わって局面(手数)を入力できる。
-しかしこれまでの経験からしてあまり使うことはなかった。
-スライダーを表示していれば現在の手数がわかるからというのもある。
-スマホの場合、無駄に一行分画面を使ってしまう。
-
-| 値             | 意味   |
-|----------------|--------|
-| is_summary_off | しない |
-| is_summary_on  | する   |
-
-### `sp_slider`
-
-- Type: `string`
-- Default: `is_slider_off`
-
-再生モード時に局面変更用スライダーを盤の下に表示するか？
-
-| 値            | 意味   |
-|---------------|--------|
-| is_slider_off | しない |
-| is_slider_on  | する   |
-
-## ユーザービリティ
-
-### `sp_turn_slider_focus`
-
-- Type: `string`
-- Default: `is_turn_slider_focus_on`
-
-最初にスライダーにフォーカスするか？
-スライダーがなければ何もしない。
-ビューモードで最初からスライダーにフォーカスしておければ、そのまま左右ボタンで局面が切り替えることができて便利になる。
-スマホだととくにメリットはない。
-
-| 値                       | 意味   |
-|--------------------------|--------|
-| is_turn_slider_focus_on  | する   |
-| is_turn_slider_focus_off | しない |
-
-## 開発者向け
-
-### `sp_setting`
-
-- Type: `string`
-- Default: `is_setting_off`
-
-設定ボタンを表示するか？
-
-| 値             | 意味   |
-|----------------|--------|
-| is_setting_off | しない |
-| is_setting_on  | する   |
