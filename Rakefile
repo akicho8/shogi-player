@@ -67,16 +67,17 @@ task "sample-sp-update" do
   system %(cd shogi-player-vue-cli-sample && ncu /shogi-player/ -u && npm i)
 end
 
-task "doc" => "doc:server"
+task :d => "doc:server"
+task :doc => "doc:server"
 namespace :doc do
   desc "[doc] server"
   task :server do
-    system %(cd vp_doc && vuepress dev -p 3900 --open)
+    system %(cd vp_doc && rake server)
   end
 
   desc "build"
   task :build do
-    system %(cd vp_doc && vuepress build)
+    system %(cd vp_doc && rake build)
   end
 end
 
@@ -84,7 +85,7 @@ task :vps => "vuepress-site:dev"
 namespace "vuepress-site" do
   desc "dev"
   task :dev do
-    system %(cd test-of-create-vuepress-site/docs && vuepress dev -p 3899 --open src)
+    system %(cd test-of-create-vuepress-site/docs && vuepress dev -p 5010 --open src)
   end
 
   desc "build"
@@ -100,7 +101,7 @@ task "wc"   => "wc:build"
 namespace "wc" do
   desc "[wc:s] server"
   task :server do
-    system %(cd web_component && vue-cli-service serve --port 3995 --open)
+    system %(cd web_component && vue-cli-service serve --port 5002 --open)
   end
 
   desc "[wc:b][wc][w] build"

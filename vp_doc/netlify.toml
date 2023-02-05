@@ -2,5 +2,5 @@
 # https://app.netlify.com/sites/shogi-player/overview
 
 [build]
-  publish = "vp_doc/.vuepress/dist/"
-  command = "rake netlify"
+  publish = ".vuepress/dist/"
+  command = "rake build"
