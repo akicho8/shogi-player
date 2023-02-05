@@ -26,7 +26,6 @@
           )
           PieceTap(
             :class="TheSp.board_piece_tap_class(logical_xy(x, y))"
-            :style="TheSp.board_piece_back_style(logical_xy(x, y))"
             :piece_texture_class="TheSp.xcontainer.board_piece_fore_class(logical_xy(x, y))"
             )
 </template>

@@ -424,17 +424,6 @@ Default: `is_comment_on`
 | is_comment_off | しない |
 | is_comment_on  | する   |
 
-### `sp_board_piece_back_user_style`
-
-Type: `Function`
-Default: `null`
-
-セルのスタイルを決める処理
-
-| 値 | 意味   |
-|----|--------|
-| FIXME  | FIXME   |
-
 ### `sp_board_piece_back_user_class`
 
 Type: `Function`

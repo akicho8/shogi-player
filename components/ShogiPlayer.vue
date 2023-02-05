@@ -91,7 +91,6 @@ export default {
     sp_player_info:                        { type: Object, default: null,                    }, // 対局者名と時間
     sp_comment:                            { type: String, default: "is_comment_on",         }, // KIFのコメントを表示する
 
-    sp_board_piece_back_user_style:        { type: Function, default: null,                  }, // セルのスタイルを決める処理
     sp_board_piece_back_user_class:        { type: Function, default: null,                  }, // セルのクラスを決める処理
     sp_board_cell_left_click_user_handle:  { type: Function, default: null,                  }, // セルタップ時の処理(クリック後に呼ぶ)
     sp_board_cell_pointerdown_user_handle: { type: Function, default: null,                  }, // セルタップ時の処理(クリックした瞬間に呼ぶ)
@@ -361,12 +360,6 @@ export default {
       }
 
       return list
-    },
-
-    board_piece_back_style(xy) {
-      if (this.sp_board_piece_back_user_style) {
-        return this.sp_board_piece_back_user_style(Place.fetch(xy))
-      }
     },
 
     delegate_to_xcontainer(method) {
