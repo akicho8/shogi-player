@@ -17,7 +17,6 @@ MainDocMainNavbar
       b-navbar-item(tag="nuxt-link" :to="{name: 'event-observe'}") イベント
       b-navbar-item(tag="nuxt-link" :to="{name: 'api'}") API
       b-navbar-item(tag="nuxt-link" :to="{name: 'responsive-with-bulma'}") レスポンシブ
-      b-navbar-item(tag="nuxt-link" :to="{name: 'credit'}") クレジット
   template(slot="end")
     b-navbar-dropdown(label="実験" hoverable v-if="development_p")
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-sp_device'}") sp_device テスト

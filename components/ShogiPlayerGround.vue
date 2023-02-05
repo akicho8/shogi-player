@@ -20,6 +20,11 @@ export default {
   computed: {
     component_class() {
       return [
+        // これらはCSS用なのでコードで管理するのは違うような気もする
+        // とはいえ利用者に委ねるとタグの構造の理解を強要することになる
+        // それに間違った場所に指定してしまってもエラーが出ることもない
+        // なので結局ここでいい
+        // Buefy も同じようなことをしている
         this.TheSp.sp_layout,
         this.TheSp.sp_balloon,
         this.TheSp.sp_layer,
@@ -31,6 +36,7 @@ export default {
         this.TheSp.sp_player_name_dir,
         this.TheSp.sp_mobile_vertical,
         this.TheSp.devise_info.key,
+        // 特殊
         `is_viewpoint_${this.TheSp.new_viewpoint}`, // システムテストで見ている
       ]
     },

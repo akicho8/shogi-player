@@ -51,10 +51,10 @@ module.exports = {
         text: 'Web Components',
         link: '/web-components/',
       },
-      // {
-      //   text: 'VuePress',
-      //   link: 'https://v1.vuepress.vuejs.org',
-      // },
+      {
+        text: 'スタイルエディタ',
+        link: 'https://akicho8.github.io/shogi-player/style-editor',
+      },
     ],
     sidebar: {
       '/guide/': [
@@ -63,9 +63,21 @@ module.exports = {
           collapsable: false,
           children: [
             '',
-            'using-vue',
-          ]
-        }
+            'using-sp',
+            'edit-mode',
+            'credit',
+          ],
+        },
+        // {
+        //   title: 'Guide',
+        //   collapsable: false,
+        //   children: [
+        //     '',
+        //     'using-sp',
+        //     'edit-mode',
+        //     'credit',
+        //   ]
+        // },
       ],
     }
   },

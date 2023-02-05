@@ -5,7 +5,6 @@
   MainDocDemo
   //- MainDocHowToEmbed
   //- MainDocApi
-  //- MainDocCredit
 </template>
 
 <script>

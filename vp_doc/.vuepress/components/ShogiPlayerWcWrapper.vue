@@ -1,6 +1,5 @@
 <template>
 <div :class="['ShogiPlayerWcWrapper', STAGE_ENV]">
-  <!-- @update:sp_turn="foo"  -->
   <shogi-player-wc v-bind="params" v-on="$listeners" />
 </div>
 </template>
@@ -9,12 +8,6 @@
 export default {
   name: "ShogiPlayerWcWrapper",
   inheritAttrs: false,
-  methods: {
-    foo(v) {
-      console.log(v)
-    },
-  },
-
   computed: {
     STAGE_ENV() { return `STAGE-${process.env.NODE_ENV}` },
     params_default() {

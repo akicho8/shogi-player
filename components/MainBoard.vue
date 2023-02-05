@@ -96,8 +96,8 @@ export default {
   +defvar(sp_grid_star_size, 0.1)                  // 星の大きさ
   +defvar(sp_grid_star_z_index, 0)                 // 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)
 
-  +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w) CSS内では未使用
-  +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h) TDの縦幅を決めるのに必要
+  // +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w)
+  // +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h)
 
   .MainBoard
     width: 100%
