@@ -8,37 +8,38 @@
     .ShogiPlayerCssVariablesOverride2(:style="sp_css_variables_hash")
       // ここに定義すると shogi-player-wc::part(sp_css_variables) {} に勝つ
       // 例: sp_css_variables="{'--sp_controller_width':0.8}"
-      //- @update:sp_turn="e => $emit('update:sp_turn', e)"
+      //- @update:sp_turn="(...e) => $emit('update:sp_turn', e)"
       ShogiPlayer(
         v-bind="$props"
         v-on="$listeners"
-        @update:short_sfen="                         e => $emit('update:short_sfen', e)"
-        @update:play_mode_advanced_full_moves_sfen=" e => $emit('update:play_mode_advanced_full_moves_sfen', e)"
-        @update:play_mode_advanced_short_sfen="      e => $emit('update:play_mode_advanced_short_sfen', e)"
-        @update:play_mode_advanced_moves="           e => $emit('update:play_mode_advanced_moves', e)"
-        @update:moves_take_turn_offset="             e => $emit('update:moves_take_turn_offset', e)"
-        @update:edit_mode_short_sfen="               e => $emit('update:edit_mode_short_sfen', e)"
-        @update:sp_turn="                            e => $emit('update:sp_turn', e)"
-        @user_piece_put="                            e => $emit('user_piece_put', e)"
-        @user_viewpoint_flip="                       e => $emit('user_viewpoint_flip', e)"
-        @user_turn_change="                          e => $emit('user_turn_change', e)"
-        @user_piece_lift="                           e => $emit('user_piece_lift', e)"
-        @user_piece_cancel="                         e => $emit('user_piece_cancel', e)"
-        @update:turn_offset="                        e => $emit('update:turn_offset', e)"
-        @update:turn_offset_max="                    e => $emit('update:turn_offset_max', e)"
-        @update:sp_run_mode="                        e => $emit('update:sp_run_mode', e)"
-        @update:sp_body="                            e => $emit('update:sp_body', e)"
-        @update:sp_debug_mode="                      e => $emit('update:sp_debug_mode', e)"
-        @update:sp_viewpoint="                       e => $emit('update:sp_viewpoint', e)"
-        @update:sp_layout="                          e => $emit('update:sp_layout', e)"
-        @update:sp_bg_variant="                      e => $emit('update:sp_bg_variant', e)"
-        @update:sp_pi_variant="                      e => $emit('update:sp_pi_variant', e)"
-        @sp_board_cell_left_click_user_handle="      e => $emit('sp_board_cell_left_click_user_handle', e)"
-        @sp_board_cell_pointerdown_user_handle="     e => $emit('sp_board_cell_pointerdown_user_handle', e)"
-        @sp_player_click_handle="                    e => $emit('sp_player_click_handle', e)"
-        @operation_invalid1="                        e => $emit('operation_invalid1', e)"
-        @operation_invalid2="                        e => $emit('operation_invalid2', e)"
-        @foul_accident="                             e => $emit('foul_accident', e)"
+        @update:short_sfen="                         (...args) => $emit('update:short_sfen', ...args)"
+        @update:play_mode_advanced_full_moves_sfen=" (...args) => $emit('update:play_mode_advanced_full_moves_sfen', ...args)"
+        @update:play_mode_advanced_short_sfen="      (...args) => $emit('update:play_mode_advanced_short_sfen', ...args)"
+        @update:play_mode_advanced_moves="           (...args) => $emit('update:play_mode_advanced_moves', ...args)"
+        @update:moves_take_turn_offset="             (...args) => $emit('update:moves_take_turn_offset', ...args)"
+        @update:edit_mode_short_sfen="               (...args) => $emit('update:edit_mode_short_sfen', ...args)"
+        @update:sp_turn="                            (...args) => $emit('update:sp_turn', ...args)"
+        @user_piece_put="                            (...args) => $emit('user_piece_put', ...args)"
+        @user_viewpoint_flip="                       (...args) => $emit('user_viewpoint_flip', ...args)"
+        @user_turn_change="                          (...args) => $emit('user_turn_change', ...args)"
+        @user_piece_lift="                           (...args) => $emit('user_piece_lift', ...args)"
+        @user_piece_cancel="                         (...args) => $emit('user_piece_cancel', ...args)"
+        @update:turn_offset="                        (...args) => $emit('update:turn_offset', ...args)"
+        @update:turn_offset_max="                    (...args) => $emit('update:turn_offset_max', ...args)"
+        @update:sp_run_mode="                        (...args) => $emit('update:sp_run_mode', ...args)"
+        @update:sp_body="                            (...args) => $emit('update:sp_body', ...args)"
+        @update:sp_debug_mode="                      (...args) => $emit('update:sp_debug_mode', ...args)"
+        @update:sp_viewpoint="                       (...args) => $emit('update:sp_viewpoint', ...args)"
+        @update:sp_layout="                          (...args) => $emit('update:sp_layout', ...args)"
+        @update:sp_bg_variant="                      (...args) => $emit('update:sp_bg_variant', ...args)"
+        @update:sp_pi_variant="                      (...args) => $emit('update:sp_pi_variant', ...args)"
+        @sp_board_cell_left_click_user_handle="      (...args) => $emit('sp_board_cell_left_click_user_handle', ...args)"
+        @sp_board_cell_pointerdown_user_handle="     (...args) => $emit('sp_board_cell_pointerdown_user_handle', ...args)"
+        @operation_invalid1="                        (...args) => $emit('operation_invalid1', ...args)"
+        @operation_invalid2="                        (...args) => $emit('operation_invalid2', ...args)"
+        @foul_accident="                             (...args) => $emit('foul_accident', ...args)"
+
+        @player_info_click="                         (...args) => $emit('player_info_click', ...args)"
       )
 </template>
 
@@ -123,7 +124,6 @@ export default {
     sp_move_cancel:                              { type: String,   }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
     sp_view_mode_soldier_movable:                { type: Boolean,  }, // view_mode でも駒を動かせる(ただし本筋は破壊しない)
 
-    sp_player_click_handle:                      { type: Function, }, // 名前(時間を含む)をタップしたときに実行する
     sp_board_click_handle:                       { type: Function, }, // 盤をタップしたときに実行する(駒よりも優先)
     sp_board_piece_back_user_style:              { type: Function, }, // セルのスタイルを決める処理
     sp_board_piece_back_user_class:              { type: Function, }, // セルのクラスを決める処理

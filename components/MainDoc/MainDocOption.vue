@@ -139,9 +139,7 @@
     .container
       form(action="/")
         .SpWrap
-          //- @player_info_click="(location, sp_player_info) => $buefy.toast.open(location.name)"
           ShogiPlayer(
-            :sp_player_click_handle="(location, sp_player_info) => $buefy.toast.open(location.name)"
             :sp_run_mode.sync="sp_run_mode"
             :sp_body.sync="sp_body"
             :sp_turn.sync="sp_turn"
@@ -169,6 +167,7 @@
             @update:turn_offset_max="                    e => trigger_check('turn_offset_max', e)"
             @update:moves_take_turn_offset="             e => trigger_check('moves_take_turn_offset', e)"
             @foul_accident="                             e => trigger_check('foul_accident', e)"
+            @player_info_click="(location, sp_player_info) => $buefy.toast.open(location.name)"
 
             :sp_play_mode_foul_check_p="sp_play_mode_foul_check_p"
             :sp_play_mode_foul_break_p="sp_play_mode_foul_break_p"
@@ -283,6 +282,9 @@ export default {
       if (this.trigger_toast_p) {
         this.$buefy.toast.open({message: `${key} -> ${JSON.stringify(v)}`, queue: false})
       }
+    },
+    my_inspect(e) {
+      console.log(e)
     },
   },
   computed: {

@@ -20,12 +20,7 @@ export default {
       }
     },
     click_handle() {
-      if (this.TheSp.sp_player_click_handle) {
-        this.TheSp.sp_player_click_handle(this.location, this.one_side_info)
-        if (false) {
-          this.$emit("player_info_click", this.location, this.one_side_info)
-        }
-      }
+      this.TheSp.$emit("player_info_click", this.location, this.one_side_info)
     },
   },
   computed: {
@@ -34,7 +29,6 @@ export default {
     },
     component_class() {
       return [
-        { "is-clickable": this.TheSp.sp_player_click_handle },
         this.player_class,
       ]
     },

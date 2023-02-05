@@ -349,18 +349,6 @@ KIFのコメントを表示する
 |    | しない   |
 |    | する |
 
-### `sp_player_click_handle`
-
-- Type: `string`
-- Default: `null`
-
-名前(時間を含む)をタップしたときに実行する
-
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
-
 ### `sp_board_piece_back_user_style`
 
 - Type: `string`

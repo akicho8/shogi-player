@@ -424,13 +424,6 @@ Default: `is_comment_on`
 | is_comment_off | しない |
 | is_comment_on  | する   |
 
-### `sp_player_click_handle`
-
-Type: `Function`
-Default: `null`
-
-名前や時間をタップしたときに実行する処理を指定する <Badge text="非推奨" type="error" vertical="top" />
-
 ### `sp_board_click_handle`
 
 Type: `Function`

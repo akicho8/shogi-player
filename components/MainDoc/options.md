@@ -45,7 +45,7 @@
 | `update:sp_pi_variant`                      | 駒の種類変更                                   |                                                                   |   |
 | `sp_board_cell_left_click_user_handle`      | セルをクリックしたとき                         | place が来るのでどこをクリックしたかわかる                        |   |
 | `sp_board_cell_pointerdown_user_handle`     | セルをクリックしたとき(スマホの場合押した瞬間) | place が来るのでどこをクリックしたかわかる                        |   |
-| `sp_player_click_handle`                    | プレイヤー名をクリックしたとき                 | (location, sp_player_infoの片側) がくる                           |   |
+| `player_info_click`                         | プレイヤー名をクリックしたとき                 | (location, sp_player_infoの片側) がくる                           |   |
 | `xxx.native`                                | 任意のイベント (例: `click.native`)            | click の場合はだいたい `sp_op_disabled` と組み合わせる            |   |
 | `operation_invalid1`                        | 手番が違うのに操作しようとした                 |                                                                   |   |
 | `operation_invalid2`                        | 自分が手番だが相手の駒を動かそうとした         |                                                                   |   |
