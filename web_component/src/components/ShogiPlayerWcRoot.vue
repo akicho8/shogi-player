@@ -33,8 +33,7 @@
         @update:sp_layout="                          (...args) => $emit('update:sp_layout', ...args)"
         @update:sp_bg_variant="                      (...args) => $emit('update:sp_bg_variant', ...args)"
         @update:sp_pi_variant="                      (...args) => $emit('update:sp_pi_variant', ...args)"
-        @sp_board_cell_left_click_user_handle="      (...args) => $emit('sp_board_cell_left_click_user_handle', ...args)"
-        @sp_board_cell_pointerdown_user_handle="     (...args) => $emit('sp_board_cell_pointerdown_user_handle', ...args)"
+        @board_cell_pointerdown="                    (...args) => $emit('board_cell_pointerdown', ...args)"
         @operation_invalid1="                        (...args) => $emit('operation_invalid1', ...args)"
         @operation_invalid2="                        (...args) => $emit('operation_invalid2', ...args)"
         @foul_accident="                             (...args) => $emit('foul_accident', ...args)"
@@ -124,9 +123,9 @@ export default {
     sp_move_cancel:                              { type: String,   }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
     sp_view_mode_soldier_movable:                { type: Boolean,  }, // view_mode でも駒を動かせる(ただし本筋は破壊しない)
 
-    sp_board_piece_back_user_class:              { type: Function, }, // セルのクラスを決める処理
-    sp_board_cell_left_click_user_handle:        { type: Function, }, // セルタップ時の処理(クリック後に呼ぶ)
-    sp_board_cell_pointerdown_user_handle:       { type: Function, }, // セルタップ時の処理(クリックした瞬間に呼ぶ)
+    sp_board_cell_left_click_disabled:           { type: Boolean,  }, // 盤上セルタップ時の通常処理の無効化
+
+    sp_board_piece_back_user_class_fn:           { type: Function, }, // セルのクラスを決める処理
   },
   mounted() {
     // console.log(JSON5.parse(""))

@@ -52,12 +52,7 @@ export const edit_mode_module = {
   methods: {
     // 盤を押した瞬間
     board_cell_pointerdown_handle(xy, e) {
-      const handle = this.sp_board_cell_pointerdown_user_handle
-      if (handle) {
-        if (handle(Place.fetch(xy), e)) {
-          return
-        }
-      }
+      this.$emit("board_cell_pointerdown", Place.fetch(xy), e)
     },
 
     // 盤をクリック
@@ -69,12 +64,9 @@ export const edit_mode_module = {
 
       const place = Place.fetch(xy)
 
-      const handle = this.sp_board_cell_left_click_user_handle
-      if (handle) {
-        this.log(`ユーザー指定のクリックハンドル実行: ${place.css_place_key}`)
-        if (handle(place, e)) {
-          return
-        }
+      if (this.sp_board_cell_left_click_disabled) {
+        this.log(`セルをクリックしたときの通常処理を無効化する`)
+        return
       }
 
       if (this.break_if_view_mode) {

@@ -43,8 +43,7 @@
 | `update:sp_layout`                          | レイアウトを変更したとき                       |                                                                   |   |
 | `update:sp_bg_variant`                      | 背景の種類変更                                 |                                                                   |   |
 | `update:sp_pi_variant`                      | 駒の種類変更                                   |                                                                   |   |
-| `sp_board_cell_left_click_user_handle`      | セルをクリックしたとき                         | place が来るのでどこをクリックしたかわかる                        |   |
-| `sp_board_cell_pointerdown_user_handle`     | セルをクリックしたとき(スマホの場合押した瞬間) | place が来るのでどこをクリックしたかわかる                        |   |
+| `board_cell_pointerdown`     | セルをクリックしたとき(スマホの場合押した瞬間) | place が来るのでどこをクリックしたかわかる                        |   |
 | `player_info_click`                         | プレイヤー名をクリックしたとき                 | (location, sp_player_infoの片側) がくる                           |   |
 | `xxx.native`                                | 任意のイベント (例: `click.native`)            | click の場合はだいたい `sp_op_disabled` と組み合わせる            |   |
 | `operation_invalid1`                        | 手番が違うのに操作しようとした                 |                                                                   |   |

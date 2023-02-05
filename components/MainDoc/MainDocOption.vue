@@ -158,6 +158,7 @@
             :sp_overlay_nav="sp_overlay_nav"
             :sp_human_side="sp_human_side"
 
+            @board_cell_pointerdown="board_cell_pointerdown"
             @update:edit_mode_short_sfen="            e => trigger_check('edit_mode_short_sfen', e)"
             @update:short_sfen="             e => trigger_check('short_sfen', e)"
             @update:play_mode_advanced_full_moves_sfen=" e => trigger_check('play_mode_advanced_full_moves_sfen', e)"
@@ -285,6 +286,9 @@ export default {
     },
     my_inspect(e) {
       console.log(e)
+    },
+    board_cell_pointerdown(place, event) {
+      this.$buefy.toast.open({message: `${place.kanji_human}のセルをクリックした瞬間`, queue: false})
     },
   },
   computed: {

@@ -90,10 +90,10 @@ export default {
     sp_body:                               { type: String, default: null,                    }, // 棋譜 KIF or SFEN
     sp_player_info:                        { type: Object, default: null,                    }, // 対局者名と時間
     sp_comment:                            { type: String, default: "is_comment_on",         }, // KIFのコメントを表示する
+    sp_board_cell_left_click_disabled:     { type: Boolean, default: false,                  }, // 盤上の左クリックの通常処理を無効化するか？
 
-    sp_board_piece_back_user_class:        { type: Function, default: null,                  }, // セルのクラスを決める処理
-    sp_board_cell_left_click_user_handle:  { type: Function, default: null,                  }, // セルタップ時の処理(クリック後に呼ぶ)
-    sp_board_cell_pointerdown_user_handle: { type: Function, default: null,                  }, // セルタップ時の処理(クリックした瞬間に呼ぶ)
+    // 一方向の $emit ではどうにもならない関数たち
+    sp_board_piece_back_user_class_fn:     { type: Function, default: null,                  }, // セルのクラスを決める処理
   },
 
   components: {
@@ -355,8 +355,8 @@ export default {
         list.push(soldier.location.flip_if(this.fliped).position_key)
       }
 
-      if (this.sp_board_piece_back_user_class) {
-        list = _.concat(list, this.sp_board_piece_back_user_class(place))
+      if (this.sp_board_piece_back_user_class_fn) {
+        list = _.concat(list, this.sp_board_piece_back_user_class_fn(place))
       }
 
       return list

@@ -424,7 +424,7 @@ Default: `is_comment_on`
 | is_comment_off | しない |
 | is_comment_on  | する   |
 
-### `sp_board_piece_back_user_class`
+### `sp_board_piece_back_user_class_fn`
 
 Type: `Function`
 Default: `null`
@@ -435,27 +435,13 @@ Default: `null`
 |----|--------|
 | FIXME  | FIXME   |
 
-### `sp_board_cell_left_click_user_handle`
+### `sp_board_cell_left_click_disabled`
 
-Type: `Function`
-Default: `null`
+Type: `Boolean`
+Default: `false`
 
-セルタップ時の処理(クリック後に呼ぶ)
-
-| 値 | 意味   |
-|----|--------|
-| FIXME  | FIXME   |
-
-### `sp_board_cell_pointerdown_user_handle`
-
-Type: `Function`
-Default: `null`
-
-セルタップ時の処理(クリックした瞬間に呼ぶ)
-
-| 値 | 意味   |
-|----|--------|
-| FIXME  | FIXME   |
+盤上のセルをクリックしたときの通常処理を無効化するか？ <Badge text="要検討" type="error" vertical="top" />
+この機能は sp_view_mode_soldier_movable を false するのでいい気がしている
 
 ### `sp_human_side`
 
