@@ -1,5 +1,11 @@
 task :default => :test
 
+task :s => :server
+desc "[s] server"
+task :server do
+  system %(nuxt dev -p 5000 --open)
+end
+
 desc "test"
 task :test do
   system %(jest)

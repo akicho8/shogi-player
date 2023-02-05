@@ -53,8 +53,6 @@
     "vue": "~2.6",
     "vue-jest": "^4.0.0-0",
     "vue-server-renderer": "~2.6",
-    "vue-template-compiler": "~2.6",
-    "vuepress": "^1.9.8",
-    "vuepress-plugin-demo-code": "^1.0.0"
+    "vue-template-compiler": "~2.6"
   }
 }
