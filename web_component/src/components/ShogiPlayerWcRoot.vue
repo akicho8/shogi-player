@@ -124,7 +124,6 @@ export default {
     sp_move_cancel:                              { type: String,   }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
     sp_view_mode_soldier_movable:                { type: Boolean,  }, // view_mode でも駒を動かせる(ただし本筋は破壊しない)
 
-    sp_board_click_handle:                       { type: Function, }, // 盤をタップしたときに実行する(駒よりも優先)
     sp_board_piece_back_user_style:              { type: Function, }, // セルのスタイルを決める処理
     sp_board_piece_back_user_class:              { type: Function, }, // セルのクラスを決める処理
     sp_board_cell_left_click_user_handle:        { type: Function, }, // セルタップ時の処理(クリック後に呼ぶ)

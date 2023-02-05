@@ -1,5 +1,5 @@
 <template lang="pug">
-.MainBoard(@click.capture="click_handle")
+.MainBoard
   // .MainBoard に設定した background-image に影をつけるために drop-shadow すると
   // .MainBoard その子供である table にまで影が適用されてしまう
   // table に影が適用されると、駒の影にも .MainBoard の影が加算されてしまい濃くなってしまう
@@ -47,12 +47,6 @@ export default {
     this.TheSp.$data._MainBoardRenderCount += 1
   },
   methods: {
-    click_handle() {
-      if (this.TheSp.sp_board_click_handle) {
-        this.TheSp.sp_board_click_handle()
-      }
-    },
-
     logical_xy(x, y) {
       x = x + Board.dimension - this.TheSp.sp_board_dimension_w
       y = y + Board.dimension - this.TheSp.sp_board_dimension_h

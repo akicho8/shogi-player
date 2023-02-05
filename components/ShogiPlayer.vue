@@ -91,7 +91,6 @@ export default {
     sp_player_info:                        { type: Object, default: null,                    }, // 対局者名と時間
     sp_comment:                            { type: String, default: "is_comment_on",         }, // KIFのコメントを表示する
 
-    sp_board_click_handle:                 { type: Function, default: null,                  }, // 盤をタップしたときに実行する(駒よりも優先)
     sp_board_piece_back_user_style:        { type: Function, default: null,                  }, // セルのスタイルを決める処理
     sp_board_piece_back_user_class:        { type: Function, default: null,                  }, // セルのクラスを決める処理
     sp_board_cell_left_click_user_handle:  { type: Function, default: null,                  }, // セルタップ時の処理(クリック後に呼ぶ)

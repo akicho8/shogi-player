@@ -424,17 +424,6 @@ Default: `is_comment_on`
 | is_comment_off | しない |
 | is_comment_on  | する   |
 
-### `sp_board_click_handle`
-
-Type: `Function`
-Default: `null`
-
-盤をタップしたときに実行する(駒よりも優先)
-
-| 値    | 意味  |
-|-------|-------|
-| FIXME | FIXME |
-
 ### `sp_board_piece_back_user_style`
 
 Type: `Function`
