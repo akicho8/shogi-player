@@ -361,30 +361,6 @@ KIFのコメントを表示する
 |    | しない   |
 |    | する |
 
-### `sp_location_click_handle`
-
-- Type: `string`
-- Default: `null`
-
-☗☖をタップしたときに実行する
-
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
-
-### `sp_board_click_handle`
-
-- Type: `string`
-- Default: `null`
-
-盤をタップしたときに実行する(駒よりも優先)
-
-| 値 | 意味   |
-|----|--------|
-|    | しない   |
-|    | する |
-
 ### `sp_board_piece_back_user_style`
 
 - Type: `string`

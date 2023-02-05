@@ -142,7 +142,6 @@
           //- @player_info_click="(location, sp_player_info) => $buefy.toast.open(location.name)"
           ShogiPlayer(
             :sp_player_click_handle="(location, sp_player_info) => $buefy.toast.open(location.name)"
-            :sp_location_click_handle="(location) => $buefy.toast.open(location.name)"
             :sp_run_mode.sync="sp_run_mode"
             :sp_body.sync="sp_body"
             :sp_turn.sync="sp_turn"

@@ -28,10 +28,10 @@ Default: `is_turn_slider_focus_on`
   * ビューモードで最初からスライダーにフォーカスしておければ、そのまま左右ボタンで局面が切り替えることができて便利になる
   * スマホだととくにメリットはない
 
-| 値 | 意味   |
-|----|--------|
-| is_turn_slider_focus_off   | しない   |
-| is_turn_slider_focus_on   | する   |
+| 値                       | 意味   |
+|--------------------------|--------|
+| is_turn_slider_focus_off | しない |
+| is_turn_slider_focus_on  | する   |
 
 ### `sp_summary`
 
@@ -218,23 +218,24 @@ Default: `is_bg_variant_none`
 
 * 基本なしでよい
 * そのとき盤面の色は `--sp_board_color` で変更できる
-* 木を指定するときはリアル駒のときだけによう
-  * デジタル駒とリアル木目盤は調和しない
+* 木を指定するときはリアル駒のときだけにしよう
+  * デジタル駒と木の組み合わせは調和しない
 
-| 値                 | 種類 | 特徴     |
-|--------------------|------|----------|
-| is_bg_variant_none | なし | 見えない |
-| is_bg_variant_a    | 木1  | 濃い     |
-| is_bg_variant_b    | 木2  | 薄め     |
+| 値                 | 種類 | 特徴                               |
+|--------------------|------|------------------------------------|
+| is_bg_variant_none | なし | 見えない(が、単色の色はつけられる) |
+| is_bg_variant_a    | 木1  | 濃い                               |
+| is_bg_variant_b    | 木2  | 薄め                               |
 
 ### `sp_mobile_vertical`
 
 Type: `String`
 Default: `is_mobile_vertical_on`
 
-モバイル時に自動的に縦配置に切り替えるか？
+画面幅が狭いとき自動的に縦配置に切り替えるか？
 
-正確には画面幅が狭いときに切り替えるかどうか
+初期値を横配置にしているときに関係してくる
+言い替えると画面幅が広いときに横配置に切り替えるかの設定でもある
 
 | 値                     | 挙動         |
 |------------------------|--------------|
@@ -272,10 +273,10 @@ Default: `is_sfen_show_off`
 
 盤面の下にSFENを表示するか？ <Badge text="削除予定" type="error" vertical="top" />
 
-| 値 | 意味   |
-|----|--------|
-| is_sfen_show_off   | しない   |
-| is_sfen_show_on   | する   |
+| 値               | 意味   |
+|------------------|--------|
+| is_sfen_show_off | しない |
+| is_sfen_show_on  | する   |
 
 ### `sp_overlay_nav`
 
@@ -284,7 +285,7 @@ Default: `is_overlay_nav_off`
 
 再生モードのときの局面切り替えで盤上の左右の領域をタップして動かせるようにするか？
 
-一長一短あって有効にすると再生しやすくなる反面、継盤的に駒を動かせなくなる
+有効にすると再生しやすくなるが駒を動かせなくなる
 
 | 値                 | 意味   |
 |--------------------|--------|
@@ -296,7 +297,7 @@ Default: `is_overlay_nav_off`
 Type: `String`
 Default: `is_digit_label_off`
 
-盤上の上と右に座標を表示するか？
+盤の上と右に座標を表示するか？
 
 | 値                 | 意味   |
 |--------------------|--------|
@@ -383,57 +384,52 @@ Default: `view_mode`
 Type: `String`
 Default: `null`
 
-棋譜 KIF or SFEN
+棋譜を指定する
 
-| 値 | 意味   |
-|----|--------|
-| is_body_off   | しない   |
-| is_body_on   | する   |
+KIF, SFEN, BOD に対応する
+不整合な棋譜の場合は親切なエラーを出すこともない
+何が起きるかわからないので本当に正しい形式だけを渡してほしい
 
 ### `sp_player_info`
 
 Type: `Object`
 Default: `null`
 
-対局者名と時間
+対局者と時間の情報をハッシュ形式で渡す
 
-| 値 | 意味   |
-|----|--------|
-| FIXME  | FIXME   |
+例:
+
+``` js
+{
+  black: {
+    name: "六代大橋宗銀",
+    time: "12:34"
+  },
+  white: {
+    name: "伊藤印達",
+    time: "56:78",
+  },
+}
+```
 
 ### `sp_comment`
 
 Type: `String`
 Default: `is_comment_on`
 
-KIFのコメントを表示する
+盤の下にKIF形式棋譜のコメントを表示するか？
 
-| 値 | 意味   |
-|----|--------|
-| is_comment_off   | しない   |
-| is_comment_on   | する   |
+| 値             | 意味   |
+|----------------|--------|
+| is_comment_off | しない |
+| is_comment_on  | する   |
 
 ### `sp_player_click_handle`
 
 Type: `Function`
 Default: `null`
 
-名前(時間を含む)をタップしたときに実行する
-
-| 値 | 意味   |
-|----|--------|
-| FIXME  | FIXME   |
-
-### `sp_location_click_handle`
-
-Type: `Function`
-Default: `null`
-
-☗☖をタップしたときに実行する
-
-| 値 | 意味   |
-|----|--------|
-| FIXME  | FIXME   |
+名前や時間をタップしたときに実行する処理を指定する <Badge text="非推奨" type="error" vertical="top" />
 
 ### `sp_board_click_handle`
 
@@ -442,9 +438,9 @@ Default: `null`
 
 盤をタップしたときに実行する(駒よりも優先)
 
-| 値 | 意味   |
-|----|--------|
-| FIXME  | FIXME   |
+| 値    | 意味  |
+|-------|-------|
+| FIXME | FIXME |
 
 ### `sp_board_piece_back_user_style`
 

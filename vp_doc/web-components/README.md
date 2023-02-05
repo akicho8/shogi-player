@@ -48,15 +48,14 @@ sidebar: auto
 />
 
 ::: tip
-* sp_run_mode: 再生モードにする
 * sp_overlay_nav: 盤面タップで局面を動かす機能を有効にする
 * sp_body: KIF・BOD・SFEN 形式のコンテンツを指定する
 :::
 
 ## コントローラーを表示する ##
 
-1. `sp_controller="is_controller_on"` を指定する
 1. Material Design Icons の CSS を読み込む
+1. `sp_controller="is_controller_on"` を指定する
 
 ```html{5,10}
 <!DOCTYPE html>

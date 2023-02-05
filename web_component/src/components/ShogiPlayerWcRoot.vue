@@ -36,7 +36,6 @@
         @sp_board_cell_left_click_user_handle="      e => $emit('sp_board_cell_left_click_user_handle', e)"
         @sp_board_cell_pointerdown_user_handle="     e => $emit('sp_board_cell_pointerdown_user_handle', e)"
         @sp_player_click_handle="                    e => $emit('sp_player_click_handle', e)"
-        @sp_location_click_handle="                  e => $emit('sp_location_click_handle', e)"
         @operation_invalid1="                        e => $emit('operation_invalid1', e)"
         @operation_invalid2="                        e => $emit('operation_invalid2', e)"
         @foul_accident="                             e => $emit('foul_accident', e)"
@@ -111,13 +110,7 @@ export default {
     sp_body:                                     { type: String,   }, // 棋譜 KIF or SFEN
     sp_player_info:                              { type: Object,   }, // 対局者名と時間
     sp_comment:                                  { type: String,   }, // KIFのコメントを表示する
-    sp_player_click_handle:                      { type: Function, }, // 名前(時間を含む)をタップしたときに実行する
-    sp_location_click_handle:                    { type: Function, }, // ☗☖をタップしたときに実行する
-    sp_board_click_handle:                       { type: Function, }, // 盤をタップしたときに実行する(駒よりも優先)
-    sp_board_piece_back_user_style:              { type: Function, }, // セルのスタイルを決める処理
-    sp_board_piece_back_user_class:              { type: Function, }, // セルのクラスを決める処理
-    sp_board_cell_left_click_user_handle:        { type: Function, }, // セルタップ時の処理(クリック後に呼ぶ)
-    sp_board_cell_pointerdown_user_handle:       { type: Function, }, // セルタップ時の処理(クリックした瞬間に呼ぶ)
+
     sp_human_side:                               { type: String,   }, // 含まれる側だけ操作できるようにする
     sp_device:                                   { type: String,   }, // デバイスを強制的に指定する (is_device_touch is_device_desktop) 自動判別するので基本そのままでよい
     sp_play_mode_foul_check_p:                   { type: Boolean,  }, // play_mode で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
@@ -129,6 +122,13 @@ export default {
     sp_edit_mode_double_click_time_ms:           { type: Number,   }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_move_cancel:                              { type: String,   }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
     sp_view_mode_soldier_movable:                { type: Boolean,  }, // view_mode でも駒を動かせる(ただし本筋は破壊しない)
+
+    sp_player_click_handle:                      { type: Function, }, // 名前(時間を含む)をタップしたときに実行する
+    sp_board_click_handle:                       { type: Function, }, // 盤をタップしたときに実行する(駒よりも優先)
+    sp_board_piece_back_user_style:              { type: Function, }, // セルのスタイルを決める処理
+    sp_board_piece_back_user_class:              { type: Function, }, // セルのクラスを決める処理
+    sp_board_cell_left_click_user_handle:        { type: Function, }, // セルタップ時の処理(クリック後に呼ぶ)
+    sp_board_cell_pointerdown_user_handle:       { type: Function, }, // セルタップ時の処理(クリックした瞬間に呼ぶ)
   },
   mounted() {
     // console.log(JSON5.parse(""))

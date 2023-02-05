@@ -17,15 +17,12 @@ export default {
       if (this.flipable) {
         this.TheSp.viewpoint_flip_handle()
       }
-      if (this.TheSp.sp_location_click_handle) {
-        this.TheSp.sp_location_click_handle(this.location)
-      }
     },
   },
   computed: {
     component_class() {
       return {
-        "is-clickable": this.TheSp.sp_location_click_handle || this.flipable
+        "is-clickable": this.flipable,
       }
     },
     // inactiveになったとき影が残ってしまう問題があった。
