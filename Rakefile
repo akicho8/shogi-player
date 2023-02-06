@@ -13,7 +13,7 @@ end
 
 desc "generate"
 task :generate do
-  system %(ruby components/extract_options.rb)
+  system %(ruby components/extract_css_variables.rb)
   system %(ruby components/extract_props.rb)
 end
 task :g => :generate

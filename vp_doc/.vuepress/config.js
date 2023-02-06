@@ -45,7 +45,11 @@ module.exports = {
       },
       {
         text: 'コンポーネント引数',
-        link: '/config/',
+        link: '/component-arguments/',
+      },
+      {
+        text: 'CSS Variables',
+        link: '/css-variables/',
       },
       {
         text: 'Web Components',

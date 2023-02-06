@@ -25,14 +25,6 @@ s = rows.collect { |e|
 puts s
 exit
 
-
-
-
-
-
-
-
-
 s = rows.collect { |e|
   o = []
   o << "## `#{e[:name]}`"
@@ -57,15 +49,11 @@ s = rows.collect { |e|
 }.join("\n\n")
 puts s
 
-
-
-
-
 # s = rows.to_t(markdown: true)
 # file = Pathname("MainDoc/component_options.md").expand_path
 # file.write(s)
 # puts file
-# 
+#
 # s = rows.collect { |e|
 #   o = []
 #   o << "## " + e["Name"].gsub("`", "")
@@ -84,7 +72,7 @@ puts s
 # file = Pathname("MainDoc/component_options_for_vueprss.md").expand_path
 # file.write(s)
 # puts file
-# 
+#
 # s = rows.collect { |e|
 #   o = []
 #   o << "## " + e["Name"].gsub("`", "")
