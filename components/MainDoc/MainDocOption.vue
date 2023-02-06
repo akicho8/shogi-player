@@ -231,7 +231,6 @@ export default {
       PiVariantInfo,
 
       sidebar_p: true,
-      sp_body_max_width: 0,
 
       // カスタマイズ用
       sp_run_mode: "view_mode",

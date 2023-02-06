@@ -45,23 +45,13 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  +defvar(sp_body_width, 100%)      // 盤(駒台を含む)の幅         FIXME: とる
-  +defvar(sp_body_max_width, none)  // 盤(駒台を含む)の最大幅     FIXME: とる
-
   .ShogiPlayerWidth
     // これがないと OpDisabledBlock の 100% は画面幅になってしまう
     // また NavigateBlock や TurnShowOrEdit の border が画面全体に及んでしまう
     position: relative
 
   .ShogiPlayerWidth
-    width: var(--sp_body_width)
-    max-width: var(--sp_body_max_width)
-
-  +mobile
-    &.is_mobile_fit_on
-      .ShogiPlayerWidth
-        width: 100%
-        max-width: none
+    width: 100%
 
   &.is_layer_on
     .ShogiPlayerWidth

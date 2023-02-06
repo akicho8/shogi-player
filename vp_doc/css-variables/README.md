@@ -88,16 +88,6 @@ Default: `0.8`
 
 駒箱のセル内における駒の占有率
 
-### TODO `--sp_body_width`
-Default: `100%`
-
-盤(駒台を含む)の幅         FIXME: とる
-
-### TODO `--sp_body_max_width`
-Default: `none`
-
-盤(駒台を含む)の最大幅     FIXME: とる
-
 ### TODO `--sp_ground_color`
 Default: `transparent`
 
