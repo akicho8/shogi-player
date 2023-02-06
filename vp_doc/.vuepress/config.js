@@ -63,7 +63,7 @@ module.exports = {
           collapsable: false,
           children: [
             '',
-            'using-sp',
+            'install',
             'edit-mode',
             'credit',
           ],
@@ -73,7 +73,7 @@ module.exports = {
         //   collapsable: false,
         //   children: [
         //     '',
-        //     'using-sp',
+        //     'install',
         //     'edit-mode',
         //     'credit',
         //   ]
