@@ -464,7 +464,7 @@
 
 <script>
 const DEVELOPMENT_P = process.env.NODE_ENV === "development"
-const IS_TRANSPARENT = "rgba(0,0,0,0)"    // chroma は "transparent" をパースできないため
+const IS_TRANSPARENT = "hsla(0, 0%, 0%, 0)"    // chroma は "transparent" をパースできないため
 const IS_WHITE       = "rgb(255,255,255)"
 
 import chroma from "chroma-js"
@@ -517,7 +517,7 @@ export default {
       se_ws_brightness: 1.0,
       se_ws_sepia: 0,
 
-      sp_board_color: "rgba(0, 0, 0, 0.2)",
+      sp_board_color: "hsla(0, 0%, 0%, 0.2)",
 
       sp_board_horizontal_gap: 0,
       sp_board_vertical_gap: 0,
@@ -534,7 +534,7 @@ export default {
       sp_mobile_vertical: "is_mobile_vertical_on",
 
       // 成り不成り選択
-      sp_promote_select_modal_bg_color: "rgba(0, 0, 0, 0.5)",
+      sp_promote_select_modal_bg_color: "hsla(0, 0%, 0%, 0.5)",
       sp_promote_select_modal_hover_color: "hsla(0, 0%, 100%, 0.5)",
 
       // 駒を操作中の移動元スタイル
@@ -547,16 +547,16 @@ export default {
       //- sp_base_w: 1,
       //- sp_base_h: 1,
       sp_stand_piece_size: 0.8,
-      sp_stand_hover_border_color: "rgba(0, 0, 0, 0.2)",
-      sp_stand_bg_color: "rgba(0, 0, 0, 0.0)",
+      sp_stand_hover_border_color: "hsla(0, 0%, 0%, 0.2)",
+      sp_stand_bg_color: "hsla(0, 0%, 0%, 0.0)",
       sp_stand_gravity: DEVELOPMENT_P ? "is_stand_gravity_top" : "is_stand_gravity_bottom",
 
       sp_turn: -1,
       sp_viewpoint: "black",
       sp_debug_mode: DEVELOPMENT_P ? "is_debug_mode_off" : "is_debug_mode_off",
       sp_piece_count_size: 0.2,
-      sp_piece_count_font_color:  "rgba(0, 0, 0, 0.75)",
-      sp_piece_count_bg_color: "rgba(255, 255, 255, 0.9)",
+      sp_piece_count_font_color:  "hsla(0, 0%, 0%, 0.75)",
+      sp_piece_count_bg_color: "hsla(0, 0%, 100%, 0.9)",
       sp_piece_count_padding: 0.08,
 
       sp_piece_count_horizontal_x: 0.43,
@@ -565,13 +565,13 @@ export default {
       sp_piece_count_vertical_y:   0.47,
 
       sp_grid_outer_stroke: 0,
-      sp_grid_outer_color: "rgba(0, 0, 0, 0.5)",
-      sp_grid_color: "rgba(0, 0, 0, 0.5)",
+      sp_grid_outer_color: "hsla(0, 0%, 0%, 0.5)",
+      sp_grid_color: "hsla(0, 0%, 0%, 0.5)",
       sp_grid_stroke: 1,
       sp_grid_star_size: 0.1,
       sp_grid_star_z_index: 0,
 
-      sp_piece_box_color: "rgba(0, 0, 0, 0.2)",
+      sp_piece_box_color: "hsla(0, 0%, 0%, 0.2)",
       sp_piece_box_piece_size: 0.8,
 
       sp_location_mark_inactive_size: 0.5,

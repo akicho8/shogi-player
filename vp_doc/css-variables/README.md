@@ -6,6 +6,8 @@ sidebar: auto
 
 ## まえがき
 
+* 初期値は `html` に対して定義してある
+  * 本当は `:root` に対して定義するべきだが node-sass が対応していなかったためできなかった
 * 「セル内の駒の占有率」は簡単に言えば「駒の大きさ」になる
 * そのとき占有率に関係なくタップできる領域の大きさは変わらない
 * 「非透明度」という表現が難しい場合は「見える度」に置き換えるとイメージしやすい
@@ -88,78 +90,85 @@ Default: `0.8`
 
 駒箱のセル内における駒の占有率
 
-### TODO `--sp_ground_color`
+### `--sp_ground_color`
 Default: `transparent`
 
-グラウンド背景色
+全体の背景色
 
-### TODO `--sp_ground_image`
+### `--sp_ground_image`
 Default: `none`
 
-グラウンド背景画像
+全体の背景画像
 
-### TODO `--sp_piece_box_color`
-Default: `rgba(0, 0, 0, 0.2)`
+### `--sp_piece_box_color`
+Default: `hsla(0, 0%, 0%, 0.2)`
 
-駒箱背景
+駒箱の背景色
 
-### TODO `--sp_common_gap`
+### `--sp_common_gap`
 Default: `0.18`
 
-共通の隙間(駒セルの縦幅に対する割合)
+共通の隙間 <Badge text="要改善" type="error" vertical="top" />
 
-### TODO `--sp_turn_slider_block_margin_top`
+* 駒のセルの縦幅に対する割り合い
+* どこを表しているのかわかりにくい
+
+### `--sp_turn_slider_block_margin_top`
 Default: `0.75rem`
 
-手数スライダーの上マージン
+スライダーの上のマージン
 
-### TODO `--sp_board_horizontal_gap`
+### `--sp_board_horizontal_gap`
 Default: `0`
 
-盤の左右の隙間(横配置時)
+盤の左右の隙間
 
-### TODO `--sp_board_vertical_gap`
+* 横配置時にのみ有効
+* 紙面風にするときだけ隙間を開けるとよいかもしれない
+
+### `--sp_board_vertical_gap`
 Default: `0`
 
-盤の上下の隙間(縦配置時)
+盤の上下の隙間
 
-### TODO `--sp_board_color`
-Default: `rgba(0, 0, 0, 0.2)`
+* 縦配置時にのみ有効
+
+### `--sp_board_color`
+Default: `hsla(0, 0%, 0%, 0.2)`
 
 盤の色
 
-### TODO `--sp_board_image`
+### `--sp_board_image`
 Default: `none`
 
-盤画像
+盤の画像
 
-### TODO `--sp_board_opacity`
-Default: `1.0`
-
-非半透明度
-
-### TODO `--sp_board_padding`
+### `--sp_board_padding`
 Default: `0.015`
 
-盤の隅の隙間
+盤の外周の隙間
 
-### TODO `--sp_board_radius`
+* 紙面風であれば 0 にしよう
+
+### `--sp_board_radius`
 Default: `5`
 
-盤の隅の丸め度合い
+盤の角の丸め度合い
 
-### TODO `--sp_grid_outer_stroke`
+### `--sp_grid_outer_stroke`
 Default: `0`
 
-グリッドの外枠の太さ(紙面風のとき)
+盤の格子の外枠の太さ
 
-### TODO `--sp_grid_outer_color`
-Default: `rgba(0, 0, 0, 0.5)`
+* 紙面風であれば 2 にしよう
+
+### `--sp_grid_outer_color`
+Default: `hsla(0, 0%, 0%, 0.5)`
 
 グリッド外枠色
 
 ### TODO `--sp_grid_color`
-Default: `rgba(0, 0, 0, 0.5)`
+Default: `hsla(0, 0%, 0%, 0.5)`
 
 グリッド色
 
@@ -244,12 +253,12 @@ Default: `0.2`
 駒数の文字サイズ(駒セル縦幅に対する比率)
 
 ### TODO `--sp_piece_count_font_color`
-Default: `rgba(0, 0, 0, 0.75)`
+Default: `hsla(0, 0%, 0%, 0.75)`
 
 駒数の文字色
 
 ### TODO `--sp_piece_count_bg_color`
-Default: `rgba(255, 255, 255, 0.9)`
+Default: `hsla(0, 0%, 100%, 0.9)`
 
 駒数の文字色背景
 
@@ -279,7 +288,7 @@ Default: `0.25`
 対局者の時間の表示サイズ
 
 ### TODO `--sp_stand_hover_border_color`
-Default: `rgba(0, 0, 0, 0.2)`
+Default: `hsla(0, 0%, 0%, 0.2)`
 
 駒を持って駒箱の上にいるときのボーダー色
 

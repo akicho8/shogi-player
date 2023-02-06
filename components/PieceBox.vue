@@ -81,7 +81,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  +defvar(sp_piece_box_color, rgba(0, 0, 0, 0.2)) // 駒箱背景
+  +defvar(sp_piece_box_color, hsla(0, 0%, 0%, 0.2)) // 駒箱背景
   +defvar(sp_common_gap, 0.18)               // 共通の隙間(駒セルの縦幅に対する割合)
 
   // あまり重要ではないところでの縦のマージンが必要なときに使う
