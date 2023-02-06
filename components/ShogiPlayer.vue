@@ -84,7 +84,7 @@ export default {
     sp_digit_label:                        { type: String, default: "is_digit_label_off",    }, // 座標の表示
     sp_digit_label_variant:                { type: String, default: "is_digit_label_variant_kanji",   }, // 座標の表記
     sp_stand_gravity:                       { type: String, default: "is_stand_gravity_bottom",  }, // 駒台の位置
-    sp_player_name_direction:                    { type: String, default: "is_player_name_dir_horizontal",  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
+    sp_player_name_direction:                    { type: String, default: "is_player_name_direction_horizontal",  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                               { type: Number, default: -1,                      }, // 局面(手数)
     sp_run_mode:                           { type: String, default: "view_mode",             }, // モード
     sp_body:                               { type: String, default: null,                    }, // 棋譜 KIF or SFEN

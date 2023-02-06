@@ -67,11 +67,11 @@ export default {
         font-weight: bold
 
   +IS_HORIZONTAL                            // 横書きなら
-    &.is_player_name_dir_vertical           // 縦書き
+    &.is_player_name_direction_vertical           // 縦書き
       .MembershipLocationPlayerInfoName
         writing-mode: vertical-rl
   +IS_VERTICAL                              // 縦の場合は(自動で縦にした場合も含めて)横にする
-    &.is_player_name_dir_vertical           // 詳細度で負けないように必要
+    &.is_player_name_direction_vertical           // 詳細度で負けないように必要
       .MembershipLocationPlayerInfoName
         writing-mode: horizontal-tb         // 明示的に横にする
 

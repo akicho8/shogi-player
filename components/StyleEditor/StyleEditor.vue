@@ -148,8 +148,8 @@
         .box
           SeTitle(name="対局者名")
           b-field(custom-class="is-small" label="縦・横書き(全体レイアウトが横の場合のみ有効)" message="英字も考慮して縦書きにするなら横書きのままで1文字ずつ<br>を入れた方が正しく縦書きになる。日本語しか使わないのであれば単に縦書きでもよい。モバイルの場合は狭いので横書きの方がよい")
-            b-radio-button(size="is-small" v-model="sp_player_name_direction" native-value="is_player_name_dir_horizontal") 横書き
-            b-radio-button(size="is-small" v-model="sp_player_name_direction" native-value="is_player_name_dir_vertical") 縦書き
+            b-radio-button(size="is-small" v-model="sp_player_name_direction" native-value="is_player_name_direction_horizontal") 横書き
+            b-radio-button(size="is-small" v-model="sp_player_name_direction" native-value="is_player_name_direction_vertical") 縦書き
 
           b-field(custom-class="is-small" label="名前の大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_player_name_size" :min="0" :max="0.5" :step="0.001")
@@ -597,7 +597,7 @@ export default {
         black: { name: "先手", time: "", },
         white: { name: "後手", time: "", },
       },
-      sp_player_name_direction: DEVELOPMENT_P ? "is_player_name_dir_vertical" : "is_player_name_dir_horizontal",
+      sp_player_name_direction: DEVELOPMENT_P ? "is_player_name_direction_vertical" : "is_player_name_direction_horizontal",
       sp_player_name_size: 0.25,
       sp_player_time_size: 0.25,
       ////////////////////////////////////////////////////////////////////////////////
@@ -726,7 +726,7 @@ export default {
       this.sp_grid_stroke                 = 1                             // グリッド線(細)
       this.sp_grid_outer_stroke           = 2                             // グリッド枠(太)
       this.sp_stand_gravity                = "is_stand_gravity_top"      // 駒台の位置
-      this.sp_player_name_direction             = "is_player_name_dir_vertical" // 縦横書き
+      this.sp_player_name_direction             = "is_player_name_direction_vertical" // 縦横書き
       this.sp_balloon                     = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
       this.sp_location_mark_inactive_size = 1.0                      // 手番でないときの☗☖を小さくしない
       this.sp_player_info.black.name      = "先手"

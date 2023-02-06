@@ -14,7 +14,7 @@
           sp_digit_label="is_digit_label_on"
           sp_digit_label_variant="is_digit_label_variant_number"
           sp_stand_gravity="is_stand_gravity_top"
-          sp_player_name_direction="is_player_name_dir_vertical"
+          sp_player_name_direction="is_player_name_direction_vertical"
           sp_balloon="is_balloon_off"
           :sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
         )
@@ -29,7 +29,7 @@
         |     sp_digit_label="is_digit_label_on"                     // 座標を表示する
         |     sp_digit_label_variant="is_digit_label_variant_number" // 右側の座標を「数値」表記に変更する
         |     sp_stand_gravity="is_stand_gravity_top"                // 駒台を上寄せ配置する
-        |     sp_player_name_direction="is_player_name_dir_vertical"       // 名前を縦書きにする
+        |     sp_player_name_direction="is_player_name_direction_vertical"       // 名前を縦書きにする
         |     sp_balloon="is_balloon_off"                            // 名前の下の吹き出しを表示しない
         |     :sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
         |   )

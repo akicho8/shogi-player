@@ -201,15 +201,15 @@ Default: `is_stand_gravity_bottom`
 一方、右上だけで詰将棋を作るなら上に寄せた方が持駒が見やすくなるなどの利点もある
 両方を▲視点で上に寄せるのはいまのところ対応していない
 
-| 値                      | 意味       |
+| 値                      | 寄せる方向 |
 |-------------------------|------------|
-| is_stand_gravity_bottom | 下に寄せる |
-| is_stand_gravity_top    | 上に寄せる |
+| is_stand_gravity_bottom | 下         |
+| is_stand_gravity_top    | 上         |
 
 ### `sp_player_name_direction`
 
 Type: `String`
-Default: `is_player_name_dir_horizontal`
+Default: `is_player_name_direction_horizontal`
 
 名前の縦横書き切り替え
 
@@ -220,8 +220,8 @@ Default: `is_player_name_dir_horizontal`
 
 | 値                            | 意味   |
 |-------------------------------|--------|
-| is_player_name_dir_horizontal | 横書き |
-| is_player_name_dir_vertical   | 縦書き |
+| is_player_name_direction_horizontal | 横書き |
+| is_player_name_direction_vertical   | 縦書き |
 
 ### `sp_player_info`
 
