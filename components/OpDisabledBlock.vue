@@ -1,5 +1,5 @@
 <template lang="pug">
-.OpDisabledBlock.is-overlay(v-if="TheSp.sp_op_disabled")
+.OpDisabledBlock.is-overlay(v-if="TheSp.sp_operation_disabled")
 </template>
 
 <script>

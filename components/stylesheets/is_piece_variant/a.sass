@@ -1,0 +1,21 @@
+=is_piece_variant_a($piece_key, $promoted, $code)
+  &.piece_#{$piece_key}
+    &.promoted_#{$promoted}
+      background-image: url("#{$sp_assets_dir}/is_piece_variant/a/#{$code}.svg")
+
+=is_piece_variant_a_pack
+  +is_piece_variant_a("K", false, "BK0")
+  +is_piece_variant_a("R", false, "BR0")
+  +is_piece_variant_a("B", false, "BB0")
+  +is_piece_variant_a("G", false, "BG0")
+  +is_piece_variant_a("S", false, "BS0")
+  +is_piece_variant_a("N", false, "BN0")
+  +is_piece_variant_a("L", false, "BL0")
+  +is_piece_variant_a("P", false, "BP0")
+  +is_piece_variant_a("X", false, "BK0")
+  +is_piece_variant_a("R", true,  "BR1")
+  +is_piece_variant_a("B", true,  "BB1")
+  +is_piece_variant_a("S", true,  "BS1")
+  +is_piece_variant_a("N", true,  "BN1")
+  +is_piece_variant_a("L", true,  "BL1")
+  +is_piece_variant_a("P", true,  "BP1")

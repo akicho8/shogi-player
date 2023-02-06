@@ -2,7 +2,7 @@
 .MainDocResponsiveWithBulmaOne.column.is-6-tablet.is-4-desktop.is-3-widescreen.is-2-fullhd
   ShogiPlayer.is_book_like(
     is_layer="is_layer_on"
-    sp_pi_variant="is_pi_variant_b"
+    sp_piece_variant="is_piece_variant_b"
     sp_summary="is_summary_off"
     :sp_player_info="sp_player_info"
     :sp_turn="-1"

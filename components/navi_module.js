@@ -11,7 +11,7 @@ export const navi_module = {
     sp_controller:                  { type: String,  default: "is_controller_off", }, // コントローラー表示
     sp_viewpoint:                   { type: String,  default: "black",             }, // 視点
 
-    sp_op_disabled:                 { type: Boolean, default: false,               }, // 全体の操作を無効化
+    sp_operation_disabled:                 { type: Boolean, default: false,               }, // 全体の操作を無効化
     sp_hidden_if_piece_stand_blank: { type: Boolean, default: false,               }, // 駒がないときは駒台側を非表示
     sp_flip_if_white:               { type: Boolean, default: false,               }, // 最初に表示した局面が△なら反転
 
@@ -54,7 +54,7 @@ export const navi_module = {
         this.log("repeat", e.repeat)
       }
 
-      if (this.sp_op_disabled) {
+      if (this.sp_operation_disabled) {
         return
       }
 

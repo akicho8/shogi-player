@@ -42,10 +42,10 @@
 | `update:sp_viewpoint`                       | 盤面を反転したとき                             |                                                                   |   |
 | `update:sp_layout`                          | レイアウトを変更したとき                       |                                                                   |   |
 | `update:sp_bg_variant`                      | 背景の種類変更                                 |                                                                   |   |
-| `update:sp_pi_variant`                      | 駒の種類変更                                   |                                                                   |   |
+| `update:sp_piece_variant`                      | 駒の種類変更                                   |                                                                   |   |
 | `board_cell_pointerdown`     | セルをクリックしたとき(スマホの場合押した瞬間) | place が来るのでどこをクリックしたかわかる                        |   |
 | `player_info_click`                         | プレイヤー名をクリックしたとき                 | (location, sp_player_infoの片側) がくる                           |   |
-| `xxx.native`                                | 任意のイベント (例: `click.native`)            | click の場合はだいたい `sp_op_disabled` と組み合わせる            |   |
+| `xxx.native`                                | 任意のイベント (例: `click.native`)            | click の場合はだいたい `sp_operation_disabled` と組み合わせる            |   |
 | `operation_invalid1`                        | 手番が違うのに操作しようとした                 |                                                                   |   |
 | `operation_invalid2`                        | 自分が手番だが相手の駒を動かそうとした         |                                                                   |   |
 | `foul_accident`                             | 反則が発生したとき                             | sp_play_mode_foul_check_p && sp_play_mode_foul_break_p のときのみ |   |

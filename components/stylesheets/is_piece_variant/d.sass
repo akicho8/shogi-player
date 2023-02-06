@@ -1,0 +1,38 @@
+=is_piece_variant_d($position, $piece_key, $promoted, $code)
+  .is_position_#{$position}
+    .PieceTextureSelf
+      &.piece_#{$piece_key}
+        &.promoted_#{$promoted}
+          background-image: url("#{$sp_assets_dir}/is_piece_variant/d/#{$code}.png")
+
+=is_piece_variant_d_pack
+  +is_piece_variant_d("north", "K", false, "WK0")
+  +is_piece_variant_d("north", "R", false, "WR0")
+  +is_piece_variant_d("north", "B", false, "WB0")
+  +is_piece_variant_d("north", "G", false, "WG0")
+  +is_piece_variant_d("north", "S", false, "WS0")
+  +is_piece_variant_d("north", "N", false, "WN0")
+  +is_piece_variant_d("north", "L", false, "WL0")
+  +is_piece_variant_d("north", "P", false, "WP0")
+  +is_piece_variant_d("north", "X", false, "WX0")
+  +is_piece_variant_d("north", "R", true,  "WR1")
+  +is_piece_variant_d("north", "B", true,  "WB1")
+  +is_piece_variant_d("north", "S", true,  "WS1")
+  +is_piece_variant_d("north", "N", true,  "WN1")
+  +is_piece_variant_d("north", "L", true,  "WL1")
+  +is_piece_variant_d("north", "P", true,  "WP1")
+  +is_piece_variant_d("south", "K", false, "BK0")
+  +is_piece_variant_d("south", "R", false, "BR0")
+  +is_piece_variant_d("south", "B", false, "BB0")
+  +is_piece_variant_d("south", "G", false, "BG0")
+  +is_piece_variant_d("south", "S", false, "BS0")
+  +is_piece_variant_d("south", "N", false, "BN0")
+  +is_piece_variant_d("south", "L", false, "BL0")
+  +is_piece_variant_d("south", "P", false, "BP0")
+  +is_piece_variant_d("south", "X", false, "BX0")
+  +is_piece_variant_d("south", "R", true,  "BR1")
+  +is_piece_variant_d("south", "B", true,  "BB1")
+  +is_piece_variant_d("south", "S", true,  "BS1")
+  +is_piece_variant_d("south", "N", true,  "BN1")
+  +is_piece_variant_d("south", "L", true,  "BL1")
+  +is_piece_variant_d("south", "P", true,  "BP1")

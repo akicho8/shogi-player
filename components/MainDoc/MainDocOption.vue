@@ -87,8 +87,8 @@
             b-radio-button(size="is-small" v-model="sp_overlay_nav" native-value="is_overlay_nav_on") ON
 
           b-field(custom-class="is-small" label="操作禁止")
-            b-radio-button(size="is-small" v-model="sp_op_disabled" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_op_disabled" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_operation_disabled" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_operation_disabled" :native-value="true") ON
 
           b-field(custom-class="is-small" label="sp_human_side")
             template(v-for="e in HumanSideInfo.values")
@@ -148,7 +148,7 @@
             :sp_debug_mode.sync="sp_debug_mode"
             :sp_hidden_if_piece_stand_blank="sp_hidden_if_piece_stand_blank"
             :sp_setting="sp_setting"
-            :sp_op_disabled="sp_op_disabled"
+            :sp_operation_disabled="sp_operation_disabled"
             :sp_viewpoint.sync="sp_viewpoint"
             :sp_flip_if_white="sp_flip_if_white"
             :sp_player_info="sp_player_info"
@@ -193,7 +193,7 @@
                 |   sp_sfen_show="{{sp_sfen_show}}"
                 |   sp_overlay_nav="{{sp_overlay_nav}}"
                 |   sp_setting="{{sp_setting}}"
-                |   :sp_op_disabled="{{sp_op_disabled}}"
+                |   :sp_operation_disabled="{{sp_operation_disabled}}"
                 |   sp_controller="{{sp_controller}}"
                 |   sp_human_side="{{sp_human_side}}"
                 |   sp_viewpoint="{{sp_viewpoint}}"
@@ -246,7 +246,7 @@ export default {
       sp_hidden_if_piece_stand_blank: false,
       sp_setting: "is_setting_off",
       sp_summary: "is_summary_on",
-      sp_op_disabled: false,
+      sp_operation_disabled: false,
       sp_viewpoint: "black",
       sp_flip_if_white: false,
 

@@ -32,7 +32,7 @@
         @update:sp_viewpoint="                       (...args) => $emit('update:sp_viewpoint', ...args)"
         @update:sp_layout="                          (...args) => $emit('update:sp_layout', ...args)"
         @update:sp_bg_variant="                      (...args) => $emit('update:sp_bg_variant', ...args)"
-        @update:sp_pi_variant="                      (...args) => $emit('update:sp_pi_variant', ...args)"
+        @update:sp_piece_variant="                      (...args) => $emit('update:sp_piece_variant', ...args)"
         @board_cell_pointerdown="                    (...args) => $emit('board_cell_pointerdown', ...args)"
         @operation_invalid1="                        (...args) => $emit('operation_invalid1', ...args)"
         @operation_invalid2="                        (...args) => $emit('operation_invalid2', ...args)"
@@ -83,7 +83,7 @@ export default {
     sp_setting:                                  { type: String,   }, // 設定ボタンの表示
     sp_controller:                               { type: String,   }, // コントローラー表示
     sp_viewpoint:                                { type: String,   }, // 視点
-    sp_op_disabled:                              { type: Boolean,  }, // 全体の操作を無効化
+    sp_operation_disabled:                              { type: Boolean,  }, // 全体の操作を無効化
     sp_hidden_if_piece_stand_blank:              { type: Boolean,  }, // 駒がないときは駒台側を非表示
     sp_flip_if_white:                            { type: Boolean,  }, // 最初に表示した局面が△なら反転
     sp_key_event_capture_enabled:                { type: Boolean,  }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
@@ -94,7 +94,7 @@ export default {
     sp_layout:                                   { type: String,   }, // レイアウト is_(vertical\|horizontal)
     sp_balloon:                                  { type: String,   }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                                    { type: String,   }, // レイヤー確認(デバッグ用)
-    sp_pi_variant:                               { type: String,   }, // 駒の種類
+    sp_piece_variant:                               { type: String,   }, // 駒の種類
     sp_bg_variant:                               { type: String,   }, // 盤の種類
     sp_mobile_vertical:                          { type: String,   }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior:                        { type: String,   }, // ☗☖をタップしたとき視点を切り替える
@@ -104,7 +104,7 @@ export default {
     sp_digit_label:                              { type: String,   }, // 座標の表示
     sp_digit_label_variant:                      { type: String,   }, // 座標の表記
     sp_stand_gravity:                            { type: String,   }, // 駒台の位置
-    sp_player_name_dir:                          { type: String,   }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
+    sp_player_name_direction:                          { type: String,   }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                                     { type: Number,   }, // 局面(手数)
     sp_run_mode:                                 { type: String,   }, // モード
     sp_body:                                     { type: String,   }, // 棋譜 KIF or SFEN

@@ -17,8 +17,8 @@
 
 ### その他
 
-* **Web Components**: 対応
 * **フレームワーク**: Vue.js 2, Buefy, Bulma
 * **入力フォーマット**: KIF, BOD, SFEN
 * **出力フォーマット**: SFEN
 * **駒落ち棋譜再生**: 対応
+* **Web Components**: 対応

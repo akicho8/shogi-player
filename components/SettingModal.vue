@@ -36,7 +36,7 @@
     //- b-field(label="駒の種類")
     //- b-field
     //-   template(v-for="e in PiVariantInfo.values")
-    //-     b-radio-button(v-model="TheSp.new_sp_pi_variant" :native-value="e.key") {{e.name}}
+    //-     b-radio-button(v-model="TheSp.new_sp_piece_variant" :native-value="e.key") {{e.name}}
 
     template(v-if="TheSp.xcontainer")
       b-field(label="再生モードの現局面(Readonly)")
