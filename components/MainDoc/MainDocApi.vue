@@ -10,7 +10,6 @@
         .column
           ShogiPlayer(
             ref="api_sp"
-            sp_turn_show="is_turn_show_off"
             :sp_hidden_if_piece_stand_blank="true"
             sp_debug_mode="is_debug_mode_off"
           )
