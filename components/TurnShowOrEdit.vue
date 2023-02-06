@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     component_alive_p() {
-      return this.TheSp.xcontainer && this.TheSp.sp_summary === "is_summary_on" && (this.TheSp.view_p || this.TheSp.play_p)
+      return this.TheSp.xcontainer && this.TheSp.sp_turn_show === "is_turn_show_on" && (this.TheSp.view_p || this.TheSp.play_p)
     },
   },
 }

@@ -3,7 +3,7 @@
   ShogiPlayer.is_book_like(
     is_layer="is_layer_on"
     sp_piece_variant="is_piece_variant_b"
-    sp_summary="is_summary_off"
+    sp_turn_show="is_turn_show_off"
     :sp_player_info="sp_player_info"
     :sp_turn="-1"
     :sp_body="kifu_book_info.sp_body"

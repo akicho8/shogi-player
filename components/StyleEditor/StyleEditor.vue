@@ -389,8 +389,8 @@
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="white") ☖
 
           b-field(custom-class="is-small" label="手数表示")
-            b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
-            b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_on") ON
+            b-radio-button(size="is-small" v-model="sp_turn_show" native-value="is_turn_show_off") OFF
+            b-radio-button(size="is-small" v-model="sp_turn_show" native-value="is_turn_show_on") ON
 
           b-field(custom-class="is-small" label="KIFコメ表示")
             b-radio-button(size="is-small" v-model="sp_comment" native-value="is_comment_off") OFF
@@ -604,7 +604,7 @@ export default {
 
       sp_body: null,
 
-      sp_summary:    DEVELOPMENT_P ? "is_summary_on" : "is_summary_off",
+      sp_turn_show:    DEVELOPMENT_P ? "is_turn_show_on" : "is_turn_show_off",
 
       sp_slider:     DEVELOPMENT_P ? "is_slider_on" : "is_slider_on",
       sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
@@ -854,7 +854,7 @@ export default {
       params.sp_turn              = this.sp_turn
       params.sp_body              = this.sp_body
       params.sp_setting           = "is_setting_off"
-      params.sp_summary           = this.sp_summary
+      params.sp_turn_show           = this.sp_turn_show
       params.sp_digit_label             = this.sp_digit_label
       params.sp_digit_label_variant = this.sp_digit_label_variant
       params.sp_stand_gravity             = this.sp_stand_gravity

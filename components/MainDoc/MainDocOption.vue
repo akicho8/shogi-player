@@ -32,8 +32,8 @@
         .box
           .title.is-5 レイアウト
           b-field(custom-class="is-small" label="手数表示")
-            b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_off") OFF
-            b-radio-button(size="is-small" v-model="sp_summary" native-value="is_summary_on") ON
+            b-radio-button(size="is-small" v-model="sp_turn_show" native-value="is_turn_show_off") OFF
+            b-radio-button(size="is-small" v-model="sp_turn_show" native-value="is_turn_show_on") ON
 
           b-field(custom-class="is-small" label="スライダー表示")
             b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_off") OFF
@@ -143,7 +143,7 @@
             :sp_run_mode.sync="sp_run_mode"
             :sp_body.sync="sp_body"
             :sp_turn.sync="sp_turn"
-            :sp_summary="sp_summary"
+            :sp_turn_show="sp_turn_show"
             :sp_slider="sp_slider"
             :sp_debug_mode.sync="sp_debug_mode"
             :sp_hidden_if_piece_stand_blank="sp_hidden_if_piece_stand_blank"
@@ -189,7 +189,7 @@
                 |   sp_run_mode="{{sp_run_mode}}"
                 |   sp_slider="{{sp_slider}}"
                 |   sp_debug_mode="{{sp_debug_mode}}"
-                |   sp_summary="{{sp_summary}}"
+                |   sp_turn_show="{{sp_turn_show}}"
                 |   sp_sfen_show="{{sp_sfen_show}}"
                 |   sp_overlay_nav="{{sp_overlay_nav}}"
                 |   sp_setting="{{sp_setting}}"
@@ -245,7 +245,7 @@ export default {
       sp_debug_mode: "is_debug_mode_off",
       sp_hidden_if_piece_stand_blank: false,
       sp_setting: "is_setting_off",
-      sp_summary: "is_summary_on",
+      sp_turn_show: "is_turn_show_on",
       sp_operation_disabled: false,
       sp_viewpoint: "black",
       sp_flip_if_white: false,

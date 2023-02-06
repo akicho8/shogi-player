@@ -20,7 +20,7 @@ export default {
     default_params() {
       return {
         sp_run_mode: "play_mode",
-        sp_summary: "is_summary_off",
+        sp_turn_show: "is_turn_show_off",
       }
     },
   },

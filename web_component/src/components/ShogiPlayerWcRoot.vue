@@ -78,7 +78,7 @@ export default {
     // sp_body:       { type: String, },
 
     sp_turn_slider_focus:                        { type: String,   }, // mountedしたらスライダーにフォーカスする？
-    sp_summary:                                  { type: String,   }, // 手数や結果の表示(再生モード時) (is_summary_on is_summary_off)
+    sp_turn_show:                                  { type: String,   }, // 手数や結果の表示(再生モード時) (is_turn_show_on is_turn_show_off)
     sp_slider:                                   { type: String,   }, // スライダー表示
     sp_setting:                                  { type: String,   }, // 設定ボタンの表示
     sp_controller:                               { type: String,   }, // コントローラー表示

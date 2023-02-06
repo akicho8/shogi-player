@@ -245,10 +245,10 @@ Default: `null`
 }
 ```
 
-### `sp_summary`
+### `sp_turn_show`
 
 Type: `String`
-Default: `is_summary_off`
+Default: `is_turn_show_off`
 
 再生モード時に手数の表示をするか？
 
@@ -260,8 +260,8 @@ Default: `is_summary_off`
 
 | 値             | 意味   |
 |----------------|--------|
-| is_summary_off | しない |
-| is_summary_on  | する   |
+| is_turn_show_off | しない |
+| is_turn_show_on  | する   |
 
 ### `sp_flip_if_white`
 
