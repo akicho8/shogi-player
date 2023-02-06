@@ -8,9 +8,12 @@ sidebar: auto
 
 * 初期値は `html` に対して定義してある
   * 本当は `:root` に対して定義するべきだが node-sass が対応していなかったためできなかった
-* 「セル内の駒の占有率」は簡単に言えば「駒の大きさ」になる
-* そのとき占有率に関係なくタップできる領域の大きさは変わらない
-* 「非透明度」という表現が難しい場合は「見える度」に置き換えるとイメージしやすい
+* セルと駒の占有率について
+  * セルは駒をタップできる領域
+  * 占有率は簡単に言えば駒の見た目の大きさになる
+  * 占有率が変わってもタップできる領域は変わらない
+* 非透明度とは？
+  * ピンとこない場合は「見える度」に置き換えるとイメージしやすい
 
 ## 基本
 
@@ -33,6 +36,12 @@ Default: `0.9`
   * デフォルト値よりもっと小さくてもいいかもしれない
   * 漢字が巨大だと暑苦しい
   * 小さめにすると余白ができてすっきりとした印象になる
+
+| 値       | おすすめ |
+|----------|----------|
+| ぬれよん |      0.9 |
+| 紙面風   | 0.8〜0.9 |
+| Portella |      1.0 |
 
 ### `--sp_board_piece_position`
 Default: `center`
@@ -165,32 +174,35 @@ Default: `0`
 ### `--sp_grid_outer_color`
 Default: `hsla(0, 0%, 0%, 0.5)`
 
-グリッド外枠色
+盤の格子の外枠の色
 
-### TODO `--sp_grid_color`
+### `--sp_grid_color`
 Default: `hsla(0, 0%, 0%, 0.5)`
 
-グリッド色
+盤の格子の色
 
-### TODO `--sp_grid_stroke`
+### `--sp_grid_stroke`
 Default: `1`
 
-グリッド太さ
+盤の格子の線の太さ
 
-### TODO `--sp_grid_outer_texture_edge_stroke`
+### `--sp_grid_outer_texture_edge_stroke`
 Default: `0`
 
-盤背景の縁取りの太さ(影の影響あり)
+盤の背景画像の縁取りの線の太さ
 
-### TODO `--sp_grid_star_size`
+### `--sp_grid_star_size`
 Default: `0.1`
 
 星の大きさ
 
-### TODO `--sp_grid_star_z_index`
+### `--sp_grid_star_z_index`
 Default: `0`
 
-星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)
+星の z-index
+
+* 本来、星の大きさにかかわらずそのまわりの4つのセルはタップできるべきだが星が大きすぎるとタップできない <Badge text="BUG" type="error" vertical="top" />
+* そのため[符号の鬼](https://www.shogi-extend.com/xy)ではタップ時の判定ミスを防ぐため `-1` にしている
 
 ### TODO `--sp_controller_width`
 Default: `0.5`

@@ -2,15 +2,15 @@
 .ShogiPlayerWcRoot(part="__root__")
   // CSS変数の初期値はここに定義する
   // __root__ は確認のためにつけているだけなので使うな
-  .ShogiPlayerCssVariablesOverride1(part="sp_css_variables")
-    // 上書きする場合のCSS変数は shogi-player-wc::part(sp_css_variables) {} でここに定義してもらう
+  .ShogiPlayerCssVariablesOverride1(part="spwc_style_scope")
+    // 上書きする場合のCSS変数は shogi-player-wc::part(spwc_style_scope) {} でここに定義してもらう
     // ShogiPlayerWcRoot でも上書きできたが優先度が曖昧なため階層化している
-    .ShogiPlayerCssVariablesOverride2(:style="sp_css_variables_hash")
-      // ここに定義すると shogi-player-wc::part(sp_css_variables) {} に勝つ
-      // 例: sp_css_variables="{'--sp_controller_width':0.8}"
+    .ShogiPlayerCssVariablesOverride2(:style="spwc_style_object_hash")
+      // ここに定義すると shogi-player-wc::part(spwc_style_scope) {} に勝つ
+      // 例: spwc_style_object="{'--sp_controller_width':0.8}"
       //- @update:sp_turn="(...e) => $emit('update:sp_turn', e)"
       ShogiPlayer(
-        v-bind="$props"
+        v-bind="vue_side_native_props"
         v-on="$listeners"
         @update:short_sfen="                         (...args) => $emit('update:short_sfen', ...args)"
         @update:play_mode_advanced_full_moves_sfen=" (...args) => $emit('update:play_mode_advanced_full_moves_sfen', ...args)"
@@ -69,7 +69,7 @@ export default {
     style: { type: String, },
 
     ////////////////////////////////////////////////////////////////////////////////
-    sp_css_variables: { type: String, },
+    spwc_style_object: { type: String, },
 
     ////////////////////////////////////////////////////////////////////////////////
     // sp_layout:     { type: String, },
@@ -89,8 +89,8 @@ export default {
     sp_key_event_capture_enabled:                { type: Boolean,  }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
     sp_shift_key_mag:                            { type: Number,   }, // キーで左右するとき shift を押したときの倍率
     sp_system_key_mag:                           { type: Number,   }, // キーで左右するとき command などを押したときの倍率
-    sp_board_dimension_w:                        { type: Number,   }, // 盤のセル数(W)
-    sp_board_dimension_h:                        { type: Number,   }, // 盤のセル数(H)
+    // sp_board_dimension_w:                        { type: Number,   }, // 盤のセル数(W)
+    // sp_board_dimension_h:                        { type: Number,   }, // 盤のセル数(H)
     sp_layout:                                   { type: String,   }, // レイアウト is_(vertical\|horizontal)
     sp_balloon:                                  { type: String,   }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                                    { type: String,   }, // レイヤー確認(デバッグ用)
@@ -108,7 +108,6 @@ export default {
     sp_turn:                                     { type: Number,   }, // 局面(手数)
     sp_run_mode:                                 { type: String,   }, // モード
     sp_body:                                     { type: String,   }, // 棋譜 KIF or SFEN
-    sp_player_info:                              { type: Object,   }, // 対局者名と時間
     sp_comment:                                  { type: String,   }, // KIFのコメントを表示する
 
     sp_human_side:                               { type: String,   }, // 含まれる側だけ操作できるようにする
@@ -125,6 +124,10 @@ export default {
 
     sp_board_cell_left_click_disabled:           { type: Boolean,  }, // 盤上セルタップ時の通常処理の無効化
 
+    // Object
+    sp_player_info:                              { type: Object,   }, // 対局者名と時間
+
+    // Function
     sp_board_piece_back_user_class_fn:           { type: Function, }, // セルのクラスを決める処理
   },
   mounted() {
@@ -133,7 +136,8 @@ export default {
     console.log("NODE_ENV", process.env.NODE_ENV)
     console.log("$attrs", this.$attrs)
     console.log("$props", this.$props)
-    console.log(this.sp_css_variables_hash)
+    console.log("spwc_style_object_hash", this.spwc_style_object_hash)
+    console.log("vue_side_native_props", this.vue_side_native_props)
   },
   methods: {
     foo(v) {
@@ -152,8 +156,23 @@ export default {
     },
   },
   computed: {
-    sp_css_variables_hash() {
-      return JSON5.parse(this.sp_css_variables ?? "{}")
+    spwc_style_object_hash() {
+      return JSON5.parse(this.spwc_style_object ?? "{}")
+    },
+    vue_side_native_props() {
+      const hash = {...this.$props, ...this.vue_side_native_objects_hash}
+      // delete hash.spwc_style_object // このコンポーネント内のみ使っているものなので削除しておく
+      return hash
+    },
+    vue_side_native_objects_hash() {
+      return {
+        sp_player_info: this.sp_player_info_native,
+      }
+    },
+    sp_player_info_native() {
+      if (this.sp_player_info != null) {
+        return JSON5.parse(this.sp_player_info)
+      }
     },
   },
 }

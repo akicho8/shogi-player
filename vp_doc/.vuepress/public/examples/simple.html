@@ -3,8 +3,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+  <style>
+    shogi-player-wc::part(spwc_style_scope) {
+      font-family: serif;                     // 明朝体
+      color: black;                           // "先手" "後手" の色
+
+      --sp_board_color: white;                // 盤の色を白にする
+      --sp_board_padding: 0;                  // グリッド外周と縁の隙間を無くす
+      --sp_board_radius: 0;                   // 角を丸めない
+      --sp_grid_stroke: 0.5;                  // グリッド内線は細くする(お好みで調整)
+      --sp_grid_outer_stroke: 2;              // グリッド外枠を内線より太くする(お好みで調整)
+      --sp_player_name_size: 0.4;             // "先手" "後手" の文字サイズ調整
+      --sp_location_mark_inactive_size: 1.0;  // 手番でない方の☗☖の比率を変更しない
+
+                                              // 駒数
+      --sp_piece_count_size: 0.4;             // 駒数の大きさ調整
+      --sp_piece_count_horizontal_x: 0.70;    // 右に寄せる
+      --sp_piece_count_horizontal_y: 0.03;    // 少し下げる
+      --sp_piece_count_bg_color: transparent; // 背景を透過させる
+
+                                              // 座標
+      --sp_digit_label_color: black;          // 座標の色を黒にする
+      --sp_digit_xlabel_size: 0.3;            // 座標の大きさ(上側)
+      --sp_digit_xlabel_push: 0.073;          // 位置を調整する(上側)
+      --sp_digit_ylabel_size: 0.3;            // 座標の大きさ(右側)
+      --sp_digit_ylabel_push: -0.009;         // 位置を調整する(右側)
+      --sp_board_horizontal_gap: 0.5;         // 座標があるため盤と駒台との隙間を空ける
+    }
+  </style>
+
 </head>
 <body>
-  <shogi-player-wc/>
+  <shogi-player-wc
+    sp_layer="is_layer_off"
+    sp_layout="is_layout_horizontal"
+    sp_piece_variant="is_piece_variant_b"
+    sp_digit_label="is_digit_label_on"
+    sp_digit_label_variant="is_digit_label_variant_kanji"
+    sp_stand_gravity="is_stand_gravity_top"
+    sp_player_name_direction="is_player_name_direction_vertical"
+    sp_balloon="is_balloon_off"
+    sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
+  />
 </body>
 </html>

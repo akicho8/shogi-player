@@ -90,10 +90,10 @@ Material Design Icons の CSS は Web Components 内ですでに読み込んで�
 ## スタイル変更 (王道) ##
 
 CSS変数は普通に定義しても Shadow DOM 内には届かない
-用意した `sp_css_variables` に対して適用する
+用意した `spwc_style_scope` に対して適用する
 
 ```css
-shogi-player-wc::part(sp_css_variables) {
+shogi-player-wc::part(spwc_style_scope) {
   --sp_board_color: lightskyblue;
 }
 ```
@@ -101,21 +101,21 @@ shogi-player-wc::part(sp_css_variables) {
 <ShogiPlayerWcWrapper class="b441958504b7c7af3ef62a47fafe8d21 is-small" />
 <style lang="stylus">
 .ShogiPlayerWcWrapper.b441958504b7c7af3ef62a47fafe8d21
-  shogi-player-wc::part(sp_css_variables)
+  shogi-player-wc::part(spwc_style_scope)
     --sp_board_color: lightskyblue
 </style>
 
 ## スタイル変更 (実験) ##
 
-Web Components の引数の sp_css_variables にハッシュで書いても変更できる (ようにした)
+Web Components の引数の spwc_style_object にハッシュで書いても変更できる (ようにした)
 これはタグの style を直接書くのに似ていて王道な方法より適用優先度が高い
 綺麗ごとを言うなら機能とスタイルは分けるべきだが、そんなことにはかまわず一箇所で一括で設定したい場合もあるかもしれないので入れてある
 
 ```html
-<shogi-player-wc sp_css_variables="{'--sp_board_color': 'lightskyblue'}" />
+<shogi-player-wc spwc_style_object="{'--sp_board_color': 'lightskyblue'}" />
 ```
 
-<ShogiPlayerWcWrapper sp_css_variables="{'--sp_board_color': 'lightskyblue'}" class="is-small" />
+<ShogiPlayerWcWrapper spwc_style_object="{'--sp_board_color': 'lightskyblue'}" class="is-small" />
 
 ## イベント受信 ##
 

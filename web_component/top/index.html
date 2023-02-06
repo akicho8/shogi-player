@@ -21,7 +21,7 @@
     /* .foo { */
     /*   --sp_controller_width: 0.9; */
     /* } */
-    shogi-player-wc::part(sp_css_variables) {
+    shogi-player-wc::part(spwc_style_scope) {
       --sp_controller_width: 0.1;
       --sp_board_color: hsla(180, 30%, 30%, 0.5);
     }
@@ -44,7 +44,8 @@
     <!-- sp_piece_variant="is_piece_variant_b" -->
     <shogi-player-wc
       class="foo"
-      sp_css_variables="{'--sp_controller_width':1.0}"
+      spwc_style_object="{'--sp_controller_width':1.0}"
+      sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
       :foo1.prop1="123"
       .foo2="def"
       sp_layout="is_layout_horizontal"

@@ -69,6 +69,7 @@ module.exports = {
             '',
             'install',
             'edit-mode',
+            'customize',
             'credit',
             'test-of-demo',
           ],

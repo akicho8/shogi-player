@@ -29,7 +29,7 @@ export default {
 @import "../styles/responsive_macro_from_bulma"
 
 // 全体の詳細度を低くした初期値
-shogi-player-wc::part(sp_css_variables)
+shogi-player-wc::part(spwc_style_scope)
   --sp_board_radius: 0
 
 .ShogiPlayerWcWrapper
