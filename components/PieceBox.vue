@@ -115,7 +115,7 @@ export default {
     &.frame_boder_if_hover
       &:hover
         .PieceBoxTexture
-          border: var(--sp_stand_hover_border_stroke) dashed var(--sp_stand_hover_border_color)
+          border: var(--sp_stand_hover_border_stroke) dashed calc(var(--sp_stand_hover_border_color) * 1px)
 
   ////////////////////////////////////////////////////////////////////////////////
   .PieceBox

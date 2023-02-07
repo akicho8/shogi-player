@@ -48,6 +48,7 @@ export default {
 <style lang="sass">
 @import "../support.sass"
 .ShogiPlayerGround
+  +defvar(sp_location_mark_active_size, 1.0)   // 手番のときの☗サイズの倍率
   +defvar(sp_location_mark_inactive_size, 0.5) // 手番ではないときの☗サイズの倍率
 
   .MembershipLocationMark
@@ -81,8 +82,8 @@ export default {
     width:  var(--sp_base_w)
     height: var(--sp_base_h)
   .MembershipLocationMarkTexture
-    width:  calc(var(--sp_stand_piece_size) * 100%)
-    height: calc(var(--sp_stand_piece_size) * 100%)
+    width:  calc(var(--sp_stand_piece_size) * var(--sp_location_mark_active_size) * 100%)
+    height: calc(var(--sp_stand_piece_size) * var(--sp_location_mark_active_size) * 100%)
   .is_turn_inactive
     .MembershipLocationMarkTexture
       width:  calc(var(--sp_stand_piece_size) * var(--sp_location_mark_inactive_size) * 100%)

@@ -57,10 +57,10 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  +defvar(sp_turn_slider_block_margin_top, 0.75rem) // 手数スライダーの上マージン
+  +defvar(sp_turn_slider_margin_top, 0.75rem) // 手数スライダーの上マージン
 
   .TurnSliderBlock
-    margin-top: var(--sp_turn_slider_block_margin_top)
+    margin-top: var(--sp_turn_slider_margin_top)
 
     display: flex
     justify-content: center

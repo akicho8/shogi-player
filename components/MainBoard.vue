@@ -82,11 +82,11 @@ export default {
 
   +defvar(sp_grid_outer_stroke, 0)                 // グリッドの外枠の太さ(紙面風のとき)
   +defvar(sp_grid_outer_color, hsla(0, 0%, 0%, 0.5)) // グリッド外枠色
-  +defvar(sp_grid_color, hsla(0, 0%, 0%, 0.5))       // グリッド色
-  +defvar(sp_grid_stroke, 1)                       // グリッド太さ
-  +defvar(sp_grid_outer_texture_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
-  +defvar(sp_grid_star_size, 0.1)                  // 星の大きさ
-  +defvar(sp_grid_star_z_index, 0)                 // 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)
+  +defvar(sp_grid_inner_color, hsla(0, 0%, 0%, 0.5))       // グリッド色
+  +defvar(sp_grid_inner_stroke, 1)                       // グリッド太さ
+  +defvar(sp_board_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
+  +defvar(sp_star_size, 0.1)                  // 星の大きさ
+  +defvar(sp_star_z_index, 0)                 // 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)
 
   // +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w)
   // +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h)
@@ -100,10 +100,10 @@ export default {
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
     +is_background_cover_by_image
     background-image: var(--sp_board_image)  // none でスルーする
-    // background-image: url("../assets/inspect/256x256.png")
+     background-image: url("../assets/inspect/256x256.png")
 
     border-radius: calc(var(--sp_board_radius) * 1px)
-    border: calc(var(--sp_grid_outer_texture_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
+    border: calc(var(--sp_board_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
 
   .BoardFieldWithPadding
     padding: calc(var(--sp_board_padding) * 100%)
@@ -122,7 +122,7 @@ export default {
 
   .BoardColumn
     // 何もしなければ縦幅は均等になる
-    border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color) // border-collapse: collapse の効果で重ならない
+    border: calc(var(--sp_grid_inner_stroke) * 1px) solid var(--sp_grid_inner_color) // border-collapse: collapse の効果で重ならない
 
     // 縦幅はブラウザによって異なるので難しい
     // Google Chrome 90.0.4430.216 までは指定なしで均等だったが、
@@ -137,7 +137,7 @@ export default {
   //   +is_overlay_origin
   //   .CellBorder
   //     +is_overlay_block
-  //     // border: calc(var(--sp_grid_stroke) * 1px) solid var(--sp_grid_color)
+  //     // border: calc(var(--sp_grid_inner_stroke) * 1px) solid var(--sp_grid_inner_color)
 
   .BoardRow:nth-child(3n+4)
     .BoardColumn:nth-child(3n+4)
@@ -148,11 +148,11 @@ export default {
         // "%" で指定すると長方形になってしまう
         // sp_base_h だけを基準にすると正方形になる
         // 中央が右下にずれているので半ピクセル調整する
-        top:    calc(var(--sp_base_h) * var(--sp_grid_star_size) * -0.5 - 0.5px)
-        left:   calc(var(--sp_base_h) * var(--sp_grid_star_size) * -0.5 - 0.5px)
-        width:  calc(var(--sp_base_h) * var(--sp_grid_star_size))
-        height: calc(var(--sp_base_h) * var(--sp_grid_star_size))
+        top:    calc(var(--sp_base_h) * var(--sp_star_size) * -0.5 - 0.5px)
+        left:   calc(var(--sp_base_h) * var(--sp_star_size) * -0.5 - 0.5px)
+        width:  calc(var(--sp_base_h) * var(--sp_star_size))
+        height: calc(var(--sp_base_h) * var(--sp_star_size))
         border-radius: 50%
         background-color: var(--sp_grid_outer_color)
-        z-index: var(--sp_grid_star_z_index)
+        z-index: var(--sp_star_z_index)
 </style>

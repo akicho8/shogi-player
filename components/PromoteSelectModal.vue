@@ -99,7 +99,7 @@ export default {
 .ShogiPlayerGround
   +defvar(sp_promote_select_modal_bg_color, hsla(0, 0%, 0%, 0.5))     // 成り不成り選択画面の背景色
   +defvar(sp_promote_select_modal_hover_color, hsla(0, 0%, 100%, 0.5)) // 成り不成り選択でhoverした駒の背景色
-  +defvar(sp_promote_select_modal_z, $promote_select_modal_z)          // 成り不成り選択モーダルの z-index
+  +defvar(sp_promote_select_modal_z_index, $promote_select_modal_z)          // 成り不成り選択モーダルの z-index
 
   .PromoteSelectModal
     .OverlayBackground
@@ -108,11 +108,11 @@ export default {
       position: fixed // 画面全体を覆う
       background-color: var(--sp_promote_select_modal_bg_color)
 
-      z-index: var(--sp_promote_select_modal_z)
+      z-index: var(--sp_promote_select_modal_z_index)
 
     .pieces_block
       position: fixed
-      z-index: calc(var(--sp_promote_select_modal_z) + 1)
+      z-index: calc(var(--sp_promote_select_modal_z_index) + 1)
 
       display: flex
       justify-content: center

@@ -21,6 +21,6 @@ export default {
   .ShogiPlayer
     --sp_board_padding: 0
     --sp_board_color: white
-    --sp_grid_stroke: 1
+    --sp_grid_inner_stroke: 1
     --sp_grid_outer_stroke: 2
 </style>

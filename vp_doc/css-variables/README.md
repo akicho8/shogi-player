@@ -7,22 +7,53 @@ sidebar: auto
 ## まえがき
 
 * 初期値は `html` に対して定義してある
-  * 本当は `:root` に対して定義するべきだが node-sass が対応していなかったためできなかった
+  * 本当は `:root` に対して定義するべきだが node-sass の問題でできなかった
 * セルと駒の占有率について
   * セルは駒をタップできる領域
   * 占有率は簡単に言えば駒の見た目の大きさになる
   * 占有率が変わってもタップできる領域は変わらない
 * 非透明度とは？
-  * ピンとこない場合は「見える度」に置き換えるとイメージしやすい
+  * 「見える度」に置き換えるとイメージしやすい
 
-## 基本
+## 盤
+
+### `--sp_board_color`
+Default: `hsla(0, 0%, 0%, 0.2)`
+
+盤の色
+
+### `--sp_board_image`
+Default: `none`
+
+盤の画像
+
+### `--sp_board_padding`
+Default: `0.015`
+
+盤の外周の隙間
+
+* 紙面風であれば 0 にしよう
+
+### `--sp_board_radius`
+Default: `5`
+
+盤の角の丸め度合い
+
+* 駒のセルの縦幅に対する比率
+
+### `--sp_board_aspect_ratio`
+Default: `1.097`
+
+盤の横を 1.0 としたときの縦の比率
+
+* 初期値は灰色ではなく黒の半透明なので配置する場所の背景色を変更すると調和しやすい
 
 ### `--sp_board_piece_size`
 Default: `0.9`
 
 盤上の駒の占有率
 
-* かなり見た目の印象がかわる
+* かなり印象がかわる
 * 駒の種類に応じて調整すべし
 * Portella の場合
   * 1.0 にするのがおすすめ
@@ -57,10 +88,80 @@ top を指定するメリットはとくに思いつかない
 | center | 中央   |
 | bottom | 下寄せ |
 
-### `--sp_piece_origin_color`
-Default: `hsla(0, 0%, 0%, 0.15)`
+### `--sp_board_horizontal_gap`
+Default: `0`
 
-着手後の移動元の背景色
+盤の左右の隙間
+
+* 横配置時にのみ有効
+* 紙面風にするときだけ隙間を開けるとよいかもしれない
+
+### `--sp_board_vertical_gap`
+Default: `0`
+
+盤の上下の隙間
+
+* 縦配置時にのみ有効
+
+### `--sp_common_gap`
+Default: `0.18`
+
+共通の隙間 <Badge text="要改善" type="error" vertical="top" />
+
+* 駒のセルの縦幅に対する割り合い
+* どこを表しているのかわかりにくい
+
+## 格子 (グリッド)
+
+### `--sp_grid_inner_stroke`
+Default: `1`
+
+盤の内側の格子の太さ
+
+### `--sp_grid_inner_color`
+Default: `hsla(0, 0%, 0%, 0.5)`
+
+盤の内側の格子の色
+
+### `--sp_grid_outer_stroke`
+Default: `0`
+
+盤の格子の外枠の太さ
+
+* 通常の盤はパディングがあるため 0 で良い
+* 紙面風の場合は 1 以上を指定する
+  * 1 か 2 で印象が変わる
+
+### `--sp_grid_outer_color`
+Default: `hsla(0, 0%, 0%, 0.5)`
+
+盤の外枠の色
+
+### `--sp_board_edge_stroke`
+Default: `0`
+
+盤のエッジの縁取りの太さ
+
+* 色は `--sp_grid_outer_color` を流用する
+
+## 星
+
+### `--sp_star_size`
+Default: `0.1`
+
+星の大きさ
+
+* 色は `--sp_grid_outer_color` を流用する
+
+### `--sp_star_z_index`
+Default: `0`
+
+星の z-index
+
+* 本来、星の大きさにかかわらずそのまわりの4つのセルはタップできるべきだが星が大きすぎるとタップできない <Badge text="BUG" type="error" vertical="top" />
+* そのため[符号の鬼](https://www.shogi-extend.com/xy)では判定ミスを防ぐため `-1` にしている
+
+## 着手
 
 ### `--sp_piece_selectable_color`
 Default: `hsla(0, 0%, 0%, 0.15)`
@@ -89,274 +190,204 @@ Default: `1.0`
 
 タッチ操作で持ち上げた駒の移動元のセルの非透明度
 
+### `--sp_piece_origin_color`
+Default: `hsla(0, 0%, 0%, 0.15)`
+
+着手後の移動元の背景色
+
+## 駒台
+
 ### `--sp_stand_piece_size`
 Default: `0.8`
 
 駒台のセル内における駒の占有率
 
+### `--sp_stand_hover_border_color`
+Default: `hsla(0, 0%, 0%, 0.2)`
+
+駒を持ったマウスに反応した駒台や駒箱のボーダー色
+
+### `--sp_stand_hover_border_stroke`
+Default: `2`
+
+駒を持ったマウスに反応した駒台や駒箱のボーダーの太さ
+
+### `--sp_stand_bg_color`
+Default: `hsla(0, 0%, 0%, 0)`
+
+駒台の背景色
+
+### `--sp_player_name_size`
+Default: `0.25`
+
+対局者名の大きさ
+
+### `--sp_player_time_size`
+Default: `0.25`
+
+持ち時間表記の大きさ
+
+## 駒箱
 ### `--sp_piece_box_piece_size`
 Default: `0.8`
 
 駒箱のセル内における駒の占有率
-
-### `--sp_ground_color`
-Default: `transparent`
-
-全体の背景色
-
-### `--sp_ground_image`
-Default: `none`
-
-全体の背景画像
 
 ### `--sp_piece_box_color`
 Default: `hsla(0, 0%, 0%, 0.2)`
 
 駒箱の背景色
 
-### `--sp_common_gap`
-Default: `0.18`
+## 先後のマーク
 
-共通の隙間 <Badge text="要改善" type="error" vertical="top" />
+### `--sp_location_mark_active_size`
+Default: `1.0`
 
-* 駒のセルの縦幅に対する割り合い
-* どこを表しているのかわかりにくい
+手番のときの☗の大きさ
 
-### `--sp_turn_slider_block_margin_top`
-Default: `0.75rem`
-
-スライダーの上のマージン
-
-### `--sp_board_horizontal_gap`
-Default: `0`
-
-盤の左右の隙間
-
-* 横配置時にのみ有効
-* 紙面風にするときだけ隙間を開けるとよいかもしれない
-
-### `--sp_board_vertical_gap`
-Default: `0`
-
-盤の上下の隙間
-
-* 縦配置時にのみ有効
-
-### `--sp_board_color`
-Default: `hsla(0, 0%, 0%, 0.2)`
-
-盤の色
-
-### `--sp_board_image`
-Default: `none`
-
-盤の画像
-
-### `--sp_board_padding`
-Default: `0.015`
-
-盤の外周の隙間
-
-* 紙面風であれば 0 にしよう
-
-### `--sp_board_radius`
-Default: `5`
-
-盤の角の丸め度合い
-
-### `--sp_grid_outer_stroke`
-Default: `0`
-
-盤の格子の外枠の太さ
-
-* 紙面風であれば 2 にしよう
-
-### `--sp_grid_outer_color`
-Default: `hsla(0, 0%, 0%, 0.5)`
-
-盤の格子の外枠の色
-
-### `--sp_grid_color`
-Default: `hsla(0, 0%, 0%, 0.5)`
-
-盤の格子の色
-
-### `--sp_grid_stroke`
-Default: `1`
-
-盤の格子の線の太さ
-
-### `--sp_grid_outer_texture_edge_stroke`
-Default: `0`
-
-盤の背景画像の縁取りの線の太さ
-
-### `--sp_grid_star_size`
-Default: `0.1`
-
-星の大きさ
-
-### `--sp_grid_star_z_index`
-Default: `0`
-
-星の z-index
-
-* 本来、星の大きさにかかわらずそのまわりの4つのセルはタップできるべきだが星が大きすぎるとタップできない <Badge text="BUG" type="error" vertical="top" />
-* そのため[符号の鬼](https://www.shogi-extend.com/xy)ではタップ時の判定ミスを防ぐため `-1` にしている
-
-### TODO `--sp_controller_width`
+### `--sp_location_mark_inactive_size`
 Default: `0.5`
 
-コントローラー横幅
+手番ではないときの☗の大きさ
 
-### TODO `--sp_controller_width_mobile`
+## コントローラーとスライダー
+
+### `--sp_controller_width`
+Default: `0.5`
+
+コントローラーの横幅 (デスクトップ時)
+
+### `--sp_controller_width_mobile`
 Default: `0.8`
 
-コントローラー横幅(モバイル時)
+コントローラーの横幅 (スマホ時)
 
-### TODO `--sp_digit_xlabel_size`
-Default: `0.125`
+### `--sp_turn_slider_margin_top`
+Default: `0.75rem`
 
-座標表記の文字サイズ(右)
+スライダーの上マージン
 
-### TODO `--sp_digit_ylabel_size`
-Default: `0.168`
+## 駒数
 
-座標表記の文字サイズ(上)
-
-### TODO `--sp_digit_xlabel_push`
-Default: `0.014`
-
-座標表記の位置調整(右)
-
-### TODO `--sp_digit_ylabel_push`
-Default: `-0.034`
-
-座標表記の位置調整(上)
-
-### TODO `--sp_digit_label_color`
-Default: `hsla(0,0%,0%,0.75)`
-
-座標表記の文字色
-
-### TODO `--sp_piece_count_horizontal_x`
+### `--sp_piece_count_horizontal_x`
 Default: `0.43`
 
-駒数の中央からの相対位置X(%) (横配置時)
+駒数のX座標 (横配置時)
 
-### TODO `--sp_piece_count_horizontal_y`
+### `--sp_piece_count_horizontal_y`
 Default: `0.30`
 
-駒数の中央からの相対位置Y(%) (横配置時)
+駒数のY座標 (横配置時)
 
-### TODO `--sp_piece_count_vertical_x`
+### `--sp_piece_count_vertical_x`
 Default: `0.0`
 
-駒数の中央からの相対位置X(%) (縦配置時)
+駒数のX座標 (縦配置時)
 
-### TODO `--sp_piece_count_vertical_y`
+### `--sp_piece_count_vertical_y`
 Default: `0.47`
 
-駒数の中央からの相対位置y(%) (縦配置時)
+駒数のY座標 (横配置時)
 
-### TODO `--sp_piece_count_size`
+### `--sp_piece_count_size`
 Default: `0.2`
 
-駒数の文字サイズ(駒セル縦幅に対する比率)
+駒数の文字サイズ
 
-### TODO `--sp_piece_count_font_color`
+* 駒のセルの縦幅に対する比率
+
+### `--sp_piece_count_font_color`
 Default: `hsla(0, 0%, 0%, 0.75)`
 
 駒数の文字色
 
-### TODO `--sp_piece_count_bg_color`
+### `--sp_piece_count_bg_color`
 Default: `hsla(0, 0%, 100%, 0.9)`
 
-駒数の文字色背景
+駒数の背景色
 
-### TODO `--sp_piece_count_padding`
+### `--sp_piece_count_padding`
 Default: `0.08`
 
-駒数のパディング(駒セル縦幅に対する比率)
-
-### TODO `--sp_board_aspect_ratio`
-Default: `1.097`
-
-盤の横を1.0としたときの縦の比率
-
-### TODO `--sp_location_mark_inactive_size`
-Default: `0.5`
-
-手番ではないときの☗サイズの倍率
-
-### TODO `--sp_player_name_size`
-Default: `0.25`
-
-対局者の名前の表示サイズ
-
-### TODO `--sp_player_time_size`
-Default: `0.25`
-
-対局者の時間の表示サイズ
-
-### TODO `--sp_stand_hover_border_color`
-Default: `hsla(0, 0%, 0%, 0.2)`
-
-駒を持って駒箱の上にいるときのボーダー色
-
-### TODO `--sp_stand_hover_border_stroke`
-Default: `2px`
-
-駒を持って駒箱の上にいるときのボーダーの太さ
-
-### TODO `--sp_stand_horizontal_hoverable_min_height`
-Default: `3`
-
-edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分)
-
-### TODO `--sp_stand_bg_color`
-Default: `hsla(0, 0%, 0%, 0)`
-
-駒台の背景色
+駒数の余白
 
 ## 成り不成り
 
-### TODO `--sp_promote_select_modal_bg_color`
+### `--sp_promote_select_modal_bg_color`
 Default: `hsla(0, 0%, 0%, 0.5)`
 
-成り不成り選択画面の背景色
+成り不成りオーバーレイの色
 
-### TODO `--sp_promote_select_modal_hover_color`
-Default: `hsla(0, 0%, 100%, 0.5)`
-
-成り不成り選択でhoverした駒の背景色
-
-### TODO `--sp_promote_select_modal_z`
+### `--sp_promote_select_modal_z_index`
 Default: `30`
 
-成り不成り選択モーダルの z-index
+成り不成り選択オーバーレイの z-index
+
+### `--sp_promote_select_modal_hover_color`
+Default: `hsla(0, 0%, 100%, 0.5)`
+
+成り不成り選択でマウスをホバーした側の駒の背景色
+
+## 座標(符号)
+
+### `--sp_digit_xlabel_size`
+Default: `0.125`
+
+盤面の上に表示するX座標の文字サイズ
+
+### `--sp_digit_xlabel_push`
+Default: `0.014`
+
+盤面の上に表示するX座標の位置調整
+
+### `--sp_digit_ylabel_size`
+Default: `0.168`
+
+盤面の右に表示するY座標の文字サイズ
+
+### `--sp_digit_ylabel_push`
+Default: `-0.034`
+
+盤面の右に表示するY座標の位置調整
+
+### `--sp_digit_label_color`
+Default: `hsla(0, 0%, 0%, 0.75)`
+
+座標の文字色
+
+## グラウンド
+
+### `--sp_ground_color`
+Default: `transparent`
+
+全体の背景色 <Badge text="非推奨" type="error" vertical="top" />
+
+### `--sp_ground_image`
+Default: `none`
+
+全体の背景画像 <Badge text="非推奨" type="error" vertical="top" />
 
 ## 内部で使用
 
+* 参照可
 * オーバーライド禁止
-* 何かのときに参照するのは良い
 
-### TODO `--sp_board_dimension_w`
+### `--sp_board_dimension_w`
 Default: `9`
 
 盤面の横のセル数
 
-### TODO `--sp_board_dimension_h`
+### `--sp_board_dimension_h`
 Default: `9`
 
 盤面の縦のセル数
 
-### TODO `--sp_base_w`
+### `--sp_base_w`
 Default: `47px`
 
 盤面のセルの現在の横幅で動的に変化する
 
-### TODO `--sp_base_h`
+### `--sp_base_h`
 Default: `50px`
 
 盤面のセルの現在の縦幅で動的に変化する

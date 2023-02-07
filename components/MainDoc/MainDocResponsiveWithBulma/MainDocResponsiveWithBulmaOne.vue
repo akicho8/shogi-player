@@ -30,5 +30,5 @@ export default {
 @import "../support.sass"
 .MainDocResponsiveWithBulmaOne
   +tablet
-    --sp_grid_color: hsl(0, 0%, 70%)
+    --sp_grid_inner_color: hsl(0, 0%, 70%)
 </style>

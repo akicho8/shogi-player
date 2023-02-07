@@ -2,7 +2,7 @@
 |----------------------------------------------|--------------------------|-----------------------------------------------------------------------|
 | `--sp_promote_select_modal_bg_color`         |     hsla(0, 0%, 0%, 0.5) | 成り不成り選択画面の背景色                                            |
 | `--sp_promote_select_modal_hover_color`      |   hsla(0, 0%, 100%, 0.5) | 成り不成り選択でhoverした駒の背景色                                   |
-| `--sp_promote_select_modal_z`                |  $promote_select_modal_z | 成り不成り選択モーダルの z-index                                      |
+| `--sp_promote_select_modal_z_index`                |  $promote_select_modal_z | 成り不成り選択モーダルの z-index                                      |
 | `--sp_board_piece_size`                      |                      0.9 | 盤のセル内の駒占有率                                                  |
 | `--sp_board_piece_position`                  |                   center | 駒を選択できる範囲内の駒の縦位置                                      |
 | `--sp_piece_origin_color`                    |    hsla(0, 0%, 0%, 0.15) | 最後に動かした駒の元の位置の背景色                                    |
@@ -19,7 +19,7 @@
 | `--sp_ground_image`                          |                     none | グラウンド背景画像                                                    |
 | `--sp_piece_box_color`                       |       hsla(0, 0%, 0%, 0.2) | 駒箱背景                                                              |
 | `--sp_common_gap`                            |                     0.18 | 共通の隙間(駒セルの縦幅に対する割合)                                  |
-| `--sp_turn_slider_block_margin_top`          |                  0.75rem | 手数スライダーの上マージン                                            |
+| `--sp_turn_slider_margin_top`          |                  0.75rem | 手数スライダーの上マージン                                            |
 | `--sp_board_horizontal_gap`                  |                        0 | 盤の左右の隙間(横配置時)                                              |
 | `--sp_board_vertical_gap`                    |                        0 | 盤の上下の隙間(縦配置時)                                              |
 | `--sp_board_color`                           |       hsla(0, 0%, 0%, 0.2) | 盤の色                                                                |
@@ -28,11 +28,11 @@
 | `--sp_board_radius`                          |                        5 | 盤の隅の丸め度合い                                                    |
 | `--sp_grid_outer_stroke`                     |                        0 | グリッドの外枠の太さ(紙面風のとき)                                    |
 | `--sp_grid_outer_color`                      |       hsla(0, 0%, 0%, 0.5) | グリッド外枠色                                                        |
-| `--sp_grid_color`                            |       hsla(0, 0%, 0%, 0.5) | グリッド色                                                            |
-| `--sp_grid_stroke`                           |                        1 | グリッド太さ                                                          |
-| `--sp_grid_outer_texture_edge_stroke`        |                        0 | 盤背景の縁取りの太さ(影の影響あり)                                    |
-| `--sp_grid_star_size`                        |                      0.1 | 星の大きさ                                                            |
-| `--sp_grid_star_z_index`                     |                        0 | 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)       |
+| `--sp_grid_inner_color`                            |       hsla(0, 0%, 0%, 0.5) | グリッド色                                                            |
+| `--sp_grid_inner_stroke`                           |                        1 | グリッド太さ                                                          |
+| `--sp_board_edge_stroke`        |                        0 | 盤背景の縁取りの太さ(影の影響あり)                                    |
+| `--sp_star_size`                        |                      0.1 | 星の大きさ                                                            |
+| `--sp_star_z_index`                     |                        0 | 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)       |
 | `--sp_board_dimension_w`                     |                        9 | 盤のセル数(w) CSS内では未使用                                         |
 | `--sp_board_dimension_h`                     |                        9 | 盤のセル数(h) TDの縦幅を決めるのに必要                                |
 | `--sp_controller_width`                      |                      0.5 | コントローラー横幅                                                    |
@@ -41,7 +41,7 @@
 | `--sp_digit_ylabel_size`                     |                    0.168 | 座標表記の文字サイズ(上)                                              |
 | `--sp_digit_xlabel_push`                     |                    0.014 | 座標表記の位置調整(右)                                                |
 | `--sp_digit_ylabel_push`                     |                   -0.034 | 座標表記の位置調整(上)                                                |
-| `--sp_digit_label_color`                     |       hsla(0,0%,0%,0.75) | 座標表記の文字色                                                      |
+| `--sp_digit_label_color`                     |       hsla(0, 0%, 0%, 0.75) | 座標表記の文字色                                                      |
 | `--sp_piece_count_horizontal_x`              |                     0.43 | 駒数の中央からの相対位置X(%) (横配置時)                               |
 | `--sp_piece_count_horizontal_y`              |                     0.30 | 駒数の中央からの相対位置Y(%) (横配置時)                               |
 | `--sp_piece_count_vertical_x`                |                      0.0 | 駒数の中央からの相対位置X(%) (縦配置時)                               |
@@ -55,6 +55,5 @@
 | `--sp_player_name_size`                      |                     0.25 | 対局者の名前の表示サイズ                                              |
 | `--sp_player_time_size`                      |                     0.25 | 対局者の時間の表示サイズ                                              |
 | `--sp_stand_hover_border_color`              |       hsla(0, 0%, 0%, 0.2) | 駒を持って駒箱の上にいるときのボーダー色                              |
-| `--sp_stand_hover_border_stroke`             |                      2px | 駒を持って駒箱の上にいるときのボーダーの太さ                          |
-| `--sp_stand_horizontal_hoverable_min_height` |                        3 | edit_mode + 縦配置 + 駒台に置ける のときの駒台の最低限の高さ(駒N個分) |
+| `--sp_stand_hover_border_stroke`             |                      2   | 駒を持って駒箱の上にいるときのボーダーの太さ                          |
 | `--sp_stand_bg_color`                        |       hsla(0, 0%, 0%, 0) | 駒台の背景色                                                          |

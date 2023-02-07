@@ -43,7 +43,7 @@
         |   --sp_board_color: white                // 盤の色を白にする
         |   --sp_board_padding: 0                  // グリッド外周と縁の隙間を無くす
         |   --sp_board_radius: 0                   // 角を丸めない
-        |   --sp_grid_stroke: 0.5                  // グリッド内線(お好みで調整・かなり印象変わる)
+        |   --sp_grid_inner_stroke: 0.5                  // グリッド内線(お好みで調整・かなり印象変わる)
         |   --sp_grid_outer_stroke: 2              // グリッド外枠(お好みで調整・かなり印象変わる)
         |   --sp_player_name_size: 0.4             // "先手" "後手" の文字サイズ調整
         |   --sp_location_mark_inactive_size: 1.0  // 手番でない方の☗☖の比率を変更しない
@@ -67,7 +67,7 @@
         .content
           ul.mt-0
             li sp_digit_label_variant の値で右側の座標を「漢字」「数字」「アルファベット」に変更できる
-            li 線の太さに関する sp_grid_stroke と sp_grid_outer_stroke は設定値によってかなり印象が変わるためお好みで調整しよう
+            li 線の太さに関する sp_grid_inner_stroke と sp_grid_outer_stroke は設定値によってかなり印象が変わるためお好みで調整しよう
             li .ShogiPlayer は 100% の大きさになるので外側(上の例では.ShogiPlayerContainer)で大きさを調整しよう
             li さらにカスタマイズしたい場合はスタイルエディタを使おう
 </template>
@@ -95,7 +95,7 @@ export default {
     --sp_board_color: white               // 盤の色を白にする
     --sp_board_padding: 0                 // グリッド外周と縁の隙間を無くす
     --sp_board_radius: 0                  // 角を丸めない
-    --sp_grid_stroke: 0.5                 // グリッド内線は細くする(お好みで調整)
+    --sp_grid_inner_stroke: 0.5                 // グリッド内線は細くする(お好みで調整)
     --sp_grid_outer_stroke: 2             // グリッド外枠を内線より太くする(お好みで調整)
     --sp_player_name_size: 0.4            // "先手" "後手" の文字サイズ調整
     --sp_location_mark_inactive_size: 1.0 // 手番でない方の☗☖の比率を変更しない

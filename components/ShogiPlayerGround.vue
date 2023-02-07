@@ -61,6 +61,8 @@ export default {
   text-align: center
   line-height: 100%
 
+  // もしかしてこの下まったく要らない？
+
   display: flex
   align-items: center
   justify-content: center
@@ -81,6 +83,6 @@ export default {
     background-position: center
     background-repeat: no-repeat
     background-size: cover
-    // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
+    //- background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
     // background-color: red
 </style>

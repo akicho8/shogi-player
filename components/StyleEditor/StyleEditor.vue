@@ -100,18 +100,20 @@
         .box
           SeTitle(name="盤グリッド")
           b-field(custom-class="is-small" label="グリッドカラー")
-            MyColorPicker(v-model="sp_grid_color")
+            MyColorPicker(v-model="sp_grid_inner_color")
           b-field(custom-class="is-small" label="星・グリッド外枠カラー")
             MyColorPicker(v-model="sp_grid_outer_color")
           b-field(custom-class="is-small" label="グリッドの太さ")
-            b-slider(v-bind="slider_attrs" v-model="sp_grid_stroke" :min="0" :max="5" :step="0.5")
+            b-slider(v-bind="slider_attrs" v-model="sp_grid_inner_stroke" :min="0" :max="5" :step="0.5")
           b-field(custom-class="is-small" label="グリッド外枠の太さ")
             b-slider(v-bind="slider_attrs" v-model="sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
+          b-field(custom-class="is-small" label="エッジの太さ")
+            b-slider(v-bind="slider_attrs" v-model="sp_board_edge_stroke" :min="0" :max="10" :step="0.5")
           b-field(custom-class="is-small" label="星の大きさ")
-            b-slider(v-bind="slider_attrs" v-model="sp_grid_star_size" :min="0" :max="2.0" :step="0.001")
+            b-slider(v-bind="slider_attrs" v-model="sp_star_size" :min="0" :max="2.0" :step="0.001")
           b-field(custom-class="is-small" label="星の z-index" message="-1のときは盤の奥に描画するため盤が透明でなければ見えない点に注意。星が巨大でセルのイベントを奪ってしまうかつ盤が透明なときのみ-1にする")
-            b-radio-button(size="is-small" v-model="sp_grid_star_z_index" :native-value="-1") -1
-            b-radio-button(size="is-small" v-model="sp_grid_star_z_index" :native-value="0") 0
+            b-radio-button(size="is-small" v-model="sp_star_z_index" :native-value="-1") -1
+            b-radio-button(size="is-small" v-model="sp_star_z_index" :native-value="0") 0
 
         .box
           SeTitle(name="駒")
@@ -374,7 +376,10 @@
         .box
           SeTitle(name="その他")
 
-          b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ(%)")
+          b-field(custom-class="is-small" label="手番のときの☗☖の大きさ")
+            b-slider(v-bind="slider_attrs" v-model="sp_location_mark_active_size" :min="0" :max="1.5" :step="0.01")
+
+          b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_location_mark_inactive_size" :min="0" :max="1.5" :step="0.01")
 
           b-field(custom-class="is-small" label="共通の隙間" message="駒セル縦幅に対する割合")
@@ -564,16 +569,18 @@ export default {
       sp_piece_count_vertical_x:   0.00,
       sp_piece_count_vertical_y:   0.47,
 
+      sp_board_edge_stroke: 0,
       sp_grid_outer_stroke: 0,
       sp_grid_outer_color: "hsla(0, 0%, 0%, 0.5)",
-      sp_grid_color: "hsla(0, 0%, 0%, 0.5)",
-      sp_grid_stroke: 1,
-      sp_grid_star_size: 0.1,
-      sp_grid_star_z_index: 0,
+      sp_grid_inner_color: "hsla(0, 0%, 0%, 0.5)",
+      sp_grid_inner_stroke: 1,
+      sp_star_size: 0.1,
+      sp_star_z_index: 0,
 
       sp_piece_box_color: "hsla(0, 0%, 0%, 0.2)",
       sp_piece_box_piece_size: 0.8,
 
+      sp_location_mark_active_size: 1.0,
       sp_location_mark_inactive_size: 0.5,
 
       sp_comment: "is_comment_off",
@@ -589,7 +596,7 @@ export default {
       sp_digit_ylabel_size: 0.168,
       sp_digit_xlabel_push: 0.014,
       sp_digit_ylabel_push: -0.034,
-      sp_digit_label_color: "hsla(0,0%,0%,0.75)",
+      sp_digit_label_color: "hsla(0, 0%, 0%, 0.75)",
 
       ////////////////////////////////////////////////////////////////////////////////
 
@@ -723,11 +730,13 @@ export default {
       this.sp_board_radius                = 0                             // 角を丸くしない
       this.sp_board_padding               = 0                             // 隙間なし
       this.sp_board_color                 = IS_WHITE                      // 盤透過
-      this.sp_grid_stroke                 = 1                             // グリッド線(細)
+      this.sp_grid_inner_stroke                 = 1                             // グリッド線(細)
       this.sp_grid_outer_stroke           = 2                             // グリッド枠(太)
+      this.sp_board_edge_stroke = 0
       this.sp_stand_gravity                = "is_stand_gravity_top"      // 駒台の位置
       this.sp_player_name_direction             = "is_player_name_direction_vertical" // 縦横書き
       this.sp_balloon                     = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
+      this.sp_location_mark_active_size   = 1.0                      // 手番でないときの☗☖を小さくしない
       this.sp_location_mark_inactive_size = 1.0                      // 手番でないときの☗☖を小さくしない
       this.sp_player_info.black.name      = "先手"
       this.sp_player_info.white.name      = "後手"
@@ -816,7 +825,7 @@ export default {
       ]
     },
 
-    // sp_grid_star_z_index が -1 のときこちらが勝ってしまうので se_bg_pattern を false にすること
+    // sp_star_z_index が -1 のときこちらが勝ってしまうので se_bg_pattern を false にすること
     component_background_class() {
       if (this.se_bg_pattern) {
         return ["pattern-checks-md", "has-text-black-bis", "has-background-black-ter"]
@@ -909,12 +918,13 @@ export default {
           --sp_board_vertical_gap:       ${this.sp_board_vertical_gap};
 
           // 盤グリッド
-          --sp_grid_color:               ${this.hsla_format(this.sp_grid_color)};
+          --sp_grid_inner_color:               ${this.hsla_format(this.sp_grid_inner_color)};
           --sp_grid_outer_color:         ${this.hsla_format(this.sp_grid_outer_color)};
-          --sp_grid_stroke:              ${this.sp_grid_stroke};
+          --sp_grid_inner_stroke:              ${this.sp_grid_inner_stroke};
           --sp_grid_outer_stroke:        ${this.sp_grid_outer_stroke};
-          --sp_grid_star_size:           ${this.sp_grid_star_size};
-          --sp_grid_star_z_index:        ${this.sp_grid_star_z_index};
+          --sp_board_edge_stroke:        ${this.sp_board_edge_stroke};
+          --sp_star_size:           ${this.sp_star_size};
+          --sp_star_z_index:        ${this.sp_star_z_index};
 
           // 駒数
           --sp_piece_count_size: ${this.sp_piece_count_size};
@@ -939,6 +949,7 @@ export default {
           --sp_piece_box_color:          ${this.hsla_format(this.sp_piece_box_color)};
 
           // ☗☖の大きさ
+          --sp_location_mark_active_size: ${this.sp_location_mark_active_size};
           --sp_location_mark_inactive_size: ${this.sp_location_mark_inactive_size};
 
           // 成り不成り選択
@@ -1077,7 +1088,7 @@ $sidebar_width_mobile:  100% * 3 / 4
 
   .StyleEditor-Background
     height: 100%
-    z-index: -200               // sp_grid_star_z_index が -1 のときチェッカー背景より前面になるようにするため -1 未満にする
+    z-index: -200               // sp_star_z_index が -1 のときチェッカー背景より前面になるようにするため -1 未満にする
 
   .Workspace
     display: flex
@@ -1086,7 +1097,7 @@ $sidebar_width_mobile:  100% * 3 / 4
     flex-direction: column
 
   .WorkspaceBackground
-    z-index: -100              // sp_grid_star_z_index が -1 のとき背景より前面なるようにするため -1 未満にする
+    z-index: -100              // sp_star_z_index が -1 のとき背景より前面なるようにするため -1 未満にする
     background-color: var(--se_ws_color)
     background-image: var(--se_ws_image)
     background-position: center
