@@ -27,7 +27,7 @@ export const api_module = {
     },
 
     // 指定手数の局面に設定(play_mode専用・音が出ない)
-    api_play_mode_xcontainer_seek_to(turn) {
+    api_play_mode_seek_to(turn) {
       this.play_mode_xcontainer_seek_to(turn)
     },
 

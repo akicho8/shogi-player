@@ -31,7 +31,7 @@ Soldier インスタンスを盤面に置く
 
 指定手数の局面に移動する
 
-### `api_play_mode_xcontainer_seek_to(turn)`
+### `api_play_mode_seek_to(turn)`
 
 再生モード専用で、指定手数の局面に移動する
 
