@@ -2,7 +2,7 @@
 sidebar: auto
 ---
 
-# API Functions
+# API
 
 ## まえがき ##
 
@@ -10,7 +10,6 @@ sidebar: auto
   * 冗長だが `api_` から始めることにしている
   * Vue.js の場合 ShogiPlayer コンポーネントをレシーバーとして実行できる
   * Web Components の場合どうやって呼ぶのかまたは呼べるのかわからない
-  * メソッド名がいまいち
   * すべて非推奨
 
 ## 一覧 ##
@@ -19,7 +18,7 @@ sidebar: auto
 
 盤面をクリアし、ランダムに駒を1つ配置し、Soldier インスタンスを返す
 
-### `api_place_on(soldier)`
+### `api_place_on(soldier: Soldier)`
 
 Soldier インスタンスを盤面に置く
 
@@ -27,15 +26,15 @@ Soldier インスタンスを盤面に置く
 
 盤面をクリアする
 
-### `api_board_turn_set(turn)`
+### `api_board_turn_set(turn: number)`
 
 指定手数の局面に移動する
 
-### `api_play_mode_seek_to(turn)`
+### `api_play_mode_seek_to(turn: number)`
 
 再生モード専用で、指定手数の局面に移動する
 
-### `api_flip_set(flag)`
+### `api_flip_set(flag: boolean)`
 
 盤の反転の有無を設定する
 
@@ -47,7 +46,7 @@ Soldier インスタンスを盤面に置く
 
 待ったする (現在の局面から2手戻す)
 
-### `api_sfen_or_kif_set(sfen_or_kif)`
+### `api_sfen_or_kif_set(sfen_or_kif: string)`
 
 棋譜を指定する
 

@@ -53,7 +53,7 @@ module.exports = {
       },
       {
         text: 'API',
-        link: '/api-functions/',
+        link: '/api/',
       },
       {
         text: 'Web Components',
@@ -75,7 +75,7 @@ module.exports = {
             'edit-mode',
             'customize',
             'credit',
-            'test-of-demo',
+            // 'test-of-demo',
           ],
         },
         // {
