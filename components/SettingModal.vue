@@ -35,7 +35,7 @@
     //-
     //- b-field(label="駒の種類")
     //- b-field
-    //-   template(v-for="e in PiVariantInfo.values")
+    //-   template(v-for="e in PieceVariantInfo.values")
     //-     b-radio-button(v-model="TheSp.new_sp_piece_variant" :native-value="e.key") {{e.name}}
 
     template(v-if="TheSp.xcontainer")
@@ -58,7 +58,7 @@
 <script>
 import { RunModeInfo } from "./models/run_mode_info.js"
 import { BgVariantInfo } from "./models/bg_variant_info.js"
-import { PiVariantInfo } from "./models/pi_variant_info.js"
+import { PieceVariantInfo } from "./models/piece_variant_info.js"
 
 import { support } from "./support.js"
 
@@ -68,7 +68,7 @@ export default {
   computed: {
     RunModeInfo()   { return RunModeInfo   },
     BgVariantInfo() { return BgVariantInfo },
-    PiVariantInfo() { return PiVariantInfo },
+    PieceVariantInfo() { return PieceVariantInfo },
   },
 }
 </script>

@@ -119,7 +119,7 @@
           SeTitle(name="駒")
           b-field(custom-class="is-small" label="プリセット")
             b-select(size="is-small" v-model="sp_piece_variant")
-              template(v-for="e in PiVariantInfo.values")
+              template(v-for="e in PieceVariantInfo.values")
                 option(:value="e.key") {{e.name}}
           b-field(custom-class="is-small" label="大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_board_piece_size" :min="0" :max="1.0" :step="0.001")
@@ -477,7 +477,7 @@ import chroma from "chroma-js"
 import { HumanSideInfo }    from "../models/human_side_info.js"
 import { RunModeInfo }      from "../models/run_mode_info.js"
 import { BgVariantInfo }    from "../models/bg_variant_info.js"
-import { PiVariantInfo }    from "../models/pi_variant_info.js"
+import { PieceVariantInfo }    from "../models/piece_variant_info.js"
 import { KifuBookInfo }     from "../models/kifu_book_info.js"
 import { MixBlendModeInfo } from "../models/mix_blend_mode_info.js"
 
@@ -785,7 +785,7 @@ export default {
     HumanSideInfo()  { return HumanSideInfo  },
     RunModeInfo()    { return RunModeInfo    },
     BgVariantInfo()  { return BgVariantInfo  },
-    PiVariantInfo()  { return PiVariantInfo  },
+    PieceVariantInfo()  { return PieceVariantInfo  },
     KifuBookInfo() { return KifuBookInfo },
     MixBlendModeInfo() { return MixBlendModeInfo },
     SeConfig() { return SeConfig },
