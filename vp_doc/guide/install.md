@@ -1,17 +1,16 @@
 # 組み込み方法
 
-## 静的サイト, WordPress, Next.js 向け
+## 静的サイト
 
-  * 既存のサイトに追加するには Web Components 版をどうぞ → [導入手順](/web-components/#導入手順/)
-  * Next.js と共生している例 → [将棋MAP](https://shogimap.com/ph13PcP0tga53rWhH7BD)
-  * カスタマイズした Web Components を作る場合は <https://github.com/akicho8/shogi-player/tree/master/web_component/src/components/ShogiPlayerWcRoot.vue> を参考にしてください (玄人向け)
+  * [Web Components 版](/web-components/) をどうぞ
+  * WordPress や React.js, Next.js もこちらをどうぞ
 
-## Vue.js 2 向け
+## Vue.js 2
 
   * 手順を半自動化したスクリプト <https://github.com/akicho8/shogi-player/blob/master/shogi-player-vue-cli-sample-create.sh> を参考にしてください
   * そのスクリプトをそのまま実行して生成したものを <https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue-cli-sample> に置いています
 
-## Nuxt.js 向け
+## Nuxt.js
 
   * 手動で組み込んだ例を <https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample> に置いています
 

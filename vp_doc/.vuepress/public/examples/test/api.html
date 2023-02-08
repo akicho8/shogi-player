@@ -9,8 +9,13 @@
   <script>
     const el = document.querySelector("shogi-player-wc")
     console.log("shogi-player-wc", el)
-    const sp = el.querySelector(".ShogiPlayer")
+    console.log("el.shadowRoot", el.shadowRoot)
+    console.log("el.shadowRoot.host", el.shadowRoot.host)
+    const sp = el.shadowRoot.querySelector(".ShogiPlayer")
     console.log(".ShogiPlayer", sp)
+    console.log("__vue__", sp.__vue__)
+
+    document.querySelector("shogi-player-wc").shadowRoot.querySelector(".ShogiPlayer").__vue__.api_viewpoint_toggle()
   </script>
 </body>
 </html>

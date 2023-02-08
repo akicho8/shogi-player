@@ -9,8 +9,8 @@ sidebar: auto
   * フロー駆動型に適した公開メソッド集
   * 冗長だが `api_` から始めることにしている
   * Vue.js の場合 ShogiPlayer コンポーネントをレシーバーとして実行できる
-  * Web Components の場合どうやって呼ぶのかまたは呼べるのかわからない
-  * すべて非推奨
+  * Web Components の場合はたどり付くのが大変 → [APIの呼び方](/web-components/#api%E3%81%AE%E5%91%BC%E3%81%B2%E3%82%99%E6%96%B9)
+  * なるべく非推奨
 
 ## 一覧 ##
 
@@ -38,9 +38,9 @@ Soldier インスタンスを盤面に置く
 
 盤の反転の有無を設定する
 
-### `api_flip_toggle()`
+### `api_viewpoint_toggle()`
 
-トグル式で盤を反転する
+視点を逆にする
 
 ### `api_retract_a_move()`
 

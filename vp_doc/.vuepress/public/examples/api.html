@@ -3,6 +3,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelector("shogi-player-wc")
+        .shadowRoot
+        .querySelector(".ShogiPlayer")
+        .__vue__
+        .api_random_puton()
+    })
+  </script>
 </head>
 <body>
   <shogi-player-wc />

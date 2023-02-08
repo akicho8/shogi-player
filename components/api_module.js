@@ -42,7 +42,7 @@ export const api_module = {
     },
 
     // 反転
-    api_flip_toggle() {
+    api_viewpoint_toggle() {
       this.viewpoint_flip()
     },
 

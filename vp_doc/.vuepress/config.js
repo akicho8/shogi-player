@@ -16,10 +16,18 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
+    // ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
+    // ['meta', { name: 'og:url', content: 'https://example.com/' }],
+    // ['meta', { name: 'og:type', content: 'website' }],
+    // ['meta', { name: 'og:title', content: 'example title' }],
+    // ['meta', { name: 'og:description', content: 'example description' }],
+    // ['meta', { name: 'og:image', content: '/og.png' }]
+
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
 
+    // グローバルに読み込むと vuepress のスタイルが崩れる問題がある
     // ['link', { rel: 'stylesheet', href: 'https://unpkg.com/tailwindcss@2.0.4/dist/tailwind.min.css' }],
 
     // for shogi-player-wc
@@ -37,7 +45,7 @@ module.exports = {
     editLinks: false,
     docsDir: '',
     editLinkText: '',
-    lastUpdated: false,
+    lastUpdated: true,
     nav: [
       {
         text: 'Guide',
