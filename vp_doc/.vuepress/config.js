@@ -52,6 +52,10 @@ module.exports = {
         link: '/css-variables/',
       },
       {
+        text: 'API',
+        link: '/api-functions/',
+      },
+      {
         text: 'Web Components',
         link: '/web-components/',
       },

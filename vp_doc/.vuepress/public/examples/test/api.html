@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+</head>
+<body>
+  <shogi-player-wc />
+  <script>
+    const el = document.querySelector("shogi-player-wc")
+    console.log("shogi-player-wc", el)
+    const sp = el.querySelector(".ShogiPlayer")
+    console.log(".ShogiPlayer", sp)
+  </script>
+</body>
+</html>

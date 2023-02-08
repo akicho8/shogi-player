@@ -19,7 +19,7 @@
 | `--sp_ground_image`                          |                     none | グラウンド背景画像                                                    |
 | `--sp_piece_box_color`                       |       hsla(0, 0%, 0%, 0.2) | 駒箱背景                                                              |
 | `--sp_common_gap`                            |                     0.18 | 共通の隙間(駒セルの縦幅に対する割合)                                  |
-| `--sp_turn_slider_margin_top`          |                  0.75rem | 手数スライダーの上マージン                                            |
+| `--sp_turn_slider_gap_top`          |                  0.75rem | 手数スライダーの上マージン                                            |
 | `--sp_board_horizontal_gap`                  |                        0 | 盤の左右の隙間(横配置時)                                              |
 | `--sp_board_vertical_gap`                    |                        0 | 盤の上下の隙間(縦配置時)                                              |
 | `--sp_board_color`                           |       hsla(0, 0%, 0%, 0.2) | 盤の色                                                                |

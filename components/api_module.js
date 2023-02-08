@@ -35,6 +35,8 @@ export const api_module = {
     api_flip_set(flag) {
       this.new_viewpoint = flag ? "white" : "black"
     },
+
+    // 視点を決める
     api_viewpoint_set(viewpoint) {
       this.new_viewpoint = viewpoint
     },
