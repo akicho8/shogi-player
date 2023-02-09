@@ -35,6 +35,7 @@ end
 
 desc "release"
 task :release do
+  # Rake::Task["dist"].invoke
   system %(npm version patch)
   system %(npm publish)
   system %(git push --tags)
@@ -92,6 +93,11 @@ namespace "vuepress-site" do
   task :build do
     system %(cd test-of-create-vuepress-site/docs && vuepress build src)
   end
+end
+
+desc "dist/ に Web Components を生成する"
+task :dist do
+  system %(cd web_component && vue-cli-service build --dest ../dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
 end
 
 task "w"    => "wc:build"
