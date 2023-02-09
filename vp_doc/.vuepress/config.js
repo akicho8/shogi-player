@@ -2,18 +2,20 @@ const { description } = require('../../package')
 
 module.exports = {
   /**
-   * Ref：https://v1.vuepress.vuejs.org/config/#title
+   * ref: https://v1.vuepress.vuejs.org/config/#title
    */
   title: 'shogi-player',
   /**
-   * Ref：https://v1.vuepress.vuejs.org/config/#description
+   * ref: https://v1.vuepress.vuejs.org/config/#description
    */
   description: description,
+
+  // lang: "ja-JP", ← 効かない
 
   /**
    * Extra tags to be injected to the page HTML `<head>`
    *
-   * ref：https://v1.vuepress.vuejs.org/config/#head
+   * ref: https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
     // ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
@@ -48,7 +50,7 @@ module.exports = {
     lastUpdated: true,
     // https://www.nxworld.net/hello-vuepress.html
     // sidebarDepth: 3,
-    displayAllHeaders: true,
+    displayAllHeaders: false,
     nav: [
       { text: 'Guide', link: '/guide/', },
       {
@@ -73,9 +75,12 @@ module.exports = {
           children: [
             '',
             'install',
-            'edit-mode',
             'customize',
             'custom-build',
+            'play-mode',
+            'edit-mode',
+            'edit-mode-shortcut',
+            'style-editor',
             'credit',
             // 'test-of-demo',
           ],
@@ -98,6 +103,7 @@ module.exports = {
   // https://github.com/markdown-it/markdown-it
   markdown: {
     breaks: true, // Convert '\n' in paragraphs into <br>
+    linkify: true, // URLを書いたら自動的にリンクするか？
   },
 
   /**

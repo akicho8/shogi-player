@@ -7,7 +7,7 @@ import { HumanSideInfo } from "./models/human_side_info.js"
 export const play_mode_module = {
   props: {
     sp_human_side: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
-    play_mode_advanced_short_sfen_emit: { type: Boolean, default: false, },
+    sp_play_mode_advanced_short_sfen_emit: { type: Boolean, default: false, },
   },
 
   data() {
@@ -127,7 +127,7 @@ export const play_mode_module = {
         this.$emit("update:play_mode_advanced_moves", this.moves)
 
         // 遅いのでデフォルトではOFFにする。消してもいい
-        if (this.play_mode_advanced_short_sfen_emit) {
+        if (this.sp_play_mode_advanced_short_sfen_emit) {
           this.$emit("update:play_mode_advanced_short_sfen", this.xcontainer.to_short_sfen) // 14 ms
         }
 

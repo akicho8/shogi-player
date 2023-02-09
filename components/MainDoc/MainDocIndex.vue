@@ -1,10 +1,7 @@
 <template lang="pug">
 .MainDocIndex
   MainDocHero
-  MainDocSummary
   MainDocDemo
-  //- MainDocHowToEmbed
-  //- MainDocApi
 </template>
 
 <script>

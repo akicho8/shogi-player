@@ -1,6 +1,6 @@
 # 使い方
 
-## 導入
+## インストール
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js"></script>
@@ -110,7 +110,7 @@ shogi-player-wc::part(spwc_style_scope) {
 
 ## スタイル変更 (実験的) ##
 
-Web Components の引数の spwc_style_hash にハッシュで書いても変更できる (ようにした)
+引数の `spwc_style_hash` に書いても変更できる (ようにした)
 これはタグの style を直接書くのに似ていて通常の方法より詳細度が高くなる
 本来機能とスタイルは分けるべきとされているが目的駆動と考えれば一箇所で設定する方が合理的なので入れてある
 
@@ -223,24 +223,20 @@ document.querySelector("shogi-player-wc")
 
 ## CDN
 
-* JSDelivr: <https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js>
-* UNPKG: <https://unpkg.com/shogi-player@latest/dist/shogi-player-wc.min.js>
+* JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js
+* UNPKG: https://unpkg.com/shogi-player@latest/dist/shogi-player-wc.min.js
 
-::: warning
-本当は
-<https://cdn.jsdelivr.net/npm/shogi-player>
-でいいはずだけど駒が表示されない問題がある
-:::
+本当は https://cdn.jsdelivr.net/npm/shogi-player@latest でいいはずだけど、画像パスがずれて駒が表示されない問題があるため js までの正確なパスを明示しないといけない
 
-### バージョンを固定する
+## バージョンを固定する
 
 事故らないように本番ではバージョンを固定する
 
 latest の部分の変更でバージョンを固定できる
-<https://cdn.jsdelivr.net/npm/shogi-player@0.0.367/dist/shogi-player-wc.min.js>
+https://cdn.jsdelivr.net/npm/shogi-player@0.0.367/dist/shogi-player-wc.min.js
 
 最新版バージョンは
-<https://cdn.jsdelivr.net/npm/shogi-player/>
+https://cdn.jsdelivr.net/npm/shogi-player/
 から確認できる
 
 ## トラブルシューティング
@@ -255,8 +251,7 @@ Uncaught SyntaxError: Invalid regular expression: /.../: Range out of order in c
 
 `<head>` 内に `<meta charset="UTF-8">` を追加する
 
-ローカルに置いた js を読み込んだときだけ上のエラーになる
-CDN 経由でエラーが出ない理由はレスポンスヘッダの `content-type` に `charset=utf-8` が含まれているからと思われる
+ローカルに置いた js を読み込んだときだけ上のエラーになる。CDN 経由の場合はたまたまエラーにならない。理由はレスポンスヘッダの `content-type` に `charset=utf-8` が含まれているからと思われる
 
 ### スマホでタップの反応が遅い
 
@@ -266,6 +261,6 @@ CDN 経由でエラーが出ない理由はレスポンスヘッダの `content-
 
 同上
 
-### アイコンが文字化けする
+### アイコンが化ける
 
 `<head>` 内に `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">` を追加する

@@ -5,17 +5,11 @@ MainDocMainNavbar
       b
         | ShogiPlayer
   template(slot="start")
-    b-navbar-item(tag="a" href="#summary"  v-scroll-to="{element: '#summary'}") 概要
     b-navbar-item(tag="a" href="#examples" v-scroll-to="{element: '#examples'}") デモ
-    b-navbar-item(tag="a" href="#style"    v-scroll-to="{element: '#style'}") スタイル
-    b-navbar-item(tag="nuxt-link" :to="{name: 'how-to-embed'}") 組み込み方法
     b-navbar-item(tag="nuxt-link" :to="{name: 'style-editor'}") スタイルエディタ
     b-navbar-dropdown(hoverable arrowless)
       b-icon(icon="dots-vertical" slot="label")
-      b-navbar-item(tag="nuxt-link" :to="{name: 'component-options'}") コンポーネント引数一覧
-      b-navbar-item(tag="nuxt-link" :to="{name: 'css-variables'}") CSS変数一覧
       b-navbar-item(tag="nuxt-link" :to="{name: 'event-observe'}") イベント
-      b-navbar-item(tag="nuxt-link" :to="{name: 'api'}") API
       b-navbar-item(tag="nuxt-link" :to="{name: 'responsive-with-bulma'}") レスポンシブ
   template(slot="end")
     b-navbar-dropdown(label="実験" hoverable v-if="development_p")
@@ -30,10 +24,6 @@ MainDocMainNavbar
 <script>
 export default {
   name: "MainDocHero",
-  data() {
-    return {
-    }
-  },
 }
 </script>
 

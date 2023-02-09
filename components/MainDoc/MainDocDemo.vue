@@ -18,8 +18,6 @@
       MainDocViewDemo6
     .columns.mt-6.is-centered
       MainDocViewDemo8.is-11-tablet.is-10-desktop.is-9-widescreen
-    .columns.mt-6
-      MainDocViewDesc
 
     .title.is-4.mt-6 2. 操作モード (play_mode)
     hr
@@ -31,21 +29,12 @@
       MainDocPlayDemo4
       MainDocPlayDemo5
     MainDocPlayDemo6
-    .columns.is-centered
-      MainDocPlayDesc
 
     .title.is-4.mt-6 3. 編集モード
     hr
     .columns
       MainDocEditDemo1
       MainDocEditDemo2
-    .columns.mt-6
-      MainDocEditDesc1
-
-    #style.title.is-3.mt-6 スタイル
-    hr
-    MainDocPaperStyle
-    MainDocStyleDemo
 </template>
 
 <script>

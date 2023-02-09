@@ -104,8 +104,10 @@ export default {
     sp_turn:                                     { type: Number,   }, // 局面(手数)
     sp_run_mode:                                 { type: String,   }, // モード
     sp_body:                                     { type: String,   }, // 棋譜 KIF or SFEN
+    sp_preset_key:                               { type: String,   }, // 手合割(初期配置)
     sp_comment:                                  { type: String,   }, // KIFのコメントを表示する
     sp_human_side:                               { type: String,   }, // 含まれる側だけ操作できるようにする
+    sp_play_mode_advanced_short_sfen_emit:          { type: Boolean,  }, // update:play_mode_advanced_short_sfen イベントを発行するか？
     sp_device:                                   { type: String,   }, // デバイスを強制的に指定する (is_device_touch is_device_desktop) 自動判別するので基本そのままでよい
     sp_play_mode_foul_check_p:                   { type: Boolean,  }, // play_mode で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
     sp_play_mode_foul_break_p:                   { type: Boolean,  }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
