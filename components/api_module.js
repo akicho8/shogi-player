@@ -31,18 +31,18 @@ export const api_module = {
       this.play_mode_xcontainer_seek_to(turn)
     },
 
-    // 反転状態の設定
-    api_flip_set(flag) {
-      this.new_viewpoint = flag ? "white" : "black"
-    },
+    // // 反転状態の設定
+    // api_flip_set(flag) {
+    //   this.new_viewpoint = flag ? "white" : "black"
+    // },
 
     // 視点を決める
-    api_viewpoint_set(viewpoint) {
-      this.new_viewpoint = viewpoint
+    api_viewpoint_set(location_key) {
+      this.new_viewpoint = location_key
     },
 
     // 反転
-    api_viewpoint_toggle() {
+    api_viewpoint_flip() {
       this.viewpoint_flip()
     },
 

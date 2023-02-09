@@ -34,13 +34,13 @@ Soldier インスタンスを盤面に置く
 
 再生モード専用で、指定手数の局面に移動する
 
-### `api_flip_set(flag: boolean)`
+### `api_viewpoint_set(location_key: string)`
 
-盤の反転の有無を設定する
+視点を指定する
 
-### `api_viewpoint_toggle()`
+### `api_viewpoint_flip()`
 
-視点を逆にする
+視点を反転する
 
 ### `api_retract_a_move()`
 
