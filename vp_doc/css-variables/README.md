@@ -4,7 +4,7 @@ sidebar: auto
 
 # CSS Variables
 
-## まえがき
+## 概要
 
 * 初期値は `html` に対して定義してある
   * 本当は `:root` に対して定義するべきだが node-sass の問題でできなかった

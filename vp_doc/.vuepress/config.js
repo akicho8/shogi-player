@@ -46,27 +46,20 @@ module.exports = {
     docsDir: '',
     editLinkText: '',
     lastUpdated: true,
+    // https://www.nxworld.net/hello-vuepress.html
+    // sidebarDepth: 3,
+    displayAllHeaders: true,
     nav: [
+      { text: 'Guide', link: '/guide/', },
       {
-        text: 'Guide',
-        link: '/guide/',
+        text: "Reference",
+        items: [
+          { text: 'コンポーネント引数', link: '/component-arguments/', },
+          { text: 'CSS Variables',      link: '/css-variables/',       },
+          { text: 'API',                link: '/api/',                 },
+        ],
       },
-      {
-        text: 'コンポーネント引数',
-        link: '/component-arguments/',
-      },
-      {
-        text: 'CSS Variables',
-        link: '/css-variables/',
-      },
-      {
-        text: 'API',
-        link: '/api/',
-      },
-      {
-        text: 'Web Components',
-        link: '/web-components/',
-      },
+
       {
         text: 'スタイルエディタ',
         link: 'https://akicho8.github.io/shogi-player/style-editor',
@@ -82,10 +75,12 @@ module.exports = {
             'install',
             'edit-mode',
             'customize',
+            'custom-build',
             'credit',
             // 'test-of-demo',
           ],
         },
+
         // {
         //   title: 'Guide',
         //   collapsable: false,

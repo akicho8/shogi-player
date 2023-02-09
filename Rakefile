@@ -1,3 +1,5 @@
+require "table_format"
+
 task :default => :test
 
 task :s => :server
@@ -122,3 +124,16 @@ task :netlify => [
   # "wc:build",
   "doc:build",
 ]
+
+desc "CDN Validations"
+task :cdn do
+  tp "JSDelivr"
+  system %(curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js | grep 'x-jsd-version:')
+  system %(curl -sI https://cdn.jsdelivr.net/npm/shogi-player@latest                      | grep 'x-jsd-version:')
+  system %(curl -sI https://cdn.jsdelivr.net/npm/shogi-player                             | grep 'x-jsd-version:')
+
+  tp "unpkg"
+  system %(curl -sI https://unpkg.com/shogi-player/dist/shogi-player-wc.min.js | grep 'location')
+  system %(curl -sI https://unpkg.com/shogi-player@latest                      | grep 'location')
+  system %(curl -sI https://unpkg.com/shogi-player                             | grep 'location')
+end
