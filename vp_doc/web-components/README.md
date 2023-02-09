@@ -4,16 +4,16 @@ sidebar: auto
 
 # Web Components
 
-## 始める
+## 導入
 
 ```html
-<script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js"></script>
 <shogi-player-wc />
 ```
 <!-- ../.vuepress/public/examples/fragment.html -->
 <a href="/examples/fragment.html" target="_blank">上のサンプルをHTML単体で開く</a>
 
-上の2行だけのHTMLを作るか既存のサイトにコピペする
+上の2行だけのHTMLを作るか既存のサイトにコピペして動けば次へ
 
 ## 文字コードやスマホを考慮する
 
@@ -22,7 +22,7 @@ sidebar: auto
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js"></script>
 </head>
 <body>
   <shogi-player-wc />
@@ -70,7 +70,7 @@ sidebar: auto
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
-  <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js"></script>
 </head>
 <body>
   <shogi-player-wc
@@ -114,15 +114,15 @@ shogi-player-wc::part(spwc_style_scope) {
 
 ## スタイル変更 (実験的) ##
 
-Web Components の引数の spwc_style_object にハッシュで書いても変更できる (ようにした)
+Web Components の引数の spwc_style_hash にハッシュで書いても変更できる (ようにした)
 これはタグの style を直接書くのに似ていて通常の方法より適用優先度が高い
 本来機能とスタイルは分けるべきとされているが目的駆動と考えれば一箇所で一括で設定する方が合理的であるため実験的に入れてある
 
 ```html
-<shogi-player-wc spwc_style_object="{'--sp_board_color': 'lightskyblue'}" />
+<shogi-player-wc spwc_style_hash="{'--sp_board_color': 'lightskyblue'}" />
 ```
 
-<ShogiPlayerWcWrapper spwc_style_object="{'--sp_board_color': 'lightskyblue'}" class="is-small" />
+<ShogiPlayerWcWrapper spwc_style_hash="{'--sp_board_color': 'lightskyblue'}" class="is-small" />
 
 ## イベント受信 ##
 
@@ -133,7 +133,7 @@ Web Components の引数の spwc_style_object にハッシュで書いても変�
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const el = document.querySelector("shogi-player-wc");
@@ -177,7 +177,7 @@ Vue.js が使える環境であれば直接ひっかける
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://shogi-player.netlify.app/dist/shogi-player-wc.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js"></script>
   <style>
     .container {
       display: flex;
@@ -230,9 +230,28 @@ document.querySelector("shogi-player-wc")
 <!-- ../.vuepress/public/examples/api.html -->
 <a href="/examples/api.html" target="_blank">上のサンプルを単体で開く</a>
 
+## バージョンを固定する
+
+**最新版:** <https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js>
+**特定バージョンの例**: <https://cdn.jsdelivr.net/npm/shogi-player@0.0.367/dist/shogi-player-wc.min.js>
+
+最新版は気分次第で変わる仕様の影響を受けてしまうため本番で使う場合はバージョンを明示しておく
+
+現在のリリースバージョンは <https://cdn.jsdelivr.net/npm/shogi-player/> から確認できる
+
+::: warning
+本当は <https://cdn.jsdelivr.net/npm/shogi-player> だと駒が表示されない問題がある
+:::
+
 ## トラブルシューティング
 
-### 正常な棋譜が読み込めない
+### Invalid regular expression
+
+```
+Uncaught SyntaxError: Invalid regular expression: /.../: Range out of order in character class
+    at new RegExp (<anonymous>)
+    at ae (xregexp.js:707:18)
+```
 
 `<head>` 内に `<meta charset="UTF-8">` を追加する
 
@@ -240,7 +259,7 @@ document.querySelector("shogi-player-wc")
 
 `<head>` 内に `<meta name="viewport" content="width=device-width, initial-scale=1.0">` を追加する
 
-### スマホで操作中に画面がズームしてしまう
+### スマホで画面ズームしてしまう
 
 `<head>` 内に `<meta name="viewport" content="width=device-width, initial-scale=1.0">` を追加する
 
