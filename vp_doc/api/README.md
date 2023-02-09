@@ -14,6 +14,10 @@ sidebar: auto
 
 ## 一覧 ##
 
+### `api_board_shuffle()`
+
+盤上の駒をシャッフルしてランダムに配置し直す
+
 ### `api_random_puton()`
 
 盤面をクリアし、ランダムに駒を1つ配置し、Soldier インスタンスを返す

@@ -1,8 +1,14 @@
+import { Board } from "./models/board.js"
 import { Soldier } from "./models/soldier.js"
 import { Xcontainer } from "./models/xcontainer.js"
 
 export const api_module = {
   methods: {
+    // 盤面をシャッフルする
+    api_board_shuffle() {
+      this.xcontainer.shuffle_apply(Board.dimension)
+    },
+
     // 盤を消してランダムに駒を配置する
     api_random_puton() {
       const soldier = Soldier.random()

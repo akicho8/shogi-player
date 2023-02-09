@@ -224,7 +224,7 @@ document.querySelector("shogi-player-wc")
   .shadowRoot
   .querySelector(".ShogiPlayer")
   .__vue__
-  .api_random_puton()
+  .api_board_shuffle()
 ```
 
 <!-- ../.vuepress/public/examples/api.html -->
