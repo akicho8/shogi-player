@@ -1,8 +1,24 @@
-/assets/style_editor_images
+# Code
+/.bundle
+/.nuxt
+/.github
 /docs
 /experiment
-/shogi-player-nuxt-sample
-/shogi-player-vue-cli-sample
-/test-of-*
 /vp_doc
 /web_component
+
+# Assets
+/assets/style_editor_images
+/assets/inspect
+
+# 検証
+/shogi-player-nuxt*
+/shogi-player-vue-cli*
+
+# ゴミ
+/*.diff
+/TODO*
+
+# Test
+/test-of-*
+/test_of_*
