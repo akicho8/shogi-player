@@ -31808,15 +31808,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 70574:
+/***/ 59839:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3b61dfe1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7998);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3b61dfe1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3b61dfe1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3a46eff6_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(45157);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3a46eff6_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3a46eff6_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3b61dfe1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = function(key) { return _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3b61dfe1_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__[key]; }.bind(0, __WEBPACK_IMPORT_KEY__)
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3a46eff6_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = function(key) { return _node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_node_modules_vue_vue_loader_v15_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_node_modules_vue_vue_loader_v15_lib_index_js_vue_loader_options_ShogiPlayerWcRoot_vue_vue_type_style_index_0_id_3a46eff6_prod_lang_sass_shadow__WEBPACK_IMPORTED_MODULE_0__[key]; }.bind(0, __WEBPACK_IMPORT_KEY__)
 /* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 
 
@@ -32417,7 +32417,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".ShogiPlayerWcRoot{--sp_turn_slider_ga
 
 /***/ }),
 
-/***/ 31057:
+/***/ 41544:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34945,20 +34945,20 @@ module.exports.__inject__ = function (shadowRoot) {
 
 /***/ }),
 
-/***/ 7998:
+/***/ 45157:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(31057);
+var content = __webpack_require__(41544);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.id, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to Shadow Root
 var add = (__webpack_require__(42339)/* ["default"] */ .Z)
 module.exports.__inject__ = function (shadowRoot) {
-  add("1830a080", content, shadowRoot)
+  add("b0afa952", content, shadowRoot)
 };
 
 /***/ }),
@@ -44626,7 +44626,7 @@ function wrap (Vue, Component) {
 
 // EXTERNAL MODULE: ./node_modules/css-loader/dist/runtime/api.js
 var api = __webpack_require__(23645);
-;// CONCATENATED MODULE: ../node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ae1a0828-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/pug-plain-loader/index.js!../node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/ShogiPlayerWcRoot.vue?vue&type=template&id=3b61dfe1&lang=pug&shadow
+;// CONCATENATED MODULE: ../node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ae1a0828-vue-loader-template"}!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/pug-plain-loader/index.js!../node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/ShogiPlayerWcRoot.vue?vue&type=template&id=3a46eff6&lang=pug&shadow
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -44636,13 +44636,13 @@ var render = function render() {
       "part": "__root__"
     }
   }, [_c('div', {
-    staticClass: "ShogiPlayerCssVariablesOverride1",
+    staticClass: "ShogiPlayerWcStyleScope",
     attrs: {
       "part": "spwc_style_scope"
     }
   }, [_c('div', {
-    staticClass: "ShogiPlayerCssVariablesOverride2",
-    style: _vm.spwc_style_object_hash
+    staticClass: "ShogiPlayerWcStyleHash",
+    style: _vm.spwc_style_hash_native
   }, [_c('ShogiPlayer', _vm._g(_vm._b({
     on: {
       "update:short_sfen": (...args) => _vm.$emit('update:short_sfen', ...args),
@@ -44672,7 +44672,7 @@ var render = function render() {
       "foul_accident": (...args) => _vm.$emit('foul_accident', ...args),
       "player_info_click": (...args) => _vm.$emit('player_info_click', ...args)
     }
-  }, 'ShogiPlayer', _vm.vue_side_native_props, false), _vm.$listeners))], 1)])]);
+  }, 'ShogiPlayer', _vm.props_native, false), _vm.$listeners))], 1)])]);
 };
 var staticRenderFns = [];
 
@@ -84927,7 +84927,6 @@ var ShogiPlayer_component = componentNormalizer_normalizeComponent(
 Vue.use(esm);
 
 // shogi-player 本体
-// import "./foo.sass"
 // import "shogi-player/components/stylesheets/all"
 // import "shogi-player/components/ShogiPlayer.sass"
 
@@ -84945,7 +84944,7 @@ Vue.use(esm);
       type: String
     },
     ////////////////////////////////////////////////////////////////////////////////
-    spwc_style_object: {
+    spwc_style_hash: {
       type: String
     },
     ////////////////////////////////////////////////////////////////////////////////
@@ -85002,8 +85001,6 @@ Vue.use(esm);
       type: Number
     },
     // キーで左右するとき command などを押したときの倍率
-    // sp_board_dimension_w:                        { type: Number,   }, // 盤のセル数(W)
-    // sp_board_dimension_h:                        { type: Number,   }, // 盤のセル数(H)
     sp_layout: {
       type: String
     },
@@ -85076,7 +85073,6 @@ Vue.use(esm);
       type: String
     },
     // KIFのコメントを表示する
-
     sp_human_side: {
       type: String
     },
@@ -85121,18 +85117,15 @@ Vue.use(esm);
       type: Boolean
     },
     // view_mode でも駒を動かせる(ただし本筋は破壊しない)
-
     sp_board_cell_left_click_disabled: {
       type: Boolean
     },
     // 盤上セルタップ時の通常処理の無効化
-
     // Object
     sp_player_info: {
       type: Object
     },
     // 対局者名と時間
-
     // Function
     sp_board_piece_back_user_class_fn: {
       type: Function
@@ -85140,43 +85133,20 @@ Vue.use(esm);
   },
 
   mounted() {
-    // console.log(JSON5.parse(""))
-
-    console.log("NODE_ENV", "production");
-    console.log("$attrs", this.$attrs);
-    console.log("$props", this.$props);
-    console.log("spwc_style_object_hash", this.spwc_style_object_hash);
-    console.log("vue_side_native_props", this.vue_side_native_props);
+    if (false) {}
   },
-  methods: {
-    foo(v) {
-      console.log(v);
-      // this.$emit('"update:sp_turn", v)
-
-      // this.$el.dispatchEvent(
-      //   new CustomEvent("foo", {})
-      //   //   bubbles: true,
-      //   //   composed: true,
-      //   //   cancelable: false,
-      //   //   detail: self
-      //   // })
-      // )
-    }
-  },
-
   computed: {
-    spwc_style_object_hash() {
-      return dist_default().parse(this.spwc_style_object ?? "{}");
+    spwc_style_hash_native() {
+      return dist_default().parse(this.spwc_style_hash ?? "{}");
     },
-    vue_side_native_props() {
-      const hash = {
+    props_native() {
+      // delete hash.spwc_style_hash としても良いが別に消さなくてもいいのでやらない
+      return {
         ...this.$props,
-        ...this.vue_side_native_objects_hash
+        ...this.override_props
       };
-      // delete hash.spwc_style_object // このコンポーネント内のみ使っているものなので削除しておく
-      return hash;
     },
-    vue_side_native_objects_hash() {
+    override_props() {
       return {
         sp_player_info: this.sp_player_info_native
       };
@@ -85196,7 +85166,7 @@ Vue.use(esm);
 
 function ShogiPlayerWcRootshadow_injectStyles (context) {
   
-  var style0 = __webpack_require__(70574)
+  var style0 = __webpack_require__(59839)
 if (style0.__inject__) style0.__inject__(context)
 
 }
