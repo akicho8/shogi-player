@@ -16,6 +16,7 @@
 /shogi-player-vue-cli*
 
 # ゴミ
+/trash
 /*.diff
 /TODO*
 
