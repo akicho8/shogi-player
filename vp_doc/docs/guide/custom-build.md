@@ -2,7 +2,7 @@
 
 ## Vue.js 以外
 
-React.js (Next.js) や WordPress は [Web Components 版](/guide/install/) をどうぞ
+React.js (Next.js) や WordPress は [Web Components 版](/guide/usage/) をどうぞ
 
 ## Vue.js 2
 

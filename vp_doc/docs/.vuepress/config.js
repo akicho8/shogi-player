@@ -79,7 +79,7 @@ module.exports = {
           collapsable: false,
           children: [
             '',
-            'install',
+            'usage',
             'customize',
             'custom-build',
             'play-mode',
@@ -91,10 +91,9 @@ module.exports = {
           ],
         },
         {
-          title: 'Advanced',
+          title: 'Reference',
           collapsable: false,
           children: [
-            '',
             '/component-arguments/',
             '/css-variables/',
             '/api/',
@@ -106,7 +105,7 @@ module.exports = {
         //   collapsable: false,
         //   children: [
         //     '',
-        //     'install',
+        //     'usage',
         //     'edit-mode',
         //     'credit',
         //   ]
@@ -126,7 +125,7 @@ module.exports = {
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
 
-    // https://v1.vuepress.vuejs.org/plugin/official/plugin-google-analytics.html#install
+    // https://v1.vuepress.vuejs.org/plugin/official/plugin-google-analytics.html#usage
     // yarn add -D @vuepress/plugin-google-analytics
     // npm i -D @vuepress/plugin-google-analytics
     // 'google-analytics': {
