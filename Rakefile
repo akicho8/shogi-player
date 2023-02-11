@@ -102,10 +102,10 @@ task :dist do
   system %(cd web_component && vue-cli-service build --dest ../dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
 end
 
-task "w"    => "wc:build"
+task :w     => "wc:build"
 task "wc:s" => "wc:server"
 task "wc:b" => "wc:build"
-task "wc"   => "wc:build"
+task :wc    => "wc:build"
 namespace "wc" do
   desc "[wc:s] server"
   task :server do
@@ -114,14 +114,12 @@ namespace "wc" do
 
   desc "[wc:b][wc][w] build"
   task :build do
-    p "ここはローカルで実行する"
     system %(cd web_component && vue-cli-service build --dest ../vp_doc/.vuepress/public/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
   end
 end
 
-desc "netlify (wc:build + doc:build)"
+desc "netlify (doc:build)"
 task :netlify => [
-  # "wc:build",
   "doc:build",
 ]
 
@@ -133,7 +131,7 @@ task :cdn do
   system %(curl -sI https://cdn.jsdelivr.net/npm/shogi-player                             | grep 'x-jsd-version:')
 
   tp "unpkg"
-  system %(curl -sI https://unpkg.com/shogi-player/dist/shogi-player-wc.min.js | grep 'location')
-  system %(curl -sI https://unpkg.com/shogi-player@latest                      | grep 'location')
-  system %(curl -sI https://unpkg.com/shogi-player                             | grep 'location')
+  system %(curl -sI https://unpkg.com/shogi-player/dist/shogi-player-wc.min.js | grep location)
+  system %(curl -sI https://unpkg.com/shogi-player@latest                      | grep location)
+  system %(curl -sI https://unpkg.com/shogi-player                             | grep location)
 end
