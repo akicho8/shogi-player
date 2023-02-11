@@ -85,6 +85,16 @@ module.exports = {
             // 'test-of-demo',
           ],
         },
+        {
+          title: 'Advanced',
+          collapsable: false,
+          children: [
+            '',
+            '/component-arguments/',
+            '/css-variables/',
+            '/api/',
+          ],
+        },
 
         // {
         //   title: 'Guide',
@@ -146,6 +156,10 @@ module.exports = {
         // copyOptions: { ... },
       },
     ],
+    
+    // https://v1.vuepress.vuejs.org/plugin/official/plugin-google-analytics.html#install
+    // yarn add -D @vuepress/plugin-google-analytics
+    // npm i -D @vuepress/plugin-google-analytics
     [
       '@vuepress/plugin-google-analytics', {
         ga: 'G-KG0GXEY9BN',

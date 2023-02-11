@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@vuepress/plugin-google-analytics": "^1.9.8",
     "vuepress": "^1.9.8",
     "vuepress-plugin-demo-code": "^1.0.0"
   }
