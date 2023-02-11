@@ -7,7 +7,6 @@ import { HumanSideInfo } from "./models/human_side_info.js"
 export const play_mode_module = {
   props: {
     sp_human_side: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
-    sp_play_mode_advanced_short_sfen_emit: { type: Boolean, default: false, },
   },
 
   data() {
@@ -28,7 +27,7 @@ export const play_mode_module = {
       // this.xcontainer.hold_pieces,
     ], () => {
       this.emit_update_edit_mode_short_sfen()
-      // this.$emit("update:edit_mode_short_sfen", this.edit_mode_short_sfen())
+      // this.$emit("ev:edit_mode_short_sfen", this.edit_mode_short_sfen())
     }, {deep: true})
   },
 
@@ -38,28 +37,28 @@ export const play_mode_module = {
   watch: {
     // 不具合確認用
     edit_mode_short_sfen2(v) {
-      this.$emit("update:edit_mode_short_sfen2", v)
+      this.$emit("ev:edit_mode_short_sfen2", v)
     },
 
     // もともと xcontainer を watch していたがそれだと to_short_sfen が変化しているかどうかにかかわらず呼ばれてしまっていた
     // to_short_sfen の変化を監視したいのだからそれを指定しないといけない
     "xcontainer.to_short_sfen": {
       handler(v) {
-        this.$emit("update:short_sfen", v)
+        this.$emit("ev:short_sfen", v)
       },
     },
 
     // 現在の手数を返す
     // update:sp_turn とは別にしてある
     turn_offset(v) {
-      this.$emit("update:turn_offset", v)
+      this.$emit("ev:turn_offset", v)
     },
 
     // 操作モードで盤面が変化したときの指し手の配列
     // ・[a, b, c] の指し手があってポインタが c のとき「←」でポインタを b にするとトリガーする
     // ・このとき [a, b] を返す
     moves_take_turn_offset(v) {
-      this.$emit("update:moves_take_turn_offset", v)
+      this.$emit("ev:moves_take_turn_offset", v)
     },
   },
 
@@ -115,21 +114,16 @@ export const play_mode_module = {
         this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
         this.xcontainer.current_turn = -1
         this.xcontainer.run()
-        this.$emit("user_piece_put")
+        this.$emit("ev:play_mode_user_piece_put")
 
-        this.$emit("update:play_mode_advanced_full_moves_sfen", {
+        this.$emit("ev:play_mode_next_info", {
           sfen:           this.play_mode_full_moves_sfen, // sfen と
           turn:           this.turn_offset,               // turn を同時に更新するの重要
           last_move_info: this.last_move_info,
           snapshot_hash:  this.xcontainer.to_sfen_without_turn, // 履歴を含まない現在の状態
         })
 
-        this.$emit("update:play_mode_advanced_moves", this.moves)
-
-        // 遅いのでデフォルトではOFFにする。消してもいい
-        if (this.sp_play_mode_advanced_short_sfen_emit) {
-          this.$emit("update:play_mode_advanced_short_sfen", this.xcontainer.to_short_sfen) // 14 ms
-        }
+        this.$emit("ev:play_mode_next_moves", this.moves)
 
         // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする
         this.turn_slider_focus()
@@ -152,7 +146,7 @@ export const play_mode_module = {
 
     emit_update_edit_mode_short_sfen() {
       if (this.edit_p) {
-        this.$emit("update:edit_mode_short_sfen", this.edit_mode_short_sfen())
+        this.$emit("ev:edit_mode_short_sfen", this.edit_mode_short_sfen())
       }
     },
   },

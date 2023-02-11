@@ -99,28 +99,25 @@
 
           MainDocSwitch(v-model="trigger_toast_p" label="イベント確認")
 
-          b-field(custom-class="is-small" label="@update:play_mode_advanced_full_moves_sfen: 操作モードで指した直後の局面を発行(movesあり)")
-            b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_full_moves_sfen)" readonly type="textarea" rows="1")
-
-          b-field(custom-class="is-small" label="@update:play_mode_advanced_short_sfen: 操作モードで指した直後の局面を発行(movesなし)")
-            b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_short_sfen)" readonly type="textarea")
+          b-field(custom-class="is-small" label="@ev:play_mode_next_info: 操作モードで指した直後の局面を発行(movesあり)")
+            b-input(size="is-small" :value="JSON.stringify(play_mode_next_info)" readonly type="textarea" rows="1")
 
           //- b-field(custom-class="is-small" label="@update:play_mode_advanced_last_move: 操作モードで指した手(sfenのmovesの最後の1つ)")
           //-   b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_last_move)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@update:play_mode_advanced_moves: 操作モードで指した手を含むmoves配列")
-            b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_moves)" readonly type="textarea")
+          b-field(custom-class="is-small" label="@ev:play_mode_next_moves: 操作モードで指した手を含むmoves配列")
+            b-input(size="is-small" :value="JSON.stringify(play_mode_next_moves)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@update:short_sfen: 盤面が変化したとき(常時更新)")
+          b-field(custom-class="is-small" label="@ev:short_sfen: 盤面が変化したとき(常時更新)")
             b-input(size="is-small" :value="JSON.stringify(short_sfen)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@update:edit_mode_short_sfen: 編集モードで盤面が変化したとき")
+          b-field(custom-class="is-small" label="@ev:edit_mode_short_sfen: 編集モードで盤面が変化したとき")
             b-input(size="is-small" :value="JSON.stringify(edit_mode_short_sfen)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@update:turn_offset: 手数が変化したとき")
+          b-field(custom-class="is-small" label="@ev:turn_offset: 手数が変化したとき")
             b-input(size="is-small" :value="JSON.stringify(turn_offset)" readonly type="text")
 
-          b-field(custom-class="is-small" label="@update:moves_take_turn_offset: 操作モードでmovesをturn_offsetでtakeしたもの")
+          b-field(custom-class="is-small" label="@ev:moves_take_turn_offset: 操作モードでmovesをturn_offsetでtakeしたもの")
             b-input(size="is-small" :value="JSON.stringify(moves_take_turn_offset)" readonly type="text")
 
           b-field(custom-class="is-small" label="@foul_accident: 反則があって無効化したとき")
@@ -159,15 +156,14 @@
             :sp_human_side="sp_human_side"
 
             @board_cell_pointerdown="board_cell_pointerdown"
-            @update:edit_mode_short_sfen="            e => trigger_check('edit_mode_short_sfen', e)"
-            @update:short_sfen="             e => trigger_check('short_sfen', e)"
-            @update:play_mode_advanced_full_moves_sfen=" e => trigger_check('play_mode_advanced_full_moves_sfen', e)"
-            @update:play_mode_advanced_short_sfen="   e => trigger_check('play_mode_advanced_short_sfen', e)"
-            @update:play_mode_advanced_moves="           e => trigger_check('play_mode_advanced_moves', e)"
-            @update:turn_offset="                        e => trigger_check('turn_offset', e)"
-            @update:turn_offset_max="                    e => trigger_check('turn_offset_max', e)"
-            @update:moves_take_turn_offset="             e => trigger_check('moves_take_turn_offset', e)"
-            @foul_accident="                             e => trigger_check('foul_accident', e)"
+            @ev:edit_mode_short_sfen="   e => trigger_check('edit_mode_short_sfen', e)"
+            @ev:short_sfen="             e => trigger_check('short_sfen', e)"
+            @ev:play_mode_next_info="    e => trigger_check('play_mode_next_info', e)"
+            @ev:play_mode_next_moves="   e => trigger_check('play_mode_next_moves', e)"
+            @ev:turn_offset="            e => trigger_check('turn_offset', e)"
+            @ev:turn_offset_max="        e => trigger_check('turn_offset_max', e)"
+            @ev:moves_take_turn_offset=" e => trigger_check('moves_take_turn_offset', e)"
+            @foul_accident="             e => trigger_check('foul_accident', e)"
             @player_info_click="(location, sp_player_info) => $buefy.toast.open(location.name)"
 
             :sp_play_mode_foul_check_p="sp_play_mode_foul_check_p"
@@ -206,13 +202,10 @@
                 |   :sp_play_mode_foul_break_p="{{sp_play_mode_foul_break_p}}"
                 |   sp_body="{{sp_body}}"
 
-      MainDocMd(:body="options_md")
       MainDocEditDesc2
 </template>
 
 <script>
-import options_md from "./options.md"
-
 import { HumanSideInfo } from "../models/human_side_info.js"
 import { RunModeInfo } from "../models/run_mode_info.js"
 import { BgVariantInfo } from "../models/bg_variant_info.js"
@@ -223,8 +216,6 @@ export default {
   name: "MainDocOption",
   data() {
     return {
-      options_md,
-
       HumanSideInfo,
       RunModeInfo,
       BgVariantInfo,
@@ -265,10 +256,9 @@ export default {
 
       edit_mode_short_sfen: null,
       short_sfen: null,
-      play_mode_advanced_full_moves_sfen: null,
-      play_mode_advanced_short_sfen: null,
+      play_mode_next_info: null,
       // play_mode_advanced_last_move: null,
-      play_mode_advanced_moves: null,
+      play_mode_next_moves: null,
       turn_offset: null,
       moves_take_turn_offset: null,
     }

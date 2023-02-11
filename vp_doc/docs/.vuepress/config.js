@@ -72,9 +72,10 @@ module.exports = {
       {
         text: "Reference",
         items: [
-          { text: 'コンポーネント引数', link: '/component-arguments/', },
-          { text: 'CSS Variables',      link: '/css-variables/',       },
-          { text: 'API',                link: '/api/',                 },
+          { text: 'コンポーネント引数', link: '/reference/component-arguments/', },
+          { text: 'CSS Variables',      link: '/reference/css-variables/',       },
+          { text: 'Event',              link: '/reference/event/',               },
+          { text: 'API',                link: '/reference/api/',                 },
         ],
       },
 
@@ -93,6 +94,7 @@ module.exports = {
             'usage',
             'customize',
             'custom-build',
+            'view-mode',
             'play-mode',
             'edit-mode',
             'edit-mode-shortcut',
@@ -101,13 +103,15 @@ module.exports = {
             // 'test-of-demo',
           ],
         },
+
         {
           title: 'Reference',
           collapsable: false,
           children: [
-            '/component-arguments/',
-            '/css-variables/',
-            '/api/',
+            '/reference/component-arguments/',
+            '/reference/css-variables/',
+            '/reference/event/',
+            '/reference/api/',
           ],
         },
 
@@ -122,6 +126,31 @@ module.exports = {
         //   ]
         // },
       ],
+
+      // '/reference/': [
+      //   {
+      //     title: 'Reference',
+      //     collapsable: false,
+      //     children: [
+      //       '',
+      //       '/component-arguments/',
+      //       '/css-variables/',
+      //       '/api/',
+      //     ],
+      //   },
+      // 
+      //   // {
+      //   //   title: 'Guide',
+      //   //   collapsable: false,
+      //   //   children: [
+      //   //     '',
+      //   //     'usage',
+      //   //     'edit-mode',
+      //   //     'credit',
+      //   //   ]
+      //   // },
+      // ],
+
     }
   },
 

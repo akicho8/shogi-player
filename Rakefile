@@ -97,6 +97,11 @@ task :open do
   system %(open https://shogi-player.netlify.app/)
 end
 
+desc "[ga] Google Analytics"
+task :ga do
+  system %(open https://tagassistant.google.com/)
+end
+
 desc "CDN Validations"
 task :cdn do
   tp "JSDelivr"

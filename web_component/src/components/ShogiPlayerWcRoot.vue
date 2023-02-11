@@ -12,32 +12,32 @@
       ShogiPlayer(
         v-bind="props_native"
         v-on="$listeners"
-        @update:short_sfen="                         (...args) => $emit('update:short_sfen', ...args)"
-        @update:play_mode_advanced_full_moves_sfen=" (...args) => $emit('update:play_mode_advanced_full_moves_sfen', ...args)"
-        @update:play_mode_advanced_short_sfen="      (...args) => $emit('update:play_mode_advanced_short_sfen', ...args)"
-        @update:play_mode_advanced_moves="           (...args) => $emit('update:play_mode_advanced_moves', ...args)"
-        @update:moves_take_turn_offset="             (...args) => $emit('update:moves_take_turn_offset', ...args)"
-        @update:edit_mode_short_sfen="               (...args) => $emit('update:edit_mode_short_sfen', ...args)"
-        @update:sp_turn="                            (...args) => $emit('update:sp_turn', ...args)"
-        @user_piece_put="                            (...args) => $emit('user_piece_put', ...args)"
-        @user_viewpoint_flip="                       (...args) => $emit('user_viewpoint_flip', ...args)"
-        @user_turn_change="                          (...args) => $emit('user_turn_change', ...args)"
-        @user_piece_lift="                           (...args) => $emit('user_piece_lift', ...args)"
-        @user_piece_cancel="                         (...args) => $emit('user_piece_cancel', ...args)"
-        @update:turn_offset="                        (...args) => $emit('update:turn_offset', ...args)"
-        @update:turn_offset_max="                    (...args) => $emit('update:turn_offset_max', ...args)"
-        @update:sp_run_mode="                        (...args) => $emit('update:sp_run_mode', ...args)"
-        @update:sp_body="                            (...args) => $emit('update:sp_body', ...args)"
-        @update:sp_debug_mode="                      (...args) => $emit('update:sp_debug_mode', ...args)"
-        @update:sp_viewpoint="                       (...args) => $emit('update:sp_viewpoint', ...args)"
-        @update:sp_layout="                          (...args) => $emit('update:sp_layout', ...args)"
-        @update:sp_bg_variant="                      (...args) => $emit('update:sp_bg_variant', ...args)"
-        @update:sp_piece_variant="                   (...args) => $emit('update:sp_piece_variant', ...args)"
-        @board_cell_pointerdown="                    (...args) => $emit('board_cell_pointerdown', ...args)"
-        @operation_invalid1="                        (...args) => $emit('operation_invalid1', ...args)"
-        @operation_invalid2="                        (...args) => $emit('operation_invalid2', ...args)"
-        @foul_accident="                             (...args) => $emit('foul_accident', ...args)"
-        @player_info_click="                         (...args) => $emit('player_info_click', ...args)"
+        @ev:short_sfen="               (...args) => $emit('ev:short_sfen', ...args)"
+        @ev:play_mode_next_info="      (...args) => $emit('ev:play_mode_next_info', ...args)"
+        @ev:play_mode_next_moves="        (...args) => $emit('ev:play_mode_next_moves', ...args)"
+        @ev:moves_take_turn_offset="   (...args) => $emit('ev:moves_take_turn_offset', ...args)"
+        @ev:edit_mode_short_sfen="     (...args) => $emit('ev:edit_mode_short_sfen', ...args)"
+        @ev:edit_mode_short_sfen2="    (...args) => $emit('ev:edit_mode_short_sfen2', ...args)"
+        @update:sp_turn="              (...args) => $emit('update:sp_turn', ...args)"
+        @ev:play_mode_user_piece_put=" (...args) => $emit('ev:play_mode_user_piece_put', ...args)"
+        @user_viewpoint_flip="         (...args) => $emit('user_viewpoint_flip', ...args)"
+        @user_turn_change="            (...args) => $emit('user_turn_change', ...args)"
+        @user_piece_lift="             (...args) => $emit('user_piece_lift', ...args)"
+        @user_piece_cancel="           (...args) => $emit('user_piece_cancel', ...args)"
+        @ev:turn_offset="              (...args) => $emit('ev:turn_offset', ...args)"
+        @ev:turn_offset_max="          (...args) => $emit('ev:turn_offset_max', ...args)"
+        @update:sp_run_mode="          (...args) => $emit('update:sp_run_mode', ...args)"
+        @update:sp_body="              (...args) => $emit('update:sp_body', ...args)"
+        @update:sp_debug_mode="        (...args) => $emit('update:sp_debug_mode', ...args)"
+        @update:sp_viewpoint="         (...args) => $emit('update:sp_viewpoint', ...args)"
+        @update:sp_layout="            (...args) => $emit('update:sp_layout', ...args)"
+        @update:sp_bg_variant="        (...args) => $emit('update:sp_bg_variant', ...args)"
+        @update:sp_piece_variant="     (...args) => $emit('update:sp_piece_variant', ...args)"
+        @board_cell_pointerdown="      (...args) => $emit('board_cell_pointerdown', ...args)"
+        @operation_invalid1="          (...args) => $emit('operation_invalid1', ...args)"
+        @operation_invalid2="          (...args) => $emit('operation_invalid2', ...args)"
+        @foul_accident="               (...args) => $emit('foul_accident', ...args)"
+        @player_info_click="           (...args) => $emit('player_info_click', ...args)"
       )
 </template>
 
@@ -107,7 +107,6 @@ export default {
     sp_preset_key:                               { type: String,   }, // 手合割(初期配置)
     sp_comment:                                  { type: String,   }, // KIFのコメントを表示する
     sp_human_side:                               { type: String,   }, // 含まれる側だけ操作できるようにする
-    sp_play_mode_advanced_short_sfen_emit:          { type: Boolean,  }, // update:play_mode_advanced_short_sfen イベントを発行するか？
     sp_device:                                   { type: String,   }, // デバイスを強制的に指定する (is_device_touch is_device_desktop) 自動判別するので基本そのままでよい
     sp_play_mode_foul_check_p:                   { type: Boolean,  }, // play_mode で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
     sp_play_mode_foul_break_p:                   { type: Boolean,  }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)

@@ -306,13 +306,6 @@ Default: `both`
 | black | ☗            |
 | white | ☖            |
 
-### `sp_play_mode_advanced_short_sfen_emit`
-
-Type: `Boolean`
-Default: `false`
-
-再生モードで `update:play_mode_advanced_short_sfen` イベントを発行するか？ <Badge text="要検討" type="error" vertical="top" />
-
 ### `sp_balloon`
 
 Type: `String`
@@ -519,12 +512,17 @@ Default: `350`
 編集モードで駒を反転するときのダブルクリックと認識する時間(ms)
 
 ネイティブなダブルクリック判定を入れると通常のクリック判定が遅れるため自力判定している
+
 ### `sp_key_event_capture_enabled`
 
 Type: `Boolean`
 Default: `false`
 
 スライダーにフォーカスしていなくても左右キーで手数を動かせるようにするか？ <Badge text="非推奨" type="error" vertical="top" />
+
+::: warning
+副作用あり。他のプログラムの操作を奪ってしまうかもしれないため基本は false にしておいた方がよい
+:::
 
 ### `sp_shift_key_mag`
 

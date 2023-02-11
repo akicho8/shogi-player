@@ -226,7 +226,7 @@ export default {
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    turn_offset_max(v) { this.$emit("update:turn_offset_max", v) },
+    turn_offset_max(v) { this.$emit("ev:turn_offset_max", v) },
   },
 
   methods: {

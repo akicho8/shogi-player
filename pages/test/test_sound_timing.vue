@@ -15,7 +15,7 @@
             sp_debug_mode="is_debug_mode_on"
             sp_controller="is_controller_on"
             sp_slider="is_slider_on"
-            @user_piece_put="     user_event_check('user_piece_put')"
+            @ev:play_mode_user_piece_put="     user_event_check('ev:play_mode_user_piece_put')"
             @user_viewpoint_flip="user_event_check('user_viewpoint_flip')"
             @user_turn_change="   user_event_check('user_turn_change')"
             @user_piece_lift="    user_event_check('user_piece_lift')"

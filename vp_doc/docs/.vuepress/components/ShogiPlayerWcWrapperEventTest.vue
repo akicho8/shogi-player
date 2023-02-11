@@ -1,5 +1,5 @@
 <template>
-<ShogiPlayerWcWrapper sp_run_mode="play_mode" @update:play_mode_advanced_full_moves_sfen="move_handle" />
+<ShogiPlayerWcWrapper sp_run_mode="play_mode" @ev:play_mode_next_info="move_handle" />
 </template>
 
 <script>

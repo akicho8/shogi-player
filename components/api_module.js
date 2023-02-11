@@ -73,5 +73,10 @@ export const api_module = {
     api_turn_slider_focus() {
       this.turn_slider_focus()
     },
+
+    // 操作モードでの moves.take(turn_offset) 相当を返す
+    api_moves_take_turn_offset() {
+      return this.moves_take_turn_offset
+    },
   },
 }
