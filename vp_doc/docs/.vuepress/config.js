@@ -27,8 +27,19 @@ module.exports = {
 
     // @vuepress/plugin-google-analytics は 2 専用だった？
     // https://github.com/vuejs/vuepress/issues/2713#issuecomment-806621348
-    ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-KG0GXEY9BN', }],
-    ['script', {}, ["window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-KG0GXEY9BN');"]],
+    //
+    // <!-- Google tag (gtag.js) -->
+    // <script async src="https://www.googletagmanager.com/gtag/js?id=G-CPET0WX1W0"></script>
+    // <script>
+    //   window.dataLayer = window.dataLayer || [];
+    //   function gtag(){dataLayer.push(arguments);}
+    //   gtag('js', new Date());
+    //
+    //   gtag('config', 'G-CPET0WX1W0');
+    // </script>
+    //
+    ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-CPET0WX1W0', }],
+    ['script', {}, ["window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-CPET0WX1W0');"]],
 
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
@@ -129,7 +140,7 @@ module.exports = {
     // yarn add -D @vuepress/plugin-google-analytics
     // npm i -D @vuepress/plugin-google-analytics
     // 'google-analytics': {
-    //   ga: 'G-KG0GXEY9BN',
+    //   ga: 'G-CPET0WX1W0',
     // },
 
     ['demo-code', {
