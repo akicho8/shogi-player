@@ -25,6 +25,11 @@ module.exports = {
     // ['meta', { name: 'og:description', content: 'example description' }],
     // ['meta', { name: 'og:image', content: '/og.png' }]
 
+    // @vuepress/plugin-google-analytics は 2 専用だった？
+    // https://github.com/vuejs/vuepress/issues/2713#issuecomment-806621348
+    ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-KG0GXEY9BN', }],
+    ['script', {}, ["window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-KG0GXEY9BN');"]],
+
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
@@ -118,15 +123,17 @@ module.exports = {
 
   // https://v1.vuepress.vuejs.org/plugin/using-a-plugin.html#plugin-options
   plugins: {
+    // plugins: ['@vuepress/back-to-top']
+    
     'back-to-top': {},
     'medium-zoom': {},
 
     // https://v1.vuepress.vuejs.org/plugin/official/plugin-google-analytics.html#install
     // yarn add -D @vuepress/plugin-google-analytics
     // npm i -D @vuepress/plugin-google-analytics
-    'google-analytics': {
-      ga: 'G-KG0GXEY9BN',
-    },
+    // 'google-analytics': {
+    //   ga: 'G-KG0GXEY9BN',
+    // },
 
     'demo-code': {
       // jsLibs: [
