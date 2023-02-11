@@ -8,17 +8,23 @@ task :server do
   system %(nuxt dev -p 5000 --open)
 end
 
-desc "test"
+task :t => :test
+desc "[t] test"
 task :test do
   system %(jest)
 end
 
-desc "generate"
+desc "dist/ に CDN 用の Web Components を生成する"
+task :dist do
+  system %(cd web_component && vue-cli-service build --dest ../dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
+end
+
+task :g => :generate
+desc "[g] generate"
 task :generate do
   system %(ruby components/extract_css_variables.rb)
   system %(ruby components/extract_props.rb)
 end
-task :g => :generate
 
 desc "clean"
 task :clean do
@@ -64,16 +70,9 @@ task :copy do
 end
 task :cp => :copy
 
-desc "sample-sp-update"
-task "sample-sp-update" do
-  system %(cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && yarn)
-  system %(cd shogi-player-vue-cli-sample && ncu /shogi-player/ -u && npm i)
-end
-
 task :d => "doc:server"
-task :doc => "doc:server"
 namespace :doc do
-  desc "[doc] server"
+  desc "[d] server"
   task :server do
     system %(cd vp_doc && rake server)
   end
@@ -84,44 +83,19 @@ namespace :doc do
   end
 end
 
-task :vps => "vuepress-site:dev"
-namespace "vuepress-site" do
-  desc "dev"
-  task :dev do
-    system %(cd test-of-create-vuepress-site/docs && vuepress dev -p 5010 --open src)
-  end
-
-  desc "build"
-  task :build do
-    system %(cd test-of-create-vuepress-site/docs && vuepress build src)
+task :n => "netlify:open"
+namespace "netlify" do
+  desc "[n] netlify open"
+  task :netlify do
+    system %(open https://app.netlify.com/sites/shogi-player/overview)
   end
 end
 
-desc "dist/ に Web Components を生成する"
-task :dist do
-  system %(cd web_component && vue-cli-service build --dest ../dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
+task :o => :open
+desc "[o] open document"
+task :open do
+  system %(open https://shogi-player.netlify.app/)
 end
-
-task :w     => "wc:build"
-task "wc:s" => "wc:server"
-task "wc:b" => "wc:build"
-task :wc    => "wc:build"
-namespace "wc" do
-  desc "[wc:s] server"
-  task :server do
-    system %(cd web_component && vue-cli-service serve --port 5002 --open)
-  end
-
-  desc "[wc:b][wc][w] build"
-  task :build do
-    system %(cd web_component && vue-cli-service build --dest ../vp_doc/.vuepress/public/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
-  end
-end
-
-desc "netlify (doc:build)"
-task :netlify => [
-  "doc:build",
-]
 
 desc "CDN Validations"
 task :cdn do
@@ -134,4 +108,36 @@ task :cdn do
   system %(curl -sI https://unpkg.com/shogi-player/dist/shogi-player-wc.min.js | grep location)
   system %(curl -sI https://unpkg.com/shogi-player@latest                      | grep location)
   system %(curl -sI https://unpkg.com/shogi-player                             | grep location)
+end
+
+task "ws" => "wc:server"
+task "wb" => "wc:build"
+namespace "wc" do
+  desc "[ws] server"
+  task :server do
+    system %(cd web_component && vue-cli-service serve --port 5002 --open)
+  end
+
+  desc "[wb] build"
+  task :build do
+    system %(cd web_component && vue-cli-service build --dest ../vp_doc/.vuepress/public/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
+  end
+end
+
+desc "other-embed-apps-shogi-player-update"
+task "other-embed-apps-shogi-player-update" do
+  system %(cd shogi-player-nuxt-sample    && ncu /shogi-player/ -u && yarn)
+  system %(cd shogi-player-vue-cli-sample && ncu /shogi-player/ -u && npm i)
+end
+
+namespace "test-of-create-vuepress-site" do
+  desc "server"
+  task :server do
+    system %(cd test-of-create-vuepress-site/docs && vuepress dev -p 5010 --open src)
+  end
+
+  desc "build"
+  task :build do
+    system %(cd test-of-create-vuepress-site/docs && vuepress build src)
+  end
 end
