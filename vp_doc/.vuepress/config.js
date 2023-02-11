@@ -40,7 +40,7 @@ module.exports = {
   /**
    * Theme configuration, here is the default theme configuration for VuePress.
    *
-   * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
+   * ref: https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
     repo: 'akicho8/shogi-player',
@@ -117,11 +117,21 @@ module.exports = {
   },
 
   /**
-   * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
+   * Apply plugins，ref: https://v1.vuepress.vuejs.org/zh/plugin/
    */
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
+
+    // https://v1.vuepress.vuejs.org/plugin/official/plugin-google-analytics.html#install
+    // yarn add -D @vuepress/plugin-google-analytics
+    // npm i -D @vuepress/plugin-google-analytics
+    [
+      '@vuepress/google-analytics', {
+        ga: 'G-KG0GXEY9BN',
+      },
+    ],
+
     // 'demo-code',
     [
       'demo-code', {
@@ -154,15 +164,6 @@ module.exports = {
         // },
         // demoCodeMark: 'demo-code',
         // copyOptions: { ... },
-      },
-    ],
-    
-    // https://v1.vuepress.vuejs.org/plugin/official/plugin-google-analytics.html#install
-    // yarn add -D @vuepress/plugin-google-analytics
-    // npm i -D @vuepress/plugin-google-analytics
-    [
-      '@vuepress/plugin-google-analytics', {
-        ga: 'G-KG0GXEY9BN',
       },
     ],
 

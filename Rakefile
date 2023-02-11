@@ -86,7 +86,7 @@ end
 task :n => "netlify:open"
 namespace "netlify" do
   desc "[n] netlify open"
-  task :netlify do
+  task :open do
     system %(open https://app.netlify.com/sites/shogi-player/overview)
   end
 end
