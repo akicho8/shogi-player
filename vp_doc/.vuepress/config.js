@@ -116,17 +116,15 @@ module.exports = {
     linkify: true, // URLを書いたら自動的にリンクするか？
   },
 
-  /**
-   * Apply plugins，ref: https://v1.vuepress.vuejs.org/zh/plugin/
-   */
+  // https://v1.vuepress.vuejs.org/plugin/using-a-plugin.html#plugin-options
   plugins: {
-    '@vuepress/plugin-back-to-top': {},
-    '@vuepress/plugin-medium-zoom': {},
+    'back-to-top': {},
+    'medium-zoom': {},
 
     // https://v1.vuepress.vuejs.org/plugin/official/plugin-google-analytics.html#install
     // yarn add -D @vuepress/plugin-google-analytics
     // npm i -D @vuepress/plugin-google-analytics
-    '@vuepress/plugin-google-analytics': {
+    'google-analytics': {
       ga: 'G-KG0GXEY9BN',
     },
 
