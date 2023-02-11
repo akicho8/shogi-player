@@ -145,7 +145,12 @@ module.exports = {
         // demoCodeMark: 'demo-code',
         // copyOptions: { ... },
       },
-    ]
+    ],
+    [
+      '@vuepress/plugin-google-analytics', {
+        ga: 'G-KG0GXEY9BN',
+      },
+    ],
 
     // require('tailwindcss'),
     // require('autoprefixer'),
