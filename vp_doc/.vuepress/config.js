@@ -122,11 +122,9 @@ module.exports = {
   },
 
   // https://v1.vuepress.vuejs.org/plugin/using-a-plugin.html#plugin-options
-  plugins: {
-    // plugins: ['@vuepress/back-to-top']
-    
-    'back-to-top': {},
-    'medium-zoom': {},
+  plugins: [
+    '@vuepress/plugin-back-to-top',
+    '@vuepress/plugin-medium-zoom',
 
     // https://v1.vuepress.vuejs.org/plugin/official/plugin-google-analytics.html#install
     // yarn add -D @vuepress/plugin-google-analytics
@@ -135,7 +133,7 @@ module.exports = {
     //   ga: 'G-KG0GXEY9BN',
     // },
 
-    'demo-code': {
+    ['demo-code', {
       // jsLibs: [
       //   // umd
       //   'https://unpkg.com/tua-storage/dist/TuaStorage.umd.js',
@@ -165,11 +163,11 @@ module.exports = {
       // },
       // demoCodeMark: 'demo-code',
       // copyOptions: { ... },
-    },
+    }],
 
     // require('tailwindcss'),
     // require('autoprefixer'),
-  },
+  ],
 
   // postcss: {
   //   plugins: [
