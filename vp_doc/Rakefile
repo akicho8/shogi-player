@@ -3,11 +3,11 @@ task :default => :s
 task :s => :server
 desc "[s] server"
 task :server do
-  system %(vuepress dev -p 5001 --open)
+  system %(vuepress dev docs -p 5001 --open)
 end
 
 task :b => :build
 desc "[b] build"
 task :build do
-  system %(vuepress build)
+  system %(vuepress build docs)
 end
