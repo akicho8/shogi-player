@@ -67,12 +67,12 @@
           .title.is-5 反則判定
 
           b-field(custom-class="is-small" label="反則判定" message="OFFなら気持ち程度処理も軽くなる")
-            b-radio-button(size="is-small" v-model="sp_play_mode_foul_check_p" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_play_mode_foul_check_p" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_foul_check" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_foul_check" :native-value="true") ON
 
           b-field(custom-class="is-small" label="操作無効" message="ONは初心者向けで判定にひっかかったら操作を無効にする")
-            b-radio-button(size="is-small" v-model="sp_play_mode_foul_break_p" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_play_mode_foul_break_p" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_foul_break" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_foul_break" :native-value="true") ON
 
         .box
           .title.is-5 その他
@@ -99,29 +99,29 @@
 
           MainDocSwitch(v-model="trigger_toast_p" label="イベント確認")
 
-          b-field(custom-class="is-small" label="@ev:play_mode_next_info: 操作モードで指した直後の局面を発行(movesあり)")
-            b-input(size="is-small" :value="JSON.stringify(play_mode_next_info)" readonly type="textarea" rows="1")
+          b-field(custom-class="is-small" label="@ev_play_mode_next: 操作モードで指した直後の局面を発行(movesあり)")
+            b-input(size="is-small" :value="JSON.stringify(ev_play_mode_next)" readonly type="textarea" rows="1")
 
           //- b-field(custom-class="is-small" label="@update:play_mode_advanced_last_move: 操作モードで指した手(sfenのmovesの最後の1つ)")
           //-   b-input(size="is-small" :value="JSON.stringify(play_mode_advanced_last_move)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@ev:play_mode_next_moves: 操作モードで指した手を含むmoves配列")
-            b-input(size="is-small" :value="JSON.stringify(play_mode_next_moves)" readonly type="textarea")
+          b-field(custom-class="is-small" label="@ev_play_mode_next_moves: 操作モードで指した手を含むmoves配列")
+            b-input(size="is-small" :value="JSON.stringify(ev_play_mode_next_moves)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@ev:short_sfen: 盤面が変化したとき(常時更新)")
-            b-input(size="is-small" :value="JSON.stringify(short_sfen)" readonly type="textarea")
+          b-field(custom-class="is-small" label="@ev_short_sfen_change: 盤面が変化したとき(常時更新)")
+            b-input(size="is-small" :value="JSON.stringify(ev_short_sfen_change)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@ev:edit_mode_short_sfen: 編集モードで盤面が変化したとき")
-            b-input(size="is-small" :value="JSON.stringify(edit_mode_short_sfen)" readonly type="textarea")
+          b-field(custom-class="is-small" label="@ev_edit_mode_short_sfen_change: 編集モードで盤面が変化したとき")
+            b-input(size="is-small" :value="JSON.stringify(ev_edit_mode_short_sfen_change)" readonly type="textarea")
 
-          b-field(custom-class="is-small" label="@ev:turn_offset: 手数が変化したとき")
-            b-input(size="is-small" :value="JSON.stringify(turn_offset)" readonly type="text")
+          b-field(custom-class="is-small" label="@ev_turn_offset_change: 手数が変化したとき")
+            b-input(size="is-small" :value="JSON.stringify(ev_turn_offset_change)" readonly type="text")
 
-          b-field(custom-class="is-small" label="@ev:moves_take_turn_offset: 操作モードでmovesをturn_offsetでtakeしたもの")
-            b-input(size="is-small" :value="JSON.stringify(moves_take_turn_offset)" readonly type="text")
+          b-field(custom-class="is-small" label="@ev_play_mode_moves_change: 操作モードでmovesをturn_offsetでtakeしたもの")
+            b-input(size="is-small" :value="JSON.stringify(ev_play_mode_moves_change)" readonly type="text")
 
-          b-field(custom-class="is-small" label="@foul_accident: 反則があって無効化したとき")
-            b-input(size="is-small" :value="JSON.stringify(foul_accident)" readonly type="textarea")
+          b-field(custom-class="is-small" label="@ev_error_foul_accident: 反則があって無効化したとき")
+            b-input(size="is-small" :value="JSON.stringify(ev_error_foul_accident)" readonly type="textarea")
 
   MainDocMainNavbar
     template(slot="brand")
@@ -155,19 +155,19 @@
             :sp_overlay_nav="sp_overlay_nav"
             :sp_human_side="sp_human_side"
 
-            @board_cell_pointerdown="board_cell_pointerdown"
-            @ev:edit_mode_short_sfen="   e => trigger_check('edit_mode_short_sfen', e)"
-            @ev:short_sfen="             e => trigger_check('short_sfen', e)"
-            @ev:play_mode_next_info="    e => trigger_check('play_mode_next_info', e)"
-            @ev:play_mode_next_moves="   e => trigger_check('play_mode_next_moves', e)"
-            @ev:turn_offset="            e => trigger_check('turn_offset', e)"
-            @ev:turn_offset_max="        e => trigger_check('turn_offset_max', e)"
-            @ev:moves_take_turn_offset=" e => trigger_check('moves_take_turn_offset', e)"
-            @foul_accident="             e => trigger_check('foul_accident', e)"
-            @player_info_click="(location, sp_player_info) => $buefy.toast.open(location.name)"
+            @ev_action_board_cell_pointerdown="ev_action_board_cell_pointerdown"
+            @ev_edit_mode_short_sfen_change="   e => trigger_check('ev_edit_mode_short_sfen_change', e)"
+            @ev_short_sfen_change="             e => trigger_check('ev_short_sfen_change', e)"
+            @ev_play_mode_next="    e => trigger_check('ev_play_mode_next', e)"
+            @ev_play_mode_next_moves="   e => trigger_check('ev_play_mode_next_moves', e)"
+            @ev_turn_offset_change="            e => trigger_check('ev_turn_offset_change', e)"
+            @ev_turn_offset_max_change="        e => trigger_check('ev_turn_offset_max_change', e)"
+            @ev_play_mode_moves_change=" e => trigger_check('ev_play_mode_moves_change', e)"
+            @ev_error_foul_accident="             e => trigger_check('ev_error_foul_accident', e)"
+            @ev_action_player_info_click="(location, sp_player_info) => $buefy.toast.open(location.name)"
 
-            :sp_play_mode_foul_check_p="sp_play_mode_foul_check_p"
-            :sp_play_mode_foul_break_p="sp_play_mode_foul_break_p"
+            :sp_foul_check="sp_foul_check"
+            :sp_foul_break="sp_foul_break"
             )
             //- @update:play_mode_advanced_last_move="       e => trigger_check('play_mode_advanced_last_move', e)"
             //- @click.native="() => $buefy.toast.open({message: '全体のどこかをクリック', queue: false})"
@@ -198,8 +198,8 @@
                 |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
                 |   :sp_flip_if_white="{{sp_flip_if_white}}"
                 |   :sp_player_info='{{JSON.stringify(sp_player_info)}}'
-                |   :sp_play_mode_foul_check_p="{{sp_play_mode_foul_check_p}}"
-                |   :sp_play_mode_foul_break_p="{{sp_play_mode_foul_break_p}}"
+                |   :sp_foul_check="{{sp_foul_check}}"
+                |   :sp_foul_break="{{sp_foul_break}}"
                 |   sp_body="{{sp_body}}"
 
       MainDocEditDesc2
@@ -241,9 +241,9 @@ export default {
       sp_flip_if_white: false,
 
       // 反則判定用
-      sp_play_mode_foul_check_p: true,
-      sp_play_mode_foul_break_p: false,
-      foul_accident: null,
+      sp_foul_check: true,
+      sp_foul_break: false,
+      ev_error_foul_accident: null,
 
       sp_player_info: {
         black: { name: "先手", time: "12:34", },
@@ -254,13 +254,13 @@ export default {
 
       trigger_toast_p: false,
 
-      edit_mode_short_sfen: null,
-      short_sfen: null,
-      play_mode_next_info: null,
+      ev_edit_mode_short_sfen_change: null,
+      ev_short_sfen_change: null,
+      ev_play_mode_next: null,
       // play_mode_advanced_last_move: null,
-      play_mode_next_moves: null,
-      turn_offset: null,
-      moves_take_turn_offset: null,
+      ev_play_mode_next_moves: null,
+      ev_turn_offset_change: null,
+      ev_play_mode_moves_change: null,
     }
   },
   methods: {
@@ -276,7 +276,7 @@ export default {
     my_inspect(e) {
       console.log(e)
     },
-    board_cell_pointerdown(place, event) {
+    ev_action_board_cell_pointerdown(place, event) {
       this.$buefy.toast.open({message: `${place.kanji_human}のセルをクリックした瞬間`, queue: false})
     },
   },

@@ -15,6 +15,6 @@ task :build do
   version = package["version"]
   p version
 
-  system %(vue-cli-service build --dest top/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
-  system %(open top/index.html)
+  system %(NODE_ENV=development vue-cli-service build --dest top/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
+  system %(open top/test.html)
 end

@@ -5,81 +5,104 @@ task :default => :test
 task :s => :server
 desc "[s] server"
 task :server do
-  system %(nuxt dev -p 5000 --open)
+  system <<~EOT
+  nuxt dev -p 5000 --open
+  EOT
 end
 
 task :t => :test
 desc "[t] test"
 task :test do
-  system %(jest)
+  system <<~EOT
+  jest
+  EOT
 end
 
 desc "dist/ に CDN 用の Web Components を生成する"
 task :dist do
-  system %(cd web_component && vue-cli-service build --dest ../dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
+  system <<~EOT
+  cd web_component
+  vue-cli-service build --mode production  --dest ../dist             --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  vue-cli-service build --mode development --dest ../dist/development --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  EOT
 end
 
 task :g => :generate
 desc "[g] generate"
 task :generate do
-  system %(ruby components/extract_css_variables.rb)
-  system %(ruby components/extract_props.rb)
+  system <<~EOT
+  ruby components/extract_css_variables.rb
+  ruby components/extract_props.rb
+  EOT
 end
 
 desc "clean"
 task :clean do
-  system %(rm -fr coverage)
-  system %(rm -fr docs)
+  system <<~EOT
+  rm -fr coverage
+  rm -fr docs
+  EOT
 end
 
 desc "deploy"
 task :deploy do
-  system %(nuxt generate --dotenv .env.production)
-  system %(git add -A)
-  system %(git commit -m "[chore][deploy] nuxt generate --dotenv .env.production")
-  system %(git push)
-  system %(open https://akicho8.github.io/shogi-player/)
+  system <<~EOT
+  nuxt generate --dotenv .env.production
+  git add -A
+  git commit -m '[chore][deploy] nuxt generate --dotenv .env.production'
+  git push
+  open "https://akicho8.github.io/shogi-player/"
+  EOT
 end
 
 desc "release"
 task :release do
-  # Rake::Task["dist"].invoke
-  system %(npm version patch)
-  system %(npm publish)
-  system %(git push --tags)
-  system %(git push)
-  system %((cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i))
+  system <<~EOT
+  npm version patch
+  npm publish
+  git push --tags
+  git push
+  (cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i)
+  EOT
 end
 
 desc "update"
 task :update do
-  system %(yarn global add npm-check-updates)
-  system %(ncu /router/ -u)
-  system %(ncu lodash -u)
-  system %(ncu buefy -u)
-  system %(ncu bulma -u)
-  system %(ncu pug -u)
-  system %(ncu nuxt -u)
-  system %(ncu js-memory-record -u)
-  system %(npm install)
+  system <<~EOT
+  yarn global add npm-check-updates
+  ncu /router/ -u
+  ncu lodash -u
+  ncu buefy -u
+  ncu bulma -u
+  ncu pug -u
+  ncu nuxt -u
+  ncu js-memory-record -u
+  npm install
+  EOT
 end
 
+task :cp => :copy
 desc "copy"
 task :copy do
-  system %(rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/)
+  system <<~EOT
+  rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/
+  EOT
 end
-task :cp => :copy
 
 task :d => "doc:server"
 namespace :doc do
   desc "[d] server"
   task :server do
-    system %(cd vp_doc && rake server)
+    system <<~EOT
+    cd vp_doc && rake server
+    EOT
   end
 
   desc "build"
   task :build do
-    system %(cd vp_doc && rake build)
+    system <<~EOT
+    cd vp_doc && rake build
+    EOT
   end
 end
 
@@ -87,62 +110,87 @@ task :n => "netlify:open"
 namespace "netlify" do
   desc "[n] netlify open"
   task :open do
-    system %(open https://app.netlify.com/sites/shogi-player/overview)
+    system <<~EOT
+    open https://app.netlify.com/sites/shogi-player/overview
+    EOT
   end
 end
 
 task :o => :open
 desc "[o] open document"
 task :open do
-  system %(open https://shogi-player.netlify.app/)
+  system <<~EOT
+  open https://shogi-player.netlify.app/
+  EOT
 end
 
 desc "[ga] Google Analytics"
 task :ga do
-  system %(open https://tagassistant.google.com/)
+  system <<~EOT
+  open https://tagassistant.google.com/
+  EOT
 end
 
 desc "CDN Validations"
 task :cdn do
   tp "JSDelivr"
-  system %(curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js | grep 'x-jsd-version:')
-  system %(curl -sI https://cdn.jsdelivr.net/npm/shogi-player@latest                      | grep 'x-jsd-version:')
-  system %(curl -sI https://cdn.jsdelivr.net/npm/shogi-player                             | grep 'x-jsd-version:')
+  system <<~EOT
+  curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js | grep 'x-jsd-version:'
+  curl -sI https://cdn.jsdelivr.net/npm/shogi-player@latest                      | grep 'x-jsd-version:'
+  curl -sI https://cdn.jsdelivr.net/npm/shogi-player                             | grep 'x-jsd-version:'
+  EOT
 
   tp "unpkg"
-  system %(curl -sI https://unpkg.com/shogi-player/dist/shogi-player-wc.min.js | grep location)
-  system %(curl -sI https://unpkg.com/shogi-player@latest                      | grep location)
-  system %(curl -sI https://unpkg.com/shogi-player                             | grep location)
+  system <<~EOT
+  curl -sI https://unpkg.com/shogi-player/dist/shogi-player-wc.min.js | grep location
+  curl -sI https://unpkg.com/shogi-player@latest                      | grep location
+  curl -sI https://unpkg.com/shogi-player                             | grep location
+  EOT
 end
 
 task "ws" => "wc:server"
-task "wb" => "wc:build"
 namespace "wc" do
   desc "[ws] server"
   task :server do
-    system %(cd web_component && vue-cli-service serve --port 5002 --open)
-  end
-
-  desc "[wb] build"
-  task :build do
-    system %(cd web_component && vue-cli-service build --dest ../vp_doc/.vuepress/public/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
+    system <<~EOT
+    cd web_component && rake s
+    EOT
   end
 end
 
 desc "other-embed-apps-shogi-player-update"
 task "other-embed-apps-shogi-player-update" do
-  system %(cd shogi-player-nuxt-sample    && ncu /shogi-player/ -u && yarn)
-  system %(cd shogi-player-vue-cli-sample && ncu /shogi-player/ -u && npm i)
+  system <<~EOT
+  (cd shogi-player-nuxt-sample    && ncu /shogi-player/ -u && yarn)
+  (cd shogi-player-vue-cli-sample && ncu /shogi-player/ -u && npm i)
+  EOT
 end
 
 namespace "test-of-create-vuepress-site" do
   desc "server"
   task :server do
-    system %(cd test-of-create-vuepress-site/docs && vuepress dev -p 5010 --open src)
+    system <<~EOT
+    cd test-of-create-vuepress-site/docs && vuepress dev -p 5010 --open src
+    EOT
   end
 
   desc "build"
   task :build do
-    system %(cd test-of-create-vuepress-site/docs && vuepress build src)
+    system <<~EOT
+    cd test-of-create-vuepress-site/docs && vuepress build src
+    EOT
   end
+end
+
+task :a  => :about
+desc "[a] about"
+task :about do
+  system <<~EOT
+  ruby -v
+  node -v
+  npm root -g
+  rg '"version"' package.json
+  fd -l -g '*.min.js' dist
+  (cd vp_doc && npm list)
+  EOT
 end

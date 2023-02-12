@@ -19,6 +19,10 @@
         b-radio-button(v-model="TheSp.new_debug_mode" native-value="is_debug_mode_off") OFF
         b-radio-button(v-model="TheSp.new_debug_mode" native-value="is_debug_mode_on") ON
 
+      b-field(label="イベントログ")
+        b-radio-button(v-model="TheSp.new_event_log" :native-value="false") OFF
+        b-radio-button(v-model="TheSp.new_event_log" :native-value="true")  ON
+
     template(v-if="false")
       b-dropdown(v-model="TheSp.new_sp_bg_variant")
         button.button(slot="trigger")

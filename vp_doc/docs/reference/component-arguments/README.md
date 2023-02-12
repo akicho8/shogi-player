@@ -440,8 +440,23 @@ Default: `false`
 持駒がないときは駒台を非表示にするか？
 
 開戦していない局面を狭い領域にたくさん表示したいときだけ使う
-### `sp_board_piece_back_user_class_fn`
-### `sp_play_mode_foul_check_p`
+
+### `sp_board_cell_class_fn`
+
+Type: `Function`
+Default: `null`
+
+盤面のセルのクラスを決める
+
+座標を引数にして呼び出すので例えば次のようにすると55の地点に「天王山」のクラスを付与する
+
+```html
+:sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && '天王山'"
+```
+
+Web Components 版では内部で eval しているため動作する
+
+### `sp_foul_check`
 
 Type: `Boolean`
 Default: `true`
@@ -454,7 +469,7 @@ Default: `true`
   * 駒ワープ
   * 死に駒
 
-### `sp_play_mode_foul_break_p`
+### `sp_foul_break`
 
 Type: `Boolean`
 Default: `false`
@@ -465,7 +480,7 @@ Default: `false`
 * 有効にすると基本的な反則の操作はできなくなる
 * 将棋ウォーズのような仕様にするなら true にする
 
-### `sp_play_mode_legal_move_only`
+### `sp_legal_move_only`
 
 Type: `Boolean`
 Default: `true`
@@ -478,7 +493,7 @@ Default: `true`
   * それを利用して後手のときも先手の駒を動かせばずっと先手側を操作できるので先手だけの囲いの手順の棋譜(SFENに限る)を作ったりするのが簡単になる
     * SFENに限る理由は駒の種類を見ていないため
 
-### `sp_play_mode_auto_promote`
+### `sp_piece_auto_promote`
 
 Type: `Boolean`
 Default: `true`
@@ -488,7 +503,7 @@ Default: `true`
 * 例えば「桂」を「11」に移動したとき自動的に成る
 * 完全なリアル対局をイメージしたいときは `false` にする
 
-### `sp_play_mode_only_own_piece_to_move`
+### `sp_my_piece_only_move`
 
 Type: `Boolean`
 Default: `true`
@@ -497,14 +512,14 @@ Default: `true`
 
 * `sp_human_side` と機能が重複しているような気がする
 
-### `sp_play_mode_can_not_kill_same_team_soldier`
+### `sp_same_group_kill_disabled`
 
 Type: `Boolean`
 Default: `true`
 
 操作モードでは自分の駒で味方の駒を取れないようにするか？
 
-### `sp_edit_mode_double_click_time_ms`
+### `sp_double_click_threshold_ms`
 
 Type: `Number`
 Default: `350`
@@ -545,7 +560,7 @@ Default: `50`
 Type: `String`
 Default: `is_setting_off`
 
-設定ボタンを表示するか？ <Badge text="開発者用" type="error" vertical="top" />
+設定ボタンを表示するか？
 
   * 設定というよりデバッグ用のツールに近い
   * 有効にするとコントローラーを表示したとき設定ボタンも付け加える
@@ -561,7 +576,7 @@ Default: `is_setting_off`
 Type: `String`
 Default: `null`
 
-デバイスを強制的に指定する <Badge text="開発者用" type="error" vertical="top" />
+デバイスを強制的に指定する
 
   * 自動判別するので基本そのままでよい
   * デバイス判別によって駒を動かすときの挙動が変わる
@@ -576,7 +591,7 @@ Default: `null`
 Type: `String`
 Default: `is_layer_off`
 
-レイヤーを確認するか？ <Badge text="開発者用" type="error" vertical="top" />
+レイヤーを確認するか？
 
 | 値           | 意味   |
 |--------------|--------|
@@ -588,9 +603,16 @@ Default: `is_layer_off`
 Type: `String`
 Default: `is_debug_mode_off`
 
-デバッグモードを有効にするか？ <Badge text="開発者用" type="error" vertical="top" />
+デバッグモードを有効にするか？
 
 | 値                | 意味   |
 |-------------------|--------|
 | is_debug_mode_off | しない |
 | is_debug_mode_on  | する   |
+
+### `sp_event_log`
+
+Type: `Boolean`
+Default: `false`
+
+イベント情報を JavaScript コンソールに出力するか？

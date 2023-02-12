@@ -40,7 +40,7 @@ export const navi_module = {
 
   watch: {
     sp_viewpoint(v)  { this.new_viewpoint = v               }, // 外 -> 中
-    new_viewpoint(v) { this.$emit("update:sp_viewpoint", v) }, // 中 -> 外
+    new_viewpoint(v) { this.event_call("update:sp_viewpoint", v) }, // 中 -> 外
   },
 
   methods: {
@@ -151,11 +151,11 @@ export const navi_module = {
         if (this.play_p) {
           this.play_mode_xcontainer_seek_to(new_val)
         }
-        this.$emit("update:sp_turn", this.turn_offset)
+        this.event_call("update:sp_turn", this.turn_offset)
 
         if (event) {
           this.log("局面を人が故意に変更")
-          this.$emit("user_turn_change", this.turn_offset) // b-slider で変更
+          this.event_call("ev_action_turn_change", this.turn_offset) // b-slider で変更
         }
       }
     },
@@ -172,7 +172,7 @@ export const navi_module = {
 
     viewpoint_flip_handle() {
       this.viewpoint_flip()
-      this.$emit("user_viewpoint_flip")
+      this.event_call("ev_action_viewpoint_flip")
       this.turn_slider_focus()
     },
 

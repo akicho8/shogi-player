@@ -8,21 +8,33 @@ sidebar: auto
 
 * Vue.js 2 でコンポーネントを使う場合の説明となっている
   * Web Components の場合はいろいろ制約がでてくる
+* 冗長だがすべて `ev_` から始まる
 * SFEN には2種類あって区別のための言い回しが冗長になるため単に長短で表わす
   * 短いSFEN: moves なし (BOD相当)
   * 長いSFEN: moves あり (KIF相当)
-* moves は SFEN の moves 後の指し手配列を表わす
+* moves は SFEN の moves 後の指し手の配列を表わす
 * 手数はN手目の局面と言い表わすときの N の部分のこと
+* 動詞の過去形は使わない
 
 ## 一覧
 
-### `ev:short_sfen(sfen: string)`
+### `ev_turn_offset_change`
+
+手数が変更されたときに手数を投げる
+
+APIで内部変数を参照するちらを使った方が良い
+
+### `ev_turn_offset_max_change`
+
+最大手数が変更されたとき最大手数を投げる
+
+### `ev_short_sfen_change(sfen: string)`
 
 状態が変わったとき短いSFENを投げる
 
 コントローラーで手を戻しても変化する
 
-### `ev:play_mode_next_info(hash: object)`
+### `ev_play_mode_next(hash: object)`
 
 操作モードで着手後にいろんな情報を投げる
 
@@ -33,126 +45,95 @@ sidebar: auto
 | last_move_info | 着手した手の情報(Object)                  |
 | snapshot_hash  | 現在の盤面のハッシュコード (千日手判定用) |
 
-### `ev:play_mode_next_moves(moves: array)`
+### `ev_play_mode_next_moves(moves: array)`
 
-操作モードで着手後に moves の配列を投げる
+操作モードで着手したとき
 
-`ev:play_mode_next_info` と統合する予定 (TODO)
+* moves の配列を投げる
+* `ev_play_mode_next` と統合する予定  <Badge text="TODO" type="error" vertical="top" />
 
-### `ev:moves_take_turn_offset(moves: array)`
+### `ev_play_mode_moves_change(moves: array)`
 
-操作モードで盤面が変化したときの moves を投げる <Badge text="非推奨" type="error" vertical="top" />
+操作モードで盤面が変化したとき <Badge text="非推奨" type="error" vertical="top" />
 
-例えば `[a, b, c]` の指し手があってポインタが `c` のときコントローラーでポインタを `b` に戻すと `[a, b]` を持ってトリガーする
+* moves を投げる
+* 例えば `[a, b, c]` の指し手があってポインタが `c` のときコントローラーでポインタを `b` に戻すと `[a, b]` を持ってトリガーする
 
-### `ev:edit_mode_short_sfen(sfen: string)`
+### `ev_edit_mode_short_sfen_change(sfen: string)`
 
-編集モードで局面が変化したら短いSFENを投げる
+編集モードで局面が変化したとき
 
-### `ev:edit_mode_short_sfen2(sfen: string)`
+* 短いSFENを投げる
 
-編集モードで局面が変化したら短いSFENを投げる <Badge text="非推奨" type="error" vertical="top" />
+### `ev_edit_mode_short_sfen2_change(sfen: string)`
 
-### `ev:play_mode_user_piece_put`
+編集モードで局面が変化したとき <Badge text="非推奨" type="error" vertical="top" />
 
-操作モードでユーザーが意図して駒を盤に置いた
+* 短いSFENを投げる
 
-指したとき
+### `ev_play_mode_piece_put`
 
-### `user_viewpoint_flip`
+操作モードでユーザーが着手したとき
 
-ユーザーが意図して盤の視点を変更した
+### `ev_action_viewpoint_flip`
 
-☗☖をクリックして反転したとき
+ユーザーが☗☖をクリックして視点を変更したとき
 
-### `user_turn_change`
+### `ev_action_turn_change(turn: number)`
 
-ユーザーが意図して手数を変更した
+ユーザーがコントローラーやスライダーを動かして手数を変更したとき
 
-スライダーを動かして手数を変更したとき。(引数は新しい手数)
+### `ev_action_piece_lift`
 
-### `user_piece_lift`
+ユーザーが駒を持ち上げたとき
 
-ユーザーが意図して駒を持ち上げた
+### `ev_action_piece_cancel`
 
-### `user_piece_cancel`
+ユーザーが持ち上げた駒を元に戻したとき
 
-ユーザーが意図して持ち上げた駒を元に戻した
+### `ev_action_board_cell_pointerdown(place: Place)`
 
-### `ev:turn_offset`
+セルを触ったとき
 
-手数が変更されたときに手数を投げる
+* その位置を投げる
+* 通常のクリックイベントでは離したときに発生する
 
-### `ev:turn_offset_max`
-
-最大手数が変更されたとき
-
-内部変数参照よりこっちの方が安全なはず
-
-### `board_cell_pointerdown`
-
-セルをクリックしたとき(スマホの場合押した瞬間)
-
-placeが来るのでどこをクリックしたかわかる
-
-### `player_info_click`
+### `ev_action_player_info_click(location: Location, player_info: Object)`
 
 プレイヤー名をクリックしたとき
 
-(location,sp_player_infoの片側)がくる
+* 位置とプレイヤー名情報を投げる
 
-### `operation_invalid1`
+### `ev_error_click_but_self_is_not_turn`
 
-手番が違うのに操作しようとした
+手番が違うのに操作しようとしたとき
 
-### `operation_invalid2`
+### `ev_error_my_turn_but_oside_click`
 
-自分が手番だが相手の駒を動かそうとした
+自分が手番だけど相手の駒を持ち上げようとしたとき
 
-### `foul_accident`
+### `ev_error_foul_accident(hash: Object)`
 
 反則が発生したとき
 
-sp_play_mode_foul_check_p&&sp_play_mode_foul_break_pのときのみ
+* 反則の情報を投げる
+* `sp_foul_check && sp_foul_break` のときのみ発生する
 
 ### `xxx.native`
 
-任意のイベント(例:click.native)
+任意のネイティブイベント
 
-clickの場合はだいたいsp_operation_disabledと組み合わせる
+* `click` の場合はだいたい `sp_operation_disabled` と組み合わせる
 
-## .sync 用
+## コンポーネント内部からの引数の更新
 
-### `update:sp_turn(turn: number)`
-
-手数が変更されたときに手数を投げる <Badge text="非推奨" type="error" vertical="top" />
-
-sp_turn に -1 が指定されたとき必ず呼ばれてしまう副作用があって使いづらい
-
-### `update:sp_body(str: string)`
-
-コンポーネント内から棋譜が変更されたとき
-
-### `update:sp_debug_mode(mode: string)`
-
-コンポーネント内からデバッグモードが変更されたとき
-
-### `update:sp_viewpoint(location_key: string)`
-
-コンポーネント内から視点が切り替わったとき
-
-### `update:sp_layout(layout: string)`
-
-レイアウトを変更したとき
-
-### `update:sp_bg_variant(type: string)`
-
-コンポーネント内から背景の種類が変更されたとき
-
-### `update:sp_piece_variant(type: string)`
-
-コンポーネント内から駒の種類が変更されたとき
-
-### `update:sp_run_mode(mode: string)`
-
-コンポーネント内からモードが変更されたとき
+* すべて [.sync 修飾子](https://jp.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A3%BE%E5%AD%90) 用
+* `sp_viewpoint` は☗☖のクリックで切り替わる
+* `sp_turn` に `-1` が指定されたとき必ず呼ばれてしまうため使いづらい
+* その他は内部の設定モーダルから更新される場合がある
+* 以下は内部で変更があると `update:xxx` のイベントを発行する
+  * `sp_turn`
+  * `sp_viewpoint`
+  * `sp_run_mode`
+  * `sp_debug_mode`
+  * `sp_event_log`

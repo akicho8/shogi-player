@@ -15,11 +15,11 @@
             sp_debug_mode="is_debug_mode_on"
             sp_controller="is_controller_on"
             sp_slider="is_slider_on"
-            @ev:play_mode_user_piece_put="     user_event_check('ev:play_mode_user_piece_put')"
-            @user_viewpoint_flip="user_event_check('user_viewpoint_flip')"
-            @user_turn_change="   user_event_check('user_turn_change')"
-            @user_piece_lift="    user_event_check('user_piece_lift')"
-            @user_piece_cancel="  user_event_check('user_piece_cancel')"
+            @ev_play_mode_piece_put="     user_event_check('ev_play_mode_piece_put')"
+            @ev_action_viewpoint_flip="user_event_check('ev_action_viewpoint_flip')"
+            @ev_action_turn_change="   user_event_check('ev_action_turn_change')"
+            @ev_action_piece_lift="    user_event_check('ev_action_piece_lift')"
+            @ev_action_piece_cancel="  user_event_check('ev_action_piece_cancel')"
           )
 </template>
 

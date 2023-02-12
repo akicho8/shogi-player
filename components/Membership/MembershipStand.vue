@@ -57,7 +57,7 @@ export default {
               f = true
             }
           }
-          if (this.TheSp.play_p && !this.TheSp.sp_play_mode_only_own_piece_to_move) {
+          if (this.TheSp.play_p && !this.TheSp.sp_my_piece_only_move) {
             f = true
           }
           if (this.break_if_view_mode) {

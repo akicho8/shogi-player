@@ -133,7 +133,7 @@ shogi-player-wc::part(spwc_style_scope) {
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const el = document.querySelector("shogi-player-wc");
-      el.addEventListener("ev:play_mode_next_info", e => {
+      el.addEventListener("ev_play_mode_next", e => {
         alert(e.detail[0].last_move_info.to_kif)
       })
     })
@@ -155,7 +155,7 @@ shogi-player-wc::part(spwc_style_scope) {
 <!-- ```html -->
 <!-- <shogi-player-wc -->
 <!--   sp_run_mode="play_mode" -->
-<!--   @ev:play_mode_next_info="e => {}" -->
+<!--   @ev_play_mode_next="e => {}" -->
 <!-- /> -->
 <!-- ``` -->
 

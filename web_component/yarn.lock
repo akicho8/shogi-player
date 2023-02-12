@@ -4855,7 +4855,7 @@
 
 "shogi-player@file:..":
   "resolved" "file:.."
-  "version" "0.0.368"
+  "version" "0.0.369"
   dependencies:
     "@babel/preset-env" "^7.12.17"
     "autolinker" "latest"

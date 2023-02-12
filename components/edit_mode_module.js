@@ -9,12 +9,12 @@ import { MoveCancelInfo } from "./models/move_cancel_info.js"
 
 export const edit_mode_module = {
   props: {
-    sp_play_mode_legal_move_only:                { type: Boolean, default: true, },                      // play_mode で合法手のみに絞る
+    sp_legal_move_only:                { type: Boolean, default: true, },                      // play_mode で合法手のみに絞る
 
-    sp_play_mode_auto_promote:                   { type: Boolean, default: true, },                      // play_mode で死に駒になるときは自動的に成る
-    sp_play_mode_only_own_piece_to_move:         { type: Boolean, default: true, },                      // play_mode では自分手番とき自分の駒しか動かせないようにする
-    sp_play_mode_can_not_kill_same_team_soldier: { type: Boolean, default: true, },                      // play_mode では自分の駒で同じ仲間の駒を取れないようにする
-    sp_edit_mode_double_click_time_ms:           { type: Number,  default: 350,  },                      // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
+    sp_piece_auto_promote:                   { type: Boolean, default: true, },                      // play_mode で死に駒になるときは自動的に成る
+    sp_my_piece_only_move:         { type: Boolean, default: true, },                      // play_mode では自分手番とき自分の駒しか動かせないようにする
+    sp_same_group_kill_disabled: { type: Boolean, default: true, },                      // play_mode では自分の駒で同じ仲間の駒を取れないようにする
+    sp_double_click_threshold_ms:           { type: Number,  default: 350,  },                      // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_move_cancel:                              { type: String,  default: "is_move_cancel_standard", }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
     sp_view_mode_soldier_movable:                { type: Boolean, default: true, },                      // view_mode でも駒を動かせる(ただし本筋は破壊しない)
   },
@@ -52,7 +52,7 @@ export const edit_mode_module = {
   methods: {
     // 盤を押した瞬間
     board_cell_pointerdown_handle(xy, e) {
-      this.$emit("board_cell_pointerdown", Place.fetch(xy), e)
+      this.event_call("ev_action_board_cell_pointerdown", Place.fetch(xy), e)
     },
 
     // 盤をクリック
@@ -95,17 +95,17 @@ export const edit_mode_module = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.$emit("operation_invalid1")
+        this.event_call("ev_error_click_but_self_is_not_turn")
         return
       }
 
-      if (this.sp_play_mode_only_own_piece_to_move) {
+      if (this.sp_my_piece_only_move) {
         if (this.play_p) {
           if (!this.lifted_p) {
             if (this.killed_soldier) {
               if (this.killed_soldier.location !== this.xcontainer.current_location) {
                 this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
-                this.$emit("operation_invalid2")
+                this.event_call("ev_error_my_turn_but_oside_click")
                 return
               }
             }
@@ -119,7 +119,7 @@ export const edit_mode_module = {
         return
       }
 
-      if (this.sp_play_mode_foul_check_p) {
+      if (this.sp_foul_check) {
         if (this.play_p && this.have_piece && !this.killed_soldier) {
           const new_soldier = this.soldier_create_from_stand_or_box_on(place)
           const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
@@ -140,7 +140,7 @@ export const edit_mode_module = {
       }
 
       if (this.play_p) {
-        if (this.sp_play_mode_can_not_kill_same_team_soldier) {
+        if (this.sp_same_group_kill_disabled) {
           if (this.put_on_my_soldier_p(this.killed_soldier)) {
             this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
 
@@ -164,8 +164,8 @@ export const edit_mode_module = {
           if (_.isEqual(this.place_from, place)) { // この処理をスキップすると3連打で2回反転できるが誤操作が頻発するのでやめ
             if (old) {
               const gap = this.$data._double_tap_time - old
-              const enable = gap < this.sp_edit_mode_double_click_time_ms
-              this.log(`ダブルクリック判定: (${gap} ms < ${this.sp_edit_mode_double_click_time_ms}) -> ${enable}`)
+              const enable = gap < this.sp_double_click_threshold_ms
+              this.log(`ダブルクリック判定: (${gap} ms < ${this.sp_double_click_threshold_ms}) -> ${enable}`)
               if (enable) {
                 this.log(`操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す`)
                 this.xcontainer.board.place_on(this.killed_soldier.transform_clone)
@@ -179,7 +179,7 @@ export const edit_mode_module = {
 
       if (_.isEqual(this.place_from, place)) {
         this.log("盤上の駒を持って同じ位置に戻したので状況キャンセル")
-        this.$emit("user_piece_cancel")
+        this.event_call("ev_action_piece_cancel")
         this.state_reset()
         return
       }
@@ -206,7 +206,7 @@ export const edit_mode_module = {
       }
 
       // 盤上から移動させようとしたとき合法手以外は指せないようにする
-      if (this.sp_play_mode_legal_move_only && this.play_p && this.place_from) {
+      if (this.sp_legal_move_only && this.play_p && this.place_from) {
         let found = false
 
         // 1つだけ動ける系
@@ -218,7 +218,7 @@ export const edit_mode_module = {
         if (!found) {
           if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place, {mode: "non_stop"})) {
             this.log("障害物を素通りすれば目的地に行ける")
-            if (this.sp_play_mode_foul_check_p) {
+            if (this.sp_foul_check) {
               if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place)) {
                 this.log("障害物なく目的地に行ける")
               } else {
@@ -240,7 +240,7 @@ export const edit_mode_module = {
           return
         }
 
-        if (this.sp_play_mode_foul_check_p) {
+        if (this.sp_foul_check) {
           if (this.xcontainer.board.move_then_king_capture_p(this.origin_soldier1, place)) {
             if (this.foul_add("foul_death_king", {soldier: this.origin_soldier1, place: place}) === "__cancel__") { // 王手放置
               return
@@ -262,7 +262,7 @@ export const edit_mode_module = {
         // しかし view モードでオーバーレイ操作を無効にしたときは play モード同様に成れないといけない
         if ((this.view_p || this.play_p) && promotable_p) {
           let must_dialog = true
-          if (this.sp_play_mode_auto_promote) {
+          if (this.sp_piece_auto_promote) {
             const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
             if (force_promote_length != null) {                                              // チェックしない場合は null
               if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
@@ -304,7 +304,7 @@ export const edit_mode_module = {
         this.log("持駒を置く")
 
         // 二歩判定
-        if (this.sp_play_mode_foul_check_p) {
+        if (this.sp_foul_check) {
           if (this.play_p) {
             if (this.have_piece.key === "P") {
               if (this.have_piece_location) {
@@ -450,7 +450,7 @@ export const edit_mode_module = {
       if (this.have_piece) {                         // 盤上からではない駒を持っているか？
         if (this.have_piece_location === location) { // 駒台からの駒か？
           this.log("自分の駒台から駒を持ち上げているならキャンセル")
-          this.$emit("user_piece_cancel")
+          this.event_call("ev_action_piece_cancel")
           this.state_reset()
           return true
         }
@@ -503,7 +503,7 @@ export const edit_mode_module = {
       }
 
       // 相手の持駒を持とうとしたときは無効
-      if (this.sp_play_mode_only_own_piece_to_move) {
+      if (this.sp_my_piece_only_move) {
         if (this.play_p) {
           if (location !== this.xcontainer.current_location) {
             this.log("相手の持駒を持とうとしたときは無効")
@@ -514,7 +514,7 @@ export const edit_mode_module = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.$emit("operation_invalid1")
+        this.event_call("ev_error_click_but_self_is_not_turn")
         return
       }
 
@@ -690,7 +690,7 @@ export const edit_mode_module = {
     if_standard_then_unhold() {
       if (this.move_cancel_info.smooth_cancel) {
         this.log("持った状態で自分の非合法セルタップでキャンセル")
-        this.$emit("user_piece_cancel")
+        this.event_call("ev_action_piece_cancel")
         this.state_reset()
       }
     },

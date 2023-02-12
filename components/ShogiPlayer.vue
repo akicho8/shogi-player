@@ -17,6 +17,7 @@ import { Place      } from "./models/place.js"
 import { SfenParser } from "./models/sfen_parser.js"
 import { KifParser  } from "./models/kif_parser.js"
 import { Location   } from "./models/location.js"
+import { EventList   } from "./models/event_list.js"
 
 // components
 import PieceBox           from "./PieceBox.vue"
@@ -44,6 +45,7 @@ import { any_func_module    } from "./any_func_module.js"
 import { api_module         } from "./api_module.js"
 import { device_detect      } from "./device_detect.js"
 import { app_chore          } from "./app_chore.js"
+import { app_debug          } from "./app_debug.js"
 import { app_vector         } from "./app_vector.js"
 
 export default {
@@ -51,6 +53,7 @@ export default {
 
   mixins: [
     app_chore,
+    app_debug,
     app_vector,
     app_focus,
     navi_module,
@@ -78,7 +81,6 @@ export default {
     sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
     sp_mobile_vertical:                    { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior:                  { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
-    sp_debug_mode:                         { type: String, default: "is_debug_mode_off",     }, // デバッグモード
     sp_sfen_show:                          { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
     sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_digit_label:                        { type: String, default: "is_digit_label_off",    }, // 座標の表示
@@ -93,7 +95,7 @@ export default {
     sp_board_cell_left_click_disabled:     { type: Boolean, default: false,                  }, // 盤上の左クリックの通常処理を無効化するか？
 
     // 一方向の $emit ではどうにもならない関数たち
-    sp_board_piece_back_user_class_fn:     { type: Function, default: null,                  }, // セルのクラスを決める処理
+    sp_board_cell_class_fn:     { type: Function, default: null,                  }, // セルのクラスを決める処理
   },
 
   components: {
@@ -109,7 +111,6 @@ export default {
 
   data() {
     return {
-      new_debug_mode: this.sp_debug_mode,
       new_run_mode: this.sp_run_mode,
       turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       xcontainer: null,                 // 局面管理
@@ -143,7 +144,6 @@ export default {
       }
     }
   },
-
   watch: {
     // sp_turn の watch より先に記述すること
     // そうしないと sp_turn と sp_body を同時に変更したとき
@@ -178,7 +178,7 @@ export default {
 
     // 外からまたはダイアログから変更されたとき
     new_run_mode(new_val, old_val) {
-      this.$emit("update:sp_run_mode", this.new_run_mode)
+      this.event_call("update:sp_run_mode", this.new_run_mode)
 
       if (this.view_p) {
         this.log("new_run_mode: view_mode")
@@ -219,14 +219,9 @@ export default {
       this.hold_cancel()
     },
 
-    //////////////////////////////////////////////////////////////////////////////// FIXME: これまとめて書けんのか？
-
-    sp_debug_mode(v)  { this.new_debug_mode = v               }, // 外 -> 内
-    new_debug_mode(v) { this.$emit("update:sp_debug_mode", v) }, // 内 -> 外
-
     ////////////////////////////////////////////////////////////////////////////////
 
-    turn_offset_max(v) { this.$emit("ev:turn_offset_max", v) },
+    turn_offset_max(v) { this.event_call("ev_turn_offset_max_change", v) },
   },
 
   methods: {
@@ -291,12 +286,6 @@ export default {
       this.current_turn_set(v, true)
     },
 
-    log(...v) {
-      if (this.debug_p || process.env.NODE_ENV === "development") {
-        console.log(...v)
-      }
-    },
-
     board_piece_tap_class(xy) {
       const place = Place.fetch(xy)
       const soldier = this.xcontainer.board.lookup(place)
@@ -331,7 +320,7 @@ export default {
             f = true
           } else if (!this.cpu_location_p && this.xcontainer.current_location === soldier.location) {
             f = true
-          } else if (this.play_p && !this.sp_play_mode_only_own_piece_to_move) {
+          } else if (this.play_p && !this.sp_my_piece_only_move) {
             f = true
           }
           if (this.break_if_view_mode) {
@@ -355,8 +344,8 @@ export default {
         list.push(soldier.location.flip_if(this.fliped).position_key)
       }
 
-      if (this.sp_board_piece_back_user_class_fn) {
-        list = _.concat(list, this.sp_board_piece_back_user_class_fn(place))
+      if (this.sp_board_cell_class_fn) {
+        list = _.concat(list, this.sp_board_cell_class_fn(place))
       }
 
       return list
@@ -367,6 +356,10 @@ export default {
         return this.xcontainer[method]
       }
     },
+
+    css_class_of_string(prefix, value) { return `${prefix}_${value}` },
+    css_class_of_bool(prefix, value)   { return `${prefix}_${value ? 'on' : 'off'}` },
+
   },
 
   computed: {
@@ -375,7 +368,6 @@ export default {
     view_p()         { return this.new_run_mode === "view_mode"          },
     play_p()         { return this.new_run_mode === "play_mode"          },
     edit_p()         { return this.new_run_mode === "edit_mode"          },
-    debug_p()        { return this.new_debug_mode === "is_debug_mode_on" },
 
     turn_base()       { return this.delegate_to_xcontainer("turn_base")       }, // 表示する上での開始手数で普通は 0
     turn_offset()     { return this.delegate_to_xcontainer("turn_offset")     }, // 手数のオフセット
@@ -385,8 +377,9 @@ export default {
 
     component_class() {
       return [
-        `is_run_mode_${this.new_run_mode}`,
+        this.css_class_of_string("is_run_mode", this.new_run_mode),
         this.new_debug_mode,
+        this.css_class_of_bool("is_event_log", this.new_event_log),
       ]
     },
 

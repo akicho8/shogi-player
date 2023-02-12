@@ -20,7 +20,7 @@ export default {
       }
     },
     click_handle() {
-      this.TheSp.$emit("player_info_click", this.location, this.one_side_info)
+      this.TheSp.event_call("ev_action_player_info_click", this.location, this.one_side_info)
     },
   },
   computed: {

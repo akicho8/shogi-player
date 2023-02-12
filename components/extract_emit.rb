@@ -5,31 +5,27 @@ require "json"
 Dir.chdir(__dir__)
 
 already_defs = %w(
-ev:short_sfen
-ev:play_mode_next_info
+ev_short_sfen_change
+ev_play_mode_next
 play_mode_next_moves
 moves_take_turn_offset
-ev:edit_mode_short_sfen
+ev_edit_mode_short_sfen_change
 update:sp_turn
-ev:play_mode_user_piece_put
-user_viewpoint_flip
-user_turn_change
-user_piece_lift
-user_piece_cancel
-ev:turn_offset
-ev:turn_offset_max
+ev_play_mode_piece_put
+ev_action_viewpoint_flip
+ev_action_turn_change
+ev_action_piece_lift
+ev_action_piece_cancel
+ev_turn_offset_change
+ev_turn_offset_max_change
 update:sp_run_mode
-update:sp_body
 update:sp_debug_mode
 update:sp_viewpoint
-update:sp_layout
-update:sp_bg_variant
-update:sp_piece_variant
-board_cell_pointerdown
-operation_invalid1
-operation_invalid2
-foul_accident
-player_info_click)
+ev_action_board_cell_pointerdown
+ev_error_click_but_self_is_not_turn
+ev_error_my_turn_but_oside_click
+ev_error_foul_accident
+ev_action_player_info_click
 
 rows = []
 Pathname(".").glob("**/*.{vue,js}") do |file|

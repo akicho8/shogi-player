@@ -15,17 +15,17 @@
             sp_debug_mode="is_debug_mode_on"
             sp_controller="is_controller_on"
             sp_slider="is_slider_off"
-            :sp_play_mode_foul_check_p="sp_play_mode_foul_check_p"
-            :sp_play_mode_foul_break_p="sp_play_mode_foul_break_p"
-            @foul_accident="value => foul_accident = value"
+            :sp_foul_check="sp_foul_check"
+            :sp_foul_break="sp_foul_break"
+            @ev_error_foul_accident="value => foul_accident = value"
           )
         .column
           b-field(custom-class="is-small" label="反則判定" message="OFFなら気持ち程度処理も軽くなる")
-            b-radio-button(size="is-small" v-model="sp_play_mode_foul_check_p" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_play_mode_foul_check_p" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_foul_check" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_foul_check" :native-value="true") ON
           b-field(custom-class="is-small" label="操作無効" message="ONは初心者向けで判定にひっかかったら操作を無効にする")
-            b-radio-button(size="is-small" v-model="sp_play_mode_foul_break_p" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_play_mode_foul_break_p" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_foul_break" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_foul_break" :native-value="true") ON
         .column
           pre
             | {{foul_accident}}
@@ -35,8 +35,8 @@
 export default {
   data() {
     return {
-      sp_play_mode_foul_check_p: true,
-      sp_play_mode_foul_break_p: false,
+      sp_foul_check: true,
+      sp_foul_break: false,
       foul_accident: null,
       sp_body: `
 後手の持駒：歩

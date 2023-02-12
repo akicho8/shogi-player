@@ -6,4 +6,4 @@
 | rake b  | Web Components 化したものを確認 |
 
 * top/dist に吐く
-* open top/index.html で確認する
+* open top/test.html で確認する
