@@ -19,7 +19,7 @@ export default {
   computed: {
     default_params() {
       return {
-        sp_run_mode: "play_mode",
+        sp_mode: "play",
       }
     },
   },

@@ -5,18 +5,18 @@ import { Place } from "./models/place.js"
 import { Board } from "./models/board.js"
 import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
-import { MoveCancelInfo } from "./models/move_cancel_info.js"
+import { LiftCancelActionInfo } from "./models/lift_cancel_action_info.js"
 
 export const edit_mode_module = {
   props: {
-    sp_legal_move_only:                { type: Boolean, default: true, },                      // play_mode で合法手のみに絞る
+    sp_legal_move_only:                { type: Boolean, default: true, },                      // play で合法手のみに絞る
 
-    sp_piece_auto_promote:                   { type: Boolean, default: true, },                      // play_mode で死に駒になるときは自動的に成る
-    sp_my_piece_only_move:         { type: Boolean, default: true, },                      // play_mode では自分手番とき自分の駒しか動かせないようにする
-    sp_same_group_kill_disabled: { type: Boolean, default: true, },                      // play_mode では自分の駒で同じ仲間の駒を取れないようにする
-    sp_double_click_threshold_ms:           { type: Number,  default: 350,  },                      // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
-    sp_move_cancel:                              { type: String,  default: "is_move_cancel_standard", }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
-    sp_view_mode_soldier_movable:                { type: Boolean, default: true, },                      // view_mode でも駒を動かせる(ただし本筋は破壊しない)
+    sp_piece_auto_promote:                   { type: Boolean, default: true, },                      // play で死に駒になるときは自動的に成る
+    sp_my_piece_only_move:         { type: Boolean, default: true, },                      // play では自分手番とき自分の駒しか動かせないようにする
+    sp_same_group_kill_disabled: { type: Boolean, default: true, },                      // play では自分の駒で同じ仲間の駒を取れないようにする
+    sp_double_click_threshold_ms:           { type: Number,  default: 350,  },                      // edit で駒を反転するときのダブルクリックと認識する時間(ms)
+    sp_lift_cancel_action:                              { type: String,  default: "standard", }, // standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。reality: (盤上の駒に限り)キャンセルは元の位置をタップ。rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
+    sp_view_mode_soldier_movable:                { type: Boolean, default: true, },                      // view でも駒を動かせる(ただし本筋は破壊しない)
   },
 
   data() {
@@ -144,7 +144,7 @@ export const edit_mode_module = {
           if (this.put_on_my_soldier_p(this.killed_soldier)) {
             this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
 
-            if (this.move_cancel_info.key === "is_move_cancel_rehold") {
+            if (this.lift_cancel_action_info.key === "rehold") {
               this.log("盤上の駒を持って別の盤上の駒に持ち直した")
               this.soldier_hold(place, e)
               return
@@ -468,7 +468,7 @@ export const edit_mode_module = {
 
       if (this.play_p) {
         if (this.origin_soldier1) {
-          this.log("play_mode では盤上の駒を駒台に置くことはできない")
+          this.log("play では盤上の駒を駒台に置くことはできない")
           this.if_standard_then_unhold()
           return true
         }
@@ -688,7 +688,7 @@ export const edit_mode_module = {
 
     // 持った状態で他の駒をタップするとキャンセルする場合はキャンセル
     if_standard_then_unhold() {
-      if (this.move_cancel_info.smooth_cancel) {
+      if (this.lift_cancel_action_info.smooth_cancel) {
         this.log("持った状態で自分の非合法セルタップでキャンセル")
         this.event_call("ev_action_piece_cancel")
         this.state_reset()
@@ -744,8 +744,8 @@ export const edit_mode_module = {
   },
 
   computed: {
-    MoveCancelInfo()   { return MoveCancelInfo },
-    move_cancel_info() { return this.MoveCancelInfo.fetch(this.sp_move_cancel) },
+    LiftCancelActionInfo()    { return LiftCancelActionInfo                                   },
+    lift_cancel_action_info() { return LiftCancelActionInfo.fetch(this.sp_lift_cancel_action) },
 
     // 移動元の駒(盤上から)
     origin_soldier1() {
@@ -782,7 +782,7 @@ export const edit_mode_module = {
       }
     },
 
-    // view_mode のときは駒を動かせるようにしない
+    // view のときは駒を動かせるようにしない
     break_if_view_mode() {
       if (this.view_p) {
         if (this.sp_view_mode_soldier_movable) {

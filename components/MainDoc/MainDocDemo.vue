@@ -4,7 +4,7 @@
     #examples.title.is-3 デモ
     hr
 
-    .title.is-4.mt-6 1. 再生モード (view_mode)
+    .title.is-4.mt-6 1. 再生モード (view)
     hr
     .columns.is-centered
       MainDocViewDemo1.is-10-tablet.is-8-desktop.is-6-widescreen
@@ -19,7 +19,7 @@
     .columns.mt-6.is-centered
       MainDocViewDemo8.is-11-tablet.is-10-desktop.is-9-widescreen
 
-    .title.is-4.mt-6 2. 操作モード (play_mode)
+    .title.is-4.mt-6 2. 操作モード (play)
     hr
     .columns
       MainDocPlayDemo1

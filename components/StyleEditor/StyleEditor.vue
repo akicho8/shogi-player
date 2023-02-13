@@ -24,9 +24,9 @@
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_layout_horizontal") 左右
             b-radio-button(size="is-small" v-model="sp_layout" native-value="is_layout_vertical") 上下
           b-field(custom-class="is-small" label="モード")
-            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="view_mode") 再生
-            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="play_mode") 操作
-            b-radio-button(size="is-small" v-model="sp_run_mode" native-value="edit_mode") 編集
+            b-radio-button(size="is-small" v-model="sp_mode" native-value="view") 再生
+            b-radio-button(size="is-small" v-model="sp_mode" native-value="play") 操作
+            b-radio-button(size="is-small" v-model="sp_mode" native-value="edit") 編集
           b-field(custom-class="is-small" label="レイヤー確認")
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
             b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
@@ -414,9 +414,9 @@
             b-radio-button(size="is-small" v-model="sp_foul_check" :native-value="true") ON
 
           b-field(custom-class="is-small" label="持駒のキャンセル方法")
-            b-radio-button(size="is-small" v-model="sp_move_cancel" native-value="is_move_cancel_reality") 元位置
-            b-radio-button(size="is-small" v-model="sp_move_cancel" native-value="is_move_cancel_standard") 別駒
-            b-radio-button(size="is-small" v-model="sp_move_cancel" native-value="is_move_cancel_rehold") 持替
+            b-radio-button(size="is-small" v-model="sp_lift_cancel_action" native-value="reality") 元位置
+            b-radio-button(size="is-small" v-model="sp_lift_cancel_action" native-value="standard") 別駒
+            b-radio-button(size="is-small" v-model="sp_lift_cancel_action" native-value="rehold") 持替
 
           b-field(custom-class="is-small" label="チェッカー背景")
             b-radio-button(size="is-small" v-model="se_bg_pattern" :native-value="false") OFF
@@ -535,7 +535,7 @@ export default {
       sp_board_dimension_w: 9,
       sp_board_dimension_h: 9,
       sp_layout: "is_layout_horizontal",
-      sp_run_mode: DEVELOPMENT_P ? "edit_mode" : "view_mode",
+      sp_mode: DEVELOPMENT_P ? "edit" : "view",
       sp_mobile_vertical: "is_mobile_vertical_on",
 
       // 成り不成り選択
@@ -618,7 +618,7 @@ export default {
       sp_legal_move_only: false,
       sp_foul_check: false,
       sp_foul_check: false,
-      sp_move_cancel: "is_move_cancel_reality",
+      sp_lift_cancel_action: "reality",
 
       se_tf0_mode: "is_tf0_mode_off",
       se_tf0_perspective: 200,
@@ -856,7 +856,7 @@ export default {
       params.sp_piece_variant        = this.sp_piece_variant
       params.sp_bg_variant        = this.sp_bg_variant
       params.sp_mobile_vertical   = this.sp_mobile_vertical
-      params.sp_run_mode          = this.sp_run_mode
+      params.sp_mode          = this.sp_mode
       params.sp_viewpoint         = this.sp_viewpoint
       params.sp_debug_mode             = this.sp_debug_mode,
       params.sp_comment           = this.sp_comment,
@@ -874,7 +874,7 @@ export default {
       params.sp_legal_move_only = this.sp_legal_move_only
       params.sp_foul_check = this.sp_foul_check
       params.sp_foul_check = this.sp_foul_check
-      params.sp_move_cancel       = this.sp_move_cancel
+      params.sp_lift_cancel_action       = this.sp_lift_cancel_action
       return params
     },
 

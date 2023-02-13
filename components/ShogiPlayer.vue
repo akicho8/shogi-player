@@ -82,13 +82,13 @@ export default {
     sp_mobile_vertical:                    { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior:                  { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
     sp_sfen_show:                          { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
-    sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
+    sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_digit_label:                        { type: String, default: "is_digit_label_off",    }, // 座標の表示
     sp_digit_label_variant:                { type: String, default: "is_digit_label_variant_kanji",   }, // 座標の表記
     sp_stand_gravity:                       { type: String, default: "is_stand_gravity_bottom",  }, // 駒台の位置
     sp_player_name_direction:                    { type: String, default: "is_player_name_direction_horizontal",  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                               { type: Number, default: -1,                      }, // 局面(手数)
-    sp_run_mode:                           { type: String, default: "view_mode",             }, // モード
+    sp_mode:                           { type: String, default: "view",             }, // モード
     sp_body:                               { type: String, default: null,                    }, // 棋譜 KIF or SFEN
     sp_player_info:                        { type: Object, default: null,                    }, // 対局者名と時間
     sp_comment:                            { type: String, default: "is_comment_on",         }, // KIFのコメントを表示する
@@ -111,7 +111,7 @@ export default {
 
   data() {
     return {
-      new_run_mode: this.sp_run_mode,
+      new_run_mode: this.sp_mode,
       turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       xcontainer: null,                 // 局面管理
       turn_edit_p: false,               // N手目編集中
@@ -134,7 +134,7 @@ export default {
     }
     if (this.play_p) {
       this.xcontainer_setup(this.sp_turn)
-      this.play_mode_setup_from("view_mode")
+      this.play_mode_setup_from("view")
     }
     if (this.edit_p) {
       if (this.sp_preset_key) {
@@ -159,7 +159,7 @@ export default {
       this.xcontainer_setup(this.sp_turn)
 
       if (this.play_p) {
-        this.play_mode_setup_from("view_mode")
+        this.play_mode_setup_from("view")
       }
     },
 
@@ -174,19 +174,19 @@ export default {
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    sp_run_mode(v) { this.new_run_mode = v            }, // 外から内への反映
+    sp_mode(v) { this.new_run_mode = v            }, // 外から内への反映
 
     // 外からまたはダイアログから変更されたとき
     new_run_mode(new_val, old_val) {
-      this.event_call("update:sp_run_mode", this.new_run_mode)
+      this.event_call("update:sp_mode", this.new_run_mode)
 
       if (this.view_p) {
-        this.log("new_run_mode: view_mode")
+        this.log("new_run_mode: view")
         // alert(`復元:${this.view_mode_turn_offset_save}`)
         this.view_mode_xcontainer_update(this.view_mode_turn_offset_save)
         this.view_mode_turn_offset_save = null
       } else {
-        // view_mode ではなくなったときの最初だけ保存しておく(xcontainerをまるごと保存しておく手もあるかも)
+        // view ではなくなったときの最初だけ保存しておく(xcontainerをまるごと保存しておく手もあるかも)
         if (this.view_mode_turn_offset_save === null) {
           this.view_mode_turn_offset_save = this.turn_offset
           // alert(`保存:${this.view_mode_turn_offset_save}`)
@@ -198,7 +198,7 @@ export default {
       }
 
       if (this.edit_p) {
-        this.log("new_run_mode: edit_mode")
+        this.log("new_run_mode: edit")
 
         const new_xcontainer = new Xcontainer()
         new_xcontainer.data_source = this.data_source_by(this.xcontainer.to_short_sfen)
@@ -365,9 +365,9 @@ export default {
   computed: {
     location_black() { return Location.fetch("black")                    },
     location_white() { return Location.fetch("white")                    },
-    view_p()         { return this.new_run_mode === "view_mode"          },
-    play_p()         { return this.new_run_mode === "play_mode"          },
-    edit_p()         { return this.new_run_mode === "edit_mode"          },
+    view_p()         { return this.new_run_mode === "view"          },
+    play_p()         { return this.new_run_mode === "play"          },
+    edit_p()         { return this.new_run_mode === "edit"          },
 
     turn_base()       { return this.delegate_to_xcontainer("turn_base")       }, // 表示する上での開始手数で普通は 0
     turn_offset()     { return this.delegate_to_xcontainer("turn_offset")     }, // 手数のオフセット

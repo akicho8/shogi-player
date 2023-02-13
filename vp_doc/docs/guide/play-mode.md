@@ -11,4 +11,4 @@
 
 ## Playground
 
-<ShogiPlayerWcWrapper sp_run_mode="play_mode" />
+<ShogiPlayerWcWrapper sp_mode="play" />

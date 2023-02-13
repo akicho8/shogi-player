@@ -48,4 +48,4 @@ Factorio に慣れているとイメージしやすい
 
 ## Playground
 
-<ShogiPlayerWcWrapper sp_run_mode="edit_mode" />
+<ShogiPlayerWcWrapper sp_mode="edit" />

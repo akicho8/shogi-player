@@ -12,7 +12,7 @@
       //- sp_body="position sfen k8/9/9/9/9/9/8l/9/r6NK b 2Nr2b4g4s3n3l18p 1"
       ShogiPlayer(
         sp_body="position sfen l+n1g1g1n+l/1ks2r1+r1/1pppp1bpp/p2+b+sp+p2/9/P1P1+SP1PP/1+P+BPP1P2/1BK1GR1+R1/+L+NSG3NL b R2B3G4S5N11L99Pr2b3g4s5n11l99p 1"
-        sp_run_mode="play_mode"
+        sp_mode="play"
         sp_debug_mode="is_debug_mode_on"
         :sp_event_log="true"
         sp_controller="is_controller_on"

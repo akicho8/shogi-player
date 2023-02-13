@@ -37,7 +37,7 @@
       DebugBlockRow(code="to_simple_sfen"       name="現局面のSFEN" :value="TheSp.xcontainer.to_simple_sfen")
       DebugBlockRow(code="turn_offset"          name="正規化手番"   :value="TheSp.turn_offset")
   table.table.is-narrow.is-hoverable.is-fullwidth
-    caption play_mode
+    caption play
     thead
       tr
         th

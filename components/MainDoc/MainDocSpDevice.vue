@@ -9,10 +9,10 @@
       .columns
         .column
           p sp_device="is_device_desktop"
-          ShogiPlayer(sp_debug_mode="is_debug_mode_on" sp_run_mode="play_mode" sp_device="is_device_desktop")
+          ShogiPlayer(sp_debug_mode="is_debug_mode_on" sp_mode="play" sp_device="is_device_desktop")
         .column
           p sp_device="is_device_touch"
-          ShogiPlayer(sp_debug_mode="is_debug_mode_on" sp_run_mode="play_mode" sp_device="is_device_touch")
+          ShogiPlayer(sp_debug_mode="is_debug_mode_on" sp_mode="play" sp_device="is_device_touch")
 </template>
 
 <script>

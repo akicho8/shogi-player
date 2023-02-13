@@ -11,9 +11,9 @@ export const play_mode_module = {
 
   data() {
     return {
-      moves: [],                  // play_mode 時の棋譜
-      init_sfen: null,            // play_mode に入ったときの最初の状態
-      init_location_key: "black", // play_mode に入ったときの最初の手番
+      moves: [],                  // play 時の棋譜
+      init_sfen: null,            // play に入ったときの最初の状態
+      init_location_key: "black", // play に入ったときの最初の手番
     }
   },
 
@@ -68,18 +68,18 @@ export const play_mode_module = {
 
       if (this.xcontainer.data_source.init_sfen !== undefined) {
         // 棋譜の最初からの指し手をすべて保持
-        // view_mode -> play_mode
-        if (old_val === "view_mode") {
+        // view -> play
+        if (old_val === "view") {
           this.init_sfen = this.xcontainer.data_source.init_sfen
           this.moves = this.xcontainer.data_source.moves
         }
-        // edit_mode -> play_mode
-        if (old_val === "edit_mode") {
+        // edit -> play
+        if (old_val === "edit") {
           this.init_sfen_set()
         }
       } else {
         // 現時点の状態から始める (KIFの場合)
-        if (old_val === "view_mode") {
+        if (old_val === "view") {
           this.init_location_key = this.xcontainer.current_location.key
         }
         this.init_sfen_set()
@@ -88,7 +88,7 @@ export const play_mode_module = {
       this.play_mode_xcontainer_seek_to(this.turn_offset)
     },
 
-    // 現在の状態を基点として play_mode に入る
+    // 現在の状態を基点として play に入る
     init_sfen_set() {
       this.init_sfen = this.edit_mode_short_sfen()
       this.moves = []

@@ -74,27 +74,27 @@ export default {
     sp_debug_mode:                               { type: String,  }, // デバッグモード
     sp_event_log:                                { type: Boolean, }, // イベントのログを開発コンソールに表示する
     sp_sfen_show:                                { type: String,  }, // SFENを下に表示する
-    sp_overlay_nav:                              { type: String,  }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)
+    sp_overlay_nav:                              { type: String,  }, // view のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_digit_label:                              { type: String,  }, // 座標の表示
     sp_digit_label_variant:                      { type: String,  }, // 座標の表記
     sp_stand_gravity:                            { type: String,  }, // 駒台の位置
     sp_player_name_direction:                    { type: String,  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                                     { type: Number,  }, // 局面(手数)
-    sp_run_mode:                                 { type: String,  }, // モード
+    sp_mode:                                 { type: String,  }, // モード
     sp_body:                                     { type: String,  }, // 棋譜 KIF or SFEN
     sp_preset_key:                               { type: String,  }, // 手合割(初期配置)
     sp_comment:                                  { type: String,  }, // KIFのコメントを表示する
     sp_human_side:                               { type: String,  }, // 含まれる側だけ操作できるようにする
     sp_device:                                   { type: String,  }, // デバイスを強制的に指定する
-    sp_foul_check:                   { type: Boolean, }, // play_mode で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
+    sp_foul_check:                   { type: Boolean, }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
     sp_foul_break:                   { type: Boolean, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
-    sp_legal_move_only:                { type: Boolean, }, // play_mode で合法手のみに絞る
-    sp_piece_auto_promote:                   { type: Boolean, }, // play_mode で死に駒になるときは自動的に成る
-    sp_my_piece_only_move:         { type: Boolean, }, // play_mode では自分手番とき自分の駒しか動かせないようにする
-    sp_same_group_kill_disabled: { type: Boolean, }, // play_mode では自分の駒で同じ仲間の駒を取れないようにする
-    sp_double_click_threshold_ms:           { type: Number,  }, // edit_mode で駒を反転するときのダブルクリックと認識する時間(ms)
-    sp_move_cancel:                              { type: String,  }, // is_move_cancel_standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。is_move_cancel_reality: (盤上の駒に限り)キャンセルは元の位置をタップ。is_move_cancel_rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
-    sp_view_mode_soldier_movable:                { type: Boolean, }, // view_mode でも駒を動かせる(ただし本筋は破壊しない)
+    sp_legal_move_only:                { type: Boolean, }, // play で合法手のみに絞る
+    sp_piece_auto_promote:                   { type: Boolean, }, // play で死に駒になるときは自動的に成る
+    sp_my_piece_only_move:         { type: Boolean, }, // play では自分手番とき自分の駒しか動かせないようにする
+    sp_same_group_kill_disabled: { type: Boolean, }, // play では自分の駒で同じ仲間の駒を取れないようにする
+    sp_double_click_threshold_ms:           { type: Number,  }, // edit で駒を反転するときのダブルクリックと認識する時間(ms)
+    sp_lift_cancel_action:                              { type: String,  }, // standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。reality: (盤上の駒に限り)キャンセルは元の位置をタップ。rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
+    sp_view_mode_soldier_movable:                { type: Boolean, }, // view でも駒を動かせる(ただし本筋は破壊しない)
     sp_board_cell_left_click_disabled:           { type: Boolean, }, // 盤上セルタップ時の通常処理の無効化
     // 本当は Object
     sp_player_info:                              { type: String,  }, // 対局者名と時間

@@ -18,7 +18,7 @@
   { key: "ev_error_click_but_self_is_not_turn"                        , name: "手番が違うのに操作しようとした",                 desc: "", },
   { key: "ev_error_my_turn_but_oside_click"                        , name: "自分が手番だが相手の駒を動かそうとした",         desc: "", },
   { key: "ev_error_foul_accident"                             , name: "反則が発生したとき",                             desc: "sp_foul_check&&sp_foul_breakのときのみ", },
-  { key: "update:sp_run_mode"                        , name: "設定ダイアログでモードが変更されたとき",         desc: "", },
+  { key: "update:sp_mode"                        , name: "設定ダイアログでモードが変更されたとき",         desc: "", },
   { key: "update:sp_debug_mode"                      , name: "設定ダイアログでデバッグモードが変更されたとき", desc: "", },
   { key: "update:sp_viewpoint"                       , name: "盤面を反転したとき",                             desc: "", },
   { key: "xxx.native"                                , name: "任意のイベント(例:click.native)",                desc: "clickの場合はだいたいsp_operation_disabledと組み合わせる", },

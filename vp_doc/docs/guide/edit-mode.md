@@ -4,8 +4,8 @@
 
 ```html
 <shogi-player-wc
-  sp_run_mode="edit_mode"
+  sp_mode="edit"
   sp_preset_key="詰将棋" />
 ```
 
-<ShogiPlayerWcWrapper sp_run_mode="edit_mode" sp_preset_key="詰将棋" class="is-small" />
+<ShogiPlayerWcWrapper sp_mode="edit" sp_preset_key="詰将棋" class="is-small" />

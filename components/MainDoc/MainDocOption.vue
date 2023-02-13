@@ -8,9 +8,9 @@
 
       .my_controls
         .box
-          b-field(custom-class="is-small" label="sp_run_mode")
+          b-field(custom-class="is-small" label="sp_mode")
             template(v-for="e in RunModeInfo.values")
-              b-radio-button(size="is-small" v-model="sp_run_mode" :native-value="e.key") {{e.name}}
+              b-radio-button(size="is-small" v-model="sp_mode" :native-value="e.key") {{e.name}}
 
         .box
           .title.is-5 棋譜
@@ -137,7 +137,7 @@
       form(action="/")
         .SpWrap
           ShogiPlayer(
-            :sp_run_mode.sync="sp_run_mode"
+            :sp_mode.sync="sp_mode"
             :sp_body.sync="sp_body"
             :sp_turn.sync="sp_turn"
             :sp_turn_show="sp_turn_show"
@@ -182,7 +182,7 @@
             b-message.shogi_player_params(:closable="false" type="is-primary" title="引数")
               pre.is-size-6
                 | ShogiPlayer(
-                |   sp_run_mode="{{sp_run_mode}}"
+                |   sp_mode="{{sp_mode}}"
                 |   sp_slider="{{sp_slider}}"
                 |   sp_debug_mode="{{sp_debug_mode}}"
                 |   sp_turn_show="{{sp_turn_show}}"
@@ -224,7 +224,7 @@ export default {
       sidebar_p: true,
 
       // カスタマイズ用
-      sp_run_mode: "view_mode",
+      sp_mode: "view",
       sp_turn: -1,
       sp_slider: "is_slider_off",
       sp_overlay_nav: "is_overlay_nav_off",

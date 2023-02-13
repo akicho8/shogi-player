@@ -140,7 +140,7 @@ shogi-player-wc::part(spwc_style_scope) {
   </script>
 </head>
 <body>
-  <shogi-player-wc sp_run_mode="play_mode" />
+  <shogi-player-wc sp_mode="play" />
 </body>
 </html>
 ```
@@ -154,7 +154,7 @@ shogi-player-wc::part(spwc_style_scope) {
 <!--  -->
 <!-- ```html -->
 <!-- <shogi-player-wc -->
-<!--   sp_run_mode="play_mode" -->
+<!--   sp_mode="play" -->
 <!--   @ev_play_mode_next="e => {}" -->
 <!-- /> -->
 <!-- ``` -->

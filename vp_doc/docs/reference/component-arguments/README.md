@@ -17,18 +17,18 @@ sidebar: auto
 
 ## よく使う
 
-### `sp_run_mode`
+### `sp_mode`
 
 Type: `String`
-Default: `view_mode`
+Default: `view`
 
 モード
 
-| 値        | 意味 | 何向け？         |
-|-----------|------|----------------|
-| view_mode | 再生 | 棋譜再生       |
-| play_mode | 操作 | 対戦や棋譜作成 |
-| edit_mode | 編集 | 主に詰将棋     |
+| 値   | 意味 | 用途                   |
+|------|------|------------------------|
+| view | 再生 | 棋譜再生               |
+| play | 操作 | 対戦や棋譜作成         |
+| edit | 編集 | 詰将棋や課題局面の作成 |
 
 ### `sp_body`
 
@@ -49,7 +49,7 @@ Default: `null`
 
 初期配置(手合割)の指定 <Badge text="要検討" type="error" vertical="top" />
 
-  * `sp_run_mode="edit_mode"` と合わせて `sp_preset_key="詰将棋"` とすれば相手玉だけがある状態で始まる
+  * `sp_mode="edit"` と合わせて `sp_preset_key="詰将棋"` とすれば相手玉だけがある状態で始まる
   * `sp_body` があるので要らないような気がしている
 
 ### `sp_turn`
@@ -335,10 +335,10 @@ Default: `is_mobile_vertical_on`
 | is_mobile_vertical_off | 切り替えない |
 | is_mobile_vertical_on  | 切り替える   |
 
-### `sp_move_cancel`
+### `sp_lift_cancel_action`
 
 Type: `String`
-Default: `is_move_cancel_standard`
+Default: `standard`
 
 盤上の持ち上げた駒のキャンセル方法
 
@@ -346,11 +346,11 @@ Default: `is_move_cancel_standard`
 * PCであれば共通して右クリックやESCキーでもキャンセルできる
 * もともとリアル志向を初期値としていたが将棋ウォーズに慣れきってしまった者たちにはハードルが高かったため初期値を変更した。が、やっぱり戻すかもしれない
 
-| 値                      | 挙動                                       | タイプ                 |
-|-------------------------|--------------------------------------------|------------------------|
-| is_move_cancel_reality  | リアル志向<br>元の位置に戻す              | 最初の共有将棋盤       |
-| is_move_cancel_standard | 初心者向け<br>移動できないセルに移動したとき  | 将棋ウォーズ<br>ぴよ将棋  |
-| is_move_cancel_rehold   | 合理的<br>キャンセルと同時に駒を持つ      | lishogi                |
+| 値           | 挙動                                         | タイプ                   |
+|--------------|----------------------------------------------|--------------------------|
+| reality  | リアル志向<br>元の位置に戻す                 | 最初の共有将棋盤         |
+| standard | 初心者向け<br>移動できないセルに移動したとき | 将棋ウォーズ<br>ぴよ将棋 |
+| rehold   | 合理的<br>キャンセルと同時に駒を持つ         | lishogi                  |
 
 ::: tip
 lishogi の方法は常に駒を持った状態になってしまって駒を離せないので使いにくい仕様だと見ていたが、よく考えてみればこれから何かの手を指そうとしているときに、駒を持ち替えることはあっても、駒を離した状態に戻らないといけなくなることはないので、実はとても合理的な仕様だった。

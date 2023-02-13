@@ -3,9 +3,9 @@ import MemoryRecord from "js-memory-record"
 export class RunModeInfo extends MemoryRecord {
   static get define() {
     return [
-      { key: "view_mode", name: "再生", },
-      { key: "play_mode", name: "操作", },
-      { key: "edit_mode", name: "編集", },
+      { key: "view", name: "再生", },
+      { key: "play", name: "操作", },
+      { key: "edit", name: "編集", },
     ]
   }
 }

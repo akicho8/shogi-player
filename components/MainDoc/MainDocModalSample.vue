@@ -17,7 +17,7 @@
 
             section.modal-card-body
               shogi-player(
-                sp_run_mode="view_mode"
+                sp_mode="view"
                 sp_debug_mode="is_debug_mode_off"
                 :sp_turn="0"
                 :sp_body="kifu_book_info.sp_body"
@@ -28,7 +28,7 @@
 
             footer.modal-card-foot
               //- b-tooltip(label="この局面から自分で操作")
-              //-   b-switch(v-model="sp_run_mode" true-value="play_mode" false-value="view_mode") 継盤
+              //-   b-switch(v-model="sp_mode" true-value="play" false-value="view") 継盤
               a.button(@click="modal_p = false") 閉じる
               a.button(@click.prevent.stop="") ボタン2
               a.button(@click.prevent.stop="") ボタン3

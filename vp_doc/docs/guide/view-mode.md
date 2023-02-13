@@ -16,4 +16,4 @@
 
 ## Playground
 
-<ShogiPlayerWcWrapper sp_run_mode="view_mode" />
+<ShogiPlayerWcWrapper sp_mode="view" />

@@ -18,7 +18,7 @@ ev_action_piece_lift
 ev_action_piece_cancel
 ev_turn_offset_change
 ev_turn_offset_max_change
-update:sp_run_mode
+update:sp_mode
 update:sp_debug_mode
 update:sp_viewpoint
 ev_action_board_cell_pointerdown

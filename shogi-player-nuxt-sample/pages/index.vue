@@ -4,7 +4,7 @@
     NuxtLogo
     .MyShogiPlayerContainer
       ShogiPlayer(
-        sp_run_mode="view_mode"
+        sp_mode="view"
         sp_layout="is_layout_horizontal"
         sp_controller="is_controller_on"
         sp_slider="is_slider_on"
