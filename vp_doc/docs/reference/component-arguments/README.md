@@ -598,7 +598,7 @@ Default: `is_layer_off`
 | is_layer_off | しない |
 | is_layer_on  | する   |
 
-### `sp_debug`
+### `sp_debug_mode`
 
 Type: `String`
 Default: `is_debug_mode_off`

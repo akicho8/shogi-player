@@ -71,7 +71,7 @@ export default {
     sp_bg_variant:                               { type: String,  }, // 盤の種類
     sp_mobile_vertical:                          { type: String,  }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior:                        { type: String,  }, // ☗☖をタップしたとき視点を切り替える
-    sp_debug:                               { type: String,  }, // デバッグモード
+    sp_debug_mode:                               { type: String,  }, // デバッグモード
     sp_event_log:                                { type: Boolean, }, // イベントのログを開発コンソールに表示する
     sp_sfen_show:                                { type: String,  }, // SFENを下に表示する
     sp_overlay_nav:                              { type: String,  }, // view_mode のとき盤の左右で手数変更(falseなら駒を動かせる)

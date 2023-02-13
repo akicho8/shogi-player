@@ -135,5 +135,5 @@ APIで内部変数を参照するちらを使った方が良い
   * `sp_turn`
   * `sp_viewpoint`
   * `sp_run_mode`
-  * `sp_debug`
+  * `sp_debug_mode`
   * `sp_event_log`

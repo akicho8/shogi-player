@@ -79,8 +79,8 @@
           MainDocSwitch(v-model="sp_key_event_capture_enabled" label="sp_key_event_capture_enabled")
 
           b-field(custom-class="is-small" label="デバッグモード")
-            b-radio-button(size="is-small" v-model="sp_debug" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_debug" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_debug_mode" native-value="is_debug_mode_off") OFF
+            b-radio-button(size="is-small" v-model="sp_debug_mode" native-value="is_debug_mode_on") ON
 
           b-field(custom-class="is-small" label="盤の上でも再生操作")
             b-radio-button(size="is-small" v-model="sp_overlay_nav" native-value="is_overlay_nav_off") OFF
@@ -142,7 +142,7 @@
             :sp_turn.sync="sp_turn"
             :sp_turn_show="sp_turn_show"
             :sp_slider="sp_slider"
-            :sp_debug.sync="sp_debug"
+            :sp_debug_mode.sync="sp_debug_mode"
             :sp_hidden_if_piece_stand_blank="sp_hidden_if_piece_stand_blank"
             :sp_setting="sp_setting"
             :sp_operation_disabled="sp_operation_disabled"
@@ -184,7 +184,7 @@
                 | ShogiPlayer(
                 |   sp_run_mode="{{sp_run_mode}}"
                 |   sp_slider="{{sp_slider}}"
-                |   sp_debug="{{sp_debug}}"
+                |   sp_debug_mode="{{sp_debug_mode}}"
                 |   sp_turn_show="{{sp_turn_show}}"
                 |   sp_sfen_show="{{sp_sfen_show}}"
                 |   sp_overlay_nav="{{sp_overlay_nav}}"
@@ -232,7 +232,7 @@ export default {
       sp_sfen_show: "is_sfen_show_off",
       sp_human_side: 'both',
       sp_key_event_capture_enabled: false,
-      sp_debug: false,
+      sp_debug_mode: "is_debug_mode_off",
       sp_hidden_if_piece_stand_blank: false,
       sp_setting: "is_setting_off",
       sp_turn_show: "is_turn_show_on",

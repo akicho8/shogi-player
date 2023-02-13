@@ -16,8 +16,8 @@
         b-radio-button(v-model="TheSp.new_viewpoint" native-value="white") ☖
 
       b-field(label="デバッグモード")
-        b-radio-button(v-model="TheSp.new_debug" :native-value="false") OFF
-        b-radio-button(v-model="TheSp.new_debug" :native-value="true") ON
+        b-radio-button(v-model="TheSp.new_debug_mode" native-value="is_debug_mode_off") OFF
+        b-radio-button(v-model="TheSp.new_debug_mode" native-value="is_debug_mode_on") ON
 
       b-field(label="イベントログ")
         b-radio-button(v-model="TheSp.new_event_log" :native-value="false") OFF
