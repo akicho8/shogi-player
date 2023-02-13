@@ -19,7 +19,7 @@ ev_action_piece_cancel
 ev_turn_offset_change
 ev_turn_offset_max_change
 update:sp_run_mode
-update:sp_debug_mode
+update:sp_debug
 update:sp_viewpoint
 ev_action_board_cell_pointerdown
 ev_error_click_but_self_is_not_turn

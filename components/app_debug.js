@@ -1,17 +1,17 @@
 export const app_debug = {
   props: {
-    sp_debug_mode: { type: String, default: "is_debug_mode_off", }, // デバッグモード
+    sp_debug: { type: String, default: false, }, // デバッグモード
     sp_event_log:  { type: Boolean, default: false,              }, // イベントログ
   },
   data() {
     return {
-      new_debug_mode: this.sp_debug_mode,
+      new_debug: this.sp_debug,
       new_event_log: this.sp_event_log,
     }
   },
   watch: {
-    sp_debug_mode(v)  { this.new_debug_mode = v               }, // 外 -> 内
-    new_debug_mode(v) { this.event_call("update:sp_debug_mode", v) }, // 内 -> 外
+    sp_debug(v)  { this.new_debug = v               }, // 外 -> 内
+    new_debug(v) { this.event_call("update:sp_debug", v) }, // 内 -> 外
 
     sp_event_log(v)  { this.new_event_log = v                 }, // 外 -> 内
     new_event_log(v) { this.event_call("update:sp_event_log", v)   }, // 内 -> 外
@@ -36,6 +36,6 @@ export const app_debug = {
     },
   },
   computed: {
-    debug_p() { return this.new_debug_mode === "is_debug_mode_on" },
+    debug_p() { return this.new_debug === true },
   },
 }

@@ -13,7 +13,7 @@
       ShogiPlayer(
         sp_body="position sfen l+n1g1g1n+l/1ks2r1+r1/1pppp1bpp/p2+b+sp+p2/9/P1P1+SP1PP/1+P+BPP1P2/1BK1GR1+R1/+L+NSG3NL b R2B3G4S5N11L99Pr2b3g4s5n11l99p 1"
         sp_run_mode="play_mode"
-        sp_debug_mode="is_debug_mode_on"
+        :sp_debug="true"
         :sp_event_log="true"
         sp_controller="is_controller_on"
         sp_setting="is_setting_on"

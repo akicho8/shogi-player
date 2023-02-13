@@ -378,7 +378,7 @@ export default {
     component_class() {
       return [
         this.css_class_of_string("is_run_mode", this.new_run_mode),
-        this.new_debug_mode,
+        this.new_debug,
         this.css_class_of_bool("is_event_log", this.new_event_log),
       ]
     },
