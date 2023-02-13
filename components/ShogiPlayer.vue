@@ -137,8 +137,8 @@ export default {
       this.play_mode_setup_from("view")
     }
     if (this.edit_p) {
-      if (this.sp_preset_key) {
-        this.xcontainer_setup_by_preset(this.sp_preset_key) // 駒箱に「玉」を乗せたいため
+      if (this.sp_preset) {
+        this.xcontainer_setup_by_preset(this.sp_preset) // 駒箱に「玉」を乗せたいため
       } else {
         this.xcontainer_setup_for_edit_mode()
       }

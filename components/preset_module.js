@@ -3,12 +3,12 @@ import { PresetInfo } from "./models/preset_info.js"
 
 export const preset_module = {
   props: {
-    sp_preset_key: { type: String,  default: null, },
+    sp_preset: { type: String,  default: null, },
   },
 
   data() {
     return {
-      new_preset_key: this.sp_preset_key, // 選択中の初期配置
+      new_preset_key: this.sp_preset, // 選択中の初期配置
     }
   },
 
@@ -47,8 +47,8 @@ export const preset_module = {
 
     // 初期配置指定がある場合、その sfen を返す
     init_preset_sfen() {
-      if (this.sp_preset_key) {
-        return PresetInfo.fetch(this.sp_preset_key).sfen
+      if (this.sp_preset) {
+        return PresetInfo.fetch(this.sp_preset).sfen
       }
     },
   },

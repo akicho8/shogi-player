@@ -42,14 +42,14 @@ Default: `null`
   * 不整合な形式の棋譜を渡してもエラーを出したりはしない
   * 何が起きるかわからないので本当に正しい形式だけを渡してほしい
 
-### `sp_preset_key`
+### `sp_preset`
 
 Type: `String`
 Default: `null`
 
 初期配置(手合割)の指定 <Badge text="要検討" type="error" vertical="top" />
 
-  * `sp_mode="edit"` と合わせて `sp_preset_key="詰将棋"` とすれば相手玉だけがある状態で始まる
+  * `sp_mode="edit"` と合わせて `sp_preset="詰将棋"` とすれば相手玉だけがある状態で始まる
   * `sp_body` があるので要らないような気がしている
 
 ### `sp_turn`

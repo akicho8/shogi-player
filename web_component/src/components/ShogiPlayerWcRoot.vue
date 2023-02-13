@@ -82,7 +82,7 @@ export default {
     sp_turn:                                     { type: Number,  }, // 局面(手数)
     sp_mode:                                 { type: String,  }, // モード
     sp_body:                                     { type: String,  }, // 棋譜 KIF or SFEN
-    sp_preset_key:                               { type: String,  }, // 手合割(初期配置)
+    sp_preset:                               { type: String,  }, // 手合割(初期配置)
     sp_comment:                                  { type: String,  }, // KIFのコメントを表示する
     sp_human_side:                               { type: String,  }, // 含まれる側だけ操作できるようにする
     sp_device:                                   { type: String,  }, // デバイスを強制的に指定する
