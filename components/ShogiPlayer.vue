@@ -74,12 +74,12 @@ export default {
   props: {
     sp_board_dimension_w:                  { type: Number, default: 9,                       }, // 盤のセル数(W)
     sp_board_dimension_h:                  { type: Number, default: 9,                       }, // 盤のセル数(H)
-    sp_layout:                             { type: String, default: "is_layout_horizontal",         }, // レイアウト is_(vertical|horizontal)
+    sp_layout:                             { type: String, default: "landscape",             }, // レイアウト
     sp_balloon:                            { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
     sp_piece_variant:                         { type: String, default: "is_piece_variant_a",       }, // 駒の種類
     sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
-    sp_mobile_vertical:                    { type: String, default: "is_mobile_vertical_on", }, // モバイル時に自動的に縦配置に切り替える
+    sp_mobile_portrait:                    { type: String, default: "is_mobile_portrait_on", }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior:                  { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
     sp_sfen_show:                          { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
     sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view のとき盤の左右で手数変更(falseなら駒を動かせる)
@@ -111,7 +111,7 @@ export default {
 
   data() {
     return {
-      new_run_mode: this.sp_mode,
+      new_mode: this.sp_mode,
       turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       xcontainer: null,                 // 局面管理
       turn_edit_p: false,               // N手目編集中
@@ -174,14 +174,14 @@ export default {
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    sp_mode(v) { this.new_run_mode = v            }, // 外から内への反映
+    sp_mode(v) { this.new_mode = v            }, // 外から内への反映
 
     // 外からまたはダイアログから変更されたとき
-    new_run_mode(new_val, old_val) {
-      this.event_call("update:sp_mode", this.new_run_mode)
+    new_mode(new_val, old_val) {
+      this.event_call("update:sp_mode", this.new_mode)
 
       if (this.view_p) {
-        this.log("new_run_mode: view")
+        this.log("new_mode: view")
         // alert(`復元:${this.view_mode_turn_offset_save}`)
         this.view_mode_xcontainer_update(this.view_mode_turn_offset_save)
         this.view_mode_turn_offset_save = null
@@ -198,7 +198,7 @@ export default {
       }
 
       if (this.edit_p) {
-        this.log("new_run_mode: edit")
+        this.log("new_mode: edit")
 
         const new_xcontainer = new Xcontainer()
         new_xcontainer.data_source = this.data_source_by(this.xcontainer.to_short_sfen)
@@ -365,9 +365,9 @@ export default {
   computed: {
     location_black() { return Location.fetch("black")                    },
     location_white() { return Location.fetch("white")                    },
-    view_p()         { return this.new_run_mode === "view"          },
-    play_p()         { return this.new_run_mode === "play"          },
-    edit_p()         { return this.new_run_mode === "edit"          },
+    view_p()         { return this.new_mode === "view"          },
+    play_p()         { return this.new_mode === "play"          },
+    edit_p()         { return this.new_mode === "edit"          },
 
     turn_base()       { return this.delegate_to_xcontainer("turn_base")       }, // 表示する上での開始手数で普通は 0
     turn_offset()     { return this.delegate_to_xcontainer("turn_offset")     }, // 手数のオフセット
@@ -377,7 +377,7 @@ export default {
 
     component_class() {
       return [
-        this.css_class_of_string("is_run_mode", this.new_run_mode),
+        this.css_class_of_string("is_mode", this.new_mode), // is_mode_view | is_mode_play | is_mode_edit
         this.new_debug_mode,
         this.css_class_of_bool("is_event_log", this.new_event_log),
       ]

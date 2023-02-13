@@ -7,8 +7,8 @@
   section.modal-card-body
     b-field(label="モード")
     b-field
-      template(v-for="e in RunModeInfo.values")
-        b-radio-button(v-model="TheSp.new_run_mode" :native-value="e.key") {{e.name}}
+      template(v-for="e in ModeInfo.values")
+        b-radio-button(v-model="TheSp.new_mode" :native-value="e.key") {{e.name}}
 
     b-field(grouped)
       b-field(label="視点")
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { RunModeInfo } from "./models/run_mode_info.js"
+import { ModeInfo } from "./models/mode_info.js"
 import { BgVariantInfo } from "./models/bg_variant_info.js"
 import { PieceVariantInfo } from "./models/piece_variant_info.js"
 
@@ -70,7 +70,7 @@ export default {
   name: "SettingModal",
   mixins: [support],
   computed: {
-    RunModeInfo()   { return RunModeInfo   },
+    ModeInfo()   { return ModeInfo   },
     BgVariantInfo() { return BgVariantInfo },
     PieceVariantInfo() { return PieceVariantInfo },
   },

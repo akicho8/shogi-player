@@ -18,7 +18,7 @@ export default {
 @import "./support.sass"
 
 .ShogiPlayer
-  &.is_run_mode_view_mode
+  &.is_mode_view
     .OverlayNavigationItem
       // background-color: change_color($primary, $alpha: 0.5)
 

@@ -52,7 +52,7 @@ export default {
       +is_layer_border
 
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
-  +IS_HORIZONTAL
+  +IF_LANDSCAPE
     .Membership
       &.is_position_north
         .PieceCount
@@ -66,7 +66,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
-  +IS_VERTICAL
+  +IF_PORTRAIT
     .Membership
       &.is_position_north
         .PieceCount

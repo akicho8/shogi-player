@@ -25,7 +25,7 @@ export default {
         // それに間違った場所に指定してしまってもエラーが出ることもない
         // なので結局ここでいい
         // Buefy も同じようなことをしている
-        this.TheSp.sp_layout,
+        `is_layout_${this.TheSp.sp_layout}`, // is_layout_landscape is_layout_portrait
         this.TheSp.sp_balloon,
         this.TheSp.sp_layer,
         this.TheSp.sp_piece_variant,
@@ -34,7 +34,7 @@ export default {
         this.TheSp.sp_digit_label_variant,
         this.TheSp.sp_stand_gravity,
         this.TheSp.sp_player_name_direction,
-        this.TheSp.sp_mobile_vertical,
+        this.TheSp.sp_mobile_portrait,
         this.TheSp.devise_info.key,
         // 特殊
         `is_viewpoint_${this.TheSp.new_viewpoint}`, // システムテストで見ている

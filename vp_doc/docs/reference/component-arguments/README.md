@@ -103,14 +103,14 @@ Default: `is_slider_off`
 ### `sp_layout`
 
 Type: `String`
-Default: `is_layout_vertical`
+Default: `portrait`
 
 駒台・名前・時間の表示場所を決める
 
-| 値                   | 配置 |            |
-|----------------------|------|------------|
-| is_layout_vertical   | 縦   | スマホ向け |
-| is_layout_horizontal | 横   |            |
+| 値        | 配置 |            |
+|-----------|------|------------|
+| portrait  | 縦長 | スマホ向け |
+| landscape | 横長 |            |
 
 ### `sp_viewpoint`
 
@@ -320,10 +320,10 @@ Default: `is_balloon_on`
 
 ## ほぼ使わない
 
-### `sp_mobile_vertical`
+### `sp_mobile_portrait`
 
 Type: `String`
-Default: `is_mobile_vertical_on`
+Default: `is_mobile_portrait_on`
 
 画面幅が狭いとき自動的に縦配置に切り替えるか？
 
@@ -332,8 +332,8 @@ Default: `is_mobile_vertical_on`
 
 | 値                     | 挙動         |
 |------------------------|--------------|
-| is_mobile_vertical_off | 切り替えない |
-| is_mobile_vertical_on  | 切り替える   |
+| is_mobile_portrait_off | 切り替えない |
+| is_mobile_portrait_on  | 切り替える   |
 
 ### `sp_lift_cancel_action`
 

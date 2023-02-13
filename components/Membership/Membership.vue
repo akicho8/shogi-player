@@ -90,7 +90,7 @@ export default {
   // .MembershipStand
   //   border: 3px dashed red ! important
 
-  +IS_HORIZONTAL
+  +IF_LANDSCAPE
     .Membership
       &.is_position_north
         flex-direction: column-reverse // 全体が横並び → 持駒は縦並び(△が下に来るため反転)
@@ -109,7 +109,7 @@ export default {
         &.is_position_south
           align-self: flex-end         // 全体が横並び → 持駒は縦並び → 先手は下寄せ
 
-  +IS_VERTICAL
+  +IF_PORTRAIT
     .Membership
       width: 100%
       height: 100%

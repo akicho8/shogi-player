@@ -21,8 +21,8 @@
           b-field(custom-class="is-small" label="コンテナ幅")
             b-slider(v-bind="slider_attrs" v-model="se_frame_width" :min="1" :max="100")
           b-field(custom-class="is-small" label="レイアウト")
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_layout_horizontal") 左右
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="is_layout_vertical") 上下
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="landscape") 左右
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="portrait") 上下
           b-field(custom-class="is-small" label="モード")
             b-radio-button(size="is-small" v-model="sp_mode" native-value="view") 再生
             b-radio-button(size="is-small" v-model="sp_mode" native-value="play") 操作
@@ -236,8 +236,8 @@
         //- .box
         //-   SeTitle(name="モバイル
         //-   b-field(custom-class="is-small" label="縦配置にする")
-        //-     b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
-        //-     b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
+        //-     b-radio-button(size="is-small" v-model="sp_mobile_portrait" native-value="is_mobile_portrait_off") OFF
+        //-     b-radio-button(size="is-small" v-model="sp_mobile_portrait" native-value="is_mobile_portrait_on") ON
 
         .box
           SeTitle(name="成り不成り選択")
@@ -386,8 +386,8 @@
             b-slider(v-bind="slider_attrs" v-model="sp_common_gap" :min="0" :max="1.0" :step="0.01")
 
           b-field(custom-class="is-small" label="モバイル時に縦配置にする")
-            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_off") OFF
-            b-radio-button(size="is-small" v-model="sp_mobile_vertical" native-value="is_mobile_vertical_on") ON
+            b-radio-button(size="is-small" v-model="sp_mobile_portrait" native-value="is_mobile_portrait_off") OFF
+            b-radio-button(size="is-small" v-model="sp_mobile_portrait" native-value="is_mobile_portrait_on") ON
 
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="black") ☗
@@ -475,7 +475,7 @@ const IS_WHITE       = "rgb(255,255,255)"
 import chroma from "chroma-js"
 
 import { HumanSideInfo }    from "../models/human_side_info.js"
-import { RunModeInfo }      from "../models/run_mode_info.js"
+import { ModeInfo }      from "../models/mode_info.js"
 import { BgVariantInfo }    from "../models/bg_variant_info.js"
 import { PieceVariantInfo }    from "../models/piece_variant_info.js"
 import { KifuBookInfo }     from "../models/kifu_book_info.js"
@@ -534,9 +534,9 @@ export default {
 
       sp_board_dimension_w: 9,
       sp_board_dimension_h: 9,
-      sp_layout: "is_layout_horizontal",
+      sp_layout: "landscape",
       sp_mode: DEVELOPMENT_P ? "edit" : "view",
-      sp_mobile_vertical: "is_mobile_vertical_on",
+      sp_mobile_portrait: "is_mobile_portrait_on",
 
       // 成り不成り選択
       sp_promote_select_modal_bg_color: "hsla(0, 0%, 0%, 0.5)",
@@ -783,7 +783,7 @@ export default {
   },
   computed: {
     HumanSideInfo()  { return HumanSideInfo  },
-    RunModeInfo()    { return RunModeInfo    },
+    ModeInfo()    { return ModeInfo    },
     BgVariantInfo()  { return BgVariantInfo  },
     PieceVariantInfo()  { return PieceVariantInfo  },
     KifuBookInfo() { return KifuBookInfo },
@@ -855,7 +855,7 @@ export default {
       params.sp_layer             = this.sp_layer
       params.sp_piece_variant        = this.sp_piece_variant
       params.sp_bg_variant        = this.sp_bg_variant
-      params.sp_mobile_vertical   = this.sp_mobile_vertical
+      params.sp_mobile_portrait   = this.sp_mobile_portrait
       params.sp_mode          = this.sp_mode
       params.sp_viewpoint         = this.sp_viewpoint
       params.sp_debug_mode             = this.sp_debug_mode,

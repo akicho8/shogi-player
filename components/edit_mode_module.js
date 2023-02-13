@@ -44,7 +44,7 @@ export const edit_mode_module = {
   },
 
   watch: {
-    new_run_mode() {
+    new_mode() {
       this.state_reset() // モードが切り替わったときに持ち上げた駒を元に戻す(こうしないとカーソルから駒が離れない)
     },
   },

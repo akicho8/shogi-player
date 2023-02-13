@@ -20,14 +20,14 @@
 <ShogiPlayerWcWrapper
   class="d1428e21a56b573f72b675b22c6bfe43"
   sp_layer="is_layer_off"
-  sp_layout="is_layout_horizontal"
+  sp_layout="landscape"
   sp_piece_variant="is_piece_variant_b"
   sp_digit_label="is_digit_label_on"
   sp_digit_label_variant="is_digit_label_variant_kanji"
   sp_stand_gravity="is_stand_gravity_top"
   sp_player_name_direction="is_player_name_direction_vertical"
   sp_balloon="is_balloon_off"
-  sp_mobile_vertical="is_mobile_vertical_off"
+  sp_mobile_portrait="is_mobile_portrait_off"
   sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
 />
 
@@ -63,14 +63,14 @@
 
 ```vue
 ShogiPlayer(
-  sp_layout="is_layout_horizontal"                       // 横配置にする
+  sp_layout="landscape"                       // 横配置にする
   sp_piece_variant="is_piece_variant_b"                  // 紙面用駒に切り替る
   sp_digit_label="is_digit_label_on"                     // 座標を表示する
   sp_digit_label_variant="is_digit_label_variant_kanji" // 右側の座標を「数値」表記に変更する
   sp_stand_gravity="is_stand_gravity_top"                // 駒台を上寄せ配置する
   sp_player_name_direction="is_player_name_direction_vertical"       // 名前を縦書きにする
   sp_balloon="is_balloon_off"                            // 名前の下の吹き出しを表示しない
-  sp_mobile_vertical="is_mobile_vertical_off"
+  sp_mobile_portrait="is_mobile_portrait_off"
   :sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
 )
 ```

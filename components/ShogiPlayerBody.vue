@@ -60,16 +60,16 @@ export default {
     ////////////////////////////////////////////////////////////////////////////////
 
   // |---------+----------------+--------------+--------------------------------------|
-  // |         | .is_layout_horizontal | .is_layout_vertical | 備考                                 |
+  // |         | .landscape | .portrait | 備考                                 |
   // |---------+----------------+--------------+--------------------------------------|
   // | +tablet | row            | column       | 画面が広いので切り替え可             |
   // | +mobile | column         | column       | 画面幅を最大に使いたいので常に縦配置 |
   // |---------+----------------+--------------+--------------------------------------|
-  +IS_HORIZONTAL
+  +IF_LANDSCAPE
     .ShogiPlayerBody
       flex-direction: row
       gap: calc(var(--sp_base_w) * var(--sp_board_horizontal_gap))
-  +IS_VERTICAL
+  +IF_PORTRAIT
     .ShogiPlayerBody
       flex-direction: column
       // 縦は "100%" としても反応しない

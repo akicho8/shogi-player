@@ -61,16 +61,20 @@ export default {
     flex-direction: column
     gap: 0.2em                   // 名前と時間の隙間
 
+  // 手番のときだけ濃くする
   .Membership
+    &.is_turn_inactive
+      .MembershipLocationPlayerInfo
+        font-weight: normal
     &.is_turn_active
       .MembershipLocationPlayerInfo
         font-weight: bold
 
-  +IS_HORIZONTAL                            // 横書きなら
+  +IF_LANDSCAPE                            // 横書きなら
     &.is_player_name_direction_vertical           // 縦書き
       .MembershipLocationPlayerInfoName
         writing-mode: vertical-rl
-  +IS_VERTICAL                              // 縦の場合は(自動で縦にした場合も含めて)横にする
+  +IF_PORTRAIT                              // 縦の場合は(自動で縦にした場合も含めて)横にする
     &.is_player_name_direction_vertical           // 詳細度で負けないように必要
       .MembershipLocationPlayerInfoName
         writing-mode: horizontal-tb         // 明示的に横にする
@@ -103,13 +107,13 @@ export default {
     .MembershipLocationPlayerInfo
 
   // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
-  +IS_HORIZONTAL
+  +IF_LANDSCAPE
     .MembershipLocationPlayerInfo
       max-width: var(--sp_base_w)
       line-height: 110%         // 元々100%にしていたくっつきすぎな印象がある
 
   // 縦幅がわりと自由につかえるので隙間をあける
-  +IS_VERTICAL
+  +IF_PORTRAIT
     .MembershipLocationPlayerInfo
       max-width: unset
       line-height: 140%

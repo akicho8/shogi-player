@@ -12,7 +12,7 @@ export default {
     STAGE_ENV() { return `STAGE-${process.env.NODE_ENV}` },
     params_default() {
       return {
-        // sp_layout: "is_layout_horizontal",
+        // sp_layout: "landscape",
       }
     },
     params() {

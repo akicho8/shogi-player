@@ -102,11 +102,11 @@ export default {
       justify-content: center
       align-items: center
 
-  //////////////////////////////////////////////////////////////////////////////// is_layout_horizontal or is_layout_vertical
-  +IS_HORIZONTAL
+  //////////////////////////////////////////////////////////////////////////////// landscape or portrait
+  +IF_LANDSCAPE
     .PieceBox
       margin-top: var(--sp_common_gap_real_px)
-  +IS_VERTICAL
+  +IF_PORTRAIT
     .PieceBox
       margin-top: 0
 

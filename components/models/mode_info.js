@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export class RunModeInfo extends MemoryRecord {
+export class ModeInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "view", name: "再生", },
@@ -11,6 +11,6 @@ export class RunModeInfo extends MemoryRecord {
 }
 
 if (process.argv[1] === __filename) {
-  console.log(RunModeInfo.fetch("simple").key)
-  console.log(RunModeInfo.fetch("simple").name)
+  console.log(ModeInfo.fetch("simple").key)
+  console.log(ModeInfo.fetch("simple").name)
 }

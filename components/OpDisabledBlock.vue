@@ -14,7 +14,7 @@ export default {
 @import "./support.sass"
 // 上に被せてすべてを押せないようにする
 .ShogiPlayer
-  &.is_run_mode_view_mode
+  &.is_mode_view
     .ShogiPlayerWidth
       .OpDisabledBlock
         z-index: $overlay_for_disable_z
