@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.12.17",
+    "@jamescoyle/vue-icon": "^0.1.2",
+    "@mdi/js": "^7.1.96",
     "autolinker": "latest",
     "buefy": "^0.9.22",
     "bulma": "^0.9.4",

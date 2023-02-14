@@ -1,5 +1,8 @@
 <template lang="pug">
 .MainDocDemo.section
+  button
+    <svg-icon type="mdi" :path="path"></svg-icon>
+
   .container
     #examples.title.is-3 デモ
     hr
@@ -38,8 +41,21 @@
 </template>
 
 <script>
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiAccount } from '@mdi/js';
+
 export default {
   name: "MainDocDemo",
+  data() {
+    return {
+      path: mdiAccount,
+    }
+  },
+
+  components: {
+    SvgIcon,
+  },
+
 }
 </script>
 
