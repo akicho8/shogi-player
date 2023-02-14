@@ -1,7 +1,7 @@
 <template>
 <div class="CenterTag">
-    <slot />
-  </div>
+  <slot />
+</div>
 </template>
 
 <style lang="stylus">

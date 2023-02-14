@@ -79,14 +79,14 @@ export default {
     sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
     sp_piece_variant:                         { type: String, default: "is_piece_variant_a",       }, // 駒の種類
     sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
-    sp_mobile_portrait:                    { type: String, default: "is_mobile_portrait_on", }, // モバイル時に自動的に縦配置に切り替える
+    sp_mobile_portrait:                    { type: Boolean, default: true, }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior:                  { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
     sp_sfen_show:                          { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
     sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_digit_label:                        { type: String, default: "is_digit_label_off",    }, // 座標の表示
     sp_digit_label_variant:                { type: String, default: "is_digit_label_variant_kanji",   }, // 座標の表記
     sp_stand_gravity:                       { type: String, default: "is_stand_gravity_bottom",  }, // 駒台の位置
-    sp_player_name_direction:                    { type: String, default: "is_player_name_direction_horizontal",  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
+    sp_name_direction:                    { type: String, default: "is_player_name_direction_horizontal",  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                               { type: Number, default: -1,                      }, // 局面(手数)
     sp_mode:                           { type: String, default: "view",             }, // モード
     sp_body:                               { type: String, default: null,                    }, // 棋譜 KIF or SFEN

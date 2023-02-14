@@ -1,7 +1,7 @@
 <template>
   <div class="CustomStyleExample">
     <iframe :src="html_file" frameborder="0" width="100%" height="600" />
-    <a :href="html_file" target="_blank">この例を単体で開く<OutboundLink /></a>
+    <a :href="html_file" target="_blank">この例を単体で開く <OutboundLink /></a>
   </div>
 </template>
 

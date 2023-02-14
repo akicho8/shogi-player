@@ -59,15 +59,7 @@ Default: `-1`
 
 開始局面
 
-負の値だと最終局面からの局面になる
-
-| 値 | 局面         |
-|----|--------------|
-|  0 | 0手目        |
-|  n | n手目        |
-| -n | 最後-n+1手目 |
-| -2 | 最後-1手目   |
-| -1 | 最後         |
+負の値は最終局面から数えた局面になる
 
 ### `sp_controller`
 
@@ -216,7 +208,7 @@ Default: `is_stand_gravity_bottom`
 | is_stand_gravity_bottom | 下         |
 | is_stand_gravity_top    | 上         |
 
-### `sp_player_name_direction`
+### `sp_name_direction`
 
 Type: `String`
 Default: `is_player_name_direction_horizontal`
@@ -322,18 +314,13 @@ Default: `is_balloon_on`
 
 ### `sp_mobile_portrait`
 
-Type: `String`
-Default: `is_mobile_portrait_on`
+Type: `Boolean`
+Default: `true`
 
 画面幅が狭いとき自動的に縦配置に切り替えるか？
 
 初期値を横配置にしているときに関係してくる
 言い替えると画面幅が広いときに横配置に切り替えるかの設定でもある
-
-| 値                     | 挙動         |
-|------------------------|--------------|
-| is_mobile_portrait_off | 切り替えない |
-| is_mobile_portrait_on  | 切り替える   |
 
 ### `sp_lift_cancel_action`
 

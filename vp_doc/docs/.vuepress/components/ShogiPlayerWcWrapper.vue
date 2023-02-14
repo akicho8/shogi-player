@@ -33,6 +33,8 @@ shogi-player-wc::part(spwc_style_scope)
   --sp_board_radius: 0
 
 .ShogiPlayerWcWrapper
+  &.is-xsmall
+    --width: 10%
   &.is-small
     --width: 40%
   --width: 50%

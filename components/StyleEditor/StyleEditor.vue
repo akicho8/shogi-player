@@ -150,8 +150,8 @@
         .box
           SeTitle(name="対局者名")
           b-field(custom-class="is-small" label="縦・横書き(全体レイアウトが横の場合のみ有効)" message="英字も考慮して縦書きにするなら横書きのままで1文字ずつ<br>を入れた方が正しく縦書きになる。日本語しか使わないのであれば単に縦書きでもよい。モバイルの場合は狭いので横書きの方がよい")
-            b-radio-button(size="is-small" v-model="sp_player_name_direction" native-value="is_player_name_direction_horizontal") 横書き
-            b-radio-button(size="is-small" v-model="sp_player_name_direction" native-value="is_player_name_direction_vertical") 縦書き
+            b-radio-button(size="is-small" v-model="sp_name_direction" native-value="is_player_name_direction_horizontal") 横書き
+            b-radio-button(size="is-small" v-model="sp_name_direction" native-value="is_player_name_direction_vertical") 縦書き
 
           b-field(custom-class="is-small" label="名前の大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_player_name_size" :min="0" :max="0.5" :step="0.001")
@@ -232,12 +232,6 @@
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(H)")
           //-       b-slider(v-bind="slider_attrs" v-model="sp_base_h" :min="1" :max="80" :step="1")
-
-        //- .box
-        //-   SeTitle(name="モバイル
-        //-   b-field(custom-class="is-small" label="縦配置にする")
-        //-     b-radio-button(size="is-small" v-model="sp_mobile_portrait" native-value="is_mobile_portrait_off") OFF
-        //-     b-radio-button(size="is-small" v-model="sp_mobile_portrait" native-value="is_mobile_portrait_on") ON
 
         .box
           SeTitle(name="成り不成り選択")
@@ -386,8 +380,8 @@
             b-slider(v-bind="slider_attrs" v-model="sp_common_gap" :min="0" :max="1.0" :step="0.01")
 
           b-field(custom-class="is-small" label="モバイル時に縦配置にする")
-            b-radio-button(size="is-small" v-model="sp_mobile_portrait" native-value="is_mobile_portrait_off") OFF
-            b-radio-button(size="is-small" v-model="sp_mobile_portrait" native-value="is_mobile_portrait_on") ON
+            b-radio-button(size="is-small" v-model="sp_mobile_portrait" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_mobile_portrait" :native-value="true") ON
 
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="black") ☗
@@ -536,7 +530,7 @@ export default {
       sp_board_dimension_h: 9,
       sp_layout: "landscape",
       sp_mode: DEVELOPMENT_P ? "edit" : "view",
-      sp_mobile_portrait: "is_mobile_portrait_on",
+      sp_mobile_portrait: true,
 
       // 成り不成り選択
       sp_promote_select_modal_bg_color: "hsla(0, 0%, 0%, 0.5)",
@@ -604,7 +598,7 @@ export default {
         black: { name: "先手", time: "", },
         white: { name: "後手", time: "", },
       },
-      sp_player_name_direction: DEVELOPMENT_P ? "is_player_name_direction_vertical" : "is_player_name_direction_horizontal",
+      sp_name_direction: DEVELOPMENT_P ? "is_player_name_direction_vertical" : "is_player_name_direction_horizontal",
       sp_player_name_size: 0.25,
       sp_player_time_size: 0.25,
       ////////////////////////////////////////////////////////////////////////////////
@@ -734,7 +728,7 @@ export default {
       this.sp_grid_outer_stroke           = 2                             // グリッド枠(太)
       this.sp_board_edge_stroke = 0
       this.sp_stand_gravity                = "is_stand_gravity_top"      // 駒台の位置
-      this.sp_player_name_direction             = "is_player_name_direction_vertical" // 縦横書き
+      this.sp_name_direction             = "is_player_name_direction_vertical" // 縦横書き
       this.sp_balloon                     = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
       this.sp_location_mark_active_size   = 1.0                      // 手番でないときの☗☖を小さくしない
       this.sp_location_mark_inactive_size = 1.0                      // 手番でないときの☗☖を小さくしない
@@ -848,33 +842,33 @@ export default {
 
     sp_params() {
       let params = {}
-      params.sp_board_dimension_w = this.sp_board_dimension_w
-      params.sp_board_dimension_h = this.sp_board_dimension_h
-      params.sp_layout            = this.sp_layout
-      params.sp_balloon           = this.sp_balloon
-      params.sp_layer             = this.sp_layer
-      params.sp_piece_variant        = this.sp_piece_variant
-      params.sp_bg_variant        = this.sp_bg_variant
-      params.sp_mobile_portrait   = this.sp_mobile_portrait
-      params.sp_mode          = this.sp_mode
-      params.sp_viewpoint         = this.sp_viewpoint
-      params.sp_debug_mode             = this.sp_debug_mode,
-      params.sp_comment           = this.sp_comment,
-      params.sp_turn              = this.sp_turn
-      params.sp_body              = this.sp_body
-      params.sp_setting           = "is_setting_off"
-      params.sp_turn_show           = this.sp_turn_show
-      params.sp_digit_label             = this.sp_digit_label
-      params.sp_digit_label_variant = this.sp_digit_label_variant
-      params.sp_stand_gravity             = this.sp_stand_gravity
-      params.sp_player_name_direction             = this.sp_player_name_direction
-      params.sp_slider            = this.sp_slider
-      params.sp_controller        = this.sp_controller
-      params.sp_player_info       = this.sp_player_info
-      params.sp_legal_move_only = this.sp_legal_move_only
-      params.sp_foul_check = this.sp_foul_check
-      params.sp_foul_check = this.sp_foul_check
-      params.sp_lift_cancel_action       = this.sp_lift_cancel_action
+      params.sp_board_dimension_w     = this.sp_board_dimension_w
+      params.sp_board_dimension_h     = this.sp_board_dimension_h
+      params.sp_layout                = this.sp_layout
+      params.sp_balloon               = this.sp_balloon
+      params.sp_layer                 = this.sp_layer
+      params.sp_piece_variant         = this.sp_piece_variant
+      params.sp_bg_variant            = this.sp_bg_variant
+      params.sp_mobile_portrait       = this.sp_mobile_portrait
+      params.sp_mode                  = this.sp_mode
+      params.sp_viewpoint             = this.sp_viewpoint
+      params.sp_debug_mode            = this.sp_debug_mode,
+      params.sp_comment               = this.sp_comment,
+      params.sp_turn                  = this.sp_turn
+      params.sp_body                  = this.sp_body
+      params.sp_setting               = "is_setting_off"
+      params.sp_turn_show             = this.sp_turn_show
+      params.sp_digit_label           = this.sp_digit_label
+      params.sp_digit_label_variant   = this.sp_digit_label_variant
+      params.sp_stand_gravity         = this.sp_stand_gravity
+      params.sp_name_direction = this.sp_name_direction
+      params.sp_slider                = this.sp_slider
+      params.sp_controller            = this.sp_controller
+      params.sp_player_info           = this.sp_player_info
+      params.sp_legal_move_only       = this.sp_legal_move_only
+      params.sp_foul_check            = this.sp_foul_check
+      params.sp_foul_check            = this.sp_foul_check
+      params.sp_lift_cancel_action    = this.sp_lift_cancel_action
       return params
     },
 

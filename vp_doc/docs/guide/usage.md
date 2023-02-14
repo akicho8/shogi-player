@@ -2,54 +2,23 @@
 
 ## インストール
 
-```html
-<script src="https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js"></script>
-<shogi-player-wc />
-```
-<!-- ../.vuepress/public/examples/fragment.html -->
-<a href="/examples/fragment.html" target="_blank">上のサンプルをHTML単体で開く</a>
+<<< @/docs/.vuepress/public/examples/fragment.html
+<LinkToExample name="fragment" />
 
 上の2行だけのHTMLを作るか既存のサイトにコピペして動けば次へ
 
 ## 文字コードやスマホを考慮する
 
-```html{3-4}
-<!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js"></script>
-</head>
-<body>
-  <shogi-player-wc />
-</body>
-</html>
-```
-
-<!-- ../.vuepress/public/examples/simple.html -->
-<a href="/examples/simple.html" target="_blank">上のサンプルをHTML単体で開く</a>
+<<< @/docs/.vuepress/public/examples/simple.html{3-4}
+<LinkToExample name="simple" />
 
   * 棋譜を正しく読むため UTF-8 を明示する
   * 反応遅延や意図しない画面ズームを防ぐため viewport を指定する
 
 ## 棋譜再生 ##
 
-盤面タップで局面を進める例
-
-```html
-<shogi-player-wc
-  sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
-  sp_turn="0"
-  sp_overlay_nav="is_overlay_nav_on"
-  />
-```
-
-<ShogiPlayerWcWrapper
-  class="is-small"
-  sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
-  sp_turn="0"
-  sp_overlay_nav="is_overlay_nav_on"
-/>
+<<< @/docs/.vuepress/public/examples/view.html{9-11}
+<LinkToExample name="view" />
 
 * **sp_body**: 棋譜を指定する
 * **sp_turn**: 局面を指定する
@@ -57,34 +26,17 @@
 
 ## コントローラーを表示する ##
 
+<<< @/docs/.vuepress/public/examples/mdi.html{5,10}
+<LinkToExample name="mdi" />
+
 1. Material Design Icons の CSS を読み込む
 1. `sp_controller="is_controller_on"` を指定する
 
-```html{5,10}
-<!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js"></script>
-</head>
-<body>
-  <shogi-player-wc
-    sp_controller="is_controller_on"
-    sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
-    />
-</body>
-</html>
-```
-
-<!-- ../.vuepress/public/examples/mdi.html -->
-<a href="/examples/mdi.html" target="_blank">上のサンプルを単体で開く</a>
-
-<ShogiPlayerWcWrapper
-  class="is-small"
-  sp_controller="is_controller_on"
-  sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
-/>
+<!-- <ShogiPlayerWcWrapper -->
+<!--   class="is-small" -->
+<!--   sp_controller="is_controller_on" -->
+<!--   sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b" -->
+<!-- /> -->
 
 ::: warning 謎
 Material Design Icons の CSS は Web Components 内ですでに読み込んでいる。にもかかわらず外でも読み込まないとコントローラーの矢印アイコンが正しく表示されない。なぜかはわからない。
@@ -92,63 +44,42 @@ Material Design Icons の CSS は Web Components 内ですでに読み込んで�
 
 ## スタイル変更 ##
 
+<!-- <CustomStyleExample2 name="style" /> -->
+<<< @/docs/.vuepress/public/examples/style.html{7-9}
+<LinkToExample name="style" />
+
 CSS変数は普通に定義しても Shadow DOM 内には届かない
 用意した `spwc_style_scope` に対して適用する
 
-```css
-shogi-player-wc::part(spwc_style_scope) {
-  --sp_board_color: lightskyblue;
-}
-```
-
-<ShogiPlayerWcWrapper class="b441958504b7c7af3ef62a47fafe8d21 is-small" />
-<style lang="stylus">
-.ShogiPlayerWcWrapper.b441958504b7c7af3ef62a47fafe8d21
-  shogi-player-wc::part(spwc_style_scope)
-    --sp_board_color: lightskyblue
-</style>
+<!-- <ShogiPlayerWcWrapper class="b441958504b7c7af3ef62a47fafe8d21 is-xsmall" /> -->
+<!-- <style lang="stylus"> -->
+<!-- .ShogiPlayerWcWrapper.b441958504b7c7af3ef62a47fafe8d21 -->
+<!--   shogi-player-wc::part(spwc_style_scope) -->
+<!--     --sp_board_color: lightskyblue -->
+<!-- </style> -->
 
 ## スタイル変更 (実験的) ##
 
-引数の `spwc_style_hash` に書いても変更できる (ようにした)
-これはタグの style を直接書くのに似ていて通常の方法より詳細度が高くなる
-本来機能とスタイルは分けるべきとされているが目的駆動と考えれば一箇所で設定する方が合理的なので入れてある
+<!-- <CustomStyleExample2 name="spwc_style_hash" /> -->
+<<< @/docs/.vuepress/public/examples/spwc_style_hash.html{8}
+<LinkToExample name="spwc_style_hash" />
 
-```html
-<shogi-player-wc spwc_style_hash="{'--sp_board_color': 'lightskyblue'}" />
-```
-
-<ShogiPlayerWcWrapper spwc_style_hash="{'--sp_board_color': 'lightskyblue'}" class="is-small" />
+引数の `spwc_style_hash` に書いても変更できるようにしてある
+これはタグの style を直接書くのに似ていて通常の方法より詳細度が高い
+本来機能とスタイルは分けるべきとされているが目的駆動と考えればまとめる方が合理的なので実験的に入れてある
 
 ## イベント受信 ##
 
+<!-- <CustomStyleExample2 name="event" /> -->
+<<< @/docs/.vuepress/public/examples/event.html{8-12}
+<LinkToExample name="event" />
+
 指し手の情報を表示する例
 
-```html
-<!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const el = document.querySelector("shogi-player-wc");
-      el.addEventListener("ev_play_mode_next", e => {
-        alert(e.detail[0].last_move_info.to_kif)
-      })
-    })
-  </script>
-</head>
-<body>
-  <shogi-player-wc sp_mode="play" />
-</body>
-</html>
-```
-
 <!-- ../.vuepress/public/examples/event.html -->
-<a href="/examples/event.html" target="_blank">上のサンプルを単体で開く</a>
+<!-- <a href="/examples/event.html" target="_blank">上のサンプルを単体で開く</a> -->
 
-<ShogiPlayerWcWrapperEventTest />
+<!-- <ShogiPlayerWcWrapperEventTest /> -->
 
 <!-- Vue.js が使える環境であれば直接ひっかける -->
 <!--  -->
@@ -159,47 +90,18 @@ shogi-player-wc::part(spwc_style_scope) {
 <!-- /> -->
 <!-- ``` -->
 
-::: warning データ欠損？
- `detail[0]` に含む情報が一部欠けている
-インスタンスを Plain Object 化しないまま Vue.js のコンテキストから出たのが原因と思われる
-:::
+<!-- ::: warning データ欠損？ -->
+<!--  `detail[0]` に含む情報が一部欠けている -->
+<!-- インスタンスを Plain Object 化しないまま Vue.js のコンテキストから出たのが原因と思われる -->
+<!-- ::: -->
 
 ## レイアウト
 
+<!-- <CustomStyleExample2 name="layout" /> -->
+<<< @/docs/.vuepress/public/examples/layout.html{7-17,21-25}
+<LinkToExample name="layout" />
+
 スマホを考慮した中央配置レイアウトの例
-
-``` html
-<!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js"></script>
-  <style>
-    .container {
-      display: flex;
-      justify-content: center;
-    }
-    .shogi-player-wc-container {
-      width: min(640px, 100%);
-    }
-    shogi-player-wc {
-      display: block;
-      width: 100%;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="shogi-player-wc-container">
-      <shogi-player-wc />
-    </div>
-  </div>
-</body>
-</html>
-```
-
-<!-- ../.vuepress/public/examples/layout.html -->
-<a href="/examples/layout.html" target="_blank">上のサンプルを単体で開く</a>
 
 何が正解なのかわからないがとりあえず `shogi-player-wc` は横100%とする。そしてもう触らない。で、外側で大きさを調整する。さらにその外側で中央に配置する。これが良さそう。
 
@@ -210,16 +112,8 @@ shogi-player-wc タグの `display` の初期値は **`inline`** のためサイ
 
 ## APIの呼び方
 
-``` js
-document.querySelector("shogi-player-wc")
-  .shadowRoot
-  .querySelector(".ShogiPlayer")
-  .__vue__
-  .api_board_shuffle()
-```
-
-<!-- ../.vuepress/public/examples/api.html -->
-<a href="/examples/api.html" target="_blank">上のサンプルを単体で開く</a>
+<<< @/docs/.vuepress/public/examples/api.html{8-12}
+<LinkToExample name="api" />
 
 ## CDN
 

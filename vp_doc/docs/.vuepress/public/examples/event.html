@@ -5,7 +5,7 @@
   <script src="https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const el = document.querySelector("shogi-player-wc");
+      const el = document.querySelector("shogi-player-wc")
       el.addEventListener("ev_play_mode_next", e => {
         console.log(e)
         alert(e.detail[0].last_move_info.to_kif)

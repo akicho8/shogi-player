@@ -69,7 +69,7 @@ export default {
     sp_layer:                                    { type: String,  }, // レイヤー確認(デバッグ用)
     sp_piece_variant:                            { type: String,  }, // 駒の種類
     sp_bg_variant:                               { type: String,  }, // 盤の種類
-    sp_mobile_portrait:                          { type: String,  }, // モバイル時に自動的に縦配置に切り替える
+    sp_mobile_portrait:                          { type: Boolean,  }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior:                        { type: String,  }, // ☗☖をタップしたとき視点を切り替える
     sp_debug_mode:                               { type: String,  }, // デバッグモード
     sp_event_log:                                { type: Boolean, }, // イベントのログを開発コンソールに表示する
@@ -78,7 +78,7 @@ export default {
     sp_digit_label:                              { type: String,  }, // 座標の表示
     sp_digit_label_variant:                      { type: String,  }, // 座標の表記
     sp_stand_gravity:                            { type: String,  }, // 駒台の位置
-    sp_player_name_direction:                    { type: String,  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
+    sp_name_direction:                    { type: String,  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                                     { type: Number,  }, // 局面(手数)
     sp_mode:                                 { type: String,  }, // モード
     sp_body:                                     { type: String,  }, // 棋譜 KIF or SFEN
