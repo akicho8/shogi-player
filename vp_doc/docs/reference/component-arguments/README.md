@@ -419,7 +419,7 @@ Default: `false`
 
 画像のような状態であってほしいときに使う
 
-### `sp_hidden_if_piece_stand_blank`
+### `sp_piece_stand_blank_then_hidden`
 
 Type: `Boolean`
 Default: `false`

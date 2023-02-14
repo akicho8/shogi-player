@@ -60,8 +60,8 @@
             b-radio-button(size="is-small" v-model="sp_flip_if_white" :native-value="true") ON
 
           b-field(custom-class="is-small" label="持駒が空なら駒台を表示しない")
-            b-radio-button(size="is-small" v-model="sp_hidden_if_piece_stand_blank" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_hidden_if_piece_stand_blank" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_piece_stand_blank_then_hidden" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_piece_stand_blank_then_hidden" :native-value="true") ON
 
         .box
           .title.is-5 反則判定
@@ -143,7 +143,7 @@
             :sp_turn_show="sp_turn_show"
             :sp_slider="sp_slider"
             :sp_debug_mode.sync="sp_debug_mode"
-            :sp_hidden_if_piece_stand_blank="sp_hidden_if_piece_stand_blank"
+            :sp_piece_stand_blank_then_hidden="sp_piece_stand_blank_then_hidden"
             :sp_setting="sp_setting"
             :sp_operation_disabled="sp_operation_disabled"
             :sp_viewpoint.sync="sp_viewpoint"
@@ -195,7 +195,7 @@
                 |   sp_viewpoint="{{sp_viewpoint}}"
                 |   :sp_turn="{{sp_turn}}"
                 |   :sp_key_event_capture_enabled="{{sp_key_event_capture_enabled}}"
-                |   :sp_hidden_if_piece_stand_blank="{{sp_hidden_if_piece_stand_blank}}"
+                |   :sp_piece_stand_blank_then_hidden="{{sp_piece_stand_blank_then_hidden}}"
                 |   :sp_flip_if_white="{{sp_flip_if_white}}"
                 |   :sp_player_info='{{JSON.stringify(sp_player_info)}}'
                 |   :sp_foul_check="{{sp_foul_check}}"
@@ -233,7 +233,7 @@ export default {
       sp_human_side: 'both',
       sp_key_event_capture_enabled: false,
       sp_debug_mode: "is_debug_mode_off",
-      sp_hidden_if_piece_stand_blank: false,
+      sp_piece_stand_blank_then_hidden: false,
       sp_setting: "is_setting_off",
       sp_turn_show: "is_turn_show_on",
       sp_operation_disabled: false,

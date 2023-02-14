@@ -55,7 +55,7 @@ export default {
 
     // 持駒が空なら駒台を表示しない
     component_show_p() {
-      if (this.TheSp.sp_hidden_if_piece_stand_blank && _.isEmpty(this.hold_pieces)) {
+      if (this.TheSp.sp_piece_stand_blank_then_hidden && _.isEmpty(this.hold_pieces)) {
         return false
       }
       return true

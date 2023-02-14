@@ -59,7 +59,7 @@ export default {
     sp_controller:                               { type: String,  }, // コントローラー表示
     sp_viewpoint:                                { type: String,  }, // 視点
     sp_operation_disabled:                       { type: Boolean, }, // 全体の操作を無効化
-    sp_hidden_if_piece_stand_blank:              { type: Boolean, }, // 駒がないときは駒台側を非表示
+    sp_piece_stand_blank_then_hidden:              { type: Boolean, }, // 駒がないときは駒台側を非表示
     sp_flip_if_white:                            { type: Boolean, }, // 最初に表示した局面が△なら反転
     sp_key_event_capture_enabled:                { type: Boolean, }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
     sp_shift_key_mag:                            { type: Number,  }, // キーで左右するとき shift を押したときの倍率
