@@ -38,8 +38,8 @@
 <!--   sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b" -->
 <!-- /> -->
 
-::: warning 謎
-Material Design Icons の CSS は Web Components 内ですでに読み込んでいる。にもかかわらず外でも読み込まないとコントローラーの矢印アイコンが正しく表示されない。なぜかはわからない。
+::: warning なぜ @mdi/font の読み込みが必要？
+Web Components 内部ですでに読み込んでいるにもかかわらず外部でも読み込まないとコントローラーの矢印アイコンが正しく表示されないから
 :::
 
 ## スタイル変更 ##
@@ -65,7 +65,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <LinkToExample name="spwc_style_hash" />
 
 引数の `spwc_style_hash` に書いても変更できるようにしてある
-これはタグの style を直接書くのに似ていて通常の方法より詳細度が高い
+これはタグの style を直接書くのに似ていて分けて書いたときより詳細度が高い
 本来機能とスタイルは分けるべきとされているが目的駆動と考えればまとめる方が合理的なので実験的に入れてある
 
 ## イベント受信 ##
@@ -120,7 +120,9 @@ shogi-player-wc タグの `display` の初期値は **`inline`** のためサイ
 * JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js
 * UNPKG: https://unpkg.com/shogi-player@latest/dist/shogi-player-wc.min.js
 
-本当は https://cdn.jsdelivr.net/npm/shogi-player@latest でいいはずだけど、画像パスがずれて駒が表示されない問題があるため js までの正確なパスを明示しないといけない
+::: tip
+本当は https://cdn.jsdelivr.net/npm/shogi-player@latest でいいはずだけど、画像パスがずれて駒が表示されない問題があるため js までの正確なパスでアクセスしないといけない
+:::
 
 ## バージョンを固定する
 
