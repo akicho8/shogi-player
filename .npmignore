@@ -1,5 +1,6 @@
 # Code
 /.bundle
+/.bin
 /.nuxt
 /.github
 /docs
