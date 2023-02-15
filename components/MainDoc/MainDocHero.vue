@@ -9,7 +9,6 @@ MainDocMainNavbar
     b-navbar-item(tag="nuxt-link" :to="{name: 'style-editor'}") スタイルエディタ
     b-navbar-dropdown(hoverable arrowless)
       b-icon(icon="dots-vertical" slot="label")
-      b-navbar-item(tag="nuxt-link" :to="{name: 'event-observe'}") イベント
       b-navbar-item(tag="nuxt-link" :to="{name: 'responsive-with-bulma'}") レスポンシブ
   template(slot="end")
     b-navbar-dropdown(label="実験" hoverable v-if="development_p")
