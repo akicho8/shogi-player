@@ -96,21 +96,21 @@ export default {
   // https://ja.nuxtjs.org/faq/webpack-audio-files
   build: {
     // https://ja.nuxtjs.org/api/configuration-build#extractcss
-    extractCSS: process.env.NODE_ENV === "production", // htmlファイルにスタイルが吐かれるのを防ぐ。trueにするとHMRが効かないので注意
+    // extractCSS: process.env.NODE_ENV === "production", // htmlファイルにスタイルが吐かれるのを防ぐ。trueにするとHMRが効かないので注意
 
-    // TODO: 意味を調べる
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          styles: {
-            name: "styles",
-            test: /\.(scss|sass|css|vue)$/,
-            chunks: "all",
-            enforce: true,
-          },
-        },
-      },
-    },
+    // // TODO: 意味を調べる
+    // optimization: {
+    //   splitChunks: {
+    //     cacheGroups: {
+    //       styles: {
+    //         name: "styles",
+    //         test: /\.(scss|sass|css|vue)$/,
+    //         chunks: "all",
+    //         enforce: true,
+    //       },
+    //     },
+    //   },
+    // },
 
     // https://ja.nuxtjs.org/api/configuration-build/#transpile
     // transpile: ["myapp1"], // 外側にあるファイルは import 文を require に変換しないと node でパースできない

@@ -1,23 +1,16 @@
 {
   "name": "myapp1",
-  "version": "0.0.1",
-  "description": "",
-  "keywords": "",
-  "homepage": "",
-  "author": "",
-  "main": "",
-  "private": false,
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "dev": "nuxt dev -p 5000",
+    "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.7",
-    "@babel/preset-env": "^7.12.17",
-    "node-sass": ">= 4.0.0 < 5.0.0"
+    "nuxt": "^2.15.7"
   },
   "devDependencies": {
   }
