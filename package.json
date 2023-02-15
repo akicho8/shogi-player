@@ -14,15 +14,11 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "core-js": "^3.15.1",
+    "nuxt": "^2.15.7",
     "@babel/preset-env": "^7.12.17",
-    "file-loader": "^6.2.0",
-    "node-sass": ">= 4.0.0 < 5.0.0",
-    "raw-loader": "^4.0.2",
-    "sass-loader": "^10.1.1"
+    "node-sass": ">= 4.0.0 < 5.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-jest": "^26.6.0",
-    "nuxt": "^2.15.8"
   }
 }
