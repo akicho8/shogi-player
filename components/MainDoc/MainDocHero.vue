@@ -5,12 +5,14 @@ MainDocMainNavbar
       b
         | ShogiPlayer
   template(slot="start")
+    b-navbar-item(tag="a" href="https://shogi-player.netlify.app/" target="_blank") Document
     b-navbar-item(tag="a" href="#examples" v-scroll-to="{element: '#examples'}") デモ
     b-navbar-item(tag="nuxt-link" :to="{name: 'style-editor'}") スタイルエディタ
-    b-navbar-dropdown(hoverable arrowless)
-      b-icon(icon="dots-vertical" slot="label")
-      b-navbar-item(tag="nuxt-link" :to="{name: 'responsive-with-bulma'}") レスポンシブ
+    //- b-navbar-dropdown(hoverable arrowless v-if="development_p")
+    //-   b-icon(icon="dots-vertical" slot="label")
+    //-   b-navbar-item(tag="nuxt-link" :to="{name: 'responsive-with-bulma'}") レスポンシブ
   template(slot="end")
+    b-navbar-item(tag="a" href="https://github.com/akicho8/shogi-player" target="_blank") GitHub
     b-navbar-dropdown(label="実験" hoverable v-if="development_p")
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-sp_device'}") sp_device テスト
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-perf1'}") 高速化
