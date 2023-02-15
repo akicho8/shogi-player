@@ -46,7 +46,7 @@ end
 
 namespace :old_doc do
   desc "deploy"
-  task :deploy => [:build, :release]
+  task :deploy => [:build, :push]
 
   desc "build"
   task :build do
@@ -58,8 +58,8 @@ namespace :old_doc do
     EOT
   end
 
-  desc "release"
-  task :release do
+  desc "push"
+  task :push do
     system <<~EOT
     git add -A
     git commit -m '[docs][deploy] nuxt generate --dotenv .env.production'
