@@ -1,57 +1,28 @@
 {
-  "name": "shogi-player",
-  "version": "0.0.371",
-  "description": "A Vue.js 2 component for playing, manipulating, and editing shogi, with a Web Components version also available.",
-  "keywords": "shogi kif bod sfen viewer editor player vue.js vue2 vue web-components japanese-chess",
-  "homepage": "https://shogi-player.netlify.app/",
-  "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
-  "main": "dist/shogi-player-wc.min.js",
+  "name": "myapp1",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": "",
+  "homepage": "",
+  "author": "",
+  "main": "",
   "private": false,
   "scripts": {
     "dev": "nuxt dev -p 5000",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate --dotenv .env.production",
-    "test": "jest"
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@babel/preset-env": "^7.12.17",
-    "autolinker": "latest",
-    "buefy": "^0.9.22",
-    "bulma": "^0.9.4",
-    "chroma-js": "^2.1.0",
-    "dayjs": "^1.11.5",
     "file-loader": "^6.2.0",
-    "ismobilejs": "^1.1.1",
-    "js-memory-record": "^0.0.22",
-    "lodash": "latest",
     "node-sass": ">= 4.0.0 < 5.0.0",
-    "pug": "^2.0.4",
-    "pug-loader": "^2.4.0",
-    "pug-plain-loader": "^1.1.0",
     "raw-loader": "^4.0.2",
-    "sass-loader": "^10.1.1",
-    "vue-scrollto": "^2.20.0",
-    "xregexp": "^4.3.0"
+    "sass-loader": "^10.1.1"
   },
   "devDependencies": {
-    "@nuxtjs/axios": "^5.12.2",
-    "@nuxtjs/proxy": "^2.0.1",
-    "@nuxtjs/pwa": "^3.2.2",
-    "@nuxtjs/sitemap": "^2.4.0",
-    "@nuxtjs/style-resources": "^1.0.0",
-    "@vue/test-utils": "^1.1.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^26.6.0",
-    "jest": "^26.6.0",
-    "marked": "^1.2.5",
-    "nuxt": "^2.15.8",
-    "nuxt-buefy": "^0.4.23",
-    "pattern.css": "^1.0.0",
-    "rimraf": "^3.0.2",
-    "vue": "~2.6",
-    "vue-jest": "^4.0.0-0",
-    "vue-server-renderer": "~2.6",
-    "vue-template-compiler": "~2.6"
+    "nuxt": "^2.15.8"
   }
 }

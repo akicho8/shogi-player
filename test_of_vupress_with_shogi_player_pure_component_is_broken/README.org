@@ -1,4 +1,0 @@
-▼add transpiledependencies in vuepress · Issue #2031 · vuejs/vuepress
-https://github.com/vuejs/vuepress/issues/2031
-が、あることから vue-cli にあった transpileDependencies は効かないっぽい
-

@@ -13,8 +13,8 @@
 /assets/inspect
 
 # 検証
-/shogi-player-nuxt*
-/shogi-player-vue-cli*
+/myapp1-nuxt*
+/myapp1-vue-cli*
 
 # ゴミ
 /trash

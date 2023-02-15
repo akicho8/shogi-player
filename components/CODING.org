@@ -1,4 +1,0 @@
-* turn は常に offset で扱う
-* turn_offset_min は常に 0 であること
-* 指し手が1つあれば turn_offset_max は 1
-* 何も指してない状態が 0 なので 指し手がなにもなければ turn_offset_max も 0
