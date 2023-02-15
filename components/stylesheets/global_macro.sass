@@ -18,7 +18,7 @@ $promote_select_modal_z:    30 // b-navbar より上にする
 //   +IF_VERTICAL
 //     .NavigateBlock
 //       margin: 0
-//   &.is_layout_portrait
+//   &.is_layout_vertical
 //     +is_vertical_style
 //   +mobile
 //     &.is_mobile_vertical_on
@@ -41,10 +41,10 @@ $promote_select_modal_z:    30 // b-navbar より上にする
 // 注意点
 // ・必ず .ShogiPlayerGround の直下で +IF_HORIZONTAL とのペアで定義すること
 =IF_HORIZONTAL
-  &.is_layout_landscape
+  &.is_layout_horizontal
     @content
 =IF_VERTICAL
-  &.is_layout_portrait
+  &.is_layout_vertical
     @content
   &.is_mobile_vertical_on
     +mobile
