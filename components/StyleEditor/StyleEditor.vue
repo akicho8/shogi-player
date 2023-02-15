@@ -21,8 +21,8 @@
           b-field(custom-class="is-small" label="コンテナ幅")
             b-slider(v-bind="slider_attrs" v-model="se_frame_width" :min="1" :max="100")
           b-field(custom-class="is-small" label="レイアウト")
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="landscape") 左右
-            b-radio-button(size="is-small" v-model="sp_layout" native-value="portrait") 上下
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="horizontal") 左右
+            b-radio-button(size="is-small" v-model="sp_layout" native-value="vertical") 上下
           b-field(custom-class="is-small" label="モード")
             b-radio-button(size="is-small" v-model="sp_mode" native-value="view") 再生
             b-radio-button(size="is-small" v-model="sp_mode" native-value="play") 操作
@@ -380,8 +380,8 @@
             b-slider(v-bind="slider_attrs" v-model="sp_common_gap" :min="0" :max="1.0" :step="0.01")
 
           b-field(custom-class="is-small" label="モバイル時に縦配置にする")
-            b-radio-button(size="is-small" v-model="sp_mobile_portrait" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_mobile_portrait" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_mobile_vertical" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_mobile_vertical" :native-value="true") ON
 
           b-field(custom-class="is-small" label="視点")
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="black") ☗
@@ -528,9 +528,9 @@ export default {
 
       sp_board_dimension_w: 9,
       sp_board_dimension_h: 9,
-      sp_layout: "landscape",
+      sp_layout: "horizontal",
       sp_mode: DEVELOPMENT_P ? "edit" : "view",
-      sp_mobile_portrait: true,
+      sp_mobile_vertical: true,
 
       // 成り不成り選択
       sp_promote_select_modal_bg_color: "hsla(0, 0%, 0%, 0.5)",
@@ -849,7 +849,7 @@ export default {
       params.sp_layer                 = this.sp_layer
       params.sp_piece_variant         = this.sp_piece_variant
       params.sp_bg_variant            = this.sp_bg_variant
-      params.sp_mobile_portrait       = this.sp_mobile_portrait
+      params.sp_mobile_vertical       = this.sp_mobile_vertical
       params.sp_mode                  = this.sp_mode
       params.sp_viewpoint             = this.sp_viewpoint
       params.sp_debug_mode            = this.sp_debug_mode,

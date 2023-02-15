@@ -90,11 +90,6 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <!-- /> -->
 <!-- ``` -->
 
-<!-- ::: warning データ欠損？ -->
-<!--  `detail[0]` に含む情報が一部欠けている -->
-<!-- インスタンスを Plain Object 化しないまま Vue.js のコンテキストから出たのが原因と思われる -->
-<!-- ::: -->
-
 ## レイアウト
 
 <!-- <CustomStyleExample2 name="layout" /> -->
@@ -117,8 +112,12 @@ shogi-player-wc タグの `display` の初期値は **`inline`** のためサイ
 
 ## CDN
 
-* JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js
-* UNPKG: https://unpkg.com/shogi-player@latest/dist/shogi-player-wc.min.js
+* production:
+  * JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/shogi-player-wc.min.js
+  * UNPKG: https://unpkg.com/shogi-player@latest/dist/shogi-player-wc.min.js
+* development:
+  * JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@latest/dist/development/shogi-player-wc.min.js
+  * UNPKG: https://unpkg.com/shogi-player@latest/dist/development/shogi-player-wc.min.js
 
 ::: tip
 本当は https://cdn.jsdelivr.net/npm/shogi-player@latest でいいはずだけど、画像パスがずれて駒が表示されない問題があるため js までの正確なパスでアクセスしないといけない

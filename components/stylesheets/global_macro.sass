@@ -11,42 +11,42 @@ $flip_trigger_cell_z:       2
 $piece_count_z:             1
 $promote_select_modal_z:    30 // b-navbar より上にする
 
-// portrait の定義は +mobile のときにも適用する
+// vertical の定義は +mobile のときにも適用する
 //
 // 冗長な書き方
 //
-//   +IF_PORTRAIT
+//   +IF_VERTICAL
 //     .NavigateBlock
 //       margin: 0
 //   &.is_layout_portrait
 //     +is_vertical_style
 //   +mobile
-//     &.is_mobile_portrait_on
+//     &.is_mobile_vertical_on
 //       +is_vertical_style
 //
 // 置き換え後
 //
-//   +IF_PORTRAIT
+//   +IF_VERTICAL
 //     .NavigateBlock
 //       margin: 0
 //
 // 書き方
 //
 //   .ShogiPlayerGround
-//     +IF_LANDSCAPE
+//     +IF_HORIZONTAL
 //       ...
-//     +IF_PORTRAIT
+//     +IF_VERTICAL
 //       ...
 //
 // 注意点
-// ・必ず .ShogiPlayerGround の直下で +IF_LANDSCAPE とのペアで定義すること
-=IF_LANDSCAPE
+// ・必ず .ShogiPlayerGround の直下で +IF_HORIZONTAL とのペアで定義すること
+=IF_HORIZONTAL
   &.is_layout_landscape
     @content
-=IF_PORTRAIT
+=IF_VERTICAL
   &.is_layout_portrait
     @content
-  &.is_mobile_portrait_on
+  &.is_mobile_vertical_on
     +mobile
       @content
 

@@ -70,10 +70,10 @@ export default {
       +is_layer_border($danger)
 
   ////////////////////////////////////////////////////////////////////////////////
-  +IF_LANDSCAPE
+  +IF_HORIZONTAL
     .NavigateBlock
       margin-top: var(--sp_common_gap_real_px)
-  +IF_PORTRAIT
+  +IF_VERTICAL
     .NavigateBlock
       margin-top: var(--sp_common_gap_real_px)
 </style>

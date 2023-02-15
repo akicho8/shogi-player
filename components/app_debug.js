@@ -23,7 +23,7 @@ export const app_debug = {
       }
     },
     event_call(name, ...args) {
-      if (this.new_event_log) {
+      if (this.new_event_log || process.env.NODE_ENV === "development") {
         this.event_log_print(name, args)
       }
       this.$emit(name, ...args)

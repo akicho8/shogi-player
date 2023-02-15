@@ -6,9 +6,7 @@ sidebar: auto
 
 ## 概要
 
-* `boolean` 型はない
-  * いや、あるけど無くしたい
-  * 2択はたまたま2択だっただけで真偽だとは限らない
+* 2択はたまたま2択だっただけで真偽だとは限らないため `boolean` 型は使わない方針だったが揺らいでいる
 * パラメータ名は `sp_` で始まる
   * 冗長だが検索は楽
 * 値は `is_` で始まる
@@ -95,14 +93,14 @@ Default: `is_slider_off`
 ### `sp_layout`
 
 Type: `String`
-Default: `portrait`
+Default: `vertical`
 
 駒台・名前・時間の表示場所を決める
 
 | 値        | 配置 |            |
 |-----------|------|------------|
-| portrait  | 縦長 | スマホ向け |
-| landscape | 横長 |            |
+| vertical  | 縦長 | スマホ向け |
+| horizontal | 横長 |            |
 
 ### `sp_viewpoint`
 
@@ -125,13 +123,13 @@ Default: `is_piece_variant_a`
 
 駒の種類
 
-| 値                 | 種類          | 特徴                      |
-|--------------------|---------------|---------------------------|
-| is_piece_variant_none | なし          | 見えない                  |
-| is_piece_variant_a    | ぬれよん(SVG) | 見やすいゴシック体の1文字 |
-| is_piece_variant_b    | 紙面風(SVG)   | 白黒と一部赤              |
-| is_piece_variant_c    | 図案駒(PNG)   | ユニバーサルデザイン      |
-| is_piece_variant_d    | Portella(PNG) | リアル駒                    |
+| 値                    | 種類     | 特徴                      | Format |
+|-----------------------|----------|---------------------------|--------|
+| is_piece_variant_none | なし     | 見えない                  |        |
+| is_piece_variant_a    | ぬれよん | 見やすいゴシック体の1文字 | SVG    |
+| is_piece_variant_b    | 紙面風   | 白黒と一部赤              | SVG    |
+| is_piece_variant_c    | 図案駒   | ユニバーサルデザイン      | PNG    |
+| is_piece_variant_d    | Portella | リアル駒                  | PNG    |
 
 ### `sp_bg_variant`
 
@@ -312,7 +310,7 @@ Default: `is_balloon_on`
 
 ## ほぼ使わない
 
-### `sp_mobile_portrait`
+### `sp_mobile_vertical`
 
 Type: `Boolean`
 Default: `true`
@@ -603,3 +601,11 @@ Type: `Boolean`
 Default: `false`
 
 イベント情報を JavaScript コンソールに出力するか？
+
+## Slot
+
+### `sfen_part`
+
+引数: `sfen`, `xcontainer`
+
+`sp_sfen_show` のときに表示する sfen の部分 <Badge text="非推奨" type="error" vertical="top" />

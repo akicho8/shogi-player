@@ -74,12 +74,12 @@ export default {
   props: {
     sp_board_dimension_w:                  { type: Number, default: 9,                       }, // 盤のセル数(W)
     sp_board_dimension_h:                  { type: Number, default: 9,                       }, // 盤のセル数(H)
-    sp_layout:                             { type: String, default: "landscape",             }, // レイアウト
+    sp_layout:                             { type: String, default: "horizontal",             }, // レイアウト
     sp_balloon:                            { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
     sp_piece_variant:                         { type: String, default: "is_piece_variant_a",       }, // 駒の種類
     sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
-    sp_mobile_portrait:                    { type: Boolean, default: true, }, // モバイル時に自動的に縦配置に切り替える
+    sp_mobile_vertical:                    { type: Boolean, default: true, }, // モバイル時に自動的に縦配置に切り替える
     sp_location_behavior:                  { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
     sp_sfen_show:                          { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
     sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view のとき盤の左右で手数変更(falseなら駒を動かせる)

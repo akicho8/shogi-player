@@ -5,7 +5,7 @@
     .MyShogiPlayerContainer
       ShogiPlayer(
         sp_mode="view"
-        sp_layout="landscape"
+        sp_layout="horizontal"
         sp_controller="is_controller_on"
         sp_slider="is_slider_on"
         :sp_turn="31"

@@ -149,13 +149,13 @@ export default {
 
   // 駒がなくても駒が置けるようにする ← piece_lifted_hover_reaction になったときだけにすると駒台が拡縮して使いにくい
   //
-  // +IF_LANDSCAPE
+  // +IF_HORIZONTAL
   //   .MembershipStand2
   //     &.piece_lifted_hover_reaction
   //       min-height: calc(var(--sp_base_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
   //       justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
   //       min-width:  var(--sp_base_w)           // 横を最低限確保
-  // &.portrait
+  // &.vertical
   //   .MembershipStand2
   //     &.piece_lifted_hover_reaction
   //       width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
@@ -170,14 +170,14 @@ export default {
         +is_layer_border
 
   ////////////////////////////////////////////////////////////////////////////////
-  +IF_LANDSCAPE
+  +IF_HORIZONTAL
     .is_position_north
       .MembershipStand2
         flex-direction: column-reverse // 全体横並び → 後手 → 縦並び(昇順) △が下にあるので大駒順に並べるため
     .is_position_south
       .MembershipStand2
         flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
-  +IF_PORTRAIT
+  +IF_VERTICAL
     .is_position_north
       .MembershipStand2
         flex-direction: row-reverse    // 「飛歩」→「歩飛」
@@ -194,13 +194,13 @@ export default {
 //   &.is_mode_edit
 //     // 駒がなくても駒が置けるようにする
 //     .ShogiPlayerGround
-//       +IF_LANDSCAPE
+//       +IF_HORIZONTAL
 //         .MembershipStand2
 //           // &.piece_lifted_hover_reaction
 //           min-height: calc(var(--sp_base_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
 //           justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
 //           min-width:  var(--sp_base_w)           // 横を最低限確保
-//       +IF_PORTRAIT
+//       +IF_VERTICAL
 //         .MembershipStand2
 //           // &.piece_lifted_hover_reaction
 //           min-height: var(--sp_base_h) // 縦を最低限確保

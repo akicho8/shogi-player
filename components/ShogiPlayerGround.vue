@@ -26,7 +26,7 @@ export default {
         // なので結局ここでいい
         // Buefy も同じようなことをしている
         `is_layout_${this.TheSp.sp_layout}`, // is_layout_landscape is_layout_portrait
-        this.TheSp.sp_mobile_portrait ? "is_mobile_portrait_on" : "is_mobile_portrait_off",
+        this.TheSp.sp_mobile_vertical ? "is_mobile_vertical_on" : "is_mobile_vertical_off",
         this.TheSp.sp_balloon,
         this.TheSp.sp_layer,
         this.TheSp.sp_piece_variant,

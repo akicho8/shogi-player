@@ -3,7 +3,7 @@
   .section
     .container
       ShogiPlayer(
-        sp_layout="landscape"
+        sp_layout="horizontal"
         sp_piece_variant="is_piece_variant_b"
         sp_digit_label="is_digit_label_on"
       )

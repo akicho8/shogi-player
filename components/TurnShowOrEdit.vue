@@ -62,18 +62,18 @@ export default {
     .TurnShowOrEdit
       +is_layer_border
 
-  // &.portrait
+  // &.vertical
   //   .TurnShowOrEdit
   //     margin: 0.2rem 0
-  // +IF_LANDSCAPE
+  // +IF_HORIZONTAL
   //   .TurnShowOrEdit
   //     margin: 0.25rem 0
 
   ////////////////////////////////////////////////////////////////////////////////
-  +IF_LANDSCAPE
+  +IF_HORIZONTAL
     .TurnShowOrEdit
       margin-bottom: var(--sp_common_gap_real_px)
-  +IF_PORTRAIT
+  +IF_VERTICAL
     .TurnShowOrEdit
       margin-bottom: var(--sp_common_gap_real_px)
 </style>

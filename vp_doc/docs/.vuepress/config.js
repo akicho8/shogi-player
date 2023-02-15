@@ -105,6 +105,14 @@ module.exports = {
         },
 
         {
+          title: 'Advanced',
+          collapsable: false,
+          children: [
+            'debug',
+          ],
+        },
+
+        {
           title: 'Reference',
           collapsable: false,
           children: [
@@ -138,7 +146,7 @@ module.exports = {
       //       '/api/',
       //     ],
       //   },
-      // 
+      //
       //   // {
       //   //   title: 'Guide',
       //   //   collapsable: false,

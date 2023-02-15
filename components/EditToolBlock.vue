@@ -46,10 +46,10 @@ export default {
       +is_layer_border
 
   ////////////////////////////////////////////////////////////////////////////////
-  +IF_LANDSCAPE
+  +IF_HORIZONTAL
     .EditToolBlock
       margin-bottom: var(--sp_common_gap_real_px)
-  +IF_PORTRAIT
+  +IF_VERTICAL
     .EditToolBlock
       margin-bottom: 0
 </style>
