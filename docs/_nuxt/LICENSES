@@ -39,6 +39,21 @@
  */
 
 
+/*!
+ * Vue.js v2.6.14
+ * (c) 2014-2021 Evan You
+ * Released under the MIT License.
+ */
+
+
+/*!
+ * XRegExp Unicode Scripts 4.4.1
+ * <xregexp.com>
+ * Steven Levithan (c) 2010-present MIT License
+ * Unicode data by Mathias Bynens <mathiasbynens.be>
+ */
+
+
 /**
  * chroma.js - JavaScript library for color conversions
  *
@@ -98,14 +113,6 @@
 
 
 /*!
- * XRegExp Unicode Scripts 4.4.1
- * <xregexp.com>
- * Steven Levithan (c) 2010-present MIT License
- * Unicode data by Mathias Bynens <mathiasbynens.be>
- */
-
-
-/*!
   * vue-scrollto v2.20.0
   * (c) 2019 Randjelovic Igor
   * @license MIT
@@ -143,7 +150,8 @@
 
 
 /*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
- * Released under the MIT License.
+ * XRegExp Unicode Scripts 4.4.1
+ * <xregexp.com>
+ * Steven Levithan (c) 2010-present MIT License
+ * Unicode data by Mathias Bynens <mathiasbynens.be>
  */

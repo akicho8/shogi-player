@@ -44,15 +44,29 @@ task :clean do
   EOT
 end
 
-desc "deploy"
-task :deploy do
-  system <<~EOT
-  nuxt generate --dotenv .env.production
-  git add -A
-  git commit -m '[chore][deploy] nuxt generate --dotenv .env.production'
-  git push
-  open "https://akicho8.github.io/shogi-player/"
-  EOT
+namespace :old_doc do
+  desc "deploy"
+  task :deploy => [:build, :release]
+
+  desc "build"
+  task :build do
+    # web_component を退避させないと nuxt generate で死ぬ (問題は相対パス参照)
+    system <<~EOT
+    mv web_component /tmp
+    nuxt generate --dotenv .env.production
+    mv /tmp/web_component .
+    EOT
+  end
+
+  desc "release"
+  task :release do
+    system <<~EOT
+    git add -A
+    git commit -m '[docs][deploy] nuxt generate --dotenv .env.production'
+    git push
+    open "https://akicho8.github.io/shogi-player/"
+    EOT
+  end
 end
 
 desc "release"
@@ -86,7 +100,7 @@ desc "copy"
 task :copy do
   system <<~EOT
   rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/
-  EOT
+    EOT
 end
 
 task :d => "doc:server"
@@ -127,6 +141,7 @@ end
 desc "[ga] Google Analytics"
 task :ga do
   system <<~EOT
+  open https://analytics.google.com/analytics/web/#/p353291851/reports/intelligenthome
   open https://tagassistant.google.com/
   EOT
 end
