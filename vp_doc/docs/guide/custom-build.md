@@ -1,13 +1,13 @@
 # 組み込み方法
 
-## 静的HTML or WordPress
+## 静的HTML
 
 [Web Components 版](/guide/usage/) をどうぞ
 
 ## React 18 + Web Components 版
 
-<<< @/docs/.vuepress/public/examples/import_to_react18.html
-<LinkToExample name="import_to_react18" />
+<<< @/docs/.vuepress/public/examples/use_in_react18.html
+<LinkToExample name="use_in_react18" />
 
 ## Vue.js 2 + Web Components 版
 
