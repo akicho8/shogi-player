@@ -7,7 +7,24 @@
 /experiment
 /vp_doc
 /web_component
-
+/pages
+/layouts
+/middleware
+/plugins
+/static
+/store
+/.rgignore
+/.node-version
+/.env.production
+/.env  
+/.byebug_history
+/.babelrc
+/BREAKING_CHANGES.org  
+/.ruby-version
+/application.png  
+/Gemfile
+/Gemfile.lock
+  
 # Assets
 /assets/style_editor_images
 /assets/inspect
