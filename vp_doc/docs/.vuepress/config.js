@@ -97,9 +97,6 @@ module.exports = {
             'view-mode',
             'play-mode',
             'edit-mode',
-            'edit-mode-shortcut',
-            'style-editor',
-            'credit',
             // 'test-of-demo',
           ],
         },
@@ -108,7 +105,10 @@ module.exports = {
           title: 'Advanced',
           collapsable: false,
           children: [
+            'edit-mode-shortcut',
+            'style-editor',
             'debug',
+            'credit',
           ],
         },
 
