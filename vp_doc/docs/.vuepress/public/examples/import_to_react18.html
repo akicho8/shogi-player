@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.372/dist/shogi-player-wc.min.js"></script>
+    <script type="text/babel">
+      class App extends React.Component {
+        render() {
+          return (<shogi-player-wc sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b" />)
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById("root"))
+    </script>
+  </body>
+</html>

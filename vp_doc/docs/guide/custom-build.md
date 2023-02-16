@@ -1,16 +1,35 @@
 # 組み込み方法
 
-## Vue.js 以外
+## 静的HTML or WordPress
 
-React.js (Next.js) や WordPress は [Web Components 版](/guide/usage/) をどうぞ
+[Web Components 版](/guide/usage/) をどうぞ
 
-## Vue.js 2
+## React 18 + Web Components 版
+
+<<< @/docs/.vuepress/public/examples/import_to_react18.html
+<LinkToExample name="import_to_react18" />
+
+## Vue.js 2 + Web Components 版
+
+<<< @/docs/.vuepress/public/examples/build_with_vue2.html{9}
+<LinkToExample name="build_with_vue2" />
+
+Web Components のタグを除外するのがポイントです
+
+## Vue 3 + Web Components 版
+
+<<< @/docs/.vuepress/public/examples/build_with_vue3.html{11}
+<LinkToExample name="build_with_vue3" />
+
+Web Components のタグを除外するのがポイントですがなぜか動きません <Badge text="お手上げ" type="error" vertical="top" />
+
+## Vue.js 2 + ShogiPlayer.vue
 
 手順を半自動化したスクリプト [shogi-player-vue-cli-sample-create.sh](https://github.com/akicho8/shogi-player/blob/master/shogi-player-vue-cli-sample-create.sh) をそのまま実行して生成したものを [shogi-player-vue-cli-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue-cli-sample) に置いています
 もともと Vue.js 2 製なので Vue.js 2 とは親和性が高いです
 ただし[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがあります
 
-## Nuxt.js
+## Nuxt.js + ShogiPlayer.vue
 
 手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いています
 
