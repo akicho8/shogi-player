@@ -61,34 +61,24 @@ Default: `-1`
 
 ### `sp_controller`
 
-Type: `String`
-Default: `is_controller_off`
+Type: `Boolean`
+Default: `false`
 
 コントローラーを表示するか？
 
   * 局面を変更する4つのボタンが合わさったコンポーネントのこと
   * sp_slider と合わせて表示することが多い
 
-| 値                | 意味   |
-|-------------------|--------|
-| is_controller_off | しない |
-| is_controller_on  | する   |
-
 ### `sp_slider`
 
-Type: `String`
-Default: `is_slider_off`
+Type: `Boolean`
+Default: `false`
 
 スライダーを表示するか？
 
 * 再生モード時には表示しておくと指定の局面に移動しやすい
 * 操作モード時にも表示できるけどガチ対局するときは消しておいた方がよい
 * 編集モード時には設定に関係なく表示しない
-
-| 値            | 意味   |
-|---------------|--------|
-| is_slider_off | しない |
-| is_slider_on  | する   |
 
 ### `sp_layout`
 
@@ -165,35 +155,30 @@ Default: `is_overlay_nav_off`
 | is_overlay_nav_off | しない |
 | is_overlay_nav_on  | する   |
 
-### `sp_digit_label`
+### `sp_coordinate`
 
-Type: `String`
-Default: `is_digit_label_off`
+Type: `Boolean`
+Default: `false`
 
 盤の上と右に座標を表示するか？
 
-| 値                 | 意味   |
-|--------------------|--------|
-| is_digit_label_off | しない |
-| is_digit_label_on  | する   |
-
-### `sp_digit_label_variant`
+### `sp_coordinate_variant`
 
 Type: `String`
-Default: `is_digit_label_variant_kanji`
+Default: `kanji`
 
 座標の表記を変更する
 
-| 値                              | 表記   |
-|---------------------------------|--------|
-| is_digit_label_variant_kanji    | 一..九 |
-| is_digit_label_variant_number   | 1..9   |
-| is_digit_label_variant_alphabet | a..i   |
+| 値       | 表記   |
+|----------|--------|
+| kanji    | 一..九 |
+| number   | 1..9   |
+| alphabet | a..i   |
 
 ### `sp_stand_gravity`
 
 Type: `String`
-Default: `is_stand_gravity_bottom`
+Default: `bottom`
 
 駒台を左右に配置したとき位置は上か下か？
 
@@ -203,13 +188,13 @@ Default: `is_stand_gravity_bottom`
 
 | 値                      | 寄せる方向 |
 |-------------------------|------------|
-| is_stand_gravity_bottom | 下         |
-| is_stand_gravity_top    | 上         |
+| bottom | 下         |
+| top    | 上         |
 
 ### `sp_name_direction`
 
 Type: `String`
-Default: `is_player_name_direction_horizontal`
+Default: `horizontal`
 
 名前の縦横書き切り替え
 
@@ -218,10 +203,10 @@ Default: `is_player_name_direction_horizontal`
 半角アルファベットを縦書きにすると横になってしまう
 その場合は、横書きのまま1文字ずつ `<br>` を入れて縦にした方がいいかもしれない
 
-| 値                            | 意味   |
-|-------------------------------|--------|
-| is_player_name_direction_horizontal | 横書き |
-| is_player_name_direction_vertical   | 縦書き |
+| 値         | 意味   |
+|------------|--------|
+| horizontal | 横書き |
+| vertical   | 縦書き |
 
 ### `sp_player_info`
 
@@ -247,8 +232,8 @@ Default: `null`
 
 ### `sp_turn_show`
 
-Type: `String`
-Default: `is_turn_show_off`
+Type: `Boolean`
+Default: `false`
 
 再生モード時に手数の表示をするか？
 
@@ -258,12 +243,7 @@ Default: `is_turn_show_off`
   * スライダーを表示していれば現在の手数がわかるからというのもある
   * スマホの場合、無駄に一行分画面を使ってしまう
 
-| 値             | 意味   |
-|----------------|--------|
-| is_turn_show_off | しない |
-| is_turn_show_on  | する   |
-
-### `sp_flip_if_white`
+### `sp_active_side_viewpoint`
 
 Type: `Boolean`
 Default: `false`
@@ -272,15 +252,10 @@ Default: `false`
 
 ### `sp_comment`
 
-Type: `String`
-Default: `is_comment_on`
+Type: `Boolean`
+Default: `true`
 
 盤の下にKIF形式棋譜のコメントを表示するか？
-
-| 値             | 意味   |
-|----------------|--------|
-| is_comment_off | しない |
-| is_comment_on  | する   |
 
 ### `sp_human_side`
 
@@ -298,15 +273,10 @@ Default: `both`
 
 ### `sp_balloon`
 
-Type: `String`
-Default: `is_balloon_on`
+Type: `Boolean`
+Default: `true`
 
 対局者名の下に駒数スタイルと同じ背景色を置くか？
-
-| 値             | 意味   |
-|----------------|--------|
-| is_balloon_off | しない |
-| is_balloon_on  | する   |
 
 ## ほぼ使わない
 
@@ -542,19 +512,14 @@ Default: `50`
 
 ### `sp_setting`
 
-Type: `String`
-Default: `is_setting_off`
+Type: `Boolean`
+Default: `false`
 
 設定ボタンを表示するか？
 
   * 設定というよりデバッグ用のツールに近い
   * 有効にするとコントローラーを表示したとき設定ボタンも付け加える
   * いまが何のモードなのかわかったりする
-
-| 値             | 意味   |
-|----------------|--------|
-| is_setting_off | しない |
-| is_setting_on  | する   |
 
 ### `sp_device`
 

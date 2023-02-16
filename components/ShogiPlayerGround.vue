@@ -25,17 +25,21 @@ export default {
         // それに間違った場所に指定してしまってもエラーが出ることもない
         // なので結局ここでいい
         // Buefy も同じようなことをしている
-        `is_layout_${this.TheSp.sp_layout}`, // is_layout_horizontal is_layout_vertical
+        `is_layout_${this.TheSp.sp_layout}`,                           // is_layout_horizontal is_layout_vertical
+        `is_coordinate_variant_${this.TheSp.sp_coordinate_variant}`, // is_coordinate_variant_kanji
+        `is_name_direction_${this.TheSp.sp_name_direction}`,           // is_name_direction_horizontal
+        `is_stand_gravity_${this.TheSp.sp_stand_gravity}`,             // top
+
         this.TheSp.sp_mobile_vertical ? "is_mobile_vertical_on" : "is_mobile_vertical_off",
-        this.TheSp.sp_balloon,
+        this.TheSp.sp_coordinate      ? "is_coordinate_on"      : "is_coordinate_off",
+        this.TheSp.sp_balloon         ? "is_balloon_on"         : "is_balloon_off",
+
         this.TheSp.sp_layer,
         this.TheSp.sp_piece_variant,
         this.TheSp.sp_bg_variant,
-        this.TheSp.sp_digit_label,
-        this.TheSp.sp_digit_label_variant,
-        this.TheSp.sp_stand_gravity,
-        this.TheSp.sp_name_direction,
+
         this.TheSp.devise_info.key,
+
         // 特殊
         `is_viewpoint_${this.TheSp.new_viewpoint}`, // システムテストで見ている
       ]

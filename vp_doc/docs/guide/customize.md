@@ -4,19 +4,12 @@
 
 ## 紙面風
 
-<CustomStyleExample name="paper" />
-<<< @/docs/.vuepress/public/examples/theme/paper.html
-
-::: tip
-[sp_digit_label_variant](/component-arguments/#sp-digit-label-variant) で右の表記を**数字**や**アルファベット**に変更できる
-:::
+<CustomizeExample name="customize/paper" />
 
 ## 木目盤＋リアル駒
 
-<CustomStyleExample name="real" />
-<<< @/docs/.vuepress/public/examples/theme/real.html
+<CustomizeExample name="customize/real" />
 
 ## ユニバーサルデザイン (図案駒)
 
-<CustomStyleExample name="universal" />
-<<< @/docs/.vuepress/public/examples/theme/universal.html
+<CustomizeExample name="customize/universal" />

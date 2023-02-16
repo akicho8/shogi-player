@@ -30,11 +30,11 @@
 <LinkToExample name="mdi" />
 
 1. Material Design Icons の CSS を読み込む
-1. `sp_controller="is_controller_on"` を指定する
+1. `sp_controller="true"` を指定する
 
 <!-- <ShogiPlayerWcWrapper -->
 <!--   class="is-small" -->
-<!--   sp_controller="is_controller_on" -->
+<!--   sp_controller="true" -->
 <!--   sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b" -->
 <!-- /> -->
 
@@ -44,7 +44,7 @@ Web Components 内部ですでに読み込んでいるにもかかわらず外�
 
 ## スタイル変更 ##
 
-<!-- <CustomStyleExample2 name="style" /> -->
+<!-- <CustomizeExample2 name="style" /> -->
 <<< @/docs/.vuepress/public/examples/style.html{7-9}
 <LinkToExample name="style" />
 
@@ -60,7 +60,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 ## スタイル変更 (実験的) ##
 
-<!-- <CustomStyleExample2 name="spwc_style_hash" /> -->
+<!-- <CustomizeExample2 name="spwc_style_hash" /> -->
 <<< @/docs/.vuepress/public/examples/spwc_style_hash.html{8}
 <LinkToExample name="spwc_style_hash" />
 
@@ -70,7 +70,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 ## イベント受信 ##
 
-<!-- <CustomStyleExample2 name="event" /> -->
+<!-- <CustomizeExample2 name="event" /> -->
 <<< @/docs/.vuepress/public/examples/event.html{8-12}
 <LinkToExample name="event" />
 
@@ -92,7 +92,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 ## レイアウト
 
-<!-- <CustomStyleExample2 name="layout" /> -->
+<!-- <CustomizeExample2 name="layout" /> -->
 <<< @/docs/.vuepress/public/examples/layout.html{7-17,21-25}
 <LinkToExample name="layout" />
 

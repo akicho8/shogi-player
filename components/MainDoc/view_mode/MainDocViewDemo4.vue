@@ -7,8 +7,8 @@
   ShogiPlayer.is_book_like.type_a(
     :sp_body="kifu_book_info.sp_body"
     :sp_turn="9"
-    sp_controller="is_controller_on"
-    sp_slider="is_slider_on"
+    :sp_controller="true"
+    :sp_slider="true"
     sp_piece_variant="is_piece_variant_b"
     )
 </template>

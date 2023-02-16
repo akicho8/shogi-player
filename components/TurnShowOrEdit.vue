@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     component_alive_p() {
-      return this.TheSp.xcontainer && this.TheSp.sp_turn_show === "is_turn_show_on" && (this.TheSp.view_p || this.TheSp.play_p)
+      return this.TheSp.xcontainer && this.TheSp.sp_turn_show && (this.TheSp.view_p || this.TheSp.play_p)
     },
   },
 }
@@ -52,7 +52,7 @@ export default {
     font-weight: bold
     font-size: $size-7
 
-  &.is_balloon_on
+  &.true
     .SpTurnText
       @extend %is_piece_count_color_set
       padding: 0.5em

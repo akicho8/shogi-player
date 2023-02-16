@@ -75,23 +75,61 @@ export default {
     sp_board_dimension_w:                  { type: Number, default: 9,                       }, // 盤のセル数(W)
     sp_board_dimension_h:                  { type: Number, default: 9,                       }, // 盤のセル数(H)
     sp_layout:                             { type: String, default: "horizontal",             }, // レイアウト
-    sp_balloon:                            { type: String, default: "is_balloon_on",         }, // 対局者名の下に駒数スタイルと同じ背景色を置く
+
+    // 対局者名の下に駒数スタイルと同じ背景色を置く
+    sp_balloon: {
+      type: Boolean,
+      default: true,
+    },
+
     sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
     sp_piece_variant:                         { type: String, default: "is_piece_variant_a",       }, // 駒の種類
     sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
-    sp_mobile_vertical:                    { type: Boolean, default: true, }, // モバイル時に自動的に縦配置に切り替える
+
+    // モバイル時に自動的に縦配置に切り替える
+    sp_mobile_vertical: {
+      type: Boolean,
+      default: true,
+      validator(value) { return [true, false].includes(value) },
+    },
+
     sp_location_behavior:                  { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
     sp_sfen_show:                          { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
     sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view のとき盤の左右で手数変更(falseなら駒を動かせる)
-    sp_digit_label:                        { type: String, default: "is_digit_label_off",    }, // 座標の表示
-    sp_digit_label_variant:                { type: String, default: "is_digit_label_variant_kanji",   }, // 座標の表記
-    sp_stand_gravity:                       { type: String, default: "is_stand_gravity_bottom",  }, // 駒台の位置
-    sp_name_direction:                    { type: String, default: "is_player_name_direction_horizontal",  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
+    sp_coordinate:                         { type: Boolean, default: false,    }, // 座標の表示
+
+    // 座標の表記
+    sp_coordinate_variant: {
+      type: String,
+      default: "kanji",
+      validator(value) { return ["kanji", "number", "alphabet"].includes(value) },
+    },
+
+    // 駒台の位置
+    sp_stand_gravity: {
+      type: String,
+      default: "bottom",
+      validator(value) { return ["top", "bottom"].includes(value) },
+    },
+
+    // 名前の縦横書き切り替え(縦は横配置時のみ有効)
+    sp_name_direction: {
+      type: String,
+      default: "horizontal",
+      validator(value) { return ["horizontal", "vertical"].includes(value) },
+    },
+
     sp_turn:                               { type: Number, default: -1,                      }, // 局面(手数)
     sp_mode:                           { type: String, default: "view",             }, // モード
     sp_body:                               { type: String, default: null,                    }, // 棋譜 KIF or SFEN
     sp_player_info:                        { type: Object, default: null,                    }, // 対局者名と時間
-    sp_comment:                            { type: String, default: "is_comment_on",         }, // KIFのコメントを表示する
+
+    // KIFのコメントを表示する
+    sp_comment: {
+      type: Boolean,
+      default: true,
+    },
+
     sp_board_cell_left_click_disabled:     { type: Boolean, default: false,                  }, // 盤上の左クリックの通常処理を無効化するか？
 
     // 一方向の $emit ではどうにもならない関数たち
@@ -254,7 +292,7 @@ export default {
     },
 
     flip_if_white_run() {
-      if (this.sp_flip_if_white) {
+      if (this.sp_active_side_viewpoint) {
         this.new_viewpoint = this.xcontainer.data_source.base_location.key
       }
     },

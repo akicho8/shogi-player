@@ -350,7 +350,7 @@ Default: `-0.034`
 
 盤面の右に表示するY座標の位置調整
 
-### `--sp_digit_label_color`
+### `--sp_coordinate_color`
 Default: `hsla(0, 0%, 0%, 0.75)`
 
 座標の文字色

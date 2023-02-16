@@ -5,8 +5,8 @@
   ShogiPlayer(
     :sp_body="kifu_book_info.sp_body"
     :sp_turn="-1"
-    sp_slider="is_slider_on"
-    sp_controller="is_controller_on"
+    :sp_slider="true"
+    :sp_controller="true"
     sp_bg_variant="is_bg_variant_a"
     sp_debug_mode="is_debug_mode_off"
     sp_mode="play"

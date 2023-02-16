@@ -131,8 +131,8 @@
         .box
           SeTitle(name="駒台")
           b-field(custom-class="is-small" label="レイアウト")
-            b-radio-button(size="is-small" v-model="sp_stand_gravity" native-value="is_stand_gravity_bottom") 下寄せ
-            b-radio-button(size="is-small" v-model="sp_stand_gravity" native-value="is_stand_gravity_top") 上寄せ
+            b-radio-button(size="is-small" v-model="sp_stand_gravity" native-value="bottom") 下寄せ
+            b-radio-button(size="is-small" v-model="sp_stand_gravity" native-value="top") 上寄せ
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
@@ -150,8 +150,8 @@
         .box
           SeTitle(name="対局者名")
           b-field(custom-class="is-small" label="縦・横書き(全体レイアウトが横の場合のみ有効)" message="英字も考慮して縦書きにするなら横書きのままで1文字ずつ<br>を入れた方が正しく縦書きになる。日本語しか使わないのであれば単に縦書きでもよい。モバイルの場合は狭いので横書きの方がよい")
-            b-radio-button(size="is-small" v-model="sp_name_direction" native-value="is_player_name_direction_horizontal") 横書き
-            b-radio-button(size="is-small" v-model="sp_name_direction" native-value="is_player_name_direction_vertical") 縦書き
+            b-radio-button(size="is-small" v-model="sp_name_direction" native-value="horizontal") 横書き
+            b-radio-button(size="is-small" v-model="sp_name_direction" native-value="vertical") 縦書き
 
           b-field(custom-class="is-small" label="名前の大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_player_name_size" :min="0" :max="0.5" :step="0.001")
@@ -160,8 +160,8 @@
             b-slider(v-bind="slider_attrs" v-model="sp_player_time_size" :min="0" :max="0.5" :step="0.001")
 
           b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
-            b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_off") OFF
-            b-radio-button(size="is-small" v-model="sp_balloon" native-value="is_balloon_on") ON
+            b-radio-button(size="is-small" v-model="sp_balloon" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_balloon" :native-value="true") ON
 
           .columns
             .column
@@ -250,12 +250,12 @@
         .box
           SeTitle(name="座標")
           b-field(custom-class="is-small" label="表示")
-            b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_off") OFF
-            b-radio-button(size="is-small" v-model="sp_digit_label" native-value="is_digit_label_on") ON
+            b-radio-button(size="is-small" v-model="sp_coordinate" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_coordinate" :native-value="true") ON
           b-field(custom-class="is-small" label="右の表記")
-            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_kanji") 漢字
-            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_number") 数字
-            b-radio-button(size="is-small" v-model="sp_digit_label_variant" native-value="is_digit_label_variant_alphabet") アルファベット
+            b-radio-button(size="is-small" v-model="sp_coordinate_variant" native-value="kanji") 漢字
+            b-radio-button(size="is-small" v-model="sp_coordinate_variant" native-value="number") 数字
+            b-radio-button(size="is-small" v-model="sp_coordinate_variant" native-value="alphabet") アルファベット
 
           .columns.mt-5
             .column.py-0
@@ -274,7 +274,7 @@
                 b-slider(v-bind="slider_attrs" v-model="sp_digit_ylabel_push" :min="-0.5" :max="0.5" :step="0.001")
 
           b-field(custom-class="is-small" label="色")
-            MyColorPicker(v-model="sp_digit_label_color")
+            MyColorPicker(v-model="sp_coordinate_color")
 
         .box
           SeTitle(name="Transform")
@@ -360,12 +360,12 @@
             b-slider(v-bind="slider_attrs" v-model="sp_controller_width_mobile" :min="0" :max="1.0" :step="0.001")
 
           b-field(custom-class="is-small" label="コントローラー表示")
-            b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_off") OFF
-            b-radio-button(size="is-small" v-model="sp_controller" native-value="is_controller_on") ON
+            b-radio-button(size="is-small" v-model="sp_controller" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_controller" :native-value="true") ON
 
           b-field(custom-class="is-small" label="スライダー表示")
-            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_off") OFF
-            b-radio-button(size="is-small" v-model="sp_slider" native-value="is_slider_on") ON
+            b-radio-button(size="is-small" v-model="sp_slider" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_slider" :native-value="true") ON
 
         .box
           SeTitle(name="その他")
@@ -388,12 +388,12 @@
             b-radio-button(size="is-small" v-model="sp_viewpoint" native-value="white") ☖
 
           b-field(custom-class="is-small" label="手数表示")
-            b-radio-button(size="is-small" v-model="sp_turn_show" native-value="is_turn_show_off") OFF
-            b-radio-button(size="is-small" v-model="sp_turn_show" native-value="is_turn_show_on") ON
+            b-radio-button(size="is-small" v-model="sp_turn_show" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_turn_show" :native-value="true") ON
 
           b-field(custom-class="is-small" label="KIFコメ表示")
-            b-radio-button(size="is-small" v-model="sp_comment" native-value="is_comment_off") OFF
-            b-radio-button(size="is-small" v-model="sp_comment" native-value="is_comment_on") ON
+            b-radio-button(size="is-small" v-model="sp_comment" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_comment" :native-value="true") ON
 
           b-field(custom-class="is-small" label="操作モードでは合法手に絞る(二歩・ワープ・王手放置等を除く)")
             b-radio-button(size="is-small" v-model="sp_legal_move_only" :native-value="false") OFF
@@ -540,7 +540,7 @@ export default {
       sp_lifted_origin_bg_color_desktop: "hsla(0, 0%, 0%, 0.15)",
       sp_lifted_origin_opacity_desktop: 0.0,
 
-      sp_balloon: "is_balloon_on",
+      sp_balloon: true,
 
       //////////////////////////////////////////////////////////////////////////////// 駒台
       //- sp_base_w: 1,
@@ -548,7 +548,7 @@ export default {
       sp_stand_piece_size: 0.8,
       sp_stand_hover_border_color: "hsla(0, 0%, 0%, 0.2)",
       sp_stand_bg_color: "hsla(0, 0%, 0%, 0.0)",
-      sp_stand_gravity: DEVELOPMENT_P ? "is_stand_gravity_top" : "is_stand_gravity_bottom",
+      sp_stand_gravity: DEVELOPMENT_P ? "top" : "bottom",
 
       sp_turn: -1,
       sp_viewpoint: "black",
@@ -577,20 +577,20 @@ export default {
       sp_location_mark_active_size: 1.0,
       sp_location_mark_inactive_size: 0.5,
 
-      sp_comment: "is_comment_off",
+      sp_comment: false,
       sp_common_gap: 0.18,
       sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
       sp_piece_variant: "is_piece_variant_a",    // is_piece_variant_d
       sp_bg_variant: "is_bg_variant_none", // is_bg_variant_a
 
       //////////////////////////////////////////////////////////////////////////////// 座標
-      sp_digit_label: DEVELOPMENT_P ? "is_digit_label_on" : "is_digit_label_off",
-      sp_digit_label_variant: DEVELOPMENT_P ? "is_digit_label_variant_alphabet" : "is_digit_label_variant_kanji",
+      sp_coordinate: DEVELOPMENT_P ? true : false,
+      sp_coordinate_variant: DEVELOPMENT_P ? "alphabet" : "kanji",
       sp_digit_xlabel_size: 0.125,
       sp_digit_ylabel_size: 0.168,
       sp_digit_xlabel_push: 0.014,
       sp_digit_ylabel_push: -0.034,
-      sp_digit_label_color: "hsla(0, 0%, 0%, 0.75)",
+      sp_coordinate_color: "hsla(0, 0%, 0%, 0.75)",
 
       ////////////////////////////////////////////////////////////////////////////////
 
@@ -598,17 +598,17 @@ export default {
         black: { name: "先手", time: "", },
         white: { name: "後手", time: "", },
       },
-      sp_name_direction: DEVELOPMENT_P ? "is_player_name_direction_vertical" : "is_player_name_direction_horizontal",
+      sp_name_direction: DEVELOPMENT_P ? "vertical" : "horizontal",
       sp_player_name_size: 0.25,
       sp_player_time_size: 0.25,
       ////////////////////////////////////////////////////////////////////////////////
 
       sp_body: null,
 
-      sp_turn_show:    DEVELOPMENT_P ? "is_turn_show_on" : "is_turn_show_off",
+      sp_turn_show:    DEVELOPMENT_P ? true : false,
 
-      sp_slider:     DEVELOPMENT_P ? "is_slider_on" : "is_slider_on",
-      sp_controller: DEVELOPMENT_P ? "is_controller_on" : "is_controller_off",
+      sp_slider:     DEVELOPMENT_P ? true : true,
+      sp_controller: DEVELOPMENT_P ? true : false,
       sp_legal_move_only: false,
       sp_foul_check: false,
       sp_foul_check: false,
@@ -727,16 +727,16 @@ export default {
       this.sp_grid_inner_stroke                 = 1                             // グリッド線(細)
       this.sp_grid_outer_stroke           = 2                             // グリッド枠(太)
       this.sp_board_edge_stroke = 0
-      this.sp_stand_gravity                = "is_stand_gravity_top"      // 駒台の位置
-      this.sp_name_direction             = "is_player_name_direction_vertical" // 縦横書き
-      this.sp_balloon                     = "is_balloon_off"              // 名前の下に吹き出し背景を入れない
+      this.sp_stand_gravity                = "top"      // 駒台の位置
+      this.sp_name_direction             = "vertical" // 縦横書き
+      this.sp_balloon                     = false              // 名前の下に吹き出し背景を入れない
       this.sp_location_mark_active_size   = 1.0                      // 手番でないときの☗☖を小さくしない
       this.sp_location_mark_inactive_size = 1.0                      // 手番でないときの☗☖を小さくしない
       this.sp_player_info.black.name      = "先手"
       this.sp_player_info.white.name      = "後手"
 
-      this.sp_digit_label                 = "is_digit_label_on"            // 座標を表示する
-      this.sp_digit_label_variant         = "is_digit_label_variant_kanji" // 座標の種類
+      this.sp_coordinate                 = "true"            // 座標を表示する
+      this.sp_coordinate_variant         = "kanji" // 座標の種類
       this.sp_board_horizontal_gap        = 0.2                            // 座標があるため盤面の左右を空ける
       this.sp_digit_xlabel_push           = 0.05                          // 座標調整
       this.sp_digit_ylabel_push           = 0.01                           // 座標調整
@@ -856,10 +856,10 @@ export default {
       params.sp_comment               = this.sp_comment,
       params.sp_turn                  = this.sp_turn
       params.sp_body                  = this.sp_body
-      params.sp_setting               = "is_setting_off"
+      params.sp_setting               = false
       params.sp_turn_show             = this.sp_turn_show
-      params.sp_digit_label           = this.sp_digit_label
-      params.sp_digit_label_variant   = this.sp_digit_label_variant
+      params.sp_coordinate           = this.sp_coordinate
+      params.sp_coordinate_variant   = this.sp_coordinate_variant
       params.sp_stand_gravity         = this.sp_stand_gravity
       params.sp_name_direction = this.sp_name_direction
       params.sp_slider                = this.sp_slider
@@ -969,7 +969,7 @@ export default {
           --sp_digit_xlabel_push: ${this.sp_digit_xlabel_push};
           --sp_digit_ylabel_size: ${this.sp_digit_ylabel_size};
           --sp_digit_ylabel_push: ${this.sp_digit_ylabel_push};
-          --sp_digit_label_color: ${this.sp_digit_label_color};
+          --sp_coordinate_color: ${this.sp_coordinate_color};
 
           //////////////////////////////////////////////////////////////////////////////// スタイルエディタ側
           // --se_* で始まるものはスタイルエディタ側で用意したスタイルなので

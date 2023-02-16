@@ -5,15 +5,32 @@ const FOCUS_FUNCTION = false
 
 export const navi_module = {
   props: {
-    sp_turn_show:                   { type: String,  default: "is_turn_show_off",    }, // 手数や結果の表示(再生モード時) (is_turn_show_on is_turn_show_off)
-    sp_slider:                      { type: String,  default: "is_slider_off",     }, // スライダー表示
-    sp_setting:                     { type: String,  default: "is_setting_off",    }, // 設定ボタンの表示
-    sp_controller:                  { type: String,  default: "is_controller_off", }, // コントローラー表示
+    // 手数や結果の表示(再生モード時) (true false)
+    sp_turn_show: {
+      type: Boolean,
+      default: false,
+    },
+    // スライダー表示
+    sp_slider: {
+      type: Boolean,
+      default: false,
+    },
+    // 設定ボタンの表示
+    sp_setting: {
+      type: Boolean,
+      default: false,
+    },
+    // コントローラー表示
+    sp_controller: {
+      type: Boolean,
+      default: false,
+    },
+
     sp_viewpoint:                   { type: String,  default: "black",             }, // 視点
 
     sp_operation_disabled:                 { type: Boolean, default: false,               }, // 全体の操作を無効化
     sp_piece_stand_blank_then_hidden: { type: Boolean, default: false,               }, // 駒がないときは駒台側を非表示
-    sp_flip_if_white:               { type: Boolean, default: false,               }, // 最初に表示した局面が△なら反転
+    sp_active_side_viewpoint:               { type: Boolean, default: false,               }, // 最初に表示した局面が△なら反転
 
     sp_key_event_capture_enabled:   { type: Boolean, default: false,               }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
     sp_shift_key_mag:               { type: Number,  default: 10,                  }, // キーで左右するとき shift を押したときの倍率
@@ -186,14 +203,14 @@ export const navi_module = {
     //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, TurnSliderBlock.vue
 
     inside_controller_p() {
-      if (this.sp_setting === "is_setting_on") {
+      if (this.sp_setting) {
         return true
       }
-      return this.sp_controller === "is_controller_on" && (this.view_p || this.play_p)
+      return this.sp_controller && (this.view_p || this.play_p)
     },
 
     inside_slider_p() {
-      return this.sp_slider === "is_slider_on" && (this.view_p || this.play_p)
+      return this.sp_slider && (this.view_p || this.play_p)
     },
 
     inside_navigate_p() {

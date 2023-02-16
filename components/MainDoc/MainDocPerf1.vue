@@ -15,9 +15,9 @@
         sp_mode="play"
         sp_debug_mode="is_debug_mode_on"
         :sp_event_log="true"
-        sp_controller="is_controller_on"
-        sp_setting="is_setting_on"
-        sp_slider="is_slider_on"
+        :sp_controller="true"
+        :sp_setting="true"
+        :sp_slider="true"
         sp_bg_variant="is_bg_variant_b"
         sp_piece_variant="is_piece_variant_d"
       )

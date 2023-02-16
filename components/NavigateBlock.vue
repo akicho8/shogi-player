@@ -9,7 +9,7 @@
         button.button.last(     ref="last"     @click.stop.prevent="TheSp.move_to_last"):              b-icon(icon="menu-right")
       template(v-if="false")
         button.button.flip(                    @click.stop.prevent="TheSp.viewpoint_flip_handle"):            b-icon(icon="swap-vertical" size="is-small")
-      template(v-if="TheSp.sp_setting === 'is_setting_on'")
+      template(v-if="TheSp.sp_setting === 'true'")
         button.button.setting(                 @click.stop.prevent="TheSp.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
     TurnSliderBlock( ref="TurnSliderBlock")
 </template>

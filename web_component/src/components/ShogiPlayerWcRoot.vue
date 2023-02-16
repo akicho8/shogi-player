@@ -53,19 +53,19 @@ export default {
     // Web Components で使えるのは String, Boolean, Number のみ
     // なので本来 Object だったり Function だったりするするものは String から変換しないといけない
     sp_turn_slider_focus:                        { type: String,  }, // mountedしたらスライダーにフォーカスする？
-    sp_turn_show:                                { type: String,  }, // 手数や結果の表示(再生モード時) (is_turn_show_on is_turn_show_off)
-    sp_slider:                                   { type: String,  }, // スライダー表示
-    sp_setting:                                  { type: String,  }, // 設定ボタンの表示
-    sp_controller:                               { type: String,  }, // コントローラー表示
+    sp_turn_show:                                { type: Boolean,  }, // 手数や結果の表示(再生モード時) (true false)
+    sp_slider:                                   { type: Boolean,  }, // スライダー表示
+    sp_setting:                                  { type: Boolean,  }, // 設定ボタンの表示
+    sp_controller:                               { type: Boolean,  }, // コントローラー表示
     sp_viewpoint:                                { type: String,  }, // 視点
     sp_operation_disabled:                       { type: Boolean, }, // 全体の操作を無効化
     sp_piece_stand_blank_then_hidden:              { type: Boolean, }, // 駒がないときは駒台側を非表示
-    sp_flip_if_white:                            { type: Boolean, }, // 最初に表示した局面が△なら反転
+    sp_active_side_viewpoint:                            { type: Boolean, }, // 最初に表示した局面が△なら反転
     sp_key_event_capture_enabled:                { type: Boolean, }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
     sp_shift_key_mag:                            { type: Number,  }, // キーで左右するとき shift を押したときの倍率
     sp_system_key_mag:                           { type: Number,  }, // キーで左右するとき command などを押したときの倍率
     sp_layout:                                   { type: String,  }, // レイアウト is_(vertical\|horizontal)
-    sp_balloon:                                  { type: String,  }, // 対局者名の下に駒数スタイルと同じ背景色を置く
+    sp_balloon:                                  { type: Boolean,  }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                                    { type: String,  }, // レイヤー確認(デバッグ用)
     sp_piece_variant:                            { type: String,  }, // 駒の種類
     sp_bg_variant:                               { type: String,  }, // 盤の種類
@@ -75,15 +75,15 @@ export default {
     sp_event_log:                                { type: Boolean, }, // イベントのログを開発コンソールに表示する
     sp_sfen_show:                                { type: String,  }, // SFENを下に表示する
     sp_overlay_nav:                              { type: String,  }, // view のとき盤の左右で手数変更(falseなら駒を動かせる)
-    sp_digit_label:                              { type: String,  }, // 座標の表示
-    sp_digit_label_variant:                      { type: String,  }, // 座標の表記
+    sp_coordinate:                              { type: Boolean,  }, // 座標の表示
+    sp_coordinate_variant:                      { type: String,  }, // 座標の表記
     sp_stand_gravity:                            { type: String,  }, // 駒台の位置
     sp_name_direction:                    { type: String,  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                                     { type: Number,  }, // 局面(手数)
     sp_mode:                                 { type: String,  }, // モード
     sp_body:                                     { type: String,  }, // 棋譜 KIF or SFEN
     sp_preset:                               { type: String,  }, // 手合割(初期配置)
-    sp_comment:                                  { type: String,  }, // KIFのコメントを表示する
+    sp_comment:                                  { type: Boolean,  }, // KIFのコメントを表示する
     sp_human_side:                               { type: String,  }, // 含まれる側だけ操作できるようにする
     sp_device:                                   { type: String,  }, // デバイスを強制的に指定する
     sp_foul_check:                   { type: Boolean, }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？

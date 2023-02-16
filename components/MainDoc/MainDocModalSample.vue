@@ -22,8 +22,8 @@
                 :sp_turn="0"
                 :sp_body="kifu_book_info.sp_body"
                 :sp_key_event_capture_enabled="true"
-                sp_slider="is_slider_on"
-                sp_controller="is_controller_on"
+                :sp_slider="true"
+                :sp_controller="true"
               )
 
             footer.modal-card-foot
