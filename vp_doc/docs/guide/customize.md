@@ -14,6 +14,6 @@
 
 <CustomizeExample name="customize/universal" />
 
-## ピンク
-
-<CustomizeExample name="customize/kimetsu" />
+<!-- ## 鬼滅の刃 -->
+<!--  -->
+<!-- <CustomizeExample name="customize/kimetsu" /> -->
