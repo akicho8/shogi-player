@@ -79,7 +79,7 @@ task :release do
   system <<~EOT
   # rake dist
   # npm version patch
-  rake tikan
+  # rake tikan
   # npm publish
   # git push --tags
   # git push
