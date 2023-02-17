@@ -92,7 +92,7 @@ task :tikan do
   require "pathname"
   version = JSON.parse(Pathname("package.json").read, symbolize_names: true)[:version]
   system <<~EOT
-  r 'player@\d+\.\d+\.\d+' 'player@#{version}' -x
+  r 'player@\\d+\\.\\d+\.\\d+' 'player@#{version}' -x
   git add -A
   git commit -m "[docs] vs_doc/* 内の cdn の新しいバージョン指定"
   EOT
