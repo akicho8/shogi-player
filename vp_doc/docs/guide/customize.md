@@ -16,4 +16,4 @@
 
 ## ピンク
 
-<CustomizeExample name="customize/pink" />
+<CustomizeExample name="customize/kimetsu" />

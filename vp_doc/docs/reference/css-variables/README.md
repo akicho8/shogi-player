@@ -142,7 +142,10 @@ Default: `0`
 
 盤のエッジの縁取りの太さ
 
-* 色は `--sp_grid_outer_color` を流用する
+### `--sp_board_edge_color`
+Default: `var(--sp_grid_outer_color)`
+
+盤のエッジの縁取りの太さ
 
 ## 星
 
@@ -151,7 +154,10 @@ Default: `0.1`
 
 星の大きさ
 
-* 色は `--sp_grid_outer_color` を流用する
+### `--sp_star_color`
+Default: `var(--sp_grid_outer_color)`
+
+星の色
 
 ### `--sp_star_z_index`
 Default: `0`

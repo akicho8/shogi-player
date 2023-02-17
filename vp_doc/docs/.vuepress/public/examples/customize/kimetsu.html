@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.374/dist/shogi-player-wc.min.js"></script> -->
+  <script src="../../dist/development/shogi-player-wc.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      background-color: hsl(0,0%,30%);
+    }
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100svh;
+    }
+    .shogi-player-wc-container {
+      width: min(640px, 100%);
+    }
+    shogi-player-wc {
+      display: block;
+      width: 100%;
+    }
+    shogi-player-wc::part(spwc_style_scope) {
+      --sp_board_color: transparent;          /* 盤の色を白にする */
+      --sp_board_padding: 0.015;                  /* グリッド外周と縁の隙間を無くす */
+      --sp_board_radius: 0;                   /* 角を丸めない */
+      --sp_grid_inner_color: hsl(100,50%,50%);
+      --sp_grid_outer_color: hsl(0,50%,50%);
+      --sp_board_edge_stroke: 2;
+      --sp_grid_inner_stroke: 0.5;            /* グリッド内線は細くする(お好みで調整) */
+      --sp_grid_outer_stroke: 2;              /* グリッド外枠を内線より太くする(お好みで調整) */
+      --sp_player_name_size: 0.4;             /* "先手" "後手" の文字サイズ調整 */
+      --sp_location_mark_inactive_size: 1.0;  /* 手番でない方の☗☖の比率を変更しない */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="shogi-player-wc-container">
+      <shogi-player-wc
+        sp_piece_variant="a"
+        sp_mobile_vertical="false"
+        />
+    </div>
+  </div>
+</body>
+</html>

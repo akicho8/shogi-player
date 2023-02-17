@@ -100,10 +100,10 @@ export default {
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
     +is_background_cover_by_image
     background-image: var(--sp_board_image)  // none でスルーする
-     background-image: url("../assets/inspect/256x256.png")
+    // background-image: url("../assets/inspect/256x256.png")
 
     border-radius: calc(var(--sp_board_radius) * 1px)
-    border: calc(var(--sp_board_edge_stroke) * 1px) solid var(--sp_grid_outer_color) // 画像の輪郭で影の影響あり
+    border: calc(var(--sp_board_edge_stroke) * 1px) solid var(--sp_board_edge_color, var(--sp_grid_outer_color)) // 画像の輪郭で影の影響あり
 
   .BoardFieldWithPadding
     padding: calc(var(--sp_board_padding) * 100%)
@@ -153,6 +153,6 @@ export default {
         width:  calc(var(--sp_base_h) * var(--sp_star_size))
         height: calc(var(--sp_base_h) * var(--sp_star_size))
         border-radius: 50%
-        background-color: var(--sp_grid_outer_color)
+        background-color: var(--sp_star_color, var(--sp_grid_outer_color))
         z-index: var(--sp_star_z_index)
 </style>
