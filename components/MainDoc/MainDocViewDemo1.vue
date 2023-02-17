@@ -11,8 +11,8 @@
     sp_bg_variant="a"
     sp_piece_variant="d"
     sp_layout="horizontal"
-    :sp_controller="true"
-    :sp_slider="true"
+    sp_controller
+    sp_slider
   )
 </template>
 

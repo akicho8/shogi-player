@@ -6,8 +6,8 @@
     .title.is-4 {{kifu_book_info.name}}
   ShogiPlayer(
     sp_piece_variant="a"
-    :sp_controller="true"
-    :sp_slider="true"
+    sp_controller
+    sp_slider
     :sp_turn="-1"
     :sp_body="kifu_book_info.sp_body"
     )

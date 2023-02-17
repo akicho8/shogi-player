@@ -11,8 +11,8 @@
         :sp_body="sp_body"
         sp_mode="view"
         sp_debug
-        :sp_controller="true"
-        :sp_slider="true"
+        sp_controller
+        sp_slider
       )
 </template>
 

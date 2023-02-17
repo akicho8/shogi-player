@@ -13,7 +13,7 @@
             :sp_body="sp_body"
             sp_mode="play"
             sp_debug
-            :sp_controller="true"
+            sp_controller
             :sp_slider="false"
             :sp_foul_check="sp_foul_check"
             :sp_foul_break="sp_foul_break"

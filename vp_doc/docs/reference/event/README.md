@@ -15,7 +15,7 @@ sidebar: auto
 * moves は SFEN の moves 後の指し手の配列を表わす
 * 手数はN手目の局面と言い表わすときの N の部分のこと
 * 動詞の過去形は使わない
-* `:sp_event_log="true"` にするとデバッグが楽
+* `sp_event_log` にするとデバッグが楽
 
 ## 一覧
 

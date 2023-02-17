@@ -8,8 +8,8 @@
     .column
       ShogiPlayer(
         sp_piece_variant="a"
-        :sp_controller="true"
-        :sp_slider="true"
+        sp_controller
+        sp_slider
         :sp_turn="0"
         :sp_body="kifu_book_info.sp_body"
         )

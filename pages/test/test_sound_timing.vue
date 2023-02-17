@@ -13,8 +13,8 @@
             :sp_body="sp_body"
             sp_mode="play"
             sp_debug
-            :sp_controller="true"
-            :sp_slider="true"
+            sp_controller
+            sp_slider
             @ev_play_mode_piece_put="     user_event_check('ev_play_mode_piece_put')"
             @ev_action_viewpoint_flip="user_event_check('ev_action_viewpoint_flip')"
             @ev_action_turn_change="   user_event_check('ev_action_turn_change')"

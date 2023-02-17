@@ -20,9 +20,9 @@
                 sp_mode="view"
                 :sp_turn="0"
                 :sp_body="kifu_book_info.sp_body"
-                :sp_key_event_capture="true"
-                :sp_slider="true"
-                :sp_controller="true"
+                sp_key_event_capture
+                sp_slider
+                sp_controller
               )
 
             footer.modal-card-foot
