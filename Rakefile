@@ -85,6 +85,7 @@ task :release do
   (cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i)
   rake old_doc:deploy
   rake open
+  rake cdn
   EOT
 end
 
