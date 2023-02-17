@@ -7,8 +7,9 @@ sidebar: auto
 ## 概要
 
 * パラメータ名はすべて `sp_` で始まる
+* Function 型は `_fn` で終わる
 
-## よく使う
+## 基本
 
 ### `sp_mode`
 
@@ -31,19 +32,9 @@ Default: `null`
 棋譜
 
   * SFEN, KIF, BOD に対応する
-  * URL ではなく棋譜の内容を渡す
+  * 棋譜の内容を渡す (URLではない)
   * 不整合な形式の棋譜を渡してもエラーを出したりはしない
   * 何が起きるかわからないので本当に正しい形式だけを渡してほしい
-
-### `sp_preset`
-
-Type: `String`
-Default: `null`
-
-初期配置(手合割)の指定 <Badge text="要検討" type="error" vertical="top" />
-
-  * `sp_mode="edit"` と合わせて `sp_preset="詰将棋"` とすれば相手玉だけがある状態で始まる
-  * `sp_body` があるので要らないような気がしている
 
 ### `sp_turn`
 
@@ -54,6 +45,30 @@ Default: `-1`
 
 負の値は最終局面から数えた局面になる
 
+### `sp_viewpoint`
+
+Type: `String`
+Default: `black`
+
+視点
+
+後手または上手視点にするには `white` を指定する
+
+| 値    | 視点 |
+|-------|------|
+| black | ☗   |
+| white | ☖   |
+
+### `sp_preset`
+
+Type: `String`
+Default: `null`
+
+手合割(初期配置)の指定 <Badge text="要検討" type="error" vertical="top" />
+
+  * `sp_mode="edit"` と合わせて `sp_preset="詰将棋"` とすれば相手玉だけがある状態で始まる
+  * `sp_body` があるので要らないような気がしている
+
 ### `sp_controller`
 
 Type: `Boolean`
@@ -61,8 +76,8 @@ Default: `false`
 
 コントローラーを表示するか？
 
-  * 局面を変更する4つのボタンが合わさったコンポーネントのこと
-  * sp_slider と合わせて表示することが多い
+  * 局面を変更するボタンが合わさったコンポーネントのこと
+  * `sp_slider` と合わせて表示することが多い
 
 ### `sp_slider`
 
@@ -87,20 +102,6 @@ Default: `vertical`
 | vertical  | 縦長 | スマホ向け |
 | horizontal | 横長 |            |
 
-### `sp_viewpoint`
-
-Type: `String`
-Default: `black`
-
-視点
-
-後手または上手視点にするには `white` を指定する
-
-| 値    | 視点 |
-|-------|------|
-| black | ☗   |
-| white | ☖   |
-
 ### `sp_piece_variant`
 
 Type: `String`
@@ -114,7 +115,7 @@ Default: `a`
 | a    | ぬれよん | 見やすいゴシック体の1文字 | SVG    |
 | b    | 紙面風   | 白黒と一部赤              | SVG    |
 | c    | 図案駒   | ユニバーサルデザイン      | PNG    |
-| d    | Portella | リアル駒                  | PNG    |
+| d    | Portella | 美麗                    | PNG    |
 
 ### `sp_bg_variant`
 
@@ -134,30 +135,41 @@ Default: `none`
 | a    | 木1  | 濃い |
 | b    | 木2  | 薄め |
 
-## あまり使わない
+## Level 2
 
 ### `sp_overlay_nav`
 
 Type: `Boolean`
 Default: `false`
 
-再生モードのときの局面切り替えで盤上の左右の領域をクリックして動かせるようにするか？
+再生モードのときの盤上の左右をクリックして動かせるようにするか？
 
-有効にすると再生しやすくなるが駒を動かせなくなる
+* 有効にすると再生しやすくなるが駒を動かせなくなる
+* 天王山をクリックすると反転する
+
+### `sp_mobile_vertical`
+
+Type: `Boolean`
+Default: `true`
+
+画面幅が狭いとき自動的に縦配置に切り替えるか？
+
+初期値を横配置にしているときに関係してくる
+言い替えると画面幅が広いときに横配置に切り替えるかの設定でもある
 
 ### `sp_coordinate`
 
 Type: `Boolean`
 Default: `false`
 
-盤の上と右に座標を表示するか？
+座標を表示するか？
 
 ### `sp_coordinate_variant`
 
 Type: `String`
 Default: `kanji`
 
-座標の表記を変更する
+座標の表記
 
 | 値       | 表記   |
 |----------|--------|
@@ -190,17 +202,19 @@ Default: `horizontal`
 
 左右配置時のみ有効になる
 紙面風にしたいときかつ「先手」「後手」とだけ表記するなら縦書きにするのがてっとり早い
-半角アルファベットを縦書きにすると横になってしまう
-その場合は、横書きのまま1文字ずつ `<br>` を入れて縦にした方がいいかもしれない
 
 | 値         | 意味   |
 |------------|--------|
 | horizontal | 横書き |
 | vertical   | 縦書き |
 
+::: warning
+半角アルファベットを縦書きにすると横になってしまう。その場合は、横書きのまま1文字ずつ `<br>` を入れて縦にした方がいいかもしれない
+:::
+
 ### `sp_player_info`
 
-Type: `Object`
+Type: `Hash`
 Default: `null`
 
 対局者と時間の情報をハッシュ形式で渡す
@@ -238,7 +252,9 @@ Default: `false`
 Type: `Boolean`
 Default: `false`
 
-最初に表示した局面が☖視点なら反転するか？
+起動時に手番側の視点にするか？
+
+言い替えると「指定の局面の手番が☖なら反転するか？」という意味になる
 
 ### `sp_comment`
 
@@ -268,17 +284,7 @@ Default: `true`
 
 対局者名の下に駒数スタイルと同じ背景色を置くか？
 
-## ほぼ使わない
-
-### `sp_mobile_vertical`
-
-Type: `Boolean`
-Default: `true`
-
-画面幅が狭いとき自動的に縦配置に切り替えるか？
-
-初期値を横配置にしているときに関係してくる
-言い替えると画面幅が広いときに横配置に切り替えるかの設定でもある
+## Level 3
 
 ### `sp_lift_cancel_action`
 
@@ -287,9 +293,9 @@ Default: `standard`
 
 盤上の持ち上げた駒のキャンセル方法
 
-* 持駒にも同じ挙動を適用するべきだができていない
-* PCであれば共通して右クリックやESCキーでもキャンセルできる
+* 共通してマウスの右クリックやキーボードのESCキーでもキャンセルできる
 * もともとリアル志向を初期値としていたが将棋ウォーズに慣れきってしまった者たちにはハードルが高かったため初期値を変更した。が、やっぱり戻すかもしれない
+* 持駒にも同じ挙動を適用するべきだができていない
 
 | 値           | 挙動                                         | タイプ                   |
 |--------------|----------------------------------------------|--------------------------|
@@ -301,7 +307,7 @@ Default: `standard`
 lishogi の方法は常に駒を持った状態になってしまって駒を離せないので使いにくい仕様だと見ていたが、よく考えてみればこれから何かの手を指そうとしているときに、駒を持ち替えることはあっても、駒を離した状態に戻らないといけなくなることはないので、実はとても合理的な仕様だった。
 :::
 
-### `sp_view_mode_soldier_movable`
+### `sp_view_mode_piece_movable`
 
 Type: `Boolean`
 Default: `true`
@@ -319,8 +325,8 @@ Type: `Boolean`
 Default: `false`
 
 盤上のセルをクリックしたときの通常処理を無効化するか？ <Badge text="要検討" type="error" vertical="top" />
-この機能は sp_view_mode_soldier_movable を false するのでいい気がしている
-### `sp_location_behavior`
+この機能は sp_view_mode_piece_movable を false するのでいい気がしている
+### `sp_location_click_behavior`
 
 Type: `String`
 Default: `flip`
@@ -387,7 +393,7 @@ Default: `null`
 
 Web Components 版では内部で eval しているため動作する
 
-### `sp_foul_check`
+### `sp_foul_validate`
 
 Type: `Boolean`
 Default: `true`
@@ -400,7 +406,7 @@ Default: `true`
   * 駒ワープ
   * 死に駒
 
-### `sp_foul_break`
+### `sp_foul_cancel`
 
 Type: `Boolean`
 Default: `false`
@@ -409,7 +415,7 @@ Default: `false`
 
 * 無かったことにしてもイベントで反則を知ることはできる
 * 有効にすると基本的な反則の操作はできなくなる
-* 将棋ウォーズのような仕様にするなら true にする
+* 有効にすると将棋ウォーズのようになる
 
 ### `sp_legal_move_only`
 
@@ -431,7 +437,7 @@ Default: `true`
 
 操作モードで死に駒になるときは自動的に成るか？
 
-* 例えば「桂」を「11」に移動したとき自動的に成る
+* 有効にすると「桂」を「11」に飛んだとき自動的に成る
 * 完全なリアル対局をイメージしたいときは `false` にする
 
 ### `sp_my_piece_only_move`
@@ -439,16 +445,16 @@ Default: `true`
 Type: `Boolean`
 Default: `true`
 
-操作モードでは自分の駒しか動かせないようにするか？ <Badge text="要検討" type="error" vertical="top" />
+操作モードで動かせるのは自分の駒だけとするか？ <Badge text="要検討" type="error" vertical="top" />
 
 * `sp_human_side` と機能が重複しているような気がする
 
-### `sp_same_group_kill_disabled`
+### `sp_my_piece_kill_disabled`
 
 Type: `Boolean`
 Default: `true`
 
-操作モードでは自分の駒で味方の駒を取れないようにするか？
+操作モードでは味方の駒を取れないようにするか？
 
 ### `sp_double_click_threshold_ms`
 
@@ -484,7 +490,7 @@ Default: `50`
 
 `sp_key_event_capture` を有効にして手数を動かすときの command を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
 
-## デバッグ用
+## Development
 
 ### `sp_setting`
 

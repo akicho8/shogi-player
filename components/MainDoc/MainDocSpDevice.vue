@@ -8,8 +8,8 @@
     .container
       .columns
         .column
-          p sp_device="desktop"
-          ShogiPlayer(sp_debug sp_mode="play" sp_device="desktop")
+          p sp_device="mouse"
+          ShogiPlayer(sp_debug sp_mode="play" sp_device="mouse")
         .column
           p sp_device="touch"
           ShogiPlayer(sp_debug sp_mode="play" sp_device="touch")

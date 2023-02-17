@@ -13,10 +13,10 @@
 @import "coordinate_variant"
 
 .ShogiPlayerGround
-  +defvar(sp_digit_xlabel_size, 0.125)             // 座標表記の文字サイズ(右)
-  +defvar(sp_digit_ylabel_size, 0.168)             // 座標表記の文字サイズ(上)
-  +defvar(sp_digit_xlabel_push, 0.014)             // 座標表記の位置調整(右)
-  +defvar(sp_digit_ylabel_push, -0.034)            // 座標表記の位置調整(上)
+  +defvar(sp_coordinate_x_size, 0.125)             // 座標表記の文字サイズ(右)
+  +defvar(sp_coordinate_y_size, 0.168)             // 座標表記の文字サイズ(上)
+  +defvar(sp_coordinate_x_push, 0.014)             // 座標表記の位置調整(右)
+  +defvar(sp_coordinate_y_push, -0.034)            // 座標表記の位置調整(上)
   +defvar(sp_coordinate_color, hsla(0, 0%, 0%, 0.75)) // 座標表記の文字色
 
   &.is_coordinate_on
@@ -29,7 +29,7 @@
 
       // 横軸表記の位置調整
       td:before
-        font-size: calc(var(--sp_base_h) * var(--sp_digit_xlabel_size))
+        font-size: calc(var(--sp_base_h) * var(--sp_coordinate_x_size))
         display: flex
 
         // 方法(1) - 高さ1remの中央に合わせる = 拡縮の基点が中央になる
@@ -43,11 +43,11 @@
         justify-content: center // 左右中央に合わせる
 
         // 下から100%押して上外に飛び出す
-        bottom: calc((1.0 + var(--sp_digit_xlabel_push)) * 100%)
+        bottom: calc((1.0 + var(--sp_coordinate_x_push)) * 100%)
 
       // 縦軸表記の位置調整
       td:after
-        font-size: calc(var(--sp_base_h) * var(--sp_digit_ylabel_size))
+        font-size: calc(var(--sp_base_h) * var(--sp_coordinate_y_size))
         display: flex
 
         height: 100%                // width: 100% は入れてはいけない(入れると先後のマークが押せなくなる)
@@ -60,7 +60,7 @@
         top: 0                      // これがないと1セル分に下に移動する
 
         // 左から100%押し出して右外に飛び出す
-        left: calc((1.0 + var(--sp_digit_ylabel_push)) * 100%)
+        left: calc((1.0 + var(--sp_coordinate_y_push)) * 100%)
 
       // 以降はそのままで良い
 

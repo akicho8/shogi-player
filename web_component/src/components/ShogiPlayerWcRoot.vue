@@ -70,7 +70,7 @@ export default {
     sp_piece_variant:                  { type: String,  }, // 駒の種類
     sp_bg_variant:                     { type: String,  }, // 盤の種類
     sp_mobile_vertical:                { type: Boolean,  }, // モバイル時に自動的に縦配置に切り替える
-    sp_location_behavior:              { type: String,  }, // ☗☖をタップしたとき視点を切り替える
+    sp_location_click_behavior:              { type: String,  }, // ☗☖をタップしたとき視点を切り替える
     sp_debug:                          { type: Boolean,  }, // デバッグモード
     sp_event_log:                      { type: Boolean, }, // イベントのログを開発コンソールに表示する
     sp_sfen_show:                      { type: Boolean,  }, // SFENを下に表示する
@@ -86,15 +86,15 @@ export default {
     sp_comment:                        { type: Boolean,  }, // KIFのコメントを表示する
     sp_human_side:                     { type: String,  }, // 含まれる側だけ操作できるようにする
     sp_device:                         { type: String,  }, // デバイスを強制的に指定する
-    sp_foul_check:                     { type: Boolean, }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
-    sp_foul_break:                     { type: Boolean, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
+    sp_foul_validate:                     { type: Boolean, }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
+    sp_foul_cancel:                     { type: Boolean, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
     sp_legal_move_only:                { type: Boolean, }, // play で合法手のみに絞る
     sp_piece_auto_promote:             { type: Boolean, }, // play で死に駒になるときは自動的に成る
     sp_my_piece_only_move:             { type: Boolean, }, // play では自分手番とき自分の駒しか動かせないようにする
-    sp_same_group_kill_disabled:       { type: Boolean, }, // play では自分の駒で同じ仲間の駒を取れないようにする
+    sp_my_piece_kill_disabled:       { type: Boolean, }, // play では自分の駒で同じ仲間の駒を取れないようにする
     sp_double_click_threshold_ms:      { type: Number,  }, // edit で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_lift_cancel_action:             { type: String,  }, // standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。reality: (盤上の駒に限り)キャンセルは元の位置をタップ。rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
-    sp_view_mode_soldier_movable:      { type: Boolean, }, // view でも駒を動かせる(ただし本筋は破壊しない)
+    sp_view_mode_piece_movable:      { type: Boolean, }, // view でも駒を動かせる(ただし本筋は破壊しない)
     sp_board_cell_left_click_disabled: { type: Boolean, }, // 盤上セルタップ時の通常処理の無効化
     // 本当は Object
     sp_player_info:                    { type: String,  }, // 対局者名と時間

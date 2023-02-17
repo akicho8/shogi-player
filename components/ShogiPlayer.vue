@@ -109,7 +109,7 @@ export default {
     },
 
     // ☗☖をタップしたときの挙動
-    sp_location_behavior: {
+    sp_location_click_behavior: {
       type: String,
       default: "flip",
       validator(value) { return ["flip", "nop"].includes(value) },

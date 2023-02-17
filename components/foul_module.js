@@ -11,8 +11,8 @@ export const foul_module = {
     // | 上級者向け     |       |       | 反則かどうかは人が判断する                       |        |
     // | 初心者向け     | o     | o     | 反則になりそうなら emit して動作をキャンセルする |        |
     // |----------------+-------+-------+--------------------------------------------------+--------|
-    sp_foul_check: { type: Boolean, default: true,  }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
-    sp_foul_break: { type: Boolean, default: false, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
+    sp_foul_validate: { type: Boolean, default: true,  }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
+    sp_foul_cancel: { type: Boolean, default: false, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
   },
 
   data() {
@@ -33,8 +33,8 @@ export const foul_module = {
       const foul_info = FoulInfo.fetch(foul_key)
       this.log(`反則: ${foul_info.name}`)
       attrs = { ...foul_info, ...attrs }
-      if (this.sp_foul_break) {
-        this.event_call("ev_error_foul_accident", attrs)
+      if (this.sp_foul_cancel) {
+        this.event_call("ev_foul_foul_accident", attrs)
         return "__cancel__"
       }
       this.foul_list.push(attrs)

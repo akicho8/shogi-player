@@ -25,7 +25,7 @@ export const hover_piece_module = {
     // 持ち上げた駒の位置を更新する
     hover_piece_element_position_update() {
       if (this.$data._HoverPieceElement && this.$data._me_last_event && this.mouse_stick_p) {
-        // if (this.devise_info.key === "desktop") {
+        // if (this.devise_info.key === "mouse") {
         const x = this.$data._me_last_event.clientX
         const y = this.$data._me_last_event.clientY
         this.element_vector_set(this.$data._HoverPieceElement, {x, y})

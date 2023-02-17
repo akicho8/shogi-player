@@ -13,3 +13,7 @@
 ## ユニバーサルデザイン (図案駒)
 
 <CustomizeExample name="customize/universal" />
+
+## ピンク
+
+<CustomizeExample name="customize/pink" />

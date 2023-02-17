@@ -6,7 +6,7 @@
     .column
       .has-text-centered
         | マウスが使えるときの挙動
-      ShogiPlayer(v-bind="{...default_params, sp_device: 'desktop'}")
+      ShogiPlayer(v-bind="{...default_params, sp_device: 'mouse'}")
     .column
       .has-text-centered
         | スマホやタブレットでの挙動

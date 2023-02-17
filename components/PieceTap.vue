@@ -45,11 +45,11 @@ export default {
   +defvar(sp_piece_origin_color, hsla(0, 0%, 0%, 0.15))     // 最後に動かした駒の元の位置の背景色
   +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.15))  // 持ち上げれる駒の背景色
 
-  +defvar(sp_lifted_origin_bg_color_desktop, hsla(0, 0%, 0%, 0.15)) // 持ち上げた駒の背景色(desktop)
-  +defvar(sp_lifted_origin_opacity_desktop, 0.0)                   // 持ち上げた駒の元のセルの非透明度(desktop)
+  +defvar(sp_mouse_lifted_origin_bg_color, hsla(0, 0%, 0%, 0.15)) // 持ち上げた駒の背景色(desktop)
+  +defvar(sp_mouse_lifted_origin_opacity, 0.0)                   // 持ち上げた駒の元のセルの非透明度(desktop)
 
-  +defvar(sp_lifted_origin_bg_color_touch, hsla(0, 0%, 0%, 0.15))   // 持ち上げた駒の背景色(touch)
-  +defvar(sp_lifted_origin_opacity_touch, 1.0)                     // 持ち上げた駒の元のセルの非透明度(touch)
+  +defvar(sp_touch_lifted_origin_bg_color, hsla(0, 0%, 0%, 0.15))   // 持ち上げた駒の背景色(touch)
+  +defvar(sp_touch_lifted_origin_opacity, 1.0)                     // 持ち上げた駒の元のセルの非透明度(touch)
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_base_w, 47px)                // 盤上以外の駒セル(W) ※内部で使用
@@ -94,18 +94,18 @@ export default {
       // 持ち上げた元のセル
       &.lifted_from_p
         .PieceTapBG
-          background-color: var(--sp_lifted_origin_bg_color_touch)
+          background-color: var(--sp_touch_lifted_origin_bg_color)
         .PieceTextureSelf
-          opacity: var(--sp_lifted_origin_opacity_touch)  // 駒を持ち上げたので元の駒を含めて薄くする
+          opacity: var(--sp_touch_lifted_origin_opacity)  // 駒を持ち上げたので元の駒を含めて薄くする
 
-  &.is_device_desktop
+  &.is_device_mouse
     .PieceTap
       // 持ち上げた元のセル
       &.lifted_from_p
         .PieceTapBG
-          background-color: var(--sp_lifted_origin_bg_color_desktop)
+          background-color: var(--sp_mouse_lifted_origin_bg_color)
         .PieceTextureSelf
-          opacity: var(--sp_lifted_origin_opacity_desktop)  // 駒を持ち上げたので元の駒を含めて薄くする
+          opacity: var(--sp_mouse_lifted_origin_opacity)  // 駒を持ち上げたので元の駒を含めて薄くする
 
       // 選択が可能
       &.selectable_p
@@ -162,7 +162,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 成り不成り選択中のセル背景色
 
-  &.is_device_desktop
+  &.is_device_mouse
     .PromoteSelectModal
       .PieceTap
         &:hover

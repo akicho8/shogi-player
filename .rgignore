@@ -1,3 +1,5 @@
 /docs/_nuxt
 **/dist/**/*.js
 **/dist/**/*.js.map
+*.lock
+*lock*.json

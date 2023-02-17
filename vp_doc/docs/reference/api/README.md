@@ -9,7 +9,6 @@ sidebar: auto
   * フロー駆動型に適した公開メソッド集
   * 冗長だが `api_` から始めることにしている
   * Vue.js の場合 ShogiPlayer コンポーネントをレシーバーとして実行できる
-  * Web Components の場合はたどり付くのが大変 → [APIの呼び方](/guide/usage#apiの呼び方)
   * なるべく非推奨
 
 ## 一覧 ##

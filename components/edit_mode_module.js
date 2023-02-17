@@ -13,10 +13,10 @@ export const edit_mode_module = {
 
     sp_piece_auto_promote:                   { type: Boolean, default: true, },                      // play で死に駒になるときは自動的に成る
     sp_my_piece_only_move:         { type: Boolean, default: true, },                      // play では自分手番とき自分の駒しか動かせないようにする
-    sp_same_group_kill_disabled: { type: Boolean, default: true, },                      // play では自分の駒で同じ仲間の駒を取れないようにする
+    sp_my_piece_kill_disabled: { type: Boolean, default: true, },                      // play では自分の駒で同じ仲間の駒を取れないようにする
     sp_double_click_threshold_ms:           { type: Number,  default: 350,  },                      // edit で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_lift_cancel_action:                              { type: String,  default: "standard", }, // standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。reality: (盤上の駒に限り)キャンセルは元の位置をタップ。rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
-    sp_view_mode_soldier_movable:                { type: Boolean, default: true, },                      // view でも駒を動かせる(ただし本筋は破壊しない)
+    sp_view_mode_piece_movable:                { type: Boolean, default: true, },                      // view でも駒を動かせる(ただし本筋は破壊しない)
   },
 
   data() {
@@ -95,7 +95,7 @@ export const edit_mode_module = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.event_call("ev_error_click_but_self_is_not_turn")
+        this.event_call("ev_foul_click_but_self_is_not_turn")
         return
       }
 
@@ -105,7 +105,7 @@ export const edit_mode_module = {
             if (this.killed_soldier) {
               if (this.killed_soldier.location !== this.xcontainer.current_location) {
                 this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
-                this.event_call("ev_error_my_turn_but_oside_click")
+                this.event_call("ev_foul_my_turn_but_oside_click")
                 return
               }
             }
@@ -119,7 +119,7 @@ export const edit_mode_module = {
         return
       }
 
-      if (this.sp_foul_check) {
+      if (this.sp_foul_validate) {
         if (this.play_p && this.have_piece && !this.killed_soldier) {
           const new_soldier = this.soldier_create_from_stand_or_box_on(place)
           const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
@@ -140,7 +140,7 @@ export const edit_mode_module = {
       }
 
       if (this.play_p) {
-        if (this.sp_same_group_kill_disabled) {
+        if (this.sp_my_piece_kill_disabled) {
           if (this.put_on_my_soldier_p(this.killed_soldier)) {
             this.log("自分の駒の上に駒を重ねようとしたので無効とする(盤上の移動元の駒を含まない)")
 
@@ -218,7 +218,7 @@ export const edit_mode_module = {
         if (!found) {
           if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place, {mode: "non_stop"})) {
             this.log("障害物を素通りすれば目的地に行ける")
-            if (this.sp_foul_check) {
+            if (this.sp_foul_validate) {
               if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place)) {
                 this.log("障害物なく目的地に行ける")
               } else {
@@ -240,7 +240,7 @@ export const edit_mode_module = {
           return
         }
 
-        if (this.sp_foul_check) {
+        if (this.sp_foul_validate) {
           if (this.xcontainer.board.move_then_king_capture_p(this.origin_soldier1, place)) {
             if (this.foul_add("foul_death_king", {soldier: this.origin_soldier1, place: place}) === "__cancel__") { // 王手放置
               return
@@ -304,7 +304,7 @@ export const edit_mode_module = {
         this.log("持駒を置く")
 
         // 二歩判定
-        if (this.sp_foul_check) {
+        if (this.sp_foul_validate) {
           if (this.play_p) {
             if (this.have_piece.key === "P") {
               if (this.have_piece_location) {
@@ -514,7 +514,7 @@ export const edit_mode_module = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.event_call("ev_error_click_but_self_is_not_turn")
+        this.event_call("ev_foul_click_but_self_is_not_turn")
         return
       }
 
@@ -785,7 +785,7 @@ export const edit_mode_module = {
     // view のときは駒を動かせるようにしない
     break_if_view_mode() {
       if (this.view_p) {
-        if (this.sp_view_mode_soldier_movable) {
+        if (this.sp_view_mode_piece_movable) {
         } else {
           return true
         }

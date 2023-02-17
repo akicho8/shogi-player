@@ -243,9 +243,9 @@
         .box
           SeTitle(name="駒を操作中の移動元スタイル")
           b-field(custom-class="is-small" label="背景")
-            MyColorPicker(v-model="sp_lifted_origin_bg_color_desktop")
+            MyColorPicker(v-model="sp_mouse_lifted_origin_bg_color")
           b-field(custom-class="is-small" label="駒の非透明度")
-            b-slider(v-bind="slider_attrs" v-model="sp_lifted_origin_opacity_desktop" :min="0" :max="1.0" :step="0.001")
+            b-slider(v-bind="slider_attrs" v-model="sp_mouse_lifted_origin_opacity" :min="0" :max="1.0" :step="0.001")
 
         .box
           SeTitle(name="座標")
@@ -260,18 +260,18 @@
           .columns.mt-5
             .column.py-0
               b-field(custom-class="is-small" label="上の大きさ")
-                b-slider(v-bind="slider_attrs" v-model="sp_digit_xlabel_size" :min="0" :max="1.0" :step="0.001")
+                b-slider(v-bind="slider_attrs" v-model="sp_coordinate_x_size" :min="0" :max="1.0" :step="0.001")
             .column.py-0
               b-field(custom-class="is-small" label="右の大きさ")
-                b-slider(v-bind="slider_attrs" v-model="sp_digit_ylabel_size" :min="0" :max="1.0" :step="0.001")
+                b-slider(v-bind="slider_attrs" v-model="sp_coordinate_y_size" :min="0" :max="1.0" :step="0.001")
 
           .columns.mt-5
             .column.py-0
               b-field(custom-class="is-small" label="上の位置")
-                b-slider(v-bind="slider_attrs" v-model="sp_digit_xlabel_push" :min="-0.5" :max="0.5" :step="0.001")
+                b-slider(v-bind="slider_attrs" v-model="sp_coordinate_x_push" :min="-0.5" :max="0.5" :step="0.001")
             .column.py-0
               b-field(custom-class="is-small" label="右の位置")
-                b-slider(v-bind="slider_attrs" v-model="sp_digit_ylabel_push" :min="-0.5" :max="0.5" :step="0.001")
+                b-slider(v-bind="slider_attrs" v-model="sp_coordinate_y_push" :min="-0.5" :max="0.5" :step="0.001")
 
           b-field(custom-class="is-small" label="色")
             MyColorPicker(v-model="sp_coordinate_color")
@@ -400,12 +400,12 @@
             b-radio-button(size="is-small" v-model="sp_legal_move_only" :native-value="true") ON
 
           b-field(custom-class="is-small" label="操作モードでは飛角香は駒を跨げない")
-            b-radio-button(size="is-small" v-model="sp_foul_check" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_foul_check" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="true") ON
 
           b-field(custom-class="is-small" label="操作モードでは二歩ができない")
-            b-radio-button(size="is-small" v-model="sp_foul_check" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_foul_check" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="true") ON
 
           b-field(custom-class="is-small" label="持駒のキャンセル方法")
             b-radio-button(size="is-small" v-model="sp_lift_cancel_action" native-value="reality") 元位置
@@ -537,8 +537,8 @@ export default {
       sp_promote_select_modal_hover_color: "hsla(0, 0%, 100%, 0.5)",
 
       // 駒を操作中の移動元スタイル
-      sp_lifted_origin_bg_color_desktop: "hsla(0, 0%, 0%, 0.15)",
-      sp_lifted_origin_opacity_desktop: 0.0,
+      sp_mouse_lifted_origin_bg_color: "hsla(0, 0%, 0%, 0.15)",
+      sp_mouse_lifted_origin_opacity: 0.0,
 
       sp_balloon: true,
 
@@ -586,10 +586,10 @@ export default {
       //////////////////////////////////////////////////////////////////////////////// 座標
       sp_coordinate: DEVELOPMENT_P ? true : false,
       sp_coordinate_variant: DEVELOPMENT_P ? "alphabet" : "kanji",
-      sp_digit_xlabel_size: 0.125,
-      sp_digit_ylabel_size: 0.168,
-      sp_digit_xlabel_push: 0.014,
-      sp_digit_ylabel_push: -0.034,
+      sp_coordinate_x_size: 0.125,
+      sp_coordinate_y_size: 0.168,
+      sp_coordinate_x_push: 0.014,
+      sp_coordinate_y_push: -0.034,
       sp_coordinate_color: "hsla(0, 0%, 0%, 0.75)",
 
       ////////////////////////////////////////////////////////////////////////////////
@@ -610,8 +610,8 @@ export default {
       sp_slider:     DEVELOPMENT_P ? true : true,
       sp_controller: DEVELOPMENT_P ? true : false,
       sp_legal_move_only: false,
-      sp_foul_check: false,
-      sp_foul_check: false,
+      sp_foul_validate: false,
+      sp_foul_validate: false,
       sp_lift_cancel_action: "reality",
 
       se_tf0_mode: "is_tf0_mode_off",
@@ -738,8 +738,8 @@ export default {
       this.sp_coordinate                 = "true"            // 座標を表示する
       this.sp_coordinate_variant         = "kanji" // 座標の種類
       this.sp_board_horizontal_gap        = 0.2                            // 座標があるため盤面の左右を空ける
-      this.sp_digit_xlabel_push           = 0.05                          // 座標調整
-      this.sp_digit_ylabel_push           = 0.01                           // 座標調整
+      this.sp_coordinate_x_push           = 0.05                          // 座標調整
+      this.sp_coordinate_y_push           = 0.01                           // 座標調整
     },
     hsla_format(v) {
       return chroma(v).css("hsla")
@@ -866,8 +866,8 @@ export default {
       params.sp_controller            = this.sp_controller
       params.sp_player_info           = this.sp_player_info
       params.sp_legal_move_only       = this.sp_legal_move_only
-      params.sp_foul_check            = this.sp_foul_check
-      params.sp_foul_check            = this.sp_foul_check
+      params.sp_foul_validate            = this.sp_foul_validate
+      params.sp_foul_validate            = this.sp_foul_validate
       params.sp_lift_cancel_action    = this.sp_lift_cancel_action
       return params
     },
@@ -951,8 +951,8 @@ export default {
           --sp_promote_select_modal_hover_color: ${this.hsla_format(this.sp_promote_select_modal_hover_color)};
 
           // 駒を操作中の移動元スタイル
-          --sp_lifted_origin_bg_color_desktop: ${this.hsla_format(this.sp_lifted_origin_bg_color_desktop)};
-          --sp_lifted_origin_opacity_desktop: ${this.sp_lifted_origin_opacity_desktop};
+          --sp_mouse_lifted_origin_bg_color: ${this.hsla_format(this.sp_mouse_lifted_origin_bg_color)};
+          --sp_mouse_lifted_origin_opacity: ${this.sp_mouse_lifted_origin_opacity};
 
           // 駒台横配置のときの盤の上下の隙間
           --sp_common_gap:              ${this.sp_common_gap};
@@ -965,10 +965,10 @@ export default {
           --sp_controller_width_mobile: ${this.sp_controller_width_mobile};
 
           // 座標表記
-          --sp_digit_xlabel_size: ${this.sp_digit_xlabel_size};
-          --sp_digit_xlabel_push: ${this.sp_digit_xlabel_push};
-          --sp_digit_ylabel_size: ${this.sp_digit_ylabel_size};
-          --sp_digit_ylabel_push: ${this.sp_digit_ylabel_push};
+          --sp_coordinate_x_size: ${this.sp_coordinate_x_size};
+          --sp_coordinate_x_push: ${this.sp_coordinate_x_push};
+          --sp_coordinate_y_size: ${this.sp_coordinate_y_size};
+          --sp_coordinate_y_push: ${this.sp_coordinate_y_push};
           --sp_coordinate_color: ${this.sp_coordinate_color};
 
           //////////////////////////////////////////////////////////////////////////////// スタイルエディタ側

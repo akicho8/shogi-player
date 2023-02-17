@@ -168,24 +168,24 @@ Default: `hsla(0, 0%, 0%, 0.15)`
 
 持ち上げることができる駒にマウスポインタを乗せたときの背景色
 
-### `--sp_lifted_origin_bg_color_desktop`
+### `--sp_mouse_lifted_origin_bg_color`
 Default: `hsla(0, 0%, 0%, 0.15)`
 
 マウスポインタで持ち上げた駒の移動元の升目の背景色
 
-### `--sp_lifted_origin_opacity_desktop`
+### `--sp_mouse_lifted_origin_opacity`
 Default: `0.0`
 
 マウスポインタで持ち上げた駒の移動元にある駒の非透明度
 
 半透明にすると駒が分身したかのように見える効果がある
 
-### `--sp_lifted_origin_bg_color_touch`
+### `--sp_touch_lifted_origin_bg_color`
 Default: `hsla(0, 0%, 0%, 0.15)`
 
 タッチ操作で持ち上げた駒の移動元のセルの背景色
 
-### `--sp_lifted_origin_opacity_touch`
+### `--sp_touch_lifted_origin_opacity`
 Default: `1.0`
 
 タッチ操作で持ち上げた駒の移動元のセルの非透明度
@@ -330,22 +330,22 @@ Default: `hsla(0, 0%, 100%, 0.5)`
 
 ## 座標(符号)
 
-### `--sp_digit_xlabel_size`
+### `--sp_coordinate_x_size`
 Default: `0.125`
 
 盤面の上に表示するX座標の文字サイズ
 
-### `--sp_digit_xlabel_push`
+### `--sp_coordinate_x_push`
 Default: `0.014`
 
 盤面の上に表示するX座標の位置調整
 
-### `--sp_digit_ylabel_size`
+### `--sp_coordinate_y_size`
 Default: `0.168`
 
 盤面の右に表示するY座標の文字サイズ
 
-### `--sp_digit_ylabel_push`
+### `--sp_coordinate_y_push`
 Default: `-0.034`
 
 盤面の右に表示するY座標の位置調整

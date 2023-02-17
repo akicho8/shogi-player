@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.372/dist/shogi-player-wc.min.js"></script>
+  <!-- <script src="../../dist/development/shogi-player-wc.min.js"></script> -->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      background-color: hsl(303.58,94.37%,86.08%);
+    }
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100svh;
+    }
+    .shogi-player-wc-container {
+      width: min(640px, 100%);
+    }
+    shogi-player-wc {
+      display: block;
+      width: 100%;
+    }
+    shogi-player-wc::part(spwc_style_scope) {
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="shogi-player-wc-container">
+      <shogi-player-wc
+        sp_piece_variant="is_piece_variant_a"
+        sp_mobile_vertical="false"
+        />
+    </div>
+  </div>
+</body>
+</html>

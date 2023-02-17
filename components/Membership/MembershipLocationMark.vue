@@ -39,7 +39,7 @@ export default {
       return this.TheSp.xcontainer.current_location === this.location ? "active" : "inactive"
     },
     flipable() {
-      return this.TheSp.sp_location_behavior === "flip"
+      return this.TheSp.sp_location_click_behavior === "flip"
     },
   },
 }
