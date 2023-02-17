@@ -41,7 +41,7 @@ export default {
         left: calc(50% - var(--sp_base_w) / 2)    // 中央からセルの横半分左に移動する
         width: var(--sp_base_w)
         top: calc(50% - var(--sp_base_h) / 2)     // 中央からセルの縦半分上に移動する
-        hidth: var(--sp_base_h)
+        height: var(--sp_base_h)
 
       //////////////////////////////////////////////////////////////////////////////// cursor
       cursor: pointer
