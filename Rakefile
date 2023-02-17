@@ -2,6 +2,24 @@ require "table_format"
 
 task :default => :test
 
+desc "all"
+task :all do
+  system <<~EOT
+  r 'player@0\.0\.\d+' 'player@0.0.373' -x
+  git add -A
+  git commit -m "[docs] vs_doc/* 内の cdn の新しいバージョン指定"
+  
+  rake dist
+  git add -A
+  git commit -m "[chore] dist/* 生成
+  
+  rake release
+  rake old_doc:deploy
+  rake open
+  EOT
+end
+
+
 task :s => :server
 desc "[s] server"
 task :server do
