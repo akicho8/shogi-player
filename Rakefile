@@ -27,8 +27,7 @@ task :dist do
   cd web_component
   vue-cli-service build --mode production  --dest ../dist             --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
   vue-cli-service build --mode development --dest ../dist/development --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
-  git add -A
-  git commit -m "[chore] dist/* 生成"
+  git add -A && git commit -m "[chore] dist/* 生成"
   EOT
 end
 
@@ -77,27 +76,23 @@ end
 desc "release"
 task :release do
   system <<~EOT
-  # rake dist
-  # npm version patch
-  # rake tikan
-  # npm publish
-  # git push --tags
-  # git push
-  # (cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i)
-  # rake old_doc:deploy
-  # rake open
+  rake dist
+  npm version patch
+  rake example_cdn_version_replace
+  npm publish
+  git push --tags
+  git push
+  (cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i)
+  rake old_doc:deploy
+  rake open
   EOT
 end
 
-desc "tikan"
-task :tikan do
-  require "json"
-  require "pathname"
-  version = JSON.parse(Pathname("package.json").read, symbolize_names: true)[:version]
+desc "example_cdn_version_replace"
+task :example_cdn_version_replace do
   system <<~EOT
-  r 'player@\\d+\\.\\d+\.\\d+' 'player@#{version}' -x
-  git add -A
-  git commit -m "[docs] vs_doc/* 内の cdn の新しいバージョン指定"
+  r 'shogi-player@\\d+\\.\\d+\.\\d+' 'shogi-player@#{package_version}' -x
+  git add -A && git commit -m "[docs] vs_doc/* 内の cdn の新しいバージョン指定"
   EOT
 end
 
