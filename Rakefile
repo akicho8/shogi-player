@@ -2,24 +2,6 @@ require "table_format"
 
 task :default => :test
 
-desc "all"
-task :all do
-  system <<~EOT
-  r 'player@0\.0\.\d+' 'player@0.0.373' -x
-  git add -A
-  git commit -m "[docs] vs_doc/* 内の cdn の新しいバージョン指定"
-  
-  rake dist
-  git add -A
-  git commit -m "[chore] dist/* 生成
-  
-  rake release
-  rake old_doc:deploy
-  rake open
-  EOT
-end
-
-
 task :s => :server
 desc "[s] server"
 task :server do
@@ -42,6 +24,8 @@ task :dist do
   cd web_component
   vue-cli-service build --mode production  --dest ../dist             --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
   vue-cli-service build --mode development --dest ../dist/development --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  git add -A
+  git commit -m "[chore] dist/* 生成"
   EOT
 end
 
@@ -73,7 +57,7 @@ namespace :old_doc do
     mv web_component /tmp
     nuxt generate --dotenv .env.production
     mv /tmp/web_component .
-    EOT
+      EOT
   end
 
   desc "push"
@@ -90,11 +74,27 @@ end
 desc "release"
 task :release do
   system <<~EOT
+  rake dist
   npm version patch
-  npm publish
-  git push --tags
-  git push
-  (cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i)
+  # rake tikan
+  # npm publish
+  # git push --tags
+  # git push
+  # (cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i)
+  # rake old_doc:deploy
+  # rake open
+  EOT
+end
+
+desc "tikan"
+task :tikan do
+  require "json"
+  require "pathname"
+  version = JSON.parse(Pathname("package.json").read, symbolize_names: true)[:version]
+  system <<~EOT
+  r 'player@\d+\.\d+\.\d+' 'player@#{version}' -x
+  git add -A
+  git commit -m "[docs] vs_doc/* 内の cdn の新しいバージョン指定"
   EOT
 end
 
@@ -160,7 +160,7 @@ desc "[ga] Google Analytics"
 task :ga do
   system <<~EOT
   open https://analytics.google.com/analytics/web/#/p353291851/reports/intelligenthome
-  open https://tagassistant.google.com/
+    open https://tagassistant.google.com/
   EOT
 end
 
@@ -226,4 +226,12 @@ task :about do
   fd -l -g '*.min.js' dist
   (cd vp_doc && npm list)
   EOT
+end
+
+task :v => :version
+desc "[v] version"
+task :version do
+  require "json"
+  require "pathname"
+  puts JSON.parse(Pathname("package.json").read, symbolize_names: true)[:version]
 end
