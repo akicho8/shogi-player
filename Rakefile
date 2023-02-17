@@ -1,4 +1,7 @@
 require "table_format"
+require "./support"
+
+include Support
 
 task :default => :test
 
@@ -231,7 +234,5 @@ end
 task :v => :version
 desc "[v] version"
 task :version do
-  require "json"
-  require "pathname"
-  puts JSON.parse(Pathname("package.json").read, symbolize_names: true)[:version]
+  puts package_version
 end
