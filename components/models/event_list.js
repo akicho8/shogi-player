@@ -17,7 +17,7 @@ export const EventList = [
   "ev_short_sfen_change",
   "ev_turn_offset_change",
   "ev_turn_offset_max_change",
-  "update:sp_debug_mode",
+  "update:sp_debug",
   "update:sp_event_log",
   "update:sp_mode",
   "update:sp_turn",

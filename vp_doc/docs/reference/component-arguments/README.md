@@ -6,12 +6,7 @@ sidebar: auto
 
 ## 概要
 
-* 2択はたまたま2択だっただけで真偽だとは限らないため `boolean` 型は使わない方針だったが揺らいでいる
-* パラメータ名は `sp_` で始まる
-  * 冗長だが検索は楽
-* 値は `is_` で始まる
-* 例えば `sp_xxx` を有効にする場合は `is_xxx_on` を指定するルールにしている
-* いろいろ例外もある
+* パラメータ名はすべて `sp_` で始まる
 
 ## よく使う
 
@@ -109,22 +104,22 @@ Default: `black`
 ### `sp_piece_variant`
 
 Type: `String`
-Default: `is_piece_variant_a`
+Default: `a`
 
 駒の種類
 
-| 値                    | 種類     | 特徴                      | Format |
-|-----------------------|----------|---------------------------|--------|
-| is_piece_variant_none | なし     | 見えない                  |        |
-| is_piece_variant_a    | ぬれよん | 見やすいゴシック体の1文字 | SVG    |
-| is_piece_variant_b    | 紙面風   | 白黒と一部赤              | SVG    |
-| is_piece_variant_c    | 図案駒   | ユニバーサルデザイン      | PNG    |
-| is_piece_variant_d    | Portella | リアル駒                  | PNG    |
+| 値   | 種類     | 特徴                      | Format |
+|------|----------|---------------------------|--------|
+| none | なし     | 見えない                  |        |
+| a    | ぬれよん | 見やすいゴシック体の1文字 | SVG    |
+| b    | 紙面風   | 白黒と一部赤              | SVG    |
+| c    | 図案駒   | ユニバーサルデザイン      | PNG    |
+| d    | Portella | リアル駒                  | PNG    |
 
 ### `sp_bg_variant`
 
 Type: `String`
-Default: `is_bg_variant_none`
+Default: `none`
 
 盤のテクスチャ
 
@@ -133,27 +128,22 @@ Default: `is_bg_variant_none`
 * 木を指定するときはリアル駒のときだけにしよう
   * デジタル駒と木の組み合わせは調和しない
 
-| 値                 | 種類 | 特徴 |
-|--------------------|------|------|
-| is_bg_variant_none | なし |      |
-| is_bg_variant_a    | 木1  | 濃い |
-| is_bg_variant_b    | 木2  | 薄め |
+| 値   | 種類 | 特徴 |
+|------|------|------|
+| none | なし |      |
+| a    | 木1  | 濃い |
+| b    | 木2  | 薄め |
 
 ## あまり使わない
 
 ### `sp_overlay_nav`
 
-Type: `String`
-Default: `is_overlay_nav_off`
+Type: `Boolean`
+Default: `false`
 
-再生モードのときの局面切り替えで盤上の左右の領域をタップして動かせるようにするか？
+再生モードのときの局面切り替えで盤上の左右の領域をクリックして動かせるようにするか？
 
 有効にすると再生しやすくなるが駒を動かせなくなる
-
-| 値                 | 意味   |
-|--------------------|--------|
-| is_overlay_nav_off | しない |
-| is_overlay_nav_on  | する   |
 
 ### `sp_coordinate`
 
@@ -323,14 +313,6 @@ Default: `true`
   * コントローラーやスライダーで手数を動かすと本筋の**前後**に戻る
     * 駒を動かす直前の局面に戻るべき？ <Badge text="要検討" type="error" vertical="top" />
 
-Type: `Function`
-Default: `null`
-
-セルのクラスを決める処理を指定する
-
-引数には Place のインスタンスが来る
-Web Components 版で動くのかは怪しい
-
 ### `sp_board_cell_left_click_disabled`
 
 Type: `Boolean`
@@ -341,42 +323,36 @@ Default: `false`
 ### `sp_location_behavior`
 
 Type: `String`
-Default: `is_location_flip_on`
+Default: `flip`
 
-☗☖をタップしたとき視点を切り替えるか？
+☗☖をクリックしたときの挙動
 
-| 値                       | 挙動         |
-|--------------------------|--------------|
-| is_location_behavior_off | 切り替えない |
-| is_location_behavior_on  | 切り替える   |
+| 値   | 挙動           |
+|------|----------------|
+| flip | 視点を反転する |
+| nop  | 何もしない     |
 
 ### `sp_sfen_show`
 
-Type: `String`
-Default: `is_sfen_show_off`
+Type: `Boolean`
+Default: `false`
 
 盤面の下にSFENを表示するか？ <Badge text="削除予定" type="error" vertical="top" />
 
-| 値               | 意味   |
-|------------------|--------|
-| is_sfen_show_off | しない |
-| is_sfen_show_on  | する   |
+### `sp_mounted_focus_to_slider`
 
-### `sp_turn_slider_focus`
+Type: `Boolean`
+Default: `false`
 
-Type: `String`
-Default: `is_turn_slider_focus_on`
-
-最初にスライダーにフォーカスするか？
+起動時にスライダーがあればフォーカスするか？
 
   * スライダーがなければ何もしない
-  * ビューモードで最初からスライダーにフォーカスしておければ、そのまま左右ボタンで局面が切り替えることができて便利になる
+  * 再生モードで最初からスライダーにフォーカスしておけばそのまま左右ボタンで局面が切り替えることができて利用者に優しいUIになる
   * スマホだととくにメリットはない
 
-| 値                       | 意味   |
-|--------------------------|--------|
-| is_turn_slider_focus_off | しない |
-| is_turn_slider_focus_on  | する   |
+::: warning
+フォーカスする際にブラウザがスクロールしてしまう場合がある
+:::
 
 ### `sp_operation_disabled`
 
@@ -483,7 +459,7 @@ Default: `350`
 
 ネイティブなダブルクリック判定を入れると通常のクリック判定が遅れるため自力判定している
 
-### `sp_key_event_capture_enabled`
+### `sp_key_event_capture`
 
 Type: `Boolean`
 Default: `false`
@@ -499,14 +475,14 @@ Default: `false`
 Type: `Number`
 Default: `10`
 
-`sp_key_event_capture_enabled` を有効にして手数を動かすときの shift を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
+`sp_key_event_capture` を有効にして手数を動かすときの shift を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
 
 ### `sp_system_key_mag`
 
 Type: `Number`
 Default: `50`
 
-`sp_key_event_capture_enabled` を有効にして手数を動かすときの command を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
+`sp_key_event_capture` を有効にして手数を動かすときの command を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
 
 ## デバッグ用
 
@@ -531,34 +507,24 @@ Default: `null`
   * 自動判別するので基本そのままでよい
   * デバイス判別によって駒を動かすときの挙動が変わる
 
-| 値                | 意味             | 挙動                                           |
-|-------------------|------------------|------------------------------------------------|
-| is_device_touch   | タッチパネル操作 | 移動元の色で駒を持ち上げたのがわかるようにする |
-| is_device_desktop | マウス操作       | 持ち上げた駒がマウスに追随する                 |
+| 値      | 意味             | 挙動                                           |
+|---------|------------------|------------------------------------------------|
+| touch   | タッチパネル操作 | 持ち上げた駒がマウスポインタについてこないかわりに移動元の色で駒を持ち上げたのがわかるようにする |
+| desktop | マウス操作       | 持ち上げた駒がマウスポインタについてくる       |
 
 ### `sp_layer`
 
-Type: `String`
-Default: `is_layer_off`
+Type: `Boolean`
+Default: `false`
 
 レイヤーを確認するか？
 
-| 値           | 意味   |
-|--------------|--------|
-| is_layer_off | しない |
-| is_layer_on  | する   |
+### `sp_debug`
 
-### `sp_debug_mode`
-
-Type: `String`
-Default: `is_debug_mode_off`
+Type: `Boolean`
+Default: `false`
 
 デバッグモードを有効にするか？
-
-| 値                | 意味   |
-|-------------------|--------|
-| is_debug_mode_off | しない |
-| is_debug_mode_on  | する   |
 
 ### `sp_event_log`
 

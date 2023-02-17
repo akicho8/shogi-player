@@ -28,9 +28,9 @@ development 版を使うとデバッグ情報を多めに表示する
   * クラス名等が難読状態になっていない
   * production 版に比べると気持ち程度遅い
 
-## `sp_debug_mode` を有効にする
+## `sp_debug` を有効にする
 
-<<< @/docs/.vuepress/public/examples/sp_debug_mode.html{2}
-<LinkToExample name="sp_debug_mode" />
+<<< @/docs/.vuepress/public/examples/sp_debug.html{2}
+<LinkToExample name="sp_debug" />
 
 内部の情報を下に表示する

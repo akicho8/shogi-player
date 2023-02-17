@@ -5,7 +5,7 @@
   ShogiPlayer(
     sp_body="position sfen lnsgkgsnl/1r5b1/pppppp1pp/6p2/9/2P4P1/PP1PPPP1P/1B5R1/LNSGKGSNL w - 4"
     sp_mode="play"
-    sp_piece_variant="is_piece_variant_d"
+    sp_piece_variant="d"
     )
 </template>
 

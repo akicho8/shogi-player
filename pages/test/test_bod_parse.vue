@@ -10,7 +10,7 @@
         :sp_turn="0"
         :sp_body="sp_body"
         sp_mode="view"
-        sp_debug_mode="is_debug_mode_on"
+        sp_debug
         :sp_controller="true"
         :sp_slider="true"
       )

@@ -32,7 +32,7 @@ export const navi_module = {
     sp_piece_stand_blank_then_hidden: { type: Boolean, default: false,               }, // 駒がないときは駒台側を非表示
     sp_active_side_viewpoint:               { type: Boolean, default: false,               }, // 最初に表示した局面が△なら反転
 
-    sp_key_event_capture_enabled:   { type: Boolean, default: false,               }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
+    sp_key_event_capture:   { type: Boolean, default: false,               }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
     sp_shift_key_mag:               { type: Number,  default: 10,                  }, // キーで左右するとき shift を押したときの倍率
     sp_system_key_mag:              { type: Number,  default: 50,                  }, // キーで左右するとき command などを押したときの倍率
   },
@@ -83,7 +83,7 @@ export const navi_module = {
         return
       }
 
-      if (this.sp_key_event_capture_enabled && (this.view_p || this.play_p)) {
+      if (this.sp_key_event_capture && (this.view_p || this.play_p)) {
         const dom = document.activeElement
 
         if (this.$NavigateBlock) {

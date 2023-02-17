@@ -58,7 +58,7 @@ export default {
       +is_layer_border
 
 .ShogiPlayer
-  &.is_debug_mode_on
+  &.is_debug_on
     .ShogiPlayerWidth
       &:after
         +mobile

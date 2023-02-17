@@ -82,21 +82,56 @@ export default {
       default: true,
     },
 
-    sp_layer:                              { type: String, default: "is_layer_off",          }, // レイヤー確認(デバッグ用)
-    sp_piece_variant:                         { type: String, default: "is_piece_variant_a",       }, // 駒の種類
-    sp_bg_variant:                         { type: String, default: "is_bg_variant_none",    }, // 盤の種類
+    // レイヤー確認(デバッグ用)
+    sp_layer: {
+      type: Boolean,
+      default: false,
+    },
+
+    // 駒の種類
+    sp_piece_variant: {
+      type: String,
+      default: "a",
+      validator(value) { return ["none", "a", "b", "c", "d"].includes(value) },
+    },
+
+    // 盤の種類
+    sp_bg_variant: {
+      type: String,
+      default: "none",
+      validator(value) { return ["none", "a", "b"].includes(value) },
+    },
 
     // モバイル時に自動的に縦配置に切り替える
     sp_mobile_vertical: {
       type: Boolean,
       default: true,
-      validator(value) { return [true, false].includes(value) },
     },
 
-    sp_location_behavior:                  { type: String, default: "is_location_flip_on",   }, // ☗☖をタップしたとき視点を切り替える
-    sp_sfen_show:                          { type: String, default: "is_sfen_show_off",      }, // SFENを下に表示する
-    sp_overlay_nav:                        { type: String, default: "is_overlay_nav_off",    }, // view のとき盤の左右で手数変更(falseなら駒を動かせる)
-    sp_coordinate:                         { type: Boolean, default: false,    }, // 座標の表示
+    // ☗☖をタップしたときの挙動
+    sp_location_behavior: {
+      type: String,
+      default: "flip",
+      validator(value) { return ["flip", "nop"].includes(value) },
+    },
+
+    // SFENを下に表示する
+    sp_sfen_show: {
+      type: Boolean,
+      default: false,
+    },
+
+    // view のとき盤の左右で手数変更(falseなら駒を動かせる)
+    sp_overlay_nav: {
+      type: Boolean,
+      default: false,
+    },
+
+    // 座標の表示
+    sp_coordinate: {
+      type: Boolean,
+      default: false,
+    },
 
     // 座標の表記
     sp_coordinate_variant: {
@@ -395,8 +430,8 @@ export default {
       }
     },
 
-    css_class_of_string(prefix, value) { return `${prefix}_${value}` },
-    css_class_of_bool(prefix, value)   { return `${prefix}_${value ? 'on' : 'off'}` },
+    str_to_css_class(prefix, value) { return `${prefix}_${value}` },
+    bool_to_css_class(prefix, value)   { return `${prefix}_${value ? 'on' : 'off'}` },
 
   },
 
@@ -415,9 +450,9 @@ export default {
 
     component_class() {
       return [
-        this.css_class_of_string("is_mode", this.new_mode), // is_mode_view | is_mode_play | is_mode_edit
-        this.new_debug_mode,
-        this.css_class_of_bool("is_event_log", this.new_event_log),
+        this.str_to_css_class("is_mode", this.new_mode), // is_mode_view | is_mode_play | is_mode_edit
+        this.bool_to_css_class("is_debug", this.new_debug),
+        this.bool_to_css_class("is_event_log", this.new_event_log),
       ]
     },
 

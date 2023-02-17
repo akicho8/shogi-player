@@ -28,8 +28,8 @@
             b-radio-button(size="is-small" v-model="sp_mode" native-value="play") 操作
             b-radio-button(size="is-small" v-model="sp_mode" native-value="edit") 編集
           b-field(custom-class="is-small" label="レイヤー確認")
-            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_off") OFF
-            b-radio-button(size="is-small" v-model="sp_layer" native-value="is_layer_on") ON
+            b-radio-button(size="is-small" v-model="sp_layer" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_layer" :native-value="true") ON
           b-field(custom-class="is-small" label="プリセット")
             .control
               .buttons
@@ -552,7 +552,7 @@ export default {
 
       sp_turn: -1,
       sp_viewpoint: "black",
-      sp_debug_mode: DEVELOPMENT_P ? "is_debug_mode_off" : "is_debug_mode_off",
+      sp_debug: DEVELOPMENT_P ? false : false,
       sp_piece_count_size: 0.2,
       sp_piece_count_font_color:  "hsla(0, 0%, 0%, 0.75)",
       sp_piece_count_bg_color: "hsla(0, 0%, 100%, 0.9)",
@@ -579,9 +579,9 @@ export default {
 
       sp_comment: false,
       sp_common_gap: 0.18,
-      sp_layer: DEVELOPMENT_P ? "is_layer_off" : "is_layer_off",
-      sp_piece_variant: "is_piece_variant_a",    // is_piece_variant_d
-      sp_bg_variant: "is_bg_variant_none", // is_bg_variant_a
+      sp_layer: DEVELOPMENT_P ? false : false,
+      sp_piece_variant: "a",    // d
+      sp_bg_variant: "none", // a
 
       //////////////////////////////////////////////////////////////////////////////// 座標
       sp_coordinate: DEVELOPMENT_P ? true : false,
@@ -714,13 +714,13 @@ export default {
     },
     sp_board_image_input_handle(v) {
       this.sp_board_image = v
-      this.sp_bg_variant = "is_bg_variant_none" // 背景画像プリセットを選択してない状態に戻しておく
+      this.sp_bg_variant = "none" // 背景画像プリセットを選択してない状態に戻しておく
     },
     all_reset_handle() {
     },
     paper_style_handle() {
       this.se_ws_color                    = "rgb(255,255,255)"            // 背景
-      this.sp_piece_variant                  = "is_piece_variant_b"             // 紙面風駒
+      this.sp_piece_variant                  = "b"             // 紙面風駒
       this.sp_board_radius                = 0                             // 角を丸くしない
       this.sp_board_padding               = 0                             // 隙間なし
       this.sp_board_color                 = IS_WHITE                      // 盤透過
@@ -852,7 +852,7 @@ export default {
       params.sp_mobile_vertical       = this.sp_mobile_vertical
       params.sp_mode                  = this.sp_mode
       params.sp_viewpoint             = this.sp_viewpoint
-      params.sp_debug_mode            = this.sp_debug_mode,
+      params.sp_debug            = this.sp_debug,
       params.sp_comment               = this.sp_comment,
       params.sp_turn                  = this.sp_turn
       params.sp_body                  = this.sp_body

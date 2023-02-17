@@ -9,7 +9,7 @@
     :sp_turn="9"
     :sp_controller="true"
     :sp_slider="true"
-    sp_piece_variant="is_piece_variant_b"
+    sp_piece_variant="b"
     )
 </template>
 

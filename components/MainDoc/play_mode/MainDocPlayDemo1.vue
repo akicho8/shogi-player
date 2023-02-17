@@ -7,8 +7,7 @@
     :sp_turn="-1"
     :sp_slider="true"
     :sp_controller="true"
-    sp_bg_variant="is_bg_variant_a"
-    sp_debug_mode="is_debug_mode_off"
+    sp_bg_variant="a"
     sp_mode="play"
     )
 </template>

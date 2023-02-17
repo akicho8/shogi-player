@@ -1,5 +1,5 @@
 <template lang="pug">
-.OverlayNavigations(v-if="TheSp.sp_overlay_nav === 'is_overlay_nav_on'")
+.OverlayNavigations(v-if="TheSp.sp_overlay_nav")
   .OverlayNavigationItem.previous(          @click.stop.prevent="TheSp.navi_relative_move(-1, $event)")
   .OverlayNavigationItem.next(              @click.stop.prevent="TheSp.navi_relative_move(+1, $event)")
   .OverlayNavigationItem.flip_trigger_cell( @click.stop.prevent="TheSp.viewpoint_flip_handle")

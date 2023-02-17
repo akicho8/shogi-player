@@ -7,7 +7,7 @@
   .columns
     .column
       ShogiPlayer(
-        sp_piece_variant="is_piece_variant_a"
+        sp_piece_variant="a"
         :sp_controller="true"
         :sp_slider="true"
         :sp_turn="0"

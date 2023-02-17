@@ -7,8 +7,7 @@
     :sp_turn="21"
     :sp_slider="true"
     :sp_controller="true"
-    sp_bg_variant="is_bg_variant_b"
-    sp_debug_mode="is_debug_mode_off"
+    sp_bg_variant="b"
     sp_mode="play"
     sp_human_side="black"
     )

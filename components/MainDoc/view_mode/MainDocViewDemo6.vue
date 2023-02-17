@@ -5,7 +5,7 @@
   .has-text-centered
     .title.is-4 {{kifu_book_info.name}}
   ShogiPlayer(
-    sp_piece_variant="is_piece_variant_a"
+    sp_piece_variant="a"
     :sp_controller="true"
     :sp_slider="true"
     :sp_turn="-1"

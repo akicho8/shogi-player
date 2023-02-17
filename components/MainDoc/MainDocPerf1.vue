@@ -13,13 +13,13 @@
       ShogiPlayer(
         sp_body="position sfen l+n1g1g1n+l/1ks2r1+r1/1pppp1bpp/p2+b+sp+p2/9/P1P1+SP1PP/1+P+BPP1P2/1BK1GR1+R1/+L+NSG3NL b R2B3G4S5N11L99Pr2b3g4s5n11l99p 1"
         sp_mode="play"
-        sp_debug_mode="is_debug_mode_on"
+        sp_debug
         :sp_event_log="true"
         :sp_controller="true"
         :sp_setting="true"
         :sp_slider="true"
-        sp_bg_variant="is_bg_variant_b"
-        sp_piece_variant="is_piece_variant_d"
+        sp_bg_variant="b"
+        sp_piece_variant="d"
       )
 </template>
 

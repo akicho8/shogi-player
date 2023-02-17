@@ -6,7 +6,11 @@ const FOCUS_FUNCTION = false
 
 export const app_focus = {
   props: {
-    sp_turn_slider_focus: { type: String,  default: "is_turn_slider_focus_on", }, // mountedしたらスライダーにフォーカスする？
+    // mountedしたらスライダーにフォーカスする？
+    sp_mounted_focus_to_slider: {
+      type: Boolean,
+      default: false,
+    },
   },
   beforeMount() {
     if (this.debug_p) {
@@ -16,7 +20,7 @@ export const app_focus = {
     }
   },
   mounted() {
-    if (this.sp_turn_slider_focus === "is_turn_slider_focus_on") {
+    if (this.sp_mounted_focus_to_slider) {
       this.turn_slider_focus()
     }
   },
@@ -64,7 +68,7 @@ export const app_focus = {
     },
     // モバイル端末または実際タッチできる端末であればキーボードはないと見なしてスライダーにフォーカスしない
     focus_disable_p() {
-      return this.sp_mobile_p || this.devise_info.key === "is_device_touch"
+      return this.sp_mobile_p || this.devise_info.key === "touch"
     },
     sp_mobile_p() {  // mobile_p にするとグローバルで定義したものと干渉する
       return isMobile(window.navigator).any

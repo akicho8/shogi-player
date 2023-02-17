@@ -4,7 +4,7 @@
     .container
       ShogiPlayer(
         sp_layout="horizontal"
-        sp_piece_variant="is_piece_variant_b"
+        sp_piece_variant="b"
         :sp_coordinate="true"
       )
 </template>

@@ -17,7 +17,8 @@
 <!-- * 駒を持った状態で右クリックすると駒を元に戻す (ショートカットキー: `Escape` `q`) -->
 <!-- * 駒台または駒箱をクリックしたことにするショートカットキーがある (☗駒台:`b` ☖駒台:`w` 駒箱:`Escape` または `t`) -->
 * `w` `b` `Backspace` `t` は真下の駒を**自動的に持ち上げる**操作を含む
-* 修飾キーは `shift` の他に `option` `meta` `control` にも対応する
+* `shift` を押しながらの操作で同じ操作を連続で行う
+* 修飾キーは `shift` の他に `option` `meta` `control` も使える
 
 ## テクニック
 
@@ -48,4 +49,4 @@
 
 ## Playground
 
-<ShogiPlayerWcWrapper sp_mode="edit" />
+<ShogiPlayerWcWrapper sp_mode="edit" sp_preset="詰将棋" />

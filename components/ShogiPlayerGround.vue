@@ -25,23 +25,24 @@ export default {
         // それに間違った場所に指定してしまってもエラーが出ることもない
         // なので結局ここでいい
         // Buefy も同じようなことをしている
-        `is_layout_${this.TheSp.sp_layout}`,                           // is_layout_horizontal is_layout_vertical
-        `is_coordinate_variant_${this.TheSp.sp_coordinate_variant}`, // is_coordinate_variant_kanji
-        `is_name_direction_${this.TheSp.sp_name_direction}`,           // is_name_direction_horizontal
-        `is_stand_gravity_${this.TheSp.sp_stand_gravity}`,             // top
 
-        this.TheSp.sp_mobile_vertical ? "is_mobile_vertical_on" : "is_mobile_vertical_off",
-        this.TheSp.sp_coordinate      ? "is_coordinate_on"      : "is_coordinate_off",
-        this.TheSp.sp_balloon         ? "is_balloon_on"         : "is_balloon_off",
+        // String
+        this.TheSp.str_to_css_class("is_layout", this.TheSp.sp_layout),                         // is_layout_horizontal is_layout_vertical
+        this.TheSp.str_to_css_class("is_coordinate_variant", this.TheSp.sp_coordinate_variant), // is_coordinate_variant_kanji
+        this.TheSp.str_to_css_class("is_name_direction", this.TheSp.sp_name_direction),         // is_name_direction_horizontal
+        this.TheSp.str_to_css_class("is_stand_gravity", this.TheSp.sp_stand_gravity),           // is_stand_gravity_top
+        this.TheSp.str_to_css_class("is_piece_variant", this.TheSp.sp_piece_variant),           // is_piece_variant_a
+        this.TheSp.str_to_css_class("is_bg_variant", this.TheSp.sp_bg_variant),                 // is_bg_variant_a
+        this.TheSp.str_to_css_class("is_device", this.TheSp.devise_info.key),                   // is_device_touch
 
-        this.TheSp.sp_layer,
-        this.TheSp.sp_piece_variant,
-        this.TheSp.sp_bg_variant,
-
-        this.TheSp.devise_info.key,
+        // Boolean
+        this.TheSp.bool_to_css_class("is_layer", this.TheSp.sp_layer),
+        this.TheSp.bool_to_css_class("is_mobile_vertical", this.TheSp.sp_mobile_vertical),
+        this.TheSp.bool_to_css_class("is_coordinate", this.TheSp.sp_coordinate),
+        this.TheSp.bool_to_css_class("is_balloon", this.TheSp.sp_balloon),
 
         // 特殊
-        `is_viewpoint_${this.TheSp.new_viewpoint}`, // システムテストで見ている
+        `is_viewpoint_${this.TheSp.new_viewpoint}`, // is_viewpoint_black (システムテストで見ている)
       ]
     },
     component_style() {
