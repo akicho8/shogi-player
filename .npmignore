@@ -16,15 +16,20 @@
 /.rgignore
 /.node-version
 /.env.production
-/.env  
+/.env
 /.byebug_history
 /.babelrc
-/BREAKING_CHANGES.org  
+/BREAKING_CHANGES.org
 /.ruby-version
-/application.png  
+/application.png
 /Gemfile
 /Gemfile.lock
-  
+/jest.config.js
+/Rakefile
+/support.rb
+/nuxt.config.js
+/components/MainDoc
+
 # Assets
 /assets/style_editor_images
 /assets/inspect
