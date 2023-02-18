@@ -14,7 +14,7 @@
 
 <CustomizeExample name="customize/universal" />
 
-## 鬼○の刃風
+## 鬼滅の刃将棋盤風
 
 <CustomizeExample name="customize/kimetsu" />
 
