@@ -67,7 +67,7 @@
         .box
           SeTitle(name="盤テクスチャ")
 
-          b-field(custom-class="is-small" label="")
+          b-field(custom-class="is-small")
             MyColorPicker(v-model="sp_board_color")
 
           b-field.my-4(custom-class="is-small" label="プリセット画像")
@@ -76,6 +76,15 @@
                 option(:value="e.key") {{e.name}}
 
           ImageUpload(@input="sp_board_image_input_handle")
+
+        .box
+          SeTitle(name="盤のセル")
+
+          b-field(custom-class="is-small" label="偶数")
+            MyColorPicker(v-model="sp_board_even_cell_color")
+
+          b-field(custom-class="is-small" label="奇数")
+            MyColorPicker(v-model="sp_board_odd_cell_color")
 
         .box
           SeTitle(name="盤")
@@ -516,7 +525,9 @@ export default {
       se_ws_brightness: 1.0,
       se_ws_sepia: 0,
 
-      sp_board_color: "hsla(0, 0%, 0%, 0.2)",
+      sp_board_color:           "hsla(0, 0%, 0%, 0.2)",
+      sp_board_even_cell_color: "hsla(0, 0%, 0%, 0.0)",
+      sp_board_odd_cell_color: "hsla(0, 0%, 0%, 0.0)",
 
       sp_board_horizontal_gap: 0,
       sp_board_vertical_gap: 0,
@@ -724,6 +735,9 @@ export default {
       this.sp_board_radius                = 0                             // 角を丸くしない
       this.sp_board_padding               = 0                             // 隙間なし
       this.sp_board_color                 = IS_WHITE                      // 盤透過
+      this.sp_board_even_cell_color = "hsla(0, 0%, 0%, 0.0)"
+      this.sp_board_odd_cell_color  = "hsla(0, 0%, 0%, 0.0)"
+
       this.sp_grid_inner_stroke                 = 1                             // グリッド線(細)
       this.sp_grid_outer_stroke           = 2                             // グリッド枠(太)
       this.sp_board_edge_stroke = 0
@@ -900,6 +914,8 @@ export default {
 
           // 盤テクスチャ
           --sp_board_color:              ${this.hsla_format(this.sp_board_color)};
+          --sp_board_even_cell_color:    ${this.hsla_format(this.sp_board_even_cell_color)};
+          --sp_board_odd_cell_color:    ${this.hsla_format(this.sp_board_odd_cell_color)};
           --sp_board_image:              ${this.sp_board_image_url};
 
           // 盤

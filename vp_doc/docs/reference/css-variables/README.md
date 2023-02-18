@@ -8,6 +8,7 @@ sidebar: auto
 
 * 初期値は `html` に対して定義してある
   * 本当は `:root` に対して定義するべきだが node-sass の問題でできなかった
+* セルは升目のこと
 * セルと駒の占有率について
   * セルは駒をタップできる領域
   * 占有率は簡単に言えば駒の見た目の大きさになる
@@ -23,6 +24,16 @@ Default: `hsla(0, 0%, 0%, 0.2)`
 盤の色
 
 * 初期値は灰色ではなく黒の半透明なので配置する場所の背景色を変更すると調和しやすい
+
+### `--sp_board_even_cell_color`
+Default: `transparent`
+
+偶数番目のセルの色
+
+### `--sp_board_odd_cell_color`
+Default: `transparent`
+
+奇数番目のセルの色
 
 ### `--sp_board_image`
 Default: `none`
@@ -70,7 +81,6 @@ Default: `0.18`
 
 * 駒のセルの縦幅に対する割り合い
 * どこを表しているのかわかりにくい
-
 
 ## 盤上の駒
 
@@ -361,17 +371,17 @@ Default: `hsla(0, 0%, 0%, 0.75)`
 
 座標の文字色
 
-## グラウンド
+## 全体
 
 ### `--sp_ground_color`
 Default: `transparent`
 
-全体の背景色 <Badge text="非推奨" type="error" vertical="top" />
+駒台を含めた盤の領域の背景色
 
 ### `--sp_ground_image`
 Default: `none`
 
-全体の背景画像 <Badge text="非推奨" type="error" vertical="top" />
+駒台を含めた盤の領域に敷く画像
 
 ## 内部で使用
 

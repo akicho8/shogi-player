@@ -14,6 +14,8 @@
 
 <CustomizeExample name="customize/universal" />
 
-<!-- ## 鬼滅の刃 -->
-<!--  -->
-<!-- <CustomizeExample name="customize/kimetsu" /> -->
+## 鬼○の刃風
+
+<CustomizeExample name="customize/kimetsu" />
+
+https://twitter.com/hamaki_shogi/status/1404658779380088835

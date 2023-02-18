@@ -21,7 +21,8 @@ Web Components のタグを除外するのがポイントです
 <<< @/docs/.vuepress/public/examples/build_with_vue3.html{11}
 <LinkToExample name="build_with_vue3" />
 
-Web Components のタグを除外するのがポイントですがなぜか動きません <Badge text="お手上げ" type="error" vertical="top" />
+Web Components のタグを除外するのがポイントです
+が、正しく動いていません(引数が渡っていない) <Badge text="お手上げ" type="error" vertical="top" />
 
 ## Vue.js 2 + ShogiPlayer.vue
 
