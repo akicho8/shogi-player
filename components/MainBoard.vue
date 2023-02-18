@@ -23,6 +23,7 @@
           @click.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), $event)"
           @mouseover="TheSp.board_mouseover_handle(logical_xy(x, y), $event)"
           @mouseleave="TheSp.mouseleave_handle"
+          :class="cell_class(x, y)"
           )
           PieceTap(
             :class="TheSp.board_piece_tap_class(logical_xy(x, y))"
@@ -46,6 +47,13 @@ export default {
     this.TheSp.$data._MainBoardRenderCount += 1
   },
   methods: {
+    cell_class(x, y) {
+      if (((x + y) & 1) === 0) {
+        return "even"
+      } else {
+        return "odd"
+      }
+    },
     logical_xy(x, y) {
       x = x + Board.dimension - this.TheSp.sp_board_dimension_w
       y = y + Board.dimension - this.TheSp.sp_board_dimension_h
@@ -75,6 +83,8 @@ export default {
 .ShogiPlayerGround
   // 全体背景と同じ構成
   +defvar(sp_board_color, hsla(0, 0%, 0%, 0.2))      // 盤の色
+  +defvar(sp_board_even_cell_color, transparent) // セルの色
+  +defvar(sp_board_odd_cell_color,  transparent) // セルの色
   +defvar(sp_board_image, none)                    // 盤画像
 
   +defvar(sp_board_padding, 0.015)                 // 盤の隅の隙間
@@ -132,6 +142,11 @@ export default {
     // ちなみに flex であれば height: 100% で均等になる
     height: calc(100.0% / var(--sp_board_dimension_h))
 
+    &.even
+      background-color: var(--sp_board_even_cell_color)
+    &.odd
+      background-color: var(--sp_board_odd_cell_color)
+
   // border が MainBoardTexture に負けるので入れ子にしている
   // td
   //   +is_overlay_origin
@@ -139,6 +154,7 @@ export default {
   //     +is_overlay_block
   //     // border: calc(var(--sp_grid_inner_stroke) * 1px) solid var(--sp_grid_inner_color)
 
+  // 星
   .BoardRow:nth-child(3n+4)
     .BoardColumn:nth-child(3n+4)
       position: relative

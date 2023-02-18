@@ -2,14 +2,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.375/dist/shogi-player-wc.min.js"></script> -->
-  <script src="../../dist/development/shogi-player-wc.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.375/dist/shogi-player-wc.min.js"></script>
+  <!-- <script src="../../dist/development/shogi-player-wc.min.js"></script> -->
+  <!-- <script src="../../dist/shogi-player-wc.min.js"></script> -->
   <style>
     * {
       box-sizing: border-box;
     }
     html {
-      background-color: hsl(0,0%,20%);
+      background-color: hsl(0,5%,15%);
     }
     body {
       padding: 0;
@@ -29,19 +30,24 @@
       width: 100%;
     }
     shogi-player-wc::part(spwc_style_scope) {
-      --sp_grid_inner_color: hsl(0,50%,50%);
-      --sp_grid_outer_color: hsl(0,50%,50%);
-      --sp_star_color:       hsl(0,50%,50%);
-      --sp_board_edge_color: hsl(0,50%,50%);
+      /* 色 */
+      --sp_board_color: transparent;                  /* 盤の色 */
+      --sp_board_even_cell_color: hsla(0,0%,100%,5%); /* 盤の偶数セルの色 */
+      --sp_grid_inner_color: hsl(0,50%,50%);          /* 内側の線の色 */
+      --sp_grid_outer_color: hsl(0,50%,50%);          /* 外側の線の色 */
+      --sp_board_edge_color: hsl(0,50%,50%);          /* 盤の縁取りの色 */
+      --sp_star_color:       hsl(0,50%,50%);          /* 星の色 */
 
-      --sp_board_color: transparent;          /* 盤の色を白にする */
-      --sp_board_padding: 0.01;                  /* グリッド外周と縁の隙間を無くす */
-      --sp_board_radius: 0;                   /* 角を丸めない */
-      --sp_board_edge_stroke: 2;
-      --sp_grid_inner_stroke: 0.5;            /* グリッド内線は細くする(お好みで調整) */
-      --sp_grid_outer_stroke: 2;              /* グリッド外枠を内線より太くする(お好みで調整) */
-      --sp_player_name_size: 0.4;             /* "先手" "後手" の文字サイズ調整 */
-      --sp_location_mark_inactive_size: 1.0;  /* 手番でない方の☗☖の比率を変更しない */
+      /* 線の太さ */
+      --sp_grid_inner_stroke: 0.5;                    /* 内側の線を細くする(お好みで調整) */
+      --sp_grid_outer_stroke: 2;                      /* 外側の線を太くする(お好みで調整) */
+      --sp_board_edge_stroke: 2;                      /* 盤の縁取をは太くする(お好みで調整) */
+
+      /* その他 */
+      --sp_board_padding: 0.01;                       /* グリッド外周と縁の隙間 */
+      --sp_board_radius: 0;                           /* 角を丸めない */
+      --sp_player_name_size: 0.4;                     /* "先手" "後手" の文字サイズ調整 */
+      --sp_location_mark_inactive_size: 1.0;          /* 手番でない方の☗☖の比率を変更しない */
     }
   </style>
 </head>

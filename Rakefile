@@ -165,6 +165,8 @@ end
 
 desc "CDN Validations"
 task :cdn do
+  tp :local => package_version
+
   tp "JSDelivr"
   system <<~EOT
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js | grep 'x-jsd-version:'
