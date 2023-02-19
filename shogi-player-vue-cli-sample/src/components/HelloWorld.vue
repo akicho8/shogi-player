@@ -39,7 +39,7 @@ $sp_assets_dir: "shogi-player/assets"
 @import "shogi-player/components/ShogiPlayer.sass"
 
 // これは public/index.html で普通に読み込んだ方がいい
-@import url("https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css")
+@import url("https://unpkg.com/@mdi/font/css/materialdesignicons.min.css")
 
 // このあとで +mobile などを使いたいため
 @import "~bulma/sass/utilities/_all"

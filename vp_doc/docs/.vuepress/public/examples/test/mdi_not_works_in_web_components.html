@@ -2,7 +2,7 @@
   <script>
     const template = document.createElement("template")
     template.innerHTML = `
-<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<link crossorigin="anonymous" href="https://unpkg.com/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
 <i class="mdi mdi-account"></i>
 `
     class MyTag extends HTMLElement {
@@ -13,12 +13,12 @@
         } else {
           this.appendChild(template.content.cloneNode(true))
         }
-        this.innerHTML = `<link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">`
+        this.innerHTML = `<link href="https://unpkg.com/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">`
 
        //   this.innerHTML = `<style>
        // @font-face {
        //   font-family: "Material Design Icons";
-       //   src: url(https://cdn.jsdelivr.net/npm/@mdi/font/fonts/materialdesignicons-webfont.woff2?v=7.1.96) format("woff");
+       //   src: url(https://unpkg.com/@mdi/font/fonts/materialdesignicons-webfont.woff2?v=7.1.96) format("woff");
        // }
         // </style>`
       }

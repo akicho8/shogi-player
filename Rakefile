@@ -239,7 +239,20 @@ task :e => :examples
 desc "[e] examples"
 task :examples do
   system <<~EOT
-  # fd -g "*.html" vp_doc/docs/.vuepress/public/examples/customize -X open -a "Google Chrome"
-  fd -a -g "*.html" vp_doc/docs/.vuepress/public/examples/customize -X open -a "Google Chrome" --new --args
+  fd -a -g "*.html" vp_doc/docs/.vuepress/public/examples -X open -a "Google Chrome" --new --args
+  EOT
+end
+
+desc "jsdelivr_to_unpkg"
+task :jsdelivr_to_unpkg do
+  system <<~EOT
+  r -Qx '"https://cdn.jsdelivr.net/npm/' '"https://unpkg.com/'
+  EOT
+end
+
+desc "unpkg_to_jsdelivr"
+task :unpkg_to_jsdelivr do
+  system <<~EOT
+  r -Qx '"https://unpkg.com/' '"https://cdn.jsdelivr.net/npm/'
   EOT
 end
