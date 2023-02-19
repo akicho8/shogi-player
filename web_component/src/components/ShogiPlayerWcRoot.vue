@@ -180,9 +180,6 @@ export default {
 </script>
 
 <style lang="sass">
-:host
-  background-color: red
-
 // Shadow DOM 内で読み込むと i タグに適用されるが「×」の状態になる
 // どこが問題なのかよくわかっていないが外側でもさらに読み込むと「×」が解消される
 @import url("https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css")

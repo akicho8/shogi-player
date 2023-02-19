@@ -417,9 +417,9 @@ export default {
         list.push(soldier.location.flip_if(this.fliped).position_key)
       }
 
-      if (this.sp_board_cell_class_fn) {
-        list = _.concat(list, this.sp_board_cell_class_fn(place))
-      }
+      // if (this.sp_board_cell_class_fn) {
+      //   list = _.concat(list, this.sp_board_cell_class_fn(place))
+      // }
 
       return list
     },

@@ -129,6 +129,14 @@ export class Place {
     return [this.human_x, this.human_y].join("")
   }
 
+  get even_p() {
+    return ((this.human_x + this.human_y) & 1) === 0
+  }
+
+  get odd_p() {
+    return !this.even_p
+  }
+
   // x, y を足した新しい位置を返す
   // はみでたのは反対側の座標とする
   rotate_add(x, y) {

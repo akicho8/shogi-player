@@ -23,7 +23,7 @@
           @click.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), $event)"
           @mouseover="TheSp.board_mouseover_handle(logical_xy(x, y), $event)"
           @mouseleave="TheSp.mouseleave_handle"
-          :class="cell_class(x, y)"
+          :class="cell_class(logical_xy(x, y))"
           )
           PieceTap(
             :class="TheSp.board_piece_tap_class(logical_xy(x, y))"
@@ -32,8 +32,11 @@
 </template>
 
 <script>
+import _ from "lodash"
+
 import { support } from "./support.js"
 import { Board   } from "./models/board.js"
+import { Place   } from "./models/place.js"
 
 import PieceTap from "./PieceTap.vue"
 
@@ -47,12 +50,16 @@ export default {
     this.TheSp.$data._MainBoardRenderCount += 1
   },
   methods: {
-    cell_class(x, y) {
-      if (((x + y) & 1) === 0) {
-        return "even"
-      } else {
-        return "odd"
+    cell_class(xy) {
+      const place = Place.fetch(xy)
+      let list = []
+      // console.log(xy[0], xy[1], place.human_x, place.human_y, (place.human_x + place.human_y), place.even_p)
+      list.push(place.even_p ? "even" : "odd")
+      const fn = this.TheSp.sp_board_cell_class_fn
+      if (fn) {
+        list = _.concat(list, fn(place))
       }
+      return list
     },
     logical_xy(x, y) {
       x = x + Board.dimension - this.TheSp.sp_board_dimension_w

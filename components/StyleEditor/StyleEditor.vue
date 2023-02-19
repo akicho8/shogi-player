@@ -467,7 +467,10 @@
   .Workspace.is-overlay
     .WorkspaceBackground.is-overlay
     .ShogiPlayerWrap
-      ShogiPlayer(v-bind="sp_params")
+      ShogiPlayer(
+      v-bind="sp_params"
+      :sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && '天王山'"
+      )
 </template>
 
 <script>
