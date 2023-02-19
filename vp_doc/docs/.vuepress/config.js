@@ -19,11 +19,13 @@ module.exports = {
    */
   head: [
     // ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
-    // ['meta', { name: 'og:url', content: 'https://example.com/' }],
-    // ['meta', { name: 'og:type', content: 'website' }],
-    // ['meta', { name: 'og:title', content: 'example title' }],
-    // ['meta', { name: 'og:description', content: 'example description' }],
-    // ['meta', { name: 'og:image', content: '/og.png' }]
+
+    ['meta', { name: 'twitter:card',   content: 'summary_large_image'               }],
+    ['meta', { name: 'og:url',         content: 'https://shogi-player.netlify.app/' }],
+    ['meta', { name: 'og:type',        content: 'website'                           }],
+    ['meta', { name: 'og:title',       content: 'ShogiPlayer Docs'                  }],
+    ['meta', { name: 'og:description', content: description                         }],
+    ['meta', { name: 'og:image',       content: '/application.png'                  }],
 
     // @vuepress/plugin-google-analytics は 2 専用だった？
     // https://github.com/vuejs/vuepress/issues/2713#issuecomment-806621348
