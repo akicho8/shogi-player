@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <my-tag></my-tag>
+    <script>
+      customElements.define("my-tag", class extends HTMLElement {
+        constructor() {
+          super();
+          this.attachShadow({mode: "open" });
+          this.shadowRoot.innerHTML = `
+        <style>@import url('https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css');</style>
+        <span class="mdi mdi-home"></span>
+      `;
+          }
+          connectedCallback () {
+            this.innerHTML = `<style>
+          @font-face {
+            font-family: "Material Design Icons";
+            src: url("https://cdn.materialdesignicons.com/4.9.95/fonts/materialdesignicons-webfont.woff?v=4.9.95") format("woff");
+          }
+       </style>`
+          }
+        }
+      );
+      </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+<body>
+  <my-tag></my-tag>
+  <script>
+    const mdi_css = `<link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">`
+
+    const template = document.createElement("template")
+    template.innerHTML = `
+${mdi_css}
+<i class="mdi mdi-account"></i>
+`
+    class MyTag extends HTMLElement {
+      connectedCallback() {
+        this.attachShadow({mode: "open"})
+        this.shadowRoot.appendChild(template.content.cloneNode(true))
+        this.innerHTML = mdi_css
+      }
+    }
+    customElements.define("my-tag", MyTag)
+  </script>
+</body>
+</html>

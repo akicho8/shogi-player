@@ -31,10 +31,9 @@
 
 ## コントローラーを表示する ##
 
-<<< @/docs/.vuepress/public/examples/mdi.html{5,10}
+<<< @/docs/.vuepress/public/examples/mdi.html{10}
 <LinkToExample name="mdi" />
 
-1. Material Design Icons の CSS を読み込む
 1. `sp_controller="true"` を指定する
 
 <!-- <ShogiPlayerWcWrapper -->
@@ -42,10 +41,6 @@
 <!--   sp_controller="true" -->
 <!--   sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b" -->
 <!-- /> -->
-
-::: warning なぜ @mdi/font の読み込みが必要？
-Web Components 内部ですでに読み込んでいるにもかかわらず外部でも読み込まないとコントローラーの矢印アイコンが正しく表示されないので仕方なく読み込んでいる
-:::
 
 ## スタイル変更 ##
 
@@ -160,7 +155,3 @@ Uncaught SyntaxError: Invalid regular expression: /.../: Range out of order in c
 ### スマホで画面ズームしてしまう
 
 同上
-
-### アイコンが化ける
-
-`<head>` 内に `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">` を追加する

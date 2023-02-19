@@ -101,7 +101,14 @@ export default {
     // 本当は Function
     sp_board_cell_class_fn:            { type: String,  }, // セルのクラスを決める処理
   },
-  mounted() {
+  beforeMount() {
+    const unique_id = "bdf2da9503326784806e006ec9c11bcf"
+    if (!document.getElementById(unique_id)) {
+      const template = document.createElement("template")
+      template.innerHTML = `<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" id="${unique_id}">`
+      const el = document.querySelector("head") // body でも良い
+      el.appendChild(template.content.cloneNode(true))
+    }
     if (this.development_p) {
       this.inspect_print()
     }
@@ -115,6 +122,11 @@ export default {
       console.log("props_native", this.props_native)
       console.log("EventList", EventList)
       console.log("event_chain", this.event_chain)
+    },
+    debug_log(...args) {
+      if (this.development_p) {
+        console.debug(...args)
+      }
     },
   },
   computed: {
@@ -168,6 +180,9 @@ export default {
 </script>
 
 <style lang="sass">
+:host
+  background-color: red
+
 // Shadow DOM 内で読み込むと i タグに適用されるが「×」の状態になる
 // どこが問題なのかよくわかっていないが外側でもさらに読み込むと「×」が解消される
 @import url("https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css")
