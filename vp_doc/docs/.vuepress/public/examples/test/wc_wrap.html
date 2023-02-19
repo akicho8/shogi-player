@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.376/dist/shogi-player-wc.min.js"></script>
+  <script>
+    class MyShogiPlayer extends HTMLElement {
+      constructor() {
+        super()
+        console.log("constructor", this.getAttribute("sp_body"))
+        this.sp_body = this.getAttribute("sp_body")
+        this.attachShadow({mode: "open"})
+      }
+
+      connectedCallback() {
+        console.log("connectedCallback", this.getAttribute("sp_body"))
+        this.sp_body = this.getAttribute("sp_body")
+        this.render()
+      }
+
+      static get observedAttributes() {
+        return ["sp_body"]
+      }
+
+      attributeChangedCallback(name, old_value, new_value) {
+        console.log("constructor", this.getAttribute("sp_body"))
+        if (name === "sp_body") {
+          this.sp_body = new_value
+          console.log("new", new_value)
+        }
+        console.log(this.dataset)
+        if (this.isConnected) {
+          this.render()
+        }
+      }
+
+      render() {
+        this.shadowRoot.innerHTML = `
+          <style>
+            shogi-player-wc {
+              display: block;
+              width: 100px;
+            }
+            shogi-player-wc::part(spwc_style_scope) {
+              --sp_board_color: blue;
+            }
+          </style>
+          <shogi-player-wc sp_body="${this.sp_body}"></shogi-player-wc>
+        `
+      }
+    }
+    customElements.define("my-shogi-player", MyShogiPlayer)
+
+    setTimeout(() => {
+      const el = document.querySelector('my-shogi-player')
+      el.sp_body = "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f"
+      console.log(el.sp_body)
+      el.render()
+    }, 1000 * 2)
+    </script>
+</head>
+<body>
+  <my-shogi-player sp_body="position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+"></my-shogi-player>
+</body>
+</html>

@@ -234,3 +234,12 @@ desc "[v] version"
 task :version do
   puts package_version
 end
+
+task :e => :examples
+desc "[e] examples"
+task :examples do
+  system <<~EOT
+  # fd -g "*.html" vp_doc/docs/.vuepress/public/examples/customize -X open -a "Google Chrome"
+  fd -a -g "*.html" vp_doc/docs/.vuepress/public/examples/customize -X open -a "Google Chrome" --new --args
+  EOT
+end

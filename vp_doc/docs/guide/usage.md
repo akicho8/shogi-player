@@ -7,6 +7,11 @@
 
 上の2行だけのHTMLを作るか既存のサイトにコピペして動けば次へ
 
+<!-- ::: warning 注意 -->
+<!-- `<shogi-player-wc/>` とすると複数配置できなくなる罠がある (なぜかはわからない) -->
+<!-- 冗長だが `<shogi-player-wc></shogi-player-wc>` が正しい -->
+<!-- ::: -->
+
 ## 文字コードやスマホを考慮する
 
 <<< @/docs/.vuepress/public/examples/simple.html{3-4}
