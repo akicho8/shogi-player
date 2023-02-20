@@ -1,24 +1,24 @@
 <template lang="pug">
-.PieceBox(
-  v-if="TheSp.edit_p"
-  :class="component_class"
-  @click.stop.prevent="TheSp.piece_box_other_click"
-  @click.right.prevent="TheSp.hold_cancel"
-  )
-  // PieceBoxPieces を is-overlay にしないとPieceBoxPiecesの背景にPieceBoxTextureの色の非透明度が影響してしまう
-  .PieceBoxTexture.is-overlay
-  .PieceBoxPieces.is-overlay
-    .PieceWithCount(
-      v-for="[piece, count] in TheSp.xcontainer.piece_box_realize()"
-      @click.stop.prevent="TheSp.piece_box_piece_click(piece, $event)"
-      @mouseover="TheSp.piece_box_mouseover_handle(piece, $event)"
-      @mouseleave="TheSp.mouseleave_handle"
-      )
-      PieceTap(
-        :class="piece_box_piece_tap_class(piece)"
-        :piece_texture_class="piece_box_piece_texture_class(piece)"
-        :count="count"
+.PieceBox(v-if="TheSp.edit_p")
+  .PieceBoxInside(
+    :class="component_class"
+    @click.stop.prevent="TheSp.piece_box_other_click"
+    @click.right.prevent="TheSp.hold_cancel"
+    )
+    // PieceBoxPieces を is-overlay にしないとPieceBoxPiecesの背景にPieceBoxTextureの色の非透明度が影響してしまう
+    .PieceBoxTexture.is-overlay
+    .PieceBoxPieces.is-overlay
+      .PieceWithCount(
+        v-for="[piece, count] in TheSp.xcontainer.piece_box_realize()"
+        @click.stop.prevent="TheSp.piece_box_piece_click(piece, $event)"
+        @mouseover="TheSp.piece_box_mouseover_handle(piece, $event)"
+        @mouseleave="TheSp.mouseleave_handle"
         )
+        PieceTap(
+          :class="piece_box_piece_tap_class(piece)"
+          :piece_texture_class="piece_box_piece_texture_class(piece)"
+          :count="count"
+          )
 </template>
 
 <script>
@@ -89,10 +89,14 @@ export default {
   --sp_common_gap_real_px: calc(var(--sp_cell_h) * var(--sp_common_gap))
 
   .PieceBox
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
     @extend %is_unselectable
+
+  .PieceBoxInside
     min-height: var(--sp_cell_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
-    margin-left: auto
-    margin-right: auto
     width: var(--sp_board_w)
 
   .PieceBoxPieces
@@ -111,19 +115,27 @@ export default {
       margin-top: var(--sp_common_gap_real_px)
   +IF_VERTICAL
     .PieceBox
-      margin-top: 0
+      margin-top: 0  // 縦の場合、上は持駒が並んでいて(見た目上の)隙間があるので隙間を作らないでよい
 
   //////////////////////////////////////////////////////////////////////////////// 駒持ってhoverしたとき全体にborder
-  .PieceBox
+  .PieceBoxInside
     &.frame_boder_if_hover
       &:hover
         .PieceBoxTexture
-          border: var(--sp_stand_hover_border_stroke) dashed calc(var(--sp_stand_hover_border_color) * 1px)
+          border: calc(var(--sp_stand_hover_border_stroke) * 1px) dashed var(--sp_stand_hover_border_color)
 
   ////////////////////////////////////////////////////////////////////////////////
-  .PieceBox
+  .PieceBoxInside
     +is_overlay_origin
-  .PieceBoxTexture
-    background-color: var(--sp_piece_box_color)
-    border-radius: calc(var(--sp_board_radius) * 1px)
+    .PieceBoxTexture
+      background-color: var(--sp_piece_box_color)
+      border-radius: calc(var(--sp_board_radius) * 1px)
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  &.is_layer_on
+    .PieceBox
+      +is_layer_border
+    .PieceBoxInside
+      +is_layer_border
 </style>
