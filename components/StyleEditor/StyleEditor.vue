@@ -603,7 +603,7 @@ export default {
       sp_coordinate_x_size: 0.125,
       sp_coordinate_y_size: 0.168,
       sp_coordinate_x_push: 0.014,
-      sp_coordinate_y_push: -0.034,
+      sp_coordinate_y_push: -0.009,
       sp_coordinate_color: "hsla(0, 0%, 0%, 0.75)",
 
       ////////////////////////////////////////////////////////////////////////////////

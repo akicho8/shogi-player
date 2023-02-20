@@ -357,7 +357,7 @@ Default: `0.168`
 盤面の右に表示するY座標の文字サイズ
 
 ### `--sp_coordinate_y_push`
-Default: `-0.034`
+Default: `-0.009`
 
 盤面の右に表示するY座標の位置調整
 
