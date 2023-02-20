@@ -1,7 +1,5 @@
 require "table_format"
-require "./support"
-
-include Support
+require "./package"
 
 task :default => :test
 
@@ -54,12 +52,12 @@ namespace :old_doc do
 
   desc "build"
   task :build do
-    # web_component を退避させないと nuxt generate で死ぬ (問題は相対パス参照)
+    # web_component を退避させないと "shogi-player": "file:.." の参照が無限ループになって nuxt generate で死ぬ
     system <<~EOT
-    mv web_component /tmp
-    nuxt generate --dotenv .env.production
-    mv /tmp/web_component .
-      EOT
+    mv web_component "/tmp"
+    nuxt generate --dotenv ".env.production"
+    mv /tmp/web_component '.'
+    EOT
   end
 
   desc "push"
@@ -92,7 +90,7 @@ end
 desc "example_cdn_version_replace"
 task :example_cdn_version_replace do
   system <<~EOT
-  r 'shogi-player@\\d+\\.\\d+\.\\d+' 'shogi-player@#{package_version}' -x
+  r 'shogi-player@\\d+\\.\\d+\.\\d+' 'shogi-player@#{Package.version}' -x
   git add -A && git commit -m "[docs] vs_doc/* 内の cdn の新しいバージョン指定"
   EOT
 end
@@ -120,52 +118,39 @@ task :copy do
     EOT
 end
 
-task :d => "doc:server"
-namespace :doc do
-  desc "[d] server"
-  task :server do
-    system <<~EOT
-    cd vp_doc && rake server
-    EOT
-  end
-
-  desc "build"
-  task :build do
-    system <<~EOT
-    cd vp_doc && rake build
-    EOT
-  end
-end
-
 task :n => "netlify:open"
 namespace "netlify" do
   desc "[n] netlify open"
   task :open do
     system <<~EOT
+    npm docs
     open https://app.netlify.com/sites/shogi-player/overview
     EOT
   end
 end
 
 task :o => :open
-desc "[o] open document"
-task :open do
+desc "[o] open related sites"
+task :open => ["netlify:open", "ga"] do
   system <<~EOT
-  open https://shogi-player.netlify.app/
+  open https://github.com/akicho8/shogi-player
+  # CDN
+  open "https://cdn.jsdelivr.net/npm/shogi-player/"
+  open "https://unpkg.com/shogi-player/"
   EOT
 end
 
 desc "[ga] Google Analytics"
 task :ga do
   system <<~EOT
-  open https://analytics.google.com/analytics/web/#/p353291851/reports/intelligenthome
-    open https://tagassistant.google.com/
+  open "https://analytics.google.com/analytics/web/#/p353291851/reports/intelligenthome"
+  # open https://tagassistant.google.com
   EOT
 end
 
 desc "CDN Validations"
 task :cdn do
-  tp :local => package_version
+  tp :local => Package.version
 
   tp "JSDelivr"
   system <<~EOT
@@ -232,27 +217,47 @@ end
 task :v => :version
 desc "[v] version"
 task :version do
-  puts package_version
+  # system <<~EOT
+  # npm version
+  # EOT
+  puts Package.version
 end
 
-task :e => :examples
-desc "[e] examples"
-task :examples do
-  system <<~EOT
-  fd -a -g "*.html" vp_doc/docs/.vuepress/public/examples -X open -a "Google Chrome" --new --args
-  EOT
-end
+task :e => "doc:examples"
+task :d => "doc:server"
+namespace :doc do
+  desc "[d] server"
+  task :server do
+    system <<~EOT
+    cd vp_doc && rake server
+    EOT
+  end
 
-desc "jsdelivr_to_unpkg"
-task :jsdelivr_to_unpkg do
-  system <<~EOT
-  r -Qx '"https://cdn.jsdelivr.net/npm/' '"https://unpkg.com/'
-  EOT
-end
+  desc "build"
+  task :build do
+    system <<~EOT
+    cd vp_doc && rake build
+    EOT
+  end
 
-desc "unpkg_to_jsdelivr"
-task :unpkg_to_jsdelivr do
-  system <<~EOT
-  r -Qx '"https://unpkg.com/' '"https://cdn.jsdelivr.net/npm/'
-  EOT
+  desc "[e] examples"
+  task :examples do
+    system <<~EOT
+    fd -a -g "*.html" vp_doc/docs/.vuepress/public/examples -X open -a "Google Chrome" --new --args
+    EOT
+  end
+
+  desc "jsdelivr_to_unpkg"
+  task :jsdelivr_to_unpkg do
+    system <<~EOT
+    r -Qx '"https://cdn.jsdelivr.net/npm/' '"https://unpkg.com/'
+    EOT
+  end
+
+  desc "unpkg_to_jsdelivr"
+  task :unpkg_to_jsdelivr do
+    system <<~EOT
+    r -Qx '"https://unpkg.com/' '"https://cdn.jsdelivr.net/npm/'
+    EOT
+  end
 end
