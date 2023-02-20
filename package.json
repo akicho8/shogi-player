@@ -1,12 +1,20 @@
 {
   "name": "shogi-player",
   "version": "0.0.378",
-  "description": "A Vue.js 2 component for playing, manipulating, and editing shogi, with a Web Components version also available.",
+  "description": "Shogi component of Vue.js for playing, manipulating, and editing, with web components version also available",
   "keywords": "shogi kif bod sfen viewer editor player vue.js vue2 vue web-components japanese-chess",
   "homepage": "https://shogi-player.netlify.app/",
   "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
   "main": "dist/shogi-player-wc.min.js",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:akicho8/shogi-player.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akicho8/shogi-player/issues",
+    "email" : "pinpon.ikeda@gmail.com"
+  },
   "scripts": {
     "dev": "nuxt dev -p 5000",
     "build": "nuxt build",
