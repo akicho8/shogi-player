@@ -752,7 +752,7 @@ export default {
       this.sp_player_info.black.name      = "先手"
       this.sp_player_info.white.name      = "後手"
 
-      this.sp_coordinate                 = "true"            // 座標を表示する
+      this.sp_coordinate                 = true            // 座標を表示する
       this.sp_coordinate_variant         = "kanji" // 座標の種類
       this.sp_board_horizontal_gap        = 0.2                            // 座標があるため盤面の左右を空ける
       this.sp_coordinate_x_push           = 0.05                          // 座標調整
