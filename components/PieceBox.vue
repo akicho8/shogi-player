@@ -92,7 +92,7 @@ export default {
 
   .PieceBoxInside
     min-height: var(--sp_cell_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
-    width: var(--sp_board_w)
+    width: var(--sp_board_w)     // 横幅を最大ではなく盤の幅に合わせる
 
   .PieceBoxPieces
     display: flex
@@ -119,14 +119,14 @@ export default {
         .PieceBoxTexture
           border: calc(var(--sp_stand_hover_border_stroke) * 1px) dashed var(--sp_stand_hover_border_color)
 
-  ////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////// color
   .PieceBoxInside
     +is_overlay_origin
     .PieceBoxTexture
       background-color: var(--sp_piece_box_color)
       border-radius: calc(var(--sp_board_radius) * 1px)
 
-  ////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////// layer
 
   &.is_layer_on
     .PieceBox
