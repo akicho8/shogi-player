@@ -30,7 +30,7 @@ module.exports = {
     // https://ogp.me/
     ["meta", { property: "og:url",         content: package.homepage                     }],
     ["meta", { property: "og:type",        content: "website"                            }],
-    ["meta", { property: "og:title",       content: "shogi-player docs"                  }],
+    ["meta", { property: "og:title",       content: "shogi-player documents"             }],
     ["meta", { property: "og:description", content: package.description                  }],
     ["meta", { property: "og:image",       content: package.homepage + "application.png" }],
     ["meta", { property: "og:locale",      content: "ja_JP"                              }],
