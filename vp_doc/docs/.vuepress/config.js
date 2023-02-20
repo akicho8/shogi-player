@@ -1,4 +1,4 @@
-const { description } = require('../../package')
+const package = require('../../../package.json')
 
 module.exports = {
   /**
@@ -8,7 +8,7 @@ module.exports = {
   /**
    * ref: https://v1.vuepress.vuejs.org/config/#description
    */
-  description: description,
+  description: package.description,
 
   // lang: "ja-JP", ← 効かない
 
@@ -18,14 +18,15 @@ module.exports = {
    * ref: https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
-    // ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
 
-    ['meta', { name: 'twitter:card',   content: 'summary_large_image'               }],
-    ['meta', { name: 'og:url',         content: 'https://shogi-player.netlify.app/' }],
-    ['meta', { name: 'og:type',        content: 'website'                           }],
-    ['meta', { name: 'og:title',       content: 'ShogiPlayer Docs'                  }],
-    ['meta', { name: 'og:description', content: description                         }],
-    ['meta', { name: 'og:image',       content: '/application.png'                  }],
+    // OGP
+    ['meta', { name: 'twitter:card',   content: 'summary_large_image' }],
+    ['meta', { name: 'og:url',         content: package.homepage      }],
+    ['meta', { name: 'og:type',        content: 'website'             }],
+    ['meta', { name: 'og:title',       content: 'shogi-player docs'   }],
+    // ['meta', { name: 'og:description', content: package.description   }],
+    ['meta', { name: 'og:image',       content: '/application.png'    }],
 
     // @vuepress/plugin-google-analytics は 2 専用だった？
     // https://github.com/vuejs/vuepress/issues/2713#issuecomment-806621348

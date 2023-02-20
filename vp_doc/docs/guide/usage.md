@@ -29,12 +29,13 @@
 * **sp_turn**: 局面を指定する
 * **sp_overlay_nav**: 盤面タップで局面を動かす
 
-## コントローラーを表示する ##
+## コントローラー類を表示する ##
 
-<<< @/docs/.vuepress/public/examples/mdi.html{10}
-<LinkToExample name="mdi" />
+<<< @/docs/.vuepress/public/examples/view_with_controller.html{10-11}
+<LinkToExample name="view_with_controller" />
 
 1. `sp_controller="true"` を指定する
+1. `sp_slider="true"` を指定する
 
 <!-- <ShogiPlayerWcWrapper -->
 <!--   class="is-small" -->
@@ -61,7 +62,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 ## スタイル変更 (実験的) ##
 
 <!-- <CustomizeExample2 name="spwc_style_hash" /> -->
-<<< @/docs/.vuepress/public/examples/spwc_style_hash.html{8}
+<<< @/docs/.vuepress/public/examples/spwc_style_hash.html{9}
 <LinkToExample name="spwc_style_hash" />
 
 引数の `spwc_style_hash` に書いても変更できるようにしてある
