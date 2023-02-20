@@ -39,23 +39,12 @@
  */
 
 
-/**
- * @license
- * Lodash <https://lodash.com/>
- * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-
 /*!
  * XRegExp Unicode Scripts 4.4.1
  * <xregexp.com>
  * Steven Levithan (c) 2010-present MIT License
  * Unicode data by Mathias Bynens <mathiasbynens.be>
  */
-
 
 /**
  * chroma.js - JavaScript library for color conversions
@@ -112,6 +101,13 @@
  * http://www.w3.org/TR/css3-color/#svg-color
  *
  * @preserve
+ */
+
+
+/*!
+ * Vue.js v2.6.14
+ * (c) 2014-2021 Evan You
+ * Released under the MIT License.
  */
 
 
@@ -134,18 +130,13 @@
  */
 
 
-/*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
- * Released under the MIT License.
- */
-
-
-/*!
- * XRegExp Unicode Scripts 4.4.1
- * <xregexp.com>
- * Steven Levithan (c) 2010-present MIT License
- * Unicode data by Mathias Bynens <mathiasbynens.be>
+/**
+ * @license
+ * Lodash <https://lodash.com/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  */
 
 
@@ -204,4 +195,20 @@
  * http://www.w3.org/TR/css3-color/#svg-color
  *
  * @preserve
+ */
+
+
+/*!
+ * XRegExp Unicode Scripts 4.4.1
+ * <xregexp.com>
+ * Steven Levithan (c) 2010-present MIT License
+ * Unicode data by Mathias Bynens <mathiasbynens.be>
+ */
+
+
+/*!
+ * XRegExp Unicode Scripts 4.4.1
+ * <xregexp.com>
+ * Steven Levithan (c) 2010-present MIT License
+ * Unicode data by Mathias Bynens <mathiasbynens.be>
  */
