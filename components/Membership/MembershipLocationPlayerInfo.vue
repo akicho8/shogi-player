@@ -51,7 +51,7 @@ export default {
   +defvar(sp_player_time_size, 0.25)       // 対局者の時間の表示サイズ
 
   .MembershipLocationPlayerInfo
-    font-size: calc(var(--sp_base_h) * var(--sp_player_name_size))
+    font-size: calc(var(--sp_cell_h) * var(--sp_player_name_size))
     word-break: break-all
     flex-shrink: 0 // 縮小しない(縦置き時に駒台の横幅を100%にするとここが縮小しようとして1文字ずつ折り返しになる、のを防ぐ)
 
@@ -81,7 +81,7 @@ export default {
 
   .MembershipLocationPlayerInfoTime
     white-space: nowrap         // 時間は絶対に折り返させない
-    font-size: calc(var(--sp_base_h) * var(--sp_player_time_size))
+    font-size: calc(var(--sp_cell_h) * var(--sp_player_time_size))
 
   &.is_balloon_on
     .MembershipLocationPlayerInfo
@@ -109,7 +109,7 @@ export default {
   // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
   +IF_HORIZONTAL
     .MembershipLocationPlayerInfo
-      max-width: var(--sp_base_w)
+      max-width: var(--sp_cell_w)
       line-height: 110%         // 元々100%にしていたくっつきすぎな印象がある
 
   // 縦幅がわりと自由につかえるので隙間をあける

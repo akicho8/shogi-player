@@ -49,7 +49,7 @@ export default {
       return {
         "--sp_board_dimension_w": this.TheSp.sp_board_dimension_w,
         "--sp_board_dimension_h": this.TheSp.sp_board_dimension_h,
-        ...this.TheSp.css_variables_sp_base_wh,
+        ...this.TheSp.ro_css_variables_hash,
       }
     },
   },

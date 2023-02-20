@@ -29,7 +29,7 @@
 
       // 横軸表記の位置調整
       td:before
-        font-size: calc(var(--sp_base_h) * var(--sp_coordinate_x_size))
+        font-size: calc(var(--sp_cell_h) * var(--sp_coordinate_x_size))
         display: flex
 
         // 方法(1) - 高さ1remの中央に合わせる = 拡縮の基点が中央になる
@@ -50,7 +50,7 @@
         // font-size と width の両方に指定することで次のようになる
         // ・文字の列は中央
         // ・大きくなるにつれて右に移動する
-        $size: calc(var(--sp_base_h) * var(--sp_coordinate_y_size))
+        $size: calc(var(--sp_cell_h) * var(--sp_coordinate_y_size))
 
         font-size: $size
         display: flex

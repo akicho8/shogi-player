@@ -68,10 +68,10 @@ export default {
   +IF_HORIZONTAL
     .ShogiPlayerBody
       flex-direction: row
-      gap: calc(var(--sp_base_w) * var(--sp_board_horizontal_gap))
+      gap: calc(var(--sp_cell_w) * var(--sp_board_horizontal_gap))
   +IF_VERTICAL
     .ShogiPlayerBody
       flex-direction: column
       // 縦は "100%" としても反応しない
-      gap: calc(var(--sp_base_h) * var(--sp_board_vertical_gap))
+      gap: calc(var(--sp_cell_h) * var(--sp_board_vertical_gap))
 </style>

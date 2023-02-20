@@ -145,10 +145,10 @@
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_w" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_cell_w" :min="1" :max="80" :step="1")
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(H)" message="駒と駒の隙間に影響する")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_h" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_cell_h" :min="1" :max="80" :step="1")
           b-field(custom-class="is-small" label="駒の大きさ")
             b-slider(v-bind="slider_attrs" v-model="sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
           b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色")
@@ -229,18 +229,18 @@
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(W)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_w" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_cell_w" :min="1" :max="80" :step="1")
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="セル(H)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_h" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_cell_h" :min="1" :max="80" :step="1")
 
           //- .columns.mt-4
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(W)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_w" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_cell_w" :min="1" :max="80" :step="1")
           //-   .column.py-0
           //-     b-field(custom-class="is-small" label="持駒画像(H)")
-          //-       b-slider(v-bind="slider_attrs" v-model="sp_base_h" :min="1" :max="80" :step="1")
+          //-       b-slider(v-bind="slider_attrs" v-model="sp_cell_h" :min="1" :max="80" :step="1")
 
         .box
           SeTitle(name="成り不成り選択")
@@ -557,8 +557,8 @@ export default {
       sp_balloon: true,
 
       //////////////////////////////////////////////////////////////////////////////// 駒台
-      //- sp_base_w: 1,
-      //- sp_base_h: 1,
+      //- sp_cell_w: 1,
+      //- sp_cell_h: 1,
       sp_stand_piece_size: 0.8,
       sp_stand_hover_border_color: "hsla(0, 0%, 0%, 0.2)",
       sp_stand_bg_color: "hsla(0, 0%, 0%, 0.0)",

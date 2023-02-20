@@ -86,11 +86,14 @@ export default {
 
   // あまり重要ではないところでの縦のマージンが必要なときに使う
   // sp_common_gap を直接使ってはいけない
-  --sp_common_gap_real_px: calc(var(--sp_base_h) * var(--sp_common_gap))
+  --sp_common_gap_real_px: calc(var(--sp_cell_h) * var(--sp_common_gap))
 
   .PieceBox
     @extend %is_unselectable
-    min-height: var(--sp_base_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
+    min-height: var(--sp_cell_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
+    margin-left: auto
+    margin-right: auto
+    width: var(--sp_board_w)
 
   .PieceBoxPieces
     display: flex

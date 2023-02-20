@@ -271,7 +271,7 @@ Default: `0.5`
 ### `--sp_controller_width`
 Default: `0.5`
 
-コントローラーの横幅 (デスクトップ時)
+コントローラーの横幅 (タブレット以上)
 
 ### `--sp_controller_width_mobile`
 Default: `0.8`
@@ -393,12 +393,22 @@ Default: `9`
 
 盤面の縦のセル数
 
-### `--sp_base_w`
+### `--sp_board_w`
+Default: `47px`
+
+現在の盤の横幅で動的に変化する
+
+### `--sp_board_h`
+Default: `50px`
+
+現在の盤の縦幅で動的に変化する
+
+### `--sp_cell_w`
 Default: `47px`
 
 現在の盤面のセルの横幅で動的に変化する
 
-### `--sp_base_h`
+### `--sp_cell_h`
 Default: `50px`
 
 現在の盤面のセルの縦幅で動的に変化する

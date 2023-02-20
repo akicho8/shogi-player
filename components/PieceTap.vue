@@ -52,8 +52,8 @@ export default {
   +defvar(sp_touch_lifted_origin_opacity, 1.0)                     // 持ち上げた駒の元のセルの非透明度(touch)
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
-  +defvar(sp_base_w, 47px)                // 盤上以外の駒セル(W) ※内部で使用
-  +defvar(sp_base_h, 50px)                // 盤上以外の駒セル(H) ※内部で使用
+  +defvar(sp_cell_w, 47px)                // 盤上以外の駒セル(W) ※内部で使用
+  +defvar(sp_cell_h, 50px)                // 盤上以外の駒セル(H) ※内部で使用
   +defvar(sp_stand_piece_size, 0.8)            // 駒台のセル内の駒占有率
   +defvar(sp_piece_box_piece_size, 0.8)        // 駒箱のセル内の駒占有率
 
@@ -183,8 +183,8 @@ export default {
   // 駒台
   .Membership
     .PieceTap
-      width:  var(--sp_base_w)
-      height: var(--sp_base_h)
+      width:  var(--sp_cell_w)
+      height: var(--sp_cell_h)
     .PieceTexture
       width:  calc(var(--sp_stand_piece_size) * 100%)
       height: calc(var(--sp_stand_piece_size) * 100%)
@@ -192,8 +192,8 @@ export default {
   // 駒箱
   .PieceBox
     .PieceTap
-      width:  var(--sp_base_w)
-      height: var(--sp_base_h)
+      width:  var(--sp_cell_w)
+      height: var(--sp_cell_h)
     .PieceTexture
       width:  calc(var(--sp_piece_box_piece_size) * 100%)
       height: calc(var(--sp_piece_box_piece_size) * 100%)
@@ -201,8 +201,8 @@ export default {
   // 持ち上げ駒
   // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceTexture は 100% 固定にする
   .HoverPieceElement
-    width:  var(--sp_base_w)
-    height: var(--sp_base_h)
+    width:  var(--sp_cell_w)
+    height: var(--sp_cell_h)
     .PieceTap
       width:  100%     // 外側の大きさに合わせる
       height: 100%
@@ -214,8 +214,8 @@ export default {
   // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceTexture は 100% 固定にする
   .PromoteSelectModal
     .PieceTap
-      width:  var(--sp_base_w)
-      height: var(--sp_base_h)
+      width:  var(--sp_cell_w)
+      height: var(--sp_cell_h)
     .PieceTexture
       width:  80%
       height: 80%

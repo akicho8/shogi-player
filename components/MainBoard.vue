@@ -1,5 +1,5 @@
 <template lang="pug">
-.MainBoard
+.MainBoard(data-resize_observer_id="MainBoard")
   // .MainBoard に設定した background-image に影をつけるために drop-shadow すると
   // .MainBoard その子供である table にまで影が適用されてしまう
   // table に影が適用されると、駒の影にも .MainBoard の影が加算されてしまい濃くなってしまう
@@ -18,6 +18,7 @@
       tr.BoardRow(v-for="(_, y) in TheSp.sp_board_dimension_h")
         td.BoardColumn(
           v-for="(_, x) in TheSp.sp_board_dimension_w"
+          data-resize_observer_id="BoardColumn"
           @pointerdown="TheSp.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
           @click.stop.prevent="TheSp.board_cell_left_click(logical_xy(x, y), $event)"
           @click.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), $event)"
@@ -88,6 +89,9 @@ export default {
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 
 .ShogiPlayerGround
+  +defvar(sp_board_w, 1px)
+  +defvar(sp_board_h, 1px)
+
   // 全体背景と同じ構成
   +defvar(sp_board_color, hsla(0, 0%, 0%, 0.2))      // 盤の色
   +defvar(sp_board_even_cell_color, transparent) // セルの色
@@ -169,12 +173,12 @@ export default {
         position: absolute
         content: ""
         // "%" で指定すると長方形になってしまう
-        // sp_base_h だけを基準にすると正方形になる
+        // sp_cell_h だけを基準にすると正方形になる
         // 中央が右下にずれているので半ピクセル調整する
-        top:    calc(var(--sp_base_h) * var(--sp_star_size) * -0.5 - 0.5px)
-        left:   calc(var(--sp_base_h) * var(--sp_star_size) * -0.5 - 0.5px)
-        width:  calc(var(--sp_base_h) * var(--sp_star_size))
-        height: calc(var(--sp_base_h) * var(--sp_star_size))
+        top:    calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
+        left:   calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
+        width:  calc(var(--sp_cell_h) * var(--sp_star_size))
+        height: calc(var(--sp_cell_h) * var(--sp_star_size))
         border-radius: 50%
         background-color: var(--sp_star_color, var(--sp_grid_outer_color))
         z-index: var(--sp_star_z_index)

@@ -20,7 +20,6 @@ import { Location   } from "./models/location.js"
 import { EventList   } from "./models/event_list.js"
 
 // components
-import PieceBox           from "./PieceBox.vue"
 import SettingModal       from "./SettingModal.vue"
 import ErrorNotify        from "./ErrorNotify.vue"
 import OpDisabledBlock    from "./OpDisabledBlock.vue"
@@ -32,7 +31,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 // mixins modules
 import { mod_focus          } from "./mod_focus.js"
 import { mod_navi        } from "./mod_navi.js"
-import { mod_cell_size        } from "./mod_cell_size.js"
+import { mod_resize_observer        } from "./mod_resize_observer.js"
 import { mod_shortcut    } from "./mod_shortcut.js"
 import { mod_edit_mode   } from "./mod_edit_mode.js"
 import { mod_foul        } from "./mod_foul.js"
@@ -57,7 +56,7 @@ export default {
     mod_vector,
     mod_focus,
     mod_navi,
-    mod_cell_size,
+    mod_resize_observer,
     mod_shortcut,
     mod_edit_mode,
     mod_foul,
@@ -172,7 +171,6 @@ export default {
   },
 
   components: {
-    PieceBox,
     SettingModal,
     ErrorNotify,
     OpDisabledBlock,

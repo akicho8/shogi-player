@@ -37,8 +37,8 @@ export default {
 
   .PieceCount
     @extend %is_piece_count_color_set
-    font-size: calc(var(--sp_base_h) * var(--sp_piece_count_size))
-    padding:   calc(var(--sp_base_w) * var(--sp_piece_count_padding)) calc(var(--sp_base_h) * var(--sp_piece_count_padding))
+    font-size: calc(var(--sp_cell_h) * var(--sp_piece_count_size))
+    padding:   calc(var(--sp_cell_w) * var(--sp_piece_count_padding)) calc(var(--sp_cell_h) * var(--sp_piece_count_padding))
 
     line-height: 100%
     border-radius: 50%

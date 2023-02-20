@@ -32,7 +32,7 @@ export default {
       &:focus
         outline: none // Google Chrome では変化ない？
       &.first, &.last
-        width: 2rem
+        width: 2rem // ← 比例させる ← これは盤の幅を考慮する
         flex-grow: 0
       &.previous, &.next
         flex-grow: 1
