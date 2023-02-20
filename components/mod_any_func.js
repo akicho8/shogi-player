@@ -1,7 +1,7 @@
 import { AnyFuncInfo } from "./models/any_func_info.js"
 import { Board } from "./models/board.js"
 
-export const any_func_module = {
+export const mod_any_func = {
   data() {
     return {
       any_func_key: null, // 常に選択してないことにしたくて v-model にして設定して any_func_key 変更のタイミングで null に再設定したけど選択してないことにはできなかったのでこれ意味ない

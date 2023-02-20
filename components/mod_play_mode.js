@@ -4,7 +4,7 @@ import { Xcontainer } from "./models/xcontainer.js"
 import { Location } from "./models/location.js"
 import { HumanSideInfo } from "./models/human_side_info.js"
 
-export const play_mode_module = {
+export const mod_play_mode = {
   props: {
     sp_human_side: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
   },

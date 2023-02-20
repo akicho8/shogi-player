@@ -1,4 +1,4 @@
-export const app_profile = {
+export const mod_profile = {
   data() {
     return {
       _ShogiPlayerRenderCount: 0,

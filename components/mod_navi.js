@@ -3,7 +3,7 @@ import { Location } from "./models/location.js"
 
 const FOCUS_FUNCTION = false
 
-export const navi_module = {
+export const mod_navi = {
   props: {
     // 手数や結果の表示(再生モード時) (true false)
     sp_turn_show: {

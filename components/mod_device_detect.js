@@ -11,7 +11,7 @@
 //
 import { DeviseInfo } from "./models/devise_info.js"
 
-export const device_detect = {
+export const mod_device_detect = {
   props: {
     // デバイスを強制的に指定する (touch mouse) 自動判別するので基本そのままでよい
     sp_device: {

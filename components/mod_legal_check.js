@@ -1,6 +1,6 @@
 import { Place } from "./models/place.js"
 
-export const legal_check = {
+export const mod_legal_check = {
   methods: {
   },
 }

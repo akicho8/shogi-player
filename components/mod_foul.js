@@ -2,7 +2,7 @@
 
 import { FoulInfo } from "./models/foul_info.js"
 
-export const foul_module = {
+export const mod_foul = {
   props: {
     // |----------------+-------+-------+--------------------------------------------------+--------|
     // | props          | check | break |                                                  |        |

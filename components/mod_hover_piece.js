@@ -5,7 +5,7 @@ const HOVER_PIECE_ELEMENT_POSITION_UPDATE_60FPS = true
 
 import { PositionInfo } from "./models/position_info.js"
 
-export const hover_piece_module = {
+export const mod_hover_piece = {
   data() {
     return {
       // プレフィクスに_をつけるとVueに監視されない

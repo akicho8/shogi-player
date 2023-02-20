@@ -30,45 +30,45 @@ import DebugBlock         from "./DebugBlock.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
 
 // mixins modules
-import { app_focus          } from "./app_focus.js"
-import { navi_module        } from "./navi_module.js"
-import { cell_size_module        } from "./cell_size_module.js"
-import { shortcut_module    } from "./shortcut_module.js"
-import { edit_mode_module   } from "./edit_mode_module.js"
-import { foul_module        } from "./foul_module.js"
-import { hover_piece_module } from "./hover_piece_module.js"
-import { legal_check        } from "./legal_check.js"
-import { play_mode_module   } from "./play_mode_module.js"
-import { app_profile        } from "./app_profile.js"
-import { preset_module      } from "./preset_module.js"
-import { any_func_module    } from "./any_func_module.js"
-import { api_module         } from "./api_module.js"
-import { device_detect      } from "./device_detect.js"
-import { app_chore          } from "./app_chore.js"
-import { app_debug          } from "./app_debug.js"
-import { app_vector         } from "./app_vector.js"
+import { mod_focus          } from "./mod_focus.js"
+import { mod_navi        } from "./mod_navi.js"
+import { mod_cell_size        } from "./mod_cell_size.js"
+import { mod_shortcut    } from "./mod_shortcut.js"
+import { mod_edit_mode   } from "./mod_edit_mode.js"
+import { mod_foul        } from "./mod_foul.js"
+import { mod_hover_piece } from "./mod_hover_piece.js"
+import { mod_legal_check        } from "./mod_legal_check.js"
+import { mod_play_mode   } from "./mod_play_mode.js"
+import { mod_profile        } from "./mod_profile.js"
+import { mod_preset      } from "./mod_preset.js"
+import { mod_any_func    } from "./mod_any_func.js"
+import { mod_api_functions         } from "./mod_api_functions.js"
+import { mod_device_detect      } from "./mod_device_detect.js"
+import { mod_chore          } from "./mod_chore.js"
+import { mod_debug          } from "./mod_debug.js"
+import { mod_vector         } from "./mod_vector.js"
 
 export default {
   name: "ShogiPlayer",
 
   mixins: [
-    app_chore,
-    app_debug,
-    app_vector,
-    app_focus,
-    navi_module,
-    cell_size_module,
-    shortcut_module,
-    edit_mode_module,
-    foul_module,
-    hover_piece_module,
-    legal_check,
-    play_mode_module,
-    app_profile,
-    preset_module,
-    any_func_module,
-    api_module,
-    device_detect,
+    mod_chore,
+    mod_debug,
+    mod_vector,
+    mod_focus,
+    mod_navi,
+    mod_cell_size,
+    mod_shortcut,
+    mod_edit_mode,
+    mod_foul,
+    mod_hover_piece,
+    mod_legal_check,
+    mod_play_mode,
+    mod_profile,
+    mod_preset,
+    mod_any_func,
+    mod_api_functions,
+    mod_device_detect,
   ],
 
   props: {

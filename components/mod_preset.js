@@ -1,7 +1,7 @@
 import { Xcontainer } from "./models/xcontainer.js"
 import { PresetInfo } from "./models/preset_info.js"
 
-export const preset_module = {
+export const mod_preset = {
   props: {
     sp_preset: { type: String,  default: null, },
   },

@@ -3,7 +3,7 @@
 const TARGET_SELECTOR = ".BoardField .PieceTap" // 左上のセル
 const THRESHOLD       = 1.5                     // 指定ピクセル以上変化したら更新する(画面震え対策)
 
-export const cell_size_module = {
+export const mod_cell_size = {
   data() {
     return {
       sp_base_w: 1,

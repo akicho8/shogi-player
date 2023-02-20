@@ -11,18 +11,20 @@
         button.button.flip(                    @click.stop.prevent="TheSp.viewpoint_flip_handle"):            b-icon(icon="swap-vertical" size="is-small")
       template(v-if="TheSp.sp_setting")
         button.button.setting(                 @click.stop.prevent="TheSp.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
-    TurnSliderBlock( ref="TurnSliderBlock")
+    TurnSliderBlock(ref="TurnSliderBlock")
 </template>
 
 <script>
 import { support } from "./support.js"
 import TurnSliderBlock from "./TurnSliderBlock.vue"
+import NavigateBlock2 from "./NavigateBlock2.vue"
 
 export default {
   name: "NavigateBlock",
   mixins: [support],
   components: {
     TurnSliderBlock,
+    TurnSliderBlock2,
   },
   mounted() {
     this.TheSp.$NavigateBlock = this // どこからでも refs するための荒技

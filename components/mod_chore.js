@@ -1,4 +1,4 @@
-export const app_chore = {
+export const mod_chore = {
   methods: {
     // Placeインスタンスに対応するセルの中央のリアル座標を返す
     place_to_cell_info(place) {

@@ -2,7 +2,7 @@ import { Board } from "./models/board.js"
 import { Soldier } from "./models/soldier.js"
 import { Xcontainer } from "./models/xcontainer.js"
 
-export const api_module = {
+export const mod_api_functions = {
   methods: {
     // 盤面をシャッフルする
     api_board_shuffle() {

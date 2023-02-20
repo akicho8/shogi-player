@@ -7,7 +7,7 @@ import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
 import { LiftCancelActionInfo } from "./models/lift_cancel_action_info.js"
 
-export const edit_mode_module = {
+export const mod_edit_mode = {
   props: {
     sp_legal_move_only:                { type: Boolean, default: true, },                      // play で合法手のみに絞る
 

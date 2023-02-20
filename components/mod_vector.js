@@ -1,4 +1,4 @@
-export const app_vector = {
+export const mod_vector = {
   methods: {
     vector_one() {
       return {

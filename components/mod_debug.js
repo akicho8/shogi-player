@@ -1,4 +1,4 @@
-export const app_debug = {
+export const mod_debug = {
   props: {
     // デバッグモード
     sp_debug: {

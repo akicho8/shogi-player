@@ -4,7 +4,7 @@ import isMobile from 'ismobilejs'
 
 const FOCUS_FUNCTION = false
 
-export const app_focus = {
+export const mod_focus = {
   props: {
     // mountedしたらスライダーにフォーカスする？
     sp_mounted_focus_to_slider: {
