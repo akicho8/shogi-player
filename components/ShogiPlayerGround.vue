@@ -60,13 +60,19 @@ export default {
 @import "./support.sass"
 
 .ShogiPlayerGround
+  +defvar(sp_common_gap, 0.18) // 共通の隙間(駒セルの縦幅に対する割合)
+
+  // あまり重要ではないところでの縦のマージンが必要なときに使う
+  // sp_common_gap を直接使ってはいけない
+  --sp_common_gap_real_px: calc(var(--sp_cell_h) * var(--sp_common_gap))
+
   &.is_layer_on
     +is_layer_border
 
   text-align: center
   line-height: 100%
 
-  // もしかしてこの下まったく要らない？
+  // もしかしてこの下まったく要らない？ → いる
 
   display: flex
   align-items: center
