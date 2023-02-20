@@ -145,7 +145,7 @@ export default {
     &.frame_boder_if_hover
       &:hover
         .MembershipStandTexture
-          border: var(--sp_stand_hover_border_stroke) dashed calc(var(--sp_stand_hover_border_color) * 1px)
+          border: calc(var(--sp_stand_hover_border_stroke) * 1px) dashed var(--sp_stand_hover_border_color)
 
   // 駒がなくても駒が置けるようにする ← piece_lifted_hover_reaction になったときだけにすると駒台が拡縮して使いにくい
   //
