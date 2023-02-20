@@ -21,12 +21,19 @@ module.exports = {
     ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
 
     // OGP
-    ['meta', { property: 'twitter:card',   content: 'summary_large_image' }],
-    ['meta', { property: 'og:url',         content: package.homepage      }],
-    ['meta', { property: 'og:type',        content: 'website'             }],
-    ['meta', { property: 'og:title',       content: 'shogi-player docs'   }],
-    // ['meta', { property: 'og:description', content: package.description   }],
-    ['meta', { property: 'og:image',       content: '/application.png' }],
+
+    // https://developer.twitter.com/ja/docs/tweets/optimize-with-cards/guides/getting-started
+    ["meta", { name: "twitter:card",       content: "summary_large_image"                }],
+    ["meta", { name: "twitter:creator",    content: "@sgkinakomochi"                     }],
+    ["meta", { name: "twitter:site",       content: "@sgkinakomochi"                     }],
+
+    // https://ogp.me/
+    ["meta", { property: "og:url",         content: package.homepage                     }],
+    ["meta", { property: "og:type",        content: "website"                            }],
+    ["meta", { property: "og:title",       content: "shogi-player docs"                  }],
+    ["meta", { property: "og:description", content: package.description                  }],
+    ["meta", { property: "og:image",       content: package.homepage + "application.png" }],
+    ["meta", { property: "og:locale",      content: "ja_JP"                              }],
 
     // @vuepress/plugin-google-analytics は 2 専用だった？
     // https://github.com/vuejs/vuepress/issues/2713#issuecomment-806621348
