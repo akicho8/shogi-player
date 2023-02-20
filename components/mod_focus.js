@@ -47,7 +47,7 @@ export const mod_focus = {
     // コントローラーのスライダーにフォーカスする
     turn_slider_focus() {
       if (this.focus_disable_p) { return false }
-      const el = this.__navigate_block_element_refs("TurnSliderBlock")
+      const el = this.__navigate_block_element_refs("SpSlider")
       if (el) {
         return el.focus_to_self()
       }

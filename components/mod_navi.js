@@ -130,7 +130,7 @@ export const mod_navi = {
 
       this.current_turn_add(v, event)
 
-      // TurnSliderBlock → (next || previous) の順でフォーカスを試みる
+      // SpSlider → (next || previous) の順でフォーカスを試みる
       if (!this.turn_slider_focus()) {
         // スライダーにはフォーカスできなかったのでボタンの方にフォーカスする
         if (v > 0) {
@@ -200,7 +200,7 @@ export const mod_navi = {
   computed: {
     fliped() { return this.new_viewpoint === "white"  },
 
-    //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, TurnSliderBlock.vue
+    //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, SpSlider.vue
 
     inside_controller_p() {
       if (this.sp_setting) {
