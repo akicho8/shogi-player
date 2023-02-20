@@ -21,12 +21,12 @@ module.exports = {
     ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
 
     // OGP
-    ['meta', { name: 'twitter:card',   content: 'summary_large_image' }],
-    ['meta', { name: 'og:url',         content: package.homepage      }],
-    ['meta', { name: 'og:type',        content: 'website'             }],
-    ['meta', { name: 'og:title',       content: 'shogi-player docs'   }],
-    // ['meta', { name: 'og:description', content: package.description   }],
-    ['meta', { name: 'og:image',       content: '/application.png'    }],
+    ['meta', { property: 'twitter:card',   content: 'summary_large_image' }],
+    ['meta', { property: 'og:url',         content: package.homepage      }],
+    ['meta', { property: 'og:type',        content: 'website'             }],
+    ['meta', { property: 'og:title',       content: 'shogi-player docs'   }],
+    // ['meta', { property: 'og:description', content: package.description   }],
+    ['meta', { property: 'og:image',       content: '/application.png' }],
 
     // @vuepress/plugin-google-analytics は 2 専用だった？
     // https://github.com/vuejs/vuepress/issues/2713#issuecomment-806621348
