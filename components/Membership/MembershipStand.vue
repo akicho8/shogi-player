@@ -94,7 +94,7 @@ export default {
       const list = []
       if (this.TheSp.edit_p) {
         if (this.lifted_p) {
-          list.push("frame_boder_if_hover")
+          list.push("is_droppable")
         }
       }
       return list
@@ -142,7 +142,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 駒を持って駒箱の上にいるとき
   .MembershipStand
-    &.frame_boder_if_hover
+    &.is_droppable
       &:hover
         .MembershipStandTexture
           border: calc(var(--sp_stand_hover_border_stroke) * 1px) dashed var(--sp_stand_hover_border_color)

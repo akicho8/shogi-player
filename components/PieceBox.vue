@@ -70,7 +70,7 @@ export default {
     component_class() {
       const list = []
       if (this.TheSp.lifted_p) {
-        list.push("frame_boder_if_hover")
+        list.push("is_droppable")
       }
       return list
     },
@@ -114,7 +114,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 駒持ってhoverしたとき全体にborder
   .PieceBoxInside
-    &.frame_boder_if_hover
+    &.is_droppable
       &:hover
         .PieceBoxTexture
           border: calc(var(--sp_stand_hover_border_stroke) * 1px) dashed var(--sp_stand_hover_border_color)
