@@ -278,11 +278,6 @@ Default: `0.8`
 
 コントローラーの横幅 (スマホ時)
 
-### `--sp_turn_slider_gap_top`
-Default: `0.75rem`
-
-スライダーの上の隙間
-
 ## 駒数
 
 ### `--sp_piece_count_horizontal_x`

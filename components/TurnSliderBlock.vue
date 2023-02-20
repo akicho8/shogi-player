@@ -1,7 +1,5 @@
 <template lang="pug">
 .TurnSliderBlock(v-if="TheSp.inside_slider_p")
-  //- input.TurnSliderBlock(type="range" :value="TheSp.turn_offset" @input="TheSp.current_turn_set($event.target.value)" :min="TheSp.turn_offset_min" :max="TheSp.turn_offset_max" ref="TurnSliderBlock")
-
   //- https://buefy.org/documentation/slider
   //- |----------+----------------------------+------------------------+------------------------|
   //- | event    | 外部から変更したら呼ばれる | 自分で動かすと呼ばれる | 離したときだけ呼ばれる |
@@ -40,7 +38,9 @@ export default {
     // フォーカスさせた状態で document.activeElement を見ると何にフォーカスするべきかわかる
     // v-if="false" のときは querySelector が取れないので注意
     focus_to_self() {
-      if (this.TheSp.focus_disable_p) { return false }
+      if (this.TheSp.focus_disable_p) {
+        return false
+      }
       if (this.$el.querySelector) {
         const el = this.$el.querySelector(".b-slider-thumb")
         if (el) {
@@ -57,10 +57,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayerGround
-  +defvar(sp_turn_slider_gap_top, 0.75rem) // 手数スライダーの上マージン
-
   .TurnSliderBlock
-    margin-top: var(--sp_turn_slider_gap_top)
+    margin-top: var(--sp_common_gap_real_px)
 
     display: flex
     justify-content: center
