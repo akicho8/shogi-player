@@ -35,7 +35,7 @@
         // 方法(1) - 高さ1remの中央に合わせる = 拡縮の基点が中央になる
         // height: 1rem            // 1文字分の高さにした上で
         // align-items: center     // 中央に合わせると拡縮の基点が中央になる
-          
+
         // 方法(2) - 下に合わせる = 拡縮の基点をベースラインにする = 拡縮してもベースラインが同じメリットあり
         align-items: flex-end
 
@@ -47,14 +47,19 @@
 
       // 縦軸表記の位置調整
       td:after
-        font-size: calc(var(--sp_base_h) * var(--sp_coordinate_y_size))
+        // font-size と width の両方に指定することで次のようになる
+        // ・文字の列は中央
+        // ・大きくなるにつれて右に移動する
+        $size: calc(var(--sp_base_h) * var(--sp_coordinate_y_size))
+
+        font-size: $size
         display: flex
 
         height: 100%                // width: 100% は入れてはいけない(入れると先後のマークが押せなくなる)
         align-items: center         // 上下中央に合わせる
 
-        width: 1rem                 // fやiがの文字が左寄りになるのを防ぐため1文字分の幅を確保する(超重要)
-        justify-content: center     // 共通の1rem幅の中で中央配置すれば f や i が中央に寄る
+        width: $size                // fやiがの文字が左寄りになるのを防ぐ(1remではだめ)
+        justify-content: center     // 共通の幅の中で中央配置すれば f や i が中央に寄る
 
         // TDの左上基点を同じにする
         top: 0                      // これがないと1セル分に下に移動する
