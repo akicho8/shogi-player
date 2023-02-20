@@ -26,7 +26,7 @@ export const mod_debug = {
   },
   methods: {
     log(...v) {
-      if (this.debug_p || process.env.NODE_ENV === "development") {
+      if (this.debug_or_development_p) {
         console.log(...v)
       }
     },
@@ -45,5 +45,6 @@ export const mod_debug = {
   },
   computed: {
     debug_p() { return this.new_debug },
+    debug_or_development_p() { return this.debug_p || process.env.NODE_ENV === "development" },
   },
 }
