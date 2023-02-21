@@ -1,6 +1,6 @@
 <template lang="pug">
 .ShogiPlayer(:class="component_class")
-  ShogiPlayerGround(ref="ShogiPlayerGround")
+  SpGround(ref="SpGround")
   DebugBlock
   b-modal(:active.sync="setting_modal_p" has-modal-card v-if="xcontainer")
     SettingModal
@@ -23,7 +23,7 @@ import { EventList   } from "./models/event_list.js"
 import SettingModal       from "./SettingModal.vue"
 import ErrorNotify        from "./ErrorNotify.vue"
 import OpDisabledBlock    from "./OpDisabledBlock.vue"
-import ShogiPlayerGround  from "./ShogiPlayerGround.vue"
+import SpGround  from "./SpGround.vue"
 import EditToolBlock      from "./EditToolBlock.vue"
 import DebugBlock         from "./DebugBlock.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
@@ -176,7 +176,7 @@ export default {
     OpDisabledBlock,
     EditToolBlock,
     DebugBlock,
-    ShogiPlayerGround,
+    SpGround,
     PromoteSelectModal,
   },
 

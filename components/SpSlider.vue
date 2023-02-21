@@ -55,7 +55,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerGround
+.ShogiPlayer .SpGround
   .SpSlider
     margin-top: var(--sp_common_gap_real_px)
     margin-bottom: 0

@@ -33,7 +33,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerGround
+.ShogiPlayer .SpGround
   .EditToolBlock
     .dropdown
       text-align: left

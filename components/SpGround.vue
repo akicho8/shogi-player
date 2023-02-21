@@ -1,6 +1,6 @@
 <template lang="pug">
-// ShogiPlayerGround は ShogiPlayerWidth の位置を調整するためにあるので他のものを入れてはいけない → 常に100%なので意味ない
-.ShogiPlayerGround(:class="component_class" :style="component_style")
+// SpGround は ShogiPlayerWidth の位置を調整するためにあるので他のものを入れてはいけない → 常に100%なので意味ない
+.ShogiPlayer .SpGround(:class="component_class" :style="component_style")
   .ShogiPlayerGroundTexture
   ShogiPlayerWidth(v-if="TheSp.xcontainer" ref="ShogiPlayerWidth")
 </template>
@@ -12,7 +12,7 @@ import DebugBlock from "./DebugBlock.vue"
 import { support } from "./support.js"
 
 export default {
-  name: "ShogiPlayerGround",
+  name: "SpGround",
   mixins: [support],
   components: {
     ShogiPlayerWidth,
@@ -59,7 +59,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 
-.ShogiPlayerGround
+.ShogiPlayer .SpGround
   +defvar(sp_common_gap, 0.18) // 共通の隙間(駒セルの縦幅に対する割合)
 
   // あまり重要ではないところでの縦のマージンが必要なときに使う

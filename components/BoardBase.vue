@@ -88,7 +88,7 @@ export default {
 // | table.BoardMatrix  | 普通に考えてここ         | グリッドと外枠に隙間が入れられない | 隙間を入れれても嬉しくない         | ←   |
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 
-.ShogiPlayerGround
+.ShogiPlayer .SpGround
   +defvar(sp_board_w, 1px)
   +defvar(sp_board_h, 1px)
 

@@ -36,7 +36,7 @@ export default {
 //       .PieceTextureSelf(駒の種類を定義するクラスたち)
 //
 
-.ShogiPlayerGround
+.ShogiPlayer .SpGround
   ////////////////////////////////////////////////////////////////////////////////
 
   +defvar(sp_board_piece_size, 0.9)                         // 盤のセル内の駒占有率

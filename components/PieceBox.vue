@@ -80,7 +80,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerGround
+.ShogiPlayer .SpGround
   +defvar(sp_piece_box_color, hsla(0, 0%, 0%, 0.2)) // 駒箱背景
 
   .PieceBox

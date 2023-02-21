@@ -109,7 +109,7 @@ export default {
 
 <style lang="sass">
 @import "../support.sass"
-.ShogiPlayerGround
+.ShogiPlayer .SpGround
   +defvar(sp_stand_hover_border_color, hsla(0, 0%, 0%, 0.2)) // 駒を持って駒箱の上にいるときのボーダー色
   +defvar(sp_stand_hover_border_stroke, 2)                   // 駒を持って駒箱の上にいるときのボーダーの太さ
   +defvar(sp_stand_bg_color, hsla(0, 0%, 0%, 0))             // 駒台の背景色
@@ -193,7 +193,7 @@ export default {
 // .ShogiPlayer
 //   &.is_mode_edit
 //     // 駒がなくても駒が置けるようにする
-//     .ShogiPlayerGround
+//     .SpGround
 //       +IF_HORIZONTAL
 //         .MembershipStand2
 //           // &.piece_lifted_hover_reaction

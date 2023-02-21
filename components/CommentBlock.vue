@@ -33,7 +33,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayerGround
+.ShogiPlayer .SpGround
   .CommentBlock
     line-height: 1.5rem
     .column
