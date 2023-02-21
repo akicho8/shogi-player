@@ -1,0 +1,31 @@
+@import "piece_variant/a.sass"
+@import "piece_variant/b.sass"
+@import "piece_variant/c.sass"
+@import "piece_variant/d.sass"
+
+%piece_black_only
+  .is_position_north
+    .PieceTextureSelf
+      @extend %is_flip
+  .is_position_south
+    .PieceTextureSelf
+
+.ShogiPlayerGround
+  &.is_piece_variant_a
+    @extend %piece_black_only
+    .PieceTextureSelf
+      +piece_variant_a_all
+
+  &.is_piece_variant_b
+    @extend %piece_black_only
+    .PieceTextureSelf
+      +piece_variant_b_all
+
+  &.is_piece_variant_c
+    @extend %piece_black_only
+    .PieceTextureSelf
+      +piece_variant_c_all
+
+  // 画像自体に影が付いている
+  &.is_piece_variant_d
+    +piece_variant_d_all
