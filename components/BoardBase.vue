@@ -1,14 +1,14 @@
 <template lang="pug">
-.MainBoard(data-resize_observer_id="MainBoard")
-  // .MainBoard に設定した background-image に影をつけるために drop-shadow すると
-  // .MainBoard その子供である table にまで影が適用されてしまう
-  // table に影が適用されると、駒の影にも .MainBoard の影が加算されてしまい濃くなってしまう
-  // それを防ぐためには .MainBoard の :after に背景を指定すればよい
-  // が、わかりやすくするために背景専用の MainBoardBG を追加した
-  // これなら MainBoardTexture に適用した影が table に影響しない
-  .MainBoardTexture.is-overlay
+.BoardBase(data-resize_observer_id="BoardBase")
+  // .BoardBase に設定した background-image に影をつけるために drop-shadow すると
+  // .BoardBase その子供である table にまで影が適用されてしまう
+  // table に影が適用されると、駒の影にも .BoardBase の影が加算されてしまい濃くなってしまう
+  // それを防ぐためには .BoardBase の :after に背景を指定すればよい
+  // が、わかりやすくするために背景専用の BoardBaseBG を追加した
+  // これなら BoardBaseTexture に適用した影が table に影響しない
+  .BoardBaseTexture.is-overlay
 
-  // MainBoardTexture の兄弟として BoardMatrix を置くと MainBoardTexture に BoardMatrix の border が負ける
+  // BoardBaseTexture の兄弟として BoardMatrix を置くと BoardBaseTexture に BoardMatrix の border が負ける
   .BoardMatrixWithPadding.is-overlay
     // flex ではなく table にしている理由
     // ・罫線が実線ではなく隙間であるため、線を黒くしようとしたとき、背景に黒を敷き詰めておかないといけない
@@ -42,13 +42,13 @@ import { Place   } from "./models/place.js"
 import PieceTap from "./PieceTap.vue"
 
 export default {
-  name: "MainBoard",
+  name: "BoardBase",
   mixins: [support],
   components: {
     PieceTap,
   },
   beforeUpdate() {
-    this.TheSp.$data._MainBoardRenderCount += 1
+    this.TheSp.$data._BoardBaseRenderCount += 1
   },
   methods: {
     cell_class(xy) {
@@ -83,8 +83,8 @@ export default {
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 // | 場所              | よい                     | だめ                               | 備考                               | 結果 |
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
-// | MainBoard         | わかりやすい             | Chromeで隙間ができる               | わかりやすい気がしていただけ       |      |
-// | MainBoardTexture  | 角を丸めても縁取りできる | 影の影響がある                     | 画像に縁取りできても別に嬉しくない |      |
+// | BoardBase         | わかりやすい             | Chromeで隙間ができる               | わかりやすい気がしていただけ       |      |
+// | BoardBaseTexture  | 角を丸めても縁取りできる | 影の影響がある                     | 画像に縁取りできても別に嬉しくない |      |
 // | table.BoardMatrix  | 普通に考えてここ         | グリッドと外枠に隙間が入れられない | 隙間を入れれても嬉しくない         | ←   |
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 
@@ -112,12 +112,12 @@ export default {
   // +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w)
   // +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h)
 
-  .MainBoard
+  .BoardBase
     width: 100%
     height: 100%
     +is_overlay_origin
 
-  .MainBoardTexture
+  .BoardBaseTexture
     background-color: var(--sp_board_color)  // 背景色は画像の透明な部分があれば見えるので画像があっても無駄にはならない
     +is_background_cover_by_image
     background-image: var(--sp_board_image)  // none でスルーする
@@ -158,7 +158,7 @@ export default {
     &.odd
       background-color: var(--sp_board_odd_cell_color)
 
-  // border が MainBoardTexture に負けるので入れ子にしている
+  // border が BoardBaseTexture に負けるので入れ子にしている
   // td
   //   +is_overlay_origin
   //   .CellBorder
