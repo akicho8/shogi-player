@@ -1,11 +1,11 @@
 <template lang="pug">
-.ShogiPlayerWidth
+.SpGroundInside
   PromoteSelectModal(v-if="TheSp.dialog_soldier")
   OpDisabledBlock
   EditToolBlock
   TurnShowOrEdit
-  .ShogiPlayerTransformBlock
-    ShogiPlayerBody(ref="ShogiPlayerBody")
+  .SpTransformBlock
+    SpBoardWithMembership(ref="SpBoardWithMembership")
   PieceBox
   NavigateBlock
   SfenShowBlock
@@ -15,7 +15,7 @@
 <script>
 import EditToolBlock      from "./EditToolBlock.vue"
 import TurnShowOrEdit     from "./TurnShowOrEdit.vue"
-import ShogiPlayerBody    from "./ShogiPlayerBody.vue"
+import SpBoardWithMembership    from "./SpBoardWithMembership.vue"
 import PieceBox           from "./PieceBox.vue"
 import NavigateBlock      from "./NavigateBlock.vue"
 import SfenShowBlock      from "./SfenShowBlock.vue"
@@ -26,12 +26,12 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 import { support } from "./support.js"
 
 export default {
-  name: "ShogiPlayerWidth",
+  name: "SpGroundInside",
   mixins: [support],
   components: {
     EditToolBlock,
     TurnShowOrEdit,
-    ShogiPlayerBody,
+    SpBoardWithMembership,
     PieceBox,
     NavigateBlock,
     SfenShowBlock,
@@ -45,21 +45,21 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayer .SpGround
-  .ShogiPlayerWidth
+  .SpGroundInside
     // これがないと OpDisabledBlock の 100% は画面幅になってしまう
     // また NavigateBlock や TurnShowOrEdit の border が画面全体に及んでしまう
     position: relative
 
-  .ShogiPlayerWidth
+  .SpGroundInside
     width: 100%
 
   &.is_layer_on
-    .ShogiPlayerWidth
+    .SpGroundInside
       +is_layer_border
 
 .ShogiPlayer
   &.is_debug_on
-    .ShogiPlayerWidth
+    .SpGroundInside
       &:after
         +mobile
           content: "(mobile)"

@@ -1131,7 +1131,7 @@ $sidebar_width_mobile:  100% * 3 / 4
 
   // 盤の変形
   &.is_tf1_mode_on
-    .ShogiPlayerTransformBlock
+    .SpTransformBlock
       transform: perspective(var(--se_tf1_perspective)) translate3d(var(--se_tf1_translate_x), var(--se_tf1_translate_y), var(--se_tf1_translate_z)) rotateX(var(--se_tf1_rotate_x)) rotateY(var(--se_tf1_rotate_y)) rotateZ(var(--se_tf1_rotate_z)) scale(var(--se_tf1_scale))
 
   // 駒の変形は先後対称。何を先後対称にするかは感覚で決める

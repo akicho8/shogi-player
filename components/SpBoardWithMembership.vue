@@ -1,5 +1,5 @@
 <template lang="pug">
-.ShogiPlayerBody(:class="component_class")
+.SpBoardWithMembership(:class="component_class")
   Membership(position="north" :location="location_of('white')")
   AspectRatioFixedBlock
     OverlayNavigations
@@ -18,7 +18,7 @@ import BoardBase             from "./BoardBase.vue"
 import OverlayNavigations    from "./OverlayNavigations.vue"
 
 export default {
-  name: "ShogiPlayerBody",
+  name: "SpBoardWithMembership",
   mixins: [support],
   components: {
     Membership,
@@ -48,7 +48,7 @@ export default {
   +defvar(sp_board_horizontal_gap, 0) // 盤の左右の隙間(横配置時)
   +defvar(sp_board_vertical_gap, 0)   // 盤の上下の隙間(縦配置時)
 
-  .ShogiPlayerBody
+  .SpBoardWithMembership
     // 縦横関係なく中央に寄せる
     display: flex
     align-items: center
@@ -66,11 +66,11 @@ export default {
   // | +mobile | column         | column       | 画面幅を最大に使いたいので常に縦配置 |
   // |---------+----------------+--------------+--------------------------------------|
   +IF_HORIZONTAL
-    .ShogiPlayerBody
+    .SpBoardWithMembership
       flex-direction: row
       gap: calc(var(--sp_cell_w) * var(--sp_board_horizontal_gap))
   +IF_VERTICAL
-    .ShogiPlayerBody
+    .SpBoardWithMembership
       flex-direction: column
       // 縦は "100%" としても反応しない
       gap: calc(var(--sp_cell_h) * var(--sp_board_vertical_gap))

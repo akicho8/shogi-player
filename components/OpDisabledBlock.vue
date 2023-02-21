@@ -15,7 +15,7 @@ export default {
 // 上に被せてすべてを押せないようにする
 .ShogiPlayer
   &.is_mode_view
-    .ShogiPlayerWidth
+    .SpGroundInside
       .OpDisabledBlock
         z-index: $overlay_for_disable_z
     .is_layer_on

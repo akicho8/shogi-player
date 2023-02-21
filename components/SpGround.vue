@@ -1,12 +1,12 @@
 <template lang="pug">
-// SpGround は ShogiPlayerWidth の位置を調整するためにあるので他のものを入れてはいけない → 常に100%なので意味ない
-.ShogiPlayer .SpGround(:class="component_class" :style="component_style")
-  .ShogiPlayerGroundTexture
-  ShogiPlayerWidth(v-if="TheSp.xcontainer" ref="ShogiPlayerWidth")
+// SpGround は SpGroundInside の位置を調整するためにあるので他のものを入れてはいけない → 常に100%なので意味ない
+.SpGround(:class="component_class" :style="component_style")
+  .SpGroundTexture
+  SpGroundInside(v-if="TheSp.xcontainer" ref="SpGroundInside")
 </template>
 
 <script>
-import ShogiPlayerWidth from "./ShogiPlayerWidth.vue"
+import SpGroundInside from "./SpGroundInside.vue"
 import DebugBlock from "./DebugBlock.vue"
 
 import { support } from "./support.js"
@@ -15,7 +15,7 @@ export default {
   name: "SpGround",
   mixins: [support],
   components: {
-    ShogiPlayerWidth,
+    SpGroundInside,
   },
   computed: {
     component_class() {
@@ -86,7 +86,7 @@ export default {
   +defvar(sp_ground_image, none)             // グラウンド背景画像
 
   +is_overlay_origin
-  .ShogiPlayerGroundTexture
+  .SpGroundTexture
     +is_overlay_block
 
     background-color: var(--sp_ground_color)
