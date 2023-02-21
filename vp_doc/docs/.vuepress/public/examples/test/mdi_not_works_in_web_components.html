@@ -2,7 +2,7 @@
   <script>
     const template = document.createElement("template")
     template.innerHTML = `
-<link crossorigin="anonymous" href="https://unpkg.com/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
 <i class="mdi mdi-account"></i>
 `
     class MyTag extends HTMLElement {
@@ -13,7 +13,7 @@
         } else {
           this.appendChild(template.content.cloneNode(true))
         }
-        this.innerHTML = `<link href="https://unpkg.com/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">`
+        this.innerHTML = `<link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">`
 
        //   this.innerHTML = `<style>
        // @font-face {

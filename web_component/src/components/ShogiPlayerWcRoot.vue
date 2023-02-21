@@ -105,7 +105,7 @@ export default {
     const unique_id = "bdf2da9503326784806e006ec9c11bcf"
     if (!document.getElementById(unique_id)) {
       const template = document.createElement("template")
-      template.innerHTML = `<link crossorigin="anonymous" href="https://unpkg.com/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" id="${unique_id}">`
+      template.innerHTML = `<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" id="${unique_id}">`
       const el = document.querySelector("head") // body でも良い
       el.appendChild(template.content.cloneNode(true))
     }
@@ -182,7 +182,7 @@ export default {
 <style lang="sass">
 // Shadow DOM 内で読み込むと i タグに適用されるが「×」の状態になる
 // どこが問題なのかよくわかっていないが外側でもさらに読み込むと「×」が解消される
-@import url("https://unpkg.com/@mdi/font/css/materialdesignicons.min.css")
+@import url("https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css")
 
 // @import "@mdi/font/css/materialdesignicons.min.css"
 
