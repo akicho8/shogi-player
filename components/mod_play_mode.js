@@ -114,7 +114,6 @@ export const mod_play_mode = {
         this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
         this.xcontainer.current_turn = -1
         this.xcontainer.run()
-        this.event_call("ev_play_mode_piece_put")
 
         this.event_call("ev_play_mode_move", {
           sfen:           this.play_mode_full_moves_sfen, // sfen と

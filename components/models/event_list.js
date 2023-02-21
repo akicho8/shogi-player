@@ -13,7 +13,6 @@ export const EventList = [
   "ev_play_mode_moves_change",
   "ev_play_mode_move",
   "ev_play_mode_next_moves",
-  "ev_play_mode_piece_put",
   "ev_short_sfen_change",
   "ev_turn_offset_change",
   "ev_turn_offset_max_change",

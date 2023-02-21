@@ -15,7 +15,7 @@
             sp_debug
             sp_controller
             sp_slider
-            @ev_play_mode_piece_put="     user_event_check('ev_play_mode_piece_put')"
+            @ev_play_mode_move="     user_event_check('ev_play_mode_move')"
             @ev_action_viewpoint_flip="user_event_check('ev_action_viewpoint_flip')"
             @ev_action_turn_change="   user_event_check('ev_action_turn_change')"
             @ev_action_piece_lift="    user_event_check('ev_action_piece_lift')"

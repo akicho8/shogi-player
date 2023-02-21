@@ -72,10 +72,6 @@ APIで内部変数を参照するちらを使った方が良い
 
 * 短いSFENを投げる
 
-### `ev_play_mode_piece_put`
-
-操作モードでユーザーが着手したとき
-
 ### `ev_action_viewpoint_flip`
 
 ユーザーが☗☖をクリックして視点を変更したとき

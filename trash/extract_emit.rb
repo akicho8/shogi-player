@@ -11,7 +11,6 @@ play_mode_next_moves
 moves_take_turn_offset
 ev_edit_mode_short_sfen_change
 update:sp_turn
-ev_play_mode_piece_put
 ev_action_viewpoint_flip
 ev_action_turn_change
 ev_action_piece_lift

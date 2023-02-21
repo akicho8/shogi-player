@@ -6,7 +6,6 @@
   { key: "ev_edit_mode_short_sfen_change"               , name: "編集モードの局面",                               desc: "", },
   { key: "ev_edit_mode_short_sfen2_change"              , name: "編集モードの局面(使用禁止)",                     desc: "", },
   { key: "update:sp_turn"                            , name: "手数が変更されたとき(非推奨)",                   desc: "sp_turnに-1が指定されたとき必ず呼ばれるので名前変更するかも", },
-  { key: "ev_play_mode_piece_put"                            , name: "ユーザーが意図して駒を盤に置いた",               desc: "指したとき", },
   { key: "ev_action_viewpoint_flip"                       , name: "ユーザーが意図して盤の視点を変更した",           desc: "☗☖をクリックして反転したとき", },
   { key: "ev_action_turn_change"                          , name: "ユーザーが意図して手数を変更した",               desc: "スライダーを動かして手数を変更したとき。(引数は新しい手数)", },
   { key: "ev_action_piece_lift"                           , name: "ユーザーが意図して駒を持ち上げた",               desc: "", },
