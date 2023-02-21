@@ -8,17 +8,17 @@
   // これなら MainBoardTexture に適用した影が table に影響しない
   .MainBoardTexture.is-overlay
 
-  // MainBoardTexture の兄弟として BoardField を置くと MainBoardTexture に BoardField の border が負ける
-  .BoardFieldWithPadding.is-overlay
+  // MainBoardTexture の兄弟として BoardMatrix を置くと MainBoardTexture に BoardMatrix の border が負ける
+  .BoardMatrixWithPadding.is-overlay
     // flex ではなく table にしている理由
     // ・罫線が実線ではなく隙間であるため、線を黒くしようとしたとき、背景に黒を敷き詰めておかないといけない
     // ・そこでもし背景に画像を配置したとすると、その上の敷き詰めた黒は透明でなければならない
     // ・つまり、黒を敷き詰める必要あるのと、画像盤の上は透明でないといけないことが両立できない
-    table.BoardField
+    table.BoardMatrix
       tr.BoardRow(v-for="(_, y) in TheSp.sp_board_dimension_h")
-        td.BoardColumn(
+        td.BoardCell(
           v-for="(_, x) in TheSp.sp_board_dimension_w"
-          data-resize_observer_id="BoardColumn"
+          data-resize_observer_id="BoardCell"
           @pointerdown="TheSp.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
           @click.stop.prevent="TheSp.board_cell_left_click(logical_xy(x, y), $event)"
           @click.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), $event)"
@@ -85,7 +85,7 @@ export default {
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 // | MainBoard         | わかりやすい             | Chromeで隙間ができる               | わかりやすい気がしていただけ       |      |
 // | MainBoardTexture  | 角を丸めても縁取りできる | 影の影響がある                     | 画像に縁取りできても別に嬉しくない |      |
-// | table.BoardField  | 普通に考えてここ         | グリッドと外枠に隙間が入れられない | 隙間を入れれても嬉しくない         | ←   |
+// | table.BoardMatrix  | 普通に考えてここ         | グリッドと外枠に隙間が入れられない | 隙間を入れれても嬉しくない         | ←   |
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 
 .ShogiPlayerGround
@@ -126,11 +126,11 @@ export default {
     border-radius: calc(var(--sp_board_radius) * 1px)
     border: calc(var(--sp_board_edge_stroke) * 1px) solid var(--sp_board_edge_color, var(--sp_grid_outer_color)) // 画像の輪郭で影の影響あり
 
-  .BoardFieldWithPadding
+  .BoardMatrixWithPadding
     padding: calc(var(--sp_board_padding) * 100%)
 
   //- flex に移行しやすいように table, tr, td 使用禁止
-  .BoardField
+  .BoardMatrix
     width: 100%
     height: 100%
     border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_outer_color)
@@ -141,7 +141,7 @@ export default {
 
     table-layout: fixed    // 横幅均等
 
-  .BoardColumn
+  .BoardCell
     // 何もしなければ縦幅は均等になる
     border: calc(var(--sp_grid_inner_stroke) * 1px) solid var(--sp_grid_inner_color) // border-collapse: collapse の効果で重ならない
 
@@ -167,7 +167,7 @@ export default {
 
   // 星
   .BoardRow:nth-child(3n+4)
-    .BoardColumn:nth-child(3n+4)
+    .BoardCell:nth-child(3n+4)
       position: relative
       &:after
         position: absolute
