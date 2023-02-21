@@ -30,7 +30,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const spwc = document.querySelector("shogi-player-wc");
       spwc.addEventListener("update:sp_viewpoint", e => alert(e.detail[0]))
-      spwc.addEventListener("ev_play_mode_next", e => alert(e.detail[0].last_move_info.to_kif))
+      spwc.addEventListener("ev_play_mode_move", e => alert(e.detail[0].last_move_info.to_kif))
     })
   </script>
 </head>

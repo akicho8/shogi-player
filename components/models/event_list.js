@@ -11,7 +11,7 @@ export const EventList = [
   "ev_foul_foul_accident",
   "ev_foul_my_turn_but_oside_click",
   "ev_play_mode_moves_change",
-  "ev_play_mode_next",
+  "ev_play_mode_move",
   "ev_play_mode_next_moves",
   "ev_play_mode_piece_put",
   "ev_short_sfen_change",

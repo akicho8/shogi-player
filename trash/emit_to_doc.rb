@@ -1,6 +1,6 @@
 [
   { key: "ev_short_sfen_change"                         , name: "盤面の状態",                                     desc: "コントローラーで手を戻しても変化する", },
-  { key: "ev_play_mode_next" , name: "操作モードで指した直後の局面を発行(movesあり)",  desc: "", },
+  { key: "ev_play_mode_move" , name: "操作モードで指した直後の局面を発行(movesあり)",  desc: "", },
   { key: "play_mode_next_moves"           , name: "操作モードで指した手の配列",                     desc: "", },
   { key: "ev_play_mode_moves_change"             , name: "操作モードでの現在の手の配列",                   desc: "turn_offsetでtakeしている", },
   { key: "ev_edit_mode_short_sfen_change"               , name: "編集モードの局面",                               desc: "", },

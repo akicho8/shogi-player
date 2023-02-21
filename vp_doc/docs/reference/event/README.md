@@ -35,7 +35,7 @@ APIで内部変数を参照するちらを使った方が良い
 
 コントローラーで手を戻しても変化する
 
-### `ev_play_mode_next(hash: object)`
+### `ev_play_mode_move(hash: object)`
 
 操作モードで着手後にいろんな情報を投げる
 
@@ -51,7 +51,7 @@ APIで内部変数を参照するちらを使った方が良い
 操作モードで着手したとき
 
 * moves の配列を投げる
-* `ev_play_mode_next` と統合する予定  <Badge text="TODO" type="error" vertical="top" />
+* `ev_play_mode_move` と統合する予定  <Badge text="TODO" type="error" vertical="top" />
 
 ### `ev_play_mode_moves_change(moves: array)`
 

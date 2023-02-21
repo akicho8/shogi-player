@@ -6,7 +6,7 @@ Dir.chdir(__dir__)
 
 already_defs = %w(
 ev_short_sfen_change
-ev_play_mode_next
+ev_play_mode_move
 play_mode_next_moves
 moves_take_turn_offset
 ev_edit_mode_short_sfen_change

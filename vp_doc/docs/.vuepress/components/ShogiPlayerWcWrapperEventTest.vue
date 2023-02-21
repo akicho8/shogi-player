@@ -1,5 +1,5 @@
 <template>
-<ShogiPlayerWcWrapper sp_mode="play" @ev_play_mode_next="move_handle" />
+<ShogiPlayerWcWrapper sp_mode="play" @ev_play_mode_move="move_handle" />
 </template>
 
 <script>

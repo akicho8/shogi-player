@@ -116,7 +116,7 @@ export const mod_play_mode = {
         this.xcontainer.run()
         this.event_call("ev_play_mode_piece_put")
 
-        this.event_call("ev_play_mode_next", {
+        this.event_call("ev_play_mode_move", {
           sfen:           this.play_mode_full_moves_sfen, // sfen と
           turn:           this.turn_offset,               // turn を同時に更新するの重要
           last_move_info: this.last_move_info,

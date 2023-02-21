@@ -87,7 +87,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <!-- ```html -->
 <!-- <shogi-player-wc -->
 <!--   sp_mode="play" -->
-<!--   @ev_play_mode_next="e => {}" -->
+<!--   @ev_play_mode_move="e => {}" -->
 <!-- /> -->
 <!-- ``` -->
 

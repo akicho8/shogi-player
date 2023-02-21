@@ -19,7 +19,6 @@ MainDocMainNavbar
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_bod_parse'}") BOD読み込み
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_foul'}") 反則判定
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_sound_timing'}") 音タイミング
-      b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_simple_paper_style'}") シンプルな紙スタイル
 </template>
 
 <script>
