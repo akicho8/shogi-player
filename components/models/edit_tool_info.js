@@ -1,7 +1,7 @@
 import MemoryRecord from "js-memory-record"
 import { Location } from "./location"
 
-export class AnyFuncInfo extends MemoryRecord {
+export class EditToolInfo extends MemoryRecord {
   static get define() {
     return [
 
@@ -15,7 +15,7 @@ export class AnyFuncInfo extends MemoryRecord {
       { key: "視点切り替え",       func: e => { e.api_viewpoint_flip() }, },
 
       // { key: "盤面をシャッフル",   func: e => { e.xcontainer.shuffle_apply(4) }, },
-      { key: "盤面シャッフル",     func: e => { e.shuffle_dialog_open() }, },
+      { key: "盤面シャッフル",     func: e => { e.shuffle_dialog_open_handle() }, },
       { key: "上ローテイト",       func: e => { e.xcontainer.slide_xy(0, -1) }, },
       { key: "下ローテイト",       func: e => { e.xcontainer.slide_xy(0, 1)  }, },
       { key: "左ローテイト",       func: e => { e.xcontainer.slide_xy(-1, 0) }, },

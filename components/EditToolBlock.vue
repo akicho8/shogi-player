@@ -8,10 +8,10 @@
       | {{record.name}}
     b-dropdown-item(separator)
     b-dropdown-item キャンセル
-  b-dropdown.mx-0(v-model="TheSp.any_func_key" size="is-small")
+  b-dropdown.mx-0(v-model="TheSp.edit_tool_key" size="is-small")
     .button.is-small(slot="trigger")
       b-icon(icon="menu" size="is-small")
-    b-dropdown-item(v-for="e in TheSp.AnyFuncInfo.values" :value="e.key" :key="e.key" @click="TheSp.any_func_click_handle(e)")
+    b-dropdown-item(v-for="e in TheSp.EditToolInfo.values" :value="e.key" :key="e.key" @click="TheSp.edit_tool_click_handle(e)")
       | {{e.name}}
     b-dropdown-item(separator)
     b-dropdown-item キャンセル

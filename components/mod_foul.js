@@ -12,7 +12,7 @@ export const mod_foul = {
     // | 初心者向け     | o     | o     | 反則になりそうなら emit して動作をキャンセルする |        |
     // |----------------+-------+-------+--------------------------------------------------+--------|
     sp_foul_validate: { type: Boolean, default: true,  }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
-    sp_foul_cancel: { type: Boolean, default: false, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
+    sp_foul_cancel:   { type: Boolean, default: false, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
   },
 
   data() {
