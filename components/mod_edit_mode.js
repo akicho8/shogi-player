@@ -402,12 +402,19 @@ export const mod_edit_mode = {
 
     board_cell_right_click(xy, e) {
       this.log("盤のセルを右クリック")
+      const place = Place.fetch(xy)
+
+      if (place.tennozan_p) {
+        if (e.shiftKey && e.altKey && e.metaKey) {
+          this.setting_modal_open_handle()
+          return
+        }
+      }
 
       if (this.break_if_view_mode) {
         return
       }
 
-      const place = Place.fetch(xy)
       const soldier = this.xcontainer.board.lookup(place)
 
       if (this.hold_cancel(e)) {

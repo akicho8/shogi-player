@@ -2,8 +2,6 @@
 .ShogiPlayer(:class="component_class")
   SpGround(ref="SpGround")
   DebugBlock
-  b-modal(:active.sync="setting_modal_p" has-modal-card v-if="xcontainer")
-    SettingModal
   pre(v-if="debug_p") {{$props}}
 </template>
 
@@ -20,7 +18,6 @@ import { Location   } from "./models/location.js"
 import { EventList   } from "./models/event_list.js"
 
 // components
-import SettingModal       from "./SettingModal.vue"
 import ErrorNotify        from "./ErrorNotify.vue"
 import OpDisabledBlock    from "./OpDisabledBlock.vue"
 import SpGround  from "./SpGround.vue"
@@ -31,6 +28,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 // mixins modules
 import { mod_focus          } from "./mod_focus.js"
 import { mod_navi        } from "./mod_navi.js"
+import { mod_setting        } from "./setting/mod_setting.js"
 import { mod_resize_observer        } from "./mod_resize_observer.js"
 import { mod_shortcut    } from "./mod_shortcut.js"
 import { mod_edit_mode   } from "./mod_edit_mode.js"
@@ -56,6 +54,7 @@ export default {
     mod_vector,
     mod_focus,
     mod_navi,
+    mod_setting,
     mod_resize_observer,
     mod_shortcut,
     mod_edit_mode,
@@ -171,7 +170,6 @@ export default {
   },
 
   components: {
-    SettingModal,
     ErrorNotify,
     OpDisabledBlock,
     EditToolBlock,
@@ -187,7 +185,6 @@ export default {
       xcontainer: null,                 // 局面管理
       turn_edit_p: false,               // N手目編集中
       update_counter: 0,
-      setting_modal_p: false,
       env: process.env.NODE_ENV,
       view_mode_turn_offset_save: null, // viewモードを抜けるとき現在の手数を記憶しておく
     }

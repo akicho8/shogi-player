@@ -15,11 +15,6 @@ export const mod_navi = {
       type: Boolean,
       default: false,
     },
-    // 設定ボタンの表示
-    sp_setting: {
-      type: Boolean,
-      default: false,
-    },
     // コントローラー表示
     sp_controller: {
       type: Boolean,

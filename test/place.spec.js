@@ -21,6 +21,7 @@ describe('Place', () => {
     expect(Place.fetch("2c").to_sfen).toEqual("2c")
   })
 
-  it('even_p', () => { expect(Place.fetch("91").even_p).toEqual(true) })
-  it('odd_p',  () => { expect(Place.fetch("92").odd_p).toEqual(true) })
+  it('even_p',     () => { expect(Place.fetch("91").even_p).toEqual(true)     })
+  it('odd_p',      () => { expect(Place.fetch("92").odd_p).toEqual(true)      })
+  it('tennozan_p', () => { expect(Place.fetch("55").tennozan_p).toEqual(true) })
 })

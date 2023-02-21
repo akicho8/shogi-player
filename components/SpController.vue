@@ -1,14 +1,19 @@
 <template lang="pug">
 .SpController.buttons.are-small.has-addons.is-centered.is-paddingless
   template(v-if="TheSp.inside_controller_p")
-    button.button.first(    ref="first"    @click.stop.prevent="TheSp.move_to_first"):             b-icon(icon="menu-left")
-    button.button.previous( ref="previous" @click.stop.prevent="TheSp.relative_move(-1, $event)"): b-icon(icon="chevron-left"  size="is-small")
-    button.button.next(     ref="next"     @click.stop.prevent="TheSp.relative_move(+1, $event)"): b-icon(icon="chevron-right" size="is-small")
-    button.button.last(     ref="last"     @click.stop.prevent="TheSp.move_to_last"):              b-icon(icon="menu-right")
+    button.button.first(ref="first" @click.stop.prevent="TheSp.move_to_first")
+      b-icon(icon="menu-left")
+    button.button.previous(ref="previous" @click.stop.prevent="TheSp.relative_move(-1, $event)")
+      b-icon(icon="chevron-left" size="is-small")
+    button.button.setting(@click.stop.prevent="TheSp.setting_modal_open_handle" v-if="TheSp.debug_or_development_p")
+      b-icon(icon="cog" size="is-small")
+    button.button.next(ref="next" @click.stop.prevent="TheSp.relative_move(+1, $event)")
+      b-icon(icon="chevron-right" size="is-small")
+    button.button.last(ref="last" @click.stop.prevent="TheSp.move_to_last")
+      b-icon(icon="menu-right")
   template(v-if="false")
-    button.button.flip(                    @click.stop.prevent="TheSp.viewpoint_flip_handle"):            b-icon(icon="swap-vertical" size="is-small")
-  template(v-if="TheSp.sp_setting")
-    button.button.setting(                 @click.stop.prevent="TheSp.setting_modal_p = true"):    b-icon(icon="cog"   size="is-small")
+    button.button.flip(@click.stop.prevent="TheSp.viewpoint_flip_handle")
+      b-icon(icon="swap-vertical" size="is-small")
 </template>
 
 <script>

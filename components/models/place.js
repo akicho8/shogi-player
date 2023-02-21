@@ -137,6 +137,10 @@ export class Place {
     return !this.even_p
   }
 
+  get tennozan_p() {
+    return this.x === Math.trunc(Board.dimension / 2) && this.y === Math.trunc(Board.dimension / 2)
+  }
+
   // x, y を足した新しい位置を返す
   // はみでたのは反対側の座標とする
   rotate_add(x, y) {

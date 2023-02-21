@@ -34,3 +34,7 @@ development 版を使うとデバッグ情報を多めに表示する
 <LinkToExample name="sp_debug" />
 
 内部の情報を下に表示する
+
+## 設定を起動する
+
+`Shift` `Option` `Command` を押しながらマウスの右クリックで設定モーダルが起動する
