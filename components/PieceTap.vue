@@ -30,7 +30,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 //
-// .HoverPieceElement // マウスの (x, y) を反映
+// .LiftedPieceElement // マウスの (x, y) を反映
 //   .PieceTap.is_position_north
 //     .PieceTexture
 //       .PieceTextureSelf(駒の種類を定義するクラスたち)
@@ -145,9 +145,9 @@ export default {
     // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
 
   //////////////////////////////////////////////////////////////////////////////// カーソル
-  .HoverPieceElement
+  .LiftedPieceElement
     position: fixed
-    z-index: $hover_piece_element_z     // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い。10だとsidebarに負ける
+    z-index: $lifted_piece_element_z     // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い。10だとsidebarに負ける
     pointer-events: none          // 一切のイベントに反応させない
     .PieceTap
       // この要素の半分を左上に移動する
@@ -157,7 +157,7 @@ export default {
 
   // タッチデバイスでは消す場合
   &.is_device_touch
-    .HoverPieceElement
+    .LiftedPieceElement
       display: none // スマホとタブレットでは表示しない
 
   //////////////////////////////////////////////////////////////////////////////// 成り不成り選択中のセル背景色
@@ -200,7 +200,7 @@ export default {
 
   // 持ち上げ駒
   // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceTexture は 100% 固定にする
-  .HoverPieceElement
+  .LiftedPieceElement
     width:  var(--sp_cell_w)
     height: var(--sp_cell_h)
     .PieceTap

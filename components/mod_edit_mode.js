@@ -278,9 +278,9 @@ export const mod_edit_mode = {
           }
 
           if (must_dialog) {
-            this.mouse_stick_p = false // ダイアログ選択時時は動かしている駒を止める
+            this.lp_mouse_stick_p = false // ダイアログ選択時時は動かしている駒を止める
             this.dialog_soldier = new_soldier
-            this.hover_piece_element_destroy()
+            this.lp_destroy()
 
             // this.$buefy.dialog.confirm({
             //   message: '成りますか？',
@@ -542,7 +542,7 @@ export const mod_edit_mode = {
       this.have_piece = piece
       this.have_piece_location = location
       this.have_piece_promoted = have_piece_promoted
-      this.hover_piece_element_create(e, this.origin_soldier2)
+      this.lp_create(e, this.origin_soldier2)
     },
 
     // 駒箱の駒を持ち上げている？
@@ -590,7 +590,7 @@ export const mod_edit_mode = {
       this.have_piece = piece
       this.have_piece_location = null
       this.have_piece_promoted = false
-      this.hover_piece_element_create(e, this.origin_soldier2)
+      this.lp_create(e, this.origin_soldier2)
     },
 
     // 成り不成り選択ダイアログ表示中はキャンセルできない
@@ -675,7 +675,7 @@ export const mod_edit_mode = {
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
       this.place_from = place
-      this.hover_piece_element_create(e, this.origin_soldier1)
+      this.lp_create(e, this.origin_soldier1)
     },
 
     // 駒を持ってない状態にする
@@ -688,7 +688,7 @@ export const mod_edit_mode = {
       this.have_piece_promoted = null
       this.killed_soldier = null
       this.foul_clear()
-      this.hover_piece_element_destroy()
+      this.lp_destroy()
     },
 
     // 持った状態で他の駒をタップするとキャンセルする場合はキャンセル

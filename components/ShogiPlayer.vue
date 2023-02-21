@@ -35,7 +35,7 @@ import { mod_resize_observer        } from "./mod_resize_observer.js"
 import { mod_shortcut    } from "./mod_shortcut.js"
 import { mod_edit_mode   } from "./mod_edit_mode.js"
 import { mod_foul        } from "./mod_foul.js"
-import { mod_hover_piece } from "./mod_hover_piece.js"
+import { mod_lifted_piece } from "./mod_lifted_piece.js"
 import { mod_legal_check        } from "./mod_legal_check.js"
 import { mod_play_mode   } from "./mod_play_mode.js"
 import { mod_profile        } from "./mod_profile.js"
@@ -60,7 +60,7 @@ export default {
     mod_shortcut,
     mod_edit_mode,
     mod_foul,
-    mod_hover_piece,
+    mod_lifted_piece,
     mod_legal_check,
     mod_play_mode,
     mod_profile,
