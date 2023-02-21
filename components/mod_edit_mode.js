@@ -65,7 +65,7 @@ export const mod_edit_mode = {
       this.log("board_cell_left_click")
       this.log(`shiftKey: ${e.shiftKey}`)
       this.$data._last_clicked_cell = e.target
-      this.foul_init()
+      this.illegal_init()
 
       const place = Place.fetch(xy)
 
@@ -100,7 +100,7 @@ export const mod_edit_mode = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.event_call("ev_foul_click_but_self_is_not_turn")
+        this.event_call("ev_illegal_click_but_self_is_not_turn")
         return
       }
 
@@ -110,7 +110,7 @@ export const mod_edit_mode = {
             if (this.killed_soldier) {
               if (this.killed_soldier.location !== this.xcontainer.current_location) {
                 this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
-                this.event_call("ev_foul_my_turn_but_oside_click")
+                this.event_call("ev_illegal_my_turn_but_oside_click")
                 return
               }
             }
@@ -124,14 +124,14 @@ export const mod_edit_mode = {
         return
       }
 
-      if (this.sp_foul_validate) {
+      if (this.sp_illegal_validate) {
         if (this.play_p && this.have_piece && !this.killed_soldier) {
           const new_soldier = this.soldier_create_from_stand_or_box_on(place)
           const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
           if (force_promote_length != null) {                                              // チェックしない場合は null
             if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
               this.log("駒台や駒箱から持ち上げた駒を置こうとしたけど死に駒なので無効とする")
-              if (this.foul_add("foul_dead_soldier", {soldier: new_soldier}) === "__cancel__") { // 死に駒
+              if (this.illegal_add("illegal_dead_soldier", {soldier: new_soldier}) === "__cancel__") { // 死に駒
                 return
               }
             }
@@ -223,12 +223,12 @@ export const mod_edit_mode = {
         if (!found) {
           if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place, {mode: "non_stop"})) {
             this.log("障害物を素通りすれば目的地に行ける")
-            if (this.sp_foul_validate) {
+            if (this.sp_illegal_validate) {
               if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place)) {
                 this.log("障害物なく目的地に行ける")
               } else {
                 this.log("障害物を飛び越えれば目的地に行ける")
-                if (this.foul_add("foul_piece_warp", {soldier: this.origin_soldier1}) === "__cancel__") { // 駒ワープ
+                if (this.illegal_add("illegal_piece_warp", {soldier: this.origin_soldier1}) === "__cancel__") { // 駒ワープ
                   return
                 }
               }
@@ -245,9 +245,9 @@ export const mod_edit_mode = {
           return
         }
 
-        if (this.sp_foul_validate) {
+        if (this.sp_illegal_validate) {
           if (this.xcontainer.board.move_then_king_capture_p(this.origin_soldier1, place)) {
-            if (this.foul_add("foul_death_king", {soldier: this.origin_soldier1, place: place}) === "__cancel__") { // 王手放置
+            if (this.illegal_add("illegal_death_king", {soldier: this.origin_soldier1, place: place}) === "__cancel__") { // 王手放置
               return
             }
           }
@@ -309,12 +309,12 @@ export const mod_edit_mode = {
         this.log("持駒を置く")
 
         // 二歩判定
-        if (this.sp_foul_validate) {
+        if (this.sp_illegal_validate) {
           if (this.play_p) {
             if (this.have_piece.key === "P") {
               if (this.have_piece_location) {
                 if (this.xcontainer.board.pawn_exist_by_x(place.x, this.have_piece_location)) {
-                  if (this.foul_add("foul_two_pawn") === "__cancel__") { // 二歩
+                  if (this.illegal_add("illegal_two_pawn") === "__cancel__") { // 二歩
                     return
                   }
                 }
@@ -396,7 +396,7 @@ export const mod_edit_mode = {
         next_turn_offset: this.turn_offset + 1,           // この手を指した直後の手数。初手76歩なら1
         player_location: this.xcontainer.current_location,  // 指した人の色。駒の色ではない
         killed_soldier: this.killed_soldier,              // 取った駒 (無い場合もある)
-        foul_list: this.foul_list,
+        illegal_list: this.illegal_list,
       })
     },
 
@@ -519,7 +519,7 @@ export const mod_edit_mode = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.event_call("ev_foul_click_but_self_is_not_turn")
+        this.event_call("ev_illegal_click_but_self_is_not_turn")
         return
       }
 
@@ -687,7 +687,7 @@ export const mod_edit_mode = {
       this.have_piece_location = null
       this.have_piece_promoted = null
       this.killed_soldier = null
-      this.foul_clear()
+      this.illegal_clear()
       this.lp_destroy()
     },
 

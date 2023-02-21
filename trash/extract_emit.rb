@@ -21,9 +21,9 @@ update:sp_mode
 update:sp_debug
 update:sp_viewpoint
 ev_action_board_cell_pointerdown
-ev_foul_click_but_self_is_not_turn
-ev_foul_my_turn_but_oside_click
-ev_foul_foul_accident
+ev_illegal_click_but_self_is_not_turn
+ev_illegal_my_turn_but_oside_click
+ev_illegal_illegal_accident
 ev_action_player_info_click
 
 rows = []

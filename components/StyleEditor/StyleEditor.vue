@@ -409,12 +409,12 @@
             b-radio-button(size="is-small" v-model="sp_legal_move_only" :native-value="true") ON
 
           b-field(custom-class="is-small" label="操作モードでは飛角香は駒を跨げない")
-            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="true") ON
 
           b-field(custom-class="is-small" label="操作モードでは二歩ができない")
-            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="true") ON
 
           b-field(custom-class="is-small" label="持駒のキャンセル方法")
             b-radio-button(size="is-small" v-model="sp_lift_cancel_action" native-value="reality") 元位置
@@ -624,8 +624,8 @@ export default {
       sp_slider:     DEVELOPMENT_P ? true : true,
       sp_controller: DEVELOPMENT_P ? true : false,
       sp_legal_move_only: false,
-      sp_foul_validate: false,
-      sp_foul_validate: false,
+      sp_illegal_validate: false,
+      sp_illegal_validate: false,
       sp_lift_cancel_action: "reality",
 
       se_tf0_mode: "is_tf0_mode_off",
@@ -883,8 +883,8 @@ export default {
       params.sp_controller            = this.sp_controller
       params.sp_player_info           = this.sp_player_info
       params.sp_legal_move_only       = this.sp_legal_move_only
-      params.sp_foul_validate            = this.sp_foul_validate
-      params.sp_foul_validate            = this.sp_foul_validate
+      params.sp_illegal_validate            = this.sp_illegal_validate
+      params.sp_illegal_validate            = this.sp_illegal_validate
       params.sp_lift_cancel_action    = this.sp_lift_cancel_action
       return params
     },

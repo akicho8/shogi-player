@@ -101,20 +101,20 @@ APIで内部変数を参照するちらを使った方が良い
 
 * 位置とプレイヤー情報を投げる
 
-### `ev_foul_click_but_self_is_not_turn`
+### `ev_illegal_click_but_self_is_not_turn`
 
 手番が違うのに操作しようとしたとき
 
-### `ev_foul_my_turn_but_oside_click`
+### `ev_illegal_my_turn_but_oside_click`
 
 自分が手番だけど相手の駒を持ち上げようとしたとき
 
-### `ev_foul_foul_accident(hash: Object)`
+### `ev_illegal_illegal_accident(hash: Object)`
 
 反則が発生したとき
 
 * 反則の情報を投げる
-* `sp_foul_validate && sp_foul_cancel` のときのみ発生する
+* `sp_illegal_validate && sp_illegal_cancel` のときのみ発生する
 
 ### `xxx.native`
 

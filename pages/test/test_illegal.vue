@@ -1,5 +1,5 @@
 <template lang="pug">
-.test-test_foul
+.test-test_illegal
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
@@ -15,29 +15,29 @@
             sp_debug
             sp_controller
             :sp_slider="false"
-            :sp_foul_validate="sp_foul_validate"
-            :sp_foul_cancel="sp_foul_cancel"
-            @ev_foul_foul_accident="value => foul_accident = value"
+            :sp_illegal_validate="sp_illegal_validate"
+            :sp_illegal_cancel="sp_illegal_cancel"
+            @ev_illegal_illegal_accident="value => illegal_accident = value"
           )
         .column
           b-field(custom-class="is-small" label="反則判定" message="OFFなら気持ち程度処理も軽くなる")
-            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_foul_validate" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="true") ON
           b-field(custom-class="is-small" label="操作無効" message="ONは初心者向けで判定にひっかかったら操作を無効にする")
-            b-radio-button(size="is-small" v-model="sp_foul_cancel" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_foul_cancel" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_illegal_cancel" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_illegal_cancel" :native-value="true") ON
         .column
           pre
-            | {{foul_accident}}
+            | {{illegal_accident}}
 </template>
 
 <script>
 export default {
   data() {
     return {
-      sp_foul_validate: true,
-      sp_foul_cancel: false,
-      foul_accident: null,
+      sp_illegal_validate: true,
+      sp_illegal_cancel: false,
+      illegal_accident: null,
       sp_body: `
 後手の持駒：歩
   ９ ８ ７ ６ ５ ４ ３ ２ １
@@ -64,5 +64,5 @@ export default {
 </script>
 
 <style lang="sass">
-.test-test_foul
+.test-test_illegal
 </style>

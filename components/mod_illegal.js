@@ -1,8 +1,8 @@
 // 反則関連
 
-import { FoulInfo } from "./models/foul_info.js"
+import { IllegalInfo } from "./models/illegal_info.js"
 
-export const mod_foul = {
+export const mod_illegal = {
   props: {
     // |----------------+-------+-------+--------------------------------------------------+--------|
     // | props          | check | break |                                                  |        |
@@ -11,33 +11,33 @@ export const mod_foul = {
     // | 上級者向け     |       |       | 反則かどうかは人が判断する                       |        |
     // | 初心者向け     | o     | o     | 反則になりそうなら emit して動作をキャンセルする |        |
     // |----------------+-------+-------+--------------------------------------------------+--------|
-    sp_foul_validate: { type: Boolean, default: true,  }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
-    sp_foul_cancel:   { type: Boolean, default: false, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
+    sp_illegal_validate: { type: Boolean, default: true,  }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
+    sp_illegal_cancel:   { type: Boolean, default: false, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
   },
 
   data() {
     return {
-      foul_list: [],
+      illegal_list: [],
     }
   },
   methods: {
-    foul_init() {
-      this.foul_list = []
+    illegal_init() {
+      this.illegal_list = []
     },
 
-    foul_clear() {
-      this.foul_list = []
+    illegal_clear() {
+      this.illegal_list = []
     },
 
-    foul_add(foul_key, attrs = {}) {
-      const foul_info = FoulInfo.fetch(foul_key)
-      this.log(`反則: ${foul_info.name}`)
-      attrs = { ...foul_info, ...attrs }
-      if (this.sp_foul_cancel) {
-        this.event_call("ev_foul_foul_accident", attrs)
+    illegal_add(illegal_key, attrs = {}) {
+      const illegal_info = IllegalInfo.fetch(illegal_key)
+      this.log(`反則: ${illegal_info.name}`)
+      attrs = { ...illegal_info, ...attrs }
+      if (this.sp_illegal_cancel) {
+        this.event_call("ev_illegal_illegal_accident", attrs)
         return "__cancel__"
       }
-      this.foul_list.push(attrs)
+      this.illegal_list.push(attrs)
     },
   },
 }

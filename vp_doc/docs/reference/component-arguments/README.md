@@ -393,7 +393,7 @@ Default: `null`
 
 Web Components 版では内部で eval しているため動作する
 
-### `sp_foul_validate`
+### `sp_illegal_validate`
 
 Type: `Boolean`
 Default: `true`
@@ -406,7 +406,7 @@ Default: `true`
   * 駒ワープ
   * 死に駒
 
-### `sp_foul_cancel`
+### `sp_illegal_cancel`
 
 Type: `Boolean`
 Default: `false`
