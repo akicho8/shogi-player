@@ -3,6 +3,7 @@ import SettingModal from "./SettingModal.vue"
 import { ModeInfo         } from "../models/mode_info.js"
 import { BgVariantInfo    } from "../models/bg_variant_info.js"
 import { PieceVariantInfo } from "../models/piece_variant_info.js"
+import { SettingTabInfo } from "../models/setting_tab_info.js"
 
 export const mod_setting = {
   props: {
@@ -28,6 +29,7 @@ export const mod_setting = {
     },
   },
   computed: {
+    SettingTabInfo()   { return SettingTabInfo   },
     ModeInfo()         { return ModeInfo         },
     BgVariantInfo()    { return BgVariantInfo    },
     PieceVariantInfo() { return PieceVariantInfo },

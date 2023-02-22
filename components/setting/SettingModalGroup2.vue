@@ -1,5 +1,5 @@
 <template lang="pug">
-b-tab-item(label="その他")
+.SettingModalGroup
   //- b-dropdown(v-model="TheSp.new_sp_bg_variant")
   //-   button.button(slot="trigger")
   //-     span

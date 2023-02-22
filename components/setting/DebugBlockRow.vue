@@ -8,7 +8,7 @@ tr.DebugBlockRow
 </template>
 
 <script>
-import { support } from "./support.js"
+import { support } from "../support.js"
 
 export default {
   name: "DebugBlockRow",
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "../support.sass"
 .ShogiPlayer
   .DebugBlockRow
     th

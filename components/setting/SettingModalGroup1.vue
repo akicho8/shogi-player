@@ -1,5 +1,5 @@
 <template lang="pug">
-b-tab-item(label="基本")
+SettingModalGroup
   b-field(custom-class="is-small" label="モード")
     template(v-for="e in TheSp.ModeInfo.values")
       b-radio-button(size="is-small" v-model="TheSp.new_mode" :native-value="e.key") {{e.name}}

@@ -1,5 +1,5 @@
 <template lang="pug">
-.DebugBlock.box(v-if="TheSp.debug_p")
+.DebugBlock
   table.table.is-narrow.is-hoverable.is-fullwidth
     caption 最適化
     thead
@@ -63,23 +63,20 @@
 </template>
 
 <script>
-import { support } from "./support.js"
+import { support } from "../support.js"
 import DebugBlockRow from "./DebugBlockRow.vue"
 
 export default {
   name: "DebugBlock",
   mixins: [support],
   components: {
-    // 明示的に指定しないと shoig-exednd 側で次のエラーがでる
-    //- [Vue warn]: Unknown custom element: <DebugBlockRow> - did you register the component correctly? For recursive components, make sure to provide the "name" option.
-    // 原因不明
     DebugBlockRow,
   },
 }
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "../support.sass"
 .ShogiPlayer
   .DebugBlock
     font-size: $size-7

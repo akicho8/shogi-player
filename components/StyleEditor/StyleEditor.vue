@@ -597,7 +597,7 @@ export default {
 
       sp_comment: false,
       sp_common_gap: 0.18,
-      sp_layer: DEVELOPMENT_P ? false : false,
+      sp_layer: DEVELOPMENT_P ? true : false,
       sp_piece_variant: "a",    // d
       sp_bg_variant: "none", // a
 
@@ -624,7 +624,7 @@ export default {
       sp_body: null,
 
       sp_turn_show:    DEVELOPMENT_P ? true : false,
-      sp_setting:      DEVELOPMENT_P ? false : false,
+      sp_setting:      DEVELOPMENT_P ? true : false,
 
       sp_slider:     DEVELOPMENT_P ? true : true,
       sp_controller: DEVELOPMENT_P ? true : false,

@@ -1,8 +1,6 @@
 <template lang="pug">
 .ShogiPlayer.is-relative(:class="component_class")
   SpGround(ref="SpGround")
-  DebugBlock
-  pre(v-if="debug_p") {{$props}}
 </template>
 
 <script>
@@ -22,7 +20,6 @@ import ErrorNotify        from "./ErrorNotify.vue"
 import OpDisabledBlock    from "./OpDisabledBlock.vue"
 import SpGround  from "./SpGround.vue"
 import EditToolBlock      from "./EditToolBlock.vue"
-import DebugBlock         from "./DebugBlock.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
 
 // mixins modules
@@ -173,7 +170,6 @@ export default {
     ErrorNotify,
     OpDisabledBlock,
     EditToolBlock,
-    DebugBlock,
     SpGround,
     // SettingModal,
     PromoteSelectModal,

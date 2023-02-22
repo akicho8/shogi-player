@@ -8,7 +8,6 @@
 
 <script>
 import SpGroundInside from "./SpGroundInside.vue"
-import DebugBlock from "./DebugBlock.vue"
 import SettingModal  from "./setting/SettingModal.vue"
 
 import { support } from "./support.js"
