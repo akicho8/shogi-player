@@ -624,7 +624,7 @@ export default {
       sp_body: null,
 
       sp_turn_show:    DEVELOPMENT_P ? true : false,
-      sp_setting:      DEVELOPMENT_P ? true : false,
+      sp_setting:      DEVELOPMENT_P ? false : false,
 
       sp_slider:     DEVELOPMENT_P ? true : true,
       sp_controller: DEVELOPMENT_P ? true : false,

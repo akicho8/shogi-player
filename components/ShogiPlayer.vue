@@ -1,5 +1,5 @@
 <template lang="pug">
-.ShogiPlayer(:class="component_class")
+.ShogiPlayer.is-relative(:class="component_class")
   SpGround(ref="SpGround")
   DebugBlock
   pre(v-if="debug_p") {{$props}}
@@ -175,12 +175,15 @@ export default {
     EditToolBlock,
     DebugBlock,
     SpGround,
+    // SettingModal,
     PromoteSelectModal,
   },
 
   data() {
     return {
       new_mode: this.sp_mode,
+      // new_bg_variant: this.sp_bg_variant,
+
       turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       xcontainer: null,                 // 局面管理
       turn_edit_p: false,               // N手目編集中

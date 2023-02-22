@@ -1,5 +1,9 @@
 import SettingModal from "./SettingModal.vue"
 
+import { ModeInfo         } from "../models/mode_info.js"
+import { BgVariantInfo    } from "../models/bg_variant_info.js"
+import { PieceVariantInfo } from "../models/piece_variant_info.js"
+
 export const mod_setting = {
   props: {
     // 設定ボタンの表示
@@ -10,34 +14,22 @@ export const mod_setting = {
   },
   data() {
     return {
-      setting_modal_instance: null,
+      new_setting: this.sp_setting,
     }
   },
   beforeDestroy() {
-    this.setting_modal_close()
   },
   methods: {
-    // 棋譜の読み込みタップ時の処理
     setting_modal_open_handle() {
-      this.setting_modal_close()
-      // https://buefy.org/documentation/modal/
-      this.setting_modal_instance = this.$buefy.modal.open({
-        // width: "", // width ではなく max-width に設定される
-        customClass: "SettingModal",
-        component: SettingModal,
-        parent: this,
-        trapFocus: true,
-        hasModalCard: true,
-        animation: "",
-        canCancel: ["outside", "escape"],
-        onCancel: () => {},
-      })
+      this.new_setting = true
     },
     setting_modal_close() {
-      if (this.setting_modal_instance) {
-        this.setting_modal_instance.close()
-        this.setting_modal_instance = null
-      }
+      this.new_setting = false
     },
+  },
+  computed: {
+    ModeInfo()         { return ModeInfo         },
+    BgVariantInfo()    { return BgVariantInfo    },
+    PieceVariantInfo() { return PieceVariantInfo },
   },
 }
