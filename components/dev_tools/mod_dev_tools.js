@@ -8,7 +8,7 @@ import { PieceVariantInfo      } from "../models/piece_variant_info.js"
 
 import { DevToolsGroupInfo     } from "./dev_tools_group_info.js"
 import { DevToolsPositionInfo    } from "./dev_tools_position_info.js"
-import { DevToolsVarInfo    } from "./dev_tools_var_info.js"
+import { DevToolsVariableInfo    } from "./dev_tools_variable_info.js"
 
 export const mod_dev_tools = {
   mixins: [mod_dev_tools_storage],
@@ -53,7 +53,7 @@ export const mod_dev_tools = {
     DevToolsPositionInfo()    { return DevToolsPositionInfo },
     dev_tools_position_info() { return DevToolsPositionInfo.lookup_or_first(this.mut_dev_tools_position) },
 
-    DevToolsVarInfo()    { return DevToolsVarInfo },
+    DevToolsVariableInfo()    { return DevToolsVariableInfo },
 
     ModeInfo()          { return ModeInfo         },
     BgVariantInfo()     { return BgVariantInfo    },

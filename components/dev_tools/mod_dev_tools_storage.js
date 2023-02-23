@@ -7,7 +7,7 @@ export const mod_dev_tools_storage = {
     const hash = MyLocalStorage.get(LOCAL_STORAGE_VARIABLE_NAME)
     if (hash) {
       if (true) {
-        this.DevToolsVarInfo.values.forEach(e => {
+        this.DevToolsVariableInfo.values.forEach(e => {
           const value = hash[e.imm_var]
           if (value) {
             this.$data[e.mut_var] = value
@@ -24,7 +24,7 @@ export const mod_dev_tools_storage = {
   },
   methods: {
     dev_tools_reset_handle() {
-      this.DevToolsVarInfo.values.forEach(e => {
+      this.DevToolsVariableInfo.values.forEach(e => {
         this.$data[e.mut_var] = this.$options.props[e.imm_var]["default"]
       })
       MyLocalStorage.remove(LOCAL_STORAGE_VARIABLE_NAME)
@@ -33,7 +33,7 @@ export const mod_dev_tools_storage = {
   computed: {
     MyLocalStorage() { return MyLocalStorage },
     ls_store_hash() {
-      return this.DevToolsVarInfo.values.reduce((a, e) => ({...a, [e.imm_var]: this.$data[e.mut_var]}), {})
+      return this.DevToolsVariableInfo.values.reduce((a, e) => ({...a, [e.imm_var]: this.$data[e.mut_var]}), {})
     },
   },
 }

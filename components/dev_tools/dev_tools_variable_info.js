@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export class DevToolsVarInfo extends MemoryRecord {
+export class DevToolsVariableInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "sp_dev_tools_position", mut_var: "mut_dev_tools_position", },
