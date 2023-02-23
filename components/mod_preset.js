@@ -13,7 +13,7 @@ export const mod_preset = {
   },
 
   watch: {
-    preset_key(v) { this.mut_preset_key = v },              // 引数の変更を反映 (FIXME: 取る)
+    sp_preset(v)      { this.mut_preset_key = v            }, // 引数の変更を反映 (FIXME: 取る)
     mut_preset_key(v) { this.xcontainer_setup_by_preset(v) }, // 設定での変更を反映
   },
 
