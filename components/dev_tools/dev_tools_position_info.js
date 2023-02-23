@@ -4,8 +4,8 @@ export class DevToolsPositionInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "left",   name: "←", },
-      { key: "right",  name: "→", },
       { key: "bottom", name: "↓", },
+      { key: "right",  name: "→", },
       { key: "top",    name: "↑", },
     ]
   }
