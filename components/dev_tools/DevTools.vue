@@ -73,10 +73,10 @@ export default {
   background-color: white
 
   //////////////////////////////////////////////////////////////////////////////// レイアウト
-  padding: 0.5rem               // 外側の隙間
+  padding: 0.75rem               // 外側の隙間
   display: flex
   flex-direction: column
-  gap: 0.5rem                   // ヘッダと本体の隙間
+  gap: 0.75rem                   // ヘッダと本体の隙間
   .DevToolsGroupContent
     flex-grow: 1                // height: 100% などとしてはいけない
     overflow: auto
