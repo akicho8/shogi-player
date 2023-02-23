@@ -39,7 +39,7 @@
           SeTitle(name="背景")
 
           b-field(custom-class="is-small" label="")
-            MyColorPicker(v-model="se_ws_color" :has_alpha="false")
+            MyColorPicker(v-model="se_ws_color" :alpha="false")
 
           ImageUpload(@input="se_ws_image_input_handle")
 
@@ -400,7 +400,7 @@
             b-radio-button(size="is-small" v-model="sp_turn_show" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_turn_show" :native-value="true") ON
 
-          b-field(custom-class="is-small" label="設定ボタン表示")
+          b-field(custom-class="is-small" label="Dev Tools")
             b-radio-button(size="is-small" v-model="sp_dev_tools" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_dev_tools" :native-value="true") ON
 

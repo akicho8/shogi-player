@@ -1,8 +1,8 @@
 <template lang="pug">
 b-colorpicker.MyColorPicker(
   v-model="new_value"
-  :alpha="has_alpha"
-  inline
+  :alpha="alpha"
+  :inline="inline"
   )
   template(#footer="{color}")
     .colorpicker-fields
@@ -26,8 +26,9 @@ import BuefyColor from "@/node_modules/buefy/src/utils/color"
 export default {
   name: "MyColorPicker",
   props: {
-    value:     { type: String, required: true },
-    has_alpha: { type: Boolean, default: true },
+    value:  { type: String, required: true  },
+    alpha:  { type: Boolean, default: true  },
+    inline: { type: Boolean, default: false },
   },
   data() {
     return {
