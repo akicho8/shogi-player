@@ -406,7 +406,7 @@ export const mod_edit_mode = {
 
       if (place.tennozan_p) {
         this.log(e)
-        if (e.shiftKey && e.altKey && e.metaKey) {
+        if (e.shiftKey && e.altKey && (e.metaKey || e.ctrlKey)) {
           this.dev_tools_toggle_handle()
           return
         }
