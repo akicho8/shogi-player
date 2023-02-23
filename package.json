@@ -1,6 +1,6 @@
 {
   "name": "shogi-player",
-  "version": "0.0.381",
+  "version": "0.0.382",
   "description": "Shogi board web components has functions for replaying, manipulating, and editing",
   "keywords": "shogi kif bod sfen viewer editor player vue.js vue2 vue web-components japanese-chess",
   "homepage": "https://shogi-player.netlify.app/",
