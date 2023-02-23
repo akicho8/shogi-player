@@ -13,16 +13,16 @@ export const mod_debug = {
   },
   data() {
     return {
-      new_debug: this.sp_debug,
-      new_event_log: this.sp_event_log,
+      mut_debug: this.sp_debug,
+      mut_event_log: this.sp_event_log,
     }
   },
   watch: {
-    sp_debug(v)  { this.new_debug = v               }, // 外 -> 内
-    new_debug(v) { this.event_call("update:sp_debug", v) }, // 内 -> 外
+    sp_debug(v)  { this.mut_debug = v               }, // 外 -> 内
+    mut_debug(v) { this.event_call("update:sp_debug", v) }, // 内 -> 外
 
-    sp_event_log(v)  { this.new_event_log = v                 }, // 外 -> 内
-    new_event_log(v) { this.event_call("update:sp_event_log", v)   }, // 内 -> 外
+    sp_event_log(v)  { this.mut_event_log = v                 }, // 外 -> 内
+    mut_event_log(v) { this.event_call("update:sp_event_log", v)   }, // 内 -> 外
   },
   methods: {
     log(...v) {
@@ -31,7 +31,7 @@ export const mod_debug = {
       }
     },
     event_call(name, ...args) {
-      if (this.new_event_log || process.env.NODE_ENV === "development") {
+      if (this.mut_event_log || process.env.NODE_ENV === "development") {
         this.event_log_print(name, args)
       }
       this.$emit(name, ...args)
@@ -44,7 +44,7 @@ export const mod_debug = {
     },
   },
   computed: {
-    debug_p() { return this.new_debug },
+    debug_p() { return this.mut_debug },
     debug_or_development_p() { return this.debug_p || process.env.NODE_ENV === "development" },
   },
 }

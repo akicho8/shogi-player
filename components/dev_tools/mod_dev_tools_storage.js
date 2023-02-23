@@ -8,7 +8,7 @@ export const mod_dev_tools_storage = {
     if (hash) {
       const value = hash["sp_dev_tools_layout"]
       if (value) {
-        this.new_dev_tools_layout = value
+        this.mut_dev_tools_layout = value
       }
     }
   },
@@ -19,7 +19,7 @@ export const mod_dev_tools_storage = {
   },
   methods: {
     dev_tools_reset_handle() {
-      this.new_dev_tools_layout = this.$options.props["sp_dev_tools_layout"]["default"]
+      this.mut_dev_tools_layout = this.$options.props["sp_dev_tools_layout"]["default"]
       MyLocalStorage.remove(LS_KEY)
     },
   },
@@ -27,7 +27,7 @@ export const mod_dev_tools_storage = {
     MyLocalStorage() { return MyLocalStorage },
     ls_store_hash() {
       return {
-        sp_dev_tools_layout: this.new_dev_tools_layout,
+        sp_dev_tools_layout: this.mut_dev_tools_layout,
       }
     },
   },

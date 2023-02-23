@@ -8,13 +8,13 @@ export const mod_preset = {
 
   data() {
     return {
-      new_preset_key: this.sp_preset, // 選択中の初期配置
+      mut_preset_key: this.sp_preset, // 選択中の初期配置
     }
   },
 
   watch: {
-    preset_key(v) { this.new_preset_key = v },              // 引数の変更を反映 (FIXME: 取る)
-    new_preset_key(v) { this.xcontainer_setup_by_preset(v) }, // 設定での変更を反映
+    preset_key(v) { this.mut_preset_key = v },              // 引数の変更を反映 (FIXME: 取る)
+    mut_preset_key(v) { this.xcontainer_setup_by_preset(v) }, // 設定での変更を反映
   },
 
   methods: {

@@ -1,6 +1,6 @@
 <template lang="pug">
 .EditToolBlock(v-if="TheSp.edit_p")
-  b-dropdown(v-model="TheSp.new_preset_key")
+  b-dropdown(v-model="TheSp.mut_preset_key")
     //  button.button にすると prevent を指定する場所がないため button で外側の form が反応してしまう
     .button.is-small(slot="trigger")
       b-icon(icon="apps" size="is-small")

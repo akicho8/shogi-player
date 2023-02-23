@@ -3,7 +3,7 @@
 .SpGround(:class="component_class" :style="component_style")
   .SpGroundTexture
   SpGroundInside(v-if="TheSp.xcontainer" ref="SpGroundInside")
-  DevTools(v-if="TheSp.new_dev_tools")
+  DevTools(v-if="TheSp.mut_dev_tools")
 </template>
 
 <script>

@@ -28,17 +28,17 @@ export const mod_dev_tools = {
 
   data() {
     return {
-      new_dev_tools: this.sp_dev_tools,
-      new_dev_tools_layout: this.sp_dev_tools_layout,
+      mut_dev_tools: this.sp_dev_tools,
+      mut_dev_tools_layout: this.sp_dev_tools_layout,
     }
   },
 
   methods: {
     dev_tools_open_handle() {
-      this.new_dev_tools = true
+      this.mut_dev_tools = true
     },
     dev_tools_close_handle() {
-      this.new_dev_tools = false
+      this.mut_dev_tools = false
     },
   },
   computed: {
@@ -49,6 +49,6 @@ export const mod_dev_tools = {
     PieceVariantInfo()  { return PieceVariantInfo },
 
     DevToolsLayoutInfo()    { return DevToolsLayoutInfo },
-    dev_tools_layout_info() { return DevToolsLayoutInfo.fetch(this.new_dev_tools_layout) },
+    dev_tools_layout_info() { return DevToolsLayoutInfo.fetch(this.mut_dev_tools_layout) },
   },
 }

@@ -177,7 +177,7 @@ export default {
 
   data() {
     return {
-      new_mode: this.sp_mode,
+      mut_mode: this.sp_mode,
       // new_bg_variant: this.sp_bg_variant,
 
       turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
@@ -241,14 +241,14 @@ export default {
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    sp_mode(v) { this.new_mode = v            }, // 外から内への反映
+    sp_mode(v) { this.mut_mode = v            }, // 外から内への反映
 
     // 外からまたはダイアログから変更されたとき
-    new_mode(new_val, old_val) {
-      this.event_call("update:sp_mode", this.new_mode)
+    mut_mode(new_val, old_val) {
+      this.event_call("update:sp_mode", this.mut_mode)
 
       if (this.view_p) {
-        this.log("new_mode: view")
+        this.log("mut_mode: view")
         // alert(`復元:${this.view_mode_turn_offset_save}`)
         this.view_mode_xcontainer_update(this.view_mode_turn_offset_save)
         this.view_mode_turn_offset_save = null
@@ -265,7 +265,7 @@ export default {
       }
 
       if (this.edit_p) {
-        this.log("new_mode: edit")
+        this.log("mut_mode: edit")
 
         const new_xcontainer = new Xcontainer()
         new_xcontainer.data_source = this.data_source_by(this.xcontainer.to_short_sfen)
@@ -432,9 +432,9 @@ export default {
   computed: {
     location_black() { return Location.fetch("black")                    },
     location_white() { return Location.fetch("white")                    },
-    view_p()         { return this.new_mode === "view"          },
-    play_p()         { return this.new_mode === "play"          },
-    edit_p()         { return this.new_mode === "edit"          },
+    view_p()         { return this.mut_mode === "view"          },
+    play_p()         { return this.mut_mode === "play"          },
+    edit_p()         { return this.mut_mode === "edit"          },
 
     turn_base()       { return this.delegate_to_xcontainer("turn_base")       }, // 表示する上での開始手数で普通は 0
     turn_offset()     { return this.delegate_to_xcontainer("turn_offset")     }, // 手数のオフセット
@@ -444,9 +444,9 @@ export default {
 
     component_class() {
       return [
-        this.str_to_css_class("is_mode", this.new_mode), // is_mode_view | is_mode_play | is_mode_edit
-        this.bool_to_css_class("is_debug", this.new_debug),
-        this.bool_to_css_class("is_event_log", this.new_event_log),
+        this.str_to_css_class("is_mode", this.mut_mode), // is_mode_view | is_mode_play | is_mode_edit
+        this.bool_to_css_class("is_debug", this.mut_debug),
+        this.bool_to_css_class("is_event_log", this.mut_event_log),
       ]
     },
 

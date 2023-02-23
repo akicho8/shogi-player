@@ -19,10 +19,10 @@
         th Value
         th 参照方法
     tbody
-      DebugBlockRow(code="new_mode"   name="現在のモード"              :value="TheSp.new_mode")
+      DebugBlockRow(code="mut_mode"   name="現在のモード"              :value="TheSp.mut_mode")
       DebugBlockRow(code="mouseover_info" name="mouseの直前までの参照要素" :value="TheSp.mouseover_info")
       DebugBlockRow(code="sp_turn"        name="開始局面番号"              :value="TheSp.sp_turn")
-      DebugBlockRow(code="new_preset_key" name="初期配置"                  :value="TheSp.new_preset_key")
+      DebugBlockRow(code="mut_preset_key" name="初期配置"                  :value="TheSp.mut_preset_key")
   table.table.is-narrow.is-hoverable.is-fullwidth(v-if="TheSp.xcontainer")
     caption Xcontainer Methods
     thead
