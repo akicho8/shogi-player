@@ -1,7 +1,15 @@
 <template lang="pug">
-.SettingModal
+.SettingModal(:class="component_class")
   FriendlyCloseButton(@click.stop="TheSp.setting_modal_close")
   b-tabs(size="is-small" v-model="tab_index" :animated="false")
+    template(v-for="e in TheSp.SettingTabInfo.values")
+      b-tab-item(:label="e.name")
+    template(v-for="e in TheSp.SettingTabInfo.values")
+      b-tab-item(:label="e.name")
+    template(v-for="e in TheSp.SettingTabInfo.values")
+      b-tab-item(:label="e.name")
+    template(v-for="e in TheSp.SettingTabInfo.values")
+      b-tab-item(:label="e.name")
     template(v-for="e in TheSp.SettingTabInfo.values")
       b-tab-item(:label="e.name")
   .my_area
@@ -55,25 +63,24 @@ export default {
       }
     },
   },
+  computed: {
+    component_class() {
+      return [this.TheSp.setting_layout_info.css_class]
+    },
+  },
 }
 </script>
 
 <style lang="sass">
 @import "../support.sass"
+@import "./position.sass"
 
 .ShogiPlayer .SettingModal
   position: fixed
-  //- bottom: 25%
-  bottom: 0%
-  left: 0
-  right: 0
 
   text-align: left
   z-index: $setting_modal_z
   background-color: white
-  // width: 100%
-  height: 50%
-  // overflow: hidden
 
   //////////////////////////////////////////////////////////////////////////////// レイアウト
   padding: 0.5rem               // 外側の隙間

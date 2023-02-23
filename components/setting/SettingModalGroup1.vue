@@ -4,6 +4,10 @@ SettingModalGroup
     template(v-for="e in TheSp.ModeInfo.values")
       b-radio-button(size="is-small" v-model="TheSp.new_mode" :native-value="e.key") {{e.name}}
 
+  b-field(custom-class="is-small" label="固定サイド")
+    template(v-for="e in TheSp.SettingLayoutInfo.values")
+      b-radio-button(size="is-small" v-model="TheSp.new_setting_layout" :native-value="e.key") {{e.name}}
+
   b-field(grouped)
     b-field(custom-class="is-small" label="視点")
       b-radio-button(size="is-small" v-model="TheSp.new_viewpoint" native-value="black") ☗

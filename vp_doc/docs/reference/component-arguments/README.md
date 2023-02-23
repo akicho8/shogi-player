@@ -501,6 +501,13 @@ Default: `false`
 
 * 設定というよりデバッグ用ツールに近い
 
+### `sp_setting_layout`
+
+Type: `String`
+Default: `bottom`
+
+設定モーダルの位置
+
 ### `sp_device`
 
 Type: `String`
