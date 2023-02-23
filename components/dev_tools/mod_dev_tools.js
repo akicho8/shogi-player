@@ -38,6 +38,12 @@ export const mod_dev_tools = {
     }
   },
 
+  watch: {
+    sp_dev_tools(v)          { this.mut_dev_tools = v          },
+    sp_dev_tools_position(v) { this.mut_dev_tools_position = v },
+    sp_dev_tools_group(v)    { this.mut_dev_tools_group = v    },
+  },
+
   methods: {
     dev_tools_toggle_handle() {
       if (this.mut_dev_tools) {
