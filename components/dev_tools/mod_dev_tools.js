@@ -1,13 +1,13 @@
-import DevToolsModal from "./DevToolsModal.vue"
+import DevTools from "./DevTools.vue"
 
 import { mod_dev_tools_storage } from "./mod_dev_tools_storage.js"
 
-import { ModeInfo         } from "../models/mode_info.js"
-import { BgVariantInfo    } from "../models/bg_variant_info.js"
-import { PieceVariantInfo } from "../models/piece_variant_info.js"
+import { ModeInfo              } from "../models/mode_info.js"
+import { BgVariantInfo         } from "../models/bg_variant_info.js"
+import { PieceVariantInfo      } from "../models/piece_variant_info.js"
 
-import { DevToolsTabInfo    } from "../dev_tools_tab_info.js"
-import { DevToolsLayoutInfo } from "../dev_tools_layout_info.js"
+import { DevToolsGroupInfo     } from "./dev_tools_group_info.js"
+import { DevToolsLayoutInfo    } from "./dev_tools_layout_info.js"
 
 export const mod_dev_tools = {
   mixins: [mod_dev_tools_storage],
@@ -34,18 +34,19 @@ export const mod_dev_tools = {
   },
 
   methods: {
-    dev_tools_modal_open_handle() {
+    dev_tools_open_handle() {
       this.new_dev_tools = true
     },
-    dev_tools_modal_close() {
+    dev_tools_close_handle() {
       this.new_dev_tools = false
     },
   },
   computed: {
-    DevToolsTabInfo()       { return DevToolsTabInfo  },
-    ModeInfo()              { return ModeInfo         },
-    BgVariantInfo()         { return BgVariantInfo    },
-    PieceVariantInfo()      { return PieceVariantInfo },
+    DevToolsGroupInfo() { return DevToolsGroupInfo  },
+
+    ModeInfo()          { return ModeInfo         },
+    BgVariantInfo()     { return BgVariantInfo    },
+    PieceVariantInfo()  { return PieceVariantInfo },
 
     DevToolsLayoutInfo()    { return DevToolsLayoutInfo },
     dev_tools_layout_info() { return DevToolsLayoutInfo.fetch(this.new_dev_tools_layout) },

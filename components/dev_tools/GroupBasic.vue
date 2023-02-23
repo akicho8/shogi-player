@@ -1,12 +1,8 @@
 <template lang="pug">
-DevToolsModalGroup
+.DevToolsGroup
   b-field(custom-class="is-small" label="モード")
     template(v-for="e in TheSp.ModeInfo.values")
       b-radio-button(size="is-small" v-model="TheSp.new_mode" :native-value="e.key") {{e.name}}
-
-  b-field(custom-class="is-small" label="固定サイド")
-    template(v-for="e in TheSp.DevToolsLayoutInfo.values")
-      b-radio-button(size="is-small" v-model="TheSp.new_dev_tools_layout" :native-value="e.key") {{e.name}}
 
   b-field(grouped)
     b-field(custom-class="is-small" label="視点")

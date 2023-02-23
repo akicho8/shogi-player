@@ -5,7 +5,7 @@
       b-icon(icon="menu-left")
     button.button.previous(ref="previous" @click.stop.prevent="TheSp.relative_move(-1, $event)")
       b-icon(icon="chevron-left" size="is-small")
-    button.button.dev_tools(@click.stop.prevent="TheSp.dev_tools_modal_open_handle" v-if="TheSp.debug_or_development_p")
+    button.button.dev_tools(@click.stop.prevent="TheSp.dev_tools_open_handle" v-if="TheSp.debug_or_development_p")
       b-icon(icon="cog" size="is-small")
     button.button.next(ref="next" @click.stop.prevent="TheSp.relative_move(+1, $event)")
       b-icon(icon="chevron-right" size="is-small")

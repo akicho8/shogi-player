@@ -1,5 +1,5 @@
 <template lang="pug">
-.DevToolsModalGroup
+.DevToolsGroup
   pre {{TheSp.$props}}
 </template>
 

@@ -1,24 +1,12 @@
 <template lang="pug">
-.DevToolsModal(:class="component_class")
-  FriendlyCloseButton(@click.stop="TheSp.dev_tools_modal_close")
+.DevTools(:class="component_class")
+  FriendlyCloseButton(@click.stop="TheSp.dev_tools_close_handle")
   b-tabs(size="is-small" v-model="tab_index" :animated="false")
-    template(v-for="e in TheSp.DevToolsTabInfo.values")
+    template(v-for="e in TheSp.DevToolsGroupInfo.values")
       b-tab-item(:label="e.name")
-    template(v-for="e in TheSp.DevToolsTabInfo.values")
-      b-tab-item(:label="e.name")
-    template(v-for="e in TheSp.DevToolsTabInfo.values")
-      b-tab-item(:label="e.name")
-    template(v-for="e in TheSp.DevToolsTabInfo.values")
-      b-tab-item(:label="e.name")
-    template(v-for="e in TheSp.DevToolsTabInfo.values")
-      b-tab-item(:label="e.name")
-  .my_area
-    DevToolsModalGroup1(v-if="tab_index === 0")
-    DevToolsModalGroup2(v-if="tab_index === 1")
-    DevToolsModalGroup3(v-if="tab_index === 2")
-    DevToolsModalGroup4(v-if="tab_index === 3")
-    DevToolsModalGroup5(v-if="tab_index === 4")
-    DevToolsModalGroup6(v-if="tab_index === 5")
+  .DevToolsGroupContent
+    template(v-for="e in TheSp.DevToolsGroupInfo.values")
+      component(:is="e.component_name" v-if="tab_index === e.code")
 </template>
 
 <script>
@@ -26,24 +14,24 @@ import { support } from "../support.js"
 
 import FriendlyCloseButton from "./FriendlyCloseButton.vue"
 
-import DevToolsModalGroup1 from "./DevToolsModalGroup1.vue"
-import DevToolsModalGroup2 from "./DevToolsModalGroup2.vue"
-import DevToolsModalGroup3 from "./DevToolsModalGroup3.vue"
-import DevToolsModalGroup4 from "./DevToolsModalGroup4.vue"
-import DevToolsModalGroup5 from "./DevToolsModalGroup5.vue"
-import DevToolsModalGroup6 from "./DevToolsModalGroup6.vue"
+import GroupBasic from "./GroupBasic.vue"
+import GroupSfen from "./GroupSfen.vue"
+import GroupDebug from "./GroupDebug.vue"
+import GroupProps from "./GroupProps.vue"
+import GroupData from "./GroupData.vue"
+import GroupDevTools from "./GroupDevTools.vue"
 
 export default {
-  name: "DevToolsModal",
+  name: "DevTools",
   mixins: [support],
   components: {
     FriendlyCloseButton,
-    DevToolsModalGroup1,
-    DevToolsModalGroup2,
-    DevToolsModalGroup3,
-    DevToolsModalGroup4,
-    DevToolsModalGroup5,
-    DevToolsModalGroup6,
+    GroupBasic,
+    GroupSfen,
+    GroupDebug,
+    GroupProps,
+    GroupData,
+    GroupDevTools,
   },
   data() {
     return {
@@ -59,7 +47,7 @@ export default {
   methods: {
     keydown_hook(e) {
       if (e.code === "Escape") {
-        this.TheSp.dev_tools_modal_close()
+        this.TheSp.dev_tools_close_handle()
       }
     },
   },
@@ -75,11 +63,11 @@ export default {
 @import "../support.sass"
 @import "./position.sass"
 
-.ShogiPlayer .DevToolsModal
+.ShogiPlayer .DevTools
   position: fixed
 
   text-align: left
-  z-index: $dev_tools_modal_z
+  z-index: $dev_tools_z
   background-color: white
 
   //////////////////////////////////////////////////////////////////////////////// レイアウト
@@ -87,8 +75,8 @@ export default {
   display: flex
   flex-direction: column
   gap: 0.5rem                   // ヘッダと本体の隙間
-  .my_area
-    flex-grow: 1
+  .DevToolsGroupContent
+    flex-grow: 1                // height: 100% などとしてはいけない
     overflow: auto
 
   //////////////////////////////////////////////////////////////////////////////// b-tabs のコンテンツは入れない
@@ -102,7 +90,7 @@ export default {
 
 .ShogiPlayer .SpGround
   &.is_layer_on
-    .DevToolsModal
+    .DevTools
       +is_layer_border
       .b-tabs
         +is_layer_border($danger, 2)
@@ -110,6 +98,6 @@ export default {
           +is_layer_border($info, 2)
           .tab-item
             +is_layer_border($warning, 2)
-      .my_area
+      .DevToolsGroupContent
         +is_layer_border($success, 2)
 </style>

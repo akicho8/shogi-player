@@ -171,7 +171,7 @@ export default {
     OpDisabledBlock,
     EditToolBlock,
     SpGround,
-    // DevToolsModal,
+    // DevTools,
     PromoteSelectModal,
   },
 
