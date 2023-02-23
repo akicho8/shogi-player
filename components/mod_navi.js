@@ -198,9 +198,9 @@ export const mod_navi = {
     //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, SpSlider.vue
 
     inside_controller_p() {
-      if (this.sp_dev_tools) {
-        return true
-      }
+      // if (this.mut_dev_tools) {
+      //   return true
+      // }
       return this.sp_controller && (this.view_p || this.play_p)
     },
 
