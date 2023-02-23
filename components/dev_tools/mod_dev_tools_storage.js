@@ -18,7 +18,6 @@ export const mod_dev_tools_storage = {
   },
   watch: {
     ls_store_hash() {
-      console.log(this.ls_store_hash)
       MyLocalStorage.set(LOCAL_STORAGE_VARIABLE_NAME, this.ls_store_hash)
     },
   },

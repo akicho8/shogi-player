@@ -77,11 +77,6 @@ export default {
       default: true,
     },
 
-    // レイヤー確認(デバッグ用)
-    sp_layer: {
-      type: Boolean,
-      default: false,
-    },
 
     // 駒の種類
     sp_piece_variant: {
@@ -178,7 +173,6 @@ export default {
   data() {
     return {
       mut_mode: this.sp_mode,
-      // new_bg_variant: this.sp_bg_variant,
 
       turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       xcontainer: null,                 // 局面管理

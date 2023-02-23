@@ -131,6 +131,3 @@ APIで内部変数を参照するちらを使った方が良い
 * 以下は内部で変更があると `update:xxx` のイベントを発行する
   * `sp_turn`
   * `sp_viewpoint`
-  * `sp_mode`
-  * `sp_debug`
-  * `sp_event_log`

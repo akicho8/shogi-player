@@ -10,19 +10,23 @@ export const mod_debug = {
       type: Boolean,
       default: false,
     },
+    // レイヤー確認
+    sp_layer: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      mut_debug: this.sp_debug,
+      mut_debug:     this.sp_debug,
       mut_event_log: this.sp_event_log,
+      mut_layer:     this.sp_layer,
     }
   },
   watch: {
-    sp_debug(v)  { this.mut_debug = v               }, // 外 -> 内
-    mut_debug(v) { this.event_call("update:sp_debug", v) }, // 内 -> 外
-
-    sp_event_log(v)  { this.mut_event_log = v                 }, // 外 -> 内
-    mut_event_log(v) { this.event_call("update:sp_event_log", v)   }, // 内 -> 外
+    sp_debug(v)     { this.mut_debug = v     },
+    sp_event_log(v) { this.mut_event_log = v },
+    sp_layer(v)     { this.mut_layer = v     },
   },
   methods: {
     log(...v) {

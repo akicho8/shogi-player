@@ -38,7 +38,7 @@ export default {
         this.TheSp.str_to_css_class("is_device", this.TheSp.devise_info.key),                   // is_device_touch
 
         // Boolean
-        this.TheSp.bool_to_css_class("is_layer", this.TheSp.sp_layer),
+        this.TheSp.bool_to_css_class("is_layer", this.TheSp.mut_layer),
         this.TheSp.bool_to_css_class("is_mobile_vertical", this.TheSp.sp_mobile_vertical),
         this.TheSp.bool_to_css_class("is_coordinate", this.TheSp.sp_coordinate),
         this.TheSp.bool_to_css_class("is_balloon", this.TheSp.sp_balloon),
