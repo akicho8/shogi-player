@@ -317,7 +317,7 @@ export default {
 
     flip_if_white_run() {
       if (this.sp_active_side_viewpoint) {
-        this.new_viewpoint = this.xcontainer.data_source.base_location.key
+        this.mut_viewpoint = this.xcontainer.data_source.base_location.key
       }
     },
 

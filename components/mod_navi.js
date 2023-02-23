@@ -34,7 +34,7 @@ export const mod_navi = {
 
   data() {
     return {
-      new_viewpoint: null,
+      mut_viewpoint: null,
     }
   },
 
@@ -47,12 +47,12 @@ export const mod_navi = {
   },
 
   created() {
-    this.new_viewpoint = this.sp_viewpoint
+    this.mut_viewpoint = this.sp_viewpoint
   },
 
   watch: {
-    sp_viewpoint(v)  { this.new_viewpoint = v               }, // 外 -> 中
-    new_viewpoint(v) { this.event_call("update:sp_viewpoint", v) }, // 中 -> 外
+    sp_viewpoint(v)  { this.mut_viewpoint = v               }, // 外 -> 中
+    mut_viewpoint(v) { this.event_call("update:sp_viewpoint", v) }, // 中 -> 外
   },
 
   methods: {
@@ -189,11 +189,11 @@ export const mod_navi = {
     },
 
     viewpoint_flip() {
-      this.new_viewpoint = Location.fetch(this.new_viewpoint).flip.key
+      this.mut_viewpoint = Location.fetch(this.mut_viewpoint).flip.key
     },
   },
   computed: {
-    fliped() { return this.new_viewpoint === "white"  },
+    fliped() { return this.mut_viewpoint === "white"  },
 
     //////////////////////////////////////////////////////////////////////////////// for NavigateBlock.vue, SpSlider.vue
 

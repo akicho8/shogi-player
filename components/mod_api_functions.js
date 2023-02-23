@@ -39,12 +39,12 @@ export const mod_api_functions = {
 
     // // 反転状態の設定
     // api_flip_set(flag) {
-    //   this.new_viewpoint = flag ? "white" : "black"
+    //   this.mut_viewpoint = flag ? "white" : "black"
     // },
 
     // 視点を決める
     api_viewpoint_set(location_key) {
-      this.new_viewpoint = location_key
+      this.mut_viewpoint = location_key
     },
 
     // 反転

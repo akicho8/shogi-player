@@ -46,7 +46,7 @@ export default {
         this.TheSp.bool_to_css_class("is_balloon", this.TheSp.sp_balloon),
 
         // 特殊
-        `is_viewpoint_${this.TheSp.new_viewpoint}`, // is_viewpoint_black (システムテストで見ている)
+        `is_viewpoint_${this.TheSp.mut_viewpoint}`, // is_viewpoint_black (システムテストで見ている)
       ]
     },
     component_style() {

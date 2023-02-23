@@ -5,8 +5,8 @@
       b-radio-button(size="is-small" v-model="TheSp.mut_mode" :native-value="e.key") {{e.name}}
 
   b-field(custom-class="is-small" label="視点")
-    b-radio-button(size="is-small" v-model="TheSp.new_viewpoint" native-value="black") ☗
-    b-radio-button(size="is-small" v-model="TheSp.new_viewpoint" native-value="white") ☖
+    b-radio-button(size="is-small" v-model="TheSp.mut_viewpoint" native-value="black") ☗
+    b-radio-button(size="is-small" v-model="TheSp.mut_viewpoint" native-value="white") ☖
 
   b-field(grouped)
     b-field(custom-class="is-small" label="デバッグモード")
