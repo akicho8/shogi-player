@@ -39,6 +39,13 @@ export const mod_dev_tools = {
   },
 
   methods: {
+    dev_tools_toggle_handle() {
+      if (this.mut_dev_tools) {
+        this.dev_tools_close_handle()
+      } else {
+        this.dev_tools_open_handle()
+      }
+    },
     dev_tools_open_handle() {
       this.mut_dev_tools = true
     },
