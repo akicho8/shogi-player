@@ -25,7 +25,7 @@ export const mod_dev_tools = {
     },
     sp_dev_tools_group: {
       type: String,
-      default: "basic",
+      default: "main",
       validator(value) { return DevToolsGroupInfo.keys.includes(value) },
     },
   },

@@ -10,16 +10,13 @@
 
   b-field(grouped)
     b-field(custom-class="is-small" label="デバッグモード")
-      b-radio-button(size="is-small" v-model="TheSp.mut_debug" :native-value="false") OFF
-      b-radio-button(size="is-small" v-model="TheSp.mut_debug" :native-value="true") ON
+      b-switch(v-model="TheSp.mut_debug" type="is-primary" size="is-small")
 
     b-field(custom-class="is-small" label="イベントログ")
-      b-radio-button(size="is-small" v-model="TheSp.mut_event_log" :native-value="false") OFF
-      b-radio-button(size="is-small" v-model="TheSp.mut_event_log" :native-value="true")  ON
+      b-switch(v-model="TheSp.mut_event_log" type="is-primary" size="is-small")
 
     b-field(custom-class="is-small" label="レイヤー")
-      b-radio-button(size="is-small" v-model="TheSp.mut_layer" :native-value="false") OFF
-      b-radio-button(size="is-small" v-model="TheSp.mut_layer" :native-value="true")  ON
+      b-switch(v-model="TheSp.mut_layer" type="is-primary" size="is-small")
 </template>
 
 <script>

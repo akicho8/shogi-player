@@ -19,7 +19,7 @@ import { support } from "../support.js"
 
 import FriendlyCloseButton from "./FriendlyCloseButton.vue"
 
-import GroupBasic from "./GroupBasic.vue"
+import GroupMain from "./GroupMain.vue"
 import GroupSfen  from "./GroupSfen.vue"
 import GroupDebug from "./GroupDebug.vue"
 import GroupProps from "./GroupProps.vue"
@@ -31,7 +31,7 @@ export default {
   mixins: [support],
   components: {
     FriendlyCloseButton,
-    GroupBasic,
+    GroupMain,
     GroupSfen,
     GroupDebug,
     GroupProps,

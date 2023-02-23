@@ -509,7 +509,7 @@ Default: `bottom`
 ### `sp_dev_tools_group`
 
 Type: `String`
-Default: `basic`
+Default: `main`
 
 開発ツールのタブ
 
