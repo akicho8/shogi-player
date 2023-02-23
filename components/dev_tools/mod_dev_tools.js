@@ -7,29 +7,34 @@ import { BgVariantInfo         } from "../models/bg_variant_info.js"
 import { PieceVariantInfo      } from "../models/piece_variant_info.js"
 
 import { DevToolsGroupInfo     } from "./dev_tools_group_info.js"
-import { DevToolsLayoutInfo    } from "./dev_tools_layout_info.js"
+import { DevToolsPositionInfo    } from "./dev_tools_position_info.js"
+import { DevToolsVarInfo    } from "./dev_tools_var_info.js"
 
 export const mod_dev_tools = {
   mixins: [mod_dev_tools_storage],
 
   props: {
-    // 設定ボタンの表示
     sp_dev_tools: {
       type: Boolean,
       default: false,
     },
-    // 設定ボタンの表示
-    sp_dev_tools_layout: {
+    sp_dev_tools_position: {
       type: String,
       default: "bottom",
-      validator(value) { return DevToolsLayoutInfo.keys.includes(value) },
+      validator(value) { return DevToolsPositionInfo.keys.includes(value) },
+    },
+    sp_dev_tools_group: {
+      type: String,
+      default: "basic",
+      validator(value) { return DevToolsGroupInfo.keys.includes(value) },
     },
   },
 
   data() {
     return {
-      mut_dev_tools: this.sp_dev_tools,
-      mut_dev_tools_layout: this.sp_dev_tools_layout,
+      mut_dev_tools:          this.sp_dev_tools,
+      mut_dev_tools_position: this.sp_dev_tools_position,
+      mut_dev_tools_group:    this.sp_dev_tools_group,
     }
   },
 
@@ -43,12 +48,16 @@ export const mod_dev_tools = {
   },
   computed: {
     DevToolsGroupInfo() { return DevToolsGroupInfo  },
+    dev_tools_group_info() { return DevToolsGroupInfo.lookup_or_first(this.mut_dev_tools_group) },
+
+    DevToolsPositionInfo()    { return DevToolsPositionInfo },
+    dev_tools_position_info() { return DevToolsPositionInfo.lookup_or_first(this.mut_dev_tools_position) },
+
+    DevToolsVarInfo()    { return DevToolsVarInfo },
 
     ModeInfo()          { return ModeInfo         },
     BgVariantInfo()     { return BgVariantInfo    },
     PieceVariantInfo()  { return PieceVariantInfo },
 
-    DevToolsLayoutInfo()    { return DevToolsLayoutInfo },
-    dev_tools_layout_info() { return DevToolsLayoutInfo.fetch(this.mut_dev_tools_layout) },
   },
 }

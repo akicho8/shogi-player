@@ -1,12 +1,17 @@
 <template lang="pug">
 .DevTools(:class="component_class")
   FriendlyCloseButton(@click.stop="TheSp.dev_tools_close_handle")
-  b-tabs(size="is-small" v-model="tab_index" :animated="false")
+  b-tabs(
+    size="is-small"
+    :value="TheSp.dev_tools_group_info.code"
+    @input="e => TheSp.mut_dev_tools_group = this.TheSp.DevToolsGroupInfo.fetch(e).code"
+    :animated="false"
+    )
     template(v-for="e in TheSp.DevToolsGroupInfo.values")
-      b-tab-item(:label="e.name")
+      b-tab-item(:label="e.name" :icon="e.icon")
   .DevToolsGroupContent
     template(v-for="e in TheSp.DevToolsGroupInfo.values")
-      component(:is="e.component_name" v-if="tab_index === e.code")
+      component(:is="e.component" v-if="TheSp.dev_tools_group_info.key === e.key")
 </template>
 
 <script>
@@ -15,11 +20,11 @@ import { support } from "../support.js"
 import FriendlyCloseButton from "./FriendlyCloseButton.vue"
 
 import GroupBasic from "./GroupBasic.vue"
-import GroupSfen from "./GroupSfen.vue"
+import GroupSfen  from "./GroupSfen.vue"
 import GroupDebug from "./GroupDebug.vue"
 import GroupProps from "./GroupProps.vue"
-import GroupData from "./GroupData.vue"
-import GroupDevTools from "./GroupDevTools.vue"
+import GroupData  from "./GroupData.vue"
+import GroupCog   from "./GroupCog.vue"
 
 export default {
   name: "DevTools",
@@ -31,12 +36,7 @@ export default {
     GroupDebug,
     GroupProps,
     GroupData,
-    GroupDevTools,
-  },
-  data() {
-    return {
-      tab_index: 0,
-    }
+    GroupCog,
   },
   mounted() {
     document.addEventListener("keydown", this.keydown_hook)
@@ -53,7 +53,9 @@ export default {
   },
   computed: {
     component_class() {
-      return [this.TheSp.dev_tools_layout_info.css_class]
+      return [
+        this.TheSp.dev_tools_position_info.css_class,
+      ]
     },
   },
 }
@@ -85,8 +87,6 @@ export default {
     margin: 0
     .tab-content
       display: none
-
-  //////////////////////////////////////////////////////////////////////////////// b-tabs のコンテンツは入れない
 
 .ShogiPlayer .SpGround
   &.is_layer_on

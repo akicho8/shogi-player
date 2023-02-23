@@ -497,16 +497,21 @@ Default: `50`
 Type: `Boolean`
 Default: `false`
 
-設定モーダルを起動するか？
+開発ツールを起動するか？
 
-* 設定というよりデバッグ用ツールに近い
-
-### `sp_dev_tools_layout`
+### `sp_dev_tools_position`
 
 Type: `String`
 Default: `bottom`
 
-設定モーダルの位置
+開発ツールの画面位置
+
+### `sp_dev_tools_group`
+
+Type: `String`
+Default: `basic`
+
+開発ツールのタブ
 
 ### `sp_device`
 

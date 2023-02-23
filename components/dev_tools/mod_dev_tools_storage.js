@@ -1,34 +1,39 @@
-const LS_KEY = "__sp_dev_tools__"
+const LOCAL_STORAGE_VARIABLE_NAME = "__sp_dev_tools__"
 
 import { MyLocalStorage } from "../models/my_local_storage.js"
 
 export const mod_dev_tools_storage = {
   beforeMount() {
-    const hash = MyLocalStorage.get(LS_KEY)
+    const hash = MyLocalStorage.get(LOCAL_STORAGE_VARIABLE_NAME)
     if (hash) {
-      const value = hash["sp_dev_tools_layout"]
-      if (value) {
-        this.mut_dev_tools_layout = value
+      if (true) {
+        this.DevToolsVarInfo.values.forEach(e => {
+          const value = hash[e.imm_var]
+          if (value) {
+            this.$data[e.mut_var] = value
+          }
+        })
       }
     }
   },
   watch: {
     ls_store_hash() {
-      MyLocalStorage.set(LS_KEY, this.ls_store_hash)
+      console.log(this.ls_store_hash)
+      MyLocalStorage.set(LOCAL_STORAGE_VARIABLE_NAME, this.ls_store_hash)
     },
   },
   methods: {
     dev_tools_reset_handle() {
-      this.mut_dev_tools_layout = this.$options.props["sp_dev_tools_layout"]["default"]
-      MyLocalStorage.remove(LS_KEY)
+      this.DevToolsVarInfo.values.forEach(e => {
+        this.$data[e.mut_var] = this.$options.props[e.imm_var]["default"]
+      })
+      MyLocalStorage.remove(LOCAL_STORAGE_VARIABLE_NAME)
     },
   },
   computed: {
     MyLocalStorage() { return MyLocalStorage },
     ls_store_hash() {
-      return {
-        sp_dev_tools_layout: this.mut_dev_tools_layout,
-      }
+      return this.DevToolsVarInfo.values.reduce((a, e) => ({...a, [e.imm_var]: this.$data[e.mut_var]}), {})
     },
   },
 }
