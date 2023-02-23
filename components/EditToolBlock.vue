@@ -19,7 +19,7 @@
   b-button(@click.stop.prevent="TheSp.fn_flop"   icon-left="pan-horizontal" size="is-small")
   b-button(@click.stop.prevent="TheSp.init_location_toggle" size="is-small")
     .is-size-7 {{TheSp.init_location.name}}
-  b-button.has-text-weight-bold(@click.stop.prevent="TheSp.shortcut_modal_show_handle" size="is-small") ?
+  b-button.has-text-weight-bold(@click.stop.prevent="TheSp.shortcut_viewer_toggle_handle" size="is-small") ?
 </template>
 
 <script>

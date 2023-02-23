@@ -32,5 +32,32 @@ export const mod_chore = {
       elem.style.left = `${vec.x}px`
       elem.style.top  = `${vec.y}px`
     },
+
+    toast_call(message, options = {}) {
+      options = {
+        container: this.root_container_query,
+        message: message,
+        position: "is-bottom",
+        type: "is-primary",
+        duration: 2,
+        queue: false,
+        ...options,
+      }
+      options.duration = 1000 * options.duration
+      this.$buefy.toast.open(options)
+    },
+
+    dialog_call(message, options = {}) {
+      options = {
+        container: this.root_container_query,
+        message: message,
+        confirmText: "実行",
+        cancelText: "キャンセル",
+        trapFocus: true,
+        animation: "",
+        ...options,
+      }
+      this.$buefy.dialog.prompt(options)
+    },
   },
 }

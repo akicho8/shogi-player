@@ -4,11 +4,13 @@
   .SpGroundTexture
   SpGroundInside(v-if="TheSp.xcontainer" ref="SpGroundInside")
   DevTools(v-if="TheSp.mut_dev_tools")
+  ShortcutViewer(v-if="TheSp.shortcut_viewer_p")
 </template>
 
 <script>
 import SpGroundInside from "./SpGroundInside.vue"
 import DevTools  from "./dev_tools/DevTools.vue"
+import ShortcutViewer  from "./shortcut_viewer/ShortcutViewer.vue"
 
 import { support } from "./support.js"
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-.ShogiPlayer.is-relative(:class="component_class")
+.ShogiPlayer.is-relative(:id="root_container_id" :class="component_class")
   SpGround(ref="SpGround")
 </template>
 
@@ -26,6 +26,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 import { mod_focus          } from "./mod_focus.js"
 import { mod_navi        } from "./mod_navi.js"
 import { mod_dev_tools        } from "./dev_tools/mod_dev_tools.js"
+import { mod_shortcut_viewer        } from "./shortcut_viewer/mod_shortcut_viewer.js"
 import { mod_resize_observer        } from "./mod_resize_observer.js"
 import { mod_shortcut    } from "./mod_shortcut.js"
 import { mod_edit_mode   } from "./mod_edit_mode.js"
@@ -52,6 +53,7 @@ export default {
     mod_focus,
     mod_navi,
     mod_dev_tools,
+    mod_shortcut_viewer,
     mod_resize_observer,
     mod_shortcut,
     mod_edit_mode,
@@ -76,7 +78,6 @@ export default {
       type: Boolean,
       default: true,
     },
-
 
     // 駒の種類
     sp_piece_variant: {
@@ -447,6 +448,9 @@ export default {
     kifu_source() {
       return this.sp_body || this.init_preset_sfen || "position startpos"
     },
+
+    root_container_id()    { return ["sp", Math.random().toString(36).slice(2)].join("-") },
+    root_container_query() { return "#" + this.root_container_id },
   },
 }
 </script>

@@ -1,6 +1,5 @@
 import { Location } from "./models/location.js"
 import { Place } from "./models/place.js"
-import ShortcutModal from "./ShortcutModal.vue"
 
 export const mod_shortcut = {
   data() {
@@ -88,7 +87,7 @@ export const mod_shortcut = {
 
       if (this.edit_p) {
         if (e.key === "?") {
-          this.shortcut_modal_toggle_handle()
+          this.shortcut_viewer_toggle_handle()
           e.preventDefault()
           return true
         }
@@ -110,9 +109,9 @@ export const mod_shortcut = {
         if (e.key === "!") {
           this.shuffle_mode_p = !this.shuffle_mode_p
           if (this.shuffle_mode_p) {
-            this.$buefy.toast.open({message: `盤面シャッフルモード: ON (TAP: 1-9)`, position: "is-bottom", queue: false, duration: 1000 * 2, type: "is-primary"})
+            this.toast_call("盤面シャッフルモード: ON (TAP: 1-9)", {duration: 2, type: "is-primary"})
           } else {
-            this.$buefy.toast.open({message: "盤面シャッフルモード: OFF", position: "is-bottom", queue: false, duration: 1000 * 0.5})
+            this.toast_call("盤面シャッフルモード: OFF", {duration: 0.5})
           }
         }
         if (this.shuffle_mode_p) {
@@ -169,40 +168,6 @@ export const mod_shortcut = {
       }
     },
 
-    //////////////////////////////////////////////////////////////////////////////// キーボードショートカット modal 表示
-
-    shortcut_modal_toggle_handle() {
-      if (this.shortcut_modal_active_p()) {
-        this.shortcut_modal_close_handle()
-      } else {
-        this.shortcut_modal_show_handle()
-      }
-    },
-    shortcut_modal_show_handle() {
-      this.shortcut_modal_close_handle()
-      if (this.$shortcut_modal) { alert("this.$shortcut_modal") }
-      this.$shortcut_modal = this.$buefy.modal.open({
-        parent: this,
-        hasModalCard: true,
-        props: { },
-        animation: "",
-        onCancel: () => { this.shortcut_modal_close_handle() },
-        canCancel: ["escape", "outside"],
-        component: ShortcutModal,
-        // events: {
-        //   "close": () => { alert("x") },
-        // },
-      })
-    },
-    shortcut_modal_close_handle() {
-      if (this.$shortcut_modal) {
-        this.$shortcut_modal.close()
-        this.$shortcut_modal = null
-      }
-    },
-    shortcut_modal_active_p() {
-      return !!this.$shortcut_modal
-    },
   },
 
   computed: {
