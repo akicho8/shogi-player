@@ -1,24 +1,24 @@
 <template lang="pug">
-.SettingModal(:class="component_class")
-  FriendlyCloseButton(@click.stop="TheSp.setting_modal_close")
+.DevToolsModal(:class="component_class")
+  FriendlyCloseButton(@click.stop="TheSp.dev_tools_modal_close")
   b-tabs(size="is-small" v-model="tab_index" :animated="false")
-    template(v-for="e in TheSp.SettingTabInfo.values")
+    template(v-for="e in TheSp.DevToolsTabInfo.values")
       b-tab-item(:label="e.name")
-    template(v-for="e in TheSp.SettingTabInfo.values")
+    template(v-for="e in TheSp.DevToolsTabInfo.values")
       b-tab-item(:label="e.name")
-    template(v-for="e in TheSp.SettingTabInfo.values")
+    template(v-for="e in TheSp.DevToolsTabInfo.values")
       b-tab-item(:label="e.name")
-    template(v-for="e in TheSp.SettingTabInfo.values")
+    template(v-for="e in TheSp.DevToolsTabInfo.values")
       b-tab-item(:label="e.name")
-    template(v-for="e in TheSp.SettingTabInfo.values")
+    template(v-for="e in TheSp.DevToolsTabInfo.values")
       b-tab-item(:label="e.name")
   .my_area
-    SettingModalGroup1(v-if="tab_index === 0")
-    SettingModalGroup2(v-if="tab_index === 1")
-    SettingModalGroup3(v-if="tab_index === 2")
-    SettingModalGroup4(v-if="tab_index === 3")
-    SettingModalGroup5(v-if="tab_index === 4")
-    SettingModalGroup6(v-if="tab_index === 5")
+    DevToolsModalGroup1(v-if="tab_index === 0")
+    DevToolsModalGroup2(v-if="tab_index === 1")
+    DevToolsModalGroup3(v-if="tab_index === 2")
+    DevToolsModalGroup4(v-if="tab_index === 3")
+    DevToolsModalGroup5(v-if="tab_index === 4")
+    DevToolsModalGroup6(v-if="tab_index === 5")
 </template>
 
 <script>
@@ -26,24 +26,24 @@ import { support } from "../support.js"
 
 import FriendlyCloseButton from "./FriendlyCloseButton.vue"
 
-import SettingModalGroup1 from "./SettingModalGroup1.vue"
-import SettingModalGroup2 from "./SettingModalGroup2.vue"
-import SettingModalGroup3 from "./SettingModalGroup3.vue"
-import SettingModalGroup4 from "./SettingModalGroup4.vue"
-import SettingModalGroup5 from "./SettingModalGroup5.vue"
-import SettingModalGroup6 from "./SettingModalGroup6.vue"
+import DevToolsModalGroup1 from "./DevToolsModalGroup1.vue"
+import DevToolsModalGroup2 from "./DevToolsModalGroup2.vue"
+import DevToolsModalGroup3 from "./DevToolsModalGroup3.vue"
+import DevToolsModalGroup4 from "./DevToolsModalGroup4.vue"
+import DevToolsModalGroup5 from "./DevToolsModalGroup5.vue"
+import DevToolsModalGroup6 from "./DevToolsModalGroup6.vue"
 
 export default {
-  name: "SettingModal",
+  name: "DevToolsModal",
   mixins: [support],
   components: {
     FriendlyCloseButton,
-    SettingModalGroup1,
-    SettingModalGroup2,
-    SettingModalGroup3,
-    SettingModalGroup4,
-    SettingModalGroup5,
-    SettingModalGroup6,
+    DevToolsModalGroup1,
+    DevToolsModalGroup2,
+    DevToolsModalGroup3,
+    DevToolsModalGroup4,
+    DevToolsModalGroup5,
+    DevToolsModalGroup6,
   },
   data() {
     return {
@@ -59,13 +59,13 @@ export default {
   methods: {
     keydown_hook(e) {
       if (e.code === "Escape") {
-        this.TheSp.setting_modal_close()
+        this.TheSp.dev_tools_modal_close()
       }
     },
   },
   computed: {
     component_class() {
-      return [this.TheSp.setting_layout_info.css_class]
+      return [this.TheSp.dev_tools_layout_info.css_class]
     },
   },
 }
@@ -75,11 +75,11 @@ export default {
 @import "../support.sass"
 @import "./position.sass"
 
-.ShogiPlayer .SettingModal
+.ShogiPlayer .DevToolsModal
   position: fixed
 
   text-align: left
-  z-index: $setting_modal_z
+  z-index: $dev_tools_modal_z
   background-color: white
 
   //////////////////////////////////////////////////////////////////////////////// レイアウト
@@ -102,7 +102,7 @@ export default {
 
 .ShogiPlayer .SpGround
   &.is_layer_on
-    .SettingModal
+    .DevToolsModal
       +is_layer_border
       .b-tabs
         +is_layer_border($danger, 2)

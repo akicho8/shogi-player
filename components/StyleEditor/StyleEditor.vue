@@ -401,8 +401,8 @@
             b-radio-button(size="is-small" v-model="sp_turn_show" :native-value="true") ON
 
           b-field(custom-class="is-small" label="設定ボタン表示")
-            b-radio-button(size="is-small" v-model="sp_setting" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_setting" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_dev_tools" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_dev_tools" :native-value="true") ON
 
           b-field(custom-class="is-small" label="KIFコメ表示")
             b-radio-button(size="is-small" v-model="sp_comment" :native-value="false") OFF
@@ -624,7 +624,7 @@ export default {
       sp_body: null,
 
       sp_turn_show:    DEVELOPMENT_P ? true : false,
-      sp_setting:      DEVELOPMENT_P ? true : false,
+      sp_dev_tools:      DEVELOPMENT_P ? true : false,
 
       sp_slider:     DEVELOPMENT_P ? true : true,
       sp_controller: DEVELOPMENT_P ? true : false,
@@ -878,7 +878,7 @@ export default {
       params.sp_comment               = this.sp_comment,
       params.sp_turn                  = this.sp_turn
       params.sp_body                  = this.sp_body
-      params.sp_setting               = this.sp_setting
+      params.sp_dev_tools               = this.sp_dev_tools
       params.sp_turn_show             = this.sp_turn_show
       params.sp_coordinate           = this.sp_coordinate
       params.sp_coordinate_variant   = this.sp_coordinate_variant

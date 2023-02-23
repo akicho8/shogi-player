@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export class SettingLayoutInfo extends MemoryRecord {
+export class DevToolsLayoutInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "left",   },
@@ -9,8 +9,8 @@ export class SettingLayoutInfo extends MemoryRecord {
       { key: "top",    },
     ]
   }
-  
+
   get css_class() {
-    return `is_setting_layout_${this.key}`
+    return `is_dev_tools_layout_${this.key}`
   }
 }

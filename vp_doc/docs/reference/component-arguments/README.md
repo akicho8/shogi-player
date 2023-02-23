@@ -492,7 +492,7 @@ Default: `50`
 
 ## Development
 
-### `sp_setting`
+### `sp_dev_tools`
 
 Type: `Boolean`
 Default: `false`
@@ -501,7 +501,7 @@ Default: `false`
 
 * 設定というよりデバッグ用ツールに近い
 
-### `sp_setting_layout`
+### `sp_dev_tools_layout`
 
 Type: `String`
 Default: `bottom`

@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export class SettingTabInfo extends MemoryRecord {
+export class DevToolsTabInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "基本",   },

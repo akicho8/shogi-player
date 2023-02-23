@@ -16,7 +16,7 @@
         sp_debug
         sp_event_log
         sp_controller
-        sp_setting
+        sp_dev_tools
         sp_slider
         sp_bg_variant="b"
         sp_piece_variant="d"

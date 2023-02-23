@@ -25,7 +25,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 // mixins modules
 import { mod_focus          } from "./mod_focus.js"
 import { mod_navi        } from "./mod_navi.js"
-import { mod_setting        } from "./setting/mod_setting.js"
+import { mod_dev_tools        } from "./dev_tools/mod_dev_tools.js"
 import { mod_resize_observer        } from "./mod_resize_observer.js"
 import { mod_shortcut    } from "./mod_shortcut.js"
 import { mod_edit_mode   } from "./mod_edit_mode.js"
@@ -51,7 +51,7 @@ export default {
     mod_vector,
     mod_focus,
     mod_navi,
-    mod_setting,
+    mod_dev_tools,
     mod_resize_observer,
     mod_shortcut,
     mod_edit_mode,
@@ -171,7 +171,7 @@ export default {
     OpDisabledBlock,
     EditToolBlock,
     SpGround,
-    // SettingModal,
+    // DevToolsModal,
     PromoteSelectModal,
   },
 

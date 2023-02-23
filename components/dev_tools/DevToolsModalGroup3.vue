@@ -1,16 +1,16 @@
 <template lang="pug">
-.SettingModalGroup
-  pre {{TheSp.$props}}
+.DevToolsModalGroup
+  DebugBlock
 </template>
 
 <script>
 import { support } from "../support.js"
+import DebugBlock from "./DebugBlock.vue"
 
 export default {
   mixins: [support],
+  components: {
+    DebugBlock,
+  },
 }
 </script>
-
-<style lang="sass">
-@import "../support.sass"
-</style>

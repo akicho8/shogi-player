@@ -1,5 +1,5 @@
 <template lang="pug">
-.SettingModalGroup
+.DevToolsModalGroup
   pre {{TheSp.$data}}
 </template>
 

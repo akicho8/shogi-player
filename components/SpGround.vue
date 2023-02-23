@@ -3,12 +3,12 @@
 .SpGround(:class="component_class" :style="component_style")
   .SpGroundTexture
   SpGroundInside(v-if="TheSp.xcontainer" ref="SpGroundInside")
-  SettingModal(v-if="TheSp.new_setting")
+  DevToolsModal(v-if="TheSp.new_dev_tools")
 </template>
 
 <script>
 import SpGroundInside from "./SpGroundInside.vue"
-import SettingModal  from "./setting/SettingModal.vue"
+import DevToolsModal  from "./dev_tools/DevToolsModal.vue"
 
 import { support } from "./support.js"
 
@@ -17,7 +17,7 @@ export default {
   mixins: [support],
   components: {
     SpGroundInside,
-    SettingModal,
+    DevToolsModal,
   },
   computed: {
     component_class() {

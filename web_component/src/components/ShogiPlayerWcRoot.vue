@@ -55,7 +55,7 @@ export default {
     sp_mounted_focus_to_slider:        { type: Boolean,  }, // mountedしたらスライダーにフォーカスする？
     sp_turn_show:                      { type: Boolean,  }, // 手数や結果の表示(再生モード時) (true false)
     sp_slider:                         { type: Boolean,  }, // スライダー表示
-    sp_setting:                        { type: Boolean,  }, // 設定ボタンの表示
+    sp_dev_tools:                        { type: Boolean,  }, // 設定ボタンの表示
     sp_controller:                     { type: Boolean,  }, // コントローラー表示
     sp_viewpoint:                      { type: String,  }, // 視点
     sp_operation_disabled:             { type: Boolean, }, // 全体の操作を無効化
