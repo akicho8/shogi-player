@@ -11,18 +11,18 @@
 //
 import { DeviseInfo } from "./models/devise_info.js"
 
-export const mod_device_detect = {
+export const mod_device_detector = {
   props: {
     // デバイスを強制的に指定する (touch mouse) 自動判別するので基本そのままでよい
     sp_device: {
       type: String,
       default: null,
-      validator(value) { return ["touch", "mouse"].includes(value) },
+      validator(value) { return DeviseInfo.keys.includes(value) },
     },
   },
   data() {
     return {
-      sp_device_default: null,
+      detected_real_device: null,
     }
   },
   beforeMount() {
@@ -42,15 +42,15 @@ export const mod_device_detect = {
     },
     device_detect_hook(e) {
       if ("changedTouches" in e) {
-        this.sp_device_default = "touch"
+        this.detected_real_device = "touch"
       } else {
-        this.sp_device_default = "mouse"
+        this.detected_real_device = "mouse"
       }
       this.device_detect_destroy()
     },
   },
   computed: {
-    new_devise_key() { return this.sp_device || this.sp_device_default || "mouse" },
-    devise_info()    { return DeviseInfo.fetch(this.new_devise_key)               },
+    any_devise_key() { return this.sp_device || this.detected_real_device || "mouse" },
+    devise_info()    { return DeviseInfo.fetch(this.any_devise_key)                  },
   },
 }

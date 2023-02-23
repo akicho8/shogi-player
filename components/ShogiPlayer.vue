@@ -37,7 +37,7 @@ import { mod_profile        } from "./mod_profile.js"
 import { mod_preset      } from "./mod_preset.js"
 import { mod_edit_tool    } from "./mod_edit_tool.js"
 import { mod_api_functions         } from "./mod_api_functions.js"
-import { mod_device_detect      } from "./mod_device_detect.js"
+import { mod_device_detector      } from "./mod_device_detector.js"
 import { mod_chore          } from "./mod_chore.js"
 import { mod_debug          } from "./mod_debug.js"
 import { mod_vector         } from "./mod_vector.js"
@@ -63,7 +63,7 @@ export default {
     mod_preset,
     mod_edit_tool,
     mod_api_functions,
-    mod_device_detect,
+    mod_device_detector,
   ],
 
   props: {
