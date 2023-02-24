@@ -25,7 +25,7 @@ task :dist do
   cd web_component
   vue-cli-service build --mode production  --dest ../dist             --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
   vue-cli-service build --mode development --dest ../dist/development --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
-  git add -A && git commit -m "[chore] dist/* 生成"
+  git add -A && git commit -m "[chore][skip ci] dist/* 生成"
   EOT
 end
 
@@ -64,7 +64,7 @@ namespace :old_doc do
   task :push do
     system <<~EOT
     git add -A
-    git commit -m '[docs][deploy] nuxt generate --dotenv .env.production'
+    git commit -m '[docs][deploy][skip ci] nuxt generate --dotenv .env.production'
     git push
     open "https://akicho8.github.io/shogi-player/"
     EOT
