@@ -3,18 +3,25 @@ task :default => :s
 task :s => "server"
 desc "[s] server"
 task :server do
-  system %(vue-cli-service serve --port 3995 --open)
+  system <<~EOT
+  vue-cli-service serve --port 3995 --open
+  EOT
 end
 
 task :b => "build"
 desc "[b] build"
 task :build do
-  require "pathname"
-  require "json"
-  package = JSON.parse(Pathname("../package.json").read)
-  version = package["version"]
-  p version
+  system <<~EOT
+  NODE_ENV=development vue-cli-service build --dest labo/shogi-player-wc/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  open labo/shogi-player-wc/index.html
+  EOT
+end
 
-  system %(NODE_ENV=development vue-cli-service build --dest top/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue)
-  system %(open top/test.html)
+task :m => "my_tag"
+desc "[m] my_tag"
+task :my_tag do
+  system <<~EOT
+  NODE_ENV=development vue-cli-service build --dest labo/my-tag/dist --inline-vue --target wc --name my-tag src/components/MyTag.vue
+  open labo/my-tag/index.html
+  EOT
 end

@@ -52,6 +52,9 @@ export default {
 
     // Web Components で使えるのは String, Boolean, Number のみ
     // なので本来 Object だったり Function だったりするするものは String から変換しないといけない
+    sp_mode:                           { type: String,  }, // モード
+    sp_body:                           { type: String,  }, // 棋譜 KIF or SFEN
+    sp_preset:                         { type: String,  }, // 手合割(初期配置)
     sp_mounted_focus_to_slider:        { type: Boolean,  }, // mountedしたらスライダーにフォーカスする？
     sp_turn_show:                      { type: Boolean,  }, // 手数や結果の表示(再生モード時) (true false)
     sp_slider:                         { type: Boolean,  }, // スライダー表示
@@ -82,9 +85,6 @@ export default {
     sp_stand_gravity:                  { type: String,  }, // 駒台の位置
     sp_name_direction:                 { type: String,  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                           { type: Number,  }, // 局面(手数)
-    sp_mode:                           { type: String,  }, // モード
-    sp_body:                           { type: String,  }, // 棋譜 KIF or SFEN
-    sp_preset:                         { type: String,  }, // 手合割(初期配置)
     sp_comment:                        { type: Boolean,  }, // KIFのコメントを表示する
     sp_human_side:                     { type: String,  }, // 含まれる側だけ操作できるようにする
     sp_device:                         { type: String,  }, // デバイスを強制的に指定する
@@ -124,6 +124,7 @@ export default {
       console.log("props_native", this.props_native)
       console.log("EventList", EventList)
       console.log("event_chain", this.event_chain)
+      // console.log("dataset", this.$el.dataset)
     },
     debug_log(...args) {
       if (this.development_p) {

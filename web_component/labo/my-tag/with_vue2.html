@@ -1,0 +1,9 @@
+<div id="app">
+  <my-tag foo_bar="OK" foo-bar="OK" ></my-tag>
+</div>
+<script src="dist/my-tag.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script>
+  Vue.config.ignoredElements = ["my-tag"]
+  new Vue({el: "#app"})
+</script>
