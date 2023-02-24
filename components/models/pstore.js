@@ -13,7 +13,7 @@
 // | core            | localStorage を返す                       |
 // |-----------------+-------------------------------------------|
 
-export class MyLocalStorage {
+export class Pstore {
   static set(key, value) {
     if (this.core) {
       if (this.development_p) {

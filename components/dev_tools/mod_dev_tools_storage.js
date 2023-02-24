@@ -1,10 +1,10 @@
 const LOCAL_STORAGE_VARIABLE_NAME = "__sp_dev_tools__"
 
-import { MyLocalStorage } from "../models/my_local_storage.js"
+import { Pstore } from "../models/pstore.js"
 
 export const mod_dev_tools_storage = {
   beforeMount() {
-    const hash = MyLocalStorage.get(LOCAL_STORAGE_VARIABLE_NAME)
+    const hash = Pstore.get(LOCAL_STORAGE_VARIABLE_NAME)
     if (hash) {
       if (true) {
         this.DevToolsVariableInfo.values.forEach(e => {
@@ -18,7 +18,7 @@ export const mod_dev_tools_storage = {
   },
   watch: {
     ls_store_hash() {
-      MyLocalStorage.set(LOCAL_STORAGE_VARIABLE_NAME, this.ls_store_hash)
+      Pstore.set(LOCAL_STORAGE_VARIABLE_NAME, this.ls_store_hash)
     },
   },
   methods: {
@@ -26,11 +26,11 @@ export const mod_dev_tools_storage = {
       this.DevToolsVariableInfo.values.forEach(e => {
         this.$data[e.mut_var] = this.$options.props[e.imm_var]["default"]
       })
-      MyLocalStorage.remove(LOCAL_STORAGE_VARIABLE_NAME)
+      Pstore.remove(LOCAL_STORAGE_VARIABLE_NAME)
     },
   },
   computed: {
-    MyLocalStorage() { return MyLocalStorage },
+    Pstore() { return Pstore },
     ls_store_hash() {
       return this.DevToolsVariableInfo.values.reduce((a, e) => ({...a, [e.imm_var]: this.$data[e.mut_var]}), {})
     },
