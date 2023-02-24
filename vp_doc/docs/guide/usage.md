@@ -114,8 +114,8 @@ shogi-player-wc タグの `display` の初期値は **`inline`** のためサイ
 ## CDN
 
 * production:
-  * JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@0.0.382/dist/shogi-player-wc.min.js
-  * UNPKG: https://unpkg.com/shogi-player@0.0.382/dist/shogi-player-wc.min.js
+  * JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@0.0.382/dist/production/shogi-player-wc.min.js
+  * UNPKG: https://unpkg.com/shogi-player@0.0.382/dist/production/shogi-player-wc.min.js
 * development:
   * JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@0.0.382/dist/development/shogi-player-wc.min.js
   * UNPKG: https://unpkg.com/shogi-player@0.0.382/dist/development/shogi-player-wc.min.js
@@ -129,7 +129,7 @@ shogi-player-wc タグの `display` の初期値は **`inline`** のためサイ
 事故らないように本番ではバージョンを固定する
 
 `@x.x.x` でバージョンを固定できる
-https://unpkg.com/shogi-player@0.0.382/dist/shogi-player-wc.min.js
+https://unpkg.com/shogi-player@0.0.382/dist/production/shogi-player-wc.min.js
 
 最新版バージョンは
 https://unpkg.com/shogi-player/

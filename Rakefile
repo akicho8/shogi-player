@@ -23,7 +23,7 @@ desc "dist/ に CDN 用の Web Components を生成する"
 task :dist do
   system <<~EOT
   cd web_component
-  vue-cli-service build --mode production  --dest ../dist             --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  vue-cli-service build --mode production  --dest ../dist/production  --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
   vue-cli-service build --mode development --dest ../dist/development --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
   git add -A && git commit -m "[chore][skip ci] dist/* 生成"
   EOT
@@ -114,8 +114,8 @@ task :cp => :copy
 desc "copy"
 task :copy do
   system <<~EOT
-  rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/
-    EOT
+  rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ "~/src/shogi-extend/nuxt_side/node_modules/shogi-player/"
+  EOT
 end
 
 task :n => "netlify:open"
@@ -154,14 +154,14 @@ task :cdn do
 
   tp "JSDelivr"
   system <<~EOT
-  curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/shogi-player-wc.min.js | grep 'x-jsd-version:'
+  curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/production/shogi-player-wc.min.js | grep 'x-jsd-version:'
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player@latest                      | grep 'x-jsd-version:'
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player                             | grep 'x-jsd-version:'
   EOT
 
   tp "unpkg"
   system <<~EOT
-  curl -sI https://unpkg.com/shogi-player/dist/shogi-player-wc.min.js | grep location
+  curl -sI https://unpkg.com/shogi-player/dist/production/shogi-player-wc.min.js | grep location
   curl -sI https://unpkg.com/shogi-player@latest                      | grep location
   curl -sI https://unpkg.com/shogi-player                             | grep location
   EOT
