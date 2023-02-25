@@ -30,7 +30,7 @@ task :l => "lib"
 desc "[l] lib"
 task :lib do
   system <<~EOT
-  SP_TARGET=lib vue-cli-service build --mode development --dest labo/shogi-player-lib/dist --target lib --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
+  SP_TARGET=lib vue-cli-service build --mode production --dest labo/shogi-player-lib/dist --target lib --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
   open labo/shogi-player-lib/index.html
   EOT
 end

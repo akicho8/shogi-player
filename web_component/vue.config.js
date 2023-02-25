@@ -27,9 +27,42 @@ module.exports = {
     ],
   },
 
+ // chainWebpack: (config) => {
+ //   config.module
+ //     .rule('images')
+ //     // .test(/\.(otf|eot|svg|ttf|woff|woff2|svg|gif|png)(\?.+)?$/)
+ //     .use('url-loader')
+ //     .loader('url-loader')
+ //     .tap(options => {
+ //       return {
+ //         ...options,
+ //         limit: Infinity,
+ //         encoding: 'base64',
+ //         esModule: false,
+ //       };
+ //     })
+ // },
+
+  // chainWebpack: config => {
+  //   config.module
+  //     .rule("images")
+  //     .use("url-loader")
+  //     .loader("url-loader")
+  //     .tap(options => {
+  //       console.log("---------------")
+  //       console.log(options)
+  //       console.log("---------------")
+  //       return Object.assign(options, { limit: Infinity })
+  //     })
+  // },
+
   // https://cli.vuejs.org/config/#css-loaderoptions
   // https://github.com/webpack-contrib/sass-loader#additionaldata
   css: {
+    // --mode process --target lib のとき駒が表示されなくなる問題の対処方法
+    // https://cli.vuejs.org/config/#css-extract
+    extract: false, // false: production のときも css を分離しない(分離すると駒が表示されなくなる)
+
     loaderOptions: {
       sass: {
         additionalData: `
@@ -37,6 +70,7 @@ module.exports = {
 @import "@/sp_sass_variables_${process.env.SP_TARGET}.sass"
 `
       }
-    }
+    },
   },
+
 }

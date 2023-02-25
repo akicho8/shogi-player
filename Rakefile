@@ -24,8 +24,8 @@ task :dist do
   system <<~EOT
   cd web_component
   npm i
-  SP_TARGET=wc  vue-cli-service build --mode production  --target wc  --dest ../dist/wc/production   --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
-  SP_TARGET=wc  vue-cli-service build --mode development --target wc  --dest ../dist/wc/development  --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  # SP_TARGET=wc  vue-cli-service build --mode production  --target wc  --dest ../dist/wc/production   --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  # SP_TARGET=wc  vue-cli-service build --mode development --target wc  --dest ../dist/wc/development  --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
   SP_TARGET=lib vue-cli-service build --mode production  --target lib --dest ../dist/lib/production  --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
   SP_TARGET=lib vue-cli-service build --mode development --target lib --dest ../dist/lib/development --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
   git add -A && git commit -m "[chore][skip ci] dist/* 生成"
