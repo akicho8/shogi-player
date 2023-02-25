@@ -1,0 +1,8 @@
+// shogi-player パッケージを使う側から見た shogi-player の assets へのパスを指定する
+// どこで使うかによって assets への相対パスがずれてしまうため仕方なく再定義することにしている
+$sp_assets_dir: "shogi-player/assets"
+
+// shogi-player のCSS変数の定義はデフォルトでは html タグに対して行う
+// その場合 shadow root によって Web Components に届かないため定義する場所を Web Components 内に変更する
+// $sp_css_root: "shogi-player-wc" とするのはうまくいかない
+// $sp_css_root: ".ShogiPlayerLib"

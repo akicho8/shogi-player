@@ -5,7 +5,7 @@
   "keywords": "shogi kif bod sfen viewer editor player vue.js vue2 vue web-components japanese-chess",
   "homepage": "https://shogi-player.netlify.app/",
   "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
-  "main": "dist/production/shogi-player-wc.min.js",
+  "main": "dist/wc/production/shogi-player-wc.min.js",
   "private": false,
   "repository": {
     "type": "git",
@@ -43,6 +43,8 @@
     "xregexp": "^4.3.0"
   },
   "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/pwa": "^3.2.2",

@@ -1,0 +1,6 @@
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+# https://app.netlify.com/sites/shogi-player-wc/overview
+
+[build]
+  publish = "top/"
+  command = "rake build"

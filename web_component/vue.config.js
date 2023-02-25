@@ -32,7 +32,10 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        additionalData: `@import "@/sp_sass_variables.sass"`
+        additionalData: `
+@import "@/sp_sass_variables.sass"
+@import "@/sp_sass_variables_${process.env.SP_TARGET}.sass"
+`
       }
     }
   },

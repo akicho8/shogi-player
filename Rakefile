@@ -23,8 +23,10 @@ desc "dist/ に CDN 用の Web Components を生成する"
 task :dist do
   system <<~EOT
   cd web_component
-  vue-cli-service build --mode production  --dest ../dist/production  --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
-  vue-cli-service build --mode development --dest ../dist/development --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  SP_TARGET=wc  vue-cli-service build --mode production  --target wc  --dest ../dist/wc/production   --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  SP_TARGET=wc  vue-cli-service build --mode development --target wc  --dest ../dist/wc/development  --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  SP_TARGET=lib vue-cli-service build --mode production  --target lib --dest ../dist/lib/production  --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
+  SP_TARGET=lib vue-cli-service build --mode development --target lib --dest ../dist/lib/development --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
   git add -A && git commit -m "[chore][skip ci] dist/* 生成"
   EOT
 end
@@ -154,14 +156,14 @@ task :cdn do
 
   tp "JSDelivr"
   system <<~EOT
-  curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/production/shogi-player-wc.min.js | grep 'x-jsd-version:'
+  curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/wc/production/shogi-player-wc.min.js | grep 'x-jsd-version:'
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player@latest                      | grep 'x-jsd-version:'
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player                             | grep 'x-jsd-version:'
   EOT
 
   tp "unpkg"
   system <<~EOT
-  curl -sI https://unpkg.com/shogi-player/dist/production/shogi-player-wc.min.js | grep location
+  curl -sI https://unpkg.com/shogi-player/dist/wc/production/shogi-player-wc.min.js | grep location
   curl -sI https://unpkg.com/shogi-player@latest                      | grep location
   curl -sI https://unpkg.com/shogi-player                             | grep location
   EOT

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.383/dist/wc/production/shogi-player-wc.min.js"></script> -->
+  <script src="../dist/lib/production/shogi-player.umd.js"></script>
+  <link rel="stylesheet" href="../dist/lib/production/shogi-player.css">
+  <!-- <script src="../dist/lib/development/shogi-player.umd.js"></script> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      new Vue({
+        el: "#app",
+        components: {
+          ShogiPlayer,
+        },
+        methods: {
+          ev_play_mode_move(e) {
+            alert(e.detail[0].last_move_info.to_kif)
+          },
+        },
+      })
+    })
+  </script>
+</head>
+<body>
+  <div id="app">
+    <shogi-player
+      sp_mode="play"
+      @ev_play_mode_move="ev_play_mode_move"
+      ></shogi-player-wc>
+  </div>
+</body>
+</html>

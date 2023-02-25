@@ -12,7 +12,7 @@ task :b => "build"
 desc "[b] build"
 task :build do
   system <<~EOT
-  NODE_ENV=development vue-cli-service build --dest labo/shogi-player-wc/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  SP_TARGET=wc vue-cli-service build --mode development --dest labo/shogi-player-wc/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerLib.vue
   open labo/shogi-player-wc/index.html
   EOT
 end
@@ -21,7 +21,16 @@ task :m => "my_tag"
 desc "[m] my_tag"
 task :my_tag do
   system <<~EOT
-  NODE_ENV=development vue-cli-service build --dest labo/my-tag/dist --inline-vue --target wc --name my-tag src/components/MyTag.vue
+  SP_TARGET=wc vue-cli-service build --mode development --dest labo/my-tag/dist --inline-vue --target wc --name my-tag src/components/MyTag.vue
   open labo/my-tag/index.html
+  EOT
+end
+
+task :l => "lib"
+desc "[l] lib"
+task :lib do
+  system <<~EOT
+  SP_TARGET=lib vue-cli-service build --mode development --dest labo/shogi-player-lib/dist --target lib --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
+  open labo/shogi-player-lib/index.html
   EOT
 end

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>ShogiPlayer demo</title>
+<script src="https://unpkg.com/vue@2"></script>
+<script src="./dist/shogi-player.umd.js"></script>
+
+<div id="app">
+  <shogi-player></shogi-player>
+</div>
+
+<script>
+new Vue({
+  components: {
+    ShogiPlayer,
+  }
+}).$mount('#app')
+</script>

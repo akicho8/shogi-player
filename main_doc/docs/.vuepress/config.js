@@ -59,7 +59,7 @@ module.exports = {
     // ['link', { rel: 'stylesheet', href: 'https://unpkg.com/tailwindcss@2.0.4/dist/tailwind.min.css' }],
 
     // for shogi-player-wc
-    ['script', { src: '/dist/production/shogi-player-wc.min.js' }],
+    ['script', { src: '/dist/wc/production/shogi-player-wc.min.js' }],
   ],
 
   /**

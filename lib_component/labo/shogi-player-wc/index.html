@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>shogi-player-wc demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css"> -->
+  <script src="dist/shogi-player-wc.js"></script>
+  <style type="text/css">
+    * {
+      box-sizing: border-box;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .shogi-player-wc-container {
+      width: min(640px, 100%);
+    }
+    shogi-player-wc {
+      display: block;
+      width: 100%;
+    }
+    shogi-player-wc::part(spwc_style_scope) {
+      --sp_board_color: lightskyblue;
+    }
+    /* shogi-player-wc([hidden]) { */
+    /*   display: none; */
+    /* } */
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const spwc = document.querySelector("shogi-player-wc");
+      spwc.addEventListener("update:sp_viewpoint", e => alert(e.detail[0]))
+      spwc.addEventListener("ev_play_mode_move", e => alert(e.detail[0].last_move_info.to_kif))
+    })
+  </script>
+</head>
+<body>
+  <div class="container">
+    <p>Web Components 版 (dist/shogi-player-wc.min.js)</p>
+    <div class="shogi-player-wc-container">
+      <shogi-player-wc
+        hidden
+        sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && 'xxx'"
+        style="color: black"
+        sp_event_log="true"
+        sp_mode="play"
+        spwc_style_hash="{'--sp_controller_width':1.0}"
+        sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
+        :foo.prop="123"
+        sp_layout="horizontal"
+        sp_controller="true"
+        sp_slider="true"
+        sp_body="position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f"
+        ></shogi-player-wc>
+      <shogi-player-wc></shogi-player-wc>
+    </div>
+  </div>
+</body>
+</html>

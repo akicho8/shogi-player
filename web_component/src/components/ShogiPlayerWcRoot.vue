@@ -9,7 +9,7 @@
       // ここに定義すると shogi-player-wc::part(spwc_style_scope) {} に勝つ
       // 例: spwc_style_hash="{'--sp_controller_width':0.8}"
       ShogiPlayer(v-bind="props_native" v-on="event_chain")
-      // CDN版で dist/development/shogi-player-wc.min.js とすると表示する(いらない？)
+      // CDN版で dist/wc/development/shogi-player-wc.min.js とすると表示する(いらない？)
       pre.ShogiPlayerWcInspector(v-if="development_p")
         | $props: {{JSON.stringify($props)}}
         | $attrs: {{JSON.stringify($attrs)}}
@@ -22,7 +22,7 @@ import JSON5 from "json5"
 // これは全体で使うことになるので本当は index.js で読み込んだ方がよい
 import Vue from "vue"
 import Buefy from "buefy"
-// import "buefy/dist/buefy.css"
+// // import "buefy/dist/buefy.css"
 Vue.use(Buefy)
 
 // shogi-player 本体
