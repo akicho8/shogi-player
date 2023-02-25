@@ -114,14 +114,14 @@ shogi-player-wc タグの `display` の初期値は **`inline`** のためサイ
 ## CDN
 
 * JSDelivr:
-  * https://cdn.jsdelivr.net/npm/shogi-player@0.0.385/dist/wc/production/shogi-player-wc.min.js
-  * https://cdn.jsdelivr.net/npm/shogi-player@0.0.385/dist/wc/development/shogi-player-wc.min.js
+  * https://cdn.jsdelivr.net/npm/shogi-player@0.0.386/dist/wc/production/shogi-player-wc.min.js
+  * https://cdn.jsdelivr.net/npm/shogi-player@0.0.386/dist/wc/development/shogi-player-wc.min.js
 * UNPKG:
-  * https://unpkg.com/shogi-player@0.0.385/dist/wc/production/shogi-player-wc.min.js
-  * https://unpkg.com/shogi-player@0.0.385/dist/wc/development/shogi-player-wc.min.js
+  * https://unpkg.com/shogi-player@0.0.386/dist/wc/production/shogi-player-wc.min.js
+  * https://unpkg.com/shogi-player@0.0.386/dist/wc/development/shogi-player-wc.min.js
 
 ::: tip
-本当は https://unpkg.com/shogi-player@0.0.385 でいいはずだけど、画像パスがずれて駒が表示されない問題があるため js までの正確なパスでアクセスしないといけない
+本当は https://unpkg.com/shogi-player@0.0.386 でいいはずだけど、画像パスがずれて駒が表示されない問題があるため js までの正確なパスでアクセスしないといけない
 :::
 
 ## バージョンを固定する
@@ -129,7 +129,7 @@ shogi-player-wc タグの `display` の初期値は **`inline`** のためサイ
 事故らないように本番ではバージョンを固定する
 
 `@x.x.x` でバージョンを固定できる
-https://unpkg.com/shogi-player@0.0.385/dist/wc/production/shogi-player-wc.min.js
+https://unpkg.com/shogi-player@0.0.386/dist/wc/production/shogi-player-wc.min.js
 
 最新版バージョン→[![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
 
