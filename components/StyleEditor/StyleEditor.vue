@@ -802,13 +802,15 @@ export default {
     },
   },
   computed: {
-    HumanSideInfo()  { return HumanSideInfo  },
-    ModeInfo()    { return ModeInfo    },
-    BgVariantInfo()  { return BgVariantInfo  },
-    PieceVariantInfo()  { return PieceVariantInfo  },
-    KifuBookInfo() { return KifuBookInfo },
+    development_p() { return DEVELOPMENT_P },
+
+    HumanSideInfo()    { return HumanSideInfo    },
+    ModeInfo()         { return ModeInfo         },
+    BgVariantInfo()    { return BgVariantInfo    },
+    PieceVariantInfo() { return PieceVariantInfo },
+    KifuBookInfo()     { return KifuBookInfo     },
     MixBlendModeInfo() { return MixBlendModeInfo },
-    SeConfig() { return SeConfig },
+    SeConfig()         { return SeConfig         },
 
     kifu_book_info() {
       if (this.kifu_sample_key) {
