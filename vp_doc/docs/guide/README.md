@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
+
 # Introduction
 
 ### 特徴

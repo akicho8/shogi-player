@@ -1,5 +1,9 @@
 # デバッグ
 
+## Dev Tools を起動する
+
+`Shift` `Option` `Command` を押しながら天王山を右クリックで Dev Tools が起動する
+
 ## `sp_layer` を有効にする
 
 <<< @/docs/.vuepress/public/examples/sp_layer.html{2}
@@ -34,7 +38,3 @@ development 版を使うとデバッグ情報を多めに表示する
 <LinkToExample name="sp_debug" />
 
 内部の情報を下に表示する
-
-## 設定を起動する
-
-`Shift` `Option` `Command` を押しながらマウスの右クリックで設定モーダルが起動する
