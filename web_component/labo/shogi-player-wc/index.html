@@ -25,6 +25,9 @@
     shogi-player-wc::part(spwc_style_scope) {
       --sp_board_color: lightskyblue;
     }
+    /* shogi-player-wc([hidden]) { */
+    /*   display: none; */
+    /* } */
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -39,6 +42,7 @@
     <p>Web Components 版 (dist/shogi-player-wc.min.js)</p>
     <div class="shogi-player-wc-container">
       <shogi-player-wc
+        hidden
         sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && 'xxx'"
         style="color: black"
         sp_event_log="true"

@@ -32,6 +32,9 @@ import ShogiPlayer from "shogi-player/components/ShogiPlayer.vue"
 
 import { EventList } from "shogi-player/components/models/event_list.js"
 
+const MDI_CSS_URL = "https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css"
+const UNIQUE_ID   = "bdf2da9503326784806e006ec9c11bcf"
+
 export default {
   name: "ShogiPlayerWcRoot",
   components: { ShogiPlayer },
@@ -104,10 +107,18 @@ export default {
     sp_board_cell_class_fn:            { type: String,  }, // セルのクラスを決める処理
   },
   beforeMount() {
-    const unique_id = "bdf2da9503326784806e006ec9c11bcf"
-    if (!document.getElementById(unique_id)) {
+    if (!document.getElementById(UNIQUE_ID)) {
       const template = document.createElement("template")
-      template.innerHTML = `<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" id="${unique_id}">`
+      template.innerHTML = [
+        `<link crossorigin="anonymous" href="${MDI_CSS_URL}" rel="stylesheet" id="${UNIQUE_ID}">`,
+
+        // https://web.dev/custom-elements-best-practices/
+        // :host がそもそもブラウザで効いてない
+        // `<style>
+        // shogi-player-wc { display: block }
+        // </style>`,
+        // shogi-player-wc:host([hidden]) { display: none }
+      ].join("")
       const el = document.querySelector("head") // body でも良い
       el.appendChild(template.content.cloneNode(true))
     }
