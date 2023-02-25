@@ -24,8 +24,8 @@ desc "[i] inspect"
 task :inspect do
   system <<~EOT
   cd web_component
-  vue inspect --mode development > vue.conifg.inspect.development.json
-  vue inspect --mode production >  vue.conifg.inspect.production.json
+  vue inspect --mode development > vue.conifg.inspect.development.txt
+  vue inspect --mode production >  vue.conifg.inspect.production.txt
   EOT
 end
 

@@ -3,17 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://unpkg.com/vue@2"></script>
-  <!-- <script src="https://unpkg.com/shogi-player@0.0.386/dist/wc/production/shogi-player-wc.min.js"></script> -->
-
-  <!-- <script src="https://unpkg.com/shogi-player@0.0.386/dist/lib/production/shogi-player.umd.min.js"></script> -->
-  <!-- <link  href="https://unpkg.com/shogi-player@0.0.386/dist/lib/production/shogi-player.css" rel="stylesheet"> -->
-
-  <!-- <script src="https://unpkg.com/shogi-player@0.0.386/dist/lib/development/shogi-player.umd.js"></script> -->
-
-  <script src="../dist/lib/production/shogi-player.umd.js"></script>
-
-  <!-- <link rel="stylesheet" href="../dist/lib/production/shogi-player.css"> -->
-  <!-- <script src="../dist/lib/development/shogi-player.umd.js"></script> -->
+  <script src="https://unpkg.com/shogi-player@0.0.386/dist/lib/production/shogi-player.umd.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       new Vue({
@@ -23,7 +13,7 @@
         },
         methods: {
           ev_play_mode_move(e) {
-            alert(e.detail[0].last_move_info.to_kif)
+            alert(e.last_move_info.to_kif)
           },
         },
       })
@@ -33,6 +23,8 @@
 <body>
   <div id="app">
     <shogi-player
+      sp_dev_tools
+      sp_controller
       sp_mode="play"
       @ev_play_mode_move="ev_play_mode_move"
       ></shogi-player-wc>
