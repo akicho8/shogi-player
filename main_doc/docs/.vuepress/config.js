@@ -102,7 +102,7 @@ module.exports = {
             '',
             'usage',
             'customize',
-            'custom-build',
+            'build',
             'view-mode',
             'play-mode',
             'edit-mode',

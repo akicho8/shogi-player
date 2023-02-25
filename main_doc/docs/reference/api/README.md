@@ -2,7 +2,7 @@
 sidebar: auto
 ---
 
-# API
+# 命令型 API
 
 ## 概要 ##
 

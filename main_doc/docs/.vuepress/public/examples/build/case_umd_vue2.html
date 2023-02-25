@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@2"></script>
+  <script src="https://unpkg.com/shogi-player@0.0.387/dist/lib/production/shogi-player.umd.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      new Vue({
+        el: "#app",
+        components: {
+          ShogiPlayer,
+        },
+        methods: {
+          ev_play_mode_move(e) {
+            alert(e.last_move_info.to_kif)
+          },
+        },
+      })
+    })
+  </script>
+</head>
+<body>
+  <div id="app">
+    <shogi-player
+      sp_mode="play"
+      sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
+      sp_controller
+      @ev_play_mode_move="ev_play_mode_move"
+      ></shogi-player>
+  </div>
+</body>
+</html>

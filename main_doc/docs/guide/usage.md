@@ -25,17 +25,14 @@
 <<< @/docs/.vuepress/public/examples/view.html{9-11}
 <LinkToExample name="view" />
 
-* **sp_body**: 棋譜を指定する
-* **sp_turn**: 局面を指定する
-* **sp_overlay_nav**: 盤面タップで局面を動かす
+<!-- * **sp_body**: 棋譜を指定する -->
+<!-- * **sp_turn**: 局面を指定する -->
+<!-- * **sp_overlay_nav**: 盤面タップで局面を動かす -->
 
 ## コントローラー類を表示する ##
 
 <<< @/docs/.vuepress/public/examples/view_with_controller.html{10-11}
 <LinkToExample name="view_with_controller" />
-
-1. `sp_controller="true"` を指定する
-1. `sp_slider="true"` を指定する
 
 <!-- <ShogiPlayerWcWrapper -->
 <!--   class="is-small" -->

@@ -9,7 +9,7 @@
       box-sizing: border-box;
     }
     html {
-      background-color: hsl(160,20%,80%);
+      background-color: hsl(243,9%,63%);
     }
     body {
       padding: 0;
@@ -29,6 +29,12 @@
       width: 100%;
     }
     shogi-player-wc::part(spwc_style_scope) {
+      --sp_coordinate_x_size: 0.3;            /* 座標の大きさ(上側) */
+      --sp_coordinate_y_size: 0.3;            /* 座標の大きさ(右側) */
+      --sp_coordinate_x_push: 0.2;            /* 位置を調整する(上側) */
+      --sp_coordinate_y_push: 0.2;            /* 位置を調整する(右側) */
+      --sp_board_horizontal_gap: 0.5;         /* 座標があるため盤と駒台との隙間を空ける */
+      --sp_board_even_cell_color: hsla(0,0%,100%,5%); /* 盤の偶数セルの色 */
     }
   </style>
 </head>
@@ -38,6 +44,8 @@
       <shogi-player-wc
         sp_piece_variant="c"
         sp_mobile_vertical="false"
+        sp_coordinate="true"
+        sp_coordinate_variant="alphabet"
         ></shogi-player-wc>
     </div>
   </div>

@@ -1,28 +1,33 @@
-# 組み込み方法
+# 各種組み込み例
 
-## 静的HTML
+## HTML + Web Components
 
-[Web Components 版](/guide/usage/) をどうぞ
+<<< @/docs/.vuepress/public/examples/build/case_wc_html.html
+<LinkToExample name="build/case_wc_html" />
 
-## React 18 + Web Components 版
+Also see: [使い方](/guide/usage/)
 
-<<< @/docs/.vuepress/public/examples/use_in_react18.html
-<LinkToExample name="use_in_react18" />
+## React + Web Components
 
-## Vue.js 2 + Web Components 版
+<<< @/docs/.vuepress/public/examples/build/case_wc_react.html
+<LinkToExample name="build/case_wc_react" />
 
-<<< @/docs/.vuepress/public/examples/build_with_vue2.html{9}
-<LinkToExample name="build_with_vue2" />
+## Vue.js 2 + Web Components
 
-Web Components のタグを除外するのがポイントです
+<<< @/docs/.vuepress/public/examples/build/case_wc_vue2.html
+<LinkToExample name="build/case_wc_vue2" />
 
-## Vue 3 + Web Components 版
+## Vue.js 2 + UMD
 
-<<< @/docs/.vuepress/public/examples/build_with_vue3.html{11}
-<LinkToExample name="build_with_vue3" />
+<<< @/docs/.vuepress/public/examples/build/case_umd_vue2.html
+<LinkToExample name="build/case_umd_vue2" />
 
-Web Components のタグを除外するのがポイントです
-が、正しく動いていません(引数が渡っていない) <Badge text="お手上げ" type="error" vertical="top" />
+## Vue 3 + Web Components
+
+<<< @/docs/.vuepress/public/examples/build/case_wc_vue3.html
+<LinkToExample name="build/case_wc_vue3" />
+
+正しく動いていません(引数が渡っていない) <Badge text="調査中" type="error" vertical="top" />
 
 ## Vue.js 2 + ShogiPlayer.vue
 
