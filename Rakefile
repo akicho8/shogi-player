@@ -93,7 +93,7 @@ desc "example_cdn_version_replace"
 task :example_cdn_version_replace do
   system <<~EOT
   r 'shogi-player@\\d+\\.\\d+\.\\d+' 'shogi-player@#{Package.version}' -x
-  git add -A && git commit -m "[docs] vs_doc/* 内の cdn の新しいバージョン指定"
+  git add -A && git commit -m "[docs][ci skip] main_doc/* 内の cdn の新しいバージョン指定"
   EOT
 end
 
