@@ -43,8 +43,6 @@
     "xregexp": "^4.3.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/pwa": "^3.2.2",
