@@ -57,7 +57,7 @@ export const mod_navi = {
 
   methods: {
     keydown_hook(e) {
-      if (this.debug_p && false) {
+      if (this.debug_or_development_p) {
         this.log(document.activeElement)
         this.log(e.shiftKey, e.ctrlKey, e.altKey, e.metaKey)
         this.log("e", e)

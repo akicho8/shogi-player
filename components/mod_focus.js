@@ -13,7 +13,7 @@ export const mod_focus = {
     },
   },
   beforeMount() {
-    if (this.debug_p) {
+    if (this.debug_or_development_p) {
       console.log(`sp_mobile_p: ${this.sp_mobile_p}`)
       console.log(`devise_info.key: ${this.devise_info.key}`)
       console.log(`focus_disable_p: ${this.focus_disable_p}`)
