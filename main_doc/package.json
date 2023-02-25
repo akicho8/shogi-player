@@ -1,5 +1,5 @@
 {
-  "name": "vp_doc",
+  "name": "main_doc",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "name": "Akira Ikeda",
     "email": "pinpon.ikeda@gmail.com"
   },
-  "repository": "/vp_doc",
+  "repository": "/main_doc",
   "scripts": {
     "dev": "vuepress dev",
     "build": "vuepress build"

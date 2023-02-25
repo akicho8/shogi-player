@@ -210,7 +210,7 @@ task :about do
   npm root -g
   rg '"version"' package.json
   fd -l -g '*.min.js' dist
-  (cd vp_doc && npm list)
+  (cd main_doc && npm list)
   EOT
 end
 
@@ -229,21 +229,21 @@ namespace :doc do
   desc "[d] server"
   task :server do
     system <<~EOT
-    cd vp_doc && rake server
+    cd main_doc && rake server
     EOT
   end
 
   desc "build"
   task :build do
     system <<~EOT
-    cd vp_doc && rake build
+    cd main_doc && rake build
     EOT
   end
 
   desc "[e] examples"
   task :examples do
     system <<~EOT
-    fd -a -g "*.html" vp_doc/docs/.vuepress/public/examples -X open -a "Google Chrome" --new --args
+    fd -a -g "*.html" main_doc/docs/.vuepress/public/examples -X open -a "Google Chrome" --new --args
     EOT
   end
 

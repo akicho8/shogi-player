@@ -93,10 +93,10 @@ sw.*
 # Node.js error report
 /report.*.json
 
-# vp_doc
-/vp_doc/.vuepress/dist
+# main_doc
+/main_doc/.vuepress/dist
 .byebug_history
 
 # web_component
 # /web_component/top/dist
-# /vp_doc/.vuepress/public/dist
+# /main_doc/.vuepress/public/dist
