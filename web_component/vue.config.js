@@ -61,7 +61,7 @@ module.exports = {
   css: {
     // --mode process --target lib のとき駒が表示されなくなる問題の対処方法
     // https://cli.vuejs.org/config/#css-extract
-    extract: false, // false: production のときも css を分離しない(分離すると駒が表示されなくなる)
+    extract: false, // false: production のときも css を分離しない → 結果的に駒が表示されるようになる
 
     loaderOptions: {
       sass: {

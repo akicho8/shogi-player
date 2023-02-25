@@ -100,3 +100,4 @@ sw.*
 # web_component
 # /web_component/top/dist
 # /main_doc/.vuepress/public/dist
+vue.conifg.inspect.*

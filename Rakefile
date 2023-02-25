@@ -19,13 +19,23 @@ task :test do
   EOT
 end
 
+task :i => :inspect
+desc "[i] inspect"
+task :inspect do
+  system <<~EOT
+  cd web_component
+  vue inspect --mode development > vue.conifg.inspect.development.json
+  vue inspect --mode production >  vue.conifg.inspect.production.json
+  EOT
+end
+
 desc "dist/ に CDN 用の Web Components を生成する"
 task :dist do
   system <<~EOT
   cd web_component
   npm i
-  # SP_TARGET=wc  vue-cli-service build --mode production  --target wc  --dest ../dist/wc/production   --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
-  # SP_TARGET=wc  vue-cli-service build --mode development --target wc  --dest ../dist/wc/development  --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  SP_TARGET=wc  vue-cli-service build --mode production  --target wc  --dest ../dist/wc/production   --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
+  SP_TARGET=wc  vue-cli-service build --mode development --target wc  --dest ../dist/wc/development  --inline-vue --name shogi-player-wc src/components/ShogiPlayerWcRoot.vue
   SP_TARGET=lib vue-cli-service build --mode production  --target lib --dest ../dist/lib/production  --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
   SP_TARGET=lib vue-cli-service build --mode development --target lib --dest ../dist/lib/development --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
   git add -A && git commit -m "[chore][skip ci] dist/* 生成"

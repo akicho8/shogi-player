@@ -29,6 +29,7 @@
 /package.rb
 /nuxt.config.js
 /components/MainDoc
+vue.conifg.inspect.*
 
 # Assets
 /assets/style_editor_images
