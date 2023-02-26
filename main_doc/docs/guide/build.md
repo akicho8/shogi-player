@@ -27,17 +27,24 @@ Also see: [使い方](/guide/usage/)
 <<< @/docs/.vuepress/public/examples/build/case_wc_vue3.html
 <LinkToExample name="build/case_wc_vue3" />
 
-正しく動いていません(引数が渡っていない) <Badge text="調査中" type="error" vertical="top" />
+::: warning 引数が渡せない問題と回避方法
+* Vue.js 2 で作成した Web Components と Vue 3 で使うときに限り snake_case なパラメータ名の値が渡せない問題がある
+  * 簡単に言えば `_` を含むパラメータは無視される
+* そこでその制約を回避するために `alternative-props` 引数を用意した
+* これは `v-bind` に似ているが、Vue にはただの文字列として認識されるため確実に内容を渡れる
+* `alternative-props` の内容は JSON5 形式の文字列としてパースする
+* 型変換は JSON5 のパーサーに任せているので Boolean 型の真は `"true"` ではなく `true` と書く
+* `alternative-props` の内容は最終的に `$props` 相当として内部で扱う
+:::
 
 ## Vue.js 2 + ShogiPlayer.vue
 
-手順を半自動化したスクリプト [shogi-player-vue-cli-sample-create.sh](https://github.com/akicho8/shogi-player/blob/master/shogi-player-vue-cli-sample-create.sh) をそのまま実行して生成したものを [shogi-player-vue-cli-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue-cli-sample) に置いています
-もともと Vue.js 2 製なので Vue.js 2 とは親和性が高いです
-ただし[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがあります
+手順を半自動化したスクリプト [shogi-player-vue-cli-sample-create.sh](https://github.com/akicho8/shogi-player/blob/master/shogi-player-vue-cli-sample-create.sh) をそのまま実行して生成したものを [shogi-player-vue-cli-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue-cli-sample) に置いてある
+もともと Vue.js 2 製なので Vue.js 2 とは親和性が高いが、ただし[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがある
 
 ## Nuxt.js + ShogiPlayer.vue
 
-手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いています
+手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いている
 
 ## 自力ビルドの要点
 
