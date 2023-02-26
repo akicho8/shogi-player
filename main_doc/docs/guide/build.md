@@ -1,6 +1,6 @@
 # 各種組み込み例
 
-## HTML + Web Components
+## Vanilla + Web Components
 
 <<< @/docs/.vuepress/public/examples/build/case_wc_html.html
 <LinkToExample name="build/case_wc_html" />
@@ -18,7 +18,7 @@ Also see: [使い方](/guide/usage/)
 <<< @/docs/.vuepress/public/examples/build/case_wc_wc_basic.html
 <LinkToExample name="build/case_wc_wc_basic" />
 
-### [WIP] Full Component
+### Full Component
 <<< @/docs/.vuepress/public/examples/build/case_wc_wc_full.html
 <LinkToExample name="build/case_wc_wc_full" />
 

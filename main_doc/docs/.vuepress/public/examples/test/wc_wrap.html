@@ -52,13 +52,13 @@
 
     setTimeout(() => {
       const el = document.querySelector('my-shogi-player')
-      el.sp_body = "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f"
+      el.sp_body = "position startpos moves 7g7f"
       console.log(el.sp_body)
       el.render()
     }, 1000 * 2)
     </script>
 </head>
 <body>
-  <my-shogi-player sp_body="position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+"></my-shogi-player>
+  <my-shogi-player sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"></my-shogi-player>
 </body>
 </html>

@@ -7,24 +7,18 @@
     class ShogiBoard extends HTMLElement {
       constructor() {
         super()
-        // this.source = this.getAttribute("source")
         this.attachShadow({mode: "open"})
-      }
-      connectedCallback() {
-        this.source = this.getAttribute("source")
-        this.render()
       }
       static get observedAttributes() {
         return ["source"]
       }
-      attributeChangedCallback(name, old_value, new_value) {
-        console.log(name, old_value, new_value)
+      attributeChangedCallback(name, oldValue, newValue) {
         if (name === "source") {
-          this.source = new_value
+          this.source = newValue
         }
-        // if (this.isConnected) {
-        this.render()
-        // }
+        if (this.isConnected) {
+          this.render()
+        }
       }
       render() {
         this.shadowRoot.innerHTML = `
@@ -60,16 +54,11 @@
       }
     }
     customElements.define("shogi-board", ShogiBoard)
-
-    setTimeout(() => {
-      const el = document.querySelector('shogi-board')
-      el.source = "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f"
-      // el.render()
-    }, 1000 * 2)
-
+    // Reactive Test
+    // setTimeout(() => document.querySelector('shogi-board').setAttribute("source", "position startpos moves 7g7f"), 1000 * 1)
     </script>
 </head>
 <body>
-  <shogi-board source="position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+"></shogi-board>
+  <shogi-board source="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"></shogi-board>
 </body>
 </html>
