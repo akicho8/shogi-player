@@ -111,16 +111,7 @@ export default {
   beforeMount() {
     if (!document.getElementById(UNIQUE_ID)) {
       const template = document.createElement("template")
-      template.innerHTML = [
-        `<link crossorigin="anonymous" href="${MDI_CSS_URL}" rel="stylesheet" id="${UNIQUE_ID}">`,
-
-        // https://web.dev/custom-elements-best-practices/
-        // :host がそもそもブラウザで効いてない
-        // `<style>
-        // shogi-player-wc { display: block }
-        // </style>`,
-        // shogi-player-wc:host([hidden]) { display: none }
-      ].join("")
+      template.innerHTML = `<link crossorigin="anonymous" href="${MDI_CSS_URL}" rel="stylesheet" id="${UNIQUE_ID}">`
       const el = document.querySelector("head") // body でも良い
       el.appendChild(template.content.cloneNode(true))
     }
@@ -235,4 +226,15 @@ $primary: $blue
 
 // .ShogiPlayerWcRoot
 //   width: 100%
+</style>
+
+<style>
+/* https://web.dev/custom-elements-best-practices/ */
+/* Web Components 全般のいまいちな仕様として display の初期値が inline になっている。*/
+/* なのでサイズが効かずにはまりがち。サイズを効かせるためには block や inline-block に変更しないといけない。*/
+/* これに関しては Web Components 側で指定できる */
+:host {
+  display: block;
+  /* width: 100svmin; */
+}
 </style>

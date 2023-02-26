@@ -17,3 +17,11 @@ export default {
   },
 }
 </script>
+
+<style>
+:host {
+  display: block;
+  background-color: blue;
+  height: 300px;
+}
+</style>

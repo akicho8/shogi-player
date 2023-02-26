@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
+  <script type="module">
+    class ShogiBoard extends HTMLElement {
+      constructor() {
+        super()
+        // this.source = this.getAttribute("source")
+        this.attachShadow({mode: "open"})
+      }
+      connectedCallback() {
+        this.source = this.getAttribute("source")
+        this.render()
+      }
+      static get observedAttributes() {
+        return ["source"]
+      }
+      attributeChangedCallback(name, old_value, new_value) {
+        console.log(name, old_value, new_value)
+        if (name === "source") {
+          this.source = new_value
+        }
+        // if (this.isConnected) {
+        this.render()
+        // }
+      }
+      render() {
+        this.shadowRoot.innerHTML = `
+          <style>
+            :host {
+              display: block;
+              background-color: hsla(0, 0%, 0%, 0.1);
+              padding: 1rem;
+            }
+            .container {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+            shogi-player-wc {
+              width: min(640px, 100%);
+            }
+            shogi-player-wc::part(spwc_style_scope) {
+              --sp_board_color: lightskyblue;
+            }
+          </style>
+          <div class="container">
+            <shogi-player-wc
+              sp_mode="play"
+              sp_body="${this.source}"
+              sp_controller="true"
+            ></shogi-player-wc>
+          </div>
+        `
+        const el = this.shadowRoot.querySelector("shogi-player-wc")
+        el.addEventListener("ev_play_mode_move", e => alert(e.detail[0].last_move_info.to_kif))
+      }
+    }
+    customElements.define("shogi-board", ShogiBoard)
+
+    setTimeout(() => {
+      const el = document.querySelector('shogi-board')
+      el.source = "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f"
+      // el.render()
+    }, 1000 * 2)
+
+    </script>
+</head>
+<body>
+  <shogi-board source="position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+"></shogi-board>
+</body>
+</html>
