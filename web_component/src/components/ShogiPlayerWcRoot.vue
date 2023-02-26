@@ -8,7 +8,7 @@
     .ShogiPlayerWcStyleHash(:style="spwc_style_hash_native")
       // ここに定義すると shogi-player-wc::part(spwc_style_scope) {} に勝つ
       // 例: spwc_style_hash="{'--sp_controller_width':0.8}"
-      ShogiPlayer(v-bind="props_native" v-on="event_chain")
+      ShogiPlayer(v-bind="bind_props" v-on="event_chain")
       // CDN版で dist/wc/development/shogi-player-wc.min.js とすると表示する(いらない？)
       pre.ShogiPlayerWcInspector(v-if="development_p")
         | $props: {{JSON.stringify($props)}}
@@ -46,6 +46,8 @@ export default {
   // inheritAttrs: false,
 
   props: {
+    alternativeProps: { type: String },
+
     // ここで style を受けていると v-bind="$props" でそのまま渡すことができるの裏技的に入れておく
     // としていたもののこれは development だと警告がでているのでやめ
     // style: { type: String, },
@@ -131,8 +133,9 @@ export default {
       console.log("NODE_ENV", process.env.NODE_ENV)
       console.log("$attrs", this.$attrs)
       console.log("$props", this.$props)
+      console.log("alternativeProps", this.alternativeProps)
       console.log("spwc_style_hash_native", this.spwc_style_hash_native)
-      console.log("props_native", this.props_native)
+      console.log("bind_props", this.bind_props)
       console.log("EventList", EventList)
       console.log("event_chain", this.event_chain)
       // console.log("dataset", this.$el.dataset)
@@ -142,23 +145,42 @@ export default {
         console.debug(...args)
       }
     },
+    lookup_var(name) {
+      if (this.alternative_props_native) {
+        if (name in this.alternative_props_native) {
+          return this.alternative_props_native[name]
+        }
+      }
+      return this[name]
+    },
   },
   computed: {
     // 開発モードか？
     development_p: () => process.env.NODE_ENV === "development",
 
+    alternative_props_native() {
+      const v = this.alternativeProps
+      if (v) {
+        return JSON5.parse(v)
+      }
+    },
+
     // spwc_style_hash の Hash 化
     spwc_style_hash_native() {
-      const v = this.spwc_style_hash
+      const v = this.lookup_var("spwc_style_hash")
       if (v) {
         return JSON5.parse(v)
       }
     },
 
     // v-bind ですべて渡すもの
-    props_native() {
+    bind_props() {
       // delete hash.spwc_style_hash としても良いが別に消さなくてもいいのでやらない
-      return {...this.$props, ...this.override_props}
+      return {
+        ...this.$props,
+        ...this.alternative_props_native,
+        ...this.override_props,
+      }
     },
 
     // Vue.js スコープで有効な型に変換したものたち
@@ -171,7 +193,7 @@ export default {
 
     // sp_player_info の Hash 化
     sp_player_info_native() {
-      const v = this.sp_player_info
+      const v = this.lookup_var("sp_player_info")
       if (v != null) {
         return JSON5.parse(v)
       }
@@ -179,7 +201,7 @@ export default {
 
     // sp_board_cell_class_fn の Function 化
     sp_board_cell_class_fn_native() {
-      const v = this.sp_board_cell_class_fn
+      const v = this.lookup_var("sp_board_cell_class_fn")
       if (v != null) {
         return eval(v)
       }
