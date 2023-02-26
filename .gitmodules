@@ -1,0 +1,3 @@
+[submodule "test-of-vue2-wc-in-vue3"]
+	path = test-of-vue2-wc-in-vue3
+	url = git@github.com:akicho8/test-of-vue2-wc-in-vue3.git

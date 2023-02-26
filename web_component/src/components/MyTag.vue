@@ -1,5 +1,8 @@
 <template>
-<div>$props: {{$props}}</div>
+<div>
+  <div>$props: {{$props}}</div>
+  <div>$attrs: {{$attrs}}</div>
+</div>
 </template>
 
 <script>
@@ -10,6 +13,7 @@ export default {
   },
   created() {
     console.log(this.$props)
-  }
+    console.log(this.$attrs)
+  },
 }
 </script>
