@@ -4,7 +4,7 @@
   <title>shogi-player-wc demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css"> -->
-  <script src="dist/shogi-player-wc.js"></script>
+  <script defer src="dist/shogi-player-wc.js"></script>
   <style type="text/css">
     * {
       box-sizing: border-box;
@@ -26,12 +26,10 @@
       display: none;
     }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const spwc = document.querySelector("shogi-player-wc");
-      spwc.addEventListener("update:sp_viewpoint", e => alert(e.detail[0]))
-      spwc.addEventListener("ev_play_mode_move", e => alert(e.detail[0].last_move_info.to_kif))
-    })
+  <script type="module">
+    const spwc = document.querySelector("shogi-player-wc");
+    spwc.addEventListener("update:sp_viewpoint", e => alert(e.detail[0]))
+    spwc.addEventListener("ev_play_mode_move", e => alert(e.detail[0].last_move_info.to_kif))
   </script>
 </head>
 <body>
