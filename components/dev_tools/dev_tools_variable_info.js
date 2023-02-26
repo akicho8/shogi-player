@@ -3,6 +3,7 @@ import MemoryRecord from "js-memory-record"
 export class DevToolsVariableInfo extends MemoryRecord {
   static get define() {
     return [
+      // sp_dev_tools は含めてはいけない
       { key: "sp_dev_tools_position", mut_var: "mut_dev_tools_position", },
       { key: "sp_dev_tools_group",    mut_var: "mut_dev_tools_group",    },
     ]

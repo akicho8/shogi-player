@@ -20,12 +20,12 @@ export const mod_dev_tools = {
     },
     sp_dev_tools_position: {
       type: String,
-      default: "bottom",
+      default: null, // 明示的な指定がないことの判定に使うので本当は初期値はあるけど null にしておく
       validator(value) { return DevToolsPositionInfo.keys.includes(value) },
     },
     sp_dev_tools_group: {
       type: String,
-      default: "main",
+      default: null,
       validator(value) { return DevToolsGroupInfo.keys.includes(value) },
     },
   },
@@ -39,7 +39,7 @@ export const mod_dev_tools = {
   },
 
   watch: {
-    sp_dev_tools(v)          { this.mut_dev_tools = v          },
+    sp_dev_tools(v)          { this.mut_dev_tools = v },
     sp_dev_tools_position(v) { this.mut_dev_tools_position = v },
     sp_dev_tools_group(v)    { this.mut_dev_tools_group = v    },
   },

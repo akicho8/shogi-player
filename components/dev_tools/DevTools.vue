@@ -39,6 +39,7 @@ export default {
     GroupCog,
   },
   mounted() {
+    this.TheSp.dev_tools_restore()
     document.addEventListener("keydown", this.keydown_hook)
   },
   beforeDestroy() {
