@@ -6,14 +6,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
   <script type="module">
     Vue.config.ignoredElements = ["shogi-player-wc"]
-    new Vue({
-      el: "#app",
-      methods: {
-        ev_play_mode_move(e) {
-          alert(e.detail[0].last_move_info.to_kif)
-        },
-      },
-    })
+    new Vue({el: "#app"})
   </script>
 </head>
 <body>
@@ -22,7 +15,7 @@
       sp_mode="play"
       sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
       sp_controller="true"
-      @ev_play_mode_move="ev_play_mode_move"
+      @ev_play_mode_move="e => alert(e.detail[0].last_move_info.to_kif)"
       ></shogi-player-wc>
   </div>
 </body>

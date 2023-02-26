@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
+    <script type="module">
+      import { LitElement, css, html } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js"
+      export class MyApp extends LitElement {
+        render() {
+          return html`
+            <shogi-player-wc
+              sp_mode="play"
+              sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
+              sp_controller="true"
+              @ev_play_mode_move="${e => alert(e.detail[0].last_move_info.to_kif)}"
+            ></shogi-player-wc>`
+        }
+      }
+      customElements.define("my-app", MyApp)
+    </script>
+  </head>
+  <body>
+    <my-app></my-app>
+  </body>
+</html>

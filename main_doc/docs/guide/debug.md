@@ -1,6 +1,6 @@
 # デバッグ
 
-## Dev Tools を起動する
+## `sp_dev_tools` を有効にする
 
 <<< @/docs/.vuepress/public/examples/debug/sp_dev_tools.html{2}
 <LinkToExample name="debug/sp_dev_tools" />
@@ -35,7 +35,7 @@ JavaScript コンソールが騷がしくなる
 
 development 版を使うとデバッグ情報を多めに表示する
 
-* development 版の特徴
+* 特徴
   * `sp_debug` と `sp_event_log` が常時有効な状態になる
   * `NODE_ENV=development` でビルドしている
   * クラス名等が難読状態になっていない

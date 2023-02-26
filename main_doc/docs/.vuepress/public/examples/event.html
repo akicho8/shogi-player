@@ -7,7 +7,6 @@
     document.addEventListener("DOMContentLoaded", () => {
       const el = document.querySelector("shogi-player-wc")
       el.addEventListener("ev_play_mode_move", e => {
-        console.log(e.detail[0])
         alert(e.detail[0].last_move_info.to_kif)
       })
     })

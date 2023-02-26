@@ -12,6 +12,16 @@ Also see: [使い方](/guide/usage/)
 <<< @/docs/.vuepress/public/examples/build/case_wc_react.html
 <LinkToExample name="build/case_wc_react" />
 
+## Lit + Web Components
+
+### Basic
+<<< @/docs/.vuepress/public/examples/build/case_wc_lit_basic.html
+<LinkToExample name="build/case_wc_lit_basic" />
+
+### Full Component
+<<< @/docs/.vuepress/public/examples/build/case_wc_lit_full.html
+<LinkToExample name="build/case_wc_lit_full" />
+
 ## Vue.js 2 + Web Components
 
 <<< @/docs/.vuepress/public/examples/build/case_wc_vue2.html

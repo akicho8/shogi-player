@@ -69,7 +69,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 ## イベント受信 ##
 
 <!-- <CustomizeExample2 name="event" /> -->
-<<< @/docs/.vuepress/public/examples/event.html{8-12}
+<<< @/docs/.vuepress/public/examples/event.html{8-11}
 <LinkToExample name="event" />
 
 指し手の情報を表示する例
@@ -94,16 +94,17 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <<< @/docs/.vuepress/public/examples/layout.html{7-17,21-25}
 <LinkToExample name="layout" />
 
-`shogi-player-wc` は明確なサイズを持っていないためデスクトップでは大きくなりすぎてしまう。そこで中央配置した上で、最大横幅を指定し、それ以下であれば画面幅に張り付くようにしたのが上の例になる。
+明確なサイズを持っていないためデスクトップでは大きくなりすぎてしまう。そこで中央配置した上で、最大横幅を指定し、それ以下であれば画面幅に張り付くようにしたのが上の例になる。
 
 方法がたくさんありすぎて何が正解なのかわからないがとりあえず `shogi-player-wc` は横100%とする。そしてもう触らない。で、外側で大きさを調整する。さらにその外側で中央に配置する。これが良さそう。
 
 ::: tip
-shogi-player-wc タグの `display` の初期値は **`inline`** のためサイズが効かない
+Web Components のいけてない仕様として Shadow Host の `display` の初期値は **`inline`** になっているためサイズが効かない
 サイズを効かせるためには `block` や `inline-block` に変更する
+これに関しては shogi-player-wc 側で :host に対して設定しておけばいいのだけど Vue.js 2 の Web Components 化ツールが対応していなくてできなかった (lit では外側と内側を一緒に書けたりする)
 :::
 
-## APIの呼び方
+## 命令型APIの呼び方
 
 <<< @/docs/.vuepress/public/examples/api.html{8-12}
 <LinkToExample name="api" />

@@ -3,11 +3,15 @@ task :default => :s
 task :s => :server
 desc "[s] server"
 task :server do
-  system %(vuepress dev docs -p 5001 --open)
+  system <<~EOT
+  vuepress dev docs -p 5001 --open --no-cache
+  EOT
 end
 
 task :b => :build
 desc "[b] build"
 task :build do
-  system %(vuepress build docs)
+  system <<~EOT
+  vuepress build docs
+  EOT
 end

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
+    <script type="module">
+      import { LitElement, css, html } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js"
+      export class ShogiBoard extends LitElement {
+        static styles = css`
+          :host {
+            display: block;
+            background-color: hsla(0, 0%, 0%, 0.1);
+            padding: 1rem;
+          }
+          .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          shogi-player-wc {
+            display: block;
+            width: min(640px, 100%);
+          }
+          shogi-player-wc::part(spwc_style_scope) {
+            --sp_board_color: lightskyblue;
+          }
+        `
+
+        static properties = {
+          source: { type: String },
+        }
+
+        constructor() {
+          super()
+          this.source ??= "position sfen 4k4/9/9/9/9/9/9/9/9 b 2r2b4g4s4n4l18p 1"
+        }
+
+        render() {
+          return html`
+            <div class="container">
+              <shogi-player-wc
+                sp_mode="play"
+                sp_body="${this.source}"
+                sp_controller="true"
+                @ev_play_mode_move="${e => alert(e.detail[0].last_move_info.to_kif)}"
+              ></shogi-player-wc>
+            </div>
+          `
+        }
+      }
+      customElements.define("shogi-board", ShogiBoard)
+    </script>
+  </head>
+  <body>
+    <shogi-board source="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"></shogi-board>
+  </body>
+</html>
