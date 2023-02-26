@@ -30,7 +30,7 @@
   //-   b-field(custom-class="is-small" label="輝度")
   //-     b-slider(v-model="new_brightness" :min="0" :max="2.0" :step="0.01")
 
-  b-field(v-if="debug_or_development_p")
+  b-field(v-if="false")
     .control
       pre
         | {{new_single_color}}
