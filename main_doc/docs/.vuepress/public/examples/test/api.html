@@ -2,11 +2,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
 </head>
 <body>
   <shogi-player-wc></shogi-player-wc>
-  <script>
+  <script type="module">
     const el = document.querySelector("shogi-player-wc")
     console.log("shogi-player-wc", el)
     console.log("el.shadowRoot", el.shadowRoot)

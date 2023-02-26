@@ -2,21 +2,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/lib/production/shogi-player.umd.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      new Vue({
-        el: "#app",
-        components: {
-          ShogiPlayer,
+  <script defer src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/lib/production/shogi-player.umd.min.js"></script>
+  <script type="module">
+    new Vue({
+      el: "#app",
+      components: {
+        ShogiPlayer,
+      },
+      methods: {
+        ev_play_mode_move(e) {
+          alert(e.last_move_info.to_kif)
         },
-        methods: {
-          ev_play_mode_move(e) {
-            alert(e.last_move_info.to_kif)
-          },
-        },
-      })
+      },
     })
   </script>
 </head>

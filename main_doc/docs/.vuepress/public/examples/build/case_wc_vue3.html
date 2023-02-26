@@ -2,21 +2,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/development/shogi-player-wc.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/development/shogi-player-wc.min.js"></script>
   <!-- <script src="../../dist/wc/production/shogi-player-wc.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const app = Vue.createApp({
-        methods: {
-          ev_play_mode_move(e) {
-            alert(e.detail[0].last_move_info.to_kif)
-          },
+  <script defer src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+  <script type="module">
+    const app = Vue.createApp({
+      methods: {
+        ev_play_mode_move(e) {
+          alert(e.detail[0].last_move_info.to_kif)
         },
-      })
-      app.config.compilerOptions.isCustomElement = tag => tag === "shogi-player-wc"
-      app.mount("#app")
+      },
     })
+    app.config.compilerOptions.isCustomElement = tag => tag === "shogi-player-wc"
+    app.mount("#app")
   </script>
 </head>
 <body>

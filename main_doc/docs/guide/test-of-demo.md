@@ -5,7 +5,7 @@
 ::: demo
 <div @click="onClick">Click me!</div>
 
-<script>
+<script type="module">
 export default {
   methods: {
     onClick: () => { window.alert(1) },
@@ -21,7 +21,7 @@ export default {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
 </head>
 <body>
   <shogi-player-wc/>
@@ -33,7 +33,7 @@ export default {
 
 ::: demo
 <head>
-<script src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.388/dist/wc/production/shogi-player-wc.min.js"></script>
 </head>
 <shogi-player-wc/>
 :::
