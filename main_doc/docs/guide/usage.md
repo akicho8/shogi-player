@@ -72,7 +72,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <<< @/docs/.vuepress/public/examples/event.html{8-11}
 <LinkToExample name="event" />
 
-指し手の情報を表示する例
+このあたりを HTML でがんばるなら [Lit](https://lit.dev/) などと組み合わせた方がいいかもしれない 
 
 <!-- ../.vuepress/public/examples/event.html -->
 <!-- <a href="/examples/event.html" target="_blank">上のサンプルを単体で開く</a> -->
@@ -91,22 +91,18 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 ## レイアウト
 
 <!-- <CustomizeExample2 name="layout" /> -->
-<<< @/docs/.vuepress/public/examples/layout.html{7-17,21-25}
+<<< @/docs/.vuepress/public/examples/layout.html{7-14,21-25}
 <LinkToExample name="layout" />
 
 明確なサイズを持っていないためデスクトップでは大きくなりすぎてしまう。そこで中央配置した上で、最大横幅を指定し、それ以下であれば画面幅に張り付くようにしたのが上の例になる。
 
-方法がたくさんありすぎて何が正解なのかわからないがとりあえず `shogi-player-wc` は横100%とする。そしてもう触らない。で、外側で大きさを調整する。さらにその外側で中央に配置する。これが良さそう。
-
 ::: tip
-Web Components のいけてない仕様として Shadow Host の `display` の初期値は **`inline`** になっているためサイズが効かない
-サイズを効かせるためには `block` や `inline-block` に変更する
-これに関しては shogi-player-wc 側で :host に対して設定しておけばいいのだけど Vue.js 2 の Web Components 化ツールが対応していなくてできなかった (lit では外側と内側を一緒に書けたりする)
+Web Components 全般のいまいちな仕様として `display` の初期値は **`inline`** になっている。なのでサイズが効かずにはまりがち。サイズを効かせるためには `block` や `inline-block` に変更しないといけない。これに関しては shogi-player-wc 側で :host に対して事前に設定しとけよって話だが Vue.js 2 では対応していなくてできなかった (lit では :host の指定も可能だったりする)
 :::
 
 ## 命令型APIの呼び方
 
-<<< @/docs/.vuepress/public/examples/api.html{8-12}
+<<< @/docs/.vuepress/public/examples/api.html{7-11}
 <LinkToExample name="api" />
 
 ## CDN

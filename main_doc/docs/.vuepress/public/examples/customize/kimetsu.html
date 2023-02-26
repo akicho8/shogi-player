@@ -22,12 +22,9 @@
       align-items: center;
       min-height: 100svh;
     }
-    .shogi-player-wc-container {
-      width: min(640px, 100%);
-    }
     shogi-player-wc {
       display: block;
-      width: 100%;
+      width: min(640px, 100%);
     }
     shogi-player-wc::part(spwc_style_scope) {
       /* 色 */
@@ -53,12 +50,10 @@
 </head>
 <body>
   <div class="container">
-    <div class="shogi-player-wc-container">
-      <shogi-player-wc
-        sp_piece_variant="a"
-        sp_mobile_vertical="false"
-        ></shogi-player-wc>
-    </div>
+    <shogi-player-wc
+      sp_piece_variant="a"
+      sp_mobile_vertical="false"
+      ></shogi-player-wc>
   </div>
 </body>
 </html>
