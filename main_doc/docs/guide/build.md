@@ -12,6 +12,11 @@ Also see: [使い方](/guide/usage/)
 <<< @/docs/.vuepress/public/examples/build/case_wc_react.html
 <LinkToExample name="build/case_wc_react" />
 
+## Solid.js + Web Components
+
+<<< @/docs/.vuepress/public/examples/build/case_wc_solid.html
+<LinkToExample name="build/case_wc_solid" />
+
 ## Web Components + Web Components
 
 ### Basic
@@ -48,10 +53,10 @@ Also see: [使い方](/guide/usage/)
 <LinkToExample name="build/case_wc_vue3" />
 
 ::: warning 引数が渡せない問題と回避方法
-* Vue.js 2 で作成した Web Components と Vue 3 で使うときに限り snake_case なパラメータ名の値が渡せない問題がある
-  * 簡単に言えば `_` を含むパラメータは無視される
-* そこでその制約を回避するために `alternative-props` 引数を用意した
-* これは `v-bind` に似ているが、Vue にはただの文字列として認識されるため確実に内容を渡れる
+* Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたときに限り snake_case なパラメータ名を持つ値が渡せない問題がある
+  * 簡単に言えば `_` を含むパラメータが無視される
+* そこでその嫌がらせのような制約を回避するために仕方なく `alternative-props` 引数を用意した
+* これは `v-bind` に似ているが Vue にはただの文字列として認識されるため確実に内容を渡すことができる
 * `alternative-props` の内容は JSON5 形式の文字列としてパースする
 * 型変換は JSON5 のパーサーに任せているので Boolean 型の真は `"true"` ではなく `true` と書く
 * `alternative-props` の内容は最終的に `$props` 相当として内部で扱う
@@ -68,13 +73,13 @@ Also see: [使い方](/guide/usage/)
 
 ## 自力ビルドの要点
 
-* `node_modules/shogi-player` 以下を babel のビルド対象に含めること
+* `node_modules/shogi-player` 以下を babel のビルド対象に含める
   * これをやらないとビルドできない
     * クラス定数や `??` 演算子が解釈されない
   * @vue/cli であれば vue.config.js の `transpileDependencies` に指定する
   * Nuxt.js であれば nuxt.config.js の `build.transpile` に含める
 * process 定数がグローバルに存在させること
   * これをやらないと `process` を参照しているコードがビルドできない
-* wav ファイルを使うときは file-loader で `esModule: false` オプションをつけること
+* wav ファイルを使うときは file-loader で `esModule: false` オプションをつける
   * これをやらないと wav ファイルへのパスが文字列にならず、ビルドできない
   * 内部では wav ファイルを使っていないがイベントに合わせて音を出したいときにはまる
