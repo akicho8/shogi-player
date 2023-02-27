@@ -20,6 +20,10 @@
     }
     shogi-player-wc::part(spwc_style_scope) {
       --sp_board_color: lightskyblue;
+      --sp_controller_width: 0.1;
+    }
+    .sedond::part(spwc_style_scope) {
+      --sp_board_color: lightpink;
     }
     /* ↓効かない */
     shogi-player-wc([hidden]) {
@@ -36,7 +40,11 @@
   <div class="container">
     <p>Web Components 版 (dist/shogi-player-wc.min.js)</p>
     <!-- alternative-props='{sp_controller: true}' -->
+    <!-- alternative-props='{spwc_style_hash: "{\"--sp_controller_width\":1.0}"}' -->
     <shogi-player-wc
+      spwc_style_hash="{'--sp_controller_width': 1.0}"
+      exportparts="spwc_style_scope:xxx"
+      class="my-class"
       hidden
       sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && 'xxx'"
       style="color: black"
@@ -44,12 +52,12 @@
       sp_mode="play"
       sp_player_info="{black: {name: '先手'}, white: {name: '後手'}}"
       :foo.prop="123"
-      alternative-props='{spwc_style_hash: "{\"--sp_controller_width\":1.0}"}'
       sp_layout="horizontal"
       sp_controller="true"
       sp_slider="true"
       sp_body="position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f"
       ></shogi-player-wc>
+    <shogi-player-wc class="sedond"></shogi-player-wc>
     <shogi-player-wc></shogi-player-wc>
   </div>
 </body>

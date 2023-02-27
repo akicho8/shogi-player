@@ -1,18 +1,10 @@
 <template lang="pug">
-.ShogiPlayerWcRoot(part="__root__")
-  // CSS変数の初期値はここに定義する
-  // __root__ は確認のためにつけているだけなので使うな
-  .ShogiPlayerWcStyleScope(part="spwc_style_scope")
-    // 上書きする場合のCSS変数は shogi-player-wc::part(spwc_style_scope) {} でここに定義してもらう
-    // .ShogiPlayerWcRoot でも上書きできたが詳細度が曖昧になるため明確に階層化している
-    .ShogiPlayerWcStyleHash(:style="spwc_style_hash_native")
-      // ここに定義すると shogi-player-wc::part(spwc_style_scope) {} に勝つ
-      // 例: spwc_style_hash="{'--sp_controller_width':0.8}"
-      ShogiPlayer(v-bind="bind_props" v-on="event_chain")
-      // CDN版で dist/wc/development/shogi-player-wc.min.js とすると表示する(いらない？)
-      pre.ShogiPlayerWcInspector(v-if="development_p")
-        | $props: {{JSON.stringify($props)}}
-        | $attrs: {{JSON.stringify($attrs)}}
+.ShogiPlayerWcRoot(part="spwc_style_scope")
+  ShogiPlayer(v-bind="bind_props" v-on="event_chain" :style="spwc_style_hash_native")
+  pre.ShogiPlayerWcInspector(v-if="development_p")
+    | $props: {{JSON.stringify($props)}}
+    | $attrs: {{JSON.stringify($attrs)}}
+    | bind_props: {{JSON.stringify(bind_props)}}
 </template>
 
 <script>
@@ -233,8 +225,8 @@ $primary: $blue
 /* Web Components 全般のいまいちな仕様として display の初期値が inline になっている。*/
 /* なのでサイズが効かずにはまりがち。サイズを効かせるためには block や inline-block に変更しないといけない。*/
 /* これに関しては Web Components 側で指定できる */
+/* width: 100svmin; */
 :host {
   display: block;
-  /* width: 100svmin; */
 }
 </style>

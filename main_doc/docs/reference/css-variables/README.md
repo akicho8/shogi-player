@@ -6,9 +6,8 @@ sidebar: auto
 
 ## 概要
 
-* 初期値は `html` に対して定義してある
-  * 本当は `:root` に対して定義するべきだが node-sass の問題でできなかった
-  * Web Components の場合は Shadow DOM 内直下に定義してある
+* CSS変数は基本 `:root` に対して定義している
+* Web Components 版は `:host` に定義している
 * セルと駒の占有率について
   * セルは駒をタップできる領域
   * 占有率は簡単に言えば駒の見た目の大きさになる
