@@ -10,26 +10,61 @@ export const mod_navi = {
       type: Boolean,
       default: false,
     },
+
     // スライダー表示
     sp_slider: {
       type: Boolean,
       default: false,
     },
+
     // コントローラー表示
     sp_controller: {
       type: Boolean,
       default: false,
     },
 
-    sp_viewpoint:                   { type: String,  default: "black",             }, // 視点
+    // 視点
+    sp_viewpoint: {
+      type: String,
+      default: "black",
+      validator(value) { return Location.keys.includes(value) },
+    },
 
-    sp_operation_disabled:                 { type: Boolean, default: false,               }, // 全体の操作を無効化
-    sp_piece_stand_blank_then_hidden: { type: Boolean, default: false,               }, // 駒がないときは駒台側を非表示
-    sp_active_side_viewpoint:               { type: Boolean, default: false,               }, // 最初に表示した局面が△なら反転
+    // 全体の操作を無効化
+    sp_operation_disabled: {
+      type: Boolean,
+      default: false,
+    },
 
-    sp_key_event_capture:   { type: Boolean, default: false,               }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
-    sp_shift_key_mag:               { type: Number,  default: 10,                  }, // キーで左右するとき shift を押したときの倍率
-    sp_system_key_mag:              { type: Number,  default: 50,                  }, // キーで左右するとき command などを押したときの倍率
+    // 駒がないときは駒台側を非表示
+    sp_piece_stand_blank_then_hidden: {
+      type: Boolean,
+      default: false,
+    },
+
+    // 最初に表示した局面が△なら反転
+    sp_active_side_viewpoint: {
+      type: Boolean,
+      default: false,
+    },
+
+    // スライダーにフォーカスしていなくても左右キーで手数を動かす
+    sp_key_event_capture: {
+      type: Boolean,
+      default: false,
+    },
+
+    // キーで左右するとき shift を押したときの倍率
+    sp_shift_key_mag: {
+      type: Number,
+      default: 10,
+    },
+
+    // キーで左右するとき command などを押したときの倍率
+    sp_system_key_mag: {
+      type: Number,
+      default: 50,
+    },
   },
 
   data() {

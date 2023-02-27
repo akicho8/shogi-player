@@ -13,7 +13,8 @@ import { Place      } from "./models/place.js"
 import { SfenParser } from "./models/sfen_parser.js"
 import { KifParser  } from "./models/kif_parser.js"
 import { Location   } from "./models/location.js"
-import { EventList   } from "./models/event_list.js"
+import { EventList  } from "./models/event_list.js"
+import { ModeInfo   } from "./models/mode_info.js"
 
 // components
 import ErrorNotify        from "./ErrorNotify.vue"
@@ -69,9 +70,15 @@ export default {
   ],
 
   props: {
-    sp_board_dimension_w:                  { type: Number, default: 9,                       }, // 盤のセル数(W)
-    sp_board_dimension_h:                  { type: Number, default: 9,                       }, // 盤のセル数(H)
-    sp_layout:                             { type: String, default: "horizontal",             }, // レイアウト
+    sp_board_dimension_w: { type: Number, default: 9, }, // 盤のセル数(W)
+    sp_board_dimension_h: { type: Number, default: 9, }, // 盤のセル数(H)
+
+    // レイアウト
+    sp_layout: {
+      type: String,
+      default: "horizontal",
+      validator(value) { return ["horizontal", "vertical"].includes(value) },
+    },
 
     // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_balloon: {
@@ -145,10 +152,30 @@ export default {
       validator(value) { return ["horizontal", "vertical"].includes(value) },
     },
 
-    sp_turn:                               { type: Number, default: -1,                      }, // 局面(手数)
-    sp_mode:                           { type: String, default: "view",             }, // モード
-    sp_body:                               { type: String, default: null,                    }, // 棋譜 KIF or SFEN
-    sp_player_info:                        { type: Object, default: null,                    }, // 対局者名と時間
+    // 局面(手数)
+    sp_turn: {
+      type: Number,
+      default: -1,
+    },
+
+    // モード
+    sp_mode: {
+      type: String,
+      default: "view",
+      validator(value) { return ModeInfo.keys.includes(value) },
+    },
+
+    // 棋譜 KIF or SFEN
+    sp_body: {
+      type: String,
+      default: null,
+    },
+
+    // 対局者名と時間
+    sp_player_info: {
+      type: Object,
+      default: null,
+    },
 
     // KIFのコメントを表示する
     sp_comment: {
@@ -156,10 +183,19 @@ export default {
       default: true,
     },
 
-    sp_board_cell_left_click_disabled:     { type: Boolean, default: false,                  }, // 盤上の左クリックの通常処理を無効化するか？
+    // 盤上の左クリックの通常処理を無効化するか？
+    sp_board_cell_left_click_disabled: {
+      type: Boolean,
+      default: false,
+    },
 
     // 一方向の $emit ではどうにもならない関数たち
-    sp_board_cell_class_fn:     { type: Function, default: null,                  }, // セルのクラスを決める処理
+
+    // セルのクラスを決める処理
+    sp_board_cell_class_fn: {
+      type: Function,
+      default: null,
+    },
   },
 
   components: {

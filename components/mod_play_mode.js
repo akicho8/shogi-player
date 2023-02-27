@@ -6,7 +6,12 @@ import { HumanSideInfo } from "./models/human_side_info.js"
 
 export const mod_play_mode = {
   props: {
-    sp_human_side: { type: String, default: "both", }, // 含まれる側だけ操作できるようにする
+    // 含まれる側だけ操作できるようにする
+    sp_human_side: {
+      type: String,
+      default: "both",
+      validator(value) { return HumanSideInfo.keys.includes(value) },
+    },
   },
 
   data() {

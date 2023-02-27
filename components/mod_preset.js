@@ -3,7 +3,11 @@ import { PresetInfo } from "./models/preset_info.js"
 
 export const mod_preset = {
   props: {
-    sp_preset: { type: String,  default: null, },
+    sp_preset: {
+      type: String,
+      default: null,
+      validator(value) { return PresetInfo.keys.includes(value) },
+    },
   },
 
   data() {
