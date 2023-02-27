@@ -4,11 +4,11 @@
 
   // CSS変数の初期値はここに定義する
   // __root__ は確認のためにつけているだけなので使うな
-  .ShogiPlayerWcStyleScope(part="spwc_style_scope")
-    // 上書きする場合のCSS変数は shogi-player-wc::part(spwc_style_scope) {} でここに定義してもらう
+  .ShogiPlayerWcStyleScope(part="root")
+    // 上書きする場合のCSS変数は shogi-player-wc::part(root) {} でここに定義してもらう
     // .MyTag でも上書きできたが詳細度が曖昧になるため明確に階層化している
     .ShogiPlayerWcStyleHash(:style="spwc_style_hash_native")
-      // ここに定義すると shogi-player-wc::part(spwc_style_scope) {} に勝つ
+      // ここに定義すると shogi-player-wc::part(root) {} に勝つ
       // 例: spwc_style_hash="{'--sp_controller_width':0.8}"
       ShogiPlayer(v-bind="props_native" v-on="event_chain")
       // CDN版で dist/wc/development/shogi-player-wc.min.js とすると表示する(いらない？)

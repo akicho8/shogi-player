@@ -18,11 +18,11 @@
     shogi-player-wc {
       width: min(640px, 100%);
     }
-    shogi-player-wc::part(spwc_style_scope) {
+    shogi-player-wc::part(root) {
       --sp_board_color: lightskyblue;
       --sp_controller_width: 0.1;
     }
-    .sedond::part(spwc_style_scope) {
+    .sedond::part(root) {
       --sp_board_color: lightpink;
     }
     /* ↓効かない */
@@ -43,7 +43,7 @@
     <!-- alternative-props='{spwc_style_hash: "{\"--sp_controller_width\":1.0}"}' -->
     <shogi-player-wc
       spwc_style_hash="{'--sp_controller_width': 1.0}"
-      exportparts="spwc_style_scope:xxx"
+      exportparts="root:xxx"
       class="my-class"
       hidden
       sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && 'xxx'"

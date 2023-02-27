@@ -47,12 +47,12 @@
 <LinkToExample name="style" />
 
 CSS変数は普通に定義しても Shadow DOM 内には届かない
-用意した `spwc_style_scope` に対して適用する
+用意した `root` に対して適用する
 
 <!-- <ShogiPlayerWcWrapper class="b441958504b7c7af3ef62a47fafe8d21 is-xsmall" /> -->
 <!-- <style lang="stylus"> -->
 <!-- .ShogiPlayerWcWrapper.b441958504b7c7af3ef62a47fafe8d21 -->
-<!--   shogi-player-wc::part(spwc_style_scope) -->
+<!--   shogi-player-wc::part(root) -->
 <!--     --sp_board_color: lightskyblue -->
 <!-- </style> -->
 

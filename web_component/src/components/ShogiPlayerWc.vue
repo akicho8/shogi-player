@@ -1,5 +1,5 @@
 <template lang="pug">
-.ShogiPlayerWc(part="spwc_style_scope")
+.ShogiPlayerWc(part="root")
   ShogiPlayer(v-bind="bind_props" v-on="event_chain" :style="spwc_style_hash_native")
   pre.ShogiPlayerWcInspector(v-if="development_p")
     | $props: {{JSON.stringify($props)}}
