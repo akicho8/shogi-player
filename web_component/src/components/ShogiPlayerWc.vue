@@ -1,5 +1,5 @@
 <template lang="pug">
-.ShogiPlayerWcRoot(part="spwc_style_scope")
+.ShogiPlayerWc(part="spwc_style_scope")
   ShogiPlayer(v-bind="bind_props" v-on="event_chain" :style="spwc_style_hash_native")
   pre.ShogiPlayerWcInspector(v-if="development_p")
     | $props: {{JSON.stringify($props)}}
@@ -28,7 +28,7 @@ const MDI_CSS_URL = "https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignic
 const UNIQUE_ID   = "bdf2da9503326784806e006ec9c11bcf"
 
 export default {
-  name: "ShogiPlayerWcRoot",
+  name: "ShogiPlayerWc",
   components: { ShogiPlayer },
 
   // true のままだと Shadow Host に意味のない属性が入ってしまう
@@ -216,7 +216,7 @@ $primary: $blue
 // このあとで +mobile などを使いたいとき
 // @import "~bulma/sass/utilities/_all"
 
-// .ShogiPlayerWcRoot
+// .ShogiPlayerWc
 //   width: 100%
 </style>
 
