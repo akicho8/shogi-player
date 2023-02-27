@@ -34,14 +34,14 @@ $shortcut_viewer_z:         $piece_count_z + 1  // $piece_count_z より上に�
 //
 // 書き方
 //
-//   .SpGround
+//   .ShogiPlayer
 //     +IF_HORIZONTAL
 //       ...
 //     +IF_VERTICAL
 //       ...
 //
 // 注意点
-// ・必ず .SpGround の直下で +IF_HORIZONTAL とのペアで定義すること
+// ・必ず .ShogiPlayer の直下で +IF_HORIZONTAL とのペアで定義すること
 =IF_HORIZONTAL
   &.is_layout_horizontal
     @content

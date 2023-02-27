@@ -91,13 +91,13 @@ export const mod_lifted_piece = {
         this.$data._LiftedPieceElement.style.top  = "-50%"
       }
 
-      this.$refs.SpGround.$el.appendChild(this.$data._LiftedPieceElement)
+      this.$el.appendChild(this.$data._LiftedPieceElement)
     },
 
     // 持ち上げた駒を破棄する
     lp_destroy() {
       if (this.$data._LiftedPieceElement) {
-        this.$refs.SpGround.$el.removeChild(this.$data._LiftedPieceElement)
+        this.$el.removeChild(this.$data._LiftedPieceElement)
 
         this.$data._LiftedPieceElement = null
         this.lp_mouse_stick_p = false

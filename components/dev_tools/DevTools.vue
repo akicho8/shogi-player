@@ -90,7 +90,7 @@ export default {
     .tab-content
       display: none
 
-.ShogiPlayer .SpGround
+.ShogiPlayer
   &.is_layer_on
     .DevTools
       +is_layer_border

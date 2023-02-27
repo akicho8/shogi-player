@@ -18,7 +18,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 
-.ShogiPlayer .SpGround
+.ShogiPlayer
   +defvar(sp_piece_count_horizontal_x, 0.43)                              // 駒数の中央からの相対位置X(%) (横配置時)
   +defvar(sp_piece_count_horizontal_y, 0.30)                              // 駒数の中央からの相対位置Y(%) (横配置時)
   +defvar(sp_piece_count_vertical_x, 0.0)                               // 駒数の中央からの相対位置X(%) (縦配置時)

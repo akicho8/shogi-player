@@ -1,6 +1,9 @@
 <template lang="pug">
-.ShogiPlayer.is-relative(:id="root_container_id" :class="component_class")
-  SpGround(ref="SpGround")
+.ShogiPlayer.is-relative(:id="root_container_id" :class="component_class" :style="component_style")
+  .SpGroundTexture
+  SpGroundInside(v-if="xcontainer" ref="SpGroundInside")
+  DevTools(v-if="mut_dev_tools")
+  ShortcutViewer(v-if="shortcut_viewer_p")
 </template>
 
 <script>
@@ -19,9 +22,11 @@ import { ModeInfo   } from "./models/mode_info.js"
 // components
 import ErrorNotify        from "./ErrorNotify.vue"
 import OpDisabledBlock    from "./OpDisabledBlock.vue"
-import SpGround  from "./SpGround.vue"
 import EditToolBlock      from "./EditToolBlock.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
+import SpGroundInside from "./SpGroundInside.vue"
+import DevTools  from "./dev_tools/DevTools.vue"
+import ShortcutViewer  from "./shortcut_viewer/ShortcutViewer.vue"
 
 // mixins modules
 import { mod_focus          } from "./mod_focus.js"
@@ -202,9 +207,9 @@ export default {
     ErrorNotify,
     OpDisabledBlock,
     EditToolBlock,
-    SpGround,
-    // DevTools,
     PromoteSelectModal,
+    SpGroundInside,
+    DevTools,
   },
 
   data() {
@@ -478,7 +483,39 @@ export default {
         this.str_to_css_class("is_mode", this.mut_mode), // is_mode_view | is_mode_play | is_mode_edit
         this.bool_to_css_class("is_debug", this.mut_debug),
         this.bool_to_css_class("is_event_log", this.mut_event_log),
+
+        // これらはCSS用なのでコードで管理するのは違うような気もする
+        // とはいえ利用者に委ねるとタグの構造の理解を強要することになる
+        // それに間違った場所に指定してしまってもエラーが出ることもない
+        // なので結局ここでいい
+        // Buefy も同じようなことをしている
+
+        // String
+        this.str_to_css_class("is_layout", this.sp_layout),                         // is_layout_horizontal is_layout_vertical
+        this.str_to_css_class("is_coordinate_variant", this.sp_coordinate_variant), // is_coordinate_variant_kanji
+        this.str_to_css_class("is_name_direction", this.sp_name_direction),         // is_name_direction_horizontal
+        this.str_to_css_class("is_stand_gravity", this.sp_stand_gravity),           // is_stand_gravity_top
+        this.str_to_css_class("is_piece_variant", this.sp_piece_variant),           // is_piece_variant_a
+        this.str_to_css_class("is_bg_variant", this.sp_bg_variant),                 // is_bg_variant_a
+        this.str_to_css_class("is_device", this.devise_info.key),                   // is_device_touch
+
+        // Boolean
+        this.bool_to_css_class("is_layer", this.mut_layer),
+        this.bool_to_css_class("is_mobile_vertical", this.sp_mobile_vertical),
+        this.bool_to_css_class("is_coordinate", this.sp_coordinate),
+        this.bool_to_css_class("is_balloon", this.sp_balloon),
+
+        // 特殊
+        `is_viewpoint_${this.mut_viewpoint}`, // is_viewpoint_black (システムテストで見ている)
       ]
+    },
+
+    component_style() {
+      return {
+        "--sp_board_dimension_w": this.sp_board_dimension_w,
+        "--sp_board_dimension_h": this.sp_board_dimension_h,
+        ...this.ro_css_variables_hash,
+      }
     },
 
     kifu_source() {
@@ -492,7 +529,45 @@ export default {
 </script>
 
 <style lang="sass">
-@import "support.sass"
+@import "./support.sass"
+// .ShogiPlayer
+//   width: 100%
+
 .ShogiPlayer
-  width: 100%
+  +defvar(sp_common_gap, 0.18) // 共通の隙間(駒セルの縦幅に対する割合)
+
+  // あまり重要ではないところでの縦のマージンが必要なときに使う
+  // sp_common_gap を直接使ってはいけない
+  --sp_common_gap_real_px: calc(var(--sp_cell_h) * var(--sp_common_gap))
+
+  &.is_layer_on
+    +is_layer_border
+
+  text-align: center
+  line-height: 100%
+
+  // もしかしてこの下まったく要らない？ → いる
+
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+
+  //////////////////////////////////////////////////////////////////////////////// ここより下は消してもいいかも
+
+  // 盤背景と同じ構成
+  +defvar(sp_ground_color, transparent)      // グラウンド背景色
+  +defvar(sp_ground_image, none)             // グラウンド背景画像
+
+  +is_overlay_origin
+  .SpGroundTexture
+    +is_overlay_block
+
+    background-color: var(--sp_ground_color)
+    background-image: var(--sp_ground_image)
+    background-position: center
+    background-repeat: no-repeat
+    background-size: cover
+    //- background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
+    // background-color: red
 </style>

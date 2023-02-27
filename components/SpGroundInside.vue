@@ -44,7 +44,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayer .SpGround
+.ShogiPlayer
   .SpGroundInside
     // これがないと OpDisabledBlock の 100% は画面幅になってしまう
     // また NavigateBlock や TurnShowOrEdit の border が画面全体に及んでしまう

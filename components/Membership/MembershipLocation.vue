@@ -21,7 +21,7 @@ export default {
 
 <style lang="sass">
 @import "../support.sass"
-.ShogiPlayer .SpGround
+.ShogiPlayer
   &.is_layer_on
     .MembershipLocation
       +is_layer_border

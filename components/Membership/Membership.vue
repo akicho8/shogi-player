@@ -71,7 +71,7 @@ export default {
 <style lang="sass">
 @import "../support.sass"
 
-.ShogiPlayer .SpGround
+.ShogiPlayer
   .Membership
     display: flex
     align-items: center // ▲を中央に配置

@@ -48,7 +48,7 @@ export default {
   justify-content: center
   flex-direction: column
 
-// .ShogiPlayer .SpGround
+// .ShogiPlayer
 //   &.is_layer_on
 //     .ShortcutViewer
 //       +is_layer_border

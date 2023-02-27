@@ -28,7 +28,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 
-.ShogiPlayer .SpGround
+.ShogiPlayer
   .SpController
     margin-top: var(--sp_common_gap_real_px)
     margin-bottom: 0

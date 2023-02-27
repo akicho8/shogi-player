@@ -42,7 +42,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-.ShogiPlayer .SpGround
+.ShogiPlayer
   .TurnShowOrEdit
     input
       max-width: 5em

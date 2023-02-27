@@ -109,7 +109,7 @@ export default {
 
 <style lang="sass">
 @import "../support.sass"
-.ShogiPlayer .SpGround
+.ShogiPlayer
   +defvar(sp_stand_hover_border_color, hsla(0, 0%, 0%, 0.2)) // 駒を持って駒箱の上にいるときのボーダー色
   +defvar(sp_stand_hover_border_stroke, 2)                   // 駒を持って駒箱の上にいるときのボーダーの太さ
   +defvar(sp_stand_bg_color, hsla(0, 0%, 0%, 0))             // 駒台の背景色
@@ -193,17 +193,16 @@ export default {
 // .ShogiPlayer
 //   &.is_mode_edit
 //     // 駒がなくても駒が置けるようにする
-//     .SpGround
-//       +IF_HORIZONTAL
-//         .MembershipStand2
-//           // &.piece_lifted_hover_reaction
-//           min-height: calc(var(--sp_cell_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
-//           justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
-//           min-width:  var(--sp_cell_w)           // 横を最低限確保
-//       +IF_VERTICAL
-//         .MembershipStand2
-//           // &.piece_lifted_hover_reaction
-//           min-height: var(--sp_cell_h) // 縦を最低限確保
-//           width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
-//           justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
+//     +IF_HORIZONTAL
+//       .MembershipStand2
+//         // &.piece_lifted_hover_reaction
+//         min-height: calc(var(--sp_cell_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
+//         justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
+//         min-width:  var(--sp_cell_w)           // 横を最低限確保
+//     +IF_VERTICAL
+//       .MembershipStand2
+//         // &.piece_lifted_hover_reaction
+//         min-height: var(--sp_cell_h) // 縦を最低限確保
+//         width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
+//         justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
 </style>

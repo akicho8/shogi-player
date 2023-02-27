@@ -26,7 +26,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 
-.ShogiPlayer .SpGround
+.ShogiPlayer
   +defvar(sp_controller_width, 0.5)        // コントローラー横幅
   +defvar(sp_controller_width_mobile, 0.8) // コントローラー横幅(モバイル時)
 
