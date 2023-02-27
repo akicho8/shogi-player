@@ -2,9 +2,11 @@
   "name": "shogi-player",
   "version": "0.0.389",
   "description": "Shogi board web components has functions for replaying, manipulating, and editing",
-  "keywords": "shogi kif bod sfen viewer editor player vue.js vue2 vue web-components japanese-chess",
   "homepage": "https://shogi-player.netlify.app/",
-  "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
+  "author": {
+    "name": "Akira Ikeda",
+    "email": "pinpon.ikeda@gmail.com"
+  },
   "main": "dist/lib/production/shogi-player.umd.min.js",
   "browser": "dist/wc/production/shogi-player-wc.min.js",
   "private": false,
@@ -16,6 +18,21 @@
     "url": "https://github.com/akicho8/shogi-player/issues",
     "email": "pinpon.ikeda@gmail.com"
   },
+  "keywords": [
+    "shogi",
+    "board",
+    "kif",
+    "bod",
+    "sfen",
+    "viewer",
+    "editor",
+    "player",
+    "vue",
+    "vuejs",
+    "vue2",
+    "web-components",
+    "japanese-chess"
+  ],
   "scripts": {
     "dev": "nuxt dev -p 5000",
     "build": "nuxt build",
