@@ -56,7 +56,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <!--     --sp_board_color: lightskyblue -->
 <!-- </style> -->
 
-## スタイル変更 (実験的) ##
+## 直接スタイル変更 ##
 
 <!-- <CustomizeExample2 name="sp_pass_style" /> -->
 <<< @/docs/.vuepress/public/examples/sp_pass_style.html{9}

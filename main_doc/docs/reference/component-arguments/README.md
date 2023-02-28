@@ -9,7 +9,7 @@ sidebar: auto
 * パラメータ名はすべて `sp_` で始まる
 * Function 型は `_fn` で終わる
 
-## 基本
+## Level 1
 
 ### `sp_mode`
 
@@ -491,6 +491,18 @@ Type: `Number`
 Default: `50`
 
 `sp_key_event_capture` を有効にして手数を動かすときの command を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
+
+## Level 4
+
+### `sp_pass_style`
+
+Type: `String`
+Default: `null`
+
+style 属性に似ていて Web Components で `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したときに使う
+
+* Web Components では style を指定してもそれは外側に適用されるだけで内側(Shadow Dom)には届かないため引数を設けている
+* ネイテイブなハッシュではなく**JSON5形式文字列**で指定する
 
 ## Development
 
