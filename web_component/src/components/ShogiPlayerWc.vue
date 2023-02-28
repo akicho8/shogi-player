@@ -45,7 +45,7 @@ export default {
     // style: { type: String, },
 
     ////////////////////////////////////////////////////////////////////////////////
-    spwc_style_hash: { type: String, },
+    sp_pass_style: { type: String, },
 
     // Web Components で使えるのは String, Boolean, Number のみ
     // なので本来 Object だったり Function だったりするするものは String から変換しないといけない
@@ -117,7 +117,7 @@ export default {
       console.log("$attrs", this.$attrs)
       console.log("$props", this.$props)
       console.log("alternativeProps", this.alternativeProps)
-      // console.log("spwc_style_hash_native", this.spwc_style_hash_native)
+      // console.log("sp_pass_style_native", this.sp_pass_style_native)
       console.log("bind_props", this.bind_props)
       console.log("EventList", EventList)
       console.log("event_chain", this.event_chain)

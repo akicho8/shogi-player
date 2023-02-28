@@ -165,7 +165,7 @@ export default {
     },
 
     // スタイル(Web Components 専用)
-    spwc_style_hash: {
+    sp_pass_style: {
       type: String,
       default: null,
     },
@@ -519,7 +519,7 @@ export default {
 
     component_style() {
       return {
-        ...this.spwc_style_hash_native, // Web Components のための無理矢理スタイルを渡すためのもの
+        ...this.sp_pass_style_native, // Web Components のための無理矢理スタイルを渡すためのもの
         "--sp_board_dimension_w": this.sp_board_dimension_w,
         "--sp_board_dimension_h": this.sp_board_dimension_h,
         ...this.ro_css_variables_hash,  // sp_cell_w 等
@@ -533,9 +533,9 @@ export default {
     root_container_id()    { return ["sp", Math.random().toString(36).slice(2)].join("-") },
     root_container_query() { return "#" + this.root_container_id },
 
-    // spwc_style_hash の Hash 化
-    spwc_style_hash_native() {
-      const v = this.spwc_style_hash
+    // sp_pass_style の Hash 化
+    sp_pass_style_native() {
+      const v = this.sp_pass_style
       if (v) {
         return JSON5.parse(v)
       }

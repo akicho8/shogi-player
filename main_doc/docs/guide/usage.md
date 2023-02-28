@@ -58,11 +58,11 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 ## スタイル変更 (実験的) ##
 
-<!-- <CustomizeExample2 name="spwc_style_hash" /> -->
-<<< @/docs/.vuepress/public/examples/spwc_style_hash.html{9}
-<LinkToExample name="spwc_style_hash" />
+<!-- <CustomizeExample2 name="sp_pass_style" /> -->
+<<< @/docs/.vuepress/public/examples/sp_pass_style.html{9}
+<LinkToExample name="sp_pass_style" />
 
-引数の `spwc_style_hash` に書いても変更できるようにしてある
+引数の `sp_pass_style` に書いても変更できるようにしてある
 これはタグの style を直接書くのに似ていて分けて書いたときより詳細度が高い
 本来機能とスタイルは分けるべきとされているが目的駆動と考えればまとめる方が合理的なので実験的に入れてある
 
