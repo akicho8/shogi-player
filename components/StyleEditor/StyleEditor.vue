@@ -742,30 +742,30 @@ export default {
     all_reset_handle() {
     },
     paper_style_handle() {
-      this.se_ws_color                    = "rgb(255,255,255)"            // 背景
-      this.sp_piece_variant                  = "b"             // 紙面風駒
-      this.sp_board_radius                = 0                             // 角を丸くしない
-      this.sp_board_padding               = 0                             // 隙間なし
-      this.sp_board_color                 = IS_WHITE                      // 盤透過
-      this.sp_board_even_cell_color = "hsla(0, 0%, 0%, 0.0)"
-      this.sp_board_odd_cell_color  = "hsla(0, 0%, 0%, 0.0)"
+      this.se_ws_color                    = IS_WHITE           // 背景
+      this.sp_piece_variant               = "paper"            // 紙面風駒
+      this.sp_board_radius                = 0                  // 角を丸くしない
+      this.sp_board_padding               = 0                  // 隙間なし
+      this.sp_board_color                 = IS_WHITE           // 盤透過
+      this.sp_board_even_cell_color       = "hsla(0, 0%, 0%, 0.0)"
+      this.sp_board_odd_cell_color        = "hsla(0, 0%, 0%, 0.0)"
 
-      this.sp_grid_inner_stroke                 = 1                             // グリッド線(細)
-      this.sp_grid_outer_stroke           = 2                             // グリッド枠(太)
-      this.sp_board_edge_stroke = 0
-      this.sp_stand_gravity                = "top"      // 駒台の位置
-      this.sp_name_direction             = "vertical" // 縦横書き
+      this.sp_grid_inner_stroke           = 1                  // グリッド線(細)
+      this.sp_grid_outer_stroke           = 2                  // グリッド枠(太)
+      this.sp_board_edge_stroke           = 0
+      this.sp_stand_gravity               = "top"              // 駒台の位置
+      this.sp_name_direction              = "vertical"         // 縦横書き
       this.sp_balloon                     = false              // 名前の下に吹き出し背景を入れない
-      this.sp_location_mark_active_size   = 1.0                      // 手番でないときの☗☖を小さくしない
-      this.sp_location_mark_inactive_size = 1.0                      // 手番でないときの☗☖を小さくしない
+      this.sp_location_mark_active_size   = 1.0                // 手番でないときの☗☖を小さくしない
+      this.sp_location_mark_inactive_size = 1.0                // 手番でないときの☗☖を小さくしない
       this.sp_player_info.black.name      = "先手"
       this.sp_player_info.white.name      = "後手"
 
-      this.sp_coordinate                 = true            // 座標を表示する
-      this.sp_coordinate_variant         = "kanji" // 座標の種類
-      this.sp_board_horizontal_gap        = 0.2                            // 座標があるため盤面の左右を空ける
-      this.sp_coordinate_x_push           = 0.05                          // 座標調整
-      this.sp_coordinate_y_push           = 0.01                           // 座標調整
+      this.sp_coordinate                  = true               // 座標を表示する
+      this.sp_coordinate_variant          = "kanji"            // 座標の種類
+      this.sp_board_horizontal_gap        = 0.2                // 座標があるため盤面の左右を空ける
+      this.sp_coordinate_x_push           = 0.05               // 座標調整
+      this.sp_coordinate_y_push           = 0.01               // 座標調整
     },
     hsla_format(v) {
       return chroma(v).css("hsla")
