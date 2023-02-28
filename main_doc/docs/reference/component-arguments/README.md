@@ -107,8 +107,8 @@ Default: `none`
 
 * 基本なしでよい
 * そのとき盤面の色は `--sp_board_color` で変更できる
-* 木を指定するときはリアル駒のときだけにしよう
-  * デジタル駒と木の組み合わせは調和しない
+* 木目を指定するときはリアル駒(Portella)のときだけにしよう
+  * デフォルメした駒と木目の組み合わせは調和しない
 
 | 値     | 名前       |                                                                 |
 |--------|------------|-----------------------------------------------------------------|
@@ -135,10 +135,10 @@ Default: `vertical`
 Type: `String`
 Default: `null`
 
-手合割(初期配置)の指定 <Badge text="要検討" type="error" vertical="top" />
+手合割(初期配置)の指定 <Badge text="非推奨" type="error" vertical="top" />
 
   * `sp_mode="edit"` と合わせて `sp_preset="詰将棋"` とすれば相手玉だけがある状態で始まる
-  * `sp_body` があるので要らないような気がしている
+  * `sp_body` があるのでこのパラメータは要らない
 
 ### `sp_overlay_nav`
 
@@ -500,9 +500,10 @@ Default: `50`
 Type: `String`
 Default: `null`
 
-style 属性に似ていて Web Components で `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したときに使う
+style 属性の代替
 
-* Web Components では style を指定してもそれは外側に適用されるだけで内側(Shadow Dom)には届かないため引数を設けている
+* Web Components で `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したときに使う
+* Web Components では style を指定しても内側(Shadow Dom)には届かないため引数を設けている
 * ネイテイブなハッシュではなく**JSON5形式文字列**で指定する
 
 ## Development
