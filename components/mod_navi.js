@@ -69,7 +69,7 @@ export const mod_navi = {
 
   data() {
     return {
-      mut_viewpoint: null,
+      mut_viewpoint: this.sp_viewpoint,
     }
   },
 
@@ -79,10 +79,6 @@ export const mod_navi = {
 
   beforeDestroy() {
     window.removeEventListener('keydown', this.keydown_hook)
-  },
-
-  created() {
-    this.mut_viewpoint = this.sp_viewpoint
   },
 
   watch: {

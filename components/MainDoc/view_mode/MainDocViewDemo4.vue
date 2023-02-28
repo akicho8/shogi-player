@@ -9,7 +9,7 @@
     :sp_turn="9"
     sp_controller
     sp_slider
-    sp_piece_variant="b"
+    sp_piece_variant="paper"
     )
 </template>
 

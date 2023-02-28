@@ -63,11 +63,11 @@ export default {
 
   .is_white
     .MembershipLocationMarkTexture
-      background-image: url("../../assets/location/location_white.svg")
+      background-image: url("../../assets/location/white.svg")
 
   .is_black
     .MembershipLocationMarkTexture
-      background-image: url("../../assets/location/location_black.svg")
+      background-image: url("../../assets/location/black.svg")
 
   .is_position_north
     .MembershipLocationMarkTexture

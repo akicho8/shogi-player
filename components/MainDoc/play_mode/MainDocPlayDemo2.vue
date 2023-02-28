@@ -7,7 +7,7 @@
     :sp_turn="21"
     sp_slider
     sp_controller
-    sp_bg_variant="b"
+    sp_bg_variant="bright"
     sp_mode="play"
     sp_human_side="black"
     )

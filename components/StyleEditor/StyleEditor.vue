@@ -598,7 +598,7 @@ export default {
       sp_comment: false,
       sp_common_gap: 0.18,
       sp_layer: DEVELOPMENT_P ? true : false,
-      sp_piece_variant: "a",    // d
+      sp_piece_variant: "nureyon",    // d
       sp_bg_variant: "none", // a
 
       //////////////////////////////////////////////////////////////////////////////// 座標

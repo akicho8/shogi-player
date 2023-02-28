@@ -3,11 +3,11 @@ import MemoryRecord from "js-memory-record"
 export class PieceVariantInfo extends MemoryRecord {
   static get define() {
     return [
-      { key: "none", name: "none",                        },
-      { key: "a",    name: "ぬれよん(svg)",               },
-      { key: "b",    name: "紙面風(svg)",                 },
-      { key: "c",    name: "図案駒(png)",                 },
-      { key: "d",    name: "Portella(png)",               },
+      { key: "none",     name: "none",     format: "",    },
+      { key: "nureyon",  name: "ぬれよん", format: "SVG", },
+      { key: "paper",    name: "紙面風",   format: "SVG", },
+      { key: "zuan",     name: "図案駒",   format: "PNG", },
+      { key: "portella", name: "Portella", format: "PNG", },
     ]
   }
 }

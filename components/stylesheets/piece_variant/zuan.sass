@@ -1,0 +1,21 @@
+=piece_variant_zuan_def($piece_key, $promoted, $code)
+  &.piece_#{$piece_key}
+    &.promoted_#{$promoted}
+      background-image: url("#{$sp_assets_dir}/piece_variant/zuan/#{$code}.png")
+    
+=piece_variant_zuan_all
+  +piece_variant_zuan_def("K", false, "BK0")
+  +piece_variant_zuan_def("R", false, "BR0")
+  +piece_variant_zuan_def("B", false, "BB0")
+  +piece_variant_zuan_def("G", false, "BG0")
+  +piece_variant_zuan_def("S", false, "BS0")
+  +piece_variant_zuan_def("N", false, "BN0")
+  +piece_variant_zuan_def("L", false, "BL0")
+  +piece_variant_zuan_def("P", false, "BP0")
+  +piece_variant_zuan_def("X", false, "BX0")
+  +piece_variant_zuan_def("R", true,  "BR1")
+  +piece_variant_zuan_def("B", true,  "BB1")
+  +piece_variant_zuan_def("S", true,  "BS1")
+  +piece_variant_zuan_def("N", true,  "BN1")
+  +piece_variant_zuan_def("L", true,  "BL1")
+  +piece_variant_zuan_def("P", true,  "BP1")

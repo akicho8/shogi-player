@@ -13,11 +13,11 @@ e["stroke-opacity"] = "0.2"
 
 e["fill"] = "hsla(0, 0%, 0%, 1.0)"
 e["stroke"] = "rgb(255, 255, 255)"
-Pathname("location_black.svg").write(doc)
+Pathname("black.svg").write(doc)
 
 e["fill"] = "hsla(0, 0%, 100%, 1.0)"
 e["stroke"] = "rgb(0, 0, 0)"
-Pathname("location_white.svg").write(doc)
+Pathname("white.svg").write(doc)
 # >> <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 # >> <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" style="overflow:visible" viewBox="-150 -162 300 324" height="324px" width="300px">
 # >>   <rect fill-opacity="0" fill="rgb(0,0,0)" height="324" width="300" y="-162" x="-150"/>

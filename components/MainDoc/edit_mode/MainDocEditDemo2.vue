@@ -5,7 +5,7 @@
   ShogiPlayer(
     sp_preset="詰将棋"
     sp_slider
-    sp_bg_variant="a"
+    sp_bg_variant="normal"
     sp_mode="edit"
     )
 </template>

@@ -6,7 +6,7 @@
     .title.is-4 {{kifu_book_info.name}}
   ShogiPlayer.is_book_like(
     :sp_body="kifu_book_info.sp_body"
-    sp_piece_variant="b"
+    sp_piece_variant="paper"
     sp_controller
     sp_slider
     sp_sfen_show

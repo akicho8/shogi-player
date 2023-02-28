@@ -1,0 +1,38 @@
+=piece_variant_portella_def($position, $piece_key, $promoted, $code)
+  .is_position_#{$position}
+    .PieceTextureSelf
+      &.piece_#{$piece_key}
+        &.promoted_#{$promoted}
+          background-image: url("#{$sp_assets_dir}/piece_variant/portella/#{$code}.png")
+
+=piece_variant_portella_all
+  +piece_variant_portella_def("north", "K", false, "WK0")
+  +piece_variant_portella_def("north", "R", false, "WR0")
+  +piece_variant_portella_def("north", "B", false, "WB0")
+  +piece_variant_portella_def("north", "G", false, "WG0")
+  +piece_variant_portella_def("north", "S", false, "WS0")
+  +piece_variant_portella_def("north", "N", false, "WN0")
+  +piece_variant_portella_def("north", "L", false, "WL0")
+  +piece_variant_portella_def("north", "P", false, "WP0")
+  +piece_variant_portella_def("north", "X", false, "WX0")
+  +piece_variant_portella_def("north", "R", true,  "WR1")
+  +piece_variant_portella_def("north", "B", true,  "WB1")
+  +piece_variant_portella_def("north", "S", true,  "WS1")
+  +piece_variant_portella_def("north", "N", true,  "WN1")
+  +piece_variant_portella_def("north", "L", true,  "WL1")
+  +piece_variant_portella_def("north", "P", true,  "WP1")
+  +piece_variant_portella_def("south", "K", false, "BK0")
+  +piece_variant_portella_def("south", "R", false, "BR0")
+  +piece_variant_portella_def("south", "B", false, "BB0")
+  +piece_variant_portella_def("south", "G", false, "BG0")
+  +piece_variant_portella_def("south", "S", false, "BS0")
+  +piece_variant_portella_def("south", "N", false, "BN0")
+  +piece_variant_portella_def("south", "L", false, "BL0")
+  +piece_variant_portella_def("south", "P", false, "BP0")
+  +piece_variant_portella_def("south", "X", false, "BX0")
+  +piece_variant_portella_def("south", "R", true,  "BR1")
+  +piece_variant_portella_def("south", "B", true,  "BB1")
+  +piece_variant_portella_def("south", "S", true,  "BS1")
+  +piece_variant_portella_def("south", "N", true,  "BN1")
+  +piece_variant_portella_def("south", "L", true,  "BL1")
+  +piece_variant_portella_def("south", "P", true,  "BP1")

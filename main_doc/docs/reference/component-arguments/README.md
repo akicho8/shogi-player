@@ -83,17 +83,20 @@ Default: `false`
 ### `sp_piece_variant`
 
 Type: `String`
-Default: `a`
+Default: `nureyon`
 
 駒の種類
 
-| 値   | 種類     | 特徴                      | Format |                                                                   |
-|------|----------|---------------------------|--------|-------------------------------------------------------------------|
-| none | なし     | 見えない                  |        |                                                                   |
-| a    | ぬれよん | 見やすいゴシック体の1文字 | SVG    | <img src="../../../../assets/piece_variant/a/BR0.svg" width="32"> |
-| b    | 紙面風   | 白黒と一部赤              | SVG    | <img src="../../../../assets/piece_variant/b/BR0.svg" width="32"> |
-| c    | 図案駒   | ユニバーサルデザイン      | PNG    | <img src="../../../../assets/piece_variant/c/BR0.png" width="32"> |
-| d    | Portella | 美麗                      | PNG    | <img src="../../../../assets/piece_variant/d/BR0.png" width="32"> |
+* SVG な駒は巨大化してもぼやけない
+* PNG な駒も元の解像度が高いのでそれほど気にならない
+
+| 値       | 名前     | 表示                                                                                                                                             | 形式   |  特徴                      |
+|----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------|----------------------------|
+| none     | なし     |                                                                                                                                                  |        |  見えない                  |
+| nureyon  | ぬれよん | <img src="../../../../assets/piece_variant/nureyon/BR0.svg" width="32"><img src="../../../../assets/piece_variant/nureyon/BR1.svg" width="32">   | SVG    |  見やすいゴシック体の一文字 |
+| paper    | 紙面風   | <img src="../../../../assets/piece_variant/paper/BR0.svg" width="32"><img src="../../../../assets/piece_variant/paper/BR1.svg" width="32">       | SVG    |  明朝体・裏面赤            |
+| zuan     | 図案駒   | <img src="../../../../assets/piece_variant/zuan/BR0.png" width="32"><img src="../../../../assets/piece_variant/zuan/BR1.png" width="32">         | PNG    |  ユニバーサルデザイン      |
+| portella | Portella | <img src="../../../../assets/piece_variant/portella/BR0.png" width="32"><img src="../../../../assets/piece_variant/portella/BR1.png" width="32"> | PNG    |  美麗                      |
 
 ### `sp_bg_variant`
 
@@ -107,11 +110,11 @@ Default: `none`
 * 木を指定するときはリアル駒のときだけにしよう
   * デジタル駒と木の組み合わせは調和しない
 
-| 値   | 種類 | 特徴 |                                                                  |
-|------|------|------|------------------------------------------------------------------|
-| none | なし |      |                                                                  |
-| a    | 木1  | 濃い | <img src="../../../../assets/bg_variant/board_a.png" width="32"> |
-| b    | 木2  | 薄め | <img src="../../../../assets/bg_variant/board_b.png" width="32"> |
+| 値     | 名前       |                                                                 |
+|--------|------------|-----------------------------------------------------------------|
+| none   | なし       |                                                                 |
+| normal | 普通の木目 | <img src="../../../../assets/bg_variant/normal.png" width="32"> |
+| bright | 明るい木目 | <img src="../../../../assets/bg_variant/bright.png" width="32"> |
 
 ## Level 2
 

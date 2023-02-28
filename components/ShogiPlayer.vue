@@ -11,44 +11,47 @@ import JSON5 from "json5"
 import _ from "lodash"
 import Vue from "vue"
 
-// Library
-import { Xcontainer } from "./models/xcontainer.js"
-import { Place      } from "./models/place.js"
-import { SfenParser } from "./models/sfen_parser.js"
-import { KifParser  } from "./models/kif_parser.js"
-import { Location   } from "./models/location.js"
-import { EventList  } from "./models/event_list.js"
-import { ModeInfo   } from "./models/mode_info.js"
+// Models
+import { Xcontainer       } from "./models/xcontainer.js"
+import { Place            } from "./models/place.js"
+import { SfenParser       } from "./models/sfen_parser.js"
+import { KifParser        } from "./models/kif_parser.js"
+import { Location         } from "./models/location.js"
+import { EventList        } from "./models/event_list.js"
+import { ModeInfo         } from "./models/mode_info.js"
+import { PieceVariantInfo } from "./models/piece_variant_info.js"
+import { BgVariantInfo    } from "./models/bg_variant_info.js"
+import { LayoutInfo       } from "./models/layout_info.js"
 
 // components
 import ErrorNotify        from "./ErrorNotify.vue"
 import OpDisabledBlock    from "./OpDisabledBlock.vue"
 import EditToolBlock      from "./EditToolBlock.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
-import SpGroundInside from "./SpGroundInside.vue"
-import DevTools  from "./dev_tools/DevTools.vue"
-import ShortcutViewer  from "./shortcut_viewer/ShortcutViewer.vue"
+import SpGroundInside     from "./SpGroundInside.vue"
+import DevTools           from "./dev_tools/DevTools.vue"
+import ShortcutViewer     from "./shortcut_viewer/ShortcutViewer.vue"
 
 // mixins modules
-import { mod_focus          } from "./mod_focus.js"
-import { mod_navi        } from "./mod_navi.js"
-import { mod_dev_tools        } from "./dev_tools/mod_dev_tools.js"
-import { mod_shortcut_viewer        } from "./shortcut_viewer/mod_shortcut_viewer.js"
-import { mod_resize_observer        } from "./mod_resize_observer.js"
-import { mod_shortcut    } from "./mod_shortcut.js"
-import { mod_edit_mode   } from "./mod_edit_mode.js"
-import { mod_illegal        } from "./mod_illegal.js"
-import { mod_lifted_piece } from "./mod_lifted_piece.js"
-import { mod_legal_check        } from "./mod_legal_check.js"
-import { mod_play_mode   } from "./mod_play_mode.js"
-import { mod_profile        } from "./mod_profile.js"
-import { mod_preset      } from "./mod_preset.js"
-import { mod_edit_tool    } from "./mod_edit_tool.js"
-import { mod_api_functions         } from "./mod_api_functions.js"
-import { mod_device_detector      } from "./mod_device_detector.js"
-import { mod_chore          } from "./mod_chore.js"
-import { mod_debug          } from "./mod_debug.js"
-import { mod_vector         } from "./mod_vector.js"
+import { mod_focus           } from "./mod_focus.js"
+import { mod_navi            } from "./mod_navi.js"
+import { mod_dev_tools       } from "./dev_tools/mod_dev_tools.js"
+import { mod_shortcut_viewer } from "./shortcut_viewer/mod_shortcut_viewer.js"
+import { mod_resize_observer } from "./mod_resize_observer.js"
+import { mod_shortcut        } from "./mod_shortcut.js"
+import { mod_edit_mode       } from "./mod_edit_mode.js"
+import { mod_illegal         } from "./mod_illegal.js"
+import { mod_lifted_piece    } from "./mod_lifted_piece.js"
+import { mod_legal_check     } from "./mod_legal_check.js"
+import { mod_play_mode       } from "./mod_play_mode.js"
+import { mod_profile         } from "./mod_profile.js"
+import { mod_preset          } from "./mod_preset.js"
+import { mod_edit_tool       } from "./mod_edit_tool.js"
+import { mod_api_functions   } from "./mod_api_functions.js"
+import { mod_device_detector } from "./mod_device_detector.js"
+import { mod_chore           } from "./mod_chore.js"
+import { mod_debug           } from "./mod_debug.js"
+import { mod_vector          } from "./mod_vector.js"
 
 export default {
   name: "ShogiPlayer",
@@ -83,7 +86,7 @@ export default {
     sp_layout: {
       type: String,
       default: "horizontal",
-      validator(value) { return ["horizontal", "vertical"].includes(value) },
+      validator(value) { return LayoutInfo.keys.includes(value) },
     },
 
     // 対局者名の下に駒数スタイルと同じ背景色を置く
@@ -96,14 +99,14 @@ export default {
     sp_piece_variant: {
       type: String,
       default: "a",
-      validator(value) { return ["none", "a", "b", "c", "d"].includes(value) },
+      validator(value) { return PieceVariantInfo.keys.includes(value) },
     },
 
     // 盤の種類
     sp_bg_variant: {
       type: String,
       default: "none",
-      validator(value) { return ["none", "a", "b"].includes(value) },
+      validator(value) { return BgVariantInfo.keys.includes(value) },
     },
 
     // モバイル時に自動的に縦配置に切り替える
@@ -221,7 +224,9 @@ export default {
 
   data() {
     return {
-      mut_mode: this.sp_mode,
+      mut_mode:          this.sp_mode,
+      mut_piece_variant: this.sp_piece_variant,
+      mut_bg_variant:    this.sp_bg_variant,
 
       turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       xcontainer: null,                 // 局面管理
@@ -255,6 +260,10 @@ export default {
     }
   },
   watch: {
+    // 外から中への反映シリーズ
+    sp_piece_variant(v) { this.mut_piece_variant = v },
+    sp_bg_variant(v) { this.mut_bg_variant = v },
+
     // sp_turn の watch より先に記述すること
     // そうしないと sp_turn と sp_body を同時に変更したとき
     // sp_turn, sp_body の順に反映されて局面が1つ前になってしまう
@@ -473,6 +482,11 @@ export default {
   },
 
   computed: {
+    Location()          { return Location         },
+    ModeInfo()          { return ModeInfo         },
+    BgVariantInfo()     { return BgVariantInfo    },
+    PieceVariantInfo()  { return PieceVariantInfo },
+
     location_black() { return Location.fetch("black")                    },
     location_white() { return Location.fetch("white")                    },
     view_p()         { return this.mut_mode === "view"          },
@@ -502,8 +516,8 @@ export default {
         this.str_to_css_class("is_coordinate_variant", this.sp_coordinate_variant), // is_coordinate_variant_kanji
         this.str_to_css_class("is_name_direction", this.sp_name_direction),         // is_name_direction_horizontal
         this.str_to_css_class("is_stand_gravity", this.sp_stand_gravity),           // is_stand_gravity_top
-        this.str_to_css_class("is_piece_variant", this.sp_piece_variant),           // is_piece_variant_a
-        this.str_to_css_class("is_bg_variant", this.sp_bg_variant),                 // is_bg_variant_a
+        this.str_to_css_class("is_piece_variant", this.mut_piece_variant),          // is_piece_variant_nureyon
+        this.str_to_css_class("is_bg_variant", this.mut_bg_variant),                // is_bg_variant_normal
         this.str_to_css_class("is_device", this.devise_info.key),                   // is_device_touch
 
         // Boolean

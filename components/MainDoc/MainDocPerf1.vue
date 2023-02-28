@@ -18,8 +18,8 @@
         sp_controller
         sp_dev_tools
         sp_slider
-        sp_bg_variant="b"
-        sp_piece_variant="d"
+        sp_bg_variant="bright"
+        sp_piece_variant="portella"
       )
 </template>
 

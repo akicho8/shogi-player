@@ -6,7 +6,7 @@
     :sp_body="`position sfen 4k4/9/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1`"
     :sp_turn="-1"
     sp_mode="play"
-    sp_piece_variant="c"
+    sp_piece_variant="zuan"
     )
 </template>
 

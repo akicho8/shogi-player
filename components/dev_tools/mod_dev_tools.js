@@ -2,10 +2,6 @@ import DevTools from "./DevTools.vue"
 
 import { mod_dev_tools_storage } from "./mod_dev_tools_storage.js"
 
-import { ModeInfo              } from "../models/mode_info.js"
-import { BgVariantInfo         } from "../models/bg_variant_info.js"
-import { PieceVariantInfo      } from "../models/piece_variant_info.js"
-
 import { DevToolsGroupInfo     } from "./dev_tools_group_info.js"
 import { DevToolsPositionInfo    } from "./dev_tools_position_info.js"
 import { DevToolsVariableInfo    } from "./dev_tools_variable_info.js"
@@ -67,10 +63,5 @@ export const mod_dev_tools = {
     dev_tools_position_info() { return DevToolsPositionInfo.lookup_or_first(this.mut_dev_tools_position) },
 
     DevToolsVariableInfo()    { return DevToolsVariableInfo },
-
-    ModeInfo()          { return ModeInfo         },
-    BgVariantInfo()     { return BgVariantInfo    },
-    PieceVariantInfo()  { return PieceVariantInfo },
-
   },
 }

@@ -7,7 +7,7 @@
     :sp_turn="-1"
     sp_slider
     sp_controller
-    sp_bg_variant="a"
+    sp_bg_variant="normal"
     sp_mode="play"
     )
 </template>

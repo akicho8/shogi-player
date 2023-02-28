@@ -5,7 +5,7 @@
   .has-text-centered
     .title.is-4 {{kifu_book_info.name}}
   ShogiPlayer(
-    sp_piece_variant="a"
+    sp_piece_variant="nureyon"
     sp_controller
     sp_slider
     :sp_turn="-1"

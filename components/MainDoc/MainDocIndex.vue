@@ -24,6 +24,6 @@ export default {
       margin: 2em 0em 1rem
       padding: 0
 
-  .is_piece_variant_d
+  .is_piece_variant_portella
     --sp_board_piece_size: 1.0
 </style>
