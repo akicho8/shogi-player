@@ -8,7 +8,7 @@
     :sp_body="kifu_book_info.sp_body"
     :sp_turn="-1"
     sp_slider
-    sp_bg_variant="normal"
+    sp_board_variant="normal"
     )
 </template>
 

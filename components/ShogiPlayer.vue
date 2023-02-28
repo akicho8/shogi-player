@@ -20,7 +20,7 @@ import { Location         } from "./models/location.js"
 import { EventList        } from "./models/event_list.js"
 import { ModeInfo         } from "./models/mode_info.js"
 import { PieceVariantInfo } from "./models/piece_variant_info.js"
-import { BgVariantInfo    } from "./models/bg_variant_info.js"
+import { BoardVariantInfo    } from "./models/board_variant_info.js"
 import { LayoutInfo       } from "./models/layout_info.js"
 
 // components
@@ -103,10 +103,10 @@ export default {
     },
 
     // 盤の種類
-    sp_bg_variant: {
+    sp_board_variant: {
       type: String,
       default: "none",
-      validator(value) { return BgVariantInfo.keys.includes(value) },
+      validator(value) { return BoardVariantInfo.keys.includes(value) },
     },
 
     // モバイル時に自動的に縦配置に切り替える
@@ -226,7 +226,7 @@ export default {
     return {
       mut_mode:          this.sp_mode,
       mut_piece_variant: this.sp_piece_variant,
-      mut_bg_variant:    this.sp_bg_variant,
+      mut_board_variant:    this.sp_board_variant,
 
       turn_edit_value: null,            // numberフィールドで current_turn を直接操作すると空にしたとき補正値 0 に変換されて使いづらいため別にする。あと -1 のときの挙動もわかりやすい。
       xcontainer: null,                 // 局面管理
@@ -262,7 +262,7 @@ export default {
   watch: {
     // 外から中への反映シリーズ
     sp_piece_variant(v) { this.mut_piece_variant = v },
-    sp_bg_variant(v) { this.mut_bg_variant = v },
+    sp_board_variant(v) { this.mut_board_variant = v },
 
     // sp_turn の watch より先に記述すること
     // そうしないと sp_turn と sp_body を同時に変更したとき
@@ -484,7 +484,7 @@ export default {
   computed: {
     Location()          { return Location         },
     ModeInfo()          { return ModeInfo         },
-    BgVariantInfo()     { return BgVariantInfo    },
+    BoardVariantInfo()     { return BoardVariantInfo    },
     PieceVariantInfo()  { return PieceVariantInfo },
 
     location_black() { return Location.fetch("black")                    },
@@ -517,7 +517,7 @@ export default {
         this.str_to_css_class("is_name_direction", this.sp_name_direction),         // is_name_direction_horizontal
         this.str_to_css_class("is_stand_gravity", this.sp_stand_gravity),           // is_stand_gravity_top
         this.str_to_css_class("is_piece_variant", this.mut_piece_variant),          // is_piece_variant_nureyon
-        this.str_to_css_class("is_bg_variant", this.mut_bg_variant),                // is_bg_variant_normal
+        this.str_to_css_class("is_board_variant", this.mut_board_variant),                // is_board_variant_normal
         this.str_to_css_class("is_device", this.devise_info.key),                   // is_device_touch
 
         // Boolean

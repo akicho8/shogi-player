@@ -8,7 +8,7 @@
     :sp_body="kifu_book_info.sp_body"
     :sp_turn="4"
     :sp_player_info="sp_player_info"
-    sp_bg_variant="normal"
+    sp_board_variant="normal"
     sp_piece_variant="portella"
     sp_layout="horizontal"
     sp_controller

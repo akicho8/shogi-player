@@ -1,0 +1,1 @@
+../../components/stylesheets/board_variant.sass

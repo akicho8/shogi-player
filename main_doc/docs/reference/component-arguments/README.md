@@ -98,7 +98,7 @@ Default: `nureyon`
 | zuan     | 図案駒   | <img src="../../../../assets/piece_variant/zuan/BR0.png" width="32"><img src="../../../../assets/piece_variant/zuan/BR1.png" width="32">         | PNG    |  ユニバーサルデザイン      |
 | portella | Portella | <img src="../../../../assets/piece_variant/portella/BR0.png" width="32"><img src="../../../../assets/piece_variant/portella/BR1.png" width="32"> | PNG    |  美麗                      |
 
-### `sp_bg_variant`
+### `sp_board_variant`
 
 Type: `String`
 Default: `none`
@@ -113,8 +113,8 @@ Default: `none`
 | 値     | 名前       |                                                                 |
 |--------|------------|-----------------------------------------------------------------|
 | none   | なし       |                                                                 |
-| normal | 普通の木目 | <img src="../../../../assets/bg_variant/normal.png" width="32"> |
-| bright | 明るい木目 | <img src="../../../../assets/bg_variant/bright.png" width="32"> |
+| normal | 普通の木目 | <img src="../../../../assets/board_variant/normal.png" width="32"> |
+| bright | 明るい木目 | <img src="../../../../assets/board_variant/bright.png" width="32"> |
 
 ## Level 2
 

@@ -1,17 +1,17 @@
 <template lang="pug">
 .DevToolsGroup
-  //- b-dropdown(v-model="TheSp.new_sp_bg_variant")
+  //- b-dropdown(v-model="TheSp.new_sp_board_variant")
   //-   button.button(slot="trigger")
   //-     span
-  //-       | {{BgVariantInfo.fetch(TheSp.new_sp_bg_variant).name}}
+  //-       | {{BoardVariantInfo.fetch(TheSp.new_sp_board_variant).name}}
   //-     b-icon(icon="menu-down")
-  //-   template(v-for="e in TheSp.BgVariantInfo.values")
+  //-   template(v-for="e in TheSp.BoardVariantInfo.values")
   //-     b-dropdown-item(:value="e.key") {{e.name}}
 
   //- b-field(custom-class="is-small" label="背景の種類")
   //- b-field
-  //-   template(v-for="e in TheSp.BgVariantInfo.values")
-  //-     b-radio-button(size="is-small" v-model="TheSp.new_sp_bg_variant" :native-value="e.key" size="is-small") {{e.name}}
+  //-   template(v-for="e in TheSp.BoardVariantInfo.values")
+  //-     b-radio-button(size="is-small" v-model="TheSp.new_sp_board_variant" :native-value="e.key" size="is-small") {{e.name}}
   //-
   //- b-field(custom-class="is-small" label="駒の種類")
   //- b-field

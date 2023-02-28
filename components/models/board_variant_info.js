@@ -1,6 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
-export class BgVariantInfo extends MemoryRecord {
+export class BoardVariantInfo extends MemoryRecord {
   static get define() {
     return [
       { key: "none",   name: "none",        },
@@ -11,6 +11,6 @@ export class BgVariantInfo extends MemoryRecord {
 }
 
 if (process.argv[1] === __filename) {
-  console.log(BgVariantInfo.fetch("normal").key)
-  console.log(BgVariantInfo.fetch("normal").name)
+  console.log(BoardVariantInfo.fetch("normal").key)
+  console.log(BoardVariantInfo.fetch("normal").name)
 }

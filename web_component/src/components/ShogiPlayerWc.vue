@@ -70,7 +70,7 @@ export default {
     sp_balloon:                        { type: Boolean,  }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                          { type: Boolean,  }, // レイヤー確認(デバッグ用)
     sp_piece_variant:                  { type: String,  }, // 駒の種類
-    sp_bg_variant:                     { type: String,  }, // 盤の種類
+    sp_board_variant:                     { type: String,  }, // 盤の種類
     sp_mobile_vertical:                { type: Boolean,  }, // モバイル時に自動的に縦配置に切り替える
     sp_location_click_behavior:              { type: String,  }, // ☗☖をタップしたとき視点を切り替える
     sp_debug:                          { type: Boolean,  }, // デバッグモード

@@ -71,8 +71,8 @@
             MyColorPicker(v-model="sp_board_color")
 
           b-field.my-4(custom-class="is-small" label="プリセット画像")
-            b-select(size="is-small" v-model="sp_bg_variant")
-              template(v-for="e in BgVariantInfo.values")
+            b-select(size="is-small" v-model="sp_board_variant")
+              template(v-for="e in BoardVariantInfo.values")
                 option(:value="e.key") {{e.name}}
 
           ImageUpload(@input="sp_board_image_input_handle")
@@ -486,7 +486,7 @@ import chroma from "chroma-js"
 
 import { HumanSideInfo }    from "../models/human_side_info.js"
 import { ModeInfo }      from "../models/mode_info.js"
-import { BgVariantInfo }    from "../models/bg_variant_info.js"
+import { BoardVariantInfo }    from "../models/board_variant_info.js"
 import { PieceVariantInfo }    from "../models/piece_variant_info.js"
 import { KifuBookInfo }     from "../models/kifu_book_info.js"
 import { MixBlendModeInfo } from "../models/mix_blend_mode_info.js"
@@ -599,7 +599,7 @@ export default {
       sp_common_gap: 0.18,
       sp_layer: DEVELOPMENT_P ? true : false,
       sp_piece_variant: "nureyon",    // d
-      sp_bg_variant: "none", // a
+      sp_board_variant: "none", // a
 
       //////////////////////////////////////////////////////////////////////////////// 座標
       sp_coordinate: DEVELOPMENT_P ? true : false,
@@ -737,7 +737,7 @@ export default {
     },
     sp_board_image_input_handle(v) {
       this.sp_board_image = v
-      this.sp_bg_variant = "none" // 背景画像プリセットを選択してない状態に戻しておく
+      this.sp_board_variant = "none" // 背景画像プリセットを選択してない状態に戻しておく
     },
     all_reset_handle() {
     },
@@ -806,7 +806,7 @@ export default {
 
     HumanSideInfo()    { return HumanSideInfo    },
     ModeInfo()         { return ModeInfo         },
-    BgVariantInfo()    { return BgVariantInfo    },
+    BoardVariantInfo()    { return BoardVariantInfo    },
     PieceVariantInfo() { return PieceVariantInfo },
     KifuBookInfo()     { return KifuBookInfo     },
     MixBlendModeInfo() { return MixBlendModeInfo },
@@ -876,7 +876,7 @@ export default {
       params.sp_balloon               = this.sp_balloon
       params.sp_layer                 = this.sp_layer
       params.sp_piece_variant         = this.sp_piece_variant
-      params.sp_bg_variant            = this.sp_bg_variant
+      params.sp_board_variant            = this.sp_board_variant
       params.sp_mobile_vertical       = this.sp_mobile_vertical
       params.sp_mode                  = this.sp_mode
       params.sp_viewpoint             = this.sp_viewpoint
