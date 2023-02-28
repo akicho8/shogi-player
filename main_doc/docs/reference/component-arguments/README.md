@@ -59,16 +59,6 @@ Default: `black`
 | black | ☗   |
 | white | ☖   |
 
-### `sp_preset`
-
-Type: `String`
-Default: `null`
-
-手合割(初期配置)の指定 <Badge text="要検討" type="error" vertical="top" />
-
-  * `sp_mode="edit"` と合わせて `sp_preset="詰将棋"` とすれば相手玉だけがある状態で始まる
-  * `sp_body` があるので要らないような気がしている
-
 ### `sp_controller`
 
 Type: `Boolean`
@@ -90,18 +80,6 @@ Default: `false`
 * 操作モード時にも表示できるけどガチ対局するときは消しておいた方がよい
 * 編集モード時には設定に関係なく表示しない
 
-### `sp_layout`
-
-Type: `String`
-Default: `vertical`
-
-駒台・名前・時間の表示場所を決める
-
-| 値        | 配置 |            |
-|-----------|------|------------|
-| vertical  | 縦長 | スマホ向け |
-| horizontal | 横長 |            |
-
 ### `sp_piece_variant`
 
 Type: `String`
@@ -109,15 +87,13 @@ Default: `a`
 
 駒の種類
 
-| 値   | 種類     | 特徴                      | Format |
-|------|----------|---------------------------|--------|
-| none | なし     | 見えない                  |        |
-| a    | ぬれよん | 見やすいゴシック体の1文字 | SVG    |
-| b    | 紙面風   | 白黒と一部赤              | SVG    |
-| c    | 図案駒   | ユニバーサルデザイン      | PNG    |
-| d    | Portella | 美麗                    | PNG    |
-
-![](../../../../assets/piece_variant/a/BB0.svg)
+| 値   | 種類     | 特徴                      | Format |                                                                   |
+|------|----------|---------------------------|--------|-------------------------------------------------------------------|
+| none | なし     | 見えない                  |        |                                                                   |
+| a    | ぬれよん | 見やすいゴシック体の1文字 | SVG    | <img src="../../../../assets/piece_variant/a/BR0.svg" width="32"> |
+| b    | 紙面風   | 白黒と一部赤              | SVG    | <img src="../../../../assets/piece_variant/b/BR0.svg" width="32"> |
+| c    | 図案駒   | ユニバーサルデザイン      | PNG    | <img src="../../../../assets/piece_variant/c/BR0.png" width="32"> |
+| d    | Portella | 美麗                      | PNG    | <img src="../../../../assets/piece_variant/d/BR0.png" width="32"> |
 
 ### `sp_bg_variant`
 
@@ -131,13 +107,35 @@ Default: `none`
 * 木を指定するときはリアル駒のときだけにしよう
   * デジタル駒と木の組み合わせは調和しない
 
-| 値   | 種類 | 特徴 |
-|------|------|------|
-| none | なし |      |
-| a    | 木1  | 濃い |
-| b    | 木2  | 薄め |
+| 値   | 種類 | 特徴 |                                                                  |
+|------|------|------|------------------------------------------------------------------|
+| none | なし |      |                                                                  |
+| a    | 木1  | 濃い | <img src="../../../../assets/bg_variant/board_a.png" width="32"> |
+| b    | 木2  | 薄め | <img src="../../../../assets/bg_variant/board_b.png" width="32"> |
 
 ## Level 2
+
+### `sp_layout`
+
+Type: `String`
+Default: `vertical`
+
+駒台・名前・時間の表示場所を決める
+
+| 値        | 配置 |            |
+|-----------|------|------------|
+| vertical  | 縦長 | スマホ向け |
+| horizontal | 横長 |            |
+
+### `sp_preset`
+
+Type: `String`
+Default: `null`
+
+手合割(初期配置)の指定 <Badge text="要検討" type="error" vertical="top" />
+
+  * `sp_mode="edit"` と合わせて `sp_preset="詰将棋"` とすれば相手玉だけがある状態で始まる
+  * `sp_body` があるので要らないような気がしている
 
 ### `sp_overlay_nav`
 
