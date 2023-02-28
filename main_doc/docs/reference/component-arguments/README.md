@@ -117,6 +117,8 @@ Default: `a`
 | c    | 図案駒   | ユニバーサルデザイン      | PNG    |
 | d    | Portella | 美麗                    | PNG    |
 
+![](../../../../assets/piece_variant/a/BB0.svg)
+
 ### `sp_bg_variant`
 
 Type: `String`
