@@ -24,7 +24,7 @@ export const mod_dev_tools_storage = {
     },
     dev_tools_reset_handle() {
       this.DevToolsVariableInfo.values.forEach(e => {
-        this.$data[e.mut_var] = this.$options.props[e.imm_var]["default"]
+        this.$data[e.mut_var] = this.$options.props[e.imm_var]["default"] // FIXME: null なのでどうしよ？
       })
       Pstore.remove(LOCAL_STORAGE_VARIABLE_NAME)
     },

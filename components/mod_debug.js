@@ -1,3 +1,7 @@
+const EVENT_LOGS_MAX = 200
+
+import _ from "lodash"
+
 export const mod_debug = {
   props: {
     // デバッグモード
@@ -21,6 +25,8 @@ export const mod_debug = {
       mut_debug:     this.sp_debug,
       mut_event_log: this.sp_event_log,
       mut_layer:     this.sp_layer,
+      //
+      event_logs: [],
     }
   },
   watch: {
@@ -34,11 +40,12 @@ export const mod_debug = {
         console.log(...v)
       }
     },
-    event_call(name, ...args) {
+    event_call(key, ...args) {
       if (this.mut_event_log || process.env.NODE_ENV === "development") {
-        this.event_log_print(name, args)
+        this.event_log_print(key, args)
+        this.event_logs = _.take([{key: key, time: Date.now(), args: args}, ...this.event_logs], EVENT_LOGS_MAX)
       }
-      this.$emit(name, ...args)
+      this.$emit(key, ...args)
     },
     event_log_print(method, args) {
       const group_key = `[SP] ${method}`

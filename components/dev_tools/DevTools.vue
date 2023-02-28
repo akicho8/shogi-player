@@ -20,6 +20,8 @@ import { support } from "../support.js"
 import FriendlyCloseButton from "./FriendlyCloseButton.vue"
 
 import GroupMain from "./GroupMain.vue"
+import GroupStyle  from "./GroupStyle.vue"
+import GroupEvent  from "./GroupEvent.vue"
 import GroupSfen  from "./GroupSfen.vue"
 import GroupDebug from "./GroupDebug.vue"
 import GroupProps from "./GroupProps.vue"
@@ -32,6 +34,8 @@ export default {
   components: {
     FriendlyCloseButton,
     GroupMain,
+    GroupStyle,
+    GroupEvent,
     GroupSfen,
     GroupDebug,
     GroupProps,
@@ -82,13 +86,15 @@ export default {
     padding: 0.75rem
     flex-grow: 1                // height: 100% などとしてはいけない
     overflow: auto
+    pre
+      padding: 0.5rem
 
   //////////////////////////////////////////////////////////////////////////////// b-tabs のコンテンツは入れない
-
   .b-tabs
     margin: 0
     .tab-content
       display: none
+
 
 .ShogiPlayer
   &.is_layer_on
