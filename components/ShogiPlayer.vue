@@ -98,7 +98,7 @@ export default {
     // 駒の種類
     sp_piece_variant: {
       type: String,
-      default: "a",
+      default: "nureyon",
       validator(value) { return PieceVariantInfo.keys.includes(value) },
     },
 
