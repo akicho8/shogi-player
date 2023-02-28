@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import JSON5 from "json5"
 import _ from "lodash"
 import Vue from "vue"
 
@@ -161,6 +162,12 @@ export default {
     sp_turn: {
       type: Number,
       default: -1,
+    },
+
+    // スタイル(Web Components 専用)
+    spwc_style_hash: {
+      type: String,
+      default: null,
     },
 
     // モード
@@ -512,9 +519,10 @@ export default {
 
     component_style() {
       return {
+        ...this.spwc_style_hash_native, // Web Components のための無理矢理スタイルを渡すためのもの
         "--sp_board_dimension_w": this.sp_board_dimension_w,
         "--sp_board_dimension_h": this.sp_board_dimension_h,
-        ...this.ro_css_variables_hash,
+        ...this.ro_css_variables_hash,  // sp_cell_w 等
       }
     },
 
@@ -524,6 +532,14 @@ export default {
 
     root_container_id()    { return ["sp", Math.random().toString(36).slice(2)].join("-") },
     root_container_query() { return "#" + this.root_container_id },
+
+    // spwc_style_hash の Hash 化
+    spwc_style_hash_native() {
+      const v = this.spwc_style_hash
+      if (v) {
+        return JSON5.parse(v)
+      }
+    },
   },
 }
 </script>

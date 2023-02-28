@@ -1,6 +1,6 @@
 <template lang="pug">
 .ShogiPlayerWc(part="root")
-  ShogiPlayer(v-bind="bind_props" v-on="event_chain" :style="spwc_style_hash_native")
+  ShogiPlayer(v-bind="bind_props" v-on="event_chain")
   pre.ShogiPlayerWcInspector(v-if="development_p")
     | $props: {{JSON.stringify($props)}}
     | $attrs: {{JSON.stringify($attrs)}}
@@ -117,7 +117,7 @@ export default {
       console.log("$attrs", this.$attrs)
       console.log("$props", this.$props)
       console.log("alternativeProps", this.alternativeProps)
-      console.log("spwc_style_hash_native", this.spwc_style_hash_native)
+      // console.log("spwc_style_hash_native", this.spwc_style_hash_native)
       console.log("bind_props", this.bind_props)
       console.log("EventList", EventList)
       console.log("event_chain", this.event_chain)
@@ -148,17 +148,8 @@ export default {
       }
     },
 
-    // spwc_style_hash の Hash 化
-    spwc_style_hash_native() {
-      const v = this.lookup_var("spwc_style_hash")
-      if (v) {
-        return JSON5.parse(v)
-      }
-    },
-
     // v-bind ですべて渡すもの
     bind_props() {
-      // delete hash.spwc_style_hash としても良いが別に消さなくてもいいのでやらない
       return {
         ...this.$props,
         ...this.alternative_props_native,
