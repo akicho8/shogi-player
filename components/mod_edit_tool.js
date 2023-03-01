@@ -1,4 +1,5 @@
 import { EditToolInfo } from "./models/edit_tool_info.js"
+import { PresetDropdownInfo } from "./models/preset_dropdown_info.js"
 import { Board } from "./models/board.js"
 
 export const mod_edit_tool = {
@@ -32,5 +33,6 @@ export const mod_edit_tool = {
 
   computed: {
     EditToolInfo() { return EditToolInfo },
+    PresetDropdownInfo() { return PresetDropdownInfo },
   },
 }

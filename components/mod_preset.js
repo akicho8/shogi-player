@@ -24,6 +24,9 @@ export const mod_preset = {
   methods: {
     // FIXME: pulldown から選択したときに2回呼ばれてしまう
     xcontainer_setup_by_preset(preset_info) {
+      if (preset_info == null) {
+        return
+      }
       preset_info = PresetInfo.fetch(preset_info)
       this.xcontainer = new Xcontainer()
       if (preset_info.sfen) {
