@@ -26,7 +26,7 @@ import { LayoutInfo       } from "./models/layout_info.js"
 // components
 import ErrorNotify        from "./ErrorNotify.vue"
 import OpDisabledBlock    from "./OpDisabledBlock.vue"
-import EditToolBlock      from "./EditToolBlock.vue"
+import ToolBelt      from "./ToolBelt.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
 import SpGroundInside     from "./SpGroundInside.vue"
 import DevTools           from "./dev_tools/DevTools.vue"
@@ -216,7 +216,7 @@ export default {
   components: {
     ErrorNotify,
     OpDisabledBlock,
-    EditToolBlock,
+    ToolBelt,
     PromoteSelectModal,
     SpGroundInside,
     DevTools,

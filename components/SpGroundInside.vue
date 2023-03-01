@@ -2,7 +2,7 @@
 .SpGroundInside
   PromoteSelectModal(v-if="TheSp.dialog_soldier")
   OpDisabledBlock
-  EditToolBlock
+  ToolBelt
   TurnShowOrEdit
   .SpTransformBlock
     SpBoardWithMembership(ref="SpBoardWithMembership")
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import EditToolBlock      from "./EditToolBlock.vue"
+import ToolBelt      from "./ToolBelt.vue"
 import TurnShowOrEdit     from "./TurnShowOrEdit.vue"
 import SpBoardWithMembership    from "./SpBoardWithMembership.vue"
 import PieceBox           from "./PieceBox.vue"
@@ -29,7 +29,7 @@ export default {
   name: "SpGroundInside",
   mixins: [support],
   components: {
-    EditToolBlock,
+    ToolBelt,
     TurnShowOrEdit,
     SpBoardWithMembership,
     PieceBox,

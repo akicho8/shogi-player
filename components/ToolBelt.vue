@@ -1,5 +1,5 @@
 <template lang="pug">
-.EditToolBlock(v-if="TheSp.edit_p")
+.ToolBelt(v-if="TheSp.edit_p")
   // プリセット
   //- https://buefy.org/documentation/dropdown
   b-dropdown(size="is-small" animation="")
@@ -13,7 +13,7 @@
     b-dropdown-item キャンセル
 
   // 命令
-  b-dropdown(size="is-small" animation="")
+  b-dropdown.EditToolInfo(size="is-small" animation="")
     .button.is-small(slot="trigger")
       b-icon(icon="menu" size="is-small")
     template(v-for="e in TheSp.EditToolInfo.values")
@@ -40,7 +40,7 @@
 import { support } from "./support.js"
 
 export default {
-  name: "EditToolBlock",
+  name: "ToolBelt",
   mixins: [support],
 }
 </script>
@@ -48,7 +48,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayer
-  .EditToolBlock
+  .ToolBelt
     display: flex
     justify-content: center
     align-items: flex-end
@@ -66,15 +66,15 @@ export default {
       padding: 0.6rem               // ここだけでかいので調整する
 
   &.is_layer_on
-    .EditToolBlock
+    .ToolBelt
       +is_layer_border
 
   ////////////////////////////////////////////////////////////////////////////////
   +IF_HORIZONTAL
-    .EditToolBlock
+    .ToolBelt
       margin-bottom: var(--sp_common_gap_real_px)
 
   +IF_VERTICAL
-    .EditToolBlock
+    .ToolBelt
       margin-bottom: 0
 </style>
