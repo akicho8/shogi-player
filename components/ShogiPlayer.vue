@@ -42,7 +42,6 @@ import { mod_shortcut        } from "./mod_shortcut.js"
 import { mod_edit_mode       } from "./mod_edit_mode.js"
 import { mod_illegal         } from "./mod_illegal.js"
 import { mod_lifted_piece    } from "./mod_lifted_piece.js"
-import { mod_legal_check     } from "./mod_legal_check.js"
 import { mod_play_mode       } from "./mod_play_mode.js"
 import { mod_profile         } from "./mod_profile.js"
 import { mod_preset          } from "./mod_preset.js"
@@ -69,7 +68,6 @@ export default {
     mod_edit_mode,
     mod_illegal,
     mod_lifted_piece,
-    mod_legal_check,
     mod_play_mode,
     mod_profile,
     mod_preset,
