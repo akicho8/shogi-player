@@ -1,4 +1,4 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
 import KIF_27584 from "./kifu_book_info/27584.kif"
 import KIF_37368 from "./kifu_book_info/37368.kif"
@@ -28,7 +28,7 @@ import SFEN_15733 from "./kifu_book_info/15733.sfen"
 import KIF_BOD_LIKE_SAMPLE1 from "./kifu_book_info/BOD_LIKE_SAMPLE1.kif"
 import illegal_check from "./kifu_book_info/illegal_check.kif"
 
-export class KifuBookInfo extends MemoryRecord {
+export class KifuBookInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       {"name": "平手", "black": "先手", "white": "後手", "sp_body": "position startpos"},

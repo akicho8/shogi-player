@@ -1,6 +1,6 @@
-import MemoryRecord from 'js-memory-record'
+import { ApplicationMemoryRecord } from './application_memory_record.js'
 
-export class MixBlendModeInfo extends MemoryRecord {
+export class MixBlendModeInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "wood_normal",      name: "なし",         desc: "上優先",                                     },

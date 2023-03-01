@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "../models/application_memory_record.js"
 
-export class DevToolsGroupInfo extends MemoryRecord {
+export class DevToolsGroupInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "main",  name: "Main",      icon: null,  component: "GroupMain",  },

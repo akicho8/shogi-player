@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
-export class PlaceYomiageInfo extends MemoryRecord {
+export class PlaceYomiageInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "1", yomiage: "1",      },

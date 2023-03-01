@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
-export class PieceYomiage extends MemoryRecord {
+export class PieceYomiage extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "K", prefix_name: "gyoku",  name: "gyoku",      promoted_name: null,           },

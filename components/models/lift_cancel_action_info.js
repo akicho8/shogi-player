@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
-export class LiftCancelActionInfo extends MemoryRecord {
+export class LiftCancelActionInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       // 一般的なのはこれ

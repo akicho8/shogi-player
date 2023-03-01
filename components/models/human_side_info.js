@@ -1,7 +1,7 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 import { Location } from "./location"
 
-export class HumanSideInfo extends MemoryRecord {
+export class HumanSideInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "none",   name: "none", location_keys: [],                 },

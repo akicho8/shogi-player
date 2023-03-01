@@ -1,8 +1,8 @@
 // force_promote_length: 死に駒になる前方にある壁との隙間の数(この値以下で死に駒になる)
 
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
-export class PieceVector extends MemoryRecord {
+export class PieceVector extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "K", basic_once_vectors: "pattern_king",   basic_repeat_vectors: null,           promoted_once_vectors: null,           promoted_repeat_vectors: null,           force_promote_length: null, },

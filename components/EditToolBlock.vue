@@ -11,8 +11,11 @@
   b-dropdown.mx-0(v-model="TheSp.edit_tool_key" size="is-small")
     .button.is-small(slot="trigger")
       b-icon(icon="menu" size="is-small")
-    b-dropdown-item(v-for="e in TheSp.EditToolInfo.values" :value="e.key" :key="e.key" @click="TheSp.edit_tool_click_handle(e)")
-      | {{e.name}}
+    template(v-for="e in TheSp.EditToolInfo.values")
+      //- template(v-if="e.name == ''")
+      //-   b-dropdown-item(separator)
+      b-dropdown-item(:value="e.key" :key="e.unique_key" @click="TheSp.edit_tool_click_handle(e)" :separator="true")
+        | {{e.name}}
     b-dropdown-item(separator)
     b-dropdown-item キャンセル
   b-button(@click.stop.prevent="TheSp.fn_flip_all" icon-left="pan-vertical" size="is-small")

@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
-export class ModeInfo extends MemoryRecord {
+export class ModeInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "view", name: "再生", },

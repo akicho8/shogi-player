@@ -1,8 +1,8 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 import { PieceVector } from "./piece_vector.js"
 import { PieceYomiage } from "./piece_yomiage.js"
 
-export class Piece extends MemoryRecord {
+export class Piece extends ApplicationMemoryRecord {
   static get define() {
     return [
       // 順序について

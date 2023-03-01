@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "../models/application_memory_record.js"
 
-export class DevToolsVariableInfo extends MemoryRecord {
+export class DevToolsVariableInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       // sp_dev_tools は含めてはいけない

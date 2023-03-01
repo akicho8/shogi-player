@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "../models/application_memory_record.js"
 
-export class DevToolsPositionInfo extends MemoryRecord {
+export class DevToolsPositionInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "left",   name: "←", },

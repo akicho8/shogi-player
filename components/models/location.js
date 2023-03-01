@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
-export class Location extends MemoryRecord {
+export class Location extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "black", name: "☗", char_key: "b", value_sign: +1, position_key: "is_position_south", long_name: "先手", handicap_long_name: "下手", },

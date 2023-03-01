@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
-export class LayoutInfo extends MemoryRecord {
+export class LayoutInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "vertical",   name: "縦", },

@@ -1,6 +1,6 @@
-import MemoryRecord from "js-memory-record"
+import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
-export class IllegalInfo extends MemoryRecord {
+export class IllegalInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "illegal_two_pawn",     name: "二歩",     },
