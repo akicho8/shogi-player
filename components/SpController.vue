@@ -35,12 +35,9 @@ export default {
     .button
       margin-bottom: 0
       &:focus
-        outline: none // Google Chrome では変化ない？
+        outline: none    // Google Chrome では変化ない？
       &.first, &.last
-        width: 2rem // ← 比例させる ← これは盤の幅を考慮する
-        flex-grow: 0
+        width: 10%       // 適当。実際の幅が数ドットになっても文字幅分は確保される
       &.previous, &.next
-        flex-grow: 1
-      &.dev_tools
-        width: 2rem
+        flex-grow: 1     // 伸びたらここを優先して拡大する
 </style>
