@@ -132,7 +132,7 @@ export default {
       {
         // ~/src/shogi-extend/nuxt_side/node_modules/nuxt-buefy/lib/module.js
         css: false,
-        materialDesignIconsHRef: "//unpkg.com/@mdi/font/css/materialdesignicons.min.css",
+        materialDesignIconsHRef: "https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css",
         async: false, // デフォルトの true のままだとアイコンがチラつく
 
         // ~/src/shogi-extend/nuxt_side/node_modules/buefy/src/utils/config.js
