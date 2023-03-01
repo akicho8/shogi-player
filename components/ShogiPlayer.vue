@@ -517,7 +517,7 @@ export default {
         this.str_to_css_class("is_name_direction", this.sp_name_direction),         // is_name_direction_horizontal
         this.str_to_css_class("is_stand_gravity", this.sp_stand_gravity),           // is_stand_gravity_top
         this.str_to_css_class("is_piece_variant", this.mut_piece_variant),          // is_piece_variant_nureyon
-        this.str_to_css_class("is_board_variant", this.mut_board_variant),                // is_board_variant_normal
+        this.str_to_css_class("is_board_variant", this.mut_board_variant),                // is_board_variant_wood_normal
         this.str_to_css_class("is_device", this.devise_info.key),                   // is_device_touch
 
         // Boolean

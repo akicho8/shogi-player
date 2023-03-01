@@ -113,8 +113,8 @@ Default: `none`
 | 値     | 名前       |                                                                 |
 |--------|------------|-----------------------------------------------------------------|
 | none   | なし       |                                                                 |
-| normal | 普通の木目 | <img src="../../../../assets/board_variant/normal.png" width="32"> |
-| bright | 明るい木目 | <img src="../../../../assets/board_variant/bright.png" width="32"> |
+| wood_normal | 普通の木目 | <img src="../../../../assets/board_variant/wood_normal.png" width="32"> |
+| wood_bright | 明るい木目 | <img src="../../../../assets/board_variant/wood_bright.png" width="32"> |
 
 ## Level 2
 

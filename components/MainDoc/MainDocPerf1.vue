@@ -18,7 +18,7 @@
         sp_controller
         sp_dev_tools
         sp_slider
-        sp_board_variant="bright"
+        sp_board_variant="wood_bright"
         sp_piece_variant="portella"
       )
 </template>

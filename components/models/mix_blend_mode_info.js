@@ -3,7 +3,7 @@ import MemoryRecord from 'js-memory-record'
 export class MixBlendModeInfo extends MemoryRecord {
   static get define() {
     return [
-      { key: "normal",      name: "なし",         desc: "上優先",                                     },
+      { key: "wood_normal",      name: "なし",         desc: "上優先",                                     },
       { key: "darken",      name: "比較(暗)",     desc: "暗い点を優先",                               },
       { key: "lighten",     name: "比較(明)",     desc: "明るい点を優先",                             },
       { key: "multiply",    name: "乗算",         desc: "色が重なると暗く",                           },

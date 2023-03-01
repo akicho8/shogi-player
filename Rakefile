@@ -127,8 +127,8 @@ task :cp => :copy
 desc "copy"
 task :copy do
   system <<~EOT
-  rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ "~/src/shogi-extend/nuxt_side/node_modules/shogi-player/"
-  EOT
+  rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/
+    EOT
 end
 
 task :n => "netlify:open"

@@ -7,7 +7,7 @@
   ShogiPlayer(
     :sp_body="kifu_book_info.sp_body"
     :sp_turn="-1"
-    sp_board_variant="bright"
+    sp_board_variant="wood_bright"
     sp_piece_variant="nureyon"
     sp_overlay_nav
     )

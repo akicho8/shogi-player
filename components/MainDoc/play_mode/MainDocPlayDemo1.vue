@@ -7,7 +7,7 @@
     :sp_turn="-1"
     sp_slider
     sp_controller
-    sp_board_variant="normal"
+    sp_board_variant="wood_normal"
     sp_mode="play"
     )
 </template>
