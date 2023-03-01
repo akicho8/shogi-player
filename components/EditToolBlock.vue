@@ -12,9 +12,7 @@
     .button.is-small(slot="trigger")
       b-icon(icon="menu" size="is-small")
     template(v-for="e in TheSp.EditToolInfo.values")
-      //- template(v-if="e.name == ''")
-      //-   b-dropdown-item(separator)
-      b-dropdown-item(:value="e.key" :key="e.unique_key" @click="TheSp.edit_tool_click_handle(e)" :separator="true")
+      b-dropdown-item(:value="e.key" :key="e.unique_key" @click="TheSp.edit_tool_click_handle(e)" :separator="e.name === ''")
         | {{e.name}}
     b-dropdown-item(separator)
     b-dropdown-item キャンセル
