@@ -513,7 +513,7 @@ Default: `null`
 
 CSSの中身をそのまま渡す <Badge text="自己責任" type="error" vertical="top" />
 
-Shadow DOM 内外でCSSは隔離される。これは Web Components が他のWebページやWebアプリ完全に分離されていることを保証するために必要な機能だが、Web開発者にとっては制約となる場合もある。その制約を回避する抜け穴がこれになる。
+Shadow DOM 内外でCSSは隔離される。これは Web Components が他のWebページやWebアプリとの完全な分離を保証するために必要な機能だが、Web開発者にとっては制約となる場合もある。その制約を回避する抜け穴がこれになる。
 
 ### `sp-pass-props`
 
