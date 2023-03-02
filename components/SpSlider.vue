@@ -55,25 +55,23 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+
+$sp_slider_font_min: 8px       // SpController.vueの8pxと合わせたい
+
 .ShogiPlayer
-  .SpSlider
-    margin-top: var(--sp_common_gap_real_px)
-    margin-bottom: 0
-    margin-left: 0
-    margin-right: 0
-
+  .b-slider
+    margin: var(--sp_common_gap_real_px) 0 0
     cursor: pointer
-    width: 100%
 
-    .b-slider-thumb
-      &:focus
-        outline: none // 青い枠を除去。フォーカスしているかどうかはサイズでわかるので不要
+  .b-slider .b-slider-thumb-wrapper.has-indicator .b-slider-thumb
+    padding: 8px 4px
+    font-size: $sp_slider_font_min
+    &:focus
+      outline: none // 青い枠を除去。フォーカスしているかどうかはサイズでわかるので不要
 
-    // indicator がでかすぎるのを調整
-    .b-slider-thumb-wrapper.has-indicator
-      .b-slider-thumb
-        padding: 8px 4px
-        font-size: 8px
+  // デフォルトのフォーカス時の拡大は大きすぎる
+  .b-slider .b-slider-thumb-wrapper .b-slider-thumb:focus
+    transform: scale(1.1)
 
   &.is_layer_on
     .SpSlider

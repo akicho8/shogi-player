@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid grey;
+      }
+      .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid blue;
+        width: 50%;
+      }
+      .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        border: 1px dashed red;
+        border-radius: 64px;
+      }
+      .button:not(:last-child) {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+      .button:not(:first-child) {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        margin-left: -1px;
+      }
+      .button.middle {
+        flex: 1 1;
+      }
+      .button.first, .button.last {
+        flex: 0 1 10%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="buttons">
+        <div class="button first">A</div>
+        <div class="button middle">B</div>
+        <div class="button middle">C</div>
+        <div class="button last">D</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -112,3 +112,20 @@ $shortcut_viewer_z:         $piece_count_z + 1  // $piece_count_z より上に�
   position: relative
 =is_overlay_block
   @extend %overlay
+  
+  
+// bulma の次の並びのときの中にある .button の角丸めが解除されない不具合対策
+//
+// .buttons.are-small
+//   .button
+//   .button
+//   .button
+//   .button
+//  
+=workaround_buttons_connect
+  .button:not(:last-child)  // [A B C] D の右側の角丸め解除
+    border-bottom-right-radius: 0 ! important
+    border-top-right-radius: 0 ! important
+  .button:not(:first-child) // A [B C D] の左側の角丸め解除
+    border-bottom-left-radius: 0 ! important
+    border-top-left-radius: 0 ! important

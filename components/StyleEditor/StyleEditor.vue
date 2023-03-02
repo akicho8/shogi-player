@@ -547,7 +547,7 @@ export default {
       sp_board_dimension_w: 9,
       sp_board_dimension_h: 9,
       sp_layout: "horizontal",
-      sp_mode: DEVELOPMENT_P ? "edit" : "view",
+      sp_mode: DEVELOPMENT_P ? "view" : "view",
       sp_mobile_vertical: true,
 
       // 成り不成り選択
@@ -624,7 +624,7 @@ export default {
       sp_body: null,
 
       sp_turn_show:    DEVELOPMENT_P ? true : false,
-      sp_dev_tools:      DEVELOPMENT_P ? true : false,
+      sp_dev_tools:    DEVELOPMENT_P ? false : false,
 
       sp_slider:     DEVELOPMENT_P ? true : true,
       sp_controller: DEVELOPMENT_P ? true : false,
