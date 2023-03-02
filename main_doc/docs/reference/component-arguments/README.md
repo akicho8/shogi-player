@@ -493,18 +493,31 @@ Default: `50`
 
 `sp_key_event_capture` を有効にして手数を動かすときの command を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
 
-## Level 4
+## Web Components 専用
 
 ### `sp_pass_style`
 
 Type: `String`
 Default: `null`
 
-style 属性の代替
+`style` 属性の代替
 
-* Web Components で `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したときに使う
+* `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したときに使う
 * Web Components では style を指定しても内側(Shadow Dom)には届かないため引数を設けている
 * ネイテイブなハッシュではなく**JSON5形式文字列**で指定する
+
+### `sp-pass-props`
+
+Type: `String`
+Default: `null`
+
+`v-bind` 属性の代替
+
+* Web Components + Vue 3 専用
+* Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたとき snake_case なパラメータ名を持つ値が渡せない問題がある
+* いまのところ、これを回避する方法がないため代替パラメータを用意した
+* 内容は JSON5 形式の文字列としてパースする
+* 型変換は JSON5 のパーサーに任せているので Boolean 型の真は `"true"` ではなく `true` と書く
 
 ## Development
 

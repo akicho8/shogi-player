@@ -38,7 +38,7 @@ export default {
   // inheritAttrs: false,
 
   props: {
-    alternativeProps: { type: String },
+    spPassProps: { type: String },
 
     // ここで style を受けていると v-bind="$props" でそのまま渡すことができるの裏技的に入れておく
     // としていたもののこれは development だと警告がでているのでやめ
@@ -116,7 +116,7 @@ export default {
       console.log("NODE_ENV", process.env.NODE_ENV)
       console.log("$attrs", this.$attrs)
       console.log("$props", this.$props)
-      console.log("alternativeProps", this.alternativeProps)
+      console.log("spPassProps", this.spPassProps)
       // console.log("sp_pass_style_native", this.sp_pass_style_native)
       console.log("bind_props", this.bind_props)
       console.log("EventList", EventList)
@@ -129,9 +129,9 @@ export default {
       }
     },
     lookup_var(name) {
-      if (this.alternative_props_native) {
-        if (name in this.alternative_props_native) {
-          return this.alternative_props_native[name]
+      if (this.sp_pass_props_native) {
+        if (name in this.sp_pass_props_native) {
+          return this.sp_pass_props_native[name]
         }
       }
       return this[name]
@@ -141,8 +141,8 @@ export default {
     // 開発モードか？
     development_p: () => process.env.NODE_ENV === "development",
 
-    alternative_props_native() {
-      const v = this.alternativeProps
+    sp_pass_props_native() {
+      const v = this.spPassProps
       if (v) {
         return JSON5.parse(v)
       }
@@ -152,7 +152,7 @@ export default {
     bind_props() {
       return {
         ...this.$props,
-        ...this.alternative_props_native,
+        ...this.sp_pass_props_native,
         ...this.override_props,
       }
     },

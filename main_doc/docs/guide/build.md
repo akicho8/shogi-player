@@ -55,11 +55,11 @@ Also see: [使い方](/guide/usage/)
 ::: warning 引数が渡せない問題と回避方法
 * Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたときに限り snake_case なパラメータ名を持つ値が渡せない問題がある
   * 簡単に言えば `_` を含むパラメータが無視される
-* そこでその嫌がらせのような制約を回避するために仕方なく `alternative-props` 引数を用意した
+* そこでその嫌がらせのような制約を回避するために仕方なく `sp-pass-props` 引数を用意した
 * これは `v-bind` に似ているが Vue にはただの文字列として認識されるため確実に内容を渡すことができる
-* `alternative-props` の内容は JSON5 形式の文字列としてパースする
+* `sp-pass-props` の内容は JSON5 形式の文字列としてパースする
 * 型変換は JSON5 のパーサーに任せているので Boolean 型の真は `"true"` ではなく `true` と書く
-* `alternative-props` の内容は最終的に `$props` 相当として内部で扱う
+* `sp-pass-props` の内容は最終的に `$props` 相当として内部で扱う
 :::
 
 ## Vue.js 2 + ShogiPlayer.vue
