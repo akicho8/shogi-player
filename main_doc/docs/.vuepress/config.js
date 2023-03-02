@@ -103,10 +103,17 @@ module.exports = {
             'usage',
             'customize',
             'build',
+            // 'test-of-demo',
+          ],
+        },
+
+        {
+          title: 'Mode',
+          collapsable: false,
+          children: [
             'view-mode',
             'play-mode',
             'edit-mode',
-            // 'test-of-demo',
           ],
         },
 
