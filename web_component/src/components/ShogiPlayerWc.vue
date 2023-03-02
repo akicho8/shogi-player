@@ -1,5 +1,8 @@
 <template lang="pug">
+//- ← Web Components のCSSはここに定義されるので
 .ShogiPlayerWc(part="root")
+  //- ↑ここに対して利用者が定義したCSSはなんでも上書きできる？ → できない
+  // CSS変数を定義することはできるが scss のようには書けない (というか書けては困る)
   ShogiPlayer(v-bind="bind_props" v-on="event_chain")
   pre.ShogiPlayerWcInspector(v-if="development_p")
     | $props: {{JSON.stringify($props)}}
@@ -46,6 +49,7 @@ export default {
 
     ////////////////////////////////////////////////////////////////////////////////
     sp_pass_style: { type: String, },
+    sp_pass_css: { type: String, },
 
     // Web Components で使えるのは String, Boolean, Number のみ
     // なので本来 Object だったり Function だったりするするものは String から変換しないといけない

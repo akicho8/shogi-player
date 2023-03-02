@@ -502,9 +502,18 @@ Default: `null`
 
 `style` 属性の代替
 
-* `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したときに使う
+* `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したいときに使う
 * Web Components では style を指定しても内側(Shadow Dom)には届かないため引数を設けている
 * ネイテイブなハッシュではなく**JSON5形式文字列**で指定する
+
+### `sp_pass_css`
+
+Type: `String`
+Default: `null`
+
+CSSの中身をそのまま渡す <Badge text="自己責任" type="error" vertical="top" />
+
+Shadow DOM 内外でCSSは隔離される。これは Web Components が他のWebページやWebアプリ完全に分離されていることを保証するために必要な機能だが、Web開発者にとっては制約となる場合もある。その制約を回避する抜け穴がこれになる。
 
 ### `sp-pass-props`
 

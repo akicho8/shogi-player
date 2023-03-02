@@ -1,5 +1,6 @@
 <template lang="pug">
 .ShogiPlayer.is-relative(:id="root_container_id" :class="component_class" :style="component_style")
+  div(is="style" v-text="sp_pass_css" v-if="sp_pass_css")
   .SpGroundTexture
   SpGroundInside(v-if="xcontainer" ref="SpGroundInside")
   DevTools(v-if="mut_dev_tools")
@@ -167,6 +168,12 @@ export default {
 
     // スタイル(Web Components 専用)
     sp_pass_style: {
+      type: String,
+      default: null,
+    },
+
+    // スタイル(Web Components 専用)
+    sp_pass_css: {
       type: String,
       default: null,
     },
