@@ -81,7 +81,7 @@ module.exports = {
       {
         text: "Reference",
         items: [
-          { text: 'コンポーネント引数', link: '/reference/component-arguments/', },
+          { text: 'コンポーネント引数', link: '/reference/props/', },
           { text: 'CSS Variables',      link: '/reference/css-variables/',       },
           { text: 'Event',              link: '/reference/event/',               },
           { text: 'API',                link: '/reference/api/',                 },
@@ -125,7 +125,7 @@ module.exports = {
           title: 'Reference',
           collapsable: false,
           children: [
-            '/reference/component-arguments/',
+            '/reference/props/',
             '/reference/css-variables/',
             '/reference/event/',
             '/reference/api/',
@@ -150,7 +150,7 @@ module.exports = {
       //     collapsable: false,
       //     children: [
       //       '',
-      //       '/component-arguments/',
+      //       '/props/',
       //       '/css-variables/',
       //       '/api/',
       //     ],
