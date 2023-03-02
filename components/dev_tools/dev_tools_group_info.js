@@ -5,7 +5,7 @@ export class DevToolsGroupInfo extends ApplicationMemoryRecord {
     return [
       { key: "main",  name: "Main",      icon: null,  component: "GroupMain",  },
       { key: "style", name: "Style",     icon: null,  component: "GroupStyle", },
-      { key: "Event", name: "Event",     icon: null,  component: "GroupEvent", },
+      { key: "event", name: "Event",     icon: null,  component: "GroupEvent", },
       { key: "sfen",  name: "SFEN",      icon: null,  component: "GroupSfen",  },
       { key: "debug", name: "Debug",     icon: null,  component: "GroupDebug", },
       { key: "props", name: "$props",    icon: null,  component: "GroupProps", },

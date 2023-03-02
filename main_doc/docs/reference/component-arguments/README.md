@@ -531,7 +531,8 @@ Default: `false`
 ### `sp_dev_tools_position`
 
 Type: `String`
-Default: `bottom`
+Default: `left`
+Choice: `left` | `right` | `top` | `bottom`
 
 開発ツールの画面位置
 
@@ -539,6 +540,7 @@ Default: `bottom`
 
 Type: `String`
 Default: `main`
+Choice: `main` | `style` | `Event` | `sfen` | `debug` | `props` | `data` | `cog`
 
 開発ツールのタブ
 
