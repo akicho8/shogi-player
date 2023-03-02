@@ -2,13 +2,13 @@
 <meta charset="UTF-8">
 <title>ShogiPlayer demo</title>
 <script defer src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="./dist/shogi-player.umd.js"></script>
+<script defer src="./dist/shogi-player.umd.js"></script>
 
 <div id="app">
   <shogi-player></shogi-player>
 </div>
 
-<script>
+<script type="module">
 new Vue({
   components: {
     ShogiPlayer,
