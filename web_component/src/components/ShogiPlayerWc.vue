@@ -190,25 +190,10 @@ export default {
 </script>
 
 <style lang="sass">
+@import "shogi-player/assets/sass/application.sass"
+
 // Shadow DOM 内で読み込むとフォントが読み込まれないがその他の部分は適用する必要があるため読み込む
 @import url("https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css")
-
-// ShogiPlayer のスタイルを読み込む($sp_assets_dir の定義が重要)
-@import "shogi-player/components/ShogiPlayer.sass"
-
-// Bulmaのテーマ色を変更する場合
-@import "~bulma/sass/utilities/initial-variables"
-$primary: $blue
-@import "~bulma"
-@import "~buefy/src/scss/buefy"
-// 変更しない場合
-// @import "buefy/dist/buefy.css"
-
-// このあとで +mobile などを使いたいとき
-// @import "~bulma/sass/utilities/_all"
-
-// .ShogiPlayerWc
-//   width: 100%
 </style>
 
 <style>

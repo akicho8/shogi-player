@@ -80,12 +80,7 @@ export default {
   ** Global CSS
   */
   css: [
-    // "application.sass"
-    // "~/assets/css/buefy.scss",
-    // "~/assets/sass/application.sass",
-    // "../app/javascript/stylesheets/application.sass",
     "./assets/sass/application.sass",
-    // "@/assets/custom-styles.scss"
   ],
   styleResources: {
     sass: [
