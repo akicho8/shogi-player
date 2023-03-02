@@ -1,0 +1,22 @@
+// ここはどうする？
+
+// 汎用的スタイル
+
+// *
+//   // iOS 13.6.1 で効かなくなっている
+//   touch-action: manipulation
+
+//////// 固定フォント
+
+.ShogiPlayer, .StyleEditor, .StyleEditor-Sidebar
+  // http://neos21.hatenablog.com/entry/2017/10/22/080000
+  .fixed_font
+    font-family: Osaka-mono, "Osaka-等幅", "ＭＳ ゴシック", "Courier New", Consolas, monospace !important
+
+  pre
+    @extend .fixed_font
+
+    &.pre-wrap
+      white-space: pre-wrap         // 折り返す
+      word-break: break-all         // 1行のCSAを意地でも折り返す
+      overflow-x: visible           // b-tooltip が消えないようにするため
