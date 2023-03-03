@@ -47,6 +47,7 @@ task :clean do
   system <<~EOT
   rm -fr coverage
   rm -fr docs
+  rm -fr node_modules
   EOT
 end
 
@@ -58,10 +59,14 @@ namespace :old_doc do
   task :build do
     # web_component を退避させないと "shogi-player": "file:.." の参照が無限ループになって nuxt generate で死ぬ
     system <<~EOT
-    mv web_component "/tmp"
-    nuxt generate --dotenv ".env.production"
-    mv /tmp/web_component '.'
-    EOT
+    mv web_component /tmp
+    mv shogi-player-nuxt-sample /tmp
+    mv shogi-player-vue2-sample /tmp
+    nuxt generate --dotenv .env.production
+    mv /tmp/web_component .
+    mv /tmp/shogi-player-nuxt-sample .
+    mv /tmp/shogi-player-vue2-sample .
+      EOT
   end
 
   desc "push"
@@ -184,8 +189,24 @@ end
 desc "other-embed-apps-shogi-player-update"
 task "other-embed-apps-shogi-player-update" do
   system <<~EOT
-  (cd shogi-player-nuxt-sample    && ncu /shogi-player/ -u && yarn)
-  (cd shogi-player-vue-cli-sample && ncu /shogi-player/ -u && npm i)
+  (cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && yarn)
+  (cd shogi-player-vue2-sample && ncu /shogi-player/ -u && npm i)
+  EOT
+end
+
+task :k => :embed_to_nuxt_and_vue2
+desc "[k] embed_to_nuxt_and_vue2"
+task :embed_to_nuxt_and_vue2 do
+  system <<~EOT
+  # r -Qx '"shogi-player": "file:.."' '"shogi-player": "^#{Package.version}"' shogi-player-vue2-sample/package.json shogi-player-nuxt-sample/package.json
+
+  tmux kill-window -t vue2
+  tmux new-window -n vue2
+  tmux send-keys -t vue2 'cd shogi-player-vue2-sample && vue-cli-service serve --port 4010 --open' C-m
+
+  tmux kill-window -t nuxt
+  tmux new-window -n nuxt
+  tmux send-keys -t nuxt 'cd shogi-player-nuxt-sample && nuxt --port 4011 --open' C-m
   EOT
 end
 

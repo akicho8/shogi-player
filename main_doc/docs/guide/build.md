@@ -64,9 +64,9 @@ Also see: [使い方](/guide/usage/)
 
 ## Vue.js 2 + ShogiPlayer.vue
 
-手順を半自動化したスクリプト [shogi-player-vue-cli-sample-create.sh](https://github.com/akicho8/shogi-player/blob/master/shogi-player-vue-cli-sample-create.sh) をそのまま実行して生成したものを [shogi-player-vue-cli-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue-cli-sample) に置いてある
+手動で組み込んだ例を [shogi-player-vue2-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample) に置いている
 もともと Vue.js 2 製なので Vue.js 2 とは親和性が高い
-ただし、[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがある
+ただし[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがある
 
 ## Nuxt.js + ShogiPlayer.vue
 
