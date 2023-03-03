@@ -15,7 +15,6 @@ MainDocMainNavbar
     b-navbar-item(tag="a" href="https://github.com/akicho8/shogi-player" target="_blank") GitHub
     b-navbar-dropdown(label="実験" hoverable v-if="development_p")
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-sp_device'}") sp_device テスト
-      b-navbar-item(tag="nuxt-link" :to="{name: 'test-perf1'}") 高速化
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_bod_parse'}") BOD読み込み
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_illegal'}") 反則判定
       b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_sound_timing'}") 音タイミング
