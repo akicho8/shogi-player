@@ -506,14 +506,26 @@ Default: `null`
 * Web Components では style を指定しても内側(Shadow Dom)には届かないため引数を設けている
 * ネイテイブなハッシュではなく**JSON5形式文字列**で指定する
 
+```html
+<shogi-player-wc
+  sp_pass_style="{'--sp_board_color': 'blue'}"
+  ></shogi-player-wc>
+```
+
 ### `sp_pass_css`
 
 Type: `String`
 Default: `null`
 
-CSSの中身をそのまま渡す <Badge text="自己責任" type="error" vertical="top" />
+Shadow DOM 内に指定のCSSを渡す <Badge text="自己責任" type="error" vertical="top" />
 
-Shadow DOM 内外でCSSは隔離される。これは Web Components が他のWebページやWebアプリとの完全な分離を保証するために必要な機能だが、Web開発者にとっては制約となる場合もある。その制約を回避する抜け穴がこれになる。
+Shadow DOM 内でCSSは隔離される。これは Web Components が他のWebページやWebアプリとの完全な分離を保証するために必要な機能である。だがWeb開発者にとっては制約となる場合もある。その制約を回避する禁じ手がこれ。
+
+```html
+<shogi-player-wc
+  sp_pass_css=".ShogiPlayer { background-color: blue }"
+  ></shogi-player-wc>
+```
 
 ### `sp-pass-props`
 
@@ -523,10 +535,21 @@ Default: `null`
 `v-bind` 属性の代替
 
 * Web Components + Vue 3 専用
-* Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたとき snake_case なパラメータ名を持つ値が渡せない問題がある
+* Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたとき `snake_case` なパラメータ名を持つ値が渡せない問題がある
 * いまのところ、これを回避する方法がないため代替パラメータを用意した
-* 内容は JSON5 形式の文字列としてパースする
+* ここだけ例外的に `kebab-case` で書かないといけない
+* JSON5 形式の文字列としてパースする
 * 型変換は JSON5 のパーサーに任せているので Boolean 型の真は `"true"` ではなく `true` と書く
+
+```html
+<shogi-player-wc
+  sp-pass-props='{
+    sp_body: "position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f",
+    sp_controller: true,
+    sp_pass_style: "{\"--sp_board_color\": \"blue\"}",
+  }'
+  ></shogi-player-wc>
+```
 
 ## Development
 
