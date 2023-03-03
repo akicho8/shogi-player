@@ -42,15 +42,6 @@ task :dist do
   EOT
 end
 
-task :g => :generate
-desc "[g] generate"
-task :generate do
-  system <<~EOT
-  ruby components/extract_css_variables.rb
-  ruby components/extract_props.rb
-  EOT
-end
-
 desc "clean"
 task :clean do
   system <<~EOT
