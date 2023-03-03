@@ -37,7 +37,7 @@ vue.conifg.inspect.*
 
 # 検証
 /shogi-player-nuxt*
-/shogi-player-vue-cli*
+/shogi-player-vue2*
 
 # ゴミ
 /trash
