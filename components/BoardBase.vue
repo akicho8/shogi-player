@@ -89,9 +89,6 @@ export default {
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
 
 .ShogiPlayer
-  +defvar(sp_board_w, 1px)
-  +defvar(sp_board_h, 1px)
-
   // 全体背景と同じ構成
   +defvar(sp_board_color, hsla(0, 0%, 0%, 0.2))      // 盤の色
   +defvar(sp_board_even_cell_color, transparent) // セルの色
@@ -108,9 +105,6 @@ export default {
   +defvar(sp_board_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
   +defvar(sp_star_size, 0.1)                  // 星の大きさ
   +defvar(sp_star_z_index, 0)                 // 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)
-
-  // +defvar(sp_board_dimension_w, 9)                 // 盤のセル数(w)
-  // +defvar(sp_board_dimension_h, 9)                 // 盤のセル数(h)
 
   .BoardBase
     width: 100%

@@ -52,8 +52,6 @@ export default {
   +defvar(sp_touch_lifted_origin_opacity, 1.0)                     // 持ち上げた駒の元のセルの非透明度(touch)
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
-  +defvar(sp_cell_w, 47px)                // 盤上以外の駒セル(W) ※内部で使用
-  +defvar(sp_cell_h, 50px)                // 盤上以外の駒セル(H) ※内部で使用
   +defvar(sp_stand_piece_size, 0.8)            // 駒台のセル内の駒占有率
   +defvar(sp_piece_box_piece_size, 0.8)        // 駒箱のセル内の駒占有率
 

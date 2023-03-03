@@ -536,6 +536,7 @@ export default {
       ]
     },
 
+    // ここで定義するものは :root に定義してはいけない
     component_style() {
       return {
         ...this.sp_pass_style_native, // Web Components のための無理矢理スタイルを渡すためのもの
