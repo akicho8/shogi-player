@@ -198,15 +198,16 @@ task :k => :embed_to_nuxt_and_vue2
 desc "[k] embed_to_nuxt_and_vue2"
 task :embed_to_nuxt_and_vue2 do
   system <<~EOT
-  # r -Qx '"shogi-player": "file:.."' '"shogi-player": "^#{Package.version}"' shogi-player-vue2-sample/package.json shogi-player-nuxt-sample/package.json
+  r -Qx '"shogi-player": "file:.."' '"shogi-player": "^#{Package.version}"' shogi-player-vue2-sample/package.json shogi-player-nuxt-sample/package.json
+  # r -x '"shogi-player": "^\d+\.\d+\.\d+"' '"shogi-player": "file:.."'  shogi-player-vue2-sample/package.json shogi-player-nuxt-sample/package.json
 
   tmux kill-window -t vue2
   tmux new-window -n vue2
-  tmux send-keys -t vue2 'cd shogi-player-vue2-sample && vue-cli-service serve --port 4010 --open' C-m
+  tmux send-keys -t vue2 'cd shogi-player-vue2-sample && npm i && vue-cli-service serve --port 4010 --open' C-m
 
   tmux kill-window -t nuxt
   tmux new-window -n nuxt
-  tmux send-keys -t nuxt 'cd shogi-player-nuxt-sample && nuxt --port 4011 --open' C-m
+  tmux send-keys -t nuxt 'cd shogi-player-nuxt-sample && npm i && nuxt --port 4011 --open' C-m
   EOT
 end
 
