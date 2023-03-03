@@ -8,6 +8,10 @@ sidebar: auto
 
 * パラメータ名はすべて `sp_` で始まる
 * Function 型は `_fn` で終わる
+* Web Components 経由の場合複雑な型は使えない
+  * Hash 型などは JSON5 風の文字列として指定する
+  * 内部で JSON5 形式としてパースする
+  * Hash は正確には Object 型のこと
 
 ## Level 1
 
@@ -497,14 +501,14 @@ Default: `50`
 
 ### `sp_pass_style`
 
-Type: `String`
+Type: `String` `Hash`
 Default: `null`
 
 `style` 属性の代替
 
 * `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したいときに使う
 * Web Components では style を指定しても内側(Shadow Dom)には届かないため引数を設けている
-* ネイテイブなハッシュではなく**JSON5形式文字列**で指定する
+* また Web Components 経由ではネイテイブなハッシュは渡せないので**JSON5形式文字列**で指定する
 
 ```html
 <shogi-player-wc
@@ -539,15 +543,22 @@ Default: `null`
 * いまのところ、これを回避する方法がないため代替パラメータを用意した
 * ここだけ例外的に `kebab-case` で書かないといけない
 * JSON5 形式の文字列としてパースする
-* 型変換は JSON5 のパーサーに任せているので Boolean 型の真は `"true"` ではなく `true` と書く
+* 型変換は JSON5 のパーサーに任せている
+  * Boolean 型は `"true"` ではなく `true` と書く
+  * Hash も Hash 型としてそのまま記述する
+    * 文字列として書いてもよいがエスケープがものすごく大変になる
+* JSON5 なのでコメントも書ける
 
 ```html
 <shogi-player-wc
-  sp-pass-props='{
-    sp_body: "position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f",
+  sp-pass-props="{
+    sp_body: 'position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f',
     sp_controller: true,
-    sp_pass_style: "{\"--sp_board_color\": \"blue\"}",
-  }'
+    // CSS変数を渡す場合 ← コメント可
+    sp_pass_style: {
+      '--sp_board_color': 'blue',
+    },
+  }"
   ></shogi-player-wc>
 ```
 
@@ -564,7 +575,7 @@ Default: `false`
 
 Type: `String`
 Default: `left`
-Choice: `left` | `right` | `top` | `bottom`
+Choice: `left` `right` `top` `bottom`
 
 開発ツールの画面位置
 
@@ -572,7 +583,7 @@ Choice: `left` | `right` | `top` | `bottom`
 
 Type: `String`
 Default: `main`
-Choice: `main` | `style` | `Event` | `sfen` | `debug` | `props` | `data` | `cog`
+Choice: `main` `style` `Event` `sfen` `debug` `props` `data` `cog`
 
 開発ツールのタブ
 

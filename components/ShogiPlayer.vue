@@ -168,7 +168,7 @@ export default {
 
     // スタイル(Web Components 専用)
     sp_pass_style: {
-      type: String,
+      type: [String, Object],
       default: null,
     },
 
@@ -553,11 +553,15 @@ export default {
     root_container_query() { return "#" + this.root_container_id },
 
     // sp_pass_style の Hash 化
+    // ややこしいんだが spPassProps 経由で来た場合はすでに Object なので文字列のときだけ変換する
     sp_pass_style_native() {
       const v = this.sp_pass_style
-      if (v) {
-        return JSON5.parse(v)
+      if (v != null) {
+        if (typeof v === "string") {
+          return JSON5.parse(v)
+        }
       }
+      return v
     },
   },
 }

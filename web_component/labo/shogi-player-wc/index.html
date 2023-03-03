@@ -41,6 +41,12 @@
     <p>Web Components 版 (dist/shogi-player-wc.min.js)</p>
     <!-- sp-pass-props='{sp_controller: true}' -->
     <!-- sp-pass-props='{sp_pass_style: "{\"--sp_controller_width\":1.0}"}' -->
+    <!-- sp-pass-props='{ -->
+    <!--   sp_body: "position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f", -->
+    <!--   sp_controller: true, -->
+    <!--   sp_pass_style: "{\"--sp_board_color\": \"blue\"}", -->
+    <!-- }' -->
+
     <shogi-player-wc
       sp_pass_style="{'--sp_controller_width': 1.0}"
       sp_pass_css=".ShogiPlayer { background: red }"
@@ -57,11 +63,14 @@
       sp_controller="true"
       sp_slider="true"
       sp_body="position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f"
-      sp-pass-props='{
-        sp_body: "position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f",
+      sp-pass-props="{
+        sp_body: 'position sfen lnsgkgsnl/1r7/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1 moves 7a6b 7g7f 5c5d 2g2f',
         sp_controller: true,
-        sp_pass_style: "{\"--sp_board_color\": \"blue\"}",
-      }'
+        // コメント
+        sp_pass_style: {
+          '--sp_board_color': 'blue',
+        },
+      }"
       ></shogi-player-wc>
     <shogi-player-wc class="second"></shogi-player-wc>
     <shogi-player-wc></shogi-player-wc>
