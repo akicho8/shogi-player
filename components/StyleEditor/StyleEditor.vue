@@ -700,10 +700,6 @@ export default {
   },
 
   mounted() {
-    // setTimeout(() => {
-    //   this.sp_debug = true
-    // }, 3*1000)
-
     // FIXME: 動かない
     if (true) {
       const hash = this.$route.hash
