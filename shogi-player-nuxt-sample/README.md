@@ -1,7 +1,5 @@
 # shogi-player-nuxt-sample
 
-<p><a href="https://akicho8.github.io/shogi-player/"><img src="https://raw.githubusercontent.com/akicho8/shogi-player/master/shogi-player-nuxt-sample/application.png" height="640" /></a></p>
-
 これは [shogi-player](https://akicho8.github.io/shogi-player/) を Nuxt.js で使うサンプルです
 
 ## 最初の段階の構築手順

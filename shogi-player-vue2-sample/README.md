@@ -1,12 +1,58 @@
 # shogi-player-vue2-sample
 
-<p><a href="https://akicho8.github.io/shogi-player/"><img src="https://github.com/akicho8/shogi-player/raw/master/shogi-player-vue2-sample/application.png" height="640" /></a></p>
+これは [shogi-player](https://akicho8.github.io/shogi-player/) を Vue (2) cli で使うサンプルです
 
-これは [shogi-player](https://akicho8.github.io/shogi-player/) を vue cli で使うサンプルです
+## 最初の段階の構築手順
 
-この半自動生成スクリプト [shogi-player-vue2-sample-setup.sh](https://github.com/akicho8/shogi-player/blob/master/shogi-player-vue2-sample-setup.sh) で生成しました
+```shell
+# 本当は npm で動かしたいが @vue/vue-loader-v15@15.10.0' is not in the npm registry. の問題があって動かない
+# vue-loader-v15 は悪意のあるコードが仕込まれたため npm に削除された
+# でも yarn はなぜかその問題を回避できる
 
-## このサンプルの実行方法
+# 使用する node のバージョン
+# なるべく新しいので動かしたいが上げすぎると node-sass が動かないので注意
+export NODENV_VERSION=12.22.0
+
+# node の対応するバージョンがなければインストールする
+nodenv install --skip-existing $NODENV_VERSION
+
+# node の対応するバージョンがあるのを確認する
+node -v
+# v12.22.0
+
+# このあとの vue create で yarn が走るので入れておく
+npm i -g yarn
+
+# vue cli 本体をインストール
+# npm で入れる場合は npm install -g @vue/cli @vue/cli-service-global とする
+yarn global add @vue/cli
+yarn global add @vue/cli-service-global
+
+# @vue/cli のバージョン確認
+vue -V
+# @vue/cli 5.0.8
+
+rm -fr ~/src/shogi-player/shogi-player-vue2-sample
+mkdir -p ~/src/shogi-player
+cd ~/src/shogi-player
+
+# プロジェクト作成
+# Default ([Vue 2] babel, eslint) を選択する
+vue create shogi-player-vue2-sample
+
+# vue create で作成したディレクトリに移動
+cd ~/src/shogi-player/shogi-player-vue2-sample
+
+# バージョンを固定する
+nodenv local $NODENV_VERSION
+
+yarn add shogi-player
+
+# webpack5 で process が参照できない問題への対処するために必要
+yarn add process
+```
+
+## 実行方法
 ```
 yarn
 yarn serve --open --port 3100
