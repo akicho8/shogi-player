@@ -11,11 +11,11 @@ e = doc.at("path")
 e["stroke-width"]   = "10"
 e["stroke-opacity"] = "0.2"
 
-e["fill"] = "hsl(0 0% 0% / 1.0)"
+e["fill"] = "hsla(0, 0%, 0%, 1.0)"
 e["stroke"] = "rgb(255, 255, 255)"
 Pathname("black.svg").write(doc)
 
-e["fill"] = "hsl(0 0% 100% / 1.0)"
+e["fill"] = "hsla(0, 0%, 100%, 1.0)"
 e["stroke"] = "rgb(0, 0, 0)"
 Pathname("white.svg").write(doc)
 # >> <?xml version="1.0" encoding="UTF-8" standalone="no"?>

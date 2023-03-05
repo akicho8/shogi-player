@@ -73,9 +73,9 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  // loading: { color: "hsl(348 100% 61%)" }, // bulma red color
-  // loading: { color: "hsl(48 100% 67%)" }, // bulma yellow color
-  loading: { color: "hsl(0 0% 21%)" }, // bulma grey-daker color
+  // loading: { color: "hsl(348, 100%, 61%)" }, // bulma red color
+  // loading: { color: "hsl(48,  100%, 67%)" }, // bulma yellow color
+  loading: { color: "hsl(0, 0%, 21%)" }, // bulma grey-daker color
   /*
   ** Global CSS
   */

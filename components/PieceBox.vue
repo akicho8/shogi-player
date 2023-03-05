@@ -81,7 +81,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayer
-  +defvar(sp_piece_box_color, hsl(0 0% 0% / 0.2)) // 駒箱背景
+  +defvar(sp_piece_box_color, hsla(0, 0%, 0%, 0.2)) // 駒箱背景
 
   .PieceBox
     display: flex

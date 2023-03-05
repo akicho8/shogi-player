@@ -18,7 +18,7 @@ sidebar: auto
 ## 盤
 
 ### `--sp_board_color`
-Default: `hsl(0 0% 0% / 0.2)`
+Default: `hsla(0, 0%, 0%, 0.2)`
 
 盤の色
 
@@ -128,7 +128,7 @@ Default: `1`
 盤の内側の格子の太さ
 
 ### `--sp_grid_inner_color`
-Default: `hsl(0 0% 0% / 0.5)`
+Default: `hsla(0, 0%, 0%, 0.5)`
 
 盤の内側の格子の色
 
@@ -142,7 +142,7 @@ Default: `0`
   * 1 か 2 で印象が変わる
 
 ### `--sp_grid_outer_color`
-Default: `hsl(0 0% 0% / 0.5)`
+Default: `hsla(0, 0%, 0%, 0.5)`
 
 盤の外枠の色
 
@@ -179,12 +179,12 @@ Default: `0`
 ## 着手
 
 ### `--sp_piece_selectable_color`
-Default: `hsl(0 0% 0% / 0.15)`
+Default: `hsla(0, 0%, 0%, 0.15)`
 
 持ち上げることができる駒にマウスポインタを乗せたときの背景色
 
 ### `--sp_mouse_lifted_origin_bg_color`
-Default: `hsl(0 0% 0% / 0.15)`
+Default: `hsla(0, 0%, 0%, 0.15)`
 
 マウスポインタで持ち上げた駒の移動元の升目の背景色
 
@@ -196,7 +196,7 @@ Default: `0.0`
 半透明にすると駒が分身したかのように見える効果がある
 
 ### `--sp_touch_lifted_origin_bg_color`
-Default: `hsl(0 0% 0% / 0.15)`
+Default: `hsla(0, 0%, 0%, 0.15)`
 
 タッチ操作で持ち上げた駒の移動元のセルの背景色
 
@@ -206,7 +206,7 @@ Default: `1.0`
 タッチ操作で持ち上げた駒の移動元のセルの非透明度
 
 ### `--sp_piece_origin_color`
-Default: `hsl(0 0% 0% / 0.15)`
+Default: `hsla(0, 0%, 0%, 0.15)`
 
 着手後の移動元の背景色
 
@@ -218,7 +218,7 @@ Default: `0.8`
 駒台のセル内における駒の占有率
 
 ### `--sp_stand_hover_border_color`
-Default: `hsl(0 0% 0% / 0.2)`
+Default: `hsla(0, 0%, 0%, 0.2)`
 
 駒を持ったマウスに反応した駒台や駒箱のボーダー色
 
@@ -228,7 +228,7 @@ Default: `2`
 駒を持ったマウスに反応した駒台や駒箱のボーダーの太さ
 
 ### `--sp_stand_bg_color`
-Default: `hsl(0 0% 0% / 0)`
+Default: `hsla(0, 0%, 0%, 0)`
 
 駒台の背景色
 
@@ -249,7 +249,7 @@ Default: `0.8`
 駒箱のセル内における駒の占有率
 
 ### `--sp_piece_box_color`
-Default: `hsl(0 0% 0% / 0.2)`
+Default: `hsla(0, 0%, 0%, 0.2)`
 
 駒箱の背景色
 
@@ -307,12 +307,12 @@ Default: `0.2`
 * 駒のセルの縦幅に対する比率
 
 ### `--sp_piece_count_font_color`
-Default: `hsl(0 0% 0% / 0.75)`
+Default: `hsla(0, 0%, 0%, 0.75)`
 
 駒数の文字色
 
 ### `--sp_piece_count_bg_color`
-Default: `hsl(0 0% 100% / 0.9)`
+Default: `hsla(0, 0%, 100%, 0.9)`
 
 駒数の背景色
 
@@ -324,7 +324,7 @@ Default: `0.08`
 ## 成り不成り
 
 ### `--sp_promote_select_modal_bg_color`
-Default: `hsl(0 0% 0% / 0.5)`
+Default: `hsla(0, 0%, 0%, 0.5)`
 
 成り不成りオーバーレイの色
 
@@ -334,7 +334,7 @@ Default: `30`
 成り不成り選択オーバーレイの z-index
 
 ### `--sp_promote_select_modal_hover_color`
-Default: `hsl(0 0% 100% / 0.5)`
+Default: `hsla(0, 0%, 100%, 0.5)`
 
 成り不成り選択でマウスをホバーした側の駒の背景色
 
@@ -361,7 +361,7 @@ Default: `-0.009`
 盤面の右に表示するY座標の位置調整
 
 ### `--sp_coordinate_color`
-Default: `hsl(0 0% 0% / 0.75)`
+Default: `hsla(0, 0%, 0%, 0.75)`
 
 座標の文字色
 
