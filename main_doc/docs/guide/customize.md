@@ -10,7 +10,7 @@
 
 <CustomizeExample name="customize/real" />
 
-## ユニバーサルデザイン (図案駒)
+## ユニバーサルデザイン
 
 <CustomizeExample name="customize/universal" />
 
