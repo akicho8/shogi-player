@@ -74,11 +74,11 @@ Default: `0`
 * 縦配置時にのみ有効
 
 ### `--sp_common_gap`
-Default: `0.18`
+Default: `0.02`
 
 共通の隙間 <Badge text="要改善" type="error" vertical="top" />
 
-* 駒のセルの縦幅に対する割り合い
+* 盤の縦幅に対する割り合い
 * どこを表しているのかわかりにくい
 
 ## 盤上の駒

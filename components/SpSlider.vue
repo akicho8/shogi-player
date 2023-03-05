@@ -56,7 +56,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 
-$sp_slider_font_min: 8px       // SpController.vueの8pxと合わせたい
+$sp_slider_font_size: 0.015     // 盤の縦幅に対する割合
+$sp_slider_font_min: 8px       // ただしこれ以上は小さくしない(SpController.vueの8pxと合わせたい)
 
 .ShogiPlayer
   .b-slider
@@ -64,8 +65,8 @@ $sp_slider_font_min: 8px       // SpController.vueの8pxと合わせたい
     cursor: pointer
 
   .b-slider .b-slider-thumb-wrapper.has-indicator .b-slider-thumb
-    padding: 8px 4px
-    font-size: $sp_slider_font_min
+    padding: unquote("clamp(2px, calc(var(--sp_board_h) * 0.015), 8px)") unquote("clamp(2px, calc(var(--sp_board_w) * 0.015), 4px)")
+    font-size: unquote("max(calc(var(--sp_board_h) * #{$sp_slider_font_size}), #{$sp_slider_font_min})")
     &:focus
       outline: none // 青い枠を除去。フォーカスしているかどうかはサイズでわかるので不要
 

@@ -29,7 +29,7 @@ export default {
 @import "./support.sass"
 
 $sp_controller_font_size: 0.02     // 盤の縦幅に対する割合
-$sp_controller_font_min: 8px       // ただしこれ以上は小さくしない(SpController.vueの8pxと合わせたい)
+$sp_controller_font_min: 8px       // ただしこれ以上は小さくしない(SpSlider.vueの8pxと合わせたい)
 
 .ShogiPlayer
   .SpController

@@ -386,7 +386,7 @@
             b-slider(v-bind="slider_attrs" v-model="sp_location_mark_inactive_size" :min="0" :max="1.5" :step="0.01")
 
           b-field(custom-class="is-small" label="共通の隙間" message="駒セル縦幅に対する割合")
-            b-slider(v-bind="slider_attrs" v-model="sp_common_gap" :min="0" :max="1.0" :step="0.01")
+            b-slider(v-bind="slider_attrs" v-model="sp_common_gap" :min="0" :max="0.1" :step="0.0001")
 
           b-field(custom-class="is-small" label="モバイル時に縦配置にする")
             b-radio-button(size="is-small" v-model="sp_mobile_vertical" :native-value="false") OFF
@@ -596,7 +596,7 @@ export default {
       sp_location_mark_inactive_size: 0.5,
 
       sp_comment: false,
-      sp_common_gap: 0.18,
+      sp_common_gap: 0.02,
       sp_layer: DEVELOPMENT_P ? true : false,
       sp_piece_variant: "nureyon",    // d
       sp_board_variant: "none", // a
