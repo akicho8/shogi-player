@@ -19,3 +19,7 @@
 <CustomizeExample name="customize/kimetsu" />
 
 https://twitter.com/hamaki_shogi/status/1404658779380088835
+
+## 痛盤
+
+<CustomizeExample name="customize/itaban" />
