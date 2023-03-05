@@ -1146,9 +1146,9 @@ $sidebar_width_mobile:  100% * 3 / 4
     transform: unquote('perspective(var(--se_tf2_perspective)) translate3d(calc(var(--se_tf2_translate_x) * #{$dir}), calc(var(--se_tf2_translate_y) * #{$dir}), var(--se_tf2_translate_z)) rotateX(calc(var(--se_tf2_rotate_x) * #{$dir})) rotateY(calc(var(--se_tf2_rotate_y) * 1)) rotateZ(calc(var(--se_tf2_rotate_z) * 1)) scale(var(--se_tf2_scale))')
   &.is_tf2_mode_on
     .is_position_north
-      .PieceTexture
+      .PieceTextureWithCount
         +def_tf2(-1)
     .is_position_south
-      .PieceTexture
+      .PieceTextureWithCount
         +def_tf2(1)
 </style>

@@ -5,25 +5,25 @@
 
 %piece_black_only
   .is_position_north
-    .PieceTextureSelf
+    .PieceTexture
       @extend %is_flip
   .is_position_south
-    .PieceTextureSelf
+    .PieceTexture
 
 .ShogiPlayer
   &.is_piece_variant_nureyon
     @extend %piece_black_only
-    .PieceTextureSelf
+    .PieceTexture
       +piece_variant_nureyon_all
 
   &.is_piece_variant_paper
     @extend %piece_black_only
-    .PieceTextureSelf
+    .PieceTexture
       +piece_variant_paper_all
 
   &.is_piece_variant_zuan
     @extend %piece_black_only
-    .PieceTextureSelf
+    .PieceTexture
       +piece_variant_zuan_all
 
   // 画像自体に影が付いている
