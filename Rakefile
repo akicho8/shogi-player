@@ -109,14 +109,14 @@ task :update do
   system <<~EOT
   yarn global add npm-check-updates
   ncu /router/ -u
-  ncu lodash -u
-  ncu buefy -u
-  ncu bulma -u
-  ncu pug -u
-  ncu nuxt -u
+  ncu /lodash/ -u
+  ncu /buefy/ -u
+  ncu /bulma/ -u
+  # ncu pug -u
+  # ncu nuxt -u
   ncu js-memory-record -u
   ncu chroma.js -u
-  npm install
+  # npm install
   EOT
 end
 
