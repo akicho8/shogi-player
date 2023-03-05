@@ -585,6 +585,7 @@ export default {
 
   text-align: center
   line-height: 100%
+  box-sizing: border-box        // VuePress の中だけ不可解な大きさになるのはこれが適用されていないから
 
   // もしかしてこの下まったく要らない？ → いる
 

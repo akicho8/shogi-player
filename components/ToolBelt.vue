@@ -63,7 +63,8 @@ export default {
       &:hover
         background-color: $white-ter
     .location_name
-      padding: 0.6rem               // ここだけでかいので調整する
+      padding-left: 0.6rem               // ここだけでかいので調整する
+      padding-right: 0.6rem              // 縦は触るな
 
   &.is_layer_on
     .ToolBelt

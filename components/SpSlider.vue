@@ -65,14 +65,18 @@ $sp_slider_font_min: 8px       // ただしこれ以上は小さくしない(SpC
     cursor: pointer
 
   .b-slider .b-slider-thumb-wrapper.has-indicator .b-slider-thumb
-    padding: unquote("clamp(2px, calc(var(--sp_board_h) * 0.015), 8px)") unquote("clamp(2px, calc(var(--sp_board_w) * 0.015), 4px)")
-    font-size: unquote("max(calc(var(--sp_board_h) * #{$sp_slider_font_size}), #{$sp_slider_font_min})")
+    // padding: unquote("clamp(0px, calc(var(--sp_board_h) * 0.001), 6px)") unquote("clamp(2px, calc(var(--sp_board_w) * 0.001), 4px)")
+    // font-size: unquote("max(calc(var(--sp_board_h) * #{$sp_slider_font_size}), #{$sp_slider_font_min})")
+    // box-sizing: border-box
+    padding: 7px 3px
+    font-size: 8px
     &:focus
       outline: none // 青い枠を除去。フォーカスしているかどうかはサイズでわかるので不要
 
   // デフォルトのフォーカス時の拡大は大きすぎる
   .b-slider .b-slider-thumb-wrapper .b-slider-thumb:focus
-    transform: scale(1.1)
+    transform: unset
+    font-weight: bold
 
   &.is_layer_on
     .SpSlider
