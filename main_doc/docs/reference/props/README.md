@@ -509,10 +509,11 @@ Default: `null`
 * `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したいときに使う
 * Web Components では style を指定しても内側(Shadow Dom)には届かないため引数を設けている
 * また Web Components 経由ではネイテイブなハッシュは渡せないので**JSON5形式文字列**で指定する
+* ShogiPlayer.vue コンポーネントの style に渡す
 
 ```html
 <shogi-player-wc
-  sp_pass_style="{'--sp_board_color': 'blue'}"
+  sp_pass_style="{'--sp_board_color': 'lightskyblue'}"
   ></shogi-player-wc>
 ```
 
@@ -523,13 +524,22 @@ Default: `null`
 
 Shadow DOM 内に指定のCSSを渡す <Badge text="自己責任" type="error" vertical="top" />
 
-Shadow DOM 内でCSSは隔離される。これは Web Components が他のWebページやWebアプリとの完全な分離を保証するために必要な機能である。だがWeb開発者にとっては制約となる場合もある。その制約を回避する禁じ手がこれ。
+* Shadow DOM 内でCSSは隔離される。これは Web Components が他のWebページやWebアプリとの完全な分離を保証するために必要な機能である。だがWeb開発者にとっては制約となる場合もある。その制約を回避する禁じ手がこれ。
+* ShogiPlayer.vue コンポーネントの内側で style タグを生成してそのコンテンツとする
+
+例えばこれで盤のスタイルを自由に変えられるが後に `BoardBase` の名前は変わるかもしれない
 
 ```html
 <shogi-player-wc
-  sp_pass_css=".ShogiPlayer { background-color: blue }"
+  sp_pass_css=".BoardBase { background-color: lightskyblue }"
   ></shogi-player-wc>
 ```
+
+駒に影をつける例
+
+<IframeWrap name="props/sp_pass_css" />
+<<< @/docs/.vuepress/public/examples/props/sp_pass_css.html
+<LinkToExample name="props/sp_pass_css" />
 
 ### `sp-pass-props`
 

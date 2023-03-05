@@ -1,12 +1,12 @@
 <template>
-  <div class="CustomizeExample2">
+  <div class="IframeWrap">
     <iframe :src="html_file" frameborder="0" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "CustomizeExample2",
+  name: "IframeWrap",
   props: ["name"],
   computed: {
     html_file: e => `/examples/${e.name}.html`,
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.CustomizeExample2
+.IframeWrap
   display: flex
   justify-content: center
   // align-items: center

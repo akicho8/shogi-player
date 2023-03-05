@@ -42,7 +42,7 @@
 
 ## スタイル変更 ##
 
-<!-- <CustomizeExample2 name="style" /> -->
+<!-- <IframeWrap name="style" /> -->
 <<< @/docs/.vuepress/public/examples/style.html{7-9}
 <LinkToExample name="style" />
 
@@ -58,7 +58,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 ## 直接スタイル変更 ##
 
-<!-- <CustomizeExample2 name="sp_pass_style" /> -->
+<!-- <IframeWrap name="sp_pass_style" /> -->
 <<< @/docs/.vuepress/public/examples/sp_pass_style.html{9}
 <LinkToExample name="sp_pass_style" />
 
@@ -68,7 +68,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 ## イベント受信 ##
 
-<!-- <CustomizeExample2 name="event" /> -->
+<!-- <IframeWrap name="event" /> -->
 <<< @/docs/.vuepress/public/examples/event.html{8-11}
 <LinkToExample name="event" />
 
@@ -90,7 +90,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 ## レイアウト
 
-<!-- <CustomizeExample2 name="layout" /> -->
+<!-- <IframeWrap name="layout" /> -->
 <<< @/docs/.vuepress/public/examples/layout.html{7-14,21-25}
 <LinkToExample name="layout" />
 
