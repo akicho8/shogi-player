@@ -8,7 +8,8 @@
       box-sizing: border-box;
     }
     html {
-      background-color: hsl(319.52 100% 87.65%);
+      background-image: radial-gradient(hsl(196 100% 47% / 0.2) 30%, transparent 0%);
+      background-size: 64px 64px;
     }
     body {
       padding: 0;
@@ -21,10 +22,10 @@
       min-height: 100svh;
     }
     shogi-player-wc {
-      flex-basis: 640px;
+      flex-basis: 800px;
     }
     shogi-player-wc::part(root) {
-      --sp_board_image: url(img/waifu.png);
+      --sp_board_image: url(img/character.png);
     }
   </style>
 </head>
@@ -33,6 +34,7 @@
     <shogi-player-wc
       sp_piece_variant="nureyon"
       sp_mobile_vertical="false"
+      sp_pass_css=".PieceTexture { filter: drop-shadow(4px 4px 4px hsla(0 0% 0% / 0.5)) }"
       ></shogi-player-wc>
   </div>
 </body>
