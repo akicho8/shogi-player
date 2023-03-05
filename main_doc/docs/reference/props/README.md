@@ -527,11 +527,11 @@ Shadow DOM 内に指定のCSSを渡す <Badge text="自己責任" type="error" v
 * Shadow DOM 内でCSSは隔離される。これは Web Components が他のWebページやWebアプリとの完全な分離を保証するために必要な機能である。だがWeb開発者にとっては制約となる場合もある。その制約を回避する禁じ手がこれ。
 * ShogiPlayer.vue コンポーネントの内側で style タグを生成してそのコンテンツとする
 
-例えばこれで盤のスタイルを自由に変えられるが後に `BoardBase` の名前は変わるかもしれない
+例えばこれで盤のスタイルを自由に変えられるが後に `MainBoard` の名前は変わるかもしれない
 
 ```html
 <shogi-player-wc
-  sp_pass_css=".BoardBase { background-color: lightskyblue }"
+  sp_pass_css=".MainBoard { background-color: lightskyblue }"
   ></shogi-player-wc>
 ```
 
