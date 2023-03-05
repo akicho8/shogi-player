@@ -34,5 +34,5 @@ export default {
 <style lang="sass">
 @import "../support.sass"
 .MainDocViewDemo8
-  --sp_board_color: hsla(205.71,17.07%,59.8%,1)
+  --sp_board_color: hsl(205.71 17.07% 59.8% / 1)
 </style>

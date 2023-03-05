@@ -90,7 +90,7 @@ export default {
 
 .ShogiPlayer
   // 全体背景と同じ構成
-  +defvar(sp_board_color, hsla(0, 0%, 0%, 0.2))      // 盤の色
+  +defvar(sp_board_color, hsl(0 0% 0% / 0.2))      // 盤の色
   +defvar(sp_board_even_cell_color, transparent) // セルの色
   +defvar(sp_board_odd_cell_color,  transparent) // セルの色
   +defvar(sp_board_image, none)                    // 盤画像
@@ -99,8 +99,8 @@ export default {
   +defvar(sp_board_radius, 5)                      // 盤の隅の丸め度合い
 
   +defvar(sp_grid_outer_stroke, 0)                 // グリッドの外枠の太さ(紙面風のとき)
-  +defvar(sp_grid_outer_color, hsla(0, 0%, 0%, 0.5)) // グリッド外枠色
-  +defvar(sp_grid_inner_color, hsla(0, 0%, 0%, 0.5))       // グリッド色
+  +defvar(sp_grid_outer_color, hsl(0 0% 0% / 0.5)) // グリッド外枠色
+  +defvar(sp_grid_inner_color, hsl(0 0% 0% / 0.5))       // グリッド色
   +defvar(sp_grid_inner_stroke, 1)                       // グリッド太さ
   +defvar(sp_board_edge_stroke, 0)    // 盤背景の縁取りの太さ(影の影響あり)
   +defvar(sp_star_size, 0.1)                  // 星の大きさ
