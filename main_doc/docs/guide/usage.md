@@ -17,28 +17,23 @@
 <<< @/docs/.vuepress/public/examples/simple.html{3-4}
 <LinkToExample name="simple" />
 
-  * 棋譜を正しく読むため UTF-8 を明示する
-  * 反応遅延や意図しない画面ズームを防ぐため viewport を指定する
+棋譜を正しく読むため UTF-8 を明示する
+反応遅延や意図しない画面ズームを防ぐため viewport を指定する
 
 ## 棋譜再生 ##
 
-<<< @/docs/.vuepress/public/examples/view.html{9-11}
+<<< @/docs/.vuepress/public/examples/view.html{9-12}
 <LinkToExample name="view" />
 
-<!-- * **sp_body**: 棋譜を指定する -->
-<!-- * **sp_turn**: 局面を指定する -->
-<!-- * **sp_overlay_nav**: 盤面タップで局面を動かす -->
+最後の局面から表示させるときは `sp_turn="-1"` とする
 
-## コントローラー類を表示する ##
+## KIF再生 ##
 
-<<< @/docs/.vuepress/public/examples/view_with_controller.html{10-11}
-<LinkToExample name="view_with_controller" />
+<<< @/docs/.vuepress/public/examples/view_kif.html{9-14}
+<LinkToExample name="view_kif" />
 
-<!-- <ShogiPlayerWcWrapper -->
-<!--   class="is-small" -->
-<!--   sp_controller="true" -->
-<!--   sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b" -->
-<!-- /> -->
+SFEN と KIF (BOD) に対応している
+どちらも `sp_body` に指定する (自動判別)
 
 ## スタイル変更 ##
 
@@ -69,7 +64,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 ## イベント受信 ##
 
 <!-- <IframeWrap name="event" /> -->
-<<< @/docs/.vuepress/public/examples/event.html{8-11}
+<<< @/docs/.vuepress/public/examples/event.html{7-10}
 <LinkToExample name="event" />
 
 このあたりを HTML でがんばるなら [Lit](https://lit.dev/) などと組み合わせた方がいいかもしれない 
@@ -91,10 +86,10 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 ## レイアウト
 
 <!-- <IframeWrap name="layout" /> -->
-<<< @/docs/.vuepress/public/examples/layout.html{7-14,21-25}
+<<< @/docs/.vuepress/public/examples/layout.html{7-13}
 <LinkToExample name="layout" />
 
-明確なサイズを持っていないためデスクトップでは大きくなりすぎてしまう。そこで中央配置した上で、最大横幅を指定し、それ以下であれば画面幅に張り付くようにしたのが上の例になる。
+明確なサイズを持っていないためデスクトップでは大きくなりすぎてしまう。そこで中央配置した上で、最大横幅を指定し、それ以下であれば縮小するようにしたのが上の例になる。
 
 ## 命令型APIの呼び方
 
@@ -121,7 +116,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 `@x.x.x` でバージョンを固定できる
 https://unpkg.com/shogi-player@0.0.398/dist/wc/production/shogi-player-wc.min.js
 
-最新版バージョン→[![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
+最新バージョン → [![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
 
 ## トラブルシューティング
 
