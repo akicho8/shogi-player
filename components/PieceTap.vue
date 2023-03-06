@@ -2,10 +2,10 @@
 .PieceTap(v-if="count >= 1")
   // 駒を押せる部分
   .PieceTapBG.is-overlay
-  .PieceTextureWithCount
-    // PieceTextureWithCount の背景に画像を設定すると影が PieceCount にまで適用されるため個別にしている(重要)
+  .PieceObject
+    // PieceObject の背景に画像を設定すると影が PieceCount にまで適用されるため個別にしている(重要)
     .PieceTexture(:class="piece_texture_class")
-    // 駒テクスチャの大きさに依存させたいので中に PieceTextureWithCount のなかに入れている
+    // 駒テクスチャの大きさに依存させたいので中に PieceObject のなかに入れている
     PieceCount(:count="count")
 </template>
 
@@ -32,7 +32,7 @@ export default {
 //
 // .LiftedPieceElement // マウスの (x, y) を反映
 //   .PieceTap.is_position_north
-//     .PieceTextureWithCount
+//     .PieceObject
 //       .PieceTexture(駒の種類を定義するクラスたち)
 //
 
@@ -65,7 +65,7 @@ export default {
   &.is_layer_on
     .PieceTap
       +is_layer_border
-    .PieceTextureWithCount
+    .PieceObject
       +is_layer_border($danger)
 
   .PieceTap
@@ -74,10 +74,10 @@ export default {
       +is_overlay_block
 
   .PieceTap
-    // セル内の PieceTextureWithCount の配置
+    // セル内の PieceObject の配置
     // ここで縦位置を調整しようとすると先後別に分けないといけない
-    // 一方、PieceTextureWithCount は共通の処理でよい
-    // なので PieceTextureWithCount の方で縦位置を(必要であれば)調整する
+    // 一方、PieceObject は共通の処理でよい
+    // なので PieceObject の方で縦位置を(必要であれば)調整する
     // まぁあまり細かいことにはこだわらず常に中心配置でいいと思う
     display: flex
     justify-content: center
@@ -130,11 +130,11 @@ export default {
       background-color: var(--sp_piece_origin_color)
 
   ////////////////////////////////////////////////////////////////////////////////
-  .PieceTextureWithCount
+  .PieceObject
     +is_overlay_origin
     // 下に引く度合い
     // top: var(--piece_pull, 10%)
-  .PieceTexture // .PieceTextureWithCount:after の alias みたいなもの
+  .PieceTexture // .PieceObject:after の alias みたいなもの
     +is_overlay_block
 
     background-position: var(--sp_board_piece_position)
@@ -174,7 +174,7 @@ export default {
     .PieceTap
       width:  100%              // 外側の TD に合わせる
       height: 100%
-    .PieceTextureWithCount
+    .PieceObject
       width:  calc(var(--sp_board_piece_size) * 100%)
       height: calc(var(--sp_board_piece_size) * 100%)
 
@@ -183,7 +183,7 @@ export default {
     .PieceTap
       width:  var(--sp_cell_w)
       height: var(--sp_cell_h)
-    .PieceTextureWithCount
+    .PieceObject
       width:  calc(var(--sp_stand_piece_size) * 100%)
       height: calc(var(--sp_stand_piece_size) * 100%)
 
@@ -192,29 +192,29 @@ export default {
     .PieceTap
       width:  var(--sp_cell_w)
       height: var(--sp_cell_h)
-    .PieceTextureWithCount
+    .PieceObject
       width:  calc(var(--sp_piece_box_piece_size) * 100%)
       height: calc(var(--sp_piece_box_piece_size) * 100%)
 
   // 持ち上げ駒
-  // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceTextureWithCount は 100% 固定にする
+  // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceObject は 100% 固定にする
   .LiftedPieceElement
     width:  var(--sp_cell_w)
     height: var(--sp_cell_h)
     .PieceTap
       width:  100%     // 外側の大きさに合わせる
       height: 100%
-    .PieceTextureWithCount
+    .PieceObject
       width:  100%     // 縮小させない
       height: 100%
 
   // 持ち上げ駒
-  // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceTextureWithCount は 100% 固定にする
+  // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceObject は 100% 固定にする
   .PromoteSelectModal
     .PieceTap
       width:  var(--sp_cell_w)
       height: var(--sp_cell_h)
-    .PieceTextureWithCount
+    .PieceObject
       width:  80%
       height: 80%
 </style>

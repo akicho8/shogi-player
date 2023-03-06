@@ -30,7 +30,7 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
 
-  .PieceTextureWithCount
+  .PieceObject
     display: flex               // PieceCount を中央配置させるため
     justify-content: center
     align-items: center

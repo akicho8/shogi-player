@@ -11,9 +11,7 @@
     ・移動元の色を半透明にすると星まで半透明になる
 
   td                        ← TD にはいっさい駒の影響を与えないこと
-    .PieceTap             ← 選択可能なことを知らせたりする領域
-      .PieceTextureWithCount           ← 実際の駒テクスチャ
-
-  .board_container.font_size_base の下だけにサイズを指定しているので、その下の要素はすべて相対サイズになる
-
-  .font_size_base の下はすべて em で指定すること。
+    .PieceTap               ← 選択可能な部分を含めた四角形な領域
+      .PieceObject          ← 駒 (影はここに適用することで反転を考慮しなくてよくなる←重要)
+        .PieceTexture       ← ここが駒の本体で北側の駒なら反転する (portellaの場合は反転しない)
+        .PieceCount         ← 個数
