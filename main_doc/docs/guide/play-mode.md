@@ -11,4 +11,8 @@
 
 ## Playground
 
-<ShogiPlayerWcWrapper sp_mode="play" />
+<ShogiPlayerWcWrapper
+  sp_mode="play"
+  sp_controller="true"
+  sp_slider="true"
+/>
