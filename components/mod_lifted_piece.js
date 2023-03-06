@@ -65,9 +65,9 @@ export const mod_lifted_piece = {
     // FIXME: これ自力で作る必要あった？
     lp_element_create(soldier) {
       this.$data._LiftedPieceElement = this.lp_el_create(["LiftedPieceElement"])
-      const PieceTap           = this.lp_el_create(["PieceTap"])
-      const PieceObject       = this.lp_el_create(["PieceObject"])
-      const PieceTexture   = this.lp_el_create(["PieceTexture", ...soldier.css_class_list])
+      const PieceTap     = this.lp_el_create(["PieceTap"])
+      const PieceObject  = this.lp_el_create(["PieceObject"])
+      const PieceTexture = this.lp_el_create(["PieceTexture", ...soldier.css_class_list])
 
       PieceTap.classList.add(soldier.location.flip_if(this.fliped).position_key)
 
