@@ -1,0 +1,11 @@
+@import "variant/horizontal_number.sass"
+@import "variant/kanji.sass"
+@import "variant/number.sass"
+@import "variant/alphabet.sass"
+
+.ShogiPlayer
+  &.is_coordinate_on
+    +is_coordinate_variant_horizontal_number
+    +is_coordinate_variant_kanji
+    +is_coordinate_variant_number
+    +is_coordinate_variant_alphabet
