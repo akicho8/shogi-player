@@ -7,6 +7,8 @@
       v-model.number="TheSp.turn_edit_value"
       @input="TheSp.turn_edit_value_set"
       @blur="blur_handle"
+      :min="TheSp.turn_offset_min"
+      :max="TheSp.turn_offset_max"
       ref="turn_edit_input"
       )
   template(v-else)
