@@ -171,12 +171,12 @@ Default: `false`
 
 座標を表示するか？
 
-### `sp_coordinate_variant`
+### `sp_coordinate_variant_v`
 
 Type: `String`
 Default: `kanji`
 
-座標の表記
+右側面の座標の表記
 
 | 値       | 表記   |
 |----------|--------|

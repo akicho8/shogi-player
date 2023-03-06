@@ -140,7 +140,7 @@ export default {
     },
 
     // 座標の表記
-    sp_coordinate_variant: {
+    sp_coordinate_variant_v: {
       type: String,
       default: "kanji",
       validator(value) { return ["kanji", "number", "alphabet"].includes(value) },
@@ -518,7 +518,7 @@ export default {
 
         // String
         this.str_to_css_class("is_layout", this.sp_layout),                         // is_layout_horizontal is_layout_vertical
-        this.str_to_css_class("is_coordinate_variant", this.sp_coordinate_variant), // is_coordinate_variant_kanji
+        this.str_to_css_class("is_coordinate_variant_v", this.sp_coordinate_variant_v), // is_coordinate_variant_kanji
         this.str_to_css_class("is_name_direction", this.sp_name_direction),         // is_name_direction_horizontal
         this.str_to_css_class("is_stand_gravity", this.sp_stand_gravity),           // is_stand_gravity_top
         this.str_to_css_class("is_piece_variant", this.mut_piece_variant),          // is_piece_variant_nureyon

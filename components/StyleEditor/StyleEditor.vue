@@ -262,9 +262,9 @@
             b-radio-button(size="is-small" v-model="sp_coordinate" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_coordinate" :native-value="true") ON
           b-field(custom-class="is-small" label="右の表記")
-            b-radio-button(size="is-small" v-model="sp_coordinate_variant" native-value="kanji") 漢字
-            b-radio-button(size="is-small" v-model="sp_coordinate_variant" native-value="number") 数字
-            b-radio-button(size="is-small" v-model="sp_coordinate_variant" native-value="alphabet") アルファベット
+            b-radio-button(size="is-small" v-model="sp_coordinate_variant_v" native-value="kanji") 漢字
+            b-radio-button(size="is-small" v-model="sp_coordinate_variant_v" native-value="number") 数字
+            b-radio-button(size="is-small" v-model="sp_coordinate_variant_v" native-value="alphabet") アルファベット
 
           .columns.mt-5
             .column.py-0
@@ -603,7 +603,7 @@ export default {
 
       //////////////////////////////////////////////////////////////////////////////// 座標
       sp_coordinate: DEVELOPMENT_P ? true : false,
-      sp_coordinate_variant: DEVELOPMENT_P ? "alphabet" : "kanji",
+      sp_coordinate_variant_v: DEVELOPMENT_P ? "alphabet" : "kanji",
       sp_coordinate_x_size: 0.125,
       sp_coordinate_y_size: 0.168,
       sp_coordinate_x_push: 0.014,
@@ -758,7 +758,7 @@ export default {
       this.sp_player_info.white.name      = "後手"
 
       this.sp_coordinate                  = true               // 座標を表示する
-      this.sp_coordinate_variant          = "kanji"            // 座標の種類
+      this.sp_coordinate_variant_v          = "kanji"            // 座標の種類
       this.sp_board_horizontal_gap        = 0.2                // 座標があるため盤面の左右を空ける
       this.sp_coordinate_x_push           = 0.05               // 座標調整
       this.sp_coordinate_y_push           = 0.01               // 座標調整
@@ -883,7 +883,7 @@ export default {
       params.sp_dev_tools               = this.sp_dev_tools
       params.sp_turn_show             = this.sp_turn_show
       params.sp_coordinate           = this.sp_coordinate
-      params.sp_coordinate_variant   = this.sp_coordinate_variant
+      params.sp_coordinate_variant_v   = this.sp_coordinate_variant_v
       params.sp_stand_gravity         = this.sp_stand_gravity
       params.sp_name_direction = this.sp_name_direction
       params.sp_slider                = this.sp_slider
