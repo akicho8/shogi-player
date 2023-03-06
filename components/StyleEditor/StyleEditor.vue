@@ -5,7 +5,7 @@
   div(is="style" v-text="comment_removed_css")
   div(is="style" v-text="user_css")
 
-  b-sidebar.StyleEditor-Sidebar(fullheight right v-model="sidebar_p" position="fixed")
+  b-sidebar.StyleEditor-Sidebar(fullheight right v-model="sidebar_p" position="fixed" :can-cancel="['escape']")
     .mx-4.my-4
       .is-flex.is-justify-content-start.is-align-items-center
         b-button(@click="sidebar_toggle_handle" icon-left="menu")

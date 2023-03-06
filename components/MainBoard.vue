@@ -77,7 +77,7 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
-@import "./coordinate.sass"
+@import "./stylesheets/coordinate.sass"
 
 // 外枠 border をどこに適用するか？
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|
