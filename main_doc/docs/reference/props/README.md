@@ -535,7 +535,7 @@ Shadow DOM 内に指定のCSSを渡す <Badge text="自己責任" type="error" v
   ></shogi-player-wc>
 ```
 
-駒に影をつける例
+盤駒に影をつける例
 
 <IframeWrap name="props/sp_pass_css" />
 <<< @/docs/.vuepress/public/examples/props/sp_pass_css.html
