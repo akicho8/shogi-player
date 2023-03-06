@@ -13,19 +13,19 @@
 @import "coordinate_variant"
 
 .ShogiPlayer
-  +defvar(sp_coordinate_x_size, 0.125)             // 座標表記の文字サイズ(上)
-  +defvar(sp_coordinate_y_size, 0.168)             // 座標表記の文字サイズ(右)
-  +defvar(sp_coordinate_x_push, 0.014)             // 座標表記の位置調整(上)
-  +defvar(sp_coordinate_y_push, -0.009)            // 座標表記の位置調整(右)
+  +defvar(sp_coordinate_x_size, 0.125)                // 座標表記の文字サイズ(上)
+  +defvar(sp_coordinate_y_size, 0.168)                // 座標表記の文字サイズ(右)
+  +defvar(sp_coordinate_x_push, 0.014)                // 座標表記の位置調整(上)
+  +defvar(sp_coordinate_y_push, -0.009)               // 座標表記の位置調整(右)
   +defvar(sp_coordinate_color, hsla(0, 0%, 0%, 0.75)) // 座標表記の文字色
 
   &.is_coordinate_on
     .BoardMatrix
       // 共通のサイズ・色
       td:before, td:after
-        line-height: 100%    // フォントの上の隙間を取る
-        color:     var(--sp_coordinate_color)
-        z-index: 0  // -1 だと盤の裏にいってしまう
+        line-height: 1.0    // フォントの上の隙間を取る
+        color: var(--sp_coordinate_color)
+        z-index: 0          // -1 だと盤の裏にいってしまう
 
       // 横軸表記の位置調整
       td:before

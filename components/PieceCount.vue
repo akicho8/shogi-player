@@ -40,7 +40,7 @@ export default {
     font-size: calc(var(--sp_cell_h) * var(--sp_piece_count_size))
     padding:   calc(var(--sp_cell_w) * var(--sp_piece_count_padding)) calc(var(--sp_cell_h) * var(--sp_piece_count_padding))
 
-    line-height: 100%
+    line-height: 1.0
     border-radius: 50%
     font-weight: bold
 
