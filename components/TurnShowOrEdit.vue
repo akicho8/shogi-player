@@ -1,7 +1,14 @@
 <template lang="pug">
 .TurnShowOrEdit.is-unselectable(v-if="component_alive_p")
   template(v-if="TheSp.turn_edit_p")
-    b-input(size="is-small" type="number" v-model.number="TheSp.turn_edit_value" @input="TheSp.turn_edit_value_set" @blur="blur_handle" ref="turn_edit_input")
+    b-input(
+      size="is-small"
+      type="number"
+      v-model.number="TheSp.turn_edit_value"
+      @input="TheSp.turn_edit_value_set"
+      @blur="blur_handle"
+      ref="turn_edit_input"
+      )
   template(v-else)
     // is-inline-block にすることで縦の margin が効く
     .SpTurnText.is-inline-block(@click.stop.prevent="turn_edit_handle")
