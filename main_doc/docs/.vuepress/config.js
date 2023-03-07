@@ -89,6 +89,10 @@ module.exports = {
       },
 
       {
+        text: 'Demo',
+        link: 'https://akicho8.github.io/shogi-player/',
+      },
+      {
         text: 'スタイルエディタ',
         link: 'https://akicho8.github.io/shogi-player/style-editor',
       },
