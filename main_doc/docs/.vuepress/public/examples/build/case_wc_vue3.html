@@ -21,11 +21,11 @@
     <div id="app">
       <shogi-player-wc
         sp-pass-props='{
-                       sp_mode: "play",
-                       sp_body: "position startpos moves 7g7f 3c3d 8h2b+ 3a2b",
-                       sp_controller: true,
-                       sp_pass_style: "{\"--sp_controller_width\":1.0}",
-                       }'
+          sp_mode: "play",
+          sp_body: "position startpos moves 7g7f 3c3d 8h2b+ 3a2b",
+          sp_controller: true,
+          sp_pass_style: "{\"--sp_controller_width\": 1.0}",
+        }'
         @ev_play_mode_move="ev_play_mode_move"
         ></shogi-player-wc>
     </div>

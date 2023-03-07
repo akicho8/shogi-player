@@ -6,9 +6,9 @@ sidebar: auto
 
 ## 概要
 
-* パラメータ名はすべて `sp_` で始まる
+* すべて `sp_` で始まる
 * Function 型は `_fn` で終わる
-* Web Components 経由の場合複雑な型は使えない
+* Web Components 経由の場合、複雑な型は使えない
   * Hash 型などは JSON5 風の文字列として指定する
   * 内部で JSON5 形式としてパースする
   * Hash は正確には Object 型のこと
@@ -56,7 +56,8 @@ Default: `black`
 
 視点
 
-後手または上手視点にするには `white` を指定する
+* 後手または上手視点にするには `white` を指定する
+* .sync 対応
 
 | 値    | 視点 |
 |-------|------|

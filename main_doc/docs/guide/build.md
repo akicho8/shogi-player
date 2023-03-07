@@ -7,6 +7,11 @@
 
 Also see: [使い方](/guide/usage/)
 
+## Ruby
+
+<<< @/docs/.vuepress/public/examples/build/case_wc_ruby.html
+<LinkToExample name="build/case_wc_ruby" />
+
 ## React
 
 <<< @/docs/.vuepress/public/examples/build/case_wc_react.html
@@ -73,13 +78,13 @@ Also see: [使い方](/guide/usage/)
 
 * 手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いている
 
-## [WIP] Vue.js 2 (vue/cli) + UMD
+## Vue.js 2 (vue/cli) + UMD [WIP]
 
 * 手動で組み込んだ例を [shogi-player-vue2-sample-umd](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample-umd) に置いている
 * すでにビルドしているため `vue.config.js` に何も書かなくても動く
 * CSSも js に含んでいるため読み込まなくて良い
 * しかしパスおかしい
-* `/img` が `/js/img` になってしまう (お手上げ)
+* `/img` が `/js/img` になってしまう
 
 ## 自力ビルドの要点
 

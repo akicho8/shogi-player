@@ -5,35 +5,30 @@
 <<< @/docs/.vuepress/public/examples/fragment.html
 <LinkToExample name="fragment" />
 
-上の2行だけのHTMLを作るか既存のサイトにコピペして動けば次へ
-
-<!-- ::: warning 注意 -->
-<!-- `<shogi-player-wc/>` とすると複数配置できなくなる罠がある (なぜかはわからない) -->
-<!-- 冗長だが `<shogi-player-wc></shogi-player-wc>` が正しい -->
-<!-- ::: -->
+上の2行だけのHTMLを作るか、既存のサイトにコピペして動けば次へ
 
 ## 文字コードやスマホを考慮する
 
 <<< @/docs/.vuepress/public/examples/simple.html{3-4}
 <LinkToExample name="simple" />
 
-棋譜を正しく読むため UTF-8 を明示する
-反応遅延や意図しない画面ズームを防ぐため viewport を指定する
+* 棋譜を正しく読むため UTF-8 を明示する
+* 反応遅延や意図しない画面ズームを防ぐため viewport を指定する (←超重要)
 
-## 棋譜再生 ##
+## 棋譜再生 (SFEN) ##
 
-<<< @/docs/.vuepress/public/examples/view.html{9-12}
+<<< @/docs/.vuepress/public/examples/view.html{8-11}
 <LinkToExample name="view" />
 
 最後の局面から表示させるときは `sp_turn="-1"` とする
 
-## KIF再生 ##
+## 棋譜再生 (KIF) ##
 
 <<< @/docs/.vuepress/public/examples/view_kif.html{9-14}
 <LinkToExample name="view_kif" />
 
 SFEN と KIF (BOD) に対応している
-どちらも `sp_body` に指定する (自動判別)
+どちらも `sp_body` に指定する (自動判別する)
 
 ## スタイル変更 ##
 
@@ -59,7 +54,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 引数の `sp_pass_style` に書いても変更できるようにしてある
 これはタグの style を直接書くのに似ていて分けて書いたときより詳細度が高い
-本来機能とスタイルは分けるべきとされているが目的駆動と考えればまとめる方が合理的なので実験的に入れてある
+古の技術駆動では機能とスタイルは分けるべきとされているが目的駆動であればまとめて書くの方が普通にわかりやすいので入れてある
 
 ## イベント受信 ##
 
@@ -83,7 +78,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <!-- /> -->
 <!-- ``` -->
 
-## レイアウト
+## レイアウト例
 
 <!-- <IframeWrap name="layout" /> -->
 <<< @/docs/.vuepress/public/examples/layout.html{7-13}
@@ -95,6 +90,9 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 <<< @/docs/.vuepress/public/examples/api.html{7-11}
 <LinkToExample name="api" />
+
+* 基本的に使うことはないが特別なことをしたいときは上のようにして呼ぶ
+* 隔離したはずの世界を自由に触れてしまうこの仕組みは数年後にはできなくなっているかもしれない
 
 ## CDN
 

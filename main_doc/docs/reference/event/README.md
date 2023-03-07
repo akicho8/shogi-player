@@ -122,12 +122,12 @@ APIで内部変数を参照するちらを使った方が良い
 
 * `click` の場合はだいたい `sp_operation_disabled` と組み合わせる
 
-## コンポーネント内部からの引数の更新
+## コンポーネント内部からの更新通知
 
 * すべて [.sync 修飾子](https://jp.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A3%BE%E5%AD%90) 用
-* `sp_viewpoint` は☗☖のクリックで切り替わる
-* `sp_turn` に `-1` が指定されたとき必ず呼ばれてしまうため使いづらい
-* その他は内部の設定モーダルから更新される場合がある
 * 以下は内部で変更があると `update:xxx` のイベントを発行する
   * `sp_turn`
   * `sp_viewpoint`
+* `sp_viewpoint` は☗☖のクリックで切り替わる
+* `sp_turn` に `-1` が指定されたとき必ず呼ばれてしまうため使いづらい
+* その他は内部の設定モーダルから更新される場合がある

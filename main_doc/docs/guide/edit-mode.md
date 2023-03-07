@@ -1,11 +1,9 @@
 # 編集モード
 
-## 詰将棋用の配置で始める
+## 特徴
 
-```html
-<shogi-player-wc
-  sp_mode="edit"
-  sp_preset="詰将棋" />
-```
+* 詰将棋や課題局面を作るときのモード
+
+## Playground
 
 <ShogiPlayerWcWrapper sp_mode="edit" sp_preset="詰将棋" class="is-small" />

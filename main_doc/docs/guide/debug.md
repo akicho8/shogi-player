@@ -5,7 +5,7 @@
 <<< @/docs/.vuepress/public/examples/debug/sp_dev_tools.html{2}
 <LinkToExample name="debug/sp_dev_tools" />
 
-`Shift` `Option` `Command` を押しながら天王山を右クリックでも起動する
+`Shift` `Option` `Command` を押しながら`天王山`を`右クリック`でも起動する
 
 ## `sp_debug` を有効にする
 

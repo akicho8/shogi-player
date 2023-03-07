@@ -6,8 +6,8 @@ sidebar: auto
 
 ## 概要
 
-* CSS変数は基本 `:root` に対して定義している
-* Web Components 版は `:host` に定義している
+* すべて `sp_` から始まる
+* `:root` に対して定義している (Web Components の場合は `:host`)
 * セルと駒の占有率について
   * セルは駒をタップできる領域
   * 占有率は簡単に言えば駒の見た目の大きさになる
@@ -120,7 +120,7 @@ Default: `center`
 | center | 中央   | 初期値                                 |
 | bottom | 下寄せ | 升目の下方向に駒の下底を合わせたいとき |
 
-## 格子 (グリッド)
+## 格子
 
 ### `--sp_grid_inner_stroke`
 Default: `1`
@@ -385,12 +385,12 @@ Default: `none`
 ### `--sp_board_dimension_w`
 Default: `9`
 
-盤面の横のセル数
+現在の盤面の横のセル数
 
 ### `--sp_board_dimension_h`
 Default: `9`
 
-盤面の縦のセル数
+現在の盤面の縦のセル数
 
 ### `--sp_board_w`
 Default: `47px`

@@ -1,22 +1,22 @@
 ---
 home: true
 # heroImage: https://raw.github.com/akicho8/shogi-player/master/application.png
-tagline: WEBブラウザ用の将棋盤コンポーネント
-actionText: Quick Start →
+tagline: WEBブラウザ用の将棋盤
+actionText: START
 actionLink: /guide/
 features:
 - title: 3つのモード
-  details: 棋譜を閲覧するための再生モード・対戦するときの操作モード・詰将棋を作るときの編集モードがある
+  details: 棋譜を見るための「再生モード」と対戦するときの「操作モード」と詰将棋を作るときの「編集モード」がある
 - title: モバイル対応
   details: レスポンシブ対応でスマホの縦長画面に対してはレイアウトを動的に変えて狭い画面を活用する
 - title: カスタマイズ
   details: オプションで調整が可能。見た目に関してはあらかじめ用意してあるCSS変数で対応する
 - title: Web Components
-  details: 数行のコピペで設置可。静的サイト・WordPress・Next.js 等、既存の環境を守ったまま組み込める
+  details: 数行のコピペで設置可。静的サイト・WordPress・Next.js 等、既存の環境を安全にして組み込める
 - title: 棋譜形式
   details: SFEN の他に一般的な KIF や BOD を読み込む。コメント付きの KIF であればオプションで表示する
 - title: 高速編集
-  details: 編集モードではマウスとキーボード操作の組み合わせで詰将棋や課題局面を素早く作れる
+  details: 編集モードではマウスとキーボードの組み合わせで詰将棋や課題局面を素早く作れる
 footer: MIT Licensed
 ---
 
