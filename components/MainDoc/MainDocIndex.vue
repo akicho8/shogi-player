@@ -17,7 +17,7 @@
         b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_sound_timing'}") 音タイミング
   .MainDocDemo.section.is-paddingless.is-marginless
     .container.is-fluid
-      .title.is-4.mt-6 1. 再生モード (view)
+      .title.is-4.mt-6 1. 再生モード
       .columns.is-centered
         MainDocViewDemo1.is-10-tablet.is-8-desktop.is-6-widescreen
       .columns.mt-6
@@ -31,7 +31,7 @@
       .columns.mt-6.is-centered
         MainDocViewDemo8.is-11-tablet.is-10-desktop.is-9-widescreen
 
-      .title.is-4.mt-6 2. 操作モード (play)
+      .title.is-4.mt-6 2. 操作モード
       .columns
         MainDocPlayDemo1
         MainDocPlayDemo2
