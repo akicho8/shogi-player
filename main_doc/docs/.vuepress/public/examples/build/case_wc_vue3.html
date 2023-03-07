@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.399/dist/wc/production/shogi-player-wc.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/vue@3"></script>
-  <script type="module">
-    const app = Vue.createApp({
-      methods: {
-        ev_play_mode_move(e) {
-          alert(e.detail[0].last_move_info.to_kif)
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.399/dist/wc/production/shogi-player-wc.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <script type="module">
+      const app = Vue.createApp({
+        methods: {
+          ev_play_mode_move(e) {
+            alert(e.detail[0].last_move_info.to_kif)
+          },
         },
-      },
-    })
-    app.config.compilerOptions.isCustomElement = tag => tag === "shogi-player-wc"
-    app.mount("#app")
-  </script>
-</head>
-<body>
-  <div id="app">
-    <shogi-player-wc
-      sp-pass-props='{
-      sp_mode: "play",
-      sp_body: "position startpos moves 7g7f 3c3d 8h2b+ 3a2b",
-      sp_controller: true,
-      sp_pass_style: "{\"--sp_controller_width\":1.0}",
-      }'
-      @ev_play_mode_move="ev_play_mode_move"
-      ></shogi-player-wc>
-  </div>
-</body>
+      })
+      app.config.compilerOptions.isCustomElement = tag => tag === "shogi-player-wc"
+      app.mount("#app")
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <shogi-player-wc
+        sp-pass-props='{
+                       sp_mode: "play",
+                       sp_body: "position startpos moves 7g7f 3c3d 8h2b+ 3a2b",
+                       sp_controller: true,
+                       sp_pass_style: "{\"--sp_controller_width\":1.0}",
+                       }'
+        @ev_play_mode_move="ev_play_mode_move"
+        ></shogi-player-wc>
+    </div>
+  </body>
 </html>

@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.399/dist/wc/production/shogi-player-wc.min.js"></script>
-  <script type="module">
-    class ShogiBoard extends HTMLElement {
-      constructor() {
-        super()
-        this.attachShadow({mode: "open"})
-      }
-      connectedCallback() {
-        this.shadowRoot.innerHTML = `
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.399/dist/wc/production/shogi-player-wc.min.js"></script>
+    <script type="module">
+      class ShogiBoard extends HTMLElement {
+        constructor() {
+          super()
+          this.attachShadow({mode: "open"})
+        }
+        connectedCallback() {
+          this.shadowRoot.innerHTML = `
           <shogi-player-wc
             sp_mode="play"
             sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
             sp_controller="true"
           ></shogi-player-wc>`
-        const el = this.shadowRoot.querySelector("shogi-player-wc")
-        el.addEventListener("ev_play_mode_move", e => alert(e.detail[0].last_move_info.to_kif))
+          const el = this.shadowRoot.querySelector("shogi-player-wc")
+          el.addEventListener("ev_play_mode_move", e => alert(e.detail[0].last_move_info.to_kif))
+        }
       }
-    }
-    customElements.define("shogi-board", ShogiBoard)
-  </script>
-</head>
-<body>
-  <shogi-board></shogi-board>
-</body>
+      customElements.define("shogi-board", ShogiBoard)
+      </script>
+  </head>
+  <body>
+    <shogi-board></shogi-board>
+  </body>
 </html>

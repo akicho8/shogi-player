@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.399/dist/wc/production/shogi-player-wc.min.js"></script>
-  <script type="module">
-    class ShogiBoard extends HTMLElement {
-      constructor() {
-        super()
-        this.attachShadow({mode: "open"})
-      }
-      static get observedAttributes() {
-        return ["source"]
-      }
-      attributeChangedCallback(name, oldValue, newValue) {
-        if (name === "source") {
-          this.source = newValue
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.399/dist/wc/production/shogi-player-wc.min.js"></script>
+    <script type="module">
+      class ShogiBoard extends HTMLElement {
+        constructor() {
+          super()
+          this.attachShadow({mode: "open"})
         }
-        if (this.isConnected) {
-          this.render()
+        static get observedAttributes() {
+          return ["source"]
         }
-      }
-      render() {
-        this.shadowRoot.innerHTML = `
+        attributeChangedCallback(name, oldValue, newValue) {
+          if (name === "source") {
+            this.source = newValue
+          }
+          if (this.isConnected) {
+            this.render()
+          }
+        }
+        render() {
+          this.shadowRoot.innerHTML = `
           <style>
             :host {
               display: block;
@@ -47,16 +48,16 @@
             ></shogi-player-wc>
           </div>
         `
-        const el = this.shadowRoot.querySelector("shogi-player-wc")
-        el.addEventListener("ev_play_mode_move", e => alert(e.detail[0].last_move_info.to_kif))
+          const el = this.shadowRoot.querySelector("shogi-player-wc")
+          el.addEventListener("ev_play_mode_move", e => alert(e.detail[0].last_move_info.to_kif))
+        }
       }
-    }
-    customElements.define("shogi-board", ShogiBoard)
-    // Reactive Test
-    // setTimeout(() => document.querySelector('shogi-board').setAttribute("source", "position startpos moves 7g7f"), 1000 * 1)
-    </script>
-</head>
-<body>
-  <shogi-board source="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"></shogi-board>
-</body>
+      customElements.define("shogi-board", ShogiBoard)
+      // Reactive Test
+      // setTimeout(() => document.querySelector('shogi-board').setAttribute("source", "position startpos moves 7g7f"), 1000 * 1)
+      </script>
+  </head>
+  <body>
+    <shogi-board source="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"></shogi-board>
+  </body>
 </html>
