@@ -1,12 +1,11 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.7)
+    activesupport (7.0.4.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     concurrent-ruby (1.2.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -14,13 +13,13 @@ GEM
     minitest (5.17.0)
     table_format (0.0.15)
       activesupport
-    tzinfo (2.0.5)
+    tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    zeitwerk (2.6.6)
 
 PLATFORMS
   x86_64-darwin-17
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   json
