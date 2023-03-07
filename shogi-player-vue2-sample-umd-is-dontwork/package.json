@@ -1,16 +1,16 @@
 {
-  "name": "shogi-player-vue2-sample",
+  "name": "shogi-player-vue2-sample-umd-is-dontwork",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.8.3",
     "process": "^0.11.10",
-    "shogi-player": "file:../",
+    "shogi-player": "^0.0.399",
     "vue": "^2.6.14"
   },
   "devDependencies": {
