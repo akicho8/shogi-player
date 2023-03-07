@@ -4,13 +4,13 @@ task :s => "server"
 desc "[s] server"
 task :server do
   system <<~EOT
-  vue-cli-service serve --port 3995 --open
+  vue-cli-service serve --port 4005 --open
   EOT
 end
 
-task :b => "build"
+task :w => "wc"
 desc "[b] build"
-task :build do
+task :wc do
   system <<~EOT
   SP_TARGET=wc vue-cli-service build --mode development --dest labo/shogi-player-wc/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWc.vue
   open labo/shogi-player-wc/index.html

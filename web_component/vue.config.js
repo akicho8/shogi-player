@@ -27,21 +27,21 @@ module.exports = {
     ],
   },
 
- // chainWebpack: (config) => {
- //   config.module
- //     .rule('images')
- //     // .test(/\.(otf|eot|svg|ttf|woff|woff2|svg|gif|png)(\?.+)?$/)
- //     .use('url-loader')
- //     .loader('url-loader')
- //     .tap(options => {
- //       return {
- //         ...options,
- //         limit: Infinity,
- //         encoding: 'base64',
- //         esModule: false,
- //       };
- //     })
- // },
+  // chainWebpack: (config) => {
+  //   config.module
+  //     .rule('images')
+  //     .test(/\.(otf|eot|svg|ttf|woff|woff2|svg|gif|png)(\?.+)?$/)
+  //     .use('url-loader')
+  //     .loader('url-loader')
+  //     .tap(options => {
+  //       return {
+  //         ...options,
+  //         limit: Infinity,
+  //         encoding: 'base64',
+  //         esModule: false,    // ← 効かない
+  //       };
+  //     })
+  // },
 
   // chainWebpack: config => {
   //   config.module
@@ -67,7 +67,7 @@ module.exports = {
       sass: {
         additionalData: `
 @import "@/sp_sass_variables.sass"
-@import "@/sp_sass_variables_${process.env.SP_TARGET}.sass"
+@import "@/sp_sass_variables_${process.env.SP_TARGET || 'none'}.sass"
 `
       }
     },

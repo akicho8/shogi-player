@@ -62,15 +62,24 @@ Also see: [使い方](/guide/usage/)
 * `sp-pass-props` の内容は最終的に `$props` 相当として内部で扱う
 :::
 
-## Vue.js 2 + ShogiPlayer.vue
+## Vue.js 2 (vue/cli) + ShogiPlayer.vue
 
-手動で組み込んだ例を [shogi-player-vue2-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample) に置いている
-もともと Vue.js 2 製なので Vue.js 2 とは親和性が高い
-ただし[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがある
+* 手動で組み込んだ例を [shogi-player-vue2-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample) に置いている
+* もともと Vue.js 2 製なので Vue.js 2 とは親和性が高い
+* ただし[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがある
+* その上 `node-sass` も `dart-sass` と干渉するかもしれない
+
+## [WIP] Vue.js 2 (vue/cli) + Webpack + UMD
+
+* 手動で組み込んだ例を [shogi-player-vue2-sample-umd-is-dontwork](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample-umd-is-dontwork) に置いている
+* すでにビルドしているため `vue.config.js` に何も書かなくても動く
+* CSSも js に含んでいるため読み込まなくて良い
+* しかしパスおかしい
+* `/img` が `/js/img` になってしまう (お手上げ)
 
 ## Nuxt.js + ShogiPlayer.vue
 
-手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いている
+* 手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いている
 
 ## 自力ビルドの要点
 
