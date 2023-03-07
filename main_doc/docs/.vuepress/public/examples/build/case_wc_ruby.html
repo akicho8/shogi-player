@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@0.0.399/dist/wc/production/shogi-player-wc.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/ruby-head-wasm-wasi@latest/dist/browser.script.iife.js"></script>
+    <script type="text/ruby">
+      require "js"
+      document = JS.global[:document]
+      el = document.querySelector("shogi-player-wc")
+      el.setAttribute("sp_body", "position startpos moves 7g7f 3c3d 8h2b+ 3a2b")
+      el.addEventListener("ev_play_mode_move") do |e|
+        JS.global.alert(e[:detail][0][:last_move_info][:to_kif])
+      end
+    </script>
+  </head>
+  <body>
+    <shogi-player-wc sp_mode="play"></shogi-player-wc>
+  </body>
+</html>
