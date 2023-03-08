@@ -64,13 +64,10 @@ export default {
   .is_white
     .MembershipLocationMarkTexture
       background-image: url("../../assets/location/white.svg")
-      // background-image: url("#{$sp_assets_dir}/location/white.svg")
 
   .is_black
     .MembershipLocationMarkTexture
       background-image: url("../../assets/location/black.svg")
-      // background-image: url("~/assets/location/black.svg")
-      // background-image: url("#{$sp_assets_dir}/location/black.svg")
 
   .is_position_north
     .MembershipLocationMarkTexture

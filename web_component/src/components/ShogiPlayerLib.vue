@@ -34,13 +34,6 @@ export default {
 // // @import "@mdi/font/css/materialdesignicons.min.css"
 //
 // // ShogiPlayer のスタイルを読み込む
-// //
-// // この場所から assets への相対パスを指定する
-// // ShogiPlayer.sass はそれを見て assets の場所がわかる
-// // $sp_assets_dir: "shogi-player/assets"
-// // $sp_css_root: ".ShogiPlayerLib2"
-// // // // // Web Components にした場合 html 内に定義しても shadow-root の中に届かない
-// // // // // なので Web Components 内に初期値を適用する
 // @import "shogi-player/components/ShogiPlayer.sass"
 //
 // // CSS側で読み込むと Web Components 内に含まれる

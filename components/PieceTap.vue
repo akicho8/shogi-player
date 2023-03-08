@@ -29,6 +29,11 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+
+// *.vue の中から読み込むのが重要
+// ここからの相対パスで assets を指定することでパスが確定される
+@import "./PieceTap/piece_variant.sass"
+
 //
 // .LiftedPieceElement // マウスの (x, y) を反映
 //   .PieceTap.is_position_north
@@ -37,6 +42,7 @@ export default {
 //
 
 .ShogiPlayer
+
   ////////////////////////////////////////////////////////////////////////////////
 
   +defvar(sp_board_piece_size, 0.9)                         // 盤のセル内の駒占有率

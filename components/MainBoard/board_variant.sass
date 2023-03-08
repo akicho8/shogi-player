@@ -1,0 +1,8 @@
+=board_variant_define($key)
+  .ShogiPlayer
+    &.is_board_variant_#{$key}
+      .BoardTexture
+        background-image: url("../assets/board_variant/#{$key}.png")
+
++board_variant_define("wood_normal")
++board_variant_define("wood_bright")

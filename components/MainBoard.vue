@@ -77,7 +77,9 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+
 @import "./MainBoard/coordinate.sass"
+@import "./MainBoard/board_variant.sass"
 
 // 外枠 border をどこに適用するか？
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|

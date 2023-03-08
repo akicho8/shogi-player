@@ -32,10 +32,6 @@ export default {
 </script>
 
 <style lang="sass">
-// ShogiPlayer のスタイルを読み込む
-// できれば $sp_assets_dir は取りたい
-// 本当は ShogiPlayer.sass からの相対パスで assets の場所が指定できればいいけどわからないので新たに設定してもらう形にしている
-$sp_assets_dir: "shogi-player/assets"
 @import "shogi-player/components/ShogiPlayer.sass"
 
 // これは public/index.html で普通に読み込んだ方がいい
