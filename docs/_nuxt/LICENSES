@@ -57,49 +57,55 @@
 
 
 /*!
- * XRegExp 4.4.1
+  * vue-scrollto v2.20.0
+  * (c) 2019 Randjelovic Igor
+  * @license MIT
+  */
+
+/*!
+ * vue-client-only v0.0.0-semantic-release
+ * (c) 2021-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+/*!
+ * vue-no-ssr v1.1.1
+ * (c) 2018-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+
+/*!
+ * XRegExp 5.1.1
  * <xregexp.com>
  * Steven Levithan (c) 2007-present MIT License
  */
 
 /*!
- * XRegExp Unicode Base 4.4.1
+ * XRegExp Unicode Base 5.1.1
  * <xregexp.com>
  * Steven Levithan (c) 2008-present MIT License
  */
 
 /*!
- * XRegExp Unicode Blocks 4.4.1
+ * XRegExp Unicode Categories 5.1.1
  * <xregexp.com>
  * Steven Levithan (c) 2010-present MIT License
  * Unicode data by Mathias Bynens <mathiasbynens.be>
  */
 
 /*!
- * XRegExp Unicode Categories 4.4.1
- * <xregexp.com>
- * Steven Levithan (c) 2010-present MIT License
- * Unicode data by Mathias Bynens <mathiasbynens.be>
- */
-
-/*!
- * XRegExp Unicode Properties 4.4.1
+ * XRegExp Unicode Properties 5.1.1
  * <xregexp.com>
  * Steven Levithan (c) 2012-present MIT License
  * Unicode data by Mathias Bynens <mathiasbynens.be>
  */
 
 /*!
- * XRegExp Unicode Scripts 4.4.1
+ * XRegExp Unicode Scripts 5.1.1
  * <xregexp.com>
  * Steven Levithan (c) 2010-present MIT License
  * Unicode data by Mathias Bynens <mathiasbynens.be>
- */
-
-/*!
- * XRegExp 4.4.1
- * <xregexp.com>
- * Steven Levithan (c) 2007-present MIT License
  */
 
 
@@ -109,12 +115,10 @@
  * Released under the MIT License.
  */
 
-
 /*!
- * XRegExp Unicode Scripts 4.4.1
+ * XRegExp 5.1.1
  * <xregexp.com>
- * Steven Levithan (c) 2010-present MIT License
- * Unicode data by Mathias Bynens <mathiasbynens.be>
+ * Steven Levithan (c) 2007-present MIT License
  */
 
 
@@ -177,21 +181,10 @@
 
 
 /*!
-  * vue-scrollto v2.20.0
-  * (c) 2019 Randjelovic Igor
-  * @license MIT
-  */
-
-/*!
- * vue-client-only v0.0.0-semantic-release
- * (c) 2021-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
- */
-
-/*!
- * vue-no-ssr v1.1.1
- * (c) 2018-present egoist <0x142857@gmail.com>
- * Released under the MIT License.
+ * XRegExp Unicode Scripts 5.1.1
+ * <xregexp.com>
+ * Steven Levithan (c) 2010-present MIT License
+ * Unicode data by Mathias Bynens <mathiasbynens.be>
  */
 
 
@@ -206,7 +199,7 @@
 
 
 /*!
- * XRegExp Unicode Scripts 4.4.1
+ * XRegExp Unicode Scripts 5.1.1
  * <xregexp.com>
  * Steven Levithan (c) 2010-present MIT License
  * Unicode data by Mathias Bynens <mathiasbynens.be>
@@ -214,7 +207,7 @@
 
 
 /*!
- * XRegExp Unicode Scripts 4.4.1
+ * XRegExp Unicode Scripts 5.1.1
  * <xregexp.com>
  * Steven Levithan (c) 2010-present MIT License
  * Unicode data by Mathias Bynens <mathiasbynens.be>
