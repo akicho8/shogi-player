@@ -9,6 +9,10 @@ import { DevToolsVariableInfo    } from "./dev_tools_variable_info.js"
 export const mod_dev_tools = {
   mixins: [mod_dev_tools_storage],
 
+  components: {
+    DevTools,
+  },
+
   props: {
     sp_dev_tools: {
       type: Boolean,

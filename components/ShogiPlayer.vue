@@ -30,7 +30,6 @@ import OpDisabledBlock    from "./OpDisabledBlock.vue"
 import ToolBelt      from "./ToolBelt.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
 import SpGroundInside     from "./SpGroundInside.vue"
-import DevTools           from "./dev_tools/DevTools.vue"
 
 // mixins modules
 import { mod_focus           } from "./mod_focus.js"
@@ -223,7 +222,6 @@ export default {
     ToolBelt,
     PromoteSelectModal,
     SpGroundInside,
-    DevTools,
   },
 
   data() {
