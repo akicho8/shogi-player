@@ -57,7 +57,7 @@ Default: `black`
 視点
 
 * 後手または上手視点にするには `white` を指定する
-* .sync 対応
+* `.sync` 対応
 
 | 値    | 視点 |
 |-------|------|
@@ -92,16 +92,16 @@ Default: `nureyon`
 
 駒の種類
 
-* SVG な駒は巨大化してもぼやけない
-* PNG な駒も元の解像度が高いのでそれほど気にならない
+* SVG な駒はどんなに巨大化してもぼやけない
+* PNG な駒も元の解像度が高いので拡大してもそれほど気にならない
 
-| 値       | 名前     | 表示                                                                                                                                             | 形式   |  特徴                      |
-|----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------|----------------------------|
-| none     | なし     |                                                                                                                                                  |        |  見えない                  |
-| nureyon  | ぬれよん | <img src="../../../../assets/piece_variant/nureyon/BR0.svg" width="32"><img src="../../../../assets/piece_variant/nureyon/BR1.svg" width="32">   | SVG    |  見やすいゴシック体の一文字 |
-| paper    | 紙面風   | <img src="../../../../assets/piece_variant/paper/BR0.svg" width="32"><img src="../../../../assets/piece_variant/paper/BR1.svg" width="32">       | SVG    |  明朝体・裏面赤            |
-| zuan     | 図案駒   | <img src="../../../../assets/piece_variant/zuan/BR0.png" width="32"><img src="../../../../assets/piece_variant/zuan/BR1.png" width="32">         | PNG    |  ユニバーサルデザイン      |
-| portella | Portella | <img src="../../../../assets/piece_variant/portella/BR0.png" width="32"><img src="../../../../assets/piece_variant/portella/BR1.png" width="32"> | PNG    |  美麗                      |
+| 値       | 名称     | 表示                                                                                                                                             | 形式   | 影     |  特徴                      |
+|----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------|--------|----------------------------|
+| none     | なし     |                                                                                                                                                  |        |        |  見えない                  |
+| nureyon  | ぬれよん | <img src="../../../../assets/piece_variant/nureyon/BR0.svg" width="32"><img src="../../../../assets/piece_variant/nureyon/BR1.svg" width="32">   | SVG    |        |  見やすいゴシック体の一文字 |
+| paper    | 紙面風   | <img src="../../../../assets/piece_variant/paper/BR0.svg" width="32"><img src="../../../../assets/piece_variant/paper/BR1.svg" width="32">       | SVG    |        |  明朝体・裏面赤            |
+| zuan     | 図案駒   | <img src="../../../../assets/piece_variant/zuan/BR0.png" width="32"><img src="../../../../assets/piece_variant/zuan/BR1.png" width="32">         | PNG    |        |  ユニバーサルデザイン      |
+| portella | Portella | <img src="../../../../assets/piece_variant/portella/BR0.png" width="32"><img src="../../../../assets/piece_variant/portella/BR1.png" width="32"> | PNG    | ✅     |  美麗                      |
 
 ### `sp_board_variant`
 
