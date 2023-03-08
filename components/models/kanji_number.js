@@ -1,6 +1,7 @@
 // ../../../bioshogi/lib/bioshogi/kanji_number.rb
 
 import XRegExp from "xregexp"
+XRegExp.uninstall("namespacing")
 
 // クラスして使ってない
 export class KanjiNumber {

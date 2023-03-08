@@ -1,4 +1,6 @@
 import XRegExp from "xregexp"
+XRegExp.uninstall("namespacing")
+
 import Vue from "vue"
 import _ from "lodash"
 

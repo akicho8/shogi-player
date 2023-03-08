@@ -1,4 +1,6 @@
 import XRegExp from "xregexp"
+XRegExp.uninstall("namespacing")
+
 import assert from "minimalistic-assert"
 
 import { ParserBase } from "./parser_base.js"

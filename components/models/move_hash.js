@@ -1,4 +1,6 @@
 import XRegExp from "xregexp"
+XRegExp.uninstall("namespacing")
+
 import { Piece } from "./piece.js"
 import { Place } from "./place.js"
 
