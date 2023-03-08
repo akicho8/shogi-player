@@ -10,7 +10,7 @@ export class BoardVariantInfo extends ApplicationMemoryRecord {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   console.log(BoardVariantInfo.fetch("wood_normal").key)
   console.log(BoardVariantInfo.fetch("wood_normal").name)
 }

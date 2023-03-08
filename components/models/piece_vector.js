@@ -85,7 +85,7 @@ export class PieceVector extends ApplicationMemoryRecord {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   // console.log(Piece.fetch("K"))
   // console.log(Piece.fetch("K"))
   // console.log(Piece.lookup(""))

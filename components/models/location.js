@@ -37,7 +37,7 @@ export class Location extends ApplicationMemoryRecord {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   console.log(Location.cycle_lookup(-1))
 
   console.log(Location.fetch("black"))

@@ -11,6 +11,6 @@ export class IllegalInfo extends ApplicationMemoryRecord {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   console.log(IllegalInfo.fetch("illegal_two_pawn").attributes)
 }

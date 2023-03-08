@@ -44,6 +44,3 @@ cd ~/src/shogi-player/shogi-player-vue2-sample
 nodenv local $NODENV_VERSION
 
 yarn add shogi-player
-
-# webpack5 で process が参照できない問題への対処するために必要
-yarn add process

@@ -29,7 +29,7 @@ export class PresetInfo extends ApplicationMemoryRecord {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   console.log(PresetInfo.fetch("平手"))
   console.log(PresetInfo.fetch("香落ち").first_location_key)
 }

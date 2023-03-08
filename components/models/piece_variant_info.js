@@ -12,7 +12,7 @@ export class PieceVariantInfo extends ApplicationMemoryRecord {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   console.log(PieceVariantInfo.fetch("a").key)
   console.log(PieceVariantInfo.fetch("a").name)
 }

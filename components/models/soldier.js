@@ -122,7 +122,7 @@ export class Soldier {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   const soldier = new Soldier({
     place: new Place([1, 7]),
     piece: Piece.fetch("P"),

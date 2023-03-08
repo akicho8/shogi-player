@@ -161,7 +161,7 @@ export class Place {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   console.log(Place.fetch("6a").key)
   console.log(Place.fetch([1, 2]).key)
 }

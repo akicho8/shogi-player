@@ -93,8 +93,6 @@ Also see: [使い方](/guide/usage/)
     * クラス定数や `??` 演算子が解釈されない
   * @vue/cli であれば vue.config.js の `transpileDependencies` に指定する
   * Nuxt.js であれば nuxt.config.js の `build.transpile` に含める
-* process 定数がグローバルに存在させること
-  * これをやらないと `process` を参照しているコードがビルドできない
 * wav ファイルを使うときは file-loader で `esModule: false` オプションをつける
   * これをやらないと wav ファイルへのパスが文字列にならず、ビルドできない
   * 内部では wav ファイルを使っていないがイベントに合わせて音を出したいときにはまる

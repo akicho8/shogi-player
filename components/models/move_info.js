@@ -115,5 +115,5 @@ export class MoveInfo {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
 }

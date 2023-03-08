@@ -2316,9 +2316,10 @@ chownr@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/chownr/-/chownr-2.0.0.tgz"
 
-chroma-js@^2.1.0:
+chroma-js@^2.4.2:
   version "2.4.2"
-  resolved "https://registry.npmjs.org/chroma-js/-/chroma-js-2.4.2.tgz"
+  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.4.2.tgz#dffc214ed0c11fa8eefca2c36651d8e57cbfb2b0"
+  integrity sha512-U9eDw6+wt7V8z5NncY2jJfZa+hUH8XEj8FQHgFJTrUFnJfXYf4Ml4adI2vXZOjqRDpFWtYVWypDfZwnJ+HIR4A==
 
 chrome-trace-event@^1.0.2:
   version "1.0.3"
@@ -4403,9 +4404,10 @@ js-base64@^2.1.8:
   version "2.6.4"
   resolved "https://registry.npmjs.org/js-base64/-/js-base64-2.6.4.tgz"
 
-js-memory-record@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.npmjs.org/js-memory-record/-/js-memory-record-0.0.24.tgz"
+js-memory-record@^0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/js-memory-record/-/js-memory-record-0.0.25.tgz#0b8c3e97eb27362f554ee8501e50784bfb89e106"
+  integrity sha512-kP01kISeWutHc0b5P9VKlZ/bSyfWXwd50gLKTwhaQlLru3f21DKiCM1EUTPjWg3jv4SSo5bP432g2CJluLGoZw==
   dependencies:
     babel-runtime latest
     core-js latest
@@ -6920,19 +6922,20 @@ shell-quote@^1.7.3:
   version "1.7.3"
   resolved "https://registry.npmjs.org/shell-quote/-/shell-quote-1.7.3.tgz"
 
-shogi-player@^0.0.396:
-  version "0.0.396"
-  resolved "https://registry.npmjs.org/shogi-player/-/shogi-player-0.0.396.tgz"
+shogi-player@^0.0.401:
+  version "0.0.401"
+  resolved "https://registry.yarnpkg.com/shogi-player/-/shogi-player-0.0.401.tgz#62309c7c7ccbf458fb8b83478e95fb7c0b1dc89f"
+  integrity sha512-cXkiLRA6XoE9lh9n9EBgYBX4XM+WB7nXAAKjaM4kAR1BdI0vx2fnChMnNiVOG/dhAE6p4zeRXhFrkVhLdxDpDw==
   dependencies:
     "@babel/preset-env" "^7.12.17"
     autolinker latest
     buefy "^0.9.22"
     bulma "^0.9.4"
-    chroma-js "^2.1.0"
+    chroma-js "^2.4.2"
     dayjs "^1.11.5"
     file-loader "^6.2.0"
     ismobilejs "^1.1.1"
-    js-memory-record "^0.0.24"
+    js-memory-record "^0.0.25"
     lodash latest
     node-sass ">= 4.0.0 < 5.0.0"
     pug "^2.0.4"

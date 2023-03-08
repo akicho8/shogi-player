@@ -66,7 +66,7 @@ export class KifuBookInfo extends ApplicationMemoryRecord {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   console.log(KifuBookInfo.fetch("simple").key)
   console.log(KifuBookInfo.fetch("simple").name)
 }
