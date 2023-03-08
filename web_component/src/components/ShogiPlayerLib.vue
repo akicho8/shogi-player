@@ -9,8 +9,6 @@ import Buefy from "buefy"
 Vue.use(Buefy)
 
 // shogi-player 本体
-// import "shogi-player/components/stylesheets/all"
-// import "shogi-player/components/ShogiPlayer.sass"
 import ShogiPlayer from "shogi-player/components/ShogiPlayer.vue"
 
 // import { EventList } from "shogi-player/components/models/event_list.js"
@@ -32,9 +30,6 @@ export default {
 // @import url("https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css")
 //
 // // @import "@mdi/font/css/materialdesignicons.min.css"
-//
-// // ShogiPlayer のスタイルを読み込む
-// @import "shogi-player/components/ShogiPlayer.sass"
 //
 // // CSS側で読み込むと Web Components 内に含まれる
 // @import "buefy/dist/buefy.css"

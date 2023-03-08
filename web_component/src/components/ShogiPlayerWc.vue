@@ -20,8 +20,6 @@ import Buefy from "buefy"
 Vue.use(Buefy)
 
 // shogi-player 本体
-// import "shogi-player/components/stylesheets/all"
-// import "shogi-player/components/ShogiPlayer.sass"
 import ShogiPlayer from "shogi-player/components/ShogiPlayer.vue"
 
 import { EventList } from "shogi-player/components/models/event_list.js"

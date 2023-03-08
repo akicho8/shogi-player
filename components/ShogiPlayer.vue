@@ -574,6 +574,11 @@ export default {
 //   width: 100%
 
 .ShogiPlayer
+  //////// タッチした直後に toast を出すと文言が自動選択されてしまう対策(青のIが出る)
+  .toast
+    @extend %is_unselectable
+
+.ShogiPlayer
   +defvar(sp_common_gap, 0.02) // 共通の隙間(駒セルの縦幅に対する割合)
 
   // あまり重要ではないところでの縦のマージンが必要なときに使う
