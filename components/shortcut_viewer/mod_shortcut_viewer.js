@@ -1,6 +1,10 @@
 import ShortcutViewer from "./ShortcutViewer.vue"
 
 export const mod_shortcut_viewer = {
+  components: {
+    ShortcutViewer,
+  },
+
   data() {
     return {
       shortcut_viewer_p: false,

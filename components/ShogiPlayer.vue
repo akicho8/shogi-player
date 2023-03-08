@@ -31,7 +31,6 @@ import ToolBelt      from "./ToolBelt.vue"
 import PromoteSelectModal from "./PromoteSelectModal.vue"
 import SpGroundInside     from "./SpGroundInside.vue"
 import DevTools           from "./dev_tools/DevTools.vue"
-import ShortcutViewer     from "./shortcut_viewer/ShortcutViewer.vue"
 
 // mixins modules
 import { mod_focus           } from "./mod_focus.js"
