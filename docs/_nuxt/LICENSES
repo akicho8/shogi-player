@@ -97,13 +97,6 @@
  */
 
 /*!
- * XRegExp 4.4.1
- * <xregexp.com>
- * Steven Levithan (c) 2007-present MIT License
- */
-
-
-/*!
   * vue-scrollto v2.20.0
   * (c) 2019 Randjelovic Igor
   * @license MIT
@@ -118,6 +111,19 @@
 /*!
  * vue-no-ssr v1.1.1
  * (c) 2018-present egoist <0x142857@gmail.com>
+ * Released under the MIT License.
+ */
+
+/*!
+ * XRegExp 4.4.1
+ * <xregexp.com>
+ * Steven Levithan (c) 2007-present MIT License
+ */
+
+
+/*!
+ * Vue.js v2.6.14
+ * (c) 2014-2021 Evan You
  * Released under the MIT License.
  */
 
@@ -185,13 +191,6 @@
  * http://www.w3.org/TR/css3-color/#svg-color
  *
  * @preserve
- */
-
-
-/*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
- * Released under the MIT License.
  */
 
 
