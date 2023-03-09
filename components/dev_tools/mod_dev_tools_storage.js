@@ -1,16 +1,16 @@
-const LOCAL_STORAGE_VARIABLE_NAME = "__sp_dev_tools__"
+const PSTORE_KEY = "__sp_dev_tools__"
 
 import { Pstore } from "../models/pstore.js"
 
 export const mod_dev_tools_storage = {
   watch: {
     ls_store_hash() {
-      Pstore.set(LOCAL_STORAGE_VARIABLE_NAME, this.ls_store_hash)
+      Pstore.set(PSTORE_KEY, this.ls_store_hash)
     },
   },
   methods: {
     dev_tools_restore() {
-      const hash = Pstore.get(LOCAL_STORAGE_VARIABLE_NAME)
+      const hash = Pstore.get(PSTORE_KEY)
       if (hash) {
         this.DevToolsVariableInfo.values.forEach(e => {
           if (this.$props[e.imm_var] == null) {  // 明示的な指定がなくて
@@ -26,7 +26,7 @@ export const mod_dev_tools_storage = {
       this.DevToolsVariableInfo.values.forEach(e => {
         this.$data[e.mut_var] = this.$options.props[e.imm_var]["default"] // FIXME: null なのでどうしよ？
       })
-      Pstore.remove(LOCAL_STORAGE_VARIABLE_NAME)
+      Pstore.remove(PSTORE_KEY)
     },
   },
   computed: {
