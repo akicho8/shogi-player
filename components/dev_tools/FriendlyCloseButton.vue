@@ -15,5 +15,5 @@ export default {
   position: absolute
   top: 0
   right: 0
-  padding: 0.25rem
+  padding: 0.15rem
 </style>

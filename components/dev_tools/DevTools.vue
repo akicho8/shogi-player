@@ -95,6 +95,15 @@ export default {
     .tab-content
       display: none
 
+  // 文字列とiconをペアで指定しなかったとき縦幅がずれてラベルの下線が出てしまう問題の対処
+  .tabs
+    .icon.is-small
+      height: unset
+
+  // 文字列とiconをペアで指定しなかったときアイコンの右に不自然なスペースができる問題の対処
+  .tabs
+    .icon
+      margin: unset
 
 .ShogiPlayer
   &.is_layer_on
