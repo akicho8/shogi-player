@@ -244,7 +244,7 @@ export class Xcontainer {
     return count
   }
 
-  piece_box_realize() {
+  get piece_box_realize() {
     const list = Object.entries(this.piece_box) // {a: 1} => [['a', 1]]
     return _(list)
       .filter(([key, count]) => count >= 1)

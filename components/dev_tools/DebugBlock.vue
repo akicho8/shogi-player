@@ -31,7 +31,7 @@
         th Value
         th 参照方法
     tbody
-      DebugBlockRow(code="piece_box_realize()"  name="駒箱"         :value="TheSp.xcontainer.piece_box_realize()")
+      DebugBlockRow(code="piece_box_realize"    name="駒箱"         :value="TheSp.xcontainer.piece_box_realize")
       DebugBlockRow(code="hold_pieces"          name="持駒"         :value="TheSp.xcontainer.hold_pieces")
       DebugBlockRow(code="current_location.key" name="次の手番"     :value="TheSp.xcontainer.current_location.key")
       DebugBlockRow(code="to_simple_sfen"       name="現局面のSFEN" :value="TheSp.xcontainer.to_simple_sfen")

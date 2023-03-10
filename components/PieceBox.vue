@@ -9,7 +9,7 @@
     .PieceBoxTexture.is-overlay
     .PieceBoxPieces.is-overlay
       .PieceWithCount(
-        v-for="[piece, count] in TheSp.xcontainer.piece_box_realize()"
+        v-for="[piece, count] in TheSp.xcontainer.piece_box_realize"
         @click.stop.prevent="TheSp.piece_box_piece_click(piece, $event)"
         @mouseover="TheSp.piece_box_mouseover_handle(piece, $event)"
         @mouseleave="TheSp.mouseleave_handle"
