@@ -69,6 +69,7 @@ export default {
 
   .is_position_north
     .MembershipLocationMarkTexture
+      +is_flip
 
   .is_position_south
     .MembershipLocationMarkTexture

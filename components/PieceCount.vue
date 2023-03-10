@@ -54,9 +54,15 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// 全体横並びの場合は横に広く表示
   +IF_HORIZONTAL
     .Membership
-      .PieceCount
-        left:  calc(var(--sp_piece_count_horizontal_x) * 100%)
-        top:   calc(var(--sp_piece_count_horizontal_y) * 100%)
+      &.is_position_north
+        .PieceCount
+          +is_flip // 上下対象にするため(反転時にそのままでよくなるが、先手からは読みにくい)
+          right:   calc(var(--sp_piece_count_horizontal_x) * 100%)
+          bottom:  calc(var(--sp_piece_count_horizontal_y) * 100%)
+      &.is_position_south
+        .PieceCount
+          left:  calc(var(--sp_piece_count_horizontal_x) * 100%)
+          top:   calc(var(--sp_piece_count_horizontal_y) * 100%)
 
   //////////////////////////////////////////////////////////////////////////////// 全体縦並びの場合
 
