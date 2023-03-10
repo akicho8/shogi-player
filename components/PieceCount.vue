@@ -19,14 +19,14 @@ export default {
 @import "./support.sass"
 
 .ShogiPlayer
-  +defvar(sp_piece_count_horizontal_x, 0.43)                              // 駒数の中央からの相対位置X(%) (横配置時)
-  +defvar(sp_piece_count_horizontal_y, 0.30)                              // 駒数の中央からの相対位置Y(%) (横配置時)
-  +defvar(sp_piece_count_vertical_x, 0.0)                               // 駒数の中央からの相対位置X(%) (縦配置時)
-  +defvar(sp_piece_count_vertical_y, 0.47)                              // 駒数の中央からの相対位置y(%) (縦配置時)
-  +defvar(sp_piece_count_size, 0.2)                      // 駒数の文字サイズ(駒セル縦幅に対する比率)
-  +defvar(sp_piece_count_font_color, hsla(0, 0%, 0%, 0.75))     // 駒数の文字色
+  +defvar(sp_piece_count_horizontal_x, 0.43)                // 駒数の中央からの相対位置X(%) (横配置時)
+  +defvar(sp_piece_count_horizontal_y, 0.30)                // 駒数の中央からの相対位置Y(%) (横配置時)
+  +defvar(sp_piece_count_vertical_x, 0.0)                   // 駒数の中央からの相対位置X(%) (縦配置時)
+  +defvar(sp_piece_count_vertical_y, 0.47)                  // 駒数の中央からの相対位置y(%) (縦配置時)
+  +defvar(sp_piece_count_size, 0.2)                         // 駒数の文字サイズ(駒セル縦幅に対する比率)
+  +defvar(sp_piece_count_font_color, hsla(0, 0%, 0%, 0.75)) // 駒数の文字色
   +defvar(sp_piece_count_bg_color, hsla(0, 0%, 100%, 0.9))  // 駒数の文字色背景
-  +defvar(sp_piece_count_padding, 0.08)                        // 駒数のパディング(駒セル縦幅に対する比率)
+  +defvar(sp_piece_count_padding, 0.08)                     // 駒数のパディング(駒セル縦幅に対する比率)
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
 
@@ -45,7 +45,7 @@ export default {
     font-weight: bold
 
     z-index: $piece_count_z // 駒数が Membership の下に潜るのを防ぐ
-    position: relative // 相対的にずらすため、かつ z-index 用
+    position: relative      // 相対的にずらすため、かつ z-index 用
 
   &.is_layer_on
     .PieceCount
