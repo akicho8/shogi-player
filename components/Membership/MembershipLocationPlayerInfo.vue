@@ -101,7 +101,7 @@ export default {
 
   .is_position_north
     .MembershipLocationPlayerInfo
-      @extend %is_flip
+      +is_flip
 
   .is_position_south
     .MembershipLocationPlayerInfo
