@@ -68,11 +68,7 @@ $shortcut_viewer_z:         $piece_count_z + 1  // $piece_count_z より上に�
   background-size: cover
 
 =is_flip
-  transform: rotate(180deg)
-
-// 反転
-%is_flip
-  +is_flip
+  scale: -1
 
 // 選択禁止
 %is_unselectable
