@@ -43,6 +43,8 @@ export class SePresetInfo extends ApplicationMemoryRecord {
           context.sp_board_horizontal_gap        = 0.2                // 座標があるため盤面の左右を空ける
           context.sp_coordinate_x_push           = 0.05               // 座標調整
           context.sp_coordinate_y_push           = 0.01               // 座標調整
+
+          context.user_custom_css                = ""
         }
       },
     ]
