@@ -9,9 +9,7 @@ import { support } from "../support.js"
 export default {
   name: "MembershipLocationMark",
   mixins: [support],
-  props: {
-    location: { required: true },
-  },
+  inject: ["location"],
   methods: {
     click_handle() {
       if (this.flipable) {

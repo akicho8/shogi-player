@@ -10,9 +10,7 @@ import { support } from "../support.js"
 export default {
   name: "MembershipLocationPlayerInfo",
   mixins: [support],
-  props: {
-    location: { required: true },
-  },
+  inject: ["location"],
   methods: {
     player_attr_of(key) {
       if (this.one_side_info) {

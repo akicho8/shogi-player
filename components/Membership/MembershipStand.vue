@@ -23,10 +23,7 @@ import { support } from "../support.js"
 export default {
   name: "MembershipStand",
   mixins: [support],
-
-  props: {
-    location: { required: true },
-  },
+  inject: ["location"],
 
   components: {
     PieceTap,

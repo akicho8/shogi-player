@@ -1,6 +1,6 @@
 <template lang="pug">
 .MembershipLocation
-  MembershipLocationMark(:location="location")
+  MembershipLocationMark
 </template>
 
 <script>
@@ -10,9 +10,7 @@ import MembershipLocationMark from "./MembershipLocationMark.vue"
 export default {
   name: "MembershipLocation",
   mixins: [support],
-  props: {
-    location: { required: true },
-  },
+  inject: ["location"],
   components: {
     MembershipLocationMark,
   },
