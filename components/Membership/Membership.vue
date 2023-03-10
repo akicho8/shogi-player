@@ -98,7 +98,7 @@ export default {
   +IF_HORIZONTAL
     .Membership
       &.is_position_north
-        flex-direction: column-reverse // 全体が横並び → 持駒は縦並び(△が下に来るため反転)
+        flex-direction: column         // 全体が横並び → 持駒は縦並び(△が下に来るため反転)
       &.is_position_south
         flex-direction: column         // 全体が横並び → 持駒は縦並び(▲が上に来るためそのまま)
     &.is_stand_gravity_top               // 左↓ 右↑

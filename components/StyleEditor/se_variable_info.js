@@ -8,7 +8,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "kifu_sample_key", default: null, },
       { key: "transform_tab_index", default: 0, },
 
-      { key: "user_custom_css", default: "", },
+      { key: "user_custom_css", default: DEVELOPMENT_P ? ".MainBoard, .PieceObject { filter: drop-shadow(4px 4px 4px hsla(0 0% 0% / 0.5)) }" : "", },
 
       ////////////////////////////////////////////////////////////////////////////////
       { key: "se_frame_width", default: 80, },
