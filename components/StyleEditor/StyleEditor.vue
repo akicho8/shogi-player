@@ -1,10 +1,10 @@
 <template lang="pug">
 .StyleEditor.is-relative(:class="component_class")
-  .StyleEditor-Background.is-overlay(:class="component_background_class")
-
   div(is="style" v-text="sp_css_embed")
   div(is="style" v-text="se_css_embed")
   div(is="style" v-text="user_custom_css")
+
+  .StyleEditor-Background.is-overlay(:class="component_background_class")
 
   b-sidebar.StyleEditorSidebar(fullheight right v-model="sidebar_p" position="fixed" :can-cancel="['escape']")
     SidebarContent
@@ -271,6 +271,7 @@ export default {
       params.sp_coordinate           = this.sp_coordinate
       params.sp_coordinate_variant_v = this.sp_coordinate_variant_v
       params.sp_stand_gravity        = this.sp_stand_gravity
+      params.sp_stand_flip        = this.sp_stand_flip
       params.sp_name_direction       = this.sp_name_direction
       params.sp_slider               = this.sp_slider
       params.sp_controller           = this.sp_controller

@@ -48,13 +48,22 @@ export default {
   computed: {
     component_class() {
       const list = []
-      list.push(`is_position_${this.position}`) // 一番上で定義してあるので子には渡す必要なし
+
+      // 一番上で定義してあるので子には渡す必要なし
+      if (this.TheSp.sp_stand_flip) {
+        list.push(`is_position_${this.position}`)
+      } else {
+        list.push(`is_position_south`)
+      }
+
       list.push(`is_${this.location.key}`)
+
       if (this.TheSp.xcontainer.current_location === this.location) {
         list.push("is_turn_active")
       } else {
         list.push("is_turn_inactive")
       }
+
       return list
     },
 

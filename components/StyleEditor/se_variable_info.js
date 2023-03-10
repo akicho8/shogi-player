@@ -8,7 +8,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "kifu_sample_key", default: null, },
       { key: "transform_tab_index", default: 0, },
 
-      { key: "user_custom_css", default: DEVELOPMENT_P ? ".MainBoard, .PieceObject { filter: drop-shadow(4px 4px 4px hsla(0 0% 0% / 0.5)) }" : "", },
+      { key: "user_custom_css", default: DEVELOPMENT_P ? ".BoardTexture, .PieceObject { filter: drop-shadow(4px 4px 4px hsla(0 0% 0% / 0.5)) }" : "", },
 
       ////////////////////////////////////////////////////////////////////////////////
       { key: "se_frame_width", default: 80, },
@@ -62,6 +62,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_stand_hover_border_color", default: "hsla(0, 0%, 0%, 0.2)", },
       { key: "sp_stand_bg_color", default: "hsla(0, 0%, 0%, 0.0)", },
       { key: "sp_stand_gravity", default: DEVELOPMENT_P ? "top" : "bottom", },
+      { key: "sp_stand_flip", default: true, },
 
       { key: "sp_turn", default: -1, },
       { key: "sp_viewpoint", default: "black", },

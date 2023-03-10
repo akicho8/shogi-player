@@ -144,6 +144,9 @@
       b-field(custom-class="is-small" label="レイアウト")
         b-radio-button(size="is-small" v-model="TheSe.sp_stand_gravity" native-value="bottom") 下寄せ
         b-radio-button(size="is-small" v-model="TheSe.sp_stand_gravity" native-value="top") 上寄せ
+      b-field(custom-class="is-small" label="相手側を反転")
+        b-radio-button(size="is-small" v-model="TheSe.sp_stand_flip" :native-value="false") しない
+        b-radio-button(size="is-small" v-model="TheSe.sp_stand_flip" :native-value="true") する
       //- .columns.mt-4
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")

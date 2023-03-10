@@ -30,6 +30,7 @@ export class SePresetInfo extends ApplicationMemoryRecord {
           context.sp_grid_outer_stroke           = 2                  // グリッド枠(太)
           context.sp_board_edge_stroke           = 0
           context.sp_stand_gravity               = "top"              // 駒台の位置
+          context.sp_stand_flip              = false              // 相手側を反転
           context.sp_name_direction              = "vertical"         // 縦横書き
           context.sp_balloon                     = false              // 名前の下に吹き出し背景を入れない
           context.sp_location_mark_active_size   = 1.0                // 手番でないときの☗☖を小さくしない

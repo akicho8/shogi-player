@@ -151,6 +151,12 @@ export default {
       validator(value) { return ["top", "bottom"].includes(value) },
     },
 
+    // 相手側の反転
+    sp_stand_flip: {
+      type: Boolean,
+      default: true,
+    },
+
     // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_name_direction: {
       type: String,
