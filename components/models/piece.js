@@ -29,7 +29,7 @@ export class Piece extends ApplicationMemoryRecord {
   // "歩" などで引く
   static lookup_by_name(key) {
     if (this._lookup_by_name == null) {
-      this._lookup_by_name = this.memory_record_create_index_or(["name", "alias_name"])
+      this._lookup_by_name = this.memory_record_create_index_by(["name", "alias_name"])
     }
     return this._lookup_by_name[key]
   }
@@ -37,7 +37,7 @@ export class Piece extends ApplicationMemoryRecord {
   // "と" などで引く
   static lookup_by_promoted_name(key) {
     if (this._lookup_by_promoted_name == null) {
-      this._lookup_by_promoted_name = this.memory_record_create_index_or(["promoted_name", "promoted_alias_name"])
+      this._lookup_by_promoted_name = this.memory_record_create_index_by(["promoted_name", "promoted_alias_name"])
     }
     return this._lookup_by_promoted_name[key]
   }
