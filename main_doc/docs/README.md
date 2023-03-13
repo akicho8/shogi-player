@@ -12,7 +12,7 @@ features:
 - title: カスタマイズ
   details: オプションで調整が可能。見た目に関してはあらかじめ用意してあるCSS変数で対応する
 - title: Web Components
-  details: 数行のコピペで設置可。静的サイト・WordPress・Next.js 等、既存の環境を安全にして組み込める
+  details: WordPress や Next.js などの既存の環境をそのままにして、数行のコードをコピペするだけで設置できる
 - title: 棋譜形式
   details: SFEN の他に一般的な KIF や BOD を読み込む。コメント付きの KIF であればオプションで表示する
 - title: 高速編集
@@ -27,7 +27,7 @@ footer: AGPL-3.0
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-<!-- <LinkToProps name="sp_human_side" /> -->
+<LinkToProps name="sp_human_side" />
 
 <!-- <iframe width="100%" height="500" src="//jsfiddle.net/megeton/cjqey5vx/2/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe> -->
 
