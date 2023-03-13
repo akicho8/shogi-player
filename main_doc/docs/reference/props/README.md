@@ -17,7 +17,7 @@ sidebar: auto
 
 ### `sp_mode`
 
-Type: `String`
+Type: `view | play | edit`
 Default: `view`
 
 モード

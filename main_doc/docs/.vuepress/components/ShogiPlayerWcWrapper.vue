@@ -46,9 +46,9 @@ shogi-player-wc::part(root)
   justify-content: center
 
   shogi-player-wc
-    width: 100%
+    flex-basis: 100%
     +tablet()
-      width: var(--width)
+      flex-basis: var(--width)
 
   &.STAGE-development
     border: 1px dotted blue

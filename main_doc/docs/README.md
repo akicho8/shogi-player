@@ -27,6 +27,8 @@ footer: MIT Licensed
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
+<!-- <LinkToProps name="sp_human_side" /> -->
+
 <!-- <iframe width="100%" height="500" src="//jsfiddle.net/megeton/cjqey5vx/2/embedded/html,result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe> -->
 
 <!-- <ShogiPlayerWcWrapper -->
