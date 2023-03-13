@@ -17,7 +17,7 @@ features:
   details: SFEN の他に一般的な KIF や BOD を読み込む。コメント付きの KIF であればオプションで表示する
 - title: 高速編集
   details: 編集モードではマウスとキーボードの組み合わせで詰将棋や課題局面を素早く作れる
-footer: MIT Licensed
+footer: AGPL-3.0
 ---
 
 <p class="codepen" data-height="720" data-default-tab="html,result" data-slug-hash="PoBvmdg" data-user="kinakom0chi" style="height: 691.2989501953125px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
