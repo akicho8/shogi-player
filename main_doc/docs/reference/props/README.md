@@ -341,6 +341,7 @@ Default: `false`
 
 盤上のセルをクリックしたときの通常処理を無効化するか？ <Badge text="要検討" type="error" vertical="top" />
 この機能は sp_view_mode_piece_movable を false するのでいい気がしている
+
 ### `sp_location_click_behavior`
 
 Type: `flip | nop`
