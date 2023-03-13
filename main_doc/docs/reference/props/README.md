@@ -51,7 +51,7 @@ Default: `-1`
 
 ### `sp_viewpoint`
 
-Type: `String`
+Type: `black | white`
 Default: `black`
 
 視点
@@ -87,7 +87,7 @@ Default: `false`
 
 ### `sp_piece_variant`
 
-Type: `String`
+Type: `nureyon | paper | zuan | portella`
 Default: `nureyon`
 
 駒の種類
@@ -105,7 +105,7 @@ Default: `nureyon`
 
 ### `sp_board_variant`
 
-Type: `String`
+Type: `none | wood_normal | wood_bright`
 Default: `none`
 
 盤のテクスチャ
@@ -125,7 +125,7 @@ Default: `none`
 
 ### `sp_layout`
 
-Type: `String`
+Type: `vertical | horizontal`
 Default: `vertical`
 
 駒台・名前・時間の表示場所を決める
@@ -174,7 +174,7 @@ Default: `false`
 
 ### `sp_coordinate_variant_v`
 
-Type: `String`
+Type: `kanji | number | alphabet`
 Default: `kanji`
 
 右側面の座標の表記
@@ -187,7 +187,7 @@ Default: `kanji`
 
 ### `sp_stand_gravity`
 
-Type: `String`
+Type: `bottom | top`
 Default: `bottom`
 
 駒台を左右に配置したとき位置は上か下か？
@@ -210,7 +210,7 @@ Default: `true`
 
 ### `sp_name_direction`
 
-Type: `String`
+Type: `horizontal | vertical`
 Default: `horizontal`
 
 名前の縦横書き切り替え
@@ -280,7 +280,7 @@ Default: `true`
 
 ### `sp_human_side`
 
-Type: `String`
+Type: `none | both | black | white`
 Default: `both`
 
 再生モードで操作できる側を絞る
@@ -303,7 +303,7 @@ Default: `true`
 
 ### `sp_lift_cancel_action`
 
-Type: `String`
+Type: `reality | standard | rehold`
 Default: `standard`
 
 盤上の持ち上げた駒のキャンセル方法
@@ -343,7 +343,7 @@ Default: `false`
 この機能は sp_view_mode_piece_movable を false するのでいい気がしている
 ### `sp_location_click_behavior`
 
-Type: `String`
+Type: `flip | nop`
 Default: `flip`
 
 ☗☖をクリックしたときの挙動
@@ -591,23 +591,21 @@ Default: `false`
 
 ### `sp_dev_tools_position`
 
-Type: `String`
+Type: `left | right | top | bottom`
 Default: `left`
-Choice: `left` `right` `top` `bottom`
 
 開発ツールの画面位置
 
 ### `sp_dev_tools_group`
 
-Type: `String`
+Type: `main | style | event | sfen | debug | props | data | cog`
 Default: `main`
-Choice: `main` `style` `Event` `sfen` `debug` `props` `data` `cog`
 
 開発ツールのタブ
 
 ### `sp_device`
 
-Type: `String`
+Type: `touch | desktop`
 Default: `null`
 
 デバイスを強制的に指定する
@@ -615,10 +613,10 @@ Default: `null`
   * 自動判別するので基本そのままでよい
   * デバイス判別によって駒を動かすときの挙動が変わる
 
-| 値      | 意味             | 挙動                                           |
-|---------|------------------|------------------------------------------------|
+| 値      | 意味             | 挙動                                                                                             |
+|---------|------------------|--------------------------------------------------------------------------------------------------|
 | touch   | タッチパネル操作 | 持ち上げた駒がマウスポインタについてこないかわりに移動元の色で駒を持ち上げたのがわかるようにする |
-| desktop | マウス操作       | 持ち上げた駒がマウスポインタについてくる       |
+| desktop | マウス操作       | 持ち上げた駒がマウスポインタについてくる                                                         |
 
 ### `sp_layer`
 
