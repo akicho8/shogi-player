@@ -41,6 +41,7 @@ import { BoardVariantInfo }    from "../models/board_variant_info.js"
 import { PieceVariantInfo }    from "../models/piece_variant_info.js"
 import { KifuBookInfo     }     from "../models/kifu_book_info.js"
 import { MixBlendModeInfo } from "../models/mix_blend_mode_info.js"
+import { LiftCancelActionInfo    }    from "../models/lift_cancel_action_info.js"
 
 import { SeVariableInfo } from "./se_variable_info.js"
 import { SePresetInfo }   from "./se_preset_info.js"
@@ -191,7 +192,7 @@ export default {
     BoardVariantInfo() { return BoardVariantInfo },
     PieceVariantInfo() { return PieceVariantInfo },
     KifuBookInfo()     { return KifuBookInfo     },
-    MixBlendModeInfo() { return MixBlendModeInfo },
+    LiftCancelActionInfo() { return LiftCancelActionInfo },
     SeSectionInfo()         { return SeSectionInfo         },
     SeVariableInfo()   { return SeVariableInfo   },
     SePresetInfo()     { return SePresetInfo     },

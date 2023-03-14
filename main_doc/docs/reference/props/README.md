@@ -321,7 +321,7 @@ Default: `true`
 
 ### `sp_lift_cancel_action`
 
-Type: `reality | standard | rehold`
+Type: `standard | reality | rehold`
 Default: `standard`
 
 盤上の持ち上げた駒のキャンセル方法
@@ -332,8 +332,8 @@ Default: `standard`
 
 | 値       | 挙動                                         | タイプ                   |
 |----------|----------------------------------------------|--------------------------|
-| reality  | リアル志向<br>元の位置に戻す                 | 昔の共有将棋盤     |
 | standard | 初心者向け<br>移動できないセルに移動したとき | 将棋ウォーズ<br>ぴよ将棋 |
+| reality  | リアル志向<br>元の位置に戻す                 | 昔の共有将棋盤     |
 | rehold   | 合理的<br>キャンセルと同時に駒を持つ         | lishogi                  |
 
 ::: tip
@@ -429,29 +429,41 @@ Default: `null`
 
 Web Components 版では内部で eval しているため動作する
 
-### `sp_illegal_validate`
+### `sp_double_click_threshold_ms`
 
-Type: `Boolean`
-Default: `true`
+Type: `Number`
+Default: `350`
 
-操作モードで反則の判定をするか？
+編集モードで駒を反転するときのダブルクリックと認識する時間(ms)
 
-* 反則の種類
-  * 二歩
-  * 王手放置
-  * 駒ワープ
-  * 死に駒
+ネイティブなダブルクリック判定を入れると通常のクリック判定が遅れるため自力判定している
 
-### `sp_illegal_cancel`
+### `sp_key_event_capture`
 
 Type: `Boolean`
 Default: `false`
 
-反則判定にひっかかったあと反則を無かったことにするか？
+スライダーにフォーカスしていなくても左右キーで手数を動かせるようにするか？ <Badge text="非推奨" type="error" vertical="top" />
 
-* 無かったことにしてもイベントで反則を知ることはできる
-* 有効にすると基本的な反則の操作はできなくなる
-* 有効にすると将棋ウォーズのようになる
+::: warning
+副作用あり。他のプログラムの操作を奪ってしまうかもしれないため基本は false にしておいた方がよい
+:::
+
+### `sp_shift_key_mag`
+
+Type: `Number`
+Default: `10`
+
+`sp_key_event_capture` を有効にして手数を動かすときの shift を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
+
+### `sp_system_key_mag`
+
+Type: `Number`
+Default: `50`
+
+`sp_key_event_capture` を有効にして手数を動かすときの command を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
+
+## 合法手
 
 ### `sp_legal_move_only`
 
@@ -492,39 +504,31 @@ Default: `true`
 
 操作モードでは味方の駒を取れないようにするか？
 
-### `sp_double_click_threshold_ms`
+## 反則
 
-Type: `Number`
-Default: `350`
+### `sp_illegal_validate`
 
-編集モードで駒を反転するときのダブルクリックと認識する時間(ms)
+Type: `Boolean`
+Default: `true`
 
-ネイティブなダブルクリック判定を入れると通常のクリック判定が遅れるため自力判定している
+操作モードで反則の判定をするか？
 
-### `sp_key_event_capture`
+* 反則の種類
+  * 二歩
+  * 王手放置
+  * 駒ワープ
+  * 死に駒
+
+### `sp_illegal_cancel`
 
 Type: `Boolean`
 Default: `false`
 
-スライダーにフォーカスしていなくても左右キーで手数を動かせるようにするか？ <Badge text="非推奨" type="error" vertical="top" />
+反則判定にひっかかったあと反則を無かったことにするか？
 
-::: warning
-副作用あり。他のプログラムの操作を奪ってしまうかもしれないため基本は false にしておいた方がよい
-:::
-
-### `sp_shift_key_mag`
-
-Type: `Number`
-Default: `10`
-
-`sp_key_event_capture` を有効にして手数を動かすときの shift を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
-
-### `sp_system_key_mag`
-
-Type: `Number`
-Default: `50`
-
-`sp_key_event_capture` を有効にして手数を動かすときの command を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
+* 無かったことにしてもイベントで反則を知ることはできる
+* 有効にすると基本的な反則の操作はできなくなる
+* 有効にすると将棋ウォーズのようになる
 
 ## Web Components 専用
 
