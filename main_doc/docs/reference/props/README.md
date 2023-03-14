@@ -125,15 +125,29 @@ Default: `none`
 
 ### `sp_layout`
 
-Type: `vertical | horizontal`
-Default: `vertical`
+Type: `horizontal | vertical`
+Default: `horizontal`
 
 駒台・名前・時間の表示場所を決める
 
-| 値        | 配置 |            |
-|-----------|------|------------|
-| vertical  | 縦長 | スマホ向け |
-| horizontal | 横長 |            |
+| 値         | 配置 |                  |
+|------------|------|------------------|
+| horizontal | 横長 | デスクトップ向け |
+| vertical   | 縦長 | スマホ向け       |
+
+See also: [sp_mobile_vertical](/reference/props#sp-mobile-vertical)
+
+### `sp_mobile_vertical`
+
+Type: `Boolean`
+Default: `true`
+
+画面幅が狭いとき自動的に縦配置に切り替えるか？
+
+初期値を横配置にしているときに関係してくる
+言い替えると画面幅が広いときに横配置に切り替えるかの設定でもある
+
+See also: [sp_layout](/reference/props#sp-layout)
 
 ### `sp_preset`
 
@@ -154,16 +168,6 @@ Default: `false`
 
 * 有効にすると再生しやすくなるが駒を動かせなくなる
 * 天王山をクリックすると反転する
-
-### `sp_mobile_vertical`
-
-Type: `Boolean`
-Default: `true`
-
-画面幅が狭いとき自動的に縦配置に切り替えるか？
-
-初期値を横配置にしているときに関係してくる
-言い替えると画面幅が広いときに横配置に切り替えるかの設定でもある
 
 ### `sp_coordinate`
 
@@ -204,9 +208,14 @@ Default: `bottom`
 ### `sp_stand_flip`
 
 Type: `Boolean`
-Default: `true`
+Default: `false`
 
 相手側を反転するか？
+
+| 値    | 意味                         |
+|-------|------------------------------|
+| false | 上下左右対象 (おすすめ)      |
+| true  | 相手側の持駒も自分目線になる |
 
 ### `sp_name_direction`
 
