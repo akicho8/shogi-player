@@ -62,7 +62,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_stand_hover_border_color", default: "hsla(0, 0%, 0%, 0.2)", },
       { key: "sp_stand_bg_color", default: "hsla(0, 0%, 0%, 0.0)", },
       { key: "sp_stand_gravity", default: DEVELOPMENT_P ? "top" : "bottom", },
-      { key: "sp_stand_flip", default: true, },
+      { key: "sp_stand_flip", default: DEVELOPMENT_P ? true : false, },
 
       { key: "sp_turn", default: -1, },
       { key: "sp_viewpoint", default: DEVELOPMENT_P ? "white" : "black", },

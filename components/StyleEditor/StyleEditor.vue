@@ -271,7 +271,7 @@ export default {
       params.sp_coordinate           = this.sp_coordinate
       params.sp_coordinate_variant_v = this.sp_coordinate_variant_v
       params.sp_stand_gravity        = this.sp_stand_gravity
-      params.sp_stand_flip        = this.sp_stand_flip
+      params.sp_stand_flip           = this.sp_stand_flip
       params.sp_name_direction       = this.sp_name_direction
       params.sp_slider               = this.sp_slider
       params.sp_controller           = this.sp_controller

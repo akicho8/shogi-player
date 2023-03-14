@@ -51,9 +51,9 @@ export default {
 
       // 一番上で定義してあるので子には渡す必要なし
       if (this.TheSp.sp_stand_flip) {
-        list.push(`is_position_${this.position}`)
-      } else {
         list.push(`is_position_south`)
+      } else {
+        list.push(`is_position_${this.position}`)
       }
 
       list.push(`is_${this.location.key}`)

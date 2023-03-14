@@ -70,9 +70,9 @@ export default {
     sp_sfen_show:                      { type: Boolean, }, // SFENを下に表示する
     sp_overlay_nav:                    { type: Boolean, }, // view のとき盤の左右で手数変更(falseなら駒を動かせる)
     sp_coordinate:                     { type: Boolean, }, // 座標の表示
-    sp_coordinate_variant_v:             { type: String,  }, // 座標の表記
+    sp_coordinate_variant_v:           { type: String,  }, // 座標の表記
     sp_stand_gravity:                  { type: String,  }, // 駒台の位置
-    sp_stand_flip:                 { type: Boolean,  }, // 相手側を反転
+    sp_stand_flip:                     { type: Boolean,  }, // 相手側を反転
     sp_name_direction:                 { type: String,  }, // 名前の縦横書き切り替え(縦は横配置時のみ有効)
     sp_turn:                           { type: Number,  }, // 局面(手数)
     sp_comment:                        { type: Boolean, }, // KIFのコメントを表示する
