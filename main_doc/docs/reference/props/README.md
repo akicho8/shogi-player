@@ -64,6 +64,8 @@ Default: `black`
 | black | ☗   |
 | white | ☖   |
 
+See also: [sp_active_side_viewpoint](/reference/props/#sp-active-side-viewpoint)
+
 ### `sp_controller`
 
 Type: `Boolean`
@@ -72,7 +74,8 @@ Default: `false`
 コントローラーを表示するか？
 
   * 局面を変更するボタンが合わさったコンポーネントのこと
-  * `sp_slider` と合わせて表示することが多い
+
+See also: [sp_slider](/reference/props/#sp-slider), [sp_overlay_nav](/reference/props/#sp-overlay-nav)
 
 ### `sp_slider`
 
@@ -84,6 +87,8 @@ Default: `false`
 * 再生モード時には表示しておくと指定の局面に移動しやすい
 * 操作モード時にも表示できるけどガチ対局するときは消しておいた方がよい
 * 編集モード時には設定に関係なく表示しない
+
+See also: [sp_controller](/reference/props/#sp-controller), [sp_mounted_focus_to_slider](/reference/props/#sp-mounted-focus-to-slider)
 
 ### `sp_piece_variant`
 
@@ -135,7 +140,7 @@ Default: `horizontal`
 | horizontal | 横長 | デスクトップ向け |
 | vertical   | 縦長 | スマホ向け       |
 
-See also: [sp_mobile_vertical](/reference/props#sp-mobile-vertical)
+See also: [sp_mobile_vertical](/reference/props/#sp-mobile-vertical)
 
 ### `sp_mobile_vertical`
 
@@ -147,7 +152,7 @@ Default: `true`
 初期値を横配置にしているときに関係してくる
 言い替えると画面幅が広いときに横配置に切り替えるかの設定でもある
 
-See also: [sp_layout](/reference/props#sp-layout)
+See also: [sp_layout](/reference/props/#sp-layout)
 
 ### `sp_preset`
 
@@ -168,6 +173,8 @@ Default: `false`
 
 * 有効にすると再生しやすくなるが駒を動かせなくなる
 * 天王山をクリックすると反転する
+
+See also: [sp_controller](/reference/props/#sp-controller)
 
 ### `sp_coordinate`
 
@@ -280,6 +287,8 @@ Default: `false`
 
 言い替えると「指定の局面の手番が☖なら反転するか？」という意味になる
 
+See also: [sp_viewpoint](/reference/props/#sp-viewpoint)
+
 ### `sp_comment`
 
 Type: `Boolean`
@@ -321,9 +330,9 @@ Default: `standard`
 * もともとリアル志向を初期値としていたが将棋ウォーズに慣れきってしまった者たちにはハードルが高かったため初期値を変更した。が、やっぱり戻すかもしれない
 * 持駒にも同じ挙動を適用するべきだができていない
 
-| 値           | 挙動                                         | タイプ                   |
-|--------------|----------------------------------------------|--------------------------|
-| reality  | リアル志向<br>元の位置に戻す                 | 最初の共有将棋盤         |
+| 値       | 挙動                                         | タイプ                   |
+|----------|----------------------------------------------|--------------------------|
+| reality  | リアル志向<br>元の位置に戻す                 | 昔の共有将棋盤     |
 | standard | 初心者向け<br>移動できないセルに移動したとき | 将棋ウォーズ<br>ぴよ将棋 |
 | rehold   | 合理的<br>キャンセルと同時に駒を持つ         | lishogi                  |
 
@@ -385,6 +394,8 @@ Default: `false`
 フォーカスする際にブラウザがスクロールしてしまう場合がある
 :::
 
+See also: [sp_slider](/reference/props#sp-slider)
+
 ### `sp_operation_disabled`
 
 Type: `Boolean`
@@ -436,7 +447,7 @@ Default: `true`
 Type: `Boolean`
 Default: `false`
 
-反則判定にひっかかったあと反則を無なかったことにするか？
+反則判定にひっかかったあと反則を無かったことにするか？
 
 * 無かったことにしてもイベントで反則を知ることはできる
 * 有効にすると基本的な反則の操作はできなくなる
