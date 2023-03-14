@@ -285,14 +285,14 @@ Default: `false`
 Type: `Boolean`
 Default: `true`
 
-盤の下にKIF形式棋譜のコメントを表示するか？
+KIF形式の棋譜にコメントが含まれていれば盤の下に表示するか？
 
 ### `sp_human_side`
 
 Type: `none | both | black | white`
 Default: `both`
 
-再生モードで操作できる側を絞る
+操作モードで操作できる側を制限する
 
 | 値    | 操作できる側 |
 |-------|--------------|
