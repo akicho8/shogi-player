@@ -527,7 +527,7 @@ Default: `null`
 * `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したいときに使う
 * Web Components では style を指定しても内側(Shadow Dom)には届かないため引数を設けている
 * また Web Components 経由ではネイテイブなハッシュは渡せないので**JSON5形式文字列**で指定する
-* ShogiPlayer.vue コンポーネントの style に渡す
+* 最終的に ShogiPlayer.vue コンポーネントの style に渡す
 
 ```html
 <shogi-player-wc

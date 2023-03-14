@@ -34,6 +34,7 @@ import SpGroundInside     from "./SpGroundInside.vue"
 // mixins modules
 import { mod_focus           } from "./mod_focus.js"
 import { mod_navi            } from "./mod_navi.js"
+import { mod_viewpoint       } from "./mod_viewpoint.js"
 import { mod_dev_tools       } from "./dev_tools/mod_dev_tools.js"
 import { mod_shortcut_viewer } from "./shortcut_viewer/mod_shortcut_viewer.js"
 import { mod_resize_observer } from "./mod_resize_observer.js"
@@ -60,6 +61,7 @@ export default {
     mod_vector,
     mod_focus,
     mod_navi,
+    mod_viewpoint,
     mod_dev_tools,
     mod_shortcut_viewer,
     mod_resize_observer,
