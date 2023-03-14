@@ -10,7 +10,7 @@ import { support } from "../support.js"
 export default {
   name: "MembershipLocationPlayerInfo",
   mixins: [support],
-  inject: ["location"],
+  inject: ["ms"],
   methods: {
     player_attr_of(key) {
       if (this.one_side_info) {
@@ -18,7 +18,7 @@ export default {
       }
     },
     click_handle() {
-      this.TheSp.event_call("ev_action_player_info_click", this.location, this.one_side_info)
+      this.TheSp.event_call("ev_action_player_info_click", this.ms.location, this.one_side_info)
     },
   },
   computed: {
@@ -32,7 +32,7 @@ export default {
     },
     one_side_info() {
       if (this.TheSp.sp_player_info) {
-        return this.TheSp.sp_player_info[this.location.key]
+        return this.TheSp.sp_player_info[this.ms.location.key]
       }
     },
     player_name()  { return this.player_attr_of("name")  },

@@ -9,7 +9,7 @@ import { support } from "../support.js"
 export default {
   name: "MembershipLocationMark",
   mixins: [support],
-  inject: ["location"],
+  inject: ["ms"],
   methods: {
     click_handle() {
       if (this.flipable) {
@@ -29,12 +29,12 @@ export default {
     component_key() {
       return [
         this.$options.name,     // MembershipLocationMark
-        this.location.key,      // black or white
+        this.ms.location.key,      // black or white
         this.is_turn_key,       // active or inactive
       ].join(".")
     },
     is_turn_key() {
-      return this.TheSp.xcontainer.current_location === this.location ? "active" : "inactive"
+      return this.TheSp.xcontainer.current_location === this.ms.location ? "active" : "inactive"
     },
     flipable() {
       return this.TheSp.sp_location_click_behavior === "flip"

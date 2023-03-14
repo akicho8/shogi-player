@@ -10,7 +10,7 @@ import MembershipLocationMark from "./MembershipLocationMark.vue"
 export default {
   name: "MembershipLocation",
   mixins: [support],
-  inject: ["location"],
+  inject: ["ms"],
   components: {
     MembershipLocationMark,
   },

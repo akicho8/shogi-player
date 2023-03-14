@@ -65,7 +65,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_stand_flip", default: true, },
 
       { key: "sp_turn", default: -1, },
-      { key: "sp_viewpoint", default: "black", },
+      { key: "sp_viewpoint", default: DEVELOPMENT_P ? "white" : "black", },
       { key: "sp_debug", default: DEVELOPMENT_P ? false : false, },
       { key: "sp_piece_count_size", default: 0.2, },
       { key: "sp_piece_count_font_color", default:  "hsla(0, 0%, 0%, 0.75)", },

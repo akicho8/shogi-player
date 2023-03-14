@@ -69,6 +69,11 @@ export class Xcontainer {
     return this.hold_pieces[location.key][piece.key] || 0
   }
 
+  // 持駒が空か？
+  hold_pieces_blank_p(location) {
+    return Object.keys(this.hold_pieces[location.key]).length === 0
+  }
+
   hold_pieces_add(location, piece, plus = 1) {
     const count = this.hold_pieces_count(location, piece) + plus
     const counts_hash = this.hold_pieces[location.key]
@@ -191,10 +196,11 @@ export class Xcontainer {
     return this.data_source.turn_base
   }
 
-  realized_hold_pieces_of(location_key) {
-    const list = Object.entries(this.hold_pieces[location_key])
+  // 持駒
+  realized_hold_pieces_of(location) {
+    const list = Object.entries(this.hold_pieces[location.key])
     return _(list)
-      .filter(([key, count]) => count >= 1)
+      // .filter(([key, count]) => count >= 1)
       .map(([key, count]) => [Piece.fetch(key), count])
       .sortBy(([key, count]) => key.code)
       .value()

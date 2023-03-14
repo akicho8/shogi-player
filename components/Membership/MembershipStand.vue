@@ -4,8 +4,8 @@
   .MembershipStand2
     .PieceWithCount.is-flex(
       v-for="[piece, count] in hold_pieces"
-      @click.stop="TheSp.piece_stand_piece_click(location, piece, false, $event)"
-      @mouseover="TheSp.piece_stand_mouseover_handle(location, piece, $event)"
+      @click.stop="TheSp.piece_stand_piece_click(ms.location, piece, false, $event)"
+      @mouseover="TheSp.piece_stand_mouseover_handle(ms.location, piece, $event)"
       @mouseleave="TheSp.mouseleave_handle"
       )
       PieceTap(
@@ -23,7 +23,7 @@ import { support } from "../support.js"
 export default {
   name: "MembershipStand",
   mixins: [support],
-  inject: ["location"],
+  inject: ["ms"],
 
   components: {
     PieceTap,
@@ -31,7 +31,7 @@ export default {
 
   methods: {
     hold_piece_lifted_p(piece) {
-      return this.TheSp.have_piece_location === this.location && this.TheSp.have_piece === piece
+      return this.TheSp.have_piece_location === this.ms.location && this.TheSp.have_piece === piece
     },
 
     piece_tap_class(piece) {
@@ -50,7 +50,7 @@ export default {
             f = true
           }
           if (this.TheSp.play_p) {
-            if (!this.TheSp.cpu_location_p && this.TheSp.xcontainer.current_location === this.location) {
+            if (!this.TheSp.cpu_location_p && this.TheSp.xcontainer.current_location === this.ms.location) {
               f = true
             }
           }
@@ -67,7 +67,7 @@ export default {
       }
 
       // list = _.concat(list, piece.css_class_list)
-      // list.push(`location_${this.location.key}`)
+      // list.push(`location_${this.ms.location.key}`)
       // list.push("promoted_false")
 
       return list
@@ -76,7 +76,7 @@ export default {
     piece_texture_class(piece) {
       let list = []
       list = _.concat(list, piece.css_class_list)
-      list.push(`location_${this.location.key}`)
+      list.push(`location_${this.ms.location.key}`)
       list.push("promoted_false")
       return list
     },
@@ -98,7 +98,7 @@ export default {
     },
 
     hold_pieces() {
-      return this.TheSp.xcontainer.realized_hold_pieces_of(this.location.key)
+      return this.TheSp.xcontainer.realized_hold_pieces_of(this.ms.location)
     },
   },
 }

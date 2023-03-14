@@ -17,13 +17,13 @@ import MembershipLocationPlayerInfo from "./MembershipLocationPlayerInfo.vue"
 export default {
   mixins: [support],
   props: {
-    location: { required: true },
-    position: { required: true },
+    location: { required: true }, // 論理的な位置
+    position: { required: true }, // 物理的な位置
   },
 
   provide() {
     return {
-      location: this.location,
+      ms: this,
     }
   },
 
@@ -67,16 +67,15 @@ export default {
       return list
     },
 
-    // 持駒が空なら駒台を表示しない
+    // 表示するか？
+    // ・sp_piece_stand_blank_then_hidden が有効なとき持駒が空なら駒台を表示しない
     component_show_p() {
-      if (this.TheSp.sp_piece_stand_blank_then_hidden && _.isEmpty(this.hold_pieces)) {
-        return false
+      if (this.TheSp.sp_piece_stand_blank_then_hidden) {
+        if (this.TheSp.xcontainer.hold_pieces_blank_p(this.location)) {
+          return false
+        }
       }
       return true
-    },
-
-    hold_pieces() {
-      return this.TheSp.xcontainer.realized_hold_pieces_of(this.location.flip_if(this.TheSp.fliped).key)
     },
   },
 }
