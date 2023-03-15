@@ -6,9 +6,9 @@ actionText: START
 actionLink: /guide/
 features:
 - title: 3つのモード
-  details: 棋譜を見るための「再生モード」と対戦するときの「操作モード」と詰将棋を作るときの「編集モード」がある
+  details: 棋譜を見るための「再生モード」と対戦用の「操作モード」そして詰将棋を作るときの「編集モード」がある
 - title: モバイル対応
-  details: レスポンシブ対応でスマホの縦長画面に対してはレイアウトを動的に変えて狭い画面を活用する
+  details: レスポンシブ対応でスマホの縦長画面にも適応するようにレイアウトを動的に変更して狭い画面を最大限に活用する
 - title: カスタマイズ
   details: オプションで調整が可能。見た目に関してはあらかじめ用意してあるCSS変数で対応する
 - title: Web Components
@@ -26,6 +26,30 @@ footer: AGPL-3.0
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+<div style="margin-top: 2rem"></div>
+
+<p class="codepen" data-height="720" data-default-tab="html,result" data-slug-hash="KKxRaaJ" data-user="kinakom0chi" style="height: 691.2989501953125px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/kinakom0chi/pen/KKxRaaJ">
+  Shogi Player Demo Auto Play</a> by kinakomochi (<a href="https://codepen.io/kinakom0chi">@kinakom0chi</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- <LinkToProps name="sp_human_side" /> -->
 

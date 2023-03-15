@@ -12,7 +12,7 @@
 ## おまけオプション
 
 * [sp_overlay_nav](/reference/props/#sp-overlay-nav): 盤面の左右で局面を動かす(ただし駒を移動できなくなる)
-* [sp_turn_show](/reference/props/#sp-turn-show): 盤面の上に手数を表示する(クリックで編集可)
+* [sp_turn_show](/reference/props/#sp-turn-show): 盤面の上に手数を表示する(邪魔)
 
 ## 補足
 

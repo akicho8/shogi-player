@@ -3,11 +3,17 @@
 ## 特徴
 
 * 対戦用のモード
-* スライダー等で変更した任意局面から手番側の操作が行える
-* 一度指すとその手が最終手になる(分岐には対応していない)
-* [sp_human_side](/reference/props/#sp-human-side) オプションで片側の操作のみに絞れる
-* emit イベントに反応して、相手側の指し手を追加した棋譜で sp_body を更新すればCPUとの対戦のようなことができる
-* 再生モードの棋譜とは独立している(再生モードの棋譜を上書きしない)
+* 手番側の操作を行う
+* 一度指すとその手が最終手になる
+* 再生モードの棋譜とは独立している (再生モードの棋譜を上書きしない)
+
+## 関連オプション
+
+* [sp_human_side](/reference/props/#sp-human-side): 片側の操作に絞る
+
+## 関連イベント
+
+* [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object): 指し手を受けとる
 
 ## Playground
 
