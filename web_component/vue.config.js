@@ -1,40 +1,21 @@
 module.exports = {
-  // ▼shogi-player 側のクラス定数 "static foo = 1" な表記が読み取れない問題に対処する
-  // 原因は babel が node_modules 以下を除外しているため。
-  // node_modules 以下であってもここで指定するとビルド対象になる
-  // https://cli.vuejs.org/config/#transpiledependencies
-  transpileDependencies: [
-    "shogi-player",
-  ],
-
-  // chainWebpack: (config) => {
-  //   config.module
-  //     .rule('images')
-  //     .test(/\.(otf|eot|svg|ttf|woff|woff2|svg|gif|png)(\?.+)?$/)
-  //     .use('url-loader')
-  //     .loader('url-loader')
-  //     .tap(options => {
-  //       return {
-  //         ...options,
-  //         limit: Infinity,
-  //         encoding: 'base64',
-  //         esModule: false,    // ← 効かない
-  //       };
-  //     })
-  // },
-
-  // chainWebpack: config => {
-  //   config.module
-  //     .rule("images")
-  //     .use("url-loader")
-  //     .loader("url-loader")
-  //     .tap(options => {
-  //       console.log("---------------")
-  //       console.log(options)
-  //       console.log("---------------")
-  //       return Object.assign(options, { limit: Infinity })
-  //     })
-  // },
+  chainWebpack: config => {
+    config.module
+      .rule("images")
+      .set("parser", {
+        dataUrlCondition: {
+          maxSize: Infinity,
+        },
+      })
+    config.module
+      .rule("svg")
+      .set("type", "asset")
+      .set("parser", {
+        dataUrlCondition: {
+          maxSize: Infinity,
+        },
+      })
+  },
 
   // https://cli.vuejs.org/config/#css-loaderoptions
   // https://github.com/webpack-contrib/sass-loader#additionaldata
@@ -53,4 +34,11 @@ module.exports = {
     },
   },
 
+  // ▼shogi-player 側のクラス定数 "static foo = 1" な表記が読み取れない問題に対処する
+  // 原因は babel が node_modules 以下を除外しているため。
+  // node_modules 以下であってもここで指定するとビルド対象になる
+  // https://cli.vuejs.org/config/#transpiledependencies
+  transpileDependencies: [
+    "shogi-player",
+  ],
 }

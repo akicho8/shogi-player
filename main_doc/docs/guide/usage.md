@@ -104,7 +104,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
   * https://unpkg.com/shogi-player@0.0.409/dist/wc/development/shogi-player-wc.min.js
 
 ::: tip
-本当は https://unpkg.com/shogi-player@0.0.409 でいいはずだけど、画像パスがずれて駒が表示されない問題があるため js までの正確なパスでアクセスしないといけない
+https://unpkg.com/shogi-player@0.0.409 
 :::
 
 ## バージョンを固定する
