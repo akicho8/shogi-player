@@ -97,14 +97,14 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 ## CDN
 
 * JSDelivr:
-  * https://cdn.jsdelivr.net/npm/shogi-player@0.0.409/dist/wc/production/shogi-player-wc.min.js
-  * https://cdn.jsdelivr.net/npm/shogi-player@0.0.409/dist/wc/development/shogi-player-wc.min.js
+  * https://cdn.jsdelivr.net/npm/shogi-player@0.0.410/dist/wc/production/shogi-player-wc.min.js
+  * https://cdn.jsdelivr.net/npm/shogi-player@0.0.410/dist/wc/development/shogi-player-wc.min.js
 * UNPKG:
-  * https://unpkg.com/shogi-player@0.0.409/dist/wc/production/shogi-player-wc.min.js
-  * https://unpkg.com/shogi-player@0.0.409/dist/wc/development/shogi-player-wc.min.js
+  * https://unpkg.com/shogi-player@0.0.410/dist/wc/production/shogi-player-wc.min.js
+  * https://unpkg.com/shogi-player@0.0.410/dist/wc/development/shogi-player-wc.min.js
 
 ::: tip
-https://unpkg.com/shogi-player@0.0.409 でも読める
+https://unpkg.com/shogi-player@0.0.410 でも読める
 :::
 
 ## バージョンを固定する
@@ -112,7 +112,7 @@ https://unpkg.com/shogi-player@0.0.409 でも読める
 事故らないように本番ではバージョンを固定する
 
 `@x.x.x` でバージョンを固定できる
-https://unpkg.com/shogi-player@0.0.409/dist/wc/production/shogi-player-wc.min.js
+https://unpkg.com/shogi-player@0.0.410/dist/wc/production/shogi-player-wc.min.js
 
 最新バージョン → [![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
 
