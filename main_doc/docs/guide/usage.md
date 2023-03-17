@@ -104,7 +104,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
   * https://unpkg.com/shogi-player@0.0.409/dist/wc/development/shogi-player-wc.min.js
 
 ::: tip
-https://unpkg.com/shogi-player@0.0.409 
+https://unpkg.com/shogi-player@0.0.409 でも読める
 :::
 
 ## バージョンを固定する
