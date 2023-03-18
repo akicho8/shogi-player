@@ -40,18 +40,6 @@ export const mod_navi = {
       type: Boolean,
       default: false,
     },
-
-    // キーで左右するとき shift を押したときの倍率
-    sp_shift_key_mag: {
-      type: Number,
-      default: 10,
-    },
-
-    // キーで左右するとき command などを押したときの倍率
-    sp_system_key_mag: {
-      type: Number,
-      default: 50,
-    },
   },
 
   mounted() {
@@ -117,19 +105,6 @@ export const mod_navi = {
     },
 
     relative_move(v, event = null) {
-      if (event) {
-        if (event.shiftKey) {
-          if (this.sp_shift_key_mag) {
-            v *= this.sp_shift_key_mag
-          }
-        }
-        if (event.ctrlKey || event.altKey || event.metaKey) {
-          if (this.sp_system_key_mag) {
-            v *= this.sp_system_key_mag
-          }
-        }
-      }
-
       this.current_turn_add(v, event)
 
       // SpSlider → (next || previous) の順でフォーカスを試みる

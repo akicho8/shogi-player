@@ -56,8 +56,6 @@ export default {
     sp_piece_stand_blank_then_hidden:  { type: Boolean, }, // 駒がないときは駒台側を非表示
     sp_active_side_viewpoint:          { type: Boolean, }, // 最初に表示した局面が△なら反転
     sp_key_event_capture:              { type: Boolean, }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
-    sp_shift_key_mag:                  { type: Number,  }, // キーで左右するとき shift を押したときの倍率
-    sp_system_key_mag:                 { type: Number,  }, // キーで左右するとき command などを押したときの倍率
     sp_layout:                         { type: String,  }, // レイアウト is_(vertical\|horizontal)
     sp_balloon:                        { type: Boolean, }, // 対局者名の下に駒数スタイルと同じ背景色を置く
     sp_layer:                          { type: Boolean, }, // レイヤー確認(デバッグ用)

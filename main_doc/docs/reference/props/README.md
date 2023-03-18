@@ -449,20 +449,6 @@ Default: `false`
 副作用あり。他のプログラムの操作を奪ってしまうかもしれないため基本は false にしておいた方がよい
 :::
 
-### `sp_shift_key_mag`
-
-Type: `Number`
-Default: `10`
-
-`sp_key_event_capture` を有効にして手数を動かすときの shift を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
-
-### `sp_system_key_mag`
-
-Type: `Number`
-Default: `50`
-
-`sp_key_event_capture` を有効にして手数を動かすときの command を押したときの倍率 <Badge text="非推奨" type="error" vertical="top" />
-
 ## 合法手
 
 ### `sp_legal_move_only`
