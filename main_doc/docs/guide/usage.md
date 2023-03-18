@@ -7,20 +7,20 @@
 
 上の2行だけのHTMLを作るか、既存のサイトにコピペして動けば次へ
 
-## 文字コードやスマホを考慮する
+## 文字コードやスマホを考慮する (重要)
 
 <<< @/docs/.vuepress/public/examples/simple.html{3-4}
 <LinkToExample name="simple" />
 
 * 棋譜を正しく読むため UTF-8 を明示する
-* 反応遅延や意図しない画面ズームを防ぐため viewport を指定する (←超重要)
+* 反応遅延や意図しない画面ズームを防ぐため viewport を指定する
 
 ## 棋譜再生 (SFEN) ##
 
 <<< @/docs/.vuepress/public/examples/view.html{8-11}
 <LinkToExample name="view" />
 
-最後の局面から表示させるときは `sp_turn="-1"` とする
+最後の局面から表示させたいなら [sp_turn](/reference/props/#sp-turn) を `-1` にする
 
 ## 棋譜再生 (KIF) ##
 
@@ -28,7 +28,7 @@
 <LinkToExample name="view_kif" />
 
 SFEN と KIF (BOD) に対応している
-どちらも `sp_body` に指定する (自動判別する)
+どちらも [sp_body](/reference/props/#sp-body) に指定する (自動判別する)
 
 ## スタイル変更 ##
 
@@ -52,9 +52,9 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <<< @/docs/.vuepress/public/examples/sp_pass_style.html{9}
 <LinkToExample name="sp_pass_style" />
 
-引数の `sp_pass_style` に書いても変更できるようにしてある
+引数の [sp_pass_style](/reference/props/#sp-pass-style) に書いても変更できるようにしてある
 これはタグの style を直接書くのに似ていて分けて書いたときより詳細度が高い
-古の技術駆動では機能とスタイルは分けるべきとされているが目的駆動であればまとめて書く方が普通にわかりやすいので入れてある
+古の技術駆動では機能とスタイルは分けるべきとされているが目的駆動として見ればまとめて書く方が普通にわかりやすい
 
 ## イベント受信 ##
 
@@ -62,21 +62,8 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <<< @/docs/.vuepress/public/examples/event.html{7-10}
 <LinkToExample name="event" />
 
-このあたりを HTML でがんばるなら [Lit](https://lit.dev/) などと組み合わせた方がいいかもしれない 
-
-<!-- ../.vuepress/public/examples/event.html -->
-<!-- <a href="/examples/event.html" target="_blank">上のサンプルを単体で開く</a> -->
-
-<!-- <ShogiPlayerWcWrapperEventTest /> -->
-
-<!-- Vue.js が使える環境であれば直接ひっかける -->
-<!--  -->
-<!-- ```html -->
-<!-- <shogi-player-wc -->
-<!--   sp_mode="play" -->
-<!--   @ev_play_mode_move="e => {}" -->
-<!-- /> -->
-<!-- ``` -->
+このように `addEventListener` を使う形になってあまり綺麗には書けない
+このあたりが負担になるなら [Lit](https://lit.dev/) などと組み合わせた方がいいかもしれない 
 
 ## レイアウト例
 
@@ -91,10 +78,15 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <<< @/docs/.vuepress/public/examples/api.html{7-11}
 <LinkToExample name="api" />
 
-* 基本的に使うことはないが特別なことをしたいときは上のようにして呼ぶ
-* 隔離したはずの世界を自由に触れてしまうこの仕組みは数年後にはできなくなっているかもしれない
+基本的に使うことはないが特別なことをしたいときは上のようにして呼ぶ
+隔離したはずの世界を自由に触れてしまうこの仕組みは数年後にはできなくなっているかもしれない
 
 ## CDN
+
+* JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@0.0.410
+* UNPKG:    https://unpkg.com/shogi-player@0.0.410
+
+### 正確なパスと development 版
 
 * JSDelivr:
   * https://cdn.jsdelivr.net/npm/shogi-player@0.0.410/dist/wc/production/shogi-player-wc.min.js
@@ -103,16 +95,16 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
   * https://unpkg.com/shogi-player@0.0.410/dist/wc/production/shogi-player-wc.min.js
   * https://unpkg.com/shogi-player@0.0.410/dist/wc/development/shogi-player-wc.min.js
 
-::: tip
-https://unpkg.com/shogi-player@0.0.410 でも読める
-:::
-
 ## バージョンを固定する
 
-事故らないように本番ではバージョンを固定する
+試すときには次のように書いてもいいが
 
-`@x.x.x` でバージョンを固定できる
-https://unpkg.com/shogi-player@0.0.410/dist/wc/production/shogi-player-wc.min.js
+* https://cdn.jsdelivr.net/npm/shogi-player
+* https://cdn.jsdelivr.net/npm/shogi-player@latest
+
+本番では `@x.x.x` をつけてバージョンを固定した方がよい
+
+* https://unpkg.com/shogi-player@0.0.410
 
 最新バージョン → [![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
 
@@ -128,7 +120,7 @@ Uncaught SyntaxError: Invalid regular expression: /.../: Range out of order in c
 
 `<head>` 内に `<meta charset="UTF-8">` を追加する
 
-ローカルに置いた js を読み込んだときだけ上のエラーになる。CDN 経由の場合はたまたまエラーにならない。理由はレスポンスヘッダの `content-type` に `charset=utf-8` が含まれているからと思われる
+ローカルに置いた js を読み込んだときだけ上のエラーになる。CDN 経由の場合はたまたまエラーにならない。理由はレスポンスヘッダの `content-type` に `charset=utf-8` が含まれているからと思われる。
 
 ### スマホでタップの反応が遅い
 
