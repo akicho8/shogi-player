@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player"></script>
+    <!-- <script defer src="https://cdn.jsdelivr.net/npm/shogi-player"></script> -->
+    <script defer src="../dist/wc/production/shogi-player-wc.js"></script>
     <script type="module">
       import { LitElement, css, html } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js"
+
       export class ShogiBoard extends LitElement {
         static styles = css`
           :host {
@@ -25,22 +27,12 @@
 
         static properties = {
           source: {},
-          turn: {},
         }
 
-        constructor() {
-          super()
-          this.turn = 0
-          this.max = null
-
-          setInterval(() => {
-            this.turn += 1
-            if (this.max) {
-              if (this.turn > this.max) {
-                this.turn = 0
-              }
-            }
-          }, 1000)
+        firstUpdated() {
+          const el = this.renderRoot.querySelector("shogi-player-wc")
+          const sp_instance = el.shadowRoot.querySelector(".ShogiPlayer").__vue__
+          setInterval(() => sp_instance.api_turn_add(1, {cycle: true}), 1000)
         }
 
         render() {
@@ -49,8 +41,7 @@
               <shogi-player-wc
                 sp_mode="view"
                 sp_body="${this.source}"
-                sp_turn="${this.turn}"
-                @ev_turn_offset_max_change="${e => this.max = e.detail[0]}"
+                sp_turn="0"
               ></shogi-player-wc>
             </div>
           `

@@ -10,8 +10,8 @@
 b-slider.is-unselectable.SpSlider(
   size="is-small"
   :value="TheSp.turn_offset"
-  @dragging="v => TheSp.current_turn_set_by_slider(v, true)"
-  @change="v => TheSp.current_turn_set_by_slider(v, true)"
+  @dragging="v => TheSp.current_turn_set(v, {interactive: true})"
+  @change="  v => TheSp.current_turn_set(v, {interactive: true})"
   :min="TheSp.turn_offset_min"
   :max="TheSp.turn_offset_max"
   :tooltip="false"

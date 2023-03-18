@@ -89,23 +89,19 @@ export const mod_navi = {
         }
 
         if (e.code === "Backspace" || e.code === "ArrowUp" || e.code === "ArrowLeft" || e.key === "k" || e.key === "p" || e.key === "b") {
-          this.relative_move(-1, e)
+          this.api_turn_add(-1, {interactive: e})
           e.preventDefault()
         }
 
         if (e.code === "Space" || e.code === "Enter" || e.code === "ArrowDown" || e.code === "ArrowRight" || e.key === "j" || e.key === "n" || e.key === "f") {
-          this.relative_move(1, e)
+          this.api_turn_add(1, {interactive: e})
           e.preventDefault()
         }
       }
     },
 
-    navi_relative_move(v, event) {
-      this.relative_move(v, event)
-    },
-
-    relative_move(v, event = null) {
-      this.current_turn_add(v, event)
+    api_turn_add(v, options = {}) {
+      this.current_turn_add(v, options)
 
       // SpSlider → (next || previous) の順でフォーカスを試みる
       if (!this.turn_slider_focus()) {
@@ -118,22 +114,28 @@ export const mod_navi = {
       }
     },
 
-    move_to_first(event = null) {
-      this.current_turn_set(this.turn_offset_min, event)
+    move_to_first(options = {}) {
+      this.current_turn_set(this.turn_offset_min, options)
       this.turn_slider_focus() || this.nav_focus_to("first")
     },
 
-    move_to_last(event = null) {
-      this.current_turn_set(this.turn_offset_max, event)
+    move_to_last(options = {}) {
+      this.current_turn_set(this.turn_offset_max, options)
       this.turn_slider_focus() || this.nav_focus_to("last")
     },
 
-    current_turn_add(v, event = null) {
-      this.current_turn_set(this.xcontainer.turn_offset + v, event)
+    current_turn_add(v, options = {}) {
+      this.current_turn_set(this.xcontainer.turn_offset + v, options)
     },
 
-    current_turn_set(v, event) {
-      const new_val = this.xcontainer.turn_clamp(v)
+    current_turn_set(v, options = {}) {
+      let new_val = null
+      if (options.cycle) {
+        new_val = this.xcontainer.turn_cycle(v)
+      } else {
+        new_val = this.xcontainer.turn_clamp(v)
+      }
+
       const updated = this.turn_offset !== new_val
 
       if (updated) {
@@ -147,23 +149,12 @@ export const mod_navi = {
         }
         this.event_call("update:sp_turn", this.turn_offset)
 
-        if (event) {
+        if (options.interactive) {
           this.log("局面を人が故意に変更")
           this.event_call("ev_action_turn_change", this.turn_offset) // b-slider で変更
         }
       }
     },
-
-    // by_user = true:ユーザーが離したときに呼ばれた
-    current_turn_set_by_slider(v, by_user) {
-      if (by_user) {
-        this.log(`スライダーをユーザーが動かした : ${v}`)
-      } else {
-        this.log(`スライダーは勝手に動いた : ${v}`)
-      }
-      this.current_turn_set(v, by_user)
-    },
-
   },
   computed: {
 

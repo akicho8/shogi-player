@@ -9,6 +9,7 @@ import { SfenParser } from "./sfen_parser.js"
 import { SfenSerializer } from "./sfen_serializer.js"
 import { PresetInfo } from "./preset_info.js"
 import { Location } from "./location.js"
+import { Xinteger } from "./xinteger.js"
 
 export class Xcontainer {
   constructor() {
@@ -154,6 +155,10 @@ export class Xcontainer {
 
   turn_clamp(index) {
     return _.clamp(Number(index), this.turn_offset_min, this.turn_offset_max)
+  }
+
+  turn_cycle(index) {
+    return Xinteger.imodulo(Number(index), this.turn_offset_max + 1)
   }
 
   get previous_location() {
