@@ -60,8 +60,10 @@
     "raw-loader": "^4.0.2",
     "sardaxon": "^0.0.3",
     "sass-loader": "^10.1.1",
-    "vue": "^2.7.14",
     "vue-scrollto": "^2.20.0",
+    "vue-template-compiler": "^2.7.14",
     "xregexp": "^5.1.1"
+  },
+  "dependencies": {
   }
 }
