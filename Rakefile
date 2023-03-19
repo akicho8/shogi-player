@@ -1,12 +1,16 @@
 require "table_format"
 require "./package"
 
+def system!(command)
+  system "sh", "-vec", command, exception: true
+end
+
 task :default => :test
 
 task :s => :server
 desc "[s] server"
 task :server do
-  system <<~EOT
+  system! <<~EOT
   nuxt dev -p 5000 --open
   EOT
 end
@@ -14,7 +18,7 @@ end
 task :t => :test
 desc "[t] test"
 task :test do
-  system <<~EOT
+  system! <<~EOT
   jest
   EOT
 end
@@ -22,7 +26,7 @@ end
 task :i => :inspect
 desc "[i] inspect"
 task :inspect do
-  system <<~EOT
+  system! <<~EOT
   cd web_component
   vue inspect --mode development > vue.conifg.inspect.development.txt
   vue inspect --mode production >  vue.conifg.inspect.production.txt
@@ -31,7 +35,7 @@ end
 
 desc "dist/ に CDN 用の Web Components を生成する"
 task :dist do
-  system <<~EOT
+  system! <<~EOT
   cd web_component
   npm i
   SP_TARGET=wc  vue-cli-service build --mode production  --target wc  --dest ../dist/wc/production   --inline-vue --name shogi-player-wc src/components/ShogiPlayerWc.vue
@@ -44,7 +48,7 @@ end
 
 desc "clean"
 task :clean do
-  system <<~EOT
+  system! <<~EOT
   rm -fr coverage
   rm -fr docs
   rm -fr node_modules
@@ -58,7 +62,7 @@ namespace :old_doc do
   desc "build"
   task :build do
     # web_component を退避させないと "shogi-player": "file:.." の参照が無限ループになって nuxt generate で死ぬ
-    system <<~EOT
+    system! <<~EOT
     mv web_component /tmp
     mv shogi-player-nuxt-sample /tmp
     mv shogi-player-vue2-sample /tmp
@@ -71,7 +75,7 @@ namespace :old_doc do
 
   desc "push"
   task :push do
-    system <<~EOT
+    system! <<~EOT
     git add -A
     git commit -m '[docs][deploy][skip ci] nuxt generate --dotenv .env.production'
     git push
@@ -82,7 +86,7 @@ end
 
 desc "release"
 task :release do
-  system <<~EOT
+  system! <<~EOT
   rake dist
   npm version patch
   rake example_cdn_version_replace
@@ -98,7 +102,7 @@ end
 
 desc "example_cdn_version_replace"
 task :example_cdn_version_replace do
-  system <<~EOT
+  system! <<~EOT
   r 'shogi-player@\\d+\\.\\d+\.\\d+' 'shogi-player@#{Package.version}' -x
   git add -A && git commit -m "[docs][ci skip] CDN の参照バージョンを #{Package.version} に変更する"
   EOT
@@ -106,7 +110,7 @@ end
 
 desc "update"
 task :update do
-  system <<~EOT
+  system! <<~EOT
   yarn global add npm-check-updates
   ncu /router/ -u
   ncu /lodash/ -u
@@ -123,7 +127,7 @@ end
 task :cp => :copy
 desc "copy"
 task :copy do
-  system <<~EOT
+  system! <<~EOT
   rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/
     EOT
 end
@@ -132,7 +136,7 @@ task :n => "netlify:open"
 namespace "netlify" do
   desc "[n] netlify open"
   task :open do
-    system <<~EOT
+    system! <<~EOT
     npm docs
     open https://app.netlify.com/sites/shogi-player/overview
     EOT
@@ -142,7 +146,7 @@ end
 task :o => :open
 desc "[o] open related sites"
 task :open => ["netlify:open", "ga"] do
-  system <<~EOT
+  system! <<~EOT
   open https://github.com/akicho8/shogi-player
   # CDN
   open "https://cdn.jsdelivr.net/npm/shogi-player/"
@@ -152,7 +156,7 @@ end
 
 desc "[ga] Google Analytics"
 task :ga do
-  system <<~EOT
+  system! <<~EOT
   open "https://analytics.google.com/analytics/web/#/p353291851/reports/intelligenthome"
   # open https://tagassistant.google.com
   EOT
@@ -163,14 +167,14 @@ task :cdn do
   tp :local => Package.version
 
   tp "JSDelivr"
-  system <<~EOT
+  system! <<~EOT
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/wc/production/shogi-player-wc.min.js | grep 'x-jsd-version:'
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player@latest                      | grep 'x-jsd-version:'
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player                             | grep 'x-jsd-version:'
   EOT
 
   tp "unpkg"
-  system <<~EOT
+  system! <<~EOT
   curl -sI https://unpkg.com/shogi-player/dist/wc/production/shogi-player-wc.min.js | grep location
   curl -sI https://unpkg.com/shogi-player@latest                      | grep location
   curl -sI https://unpkg.com/shogi-player                             | grep location
@@ -181,7 +185,7 @@ task "ws" => "wc:server"
 namespace "wc" do
   desc "[ws] server"
   task :server do
-    system <<~EOT
+    system! <<~EOT
     cd web_component && rake s
     EOT
   end
@@ -189,7 +193,7 @@ end
 
 desc "other-embed-apps-shogi-player-update"
 task "other-embed-apps-shogi-player-update" do
-  system <<~EOT
+  system! <<~EOT
   (cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && yarn)
   (cd shogi-player-vue2-sample && ncu /shogi-player/ -u && npm i)
   EOT
@@ -198,7 +202,7 @@ end
 task :k => :embed_to_nuxt_and_vue2
 desc "[k] embed_to_nuxt_and_vue2"
 task :embed_to_nuxt_and_vue2 do
-  system <<~EOT
+  system! <<~EOT
   r -Qx '"shogi-player": "file:.."' '"shogi-player": "^#{Package.version}"' shogi-player-vue2-sample/package.json shogi-player-nuxt-sample/package.json
   # r -x '"shogi-player": "^\d+\.\d+\.\d+"' '"shogi-player": "file:.."'  shogi-player-vue2-sample/package.json shogi-player-nuxt-sample/package.json
 
@@ -215,14 +219,14 @@ end
 namespace "test-of-create-vuepress-site" do
   desc "server"
   task :server do
-    system <<~EOT
+    system! <<~EOT
     cd test-of-create-vuepress-site/docs && vuepress dev -p 5010 --open src
     EOT
   end
 
   desc "build"
   task :build do
-    system <<~EOT
+    system! <<~EOT
     cd test-of-create-vuepress-site/docs && vuepress build src
     EOT
   end
@@ -231,7 +235,7 @@ end
 task :a  => :about
 desc "[a] about"
 task :about do
-  system <<~EOT
+  system! <<~EOT
   ruby -v
   node -v
   npm root -g
@@ -244,7 +248,7 @@ end
 task :v => :version
 desc "[v] version"
 task :version do
-  # system <<~EOT
+  # system! <<~EOT
   # npm version
   # EOT
   puts Package.version
@@ -255,35 +259,35 @@ task :d => "doc:server"
 namespace :doc do
   desc "[d] server"
   task :server do
-    system <<~EOT
+    system! <<~EOT
     cd main_doc && rake server
     EOT
   end
 
   desc "build"
   task :build do
-    system <<~EOT
+    system! <<~EOT
     cd main_doc && rake build
     EOT
   end
 
   desc "[e] examples"
   task :examples do
-    system <<~EOT
+    system! <<~EOT
     fd -a -g "*.html" main_doc/docs/.vuepress/public/examples -X open -a "Google Chrome" --new --args
     EOT
   end
 
   desc "jsdelivr_to_unpkg"
   task :jsdelivr_to_unpkg do
-    system <<~EOT
+    system! <<~EOT
     r -Qx '"https://cdn.jsdelivr.net/npm/' '"https://unpkg.com/'
     EOT
   end
 
   desc "unpkg_to_jsdelivr"
   task :unpkg_to_jsdelivr do
-    system <<~EOT
+    system! <<~EOT
     r -Qx '"https://unpkg.com/' '"https://cdn.jsdelivr.net/npm/'
     EOT
   end
