@@ -154,8 +154,8 @@ export default {
     ],
 
     // Doc: https://axios.nuxtjs.org/usage
-    "@nuxtjs/axios",
-    "@nuxtjs/proxy",
+    // "@nuxtjs/axios",
+    // "@nuxtjs/proxy",
 
     "@nuxtjs/style-resources",
   ],

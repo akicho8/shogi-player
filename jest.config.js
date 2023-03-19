@@ -14,9 +14,4 @@ module.exports = {
     '.*\\.(vue)$': 'vue-jest',
   },
   setupFiles: ['<rootDir>/test/setup'],
-  collectCoverage: false,
-  collectCoverageFrom: [
-    '<rootDir>/components/**/*.vue',
-    '<rootDir>/pages/**/*.vue',
-  ]
 }
