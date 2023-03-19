@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@latest"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player"></script>
     <!-- <script defer src="../dist/wc/production/shogi-player-wc.js"></script> -->
     <script type="module">
       import { LitElement, css, html } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js"
@@ -42,6 +42,7 @@
                 sp_mode="view"
                 sp_body="${this.source}"
                 sp_turn="0"
+                sp_viewpoint="white"
               ></shogi-player-wc>
             </div>
           `
