@@ -41,7 +41,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "autolinker": "^4.0.0",
+    "beetleshine": "^0.0.6",
     "chroma-js": "^2.4.2",
     "ismobilejs": "^1.1.1",
     "js-memory-record": "^0.0.28",
