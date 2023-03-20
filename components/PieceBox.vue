@@ -24,6 +24,7 @@
 <script>
 import { support } from "./support.js"
 import PieceTap from "./PieceTap.vue"
+import _ from "lodash"
 
 export default {
   mixins: [support],
