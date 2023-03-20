@@ -93,7 +93,7 @@ task :release do
   npm publish
   git push --tags
   git push
-  (cd ~/src/shogi-extend/nuxt_side && ncu /shogi-player/ -u && npm i)
+  # (cd ~/src/shogi-extend/nuxt_side && npx npm-check-updates /shogi-player/ -u && npm i)
   rake old_doc:deploy
   rake open
   rake cdn
