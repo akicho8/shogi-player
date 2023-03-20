@@ -42,7 +42,7 @@ task :dist do
   SP_TARGET=wc  vue-cli-service build --mode development --target wc  --dest ../dist/wc/development  --inline-vue --name shogi-player-wc src/components/ShogiPlayerWc.vue
   SP_TARGET=lib vue-cli-service build --mode production  --target lib --dest ../dist/lib/production  --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
   SP_TARGET=lib vue-cli-service build --mode development --target lib --dest ../dist/lib/development --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
-  git add -A && git commit -m "[chore][skip ci] dist/* 生成"
+  git add -A && git commit -m "[chore][skip ci] dist/* 生成" --allow-empty
   EOT
 end
 
