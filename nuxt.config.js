@@ -12,14 +12,14 @@ export default {
   //   mode: "spa"        → ssr: false
   //   mode: "universal"  → ssr: true
   //
-  ssr: false,
+  ssr: true,
 
   /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
-  // target: "server",
-  target: "static",
+  target: "server",
+  // target: "static",
 
   router: {
     base: process.env.NODE_ENV === "production" ? "/shogi-player/" : "/",
