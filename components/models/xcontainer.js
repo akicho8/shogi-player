@@ -9,7 +9,7 @@ import { SfenParser } from "./sfen_parser.js"
 import { SfenSerializer } from "./sfen_serializer.js"
 import { PresetInfo } from "./preset_info.js"
 import { Location } from "./location.js"
-import { Beetleshine as Gs } from "beetleshine"
+import { Xinteger } from "beetleshine/lib/xinteger"
 
 export class Xcontainer {
   constructor() {
@@ -158,7 +158,7 @@ export class Xcontainer {
   }
 
   turn_cycle(index) {
-    return Gs.imodulo(Number(index), this.turn_offset_max + 1)
+    return Xinteger.imodulo(Number(index), this.turn_offset_max + 1)
   }
 
   get previous_location() {
