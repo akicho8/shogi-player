@@ -457,9 +457,18 @@
 </template>
 
 <script>
+import MyColorPicker from "./MyColorPicker.vue"
+import ImageUpload   from "./ImageUpload.vue"
+import SeTitle       from "./SeTitle.vue"
+
 export default {
   name: "SidebarContent",
   inject: ["TheSe"],
+  components: {
+    MyColorPicker,
+    ImageUpload,
+    SeTitle,
+  },
 }
 </script>
 

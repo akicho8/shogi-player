@@ -53,9 +53,6 @@ import { mod_se_css } from "./mod_se_css.js"
 import { mod_helper } from "./mod_helper.js"
 
 import ShogiPlayer   from "../ShogiPlayer.vue"
-import MyColorPicker from "./MyColorPicker.vue"
-import ImageUpload   from "./ImageUpload.vue"
-import SeTitle   from "./SeTitle.vue"
 import SidebarContent   from "./SidebarContent.vue"
 
 export default {
@@ -69,9 +66,6 @@ export default {
 
   components: {
     ShogiPlayer,
-    MyColorPicker,
-    ImageUpload,
-    SeTitle,
     SidebarContent,
   },
 
