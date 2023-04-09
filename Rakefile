@@ -88,7 +88,7 @@ desc "release"
 task :release do
   system! <<~EOT
   rake dist
-  npm version minor
+  npm version patch
   rake example_cdn_version_replace
   npm publish
   git push --tags
