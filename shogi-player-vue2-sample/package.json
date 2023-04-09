@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "shogi-player": "^0.0.401",
+    "shogi-player": "^1.0.0",
     "vue": "^2.6.14"
   },
   "devDependencies": {
