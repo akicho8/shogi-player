@@ -167,14 +167,14 @@ task :cdn do
   tp :local => Package.version
 
   tp "JSDelivr"
-  system! <<~EOT
+  system <<~EOT
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player/dist/wc/production/shogi-player-wc.min.js | grep 'x-jsd-version:'
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player@latest                      | grep 'x-jsd-version:'
   curl -sI https://cdn.jsdelivr.net/npm/shogi-player                             | grep 'x-jsd-version:'
   EOT
 
   tp "unpkg"
-  system! <<~EOT
+  system <<~EOT
   curl -sI https://unpkg.com/shogi-player/dist/wc/production/shogi-player-wc.min.js | grep location
   curl -sI https://unpkg.com/shogi-player@latest                      | grep location
   curl -sI https://unpkg.com/shogi-player                             | grep location

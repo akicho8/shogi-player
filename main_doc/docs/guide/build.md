@@ -67,6 +67,12 @@ Also see: [使い方](/guide/usage/)
 * 最終的に `sp-pass-props` の内容は `$props` 相当として扱う
 :::
 
+## Vue.js 2 (vue/cli) + UMD
+
+* 手動で組み込んだ例を [shogi-player-vue2-sample-umd](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample-umd) に置いている
+* すでにビルドしているため `vue.config.js` に何も書かなくても動く
+* CSSも js に含んでいるため読み込む必要がない
+
 ## Vue.js 2 (vue/cli) + ShogiPlayer.vue
 
 * 手動で組み込んだ例を [shogi-player-vue2-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample) に置いている
@@ -78,14 +84,6 @@ Also see: [使い方](/guide/usage/)
 
 * 手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いている
 
-## Vue.js 2 (vue/cli) + UMD [WIP]
-
-* 手動で組み込んだ例を [shogi-player-vue2-sample-umd](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample-umd) に置いている
-* すでにビルドしているため `vue.config.js` に何も書かなくても動く
-* CSSも js に含んでいるため読み込まなくて良い
-* しかしパスおかしい
-* `/img` が `/js/img` になってしまう
-
 ## 自力ビルドの要点
 
 * `node_modules/shogi-player` 以下を babel のビルド対象に含める
@@ -93,3 +91,6 @@ Also see: [使い方](/guide/usage/)
     * クラス定数や `??` 演算子が解釈されない
   * @vue/cli であれば vue.config.js の `transpileDependencies` に指定する
   * Nuxt.js であれば nuxt.config.js の `build.transpile` に含める
+* Babel の設定は `.babelrc` ではなく `babel.config.js` に書く
+  * そうしないと node_modules/* に適用されず jest が動かない
+
