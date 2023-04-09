@@ -7,15 +7,10 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-  "dependencies": {
-    "core-js": "^3.8.3",
-    "shogi-player": "^0.0.401",
-    "vue": "^2.6.14"
-  },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-service": "~5.0.8",
-    "vue-template-compiler": "^2.6.14"
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "shogi-player": "^1.0.0"
   },
   "browserslist": [
     "> 1%",
