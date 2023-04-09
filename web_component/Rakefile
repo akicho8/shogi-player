@@ -9,7 +9,7 @@ task :server do
 end
 
 task :w => "wc"
-desc "[b] build"
+desc "[w] wc"
 task :wc do
   system <<~EOT
   SP_TARGET=wc vue-cli-service build --mode production --dest labo/shogi-player-wc/dist --inline-vue --target wc --name shogi-player-wc src/components/ShogiPlayerWc.vue
