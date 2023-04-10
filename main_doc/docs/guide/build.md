@@ -86,11 +86,14 @@ Also see: [使い方](/guide/usage/)
 
 ## 自力ビルドの要点
 
-* `node_modules/shogi-player` 以下を babel のビルド対象に含める
+* transpile 問題
+  * `node_modules/shogi-player` 以下を babel のビルド対象に含める
   * これをやらないとビルドできない
     * クラス定数や `??` 演算子が解釈されない
   * @vue/cli であれば vue.config.js の `transpileDependencies` に指定する
   * Nuxt.js であれば nuxt.config.js の `build.transpile` に含める
-* Babel の設定は `.babelrc` ではなく `babel.config.js` に書く
+* webpack-dev-server で `ResizeObserver loop limit exceeded` が出る場合
+  * `devServer.client.overlay.runtimeErrors` を `false` にする
+* jest
+  * Babel の設定は `.babelrc` ではなく `babel.config.js` に書く
   * そうしないと node_modules/* に適用されず jest が動かない
-

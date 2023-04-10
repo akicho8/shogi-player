@@ -10,6 +10,7 @@
 <script>
 
 import ShogiPlayer from "shogi-player/dist/lib/development/shogi-player.umd.js"
+// import ShogiPlayer from "../../../web_component/labo/shogi-player-lib/dist/shogi-player.umd.js"
 
 export default {
   name: "ShogiBoard",
