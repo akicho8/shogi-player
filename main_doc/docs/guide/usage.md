@@ -15,14 +15,16 @@
 * 棋譜を正しく読むため UTF-8 を明示する
 * 反応遅延や意図しない画面ズームを防ぐため viewport を指定する
 
-## 棋譜再生 (SFEN) ##
+## 棋譜再生
+  
+### SFEN
 
 <<< @/docs/.vuepress/public/examples/view.html{8-11}
 <LinkToExample name="view" />
 
 最後の局面から表示させたいなら [sp_turn](/reference/props/#sp-turn) を `-1` にする
 
-## 棋譜再生 (KIF) ##
+### KIF
 
 <<< @/docs/.vuepress/public/examples/view_kif.html{9-14}
 <LinkToExample name="view_kif" />
@@ -54,7 +56,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 引数の [sp_pass_style](/reference/props/#sp-pass-style) に書いても変更できるようにしてある
 これはタグの style を直接書くのに似ていて分けて書いたときより詳細度が高い
-古の技術駆動では機能とスタイルは分けるべきとされているが目的駆動として見ればまとめて書く方が普通にわかりやすい
+古の技術駆動では機能とスタイルは分けるべきとされているが目的駆動として見ればまとめて書く方が理に適っている
 
 ## イベント受信 ##
 

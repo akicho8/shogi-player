@@ -1,6 +1,6 @@
 # 各種組み込み例
 
-## Vanilla
+## Vanilla JS
 
 <<< @/docs/.vuepress/public/examples/build/case_wc_html.html
 <LinkToExample name="build/case_wc_html" />

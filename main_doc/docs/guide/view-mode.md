@@ -4,13 +4,19 @@
 
   * 棋譜再生時に用いるモード
 
+## 必須パラメータ
+
+* [sp_body](/reference/props/#sp-body): 棋譜
+
 ## 推奨オプション
 
+* [sp_turn](/reference/props/#sp-turn): 最初に表示する局面(手数)を指定する
 * [sp_controller](/reference/props/#sp-controller): 盤の下にボタン類を表示する
 * [sp_slider](/reference/props/#sp-slider): 盤の下にスライダーを表示する
 
 ## おまけオプション
 
+* [sp_viewpoint](/reference/props/#sp-viewpoint): 視点
 * [sp_overlay_nav](/reference/props/#sp-overlay-nav): 盤面の左右で局面を動かす(ただし駒を移動できなくなる)
 * [sp_turn_show](/reference/props/#sp-turn-show): 盤面の上に手数を表示する(邪魔)
 
