@@ -19,13 +19,13 @@ sidebar: auto
 
 ## 一覧
 
-### `ev_turn_offset_change`
+### `ev_turn_offset_change(turn: integer)`
 
 手数が変更されたときに手数を投げる
 
-APIで内部変数を参照するちらを使った方が良い
+APIで内部変数を参照するよりこちらを使った方が良い
 
-### `ev_turn_offset_max_change`
+### `ev_turn_offset_max_change(turn :integer)`
 
 最大手数が変更されたとき最大手数を投げる
 
