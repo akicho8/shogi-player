@@ -67,7 +67,7 @@ export class ParserBase {
     console.warn("not implemented")
   }
 
-  get comments_pack() {
+  get comment_lines_hash() {
     return null
   }
 }

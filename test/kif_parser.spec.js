@@ -8,6 +8,10 @@ describe("KifParser", () => {
     expect(KifParser.parse("key3：").header["key3"]).toEqual("")
   })
 
+  it("コメント", () => {
+    expect(KifParser.parse("*a\n*b").comment_lines_hash).toEqual({ '0': [ 'a', 'b' ] })
+  })
+
   it("指し手", () => {
     const instance1 = KifParser.parse(`1 １二歩(21)   (00:00/00:00:00)`)
     expect(instance1.move_infos[0].location.key).toEqual("black")

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@1.0.1"></script>
+    <!-- <script defer src="../../dist/wc/production/shogi-player-wc.js"></script> -->
+    <script type="module">
+      import { LitElement, css, html } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js"
+      export class ShogiBoard extends LitElement {
+        static styles = css`
+          :host {
+            display: block;
+            border: 1px solid hsl(0 0% 0% / 0.1);
+            padding: 1rem;
+          }
+          .container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+          }
+          shogi-player-wc {
+            flex-basis: 640px;
+          }
+          shogi-player-wc::part(root) {
+            --sp_board_color: lightskyblue;
+          }
+          .comment {
+            border: 1px solid hsl(0 0% 0% / 0.10);
+            background-color: hsl(0 0% 0% / 0.02);
+            border-radius: 4px;
+            flex-basis: 320px;
+            position: relative;
+          }
+          .comment-body {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            bottom: 1rem;
+            right: 1rem;
+
+            display: flex;
+            flex-direction: column;
+            overflow-y: scroll;
+            gap: 1rem;
+          }
+          .comment-body p {
+            margin: 0;
+          }
+        `
+
+        static properties = {
+          source: { type: String },
+          comment_lines: { type: Array },
+        }
+
+        constructor() {
+          super()
+          this.source ??= "position sfen 4k4/9/9/9/9/9/9/9/9 b 2r2b4g4s4n4l18p 1"
+          this.comment_lines = null
+        }
+
+        render() {
+          return html`
+            <div class="container">
+              <shogi-player-wc
+                sp_mode="view"
+                sp_body="${this.source}"
+                sp_comment="false"
+                sp_mobile_vertical="false"
+                sp_turn="0"
+                @ev_comment_change="${e => this.comment_lines = e.detail[0]}"
+                sp_controller="true"
+              ></shogi-player-wc>
+              <div class="comment">
+                <div class="comment-body">
+                  ${(this.comment_lines || []).map(e => html`<p>${e}</p>`)}
+                </div>
+              </div>
+            </div>
+          `
+        }
+      }
+      customElements.define("shogi-board", ShogiBoard)
+    </script>
+  </head>
+  <body>
+    <shogi-board
+      source="
+* 皆様、今日は素晴らしい将棋の対局が始まります！
+* 今日の対局は、双方が有名な棋士であり、世界でもトップクラスの実力を誇ります。
+* どちらが勝ってもきっと見ごたえのある素晴らしい対局になることでしょう。
+* 皆さんも一緒に、この素晴らしい対局を見届けましょう！盤上の駒たちが踊り出すような、熱い対局を期待してください！
+1 ７六歩(77)
+* 初手7六歩は、先手が先手番から4歩を進めた後に7六に歩を進める指し手で、秀策流や角換わりなど様々な戦型で採用されます。
+* この指し手の目的は、中央を支配するための布石であり、7筋の歩が敵陣深くに飛び込むことで、後手の「居飛車」の銀将を強引に牽制することができます。また、自陣の居飛車の場合は、7筋の歩を前進させることで、中央の地形を改善して攻めやすくすることができます。
+* 先手が初手7六歩を打った場合、後手は角道を開ける手を指すことが多いです。一方で角道を閉じる手もあり、後手も先手と同じく中央を一番に考えることが重要です。
+2 ８四歩(83)
+* 後手の2手目８四歩は、角道を開けることで中央を固める戦略の一環です。
+* また、前述の通り、先手が居玉をした場合には、後手が角を出せば、どんな局面でも中盤戦に陥ることができます。
+* ただし、この手は、初心者が落としやすい手でもあります。
+* というのも、開かれた角道を利用して両者の駒がすぐに固まってしまうからです。
+* したがって、この手をプレイする際には、注意深く相手の手を読む必要があります。
+3 ７五歩(76)
+先手の７五歩について真面目に解説してください
+* この手筋の最大の特徴は、角道を開け、玉を防御し、戦闘に備えることにあります。この手によって、先手側は角や飛車が自由に展開でき、攻めやすい布陣を築くことができます。
+* 一方で、７五歩を打ったことで、先手側の四間飛車（右金または右銀を先手番として振る戦法）は一度に崩れる可能性もあるため、注意が必要です。
+* ７五歩の打ち方には、いくつかのバリエーションがあります。玉を守りつつ、後手の攻撃を受けないよう、慎重に打ちましょう。
+4 ３四歩(33)
+* 後手の３四歩は、将棋において非常に重要な指し手の1つです。以下に、その魅力について解説します。
+* 1. 主導権を奪う手
+* 後手の３四歩は、初手からの序盤に指すことが多いです。この手により、後手は対局の主導権を奪うことができます。具体的には、３四歩によって先手側の陣形を崩し、自分の攻めを展開することができます。
+* 2. 展開が自由自在になる
+* ３四歩を指すことで、後手は自分の駒の展開が自由自在になります。例えば、先手が中飛車を指そうとすると、後手は３四歩を突いて相手を追い込んだり、居飛車を指そうとすると、３五歩を指して相手を攻撃したりすることができます。このように、後手の３四歩は、将棋の序盤において、駒の布置を効果的に行うことができる手として重要です。
+* 3. 先手の意表をつくことができる
+* 後手が３四歩を指すことで、先手に意表をつかれることがあります。例えば、先手が角道を空けてから４六歩を指そうとした場合、後手が３四歩を指すことで、先手の角道攻めを妨げることができます。このように、後手の３四歩は、相手の手筋を読んで、その手を狙ったり、逆手にとって相手を驚かせたりすることができる強い手です。
+* 以上のように、後手の３四歩は将棋において非常に重要で、その使い方次第で対局の流れを変えることができます。
+"
+    ></shogi-board>
+  </body>
+</html>

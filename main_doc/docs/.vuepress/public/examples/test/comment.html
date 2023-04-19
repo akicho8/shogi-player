@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@1.0.1"></script> -->
+  <script defer src="../../dist/wc/production/shogi-player-wc.js"></script>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+    }
+    shogi-player-wc {
+      flex-basis: 640px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <shogi-player-wc
+      sp_body="
+* あいうえお
+1 ７六歩(77)
+2 ３四歩(33)
+3 ２二角成(88)
+4 ２二銀(31)
+      "
+      sp_comment="true"
+      sp_turn="0"
+      sp_controller="true"
+      sp_slider="true"
+      ></shogi-player-wc>
+  </div>
+</body>
+</html>

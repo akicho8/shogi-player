@@ -65,6 +65,11 @@ export const mod_play_mode = {
     moves_take_turn_offset(v) {
       this.event_call("ev_play_mode_moves_change", v)
     },
+
+    // 現在のコメントを返す
+    current_comments(v) {
+      this.event_call("ev_comment_change", v)
+    },
   },
 
   methods: {

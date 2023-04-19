@@ -39,7 +39,7 @@ export class KifParser extends ParserBase {
   reset() {
     super.reset()
     this.move_infos = []
-    this.comments_pack = {}
+    this.comment_lines_hash = {}
     this.board_lines = []                            // 盤面が1行ごと入る(内部用)
     this.direct_location = null                      // 手番の指定があればそのキー
     this.hold_pieces = this.hold_pieces_empty_hash() // 持駒個数
@@ -112,8 +112,8 @@ export class KifParser extends ParserBase {
         } else if (m["comment"]) {
           // コメント部分
           const i = this.move_infos.length
-          this.comments_pack[i] = this.comments_pack[i] || []
-          this.comments_pack[i].push(m["comment"])
+          this.comment_lines_hash[i] ??= []
+          this.comment_lines_hash[i].push(m["comment"])
         } else if (m["board"]) {
           // 盤
           this.board_lines.push(m["board"])
@@ -161,12 +161,12 @@ export class KifParser extends ParserBase {
     return this._move_infos
   }
 
-  set comments_pack(v) {
-    this._comments_pack = v
+  set comment_lines_hash(v) {
+    this._comment_lines_hash = v
   }
 
-  get comments_pack() {
-    return this._comments_pack
+  get comment_lines_hash() {
+    return this._comment_lines_hash
   }
 
   // private
@@ -232,6 +232,6 @@ if (typeof process !== "undefined" && process.argv[1] === __filename) {
   // console.log(instance.base_location)
   // console.log(instance.hold_pieces)
   console.log(instance.move_infos)
-  console.log(instance.comments_pack)
+  console.log(instance.comment_lines_hash)
   console.log(instance.init_sfen === undefined)
 }

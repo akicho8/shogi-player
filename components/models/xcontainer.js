@@ -170,8 +170,8 @@ export class Xcontainer {
   }
 
   get current_comments() {
-    if (this.data_source.comments_pack) {
-      return this.data_source.comments_pack[this.turn_offset]
+    if (this.data_source.comment_lines_hash) {
+      return this.data_source.comment_lines_hash[this.turn_offset]
     }
   }
 

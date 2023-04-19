@@ -509,6 +509,8 @@ export default {
     turn_offset_min() { return this.delegate_to_xcontainer("turn_offset_min") }, // 必ず 0
     turn_offset_max() { return this.delegate_to_xcontainer("turn_offset_max") }, // moves.length が 2 なら 2
 
+    current_comments() { return this.delegate_to_xcontainer("current_comments") },
+
     component_class() {
       return [
         this.str_to_css_class("is_mode", this.mut_mode), // is_mode_view | is_mode_play | is_mode_edit
