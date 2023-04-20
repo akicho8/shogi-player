@@ -532,7 +532,7 @@ Default: `null`
 
 ```html
 <shogi-player-wc
-  sp_pass_style="{'--sp_board_color': 'lightskyblue'}"
+  sp_pass_style="{'--sp_board_color': 'LightSkyBlue'}"
   ></shogi-player-wc>
 ```
 
@@ -550,7 +550,7 @@ Shadow DOM 内に指定のCSSを渡す <Badge text="自己責任" type="error" v
 
 ```html
 <shogi-player-wc
-  sp_pass_css=".BoardTexture { background-color: lightskyblue }"
+  sp_pass_css=".BoardTexture { background-color: LightSkyBlue }"
   ></shogi-player-wc>
 ```
 

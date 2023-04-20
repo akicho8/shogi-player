@@ -45,7 +45,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 <!-- <style lang="stylus"> -->
 <!-- .ShogiPlayerWcWrapper.b441958504b7c7af3ef62a47fafe8d21 -->
 <!--   shogi-player-wc::part(root) -->
-<!--     --sp_board_color: lightskyblue -->
+<!--     --sp_board_color: LightSkyBlue -->
 <!-- </style> -->
 
 ## 直接スタイル変更 ##
