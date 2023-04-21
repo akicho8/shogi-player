@@ -18,7 +18,7 @@
 
 <CustomizeExample name="customize/kimetsu" />
 
-https://twitter.com/hamaki_shogi/status/1404658779380088835
+[参考](https://twitter.com/hamaki_shogi/status/1404658779380088835)
 
 ## 痛盤
 
