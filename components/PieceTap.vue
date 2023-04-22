@@ -153,7 +153,6 @@ export default {
     position: fixed
     z-index: $lifted_piece_element_z     // bulma のボタンの z-index が 2 なのでそれより上ならなんでも良い。10だとsidebarに負ける
     pointer-events: none                 // 一切のイベントに反応させない(これがないと下のセルが押せない)
-    cursor: grabbing
     .PieceTap
       // この要素の半分を左上に移動する
       position: relative
