@@ -75,7 +75,7 @@
               ></shogi-player-wc>
               <div class="comment">
                 <div class="comment-body">
-                  ${(this.comment_lines || []).map(e => html`<p>${e}</p>`)}
+                  ${(this.comment_lines ?? []).map(e => html`<p>${e}</p>`)}
                 </div>
               </div>
             </div>
