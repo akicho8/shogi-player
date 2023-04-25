@@ -9,7 +9,7 @@
     "generate": "nuxt generate"
   },
   "devDependencies": {
-    "nuxt": "^2.16.3",
+    "nuxt": "^3.4.2",
     "nuxt-buefy": "^0.4.25",
     "shogi-player": "^1.0.0",
     "@nuxtjs/style-resources": "^1.2.1"
