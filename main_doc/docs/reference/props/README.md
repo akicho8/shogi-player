@@ -550,11 +550,11 @@ Shadow DOM 内に指定のCSSを渡す <Badge text="自己責任" type="error" v
 
 ```html
 <shogi-player-wc
-  sp_pass_css=".BoardTexture { background-color: LightSkyBlue }"
-  ></shogi-player-wc>
+ sp_pass_css=".BoardTexture { background-color: LightSkyBlue }"
+></shogi-player-wc>
 ```
 
-盤駒に影をつける例
+#### 盤と特定のセルに着色し、盤駒に影をつける例
 
 <IframeWrap name="props/sp_pass_css" />
 <<< @/docs/.vuepress/public/examples/props/sp_pass_css.html
