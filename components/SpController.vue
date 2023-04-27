@@ -1,7 +1,7 @@
 <template lang="pug">
 .SpController.buttons.are-small.has-addons.is-centered.is-paddingless.is-flex-wrap-nowrap
   template(v-if="TheSp.inside_controller_p")
-    button.button.first(ref="first" @click.stop.prevent="TheSp.move_to_first")
+    button.button.first(ref="first" @click.stop.prevent="TheSp.move_to_first({interactive: $event})")
       b-icon(size="is-small" icon="menu-left")
     button.button.previous(ref="previous" @click.stop.prevent="TheSp.api_turn_add(-1, {interactive: $event})")
       b-icon(size="is-small" icon="chevron-left")
@@ -9,7 +9,7 @@
       b-icon(size="is-small" icon="cog")
     button.button.next(ref="next" @click.stop.prevent="TheSp.api_turn_add(+1, {interactive: $event})")
       b-icon(size="is-small" icon="chevron-right")
-    button.button.last(ref="last" @click.stop.prevent="TheSp.move_to_last")
+    button.button.last(ref="last" @click.stop.prevent="TheSp.move_to_last({interactive: $event})")
       b-icon(size="is-small" icon="menu-right")
   template(v-if="false")
     button.button.flip(@click.stop.prevent="TheSp.viewpoint_flip_handle")
