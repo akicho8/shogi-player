@@ -114,12 +114,12 @@ export const mod_navi = {
       }
     },
 
-    move_to_first(options = {}) {
+    api_turn_set_to_min(options = {}) {
       this.current_turn_set(this.turn_offset_min, options)
       this.turn_slider_focus() || this.nav_focus_to("first")
     },
 
-    move_to_last(options = {}) {
+    api_turn_set_to_max(options = {}) {
       this.current_turn_set(this.turn_offset_max, options)
       this.turn_slider_focus() || this.nav_focus_to("last")
     },

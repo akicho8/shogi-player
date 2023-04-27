@@ -71,23 +71,23 @@ Soldier インスタンスを盤面に置く
 | api_turn_add(1, {cycle: true})       | 最後の次は0手目に戻る              |
 | api_turn_add(1, {interactive: true}) | ユーザー操作によって移動したとする |
 
-### `move_to_first()`
+### `api_turn_set_to_min()`
 
 開始局面に移動する
 
 | 実行例                             | 意味                               |
 |------------------------------------|------------------------------------|
-| move_to_first()                    | 静かに移動する                     |
-| move_to_first({interactive: true}) | ユーザー操作によって移動したとする |
+| api_turn_set_to_min()                    | 静かに移動する                     |
+| api_turn_set_to_min({interactive: true}) | ユーザー操作によって移動したとする |
 
-### `move_to_last()`
+### `api_turn_set_to_max()`
 
 最終局面に移動する
 
 | 実行例                            | 意味                               |
 |-----------------------------------|------------------------------------|
-| move_to_last()                    | 静かに移動する |
-| move_to_last({interactive: true}) | ユーザー操作によって移動したとする |
+| api_turn_set_to_max()                    | 静かに移動する |
+| api_turn_set_to_max({interactive: true}) | ユーザー操作によって移動したとする |
 
 ## Read Only Properties
 
