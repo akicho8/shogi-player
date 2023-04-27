@@ -85,17 +85,17 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 ## CDN
 
-* JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@1.1.0
-* UNPKG:    https://unpkg.com/shogi-player@1.1.0
+* JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@1.1.1
+* UNPKG:    https://unpkg.com/shogi-player@1.1.1
 
 ### 正確なパスと development 版
 
 * JSDelivr:
-  * https://cdn.jsdelivr.net/npm/shogi-player@1.1.0/dist/wc/production/shogi-player-wc.min.js
-  * https://cdn.jsdelivr.net/npm/shogi-player@1.1.0/dist/wc/development/shogi-player-wc.min.js
+  * https://cdn.jsdelivr.net/npm/shogi-player@1.1.1/dist/wc/production/shogi-player-wc.min.js
+  * https://cdn.jsdelivr.net/npm/shogi-player@1.1.1/dist/wc/development/shogi-player-wc.min.js
 * UNPKG:
-  * https://unpkg.com/shogi-player@1.1.0/dist/wc/production/shogi-player-wc.min.js
-  * https://unpkg.com/shogi-player@1.1.0/dist/wc/development/shogi-player-wc.min.js
+  * https://unpkg.com/shogi-player@1.1.1/dist/wc/production/shogi-player-wc.min.js
+  * https://unpkg.com/shogi-player@1.1.1/dist/wc/development/shogi-player-wc.min.js
 
 ## バージョンを固定する
 
@@ -106,7 +106,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 本番では `@x.x.x` をつけてバージョンを固定した方がよい
 
-* https://unpkg.com/shogi-player@1.1.0
+* https://unpkg.com/shogi-player@1.1.1
 
 最新バージョン → [![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
 
