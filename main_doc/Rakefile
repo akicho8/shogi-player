@@ -4,7 +4,7 @@ task :s => :server
 desc "[s] server"
 task :server do
   system <<~EOT
-  vuepress dev docs -p 5001 --open --no-cache
+  vuepress dev docs -p 4002 --open --no-cache
   EOT
 end
 
