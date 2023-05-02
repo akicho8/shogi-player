@@ -26,4 +26,4 @@
 
 ## コメントを右に表示する
 
-<CustomizeExample name="customize/comment_layout" width="300" height="220" />
+<CustomizeExample name="customize/comment_layout" :width="300" :height="220" />

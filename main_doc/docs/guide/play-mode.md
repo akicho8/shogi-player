@@ -61,7 +61,7 @@ export default {
 
 ### デモ
 
-<CustomizeExample name="human_vs_ai" width="250" height="370" />
+<CustomizeExample name="human_vs_ai" :width="250" :height="370" />
 
 * AI は角交換を望んでいる
 * 先手(人間)は角道を開けて自分から角交換すること
