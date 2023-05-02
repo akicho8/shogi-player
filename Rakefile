@@ -11,7 +11,7 @@ task :s => :server
 desc "[s] server"
 task :server do
   system! <<~EOT
-  nuxt dev -p 5000 --open
+  nuxt dev -p 4001 --open
   EOT
 end
 
