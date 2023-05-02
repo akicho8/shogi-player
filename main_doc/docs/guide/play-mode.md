@@ -9,11 +9,12 @@
 
 ## 関連オプション
 
+* [sp_body](/reference/props/#sp-body): AIと対戦すると仮定したときAIの指し手を反映する
 * [sp_human_side](/reference/props/#sp-human-side): 片側の操作に絞る
 
 ## 関連イベント
 
-* [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object): 指し手を受けとる
+* [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object): 人間の指し手を受けとる
 
 ## Playground
 
@@ -55,3 +56,59 @@ export default {
     flex-wrap: wrap
     gap: 0.5rem
 </style>
+
+## AIと対戦する
+
+### デモ
+
+<CustomizeExample name="human_vs_ai" width="250" height="370" />
+
+* AI は角交換を望んでいる
+* 先手(人間)は角道を空けて自分から角交換すること
+* それ以外の手を指すと AI は投了する
+
+### 手順
+
+1. 操作モードにする
+1. 人間が指す
+1. と同時に ev_play_mode_move で指し手を含む棋譜を受け取る
+1. その棋譜を AI に渡す
+1. AI は受け取った棋譜を元に次の手を考えて新しい棋譜を返す
+1. その棋譜を sp_body に指定する
+1. 2 に戻る
+
+* ここでいう「棋譜」は「moves 付きの SFEN」を意味する
+* AIの指し手を反映する方法は棋譜を sp_body に指定する
+* 特定の駒を移動させるようなAPIを使うわけではない
+
+### コードの要点
+
+```html
+<shogi-player-wc
+  sp_mode="play"
+  sp_body="${this.ai_sfen}"
+  @ev_play_mode_move="${this.ev_play_mode_move}"
+></shogi-player-wc>
+```
+
+```javascript
+ev_play_mode_move(e) {
+  this.human_sfen = e.detail[0].sfen                // 人間の指し手を受け取って
+  const sfen = this.ai_best_move(this.human_sfen)   // AIに渡すと応手が返ってくるので
+  if (sfen == null) {
+    alert("AIが投了しました")
+    return
+  }
+  this.ai_sfen = sfen                               // 局面に反映する
+}
+
+// ☗76歩には☖34歩とし☗22角成に同銀とするだけのAI
+ai_best_move(sfen) {
+  if (sfen === "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f") {
+    return "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d"
+  }
+  if (sfen === "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+") {
+    return "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+ 3a2b"
+  }
+}
+```

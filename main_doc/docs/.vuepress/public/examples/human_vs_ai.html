@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@1.1.1"></script>
+    <!-- <script defer src="../../dist/wc/production/shogi-player-wc.js"></script> -->
+    <script type="module">
+      import { LitElement, css, html } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js"
+      export class ShogiBoard extends LitElement {
+        static styles = css`
+          :host {
+            display: block;
+          }
+          .container {
+            display: flex;
+            flex-wrap: wrap;
+          }
+          shogi-player-wc {
+            flex-basis: 512px;
+          }
+          pre {
+            word-break: break-all;
+            white-space: pre-line;
+          }
+        `
+
+        static properties = {
+          human_sfen: { type: String },
+          ai_sfen:    { type: String },
+        }
+
+        constructor() {
+          super()
+          this.human_sfen = ""
+          this.ai_sfen    = ""
+        }
+
+        render() {
+          return html`
+            <div class="container">
+              <shogi-player-wc
+                sp_mode="play"
+                sp_body="${this.ai_sfen}"
+                @ev_play_mode_move="${this.ev_play_mode_move}"
+              ></shogi-player-wc>
+              <pre>
+                自分: ${this.human_sfen}
+                相手: ${this.ai_sfen}
+              </pre>
+            </div>
+          `
+        }
+
+        ev_play_mode_move(e) {
+          this.human_sfen = e.detail[0].sfen
+          const sfen = this.ai_best_move(this.human_sfen)
+          if (sfen == null) {
+            alert("AIが投了しました")
+            return
+          }
+          this.ai_sfen = sfen
+        }
+
+        ai_best_move(sfen) {
+          if (sfen === "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f") {
+            return "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d"
+          }
+          if (sfen === "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+") {
+            return "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+ 3a2b"
+          }
+        }
+      }
+
+      customElements.define("shogi-board", ShogiBoard)
+    </script>
+  </head>
+  <body>
+    <shogi-board></shogi-board>
+  </body>
+</html>
