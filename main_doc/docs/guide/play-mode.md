@@ -71,14 +71,15 @@ export default {
 
 1. 操作モードにする
 1. 人間が指す
-1. と同時に ev_play_mode_move で指し手を含む棋譜を受け取る
+1. と同時に [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object) で指し手を含む棋譜を受け取る
 1. その棋譜を AI に渡す
-1. AI は受け取った棋譜を元に次の手を考えて新しい棋譜を返す
-1. その棋譜を sp_body に指定する
+1. AI は受け取った棋譜を見て考え、応手を含む新しい棋譜を返す
+1. その棋譜を [sp_body](/reference/props/#sp-body) に指定する
+   このとき人間にはAIが駒を1つ動かしただけのように見える
 1. 2 に戻る
 
 * ここでいう「棋譜」は「moves 付きの SFEN」を意味する
-* AIの指し手を反映する方法は棋譜を sp_body に指定する
+* AIの指し手を反映する方法は棋譜を [sp_body](/reference/props/#sp-body) に指定する
 * 特定の駒を移動させるようなAPIを使うわけではない
 
 ### コードの要点
