@@ -88,14 +88,18 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 * JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@1.1.1
 * UNPKG:    https://unpkg.com/shogi-player@1.1.1
 
-### 正確なパスと development 版
+どちらも production 版へのショートカットになっている
 
-* JSDelivr:
+### CDNの正確なURL
+
+* JSDelivr
   * https://cdn.jsdelivr.net/npm/shogi-player@1.1.1/dist/wc/production/shogi-player-wc.min.js
   * https://cdn.jsdelivr.net/npm/shogi-player@1.1.1/dist/wc/development/shogi-player-wc.min.js
-* UNPKG:
+* UNPKG
   * https://unpkg.com/shogi-player@1.1.1/dist/wc/production/shogi-player-wc.min.js
   * https://unpkg.com/shogi-player@1.1.1/dist/wc/development/shogi-player-wc.min.js
+
+production と development 版の2つがあり development 版を使うときはフルパスで書く
 
 ## バージョンを固定する
 
