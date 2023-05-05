@@ -54,12 +54,14 @@
 
         ev_play_mode_move(e) {
           this.human_sfen = e.detail[0].sfen
-          const sfen = this.ai_best_move(this.human_sfen)
-          if (sfen == null) {
-            alert("AIが投了しました")
-            return
-          }
-          this.ai_sfen = sfen
+          setTimeout(() => {
+            const sfen = this.ai_best_move(this.human_sfen)
+            if (sfen == null) {
+              alert("AIが投了しました")
+              return
+            }
+            this.ai_sfen = sfen
+          }, 1000 * 0.5)
         }
 
         ai_best_move(sfen) {
@@ -73,7 +75,7 @@
       }
 
       customElements.define("shogi-board", ShogiBoard)
-    </script>
+      </script>
   </head>
   <body>
     <shogi-board></shogi-board>
