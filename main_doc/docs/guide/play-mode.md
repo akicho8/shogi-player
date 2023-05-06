@@ -79,8 +79,8 @@ export default {
 1. 2 に戻る
 
 * ここでいう「棋譜」は「moves 付きの SFEN」を意味する
-* AIの指し手を反映する方法は棋譜を [sp_body](/reference/props/#sp-body) に指定する
-* 特定の駒を移動させるようなAPIを使うわけではない
+* 指し手を反映させる方法として「A座標の駒をB座標に動かす」のような処理のイメージをしてしまうかもしれないがそういうAPIがあるわけではない
+* 指し手の反映は棋譜を [sp_body](/reference/props/#sp-body) に指定するのみ
 
 ### コードの要点
 
@@ -96,10 +96,6 @@ export default {
 ev_play_mode_move(e) {
   this.human_sfen = e.detail[0].sfen                // 人間の指し手を受け取って
   const sfen = this.ai_best_move(this.human_sfen)   // AIに渡すと応手が返ってくるので
-  if (sfen == null) {
-    alert("AIが投了しました")
-    return
-  }
   this.ai_sfen = sfen                               // 局面に反映する
 }
 
