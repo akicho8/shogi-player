@@ -7,7 +7,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
     concurrent-ruby (1.2.2)
-    i18n (1.12.0)
+    i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     json (2.6.3)
     minitest (5.18.0)
@@ -19,6 +19,7 @@ GEM
 PLATFORMS
   x86_64-darwin-17
   x86_64-darwin-20
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
