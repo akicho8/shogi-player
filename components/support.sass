@@ -68,7 +68,9 @@ $shortcut_viewer_z:         $piece_count_z + 1  // $piece_count_z より上に�
   background-size: cover
 
 =is_flip
-  scale: -1
+  // 本当は scale を使いたいが古いブラウザを使い続けている人が多いため transform に戻す
+  // scale: -1
+  transform: rotate(180deg)
 
 // 選択禁止
 %is_unselectable
