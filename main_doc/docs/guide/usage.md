@@ -85,19 +85,19 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない
 
 ## CDN
 
-* JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@1.1.1
-* UNPKG:    https://unpkg.com/shogi-player@1.1.1
+* JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@1.1.2
+* UNPKG:    https://unpkg.com/shogi-player@1.1.2
 
 どちらも production 版へのショートカットになっている
 
 ### CDNの正確なURL
 
 * JSDelivr
-  * https://cdn.jsdelivr.net/npm/shogi-player@1.1.1/dist/wc/production/shogi-player-wc.min.js
-  * https://cdn.jsdelivr.net/npm/shogi-player@1.1.1/dist/wc/development/shogi-player-wc.min.js
+  * https://cdn.jsdelivr.net/npm/shogi-player@1.1.2/dist/wc/production/shogi-player-wc.min.js
+  * https://cdn.jsdelivr.net/npm/shogi-player@1.1.2/dist/wc/development/shogi-player-wc.min.js
 * UNPKG
-  * https://unpkg.com/shogi-player@1.1.1/dist/wc/production/shogi-player-wc.min.js
-  * https://unpkg.com/shogi-player@1.1.1/dist/wc/development/shogi-player-wc.min.js
+  * https://unpkg.com/shogi-player@1.1.2/dist/wc/production/shogi-player-wc.min.js
+  * https://unpkg.com/shogi-player@1.1.2/dist/wc/development/shogi-player-wc.min.js
 
 production と development 版の2つがあり development 版を使うときはフルパスで書く
 
@@ -110,7 +110,7 @@ production と development 版の2つがあり development 版を使うときは
 
 本番では `@x.x.x` をつけてバージョンを固定した方がよい
 
-* https://unpkg.com/shogi-player@1.1.1
+* https://unpkg.com/shogi-player@1.1.2
 
 最新バージョン → [![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
 
