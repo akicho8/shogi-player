@@ -60,7 +60,7 @@ Soldier インスタンスを盤面に置く
 
 操作モードでの `moves.take(turn_offset)` 相当を返す
 
-### `api_turn_add()`
+### `api_turn_add`
 
 局面を移動する
 
@@ -89,7 +89,7 @@ Soldier インスタンスを盤面に置く
 | api_turn_set_to_max()                    | 静かに移動する |
 | api_turn_set_to_max({interactive: true}) | ユーザー操作によって移動したとする |
 
-## Read Only Properties
+## Read Only プロパティ
 
 | 名前            | 意味                                                                                                 |
 |-----------------|------------------------------------------------------------------------------------------------------|

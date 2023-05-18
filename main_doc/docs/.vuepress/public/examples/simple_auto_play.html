@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@1.1.2"></script>
+    <script type="module">
+      let turn = 1
+      setInterval(() => {
+        const el = document.querySelector("shogi-player-wc")
+        el.setAttribute("sp_turn", turn)
+        turn = (turn + 1) % 5
+      }, 1000)
+    </script>
+  </head>
+  <body>
+    <shogi-player-wc
+      sp_mode="view"
+      sp_body="position startpos moves 7g7f 3c3d 8h2b+ 3a2b"
+      sp_turn="0"
+      ></shogi-player-wc>
+  </body>
+</html>
