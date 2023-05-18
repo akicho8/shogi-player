@@ -33,7 +33,7 @@
 
 ## 自動再生の例
 
-<<< @/docs/.vuepress/public/examples/simple_auto_play.html
+<<< @/docs/.vuepress/public/examples/simple_auto_play.html{8-13}
 <CustomizeExample name="simple_auto_play" :width="250" :height="320" />
 
 * 駒を動かすには棋譜はそのままで [sp_turn](/reference/props/#sp-turn) を進める

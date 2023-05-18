@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@1.1.2"></script>
     <script type="module">
+      const el = document.querySelector("shogi-player-wc")
       let turn = 1
       setInterval(() => {
-        const el = document.querySelector("shogi-player-wc")
         el.setAttribute("sp_turn", turn)
         turn = (turn + 1) % 5
       }, 1000)
