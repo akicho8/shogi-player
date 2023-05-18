@@ -87,11 +87,11 @@ end
 desc "release"
 task :release do
   system! <<~EOT
-  # rake dist
-  # npm version patch
-  # rake example_cdn_version_replace
-  # npm publish
-  # git push --tags
+  rake dist
+  npm version patch
+  rake example_cdn_version_replace
+  npm publish
+  git push --tags
   git push
   (cd ~/src/shogi-extend/nuxt_side && ncu shogi-player -u && npm i)
   rake old_doc:deploy
