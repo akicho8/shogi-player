@@ -95,8 +95,9 @@ sw.*
 /report.*.json
 
 # main_doc
-/main_doc/.vuepress/dist
+/main_doc/docs/.vuepress/dist
 vue.conifg.inspect.*
 
 # web_component
 web_component/labo/*/dist
+
