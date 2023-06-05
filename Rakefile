@@ -235,9 +235,9 @@ end
 task :a  => :about
 desc "[a] about"
 task :about do
+  system! "file $(nodenv which node)"
   system! <<~EOT
   uname -m
-  file $(nodenv which node)
   ruby -v
   node -v
   npm root -g
@@ -250,9 +250,6 @@ end
 task :v => :version
 desc "[v] version"
 task :version do
-  # system! <<~EOT
-  # npm version
-  # EOT
   puts Package.version
 end
 
