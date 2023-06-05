@@ -50,4 +50,5 @@ export default {
 
 <style lang="sass">
 .test-test_sound_timing
+  __css_keep__: 0
 </style>

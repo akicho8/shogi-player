@@ -23,4 +23,6 @@ export default {
 <style lang="sass">
 @import "../support.sass"
 .MainDocEditDemo2
+  __css_keep__: 0
 </style>
+

@@ -103,6 +103,7 @@ export default {
 
   .is_position_south
     .MembershipLocationPlayerInfo
+      __css_keep__: 0
 
   // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
   +IF_HORIZONTAL

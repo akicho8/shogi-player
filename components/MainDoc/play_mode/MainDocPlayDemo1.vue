@@ -28,4 +28,5 @@ export default {
 <style lang="sass">
 @import "../support.sass"
 .MainDocPlayDemo1
+  __css_keep__: 0
 </style>

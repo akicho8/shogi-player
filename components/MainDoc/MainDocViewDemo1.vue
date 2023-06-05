@@ -36,4 +36,5 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .MainDocViewDemo1
+  __css_keep__: 0
 </style>

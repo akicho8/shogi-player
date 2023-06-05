@@ -65,4 +65,5 @@ export default {
 
 <style lang="sass">
 .test-test_illegal
+  __css_keep__: 0
 </style>

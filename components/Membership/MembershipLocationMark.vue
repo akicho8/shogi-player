@@ -73,6 +73,7 @@ export default {
 
   .is_position_south
     .MembershipLocationMarkTexture
+      __css_keep__: 0
 
   //////////////////////////////////////////////////////////////////////////////// サイズ (基本)
 
