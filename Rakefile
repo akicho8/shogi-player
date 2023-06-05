@@ -2,10 +2,7 @@ require "table_format"
 require "./package"
 
 def system!(command)
-  command.each_line(chomp: true) do |command|
-    puts "> \e[1;32m#{command}\e[m"
-    system command, exception: true
-  end
+  system "sh", "-vec", command, exception: true
 end
 
 task :default => :test
