@@ -2,7 +2,10 @@ require "table_format"
 require "./package"
 
 def system!(command)
-  system "sh", "-vec", command, exception: true
+  command.each_line(chomp: true) do |command|
+    puts "> \e[1;32m#{command}\e[m"
+    system command, exception: true
+  end
 end
 
 task :default => :test
@@ -29,7 +32,7 @@ task :inspect do
   system! <<~EOT
   cd web_component
   vue inspect --mode development > vue.conifg.inspect.development.txt
-  vue inspect --mode production >  vue.conifg.inspect.production.txt
+  vue inspect --mode production  > vue.conifg.inspect.production.txt
   EOT
 end
 
@@ -236,6 +239,8 @@ task :a  => :about
 desc "[a] about"
 task :about do
   system! <<~EOT
+  uname -m
+  file $(nodenv which node)
   ruby -v
   node -v
   npm root -g
