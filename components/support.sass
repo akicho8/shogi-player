@@ -87,7 +87,9 @@ $shortcut_viewer_z:         $piece_count_z + 1  // $piece_count_z より上に�
 // defvar はもともと dart-sass で「--xxx: 1 // コメント」の値が「1 // コメント」になる災いために作った
 // node-sass の場合は「--xxx: 1 // コメント」としても「// コメント」を除去してくれるので必要ない
 // けどあとあと変更が楽なのと1行で書けるのは便利なので使う
-@debug $sp_css_root
+//
+// $sp_css_root のデフォルトは :root だけど Web Components のときは :host になるようにする
+// @debug $sp_css_root
 =defvar($key, $val)
   @at-root
     #{$sp_css_root}
