@@ -7,6 +7,17 @@ end
 
 task :default => :test
 
+desc "setup"
+task :setup do
+  system! <<~EOT
+  arm64 nodenv install -f 20.0.0
+  npm i -g yarn
+  npm i -g npm-check-updates
+  nodenv which node
+  nodenv which yarn
+  EOT
+end
+
 task :s => :server
 desc "[s] server"
 task :server do
