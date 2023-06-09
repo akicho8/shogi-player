@@ -10,11 +10,10 @@ task :default => :test
 desc "setup"
 task :setup do
   system! <<~EOT
-  arm64 nodenv install -f 20.0.0
-  npm i -g yarn
+  arm64 nodenv install -f 16.19.1
+  npm i -g npm
   npm i -g npm-check-updates
   nodenv which node
-  nodenv which yarn
   EOT
 end
 
@@ -122,7 +121,7 @@ end
 desc "update"
 task :update do
   system! <<~EOT
-  yarn global add npm-check-updates
+  npm i -g npm-check-updates
   ncu /router/ -u
   ncu /lodash/ -u
   ncu /buefy/ -u
@@ -205,7 +204,7 @@ end
 desc "other-embed-apps-shogi-player-update"
 task "other-embed-apps-shogi-player-update" do
   system! <<~EOT
-  (cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && yarn)
+  (cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && npm i)
   (cd shogi-player-vue2-sample && ncu /shogi-player/ -u && npm i)
   EOT
 end

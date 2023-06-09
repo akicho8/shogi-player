@@ -214,12 +214,12 @@ export default {
 
       // https://www.suzunatsu.com/post/node-sass-to-dart-sass/
       sass: {
-        implementation: require('node-sass'),
-        // implementation: require('sass'),
+        // implementation: require('node-sass'),
+        implementation: require('sass'),
       },
       scss: {
-        implementation: require('node-sass'),
-        // implementation: require('sass'),
+        // implementation: require('node-sass'),
+        implementation: require('sass'),
       },
 
     },

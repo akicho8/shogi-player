@@ -10,7 +10,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
-    "shogi-player": "^1.0.0"
+    "shogi-player": "^1.1.8"
   },
   "browserslist": [
     "> 1%",
