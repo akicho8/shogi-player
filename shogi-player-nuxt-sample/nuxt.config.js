@@ -28,7 +28,7 @@ export default {
   // これを指定しないと +tablet や $primary が参照できない
   styleResources: {
     sass: [
-      "./assets/sass/styleResources.scss", // sass の項目に scss のファイルを与えないと読み込まれないのは謎
+      "./assets/sass/styleResources.sass",
     ],
   },
 
@@ -55,6 +55,8 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   // https://ja.nuxtjs.org/api/configuration-build/#transpile
   build: {
+    hardSource: process.env.NODE_ENV !== "production",
+
     transpile: [
       // クラス定数や "??" の読み込みで失敗する対策
       "shogi-player",

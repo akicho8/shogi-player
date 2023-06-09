@@ -1,8 +1,0 @@
-// 両方で読み込む
-@import "~bulma/sass/utilities/initial-variables"; // bulma の初期値を参照するため
-@import "~bulma/sass/utilities/functions.sass";    // findColorInvert を使うため
-
-// 以降 bulma の全体カスタマイズ
-
-// 主用カラー
-$primary: $blue;
