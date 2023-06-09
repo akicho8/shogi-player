@@ -1,5 +1,7 @@
 import dayjs from "dayjs"
 const BUILD_VERSION = dayjs().format("YYYY-MM-DD HH:mm:ss")
+const PRODUCTION_P = process.env.NODE_ENV === "production"
+const DEVELOPMENT_P = !PRODUCTION_P
 const SITE_DESC = "将棋の棋譜再生・対局・盤面編集等が可能なVue.js用将棋盤コンポーネント"
 
 export default {
@@ -175,6 +177,8 @@ export default {
   // オーディオファイルをロードするように Webpack の設定を拡張するには？
   // https://ja.nuxtjs.org/faq/webpack-audio-files
   build: {
+    hardSource: DEVELOPMENT_P,
+
     // https://ja.nuxtjs.org/api/configuration-build#extractcss
     extractCSS: process.env.NODE_ENV === "production", // htmlファイルにスタイルが吐かれるのを防ぐ。trueにするとHMRが効かないので注意
 
@@ -207,6 +211,17 @@ export default {
           audio: "src",
         },
       },
+
+      // https://www.suzunatsu.com/post/node-sass-to-dart-sass/
+      sass: {
+        // implementation: require('node-sass'),
+        implementation: require('sass'),
+      },
+      scss: {
+        // implementation: require('node-sass'),
+        implementation: require('sass'),
+      },
+
     },
 
     extend (config, ctx) {
