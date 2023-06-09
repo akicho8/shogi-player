@@ -60,6 +60,24 @@ export default {
       "shogi-player",
     ],
 
+    loaders: {
+      // vue: {
+      //   transformAssetUrls: {
+      //     audio: "src",
+      //   },
+      // },
+
+      // https://www.suzunatsu.com/post/node-sass-to-dart-sass/
+      sass: {
+        implementation: require('node-sass'),
+        // implementation: require('sass'),
+      },
+      scss: {
+        implementation: require('node-sass'),
+        // implementation: require('sass'),
+      },
+    },
+
     // wav の読み込みで失敗する対策
     extend (config, ctx) {
       config.module.rules.push({

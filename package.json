@@ -41,7 +41,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "beetleshine": "^0.0.9",
     "chroma-js": "^2.4.2",
     "ismobilejs": "^1.1.1",
@@ -50,6 +49,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@nuxtjs/style-resources": "^1.0.0",
     "dayjs": "^1.11.7",
     "file-loader": "^6.2.0",
