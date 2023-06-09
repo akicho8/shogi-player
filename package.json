@@ -1,6 +1,6 @@
 {
   "name": "shogi-player",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "Shogi board web components has functions for replaying, manipulating, and editing",
   "homepage": "https://shogi-player.netlify.app/",
   "license": "AGPL-3.0",
