@@ -9,7 +9,7 @@ import "buefy/dist/buefy.css" // カスタイズする場合はこれ読み込�
 Vue.use(Buefy)
 
 // ShogiPlayer
-import "@/assets/application.sass"
+// import "@/assets/application.sass"
 
 new Vue({
   render: h => h(App),

@@ -11,7 +11,7 @@ desc "setup"
 task :setup do
   system! <<~EOT
   arm64 nodenv install -f 16.19.1
-  npm i -g npm
+  npm i -g pnpm
   npm i -g npm-check-updates
   nodenv which node
   EOT
@@ -47,7 +47,7 @@ desc "dist/ に CDN 用の Web Components を生成する"
 task :dist do
   system! <<~EOT
   cd web_component
-  npm i
+  pnpm i
   SP_TARGET=wc  vue-cli-service build --mode production  --target wc  --dest ../dist/wc/production   --inline-vue --name shogi-player-wc src/components/ShogiPlayerWc.vue
   SP_TARGET=wc  vue-cli-service build --mode development --target wc  --dest ../dist/wc/development  --inline-vue --name shogi-player-wc src/components/ShogiPlayerWc.vue
   SP_TARGET=lib vue-cli-service build --mode production  --target lib --dest ../dist/lib/production  --name ShogiPlayer --filename shogi-player src/components/ShogiPlayerLib.vue
@@ -100,10 +100,10 @@ task :release do
   rake dist
   npm version patch
   rake example_cdn_version_replace
-  npm publish
+  pnpm publish
   git push --tags
   git push
-  (cd ~/src/shogi-extend/nuxt_side && ncu shogi-player -u && npm i)
+  (cd ~/src/shogi-extend/nuxt_side && ncu shogi-player -u && pnpm i)
   rake old_doc:deploy
   rake open
   rake cdn
@@ -121,7 +121,6 @@ end
 desc "update"
 task :update do
   system! <<~EOT
-  npm i -g npm-check-updates
   ncu /router/ -u
   ncu /lodash/ -u
   ncu /buefy/ -u
@@ -204,8 +203,8 @@ end
 desc "other-embed-apps-shogi-player-update"
 task "other-embed-apps-shogi-player-update" do
   system! <<~EOT
-  (cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && npm i)
-  (cd shogi-player-vue2-sample && ncu /shogi-player/ -u && npm i)
+  (cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && pnpm i)
+  (cd shogi-player-vue2-sample && ncu /shogi-player/ -u && pnpm i)
   EOT
 end
 
@@ -218,11 +217,11 @@ task :embed_to_nuxt_and_vue2 do
 
   tmux kill-window -t vue2
   tmux new-window -n vue2
-  tmux send-keys -t vue2 'cd shogi-player-vue2-sample && npm i && vue-cli-service serve --port 4010 --open' C-m
+  tmux send-keys -t vue2 'cd shogi-player-vue2-sample && pnpm i && vue-cli-service serve --port 4010 --open' C-m
 
   tmux kill-window -t nuxt
   tmux new-window -n nuxt
-  tmux send-keys -t nuxt 'cd shogi-player-nuxt-sample && npm i && nuxt --port 4011 --open' C-m
+  tmux send-keys -t nuxt 'cd shogi-player-nuxt-sample && pnpm i && nuxt --port 4011 --open' C-m
   EOT
 end
 
@@ -253,7 +252,7 @@ task :about do
   npm root -g
   rg '"version"' package.json
   fd -l -g '*.min.js' dist
-  (cd main_doc && npm list)
+  (cd main_doc && pnpm list)
   EOT
 end
 
