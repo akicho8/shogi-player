@@ -7,10 +7,10 @@ settings:
 devDependencies:
   '@vue/cli-plugin-babel':
     specifier: ^5.0.8
-    version: 5.0.8(@vue/cli-service@5.0.8)(vue@2.7.14)
+    version: 5.0.8(@vue/cli-service@5.0.8)
   '@vue/cli-service':
     specifier: ^5.0.8
-    version: 5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1)(vue@2.7.14)
+    version: 5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1)
   pug:
     specifier: ^2.0.4
     version: 2.0.4
@@ -27,11 +27,8 @@ devDependencies:
     specifier: ^10.4.1
     version: 10.4.1(sass@1.63.2)(webpack@5.86.0)
   shogi-player:
-    specifier: ^1.0.0
-    version: 1.0.0
-  vue:
-    specifier: ^2.7.14
-    version: 2.7.14
+    specifier: ^1.1.8
+    version: 1.1.8
 
 packages:
 
@@ -1653,7 +1650,7 @@ packages:
       svg-tags: 1.0.0
     dev: true
 
-  /@vue/babel-preset-app@5.0.8(@babel/core@7.22.5)(vue@2.7.14):
+  /@vue/babel-preset-app@5.0.8(@babel/core@7.22.5):
     resolution: {integrity: sha512-yl+5qhpjd8e1G4cMXfORkkBlvtPCIgmRf3IYCWYDKIQ7m+PPa5iTm4feiNmCMD6yGqQWMhhK/7M3oWGL9boKwg==}
     peerDependencies:
       '@babel/core': '*'
@@ -1676,16 +1673,15 @@ packages:
       '@babel/preset-env': 7.22.5(@babel/core@7.22.5)
       '@babel/runtime': 7.22.5
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.22.5)
-      '@vue/babel-preset-jsx': 1.4.0(@babel/core@7.22.5)(vue@2.7.14)
+      '@vue/babel-preset-jsx': 1.4.0(@babel/core@7.22.5)
       babel-plugin-dynamic-import-node: 2.3.3
       core-js-compat: 3.31.0
       semver: 7.5.1
-      vue: 2.7.14
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@vue/babel-preset-jsx@1.4.0(@babel/core@7.22.5)(vue@2.7.14):
+  /@vue/babel-preset-jsx@1.4.0(@babel/core@7.22.5):
     resolution: {integrity: sha512-QmfRpssBOPZWL5xw7fOuHNifCQcNQC1PrOo/4fu6xlhlKJJKSA3HqX92Nvgyx8fqHZTUGMPHmFA+IDqwXlqkSA==}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -1703,7 +1699,6 @@ packages:
       '@vue/babel-sugar-inject-h': 1.4.0(@babel/core@7.22.5)
       '@vue/babel-sugar-v-model': 1.4.0(@babel/core@7.22.5)
       '@vue/babel-sugar-v-on': 1.4.0(@babel/core@7.22.5)
-      vue: 2.7.14
     dev: true
 
   /@vue/babel-sugar-composition-api-inject-h@1.4.0(@babel/core@7.22.5):
@@ -1771,14 +1766,14 @@ packages:
     resolution: {integrity: sha512-KmtievE/B4kcXp6SuM2gzsnSd8WebkQpg3XaB6GmFh1BJGRqa1UiW9up7L/Q67uOdTigHxr5Ar2lZms4RcDjwQ==}
     dev: true
 
-  /@vue/cli-plugin-babel@5.0.8(@vue/cli-service@5.0.8)(vue@2.7.14):
+  /@vue/cli-plugin-babel@5.0.8(@vue/cli-service@5.0.8):
     resolution: {integrity: sha512-a4qqkml3FAJ3auqB2kN2EMPocb/iu0ykeELwed+9B1c1nQ1HKgslKMHMPavYx3Cd/QAx2mBD4hwKBqZXEI/CsQ==}
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
       '@babel/core': 7.22.5
-      '@vue/babel-preset-app': 5.0.8(@babel/core@7.22.5)(vue@2.7.14)
-      '@vue/cli-service': 5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1)(vue@2.7.14)
+      '@vue/babel-preset-app': 5.0.8(@babel/core@7.22.5)
+      '@vue/cli-service': 5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1)
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.3.0(@babel/core@7.22.5)(webpack@5.86.0)
       thread-loader: 3.0.4(webpack@5.86.0)
@@ -1799,7 +1794,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1)(vue@2.7.14)
+      '@vue/cli-service': 5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1)
       '@vue/cli-shared-utils': 5.0.8
     transitivePeerDependencies:
       - encoding
@@ -1810,10 +1805,10 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1)(vue@2.7.14)
+      '@vue/cli-service': 5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1)
     dev: true
 
-  /@vue/cli-service@5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1)(vue@2.7.14):
+  /@vue/cli-service@5.0.8(@babel/core@7.22.5)(pug-plain-loader@1.1.0)(pug@2.0.4)(sass-loader@10.4.1):
     resolution: {integrity: sha512-nV7tYQLe7YsTtzFrfOMIHc5N2hp5lHG2rpYr0aNja9rNljdgcPZLyQRb2YRivTHqTv7lI962UXFURcpStHgyFw==}
     engines: {node: ^12.0.0 || >= 14.0.0}
     hasBin: true
@@ -1892,7 +1887,7 @@ packages:
       ssri: 8.0.1
       terser-webpack-plugin: 5.3.9(webpack@5.86.0)
       thread-loader: 3.0.4(webpack@5.86.0)
-      vue-loader: 17.2.2(vue@2.7.14)(webpack@5.86.0)
+      vue-loader: 17.2.2(webpack@5.86.0)
       vue-style-loader: 4.1.3
       webpack: 5.86.0
       webpack-bundle-analyzer: 4.9.0
@@ -1988,14 +1983,6 @@ packages:
       strip-ansi: 6.0.1
     transitivePeerDependencies:
       - encoding
-    dev: true
-
-  /@vue/compiler-sfc@2.7.14:
-    resolution: {integrity: sha512-aNmNHyLPsw+sVvlQFQ2/8sjNuLtK54TC6cuKnVzAY93ks4ZBrvwQSnkkIh7bsbNhum5hJBS00wSDipQ937f5DA==}
-    dependencies:
-      '@babel/parser': 7.22.5
-      postcss: 8.4.24
-      source-map: 0.6.1
     dev: true
 
   /@vue/component-compiler-utils@3.3.0(pug@2.0.4):
@@ -2383,7 +2370,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.7
-      caniuse-lite: 1.0.30001499
+      caniuse-lite: 1.0.30001502
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -2481,8 +2468,8 @@ packages:
     resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}
     dev: true
 
-  /beetleshine@0.0.8:
-    resolution: {integrity: sha512-xOvDfAZ7nhpetySwvH+cVNX2Bf3izgyK88PVnPpScG4sjsr0uRMUI4U/cOlY8fdP88pG2m6VNb6243nxpESa+g==}
+  /beetleshine@0.0.9:
+    resolution: {integrity: sha512-vKrjjRdXibHv4SvmuzmTCoGZukb2aVBV9Oevn9em/Ht0A2oRKtqU8ME6AYgBSMjrgDrAh8+YaPQgCeIeIu7kLg==}
     dependencies:
       autolinker: 4.0.0
       extsprintf: 1.4.1
@@ -2565,7 +2552,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001499
+      caniuse-lite: 1.0.30001502
       electron-to-chromium: 1.4.427
       node-releases: 2.0.12
       update-browserslist-db: 1.0.11(browserslist@4.21.7)
@@ -2630,13 +2617,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.21.7
-      caniuse-lite: 1.0.30001499
+      caniuse-lite: 1.0.30001502
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite@1.0.30001499:
-    resolution: {integrity: sha512-IhoQqRrW6WiecFcfZgoJS1YLEN1/HR1vHP5WNgjCARRW7KUNToHHTX3FrwCM+y4zkRa48D9rE90WFYc2IWhDWQ==}
+  /caniuse-lite@1.0.30001502:
+    resolution: {integrity: sha512-AZ+9tFXw1sS0o0jcpJQIXvFTOB/xGiQ4OQ2t98QX3NDn2EZTSRBC801gxrsGgViuq2ak/NLkNgSNEPtCr5lfKg==}
     dev: true
 
   /case-sensitive-paths-webpack-plugin@2.4.0:
@@ -3288,10 +3275,6 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       css-tree: 1.1.3
-    dev: true
-
-  /csstype@3.1.2:
-    resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
     dev: true
 
   /debug@2.6.9:
@@ -5972,10 +5955,10 @@ packages:
     resolution: {integrity: sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==}
     dev: true
 
-  /shogi-player@1.1.11:
-    resolution: {integrity: sha512-d0Guh8BdrqEw6UqhRWUupSbt3kVFhtEgtqllEPsgbtc7dDYISOASpxWWrgCObX9FyJGpQliFX+/xnZuSNcEleg==}
+  /shogi-player@1.1.8:
+    resolution: {integrity: sha512-Lfx/edNJj1x+Ompw9N36GPFD+dpyNkEp+XsFimFmHDq9KE5BmZi3DB6D+Nb7oNieKb/IabLdpCACPlkAS0C/kQ==}
     dependencies:
-      beetleshine: 0.0.8
+      beetleshine: 0.0.9
       chroma-js: 2.4.2
       ismobilejs: 1.1.1
       js-memory-record: 0.0.28
@@ -6537,7 +6520,7 @@ packages:
       - whiskers
     dev: true
 
-  /vue-loader@17.2.2(vue@2.7.14)(webpack@5.86.0):
+  /vue-loader@17.2.2(webpack@5.86.0):
     resolution: {integrity: sha512-aqNvKJvnz2A/6VWeJZodAo8XLoAlVwBv+2Z6dama+LHsAF+P/xijQ+OfWrxIs0wcGSJduvdzvTuATzXbNKkpiw==}
     peerDependencies:
       '@vue/compiler-sfc': '*'
@@ -6551,7 +6534,6 @@ packages:
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
-      vue: 2.7.14
       watchpack: 2.4.0
       webpack: 5.86.0
     dev: true
@@ -6565,13 +6547,6 @@ packages:
 
   /vue-template-es2015-compiler@1.9.1:
     resolution: {integrity: sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==}
-    dev: true
-
-  /vue@2.7.14:
-    resolution: {integrity: sha512-b2qkFyOM0kwqWFuQmgd4o+uHGU7T+2z3T+WQp8UBjADfEv2n4FEMffzBmCKNP0IGzOEEfYjvtcC62xaSKeQDrQ==}
-    dependencies:
-      '@vue/compiler-sfc': 2.7.14
-      csstype: 3.1.2
     dev: true
 
   /watchpack@2.4.0:

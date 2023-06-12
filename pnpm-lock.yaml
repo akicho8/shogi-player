@@ -31,9 +31,6 @@ devDependencies:
   '@nuxtjs/style-resources':
     specifier: ^1.0.0
     version: 1.0.0
-  buefy:
-    specifier: ^0.9.23
-    version: 0.9.23(vue@2.7.14)
   dayjs:
     specifier: ^1.11.7
     version: 1.11.7
