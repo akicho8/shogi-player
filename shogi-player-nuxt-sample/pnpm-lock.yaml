@@ -8542,7 +8542,7 @@ packages:
     resolution: {integrity: sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==}
     dev: true
 
-  /shogi-player@1.1.11:
+  /shogi-player@1.1.12:
     resolution: {integrity: sha512-a2SaZGab1hEl8EPXxvL56ylAgyJp/1Sh0oFSEmAczvYX287ISj0grMLjAF3mdD1xxsT4ySy0A7GNdFjkylfh0g==}
     dependencies:
       beetleshine: 0.0.9
