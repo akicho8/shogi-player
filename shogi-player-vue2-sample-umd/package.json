@@ -15,7 +15,7 @@
     "pug-plain-loader": "^1.1.0",
     "sass": "^1.63.2",
     "sass-loader": "^10.4.1",
-    "shogi-player": "^1.1.11"
+    "shogi-player": "^1.1.12"
   },
   "browserslist": [
     "> 1%",

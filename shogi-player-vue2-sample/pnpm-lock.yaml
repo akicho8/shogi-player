@@ -33,8 +33,8 @@ devDependencies:
     specifier: ^10.4.1
     version: 10.4.1(sass@1.63.2)(webpack@5.86.0)
   shogi-player:
-    specifier: ^1.1.11
-    version: 1.1.11
+    specifier: ^1.1.12
+    version: 1.1.12
 
 packages:
 
@@ -5990,7 +5990,7 @@ packages:
     dev: true
 
   /shogi-player@1.1.12:
-    resolution: {integrity: sha512-a2SaZGab1hEl8EPXxvL56ylAgyJp/1Sh0oFSEmAczvYX287ISj0grMLjAF3mdD1xxsT4ySy0A7GNdFjkylfh0g==}
+    resolution: {integrity: sha512-qpfqArTPh+Fl0N43MTXhT2mnqxuz7YuE7bumy/Z8BVBlj3mPC1DVflSuDXgTnazXUGMwO6m5f1tRkcGVqpQcOQ==}
     dependencies:
       beetleshine: 0.0.9
       chroma-js: 2.4.2
