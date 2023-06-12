@@ -203,8 +203,9 @@ end
 desc "other-embed-apps-shogi-player-update"
 task "other-embed-apps-shogi-player-update" do
   system! <<~EOT
-  (cd shogi-player-nuxt-sample && ncu /shogi-player/ -u && pnpm i)
-  (cd shogi-player-vue2-sample && ncu /shogi-player/ -u && pnpm i)
+  (cd shogi-player-nuxt-sample     && ncu /shogi-player/ -u && pnpm i)
+  (cd shogi-player-vue2-sample     && ncu /shogi-player/ -u && pnpm i)
+  (cd shogi-player-vue2-sample-umd && ncu /shogi-player/ -u && pnpm i)
   EOT
 end
 
