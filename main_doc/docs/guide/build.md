@@ -78,7 +78,6 @@ Also see: [使い方](/guide/usage/)
 * 手動で組み込んだ例を [shogi-player-vue2-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample) に置いている
 * もともと Vue.js 2 製なので Vue.js 2 とは親和性が高い
 * ただし[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがある
-* その上 `node-sass` も `dart-sass` と干渉するかもしれない
 
 ## Nuxt.js + ShogiPlayer.vue
 
