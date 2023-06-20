@@ -14,7 +14,7 @@
 
 <CustomizeExample name="customize/universal" />
 
-## 鬼滅の刃 風
+## 鬼滅の刃将棋盤 風
 
 <CustomizeExample name="customize/kimetsu" />
 
@@ -24,6 +24,6 @@
 
 <CustomizeExample name="customize/itaban" />
 
-## コメントを右に表示する
+## KIFコメントを右に表示する
 
 <CustomizeExample name="customize/comment_layout" :width="300" :height="220" />
