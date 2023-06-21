@@ -11,7 +11,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@nuxtjs/style-resources": "^1.2.1",
-    "nuxt": "^2.16.3",
+    "nuxt": "^3.4.3",
     "nuxt-buefy": "^0.4.25",
     "pug": "^2.0.4",
     "pug-loader": "^2.4.0",
