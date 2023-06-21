@@ -38,5 +38,5 @@ development 版を使うとデバッグ情報を多めに表示する
 * 特徴
   * `sp_debug` と `sp_event_log` が常時有効な状態になる
   * `NODE_ENV=development` でビルドしている
-  * クラス名等が難読状態になっていない
-  * production 版に比べると気持ち程度遅い
+  * クラス名などが難読状態になっていない
+  * production 版に比べると遅い
