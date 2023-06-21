@@ -2,7 +2,7 @@
 home: true
 # heroImage: https://raw.github.com/akicho8/shogi-player/master/application.png
 tagline: WEBブラウザ用の将棋盤
-actionText: START
+actionText: Get Started →
 actionLink: /guide/
 features:
 - title: 3つのモード
