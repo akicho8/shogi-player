@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@1.1.12"></script>
+    <script type="module">
+      import { LitElement, css, html } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js"
+      export class ShogiQuiz extends LitElement {
+        static styles = css`
+          :host {
+            display: block;
+          }
+          .container {
+            display: flex;
+            justify-content: center;
+          }
+          shogi-player-wc {
+            flex-basis: 640px;
+          }
+        `
+
+        static properties = {
+          source: { type: String },
+          expected: { type: String },
+        }
+
+        constructor() {
+          super()
+          this.source = ""
+          this.expected = ""
+        }
+
+        render() {
+          return html`
+            <div class="container">
+              <shogi-player-wc
+                sp_mode="play"
+                sp_body="${this.source}"
+                @ev_play_mode_move="${this.ev_play_mode_move}"
+              ></shogi-player-wc>
+            </div>
+          `
+        }
+
+        ev_play_mode_move(e) {
+          const move = e.detail[0].last_move_info.to_kif
+          setTimeout(() => {
+            if (move === this.expected) {
+              alert("正解")
+            } else {
+              alert("不正解")
+            }
+          }, 1000 * 0.1)
+        }
+      }
+
+      customElements.define("shogi-quiz", ShogiQuiz)
+      </script>
+  </head>
+  <body>
+    <shogi-quiz
+      source="position sfen ln3k2+B/4g1g2/p1s2p1pp/2p1pLp2/3p1P3/P3P3P/3PG4/1+rSKS1r2/L7L b B3NPgs4p 1"
+      expected="☗4三香不成(44)"
+      ></shogi-quiz>
+  </body>
+</html>

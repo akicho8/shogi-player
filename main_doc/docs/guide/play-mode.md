@@ -57,9 +57,41 @@ export default {
     gap: 0.5rem
 </style>
 
-## AIと対戦する
+## 例1. 次の1手クイズ
 
-### デモ
+<CustomizeExample name="quiz" :width="250" :height="340" />
+
+指し手によって「正解」「不正解」を表示する
+
+### 手順
+
+1. 操作モードにする
+1. 人間が指す
+1. と同時に [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object) で指し手を受け取る
+1. 指し手が正しいか確認する
+
+### コードの要点
+
+```html
+<shogi-player-wc
+  sp_mode="play"
+  sp_body="${this.source}"
+  @ev_play_mode_move="${this.ev_play_mode_move}"
+></shogi-player-wc>
+```
+
+```javascript
+ev_play_mode_move(e) {
+  const move = e.detail[0].last_move_info.to_kif
+  if (move === this.expected) {
+    alert("正解")
+  } else {
+    alert("不正解")
+  }
+}
+```
+
+## 例2. AIと対戦する
 
 <CustomizeExample name="human_vs_ai" :width="250" :height="370" />
 
