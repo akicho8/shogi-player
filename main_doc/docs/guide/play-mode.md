@@ -111,7 +111,7 @@ ev_play_mode_move(e) {
 1. 2 に戻る
 
 * ここでいう「棋譜」は「moves 付きの SFEN」を意味する
-* 指し手を反映させる方法として「A座標の駒をB座標に動かす」のような処理のイメージをしてしまうかもしれないがそういうAPIがあるわけではない
+* AIの指し手を反映させる方法として「A座標の駒をB座標に動かす」のような処理のイメージをしてしまうかもしれないがそのようなAPIがあるわけではない
 * 指し手の反映は棋譜を [sp_body](/reference/props/#sp-body) に指定するのみ
 
 ### コードの要点
@@ -131,7 +131,7 @@ ev_play_mode_move(e) {
   this.ai_sfen = sfen                               // 局面に反映する
 }
 
-// ☗76歩には☖34歩とし☗22角成に同銀とするだけのAI
+// 「☗76歩」には「☖34歩」とし「☗22角成」に「同銀」とするだけのAI
 ai_best_move(sfen) {
   if (sfen === "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f") {
     return "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d"
