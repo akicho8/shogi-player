@@ -81,7 +81,32 @@ Also see: [使い方](/guide/usage/)
 
 ## Nuxt.js + ShogiPlayer.vue
 
-* 手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いている
+手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いている
+
+## Svelte
+
+手動で組み込んだ例を [shogi-player-svelte-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-svelte-sample) に置いている
+
+そこから該当箇所の抜粋:
+
+```html
+<script>
+  function ev_play_mode_move(e) {
+    alert(e.detail[0].last_move_info.to_kif)
+  }
+</script>
+
+<main>
+  <shogi-player-wc
+    sp-pass-props={'{sp_mode: "play", sp_body: "position startpos moves 7g7f 3c3d 8h2b+ 3a2b", sp_controller: true, sp_pass_style: {\"--sp_controller_width\": 1.0}}'}
+    on:ev_play_mode_move={ev_play_mode_move}
+    ></shogi-player-wc>
+</main>
+```
+
+* [Vue 3](/guide/build.md#vue-3) の場合と同じパラメータを渡す例が上になる
+* パラメータの渡し方が Vue 3 よりも難しい
+* `sp-pass-props` は途中で改行すると動かなくなる
 
 ## 自力ビルドの要点
 
