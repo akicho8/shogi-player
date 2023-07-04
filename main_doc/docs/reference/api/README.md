@@ -52,6 +52,10 @@ Soldier インスタンスを盤面に置く
 
 棋譜を指定する
 
+### `api_play_mode_setup()`
+
+api_sfen_or_kif_set で指定した棋譜で再生モード用の内部変数を初期化する
+
 ### `api_turn_slider_focus()`
 
 スライダーがあればフォーカスする

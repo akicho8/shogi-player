@@ -69,6 +69,11 @@ export const mod_api_functions = {
       this.xcontainer.run()
     },
 
+    // play モード用の変数の準備
+    api_play_mode_setup() {
+      this.play_mode_setup()
+    },
+
     // slider にフォーカスする
     api_turn_slider_focus() {
       this.turn_slider_focus()

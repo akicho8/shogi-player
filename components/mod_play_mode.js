@@ -3,6 +3,7 @@ import _ from "lodash"
 import { Xcontainer } from "./models/xcontainer.js"
 import { Location } from "./models/location.js"
 import { HumanSideInfo } from "./models/human_side_info.js"
+import assert from "minimalistic-assert"
 
 export const mod_play_mode = {
   props: {
@@ -80,8 +81,7 @@ export const mod_play_mode = {
         // 棋譜の最初からの指し手をすべて保持
         // view -> play
         if (old_val === "view") {
-          this.init_sfen = this.xcontainer.data_source.init_sfen
-          this.moves = this.xcontainer.data_source.moves
+          this.play_mode_setup()
         }
         // edit -> play
         if (old_val === "edit") {
@@ -98,12 +98,20 @@ export const mod_play_mode = {
       this.play_mode_xcontainer_seek_to(this.turn_offset)
     },
 
+    // これを実行しないと正常に動かない
+    play_mode_setup() {
+      assert(this.xcontainer.data_source.init_sfen)
+      this.init_sfen = this.xcontainer.data_source.init_sfen
+      this.moves     = this.xcontainer.data_source.moves
+    },
+
     // 現在の状態を基点として play に入る
     init_sfen_set() {
       this.init_sfen = this.edit_mode_short_sfen()
       this.moves = []
     },
 
+    // FIXME: なんで再度実行している？
     play_mode_xcontainer_seek_to(turn) {
       this.xcontainer = new Xcontainer()
       this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
