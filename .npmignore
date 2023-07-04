@@ -36,8 +36,7 @@ vue.conifg.inspect.*
 /assets/inspect
 
 # 検証
-/shogi-player-nuxt*
-/shogi-player-vue2*
+/shogi-player-*
 
 # ゴミ
 /trash
