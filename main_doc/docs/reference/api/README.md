@@ -56,6 +56,10 @@ Soldier インスタンスを盤面に置く
 
 api_sfen_or_kif_set で指定した棋譜で再生モード用の内部変数を初期化する
 
+### `api_hold_piece_release()`
+
+持った駒を離す
+
 ### `api_turn_slider_focus()`
 
 スライダーがあればフォーカスする

@@ -278,7 +278,7 @@ export default {
     // そうしないと sp_turn と sp_body を同時に変更したとき
     // sp_turn, sp_body の順に反映されて局面が1つ前になってしまう
     kifu_source() {
-      this.state_reset() // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
+      this.hold_piece_release() // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
 
       if (this.edit_p) {
         this.xcontainer_setup_for_edit_mode()

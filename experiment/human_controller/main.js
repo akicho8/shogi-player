@@ -85,7 +85,7 @@ const vm = new Vue({
     piece_stand_piece_click: function(location, piece, e) {
       // 持っているならキャンセル
       if (this.rules["rule3"] && this.hold_p) {
-        this.state_reset()
+        this.hold_piece_release()
         return
       }
 
@@ -99,7 +99,7 @@ const vm = new Vue({
         const count = (this.hold_pieces[location][this.origin_soldier.piece] || 0) + 1
         Vue.set(this.hold_pieces[location], this.origin_soldier.piece, count)
         Vue.set(this.board, this.place_from, null)      // 元の位置を消す
-        this.state_reset()
+        this.hold_piece_release()
         this.turn_next()
         return
       }
@@ -136,13 +136,13 @@ const vm = new Vue({
 
       // 自分の駒の上に駒を重ねようとしたので状況キャンセル
       if (this.put_on_my_soldier_p(soldier)) {
-        this.state_reset()
+        this.hold_piece_release()
         return
       }
 
       // 盤上の駒を持って同じ位置に戻したので状況キャンセル
       if (_.isEqual(this.place_from, place)) {
-        this.state_reset()
+        this.hold_piece_release()
         return
       }
 
@@ -159,7 +159,7 @@ const vm = new Vue({
         this.piece_capture(soldier)                     // 相手の駒があれば取る
         Vue.set(this.board, place, this.origin_soldier) // 移動
         Vue.set(this.board, this.place_from, null)      // 元の位置を消す
-        this.state_reset()
+        this.hold_piece_release()
         this.turn_next()
         return
       }
@@ -169,7 +169,7 @@ const vm = new Vue({
         const soldier = {piece: this.have_piece, location: this.current_player}
         Vue.set(this.board, place, soldier) // 置く
         this.mochigoma_herasu()             // 持駒を減らす
-        this.state_reset()
+        this.hold_piece_release()
         this.turn_next()
         return
       }
@@ -206,7 +206,7 @@ const vm = new Vue({
       e.target.classList.add("active")
     },
 
-    state_reset: function() {
+    hold_piece_release: function() {
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       if (this.from_dom) {

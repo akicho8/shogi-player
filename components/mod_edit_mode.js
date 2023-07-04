@@ -50,7 +50,7 @@ export const mod_edit_mode = {
 
   watch: {
     mut_mode() {
-      this.state_reset() // モードが切り替わったときに持ち上げた駒を元に戻す(こうしないとカーソルから駒が離れない)
+      this.hold_piece_release() // モードが切り替わったときに持ち上げた駒を元に戻す(こうしないとカーソルから駒が離れない)
     },
   },
 
@@ -185,7 +185,7 @@ export const mod_edit_mode = {
       if (_.isEqual(this.place_from, place)) {
         this.log("盤上の駒を持って同じ位置に戻したので状況キャンセル")
         this.event_call("ev_action_piece_cancel")
-        this.state_reset()
+        this.hold_piece_release()
         return
       }
 
@@ -297,7 +297,7 @@ export const mod_edit_mode = {
           }
           this.xcontainer.board.place_on(new_soldier) // 置く
           this.xcontainer.board.delete_at(this.place_from)
-          this.state_reset()
+          this.hold_piece_release()
           this.turn_next()
         }
 
@@ -344,7 +344,7 @@ export const mod_edit_mode = {
         this.xcontainer.board.place_on(new_soldier) // 置く
         this.move_info_create({type: "put", to: new_soldier})
         this.moves_set()
-        this.state_reset()
+        this.hold_piece_release()
         this.turn_next()
         return
       }
@@ -385,7 +385,7 @@ export const mod_edit_mode = {
       this.moves_set() // 7g7f+
       this.xcontainer.board.place_on(new_soldier) // 置く
       this.xcontainer.board.delete_at(this.place_from)
-      this.state_reset()
+      this.hold_piece_release()
       this.turn_next()
     },
 
@@ -463,7 +463,7 @@ export const mod_edit_mode = {
         if (this.have_piece_location === location) { // 駒台からの駒か？
           this.log("自分の駒台から駒を持ち上げているならキャンセル")
           this.event_call("ev_action_piece_cancel")
-          this.state_reset()
+          this.hold_piece_release()
           return true
         }
       }
@@ -535,7 +535,7 @@ export const mod_edit_mode = {
       // if (this.have_piece && this.have_piece.key === piece.key) {
       //   if (this.have_piece_location === location) {
       //     this.log("駒台の駒を持った状態で同じ駒台の同じ駒を持ったのでキャンセルする")
-      //     this.state_reset()
+      //     this.hold_piece_release()
       //     return
       //   }
       // }
@@ -563,7 +563,7 @@ export const mod_edit_mode = {
 
       if (_.isNil(this.have_piece_location) && this.have_piece) {
         this.log("持っているならキャンセル")
-        this.state_reset()
+        this.hold_piece_release()
         return true
       }
 
@@ -571,7 +571,7 @@ export const mod_edit_mode = {
         this.log("駒台から駒箱に移動")
         const count = this.hold_piece_source_cut(e)               // 相手の持駒を減らして減らした分だけ
         this.xcontainer.piece_box_add(this.have_piece, count) // 駒箱に加算する
-        this.state_reset()
+        this.hold_piece_release()
         return true
       }
 
@@ -579,7 +579,7 @@ export const mod_edit_mode = {
         this.log("盤上の駒を駒箱に移動")
         this.xcontainer.piece_box_add(this.origin_soldier1.piece)
         this.xcontainer.board.delete_at(this.origin_soldier1.place)
-        this.state_reset()
+        this.hold_piece_release()
         return true
       }
 
@@ -605,7 +605,7 @@ export const mod_edit_mode = {
       if (!this.dialog_soldier) {
         if (this.lifted_p) {
           this.log("持ち上げた駒を元に戻す")
-          this.state_reset()
+          this.hold_piece_release()
           return true
         }
       }
@@ -617,14 +617,14 @@ export const mod_edit_mode = {
     board_soldir_to_hold_pieces(location) {
       this.xcontainer.hold_pieces_add(location, this.origin_soldier1.piece) // 駒台にプラス
       this.xcontainer.board.delete_at(this.origin_soldier1.place)
-      this.state_reset()
+      this.hold_piece_release()
     },
 
     hold_pieces_move_to_my_hold_pieces(e, location) {
       this.log("相手の持駒を自分の駒台に移動")
       const count = this.hold_piece_source_cut(e)                           // 相手の持駒を減らして減らした分だけ
       this.xcontainer.hold_pieces_add(location, this.have_piece, count) // 自分に加算する
-      this.state_reset()
+      this.hold_piece_release()
     },
 
     // 持ち上げている駒を元の場所から減らす
@@ -686,8 +686,8 @@ export const mod_edit_mode = {
     },
 
     // 駒を持ってない状態にする
-    state_reset() {
-      this.log("state_reset")
+    hold_piece_release() {
+      this.log("hold_piece_release")
       this.dialog_soldier = null
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
@@ -703,7 +703,7 @@ export const mod_edit_mode = {
       if (this.lift_cancel_action_info.smooth_cancel) {
         this.log("持った状態で自分の非合法セルタップでキャンセル")
         this.event_call("ev_action_piece_cancel")
-        this.state_reset()
+        this.hold_piece_release()
       }
     },
 
@@ -711,7 +711,7 @@ export const mod_edit_mode = {
     // これは Vue がリアクティブにならない対策として入れているのでできれば外したい
     piece_hold_and_put_for_bug(place, e) {
       // this.soldier_hold(place, e)
-      this.state_reset() // ←これは絶対にいる
+      this.hold_piece_release() // ←これは絶対にいる
       // emitされない不具合の暫定対策でちょうどここが共通処理になっているのでつっこんでおく
       // this.emit_update_edit_mode_short_sfen()
     },

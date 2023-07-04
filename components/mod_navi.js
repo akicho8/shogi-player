@@ -139,7 +139,7 @@ export const mod_navi = {
       const updated = this.turn_offset !== new_val
 
       if (updated) {
-        this.state_reset() // 駒を持った状態でコントローラーを操作したとき駒を持ち上げた状態が残るのを防ぐ
+        this.hold_piece_release() // 駒を持った状態でコントローラーを操作したとき駒を持ち上げた状態が残るのを防ぐ
 
         if (this.view_p) {
           this.view_mode_xcontainer_update(new_val)

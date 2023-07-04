@@ -132,7 +132,7 @@ export const mod_lifted_piece = {
     // 右クリックならキャンセル(動いてないっぽい)
     lp_click_hook(e) {
       if (e.which !== 1) {
-        this.state_reset()
+        this.hold_piece_release()
       }
     },
 

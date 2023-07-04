@@ -74,6 +74,11 @@ export const mod_api_functions = {
       this.play_mode_setup()
     },
 
+    // 持った駒を離す
+    api_hold_piece_release() {
+      this.hold_piece_release()
+    },
+
     // slider にフォーカスする
     api_turn_slider_focus() {
       this.turn_slider_focus()
