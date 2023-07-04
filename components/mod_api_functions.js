@@ -75,8 +75,8 @@ export const mod_api_functions = {
     },
 
     // 持った駒を離す
-    api_hold_piece_release() {
-      this.hold_piece_release()
+    api_lifted_piece_cancel() {
+      this.lifted_piece_cancel()
     },
 
     // slider にフォーカスする
