@@ -5955,7 +5955,7 @@ packages:
     resolution: {integrity: sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==}
     dev: true
 
-  /shogi-player@1.1.13:
+  /shogi-player@1.1.14:
     resolution: {integrity: sha512-qpfqArTPh+Fl0N43MTXhT2mnqxuz7YuE7bumy/Z8BVBlj3mPC1DVflSuDXgTnazXUGMwO6m5f1tRkcGVqpQcOQ==}
     dependencies:
       beetleshine: 0.0.9
