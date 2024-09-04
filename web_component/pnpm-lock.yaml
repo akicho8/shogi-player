@@ -2392,8 +2392,8 @@ packages:
     resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}
     dev: true
 
-  /beetleshine@0.0.9:
-    resolution: {integrity: sha512-vKrjjRdXibHv4SvmuzmTCoGZukb2aVBV9Oevn9em/Ht0A2oRKtqU8ME6AYgBSMjrgDrAh8+YaPQgCeIeIu7kLg==}
+  /beetleshine@0.0.14:
+    resolution: {integrity: sha512-fsdzvnUoxyns+rLMv9ZSkplx8CEjE7qUx7OdDoz3e7Jh6Q38HuGewIUVuM5ll1uNk+Zqk6YK/9eXpoW4K8e7tg==}
     dependencies:
       autolinker: 4.0.0
       extsprintf: 1.4.1
@@ -6450,9 +6450,8 @@ packages:
   file:..:
     resolution: {directory: .., type: directory}
     name: shogi-player
-    version: 1.1.10
     dependencies:
-      beetleshine: 0.0.9
+      beetleshine: 0.0.14
       chroma-js: 2.4.2
       ismobilejs: 1.1.1
       js-memory-record: 0.0.28
