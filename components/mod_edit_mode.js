@@ -245,6 +245,7 @@ export const mod_edit_mode = {
           return
         }
 
+        // [王手放置判定] 駒を移動したとき
         if (this.sp_illegal_validate) {
           if (this.xcontainer.board.move_then_king_capture_p(this.origin_soldier1, place)) {
             if (this.illegal_add("illegal_death_king", {soldier: this.origin_soldier1, place: place}) === "__cancel__") { // 王手放置
@@ -307,6 +308,18 @@ export const mod_edit_mode = {
       // 持駒を置く
       if (this.have_piece) {
         this.log("持駒を置く")
+
+        // [王手放置判定] 持駒を打ったとき
+        if (this.sp_illegal_validate) {
+          if (this.play_p) {
+            const new_soldier = this.soldier_create_from_stand_or_box_on(place)
+            if (this.xcontainer.board.puton_then_king_capture_p(new_soldier, place)) {
+              if (this.illegal_add("illegal_death_king", {soldier: new_soldier, place: place}) === "__cancel__") { // 王手放置
+                return
+              }
+            }
+          }
+        }
 
         // 二歩判定
         if (this.sp_illegal_validate) {

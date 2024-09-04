@@ -160,6 +160,13 @@ export class Board {
     return board.king_capture_p(soldier.location)
   }
 
+  // 仮に soldier を置いたとき soldier.location 側の玉が取られるか？
+  puton_then_king_capture_p(soldier) {
+    const board = this.shallow_clone
+    board.place_on(soldier)
+    return board.king_capture_p(soldier.location)
+  }
+
   // 相手の盤上の駒をすべて動かしたとき location 側の king が取られるか？
   king_capture_p(location) {
     const king = this.king_find_by_location(location)
