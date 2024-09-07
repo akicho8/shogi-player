@@ -8,6 +8,10 @@ describe("KifParser", () => {
     expect(KifParser.parse("key3：").header["key3"]).toEqual("")
   })
 
+  it("コメント内の「KEY：VALUE」形式をヘッダーとして読み込まないこと", () => {
+    expect(KifParser.parse("手数----指手---------消費時間--\n*KEY：VALUE").header).toEqual({})
+  })
+
   it("コメント", () => {
     expect(KifParser.parse("*a\n*b").comment_lines_hash).toEqual({ '0': [ 'a', 'b' ] })
   })

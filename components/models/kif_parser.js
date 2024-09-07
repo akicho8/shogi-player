@@ -16,7 +16,7 @@ import { KanjiNumber    } from "./kanji_number.js"
 ////////////////////////////////////////////////////////////////////////////////
 
 const REGEXP = {
-  header: "(?<key>.*)：\s*(?<value>.*)",                         // key：val
+  header: "^(?!\\*)(?<key>.*)：\s*(?<value>.*)",                         // key：val
   board:  "\\|(?<board>.*)\\|",                                  // | 香 桂 銀 金 玉 金 銀 桂 香|九
   direct_location: "(?<direct_location>^[上下先後]手番)",        // 上手番
   latest_triangle: "^手数＝.*(?<latest_triangle>[▲△])",               // 手数＝24 △５四歩 まで (TODO: 最終手を活用する)
