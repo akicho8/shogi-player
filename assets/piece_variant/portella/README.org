@@ -1,1 +1,3 @@
 Portella
+
+rsync -a ~/src/bioshogi/lib/bioshogi/assets/images/piece/Portella/*.png .
