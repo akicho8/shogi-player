@@ -23,7 +23,7 @@
           data-resize_observer_id="BoardCell"
           @pointerdown="TheSp.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
           @click.stop.prevent="TheSp.board_cell_left_click(logical_xy(x, y), $event)"
-          @click.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), $event)"
+          @click.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), $event, 'transform_all')"
           @mouseover="TheSp.board_mouseover_handle(logical_xy(x, y), $event)"
           @mouseleave="TheSp.mouseleave_handle"
           :class="cell_class(logical_xy(x, y))"

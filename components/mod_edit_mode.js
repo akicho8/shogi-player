@@ -173,7 +173,7 @@ export const mod_edit_mode = {
               this.log(`ダブルクリック判定: (${gap} ms < ${this.sp_double_click_threshold_ms}) -> ${enable}`)
               if (enable) {
                 this.log(`操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す`)
-                this.xcontainer.board.place_on(this.killed_soldier.transform_clone)
+                this.xcontainer.board.place_on(this.killed_soldier.transform_all)
                 this.piece_hold_and_put_for_bug(place, e) // 不具合対策
                 return
               }
@@ -196,7 +196,7 @@ export const mod_edit_mode = {
         if (this.meta_p(e)) {
           if (!this.lifted_p && this.killed_soldier) { // 持ってなくて、駒がある
             this.log("盤上の駒を裏返す")
-            this.xcontainer.board.place_on(this.killed_soldier.transform_clone)
+            this.xcontainer.board.place_on(this.killed_soldier.transform_all)
             this.piece_hold_and_put_for_bug(place, e) // 不具合対策
             return
           }
@@ -377,7 +377,7 @@ export const mod_edit_mode = {
     //     if (!this.lifted_p) {
     //       if (soldier) {
     //         this.log("操作モードでダブルタップしたので裏返す")
-    //         // this.xcontainer.board.place_on(soldier.transform_clone)
+    //         // this.xcontainer.board.place_on(soldier.transform_all)
     //         // this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //         return
     //       }
@@ -413,7 +413,7 @@ export const mod_edit_mode = {
       })
     },
 
-    board_cell_right_click(xy, e) {
+    board_cell_right_click(xy, e, method) {
       this.log("盤のセルを右クリック")
       const place = Place.fetch(xy)
 
@@ -437,7 +437,7 @@ export const mod_edit_mode = {
       if (this.edit_p) {
         if (!this.lifted_p && soldier) {
           this.log("盤上の駒を裏返す")
-          this.xcontainer.board.place_on(soldier.transform_clone)
+          this.xcontainer.board.place_on(soldier[method]) // method: transform_all | transform_head | transform_promote
           this.piece_hold_and_put_for_bug(place, e) // 不具合対策
         }
       }
@@ -460,7 +460,7 @@ export const mod_edit_mode = {
     //   if (this.edit_p) {
     //     if (!this.lifted_p && soldier) {
     //       this.log("盤上の駒を裏返す")
-    //       this.xcontainer.board.place_on(soldier.transform_clone)
+    //       this.xcontainer.board.place_on(soldier.transform_all)
     //       this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //     }
     //   }

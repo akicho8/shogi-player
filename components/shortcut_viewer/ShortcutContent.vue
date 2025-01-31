@@ -1,19 +1,26 @@
 <template lang="pug">
 .ShortcutContent.box.has-text-left(@click="TheSp.shortcut_viewer_close_handle")
   .my_title
-    | キーボードショートカット
+    | ショートカット
   table.table.is-fullwidth.mt-1.mb-0
     tbody
       tr
         th 駒の反転
         td
           b-tag(type="is-primary") SPC
-          b-tag.ml-1(type="is-primary") V
           b-tag.ml-1(type="is-primary") R
           .mt-1
             b-tag(type="") SHIFT
             span.mx-1 +
             b-tag(type="") クリック
+      tr
+        th 駒の<b>上下</b>のみ反転
+        td
+          b-tag(type="is-primary") V
+      tr
+        th 駒の<b>裏表</b>のみ反転
+        td
+          b-tag(type="is-primary") H
       tr
         th ポインタ下の駒を<br>駒台に<b>移動</b>
         td

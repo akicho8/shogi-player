@@ -61,18 +61,38 @@ export class Soldier {
     return this.piece.piece_yomiage.yomiage(this.promoted)
   }
 
+  ////////////////////////////////////////////////////////////////////////////////
+
+  // 互換性のため
   get transform_clone() {
-    let attrs = null
+    return this.transform_all
+  }
+
+  // 上下反転(不成)→成り (4パターン) の繰り返し
+  get transform_all() {
     if (this.piece.promotable_p) {
       if (this.promoted) {
-        attrs = {location: this.location.flip, promoted: !this.promoted}
+        return this.clone_with_attrs({location: this.location.flip, promoted: !this.promoted})
       } else {
-        attrs = {promoted: !this.promoted}
+        return this.clone_with_attrs({promoted: !this.promoted})
       }
     } else {
-      attrs = {location: this.location.flip}
+      return this.transform_head
+    }
+  }
+
+  // 成り→不成 (2パターン) の繰り返し
+  get transform_promote() {
+    let attrs = null
+    if (this.piece.promotable_p) {
+      attrs = {promoted: !this.promoted}
     }
     return this.clone_with_attrs(attrs)
+  }
+
+  // 先後 (2パターン) の繰り返し
+  get transform_head() {
+    return this.clone_with_attrs({location: this.location.flip})
   }
 
   // soldier.clone_with_attrs({promoted: true})
@@ -80,6 +100,8 @@ export class Soldier {
   clone_with_attrs(attrs = {}) {
     return new Soldier({...this.attributes, ...attrs})
   }
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   get promotable_p() {
     if (this.piece.promotable_p && !this.promoted) { // 成れるのに成ってなくて

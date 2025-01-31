@@ -75,12 +75,26 @@ export const mod_shortcut = {
 
       // 反転
       // command + r でリロードを優先したいため command が押されていないときだけ反応させる
-      if (!this.meta_p(e) && (e.key === "v" || e.key === "r" || e.code === "Space")) {
+      if (!this.meta_p(e)) {
         if (this.mouseover_info) {
+          console.log(this.mouseover_info)
           if (this.mouseover_info.type === "board") {
-            this.board_cell_right_click(this.mouseover_info.xy, e)
-            e.preventDefault()
-            return true
+            // r, v, h は factorio のキーバインドに倣っている
+            if (e.key === "r" || e.code === "Space") {
+              this.board_cell_right_click(this.mouseover_info.xy, e, "transform_all") // 4パターン切り替え
+              e.preventDefault()
+              return true
+            }
+            if (e.key === "v") {
+              this.board_cell_right_click(this.mouseover_info.xy, e, "transform_head") // 上下反転
+              e.preventDefault()
+              return true
+            }
+            if (e.key === "h") {
+              this.board_cell_right_click(this.mouseover_info.xy, e, "transform_promote") // 裏表反転
+              e.preventDefault()
+              return true
+            }
           }
         }
       }
