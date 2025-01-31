@@ -77,7 +77,6 @@ export const mod_shortcut = {
       // command + r でリロードを優先したいため command が押されていないときだけ反応させる
       if (!this.meta_p(e)) {
         if (this.mouseover_info) {
-          console.log(this.mouseover_info)
           if (this.mouseover_info.type === "board") {
             // r, v, h は factorio のキーバインドに倣っている
             if (e.key === "r" || e.code === "Space") {
