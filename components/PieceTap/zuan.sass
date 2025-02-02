@@ -1,0 +1,25 @@
+.ShogiPlayer
+  &.is_piece_variant_zuan
+    @extend %piece_black_only
+
+    .PieceTexture
+      +piece_variant_def("K", false, "zuan", "BK0", "png")
+      +piece_variant_def("R", false, "zuan", "BR0", "png")
+      +piece_variant_def("B", false, "zuan", "BB0", "png")
+      +piece_variant_def("G", false, "zuan", "BG0", "png")
+      +piece_variant_def("S", false, "zuan", "BS0", "png")
+      +piece_variant_def("N", false, "zuan", "BN0", "png")
+      +piece_variant_def("L", false, "zuan", "BL0", "png")
+      +piece_variant_def("P", false, "zuan", "BP0", "png")
+      +piece_variant_def("X", false, "zuan", "BK0", "png")
+      +piece_variant_def("R", true,  "zuan", "BR1", "png")
+      +piece_variant_def("B", true,  "zuan", "BB1", "png")
+      +piece_variant_def("S", true,  "zuan", "BS1", "png")
+      +piece_variant_def("N", true,  "zuan", "BN1", "png")
+      +piece_variant_def("L", true,  "zuan", "BL1", "png")
+      +piece_variant_def("P", true,  "zuan", "BP1", "png")
+
+    // 北側の玉だけ「王」にする
+    .is_position_north
+      .PieceTexture
+        +piece_variant_def("K", false, "zuan", "WK0", "png")

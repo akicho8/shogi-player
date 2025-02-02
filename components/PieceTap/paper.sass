@@ -1,0 +1,24 @@
+.ShogiPlayer
+  &.is_piece_variant_paper
+    @extend %piece_black_only
+
+    .PieceTexture
+      +piece_variant_def("K", false, "paper", "BK0", "svg")
+      +piece_variant_def("R", false, "paper", "BR0", "svg")
+      +piece_variant_def("B", false, "paper", "BB0", "svg")
+      +piece_variant_def("G", false, "paper", "BG0", "svg")
+      +piece_variant_def("S", false, "paper", "BS0", "svg")
+      +piece_variant_def("N", false, "paper", "BN0", "svg")
+      +piece_variant_def("L", false, "paper", "BL0", "svg")
+      +piece_variant_def("P", false, "paper", "BP0", "svg")
+      +piece_variant_def("R", true,  "paper", "BR1", "svg")
+      +piece_variant_def("B", true,  "paper", "BB1", "svg")
+      +piece_variant_def("S", true,  "paper", "BS1", "svg")
+      +piece_variant_def("N", true,  "paper", "BN1", "svg")
+      +piece_variant_def("L", true,  "paper", "BL1", "svg")
+      +piece_variant_def("P", true,  "paper", "BP1", "svg")
+
+    // 北側の玉だけ「王」にする
+    .is_position_north
+      .PieceTexture
+        +piece_variant_def("K", false, "paper", "WK0", "svg")

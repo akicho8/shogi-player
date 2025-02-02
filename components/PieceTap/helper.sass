@@ -1,0 +1,13 @@
+// 先手側の駒を反転して後手に流用する用
+%piece_black_only
+  .is_position_north
+    .PieceTexture
+      +is_flip
+  .is_position_south
+    .PieceTexture
+      __css_keep__: 0
+
+=piece_variant_def($piece_key, $promoted, $type, $code, $ext_name)
+  &.piece_#{$piece_key}
+    &.promoted_#{$promoted}
+      background-image: url("../assets/piece_variant/#{$type}/#{$code}.#{$ext_name}")

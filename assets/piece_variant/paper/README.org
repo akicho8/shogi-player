@@ -4,20 +4,21 @@ https://glyphwiki.org/
 コドモとアプリ
 https://studio.beatnix.co.jp/
 
-|----+---------------------------------------------------------------------------------|
-| K0 | https://glyphwiki.org/wiki/u738b                                                |
-| R0 | https://glyphwiki.org/wiki/u98db                                                |
-| B0 | https://glyphwiki.org/wiki/u89d2                                                |
-| G0 | https://glyphwiki.org/wiki/u91d1                                                |
-| S0 | https://glyphwiki.org/wiki/u9280                                                |
-| N0 | https://glyphwiki.org/wiki/u6842                                                |
-| L0 | https://glyphwiki.org/wiki/u9999                                                |
-| P0 | https://glyphwiki.org/wiki/u6b69                                                |
-| X0 | https://glyphwiki.org/wiki/u7389                                                |
-| R1 | https://glyphwiki.org/wiki/u7adc                                                |
-| B1 | https://glyphwiki.org/wiki/u99ac                                                |
-| S1 | https://glyphwiki.org/wiki/u5168                                                |
-| N1 | https://glyphwiki.org/wiki/u572d                                                |
-| L1 | https://glyphwiki.org/wiki/u674f                                                |
-| P1 | https://studio.beatnix.co.jp/files/moji-svg/hiragana/minchyo/01/hira_min_to.svg |
-|----+---------------------------------------------------------------------------------|
+|-----+---------------------------------------------------------------------------------|
+| BK0 | https://glyphwiki.org/wiki/u7389                                                |
+| WK0 | https://glyphwiki.org/wiki/u738b                                                |
+| BR0 | https://glyphwiki.org/wiki/u98db                                                |
+| BB0 | https://glyphwiki.org/wiki/u89d2                                                |
+| BG0 | https://glyphwiki.org/wiki/u91d1                                                |
+| BS0 | https://glyphwiki.org/wiki/u9280                                                |
+| BN0 | https://glyphwiki.org/wiki/u6842                                                |
+| BL0 | https://glyphwiki.org/wiki/u9999                                                |
+| BP0 | https://glyphwiki.org/wiki/u6b69                                                |
+| BX0 | https://glyphwiki.org/wiki/u7389                                                |
+| BR1 | https://glyphwiki.org/wiki/u7adc                                                |
+| BB1 | https://glyphwiki.org/wiki/u99ac                                                |
+| BS1 | https://glyphwiki.org/wiki/u5168                                                |
+| BN1 | https://glyphwiki.org/wiki/u572d                                                |
+| BL1 | https://glyphwiki.org/wiki/u674f                                                |
+| BP1 | https://studio.beatnix.co.jp/files/moji-svg/hiragana/minchyo/01/hira_min_to.svg |
+|-----+---------------------------------------------------------------------------------|

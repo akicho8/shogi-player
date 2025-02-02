@@ -1,0 +1,24 @@
+.ShogiPlayer
+  &.is_piece_variant_nureyon
+    @extend %piece_black_only
+
+    .PieceTexture
+      +piece_variant_def("K", false, "nureyon", "BK0", "svg")
+      +piece_variant_def("R", false, "nureyon", "BR0", "svg")
+      +piece_variant_def("B", false, "nureyon", "BB0", "svg")
+      +piece_variant_def("G", false, "nureyon", "BG0", "svg")
+      +piece_variant_def("S", false, "nureyon", "BS0", "svg")
+      +piece_variant_def("N", false, "nureyon", "BN0", "svg")
+      +piece_variant_def("L", false, "nureyon", "BL0", "svg")
+      +piece_variant_def("P", false, "nureyon", "BP0", "svg")
+      +piece_variant_def("R", true,  "nureyon", "BR1", "svg")
+      +piece_variant_def("B", true,  "nureyon", "BB1", "svg")
+      +piece_variant_def("S", true,  "nureyon", "BS1", "svg")
+      +piece_variant_def("N", true,  "nureyon", "BN1", "svg")
+      +piece_variant_def("L", true,  "nureyon", "BL1", "svg")
+      +piece_variant_def("P", true,  "nureyon", "BP1", "svg")
+
+    // 北側の玉だけ「王」にする
+    .is_position_north
+      .PieceTexture
+        +piece_variant_def("K", false, "nureyon", "WK0", "svg")

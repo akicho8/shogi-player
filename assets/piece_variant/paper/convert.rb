@@ -1,9 +1,13 @@
-#!/usr/bin/env ruby
 require "pathname"
 require "open-uri"
+require "nokogiri"
+
+COLOR_RED   = "rgb(239,69,74)" # 朱色 (https://www.color-sample.com/colors/257/)
+COLOR_BLACK = "black"
 
 {
-  "BK0" => "https://glyphwiki.org/wiki/u738b",
+  "BK0" => "https://glyphwiki.org/wiki/u7389",
+  "WK0" => "https://glyphwiki.org/wiki/u738b",
   "BR0" => "https://glyphwiki.org/wiki/u98db",
   "BB0" => "https://glyphwiki.org/wiki/u89d2",
   "BG0" => "https://glyphwiki.org/wiki/u91d1",
@@ -23,8 +27,16 @@ require "open-uri"
     code = url.split("/").last
     url = "https://glyphwiki.org/glyph/#{code}.svg"
   end
-  file = Pathname("#{key}.svg")
   svg = URI(url).read
-  file.write(svg)
-  p [key, file.to_s, svg.size]
+
+  # 裏の場合は赤色にする
+  doc = Nokogiri::XML(svg)
+  element = doc.at("g")
+  if key.end_with?("1")
+    element["fill"] = COLOR_RED
+  else
+    element["fill"] = COLOR_BLACK
+  end
+
+  Pathname("#{key}.svg").write(doc)
 end

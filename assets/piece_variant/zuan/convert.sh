@@ -1,5 +1,6 @@
 #!/bin/sh
-mv 01_oushou.png      BK0.png
+mv 01_oushou.png      WK0.png
+mv 02_gyoku.png       BK0.png
 mv 03_hisha.png       BR0.png
 mv 05_kakugyou.png    BB0.png
 mv 07_kinshou.png     BG0.png
