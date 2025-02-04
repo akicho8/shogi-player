@@ -12,18 +12,25 @@ export const mod_shortcut = {
   methods: {
     shortcut_hook(e) {
       if (this.play_p || this.edit_p) {
-      } else {
-        return true
-      }
-
-      // w, b で駒台をクリックしたことにする
-      for (const loc of Location.values) {
-        const key = e.key.toLowerCase()
-        if (key === loc.char_key) {
-          this.soldier_hold_unless_lifted_p(e)
-          if (this.membership_click_handle(loc, e)) { // 駒台クリック
+        // 移動キャンセル
+        if (e.code === "Escape") {
+          if (this.hold_cancel(e)) {
             e.preventDefault()
             return true
+          }
+        }
+      }
+
+      if (this.edit_p) {
+        // w, b で駒台をクリックしたことにする
+        for (const loc of Location.values) {
+          const key = e.key.toLowerCase()
+          if (key === loc.char_key) {
+            this.soldier_hold_unless_lifted_p(e)
+            if (this.membership_click_handle(loc, e)) { // 駒台クリック
+              e.preventDefault()
+              return true
+            }
           }
         }
       }
@@ -39,60 +46,56 @@ export const mod_shortcut = {
         }
       }
 
-      // 移動キャンセル
-      if (e.code === "Escape") {
-        if (this.hold_cancel(e)) {
-          e.preventDefault()
-          return true
-        }
-      }
-
-      // 何も持っていない状態 → 持駒に同じ駒があれば持つ
-      // 何か持っている状態   → キャンセル
-      // https://wikiwiki.jp/factorio/%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95
-      if (e.key === "q") {
-        // 何か持っている状態ならキャンセルする
-        if (this.lifted_p) {
-          if (this.hold_cancel(e)) {
-            e.preventDefault()
-            return true
-          }
-        }
-
-        // 何も持っていない状態なので持駒に同じ駒があれば持つ
-        if (this.mouseover_info) {
-          if (this.mouseover_info.type === "board") {
-            const place = Place.fetch(this.mouseover_info.xy)
-            const soldier = this.xcontainer.board.lookup(place)
-            if (soldier) {
-              this.piece_stand_piece_click(soldier.location, soldier.piece, soldier.promoted, null) // キーボードのイベントなので null 指定
+      if (this.edit_p) {
+        // 何も持っていない状態 → 持駒に同じ駒があれば持つ
+        // 何か持っている状態   → キャンセル
+        // https://wikiwiki.jp/factorio/%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95
+        if (e.key === "q") {
+          // 何か持っている状態ならキャンセルする
+          if (this.lifted_p) {
+            if (this.hold_cancel(e)) {
               e.preventDefault()
               return true
+            }
+          }
+
+          // 何も持っていない状態なので持駒に同じ駒があれば持つ
+          if (this.mouseover_info) {
+            if (this.mouseover_info.type === "board") {
+              const place = Place.fetch(this.mouseover_info.xy)
+              const soldier = this.xcontainer.board.lookup(place)
+              if (soldier) {
+                this.piece_stand_piece_click(soldier.location, soldier.piece, soldier.promoted, null) // キーボードのイベントなので null 指定
+                e.preventDefault()
+                return true
+              }
             }
           }
         }
       }
 
-      // 反転
-      // command + r でリロードを優先したいため command が押されていないときだけ反応させる
-      if (!this.meta_p(e)) {
-        if (this.mouseover_info) {
-          if (this.mouseover_info.type === "board") {
-            // r, v, h は factorio のキーバインドに倣っている
-            if (e.key === "r" || e.code === "Space") {
-              this.board_cell_right_click(this.mouseover_info.xy, e, "transform_all") // 4パターン切り替え
-              e.preventDefault()
-              return true
-            }
-            if (e.key === "v") {
-              this.board_cell_right_click(this.mouseover_info.xy, e, "transform_head") // 上下反転
-              e.preventDefault()
-              return true
-            }
-            if (e.key === "h") {
-              this.board_cell_right_click(this.mouseover_info.xy, e, "transform_promote") // 裏表反転
-              e.preventDefault()
-              return true
+      if (this.edit_p) {
+        // 反転
+        // command + r でリロードを優先したいため command が押されていないときだけ反応させる
+        if (!this.meta_p(e)) {
+          if (this.mouseover_info) {
+            if (this.mouseover_info.type === "board") {
+              // r, v, h は factorio のキーバインドに倣っている
+              if (e.key === "r" || e.code === "Space") {
+                this.board_cell_right_click(this.mouseover_info.xy, "transform_all", e) // 4パターン切り替え
+                e.preventDefault()
+                return true
+              }
+              if (e.key === "v") {
+                this.board_cell_right_click(this.mouseover_info.xy, "transform_head", e) // 上下反転
+                e.preventDefault()
+                return true
+              }
+              if (e.key === "h") {
+                this.board_cell_right_click(this.mouseover_info.xy, "transform_promote", e) // 裏表反転
+                e.preventDefault()
+                return true
+              }
             }
           }
         }

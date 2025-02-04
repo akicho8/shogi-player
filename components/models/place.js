@@ -117,6 +117,7 @@ export class Place {
     return ["place", this.human_x, this.human_y].join("_")
   }
 
+  // [7, 6]
   get human_xy_ary() {
     return [this.human_x, this.human_y]
   }
@@ -125,8 +126,15 @@ export class Place {
     return [this.kanji_human_x, this.kanji_human_y].join("")
   }
 
+  // "76"
   get digit_human() {
-    return [this.human_x, this.human_y].join("")
+    return this.human_xy_ary.join("")
+  }
+
+  // 盤と駒台を含めたユニークな位置情報の文字列を返す
+  // "7_6"
+  get to_mark_pos_key() {
+    return this.human_xy_ary.join("_")
   }
 
   get even_p() {

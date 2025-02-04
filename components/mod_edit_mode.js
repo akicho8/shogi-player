@@ -55,19 +55,57 @@ export const mod_edit_mode = {
   },
 
   methods: {
-    // 盤を押した瞬間
-    board_cell_pointerdown_handle(xy, e) {
-      this.event_call("ev_action_board_cell_pointerdown", Place.fetch(xy), e)
-    },
+    // // 盤を押した瞬間
+    // board_cell_pointerdown_handle(xy, e) {
+    //   const place = Place.fetch(xy)
+    //
+    //   this.event_call("ev_action_board_cell_pointerdown", place, e)
+    //
+    //   const params = {
+    //     mark_pos_key: place.to_mark_pos_key, // これだけあればいいけど
+    //     place: place,                        // 他のも入れとく
+    //   }
+    //   this.event_call("ev_action_markable_pointerdown", params, e)
+    // },
 
     // 盤をクリック
     board_cell_left_click(xy, e) {
+      const place = Place.fetch(xy)
+      this.event_call("ev_action_board_cell_pointerdown", place, e)
+      this.board_cell_left_click_markable_event(place, e)
+      this.board_cell_left_click_piece_move(place, e)
+    },
+
+    // マークしたいとき用のイベントを発行する
+    board_cell_left_click_markable_event(place, e) {
+      // if (!this.lifted_p) {
+      const params = {
+        mark_pos_key: place.to_mark_pos_key, // これだけあればいいけど
+        place: place,                        // 他のも入れとく
+      }
+      // if (this.meta_p(e)) {
+      this.event_call("ev_action_markable_pointerdown", params, e)
+      // }
+    },
+
+    board_cell_left_click_piece_move(place, e) {
       this.log("board_cell_left_click")
       this.log(`shiftKey: ${e.shiftKey}`)
+
+      if (this.click_operation_cancel(e)) {
+        return
+      }
+
       this.$data._last_clicked_cell = e.target
       this.illegal_init()
 
-      const place = Place.fetch(xy)
+      // if (this.play_p) {
+      //   if (this.meta_p(e)) {
+      //     return
+      //   }
+      // }
+
+      // @pointerdown="TheSp.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
 
       if (this.sp_board_cell_left_click_disabled) {
         this.log(`セルをクリックしたときの通常処理を無効化する`)
@@ -206,6 +244,12 @@ export const mod_edit_mode = {
       // 盤上の駒を持ちあげる
       if (!this.lifted_p) {
         this.log("盤上の駒を持ちあげる")
+
+        // if (this.meta_p(e)) {
+        //   this.log("しかしシフトキーを押しているので持ち上げない")
+        //   return
+        // }
+
         this.soldier_hold(place, e)
         return
       }
@@ -413,7 +457,7 @@ export const mod_edit_mode = {
       })
     },
 
-    board_cell_right_click(xy, e, method) {
+    board_cell_right_click(xy, method, e) {
       this.log("盤のセルを右クリック")
       const place = Place.fetch(xy)
 
@@ -509,11 +553,37 @@ export const mod_edit_mode = {
       return false
     },
 
+    // 駒台の駒を押した瞬間
+    piece_stand_piece_click_with_mark_event(location, piece, have_piece_promoted, e) {
+      this.event_call("ev_action_stand_cell_pointerdown", location, piece, e)
+
+      this.piece_stand_markable_event(location, piece, e)
+
+      this.piece_stand_piece_click(location, piece, have_piece_promoted, e)
+    },
+
+    // piece_stand_piece_pointerdown_handle(location, piece, e) {
+    //   this.piece_stand_piece_pointerdown_event(location, piece, e)
+    // },
+
+    piece_stand_markable_event(location, piece, e) {
+      const params = {
+        mark_pos_key: location.to_mark_pos_key(piece), // これだけあればいいけど
+        location: location,                    // 何かに使うかもしれないので
+        piece: piece,                          // 他のも入れとく
+      }
+      this.event_call("ev_action_markable_pointerdown", params, e)
+    },
+
     // 駒台の駒をクリック
     piece_stand_piece_click(location, piece, have_piece_promoted, e) {
       this.log("駒台の駒をクリック")
 
       if (this.break_if_view_mode) {
+        return
+      }
+
+      if (this.click_operation_cancel(e)) {
         return
       }
 
@@ -563,6 +633,17 @@ export const mod_edit_mode = {
       this.have_piece_location = location
       this.have_piece_promoted = have_piece_promoted
       this.lp_create(e, this.origin_soldier2)
+    },
+
+    click_operation_cancel(event) {
+      if (this.play_p) {
+        if (this.sp_play_mode_operation_single_click_only) {
+          if (this.meta_p(event)) {
+            this.log("play_mode で装飾キーを押しながらクリックしたので無効とする")
+            return true
+          }
+        }
+      }
     },
 
     // 駒箱の駒を持ち上げている？

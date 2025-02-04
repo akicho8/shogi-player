@@ -1,10 +1,10 @@
 <template lang="pug">
-.MembershipStand(:class="component_class" @click.right.stop.prevent="TheSp.hold_cancel")
+.MembershipStand(:class="component_class" @pointerdown.right.stop.prevent="TheSp.hold_cancel")
   .MembershipStandTexture.is-overlay
   .MembershipStand2
     .PieceWithCount.is-flex(
       v-for="[piece, count] in hold_pieces"
-      @click.stop="TheSp.piece_stand_piece_click(ms.location, piece, false, $event)"
+      @pointerdown="TheSp.piece_stand_piece_click_with_mark_event(ms.location, piece, false, $event)"
       @mouseover="TheSp.piece_stand_mouseover_handle(ms.location, piece, $event)"
       @mouseleave="TheSp.mouseleave_handle"
       )
@@ -12,6 +12,7 @@
         :class="piece_tap_class(piece)"
         :piece_texture_class="piece_texture_class(piece)"
         :count="count"
+        :mark_pos_key="ms.location.to_mark_pos_key(piece)"
         )
 </template>
 

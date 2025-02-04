@@ -21,16 +21,17 @@
         td.BoardCell(
           v-for="(_, x) in TheSp.sp_board_dimension_w"
           data-resize_observer_id="BoardCell"
-          @pointerdown="TheSp.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
-          @click.stop.prevent="TheSp.board_cell_left_click(logical_xy(x, y), $event)"
-          @click.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), $event, 'transform_all')"
+          @pointerdown.stop.prevent.left="TheSp.board_cell_left_click(logical_xy(x, y), $event)"
+          @pointerdown.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), 'transform_all', $event)"
           @mouseover="TheSp.board_mouseover_handle(logical_xy(x, y), $event)"
           @mouseleave="TheSp.mouseleave_handle"
           :class="cell_class(logical_xy(x, y))"
           )
+          // PieceTap は盤上にあるとは限らないので x, y に依存してはいけない。だから x, y を元にしたものを渡している
           PieceTap(
             :class="TheSp.board_piece_tap_class(logical_xy(x, y))"
             :piece_texture_class="TheSp.xcontainer.board_piece_fore_class(logical_xy(x, y))"
+            :mark_pos_key="mark_pos_key_from(x, y)"
             )
 </template>
 
@@ -72,6 +73,9 @@ export default {
         y = this.TheSp.sp_board_dimension_h - y - 1
       }
       return [x, y]
+    },
+    mark_pos_key_from(x, y) {
+      return Place.fetch(this.logical_xy(x, y)).to_mark_pos_key
     },
   },
 }
@@ -180,4 +184,5 @@ export default {
         border-radius: 50%
         background-color: var(--sp_star_color, var(--sp_grid_outer_color))
         z-index: var(--sp_star_z_index)
+
 </style>

@@ -7,22 +7,27 @@
     .PieceTexture(:class="piece_texture_class")
     // 駒テクスチャの大きさに依存させたいので中に PieceObject のなかに入れている
     PieceCount(:count="count")
+  ThinkMark(:mark_pos_key="mark_pos_key")
 </template>
 
 <script>
 import _ from "lodash"
 import { support } from "./support.js"
 import PieceCount from "./PieceCount.vue"
+import ThinkMark from "./think_mark/ThinkMark.vue"
 
 export default {
   name: "PieceTap",
   mixins: [support],
   components: {
     PieceCount,
+    ThinkMark,
   },
   props: {
     piece_texture_class: { required: true              },
     count:               { required: false, default: 1 },
+    //
+    mark_pos_key:        { required: false             },
   },
 }
 </script>

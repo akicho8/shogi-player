@@ -35,6 +35,11 @@ export class Location extends ApplicationMemoryRecord {
   flip_if(flip) {
     return this.advance(flip ? 1 : 0)
   }
+
+  // 先手の持駒の飛車なら black_R を返す
+  to_mark_pos_key(piece) {
+    return [this.key, piece.key].join("_")
+  }
 }
 
 if (typeof process !== "undefined" && process.argv[1] === __filename) {

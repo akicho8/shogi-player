@@ -1,5 +1,5 @@
 <template lang="pug">
-.MembershipLocationMark(:class="component_class" :key="component_key" @click="click_handle")
+.MembershipLocationMark(:class="component_class" :key="component_key" @pointerdown="click_handle")
   .MembershipLocationMarkTexture
 </template>
 

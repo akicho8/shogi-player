@@ -15,6 +15,7 @@ describe('Place', () => {
 
   it('digit_human', () => {
     expect(Place.fetch("2c").digit_human).toEqual("23")
+    expect(Place.fetch([7, 1]).digit_human).toEqual("22")
   })
 
   it('to_sfen', () => {
@@ -24,4 +25,8 @@ describe('Place', () => {
   it('even_p',     () => { expect(Place.fetch("91").even_p).toEqual(true)     })
   it('odd_p',      () => { expect(Place.fetch("92").odd_p).toEqual(true)      })
   it('tennozan_p', () => { expect(Place.fetch("55").tennozan_p).toEqual(true) })
+
+  it('key', () => {
+    expect(Place.fetch("22").key).toEqual("7,1")
+  })
 })
