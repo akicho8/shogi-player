@@ -9,8 +9,8 @@ export const mod_lifted_piece = {
   data() {
     return {
       // プレフィクスに_をつけるとVueに監視されない
-      lp_pos_update_need_p: false, // mousemove イベント緩和用
-      _lp_latest_mouse_event: null,     // mousemove イベント
+      lp_pos_update_need_p: false, // pointermove イベント緩和用
+      _lp_latest_pointermove_event: null,     // pointermove イベント
 
       _LiftedPieceElement: null,   // 持ちあげている駒のDOM
       lp_mouse_stick_p: false,     // 持ち上げている駒をマウスに追随させるか？
@@ -24,10 +24,10 @@ export const mod_lifted_piece = {
   methods: {
     // 持ち上げた駒の位置を更新する
     lp_pos_update() {
-      if (this.$data._LiftedPieceElement && this.$data._lp_latest_mouse_event && this.lp_mouse_stick_p) {
+      if (this.$data._LiftedPieceElement && this.$data._lp_latest_pointermove_event && this.lp_mouse_stick_p) {
         // if (this.devise_info.key === "mouse") {
-        const x = this.$data._lp_latest_mouse_event.clientX
-        const y = this.$data._lp_latest_mouse_event.clientY
+        const x = this.$data._lp_latest_pointermove_event.clientX
+        const y = this.$data._lp_latest_pointermove_event.clientY
         this.element_vector_set(this.$data._LiftedPieceElement, {x, y})
         // }
       }
@@ -45,11 +45,11 @@ export const mod_lifted_piece = {
       // キーボードイベントの場合は null が来るようにしている
       // マウスを動かしてはじめて座標が取れるのでキーボードの場合はすぐに駒は表示されない
       if (event) {
-        this.$data._lp_latest_mouse_event = event
+        this.$data._lp_latest_pointermove_event = event
         this.lp_pos_update()
       }
 
-      this.$el.addEventListener("mousemove", this.lp_mousemove_hook)
+      this.$el.addEventListener("pointermove", this.lp_pointermove_hook)
       this.$el.addEventListener("click", this.lp_click_hook)
     },
 
@@ -102,13 +102,13 @@ export const mod_lifted_piece = {
         this.$data._LiftedPieceElement = null
         this.lp_mouse_stick_p = false
 
-        this.$el.removeEventListener("mousemove", this.lp_mousemove_hook)
+        this.$el.removeEventListener("pointermove", this.lp_pointermove_hook)
         this.$el.removeEventListener("click", this.lp_click_hook)
       }
     },
 
-    lp_mousemove_hook(e) {
-      this.$data._lp_latest_mouse_event = e
+    lp_pointermove_hook(e) {
+      this.$data._lp_latest_pointermove_event = e
 
       // 連続で呼ばれるイベント処理を緩和する方法
       // https://qiita.com/noplan1989/items/9333faad731f5ecaaccd
