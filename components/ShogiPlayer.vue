@@ -583,9 +583,12 @@ export default {
 //   width: 100%
 
 .ShogiPlayer
+  // 長押しでテキスト選択を防ぐ。これは一番上に一回やるだけでいいはず。 
+  @extend %is_unselectable
+
   //////// タッチした直後に toast を出すと文言が自動選択されてしまう対策(青のIが出る)
-  .toast
-    @extend %is_unselectable
+  // .toast
+  //   @extend %is_unselectable
 
 .ShogiPlayer
   +defvar(sp_common_gap, 0.02) // 共通の隙間(駒セルの縦幅に対する割合)
