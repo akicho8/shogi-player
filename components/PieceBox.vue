@@ -1,5 +1,5 @@
 <template lang="pug">
-.PieceBox(v-if="TheSp.edit_p")
+.PieceBox(v-if="TheSp.edit_p" v-sp-disable-interactions)
   .PieceBoxInside(
     :class="component_class"
     @click.stop.prevent="TheSp.piece_box_other_click"

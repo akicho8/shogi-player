@@ -1,5 +1,5 @@
 <template lang="pug">
-.NavigateBlock(v-if="TheSp.inside_navigate_p")
+.NavigateBlock(v-if="TheSp.inside_navigate_p" v-sp-disable-interactions)
   .NavigateBlockInside
     SpController(v-if="TheSp.inside_controller_p")
     SpSlider(v-if="TheSp.inside_slider_p" ref="SpSlider")
@@ -31,6 +31,8 @@ export default {
   +defvar(sp_controller_width_mobile, 0.8) // コントローラー横幅(モバイル時)
 
   .NavigateBlock
+    @extend %is_unselectable
+
     display: flex
     align-items: center
     justify-content: center
