@@ -1,5 +1,9 @@
 <template lang="pug">
-.ShogiPlayer.is-relative(:id="root_container_id" :class="component_class" :style="component_style")
+.ShogiPlayer.is-relative(
+  :id="root_container_id"
+  :class="component_class"
+  :style="component_style"
+  )
   div(is="style" v-text="sp_pass_css" v-if="sp_pass_css")
   .SpGroundTexture
   SpGroundInside(v-if="xcontainer" ref="SpGroundInside")
@@ -32,6 +36,7 @@ import PromoteSelectModal from "./PromoteSelectModal.vue"
 import SpGroundInside     from "./SpGroundInside.vue"
 
 // mixins modules
+import { mod_context_menu    } from "./mod_context_menu.js"
 import { mod_focus           } from "./mod_focus.js"
 import { mod_navi            } from "./mod_navi.js"
 import { mod_viewpoint       } from "./mod_viewpoint.js"
@@ -60,6 +65,7 @@ export default {
     mod_chore,
     mod_debug,
     mod_vector,
+    mod_context_menu,
     mod_focus,
     mod_navi,
     mod_viewpoint,
@@ -271,6 +277,10 @@ export default {
       }
     }
   },
+
+  // mounted() {
+  // },
+
   watch: {
     // 外から中への反映シリーズ
     sp_piece_variant(v) { this.mut_piece_variant = v },
@@ -490,7 +500,6 @@ export default {
 
     str_to_css_class(prefix, value) { return `${prefix}_${value}` },
     bool_to_css_class(prefix, value)   { return `${prefix}_${value ? 'on' : 'off'}` },
-
   },
 
   computed: {
@@ -583,7 +592,7 @@ export default {
 //   width: 100%
 
 .ShogiPlayer
-  // 長押しでテキスト選択を防ぐ。これは一番上に一回やるだけでいいはず。 
+  // 長押しでテキスト選択を防ぐ。これは一番上に一回やるだけでいいはず。
   @extend %is_unselectable
 
   //////// タッチした直後に toast を出すと文言が自動選択されてしまう対策(青のIが出る)
