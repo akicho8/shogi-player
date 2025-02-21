@@ -83,6 +83,8 @@ export default {
     padding: 0 0.25em
     font-weight: bold
     border-radius: 2px
+    +mobile
+      font-size: 0.5em
 
 .ShogiPlayer
   &.is_layer_on
