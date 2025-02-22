@@ -31,8 +31,11 @@ export default {
   +defvar(sp_controller_width_mobile, 0.8) // コントローラー横幅(モバイル時)
 
   .NavigateBlock
-    @extend %is_unselectable
+    user-select: auto
+    pointer-events: auto
+    touch-action: manipulation
 
+  .NavigateBlock
     display: flex
     align-items: center
     justify-content: center
