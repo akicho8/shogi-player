@@ -37,7 +37,7 @@ class EventHelper {
   }
 
   __log(el, event_name, on_or_off) {
-    console.log(`[ShogiPlayer][EventHelper][${el.className}] ${event_name} ${on_or_off}`)
+    // console.log(`[ShogiPlayer][EventHelper][${el.className}] ${event_name} ${on_or_off}`)
   }
 }
 
