@@ -50,7 +50,7 @@ export const mod_lifted_piece = {
       }
 
       this.$el.addEventListener("pointermove", this.lp_pointermove_hook)
-      this.$el.addEventListener("click", this.lp_click_hook)
+      this.$el.addEventListener("pointerdown", this.lp_click_hook)
     },
 
     // private
@@ -103,7 +103,7 @@ export const mod_lifted_piece = {
         this.lp_mouse_stick_p = false
 
         this.$el.removeEventListener("pointermove", this.lp_pointermove_hook)
-        this.$el.removeEventListener("click", this.lp_click_hook)
+        this.$el.removeEventListener("pointerdown", this.lp_click_hook)
       }
     },
 
