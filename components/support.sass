@@ -72,10 +72,6 @@ $shortcut_viewer_z:         $piece_count_z + 1  // $piece_count_z より上に�
   // scale: -1
   transform: rotate(180deg)
 
-// 選択禁止
-%is_unselectable
-  user-select: none
-
 // is_layer_on 用
 =sp_xray_color($level)
   $color: hsla((240 + 360 / 15) * $level, 50%, 50%, 0.4)

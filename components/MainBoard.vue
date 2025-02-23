@@ -1,5 +1,5 @@
 <template lang="pug">
-.MainBoard(data-resize_observer_id="MainBoard")
+.MainBoard.is-unselectable(data-resize_observer_id="MainBoard")
   // ↑ここに影を適用してはいけない
   // .MainBoard に設定した background-image に影をつけるために drop-shadow すると
   // .MainBoard その子供である table にまで影が適用されてしまう
@@ -137,9 +137,6 @@ export default {
     height: 100%
     border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_outer_color)
     border-collapse: collapse // td同士のborderを共有する
-
-    // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
-    @extend %is_unselectable
 
     table-layout: fixed    // 横幅均等
 

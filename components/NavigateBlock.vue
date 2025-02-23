@@ -1,5 +1,6 @@
 <template lang="pug">
-.NavigateBlock(v-if="TheSp.inside_navigate_p" v-sp-disable-interactions)
+// よかれと考えてこれに v-sp-disable-interactions を指定すると touchstart の制限が影響してコントローラー(ボタン)が押せなくなるので注意せよ
+.NavigateBlock(v-if="TheSp.inside_navigate_p")
   .NavigateBlockInside
     SpController(v-if="TheSp.inside_controller_p")
     SpSlider(v-if="TheSp.inside_slider_p" ref="SpSlider")
@@ -29,11 +30,6 @@ export default {
 .ShogiPlayer
   +defvar(sp_controller_width, 0.5)        // コントローラー横幅
   +defvar(sp_controller_width_mobile, 0.8) // コントローラー横幅(モバイル時)
-
-  .NavigateBlock
-    user-select: auto
-    pointer-events: auto
-    touch-action: manipulation
 
   .NavigateBlock
     display: flex

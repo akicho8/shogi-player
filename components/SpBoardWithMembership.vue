@@ -1,5 +1,5 @@
 <template lang="pug">
-.SpBoardWithMembership(:class="component_class" v-sp-disable-interactions)
+.SpBoardWithMembership.is-unselectable(:class="component_class" v-sp-disable-interactions)
   Membership(position="north" :location="location_of('white')")
   AspectRatioFixedBlock
     OverlayNavigations
@@ -49,8 +49,6 @@ export default {
   +defvar(sp_board_vertical_gap, 0)   // 盤の上下の隙間(縦配置時)
 
   .SpBoardWithMembership
-    @extend %is_unselectable
-
     // 縦横関係なく中央に寄せる
     display: flex
     align-items: center

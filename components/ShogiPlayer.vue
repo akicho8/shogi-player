@@ -60,7 +60,7 @@ import { mod_vector          } from "./mod_vector.js"
 
 ////////////////////////////////////////////////////////////////////////////////
 // コンテキストメニュー・長押し・ドラッグ を禁止する
-// v-sp-disable-interactions を指定するタグには面倒だが CSS で @extend %is_unselectable も合わせて指定すること
+// v-sp-disable-interactions を指定するタグには面倒だが CSS で @extend %unselectable も合わせて指定すること
 
 import { event_helper } from "./models/event_helper.js"
 
@@ -616,11 +616,11 @@ export default {
 .ShogiPlayer
   // 長押しでテキスト選択を防ぐ。これは一番上に一回やるだけでいいはず。
   // これをやるとデバッグモードの表示さえ選択できなくなってしまう
-  // @extend %is_unselectable
+  // @extend %unselectable
 
   //////// タッチした直後に toast を出すと文言が自動選択されてしまう対策(青のIが出る)
   .toast
-    @extend %is_unselectable
+    @extend %unselectable
 
 .ShogiPlayer
   +defvar(sp_common_gap, 0.02) // 共通の隙間(駒セルの縦幅に対する割合)

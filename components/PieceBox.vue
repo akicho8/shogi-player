@@ -1,5 +1,5 @@
 <template lang="pug">
-.PieceBox(v-if="TheSp.edit_p" v-sp-disable-interactions)
+.PieceBox.is-unselectable(v-if="TheSp.edit_p" v-sp-disable-interactions)
   .PieceBoxInside(
     :class="component_class"
     @click.stop.prevent="TheSp.piece_box_other_click"
@@ -89,7 +89,6 @@ export default {
     align-items: center
     justify-content: center
     flex-direction: column
-    @extend %is_unselectable
 
   .PieceBoxInside
     min-height: var(--sp_cell_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
