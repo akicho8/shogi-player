@@ -612,8 +612,10 @@ export default {
 @import "./support.sass"
 // .ShogiPlayer
 //   width: 100%
-
 .ShogiPlayer
+  // ダブルタップによるズームを無効にする (しかし Mobile Safari では無視される)
+  touch-action: manipulation
+
   // 長押しでテキスト選択を防ぐ。これは一番上に一回やるだけでいいはず。
   // これをやるとデバッグモードの表示さえ選択できなくなってしまう
   // @extend %unselectable
