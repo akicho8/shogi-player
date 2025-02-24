@@ -131,7 +131,7 @@ export const mod_lifted_piece = {
 
     // 右クリックならキャンセル(動いてないっぽい)
     lp_click_hook(e) {
-      if (e.which !== 1) {
+      if (e.button !== 1) {
         this.lifted_piece_cancel()
       }
     },
