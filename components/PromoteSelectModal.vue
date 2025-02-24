@@ -19,10 +19,10 @@ export default {
   },
   mounted() {
     this.component_position_set()
-    this.TheSp.event_call("ev_promote_selector_open", this.soldier)
+    this.TheSp.event_call("ev_action_promote_select_open", this.soldier)
   },
   beforeDestroy() {
-    this.TheSp.event_call("ev_promote_selector_close")
+    this.TheSp.event_call("ev_action_promote_select_close")
   },
   methods: {
     piece_texture_class(promoted) {

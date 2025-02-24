@@ -270,6 +270,22 @@ Default: `null`
 }
 ```
 
+<!-- ### `sp_think_mark_list` -->
+<!--  -->
+<!-- Type: `Array` -->
+<!-- Default: `[]` -->
+<!--  -->
+<!-- 思考印の初期配列を指定する -->
+<!--  -->
+<!-- 例: -->
+<!--  -->
+<!-- ``` js -->
+<!-- [ -->
+<!--   { mark_pos_key: "7_6",     mark_user_name: "alice",  mark_color_index: 0, }, -->
+<!--   { mark_pos_key: "white_P", mark_user_name: "bob",    mark_color_index: 1, }, -->
+<!-- ] -->
+<!-- ``` -->
+
 ### `sp_turn_show`
 
 Type: `Boolean`

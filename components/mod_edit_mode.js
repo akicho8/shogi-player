@@ -73,7 +73,7 @@ export const mod_edit_mode = {
     //     mark_pos_key: place.to_mark_pos_key, // これだけあればいいけど
     //     place: place,                        // 他のも入れとく
     //   }
-    //   this.event_call("ev_action_markable_pointerdown", params, e)
+    //   this.event_call("ev_action_click_for_think_mark", params, e)
     // },
 
     // // 盤面クリック時に反応する部分
@@ -111,7 +111,7 @@ export const mod_edit_mode = {
         place: place,                        // 他のも入れとく
       }
       // if (this.meta_p(e)) {
-      this.event_call("ev_action_markable_pointerdown", params, e)
+      this.event_call("ev_action_click_for_think_mark", params, e)
       // }
     },
 
@@ -599,7 +599,7 @@ export const mod_edit_mode = {
         location: location,                    // 何かに使うかもしれないので
         piece: piece,                          // 他のも入れとく
       }
-      this.event_call("ev_action_markable_pointerdown", params, e)
+      this.event_call("ev_action_click_for_think_mark", params, e)
     },
 
     // 駒台の駒をクリック
@@ -664,7 +664,7 @@ export const mod_edit_mode = {
 
     click_operation_cancel(event) {
       if (this.play_p) {
-        if (this.sp_play_mode_operation_single_click_only) {
+        if (this.sp_move_simple_click_only) {
           if (this.meta_p(event)) {
             this.log("play_mode で装飾キーを押しながらクリックしたので無効とする")
             return true

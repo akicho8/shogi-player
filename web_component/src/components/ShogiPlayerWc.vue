@@ -86,8 +86,12 @@ export default {
     sp_lift_cancel_action:             { type: String,  }, // standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。reality: (盤上の駒に限り)キャンセルは元の位置をタップ。rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
     sp_view_mode_piece_movable:        { type: Boolean, }, // view でも駒を動かせる(ただし本筋は破壊しない)
     sp_board_cell_left_click_disabled: { type: Boolean, }, // 盤上セルタップ時の通常処理の無効化
+    sp_move_simple_click_only:         { type: Boolean, }, // play_mode での駒操作は単純なクリックだけに反応するか？
+
     // 本当は Object
     sp_player_info:                    { type: String,  }, // 対局者名と時間
+    // 本当は Array
+    sp_think_mark_list:                { type: String,  }, // 初期思考印配列
     // 本当は Function
     sp_board_cell_class_fn:            { type: String,  }, // セルのクラスを決める処理
   },
@@ -152,6 +156,7 @@ export default {
     override_props() {
       return {
         sp_player_info:         this.sp_player_info_native,
+        sp_think_mark_list:     this.sp_think_mark_list_native,
         sp_board_cell_class_fn: this.sp_board_cell_class_fn_native,
       }
     },
@@ -159,6 +164,14 @@ export default {
     // sp_player_info の Hash 化
     sp_player_info_native() {
       const v = this.lookup_var("sp_player_info")
+      if (v != null) {
+        return JSON5.parse(v)
+      }
+    },
+
+    // sp_think_mark_list の Hash 化
+    sp_think_mark_list_native() {
+      const v = this.lookup_var("sp_think_mark_list")
       if (v != null) {
         return JSON5.parse(v)
       }

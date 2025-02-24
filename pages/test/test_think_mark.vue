@@ -35,7 +35,7 @@
             sp_board_variant="wood_normal"
             :sp_slider="true"
             :sp_think_mark_list="sp_think_mark_list"
-            @ev_action_markable_pointerdown="ev_action_markable_pointerdown"
+            @ev_action_click_for_think_mark="ev_action_click_for_think_mark"
             sp_human_side="none"
           )
         .column
@@ -105,7 +105,7 @@ export default {
 
     //////////////////////////////////////////////////////////////////////////////// ユーザー側の定義
 
-    ev_action_markable_pointerdown(params, event) {
+    ev_action_click_for_think_mark(params, event) {
       const mark_attrs = this.mark_attrs_from(params.mark_pos_key)
       this.$refs.sp_object.mut_think_mark_list.toggle(mark_attrs)
     },

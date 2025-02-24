@@ -100,10 +100,23 @@ APIで内部変数を参照するよりこちらを使った方が良い
 
 ### `ev_action_board_cell_pointerdown(place: Place)`
 
-セルを触ったとき
+盤面のセルを触ったとき
 
 * その位置を投げる
-* 通常のクリックイベントでは離したときに発生するが、このイベントは触った瞬間に発生する。
+
+### `ev_action_stand_cell_pointerdown(location: Location, piece: Piece)`
+
+持駒を触ったとき
+
+* 先後と駒の情報を投げる
+
+### `ev_action_promote_select_open(soldier: Soldier)`
+
+成不成選択モードに入ったとき
+
+### `ev_action_promote_select_close`
+
+成不成選択モードから出たとき
 
 ### `ev_action_player_info_click(location: Location, player_info: Object)`
 
