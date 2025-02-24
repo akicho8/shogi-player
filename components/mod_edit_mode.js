@@ -249,8 +249,7 @@ export const mod_edit_mode = {
 
       if (_.isEqual(this.place_from, place)) {
         this.log("盤上の駒を持って同じ位置に戻したので状況キャンセル")
-        this.event_call("ev_action_piece_cancel")
-        this.lifted_piece_cancel()
+        this.interactive_lifted_piece_cancel()
         return
       }
 
@@ -546,8 +545,7 @@ export const mod_edit_mode = {
       if (this.have_piece) {                         // 盤上からではない駒を持っているか？
         if (this.have_piece_location === location) { // 駒台からの駒か？
           this.log("自分の駒台から駒を持ち上げているならキャンセル")
-          this.event_call("ev_action_piece_cancel")
-          this.lifted_piece_cancel()
+          this.interactive_lifted_piece_cancel()
           return true
         }
       }
@@ -737,7 +735,7 @@ export const mod_edit_mode = {
       if (!this.dialog_soldier) {
         if (this.lifted_p) {
           this.log("持ち上げた駒を元に戻す")
-          this.lifted_piece_cancel()
+          this.interactive_lifted_piece_cancel()
           return true
         }
       }
@@ -817,6 +815,12 @@ export const mod_edit_mode = {
       this.lp_create(e, this.origin_soldier1)
     },
 
+    // ユーザーの操作で故意に駒を持ってない状態にする (イベント発生)
+    interactive_lifted_piece_cancel() {
+      this.event_call("ev_action_piece_cancel")
+      this.lifted_piece_cancel()
+    },
+
     // 駒を持ってない状態にする
     lifted_piece_cancel() {
       this.log("lifted_piece_cancel: 駒を持ってない状態にする")
@@ -834,8 +838,7 @@ export const mod_edit_mode = {
     if_standard_then_unhold() {
       if (this.lift_cancel_action_info.smooth_cancel) {
         this.log("持った状態で自分の非合法セルタップでキャンセル")
-        this.event_call("ev_action_piece_cancel")
-        this.lifted_piece_cancel()
+        this.interactive_lifted_piece_cancel()
       }
     },
 
