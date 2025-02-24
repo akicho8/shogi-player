@@ -397,7 +397,7 @@ export class Xcontainer {
           // 玉の場合は駒箱にとらげる
           this.piece_box_add(piece)
         } else {
-          // 他の駒は相手の駒箱へ
+          // 他の駒は相手の駒台へ
           this.hold_pieces_add(Location.fetch("white"), piece)
         }
       }

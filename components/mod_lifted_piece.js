@@ -70,14 +70,14 @@ export const mod_lifted_piece = {
       const PieceObject  = this.lp_el_create(["PieceObject"])
       const PieceTexture = this.lp_el_create(["PieceTexture", ...soldier.css_class_list])
 
-      PieceTap.classList.add(soldier.location.flip_if(this.fliped).position_key)
+      const position_info = this.__soldier_to_position_info(soldier)
+
+      PieceTap.classList.add(position_info.key)
 
       PieceObject.appendChild(PieceTexture)
       PieceTap.appendChild(PieceObject)
       this.$data._LiftedPieceElement.appendChild(PieceTap)
 
-      const position_key = soldier.location.flip_if(this.fliped).position_key
-      const position_info = PositionInfo.fetch(position_key)
       if (soldier.place) {
         // 盤上から動かそうとしている駒
         // devise_info.gap が 0.25 でちょうど左上にすこしずれる
@@ -93,6 +93,21 @@ export const mod_lifted_piece = {
       }
 
       this.$el.appendChild(this.$data._LiftedPieceElement)
+    },
+
+    __soldier_to_position_info(soldier) {
+      let key = null
+      if (this.lifted_from_box_p) {
+        // 駒箱から取り出した駒は↑向き
+        key = "is_position_south"
+      } else if (this.lifted_from_board_p || this.lifted_from_stand_p) {
+        // 盤や台から取り出した駒は soldier からわかる
+        // ただし反転しているとその逆になる
+        key = soldier.location.flip_if(this.fliped).position_key
+      } else {
+        throw new Error("must not happen")
+      }
+      return PositionInfo.fetch(key)
     },
 
     // 持ち上げた駒を破棄する

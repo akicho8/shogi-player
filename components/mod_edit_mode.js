@@ -44,7 +44,7 @@ export const mod_edit_mode = {
       place_from: null,           // 盤上ら動かそうとしているときの元位置
       have_piece: null,           // 駒台 or 駒箱から持った駒
       have_piece_location: null,  // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
-      have_piece_promoted: null,    // 持ったとき成った状態にするか？
+      have_piece_promoted: null,  // 持ったとき成った状態にするか？
 
       dialog_soldier: null,     // 成り確認ダイアログ表示中か？
       _last_clicked_cell: null,        // 最後にクリックした要素
@@ -709,9 +709,6 @@ export const mod_edit_mode = {
 
     // 駒箱の駒をクリック
     piece_box_piece_click(piece, e) {
-      e.preventDefault()
-      e.stopPropagation()
-
       // 駒をクリックしたとき駒箱をクリックするのと同じ処理を実行
       if (this.piece_box_other_click(e)) {
         return
@@ -767,7 +764,7 @@ export const mod_edit_mode = {
       let count = 1
 
       if (this.have_piece_location) {
-        this.log("相手の駒箱から移動")
+        this.log("相手の駒台から移動")
         if (this.meta_p(e)) {
           this.log("シフトが押されていたので全部移動")
           count = this.xcontainer.hold_pieces_count(this.have_piece_location, this.have_piece)
@@ -888,6 +885,7 @@ export const mod_edit_mode = {
     meta_p(e) {
       return e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
     },
+
   },
 
   computed: {
@@ -915,14 +913,24 @@ export const mod_edit_mode = {
       }
     },
 
-    // 盤上または駒台の駒を持ち上げたか？
-    soldier_or_stand_p() {
-      return this.place_from || this.have_piece_location
-    },
+    // |------------------------+------------+------------+---------------------|
+    // | どこの駒を持ち上げた？ | place_from | have_piece | have_piece_location |
+    // |------------------------+------------+------------+---------------------|
+    // | 盤上                   | ○         |            |                     |
+    // | 駒台                   |            | ○         | ○                  |
+    // | 駒箱                   |            | ○         |                     |
+    // |------------------------+------------+------------+---------------------|
+    lifted_p()            { return this.place_from || this.have_piece                               }, // 駒を持ち上げているか？
+    lifted_from_board_p() { return this.place_from                                                  }, // 盤の駒を持ち上げているか？
+    lifted_from_stand_p() { return this.have_piece_location                                         }, // 駒台の駒を持ち上げているか？
+    lifted_from_box_p()   { return !this.place_from && this.have_piece && !this.have_piece_location }, // 駒箱の駒を持ち上げているか？
 
-    // 駒を持ち上げている状態？
-    lifted_p() {
-      return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
+    lifted_inspect() {
+      return [
+        this.lifted_from_board_p ? "盤" : "",
+        this.lifted_from_stand_p ? "台" : "",
+        this.lifted_from_box_p   ? "箱" : "",
+      ].join("")
     },
 
     // 片方の手番だけを操作できるようにする sp_human_side の指定があってCPUの手番？
