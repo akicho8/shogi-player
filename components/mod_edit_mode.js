@@ -90,7 +90,7 @@ export const mod_edit_mode = {
     //   } else {
     //     this.board_cell_right_click(xy, "transform_all", e)
     //   }
-    // 
+    //
     //   e.preventDefault()
     //   e.stopPropagation()
     // },
@@ -735,6 +735,8 @@ export const mod_edit_mode = {
 
     // 成り不成り選択ダイアログ表示中はキャンセルできない
     hold_cancel(e) {
+      this.log("hold_cancel")
+
       if (!this.dialog_soldier) {
         if (this.lifted_p) {
           this.log("持ち上げた駒を元に戻す")
@@ -820,7 +822,7 @@ export const mod_edit_mode = {
 
     // 駒を持ってない状態にする
     lifted_piece_cancel() {
-      this.log("lifted_piece_cancel")
+      this.log("lifted_piece_cancel: 駒を持ってない状態にする")
       this.dialog_soldier = null
       this.place_from = null // 持ってない状態にする
       this.have_piece = null

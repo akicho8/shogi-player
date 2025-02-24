@@ -25,6 +25,7 @@ export const mod_lifted_piece = {
     // 持ち上げた駒の位置を更新する
     lp_pos_update() {
       if (this.$data._LiftedPieceElement && this.$data._lp_latest_pointermove_event && this.lp_mouse_stick_p) {
+        // this.log("持ち上げた駒の位置を更新する")
         // if (this.devise_info.key === "mouse") {
         const x = this.$data._lp_latest_pointermove_event.clientX
         const y = this.$data._lp_latest_pointermove_event.clientY
@@ -33,8 +34,8 @@ export const mod_lifted_piece = {
       }
     },
 
-    // マウス位置に表示する駒の生成
     lp_create(event, soldier) {
+      this.log("マウス位置に表示する駒の生成")
       this.event_call("ev_action_piece_lift")
 
       this.lp_destroy()
@@ -131,9 +132,11 @@ export const mod_lifted_piece = {
 
     // 右クリックならキャンセル(動いてないっぽい)
     lp_click_hook(e) {
-      if (e.button !== 1) {
-        this.lifted_piece_cancel()
-      }
+      // this.log("lp_click_hook: 右クリックならキャンセル")
+      // alert(e.button)
+      // if (e.button !== 1) {
+      //   this.lifted_piece_cancel()
+      // }
     },
 
     lp_el_create(classes) {
