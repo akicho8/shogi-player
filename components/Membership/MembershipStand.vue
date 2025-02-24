@@ -8,6 +8,7 @@
       @mouseover="TheSp.piece_stand_mouseover_handle(ms.location, piece, $event)"
       @mouseleave="TheSp.mouseleave_handle"
       )
+      //- @[TheSp.click_response_timing_info.method]="TheSp.piece_stand_piece_click_with_mark_event(ms.location, piece, false, $event)"
       PieceTap(
         :class="piece_tap_class(piece)"
         :piece_texture_class="piece_texture_class(piece)"

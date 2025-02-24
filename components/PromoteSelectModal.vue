@@ -2,8 +2,8 @@
 .PromoteSelectModal(:class="position_key")
   .OverlayBackground
   .pieces_block(ref="pieces_block")
-    PieceTap(:piece_texture_class="piece_texture_class(true)"  @click.native="TheSp.promotable_piece_moved2(true)")
-    PieceTap(:piece_texture_class="piece_texture_class(false)" @click.native="TheSp.promotable_piece_moved2(false)")
+    PieceTap(:piece_texture_class="piece_texture_class(true)"  @pointerdown.native="TheSp.promotable_piece_moved2(true)")
+    PieceTap(:piece_texture_class="piece_texture_class(false)" @pointerdown.native="TheSp.promotable_piece_moved2(false)")
 </template>
 
 <script>

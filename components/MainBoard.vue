@@ -12,10 +12,14 @@
 
   // BoardTexture の兄弟として BoardMatrix を置くと BoardTexture に BoardMatrix の border が負ける
   .BoardMatrixWithPadding.is-overlay
-    // flex ではなく table にしている理由
+    // flex ではなく table にしている理由:
     // ・罫線が実線ではなく隙間であるため、線を黒くしようとしたとき、背景に黒を敷き詰めておかないといけない
     // ・そこでもし背景に画像を配置したとすると、その上の敷き詰めた黒は透明でなければならない
     // ・つまり、黒を敷き詰める必要あるのと、画像盤の上は透明でないといけないことが両立できない
+    //
+    // @[xxx] に装飾詞をつけられない問題:
+    // @[xxx].left と @[xxx].right を定義しても .left .right の部分は無視されているため @[xxx] は一つだけとする
+    //
     table.BoardMatrix
       tr.BoardRow(v-for="(_, y) in TheSp.sp_board_dimension_h")
         td.BoardCell(
@@ -27,6 +31,8 @@
           @mouseleave="TheSp.mouseleave_handle"
           :class="cell_class(logical_xy(x, y))"
           )
+          // @[TheSp.click_response_timing_info.method]="TheSp.interactive_board_cell_click_entry(logical_xy(x, y), $event)"
+
           // PieceTap は盤上にあるとは限らないので x, y に依存してはいけない。だから x, y を元にしたものを渡している
           PieceTap(
             :class="TheSp.board_piece_tap_class(logical_xy(x, y))"

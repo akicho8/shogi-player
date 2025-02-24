@@ -42,6 +42,7 @@ import { PieceVariantInfo }    from "../models/piece_variant_info.js"
 import { KifuBookInfo     }     from "../models/kifu_book_info.js"
 import { MixBlendModeInfo } from "../models/mix_blend_mode_info.js"
 import { LiftCancelActionInfo    }    from "../models/lift_cancel_action_info.js"
+import { ClickResponseTimingInfo    }    from "../models/click_response_timing_info.js"
 
 import { SeVariableInfo } from "./se_variable_info.js"
 import { SePresetInfo }   from "./se_preset_info.js"
@@ -187,6 +188,7 @@ export default {
     PieceVariantInfo() { return PieceVariantInfo },
     KifuBookInfo()     { return KifuBookInfo     },
     LiftCancelActionInfo() { return LiftCancelActionInfo },
+    ClickResponseTimingInfo() { return ClickResponseTimingInfo },
     SeSectionInfo()         { return SeSectionInfo         },
     SeVariableInfo()   { return SeVariableInfo   },
     SePresetInfo()     { return SePresetInfo     },
@@ -274,6 +276,7 @@ export default {
       params.sp_legal_move_only      = this.sp_legal_move_only
       params.sp_illegal_validate     = this.sp_illegal_validate
       params.sp_lift_cancel_action   = this.sp_lift_cancel_action
+      params.sp_click_response_timing     = this.sp_click_response_timing
       return params
     },
   },

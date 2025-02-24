@@ -425,6 +425,10 @@
         template(v-for="e in TheSe.LiftCancelActionInfo.values")
           b-radio-button(size="is-small" v-model="TheSe.sp_lift_cancel_action" :native-value="e.key") {{e.radio_button_name}}
 
+      //- b-field(custom-class="is-small" label="盤が反応するタイミング")
+      //-   template(v-for="e in TheSe.ClickResponseTimingInfo.values")
+      //-     b-radio-button(size="is-small" v-model="TheSe.sp_click_response_timing" :native-value="e.key") {{e.name}}
+
       b-field(custom-class="is-small" label="チェッカー背景")
         b-radio-button(size="is-small" v-model="TheSe.se_bg_pattern" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.se_bg_pattern" :native-value="true") ON

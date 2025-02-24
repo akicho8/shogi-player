@@ -6,6 +6,7 @@ import { Board } from "./models/board.js"
 import { Soldier } from "./models/soldier.js"
 import { Location } from "./models/location.js"
 import { LiftCancelActionInfo } from "./models/lift_cancel_action_info.js"
+import { ClickResponseTimingInfo } from "./models/click_response_timing_info.js"
 
 export const mod_edit_mode = {
   props: {
@@ -21,6 +22,13 @@ export const mod_edit_mode = {
       type: String,
       default: "standard",
       validator(value) { return LiftCancelActionInfo.keys.includes(value) },
+    },
+
+    // 盤が反応するタイミング
+    sp_click_response_timing: {
+      type: String,
+      default: "slow",
+      validator(value) { return ClickResponseTimingInfo.keys.includes(value) },
     },
   },
 
@@ -66,6 +74,25 @@ export const mod_edit_mode = {
     //     place: place,                        // 他のも入れとく
     //   }
     //   this.event_call("ev_action_markable_pointerdown", params, e)
+    // },
+
+    // // 盤面クリック時に反応する部分
+    // //
+    // // 本来は、
+    // // @pointerdown.stop.prevent.left="TheSp.board_cell_left_click(logical_xy(x, y), $event)"
+    // // @pointerdown.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), 'transform_all', $event)"
+    // // として書いていたが、pointerdown の部分を pointerdown か click 動的に切り替えると stop.prevent.xxx が利かなくなるため
+    // // 一つのメソッドだけが反応するようにしている
+    // //
+    // interactive_board_cell_click_entry(xy, e) {
+    //   if (e.button === 0) {
+    //     this.board_cell_left_click(xy, e)
+    //   } else {
+    //     this.board_cell_right_click(xy, "transform_all", e)
+    //   }
+    // 
+    //   e.preventDefault()
+    //   e.stopPropagation()
     // },
 
     // 盤をクリック
@@ -682,6 +709,9 @@ export const mod_edit_mode = {
 
     // 駒箱の駒をクリック
     piece_box_piece_click(piece, e) {
+      e.preventDefault()
+      e.stopPropagation()
+
       // 駒をクリックしたとき駒箱をクリックするのと同じ処理を実行
       if (this.piece_box_other_click(e)) {
         return
@@ -693,6 +723,15 @@ export const mod_edit_mode = {
       this.have_piece_promoted = false
       this.lp_create(e, this.origin_soldier2)
     },
+
+    // // 成り不成り選択ダイアログ表示中はキャンセルできない
+    // interactive_hold_cancel(e) {
+    //   if (e.button !== 0) {     // 右クリック
+    //     e.preventDefault()
+    //     e.stopPropagation()
+    //     return this.hold_cancel(e)
+    //   }
+    // },
 
     // 成り不成り選択ダイアログ表示中はキャンセルできない
     hold_cancel(e) {
@@ -852,6 +891,9 @@ export const mod_edit_mode = {
   computed: {
     LiftCancelActionInfo()    { return LiftCancelActionInfo                                   },
     lift_cancel_action_info() { return LiftCancelActionInfo.fetch(this.sp_lift_cancel_action) },
+
+    ClickResponseTimingInfo()    { return ClickResponseTimingInfo                                      },
+    click_response_timing_info() { return ClickResponseTimingInfo.fetch(this.sp_click_response_timing) },
 
     // 移動元の駒(盤上から)
     origin_soldier1() {

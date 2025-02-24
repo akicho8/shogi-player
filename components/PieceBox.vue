@@ -2,15 +2,15 @@
 .PieceBox.is-unselectable(v-if="TheSp.edit_p" v-sp-disable-interactions)
   .PieceBoxInside(
     :class="component_class"
-    @click.stop.prevent="TheSp.piece_box_other_click"
-    @click.right.prevent="TheSp.hold_cancel"
+    @pointerdown.stop.prevent="TheSp.piece_box_other_click"
+    @pointerdown.right.prevent="TheSp.hold_cancel"
     )
     // PieceBoxPieces を is-overlay にしないとPieceBoxPiecesの背景にPieceBoxTextureの色の非透明度が影響してしまう
     .PieceBoxTexture.is-overlay
     .PieceBoxPieces.is-overlay
       .PieceWithCount(
         v-for="[piece, count] in TheSp.xcontainer.piece_box_realize"
-        @click.stop.prevent="TheSp.piece_box_piece_click(piece, $event)"
+        @pointerdown.stop.prevent="TheSp.piece_box_piece_click(piece, $event)"
         @mouseover="TheSp.piece_box_mouseover_handle(piece, $event)"
         @mouseleave="TheSp.mouseleave_handle"
         )

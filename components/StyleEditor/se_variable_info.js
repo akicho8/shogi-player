@@ -124,6 +124,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_legal_move_only", default: false, },
       { key: "sp_illegal_validate", default: false, },
       { key: "sp_lift_cancel_action", default: "reality", },
+      { key: "sp_click_response_timing", default: "fast", },
 
       { key: "se_tf0_mode", default: "is_tf0_mode_off", },
       { key: "se_tf0_perspective", default: 200, },
