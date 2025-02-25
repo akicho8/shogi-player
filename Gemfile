@@ -1,5 +1,14 @@
 source "https://rubygems.org"
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem "json"
 gem "table_format"
+gem "capybara", require: "capybara/dsl"
+gem "webdrivers"
+# gem "selenium-webdriver"
+gem "rspec"
+# gem "test-unit"
+gem "table_format"
+gem "power_assert"
+gem "rake"
+gem "minitest"
+gem "minitest-power_assert"

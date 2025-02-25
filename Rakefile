@@ -1,6 +1,14 @@
 require "table_format"
 require "./package"
 
+if true
+  require "rspec/core/rake_task"
+  RSpec::Core::RakeTask.new do |t|
+    t.pattern = "./spec/**/*_spec.rb"
+  end
+  task :default => :spec
+end
+
 def system!(command)
   system "sh", "-vec", command, exception: true
 end
