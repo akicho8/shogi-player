@@ -19184,12 +19184,12 @@ var place_filename = "/index.js";
 
 
 
-class place_Place {
+class Place {
   static fetch(v) {
     if (v instanceof this) {
       return v;
     }
-    return Object.freeze(new place_Place(v));
+    return Object.freeze(new Place(v));
   }
   static xy_valid_p(x, y) {
     return 0 <= x && x < Board.dimension && 0 <= y && y < Board.dimension;
@@ -19229,10 +19229,10 @@ class place_Place {
     return Board.dimension - this._x;
   }
   get kanji_human_x() {
-    return place_Place.TO_KANJI_REPLACE_TABLE_X[this.human_x];
+    return Place.TO_KANJI_REPLACE_TABLE_X[this.human_x];
   }
   get kanji_human_y() {
-    return place_Place.TO_KANJI_REPLACE_TABLE_Y[this.human_y];
+    return Place.TO_KANJI_REPLACE_TABLE_Y[this.human_y];
   }
   get yomiage_x() {
     return PlaceYomiageInfo.fetch(this.human_x.toString()).yomiage;
@@ -19244,10 +19244,10 @@ class place_Place {
     return this._y + 1;
   }
   get flip_all() {
-    return place_Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y]);
+    return Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y]);
   }
   get flop() {
-    return place_Place.fetch([Board.dimension - 1 - this._x, this._y]);
+    return Place.fetch([Board.dimension - 1 - this._x, this._y]);
   }
   flop_if(v) {
     if (v) {
@@ -19264,7 +19264,7 @@ class place_Place {
     }
   }
   get to_sfen() {
-    return [Board.dimension - this._x, place_Place.TO_SFEN_REPLACE_TABLE_Y[this._y]].join("");
+    return [Board.dimension - this._x, Place.TO_SFEN_REPLACE_TABLE_Y[this._y]].join("");
   }
 
   // "place_7_6"
@@ -19305,7 +19305,7 @@ class place_Place {
   rotate_add(x, y) {
     const nx = this.__new_pos(this._x, x);
     const ny = this.__new_pos(this._y, y);
-    return place_Place.fetch([nx, ny]);
+    return Place.fetch([nx, ny]);
   }
 
   // private
@@ -19315,11 +19315,11 @@ class place_Place {
   }
 
   __parse_from_string(s) {
-    const [x, y] = s.split("").map(e => Number(place_Place.ANY_TO_NUMBER_REPLACE_TABLE[e] ?? e));
+    const [x, y] = s.split("").map(e => Number(Place.ANY_TO_NUMBER_REPLACE_TABLE[e] ?? e));
     return [Board.dimension - x, y - 1];
   }
 }
-_defineProperty(place_Place, "ANY_TO_NUMBER_REPLACE_TABLE", {
+_defineProperty(Place, "ANY_TO_NUMBER_REPLACE_TABLE", {
   "１": 1,
   "２": 2,
   "３": 3,
@@ -19348,7 +19348,7 @@ _defineProperty(place_Place, "ANY_TO_NUMBER_REPLACE_TABLE", {
   "h": 8,
   "i": 9
 });
-_defineProperty(place_Place, "TO_KANJI_REPLACE_TABLE_X", {
+_defineProperty(Place, "TO_KANJI_REPLACE_TABLE_X", {
   1: "１",
   2: "２",
   3: "３",
@@ -19359,7 +19359,7 @@ _defineProperty(place_Place, "TO_KANJI_REPLACE_TABLE_X", {
   8: "８",
   9: "９"
 });
-_defineProperty(place_Place, "TO_KANJI_REPLACE_TABLE_Y", {
+_defineProperty(Place, "TO_KANJI_REPLACE_TABLE_Y", {
   1: "一",
   2: "二",
   3: "三",
@@ -19370,10 +19370,10 @@ _defineProperty(place_Place, "TO_KANJI_REPLACE_TABLE_Y", {
   8: "八",
   9: "九"
 });
-_defineProperty(place_Place, "TO_SFEN_REPLACE_TABLE_Y", ["a", "b", "c", "d", "e", "f", "g", "h", "i"]);
+_defineProperty(Place, "TO_SFEN_REPLACE_TABLE_Y", ["a", "b", "c", "d", "e", "f", "g", "h", "i"]);
 if (typeof process !== "undefined" && process.argv[1] === place_filename) {
-  console.log(place_Place.fetch("6a").key);
-  console.log(place_Place.fetch([1, 2]).key);
+  console.log(Place.fetch("6a").key);
+  console.log(Place.fetch([1, 2]).key);
 }
 ;// CONCATENATED MODULE: ./node_modules/.pnpm/file+../node_modules/shogi-player/components/models/piece_vector.js
 var piece_vector_filename = "/index.js";
@@ -19731,7 +19731,7 @@ class Soldier {
     if (!place) {
       const x = lodash_default().random(0, Board.dimension - 1);
       const y = lodash_default().random(0, Board.dimension - 1);
-      place = place_Place.fetch([x, y]);
+      place = Place.fetch([x, y]);
     }
     const piece = Piece.fetch(lodash_default().random(0, Piece.values.length - 1));
     const promoted = piece.promotable_p && lodash_default().random(0, 1) === 0;
@@ -19867,7 +19867,7 @@ class Soldier {
 }
 if (typeof process !== "undefined" && process.argv[1] === soldier_filename) {
   const soldier = new Soldier({
-    place: new place_Place([1, 7]),
+    place: new Place([1, 7]),
     piece: Piece.fetch("P"),
     promoted: true,
     location: Location.fetch("white")
@@ -19928,7 +19928,7 @@ class Board {
   pawn_exist_by_x(x, location) {
     let found = false;
     for (let y = 0; y < Board.dimension; y++) {
-      const place = place_Place.fetch([x, y]);
+      const place = Place.fetch([x, y]);
       const soldier = this.lookup(place);
       if (soldier) {
         if (soldier.location.key === location.key) {
@@ -19998,7 +19998,7 @@ class Board {
     let y = oy + vy;
     let success = false;
     while (true) {
-      if (place_Place.xy_invalid_p(x, y)) {
+      if (Place.xy_invalid_p(x, y)) {
         // 外に出てしまった
         break;
       }
@@ -20009,7 +20009,7 @@ class Board {
       }
       if (options.mode == "non_stop") {} else {
         // 他の駒に衝突したら停止
-        const place = place_Place.fetch([x, y]);
+        const place = Place.fetch([x, y]);
         const other = this.lookup(place);
         if (other) {
           break;
@@ -20166,7 +20166,7 @@ class Board {
     const places = [];
     for (let y = 0; y < size; y++) {
       for (let x = 0; x < size; x++) {
-        const place = place_Place.fetch([bx + x, by + y]);
+        const place = Place.fetch([bx + x, by + y]);
         // if (!this.lookup(place)) {
         places.push(place);
         // }
@@ -20184,7 +20184,7 @@ class Board {
       let str = "";
       let space = 0;
       lodash_default().times(Board.dimension, x => {
-        const place = place_Place.fetch([x, y]);
+        const place = Place.fetch([x, y]);
         const soldier = this.lookup(place);
         if (lodash_default().isNil(soldier)) {
           space++;
@@ -20285,6 +20285,7 @@ if (typeof process !== "undefined" && process.argv[1] === parser_base_filename) 
 
 
 lib_default().uninstall("namespacing");
+
 
 class MoveHash {
   // 複数の指し手の左右反転
@@ -20404,7 +20405,7 @@ class SfenParser extends ParserBase {
           x += Number(m.piece);
         } else {
           const soldier = new Soldier({
-            place: new place_Place([x, y]),
+            place: new Place([x, y]),
             piece: Piece.fetch(m.piece),
             promoted: m.promoted === "+",
             location: this.__location_by_upper_or_lower_case(m.piece)
@@ -20875,7 +20876,7 @@ class Xcontainer {
     this.board.delete_at(place);
   }
   board_piece_fore_class(xy) {
-    const place = place_Place.fetch(xy);
+    const place = Place.fetch(xy);
     const soldier = this.board.lookup(place);
     if (soldier) {
       return soldier.css_class_list;
@@ -20883,7 +20884,7 @@ class Xcontainer {
     return [];
   }
   cell_piece_class(xy) {
-    const place = place_Place.fetch(xy);
+    const place = Place.fetch(xy);
     const soldier = this.board.lookup(place);
     let list = [];
     if (soldier) {
@@ -20892,7 +20893,7 @@ class Xcontainer {
     return list;
   }
   cell_view(xy) {
-    const place = place_Place.fetch(xy);
+    const place = Place.fetch(xy);
     const soldier = this.board.lookup(place);
     let str = "";
     if (soldier) {
@@ -21244,7 +21245,7 @@ class Xcontainer {
         piece: Piece.fetch(e.piece),
         promoted: e.promoted,
         location: Location.fetch(e.location),
-        place: place_Place.fetch(e.place)
+        place: Place.fetch(e.place)
       });
     });
   }
@@ -21509,11 +21510,11 @@ class KifParser extends ParserBase {
           const attrs = {};
           attrs["location"] = this.location_by_offset(Number(m["number"]) - 1);
           if (m["origin_place"]) {
-            attrs["origin_place"] = place_Place.fetch(m["origin_place"]);
+            attrs["origin_place"] = Place.fetch(m["origin_place"]);
           }
           minimalistic_assert_default()(m["to"] || m["same"]);
           if (m["to"]) {
-            attrs["place"] = place_Place.fetch(m["to"]);
+            attrs["place"] = Place.fetch(m["to"]);
             before_place = attrs["place"];
           } else {
             minimalistic_assert_default()(m["same"]);
@@ -21563,7 +21564,7 @@ class KifParser extends ParserBase {
             promoted = true;
           }
           const soldier = new Soldier({
-            place: new place_Place([x, y]),
+            place: new Place([x, y]),
             piece: piece,
             promoted: promoted,
             location: Location.fetch(location_key)
@@ -23042,7 +23043,7 @@ var MainBoardvue_type_template_id_9f5e39aa_lang_pug_staticRenderFns = [];
   },
   methods: {
     cell_class(xy) {
-      const place = place_Place.fetch(xy);
+      const place = Place.fetch(xy);
       let list = [];
       // console.log(xy[0], xy[1], place.human_x, place.human_y, (place.human_x + place.human_y), place.even_p)
       list.push(place.even_p ? "even" : "odd");
@@ -23062,7 +23063,7 @@ var MainBoardvue_type_template_id_9f5e39aa_lang_pug_staticRenderFns = [];
       return [x, y];
     },
     mark_pos_key_from(x, y) {
-      return place_Place.fetch(this.logical_xy(x, y)).to_mark_pos_key;
+      return Place.fetch(this.logical_xy(x, y)).to_mark_pos_key;
     }
   }
 });
@@ -31274,7 +31275,7 @@ const mod_shortcut = {
           // 何も持っていない状態なので持駒に同じ駒があれば持つ
           if (this.mouseover_info) {
             if (this.mouseover_info.type === "board") {
-              const place = place_Place.fetch(this.mouseover_info.xy);
+              const place = Place.fetch(this.mouseover_info.xy);
               const soldier = this.xcontainer.board.lookup(place);
               if (soldier) {
                 this.piece_stand_piece_click(soldier.location, soldier.piece, soldier.promoted, null); // キーボードのイベントなので null 指定
@@ -31719,7 +31720,7 @@ const mod_edit_mode = {
 
     // 盤をクリック
     board_cell_left_click(xy, e) {
-      const place = place_Place.fetch(xy);
+      const place = Place.fetch(xy);
       this.event_call("ev_action_board_cell_pointerdown", place, e);
       this.board_cell_left_click_markable_event(place, e);
       this.board_cell_left_click_piece_move(place, e);
@@ -32128,7 +32129,7 @@ const mod_edit_mode = {
     },
     board_cell_right_click(xy, method, e) {
       this.log("盤のセルを右クリック");
-      const place = place_Place.fetch(xy);
+      const place = Place.fetch(xy);
       if (place.tennozan_p) {
         if (e.shiftKey && e.altKey && (e.metaKey || e.ctrlKey)) {
           this.dev_tools_toggle_handle();
@@ -34071,7 +34072,7 @@ vue_runtime_esm/* default */.ZP.directive("sp-disable-interactions", {
       this.current_turn_set(v, true);
     },
     board_piece_tap_class(xy) {
-      const place = place_Place.fetch(xy);
+      const place = Place.fetch(xy);
       const soldier = this.xcontainer.board.lookup(place);
       let list = [];
       list.push(place.css_place_key); // place_9_9
