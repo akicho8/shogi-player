@@ -6,6 +6,7 @@
 /docs
 /workbench
 /spec
+/.rspec
 /main_doc
 /web_component
 /pages
