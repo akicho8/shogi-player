@@ -4,7 +4,8 @@
 /.nuxt
 /.github
 /docs
-/experiment
+/workbench
+/spec
 /main_doc
 /web_component
 /pages
