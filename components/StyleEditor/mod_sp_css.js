@@ -45,7 +45,7 @@ export const mod_sp_css = {
           --sp_stand_hover_border_color:         ${this.hsla_format(this.sp_stand_hover_border_color)};
           --sp_stand_bg_color:                   ${this.hsla_format(this.sp_stand_bg_color)};
 
-          /* 名前と時間お大きさ */
+          /* 名前と時間の大きさ */
           --sp_player_name_size:                 ${this.sp_player_name_size};
           --sp_player_time_size:                 ${this.sp_player_time_size};
 
