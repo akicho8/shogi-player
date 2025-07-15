@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 devDependencies:
@@ -10,7 +10,7 @@ devDependencies:
     version: 5.0.8(@vue/cli-service@5.0.8)
   '@vue/cli-service':
     specifier: ^5.0.8
-    version: 5.0.8(@babel/core@7.22.5)
+    version: 5.0.8
   json5:
     specifier: ^2.2.3
     version: 2.2.3
@@ -94,6 +94,19 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.22.5
+    dev: true
+
+  /@babel/helper-compilation-targets@7.22.5:
+    resolution: {integrity: sha512-Ji+ywpHeuqxB8WDxraCiqR0xfhYjiDE/e6k7FuIaANnoOFxAHskHChz4vA1mJC9Lbm01s1PVAGhQY4FUKSkGZw==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+    dependencies:
+      '@babel/compat-data': 7.22.5
+      '@babel/helper-validator-option': 7.22.5
+      browserslist: 4.21.7
+      lru-cache: 5.1.1
+      semver: 6.3.0
     dev: true
 
   /@babel/helper-compilation-targets@7.22.5(@babel/core@7.22.5):
@@ -1628,11 +1641,9 @@ packages:
       svg-tags: 1.0.0
     dev: true
 
-  /@vue/babel-preset-app@5.0.8(@babel/core@7.22.5):
+  /@vue/babel-preset-app@5.0.8:
     resolution: {integrity: sha512-yl+5qhpjd8e1G4cMXfORkkBlvtPCIgmRf3IYCWYDKIQ7m+PPa5iTm4feiNmCMD6yGqQWMhhK/7M3oWGL9boKwg==}
     peerDependencies:
-      '@babel/core': '*'
-      core-js: ^3
       vue: ^2 || ^3.2.13
     peerDependenciesMeta:
       core-js:
@@ -1653,6 +1664,7 @@ packages:
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.22.5)
       '@vue/babel-preset-jsx': 1.4.0(@babel/core@7.22.5)
       babel-plugin-dynamic-import-node: 2.3.3
+      core-js: 3.44.0
       core-js-compat: 3.31.0
       semver: 7.5.1
     transitivePeerDependencies:
@@ -1750,15 +1762,14 @@ packages:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
       '@babel/core': 7.22.5
-      '@vue/babel-preset-app': 5.0.8(@babel/core@7.22.5)
-      '@vue/cli-service': 5.0.8(@babel/core@7.22.5)
+      '@vue/babel-preset-app': 5.0.8
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.3.0(@babel/core@7.22.5)(webpack@5.86.0)
       thread-loader: 3.0.4(webpack@5.86.0)
       webpack: 5.86.0
     transitivePeerDependencies:
       - '@swc/core'
-      - core-js
       - encoding
       - esbuild
       - supports-color
@@ -1772,7 +1783,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8(@babel/core@7.22.5)
+      '@vue/cli-service': 5.0.8
       '@vue/cli-shared-utils': 5.0.8
     transitivePeerDependencies:
       - encoding
@@ -1783,10 +1794,10 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
-      '@vue/cli-service': 5.0.8(@babel/core@7.22.5)
+      '@vue/cli-service': 5.0.8
     dev: true
 
-  /@vue/cli-service@5.0.8(@babel/core@7.22.5):
+  /@vue/cli-service@5.0.8:
     resolution: {integrity: sha512-nV7tYQLe7YsTtzFrfOMIHc5N2hp5lHG2rpYr0aNja9rNljdgcPZLyQRb2YRivTHqTv7lI962UXFURcpStHgyFw==}
     engines: {node: ^12.0.0 || >= 14.0.0}
     hasBin: true
@@ -1817,7 +1828,7 @@ packages:
       webpack-sources:
         optional: true
     dependencies:
-      '@babel/helper-compilation-targets': 7.22.5(@babel/core@7.22.5)
+      '@babel/helper-compilation-targets': 7.22.5
       '@soda/friendly-errors-webpack-plugin': 1.8.1(webpack@5.86.0)
       '@soda/get-current-script': 1.0.2
       '@types/minimist': 1.2.2
@@ -2180,10 +2191,8 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /ajv-formats@2.1.1(ajv@8.12.0):
+  /ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependencies:
-      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -2964,6 +2973,11 @@ packages:
 
   /core-js-pure@3.31.0:
     resolution: {integrity: sha512-/AnE9Y4OsJZicCzIe97JP5XoPKQJfTuEG43aEVLFJGOJpyqELod+pE6LEl63DfG1Mp8wX97LDaDpy1GmLEUxlg==}
+    requiresBuild: true
+    dev: true
+
+  /core-js@3.44.0:
+    resolution: {integrity: sha512-aFCtd4l6GvAXwVEh3XbbVqJGHDJt0OZRa+5ePGx3LLwi12WfexqQxcsohb2wgsa/92xtl19Hd66G/L+TaAxDMw==}
     requiresBuild: true
     dev: true
 
@@ -5458,7 +5472,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.12
       ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
+      ajv-formats: 2.1.1
       ajv-keywords: 5.1.0(ajv@8.12.0)
     dev: true
 
@@ -6450,6 +6464,7 @@ packages:
   file:..:
     resolution: {directory: .., type: directory}
     name: shogi-player
+    version: 1.1.24
     dependencies:
       beetleshine: 0.0.14
       chroma-js: 2.4.2
