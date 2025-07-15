@@ -511,6 +511,11 @@ export const mod_edit_mode = {
           this.piece_hold_and_put_for_bug(place, e) // 不具合対策
         }
       }
+
+      // 右クリックでの思考印
+      if (this.play_p) {
+        this.board_cell_left_click_markable_event(place, e)
+      }
     },
 
     // board_cell_right_click2(xy, e) {
