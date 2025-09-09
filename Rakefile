@@ -102,7 +102,7 @@ namespace :old_doc do
   end
 end
 
-desc "release"
+desc "最新版をリリースしてサイトを更新する"
 task :release do
   system! <<~EOT
   rake dist
@@ -142,7 +142,7 @@ task :update do
 end
 
 task :cp => :copy
-desc "copy"
+desc "~/src/shogi-extend 側にコピーする (alias cp)"
 task :copy do
   system! <<~EOT
   rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/
