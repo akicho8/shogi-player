@@ -11,6 +11,1512 @@
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 52427:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isCallable = __webpack_require__(17389);
+var tryToString = __webpack_require__(74259);
+
+var $TypeError = TypeError;
+
+// `Assert: IsCallable(argument) is true`
+module.exports = function (argument) {
+  if (isCallable(argument)) return argument;
+  throw $TypeError(tryToString(argument) + ' is not a function');
+};
+
+
+/***/ }),
+
+/***/ 76824:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isObject = __webpack_require__(12465);
+
+var $String = String;
+var $TypeError = TypeError;
+
+// `Assert: Type(argument) is Object`
+module.exports = function (argument) {
+  if (isObject(argument)) return argument;
+  throw $TypeError($String(argument) + ' is not an object');
+};
+
+
+/***/ }),
+
+/***/ 99483:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var toIndexedObject = __webpack_require__(82415);
+var toAbsoluteIndex = __webpack_require__(73041);
+var lengthOfArrayLike = __webpack_require__(61166);
+
+// `Array.prototype.{ indexOf, includes }` methods implementation
+var createMethod = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIndexedObject($this);
+    var length = lengthOfArrayLike(O);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare -- NaN check
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare -- NaN check
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) {
+      if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
+module.exports = {
+  // `Array.prototype.includes` method
+  // https://tc39.es/ecma262/#sec-array.prototype.includes
+  includes: createMethod(true),
+  // `Array.prototype.indexOf` method
+  // https://tc39.es/ecma262/#sec-array.prototype.indexof
+  indexOf: createMethod(false)
+};
+
+
+/***/ }),
+
+/***/ 19912:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var DESCRIPTORS = __webpack_require__(12404);
+var isArray = __webpack_require__(55384);
+
+var $TypeError = TypeError;
+// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// Safari < 13 does not throw an error in this case
+var SILENT_ON_NON_WRITABLE_LENGTH_SET = DESCRIPTORS && !function () {
+  // makes no sense without proper strict mode support
+  if (this !== undefined) return true;
+  try {
+    // eslint-disable-next-line es/no-object-defineproperty -- safe
+    Object.defineProperty([], 'length', { writable: false }).length = 1;
+  } catch (error) {
+    return error instanceof TypeError;
+  }
+}();
+
+module.exports = SILENT_ON_NON_WRITABLE_LENGTH_SET ? function (O, length) {
+  if (isArray(O) && !getOwnPropertyDescriptor(O, 'length').writable) {
+    throw $TypeError('Cannot set read only .length');
+  } return O.length = length;
+} : function (O, length) {
+  return O.length = length;
+};
+
+
+/***/ }),
+
+/***/ 956:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var uncurryThis = __webpack_require__(80764);
+
+var toString = uncurryThis({}.toString);
+var stringSlice = uncurryThis(''.slice);
+
+module.exports = function (it) {
+  return stringSlice(toString(it), 8, -1);
+};
+
+
+/***/ }),
+
+/***/ 59962:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var hasOwn = __webpack_require__(20627);
+var ownKeys = __webpack_require__(32463);
+var getOwnPropertyDescriptorModule = __webpack_require__(83178);
+var definePropertyModule = __webpack_require__(33015);
+
+module.exports = function (target, source, exceptions) {
+  var keys = ownKeys(source);
+  var defineProperty = definePropertyModule.f;
+  var getOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f;
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if (!hasOwn(target, key) && !(exceptions && hasOwn(exceptions, key))) {
+      defineProperty(target, key, getOwnPropertyDescriptor(source, key));
+    }
+  }
+};
+
+
+/***/ }),
+
+/***/ 3085:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var DESCRIPTORS = __webpack_require__(12404);
+var definePropertyModule = __webpack_require__(33015);
+var createPropertyDescriptor = __webpack_require__(30073);
+
+module.exports = DESCRIPTORS ? function (object, key, value) {
+  return definePropertyModule.f(object, key, createPropertyDescriptor(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+
+/***/ }),
+
+/***/ 30073:
+/***/ ((module) => {
+
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+
+/***/ }),
+
+/***/ 94519:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isCallable = __webpack_require__(17389);
+var definePropertyModule = __webpack_require__(33015);
+var makeBuiltIn = __webpack_require__(7841);
+var defineGlobalProperty = __webpack_require__(67528);
+
+module.exports = function (O, key, value, options) {
+  if (!options) options = {};
+  var simple = options.enumerable;
+  var name = options.name !== undefined ? options.name : key;
+  if (isCallable(value)) makeBuiltIn(value, name, options);
+  if (options.global) {
+    if (simple) O[key] = value;
+    else defineGlobalProperty(key, value);
+  } else {
+    try {
+      if (!options.unsafe) delete O[key];
+      else if (O[key]) simple = true;
+    } catch (error) { /* empty */ }
+    if (simple) O[key] = value;
+    else definePropertyModule.f(O, key, {
+      value: value,
+      enumerable: false,
+      configurable: !options.nonConfigurable,
+      writable: !options.nonWritable
+    });
+  } return O;
+};
+
+
+/***/ }),
+
+/***/ 67528:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var global = __webpack_require__(92019);
+
+// eslint-disable-next-line es/no-object-defineproperty -- safe
+var defineProperty = Object.defineProperty;
+
+module.exports = function (key, value) {
+  try {
+    defineProperty(global, key, { value: value, configurable: true, writable: true });
+  } catch (error) {
+    global[key] = value;
+  } return value;
+};
+
+
+/***/ }),
+
+/***/ 12404:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var fails = __webpack_require__(82170);
+
+// Detect IE8's incomplete defineProperty implementation
+module.exports = !fails(function () {
+  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
+  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] != 7;
+});
+
+
+/***/ }),
+
+/***/ 93398:
+/***/ ((module) => {
+
+var documentAll = typeof document == 'object' && document.all;
+
+// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot
+// eslint-disable-next-line unicorn/no-typeof-undefined -- required for testing
+var IS_HTMLDDA = typeof documentAll == 'undefined' && documentAll !== undefined;
+
+module.exports = {
+  all: documentAll,
+  IS_HTMLDDA: IS_HTMLDDA
+};
+
+
+/***/ }),
+
+/***/ 1220:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var global = __webpack_require__(92019);
+var isObject = __webpack_require__(12465);
+
+var document = global.document;
+// typeof document.createElement is 'object' in old IE
+var EXISTS = isObject(document) && isObject(document.createElement);
+
+module.exports = function (it) {
+  return EXISTS ? document.createElement(it) : {};
+};
+
+
+/***/ }),
+
+/***/ 37711:
+/***/ ((module) => {
+
+var $TypeError = TypeError;
+var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF; // 2 ** 53 - 1 == 9007199254740991
+
+module.exports = function (it) {
+  if (it > MAX_SAFE_INTEGER) throw $TypeError('Maximum allowed index exceeded');
+  return it;
+};
+
+
+/***/ }),
+
+/***/ 75531:
+/***/ ((module) => {
+
+module.exports = typeof navigator != 'undefined' && String(navigator.userAgent) || '';
+
+
+/***/ }),
+
+/***/ 27098:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var global = __webpack_require__(92019);
+var userAgent = __webpack_require__(75531);
+
+var process = global.process;
+var Deno = global.Deno;
+var versions = process && process.versions || Deno && Deno.version;
+var v8 = versions && versions.v8;
+var match, version;
+
+if (v8) {
+  match = v8.split('.');
+  // in old Chrome, versions of V8 isn't V8 = Chrome / 10
+  // but their correct versions are not interesting for us
+  version = match[0] > 0 && match[0] < 4 ? 1 : +(match[0] + match[1]);
+}
+
+// BrowserFS NodeJS `process` polyfill incorrectly set `.v8` to `0.0`
+// so check `userAgent` even if `.v8` exists, but 0
+if (!version && userAgent) {
+  match = userAgent.match(/Edge\/(\d+)/);
+  if (!match || match[1] >= 74) {
+    match = userAgent.match(/Chrome\/(\d+)/);
+    if (match) version = +match[1];
+  }
+}
+
+module.exports = version;
+
+
+/***/ }),
+
+/***/ 72197:
+/***/ ((module) => {
+
+// IE8- don't enum bug keys
+module.exports = [
+  'constructor',
+  'hasOwnProperty',
+  'isPrototypeOf',
+  'propertyIsEnumerable',
+  'toLocaleString',
+  'toString',
+  'valueOf'
+];
+
+
+/***/ }),
+
+/***/ 46367:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var global = __webpack_require__(92019);
+var getOwnPropertyDescriptor = (__webpack_require__(83178).f);
+var createNonEnumerableProperty = __webpack_require__(3085);
+var defineBuiltIn = __webpack_require__(94519);
+var defineGlobalProperty = __webpack_require__(67528);
+var copyConstructorProperties = __webpack_require__(59962);
+var isForced = __webpack_require__(61323);
+
+/*
+  options.target         - name of the target object
+  options.global         - target is the global object
+  options.stat           - export as static methods of target
+  options.proto          - export as prototype methods of target
+  options.real           - real prototype method for the `pure` version
+  options.forced         - export even if the native feature is available
+  options.bind           - bind methods to the target, required for the `pure` version
+  options.wrap           - wrap constructors to preventing global pollution, required for the `pure` version
+  options.unsafe         - use the simple assignment of property instead of delete + defineProperty
+  options.sham           - add a flag to not completely full polyfills
+  options.enumerable     - export as enumerable property
+  options.dontCallGetSet - prevent calling a getter on target
+  options.name           - the .name of the function if it does not match the key
+*/
+module.exports = function (options, source) {
+  var TARGET = options.target;
+  var GLOBAL = options.global;
+  var STATIC = options.stat;
+  var FORCED, target, key, targetProperty, sourceProperty, descriptor;
+  if (GLOBAL) {
+    target = global;
+  } else if (STATIC) {
+    target = global[TARGET] || defineGlobalProperty(TARGET, {});
+  } else {
+    target = (global[TARGET] || {}).prototype;
+  }
+  if (target) for (key in source) {
+    sourceProperty = source[key];
+    if (options.dontCallGetSet) {
+      descriptor = getOwnPropertyDescriptor(target, key);
+      targetProperty = descriptor && descriptor.value;
+    } else targetProperty = target[key];
+    FORCED = isForced(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced);
+    // contained in target
+    if (!FORCED && targetProperty !== undefined) {
+      if (typeof sourceProperty == typeof targetProperty) continue;
+      copyConstructorProperties(sourceProperty, targetProperty);
+    }
+    // add a flag to not completely full polyfills
+    if (options.sham || (targetProperty && targetProperty.sham)) {
+      createNonEnumerableProperty(sourceProperty, 'sham', true);
+    }
+    defineBuiltIn(target, key, sourceProperty, options);
+  }
+};
+
+
+/***/ }),
+
+/***/ 82170:
+/***/ ((module) => {
+
+module.exports = function (exec) {
+  try {
+    return !!exec();
+  } catch (error) {
+    return true;
+  }
+};
+
+
+/***/ }),
+
+/***/ 13780:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var fails = __webpack_require__(82170);
+
+module.exports = !fails(function () {
+  // eslint-disable-next-line es/no-function-prototype-bind -- safe
+  var test = (function () { /* empty */ }).bind();
+  // eslint-disable-next-line no-prototype-builtins -- safe
+  return typeof test != 'function' || test.hasOwnProperty('prototype');
+});
+
+
+/***/ }),
+
+/***/ 51568:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var NATIVE_BIND = __webpack_require__(13780);
+
+var call = Function.prototype.call;
+
+module.exports = NATIVE_BIND ? call.bind(call) : function () {
+  return call.apply(call, arguments);
+};
+
+
+/***/ }),
+
+/***/ 95114:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var DESCRIPTORS = __webpack_require__(12404);
+var hasOwn = __webpack_require__(20627);
+
+var FunctionPrototype = Function.prototype;
+// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+var getDescriptor = DESCRIPTORS && Object.getOwnPropertyDescriptor;
+
+var EXISTS = hasOwn(FunctionPrototype, 'name');
+// additional protection from minified / mangled / dropped function names
+var PROPER = EXISTS && (function something() { /* empty */ }).name === 'something';
+var CONFIGURABLE = EXISTS && (!DESCRIPTORS || (DESCRIPTORS && getDescriptor(FunctionPrototype, 'name').configurable));
+
+module.exports = {
+  EXISTS: EXISTS,
+  PROPER: PROPER,
+  CONFIGURABLE: CONFIGURABLE
+};
+
+
+/***/ }),
+
+/***/ 80764:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var NATIVE_BIND = __webpack_require__(13780);
+
+var FunctionPrototype = Function.prototype;
+var call = FunctionPrototype.call;
+var uncurryThisWithBind = NATIVE_BIND && FunctionPrototype.bind.bind(call, call);
+
+module.exports = NATIVE_BIND ? uncurryThisWithBind : function (fn) {
+  return function () {
+    return call.apply(fn, arguments);
+  };
+};
+
+
+/***/ }),
+
+/***/ 73012:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var global = __webpack_require__(92019);
+var isCallable = __webpack_require__(17389);
+
+var aFunction = function (argument) {
+  return isCallable(argument) ? argument : undefined;
+};
+
+module.exports = function (namespace, method) {
+  return arguments.length < 2 ? aFunction(global[namespace]) : global[namespace] && global[namespace][method];
+};
+
+
+/***/ }),
+
+/***/ 28453:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var aCallable = __webpack_require__(52427);
+var isNullOrUndefined = __webpack_require__(82109);
+
+// `GetMethod` abstract operation
+// https://tc39.es/ecma262/#sec-getmethod
+module.exports = function (V, P) {
+  var func = V[P];
+  return isNullOrUndefined(func) ? undefined : aCallable(func);
+};
+
+
+/***/ }),
+
+/***/ 92019:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+var check = function (it) {
+  return it && it.Math == Math && it;
+};
+
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+module.exports =
+  // eslint-disable-next-line es/no-global-this -- safe
+  check(typeof globalThis == 'object' && globalThis) ||
+  check(typeof window == 'object' && window) ||
+  // eslint-disable-next-line no-restricted-globals -- safe
+  check(typeof self == 'object' && self) ||
+  check(typeof __webpack_require__.g == 'object' && __webpack_require__.g) ||
+  // eslint-disable-next-line no-new-func -- fallback
+  (function () { return this; })() || this || Function('return this')();
+
+
+/***/ }),
+
+/***/ 20627:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var uncurryThis = __webpack_require__(80764);
+var toObject = __webpack_require__(44247);
+
+var hasOwnProperty = uncurryThis({}.hasOwnProperty);
+
+// `HasOwnProperty` abstract operation
+// https://tc39.es/ecma262/#sec-hasownproperty
+// eslint-disable-next-line es/no-object-hasown -- safe
+module.exports = Object.hasOwn || function hasOwn(it, key) {
+  return hasOwnProperty(toObject(it), key);
+};
+
+
+/***/ }),
+
+/***/ 96508:
+/***/ ((module) => {
+
+module.exports = {};
+
+
+/***/ }),
+
+/***/ 88437:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var DESCRIPTORS = __webpack_require__(12404);
+var fails = __webpack_require__(82170);
+var createElement = __webpack_require__(1220);
+
+// Thanks to IE8 for its funny defineProperty
+module.exports = !DESCRIPTORS && !fails(function () {
+  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
+  return Object.defineProperty(createElement('div'), 'a', {
+    get: function () { return 7; }
+  }).a != 7;
+});
+
+
+/***/ }),
+
+/***/ 22146:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var uncurryThis = __webpack_require__(80764);
+var fails = __webpack_require__(82170);
+var classof = __webpack_require__(956);
+
+var $Object = Object;
+var split = uncurryThis(''.split);
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+module.exports = fails(function () {
+  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
+  // eslint-disable-next-line no-prototype-builtins -- safe
+  return !$Object('z').propertyIsEnumerable(0);
+}) ? function (it) {
+  return classof(it) == 'String' ? split(it, '') : $Object(it);
+} : $Object;
+
+
+/***/ }),
+
+/***/ 6070:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var uncurryThis = __webpack_require__(80764);
+var isCallable = __webpack_require__(17389);
+var store = __webpack_require__(62548);
+
+var functionToString = uncurryThis(Function.toString);
+
+// this helper broken in `core-js@3.4.1-3.4.4`, so we can't use `shared` helper
+if (!isCallable(store.inspectSource)) {
+  store.inspectSource = function (it) {
+    return functionToString(it);
+  };
+}
+
+module.exports = store.inspectSource;
+
+
+/***/ }),
+
+/***/ 53292:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var NATIVE_WEAK_MAP = __webpack_require__(43018);
+var global = __webpack_require__(92019);
+var isObject = __webpack_require__(12465);
+var createNonEnumerableProperty = __webpack_require__(3085);
+var hasOwn = __webpack_require__(20627);
+var shared = __webpack_require__(62548);
+var sharedKey = __webpack_require__(40019);
+var hiddenKeys = __webpack_require__(96508);
+
+var OBJECT_ALREADY_INITIALIZED = 'Object already initialized';
+var TypeError = global.TypeError;
+var WeakMap = global.WeakMap;
+var set, get, has;
+
+var enforce = function (it) {
+  return has(it) ? get(it) : set(it, {});
+};
+
+var getterFor = function (TYPE) {
+  return function (it) {
+    var state;
+    if (!isObject(it) || (state = get(it)).type !== TYPE) {
+      throw TypeError('Incompatible receiver, ' + TYPE + ' required');
+    } return state;
+  };
+};
+
+if (NATIVE_WEAK_MAP || shared.state) {
+  var store = shared.state || (shared.state = new WeakMap());
+  /* eslint-disable no-self-assign -- prototype methods protection */
+  store.get = store.get;
+  store.has = store.has;
+  store.set = store.set;
+  /* eslint-enable no-self-assign -- prototype methods protection */
+  set = function (it, metadata) {
+    if (store.has(it)) throw TypeError(OBJECT_ALREADY_INITIALIZED);
+    metadata.facade = it;
+    store.set(it, metadata);
+    return metadata;
+  };
+  get = function (it) {
+    return store.get(it) || {};
+  };
+  has = function (it) {
+    return store.has(it);
+  };
+} else {
+  var STATE = sharedKey('state');
+  hiddenKeys[STATE] = true;
+  set = function (it, metadata) {
+    if (hasOwn(it, STATE)) throw TypeError(OBJECT_ALREADY_INITIALIZED);
+    metadata.facade = it;
+    createNonEnumerableProperty(it, STATE, metadata);
+    return metadata;
+  };
+  get = function (it) {
+    return hasOwn(it, STATE) ? it[STATE] : {};
+  };
+  has = function (it) {
+    return hasOwn(it, STATE);
+  };
+}
+
+module.exports = {
+  set: set,
+  get: get,
+  has: has,
+  enforce: enforce,
+  getterFor: getterFor
+};
+
+
+/***/ }),
+
+/***/ 55384:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var classof = __webpack_require__(956);
+
+// `IsArray` abstract operation
+// https://tc39.es/ecma262/#sec-isarray
+// eslint-disable-next-line es/no-array-isarray -- safe
+module.exports = Array.isArray || function isArray(argument) {
+  return classof(argument) == 'Array';
+};
+
+
+/***/ }),
+
+/***/ 17389:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var $documentAll = __webpack_require__(93398);
+
+var documentAll = $documentAll.all;
+
+// `IsCallable` abstract operation
+// https://tc39.es/ecma262/#sec-iscallable
+module.exports = $documentAll.IS_HTMLDDA ? function (argument) {
+  return typeof argument == 'function' || argument === documentAll;
+} : function (argument) {
+  return typeof argument == 'function';
+};
+
+
+/***/ }),
+
+/***/ 61323:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var fails = __webpack_require__(82170);
+var isCallable = __webpack_require__(17389);
+
+var replacement = /#|\.prototype\./;
+
+var isForced = function (feature, detection) {
+  var value = data[normalize(feature)];
+  return value == POLYFILL ? true
+    : value == NATIVE ? false
+    : isCallable(detection) ? fails(detection)
+    : !!detection;
+};
+
+var normalize = isForced.normalize = function (string) {
+  return String(string).replace(replacement, '.').toLowerCase();
+};
+
+var data = isForced.data = {};
+var NATIVE = isForced.NATIVE = 'N';
+var POLYFILL = isForced.POLYFILL = 'P';
+
+module.exports = isForced;
+
+
+/***/ }),
+
+/***/ 82109:
+/***/ ((module) => {
+
+// we can't use just `it == null` since of `document.all` special case
+// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot-aec
+module.exports = function (it) {
+  return it === null || it === undefined;
+};
+
+
+/***/ }),
+
+/***/ 12465:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isCallable = __webpack_require__(17389);
+var $documentAll = __webpack_require__(93398);
+
+var documentAll = $documentAll.all;
+
+module.exports = $documentAll.IS_HTMLDDA ? function (it) {
+  return typeof it == 'object' ? it !== null : isCallable(it) || it === documentAll;
+} : function (it) {
+  return typeof it == 'object' ? it !== null : isCallable(it);
+};
+
+
+/***/ }),
+
+/***/ 33709:
+/***/ ((module) => {
+
+module.exports = false;
+
+
+/***/ }),
+
+/***/ 51666:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getBuiltIn = __webpack_require__(73012);
+var isCallable = __webpack_require__(17389);
+var isPrototypeOf = __webpack_require__(42378);
+var USE_SYMBOL_AS_UID = __webpack_require__(78238);
+
+var $Object = Object;
+
+module.exports = USE_SYMBOL_AS_UID ? function (it) {
+  return typeof it == 'symbol';
+} : function (it) {
+  var $Symbol = getBuiltIn('Symbol');
+  return isCallable($Symbol) && isPrototypeOf($Symbol.prototype, $Object(it));
+};
+
+
+/***/ }),
+
+/***/ 61166:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var toLength = __webpack_require__(66772);
+
+// `LengthOfArrayLike` abstract operation
+// https://tc39.es/ecma262/#sec-lengthofarraylike
+module.exports = function (obj) {
+  return toLength(obj.length);
+};
+
+
+/***/ }),
+
+/***/ 7841:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var uncurryThis = __webpack_require__(80764);
+var fails = __webpack_require__(82170);
+var isCallable = __webpack_require__(17389);
+var hasOwn = __webpack_require__(20627);
+var DESCRIPTORS = __webpack_require__(12404);
+var CONFIGURABLE_FUNCTION_NAME = (__webpack_require__(95114).CONFIGURABLE);
+var inspectSource = __webpack_require__(6070);
+var InternalStateModule = __webpack_require__(53292);
+
+var enforceInternalState = InternalStateModule.enforce;
+var getInternalState = InternalStateModule.get;
+var $String = String;
+// eslint-disable-next-line es/no-object-defineproperty -- safe
+var defineProperty = Object.defineProperty;
+var stringSlice = uncurryThis(''.slice);
+var replace = uncurryThis(''.replace);
+var join = uncurryThis([].join);
+
+var CONFIGURABLE_LENGTH = DESCRIPTORS && !fails(function () {
+  return defineProperty(function () { /* empty */ }, 'length', { value: 8 }).length !== 8;
+});
+
+var TEMPLATE = String(String).split('String');
+
+var makeBuiltIn = module.exports = function (value, name, options) {
+  if (stringSlice($String(name), 0, 7) === 'Symbol(') {
+    name = '[' + replace($String(name), /^Symbol\(([^)]*)\)/, '$1') + ']';
+  }
+  if (options && options.getter) name = 'get ' + name;
+  if (options && options.setter) name = 'set ' + name;
+  if (!hasOwn(value, 'name') || (CONFIGURABLE_FUNCTION_NAME && value.name !== name)) {
+    if (DESCRIPTORS) defineProperty(value, 'name', { value: name, configurable: true });
+    else value.name = name;
+  }
+  if (CONFIGURABLE_LENGTH && options && hasOwn(options, 'arity') && value.length !== options.arity) {
+    defineProperty(value, 'length', { value: options.arity });
+  }
+  try {
+    if (options && hasOwn(options, 'constructor') && options.constructor) {
+      if (DESCRIPTORS) defineProperty(value, 'prototype', { writable: false });
+    // in V8 ~ Chrome 53, prototypes of some methods, like `Array.prototype.values`, are non-writable
+    } else if (value.prototype) value.prototype = undefined;
+  } catch (error) { /* empty */ }
+  var state = enforceInternalState(value);
+  if (!hasOwn(state, 'source')) {
+    state.source = join(TEMPLATE, typeof name == 'string' ? name : '');
+  } return value;
+};
+
+// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
+// eslint-disable-next-line no-extend-native -- required
+Function.prototype.toString = makeBuiltIn(function toString() {
+  return isCallable(this) && getInternalState(this).source || inspectSource(this);
+}, 'toString');
+
+
+/***/ }),
+
+/***/ 97951:
+/***/ ((module) => {
+
+var ceil = Math.ceil;
+var floor = Math.floor;
+
+// `Math.trunc` method
+// https://tc39.es/ecma262/#sec-math.trunc
+// eslint-disable-next-line es/no-math-trunc -- safe
+module.exports = Math.trunc || function trunc(x) {
+  var n = +x;
+  return (n > 0 ? floor : ceil)(n);
+};
+
+
+/***/ }),
+
+/***/ 33015:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var DESCRIPTORS = __webpack_require__(12404);
+var IE8_DOM_DEFINE = __webpack_require__(88437);
+var V8_PROTOTYPE_DEFINE_BUG = __webpack_require__(53939);
+var anObject = __webpack_require__(76824);
+var toPropertyKey = __webpack_require__(61918);
+
+var $TypeError = TypeError;
+// eslint-disable-next-line es/no-object-defineproperty -- safe
+var $defineProperty = Object.defineProperty;
+// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+var ENUMERABLE = 'enumerable';
+var CONFIGURABLE = 'configurable';
+var WRITABLE = 'writable';
+
+// `Object.defineProperty` method
+// https://tc39.es/ecma262/#sec-object.defineproperty
+exports.f = DESCRIPTORS ? V8_PROTOTYPE_DEFINE_BUG ? function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPropertyKey(P);
+  anObject(Attributes);
+  if (typeof O === 'function' && P === 'prototype' && 'value' in Attributes && WRITABLE in Attributes && !Attributes[WRITABLE]) {
+    var current = $getOwnPropertyDescriptor(O, P);
+    if (current && current[WRITABLE]) {
+      O[P] = Attributes.value;
+      Attributes = {
+        configurable: CONFIGURABLE in Attributes ? Attributes[CONFIGURABLE] : current[CONFIGURABLE],
+        enumerable: ENUMERABLE in Attributes ? Attributes[ENUMERABLE] : current[ENUMERABLE],
+        writable: false
+      };
+    }
+  } return $defineProperty(O, P, Attributes);
+} : $defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPropertyKey(P);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return $defineProperty(O, P, Attributes);
+  } catch (error) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw $TypeError('Accessors not supported');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+
+/***/ }),
+
+/***/ 83178:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var DESCRIPTORS = __webpack_require__(12404);
+var call = __webpack_require__(51568);
+var propertyIsEnumerableModule = __webpack_require__(38327);
+var createPropertyDescriptor = __webpack_require__(30073);
+var toIndexedObject = __webpack_require__(82415);
+var toPropertyKey = __webpack_require__(61918);
+var hasOwn = __webpack_require__(20627);
+var IE8_DOM_DEFINE = __webpack_require__(88437);
+
+// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// `Object.getOwnPropertyDescriptor` method
+// https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
+exports.f = DESCRIPTORS ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
+  O = toIndexedObject(O);
+  P = toPropertyKey(P);
+  if (IE8_DOM_DEFINE) try {
+    return $getOwnPropertyDescriptor(O, P);
+  } catch (error) { /* empty */ }
+  if (hasOwn(O, P)) return createPropertyDescriptor(!call(propertyIsEnumerableModule.f, O, P), O[P]);
+};
+
+
+/***/ }),
+
+/***/ 28290:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+var internalObjectKeys = __webpack_require__(39814);
+var enumBugKeys = __webpack_require__(72197);
+
+var hiddenKeys = enumBugKeys.concat('length', 'prototype');
+
+// `Object.getOwnPropertyNames` method
+// https://tc39.es/ecma262/#sec-object.getownpropertynames
+// eslint-disable-next-line es/no-object-getownpropertynames -- safe
+exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return internalObjectKeys(O, hiddenKeys);
+};
+
+
+/***/ }),
+
+/***/ 38891:
+/***/ ((__unused_webpack_module, exports) => {
+
+// eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
+exports.f = Object.getOwnPropertySymbols;
+
+
+/***/ }),
+
+/***/ 42378:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var uncurryThis = __webpack_require__(80764);
+
+module.exports = uncurryThis({}.isPrototypeOf);
+
+
+/***/ }),
+
+/***/ 39814:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var uncurryThis = __webpack_require__(80764);
+var hasOwn = __webpack_require__(20627);
+var toIndexedObject = __webpack_require__(82415);
+var indexOf = (__webpack_require__(99483).indexOf);
+var hiddenKeys = __webpack_require__(96508);
+
+var push = uncurryThis([].push);
+
+module.exports = function (object, names) {
+  var O = toIndexedObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) !hasOwn(hiddenKeys, key) && hasOwn(O, key) && push(result, key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (hasOwn(O, key = names[i++])) {
+    ~indexOf(result, key) || push(result, key);
+  }
+  return result;
+};
+
+
+/***/ }),
+
+/***/ 38327:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+var $propertyIsEnumerable = {}.propertyIsEnumerable;
+// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+
+// Nashorn ~ JDK8 bug
+var NASHORN_BUG = getOwnPropertyDescriptor && !$propertyIsEnumerable.call({ 1: 2 }, 1);
+
+// `Object.prototype.propertyIsEnumerable` method implementation
+// https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
+exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
+  var descriptor = getOwnPropertyDescriptor(this, V);
+  return !!descriptor && descriptor.enumerable;
+} : $propertyIsEnumerable;
+
+
+/***/ }),
+
+/***/ 29276:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var call = __webpack_require__(51568);
+var isCallable = __webpack_require__(17389);
+var isObject = __webpack_require__(12465);
+
+var $TypeError = TypeError;
+
+// `OrdinaryToPrimitive` abstract operation
+// https://tc39.es/ecma262/#sec-ordinarytoprimitive
+module.exports = function (input, pref) {
+  var fn, val;
+  if (pref === 'string' && isCallable(fn = input.toString) && !isObject(val = call(fn, input))) return val;
+  if (isCallable(fn = input.valueOf) && !isObject(val = call(fn, input))) return val;
+  if (pref !== 'string' && isCallable(fn = input.toString) && !isObject(val = call(fn, input))) return val;
+  throw $TypeError("Can't convert object to primitive value");
+};
+
+
+/***/ }),
+
+/***/ 32463:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getBuiltIn = __webpack_require__(73012);
+var uncurryThis = __webpack_require__(80764);
+var getOwnPropertyNamesModule = __webpack_require__(28290);
+var getOwnPropertySymbolsModule = __webpack_require__(38891);
+var anObject = __webpack_require__(76824);
+
+var concat = uncurryThis([].concat);
+
+// all object keys, includes non-enumerable and symbols
+module.exports = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
+  var keys = getOwnPropertyNamesModule.f(anObject(it));
+  var getOwnPropertySymbols = getOwnPropertySymbolsModule.f;
+  return getOwnPropertySymbols ? concat(keys, getOwnPropertySymbols(it)) : keys;
+};
+
+
+/***/ }),
+
+/***/ 28466:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var isNullOrUndefined = __webpack_require__(82109);
+
+var $TypeError = TypeError;
+
+// `RequireObjectCoercible` abstract operation
+// https://tc39.es/ecma262/#sec-requireobjectcoercible
+module.exports = function (it) {
+  if (isNullOrUndefined(it)) throw $TypeError("Can't call method on " + it);
+  return it;
+};
+
+
+/***/ }),
+
+/***/ 40019:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var shared = __webpack_require__(34558);
+var uid = __webpack_require__(58103);
+
+var keys = shared('keys');
+
+module.exports = function (key) {
+  return keys[key] || (keys[key] = uid(key));
+};
+
+
+/***/ }),
+
+/***/ 62548:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var global = __webpack_require__(92019);
+var defineGlobalProperty = __webpack_require__(67528);
+
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || defineGlobalProperty(SHARED, {});
+
+module.exports = store;
+
+
+/***/ }),
+
+/***/ 34558:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var IS_PURE = __webpack_require__(33709);
+var store = __webpack_require__(62548);
+
+(module.exports = function (key, value) {
+  return store[key] || (store[key] = value !== undefined ? value : {});
+})('versions', []).push({
+  version: '3.31.0',
+  mode: IS_PURE ? 'pure' : 'global',
+  copyright: '© 2014-2023 Denis Pushkarev (zloirock.ru)',
+  license: 'https://github.com/zloirock/core-js/blob/v3.31.0/LICENSE',
+  source: 'https://github.com/zloirock/core-js'
+});
+
+
+/***/ }),
+
+/***/ 63488:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/* eslint-disable es/no-symbol -- required for testing */
+var V8_VERSION = __webpack_require__(27098);
+var fails = __webpack_require__(82170);
+var global = __webpack_require__(92019);
+
+var $String = global.String;
+
+// eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
+module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
+  var symbol = Symbol();
+  // Chrome 38 Symbol has incorrect toString conversion
+  // `get-own-property-symbols` polyfill symbols converted to object are not Symbol instances
+  // nb: Do not call `String` directly to avoid this being optimized out to `symbol+''` which will,
+  // of course, fail.
+  return !$String(symbol) || !(Object(symbol) instanceof Symbol) ||
+    // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
+    !Symbol.sham && V8_VERSION && V8_VERSION < 41;
+});
+
+
+/***/ }),
+
+/***/ 73041:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var toIntegerOrInfinity = __webpack_require__(86287);
+
+var max = Math.max;
+var min = Math.min;
+
+// Helper for a popular repeating case of the spec:
+// Let integer be ? ToInteger(index).
+// If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
+module.exports = function (index, length) {
+  var integer = toIntegerOrInfinity(index);
+  return integer < 0 ? max(integer + length, 0) : min(integer, length);
+};
+
+
+/***/ }),
+
+/***/ 82415:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// toObject with fallback for non-array-like ES3 strings
+var IndexedObject = __webpack_require__(22146);
+var requireObjectCoercible = __webpack_require__(28466);
+
+module.exports = function (it) {
+  return IndexedObject(requireObjectCoercible(it));
+};
+
+
+/***/ }),
+
+/***/ 86287:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var trunc = __webpack_require__(97951);
+
+// `ToIntegerOrInfinity` abstract operation
+// https://tc39.es/ecma262/#sec-tointegerorinfinity
+module.exports = function (argument) {
+  var number = +argument;
+  // eslint-disable-next-line no-self-compare -- NaN check
+  return number !== number || number === 0 ? 0 : trunc(number);
+};
+
+
+/***/ }),
+
+/***/ 66772:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var toIntegerOrInfinity = __webpack_require__(86287);
+
+var min = Math.min;
+
+// `ToLength` abstract operation
+// https://tc39.es/ecma262/#sec-tolength
+module.exports = function (argument) {
+  return argument > 0 ? min(toIntegerOrInfinity(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
+};
+
+
+/***/ }),
+
+/***/ 44247:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var requireObjectCoercible = __webpack_require__(28466);
+
+var $Object = Object;
+
+// `ToObject` abstract operation
+// https://tc39.es/ecma262/#sec-toobject
+module.exports = function (argument) {
+  return $Object(requireObjectCoercible(argument));
+};
+
+
+/***/ }),
+
+/***/ 34929:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var call = __webpack_require__(51568);
+var isObject = __webpack_require__(12465);
+var isSymbol = __webpack_require__(51666);
+var getMethod = __webpack_require__(28453);
+var ordinaryToPrimitive = __webpack_require__(29276);
+var wellKnownSymbol = __webpack_require__(19163);
+
+var $TypeError = TypeError;
+var TO_PRIMITIVE = wellKnownSymbol('toPrimitive');
+
+// `ToPrimitive` abstract operation
+// https://tc39.es/ecma262/#sec-toprimitive
+module.exports = function (input, pref) {
+  if (!isObject(input) || isSymbol(input)) return input;
+  var exoticToPrim = getMethod(input, TO_PRIMITIVE);
+  var result;
+  if (exoticToPrim) {
+    if (pref === undefined) pref = 'default';
+    result = call(exoticToPrim, input, pref);
+    if (!isObject(result) || isSymbol(result)) return result;
+    throw $TypeError("Can't convert object to primitive value");
+  }
+  if (pref === undefined) pref = 'number';
+  return ordinaryToPrimitive(input, pref);
+};
+
+
+/***/ }),
+
+/***/ 61918:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var toPrimitive = __webpack_require__(34929);
+var isSymbol = __webpack_require__(51666);
+
+// `ToPropertyKey` abstract operation
+// https://tc39.es/ecma262/#sec-topropertykey
+module.exports = function (argument) {
+  var key = toPrimitive(argument, 'string');
+  return isSymbol(key) ? key : key + '';
+};
+
+
+/***/ }),
+
+/***/ 74259:
+/***/ ((module) => {
+
+var $String = String;
+
+module.exports = function (argument) {
+  try {
+    return $String(argument);
+  } catch (error) {
+    return 'Object';
+  }
+};
+
+
+/***/ }),
+
+/***/ 58103:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var uncurryThis = __webpack_require__(80764);
+
+var id = 0;
+var postfix = Math.random();
+var toString = uncurryThis(1.0.toString);
+
+module.exports = function (key) {
+  return 'Symbol(' + (key === undefined ? '' : key) + ')_' + toString(++id + postfix, 36);
+};
+
+
+/***/ }),
+
+/***/ 78238:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/* eslint-disable es/no-symbol -- required for testing */
+var NATIVE_SYMBOL = __webpack_require__(63488);
+
+module.exports = NATIVE_SYMBOL
+  && !Symbol.sham
+  && typeof Symbol.iterator == 'symbol';
+
+
+/***/ }),
+
+/***/ 53939:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var DESCRIPTORS = __webpack_require__(12404);
+var fails = __webpack_require__(82170);
+
+// V8 ~ Chrome 36-
+// https://bugs.chromium.org/p/v8/issues/detail?id=3334
+module.exports = DESCRIPTORS && fails(function () {
+  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
+  return Object.defineProperty(function () { /* empty */ }, 'prototype', {
+    value: 42,
+    writable: false
+  }).prototype != 42;
+});
+
+
+/***/ }),
+
+/***/ 43018:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var global = __webpack_require__(92019);
+var isCallable = __webpack_require__(17389);
+
+var WeakMap = global.WeakMap;
+
+module.exports = isCallable(WeakMap) && /native code/.test(String(WeakMap));
+
+
+/***/ }),
+
+/***/ 19163:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var global = __webpack_require__(92019);
+var shared = __webpack_require__(34558);
+var hasOwn = __webpack_require__(20627);
+var uid = __webpack_require__(58103);
+var NATIVE_SYMBOL = __webpack_require__(63488);
+var USE_SYMBOL_AS_UID = __webpack_require__(78238);
+
+var Symbol = global.Symbol;
+var WellKnownSymbolsStore = shared('wks');
+var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol['for'] || Symbol : Symbol && Symbol.withoutSetter || uid;
+
+module.exports = function (name) {
+  if (!hasOwn(WellKnownSymbolsStore, name)) {
+    WellKnownSymbolsStore[name] = NATIVE_SYMBOL && hasOwn(Symbol, name)
+      ? Symbol[name]
+      : createWellKnownSymbol('Symbol.' + name);
+  } return WellKnownSymbolsStore[name];
+};
+
+
+/***/ }),
+
+/***/ 25013:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var $ = __webpack_require__(46367);
+var toObject = __webpack_require__(44247);
+var lengthOfArrayLike = __webpack_require__(61166);
+var setArrayLength = __webpack_require__(19912);
+var doesNotExceedSafeInteger = __webpack_require__(37711);
+var fails = __webpack_require__(82170);
+
+var INCORRECT_TO_LENGTH = fails(function () {
+  return [].push.call({ length: 0x100000000 }, 1) !== 4294967297;
+});
+
+// V8 and Safari <= 15.4, FF < 23 throws InternalError
+// https://bugs.chromium.org/p/v8/issues/detail?id=12681
+var properErrorOnNonWritableLength = function () {
+  try {
+    // eslint-disable-next-line es/no-object-defineproperty -- safe
+    Object.defineProperty([], 'length', { writable: false }).push();
+  } catch (error) {
+    return error instanceof TypeError;
+  }
+};
+
+var FORCED = INCORRECT_TO_LENGTH || !properErrorOnNonWritableLength();
+
+// `Array.prototype.push` method
+// https://tc39.es/ecma262/#sec-array.prototype.push
+$({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
+  // eslint-disable-next-line no-unused-vars -- required for `.length`
+  push: function push(item) {
+    var O = toObject(this);
+    var len = lengthOfArrayLike(O);
+    var argCount = arguments.length;
+    doesNotExceedSafeInteger(len + argCount);
+    for (var i = 0; i < argCount; i++) {
+      O[len] = arguments[i];
+      len++;
+    }
+    setArrayLength(O, len);
+    return len;
+  }
+});
+
+
+/***/ }),
+
 /***/ 2193:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -531,7 +2037,7 @@ __webpack_require__(57764);
 __webpack_require__(69933);
 __webpack_require__(68220);
 __webpack_require__(98412);
-__webpack_require__(83668);
+__webpack_require__(11035);
 __webpack_require__(69922);
 var path = __webpack_require__(28488);
 
@@ -4350,7 +5856,7 @@ setToStringTag(global.JSON, 'JSON', true);
 
 /***/ }),
 
-/***/ 83668:
+/***/ 11035:
 /***/ (() => {
 
 // empty
@@ -6271,7 +7777,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.ShogiPlayer .ShortcutViewer{position:
 
 /***/ }),
 
-/***/ 956:
+/***/ 52046:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -26562,7 +28068,7 @@ var update = add("79933e6e", content, true, {"sourceMap":false,"shadowMode":fals
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(956);
+var content = __webpack_require__(52046);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.id, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -31852,1631 +33358,6 @@ function _unsupportedIterableToArray(o, minLen) {
 }
 module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
-/***/ }),
-
-/***/ 18083:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var isCallable = __webpack_require__(8387);
-var tryToString = __webpack_require__(5598);
-
-var $TypeError = TypeError;
-
-// `Assert: IsCallable(argument) is true`
-module.exports = function (argument) {
-  if (isCallable(argument)) return argument;
-  throw new $TypeError(tryToString(argument) + ' is not a function');
-};
-
-
-/***/ }),
-
-/***/ 82918:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var isObject = __webpack_require__(66935);
-
-var $String = String;
-var $TypeError = TypeError;
-
-// `Assert: Type(argument) is Object`
-module.exports = function (argument) {
-  if (isObject(argument)) return argument;
-  throw new $TypeError($String(argument) + ' is not an object');
-};
-
-
-/***/ }),
-
-/***/ 54408:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var toIndexedObject = __webpack_require__(74386);
-var toAbsoluteIndex = __webpack_require__(8588);
-var lengthOfArrayLike = __webpack_require__(74668);
-
-// `Array.prototype.{ indexOf, includes }` methods implementation
-var createMethod = function (IS_INCLUDES) {
-  return function ($this, el, fromIndex) {
-    var O = toIndexedObject($this);
-    var length = lengthOfArrayLike(O);
-    if (length === 0) return !IS_INCLUDES && -1;
-    var index = toAbsoluteIndex(fromIndex, length);
-    var value;
-    // Array#includes uses SameValueZero equality algorithm
-    // eslint-disable-next-line no-self-compare -- NaN check
-    if (IS_INCLUDES && el !== el) while (length > index) {
-      value = O[index++];
-      // eslint-disable-next-line no-self-compare -- NaN check
-      if (value !== value) return true;
-    // Array#indexOf ignores holes, Array#includes - not
-    } else for (;length > index; index++) {
-      if ((IS_INCLUDES || index in O) && O[index] === el) return IS_INCLUDES || index || 0;
-    } return !IS_INCLUDES && -1;
-  };
-};
-
-module.exports = {
-  // `Array.prototype.includes` method
-  // https://tc39.es/ecma262/#sec-array.prototype.includes
-  includes: createMethod(true),
-  // `Array.prototype.indexOf` method
-  // https://tc39.es/ecma262/#sec-array.prototype.indexof
-  indexOf: createMethod(false)
-};
-
-
-/***/ }),
-
-/***/ 76959:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__(71475);
-var isArray = __webpack_require__(57931);
-
-var $TypeError = TypeError;
-// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-
-// Safari < 13 does not throw an error in this case
-var SILENT_ON_NON_WRITABLE_LENGTH_SET = DESCRIPTORS && !function () {
-  // makes no sense without proper strict mode support
-  if (this !== undefined) return true;
-  try {
-    // eslint-disable-next-line es/no-object-defineproperty -- safe
-    Object.defineProperty([], 'length', { writable: false }).length = 1;
-  } catch (error) {
-    return error instanceof TypeError;
-  }
-}();
-
-module.exports = SILENT_ON_NON_WRITABLE_LENGTH_SET ? function (O, length) {
-  if (isArray(O) && !getOwnPropertyDescriptor(O, 'length').writable) {
-    throw new $TypeError('Cannot set read only .length');
-  } return O.length = length;
-} : function (O, length) {
-  return O.length = length;
-};
-
-
-/***/ }),
-
-/***/ 91383:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var uncurryThis = __webpack_require__(63211);
-
-var toString = uncurryThis({}.toString);
-var stringSlice = uncurryThis(''.slice);
-
-module.exports = function (it) {
-  return stringSlice(toString(it), 8, -1);
-};
-
-
-/***/ }),
-
-/***/ 87221:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var hasOwn = __webpack_require__(38262);
-var ownKeys = __webpack_require__(20764);
-var getOwnPropertyDescriptorModule = __webpack_require__(60563);
-var definePropertyModule = __webpack_require__(5200);
-
-module.exports = function (target, source, exceptions) {
-  var keys = ownKeys(source);
-  var defineProperty = definePropertyModule.f;
-  var getOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f;
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    if (!hasOwn(target, key) && !(exceptions && hasOwn(exceptions, key))) {
-      defineProperty(target, key, getOwnPropertyDescriptor(source, key));
-    }
-  }
-};
-
-
-/***/ }),
-
-/***/ 29287:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__(71475);
-var definePropertyModule = __webpack_require__(5200);
-var createPropertyDescriptor = __webpack_require__(43814);
-
-module.exports = DESCRIPTORS ? function (object, key, value) {
-  return definePropertyModule.f(object, key, createPropertyDescriptor(1, value));
-} : function (object, key, value) {
-  object[key] = value;
-  return object;
-};
-
-
-/***/ }),
-
-/***/ 43814:
-/***/ ((module) => {
-
-"use strict";
-
-module.exports = function (bitmap, value) {
-  return {
-    enumerable: !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable: !(bitmap & 4),
-    value: value
-  };
-};
-
-
-/***/ }),
-
-/***/ 46380:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var isCallable = __webpack_require__(8387);
-var definePropertyModule = __webpack_require__(5200);
-var makeBuiltIn = __webpack_require__(9998);
-var defineGlobalProperty = __webpack_require__(95814);
-
-module.exports = function (O, key, value, options) {
-  if (!options) options = {};
-  var simple = options.enumerable;
-  var name = options.name !== undefined ? options.name : key;
-  if (isCallable(value)) makeBuiltIn(value, name, options);
-  if (options.global) {
-    if (simple) O[key] = value;
-    else defineGlobalProperty(key, value);
-  } else {
-    try {
-      if (!options.unsafe) delete O[key];
-      else if (O[key]) simple = true;
-    } catch (error) { /* empty */ }
-    if (simple) O[key] = value;
-    else definePropertyModule.f(O, key, {
-      value: value,
-      enumerable: false,
-      configurable: !options.nonConfigurable,
-      writable: !options.nonWritable
-    });
-  } return O;
-};
-
-
-/***/ }),
-
-/***/ 95814:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var globalThis = __webpack_require__(29892);
-
-// eslint-disable-next-line es/no-object-defineproperty -- safe
-var defineProperty = Object.defineProperty;
-
-module.exports = function (key, value) {
-  try {
-    defineProperty(globalThis, key, { value: value, configurable: true, writable: true });
-  } catch (error) {
-    globalThis[key] = value;
-  } return value;
-};
-
-
-/***/ }),
-
-/***/ 71475:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var fails = __webpack_require__(89133);
-
-// Detect IE8's incomplete defineProperty implementation
-module.exports = !fails(function () {
-  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
-  return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] !== 7;
-});
-
-
-/***/ }),
-
-/***/ 96326:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var globalThis = __webpack_require__(29892);
-var isObject = __webpack_require__(66935);
-
-var document = globalThis.document;
-// typeof document.createElement is 'object' in old IE
-var EXISTS = isObject(document) && isObject(document.createElement);
-
-module.exports = function (it) {
-  return EXISTS ? document.createElement(it) : {};
-};
-
-
-/***/ }),
-
-/***/ 87055:
-/***/ ((module) => {
-
-"use strict";
-
-var $TypeError = TypeError;
-var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF; // 2 ** 53 - 1 == 9007199254740991
-
-module.exports = function (it) {
-  if (it > MAX_SAFE_INTEGER) throw $TypeError('Maximum allowed index exceeded');
-  return it;
-};
-
-
-/***/ }),
-
-/***/ 69784:
-/***/ ((module) => {
-
-"use strict";
-
-// IE8- don't enum bug keys
-module.exports = [
-  'constructor',
-  'hasOwnProperty',
-  'isPrototypeOf',
-  'propertyIsEnumerable',
-  'toLocaleString',
-  'toString',
-  'valueOf'
-];
-
-
-/***/ }),
-
-/***/ 97228:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var globalThis = __webpack_require__(29892);
-
-var navigator = globalThis.navigator;
-var userAgent = navigator && navigator.userAgent;
-
-module.exports = userAgent ? String(userAgent) : '';
-
-
-/***/ }),
-
-/***/ 17049:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var globalThis = __webpack_require__(29892);
-var userAgent = __webpack_require__(97228);
-
-var process = globalThis.process;
-var Deno = globalThis.Deno;
-var versions = process && process.versions || Deno && Deno.version;
-var v8 = versions && versions.v8;
-var match, version;
-
-if (v8) {
-  match = v8.split('.');
-  // in old Chrome, versions of V8 isn't V8 = Chrome / 10
-  // but their correct versions are not interesting for us
-  version = match[0] > 0 && match[0] < 4 ? 1 : +(match[0] + match[1]);
-}
-
-// BrowserFS NodeJS `process` polyfill incorrectly set `.v8` to `0.0`
-// so check `userAgent` even if `.v8` exists, but 0
-if (!version && userAgent) {
-  match = userAgent.match(/Edge\/(\d+)/);
-  if (!match || match[1] >= 74) {
-    match = userAgent.match(/Chrome\/(\d+)/);
-    if (match) version = +match[1];
-  }
-}
-
-module.exports = version;
-
-
-/***/ }),
-
-/***/ 34186:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var globalThis = __webpack_require__(29892);
-var getOwnPropertyDescriptor = (__webpack_require__(60563).f);
-var createNonEnumerableProperty = __webpack_require__(29287);
-var defineBuiltIn = __webpack_require__(46380);
-var defineGlobalProperty = __webpack_require__(95814);
-var copyConstructorProperties = __webpack_require__(87221);
-var isForced = __webpack_require__(23900);
-
-/*
-  options.target         - name of the target object
-  options.global         - target is the global object
-  options.stat           - export as static methods of target
-  options.proto          - export as prototype methods of target
-  options.real           - real prototype method for the `pure` version
-  options.forced         - export even if the native feature is available
-  options.bind           - bind methods to the target, required for the `pure` version
-  options.wrap           - wrap constructors to preventing global pollution, required for the `pure` version
-  options.unsafe         - use the simple assignment of property instead of delete + defineProperty
-  options.sham           - add a flag to not completely full polyfills
-  options.enumerable     - export as enumerable property
-  options.dontCallGetSet - prevent calling a getter on target
-  options.name           - the .name of the function if it does not match the key
-*/
-module.exports = function (options, source) {
-  var TARGET = options.target;
-  var GLOBAL = options.global;
-  var STATIC = options.stat;
-  var FORCED, target, key, targetProperty, sourceProperty, descriptor;
-  if (GLOBAL) {
-    target = globalThis;
-  } else if (STATIC) {
-    target = globalThis[TARGET] || defineGlobalProperty(TARGET, {});
-  } else {
-    target = globalThis[TARGET] && globalThis[TARGET].prototype;
-  }
-  if (target) for (key in source) {
-    sourceProperty = source[key];
-    if (options.dontCallGetSet) {
-      descriptor = getOwnPropertyDescriptor(target, key);
-      targetProperty = descriptor && descriptor.value;
-    } else targetProperty = target[key];
-    FORCED = isForced(GLOBAL ? key : TARGET + (STATIC ? '.' : '#') + key, options.forced);
-    // contained in target
-    if (!FORCED && targetProperty !== undefined) {
-      if (typeof sourceProperty == typeof targetProperty) continue;
-      copyConstructorProperties(sourceProperty, targetProperty);
-    }
-    // add a flag to not completely full polyfills
-    if (options.sham || (targetProperty && targetProperty.sham)) {
-      createNonEnumerableProperty(sourceProperty, 'sham', true);
-    }
-    defineBuiltIn(target, key, sourceProperty, options);
-  }
-};
-
-
-/***/ }),
-
-/***/ 89133:
-/***/ ((module) => {
-
-"use strict";
-
-module.exports = function (exec) {
-  try {
-    return !!exec();
-  } catch (error) {
-    return true;
-  }
-};
-
-
-/***/ }),
-
-/***/ 46593:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var fails = __webpack_require__(89133);
-
-module.exports = !fails(function () {
-  // eslint-disable-next-line es/no-function-prototype-bind -- safe
-  var test = (function () { /* empty */ }).bind();
-  // eslint-disable-next-line no-prototype-builtins -- safe
-  return typeof test != 'function' || test.hasOwnProperty('prototype');
-});
-
-
-/***/ }),
-
-/***/ 5805:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var NATIVE_BIND = __webpack_require__(46593);
-
-var call = Function.prototype.call;
-// eslint-disable-next-line es/no-function-prototype-bind -- safe
-module.exports = NATIVE_BIND ? call.bind(call) : function () {
-  return call.apply(call, arguments);
-};
-
-
-/***/ }),
-
-/***/ 97792:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__(71475);
-var hasOwn = __webpack_require__(38262);
-
-var FunctionPrototype = Function.prototype;
-// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-var getDescriptor = DESCRIPTORS && Object.getOwnPropertyDescriptor;
-
-var EXISTS = hasOwn(FunctionPrototype, 'name');
-// additional protection from minified / mangled / dropped function names
-var PROPER = EXISTS && (function something() { /* empty */ }).name === 'something';
-var CONFIGURABLE = EXISTS && (!DESCRIPTORS || (DESCRIPTORS && getDescriptor(FunctionPrototype, 'name').configurable));
-
-module.exports = {
-  EXISTS: EXISTS,
-  PROPER: PROPER,
-  CONFIGURABLE: CONFIGURABLE
-};
-
-
-/***/ }),
-
-/***/ 63211:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var NATIVE_BIND = __webpack_require__(46593);
-
-var FunctionPrototype = Function.prototype;
-var call = FunctionPrototype.call;
-// eslint-disable-next-line es/no-function-prototype-bind -- safe
-var uncurryThisWithBind = NATIVE_BIND && FunctionPrototype.bind.bind(call, call);
-
-module.exports = NATIVE_BIND ? uncurryThisWithBind : function (fn) {
-  return function () {
-    return call.apply(fn, arguments);
-  };
-};
-
-
-/***/ }),
-
-/***/ 85507:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var globalThis = __webpack_require__(29892);
-var isCallable = __webpack_require__(8387);
-
-var aFunction = function (argument) {
-  return isCallable(argument) ? argument : undefined;
-};
-
-module.exports = function (namespace, method) {
-  return arguments.length < 2 ? aFunction(globalThis[namespace]) : globalThis[namespace] && globalThis[namespace][method];
-};
-
-
-/***/ }),
-
-/***/ 44435:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var aCallable = __webpack_require__(18083);
-var isNullOrUndefined = __webpack_require__(3302);
-
-// `GetMethod` abstract operation
-// https://tc39.es/ecma262/#sec-getmethod
-module.exports = function (V, P) {
-  var func = V[P];
-  return isNullOrUndefined(func) ? undefined : aCallable(func);
-};
-
-
-/***/ }),
-
-/***/ 29892:
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-"use strict";
-
-var check = function (it) {
-  return it && it.Math === Math && it;
-};
-
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-module.exports =
-  // eslint-disable-next-line es/no-global-this -- safe
-  check(typeof globalThis == 'object' && globalThis) ||
-  check(typeof window == 'object' && window) ||
-  // eslint-disable-next-line no-restricted-globals -- safe
-  check(typeof self == 'object' && self) ||
-  check(typeof __webpack_require__.g == 'object' && __webpack_require__.g) ||
-  check(typeof this == 'object' && this) ||
-  // eslint-disable-next-line no-new-func -- fallback
-  (function () { return this; })() || Function('return this')();
-
-
-/***/ }),
-
-/***/ 38262:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var uncurryThis = __webpack_require__(63211);
-var toObject = __webpack_require__(43301);
-
-var hasOwnProperty = uncurryThis({}.hasOwnProperty);
-
-// `HasOwnProperty` abstract operation
-// https://tc39.es/ecma262/#sec-hasownproperty
-// eslint-disable-next-line es/no-object-hasown -- safe
-module.exports = Object.hasOwn || function hasOwn(it, key) {
-  return hasOwnProperty(toObject(it), key);
-};
-
-
-/***/ }),
-
-/***/ 40287:
-/***/ ((module) => {
-
-"use strict";
-
-module.exports = {};
-
-
-/***/ }),
-
-/***/ 96539:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__(71475);
-var fails = __webpack_require__(89133);
-var createElement = __webpack_require__(96326);
-
-// Thanks to IE8 for its funny defineProperty
-module.exports = !DESCRIPTORS && !fails(function () {
-  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
-  return Object.defineProperty(createElement('div'), 'a', {
-    get: function () { return 7; }
-  }).a !== 7;
-});
-
-
-/***/ }),
-
-/***/ 35684:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var uncurryThis = __webpack_require__(63211);
-var fails = __webpack_require__(89133);
-var classof = __webpack_require__(91383);
-
-var $Object = Object;
-var split = uncurryThis(''.split);
-
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-module.exports = fails(function () {
-  // throws an error in rhino, see https://github.com/mozilla/rhino/issues/346
-  // eslint-disable-next-line no-prototype-builtins -- safe
-  return !$Object('z').propertyIsEnumerable(0);
-}) ? function (it) {
-  return classof(it) === 'String' ? split(it, '') : $Object(it);
-} : $Object;
-
-
-/***/ }),
-
-/***/ 71436:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var uncurryThis = __webpack_require__(63211);
-var isCallable = __webpack_require__(8387);
-var store = __webpack_require__(21336);
-
-var functionToString = uncurryThis(Function.toString);
-
-// this helper broken in `core-js@3.4.1-3.4.4`, so we can't use `shared` helper
-if (!isCallable(store.inspectSource)) {
-  store.inspectSource = function (it) {
-    return functionToString(it);
-  };
-}
-
-module.exports = store.inspectSource;
-
-
-/***/ }),
-
-/***/ 25323:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var NATIVE_WEAK_MAP = __webpack_require__(16910);
-var globalThis = __webpack_require__(29892);
-var isObject = __webpack_require__(66935);
-var createNonEnumerableProperty = __webpack_require__(29287);
-var hasOwn = __webpack_require__(38262);
-var shared = __webpack_require__(21336);
-var sharedKey = __webpack_require__(95332);
-var hiddenKeys = __webpack_require__(40287);
-
-var OBJECT_ALREADY_INITIALIZED = 'Object already initialized';
-var TypeError = globalThis.TypeError;
-var WeakMap = globalThis.WeakMap;
-var set, get, has;
-
-var enforce = function (it) {
-  return has(it) ? get(it) : set(it, {});
-};
-
-var getterFor = function (TYPE) {
-  return function (it) {
-    var state;
-    if (!isObject(it) || (state = get(it)).type !== TYPE) {
-      throw new TypeError('Incompatible receiver, ' + TYPE + ' required');
-    } return state;
-  };
-};
-
-if (NATIVE_WEAK_MAP || shared.state) {
-  var store = shared.state || (shared.state = new WeakMap());
-  /* eslint-disable no-self-assign -- prototype methods protection */
-  store.get = store.get;
-  store.has = store.has;
-  store.set = store.set;
-  /* eslint-enable no-self-assign -- prototype methods protection */
-  set = function (it, metadata) {
-    if (store.has(it)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
-    metadata.facade = it;
-    store.set(it, metadata);
-    return metadata;
-  };
-  get = function (it) {
-    return store.get(it) || {};
-  };
-  has = function (it) {
-    return store.has(it);
-  };
-} else {
-  var STATE = sharedKey('state');
-  hiddenKeys[STATE] = true;
-  set = function (it, metadata) {
-    if (hasOwn(it, STATE)) throw new TypeError(OBJECT_ALREADY_INITIALIZED);
-    metadata.facade = it;
-    createNonEnumerableProperty(it, STATE, metadata);
-    return metadata;
-  };
-  get = function (it) {
-    return hasOwn(it, STATE) ? it[STATE] : {};
-  };
-  has = function (it) {
-    return hasOwn(it, STATE);
-  };
-}
-
-module.exports = {
-  set: set,
-  get: get,
-  has: has,
-  enforce: enforce,
-  getterFor: getterFor
-};
-
-
-/***/ }),
-
-/***/ 57931:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var classof = __webpack_require__(91383);
-
-// `IsArray` abstract operation
-// https://tc39.es/ecma262/#sec-isarray
-// eslint-disable-next-line es/no-array-isarray -- safe
-module.exports = Array.isArray || function isArray(argument) {
-  return classof(argument) === 'Array';
-};
-
-
-/***/ }),
-
-/***/ 8387:
-/***/ ((module) => {
-
-"use strict";
-
-// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot
-var documentAll = typeof document == 'object' && document.all;
-
-// `IsCallable` abstract operation
-// https://tc39.es/ecma262/#sec-iscallable
-// eslint-disable-next-line unicorn/no-typeof-undefined -- required for testing
-module.exports = typeof documentAll == 'undefined' && documentAll !== undefined ? function (argument) {
-  return typeof argument == 'function' || argument === documentAll;
-} : function (argument) {
-  return typeof argument == 'function';
-};
-
-
-/***/ }),
-
-/***/ 23900:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var fails = __webpack_require__(89133);
-var isCallable = __webpack_require__(8387);
-
-var replacement = /#|\.prototype\./;
-
-var isForced = function (feature, detection) {
-  var value = data[normalize(feature)];
-  return value === POLYFILL ? true
-    : value === NATIVE ? false
-    : isCallable(detection) ? fails(detection)
-    : !!detection;
-};
-
-var normalize = isForced.normalize = function (string) {
-  return String(string).replace(replacement, '.').toLowerCase();
-};
-
-var data = isForced.data = {};
-var NATIVE = isForced.NATIVE = 'N';
-var POLYFILL = isForced.POLYFILL = 'P';
-
-module.exports = isForced;
-
-
-/***/ }),
-
-/***/ 3302:
-/***/ ((module) => {
-
-"use strict";
-
-// we can't use just `it == null` since of `document.all` special case
-// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot-aec
-module.exports = function (it) {
-  return it === null || it === undefined;
-};
-
-
-/***/ }),
-
-/***/ 66935:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var isCallable = __webpack_require__(8387);
-
-module.exports = function (it) {
-  return typeof it == 'object' ? it !== null : isCallable(it);
-};
-
-
-/***/ }),
-
-/***/ 95716:
-/***/ ((module) => {
-
-"use strict";
-
-module.exports = false;
-
-
-/***/ }),
-
-/***/ 11035:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var getBuiltIn = __webpack_require__(85507);
-var isCallable = __webpack_require__(8387);
-var isPrototypeOf = __webpack_require__(92284);
-var USE_SYMBOL_AS_UID = __webpack_require__(79692);
-
-var $Object = Object;
-
-module.exports = USE_SYMBOL_AS_UID ? function (it) {
-  return typeof it == 'symbol';
-} : function (it) {
-  var $Symbol = getBuiltIn('Symbol');
-  return isCallable($Symbol) && isPrototypeOf($Symbol.prototype, $Object(it));
-};
-
-
-/***/ }),
-
-/***/ 74668:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var toLength = __webpack_require__(42849);
-
-// `LengthOfArrayLike` abstract operation
-// https://tc39.es/ecma262/#sec-lengthofarraylike
-module.exports = function (obj) {
-  return toLength(obj.length);
-};
-
-
-/***/ }),
-
-/***/ 9998:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var uncurryThis = __webpack_require__(63211);
-var fails = __webpack_require__(89133);
-var isCallable = __webpack_require__(8387);
-var hasOwn = __webpack_require__(38262);
-var DESCRIPTORS = __webpack_require__(71475);
-var CONFIGURABLE_FUNCTION_NAME = (__webpack_require__(97792).CONFIGURABLE);
-var inspectSource = __webpack_require__(71436);
-var InternalStateModule = __webpack_require__(25323);
-
-var enforceInternalState = InternalStateModule.enforce;
-var getInternalState = InternalStateModule.get;
-var $String = String;
-// eslint-disable-next-line es/no-object-defineproperty -- safe
-var defineProperty = Object.defineProperty;
-var stringSlice = uncurryThis(''.slice);
-var replace = uncurryThis(''.replace);
-var join = uncurryThis([].join);
-
-var CONFIGURABLE_LENGTH = DESCRIPTORS && !fails(function () {
-  return defineProperty(function () { /* empty */ }, 'length', { value: 8 }).length !== 8;
-});
-
-var TEMPLATE = String(String).split('String');
-
-var makeBuiltIn = module.exports = function (value, name, options) {
-  if (stringSlice($String(name), 0, 7) === 'Symbol(') {
-    name = '[' + replace($String(name), /^Symbol\(([^)]*)\).*$/, '$1') + ']';
-  }
-  if (options && options.getter) name = 'get ' + name;
-  if (options && options.setter) name = 'set ' + name;
-  if (!hasOwn(value, 'name') || (CONFIGURABLE_FUNCTION_NAME && value.name !== name)) {
-    if (DESCRIPTORS) defineProperty(value, 'name', { value: name, configurable: true });
-    else value.name = name;
-  }
-  if (CONFIGURABLE_LENGTH && options && hasOwn(options, 'arity') && value.length !== options.arity) {
-    defineProperty(value, 'length', { value: options.arity });
-  }
-  try {
-    if (options && hasOwn(options, 'constructor') && options.constructor) {
-      if (DESCRIPTORS) defineProperty(value, 'prototype', { writable: false });
-    // in V8 ~ Chrome 53, prototypes of some methods, like `Array.prototype.values`, are non-writable
-    } else if (value.prototype) value.prototype = undefined;
-  } catch (error) { /* empty */ }
-  var state = enforceInternalState(value);
-  if (!hasOwn(state, 'source')) {
-    state.source = join(TEMPLATE, typeof name == 'string' ? name : '');
-  } return value;
-};
-
-// add fake Function#toString for correct work wrapped methods / constructors with methods like LoDash isNative
-// eslint-disable-next-line no-extend-native -- required
-Function.prototype.toString = makeBuiltIn(function toString() {
-  return isCallable(this) && getInternalState(this).source || inspectSource(this);
-}, 'toString');
-
-
-/***/ }),
-
-/***/ 14577:
-/***/ ((module) => {
-
-"use strict";
-
-var ceil = Math.ceil;
-var floor = Math.floor;
-
-// `Math.trunc` method
-// https://tc39.es/ecma262/#sec-math.trunc
-// eslint-disable-next-line es/no-math-trunc -- safe
-module.exports = Math.trunc || function trunc(x) {
-  var n = +x;
-  return (n > 0 ? floor : ceil)(n);
-};
-
-
-/***/ }),
-
-/***/ 5200:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__(71475);
-var IE8_DOM_DEFINE = __webpack_require__(96539);
-var V8_PROTOTYPE_DEFINE_BUG = __webpack_require__(90160);
-var anObject = __webpack_require__(82918);
-var toPropertyKey = __webpack_require__(34453);
-
-var $TypeError = TypeError;
-// eslint-disable-next-line es/no-object-defineproperty -- safe
-var $defineProperty = Object.defineProperty;
-// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-var ENUMERABLE = 'enumerable';
-var CONFIGURABLE = 'configurable';
-var WRITABLE = 'writable';
-
-// `Object.defineProperty` method
-// https://tc39.es/ecma262/#sec-object.defineproperty
-exports.f = DESCRIPTORS ? V8_PROTOTYPE_DEFINE_BUG ? function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPropertyKey(P);
-  anObject(Attributes);
-  if (typeof O === 'function' && P === 'prototype' && 'value' in Attributes && WRITABLE in Attributes && !Attributes[WRITABLE]) {
-    var current = $getOwnPropertyDescriptor(O, P);
-    if (current && current[WRITABLE]) {
-      O[P] = Attributes.value;
-      Attributes = {
-        configurable: CONFIGURABLE in Attributes ? Attributes[CONFIGURABLE] : current[CONFIGURABLE],
-        enumerable: ENUMERABLE in Attributes ? Attributes[ENUMERABLE] : current[ENUMERABLE],
-        writable: false
-      };
-    }
-  } return $defineProperty(O, P, Attributes);
-} : $defineProperty : function defineProperty(O, P, Attributes) {
-  anObject(O);
-  P = toPropertyKey(P);
-  anObject(Attributes);
-  if (IE8_DOM_DEFINE) try {
-    return $defineProperty(O, P, Attributes);
-  } catch (error) { /* empty */ }
-  if ('get' in Attributes || 'set' in Attributes) throw new $TypeError('Accessors not supported');
-  if ('value' in Attributes) O[P] = Attributes.value;
-  return O;
-};
-
-
-/***/ }),
-
-/***/ 60563:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__(71475);
-var call = __webpack_require__(5805);
-var propertyIsEnumerableModule = __webpack_require__(44399);
-var createPropertyDescriptor = __webpack_require__(43814);
-var toIndexedObject = __webpack_require__(74386);
-var toPropertyKey = __webpack_require__(34453);
-var hasOwn = __webpack_require__(38262);
-var IE8_DOM_DEFINE = __webpack_require__(96539);
-
-// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-var $getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-
-// `Object.getOwnPropertyDescriptor` method
-// https://tc39.es/ecma262/#sec-object.getownpropertydescriptor
-exports.f = DESCRIPTORS ? $getOwnPropertyDescriptor : function getOwnPropertyDescriptor(O, P) {
-  O = toIndexedObject(O);
-  P = toPropertyKey(P);
-  if (IE8_DOM_DEFINE) try {
-    return $getOwnPropertyDescriptor(O, P);
-  } catch (error) { /* empty */ }
-  if (hasOwn(O, P)) return createPropertyDescriptor(!call(propertyIsEnumerableModule.f, O, P), O[P]);
-};
-
-
-/***/ }),
-
-/***/ 50493:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-var internalObjectKeys = __webpack_require__(449);
-var enumBugKeys = __webpack_require__(69784);
-
-var hiddenKeys = enumBugKeys.concat('length', 'prototype');
-
-// `Object.getOwnPropertyNames` method
-// https://tc39.es/ecma262/#sec-object.getownpropertynames
-// eslint-disable-next-line es/no-object-getownpropertynames -- safe
-exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
-  return internalObjectKeys(O, hiddenKeys);
-};
-
-
-/***/ }),
-
-/***/ 2504:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-// eslint-disable-next-line es/no-object-getownpropertysymbols -- safe
-exports.f = Object.getOwnPropertySymbols;
-
-
-/***/ }),
-
-/***/ 92284:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var uncurryThis = __webpack_require__(63211);
-
-module.exports = uncurryThis({}.isPrototypeOf);
-
-
-/***/ }),
-
-/***/ 449:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var uncurryThis = __webpack_require__(63211);
-var hasOwn = __webpack_require__(38262);
-var toIndexedObject = __webpack_require__(74386);
-var indexOf = (__webpack_require__(54408).indexOf);
-var hiddenKeys = __webpack_require__(40287);
-
-var push = uncurryThis([].push);
-
-module.exports = function (object, names) {
-  var O = toIndexedObject(object);
-  var i = 0;
-  var result = [];
-  var key;
-  for (key in O) !hasOwn(hiddenKeys, key) && hasOwn(O, key) && push(result, key);
-  // Don't enum bug & hidden keys
-  while (names.length > i) if (hasOwn(O, key = names[i++])) {
-    ~indexOf(result, key) || push(result, key);
-  }
-  return result;
-};
-
-
-/***/ }),
-
-/***/ 44399:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-var $propertyIsEnumerable = {}.propertyIsEnumerable;
-// eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
-var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-
-// Nashorn ~ JDK8 bug
-var NASHORN_BUG = getOwnPropertyDescriptor && !$propertyIsEnumerable.call({ 1: 2 }, 1);
-
-// `Object.prototype.propertyIsEnumerable` method implementation
-// https://tc39.es/ecma262/#sec-object.prototype.propertyisenumerable
-exports.f = NASHORN_BUG ? function propertyIsEnumerable(V) {
-  var descriptor = getOwnPropertyDescriptor(this, V);
-  return !!descriptor && descriptor.enumerable;
-} : $propertyIsEnumerable;
-
-
-/***/ }),
-
-/***/ 46954:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var call = __webpack_require__(5805);
-var isCallable = __webpack_require__(8387);
-var isObject = __webpack_require__(66935);
-
-var $TypeError = TypeError;
-
-// `OrdinaryToPrimitive` abstract operation
-// https://tc39.es/ecma262/#sec-ordinarytoprimitive
-module.exports = function (input, pref) {
-  var fn, val;
-  if (pref === 'string' && isCallable(fn = input.toString) && !isObject(val = call(fn, input))) return val;
-  if (isCallable(fn = input.valueOf) && !isObject(val = call(fn, input))) return val;
-  if (pref !== 'string' && isCallable(fn = input.toString) && !isObject(val = call(fn, input))) return val;
-  throw new $TypeError("Can't convert object to primitive value");
-};
-
-
-/***/ }),
-
-/***/ 20764:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var getBuiltIn = __webpack_require__(85507);
-var uncurryThis = __webpack_require__(63211);
-var getOwnPropertyNamesModule = __webpack_require__(50493);
-var getOwnPropertySymbolsModule = __webpack_require__(2504);
-var anObject = __webpack_require__(82918);
-
-var concat = uncurryThis([].concat);
-
-// all object keys, includes non-enumerable and symbols
-module.exports = getBuiltIn('Reflect', 'ownKeys') || function ownKeys(it) {
-  var keys = getOwnPropertyNamesModule.f(anObject(it));
-  var getOwnPropertySymbols = getOwnPropertySymbolsModule.f;
-  return getOwnPropertySymbols ? concat(keys, getOwnPropertySymbols(it)) : keys;
-};
-
-
-/***/ }),
-
-/***/ 95566:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var isNullOrUndefined = __webpack_require__(3302);
-
-var $TypeError = TypeError;
-
-// `RequireObjectCoercible` abstract operation
-// https://tc39.es/ecma262/#sec-requireobjectcoercible
-module.exports = function (it) {
-  if (isNullOrUndefined(it)) throw new $TypeError("Can't call method on " + it);
-  return it;
-};
-
-
-/***/ }),
-
-/***/ 95332:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var shared = __webpack_require__(81151);
-var uid = __webpack_require__(19072);
-
-var keys = shared('keys');
-
-module.exports = function (key) {
-  return keys[key] || (keys[key] = uid(key));
-};
-
-
-/***/ }),
-
-/***/ 21336:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var IS_PURE = __webpack_require__(95716);
-var globalThis = __webpack_require__(29892);
-var defineGlobalProperty = __webpack_require__(95814);
-
-var SHARED = '__core-js_shared__';
-var store = module.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
-
-(store.versions || (store.versions = [])).push({
-  version: '3.44.0',
-  mode: IS_PURE ? 'pure' : 'global',
-  copyright: '© 2014-2025 Denis Pushkarev (zloirock.ru)',
-  license: 'https://github.com/zloirock/core-js/blob/v3.44.0/LICENSE',
-  source: 'https://github.com/zloirock/core-js'
-});
-
-
-/***/ }),
-
-/***/ 81151:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var store = __webpack_require__(21336);
-
-module.exports = function (key, value) {
-  return store[key] || (store[key] = value || {});
-};
-
-
-/***/ }),
-
-/***/ 11596:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-/* eslint-disable es/no-symbol -- required for testing */
-var V8_VERSION = __webpack_require__(17049);
-var fails = __webpack_require__(89133);
-var globalThis = __webpack_require__(29892);
-
-var $String = globalThis.String;
-
-// eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
-module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
-  var symbol = Symbol('symbol detection');
-  // Chrome 38 Symbol has incorrect toString conversion
-  // `get-own-property-symbols` polyfill symbols converted to object are not Symbol instances
-  // nb: Do not call `String` directly to avoid this being optimized out to `symbol+''` which will,
-  // of course, fail.
-  return !$String(symbol) || !(Object(symbol) instanceof Symbol) ||
-    // Chrome 38-40 symbols are not inherited from DOM collections prototypes to instances
-    !Symbol.sham && V8_VERSION && V8_VERSION < 41;
-});
-
-
-/***/ }),
-
-/***/ 8588:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var toIntegerOrInfinity = __webpack_require__(1971);
-
-var max = Math.max;
-var min = Math.min;
-
-// Helper for a popular repeating case of the spec:
-// Let integer be ? ToInteger(index).
-// If integer < 0, let result be max((length + integer), 0); else let result be min(integer, length).
-module.exports = function (index, length) {
-  var integer = toIntegerOrInfinity(index);
-  return integer < 0 ? max(integer + length, 0) : min(integer, length);
-};
-
-
-/***/ }),
-
-/***/ 74386:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-// toObject with fallback for non-array-like ES3 strings
-var IndexedObject = __webpack_require__(35684);
-var requireObjectCoercible = __webpack_require__(95566);
-
-module.exports = function (it) {
-  return IndexedObject(requireObjectCoercible(it));
-};
-
-
-/***/ }),
-
-/***/ 1971:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var trunc = __webpack_require__(14577);
-
-// `ToIntegerOrInfinity` abstract operation
-// https://tc39.es/ecma262/#sec-tointegerorinfinity
-module.exports = function (argument) {
-  var number = +argument;
-  // eslint-disable-next-line no-self-compare -- NaN check
-  return number !== number || number === 0 ? 0 : trunc(number);
-};
-
-
-/***/ }),
-
-/***/ 42849:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var toIntegerOrInfinity = __webpack_require__(1971);
-
-var min = Math.min;
-
-// `ToLength` abstract operation
-// https://tc39.es/ecma262/#sec-tolength
-module.exports = function (argument) {
-  var len = toIntegerOrInfinity(argument);
-  return len > 0 ? min(len, 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
-};
-
-
-/***/ }),
-
-/***/ 43301:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var requireObjectCoercible = __webpack_require__(95566);
-
-var $Object = Object;
-
-// `ToObject` abstract operation
-// https://tc39.es/ecma262/#sec-toobject
-module.exports = function (argument) {
-  return $Object(requireObjectCoercible(argument));
-};
-
-
-/***/ }),
-
-/***/ 67985:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var call = __webpack_require__(5805);
-var isObject = __webpack_require__(66935);
-var isSymbol = __webpack_require__(11035);
-var getMethod = __webpack_require__(44435);
-var ordinaryToPrimitive = __webpack_require__(46954);
-var wellKnownSymbol = __webpack_require__(63810);
-
-var $TypeError = TypeError;
-var TO_PRIMITIVE = wellKnownSymbol('toPrimitive');
-
-// `ToPrimitive` abstract operation
-// https://tc39.es/ecma262/#sec-toprimitive
-module.exports = function (input, pref) {
-  if (!isObject(input) || isSymbol(input)) return input;
-  var exoticToPrim = getMethod(input, TO_PRIMITIVE);
-  var result;
-  if (exoticToPrim) {
-    if (pref === undefined) pref = 'default';
-    result = call(exoticToPrim, input, pref);
-    if (!isObject(result) || isSymbol(result)) return result;
-    throw new $TypeError("Can't convert object to primitive value");
-  }
-  if (pref === undefined) pref = 'number';
-  return ordinaryToPrimitive(input, pref);
-};
-
-
-/***/ }),
-
-/***/ 34453:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var toPrimitive = __webpack_require__(67985);
-var isSymbol = __webpack_require__(11035);
-
-// `ToPropertyKey` abstract operation
-// https://tc39.es/ecma262/#sec-topropertykey
-module.exports = function (argument) {
-  var key = toPrimitive(argument, 'string');
-  return isSymbol(key) ? key : key + '';
-};
-
-
-/***/ }),
-
-/***/ 5598:
-/***/ ((module) => {
-
-"use strict";
-
-var $String = String;
-
-module.exports = function (argument) {
-  try {
-    return $String(argument);
-  } catch (error) {
-    return 'Object';
-  }
-};
-
-
-/***/ }),
-
-/***/ 19072:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var uncurryThis = __webpack_require__(63211);
-
-var id = 0;
-var postfix = Math.random();
-var toString = uncurryThis(1.1.toString);
-
-module.exports = function (key) {
-  return 'Symbol(' + (key === undefined ? '' : key) + ')_' + toString(++id + postfix, 36);
-};
-
-
-/***/ }),
-
-/***/ 79692:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-/* eslint-disable es/no-symbol -- required for testing */
-var NATIVE_SYMBOL = __webpack_require__(11596);
-
-module.exports = NATIVE_SYMBOL &&
-  !Symbol.sham &&
-  typeof Symbol.iterator == 'symbol';
-
-
-/***/ }),
-
-/***/ 90160:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__(71475);
-var fails = __webpack_require__(89133);
-
-// V8 ~ Chrome 36-
-// https://bugs.chromium.org/p/v8/issues/detail?id=3334
-module.exports = DESCRIPTORS && fails(function () {
-  // eslint-disable-next-line es/no-object-defineproperty -- required for testing
-  return Object.defineProperty(function () { /* empty */ }, 'prototype', {
-    value: 42,
-    writable: false
-  }).prototype !== 42;
-});
-
-
-/***/ }),
-
-/***/ 16910:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var globalThis = __webpack_require__(29892);
-var isCallable = __webpack_require__(8387);
-
-var WeakMap = globalThis.WeakMap;
-
-module.exports = isCallable(WeakMap) && /native code/.test(String(WeakMap));
-
-
-/***/ }),
-
-/***/ 63810:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var globalThis = __webpack_require__(29892);
-var shared = __webpack_require__(81151);
-var hasOwn = __webpack_require__(38262);
-var uid = __webpack_require__(19072);
-var NATIVE_SYMBOL = __webpack_require__(11596);
-var USE_SYMBOL_AS_UID = __webpack_require__(79692);
-
-var Symbol = globalThis.Symbol;
-var WellKnownSymbolsStore = shared('wks');
-var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol['for'] || Symbol : Symbol && Symbol.withoutSetter || uid;
-
-module.exports = function (name) {
-  if (!hasOwn(WellKnownSymbolsStore, name)) {
-    WellKnownSymbolsStore[name] = NATIVE_SYMBOL && hasOwn(Symbol, name)
-      ? Symbol[name]
-      : createWellKnownSymbol('Symbol.' + name);
-  } return WellKnownSymbolsStore[name];
-};
-
-
-/***/ }),
-
-/***/ 60599:
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-var $ = __webpack_require__(34186);
-var toObject = __webpack_require__(43301);
-var lengthOfArrayLike = __webpack_require__(74668);
-var setArrayLength = __webpack_require__(76959);
-var doesNotExceedSafeInteger = __webpack_require__(87055);
-var fails = __webpack_require__(89133);
-
-var INCORRECT_TO_LENGTH = fails(function () {
-  return [].push.call({ length: 0x100000000 }, 1) !== 4294967297;
-});
-
-// V8 <= 121 and Safari <= 15.4; FF < 23 throws InternalError
-// https://bugs.chromium.org/p/v8/issues/detail?id=12681
-var properErrorOnNonWritableLength = function () {
-  try {
-    // eslint-disable-next-line es/no-object-defineproperty -- safe
-    Object.defineProperty([], 'length', { writable: false }).push();
-  } catch (error) {
-    return error instanceof TypeError;
-  }
-};
-
-var FORCED = INCORRECT_TO_LENGTH || !properErrorOnNonWritableLength();
-
-// `Array.prototype.push` method
-// https://tc39.es/ecma262/#sec-array.prototype.push
-$({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
-  // eslint-disable-next-line no-unused-vars -- required for `.length`
-  push: function push(item) {
-    var O = toObject(this);
-    var len = lengthOfArrayLike(O);
-    var argCount = arguments.length;
-    doesNotExceedSafeInteger(len + argCount);
-    for (var i = 0; i < argCount; i++) {
-      O[len] = arguments[i];
-      len++;
-    }
-    setArrayLength(O, len);
-    return len;
-  }
-});
-
-
 /***/ })
 
 /******/ 	});
@@ -33615,7 +33496,7 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ entry_lib)
 });
 
-;// CONCATENATED MODULE: ./node_modules/.pnpm/@vue+cli-service@5.0.8/node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
+;// CONCATENATED MODULE: ./node_modules/.pnpm/@vue+cli-service@5.0.8_@babel+core@7.22.5/node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 /* eslint-disable no-var */
 // This file is imported into lib/wc client bundles.
 
@@ -33632,7 +33513,7 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ const setPublicPath = (null);
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/ShogiPlayerLib.vue?vue&type=template&id=af938a1e&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/ShogiPlayerLib.vue?vue&type=template&id=af938a1e&lang=pug&
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -52672,7 +52553,7 @@ use(Buefy);
 
 /* harmony default export */ const esm = (Buefy);
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/ShogiPlayer.vue?vue&type=template&id=51673a5a&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/ShogiPlayer.vue?vue&type=template&id=51673a5a&lang=pug&
 var ShogiPlayervue_type_template_id_51673a5a_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -52696,8 +52577,8 @@ var ShogiPlayervue_type_template_id_51673a5a_lang_pug_render = function render()
 };
 var ShogiPlayervue_type_template_id_51673a5a_lang_pug_staticRenderFns = [];
 
-// EXTERNAL MODULE: ./node_modules/.pnpm/core-js@3.44.0/node_modules/core-js/modules/es.array.push.js
-var es_array_push = __webpack_require__(60599);
+// EXTERNAL MODULE: ../node_modules/.pnpm/core-js@3.31.0/node_modules/core-js/modules/es.array.push.js
+var es_array_push = __webpack_require__(25013);
 // EXTERNAL MODULE: ./node_modules/.pnpm/json5@2.2.3/node_modules/json5/dist/index.js
 var dist = __webpack_require__(22884);
 var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
@@ -55313,7 +55194,7 @@ class LayoutInfo extends ApplicationMemoryRecord {
     }];
   }
 }
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/ErrorNotify.vue?vue&type=template&id=b6f26fdc&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/ErrorNotify.vue?vue&type=template&id=b6f26fdc&lang=pug&
 var ErrorNotifyvue_type_template_id_b6f26fdc_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -55460,7 +55341,7 @@ var component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const ErrorNotify = (component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/OpDisabledBlock.vue?vue&type=template&id=3ae1f43f&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/OpDisabledBlock.vue?vue&type=template&id=3ae1f43f&lang=pug&
 var OpDisabledBlockvue_type_template_id_3ae1f43f_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -55502,7 +55383,7 @@ var OpDisabledBlock_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const OpDisabledBlock = (OpDisabledBlock_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/ToolBelt.vue?vue&type=template&id=7558892e&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/ToolBelt.vue?vue&type=template&id=7558892e&lang=pug&
 var ToolBeltvue_type_template_id_7558892e_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -55658,7 +55539,7 @@ var ToolBelt_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const ToolBelt = (ToolBelt_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/PromoteSelectModal.vue?vue&type=template&id=3552d510&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/PromoteSelectModal.vue?vue&type=template&id=3552d510&lang=pug&
 var PromoteSelectModalvue_type_template_id_3552d510_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -55692,7 +55573,7 @@ var PromoteSelectModalvue_type_template_id_3552d510_lang_pug_render = function r
 };
 var PromoteSelectModalvue_type_template_id_3552d510_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/PieceTap.vue?vue&type=template&id=d3ff7ac2&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/PieceTap.vue?vue&type=template&id=d3ff7ac2&lang=pug&
 var PieceTapvue_type_template_id_d3ff7ac2_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -55717,7 +55598,7 @@ var PieceTapvue_type_template_id_d3ff7ac2_lang_pug_render = function render() {
 };
 var PieceTapvue_type_template_id_d3ff7ac2_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/PieceCount.vue?vue&type=template&id=51eddc2b&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/PieceCount.vue?vue&type=template&id=51eddc2b&lang=pug&
 var PieceCountvue_type_template_id_51eddc2b_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -55766,7 +55647,7 @@ var PieceCount_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const PieceCount = (PieceCount_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/think_mark/ThinkMark.vue?vue&type=template&id=2c910674&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/think_mark/ThinkMark.vue?vue&type=template&id=2c910674&lang=pug&
 var ThinkMarkvue_type_template_id_2c910674_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56019,7 +55900,7 @@ var PromoteSelectModal_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const PromoteSelectModal = (PromoteSelectModal_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SpGroundInside.vue?vue&type=template&id=54486e28&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SpGroundInside.vue?vue&type=template&id=54486e28&lang=pug&
 var SpGroundInsidevue_type_template_id_54486e28_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56033,7 +55914,7 @@ var SpGroundInsidevue_type_template_id_54486e28_lang_pug_render = function rende
 };
 var SpGroundInsidevue_type_template_id_54486e28_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/TurnShowOrEdit.vue?vue&type=template&id=1359a2be&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/TurnShowOrEdit.vue?vue&type=template&id=1359a2be&lang=pug&
 var TurnShowOrEditvue_type_template_id_1359a2be_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56118,7 +55999,7 @@ var TurnShowOrEdit_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const TurnShowOrEdit = (TurnShowOrEdit_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SpBoardWithMembership.vue?vue&type=template&id=3c016f1f&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SpBoardWithMembership.vue?vue&type=template&id=3c016f1f&lang=pug&
 var SpBoardWithMembershipvue_type_template_id_3c016f1f_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56143,7 +56024,7 @@ var SpBoardWithMembershipvue_type_template_id_3c016f1f_lang_pug_render = functio
 };
 var SpBoardWithMembershipvue_type_template_id_3c016f1f_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/Membership.vue?vue&type=template&id=7fd83db4&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/Membership.vue?vue&type=template&id=7fd83db4&lang=pug&
 var Membershipvue_type_template_id_7fd83db4_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56159,7 +56040,7 @@ var Membershipvue_type_template_id_7fd83db4_lang_pug_render = function render() 
 };
 var Membershipvue_type_template_id_7fd83db4_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/MembershipLocation.vue?vue&type=template&id=d94183fe&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/MembershipLocation.vue?vue&type=template&id=d94183fe&lang=pug&
 var MembershipLocationvue_type_template_id_d94183fe_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56169,7 +56050,7 @@ var MembershipLocationvue_type_template_id_d94183fe_lang_pug_render = function r
 };
 var MembershipLocationvue_type_template_id_d94183fe_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/MembershipLocationMark.vue?vue&type=template&id=cc008a12&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/MembershipLocationMark.vue?vue&type=template&id=cc008a12&lang=pug&
 var MembershipLocationMarkvue_type_template_id_cc008a12_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56289,7 +56170,7 @@ var MembershipLocation_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const MembershipLocation = (MembershipLocation_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/MembershipStand.vue?vue&type=template&id=f8329890&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/MembershipStand.vue?vue&type=template&id=f8329890&lang=pug&
 var MembershipStandvue_type_template_id_f8329890_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56440,7 +56321,7 @@ var MembershipStand_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const MembershipStand = (MembershipStand_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/MembershipLocationPlayerInfo.vue?vue&type=template&id=251f2f0e&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/Membership/MembershipLocationPlayerInfo.vue?vue&type=template&id=251f2f0e&lang=pug&
 var MembershipLocationPlayerInfovue_type_template_id_251f2f0e_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56627,7 +56508,7 @@ var Membership_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const Membership = (Membership_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/AspectRatioFixedBlock.vue?vue&type=template&id=968d64f6&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/AspectRatioFixedBlock.vue?vue&type=template&id=968d64f6&lang=pug&
 var AspectRatioFixedBlockvue_type_template_id_968d64f6_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56680,7 +56561,7 @@ var AspectRatioFixedBlock_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const AspectRatioFixedBlock = (AspectRatioFixedBlock_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/MainBoard.vue?vue&type=template&id=9f5e39aa&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/MainBoard.vue?vue&type=template&id=9f5e39aa&lang=pug&
 var MainBoardvue_type_template_id_9f5e39aa_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56805,7 +56686,7 @@ var MainBoard_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const MainBoard = (MainBoard_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/OverlayNavigations.vue?vue&type=template&id=c0ab0398&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/OverlayNavigations.vue?vue&type=template&id=c0ab0398&lang=pug&
 var OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -56933,7 +56814,7 @@ var SpBoardWithMembership_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const SpBoardWithMembership = (SpBoardWithMembership_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/PieceBox.vue?vue&type=template&id=e5d6f376&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/PieceBox.vue?vue&type=template&id=e5d6f376&lang=pug&
 var PieceBoxvue_type_template_id_e5d6f376_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -57066,7 +56947,7 @@ var PieceBox_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const PieceBox = (PieceBox_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/NavigateBlock.vue?vue&type=template&id=d9c63b08&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/NavigateBlock.vue?vue&type=template&id=d9c63b08&lang=pug&
 var NavigateBlockvue_type_template_id_d9c63b08_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -57080,7 +56961,7 @@ var NavigateBlockvue_type_template_id_d9c63b08_lang_pug_render = function render
 };
 var NavigateBlockvue_type_template_id_d9c63b08_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SpController.vue?vue&type=template&id=b8401202&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SpController.vue?vue&type=template&id=b8401202&lang=pug&
 var SpControllervue_type_template_id_b8401202_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -57205,7 +57086,7 @@ var SpController_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const SpController = (SpController_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SpSlider.vue?vue&type=template&id=26692f32&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SpSlider.vue?vue&type=template&id=26692f32&lang=pug&
 var SpSlidervue_type_template_id_26692f32_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -57330,7 +57211,7 @@ var NavigateBlock_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const NavigateBlock = (NavigateBlock_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SfenShowBlock.vue?vue&type=template&id=26b8a48e&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/SfenShowBlock.vue?vue&type=template&id=26b8a48e&lang=pug&
 var SfenShowBlockvue_type_template_id_26b8a48e_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -57378,7 +57259,7 @@ var SfenShowBlock_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const SfenShowBlock = (SfenShowBlock_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/CommentBlock.vue?vue&type=template&id=a5c4e39c&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/CommentBlock.vue?vue&type=template&id=a5c4e39c&lang=pug&
 var CommentBlockvue_type_template_id_a5c4e39c_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63016,7 +62897,7 @@ const mod_viewpoint = {
     }
   }
 };
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/DevTools.vue?vue&type=template&id=5b5a983a&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/DevTools.vue?vue&type=template&id=5b5a983a&lang=pug&
 var DevToolsvue_type_template_id_5b5a983a_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63056,7 +62937,7 @@ var DevToolsvue_type_template_id_5b5a983a_lang_pug_render = function render() {
 };
 var DevToolsvue_type_template_id_5b5a983a_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/FriendlyCloseButton.vue?vue&type=template&id=18937ef9&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/FriendlyCloseButton.vue?vue&type=template&id=18937ef9&lang=pug&
 var FriendlyCloseButtonvue_type_template_id_18937ef9_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63099,7 +62980,7 @@ var FriendlyCloseButton_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const FriendlyCloseButton = (FriendlyCloseButton_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupMain.vue?vue&type=template&id=471b8b12&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupMain.vue?vue&type=template&id=471b8b12&lang=pug&
 var GroupMainvue_type_template_id_471b8b12_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63191,7 +63072,7 @@ var GroupMain_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const GroupMain = (GroupMain_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupStyle.vue?vue&type=template&id=de9acfe6&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupStyle.vue?vue&type=template&id=de9acfe6&lang=pug&
 var GroupStylevue_type_template_id_de9acfe6_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63293,7 +63174,7 @@ var GroupStyle_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const GroupStyle = (GroupStyle_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupEvent.vue?vue&type=template&id=1d706c82&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupEvent.vue?vue&type=template&id=1d706c82&lang=pug&
 var GroupEventvue_type_template_id_1d706c82_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63347,7 +63228,7 @@ var GroupEvent_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const GroupEvent = (GroupEvent_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupSfen.vue?vue&type=template&id=689a14d7&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupSfen.vue?vue&type=template&id=689a14d7&lang=pug&
 var GroupSfenvue_type_template_id_689a14d7_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63433,7 +63314,7 @@ var GroupSfen_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const GroupSfen = (GroupSfen_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupDebug.vue?vue&type=template&id=1b4a165e&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupDebug.vue?vue&type=template&id=1b4a165e&lang=pug&
 var GroupDebugvue_type_template_id_1b4a165e_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63443,7 +63324,7 @@ var GroupDebugvue_type_template_id_1b4a165e_lang_pug_render = function render() 
 };
 var GroupDebugvue_type_template_id_1b4a165e_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/DebugBlock.vue?vue&type=template&id=f97241dc&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/DebugBlock.vue?vue&type=template&id=f97241dc&lang=pug&
 var DebugBlockvue_type_template_id_f97241dc_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63599,7 +63480,7 @@ var DebugBlockvue_type_template_id_f97241dc_lang_pug_staticRenderFns = [function
 
 ;// CONCATENATED MODULE: ./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/DebugBlock.vue?vue&type=template&id=f97241dc&lang=pug&
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/DebugBlockRow.vue?vue&type=template&id=095f6ac6&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/DebugBlockRow.vue?vue&type=template&id=095f6ac6&lang=pug&
 var DebugBlockRowvue_type_template_id_095f6ac6_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63723,7 +63604,7 @@ var GroupDebug_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const GroupDebug = (GroupDebug_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupProps.vue?vue&type=template&id=2f156154&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupProps.vue?vue&type=template&id=2f156154&lang=pug&
 var GroupPropsvue_type_template_id_2f156154_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63765,7 +63646,7 @@ var GroupProps_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const GroupProps = (GroupProps_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupData.vue?vue&type=template&id=0c741d59&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupData.vue?vue&type=template&id=0c741d59&lang=pug&
 var GroupDatavue_type_template_id_0c741d59_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -63802,7 +63683,7 @@ var GroupData_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const GroupData = (GroupData_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupCog.vue?vue&type=template&id=7a0580db&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/dev_tools/GroupCog.vue?vue&type=template&id=7a0580db&lang=pug&
 var GroupCogvue_type_template_id_7a0580db_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -64247,7 +64128,7 @@ const mod_dev_tools = {
     }
   }
 };
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/shortcut_viewer/ShortcutViewer.vue?vue&type=template&id=33e34252&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/shortcut_viewer/ShortcutViewer.vue?vue&type=template&id=33e34252&lang=pug&
 var ShortcutViewervue_type_template_id_33e34252_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -64263,7 +64144,7 @@ var ShortcutViewervue_type_template_id_33e34252_lang_pug_render = function rende
 };
 var ShortcutViewervue_type_template_id_33e34252_lang_pug_staticRenderFns = [];
 
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"8c709ff4-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/shortcut_viewer/ShortcutContent.vue?vue&type=template&id=77c8f67f&lang=pug&
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e377a86e-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-82.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/shortcut_viewer/ShortcutContent.vue?vue&type=template&id=77c8f67f&lang=pug&
 var ShortcutContentvue_type_template_id_77c8f67f_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
@@ -64712,12 +64593,6 @@ const mod_think_mark = {
     sp_think_mark_list: {
       type: Array,
       default: () => []
-    },
-    // play_mode での駒操作は単純なクリックだけに反応するか？
-    // 例えばメタキーを押しながら click した場合は無効する
-    sp_move_simple_click_only: {
-      type: Boolean,
-      default: true
     }
   },
   data() {
@@ -65452,9 +65327,6 @@ const mod_edit_mode = {
     board_cell_left_click_piece_move(place, e) {
       this.log("board_cell_left_click");
       this.log(`shiftKey: ${e.shiftKey}`);
-      if (this.click_operation_cancel(e)) {
-        return;
-      }
       this.$data._last_clicked_cell = e.target;
       this.illegal_init();
 
@@ -65957,9 +65829,6 @@ const mod_edit_mode = {
       if (this.break_if_view_mode) {
         return;
       }
-      if (this.click_operation_cancel(e)) {
-        return;
-      }
 
       // if (this.membership_click_handle(location, e)) {
       //   return
@@ -66006,16 +65875,6 @@ const mod_edit_mode = {
       this.have_piece_location = location;
       this.have_piece_promoted = have_piece_promoted;
       this.lp_create(e, this.origin_soldier2);
-    },
-    click_operation_cancel(event) {
-      if (this.play_p) {
-        if (this.sp_move_simple_click_only) {
-          if (this.meta_p(event)) {
-            this.log("play_mode で装飾キーを押しながらクリックしたので無効とする");
-            return true;
-          }
-        }
-      }
     },
     // 駒箱の駒を持ち上げている？
     piece_box_have_p(piece) {
@@ -68048,7 +67907,7 @@ var ShogiPlayerLib_component = componentNormalizer_normalizeComponent(
 )
 
 /* harmony default export */ const ShogiPlayerLib = (ShogiPlayerLib_component.exports);
-;// CONCATENATED MODULE: ./node_modules/.pnpm/@vue+cli-service@5.0.8/node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
+;// CONCATENATED MODULE: ./node_modules/.pnpm/@vue+cli-service@5.0.8_@babel+core@7.22.5/node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 
 /* harmony default export */ const entry_lib = (ShogiPlayerLib);
