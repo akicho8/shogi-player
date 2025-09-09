@@ -111,7 +111,7 @@ task :release do
   pnpm publish
   git push --tags
   git push
-  (cd ~/src/shogi-extend/nuxt_side && ncu shogi-player -u && pnpm i)
+  (cd ~/src/shogi-extend/nuxt_side && ncu shogi-player -u && npm i)
   rake old_doc:deploy
   rake open
   rake cdn
