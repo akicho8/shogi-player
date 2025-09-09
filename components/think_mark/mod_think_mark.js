@@ -11,13 +11,6 @@ export const mod_think_mark = {
       type: Array,
       default: () => [],
     },
-
-    // play_mode での駒操作は単純なクリックだけに反応するか？
-    // 例えばメタキーを押しながら click した場合は無効する
-    sp_move_simple_click_only: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   data() {

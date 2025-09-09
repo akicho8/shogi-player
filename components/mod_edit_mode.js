@@ -119,10 +119,6 @@ export const mod_edit_mode = {
       this.log("board_cell_left_click")
       this.log(`shiftKey: ${e.shiftKey}`)
 
-      if (this.click_operation_cancel(e)) {
-        return
-      }
-
       this.$data._last_clicked_cell = e.target
       this.illegal_init()
 
@@ -613,10 +609,6 @@ export const mod_edit_mode = {
         return
       }
 
-      if (this.click_operation_cancel(e)) {
-        return
-      }
-
       // if (this.membership_click_handle(location, e)) {
       //   return
       // }
@@ -663,17 +655,6 @@ export const mod_edit_mode = {
       this.have_piece_location = location
       this.have_piece_promoted = have_piece_promoted
       this.lp_create(e, this.origin_soldier2)
-    },
-
-    click_operation_cancel(event) {
-      if (this.play_p) {
-        if (this.sp_move_simple_click_only) {
-          if (this.meta_p(event)) {
-            this.log("play_mode で装飾キーを押しながらクリックしたので無効とする")
-            return true
-          }
-        }
-      }
     },
 
     // 駒箱の駒を持ち上げている？
