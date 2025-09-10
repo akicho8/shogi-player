@@ -29,6 +29,23 @@ export default {
     //
     mark_pos_key:        { required: false             },
   },
+
+  mounted() {
+    // 駒の角度を -5..5 の範囲でずらす場合
+    if (true) {
+      const piece = this.$el.querySelector(".PieceTexture")
+      // 現在の transform を取得
+      const style = window.getComputedStyle(piece)
+      const matrix = new DOMMatrixReadOnly(style.transform)
+      // matrix から現在の回転角を算出
+      const currentAngle = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI)
+      // -5〜5 度の乱数を生成して加算
+      const delta = Math.random() * 10 - 5
+      const newAngle = currentAngle + delta
+      // 新しい transform を適用
+      piece.style.transform = `rotate(${newAngle}deg)`
+    }
+  },
 }
 </script>
 
