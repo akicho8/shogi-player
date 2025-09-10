@@ -32,7 +32,7 @@ export default {
 
   mounted() {
     // 駒の角度を -5..5 の範囲でずらす場合
-    if (true) {
+    if (false) {
       const piece = this.$el.querySelector(".PieceTexture")
       // 現在の transform を取得
       const style = window.getComputedStyle(piece)
