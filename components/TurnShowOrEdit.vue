@@ -38,7 +38,7 @@ export default {
     },
     turn_edit_handle() {
       this.TheSp.turn_edit_handle()
-      this.$nextTick(() => this.$refs.turn_edit_input.focus())
+      this.$nextTick(() => this.$refs.turn_edit_input.focus({preventScroll: true}))
     },
   },
   computed: {

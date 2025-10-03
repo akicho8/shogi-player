@@ -38,7 +38,7 @@ export const mod_focus = {
       if (this.focus_disable_p) { return false }
       const el = this.__navigate_block_element_refs(key)
       if (el) {
-        el.focus()
+        el.focus({preventScroll: true})
         return true
       }
       return false

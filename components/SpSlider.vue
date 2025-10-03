@@ -43,7 +43,7 @@ export default {
       if (this.$el.querySelector) {
         const el = this.$el.querySelector(".b-slider-thumb")
         if (el) {
-          el.focus()
+          el.focus({preventScroll: true})
           return true
         }
       }
