@@ -1,8 +1,9 @@
 <template lang="pug">
 .OverlayNavigations(v-if="TheSp.sp_overlay_nav")
-  .OverlayNavigationItem.previous(          @click.stop.prevent="TheSp.api_turn_add(-1, {interactive: $event})")
-  .OverlayNavigationItem.next(              @click.stop.prevent="TheSp.api_turn_add(+1, {interactive: $event})")
-  .OverlayNavigationItem.flip_trigger_cell( @click.stop.prevent="TheSp.viewpoint_flip_handle")
+  // models/event_helper.js の long_press_disable の影響でここでは @click は使えない
+  .OverlayNavigationItem.previous(          @pointerdown.stop.prevent="TheSp.api_turn_add(-1, {interactive: $event})")
+  .OverlayNavigationItem.next(              @pointerdown.stop.prevent="TheSp.api_turn_add(+1, {interactive: $event})")
+  .OverlayNavigationItem.flip_trigger_cell( @pointerdown.stop.prevent="TheSp.viewpoint_flip_handle")
 </template>
 
 <script>

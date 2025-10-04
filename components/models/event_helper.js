@@ -11,6 +11,9 @@ class EventHelper {
     el.removeEventListener("contextmenu", this.__prevent_default)
   }
 
+  // iOS で sp_overlay_nav を有効にしたとき ../OverlayNavigations.vue で @click が反応しなくなるのはこれが原因
+  // だがこれを無効にするとそれはそれで災いが起きるので @click を @pointerdown に変更する
+  // ShogiPlayer の盤面の部分は click より pointerdown に統一したい意図もある
   long_press_disable(el) {
     this.__log(el, "touchstart", "off")
     el.addEventListener("touchstart", this.__prevent_default, { passive: false })
