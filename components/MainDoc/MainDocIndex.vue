@@ -17,6 +17,7 @@
         b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_sound_timing'}") 音タイミング
         b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_think_mark'}") マーク
         b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_show'}") 表示
+        b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_overlay_nav'}") 盤面左右で進む
   .MainDocDemo.section.is-paddingless.is-marginless
     .container.is-fluid
       .title.is-4.mt-6 1. 再生モード
