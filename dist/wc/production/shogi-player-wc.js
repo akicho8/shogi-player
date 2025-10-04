@@ -19045,7 +19045,7 @@ use(Buefy);
 
 /***/ }),
 
-/***/ 24627:
+/***/ 48937:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23100,8 +23100,8 @@ var MainBoard_component = (0,componentNormalizer/* default */.Z)(
 )
 
 /* harmony default export */ const MainBoard = (MainBoard_component.exports);
-;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1203640c-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/OverlayNavigations.vue?vue&type=template&id=c0ab0398&lang=pug&
-var OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_render = function render() {
+;// CONCATENATED MODULE: ../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1203640c-vue-loader-template"}!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!../node_modules/.pnpm/pug-plain-loader@1.1.0_pug@2.0.4/node_modules/pug-plain-loader/index.js!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/OverlayNavigations.vue?vue&type=template&id=836d57e0&lang=pug&
+var OverlayNavigationsvue_type_template_id_836d57e0_lang_pug_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _vm.TheSp.sp_overlay_nav ? _c('div', {
@@ -23109,7 +23109,7 @@ var OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_render = function r
   }, [_c('div', {
     staticClass: "OverlayNavigationItem previous",
     on: {
-      "click": function ($event) {
+      "pointerdown": function ($event) {
         $event.stopPropagation();
         $event.preventDefault();
         return _vm.TheSp.api_turn_add(-1, {
@@ -23120,7 +23120,7 @@ var OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_render = function r
   }), _c('div', {
     staticClass: "OverlayNavigationItem next",
     on: {
-      "click": function ($event) {
+      "pointerdown": function ($event) {
         $event.stopPropagation();
         $event.preventDefault();
         return _vm.TheSp.api_turn_add(+1, {
@@ -23131,7 +23131,7 @@ var OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_render = function r
   }), _c('div', {
     staticClass: "OverlayNavigationItem flip_trigger_cell",
     on: {
-      "click": function ($event) {
+      "pointerdown": function ($event) {
         $event.stopPropagation();
         $event.preventDefault();
         return _vm.TheSp.viewpoint_flip_handle.apply(null, arguments);
@@ -23139,7 +23139,7 @@ var OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_render = function r
     }
   })]) : _vm._e();
 };
-var OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_staticRenderFns = [];
+var OverlayNavigationsvue_type_template_id_836d57e0_lang_pug_staticRenderFns = [];
 
 ;// CONCATENATED MODULE: ./node_modules/.pnpm/thread-loader@3.0.4_webpack@5.86.0/node_modules/thread-loader/dist/cjs.js!./node_modules/.pnpm/babel-loader@8.3.0_@babel+core@7.22.5_webpack@5.86.0/node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!../node_modules/.pnpm/cache-loader@4.1.0_webpack@4.46.0/node_modules/cache-loader/dist/cjs.js??ruleSet[0].use[0]!./node_modules/.pnpm/vue-loader@15.10.1_css-loader@6.8.1_webpack@5.86.0/node_modules/vue-loader/lib/index.js??vue-loader-options!./node_modules/.pnpm/file+../node_modules/shogi-player/components/OverlayNavigations.vue?vue&type=script&lang=js&
 
@@ -23155,7 +23155,7 @@ var OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_staticRenderFns = [
 
 function OverlayNavigations_injectStyles (context) {
   
-  var style0 = __webpack_require__(53839)
+  var style0 = __webpack_require__(45569)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -23164,8 +23164,8 @@ if (style0.__inject__) style0.__inject__(context)
 
 var OverlayNavigations_component = (0,componentNormalizer/* default */.Z)(
   components_OverlayNavigationsvue_type_script_lang_js_,
-  OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_render,
-  OverlayNavigationsvue_type_template_id_c0ab0398_lang_pug_staticRenderFns,
+  OverlayNavigationsvue_type_template_id_836d57e0_lang_pug_render,
+  OverlayNavigationsvue_type_template_id_836d57e0_lang_pug_staticRenderFns,
   false,
   OverlayNavigations_injectStyles,
   null,
@@ -33631,6 +33631,10 @@ class EventHelper {
     this.__log(el, "contextmenu", "on");
     el.removeEventListener("contextmenu", this.__prevent_default);
   }
+
+  // iOS で sp_overlay_nav を有効にしたとき ../OverlayNavigations.vue で @click が反応しなくなるのはこれが原因
+  // だがこれを無効にするとそれはそれで災いが起きるので @click を @pointerdown に変更する
+  // ShogiPlayer の盤面の部分は click より pointerdown に統一したい意図もある
   long_press_disable(el) {
     this.__log(el, "touchstart", "off");
     el.addEventListener("touchstart", this.__prevent_default, {
@@ -50524,7 +50528,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.ShogiPlayer.is_mode_view .SpGroundIns
 
 /***/ }),
 
-/***/ 28806:
+/***/ 58538:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -70535,7 +70539,7 @@ assert.equal = function assertEqual(l, r, msg) {
 /* harmony import */ var json5__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(json5__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(21111);
 /* harmony import */ var buefy__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(33965);
-/* harmony import */ var shogi_player_components_ShogiPlayer_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(24627);
+/* harmony import */ var shogi_player_components_ShogiPlayer_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(48937);
 /* harmony import */ var shogi_player_components_models_event_list_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(87560);
 
 
@@ -71016,15 +71020,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 53839:
+/***/ 45569:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_c0ab0398_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(34362);
-/* harmony import */ var _vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_c0ab0398_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_c0ab0398_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_836d57e0_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(89355);
+/* harmony import */ var _vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_836d57e0_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_836d57e0_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_c0ab0398_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_c0ab0398_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
+/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_836d57e0_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _vue_style_loader_4_1_3_node_modules_vue_style_loader_index_js_clonedRuleSet_27_use_0_css_loader_6_8_1_webpack_5_86_0_node_modules_css_loader_dist_cjs_js_clonedRuleSet_27_use_1_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_loaders_stylePostLoader_js_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_2_postcss_loader_6_2_1_postcss_8_4_24_webpack_5_86_0_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_27_use_3_node_modules_pnpm_sass_loader_10_4_1_sass_1_63_2_webpack_4_46_0_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_27_use_4_node_modules_pnpm_cache_loader_4_1_0_webpack_4_46_0_node_modules_cache_loader_dist_cjs_js_ruleSet_0_use_0_vue_loader_15_10_1_css_loader_6_8_1_webpack_5_86_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OverlayNavigations_vue_vue_type_style_index_0_id_836d57e0_prod_lang_sass___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
 /* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 
 
@@ -71629,20 +71633,20 @@ module.exports.__inject__ = function (shadowRoot) {
 
 /***/ }),
 
-/***/ 34362:
+/***/ 89355:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(28806);
+var content = __webpack_require__(58538);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.id, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to Shadow Root
 var add = (__webpack_require__(29943)/* ["default"] */ .Z)
 module.exports.__inject__ = function (shadowRoot) {
-  add("2103eb4e", content, shadowRoot)
+  add("ccef6b70", content, shadowRoot)
 };
 
 /***/ }),
