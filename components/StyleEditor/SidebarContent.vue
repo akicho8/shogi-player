@@ -409,6 +409,10 @@
         b-radio-button(size="is-small" v-model="TheSe.sp_dev_tools" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_dev_tools" :native-value="true") ON
 
+      b-field(custom-class="is-small" label="盤面左右で局面変更")
+        b-radio-button(size="is-small" v-model="TheSe.sp_overlay_nav" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_overlay_nav" :native-value="true") ON
+
       b-field(custom-class="is-small" label="KIFコメ表示")
         b-radio-button(size="is-small" v-model="TheSe.sp_comment" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_comment" :native-value="true") ON

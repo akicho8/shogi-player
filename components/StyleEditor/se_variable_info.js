@@ -118,6 +118,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       { key: "sp_turn_show", default:    DEVELOPMENT_P ? true : false, },
       { key: "sp_dev_tools", default:    DEVELOPMENT_P ? false : false, },
+      { key: "sp_overlay_nav", default:    DEVELOPMENT_P ? false : false, },
 
       { key: "sp_slider", default:     DEVELOPMENT_P ? true : true, },
       { key: "sp_controller", default: DEVELOPMENT_P ? true : false, },

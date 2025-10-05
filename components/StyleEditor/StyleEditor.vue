@@ -264,6 +264,7 @@ export default {
       params.sp_turn                 = this.sp_turn
       params.sp_body                 = this.sp_body
       params.sp_dev_tools            = this.sp_dev_tools
+      params.sp_overlay_nav          = this.sp_overlay_nav
       params.sp_turn_show            = this.sp_turn_show
       params.sp_coordinate           = this.sp_coordinate
       params.sp_coordinate_variant_v = this.sp_coordinate_variant_v
