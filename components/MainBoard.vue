@@ -1,5 +1,6 @@
 <template lang="pug">
-.MainBoard.is-unselectable(data-resize_observer_id="MainBoard")
+// ↓ v-sp-disable-interactions を指定したことによってこの中では @click は使えない
+.MainBoard.is-unselectable(data-resize_observer_id="MainBoard" v-sp-disable-interactions)
   // ↑ここに影を適用してはいけない
   // .MainBoard に設定した background-image に影をつけるために drop-shadow すると
   // .MainBoard その子供である table にまで影が適用されてしまう

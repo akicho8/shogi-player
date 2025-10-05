@@ -174,10 +174,12 @@ Default: `null`
 Type: `Boolean`
 Default: `false`
 
-再生モードのときの盤上の左右をクリックして動かせるようにするか？
+再生モードのときの盤上の左右をクリックして局面を動かせるようにするか？
 
 * 有効にすると再生しやすくなるが駒を動かせなくなる
 * 天王山をクリックすると反転する
+* 基本的に盤面の中の操作トリガーはタッチした瞬間に反応する `pointerdown` イベントに統一しているが `sp_overlay_nav` は `sp_controller` の代替機能でもあるため、例外的に `click` イベントに反応するようにしている
+* また `click` イベントにすることでタッチスクロールが可能になる
 
 See also: [sp_controller](/reference/props/#sp-controller)
 

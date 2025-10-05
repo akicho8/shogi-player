@@ -1,5 +1,5 @@
 <template lang="pug">
-.SpBoardWithMembership.is-unselectable(:class="component_class" v-sp-disable-interactions)
+.SpBoardWithMembership.is-unselectable(:class="component_class")
   Membership(position="north" :location="location_of('white')")
   AspectRatioFixedBlock
     OverlayNavigations
