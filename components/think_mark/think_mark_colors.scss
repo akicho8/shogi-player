@@ -25,7 +25,15 @@
       // 円の輝度に順応
       $rate: 30%;
       $edge_color: if($lightness > 50%, lighten($color, $rate), darken($color, $rate));
-      box-shadow: 0 0 0 1px $edge_color, inset 0 0 0 1px $edge_color;
+
+      // 方法1. 本来はこの方法でいいのだが、Mac Safari と Mobile Chrome では外側の部分が縁取られず背景色になってしまう。
+      // //          外側                   内側
+      // box-shadow: 0 0 0 1px $edge_color, inset 0 0 0 1px $edge_color;
+
+      // 方法2. 外側でバグるので外側だけ outline を使う。これで上の問題は一応解決する。
+      outline: 1px solid $edge_color;          // 内側
+      box-shadow: inset 0 0 0 1px $edge_color; // 外側
+      // outline-offset: -1px; // 必要なら内側に寄せる
     }
 
     .think_mark_user_name_color#{$i} {
