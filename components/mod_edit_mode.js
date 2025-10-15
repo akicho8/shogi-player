@@ -609,6 +609,11 @@ export const mod_edit_mode = {
         return
       }
 
+      if (this.view_p && this.sp_overlay_nav) {
+        this.log("盤面左右で移動する場合は盤面で駒を動かせないのだから駒台の操作も禁止する")
+        return
+      }
+
       // if (this.membership_click_handle(location, e)) {
       //   return
       // }
