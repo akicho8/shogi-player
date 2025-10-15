@@ -1,5 +1,5 @@
 <template lang="pug">
-.Membership(:class="component_class" v-if="component_show_p" @pointerdown.capture="click_handle")
+.Membership(:class="component_class" v-if="component_show_p" @pointerdown.capture="click_handle" v-sp-disable-interactions)
   MembershipLocation
   MembershipLocationPlayerInfo
   MembershipStand
