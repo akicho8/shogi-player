@@ -37,6 +37,10 @@ export default {
     },
 
     piece_tap_class(piece) {
+      if (this.break_if_view_mode) {
+        return []
+      }
+
       let list = []
 
       // if (this.lifted_p) {
@@ -59,11 +63,21 @@ export default {
           if (this.TheSp.play_p && !this.TheSp.sp_my_piece_only_move) {
             f = true
           }
-          if (this.break_if_view_mode) {
-            f = false
+
+          // 再生モードの場合
+          if (this.TheSp.view_p) {
+            // 再生モードでもデフォルトの sp_view_mode_piece_movable=true なら駒は動かせるので手番の側であれば動かせるとする
+            if (this.TheSp.xcontainer.current_location === this.ms.location) {
+              f = true
+            }
+            // しかし sp_overlay_nav の場合は盤面で操作できないので駒台の方も無効にする
+            if (this.TheSp.sp_overlay_nav) {
+              f = false
+            }
           }
+
           if (f) {
-            list.push("selectable_p")
+            list.push("selectable_p") // マウスホバーでセルに色をつける
           }
         }
       }
