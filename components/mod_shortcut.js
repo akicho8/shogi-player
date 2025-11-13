@@ -27,7 +27,7 @@ export const mod_shortcut = {
           const key = e.key.toLowerCase()
           if (key === loc.char_key) {
             this.soldier_hold_unless_lifted_p(e)
-            if (this.membership_click_handle(loc, e)) { // 駒台クリック
+            if (this.membership_left_click_handle(loc, e)) { // 駒台クリック
               e.preventDefault()
               return true
             }

@@ -538,7 +538,7 @@ export const mod_edit_mode = {
     // },
 
     // 駒台 or 駒台の駒をクリックしたときの共通処理
-    membership_click_handle(location, e) {
+    membership_left_click_handle(location, e) {
       if (this.break_if_view_mode) {
         return
       }
@@ -579,6 +579,14 @@ export const mod_edit_mode = {
       return false
     },
 
+    // 副ボタンクリックの場合は
+    membership_right_click_handle(location, e) {
+      if (this.lifted_p) {
+        this.interactive_lifted_piece_cancel()
+        return true
+      }
+    },
+
     // 駒台の駒を押した瞬間
     piece_stand_piece_click_with_mark_event(location, piece, have_piece_promoted, e) {
       this.event_call("ev_action_stand_cell_pointerdown", location, piece, e)
@@ -614,7 +622,7 @@ export const mod_edit_mode = {
         return
       }
 
-      // if (this.membership_click_handle(location, e)) {
+      // if (this.membership_left_click_handle(location, e)) {
       //   return
       // }
 

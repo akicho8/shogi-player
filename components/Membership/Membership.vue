@@ -1,5 +1,10 @@
 <template lang="pug">
-.Membership(:class="component_class" v-if="component_show_p" @pointerdown.capture="click_handle" v-sp-disable-interactions)
+.Membership(
+  :class="component_class"
+  v-if="component_show_p"
+  @pointerdown.capture="right_click_handle"
+  v-sp-disable-interactions
+  )
   MembershipLocation
   MembershipLocationPlayerInfo
   MembershipStand
@@ -37,8 +42,14 @@ export default {
     // これが capture によって子供の駒より先に反応しているため駒を持っているときに元に戻される
     // capture にしなかったら駒台の駒を持ち替えることができる
     // しかし一見便利なように見えて駒を離せなくなるので持ち替えはやらない方がよい
-    click_handle(e) {
-      if (this.TheSp.membership_click_handle(this.location, e)) {
+    left_click_handle(e) {
+      if (this.TheSp.membership_left_click_handle(this.location, e)) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+    },
+    right_click_handle(e) {
+      if (this.TheSp.membership_right_click_handle(this.location, e)) {
         e.preventDefault()
         e.stopPropagation()
       }
