@@ -2,7 +2,8 @@
 .Membership(
   :class="component_class"
   v-if="component_show_p"
-  @pointerdown.capture="right_click_handle"
+  @pointerdown.capture.right="right_click_handle"
+  @pointerdown.capture.left="left_click_handle"
   v-sp-disable-interactions
   )
   MembershipLocation
