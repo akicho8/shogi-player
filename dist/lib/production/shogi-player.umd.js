@@ -54105,7 +54105,8 @@ class Location extends ApplicationMemoryRecord {
       value_sign: +1,
       position_key: "is_position_south",
       long_name: "先手",
-      handicap_long_name: "下手"
+      handicap_long_name: "下手",
+      human_color_name: "黒"
     }, {
       key: "white",
       name: "☖",
@@ -54113,7 +54114,8 @@ class Location extends ApplicationMemoryRecord {
       value_sign: -1,
       position_key: "is_position_north",
       long_name: "後手",
-      handicap_long_name: "上手"
+      handicap_long_name: "上手",
+      human_color_name: "白"
     }];
   }
   static cycle_lookup(value) {
