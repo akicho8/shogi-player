@@ -18,6 +18,10 @@ describe('Location', () => {
     expect(Location.fetch("black").any_long_name(true)).toEqual("下手")
   })
 
+  it('human_color_name', () => {
+    expect(Location.fetch("black").human_color_name).toEqual("黒")
+  })
+
   it('advance', () => {
     expect(Location.fetch("black").advance(-2).key).toEqual("black")
     expect(Location.fetch("black").advance(-1).key).toEqual("white")
