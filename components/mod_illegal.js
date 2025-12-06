@@ -4,13 +4,13 @@ import { IllegalInfo } from "./models/illegal_info.js"
 
 export const mod_illegal = {
   props: {
-    // |----------------+-------+-------+--------------------------------------------------+--------|
-    // | props          | check | break |                                                  |        |
-    // |----------------+-------+-------+--------------------------------------------------+--------|
-    // | リレー将棋向け | o     |       | 反則になりそうでも指させてシステム側で指摘する   | 初期値 |
-    // | 上級者向け     |       |       | 反則かどうかは人が判断する                       |        |
-    // | 初心者向け     | o     | o     | 反則になりそうなら emit して動作をキャンセルする |        |
-    // |----------------+-------+-------+--------------------------------------------------+--------|
+    // |----------------+----------+--------+--------------------------------------------------+--------|
+    // | props          | validate | cancel |                                                  |        |
+    // |----------------+----------+--------+--------------------------------------------------+--------|
+    // | リレー将棋向け | o        |        | 反則になりそうでも指させてシステム側で指摘する   | 初期値 |
+    // | 上級者向け     |          |        | 反則かどうかは人が判断する                       |        |
+    // | 初心者向け     | o        | o      | 反則になりそうなら emit して動作をキャンセルする |        |
+    // |----------------+----------+--------+--------------------------------------------------+--------|
     sp_illegal_validate: { type: Boolean, default: true,  }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
     sp_illegal_cancel:   { type: Boolean, default: false, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
   },
@@ -27,6 +27,17 @@ export const mod_illegal = {
 
     illegal_clear() {
       this.illegal_list = []
+    },
+
+    illegal_add2(illegal_key, last_move_info) {
+      const moves = [...this.moves_take_turn_offset, last_move_info.to_sfen]
+      const sfen = this.init_sfen + " moves " + moves.join(" ")
+      const attrs = {
+        sfen: sfen,
+        turn: this.turn_offset + 1,
+        last_move_info: last_move_info,
+      }
+      return this.illegal_add(illegal_key, attrs)
     },
 
     illegal_add(illegal_key, attrs = {}) {

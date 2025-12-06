@@ -365,7 +365,7 @@
               b-button(size="is-small" @click="TheSe.se_tf2_reset") リセット
 
     .box
-      SeTitle(name="コントローラー＆スライダー")
+      SeTitle(name="コントローラー")
 
       b-field(custom-class="is-small" label="横幅")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_controller_width" :min="0" :max="1.0" :step="0.001")
@@ -380,6 +380,20 @@
       b-field(custom-class="is-small" label="スライダー表示")
         b-radio-button(size="is-small" v-model="TheSe.sp_slider" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_slider" :native-value="true") ON
+
+    .box
+      SeTitle(name="反則")
+      b-field(custom-class="is-small" label="操作モードでは合法手に絞る(二歩・ワープ・王手放置等を除く)")
+        b-radio-button(size="is-small" v-model="TheSe.sp_legal_move_only" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_legal_move_only" :native-value="true") ON
+
+      b-field(custom-class="is-small" label="操作モードでの反則判定")
+        b-radio-button(size="is-small" v-model="TheSe.sp_illegal_validate" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_illegal_validate" :native-value="true") ON
+
+      b-field(custom-class="is-small" label="操作モードでの反則ブロック")
+        b-radio-button(size="is-small" v-model="TheSe.sp_illegal_cancel" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_illegal_cancel" :native-value="true") ON
 
     .box
       SeTitle(name="その他")
@@ -416,14 +430,6 @@
       b-field(custom-class="is-small" label="KIFコメ表示")
         b-radio-button(size="is-small" v-model="TheSe.sp_comment" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_comment" :native-value="true") ON
-
-      b-field(custom-class="is-small" label="操作モードでは合法手に絞る(二歩・ワープ・王手放置等を除く)")
-        b-radio-button(size="is-small" v-model="TheSe.sp_legal_move_only" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_legal_move_only" :native-value="true") ON
-
-      b-field(custom-class="is-small" label="操作モードでの反則判定")
-        b-radio-button(size="is-small" v-model="TheSe.sp_illegal_validate" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_illegal_validate" :native-value="true") ON
 
       b-field(custom-class="is-small" label="持駒のキャンセル方法")
         template(v-for="e in TheSe.LiftCancelActionInfo.values")

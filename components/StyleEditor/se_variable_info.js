@@ -61,12 +61,12 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_stand_piece_size", default: 0.8, },
       { key: "sp_stand_hover_border_color", default: "hsla(0, 0%, 0%, 0.2)", },
       { key: "sp_stand_bg_color", default: "hsla(0, 0%, 0%, 0.0)", },
-      { key: "sp_stand_gravity", default: DEVELOPMENT_P ? "top" : "bottom", },
-      { key: "sp_stand_flip", default: DEVELOPMENT_P ? true : false, },
+      { key: "sp_stand_gravity", default: "bottom" },
+      { key: "sp_stand_flip", default: false },
 
       { key: "sp_turn", default: -1, },
-      { key: "sp_viewpoint", default: DEVELOPMENT_P ? "white" : "black", },
-      { key: "sp_debug", default: DEVELOPMENT_P ? false : false, },
+      { key: "sp_viewpoint", default: "black" },
+      { key: "sp_debug", default: DEVELOPMENT_P ? true : false, },
       { key: "sp_piece_count_size", default: 0.2, },
       { key: "sp_piece_count_font_color", default:  "hsla(0, 0%, 0%, 0.75)", },
       { key: "sp_piece_count_bg_color", default: "hsla(0, 0%, 100%, 0.9)", },
@@ -114,16 +114,18 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_player_time_size", default: 0.25, },
       ////////////////////////////////////////////////////////////////////////////////
 
-      { key: "sp_body", default: null, },
+      { key: "sp_body", default: "", },
 
       { key: "sp_turn_show", default:    DEVELOPMENT_P ? true : false, },
-      { key: "sp_dev_tools", default:    DEVELOPMENT_P ? false : false, },
-      { key: "sp_overlay_nav", default:    DEVELOPMENT_P ? false : false, },
+      { key: "sp_dev_tools", default: false },
+      { key: "sp_dev_tools_group", default: DEVELOPMENT_P ? "event" : "main", },
+      { key: "sp_overlay_nav", default: false, },
 
       { key: "sp_slider", default:     DEVELOPMENT_P ? true : true, },
       { key: "sp_controller", default: DEVELOPMENT_P ? true : false, },
-      { key: "sp_legal_move_only", default: false, },
-      { key: "sp_illegal_validate", default: false, },
+      { key: "sp_legal_move_only", default: true, },
+      { key: "sp_illegal_validate", default: true, },
+      { key: "sp_illegal_cancel", default: false, },
       { key: "sp_lift_cancel_action", default: "reality", },
       { key: "sp_click_response_timing", default: "fast", },
 

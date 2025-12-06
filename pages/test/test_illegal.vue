@@ -5,7 +5,7 @@
       MainDocNavbarItemHome
       b-navbar-item(tag="div").has-text-weight-bold 反則判定
   .section
-    .container
+    .container.is-fluid
       .columns
         .column.is-3
           ShogiPlayer(
@@ -14,50 +14,65 @@
             sp_mode="play"
             sp_debug
             sp_controller
-            :sp_slider="false"
+            sp_slider
             :sp_illegal_validate="sp_illegal_validate"
             :sp_illegal_cancel="sp_illegal_cancel"
             @ev_illegal_illegal_accident="value => illegal_accident = value"
           )
-        .column
+          template(v-if="illegal_accident && illegal_accident.sfen")
+            | 反則局面
+            ShogiPlayer(
+              :sp_turn="illegal_accident.turn"
+              :sp_body="illegal_accident.sfen"
+            )
+        .column.is-2
           b-field(custom-class="is-small" label="反則判定" message="OFFなら気持ち程度処理も軽くなる")
             b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="true") ON
-          b-field(custom-class="is-small" label="操作無効" message="ONは初心者向けで判定にひっかかったら操作を無効にする")
+          b-field(custom-class="is-small" label="反則ブロック" message="ONは初心者向けで判定にひっかかったら操作を無効にする")
             b-radio-button(size="is-small" v-model="sp_illegal_cancel" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_illegal_cancel" :native-value="true") ON
         .column
+          | イベント情報
           pre
             | {{illegal_accident}}
+        .column
+          | 人間向け表記
+          pre(v-if="illegal_accident && illegal_accident.last_move_info")
+            | to_kif: {{illegal_accident.last_move_info.to_kif}}
+            | to_kif_without_from: {{illegal_accident.last_move_info.to_kif_without_from}}
+            | to_kif_without_from_and_location: {{illegal_accident.last_move_info.to_kif_without_from_and_location}}
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      sp_illegal_validate: true,
-      sp_illegal_cancel: false,
-      illegal_accident: null,
-      sp_body: `
+const sp_body_default = `
 後手の持駒：歩
   ９ ８ ７ ６ ５ ４ ３ ２ １
 +---------------------------+
-| ・ ・ ・ ・v飛 ・ ・ ・ ・|
+| ・ ・ ・v飛 ・ ・ ・ ・ ・|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
-| ・ ・ ・ ・ ・ 歩 ・ ・ ・|
-| ・ ・ ・ ・ 角 ・ ・ ・ ・|
-| ・ ・ ・ ・ 玉 ・ ・ ・ 歩|
+| ・ ・ ・ ・ 歩 ・ ・ ・ ・|
+| ・ ・ ・ 角 ・ ・ ・ ・ ・|
+|v飛 ・ ・ 玉 ・ ・ ・ ・ 歩|
 +---------------------------+
 先手の持駒：歩
 手数＝0 まで
 
 先手番
 手数----指手---------消費時間--
-`,
+`
+
+export default {
+  data() {
+    return {
+      sp_illegal_validate: true,
+      sp_illegal_cancel: true,
+      illegal_accident: null,
+      sp_body: this.$route.query.sp_body ?? sp_body_default,
     }
   },
 }
@@ -66,4 +81,7 @@ export default {
 <style lang="sass">
 .test-test_illegal
   __css_keep__: 0
+  pre
+    white-space: pre-wrap
+    word-break: break-all
 </style>
