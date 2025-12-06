@@ -39,6 +39,11 @@ export class MoveInfo {
     return this.to_custom_kif({from: false})
   }
 
+  // 7六歩
+  get to_kif_without_from_and_location() {
+    return this.to_custom_kif({from: false, location: false})
+  }
+
   // 7 6 ふ うつ
   get to_yomiage() {
     let v = null

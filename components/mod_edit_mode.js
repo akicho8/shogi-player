@@ -192,7 +192,8 @@ export const mod_edit_mode = {
           if (force_promote_length != null) {                                              // チェックしない場合は null
             if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
               this.log("駒台や駒箱から持ち上げた駒を置こうとしたけど死に駒なので無効とする")
-              if (this.illegal_add("illegal_dead_soldier", {soldier: new_soldier}) === "__cancel__") { // 死に駒
+              const last_move_info = this.move_info_create({type: "put", to: new_soldier})
+              if (this.illegal_add2("illegal_dead_piece", last_move_info) === "__cancel__") { // 死に駒
                 return
               }
             }
@@ -294,7 +295,8 @@ export const mod_edit_mode = {
                 this.log("障害物なく目的地に行ける")
               } else {
                 this.log("障害物を飛び越えれば目的地に行ける")
-                if (this.illegal_add("illegal_piece_warp", {soldier: this.origin_soldier1}) === "__cancel__") { // 駒ワープ
+                const last_move_info = this.move_info_create({type: "move", from: this.origin_soldier1, to: new_soldier, killed_soldier: this.killed_soldier})
+                if (this.illegal_add2("illegal_warp_move", last_move_info) === "__cancel__") { // 駒ワープ
                   return
                 }
               }
@@ -314,7 +316,10 @@ export const mod_edit_mode = {
         // [王手放置判定] 駒を移動したとき
         if (this.sp_illegal_validate) {
           if (this.xcontainer.board.move_then_king_capture_p(this.origin_soldier1, place)) {
-            if (this.illegal_add("illegal_death_king", {soldier: this.origin_soldier1, place: place}) === "__cancel__") { // 王手放置
+            this.log("駒を動かしたあとの状態が自玉王手になっている")
+            const last_move_info = this.move_info_create({type: "move", from: this.origin_soldier1, to: new_soldier, killed_soldier: this.killed_soldier})
+            const illegal_key = this.illegal_key_of_piece_move2(this.origin_soldier1.location, this.origin_soldier1.piece)
+            if (this.illegal_add2(illegal_key, last_move_info) === "__cancel__") { // 王手放置 or 自殺手
               return
             }
           }
@@ -359,7 +364,7 @@ export const mod_edit_mode = {
           }
         } else {
           if (this.play_p) {
-            this.move_info_create({type: "move", from: this.origin_soldier1, to: new_soldier, killed_soldier: this.killed_soldier})
+            this.last_move_info_set({type: "move", from: this.origin_soldier1, to: new_soldier, killed_soldier: this.killed_soldier})
             this.moves_set()
           }
           this.xcontainer.board.place_on(new_soldier) // 置く
@@ -380,7 +385,9 @@ export const mod_edit_mode = {
           if (this.play_p) {
             const new_soldier = this.soldier_create_from_stand_or_box_on(place)
             if (this.xcontainer.board.puton_then_king_capture_p(new_soldier, place)) {
-              if (this.illegal_add("illegal_death_king", {soldier: new_soldier, place: place}) === "__cancel__") { // 王手放置
+              const last_move_info = this.move_info_create({type: "put", to: new_soldier})
+              const illegal_key = this.illegal_key_of_piece_move2(new_soldier.location, new_soldier.piece)
+              if (this.illegal_add2(illegal_key, last_move_info) === "__cancel__") { // 王手放置
                 return
               }
             }
@@ -393,7 +400,14 @@ export const mod_edit_mode = {
             if (this.have_piece.key === "P") {
               if (this.have_piece_location) {
                 if (this.xcontainer.board.pawn_exist_by_x(place.x, this.have_piece_location)) {
-                  if (this.illegal_add("illegal_two_pawn") === "__cancel__") { // 二歩
+                  // 二歩をブロックしたとき、これまで "二歩" の文字列だけを発行していたが
+                  // これだと何を指してどのような局面になったのかわからない
+                  // したがって二歩ブロックであっても通常の指し手と同じような情報を用意しないといけない
+                  // しかし副作用で moves などを更新してしまうと棋譜が二歩で上書きされてしまうので注意する
+                  // 持駒の増減に関して SFEN は指し手だけ繋げればよいのでこのままでよい
+                  const new_soldier = this.soldier_create_from_stand_or_box_on(place)
+                  const last_move_info = this.move_info_create({type: "put", to: new_soldier})
+                  if (this.illegal_add2("illegal_double_pawn", last_move_info) === "__cancel__") { // 二歩
                     return
                   }
                 }
@@ -421,7 +435,7 @@ export const mod_edit_mode = {
         const new_soldier = this.soldier_create_from_stand_or_box_on(place)
         this.piece_decriment()
         this.xcontainer.board.place_on(new_soldier) // 置く
-        this.move_info_create({type: "put", to: new_soldier})
+        this.last_move_info_set({type: "put", to: new_soldier})
         this.moves_set()
         this.lifted_piece_cancel()
         this.turn_next()
@@ -460,7 +474,7 @@ export const mod_edit_mode = {
     // 成れる状態の駒をどうするか
     promotable_piece_moved(new_soldier, promoted) {
       new_soldier = new_soldier.clone_with_attrs({promoted: promoted})
-      this.move_info_create({type: "promotable", from: this.origin_soldier1, to: new_soldier})
+      this.last_move_info_set({type: "promotable", from: this.origin_soldier1, to: new_soldier})
       this.moves_set() // 7g7f+
       this.xcontainer.board.place_on(new_soldier) // 置く
       this.xcontainer.board.delete_at(this.place_from)
@@ -469,8 +483,13 @@ export const mod_edit_mode = {
     },
 
     // 最後に操作した駒の情報を作る
+    last_move_info_set(attrs) {
+      this.last_move_info = this.move_info_create(attrs)
+    },
+
+    // 最後に操作した駒の情報を作る
     move_info_create(attrs) {
-      this.last_move_info = new MoveInfo({
+      return new MoveInfo({
         ...attrs,
         next_turn_offset: this.turn_offset + 1,           // この手を指した直後の手数。初手76歩なら1
         player_location: this.xcontainer.current_location,  // 指した人の色。駒の色ではない
@@ -888,6 +907,29 @@ export const mod_edit_mode = {
       return e.shiftKey | e.ctrlKey | e.altKey | e.metaKey
     },
 
+    ////////////////////////////////////////////////////////////////////////////////
+
+    illegal_key_of_piece_move2(location, piece) {
+      if (this.xcontainer.board.king_capture_p(location)) {
+        this.log("駒を動かす前から自玉王手だった → つまり王手放置")
+        if (piece.key === "K") {
+          this.log("王手に対して王を動かしたのに王手状態なのは放置ではなく故意の「王手解除せず」というべきか")
+          return "illegal_no_check_escape"
+        } else {
+          this.log("王手に対して他の駒を動かした → 王手だと気づいていない → つまり王手放置 (これはしっくりくる)")
+          return "illegal_check_ignored"
+        }
+      } else {
+        this.log("駒を動したことで自玉王手になった (玉を動かしたかどうかにかかわらず自殺手)")
+        if (piece.key === "K") {
+          this.log("玉を動かして即死した → つまり自殺手")
+          return "illegal_self_check"
+        } else {
+          this.log("玉以外の駒を動かして即死した → つまりピン外し自殺手")
+          return "illegal_pin_break_check"
+        }
+      }
+    },
   },
 
   computed: {

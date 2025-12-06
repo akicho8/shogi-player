@@ -45,8 +45,8 @@ import { LiftCancelActionInfo    }    from "../models/lift_cancel_action_info.js
 import { ClickResponseTimingInfo    }    from "../models/click_response_timing_info.js"
 
 import { SeVariableInfo } from "./se_variable_info.js"
-import { SePresetInfo }   from "./se_preset_info.js"
-import { SeSectionInfo }    from "./se_section_info.js"
+import { SePresetInfo   } from "./se_preset_info.js"
+import { SeSectionInfo  } from "./se_section_info.js"
 
 import { mod_storage } from "./mod_storage.js"
 import { mod_sp_css } from "./mod_sp_css.js"
@@ -89,35 +89,50 @@ export default {
 
   methods: {
     data_init() {
-      const query = this.$route.query
-      const { body, black, white } = query
+      if (true) {
+        const query = this.$route.query
+        const { body, black, white } = query
+        if (body) {
+          this.sp_body = body
+        }
+        if (black) {
+          this.sp_player_info.black = black
+        }
+        if (white) {
+          this.sp_player_info.white = white
+        }
+        if ("turn" in query) {
+          this.sp_turn = Number(query.turn)
+        }
+        if ("viewpoint" in query) {
+          this.sp_viewpoint = query.viewpoint
+        }
+        if (false) {
+          if (!body) {
+            this.kifu_sample_key = this.KifuBookInfo.values[1].key
+            this.kifu_sample_key = this.KifuBookInfo.fetch("KIF_15733").key
+            this.kifu_sample_key_input_handle()
+          }
+        }
+        if (false) {
+          this.sp_player_info = {
+            black: { name: "先手", time: "12:34", },
+            white: { name: "後手", time: "56:78", },
+          }
+        }
+      }
 
-      if (body) {
-        this.sp_body = body
-      }
-      if (black) {
-        this.sp_player_info.black = black
-      }
-      if (white) {
-        this.sp_player_info.white = white
-      }
-      if ("turn" in query) {
-        this.sp_turn = Number(query.turn)
-      }
-      if ("viewpoint" in query) {
-        this.sp_viewpoint = query.viewpoint
-      }
+      SeVariableInfo.values.forEach(it => this.variable_set(it))
+      this.variable_set({key: "sidebar_p", default: true})
+    },
 
-      if (!body) {
-        this.kifu_sample_key = this.KifuBookInfo.values[1].key
-        this.kifu_sample_key = this.KifuBookInfo.fetch("KIF_15733").key
-        this.kifu_sample_key_input_handle()
-      }
-
-      if (false) {
-        this.sp_player_info = {
-          black: { name: "先手", time: "12:34", },
-          white: { name: "後手", time: "56:78", },
+    variable_set(it) {
+      const value = this.$route.query[it.key]
+      if (value) {
+        if (typeof it.default === "string") {
+          this.$data[it.key] = value.trim()
+        } else {
+          this.$data[it.key] = (value === "true")
         }
       }
     },
@@ -181,6 +196,7 @@ export default {
   },
   computed: {
     development_p() { return DEVELOPMENT_P },
+    __SYSTEM_TEST_RUNNING__() { return this.$route.query.__SYSTEM_TEST_RUNNING__ === "true" },
 
     HumanSideInfo()    { return HumanSideInfo    },
     ModeInfo()         { return ModeInfo         },
@@ -264,6 +280,7 @@ export default {
       params.sp_turn                 = this.sp_turn
       params.sp_body                 = this.sp_body
       params.sp_dev_tools            = this.sp_dev_tools
+      params.sp_dev_tools_group            = this.sp_dev_tools_group
       params.sp_overlay_nav          = this.sp_overlay_nav
       params.sp_turn_show            = this.sp_turn_show
       params.sp_coordinate           = this.sp_coordinate
@@ -274,8 +291,11 @@ export default {
       params.sp_slider               = this.sp_slider
       params.sp_controller           = this.sp_controller
       params.sp_player_info          = this.sp_player_info
+
       params.sp_legal_move_only      = this.sp_legal_move_only
       params.sp_illegal_validate     = this.sp_illegal_validate
+      params.sp_illegal_cancel       = this.sp_illegal_cancel
+
       params.sp_lift_cancel_action   = this.sp_lift_cancel_action
       params.sp_click_response_timing     = this.sp_click_response_timing
       return params

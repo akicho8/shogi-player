@@ -1,10 +1,12 @@
-require "bundler/setup"
-# Dir.chdir(Bundler.root)
 Bundler.require(:default)
+
+require "active_support/core_ext/string"
 
 if true
   Minitest::Assertions.prepend Minitest::PowerAssert::Assertions
 end
+
+Pathname(__dir__).glob("support/**/*.rb").sort_by(&:to_s).each { require it }
 
 if true
   Capybara.current_driver = :selenium_chrome_headless
@@ -23,8 +25,7 @@ RSpec.configure do |config|
     expectations.syntax = [:should, :expect]
   end
 
-  require "my_helper"
-  config.include MyHelper
+  config.include SpSystemTestMethods
 
   config.include Capybara::DSL
 
