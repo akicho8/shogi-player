@@ -10,6 +10,7 @@ export class IllegalInfo extends ApplicationMemoryRecord {
       { key: "illegal_no_check_escape", name: "王手解除せず",   condition_desc: "王手を故意に解除しなかった可能性がある。往生際悪く詰みの局面で玉を動かしたか？。玉を移動させた場合のみとする。", },
       { key: "illegal_self_check",      name: "自殺手",         condition_desc: "玉を利きに動かしたことで即死",                                                   },
       { key: "illegal_pin_break_check", name: "ピン外し自殺手", condition_desc: "守っていた駒を動かしたことで即死",                                               },
+      { key: "illegal_perpetual_check", name: "千日手",         condition_desc: "同一局面のX回目",                                                 }, // shogi-player ではチェックしていない
     ]
   }
 }
@@ -17,5 +18,3 @@ export class IllegalInfo extends ApplicationMemoryRecord {
 if (typeof process !== "undefined" && process.argv[1] === __filename) {
   console.log(IllegalInfo.fetch("illegal_double_pawn").attributes)
 }
-
-
