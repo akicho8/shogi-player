@@ -75,7 +75,7 @@ export class SfenParser extends ParserBase {
             promoted: (m.promoted === "+"),
             location: this.__location_by_upper_or_lower_case(m.piece),
           })
-          board.place_on(soldier)
+          board.soldier_drop$(soldier)
           x++
         }
       })
@@ -100,7 +100,7 @@ export class SfenParser extends ParserBase {
         const piece = Piece.fetch(md.piece_char)
         let count = Number(md.count || 1)
         const location = this.__location_by_upper_or_lower_case(md.piece_char)
-        count += hash[location.key][piece.key] || 0
+        count += hash[location.key][piece.key] ?? 0
         Vue.set(hash[location.key], piece.key, count)
       })
     }

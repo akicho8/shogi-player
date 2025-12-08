@@ -1,9 +1,9 @@
 import Vue from "vue"
-import _ from 'lodash'
-import { Board } from './board'
-import { Place } from './place'
-import { Piece } from './piece'
-import { Location } from './location'
+import _ from "lodash"
+import { Board } from "./board"
+import { Place } from "./place"
+import { Piece } from "./piece"
+import { Location } from "./location"
 
 export class Soldier {
   static random(params = {}) {
@@ -22,16 +22,67 @@ export class Soldier {
     return new this({piece: piece, place: place, promoted: promoted, location: location})
   }
 
-  constructor(attributes) {
-    this.attributes = Object.assign({}, attributes)
+  static create(attributes = {}) {
+    return new this(attributes)
+  }
+
+  // for test
+  static create4(place_key, piece_key, promoted, location_key) {
+    return this.easy_create({place_key, piece_key, promoted, location_key})
+  }
+
+  // for test
+  static easy_create(attributes = {}) {
+    const hv = {}
+
+    if (attributes.place) {
+      hv.place = attributes.place
+    }
+    if (attributes.place_key) {
+      hv.place = Place.fetch(attributes.place_key)
+    }
+
+    if (attributes.piece) {
+      hv.piece = attributes.piece
+    }
+    if (attributes.piece_key) {
+      hv.piece = Piece.fetch(attributes.piece_key)
+    }
+
+    if (attributes.location) {
+      hv.location = attributes.location
+    }
+    if (attributes.location_key) {
+      hv.location = Location.fetch(attributes.location_key)
+    }
+
+    if (attributes.promoted != null) {
+      hv.promoted = attributes.promoted
+    }
+
+    return this.create(hv)
+  }
+
+  static get default_attributes() {
+    return {
+      place: Place.bottom_center,
+      piece: Piece.fetch("K"),
+      location: Location.black,
+      promoted: false,
+    }
+  }
+
+  constructor(attributes = {}) {
+    this.attributes = {
+      ...this.constructor.default_attributes,
+      ...attributes,
+    }
+    Object.freeze(this.attributes)
+    Object.freeze(this)
   }
 
   get piece() {
     return this.attributes.piece
-  }
-
-  set place(place) {
-    Vue.set(this.attributes, "place", place)
   }
 
   get place() {
@@ -46,15 +97,15 @@ export class Soldier {
     return !!this.attributes.promoted
   }
 
-  set promoted(v) {
-    Vue.set(this.attributes, "promoted", v)
-  }
-
   get name() {
     if (this.promoted) {
       return this.piece.promoted_name
     }
     return this.piece.name
+  }
+
+  get to_s() {
+    return this.name
   }
 
   get yomiage_name() {
@@ -72,9 +123,9 @@ export class Soldier {
   get transform_all() {
     if (this.piece.promotable_p) {
       if (this.promoted) {
-        return this.clone_with_attrs({location: this.location.flip, promoted: !this.promoted})
+        return this.clone_with({location: this.location.flip, promoted: !this.promoted})
       } else {
-        return this.clone_with_attrs({promoted: !this.promoted})
+        return this.clone_with({promoted: !this.promoted})
       }
     } else {
       return this.transform_head
@@ -87,17 +138,17 @@ export class Soldier {
     if (this.piece.promotable_p) {
       attrs = {promoted: !this.promoted}
     }
-    return this.clone_with_attrs(attrs)
+    return this.clone_with(attrs)
   }
 
   // 先後 (2パターン) の繰り返し
   get transform_head() {
-    return this.clone_with_attrs({location: this.location.flip})
+    return this.clone_with({location: this.location.flip})
   }
 
-  // soldier.clone_with_attrs({promoted: true})
-  // soldier.clone_with_attrs({promoted: false})
-  clone_with_attrs(attrs = {}) {
+  // soldier.clone_with({promoted: true})
+  // soldier.clone_with({promoted: false})
+  clone_with(attrs = {}) {
     return new Soldier({...this.attributes, ...attrs})
   }
 
@@ -132,7 +183,7 @@ export class Soldier {
 
   // 自分の側の一番上を0としてあとどれだけで突き当たるかの値
   get top_spaces() {
-    return this.place.sp_flip_if_white(this.location).y
+    return this.place.sp_half_spin_if_white(this.location).y
   }
 
   get once_vectors() {
@@ -141,6 +192,18 @@ export class Soldier {
 
   get repeat_vectors() {
     return this.piece.repeat_vectors(this.promoted)
+  }
+
+  //////////////////////////////////////////////////////////////////////////////// ルール違反
+
+  get dead_place_p() {
+    if (this.promoted) {
+      return false              // 成っていると絶対に死に駒にならない
+    }
+    const gap = this.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
+    if (gap != null) {                                       // チェックしない場合は null
+      return this.top_spaces <= gap                          // 実際の上の隙間 <= 死に駒になる上の隙間
+    }
   }
 }
 

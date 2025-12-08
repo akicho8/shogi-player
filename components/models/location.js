@@ -8,6 +8,9 @@ export class Location extends ApplicationMemoryRecord {
     ]
   }
 
+  static get black() { return this.fetch("black") }
+  static get white() { return this.fetch("white") }
+
   static cycle_lookup(value) {
     if (typeof value !== "number") {
       throw new Error(`ArgumentError: ${this.name}.cycle_lookup(${JSON.stringify(value)})`)

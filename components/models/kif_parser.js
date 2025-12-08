@@ -104,7 +104,7 @@ export class KifParser extends ParserBase {
                 const piece = Piece.lookup_by_name(m2.piece_char)
                 let count = Number(m2.count || 1)
                 const location_key = m.key.match(/[上後]/) ? "white" : "black"
-                count += this.hold_pieces[location_key][piece.key] || 0
+                count += this.hold_pieces[location_key][piece.key] ?? 0
                 this.hold_pieces[location_key][piece.key] = count
               })
             }
@@ -192,7 +192,7 @@ export class KifParser extends ParserBase {
             promoted: promoted,
             location: Location.fetch(location_key),
           })
-          board.place_on(soldier)
+          board.soldier_drop$(soldier)
         }
       })
     })

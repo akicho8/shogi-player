@@ -23,7 +23,9 @@ export class PieceVector extends ApplicationMemoryRecord {
     } else {
       method = this.basic_once_vectors
     }
-    return this.constructor[method]
+    if (method) {
+      return this.constructor[method]
+    }
   }
 
   repeat_vectors(promoted) {
@@ -33,7 +35,9 @@ export class PieceVector extends ApplicationMemoryRecord {
     } else {
       method = this.basic_repeat_vectors
     }
-    return this.constructor[method]
+    if (method) {
+      return this.constructor[method]
+    }
   }
 
   static get pattern_plus() {

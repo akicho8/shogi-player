@@ -15,9 +15,11 @@
             sp_debug
             sp_controller
             sp_slider
+            :sp_checkmate_feature="sp_checkmate_feature"
             :sp_illegal_validate="sp_illegal_validate"
             :sp_illegal_cancel="sp_illegal_cancel"
             @ev_illegal_illegal_accident="value => illegal_accident = value"
+            @ev_play_mode_move="value => play_mode_move = value"
           )
           template(v-if="illegal_accident && illegal_accident.sfen")
             | 反則局面
@@ -32,10 +34,17 @@
           b-field(custom-class="is-small" label="反則ブロック" message="ONは初心者向けで判定にひっかかったら操作を無効にする")
             b-radio-button(size="is-small" v-model="sp_illegal_cancel" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_illegal_cancel" :native-value="true") ON
+          b-field(custom-class="is-small" label="詰み判定" message="詰み判定するか？")
+            b-radio-button(size="is-small" v-model="sp_checkmate_feature" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_checkmate_feature" :native-value="true") ON
         .column
-          | イベント情報
+          | 反則ブロック情報
           pre
             | {{illegal_accident}}
+        .column
+          | 指し手
+          pre
+            | {{play_mode_move}}
         .column
           | 人間向け表記
           pre(v-if="illegal_accident && illegal_accident.last_move_info")
@@ -45,19 +54,40 @@
 </template>
 
 <script>
+// const sp_body_default = `
+// 後手の持駒：歩
+//   ９ ８ ７ ６ ５ ４ ３ ２ １
+// +---------------------------+
+// | ・ ・ ・v飛 ・ ・ ・ ・ ・|
+// | ・ ・ ・ ・ ・ ・ ・ ・ ・|
+// | ・ ・ ・ ・ ・ ・ ・ ・ ・|
+// | ・ ・ ・ ・ ・ ・ ・ ・ ・|
+// | ・ ・ ・ ・ ・ ・ ・ ・ ・|
+// | ・ ・ ・ ・ ・ ・ ・ ・ ・|
+// | ・ ・ ・ ・ 歩 ・ ・ ・ ・|
+// | ・ ・ ・ 角 ・ ・ ・ ・ ・|
+// |v飛 ・ ・ 玉 ・ ・ ・ ・ 歩|
+// +---------------------------+
+// 先手の持駒：歩
+// 手数＝0 まで
+//
+// 先手番
+// 手数----指手---------消費時間--
+// `
+
 const sp_body_default = `
 後手の持駒：歩
   ９ ８ ７ ６ ５ ４ ３ ２ １
 +---------------------------+
-| ・ ・ ・v飛 ・ ・ ・ ・ ・|
+| ・ ・ ・ ・ ・ ・ ・v歩v玉|
+| ・ ・ ・ ・ ・ ・ ・ ・ ・|
+| ・ ・ ・ ・ ・ ・ ・ ・ 玉|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
 | ・ ・ ・ ・ ・ ・ ・ ・ ・|
-| ・ ・ ・ ・ 歩 ・ ・ ・ ・|
-| ・ ・ ・ 角 ・ ・ ・ ・ ・|
-|v飛 ・ ・ 玉 ・ ・ ・ ・ 歩|
+| ・ ・ ・ ・ ・ ・ ・ ・ ・|
 +---------------------------+
 先手の持駒：歩
 手数＝0 まで
@@ -69,9 +99,11 @@ const sp_body_default = `
 export default {
   data() {
     return {
+      sp_checkmate_feature: true,
       sp_illegal_validate: true,
       sp_illegal_cancel: true,
       illegal_accident: null,
+      play_mode_move: null,
       sp_body: this.$route.query.sp_body ?? sp_body_default,
     }
   },

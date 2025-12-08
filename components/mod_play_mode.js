@@ -125,7 +125,7 @@ export const mod_play_mode = {
       this.moves = [...this.moves_take_turn_offset, this.last_move_info.to_sfen]
     },
 
-    turn_next() {
+    current_turn_commit() {
       if (this.play_p) {
         // ↓FIXME: これも20msほどかかるので実行したくない
         this.xcontainer = new Xcontainer()
@@ -137,7 +137,9 @@ export const mod_play_mode = {
           sfen:           this.play_mode_full_moves_sfen, // sfen と
           turn:           this.turn_offset,               // turn を同時に更新するの重要
           last_move_info: this.last_move_info,
+          illegal_hv_list: this.illegal_hv_list,          // illegal_hv_list を last_move_info に入れると循環で ActionCable がぶっこわれる
           snapshot_hash:  this.xcontainer.to_sfen_without_turn, // 履歴を含まない現在の状態
+          checkmate_stat: this.checkmate_stat,            // 詰み情報
         })
 
         this.event_call("ev_play_mode_next_moves", this.moves)

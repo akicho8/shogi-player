@@ -23,7 +23,7 @@
     b-dropdown-item キャンセル
 
   // ↑↓
-  b-button(@click.stop.prevent="TheSp.fn_flip_all" icon-left="pan-vertical" size="is-small")
+  b-button(@click.stop.prevent="TheSp.fn_half_spin" icon-left="pan-vertical" size="is-small")
 
   // ←→
   b-button(@click.stop.prevent="TheSp.fn_flop"   icon-left="pan-horizontal" size="is-small")

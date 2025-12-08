@@ -76,6 +76,7 @@ export default {
     sp_comment:                        { type: Boolean, }, // KIFのコメントを表示する
     sp_human_side:                     { type: String,  }, // 含まれる側だけ操作できるようにする
     sp_device:                         { type: String,  }, // デバイスを強制的に指定する
+    sp_checkmate_feature:              { type: Boolean, }, // 詰み判定するか？
     sp_illegal_validate:               { type: Boolean, }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
     sp_illegal_cancel:                 { type: Boolean, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
     sp_legal_move_only:                { type: Boolean, }, // play で合法手のみに絞る

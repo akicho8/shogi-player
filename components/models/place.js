@@ -15,11 +15,29 @@ export class Place {
 
   static TO_SFEN_REPLACE_TABLE_Y = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
 
+  static get top_left()      { return this.fetch([0, 0])                                                             }
+  static get top_center()    { return this.fetch([Math.trunc(Board.dimension / 2), 0])                               }
+  static get top_right()     { return this.fetch([Board.dimension - 1, 0])                                           }
+  static get bottom_left()   { return this.fetch([0, Board.dimension - 1])                                           }
+  static get bottom_center() { return this.fetch([Math.trunc(Board.dimension / 2), Board.dimension - 1])             }
+  static get bottom_right()  { return this.fetch([Board.dimension - 1, Board.dimension - 1])                         }
+  static get center_center() { return this.fetch([Math.trunc(Board.dimension / 2), Math.trunc(Board.dimension / 2)]) }
+
   static fetch(v) {
     if (v instanceof this) {
       return v
     }
     return Object.freeze(new Place(v))
+  }
+
+  // x, y を足した新しい位置を返す
+  // はみでたのは反対側の座標とする
+  static wrap_fetch(x, y) {
+    return this.fetch([this.__wrap_position(x), this.__wrap_position(y)])
+  }
+
+  static __wrap_position(value) {
+    return Math.trunc((value + Board.dimension) % Board.dimension)
   }
 
   static xy_valid_p(x, y) {
@@ -28,6 +46,35 @@ export class Place {
 
   static xy_invalid_p(x, y) {
     return !this.xy_valid_p(x, y)
+  }
+
+  //==============================================================================
+  // a から b までの直線上のマスを列挙
+  // 斜め・縦・横に並んでいない場合は空
+  // 両端は含めない
+  //==============================================================================
+  static line_between(a, b) {
+    if (!this.straight_p(a, b)) {
+      return []
+    }
+    const list = []
+    const dx = Math.sign(b.x - a.x)
+    const dy = Math.sign(b.y - a.y)
+    let x = a.x + dx
+    let y = a.y + dy
+    while (!(x === b.x && y === b.y)) {
+      list.push(Place.fetch([x, y]))
+      x += dx
+      y += dy
+    }
+    return list
+  }
+
+  // a から b までは直線になっているか？
+  static straight_p(a, b) {
+    const dx = b.x - a.x
+    const dy = b.y - a.y
+    return dx === 0 || dy === 0 || Math.abs(dx) === Math.abs(dy)
   }
 
   constructor(value) {
@@ -53,11 +100,11 @@ export class Place {
   }
 
   get to_a() {
-    return [this.x, this.y]
+    return [this._x, this._y]
   }
 
   get to_h() {
-    return { x: this.x, y: this.y }
+    return { x: this._x, y: this._y }
   }
 
   get human_x() {
@@ -84,7 +131,7 @@ export class Place {
     return this._y + 1
   }
 
-  get flip_all() {
+  get half_spin() {
     return Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y])
   }
 
@@ -100,9 +147,9 @@ export class Place {
     }
   }
 
-  sp_flip_if_white(location) {
+  sp_half_spin_if_white(location) {
     if (location.key === "white") {
-      return this.flip_all
+      return this.half_spin
     } else {
       return this
     }
@@ -145,26 +192,33 @@ export class Place {
     return !this.even_p
   }
 
-  get tennozan_p() {
-    return this.x === Math.trunc(Board.dimension / 2) && this.y === Math.trunc(Board.dimension / 2)
+  get middle_center_p() {
+    const e = Place.center_center
+    return this.x === e.x && this.y === e.y
   }
 
   // x, y を足した新しい位置を返す
   // はみでたのは反対側の座標とする
-  rotate_add(x, y) {
-    const nx = this.__new_pos(this._x, x)
-    const ny = this.__new_pos(this._y, y)
-    return Place.fetch([nx, ny])
+  to_rotate_place(x, y) {
+    return Place.wrap_fetch(this.x + x, this.y + y)
+  }
+
+  line_between_to(to) {
+    return this.constructor.line_between(this, to)
+  }
+
+  straight_to_p(to) {
+    return this.constructor.straight_p(this, to)
   }
 
   // private
 
-  __new_pos(origin, v) {
-    return Math.trunc((origin + v + Board.dimension) % Board.dimension) // (x + 1).modulo(dimension)
-  }
-
   __parse_from_string(s) {
     const [x, y] = s.split("").map(e => Number(Place.ANY_TO_NUMBER_REPLACE_TABLE[e] ?? e))
+    return this.__logical_xy_to_internal_xy(x, y)
+  }
+
+  __logical_xy_to_internal_xy(x, y) {
     return [Board.dimension - x, y - 1]
   }
 }
