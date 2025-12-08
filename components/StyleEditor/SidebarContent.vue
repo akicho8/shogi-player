@@ -398,6 +398,10 @@
     .box
       SeTitle(name="その他")
 
+      b-field(custom-class="is-small" label="操作モードでの詰み判定")
+        b-radio-button(size="is-small" v-model="TheSe.sp_checkmate_feature" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_checkmate_feature" :native-value="true") ON
+
       b-field(custom-class="is-small" label="手番のときの☗☖の大きさ")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_location_mark_active_size" :min="0" :max="1.5" :step="0.01")
 

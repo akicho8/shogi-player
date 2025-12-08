@@ -61,7 +61,7 @@ module SpSystemTestMethods
   end
 
   # 持駒を place に打つ
-  def stand_move(location_key, piece_key, place)
+  def stand_drop(location_key, piece_key, place)
     stand_click(location_key, piece_key)
     place_click(place)
   end

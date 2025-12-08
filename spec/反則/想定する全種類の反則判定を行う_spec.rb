@@ -2,20 +2,26 @@ require "#{__dir__}/setup"
 
 RSpec.describe __FILE__ do
   # 最初から王手状態
-  def sfen1
+  def danger_sfen
     "position sfen 8k/6b1l/5R+rG1/8K/8P/9/9/9/9 b P 1"
   end
 
   # 王手になっていない状態
-  def sfen2
+  def normal_sfen
     "position sfen 8k/6b2/6+rG1/8K/8P/9/9/9/9 b P 1"
+  end
+
+  # 打ち歩詰め1手前
+  def pawn_drop_mate_sfen
+    "position sfen k8/1sG6/G8/9/9/9/9/9/9 b P 1"
   end
 
   def case1(illegal_key, options = {}, &block)
     options = {
-      sp_body: sfen1,
+      sp_body: danger_sfen,
     }.merge(options)
     visit_to("/style-editor", {
+        sp_checkmate_feature: true,
         sp_illegal_validate: true,
         sp_illegal_cancel: true,
         sp_mode: :play,
@@ -30,11 +36,15 @@ RSpec.describe __FILE__ do
   end
 
   def case2(illegal_key, &block)
-    case1(illegal_key, sp_body: sfen2, &block)
+    case1(illegal_key, sp_body: normal_sfen, &block)
   end
 
   it "二歩" do
-    case1("illegal_double_pawn") { stand_move(:black, :P, "13") }
+    case1("illegal_double_pawn") { stand_drop(:black, :P, "13") }
+  end
+
+  it "打ち歩詰め" do
+    case1("illegal_pawn_drop_mate", sp_body: pawn_drop_mate_sfen) { stand_drop(:black, :P, "92") }
   end
 
   it "駒ワープ" do
@@ -42,12 +52,12 @@ RSpec.describe __FILE__ do
   end
 
   it "死に駒" do
-    case1("illegal_dead_piece") { stand_move(:black, :P, "21") }
+    case1("illegal_dead_piece") { stand_drop(:black, :P, "21") }
   end
 
   describe "王手放置" do
     it "打 (うっかり系)" do
-      case1("illegal_check_ignored") { stand_move(:black, :P, "24") }
+      case1("illegal_check_ignored") { stand_drop(:black, :P, "24") }
     end
     it "移動 玉以外 (うっかり系)" do
       case1("illegal_check_ignored") { piece_move("23", "32") }

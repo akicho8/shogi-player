@@ -9,7 +9,7 @@ import { SfenParser } from "./sfen_parser.js"
 import { SfenSerializer } from "./sfen_serializer.js"
 import { PresetInfo } from "./preset_info.js"
 import { Location } from "./location.js"
-import { Xinteger } from "beetleshine/lib/xinteger"
+import { Beetleshine as GX } from "beetleshine"
 
 export class Xcontainer {
   constructor() {
@@ -41,33 +41,30 @@ export class Xcontainer {
   execute_one(m) {
     this.last_hand = m
     if (m.drop_piece) {
-      const soldier = new Soldier({
-        piece: m.drop_piece,
-        place: m.place,
-        promoted: m.promoted,
-        location: m.location,
-      })
-      this.hold_pieces_add(m.location, soldier.piece, -1)
-      this.board.place_on(soldier)
+      const drop_soldier = Soldier.create({piece: m.drop_piece, place: m.place, promoted: m.promoted, location: m.location})
+      this.board.soldier_drop$(drop_soldier)
+      this.hold_pieces_add(m.location, drop_soldier.piece, -1)
     } else {
       {
-        const soldier = this.board.lookup(m.place)
-        if (soldier) {
-          this.hold_pieces_add(m.location, soldier.piece, 1)
+        const killed_soldier = this.board.lookup(m.place)
+        if (killed_soldier) {
+          this.hold_pieces_add(m.location, killed_soldier.piece, 1)
         }
       }
-      const soldier = this.board.lookup(m.origin_place)
-      if (m.promoted_trigger) {
-        soldier.promoted = true
+      {
+        let new_attributes = { place: m.place }
+        if (m.promoted_trigger) {
+          new_attributes["promoted"] = true
+        }
+        const old_soldier = this.board.lookup(m.origin_place)
+        const new_soldier = old_soldier.clone_with(new_attributes)
+        this.board.soldier_move$(old_soldier, new_soldier)
       }
-      soldier.place = m.place
-      this.board.delete_at(m.origin_place)
-      this.board.place_on(soldier)
     }
   }
 
   hold_pieces_count(location, piece) {
-    return this.hold_pieces[location.key][piece.key] || 0
+    return this.hold_pieces[location.key][piece.key] ?? 0
   }
 
   // 持駒が空か？
@@ -103,10 +100,6 @@ export class Xcontainer {
       count = max
     }
     return count
-  }
-
-  board_safe_delete_on(place) {
-    this.board.delete_at(place)
   }
 
   board_piece_fore_class(xy) {
@@ -158,7 +151,7 @@ export class Xcontainer {
   }
 
   turn_cycle(index) {
-    return Xinteger.imodulo(Number(index), this.turn_offset_max + 1)
+    return GX.imodulo(Number(index), this.turn_offset_max + 1)
   }
 
   get previous_location() {
@@ -235,7 +228,7 @@ export class Xcontainer {
   // -------------------------------------------------------------------------------- piece_box
 
   piece_box_count(piece) {
-    return this.piece_box[piece.key] || 0
+    return this.piece_box[piece.key] ?? 0
   }
 
   piece_box_add(piece, plus = 1) {
@@ -304,7 +297,7 @@ export class Xcontainer {
     const info = PresetInfo.fetch("全部駒箱")
     info.piece_box.forEach(([e, c]) => {
       const piece = Piece.fetch(e)
-      const rest = c - ((counts_hash[piece.key] || 0) + (counts_hash_on_board[piece.key] || 0))
+      const rest = c - ((counts_hash[piece.key] ?? 0) + (counts_hash_on_board[piece.key] ?? 0))
       this.piece_box_add(piece, rest)
     })
   }
@@ -314,7 +307,7 @@ export class Xcontainer {
     const counts = {}
     Location.values.forEach(e => {
       _.forIn(this.hold_pieces[e.key], (count, piece_key) => {
-        counts[piece_key] = (counts[piece_key] || 0) + count
+        counts[piece_key] = (counts[piece_key] ?? 0) + count
       })
     })
     return counts
@@ -392,7 +385,7 @@ export class Xcontainer {
       const soldier = this.board.lookup(e.place)
       if (soldier) {
         const piece = soldier.piece
-        this.board.delete_at(soldier.place)
+        this.board.delete_at$(soldier.place)
         if (piece.key === "K") {
           // 玉の場合は駒箱にとらげる
           this.piece_box_add(piece)
@@ -423,7 +416,7 @@ export class Xcontainer {
       }
     }
 
-    this.board.place_on(soldier)
+    this.board.soldier_drop$(soldier)
   }
 
   // 相手の駒→駒箱→自分の駒の順で駒を探してあれば -1 して true を返す

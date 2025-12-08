@@ -124,6 +124,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_slider", default:     DEVELOPMENT_P ? true : true, },
       { key: "sp_controller", default: DEVELOPMENT_P ? true : false, },
       { key: "sp_legal_move_only", default: true, },
+      { key: "sp_checkmate_feature", default: false, },
       { key: "sp_illegal_validate", default: true, },
       { key: "sp_illegal_cancel", default: false, },
       { key: "sp_lift_cancel_action", default: "reality", },

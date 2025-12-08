@@ -85,7 +85,7 @@ const vm = new Vue({
     piece_stand_piece_click: function(location, piece, e) {
       // 持っているならキャンセル
       if (this.rules["rule3"] && this.hold_p) {
-        this.lifted_piece_cancel()
+        this.current_turn_reset_all()
         return
       }
 
@@ -99,8 +99,8 @@ const vm = new Vue({
         const count = (this.hold_pieces[location][this.origin_soldier.piece] || 0) + 1
         Vue.set(this.hold_pieces[location], this.origin_soldier.piece, count)
         Vue.set(this.board, this.place_from, null)      // 元の位置を消す
-        this.lifted_piece_cancel()
-        this.turn_next()
+        this.current_turn_reset_all()
+        this.current_turn_commit()
         return
       }
 
@@ -136,13 +136,13 @@ const vm = new Vue({
 
       // 自分の駒の上に駒を重ねようとしたので状況キャンセル
       if (this.put_on_my_soldier_p(soldier)) {
-        this.lifted_piece_cancel()
+        this.current_turn_reset_all()
         return
       }
 
       // 盤上の駒を持って同じ位置に戻したので状況キャンセル
       if (_.isEqual(this.place_from, place)) {
-        this.lifted_piece_cancel()
+        this.current_turn_reset_all()
         return
       }
 
@@ -159,8 +159,8 @@ const vm = new Vue({
         this.piece_capture(soldier)                     // 相手の駒があれば取る
         Vue.set(this.board, place, this.origin_soldier) // 移動
         Vue.set(this.board, this.place_from, null)      // 元の位置を消す
-        this.lifted_piece_cancel()
-        this.turn_next()
+        this.current_turn_reset_all()
+        this.current_turn_commit()
         return
       }
 
@@ -169,8 +169,8 @@ const vm = new Vue({
         const soldier = {piece: this.have_piece, location: this.current_player}
         Vue.set(this.board, place, soldier) // 置く
         this.mochigoma_herasu()             // 持駒を減らす
-        this.lifted_piece_cancel()
-        this.turn_next()
+        this.current_turn_reset_all()
+        this.current_turn_commit()
         return
       }
 
@@ -206,7 +206,7 @@ const vm = new Vue({
       e.target.classList.add("active")
     },
 
-    lifted_piece_cancel: function() {
+    current_turn_reset_all: function() {
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       if (this.from_dom) {
@@ -215,7 +215,7 @@ const vm = new Vue({
       }
     },
 
-    turn_next: function() {
+    current_turn_commit: function() {
       this.turn_counter += 1
     },
 

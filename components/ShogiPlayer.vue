@@ -46,6 +46,7 @@ import { mod_think_mark } from "./think_mark/mod_think_mark.js"
 import { mod_resize_observer } from "./mod_resize_observer.js"
 import { mod_shortcut        } from "./mod_shortcut.js"
 import { mod_edit_mode       } from "./mod_edit_mode.js"
+import { mod_checkmate       } from "./mod_checkmate.js"
 import { mod_illegal         } from "./mod_illegal.js"
 import { mod_lifted_piece    } from "./mod_lifted_piece.js"
 import { mod_play_mode       } from "./mod_play_mode.js"
@@ -97,6 +98,7 @@ export default {
     mod_resize_observer,
     mod_shortcut,
     mod_edit_mode,
+    mod_checkmate,
     mod_illegal,
     mod_lifted_piece,
     mod_play_mode,
@@ -312,7 +314,7 @@ export default {
     // そうしないと sp_turn と sp_body を同時に変更したとき
     // sp_turn, sp_body の順に反映されて局面が1つ前になってしまう
     kifu_source() {
-      this.lifted_piece_cancel() // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
+      this.current_turn_reset_all() // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
 
       if (this.edit_p) {
         this.xcontainer_setup_for_edit_mode()

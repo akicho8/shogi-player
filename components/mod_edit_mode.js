@@ -16,6 +16,7 @@ export const mod_edit_mode = {
     sp_my_piece_kill_disabled:    { type: Boolean, default: true, },       // play では自分の駒で同じ仲間の駒を取れないようにする
     sp_double_click_threshold_ms: { type: Number,  default: 350,  },       // edit で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_view_mode_piece_movable:   { type: Boolean, default: true, },       // view でも駒を動かせる(ただし本筋は破壊しない)
+    sp_checkmate_feature:         { type: Boolean, default: false, },      // play で詰み判定するか？
 
     // 駒キャンセル方法
     sp_lift_cancel_action: {
@@ -58,7 +59,7 @@ export const mod_edit_mode = {
 
   watch: {
     mut_mode() {
-      this.lifted_piece_cancel() // モードが切り替わったときに持ち上げた駒を元に戻す(こうしないとカーソルから駒が離れない)
+      this.current_turn_reset_all() // モードが切り替わったときに持ち上げた駒を元に戻す(こうしないとカーソルから駒が離れない)
     },
   },
 
@@ -119,6 +120,8 @@ export const mod_edit_mode = {
       this.log("board_cell_left_click")
       this.log(`shiftKey: ${e.shiftKey}`)
 
+      this.checkmate_init()
+
       this.$data._last_clicked_cell = e.target
       this.illegal_init()
 
@@ -146,7 +149,7 @@ export const mod_edit_mode = {
       let new_soldier = null
       let promotable_p = null
       if (this.origin_soldier1) {
-        new_soldier = this.origin_soldier1.clone_with_attrs({place: place})
+        new_soldier = this.origin_soldier1.clone_with({place: place})
         // new_soldier = new Soldier({
         //   piece: this.origin_soldier1.piece,
         //   place: place,
@@ -188,14 +191,11 @@ export const mod_edit_mode = {
       if (this.sp_illegal_validate) {
         if (this.play_p && this.have_piece && !this.killed_soldier) {
           const new_soldier = this.soldier_create_from_stand_or_box_on(place)
-          const force_promote_length = new_soldier.piece.piece_vector.force_promote_length // 死に駒になる上の隙間
-          if (force_promote_length != null) {                                              // チェックしない場合は null
-            if (new_soldier.top_spaces <= force_promote_length) {                          // 実際の上の隙間 <= 死に駒になる上の隙間
-              this.log("駒台や駒箱から持ち上げた駒を置こうとしたけど死に駒なので無効とする")
-              const last_move_info = this.move_info_create({type: "put", to: new_soldier})
-              if (this.illegal_add2("illegal_dead_piece", last_move_info) === "__cancel__") { // 死に駒
-                return
-              }
+          if (new_soldier.dead_place_p) {
+            this.log("駒台や駒箱から持ち上げた駒を置こうとしたけど死に駒なので無効とする")
+            const last_move_info = this.move_info_create({type: "put", to: new_soldier})
+            if (this.illegal_call("illegal_dead_piece", last_move_info) === "__cancel__") { // 死に駒
+              return
             }
           }
         }
@@ -235,7 +235,7 @@ export const mod_edit_mode = {
               this.log(`ダブルクリック判定: (${gap} ms < ${this.sp_double_click_threshold_ms}) -> ${enable}`)
               if (enable) {
                 this.log(`操作モードで盤上の駒を持って同じ位置に戻したときに盤上の駒を裏返す`)
-                this.xcontainer.board.place_on(this.killed_soldier.transform_all)
+                this.xcontainer.board.soldier_drop$(this.killed_soldier.transform_all)
                 this.piece_hold_and_put_for_bug(place, e) // 不具合対策
                 return
               }
@@ -257,7 +257,7 @@ export const mod_edit_mode = {
         if (this.meta_p(e)) {
           if (!this.lifted_p && this.killed_soldier) { // 持ってなくて、駒がある
             this.log("盤上の駒を裏返す")
-            this.xcontainer.board.place_on(this.killed_soldier.transform_all)
+            this.xcontainer.board.soldier_drop$(this.killed_soldier.transform_all)
             this.piece_hold_and_put_for_bug(place, e) // 不具合対策
             return
           }
@@ -283,20 +283,20 @@ export const mod_edit_mode = {
 
         // 1つだけ動ける系
         if (!found) {
-          found = this.xcontainer.board.once_reach(this.origin_soldier1, place)
+          found = this.xcontainer.board.once_reach_count(this.origin_soldier1, place) > 0
         }
 
         // 連続で動ける系
         if (!found) {
-          if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place, {mode: "non_stop"})) {
+          if (this.xcontainer.board.repeat_reach_count(this.origin_soldier1, place, {ghost_move: true}) > 0) {
             this.log("障害物を素通りすれば目的地に行ける")
             if (this.sp_illegal_validate) {
-              if (this.xcontainer.board.repeat_reach(this.origin_soldier1, place)) {
+              if (this.xcontainer.board.repeat_reach_count(this.origin_soldier1, place) > 0) {
                 this.log("障害物なく目的地に行ける")
               } else {
                 this.log("障害物を飛び越えれば目的地に行ける")
                 const last_move_info = this.move_info_create({type: "move", from: this.origin_soldier1, to: new_soldier, killed_soldier: this.killed_soldier})
-                if (this.illegal_add2("illegal_warp_move", last_move_info) === "__cancel__") { // 駒ワープ
+                if (this.illegal_call("illegal_warp_move", last_move_info) === "__cancel__") { // 駒ワープ
                   return
                 }
               }
@@ -315,11 +315,11 @@ export const mod_edit_mode = {
 
         // [王手放置判定] 駒を移動したとき
         if (this.sp_illegal_validate) {
-          if (this.xcontainer.board.move_then_king_capture_p(this.origin_soldier1, place)) {
+          if (this.xcontainer.board.soldier_move_then_king_death_p(this.origin_soldier1, new_soldier)) {
             this.log("駒を動かしたあとの状態が自玉王手になっている")
             const last_move_info = this.move_info_create({type: "move", from: this.origin_soldier1, to: new_soldier, killed_soldier: this.killed_soldier})
-            const illegal_key = this.illegal_key_of_piece_move2(this.origin_soldier1.location, this.origin_soldier1.piece)
-            if (this.illegal_add2(illegal_key, last_move_info) === "__cancel__") { // 王手放置 or 自殺手
+            const illegal_key = this.illegal_key_of_piece_move(this.origin_soldier1.location, this.origin_soldier1.piece)
+            if (this.illegal_call(illegal_key, last_move_info) === "__cancel__") { // 王手放置 or 自殺手
               return
             }
           }
@@ -367,10 +367,11 @@ export const mod_edit_mode = {
             this.last_move_info_set({type: "move", from: this.origin_soldier1, to: new_soldier, killed_soldier: this.killed_soldier})
             this.moves_set()
           }
-          this.xcontainer.board.place_on(new_soldier) // 置く
-          this.xcontainer.board.delete_at(this.place_from)
-          this.lifted_piece_cancel()
-          this.turn_next()
+          this.move_then_checkmate_check(new_soldier)
+          this.xcontainer.board.soldier_drop$(new_soldier) // 置く
+          this.xcontainer.board.delete_at$(this.place_from)
+          this.current_turn_commit()
+          this.current_turn_reset_all()
         }
 
         return
@@ -380,14 +381,15 @@ export const mod_edit_mode = {
       if (this.have_piece) {
         this.log("持駒を置く")
 
+        const drop_soldier = this.soldier_create_from_stand_or_box_on(place)
+
         // [王手放置判定] 持駒を打ったとき
         if (this.sp_illegal_validate) {
           if (this.play_p) {
-            const new_soldier = this.soldier_create_from_stand_or_box_on(place)
-            if (this.xcontainer.board.puton_then_king_capture_p(new_soldier, place)) {
-              const last_move_info = this.move_info_create({type: "put", to: new_soldier})
-              const illegal_key = this.illegal_key_of_piece_move2(new_soldier.location, new_soldier.piece)
-              if (this.illegal_add2(illegal_key, last_move_info) === "__cancel__") { // 王手放置
+            if (this.xcontainer.board.soldier_drop_then_king_death_p(drop_soldier)) {
+              const last_move_info = this.move_info_create({type: "put", to: drop_soldier})
+              const illegal_key = this.illegal_key_of_piece_move(drop_soldier.location, drop_soldier.piece)
+              if (this.illegal_call(illegal_key, last_move_info) === "__cancel__") { // 王手放置
                 return
               }
             }
@@ -399,15 +401,15 @@ export const mod_edit_mode = {
           if (this.play_p) {
             if (this.have_piece.key === "P") {
               if (this.have_piece_location) {
-                if (this.xcontainer.board.pawn_exist_by_x(place.x, this.have_piece_location)) {
+                // 駒台から動かしている状態
+                if (this.xcontainer.board.double_pawn_violation_p(drop_soldier)) {
                   // 二歩をブロックしたとき、これまで "二歩" の文字列だけを発行していたが
                   // これだと何を指してどのような局面になったのかわからない
                   // したがって二歩ブロックであっても通常の指し手と同じような情報を用意しないといけない
                   // しかし副作用で moves などを更新してしまうと棋譜が二歩で上書きされてしまうので注意する
                   // 持駒の増減に関して SFEN は指し手だけ繋げればよいのでこのままでよい
-                  const new_soldier = this.soldier_create_from_stand_or_box_on(place)
-                  const last_move_info = this.move_info_create({type: "put", to: new_soldier})
-                  if (this.illegal_add2("illegal_double_pawn", last_move_info) === "__cancel__") { // 二歩
+                  const last_move_info = this.move_info_create({type: "put", to: drop_soldier})
+                  if (this.illegal_call("illegal_double_pawn", last_move_info) === "__cancel__") { // 二歩
                     return
                   }
                 }
@@ -432,13 +434,30 @@ export const mod_edit_mode = {
           }
         }
 
-        const new_soldier = this.soldier_create_from_stand_or_box_on(place)
+        // 打ち歩詰めチェック
+        // ・詰みチェックは別に行う
+        // ・玉の頭に歩を打つ場面は滅多にないため重複しても問題ない (絶対に共通化するな)
+        if (this.sp_illegal_validate) {
+          if (this.xcontainer.board.pawn_drop_on_king_front_p(drop_soldier)) { // まず玉の頭に歩を打ったか？ の判定を先に入れる
+            const hold_pieces = this.xcontainer.hold_pieces[drop_soldier.location.flip.key]
+            if (this.xcontainer.board.soldier_drop_then_checkmate_p(drop_soldier, {hold_pieces: hold_pieces})) {
+              const last_move_info = this.move_info_create({type: "put", to: drop_soldier})
+              if (this.illegal_call("illegal_pawn_drop_mate", last_move_info) === "__cancel__") {
+                return
+              }
+            }
+          }
+        }
+
+        // 詰み
+        this.drop_then_checkmate_check(drop_soldier)
+
         this.piece_decriment()
-        this.xcontainer.board.place_on(new_soldier) // 置く
-        this.last_move_info_set({type: "put", to: new_soldier})
+        this.xcontainer.board.soldier_drop$(drop_soldier) // 置く
+        this.last_move_info_set({type: "put", to: drop_soldier})
         this.moves_set()
-        this.lifted_piece_cancel()
-        this.turn_next()
+        this.current_turn_commit()
+        this.current_turn_reset_all()
         return
       }
 
@@ -457,7 +476,7 @@ export const mod_edit_mode = {
     //     if (!this.lifted_p) {
     //       if (soldier) {
     //         this.log("操作モードでダブルタップしたので裏返す")
-    //         // this.xcontainer.board.place_on(soldier.transform_all)
+    //         // this.xcontainer.board.soldier_drop$(soldier.transform_all)
     //         // this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //         return
     //       }
@@ -473,13 +492,14 @@ export const mod_edit_mode = {
 
     // 成れる状態の駒をどうするか
     promotable_piece_moved(new_soldier, promoted) {
-      new_soldier = new_soldier.clone_with_attrs({promoted: promoted})
+      new_soldier = new_soldier.clone_with({promoted: promoted})
       this.last_move_info_set({type: "promotable", from: this.origin_soldier1, to: new_soldier})
       this.moves_set() // 7g7f+
-      this.xcontainer.board.place_on(new_soldier) // 置く
-      this.xcontainer.board.delete_at(this.place_from)
-      this.lifted_piece_cancel()
-      this.turn_next()
+      this.move_then_checkmate_check(new_soldier)
+      this.xcontainer.board.soldier_drop$(new_soldier) // 置く
+      this.xcontainer.board.delete_at$(this.place_from)
+      this.current_turn_commit()
+      this.current_turn_reset_all()
     },
 
     // 最後に操作した駒の情報を作る
@@ -494,7 +514,7 @@ export const mod_edit_mode = {
         next_turn_offset: this.turn_offset + 1,           // この手を指した直後の手数。初手76歩なら1
         player_location: this.xcontainer.current_location,  // 指した人の色。駒の色ではない
         killed_soldier: this.killed_soldier,              // 取った駒 (無い場合もある)
-        illegal_list: this.illegal_list,
+        // illegal_hv_list: this.illegal_hv_list,
       })
     },
 
@@ -502,7 +522,7 @@ export const mod_edit_mode = {
       this.log("盤のセルを右クリック")
       const place = Place.fetch(xy)
 
-      if (place.tennozan_p) {
+      if (place.middle_center_p) {
         if (e.shiftKey && e.altKey && (e.metaKey || e.ctrlKey)) {
           this.dev_tools_toggle_handle()
           return
@@ -522,7 +542,7 @@ export const mod_edit_mode = {
       if (this.edit_p) {
         if (!this.lifted_p && soldier) {
           this.log("盤上の駒を裏返す")
-          this.xcontainer.board.place_on(soldier[method]) // method: transform_all | transform_head | transform_promote
+          this.xcontainer.board.soldier_drop$(soldier[method]) // method: transform_all | transform_head | transform_promote
           this.piece_hold_and_put_for_bug(place, e) // 不具合対策
         }
       }
@@ -550,7 +570,7 @@ export const mod_edit_mode = {
     //   if (this.edit_p) {
     //     if (!this.lifted_p && soldier) {
     //       this.log("盤上の駒を裏返す")
-    //       this.xcontainer.board.place_on(soldier.transform_all)
+    //       this.xcontainer.board.soldier_drop$(soldier.transform_all)
     //       this.piece_hold_and_put_for_bug(place, e) // 不具合対策
     //     }
     //   }
@@ -672,7 +692,7 @@ export const mod_edit_mode = {
       // if (this.have_piece && this.have_piece.key === piece.key) {
       //   if (this.have_piece_location === location) {
       //     this.log("駒台の駒を持った状態で同じ駒台の同じ駒を持ったのでキャンセルする")
-      //     this.lifted_piece_cancel()
+      //     this.current_turn_reset_all()
       //     return
       //   }
       // }
@@ -700,7 +720,7 @@ export const mod_edit_mode = {
 
       if (_.isNil(this.have_piece_location) && this.have_piece) {
         this.log("持っているならキャンセル")
-        this.lifted_piece_cancel()
+        this.current_turn_reset_all()
         return true
       }
 
@@ -708,15 +728,15 @@ export const mod_edit_mode = {
         this.log("駒台から駒箱に移動")
         const count = this.hold_piece_source_cut(e)               // 相手の持駒を減らして減らした分だけ
         this.xcontainer.piece_box_add(this.have_piece, count) // 駒箱に加算する
-        this.lifted_piece_cancel()
+        this.current_turn_reset_all()
         return true
       }
 
       if (this.origin_soldier1) {
         this.log("盤上の駒を駒箱に移動")
         this.xcontainer.piece_box_add(this.origin_soldier1.piece)
-        this.xcontainer.board.delete_at(this.origin_soldier1.place)
-        this.lifted_piece_cancel()
+        this.xcontainer.board.delete_at$(this.origin_soldier1.place)
+        this.current_turn_reset_all()
         return true
       }
 
@@ -764,15 +784,15 @@ export const mod_edit_mode = {
     // 盤上の駒を駒台に置く
     board_soldir_to_hold_pieces(location) {
       this.xcontainer.hold_pieces_add(location, this.origin_soldier1.piece) // 駒台にプラス
-      this.xcontainer.board.delete_at(this.origin_soldier1.place)
-      this.lifted_piece_cancel()
+      this.xcontainer.board.delete_at$(this.origin_soldier1.place)
+      this.current_turn_reset_all()
     },
 
     hold_pieces_move_to_my_hold_pieces(e, location) {
       this.log("相手の持駒を自分の駒台に移動")
       const count = this.hold_piece_source_cut(e)                           // 相手の持駒を減らして減らした分だけ
       this.xcontainer.hold_pieces_add(location, this.have_piece, count) // 自分に加算する
-      this.lifted_piece_cancel()
+      this.current_turn_reset_all()
     },
 
     // 持ち上げている駒を元の場所から減らす
@@ -836,18 +856,19 @@ export const mod_edit_mode = {
     // ユーザーの操作で故意に駒を持ってない状態にする (イベント発生)
     interactive_lifted_piece_cancel() {
       this.event_call("ev_action_piece_cancel")
-      this.lifted_piece_cancel()
+      this.current_turn_reset_all()
     },
 
     // 駒を持ってない状態にする
-    lifted_piece_cancel() {
-      this.log("lifted_piece_cancel: 駒を持ってない状態にする")
+    current_turn_reset_all() {
+      this.log("current_turn_reset_all: 駒を持ってない状態にする")
       this.dialog_soldier = null
       this.place_from = null // 持ってない状態にする
       this.have_piece = null
       this.have_piece_location = null
       this.have_piece_promoted = null
       this.killed_soldier = null
+      this.checkmate_init()
       this.illegal_clear()
       this.lp_destroy()
     },
@@ -864,7 +885,7 @@ export const mod_edit_mode = {
     // これは Vue がリアクティブにならない対策として入れているのでできれば外したい
     piece_hold_and_put_for_bug(place, e) {
       // this.soldier_hold(place, e)
-      this.lifted_piece_cancel() // ←これは絶対にいる
+      this.current_turn_reset_all() // ←これは絶対にいる
       // emitされない不具合の暫定対策でちょうどここが共通処理になっているのでつっこんでおく
       // this.emit_update_edit_mode_short_sfen()
     },
@@ -873,9 +894,10 @@ export const mod_edit_mode = {
 
     // --------------------------------------------------------------------------------
 
-    fn_flip_all() {
+    // FIXME: xcontainer.half_spin_self() のメソッドにする
+    fn_half_spin() {
       // 盤面反転
-      this.xcontainer.board = this.xcontainer.board.flip_all
+      this.xcontainer.board = this.xcontainer.board.half_spin
 
       // 持駒反転
       this.xcontainer.hold_pieces = _.reduce(Location.values, (a, e) => {
@@ -909,8 +931,9 @@ export const mod_edit_mode = {
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    illegal_key_of_piece_move2(location, piece) {
-      if (this.xcontainer.board.king_capture_p(location)) {
+    // ここでの処理はすでに反則がわかっている状態なので多少遅くてもよい
+    illegal_key_of_piece_move(location, piece) {
+      if (this.xcontainer.board.king_dead_p(location)) {
         this.log("駒を動かす前から自玉王手だった → つまり王手放置")
         if (piece.key === "K") {
           this.log("王手に対して王を動かしたのに王手状態なのは放置ではなく故意の「王手解除せず」というべきか")
@@ -929,6 +952,20 @@ export const mod_edit_mode = {
           return "illegal_pin_break_check"
         }
       }
+    },
+
+    drop_then_checkmate_check(new_soldier) {
+      this.checkmate_block(() => {
+        const hold_pieces = this.xcontainer.hold_pieces[new_soldier.location.flip.key]
+        return this.xcontainer.board.soldier_drop_then_checkmate_p(new_soldier, {hold_pieces: hold_pieces})
+      })
+    },
+
+    move_then_checkmate_check(new_soldier) {
+      this.checkmate_block(() => {
+        const hold_pieces = this.xcontainer.hold_pieces[new_soldier.location.flip.key]
+        return this.xcontainer.board.soldier_move_then_checkmate_p(this.origin_soldier1, new_soldier, {hold_pieces: hold_pieces})
+      })
     },
   },
 

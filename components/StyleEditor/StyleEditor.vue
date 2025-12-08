@@ -295,6 +295,7 @@ export default {
       params.sp_legal_move_only      = this.sp_legal_move_only
       params.sp_illegal_validate     = this.sp_illegal_validate
       params.sp_illegal_cancel       = this.sp_illegal_cancel
+      params.sp_checkmate_feature     = this.sp_checkmate_feature
 
       params.sp_lift_cancel_action   = this.sp_lift_cancel_action
       params.sp_click_response_timing     = this.sp_click_response_timing

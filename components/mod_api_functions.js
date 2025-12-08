@@ -12,19 +12,19 @@ export const mod_api_functions = {
     // 盤を消してランダムに駒を配置する
     api_random_puton() {
       const soldier = Soldier.random()
-      this.xcontainer.board.clear()
-      this.xcontainer.board.place_on(soldier)
+      this.xcontainer.board.clear$()
+      this.xcontainer.board.soldier_drop$(soldier)
       return soldier
     },
 
     // 駒を置く
     api_place_on(soldier) {
-      this.xcontainer.board.place_on(soldier)
+      this.xcontainer.board.soldier_drop$(soldier)
     },
 
     // 盤面クリア
     api_board_clear() {
-      this.xcontainer.board.clear()
+      this.xcontainer.board.clear$()
     },
 
     // 指定手数の局面に設定
@@ -76,7 +76,7 @@ export const mod_api_functions = {
 
     // 持った駒を離す
     api_lifted_piece_cancel() {
-      this.lifted_piece_cancel()
+      this.current_turn_reset_all()
     },
 
     // slider にフォーカスする

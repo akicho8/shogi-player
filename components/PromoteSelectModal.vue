@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     piece_texture_class(promoted) {
-      return this.soldier.clone_with_attrs({promoted: promoted}).css_class_list
+      return this.soldier.clone_with({promoted: promoted}).css_class_list
     },
     // 対象のセルの相対位置にこのコンポーネントを配置
     component_position_set() {

@@ -150,7 +150,7 @@ export const mod_lifted_piece = {
       // this.log("lp_click_hook: 右クリックならキャンセル")
       // alert(e.button)
       // if (e.button !== 1) {
-      //   this.lifted_piece_cancel()
+      //   this.current_turn_reset_all()
       // }
     },
 

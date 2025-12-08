@@ -532,6 +532,15 @@ Default: `true`
 
 操作モードでは味方の駒を取れないようにするか？
 
+## 詰み
+
+### `sp_checkmate_feature`
+
+Type: `Boolean`
+Default: `false`
+
+操作モードで詰み判定するか？ (v1.1.34 以上)
+
 ## 反則
 
 ### `sp_illegal_validate`
