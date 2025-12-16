@@ -169,7 +169,7 @@ export class Soldier {
 
   // 自分の側の一番上を0としてあとどれだけで突き当たるかの値
   get top_spaces() {
-    return this.place.sp_half_spin_if_white(this.location).y
+    return this.place.half_spin_if_white(this.location).y
   }
 
   get once_vectors() {

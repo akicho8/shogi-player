@@ -66,7 +66,7 @@ export class Place {
     let x = a.x + dx
     let y = a.y + dy
     while (!(x === b.x && y === b.y)) {
-      list.push(Place.fetch([x, y]))
+      list.push(this.fetch([x, y]))
       x += dx
       y += dy
     }
@@ -87,40 +87,37 @@ export class Place {
     } else {
       [x, y] = value            // valus is array
     }
-    [this._x, this._y] = [x, y]
+    if (process.env.NODE_ENV !== "production") {
+      GX.assert_kind_of_integer(x)
+      GX.assert_kind_of_integer(y)
+    }
+    this.x = x
+    this.y = y
     Object.freeze(this)
   }
 
   get key() {
-    return [this._x, this._y].toString()
-  }
-
-  get x() {
-    return this._x
-  }
-
-  get y() {
-    return this._y
+    return this.to_a.toString()
   }
 
   get to_a() {
-    return [this._x, this._y]
+    return [this.x, this.y]
   }
 
   get to_h() {
-    return { x: this._x, y: this._y }
+    return { x: this.x, y: this.y }
   }
 
   get human_x() {
-    return Board.dimension - this._x
+    return Board.dimension - this.x
   }
 
   get kanji_human_x() {
-    return Place.TO_KANJI_REPLACE_TABLE_X[this.human_x]
+    return this.constructor.TO_KANJI_REPLACE_TABLE_X[this.human_x]
   }
 
   get kanji_human_y() {
-    return Place.TO_KANJI_REPLACE_TABLE_Y[this.human_y]
+    return this.constructor.TO_KANJI_REPLACE_TABLE_Y[this.human_y]
   }
 
   get yomiage_x() {
@@ -132,19 +129,19 @@ export class Place {
   }
 
   get human_y() {
-    return this._y + 1
+    return this.y + 1
   }
 
   get half_spin() {
-    return Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y])
+    return this.constructor.fetch([Board.dimension - 1 - this.x, Board.dimension - 1 - this.y])
   }
 
   get flip() {
-    return Place.fetch([this._x, Board.dimension - 1 - this._y])
+    return this.constructor.fetch([this.x, Board.dimension - 1 - this.y])
   }
 
   get flop() {
-    return Place.fetch([Board.dimension - 1 - this._x, this._y])
+    return this.constructor.fetch([Board.dimension - 1 - this.x, this.y])
   }
 
   flop_if(v) {
@@ -155,7 +152,7 @@ export class Place {
     }
   }
 
-  sp_half_spin_if_white(location) {
+  half_spin_if_white(location) {
     if (location.key === "white") {
       return this.half_spin
     } else {
@@ -164,7 +161,7 @@ export class Place {
   }
 
   get to_sfen() {
-    return [Board.dimension - this._x, Place.TO_SFEN_REPLACE_TABLE_Y[this._y]].join("")
+    return [Board.dimension - this.x, this.constructor.TO_SFEN_REPLACE_TABLE_Y[this.y]].join("")
   }
 
   // "place_7_6"
@@ -201,14 +198,14 @@ export class Place {
   }
 
   get middle_center_p() {
-    const e = Place.center_center
+    const e = this.constructor.center_center
     return this.x === e.x && this.y === e.y
   }
 
   // x, y を足した新しい位置を返す
   // はみでたのは反対側の座標とする
   rotate_xy(x, y) {
-    return Place.wrap_fetch(this.x + x, this.y + y)
+    return this.constructor.wrap_fetch(this.x + x, this.y + y)
   }
 
   line_between_to(to) {
@@ -222,16 +219,11 @@ export class Place {
   // private
 
   __str_to_xy(str) {
-    const [x, y] = str.split("").map(e => Number(Place.ANY_TO_NUMBER_REPLACE_TABLE[e] ?? e))
+    const [x, y] = str.split("").map(e => Number(this.constructor.ANY_TO_NUMBER_REPLACE_TABLE[e] ?? e))
     return this.__logical_xy_to_internal_xy(x, y)
   }
 
   __logical_xy_to_internal_xy(x, y) {
     return [Board.dimension - x, y - 1]
   }
-}
-
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  console.log(Place.fetch("6a").key)
-  console.log(Place.fetch([1, 2]).key)
 }
