@@ -7,19 +7,11 @@ import { Location } from "./location"
 
 export class Soldier {
   static random(params = {}) {
-    let place = params.place
-    if (!place) {
-      const x = _.random(0, Board.dimension - 1)
-      const y = _.random(0, Board.dimension - 1)
-      place = Place.fetch([x, y])
-    }
-
-    const piece = Piece.fetch(_.random(0, Piece.values.length - 1))
-    const promoted = piece.promotable_p && _.random(0, 1) === 0
-
-    const location = Location.fetch(_.random(0, Location.values.length - 1))
-
-    return new this({piece: piece, place: place, promoted: promoted, location: location})
+    const place    = params.place ?? Place.random
+    const piece    = params.piece ?? _.sample(Piece.values)
+    const promoted = params.promoted ?? (piece.promotable_p ? _.sample([true, false]) : false)
+    const location = params.location ?? _.sample(Location.values)
+    return new this.create({piece, place, promoted, location})
   }
 
   static create(attributes = {}) {
@@ -27,11 +19,8 @@ export class Soldier {
   }
 
   // for test
-  static create4(place_key, piece_key, promoted, location_key) {
-    return this.easy_create({place_key, piece_key, promoted, location_key})
-  }
-
-  // for test
+  // 無駄が多いが生成しやすい
+  // 初期値がある
   static easy_create(attributes = {}) {
     const hv = {}
 
@@ -60,7 +49,7 @@ export class Soldier {
       hv.promoted = attributes.promoted
     }
 
-    return this.create(hv)
+    return this.create({...this.default_attributes, ...hv})
   }
 
   static get default_attributes() {
@@ -73,10 +62,7 @@ export class Soldier {
   }
 
   constructor(attributes = {}) {
-    this.attributes = {
-      ...this.constructor.default_attributes,
-      ...attributes,
-    }
+    this.attributes = {...attributes}
     Object.freeze(this.attributes)
     Object.freeze(this)
   }
@@ -149,7 +135,7 @@ export class Soldier {
   // soldier.clone_with({promoted: true})
   // soldier.clone_with({promoted: false})
   clone_with(attrs = {}) {
-    return new Soldier({...this.attributes, ...attrs})
+    return this.constructor.create({...this.attributes, ...attrs})
   }
 
   ////////////////////////////////////////////////////////////////////////////////

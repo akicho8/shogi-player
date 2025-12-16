@@ -15,7 +15,7 @@ export class Board {
     return new this()
   }
 
-  static get empty() {
+  static create_empty() {
     return this.create()
   }
 
@@ -149,7 +149,3 @@ ClassHelper.class_include(Board, UtilityMethods)
 ClassHelper.class_include(Board, TransformMethods)
 ClassHelper.class_include(Board, LeaveKingAloneMethods)
 ClassHelper.class_include(Board, CheckmateMethods)
-
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  console.log(Board.dimension)
-}

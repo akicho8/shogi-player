@@ -23,14 +23,14 @@ export class EditToolInfo extends ApplicationMemoryRecord {
       // { name: "指将棋用玉回収(右)", func: e => { e.xcontainer.king_formation_unset("bottom_right") }, },
       { separator: true },
 
-      // { name: "盤面をシャッフル",   func: e => { e.xcontainer.shuffle_apply(4) }, },
+      // { name: "盤面をシャッフル",   func: e => { e.xcontainer.square_shuffle(4) }, },
       { name: "シャッフル",     func: e => { e.shuffle_dialog_open_handle() }, },
       { separator: true },
 
-      { name: "ローテイト ←", func: e => { e.xcontainer.slide_xy(-1, 0) }, },
-      { name: "ローテイト →", func: e => { e.xcontainer.slide_xy(1, 0)  }, },
-      { name: "ローテイト ↑", func: e => { e.xcontainer.slide_xy(0, -1) }, },
-      { name: "ローテイト ↓", func: e => { e.xcontainer.slide_xy(0, 1)  }, },
+      { name: "ローテイト ←", func: e => { e.xcontainer.rotate_xy(-1, 0) }, },
+      { name: "ローテイト →", func: e => { e.xcontainer.rotate_xy(1, 0)  }, },
+      { name: "ローテイト ↑", func: e => { e.xcontainer.rotate_xy(0, -1) }, },
+      { name: "ローテイト ↓", func: e => { e.xcontainer.rotate_xy(0, 1)  }, },
     ]
   }
 }

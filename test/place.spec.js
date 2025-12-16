@@ -2,15 +2,10 @@ import { Place } from "@/components/models/place.js"
 
 describe("Place", () => {
   describe("ClassMethods", () => {
-    describe(".fetch", () => {
-      it("人間表記の文字列から作る", () => {
-        expect(Place.fetch("1a").digit_human).toEqual("11")
-        expect(Place.fetch("11").digit_human).toEqual("11")
-      })
-
-      it("内部座標から作る", () => {
-        expect(Place.fetch([0, 0]).digit_human).toEqual("91")
-      })
+    it(".fetch", () => {
+      expect(Place.fetch("1a").digit_human).toEqual("11")
+      expect(Place.fetch("11").digit_human).toEqual("11")
+      expect(Place.fetch([8, 0]).digit_human).toEqual("11")
     })
 
     it(".wrap_fetch", () => {
@@ -26,6 +21,10 @@ describe("Place", () => {
       expect(Place.bottom_center.digit_human).toEqual("59")
       expect(Place.bottom_right.digit_human).toEqual("19")
       expect(Place.center_center.digit_human).toEqual("55")
+    })
+
+    it(".random", () => {
+      expect(Place.random.constructor.name).toEqual("Place")
     })
 
     it(".line_between", () => {

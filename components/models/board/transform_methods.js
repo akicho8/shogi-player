@@ -3,95 +3,44 @@ import { Place } from "../place.js"
 import { Soldier } from "../soldier.js"
 
 export class TransformMethods {
-  // 360度回転相当の新しいインスタンスを返す
-  get half_spin() {
-    const new_board = this.constructor.create()
-    _.forEach(this._surface, (soldier, _place) => {
-      const new_soldier = soldier.clone_with({location: soldier.location.flip, place: soldier.place.half_spin})
-      new_board.soldier_drop$(new_soldier)
-    })
-    return new_board
-  }
+  get half_spin() { return this.__transform_call(e => e.clone_with({ place: e.place.half_spin, location: e.location.flip })) } // 180度反転
+  get flip()      { return this.__transform_call(e => e.clone_with({ place: e.place.flip                                 })) } // 上下反転
+  get flop()      { return this.__transform_call(e => e.clone_with({ place: e.place.flop                                 })) } // 左右反転
+  rotate_xy(x, y) { return this.__transform_call(e => e.clone_with({ place: e.place.rotate_xy(x, y)                      })) } // x, y ずらす
 
-  // 左右反転した新しいインスタンスを返す
-  get flop() {
-    const new_board = this.constructor.create()
-    _.forEach(this._surface, (soldier, _place) => {
-      const new_soldier = soldier.clone_with({place: soldier.place.flop})
-      new_board.soldier_drop$(new_soldier)
-    })
-    return new_board
-  }
-
-  // 上下左右ローテイトした新しいインスタンスを返す
-  slide_xy(x, y) {
-    const new_board = this.constructor.create()
-    _.forEach(this._surface, (soldier, _place) => {
-      const new_soldier = soldier.clone_with({place: soldier.place.to_rotate_place(x, y)})
-      new_board.soldier_drop$(new_soldier)
-    })
-    return new_board
-  }
-
-  shuffle_apply(size) {
-    // const new_board = this.constructor.create()
-    // _.forEach(this._surface, (soldier, place) => {
-    //   while (true) {
-    //     const nx = _.random(0, size - 1)
-    //     const ny = _.random(0, size - 1)
-    //     const new_place = Place.fetch([nx, ny])
-    //     if (new_board.lookup(new_place)) {
-    //       const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
-    //         location: soldier.location,
-    //         place: new_place,
-    //       }))
-    //       new_board.soldier_drop$(new_soldier)
-    //       break
-    //     }
-    //   }
-    // })
-    // return new_board
-
-    if ((size * size) < this.soldiers.length) {
-      // alert(`再配置するスペースより駒の数の方が多いため処理できません`)
+  // size * size の範囲で配置をランダムにする
+  square_shuffle(size) {
+    if ((size * size) < this.soldiers_count) {
+      // 再配置するスペースより駒の数の方が多いため処理できない
       return
     }
 
-    const places = this.all_places(size)
-    const shuffled_places = _.shuffle(places)
-    // console.log(places)
-    // if (places.length < this.soldiers.length) {
-    //   alert("空がありません")
-    //   return
-    // }
+    const target_area_places = this.__target_area_places(size)
+    const shuffled_places = _.shuffle(target_area_places)
 
-    const new_board = this.constructor.create()
     let i = 0
-    _.forEach(this._surface, (soldier, place) => {
-      const new_soldier = new Soldier(Object.assign({}, soldier.attributes, {
-        location: soldier.location,
-        place: shuffled_places[i],
-      }))
-      new_board.soldier_drop$(new_soldier)
+    return this.__transform_call(e => {
+      const new_place = shuffled_places[i]
       i += 1
+      return e.clone_with({place: new_place})
     })
-    return new_board
   }
 
   // 単純に右上を原点として size x size のセルの Place オブジェクトの配列を返す
-  all_places(size) {
+  __target_area_places(size) {
     const bx = this.dimension - size
     const by = 0
-
     const places = []
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        const place = Place.fetch([bx + x, by + y])
-        // if (!this.lookup(place)) {
-        places.push(place)
-        // }
-      }
-    }
+    _(size).times(y => {
+      _(size).times(x => {
+        places.push(Place.fetch([bx + x, by + y]))
+      })
+    })
     return places
+  }
+
+  __transform_call(block) {
+    const new_soldiers = this.soldiers.map(e => block(e))
+    return this.constructor.create_from_soldiers(new_soldiers)
   }
 }

@@ -4,8 +4,8 @@ import { Soldier } from "@/components/models/soldier.js"
 import { Location } from "@/components/models/location.js"
 
 describe("Soldier", () => {
-  it("初期値", () => {
-    const soldier = Soldier.create()
+  it("easy_create", () => {
+    const soldier = Soldier.easy_create()
     expect(soldier.promoted).toEqual(false)
     expect(soldier.location.key).toEqual("black")
     expect(soldier.place.digit_human).toEqual(Place.bottom_center.digit_human)
@@ -13,7 +13,7 @@ describe("Soldier", () => {
   })
 
   it("#dead_place_p: 死に駒か？", () => {
-    const fn = (place_key, piece_key, promoted, location_key) => !!Soldier.create4(place_key, piece_key, promoted, location_key).dead_place_p
+    const fn = (place_key, piece_key, promoted, location_key) => !!Soldier.easy_create({place_key, piece_key, promoted, location_key}).dead_place_p
 
     expect(fn("91", "P", false, "black")).toEqual(true)
     expect(fn("92", "P", false, "black")).toEqual(false)
