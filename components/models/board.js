@@ -11,13 +11,6 @@ export class Board {
   get dimension()        { return this.constructor.dimension }
   get danger_zone_size() { return this.constructor.danger_zone_size }
 
-  static vector_flip(x, y) {
-    return [
-      this.dimension - x - 1,
-      this.dimension - y - 1,
-    ]
-  }
-
   static create() {
     return new this()
   }
@@ -69,20 +62,56 @@ export class Board {
     this.soldier_drop$(new_soldier)
   }
 
-  // 場所を見ているだけで厳密なチェックはしていない
-  soldier_exist_p(soldier) {
-    return this.lookup(soldier.place)
-  }
-
-  lookup(place) {
-    return this._surface[place.key]
-  }
-
   clear$() {
     this._surface = {}
   }
 
   //////////////////////////////////////////////////////////////////////////////// 非破壊的
+
+  // 指定の場所にある駒を返す
+  lookup(place) {
+    return this._surface[place.key]
+  }
+
+  //////////////////////////////////////////////////////////////////////////////// Utilities
+
+  get empty_p() {
+    return GX.hash_empty_p(this._surface)
+  }
+
+  get soldiers() {
+    return Object.values(this._surface)
+  }
+
+  get to_a() {
+    return this.soldiers
+  }
+
+  get to_h() {
+    return this._surface
+  }
+
+  get soldiers_count() {
+    return this.soldiers.length
+  }
+
+  soldiers_by_location(location) {
+    const key = location.key
+    return this.soldiers.filter(e => e.location.key === key)
+  }
+
+  get shallow_clone() {
+    const new_board = this.constructor.create()
+    new_board._surface = {...this._surface}
+    return new_board
+  }
+
+  //////////////////////////////////////////////////////////////////////////////// soldier_*
+
+  // 場所を見ているだけで厳密なチェックはしていない
+  soldier_exist_p(soldier) {
+    return this.lookup(soldier.place)
+  }
 
   // 指す
   soldier_move(old_soldier, new_soldier) {
@@ -103,24 +132,6 @@ export class Board {
     const cloned_board = this.shallow_clone
     cloned_board.soldier_remove$(soldier)
     return cloned_board
-  }
-
-  //////////////////////////////////////////////////////////////////////////////// Utilities
-
-  get shallow_clone() {
-    const new_board = this.constructor.create()
-    new_board._surface = {...this._surface}
-    return new_board
-  }
-
-  get soldiers() {
-    return Object.values(this._surface)
-  }
-
-  // location 側の soldiers
-  soldiers_by_location(location) {
-    const key = location.key
-    return this.soldiers.filter(e => e.location.key === key)
   }
 }
 
