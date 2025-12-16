@@ -25,7 +25,7 @@ export const mod_edit_tool = {
 
     shuffle_run(size) {
       size = parseInt(size)
-      if (!this.xcontainer.shuffle_apply(size)) {
+      if (!this.xcontainer.square_shuffle(size)) {
         this.toast_call(`${size} x ${size} が盤上の駒の数より少ないため何もしませんでした`, {type: "is-warning"})
       }
     },

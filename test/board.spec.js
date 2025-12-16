@@ -6,14 +6,6 @@ import { Location } from "@/components/models/location.js"
 import { KifParser } from "@/components/models/kif_parser.js"
 
 describe("Board", () => {
-  let soldier = null
-  let board = null
-
-  beforeEach(() => {
-    board = Board.empty
-    soldier = Soldier.create({place: Place.top_left, piece: Piece.fetch("P")})
-  })
-
   describe("ClassMethods", () => {
     it(".dimension", () => {
       expect(Board.dimension).toEqual(9)
@@ -30,10 +22,10 @@ describe("Board", () => {
     })
   })
 
-  describe("基本", () => {
+  describe("破壊的", () => {
     it("#soldier_drop$", () => {
       const soldier = Soldier.easy_create()
-      const board = Board.empty
+      const board = Board.create_empty()
       board.soldier_drop$(soldier)
       expect(!!board.soldier_exist_p(soldier)).toEqual(true)
     })
@@ -71,7 +63,7 @@ describe("Board", () => {
 
   describe("非破壊的", () => {
     it("#empty_p", () => {
-      expect(Board.empty.empty_p).toEqual(true)
+      expect(Board.create_empty().empty_p).toEqual(true)
       expect(Board.create_from_soldiers([Soldier.easy_create()]).empty_p).toEqual(false)
     })
 
@@ -83,7 +75,7 @@ describe("Board", () => {
 
     it("#shallow_clone", () => {
       const soldier = Soldier.easy_create()
-      const old_board = Board.empty
+      const old_board = Board.create_empty()
       const new_board = old_board.shallow_clone
       old_board.soldier_drop$(soldier)
       expect(new_board.empty_p).toEqual(true)
@@ -93,14 +85,13 @@ describe("Board", () => {
       const soldier = Soldier.easy_create()
       const board = Board.create_from_soldiers([soldier])
       expect(board.soldiers).toEqual([soldier])
-    })
-
-    it("#to_a", () => {
-      expect(Board.empty.to_a).toEqual([])
+      expect(board.to_a).toEqual([soldier])
     })
 
     it("#to_h", () => {
-      expect(Board.empty.to_h).toEqual({})
+      const soldier = Soldier.easy_create()
+      const board = Board.create_from_soldiers([soldier])
+      expect(board.to_h).toEqual({[soldier.place.key]: soldier})
     })
 
     it("#soldiers_count", () => {
@@ -126,7 +117,7 @@ describe("Board", () => {
 
     it("#soldier_drop", () => {
       const soldier = Soldier.easy_create()
-      const old_board = Board.empty
+      const old_board = Board.create_empty()
       const new_board = old_board.soldier_drop(soldier)
       expect(old_board.empty_p).toEqual(true)
       expect(new_board.empty_p).toEqual(false)
@@ -186,7 +177,7 @@ describe("Board", () => {
       const soldier = Soldier.easy_create()
       const board = Board.create_from_soldiers([soldier])
       expect(board.to_sfen).toEqual("9/9/9/9/9/9/9/9/4K4")
-      expect(Board.empty.to_sfen).toEqual("9/9/9/9/9/9/9/9/9")
+      expect(Board.create_empty().to_sfen).toEqual("9/9/9/9/9/9/9/9/9")
     })
   })
 
@@ -201,35 +192,50 @@ describe("Board", () => {
 
   describe("TransformMethods", () => {
     it("#half_spin", () => {
-      const soldier = Soldier.easy_create({place: Place.top_left})
+      const soldier = Soldier.easy_create({place: Place.top_right})
       const old_board = Board.create_from_soldiers([soldier])
       const new_board = old_board.half_spin
-      expect(old_board.to_sfen).toEqual("K8/9/9/9/9/9/9/9/9")
-      expect(new_board.to_sfen).toEqual("9/9/9/9/9/9/9/9/8k")
+      expect(old_board.to_sfen).toEqual("8K/9/9/9/9/9/9/9/9")
+      expect(new_board.to_sfen).toEqual("9/9/9/9/9/9/9/9/k8")
+    })
+
+    it("#flip", () => {
+      const soldier = Soldier.easy_create({place: Place.top_right})
+      const old_board = Board.create_from_soldiers([soldier])
+      const new_board = old_board.flip
+      expect(old_board.to_sfen).toEqual("8K/9/9/9/9/9/9/9/9")
+      expect(new_board.to_sfen).toEqual("9/9/9/9/9/9/9/9/8K")
     })
 
     it("#flop", () => {
-      const soldier = Soldier.easy_create({place: Place.top_left})
+      const soldier = Soldier.easy_create({place: Place.top_right})
       const old_board = Board.create_from_soldiers([soldier])
       const new_board = old_board.flop
-      expect(old_board.to_sfen).toEqual("K8/9/9/9/9/9/9/9/9")
-      expect(new_board.to_sfen).toEqual("8K/9/9/9/9/9/9/9/9")
+      expect(old_board.to_sfen).toEqual("8K/9/9/9/9/9/9/9/9")
+      expect(new_board.to_sfen).toEqual("K8/9/9/9/9/9/9/9/9")
     })
 
-    it("#slide_xy", () => {
-      ここから
+    it("#rotate_xy", () => {
+      const soldier = Soldier.easy_create({place: Place.top_right})
+      const old_board = Board.create_from_soldiers([soldier])
+      const new_board = old_board.rotate_xy(1, -1)
+      expect(old_board.to_sfen).toEqual("8K/9/9/9/9/9/9/9/9")
+      expect(new_board.to_sfen).toEqual("9/9/9/9/9/9/9/9/K8")
+    })
 
-      board.soldier_drop$(soldier)
-      const new_board = board.slide_xy(-1, -1)
-      expect(board.to_sfen).toEqual("P8/9/9/9/9/9/9/9/9")
-      expect(new_board.to_sfen).toEqual("9/9/9/9/9/9/9/9/8P")
+    it("#square_shuffle", () => {
+      const soldier = Soldier.easy_create({place: Place.top_right})
+      const old_board = Board.create_from_soldiers([soldier])
+      const new_board = old_board.square_shuffle(4)
+      expect(old_board.to_sfen).toEqual("8K/9/9/9/9/9/9/9/9")
+      expect(new_board.to_sfen.includes("K")).toEqual(true)
     })
   })
 
   describe("LeaveKingAloneMethods", () => {
-    beforeEach(() => {
-      soldier = Soldier.create({place: Place.fetch("19"), piece: Piece.fetch("R"), promoted: true})
-    })
+    // beforeEach(() => {
+    //   soldier = Soldier.create({place: Place.fetch("19"), piece: Piece.fetch("R"), promoted: true})
+    // })
 
     it("#king_dead_p", () => {
       const fn = (board_lines) => {
@@ -274,38 +280,48 @@ describe("Board", () => {
         "| ・ ・ 竜 |",
         "+----------+",
       ].join("\n"))
-      expect(board.soldier_drop_then_king_death_p(Soldier.create4("91", "P", false, "black"))).toEqual(true)
+      const soldier = Soldier.easy_create({place_key: "91", piece_key: "P"})
+      expect(board.soldier_drop_then_king_death_p(soldier)).toEqual(true)
     })
 
     it("#reach_p", () => {
-      expect(board.reach_p(soldier, Place.fetch("28"))).toEqual(true)
-      expect(board.reach_p(soldier, Place.fetch("37"))).toEqual(false)
-      expect(board.reach_p(soldier, Place.fetch("17"))).toEqual(true)
+      const board = Board.create_empty()
+      const rook_plus = Soldier.easy_create({place_key: "19", piece_key: "R", promoted: true})
+      expect(board.reach_p(rook_plus, Place.fetch("28"))).toEqual(true)
+      expect(board.reach_p(rook_plus, Place.fetch("37"))).toEqual(false)
+      expect(board.reach_p(rook_plus, Place.fetch("17"))).toEqual(true)
     })
 
     it("#reach_count", () => {
-      expect(board.reach_count(soldier, Place.fetch("28"))).toEqual(1)
-      expect(board.reach_count(soldier, Place.fetch("37"))).toEqual(0)
-      expect(board.reach_count(soldier, Place.fetch("17"))).toEqual(2)
+      const board = Board.create_empty()
+      const rook_plus = Soldier.easy_create({place_key: "19", piece_key: "R", promoted: true})
+      expect(board.reach_count(rook_plus, Place.fetch("28"))).toEqual(1)
+      expect(board.reach_count(rook_plus, Place.fetch("37"))).toEqual(0)
+      expect(board.reach_count(rook_plus, Place.fetch("17"))).toEqual(2)
     })
 
     it("#once_reach_count", () => {
-      expect(board.once_reach_count(soldier, Place.fetch("28"))).toEqual(1)
-      expect(board.once_reach_count(soldier, Place.fetch("37"))).toEqual(0)
-      expect(board.once_reach_count(soldier, Place.fetch("17"))).toEqual(0)
+      const board = Board.create_empty()
+      const rook_plus = Soldier.easy_create({place_key: "19", piece_key: "R", promoted: true})
+      expect(board.once_reach_count(rook_plus, Place.fetch("28"))).toEqual(1)
+      expect(board.once_reach_count(rook_plus, Place.fetch("37"))).toEqual(0)
+      expect(board.once_reach_count(rook_plus, Place.fetch("17"))).toEqual(0)
     })
 
     it("#repeat_reach_count", () => {
-      expect(board.repeat_reach_count(soldier, Place.fetch("28"))).toEqual(0)
-      expect(board.repeat_reach_count(soldier, Place.fetch("37"))).toEqual(0)
-      expect(board.repeat_reach_count(soldier, Place.fetch("17"))).toEqual(2)
+      const board = Board.create_empty()
+      const rook_plus = Soldier.easy_create({place_key: "19", piece_key: "R", promoted: true})
+      expect(board.repeat_reach_count(rook_plus, Place.fetch("28"))).toEqual(0)
+      expect(board.repeat_reach_count(rook_plus, Place.fetch("37"))).toEqual(0)
+      expect(board.repeat_reach_count(rook_plus, Place.fetch("17"))).toEqual(2)
     })
 
     it("#repeat_reach_count (間に駒がある場合)", () => {
       const soldier_18P = Soldier.create({place: Place.fetch("18"), piece: Piece.fetch("P")})
-      board.soldier_drop$(soldier_18P)
-      expect(board.repeat_reach_count(soldier, Place.fetch("17"), {ghost_move: true})).toEqual(2)
-      expect(board.repeat_reach_count(soldier, Place.fetch("17"))).toEqual(0)
+      const board = Board.create_from_soldiers([soldier_18P])
+      const rook_plus = Soldier.easy_create({place_key: "19", piece_key: "R", promoted: true})
+      expect(board.repeat_reach_count(rook_plus, Place.fetch("17"), {ghost_move: true})).toEqual(2)
+      expect(board.repeat_reach_count(rook_plus, Place.fetch("17"))).toEqual(0)
     })
   })
 
@@ -320,7 +336,6 @@ describe("Board", () => {
     }
 
     describe("#checkmate_stat: 詰んでいるか？", () => {
-
       it("詰んでいる", () => {
         const { board, king, friends, attacker, block_places } = case2([
           "+---------+",

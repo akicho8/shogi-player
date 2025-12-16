@@ -493,12 +493,12 @@ export class Xcontainer {
   ////////////////////////////////////////////////////////////////////////////////
 
   // 左右スライド
-  slide_xy(x, y) {
-    this.board = this.board.slide_xy(x, y)
+  rotate_xy(x, y) {
+    this.board = this.board.rotate_xy(x, y)
   }
 
-  shuffle_apply(size) {
-    const new_board = this.board.shuffle_apply(size)
+  square_shuffle(size) {
+    const new_board = this.board.square_shuffle(size)
     if (new_board) {
       this.board = new_board
       return true

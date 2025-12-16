@@ -1,4 +1,5 @@
 import _ from "lodash"
+import { Beetleshine as GX } from "beetleshine"
 
 import { Board } from "./board"
 import { PlaceYomiageInfo } from "./place_yomiage_info.js"
@@ -10,8 +11,8 @@ export class Place {
     "a":  1, "b":  2, "c":  3, "d":  4, "e":  5, "f":  6, "g":  7, "h":  8, "i":  9,
   }
 
-  static TO_KANJI_REPLACE_TABLE_X = {1: "１", 2: "２", 3: "３", 4: "４", 5: "５", 6: "６", 7: "７", 8: "８", 9: "９"}
-  static TO_KANJI_REPLACE_TABLE_Y = {1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九"}
+  static TO_KANJI_REPLACE_TABLE_X = { 1: "１", 2: "２", 3: "３", 4: "４", 5: "５", 6: "６", 7: "７", 8: "８", 9: "９", }
+  static TO_KANJI_REPLACE_TABLE_Y = { 1: "一", 2: "二", 3: "三", 4: "四", 5: "五", 6: "六", 7: "七", 8: "八", 9: "九", }
 
   static TO_SFEN_REPLACE_TABLE_Y = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
 
@@ -27,17 +28,13 @@ export class Place {
     if (v instanceof this) {
       return v
     }
-    return Object.freeze(new Place(v))
+    return new this(v)
   }
 
-  // x, y を足した新しい位置を返す
-  // はみでたのは反対側の座標とする
   static wrap_fetch(x, y) {
-    return this.fetch([this.__wrap_position(x), this.__wrap_position(y)])
-  }
-
-  static __wrap_position(value) {
-    return Math.trunc((value + Board.dimension) % Board.dimension)
+    const nx = GX.imodulo(x, Board.dimension)
+    const ny = GX.imodulo(y, Board.dimension)
+    return this.fetch([nx, ny])
   }
 
   static xy_valid_p(x, y) {
@@ -46,6 +43,12 @@ export class Place {
 
   static xy_invalid_p(x, y) {
     return !this.xy_valid_p(x, y)
+  }
+
+  static get random() {
+    const x = _.random(0, Board.dimension - 1)
+    const y = _.random(0, Board.dimension - 1)
+    return this.fetch([x, y])
   }
 
   //==============================================================================
@@ -80,11 +83,12 @@ export class Place {
   constructor(value) {
     let x, y
     if (typeof value === "string") {
-      [x, y] = this.__parse_from_string(value)
+      [x, y] = this.__str_to_xy(value)
     } else {
       [x, y] = value            // valus is array
     }
     [this._x, this._y] = [x, y]
+    Object.freeze(this)
   }
 
   get key() {
@@ -133,6 +137,10 @@ export class Place {
 
   get half_spin() {
     return Place.fetch([Board.dimension - 1 - this._x, Board.dimension - 1 - this._y])
+  }
+
+  get flip() {
+    return Place.fetch([this._x, Board.dimension - 1 - this._y])
   }
 
   get flop() {
@@ -199,7 +207,7 @@ export class Place {
 
   // x, y を足した新しい位置を返す
   // はみでたのは反対側の座標とする
-  to_rotate_place(x, y) {
+  rotate_xy(x, y) {
     return Place.wrap_fetch(this.x + x, this.y + y)
   }
 
@@ -213,8 +221,8 @@ export class Place {
 
   // private
 
-  __parse_from_string(s) {
-    const [x, y] = s.split("").map(e => Number(Place.ANY_TO_NUMBER_REPLACE_TABLE[e] ?? e))
+  __str_to_xy(str) {
+    const [x, y] = str.split("").map(e => Number(Place.ANY_TO_NUMBER_REPLACE_TABLE[e] ?? e))
     return this.__logical_xy_to_internal_xy(x, y)
   }
 
