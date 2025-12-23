@@ -6,14 +6,6 @@ import { Piece } from "./piece"
 import { Location } from "./location"
 
 export class Soldier {
-  static random(params = {}) {
-    const place    = params.place ?? Place.random
-    const piece    = params.piece ?? _.sample(Piece.values)
-    const promoted = params.promoted ?? (piece.promotable_p ? _.sample([true, false]) : false)
-    const location = params.location ?? _.sample(Location.values)
-    return new this.create({piece, place, promoted, location})
-  }
-
   static create(attributes = {}) {
     return new this(attributes)
   }
@@ -49,10 +41,19 @@ export class Soldier {
       hv.promoted = attributes.promoted
     }
 
-    return this.create({...this.default_attributes, ...hv})
+    return this.create({...this.__default_attributes, ...hv})
   }
 
-  static get default_attributes() {
+  static random(params = {}) {
+    const place    = params.place ?? Place.random
+    const piece    = params.piece ?? _.sample(Piece.values)
+    const promoted = params.promoted ?? (piece.promotable_p ? _.sample([true, false]) : false)
+    const location = params.location ?? _.sample(Location.values)
+    return this.create({piece, place, promoted, location})
+  }
+
+  // ▲59玉
+  static get __default_attributes() {
     return {
       place: Place.bottom_center,
       piece: Piece.fetch("K"),
@@ -67,20 +68,20 @@ export class Soldier {
     Object.freeze(this)
   }
 
-  get piece() {
-    return this.attributes.piece
-  }
-
   get place() {
     return this.attributes.place
   }
 
-  get location() {
-    return this.attributes.location
+  get piece() {
+    return this.attributes.piece
   }
 
   get promoted() {
     return !!this.attributes.promoted
+  }
+
+  get location() {
+    return this.attributes.location
   }
 
   get name() {
@@ -90,47 +91,32 @@ export class Soldier {
     return this.piece.name
   }
 
-  get to_s() {
-    return this.name
-  }
-
   get yomiage_name() {
     return this.piece.piece_yomiage.yomiage(this.promoted)
   }
 
+  get to_sfen() {
+    let str = ""
+    if (this.promoted) {
+      str += "+"
+    }
+    let key = this.piece.key
+    if (this.location.key === "white") {
+      key = key.toLowerCase()
+    }
+    str += key
+    return str
+  }
+
+  get inspect() {
+    return ["<", this.location.name, this.place.digit_human, this.name, ">"].join("")
+  }
+
+  get to_s() {
+    return this.inspect
+  }
+
   ////////////////////////////////////////////////////////////////////////////////
-
-  // 互換性のため
-  get transform_clone() {
-    return this.transform_all
-  }
-
-  // 上下反転(不成)→成り (4パターン) の繰り返し
-  get transform_all() {
-    if (this.piece.promotable_p) {
-      if (this.promoted) {
-        return this.clone_with({location: this.location.flip, promoted: !this.promoted})
-      } else {
-        return this.clone_with({promoted: !this.promoted})
-      }
-    } else {
-      return this.transform_head
-    }
-  }
-
-  // 成り→不成 (2パターン) の繰り返し
-  get transform_promote() {
-    let attrs = null
-    if (this.piece.promotable_p) {
-      attrs = {promoted: !this.promoted}
-    }
-    return this.clone_with(attrs)
-  }
-
-  // 先後 (2パターン) の繰り返し
-  get transform_head() {
-    return this.clone_with({location: this.location.flip})
-  }
 
   // soldier.clone_with({promoted: true})
   // soldier.clone_with({promoted: false})
@@ -140,10 +126,12 @@ export class Soldier {
 
   ////////////////////////////////////////////////////////////////////////////////
 
+  // 成れるか？
   get promotable_p() {
-    if (this.piece.promotable_p && !this.promoted) { // 成れるのに成ってなくて
+    if (this.piece.promotable_p && !this.promoted) {
       return this.danger_zone_p
     }
+    return false
   }
 
   get danger_zone_p() {
@@ -156,7 +144,7 @@ export class Soldier {
 
   get css_class_list() {
     let list = []
-    list.push(`location_${this.location.key}`) // 未使用?
+    list.push(`location_${this.location.key}`)
     list.push(`promoted_${this.promoted}`)
     list = _.concat(list, this.piece.css_class_list)
     return list
@@ -193,13 +181,17 @@ export class Soldier {
   }
 }
 
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  const soldier = new Soldier({
-    place: new Place([1, 7]),
-    piece: Piece.fetch("P"),
-    promoted: true,
-    location: Location.fetch("white"),
-  })
-  console.log(soldier.name)
-  console.log(soldier.top_spaces)
-}
+import { ClassHelper } from "./class_helper"
+// import { SerializeMethods } from "./soldier/serialize_methods"
+// import { ViolationMethods } from "./soldier/violation_methods"
+// import { UtilityMethods } from "./soldier/utility_methods"
+import { TransformMethods } from "./soldier/transform_methods"
+// import { LeaveKingAloneMethods } from "./soldier/leave_king_alone_methods"
+// import { CheckmateMethods } from "./soldier/checkmate_methods"
+
+// ClassHelper.class_include(Soldier, SerializeMethods)
+// ClassHelper.class_include(Soldier, ViolationMethods)
+// ClassHelper.class_include(Soldier, UtilityMethods)
+ClassHelper.class_include(Soldier, TransformMethods)
+// ClassHelper.class_include(Soldier, LeaveKingAloneMethods)
+// ClassHelper.class_include(Soldier, CheckmateMethods)

@@ -542,7 +542,7 @@ export const mod_edit_mode = {
       if (this.edit_p) {
         if (!this.lifted_p && soldier) {
           this.log("盤上の駒を裏返す")
-          this.xcontainer.board.soldier_drop$(soldier[method]) // method: transform_all | transform_head | transform_promote
+          this.xcontainer.board.soldier_drop$(soldier[method]) // method: transform_all | transform_location | transform_promote
           this.piece_hold_and_put_for_bug(place, e) // 不具合対策
         }
       }

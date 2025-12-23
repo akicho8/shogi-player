@@ -22,7 +22,7 @@ describe("Board", () => {
     })
   })
 
-  describe("破壊的", () => {
+  describe("in-place methods", () => {
     it("#soldier_drop$", () => {
       const soldier = Soldier.easy_create()
       const board = Board.create_empty()
@@ -233,11 +233,7 @@ describe("Board", () => {
   })
 
   describe("LeaveKingAloneMethods", () => {
-    // beforeEach(() => {
-    //   soldier = Soldier.create({place: Place.fetch("19"), piece: Piece.fetch("R"), promoted: true})
-    // })
-
-    it("#king_dead_p", () => {
+    it("#king_dead_p: 玉は死んでいるか？", () => {
       const fn = (board_lines) => {
         const { board } = KifParser.parse(board_lines.join("\n"))
         return !!board.king_dead_p(Location.black)
@@ -350,7 +346,6 @@ describe("Board", () => {
     })
 
     describe("#can_escape_p: (A) 玉が逃げることができるか？", () => {
-
       it("逃げられない", () => {
         const { board, king, friends, attacker, block_places } = case2([
           "+---------+",
