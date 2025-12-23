@@ -87,7 +87,7 @@ export const mod_shortcut = {
                 return true
               }
               if (e.key === "v") {
-                this.board_cell_right_click(this.mouseover_info.xy, "transform_head", e) // 上下反転
+                this.board_cell_right_click(this.mouseover_info.xy, "transform_location", e) // 上下反転
                 e.preventDefault()
                 return true
               }

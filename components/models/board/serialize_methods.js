@@ -4,10 +4,10 @@ import { Place } from "../place.js"
 export class SerializeMethods {
   get to_sfen() {
     const rows = []
-    _.times(this.dimension, (y) => {
+    _(this.dimension).times(y => {
       let str = ""
       let space = 0
-      _.times(this.dimension, (x) => {
+      _(this.dimension).times(x => {
         const place = Place.fetch([x, y])
         const soldier = this.lookup(place)
         if (_.isNil(soldier)) {
@@ -17,14 +17,7 @@ export class SerializeMethods {
             str += space
             space = 0
           }
-          if (soldier.promoted) {
-            str += "+"
-          }
-          let key = soldier.piece.key
-          if (soldier.location.key === "white") {
-            key = key.toLowerCase()
-          }
-          str += key
+          str += soldier.to_sfen
         }
       })
       if (space >= 1) {
