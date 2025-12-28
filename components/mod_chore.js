@@ -1,3 +1,5 @@
+import { Beetleshine as GX } from "beetleshine"
+
 export const mod_chore = {
   methods: {
     // Placeインスタンスに対応するセルの中央のリアル座標を返す
@@ -58,6 +60,10 @@ export const mod_chore = {
         ...options,
       }
       this.$buefy.dialog.prompt(options)
+    },
+
+    benchmark_print(name, block) {
+      GX.benchmark_print(name, this.debug_or_development_p, block)
     },
   },
 }

@@ -3,6 +3,7 @@ import _ from "lodash"
 import { Xcontainer } from "./models/xcontainer.js"
 import { Location } from "./models/location.js"
 import { HumanSideInfo } from "./models/human_side_info.js"
+import { Beetleshine as GX } from "beetleshine"
 import assert from "minimalistic-assert"
 
 export const mod_play_mode = {
@@ -126,27 +127,41 @@ export const mod_play_mode = {
     },
 
     current_turn_commit() {
-      if (this.play_p) {
-        // ↓FIXME: これも20msほどかかるので実行したくない
+      if (!this.play_p) {
+        return
+      }
+
+      this.benchmark_print("局面再構築", () => {
+        // これも20msもかかるので実行したくないけど仕方ないのか？
+        // 最後の1手だけを、data_source に追加できればいい気もするけど、しっかりしたテストがないとできない
+        // とりあえず、これを実行すれば turn_offset は更新される
         this.xcontainer = new Xcontainer()
         this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
         this.xcontainer.current_turn = -1
         this.xcontainer.run()
+      })
 
-        this.event_call("ev_play_mode_move", {
-          sfen:           this.play_mode_full_moves_sfen, // sfen と
-          turn:           this.turn_offset,               // turn を同時に更新するの重要
-          last_move_info: this.last_move_info,
-          illegal_hv_list: this.illegal_hv_list,          // illegal_hv_list を last_move_info に入れると循環で ActionCable がぶっこわれる
-          snapshot_hash:  this.xcontainer.to_sfen_without_turn, // 履歴を含まない現在の状態
-          checkmate_stat: this.checkmate_stat,            // 詰み情報
-        })
-
-        this.event_call("ev_play_mode_next_moves", this.moves)
-
-        // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする
-        this.turn_slider_focus()
+      const params = {
+        sfen:            this.play_mode_full_moves_sfen, // 長い sfen
+        turn:            this.turn_offset,               // turn を同時に更新するの重要
+        last_move_info:  this.last_move_info,            // 最後に動かした駒の詳細
+        illegal_hv_list: this.illegal_hv_list,           // 反則情報たち (複数ある場合もある) ※illegal_hv_list を last_move_info に入れると循環で ActionCable がぶっこわれる
       }
+
+      if (this.sp_request_snapshot_hash) {
+        params["snapshot_hash"] = this.snapshot_hash() // 履歴を含まない現在の局面(BOD相当のSFEN)
+      }
+
+      if (this.sp_request_op_king_check) {
+        params["op_king_check"] = this.my_king_check()  // 指し終わってから調べているので、実際の処理は自分が王手されているかで判定する
+      }
+
+      params["checkmate_stat"] = this.checkmate_stat
+
+      this.event_call("ev_play_mode_move", params)
+      this.event_call("ev_play_mode_next_moves", this.moves)
+
+      this.turn_slider_focus() // 操作モードで詰将棋を動かしていて間違えて1手すぐに戻したいとき「←」キーですぐに戻せるように(スライダーがあれば)フォーカスする
     },
 
     // 現在の状態を基点とした moves がない棋譜 (init_location が反映されていることが重要)

@@ -3,15 +3,15 @@ import { ApplicationMemoryRecord } from "./application_memory_record.js"
 export class IllegalInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
-      { key: "illegal_double_pawn",     name: "二歩",           condition_desc: "",                                                                                                               },
-      { key: "illegal_pawn_drop_mate",  name: "打ち歩詰め",     condition_desc: "",                                                                                                               }, // sp_checkmate_feature に関わらず判定する
-      { key: "illegal_warp_move",       name: "駒ワープ",       condition_desc: "",                                                                                                               },
-      { key: "illegal_dead_piece",      name: "死に駒",         condition_desc: "",                                                                                                               },
-      { key: "illegal_check_ignored",   name: "王手放置",       condition_desc: "王手を解除しなかった。うっかりの可能性が高い。内部的には打の場合と移動の場合の二通りある",                       },
-      { key: "illegal_no_check_escape", name: "王手解除せず",   condition_desc: "王手を故意に解除しなかった可能性がある。往生際悪く詰みの局面で玉を動かしたか？。玉を移動させた場合のみとする。", },
-      { key: "illegal_self_check",      name: "自殺手",         condition_desc: "玉を利きに動かしたことで即死",                                                                                   },
-      { key: "illegal_pin_break_check", name: "ピン外し自殺手", condition_desc: "守っていた駒を動かしたことで即死",                                                                               },
-      { key: "illegal_perpetual_check", name: "千日手",         condition_desc: "先に同一局面を4回の登場させた方が負ける ← 引分が正しい",                                                                        }, // shogi-player ではチェックしていない
+      { key: "illegal_double_pawn",     name: "二歩",             condition_desc: "",                                                                                                               },
+      { key: "illegal_pawn_drop_mate",  name: "打ち歩詰め",       condition_desc: "",                                                                                                               }, // 似ているが、こちらは反則の管轄なので詰み判定(sp_request_checkmate_stat)に関わらず判定する
+      { key: "illegal_warp_move",       name: "駒ワープ",         condition_desc: "",                                                                                                               },
+      { key: "illegal_dead_piece",      name: "死に駒",           condition_desc: "",                                                                                                               },
+      { key: "illegal_check_ignored",   name: "王手放置",         condition_desc: "王手を解除しなかった。うっかりの可能性が高い。内部的には打の場合と移動の場合の二通りある",                       },
+      { key: "illegal_no_check_escape", name: "王手解除せず",     condition_desc: "王手を故意に解除しなかった可能性がある。往生際悪く詰みの局面で玉を動かしたか？。玉を移動させた場合のみとする。", },
+      { key: "illegal_self_check",      name: "自殺手",           condition_desc: "玉を利きに動かしたことで即死",                                                                                   },
+      { key: "illegal_pin_break_check", name: "ピン外し自殺手",   condition_desc: "守っていた駒を動かしたことで即死",                                                                               },
+      { key: "illegal_perpetual_check", name: "連続王手の千日手", condition_desc: "先に同一局面を4回の登場させた方が負ける",                                                                        }, // shogi-player ではチェックしていない
     ]
   }
 }

@@ -21,7 +21,9 @@ RSpec.describe __FILE__ do
       sp_body: danger_sfen,
     }.merge(options)
     visit_to("/style-editor", {
-        sp_checkmate_feature: true,
+        sp_request_checkmate_stat: true,
+        sp_request_snapshot_hash: true,
+        sp_request_op_king_check: true,
         sp_illegal_validate: true,
         sp_illegal_cancel: true,
         sp_mode: :play,

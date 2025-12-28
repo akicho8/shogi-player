@@ -42,7 +42,6 @@ Default: `null`
 * 不整合な形式の棋譜を渡してもエラーを出したりはしない
 * 何が起きるかわからないので本当に正しい形式だけを渡してほしい
 
-
 ### `sp_turn`
 
 Type: `Number`
@@ -534,7 +533,7 @@ Default: `true`
 
 ## 詰み
 
-### `sp_checkmate_feature`
+### `sp_request_checkmate_stat`
 
 Type: `Boolean`
 Default: `false`
@@ -550,11 +549,23 @@ Default: `true`
 
 操作モードで反則の判定をするか？
 
-* 反則の種類
-  * 二歩
-  * 王手放置
-  * 駒ワープ
-  * 死に駒
+| 反則名           | 反則ブロック対応 | 備考                         |
+|------------------|------------------|------------------------------|
+| 二歩             | ○               |                              |
+| 打ち歩詰め       | ○               |                              |
+| 駒ワープ         | ○               |                              |
+| 死に駒           | ○               |                              |
+| 王手放置         | ○               |                              |
+| 王手解除せず     | ○               |                              |
+| 自殺手           | ○               |                              |
+| ピン外し自殺手   | ○               |                              |
+| 千日手           | ×               | 厳密には反則ではなく引き分け |
+| 連続王手の千日手 | ×               |                              |
+
+* 反則ブロック対応とは `sp_illegal_cancel` を有効にしたときのこと
+* 千日手系は設計ミスにより指す前に判定ができないので将来的にはなんとかしたい <Badge text="TODO" type="error" vertical="top" />
+
+See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
 
 ### `sp_illegal_cancel`
 
@@ -566,6 +577,29 @@ Default: `false`
 * 無かったことにしてもイベントで反則を知ることはできる
 * 有効にすると基本的な反則の操作はできなくなる
 * 有効にすると将棋ウォーズのようになる
+* 千日手関連は判定できない
+
+## 千日手関連
+
+### `sp_request_snapshot_hash`
+
+Type: `Boolean`
+Default: `true`
+
+操作モードのイベント `ev_play_mode_move` に現局面のハッシュを含めるか？
+
+See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
+
+### `sp_request_op_king_check`
+
+Type: `Boolean`
+Default: `false`
+
+* 操作モードのイベント `ev_play_mode_move` に相手に王手しているかどうかの結果を含めるか？
+* これを有効にするとアプリ側で初心者向けに「王手！」などと表示することができる
+* また連続王手の千日手を判定するには `sp_request_snapshot_hash` と合わせて有効にする
+
+See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
 
 ## Web Components 専用
 

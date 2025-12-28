@@ -47,6 +47,7 @@ import { mod_resize_observer } from "./mod_resize_observer.js"
 import { mod_shortcut        } from "./mod_shortcut.js"
 import { mod_edit_mode       } from "./mod_edit_mode.js"
 import { mod_checkmate       } from "./mod_checkmate.js"
+import { mod_snapshot_hash      } from "./mod_snapshot_hash.js"
 import { mod_illegal         } from "./mod_illegal.js"
 import { mod_lifted_piece    } from "./mod_lifted_piece.js"
 import { mod_play_mode       } from "./mod_play_mode.js"
@@ -99,6 +100,7 @@ export default {
     mod_shortcut,
     mod_edit_mode,
     mod_checkmate,
+    mod_snapshot_hash,
     mod_illegal,
     mod_lifted_piece,
     mod_play_mode,

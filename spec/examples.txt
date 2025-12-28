@@ -1,12 +1,12 @@
 example_id                               | status | run_time        |
 ---------------------------------------- | ------ | --------------- |
 ./spec/style_editor/main_spec.rb[1:1]    | passed | 1.79 seconds    |
-./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:1]   | passed | 0.47131 seconds |
-./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:2]   | passed | 0.45146 seconds |
-./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:3]   | passed | 0.44863 seconds |
-./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:4]   | passed | 0.46111 seconds |
-./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:5:1] | passed | 0.45257 seconds |
-./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:5:2] | passed | 0.48346 seconds |
-./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:5:3] | passed | 0.45388 seconds |
-./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:6:1] | passed | 0.46473 seconds |
-./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:6:2] | passed | 0.45467 seconds |
+./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:1]   | passed | 2.43 seconds    |
+./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:2]   | passed | 0.48877 seconds |
+./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:3]   | passed | 0.47517 seconds |
+./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:4]   | passed | 0.48699 seconds |
+./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:5:1] | passed | 0.46866 seconds |
+./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:5:2] | passed | 0.48553 seconds |
+./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:5:3] | passed | 0.4682 seconds  |
+./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:6:1] | passed | 0.49184 seconds |
+./spec/反則/想定する全種類の反則判定を行う_spec.rb[1:6:2] | passed | 0.47547 seconds |
