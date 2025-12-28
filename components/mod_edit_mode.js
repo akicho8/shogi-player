@@ -16,7 +16,6 @@ export const mod_edit_mode = {
     sp_my_piece_kill_disabled:    { type: Boolean, default: true, },       // play では自分の駒で同じ仲間の駒を取れないようにする
     sp_double_click_threshold_ms: { type: Number,  default: 350,  },       // edit で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_view_mode_piece_movable:   { type: Boolean, default: true, },       // view でも駒を動かせる(ただし本筋は破壊しない)
-    sp_checkmate_feature:         { type: Boolean, default: false, },      // play で詰み判定するか？
 
     // 駒キャンセル方法
     sp_lift_cancel_action: {
@@ -121,6 +120,7 @@ export const mod_edit_mode = {
       this.log(`shiftKey: ${e.shiftKey}`)
 
       this.checkmate_init()
+      // this.checkmate_init2()
 
       this.$data._last_clicked_cell = e.target
       this.illegal_init()
@@ -451,6 +451,9 @@ export const mod_edit_mode = {
 
         // 詰み
         this.drop_then_checkmate_check(drop_soldier)
+
+        // FIXME: 設計ミス。this.xcontainer が安全に複製できないせいで指す前に連続王手の千日手になっているかの判定ができない
+        // 本当は xcontainer の完全な複製に対して指して連続王手の千日手判定を行い、反則ブロック条件なら、emit しないといけない
 
         this.piece_decriment()
         this.xcontainer.board.soldier_drop$(drop_soldier) // 置く
@@ -869,6 +872,7 @@ export const mod_edit_mode = {
       this.have_piece_promoted = null
       this.killed_soldier = null
       this.checkmate_init()
+      // this.checkmate_init2()
       this.illegal_clear()
       this.lp_destroy()
     },

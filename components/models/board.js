@@ -135,13 +135,13 @@ export class Board {
   }
 }
 
-import { ClassHelper } from "./class_helper"
-import { SerializeMethods } from "./board/serialize_methods"
-import { ViolationMethods } from "./board/violation_methods"
-import { UtilityMethods } from "./board/utility_methods"
-import { TransformMethods } from "./board/transform_methods"
+import { ClassHelper           } from "./class_helper"
+import { SerializeMethods      } from "./board/serialize_methods"
+import { ViolationMethods      } from "./board/violation_methods"
+import { UtilityMethods        } from "./board/utility_methods"
+import { TransformMethods      } from "./board/transform_methods"
 import { LeaveKingAloneMethods } from "./board/leave_king_alone_methods"
-import { CheckmateMethods } from "./board/checkmate_methods"
+import { CheckmateMethods      } from "./board/checkmate_methods"
 
 ClassHelper.class_include(Board, SerializeMethods)
 ClassHelper.class_include(Board, ViolationMethods)

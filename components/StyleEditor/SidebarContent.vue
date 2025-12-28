@@ -383,7 +383,7 @@
 
     .box
       SeTitle(name="反則")
-      b-field(custom-class="is-small" label="操作モードでは合法手に絞る(二歩・ワープ・王手放置等を除く)")
+      b-field(custom-class="is-small" label="操作モードでは合法手に絞る(反則判定には関与しない)")
         b-radio-button(size="is-small" v-model="TheSe.sp_legal_move_only" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_legal_move_only" :native-value="true") ON
 
@@ -399,8 +399,16 @@
       SeTitle(name="その他")
 
       b-field(custom-class="is-small" label="操作モードでの詰み判定")
-        b-radio-button(size="is-small" v-model="TheSe.sp_checkmate_feature" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_checkmate_feature" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_checkmate_stat" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_checkmate_stat" :native-value="true") ON
+
+      b-field(custom-class="is-small" label="操作モードで現局面のハッシュをイベントに含めるか？")
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_snapshot_hash" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_snapshot_hash" :native-value="true") ON
+
+      b-field(custom-class="is-small" label="操作モードで王手しているかどうかの結果をイベントに含めるか？")
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_op_king_check" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_op_king_check" :native-value="true") ON
 
       b-field(custom-class="is-small" label="手番のときの☗☖の大きさ")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_location_mark_active_size" :min="0" :max="1.5" :step="0.01")

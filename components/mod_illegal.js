@@ -11,7 +11,7 @@ export const mod_illegal = {
     // | 上級者向け     |          |        | 反則かどうかは人が判断する                       |        |
     // | 初心者向け     | o        | o      | 反則になりそうなら emit して動作をキャンセルする |        |
     // |----------------+----------+--------+--------------------------------------------------+--------|
-    sp_illegal_validate: { type: Boolean, default: true,  }, // play で「二歩・王手放置・駒ワープ・死に駒」の判定をするか？
+    sp_illegal_validate: { type: Boolean, default: true,  }, // play で反則の判定をするか？
     sp_illegal_cancel:   { type: Boolean, default: false, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
   },
 
@@ -47,6 +47,9 @@ export const mod_illegal = {
         return "__cancel__"
       }
       this.illegal_hv_list.push(illegal_hv)
+    },
+
+    perpetual_check_process() {
     },
   },
 }

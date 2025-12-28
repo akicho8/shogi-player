@@ -1,6 +1,4 @@
 import _ from "lodash"
-import { Place } from "../place.js"
-import { Soldier } from "../soldier.js"
 
 export class TransformMethods {
   // 上下反転(不成)→成り (4パターン) の繰り返し
