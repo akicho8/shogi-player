@@ -58,7 +58,6 @@ import { mod_api_functions   } from "./mod_api_functions.js"
 import { mod_device_detector } from "./mod_device_detector.js"
 import { mod_chore           } from "./mod_chore.js"
 import { mod_debug           } from "./mod_debug.js"
-import { mod_vector          } from "./mod_vector.js"
 
 ////////////////////////////////////////////////////////////////////////////////
 // コンテキストメニュー・長押し・ドラッグ を禁止する
@@ -88,7 +87,6 @@ export default {
   mixins: [
     mod_chore,
     mod_debug,
-    mod_vector,
     mod_context_menu,
     mod_focus,
     mod_navi,

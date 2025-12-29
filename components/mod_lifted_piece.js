@@ -4,6 +4,7 @@
 const HOVER_PIECE_ELEMENT_POSITION_UPDATE_60FPS = true
 
 import { PositionInfo } from "./models/position_info.js"
+import { Vec2d } from "./models/vec2d.js"
 
 export const mod_lifted_piece = {
   data() {
@@ -29,7 +30,7 @@ export const mod_lifted_piece = {
         // if (this.devise_info.key === "mouse") {
         const x = this.$data._lp_latest_pointermove_event.clientX
         const y = this.$data._lp_latest_pointermove_event.clientY
-        this.element_vector_set(this.$data._LiftedPieceElement, {x, y})
+        this.element_vector_set(this.$data._LiftedPieceElement, Vec2d.create(x, y))
         // }
       }
     },
@@ -81,9 +82,9 @@ export const mod_lifted_piece = {
       if (soldier.place) {
         // 盤上から動かそうとしている駒
         // devise_info.gap が 0.25 でちょうど左上にすこしずれる
-        const ci = this.place_to_cell_info(soldier.place)                                        // place から実際のセルの位置情報を取得
-        const gap = this.vector_scale(ci.radius, this.devise_info.gap * position_info.sign * -1) // 左上にずらす度合いを計算
-        const vec = this.vector_add(ci.center, gap)                                              // 中央から左上にずらす
+        const ci = this.place_to_cell_info(soldier.place)                           // place から実際のセルの位置情報を取得
+        const gap = ci.radius.scale(this.devise_info.gap * position_info.sign * -1) // 左上にずらす度合いを計算
+        const vec = ci.center.add(gap)                                              // 中央から左上にずらす
         this.element_vector_set(this.$data._LiftedPieceElement, vec)                                   // カーソル座標とする
       } else {
         // 駒箱や駒台から取り出した駒
