@@ -1,12 +1,13 @@
 // force_promote_length: 死に駒になる前方にある壁との隙間の数(この値以下で死に駒になる)
 
 import { ApplicationMemoryRecord } from "./application_memory_record.js"
+import { Vec2d } from "./vec2d.js"
 import _ from "lodash"
 
 function vector_table_define(hv) {
   const acc = {}
   _.each(hv, (av, key) => {
-    acc[key] = Object.freeze(av.map(e => Object.freeze(e)))
+    acc[key] = Object.freeze(av.map(e => Vec2d.create(...e)))
   })
   return Object.freeze(acc)
 }

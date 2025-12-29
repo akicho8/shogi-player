@@ -113,13 +113,13 @@ describe("Soldier", () => {
   })
 
   it("#once_vectors", () => {
-    expect(Soldier.easy_create({piece_key: "R", promoted: true}).once_vectors).toEqual([[-1,-1],[1,-1],[-1,1],[1,1]])
+    expect(Soldier.easy_create({piece_key: "R", promoted: true}).once_vectors.map(e => e.to_a)).toEqual([[-1,-1],[1,-1],[-1,1],[1,1]])
     expect(Soldier.easy_create({piece_key: "L"}).once_vectors).toEqual(undefined)
   })
 
   it("#repeat_vectors", () => {
-    expect(Soldier.easy_create({piece_key: "R", promoted: true}).repeat_vectors).toEqual([[0,-1],[-1,0],[1,0],[0,1]])
-    expect(Soldier.easy_create({piece_key: "L"}).repeat_vectors).toEqual([[0, -1]])
+    expect(Soldier.easy_create({piece_key: "R", promoted: true}).repeat_vectors.map(e => e.to_a)).toEqual([[0,-1],[-1,0],[1,0],[0,1]])
+    expect(Soldier.easy_create({piece_key: "L"}).repeat_vectors.map(e => e.to_a)).toEqual([[0, -1]])
   })
 
   it("#dead_place_p: 死に駒か？", () => {

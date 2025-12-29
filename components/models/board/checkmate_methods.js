@@ -113,8 +113,8 @@ export class CheckmateMethods {
     const around = soldier.once_vectors || []
 
     for (const vec of around) {
-      const vx = vec[0]
-      const vy = vec[1] * soldier.location.value_sign   // 先後の向きを反映
+      const vx = vec.x
+      const vy = vec.y * soldier.location.value_sign   // 先後の向きを反映
       const x  = soldier.place.x + vx
       const y  = soldier.place.y + vy
 
