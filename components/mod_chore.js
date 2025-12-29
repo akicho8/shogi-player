@@ -1,4 +1,5 @@
 import { Beetleshine as GX } from "beetleshine"
+import { Vec2d } from "./models/vec2d.js"
 
 export const mod_chore = {
   methods: {
@@ -14,18 +15,9 @@ export const mod_chore = {
       const x = rc.left + rw                       // 中央(右下方向)に少し移動する
       const y = rc.top  + rh                       // 本当は rc.x, rc.y を使いたいが iOS11未満の Safari にはない
       return {
-        center: {
-          x: x,
-          y: y,
-        },
-        rect: {
-          x: w,
-          y: h,
-        },
-        radius: {
-          x: rw,
-          y: rh,
-        },
+        center: Vec2d.create(x, y),
+        rect:   Vec2d.create(w, h),
+        radius: Vec2d.create(rw, rh),
       }
     },
 
