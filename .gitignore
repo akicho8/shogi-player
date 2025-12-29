@@ -100,3 +100,6 @@ vue.conifg.inspect.*
 
 # web_component
 web_component/labo/*/dist
+
+# RSpec
+/examples.txt
