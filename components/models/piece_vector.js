@@ -1,6 +1,15 @@
 // force_promote_length: 死に駒になる前方にある壁との隙間の数(この値以下で死に駒になる)
 
 import { ApplicationMemoryRecord } from "./application_memory_record.js"
+import _ from "lodash"
+
+function vector_table_define(hv) {
+  const acc = {}
+  _.each(hv, (av, key) => {
+    acc[key] = Object.freeze(av.map(e => Object.freeze(e)))
+  })
+  return Object.freeze(acc)
+}
 
 export class PieceVector extends ApplicationMemoryRecord {
   static get define() {
@@ -16,6 +25,16 @@ export class PieceVector extends ApplicationMemoryRecord {
     ]
   }
 
+  static VectorTable = vector_table_define({
+    pattern_plus: [[0, -1], [-1, 0], [1, 0], [0, 1]],
+    pattern_x: [[-1, -1], [1, -1], [-1, 1], [1, 1]],
+    pattern_silver: [[-1, -1], [0, -1], [1, -1], [-1, 1], [1, 1]],
+    pattern_gold: [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [0, 1]],
+    pattern_king: [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]],
+    pattern_knight: [[-1, -2], [1, -2]],
+    pattern_pawn: [[0, -1]],
+  })
+
   once_vectors(promoted) {
     let method = null
     if (promoted) {
@@ -24,7 +43,7 @@ export class PieceVector extends ApplicationMemoryRecord {
       method = this.basic_once_vectors
     }
     if (method) {
-      return this.constructor[method]
+      return this.constructor.VectorTable[method]
     }
   }
 
@@ -36,64 +55,7 @@ export class PieceVector extends ApplicationMemoryRecord {
       method = this.basic_repeat_vectors
     }
     if (method) {
-      return this.constructor[method]
+      return this.constructor.VectorTable[method]
     }
   }
-
-  static get pattern_plus() {
-    return [
-      null,    [0,-1],   null,
-      [-1, 0],         [1, 0],
-      null,    [0, 1],   null,
-    ]
-  }
-
-  static get pattern_x() {
-    return [
-      [-1, -1], null, [1, -1],
-          null, null,    null,
-      [-1,  1], null, [1,  1],
-    ]
-  }
-
-  static get pattern_silver() {
-    return [
-      [-1, -1], [0, -1], [1, -1],
-      null,        null,    null,
-      [-1,  1],    null, [1,  1],
-    ]
-  }
-
-  static get pattern_gold() {
-    return [
-      [-1, -1], [0, -1], [1, -1],
-      [-1,  0],          [1,  0],
-          null, [0,  1],    null,
-    ]
-  }
-
-  static get pattern_king() {
-    return [
-      [-1, -1], [0, -1], [1, -1],
-      [-1,  0],    null, [1,  0],
-      [-1,  1], [0,  1], [1,  1],
-    ]
-  }
-
-  static get pattern_knight() {
-    return [[-1, -2], [1, -2]]
-  }
-
-  static get pattern_pawn() {
-    return [[0, -1]]
-  }
-}
-
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  // console.log(Piece.fetch("K"))
-  // console.log(Piece.fetch("K"))
-  // console.log(Piece.lookup(""))
-  // console.log(Piece.values)
-  // console.log(Piece.values_map.get("K"))
-  // console.log(Piece.fetch("K").key)
 }

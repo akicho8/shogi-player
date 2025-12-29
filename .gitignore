@@ -102,4 +102,4 @@ vue.conifg.inspect.*
 web_component/labo/*/dist
 
 # RSpec
-/examples.txt
+/spec/examples.txt
