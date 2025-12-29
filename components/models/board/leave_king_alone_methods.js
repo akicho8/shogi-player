@@ -90,8 +90,8 @@ export class LeaveKingAloneMethods {
 
   // soldier は vec の方に動くとき goal に移動できるか？
   __once_reach_vec(soldier, goal, vec) {
-    const vx = vec[0]
-    const vy = vec[1] * soldier.location.value_sign
+    const vx = vec.x
+    const vy = vec.y * soldier.location.value_sign
     const x = soldier.place.x + vx
     const y = soldier.place.y + vy
     return x === goal.x && y === goal.y
@@ -123,8 +123,8 @@ export class LeaveKingAloneMethods {
     const ox = soldier.place.x
     const oy = soldier.place.y
 
-    const vx = vector[0]
-    const vy = vector[1] * soldier.location.value_sign
+    const vx = vector.x
+    const vy = vector.y * soldier.location.value_sign
 
     let x = ox + vx
     let y = oy + vy
