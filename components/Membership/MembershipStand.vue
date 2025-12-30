@@ -1,5 +1,5 @@
 <template lang="pug">
-.MembershipStand(:class="component_class" @pointerdown.right.stop.prevent="TheSp.hold_cancel")
+.MembershipStand(:class="component_class" @pointerdown.right.stop.prevent="TheSp.hold_cancel" v-if="hold_pieces.length > 0")
   .MembershipStandTexture.is-overlay
   .MembershipStand2
     .PieceWithCount.is-flex(
