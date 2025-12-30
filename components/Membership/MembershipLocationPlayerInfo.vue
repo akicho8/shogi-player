@@ -86,11 +86,23 @@ export default {
     white-space: nowrap         // 時間は絶対に折り返させない
     font-size: calc(var(--sp_cell_h) * var(--sp_player_time_size))
 
+  //////////////////////////////////////////////////////////////////////////////// 背景 (横並び→丸める。縦並び→丸めない)
+
   &.is_balloon_on
     .MembershipLocationPlayerInfo
       @extend %is_piece_count_color_set
       padding: 0.5em
-      border-radius: 3px
+
+  +IF_HORIZONTAL
+    &.is_balloon_on
+      .MembershipLocationPlayerInfo
+        border-radius: 3px
+  +IF_VERTICAL
+    &.is_balloon_on
+      .MembershipLocationPlayerInfo
+        border-radius: unset
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   &.is_layer_on
     .MembershipLocationPlayerInfo
