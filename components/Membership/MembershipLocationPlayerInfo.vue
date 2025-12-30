@@ -59,7 +59,8 @@ export default {
     flex-direction: column
     gap: 0.2em                   // 名前と時間の隙間
 
-  // 手番のときだけ濃くする
+  //////////////////////////////////////////////////////////////////////////////// 手番のときだけ濃くする
+
   .Membership
     &.is_turn_inactive
       .MembershipLocationPlayerInfo
@@ -67,6 +68,8 @@ export default {
     &.is_turn_active
       .MembershipLocationPlayerInfo
         font-weight: bold
+
+  //////////////////////////////////////////////////////////////////////////////// 名前の方向
 
   +IF_HORIZONTAL                            // 横書きなら
     &.is_name_direction_vertical           // 縦書き
@@ -76,6 +79,8 @@ export default {
     &.is_name_direction_vertical           // 詳細度で負けないように必要
       .MembershipLocationPlayerInfoName
         writing-mode: horizontal-tb         // 明示的に横にする
+
+  //////////////////////////////////////////////////////////////////////////////// 時間
 
   .MembershipLocationPlayerInfoTime
     white-space: nowrap         // 時間は絶対に折り返させない
