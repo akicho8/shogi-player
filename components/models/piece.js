@@ -46,21 +46,30 @@ export class Piece extends ApplicationMemoryRecord {
     return ["piece_name", `piece_${this.key}`]
   }
 
+  // 裏表がある駒か？
   get promotable_p() {
-    return !!this.promoted_name
+    return this.promoted_name !== null
   }
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   get piece_vector() {
     return PieceVector.fetch(this.key)
   }
 
+  // いっぽだけ進むベクトルたちを返す
+  // 0個の場合は空配列ではなく undefined を返す
   once_vectors(promoted) {
     return this.piece_vector.once_vectors(promoted)
   }
 
+  // 連続で進むベクトルたちを返す
+  // 0個の場合は空配列ではなく undefined を返す
   repeat_vectors(promoted) {
     return this.piece_vector.repeat_vectors(promoted)
   }
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   get piece_yomiage() {
     return PieceYomiage.fetch(this.key)
