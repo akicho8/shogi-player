@@ -1,5 +1,6 @@
 import MemoryRecord from "js-memory-record"
 
+// js 版は freeze している
 export class ApplicationMemoryRecord extends MemoryRecord {
   // グローバルで完全ユニークなキーとする
   get unique_key() {
