@@ -1,6 +1,7 @@
 import _ from "lodash"
 import { Place } from "../place.js"
 import { Beetleshine as GX } from "beetleshine"
+import { PresetInfo } from "../preset_info.js"
 
 export class UtilityMethods {
   // location 側の玉を探す
@@ -29,5 +30,11 @@ export class UtilityMethods {
       }
     }
     return false
+  }
+
+  // 盤面だけを見て推測した手合割
+  get guess_preset_info() {
+    const padded_sfen = " " + this.to_sfen + " "
+    return PresetInfo.values.find(e => e.sfen.includes(padded_sfen))
   }
 }
