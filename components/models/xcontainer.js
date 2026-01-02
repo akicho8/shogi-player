@@ -1,17 +1,22 @@
 import _ from "lodash"
 import Vue from "vue"
 
-import { Board } from "./board.js"
-import { Place } from "./place.js"
-import { Piece } from "./piece.js"
-import { Soldier } from "./soldier.js"
-import { SfenParser } from "./sfen_parser.js"
-import { SfenSerializer } from "./sfen_serializer.js"
-import { PresetInfo } from "./preset_info.js"
-import { Location } from "./location.js"
 import { Beetleshine as GX } from "beetleshine"
 
+import { Board          } from "./board.js"
+import { Place          } from "./place.js"
+import { Piece          } from "./piece.js"
+import { Soldier        } from "./soldier.js"
+import { SfenParser     } from "./sfen_parser.js"
+import { SfenSerializer } from "./sfen_serializer.js"
+import { PresetInfo     } from "./preset_info.js"
+import { Location       } from "./location.js"
+
 export class Xcontainer {
+  static create() {
+    return new this()
+  }
+
   constructor() {
     const data_source = new SfenParser()
     data_source.raw_body = "position startpos"
@@ -505,3 +510,14 @@ export class Xcontainer {
     }
   }
 }
+
+import { ClassHelper      } from "./class_helper"
+import { CoreMethods      } from "./xcontainer/core_methods"
+import { SerializeMethods } from "./xcontainer/serialize_methods"
+import { UtilityMethods   } from "./xcontainer/utility_methods"
+import { TransformMethods } from "./xcontainer/transform_methods"
+
+ClassHelper.class_include(Xcontainer, CoreMethods)
+ClassHelper.class_include(Xcontainer, SerializeMethods)
+ClassHelper.class_include(Xcontainer, UtilityMethods)
+ClassHelper.class_include(Xcontainer, TransformMethods)

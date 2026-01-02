@@ -2,8 +2,12 @@ import _ from "lodash"
 import { Location } from "./location"
 
 export class ParserBase {
-  static parse(raw_body) {
-    const instance = new this(raw_body)
+  static create(...args) {
+    return new this(...args)
+  }
+
+  static parse(...args) {
+    const instance = this.create(...args)
     instance.parse()
     return instance
   }
