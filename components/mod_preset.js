@@ -1,5 +1,6 @@
 import { Xcontainer } from "./models/xcontainer.js"
 import { PresetInfo } from "./models/preset_info.js"
+import { SfenParser } from "./models/sfen_parser.js"
 
 export const mod_preset = {
   props: {
@@ -30,7 +31,7 @@ export const mod_preset = {
       preset_info = PresetInfo.fetch(preset_info)
       this.xcontainer = new Xcontainer()
       if (preset_info.sfen) {
-        this.xcontainer.data_source = this.data_source_by(preset_info.sfen)
+        this.xcontainer.data_source = SfenParser.parse(preset_info.sfen)
       }
       this.xcontainer.run()
 

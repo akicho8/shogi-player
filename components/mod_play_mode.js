@@ -5,6 +5,7 @@ import { Location } from "./models/location.js"
 import { HumanSideInfo } from "./models/human_side_info.js"
 import { Beetleshine as GX } from "beetleshine"
 import assert from "minimalistic-assert"
+import { SfenParser } from "./models/sfen_parser.js"
 
 export const mod_play_mode = {
   props: {
@@ -115,7 +116,7 @@ export const mod_play_mode = {
     // FIXME: なんで再度実行している？
     play_mode_xcontainer_seek_to(turn) {
       this.xcontainer = new Xcontainer()
-      this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
+      this.xcontainer.data_source = SfenParser.parse(this.play_mode_full_moves_sfen)
       this.xcontainer.current_turn = turn
       this.xcontainer.run()
       this.flip_if_white_run()
@@ -136,7 +137,7 @@ export const mod_play_mode = {
         // 最後の1手だけを、data_source に追加できればいい気もするけど、しっかりしたテストがないとできない
         // とりあえず、これを実行すれば turn_offset は更新される
         this.xcontainer = new Xcontainer()
-        this.xcontainer.data_source = this.data_source_by(this.play_mode_full_moves_sfen)
+        this.xcontainer.data_source = SfenParser.parse(this.play_mode_full_moves_sfen)
         this.xcontainer.current_turn = -1
         this.xcontainer.run()
       })

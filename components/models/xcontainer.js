@@ -18,11 +18,7 @@ export class Xcontainer {
   }
 
   constructor() {
-    const data_source = new SfenParser()
-    data_source.raw_body = "position startpos"
-    data_source.parse()
-
-    this.data_source = data_source
+    this.data_source = SfenParser.default_create()
     this.current_turn = 0
     this.board = null
     this.hold_pieces = null
