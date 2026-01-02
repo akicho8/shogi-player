@@ -29,7 +29,7 @@ describe("KifParser", () => {
   })
 
   it("盤が定義されていないとき盤は平手の配置になっている", () => {
-    expect(KifParser.parse("").board.to_sfen).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL")
+    expect(KifParser.parse("").board.guess_preset_info.key).toEqual("平手")
   })
 
   it("持駒", () => {

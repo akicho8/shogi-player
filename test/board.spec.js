@@ -4,6 +4,7 @@ import { Piece } from "@/components/models/piece.js"
 import { Soldier } from "@/components/models/soldier.js"
 import { Location } from "@/components/models/location.js"
 import { KifParser } from "@/components/models/kif_parser.js"
+import { SfenParser } from "@/components/models/sfen_parser.js"
 
 describe("Board", () => {
   describe("ClassMethods", () => {
@@ -169,6 +170,11 @@ describe("Board", () => {
       expect(fn("56")).toEqual(true)
       expect(fn("45")).toEqual(false)
       expect(fn("65")).toEqual(false)
+    })
+
+    it("#guess_preset_info", () => {
+      const board = Board.create_empty()
+      expect(board.guess_preset_info.key).toEqual("全部駒箱")
     })
   })
 
