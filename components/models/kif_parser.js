@@ -50,7 +50,7 @@ export class KifParser extends ParserBase {
       return this.board_setup_from_board_lines()
     } else {
       // FIXME: KIFがSFENに依存してんのおかしいだろ
-      const sfen_parser = new SfenParser()
+      const sfen_parser = SfenParser.create()
       sfen_parser.raw_body = this.preset_info.sfen
       sfen_parser.parse()
       return sfen_parser.board

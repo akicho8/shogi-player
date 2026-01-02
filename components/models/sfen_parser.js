@@ -168,7 +168,7 @@ export class SfenParser extends ParserBase {
   // 最初の局面(1から始まる)
   //
   //   以下のようにしてもよい
-  //   const sfen_parser = new SfenParser()
+  //   const sfen_parser = SfenParser.create()
   //   sfen_parser.raw_body = "position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 2"
   //   sfen_parser.parse()
   //   sfen_parser.attributes.turn_counter_next = 1
