@@ -201,7 +201,7 @@ export class KifParser extends ParserBase {
 }
 
 if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  const instance = new KifParser()
+  const instance = KifParser.create()
   //   instance.raw_body = `
   // # ----  Kifu for Windows V6.26 棋譜ファイル  ----
   // key：value
