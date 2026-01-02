@@ -19,8 +19,8 @@ import Vue from "vue"
 // Models
 import { Xcontainer       } from "./models/xcontainer.js"
 import { Place            } from "./models/place.js"
+import { AnyParser        } from "./models/any_parser.js"
 import { SfenParser       } from "./models/sfen_parser.js"
-import { KifParser        } from "./models/kif_parser.js"
 import { Location         } from "./models/location.js"
 import { EventList        } from "./models/event_list.js"
 import { ModeInfo         } from "./models/mode_info.js"
@@ -366,7 +366,7 @@ export default {
         this.log("mut_mode: edit")
 
         const new_xcontainer = new Xcontainer()
-        new_xcontainer.data_source = this.data_source_by(this.xcontainer.to_short_sfen)
+        new_xcontainer.data_source = SfenParser.parse(this.xcontainer.to_short_sfen)
         new_xcontainer.current_turn = 0
         new_xcontainer.run()
 
@@ -392,7 +392,7 @@ export default {
   methods: {
     xcontainer_setup(turn) {
       this.xcontainer = new Xcontainer()
-      this.xcontainer.data_source = this.data_source_by(this.kifu_source)
+      this.xcontainer.data_source = AnyParser.parse(this.kifu_source)
       this.xcontainer.current_turn = turn
       this.xcontainer.run()
       this.flip_if_white_run()
@@ -401,7 +401,7 @@ export default {
     xcontainer_setup_for_edit_mode() {
       // まず0手目の状態を作る
       this.xcontainer = new Xcontainer()
-      this.xcontainer.data_source = this.data_source_by(this.kifu_source)
+      this.xcontainer.data_source = AnyParser.parse(this.kifu_source)
       this.xcontainer.current_turn = 0
       this.xcontainer.run()
 
@@ -427,18 +427,6 @@ export default {
     view_mode_xcontainer_update(turn) {
       this.xcontainer_setup(turn)
       this.update_counter++
-    },
-
-    data_source_by(str) {
-      let data_source = null
-      if (/position|sfen|moves/.test(str)) {
-        data_source = new SfenParser()
-      } else {
-        data_source = new KifParser()
-      }
-      data_source.raw_body = str
-      data_source.parse()
-      return data_source
     },
 
     turn_edit_handle() {

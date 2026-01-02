@@ -1,6 +1,7 @@
 import { Board } from "./models/board.js"
 import { Soldier } from "./models/soldier.js"
 import { Xcontainer } from "./models/xcontainer.js"
+import { AnyParser } from "./models/any_parser.js"
 
 export const mod_api_functions = {
   methods: {
@@ -64,7 +65,7 @@ export const mod_api_functions = {
     // 棋譜の反映
     api_sfen_or_kif_set(sfen_or_kif, options = {}) {
       this.xcontainer = new Xcontainer()
-      this.xcontainer.data_source = this.data_source_by(sfen_or_kif)
+      this.xcontainer.data_source = AnyParser.parse(sfen_or_kif)
       this.xcontainer.current_turn = options.turn || 0
       this.xcontainer.run()
     },

@@ -5,15 +5,20 @@ import Vue from "vue"
 import _ from "lodash"
 
 import { Board      } from "./board.js"
-import { ParserBase } from "./parser_base.js"
 import { Piece      } from "./piece.js"
 import { Place      } from "./place.js"
 import { Soldier    } from "./soldier.js"
 import { Location   } from "./location.js"
 import { MoveHash   } from "./move_hash.js"
-import { Xcontainer   } from "./xcontainer.js"
+import { Xcontainer } from "./xcontainer.js"
+
+import { ParserBase } from "./parser_base.js"
 
 export class SfenParser extends ParserBase {
+  static default_create() {
+    return this.parse("position startpos")
+  }
+
   static sfen_flop(sfen) {
     const source = this.parse(sfen)
 
@@ -216,6 +221,8 @@ export class SfenParser extends ParserBase {
     return parts.join(" ")
   }
 
+  // private
+
   __location_by_upper_or_lower_case(v) {
     let key = null
     if (/[A-Z]/.test(v)) {
@@ -225,27 +232,4 @@ export class SfenParser extends ParserBase {
     }
     return Location.fetch(key)
   }
-}
-
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  let sfen_parser
-
-  sfen_parser = SfenParser.parse("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
-  console.log(sfen_parser)
-
-  sfen_parser = SfenParser.parse("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
-  console.log(sfen_parser)
-
-  // sfen_parser = new SfenParser("position sfen +lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b S2s 1 moves 7i6h S*2d")
-  // sfen_parser.parse()
-  // console.log(sfen_parser.board)
-  // console.log(sfen_parser.base_location.key)
-  // console.log(sfen_parser.hold_pieces)
-  // console.log(sfen_parser.move_infos)
-  // console.log(sfen_parser.moves)
-  // console.log(sfen_parser.init_sfen)
-  //
-  // sfen_parser = new SfenParser("position sfen lr4knl/3g2gs1/4ppP2/p4bNpp/2pSsN3/PPPP1P2P/2N1P1G2/2G6/L1K4RL w BPs3p 72 moves 2b3c")
-  // sfen_parser.parse()
-  // console.log(sfen_parser.location_by_offset(0))
 }
