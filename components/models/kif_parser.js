@@ -46,24 +46,19 @@ export class KifParser extends ParserBase {
   }
 
   get board() {
-    if (this.board_lines.length >= 1) {
-      return this.board_setup_from_board_lines()
-    } else {
-      // FIXME: KIFがSFENに依存してんのおかしいだろ
-      const sfen_parser = SfenParser.create()
-      sfen_parser.raw_body = this.preset_info.sfen
-      sfen_parser.parse()
-      return sfen_parser.board
+    if (this.board_lines.length === 0 && this.preset_info) {
+      return this.preset_info.sfen_info.board
     }
+
+    return this.board_setup_from_board_lines()
   }
 
   get preset_key() {
     const v = this.header["手合割"]
     if (v === "その他") {
       return null
-    } else {
-      return v || "平手"
     }
+    return v || "平手"
   }
 
   get preset_info() {

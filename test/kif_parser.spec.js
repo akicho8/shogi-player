@@ -28,6 +28,10 @@ describe("KifParser", () => {
     expect(KifParser.parse("|vと|").board.lookup(Place.fetch("91")).promoted).toEqual(true)
   })
 
+  it("盤が定義されていないとき盤は平手の配置になっている", () => {
+    expect(KifParser.parse("").board.to_sfen).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL")
+  })
+
   it("持駒", () => {
     const hold_pieces = KifParser.parse("上手の持駒：玉王玉 飛2 歩").hold_pieces
     expect(hold_pieces["white"]["K"]).toEqual(3)

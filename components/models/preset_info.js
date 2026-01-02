@@ -1,5 +1,5 @@
 import { ApplicationMemoryRecord } from "./application_memory_record.js"
-// import { Location } from "../location"
+import { SfenParser } from "./sfen_parser.js"
 
 export class PresetInfo extends ApplicationMemoryRecord {
   static get define() {
@@ -26,6 +26,11 @@ export class PresetInfo extends ApplicationMemoryRecord {
       { key: "二十枚落ち",                sfen: "position sfen 9/9/9/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL w - 1",                                   first_location_key: "white", piece_box: [["B", 1], ["R", 1], ["L", 2], ["N", 2], ["S", 2], ["G", 2], ["P", 9], ["K", 1]]},
       { key: "青空将棋",                  sfen: "position sfen lnsgkgsnl/1r5b1/9/9/9/9/9/1B5R1/LNSGKGSNL b - 1",                               first_location_key: "black", piece_box: []},
     ]
+  }
+
+  // FIXME: first_location_key は sfen_info から取れる
+  get sfen_info() {
+    return SfenParser.parse(this.sfen)
   }
 }
 
