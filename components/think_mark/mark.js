@@ -1,4 +1,6 @@
-import assert from "minimalistic-assert"
+// 利用者が自分で定義したスタイルを使えるように mark_color_index を SS_MARK_COLOR_COUNT で丸めてはいけない
+
+import { Beetleshine as GX } from "beetleshine"
 
 export class Mark {
   static create(attributes) {
@@ -9,31 +11,15 @@ export class Mark {
   }
 
   constructor(attributes) {
-    assert(attributes, "attributes")
-    assert(attributes.mark_pos_key, "attributes.mark_pos_key")
-    assert(typeof attributes.mark_pos_key === "string", 'typeof attributes.mark_pos_key === "string"')
+    GX.assert_not_null(attributes)
+    GX.assert_not_null(attributes.mark_pos_key)
+    GX.assert_kind_of_string(attributes.mark_pos_key)
 
-    // this.attributes = {...attributes}
-    this._mark_pos_key = attributes.mark_pos_key
-    this._mark_user_name = attributes.mark_user_name ?? ""
-    this._mark_color_index = attributes.mark_color_index ?? 0
-  }
+    this.mark_pos_key = attributes.mark_pos_key
+    this.mark_user_name = attributes.mark_user_name ?? ""
+    this.mark_color_index = attributes.mark_color_index ?? 0
 
-  get mark_pos_key() {
-    return this._mark_pos_key
-  }
-
-  get mark_user_name() {
-    return this._mark_user_name
-  }
-
-  get mark_color_index() {
-    // if (false) {
-    //   // 利用者が自分で定義したスタイルを使えるように SS_MARK_COLOR_COUNT で丸めてはいけない
-    //   this._mark_color_index % this.constructor.SS_MARK_COLOR_COUNT
-    // } else {
-    return this._mark_color_index
-    // }
+    Object.freeze(this)
   }
 
   get css_circle_class() {
