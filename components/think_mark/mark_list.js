@@ -1,4 +1,6 @@
-import assert from "minimalistic-assert"
+// ・Mutable
+
+import { Beetleshine as GX } from "beetleshine"
 import { Mark } from "./mark.js"
 
 export class MarkList {
@@ -64,7 +66,7 @@ export class MarkList {
   // 位置をキーにしたハッシュを返す
   get marks_hash() {
     return this._items.reduce((a, e) => {
-      assert(e.mark_pos_key)
+      GX.assert(e.mark_pos_key)
       if (!a[e.mark_pos_key]) {
         a[e.mark_pos_key] = []
       }
