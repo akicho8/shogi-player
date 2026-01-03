@@ -29,11 +29,7 @@ export const mod_preset = {
         return
       }
       preset_info = PresetInfo.fetch(preset_info)
-      this.xcontainer = new Xcontainer()
-      if (preset_info.sfen) {
-        this.xcontainer.data_source = SfenParser.parse(preset_info.sfen)
-      }
-      this.xcontainer.run()
+      this.xcontainer = Xcontainer.setup_by({sfen: preset_info.sfen})
 
       // 足りない駒を preset_info から設定するのは廃止
       // this.xcontainer.piece_box_reset_by_preset(preset_info)

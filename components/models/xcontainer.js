@@ -8,24 +8,39 @@ import { Place          } from "./place.js"
 import { Piece          } from "./piece.js"
 import { Soldier        } from "./soldier.js"
 import { SfenParser     } from "./sfen_parser.js"
+import { KifParser      } from "./kif_parser.js"
+import { AnyParser      } from "./any_parser.js"
 import { SfenSerializer } from "./sfen_serializer.js"
 import { PresetInfo     } from "./preset_info.js"
 import { Location       } from "./location.js"
 
 export class Xcontainer {
-  static create() {
-    return new this()
+  static create(attributes = {}) {
+    const normalized_attributes = {
+      data_source: AnyParser.from_attributes(attributes),
+      current_turn: attributes["current_turn"] ?? 0,
+    }
+    return new this(normalized_attributes)
   }
 
-  constructor() {
-    this.data_source = SfenParser.default_create()
-    this.current_turn = 0
-    this.board = null
-    this.hold_pieces = null
-    this.last_hand = null
-    this.piece_box = {}
+  static setup_by(attributes = {}) {
+    const instance = this.create(attributes)
+    instance.run()
+    return instance
+  }
 
-    this.env = process.env.NODE_ENV
+  constructor(attributes = {}) {
+    GX.assert_not_null(attributes["data_source"])
+    GX.assert_not_null(attributes["current_turn"])
+
+    this.data_source  = attributes["data_source"]
+    this.current_turn = attributes["current_turn"]
+
+    // ここを外部から設定することはない
+    this.board       = null
+    this.hold_pieces = null
+    this.last_hand   = null
+    this.piece_box   = {}
   }
 
   run() {
@@ -482,7 +497,7 @@ export class Xcontainer {
       { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, by + sy      ] },
       { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, by           ] },
     ].map(e => {
-      return new Soldier({
+      return Soldier.create({
         piece: Piece.fetch(e.piece),
         promoted: e.promoted,
         location: Location.fetch(e.location),

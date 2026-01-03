@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   beetleshine:
-    specifier: ^0.0.33
-    version: 0.0.33
+    specifier: ^0.0.35
+    version: 0.0.35
   chroma-js:
     specifier: ^2.4.2
     version: 2.4.2
@@ -3526,8 +3526,8 @@ packages:
       pascalcase: 0.1.1
     dev: true
 
-  /beetleshine@0.0.33:
-    resolution: {integrity: sha512-J1WJ9NkxXplo97XqxNkbfjgLW/BgrcTrD3/thWSliglfts1802Ty/RbJ3OBZG91LmtgYJJI2dWKR5U33Dl1ydw==}
+  /beetleshine@0.0.35:
+    resolution: {integrity: sha512-27xxoNVsgTMzRpQ6WknBEFUeQHJTtONQncM8QYb17lMvsS32jBLcKH6ESswQb+s/uNm+lBGUc/sfUfM+kF6m2w==}
     dependencies:
       autolinker: 4.0.0
       extsprintf: 1.4.1

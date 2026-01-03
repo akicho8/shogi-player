@@ -1,10 +1,18 @@
 import { AnyParser } from "@/components/models/any_parser.js"
+import { SfenParser } from "@/components/models/sfen_parser.js"
 
 describe("AnyParser", () => {
   describe("ClassMethods", () => {
     it(".parse", () => {
-      expect(AnyParser.parse("position startpos").to_sfen).toEqual("position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
+      expect(AnyParser.parse("position startpos").to_sfen).toEqual(SfenParser.SFEN_DEFAULT)
       expect(AnyParser.parse("1 １二歩(21)").move_infos.length).toEqual(1)
+    })
+
+    it(".from_attributes", () => {
+      expect(AnyParser.from_attributes({sfen: "position startpos"}).to_sfen).toEqual(SfenParser.SFEN_DEFAULT)
+      expect(AnyParser.from_attributes({kif: "1 １二歩(21)"}).move_infos.length).toEqual(1)
+      expect(AnyParser.from_attributes({any: "position startpos"}).to_sfen).toEqual(SfenParser.SFEN_DEFAULT)
+      expect(AnyParser.from_attributes({data_source: SfenParser.parse("position startpos")}).to_sfen).toEqual(SfenParser.SFEN_DEFAULT)
     })
   })
 })

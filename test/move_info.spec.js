@@ -5,10 +5,10 @@ import { Piece } from "@/components/models/piece.js"
 import { Location } from "@/components/models/location.js"
 
 describe("MoveInfo", () => {
-  const soldier_77P0 = new Soldier({place: new Place([2, 6]), piece: Piece.fetch("P"), promoted: false, location: Location.fetch("black")})
-  const soldier_77P1 = new Soldier({place: new Place([2, 6]), piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("black")})
-  const soldier_76P0 = new Soldier({place: new Place([2, 5]), piece: Piece.fetch("P"), promoted: false, location: Location.fetch("black")})
-  const soldier_76P1 = new Soldier({place: new Place([2, 5]), piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("black")})
+  const soldier_77P0 = Soldier.create({place: Place.fetch([2, 6]), piece: Piece.fetch("P"), promoted: false, location: Location.fetch("black")})
+  const soldier_77P1 = Soldier.create({place: Place.fetch([2, 6]), piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("black")})
+  const soldier_76P0 = Soldier.create({place: Place.fetch([2, 5]), piece: Piece.fetch("P"), promoted: false, location: Location.fetch("black")})
+  const soldier_76P1 = Soldier.create({place: Place.fetch([2, 5]), piece: Piece.fetch("P"), promoted: true,  location: Location.fetch("black")})
 
   it("to_sfen", () => {
     expect(new MoveInfo({type: "move",       from: soldier_77P0, to: soldier_76P0}).to_sfen).toEqual("7g7f")

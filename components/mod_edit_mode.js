@@ -150,12 +150,6 @@ export const mod_edit_mode = {
       let promotable_p = null
       if (this.origin_soldier1) {
         new_soldier = this.origin_soldier1.clone_with({place: place})
-        // new_soldier = new Soldier({
-        //   piece: this.origin_soldier1.piece,
-        //   place: place,
-        //   promoted: this.origin_soldier1.promoted,
-        //   location: this.origin_soldier1.location,
-        // })
         // 入って成る？ それとも出てなる？
         promotable_p = new_soldier.promotable_p || this.origin_soldier1.promotable_p
       }
@@ -921,7 +915,7 @@ export const mod_edit_mode = {
 
     // 駒箱や駒台から持ち上げている駒
     soldier_create_from_stand_or_box_on(place) {
-      return new Soldier({
+      return Soldier.create({
         piece: this.have_piece,
         place: place,
         promoted: this.have_piece_promoted || false,
