@@ -30,11 +30,11 @@ Soldier インスタンスを盤面に置く
 
 ### `api_board_turn_set(turn: number)`
 
-指定手数の局面に移動する
+再生モード用で指定手数の局面に移動する
 
 ### `api_play_mode_seek_to(turn: number)`
 
-再生モード専用で、指定手数の局面に移動する
+操作モード用で指定手数の局面に移動する
 
 ### `api_viewpoint_set(location_key: string)`
 
