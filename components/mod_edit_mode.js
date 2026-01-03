@@ -627,9 +627,16 @@ export const mod_edit_mode = {
     piece_stand_piece_click_with_mark_event(location, piece, have_piece_promoted, e) {
       this.event_call("ev_action_stand_cell_pointerdown", location, piece, e) // 共有将棋盤では未使用
 
-      this.piece_stand_markable_event(location, piece, e) // 左クリックと右クリック両方で反応する必要があるため常に呼ぶ
+      // 思考印は左クリックと右クリックのどちらを使って有効にしようとしているか関与しないためどちらのクリックであってイベントを発生させる
+      this.piece_stand_markable_event(location, piece, e)
 
-      this.piece_stand_piece_left_click(location, piece, have_piece_promoted, e) // 駒の持ち上げ処理なので左クリックに限定する
+      // 【重要】
+      // ・駒の持ち上げ処理なので「左クリックに限定」すること
+      // ・限定しなかった場合、右クリックで「駒を持つ」「持ち上げ駒キャンセル」のイベントが同時に発生してしまう
+      // ・そうなると共有将棋盤側で左クリックして思考印をつけると3つ「思考印をつける」「駒を持つ」「持ち上げ駒キャンセル」の効果音が鳴ってしまう
+      if (e.button === 0) {
+        this.piece_stand_piece_left_click(location, piece, have_piece_promoted, e)
+      }
     },
 
     // piece_stand_piece_pointerdown_handle(location, piece, e) {
