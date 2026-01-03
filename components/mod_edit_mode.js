@@ -625,11 +625,11 @@ export const mod_edit_mode = {
 
     // 駒台の駒を押した瞬間
     piece_stand_piece_click_with_mark_event(location, piece, have_piece_promoted, e) {
-      this.event_call("ev_action_stand_cell_pointerdown", location, piece, e)
+      this.event_call("ev_action_stand_cell_pointerdown", location, piece, e) // 共有将棋盤では未使用
 
-      this.piece_stand_markable_event(location, piece, e)
+      this.piece_stand_markable_event(location, piece, e) // 左クリックと右クリック両方で反応する必要があるため常に呼ぶ
 
-      this.piece_stand_piece_click(location, piece, have_piece_promoted, e)
+      this.piece_stand_piece_left_click(location, piece, have_piece_promoted, e) // 駒の持ち上げ処理なので左クリックに限定する
     },
 
     // piece_stand_piece_pointerdown_handle(location, piece, e) {
@@ -646,8 +646,8 @@ export const mod_edit_mode = {
     },
 
     // 駒台の駒をクリック
-    piece_stand_piece_click(location, piece, have_piece_promoted, e) {
-      this.log("駒台の駒をクリック")
+    piece_stand_piece_left_click(location, piece, have_piece_promoted, e) {
+      this.log("駒台の駒を左クリック")
 
       if (this.break_if_view_mode) {
         return
