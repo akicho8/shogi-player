@@ -287,17 +287,17 @@ export default {
 
   created() {
     if (this.view_p) {
-      this.xcontainer_setup(this.sp_turn)
+      this.view_mode_xcontainer_setup(this.sp_turn)
     }
     if (this.play_p) {
-      this.xcontainer_setup(this.sp_turn)
+      this.view_mode_xcontainer_setup(this.sp_turn)
       this.play_mode_setup_from("view")
     }
     if (this.edit_p) {
       if (this.sp_preset) {
         this.xcontainer_setup_by_preset(this.sp_preset) // 駒箱に「玉」を乗せたいため
       } else {
-        this.xcontainer_setup_for_edit_mode()
+        this.edit_mode_xcontainer_setup()
       }
     }
   },
@@ -317,11 +317,11 @@ export default {
       this.current_turn_reset_all() // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
 
       if (this.edit_p) {
-        this.xcontainer_setup_for_edit_mode()
+        this.edit_mode_xcontainer_setup()
         return
       }
 
-      this.xcontainer_setup(this.sp_turn)
+      this.view_mode_xcontainer_setup(this.sp_turn)
 
       if (this.play_p) {
         this.play_mode_setup_from("view")
@@ -342,6 +342,7 @@ export default {
     sp_mode(v) { this.mut_mode = v            }, // 外から内への反映
 
     // 外からまたはダイアログから変更されたとき
+    // ここが一番カオスでテストを書いてからでないといじれなくなっている
     mut_mode(new_val, old_val) {
       this.event_call("update:sp_mode", this.mut_mode)
 
@@ -365,13 +366,8 @@ export default {
       if (this.edit_p) {
         this.log("mut_mode: edit")
 
-        const new_xcontainer = new Xcontainer()
-        new_xcontainer.data_source = SfenParser.parse(this.xcontainer.to_short_sfen)
-        new_xcontainer.current_turn = 0
-        new_xcontainer.run()
-
-        this.xcontainer = new_xcontainer
-        this.init_location_key = new_xcontainer.current_location.key
+        this.xcontainer = Xcontainer.setup_by({sfen: this.xcontainer.to_short_sfen})
+        this.init_location_key = this.xcontainer.current_location.key
 
         this.xcontainer.piece_box_piece_counts_adjust()
       }
@@ -390,27 +386,20 @@ export default {
   },
 
   methods: {
-    xcontainer_setup(turn) {
-      this.xcontainer = new Xcontainer()
-      this.xcontainer.data_source = AnyParser.parse(this.kifu_source)
-      this.xcontainer.current_turn = turn
-      this.xcontainer.run()
+    view_mode_xcontainer_setup(turn) {
+      this.xcontainer = Xcontainer.setup_by({any: this.kifu_source, current_turn: turn})
       this.flip_if_white_run()
     },
 
-    xcontainer_setup_for_edit_mode() {
+    edit_mode_xcontainer_setup() {
       // まず0手目の状態を作る
-      this.xcontainer = new Xcontainer()
-      this.xcontainer.data_source = AnyParser.parse(this.kifu_source)
-      this.xcontainer.current_turn = 0
-      this.xcontainer.run()
+      this.xcontainer = Xcontainer.setup_by({any: this.kifu_source})
 
       // 0手目の手番を反映
       this.init_location_key = this.xcontainer.current_location.key
 
       // そのあとで指定の手数に変更
-      this.xcontainer.current_turn = this.sp_turn
-      this.xcontainer.run()
+      this.xcontainer = Xcontainer.setup_by({any: this.kifu_source, current_turn: this.sp_turn})
 
       // 不足駒を駒箱に生成
       this.xcontainer.piece_box_piece_counts_adjust()
@@ -425,8 +414,8 @@ export default {
     },
 
     view_mode_xcontainer_update(turn) {
-      this.xcontainer_setup(turn)
-      this.update_counter++
+      this.view_mode_xcontainer_setup(turn)
+      this.update_counter += 1
     },
 
     turn_edit_handle() {

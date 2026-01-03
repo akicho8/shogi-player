@@ -29,8 +29,9 @@ export const mod_api_functions = {
     },
 
     // 指定手数の局面に設定
+    // FIXME: この API 名から view_mode 用だとはわからない
     api_board_turn_set(turn) {
-      this.xcontainer_setup(turn)
+      this.view_mode_xcontainer_setup(turn)
     },
 
     // 指定手数の局面に設定(play_mode専用・音が出ない)
@@ -64,10 +65,7 @@ export const mod_api_functions = {
 
     // 棋譜の反映
     api_sfen_or_kif_set(sfen_or_kif, options = {}) {
-      this.xcontainer = new Xcontainer()
-      this.xcontainer.data_source = AnyParser.parse(sfen_or_kif)
-      this.xcontainer.current_turn = options.turn || 0
-      this.xcontainer.run()
+      this.xcontainer = Xcontainer.setup_by({any: sfen_or_kif, current_turn: options.turn})
     },
 
     // play モード用の変数の準備

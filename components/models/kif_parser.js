@@ -3,15 +3,15 @@ XRegExp.uninstall("namespacing")
 
 import assert from "minimalistic-assert"
 
-import { ParserBase } from "./parser_base.js"
-import { Board      } from "./board.js"
-import { Piece } from "./piece.js"
-import { Place } from "./place.js"
-import { Location } from "./location.js"
-import { SfenParser } from "./sfen_parser.js"
-import { PresetInfo } from "./preset_info.js"
-import { Soldier    } from "./soldier.js"
-import { KanjiNumber    } from "./kanji_number.js"
+import { ParserBase  } from "./parser_base.js"
+import { Board       } from "./board.js"
+import { Piece       } from "./piece.js"
+import { Place       } from "./place.js"
+import { Location    } from "./location.js"
+import { SfenParser  } from "./sfen_parser.js"
+import { PresetInfo  } from "./preset_info.js"
+import { Soldier     } from "./soldier.js"
+import { KanjiNumber } from "./kanji_number.js"
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -168,7 +168,7 @@ export class KifParser extends ParserBase {
 
   board_setup_from_board_lines() {
     assert(this.board_lines.length >= 1)
-    const board = new Board()
+    const board = Board.create_empty()
     this.board_lines.forEach((e, y) => {
       XRegExp.forEach(e, XRegExp("(?<arrow>.)(?<piece>\\S)"), (m, x) => {
         if (m.piece === "・") {
@@ -181,8 +181,8 @@ export class KifParser extends ParserBase {
             assert(piece)
             promoted = true
           }
-          const soldier = new Soldier({
-            place: new Place([x, y]),
+          const soldier = Soldier.create({
+            place: Place.fetch([x, y]),
             piece: piece,
             promoted: promoted,
             location: Location.fetch(location_key),
@@ -193,40 +193,4 @@ export class KifParser extends ParserBase {
     })
     return board
   }
-}
-
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  const instance = KifParser.create()
-  //   instance.raw_body = `
-  // # ----  Kifu for Windows V6.26 棋譜ファイル  ----
-  // key：value
-  // 手数----指手---------消費時間--
-  // *コメント0a
-  // *コメント0b
-  //    1 ７六歩(77)   ( 0:00/00:00:00)
-  // *コメント1a
-  // *コメント1b
-  //    2 ３四歩(33)   ( 0:00/00:00:00)
-  //    3 投了         ( 0:00/00:00:00)
-  // `
-
-  instance.raw_body = `
-   1 ２六歩(27)   ( 0:16/00:00:16)
-   2 ３四歩(33)   ( 0:22/00:00:22)
-   3 ７六歩(77)   ( 0:06/00:00:22)
-   4 ８四歩(83)   ( 0:13/00:00:35)
-   5 ２五歩(26)   ( 0:09/00:00:31)
-   6 ８五歩(84)   ( 0:16/00:00:51)
-   7 ７八金(69)   ( 0:04/00:00:35)
-   8 ３二金(41)   ( 0:09/00:01:00)
-   9 ２四歩(25)   ( 0:04/00:00:39)
-  10 同 歩(23)    ( 0:10/00:01:10)
-`
-  instance.parse()
-  // console.log(instance.board)
-  // console.log(instance.base_location)
-  // console.log(instance.hold_pieces)
-  console.log(instance.move_infos)
-  console.log(instance.comment_lines_hash)
-  console.log(instance.init_sfen === undefined)
 }

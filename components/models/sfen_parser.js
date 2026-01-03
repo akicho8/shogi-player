@@ -15,41 +15,20 @@ import { Xcontainer } from "./xcontainer.js"
 import { ParserBase } from "./parser_base.js"
 
 export class SfenParser extends ParserBase {
+  static SFEN_DEFAULT = "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1"
+
   static default_create() {
     return this.parse("position startpos")
   }
 
   static sfen_flop(sfen) {
-    const source = this.parse(sfen)
+    const data_source = this.parse(sfen)
 
-    // 方法1. Xcontainer を仲介する方法
-    // 一応動くけど Xcontainer まで出動する必要はない
-    // もっと下位層のライブラリで行うべき
-    if (false) {
-      const xcontainer = new Xcontainer()
-      xcontainer.data_source = source
-      xcontainer.current_turn = 0
-      xcontainer.run()
-      xcontainer.board = xcontainer.board.flop
-
-      const parts = []
-      parts.push(xcontainer.to_short_sfen)
-
-      const v = source.move_infos
-      if (v.length >= 1) {
-        parts.push("moves")
-        parts.push(v.map(e => e.to_flop_sfen).join(" "))
-      }
-
-      return parts.join(" ")
-    }
-
-    // 方法2. SFENパーサーで読み取ってそのままSFEN出力する間で属性を変更する方法
-    if (true) {
-      source.attributes["board"] = source.board.flop.to_sfen
-      source.attributes["moves"] = source.move_infos.map(e => e.to_flop_sfen).join(" ")
-      return source.to_sfen
-    }
+    // SFENパーサーで読み取ってそのままSFEN出力する間で属性を変更する
+    // FIXME: 破壊しないようにする
+    data_source.attributes["board"] = data_source.board.flop.to_sfen
+    data_source.attributes["moves"] = data_source.move_infos.map(e => e.to_flop_sfen).join(" ")
+    return data_source.to_sfen
   }
 
   reset() {
@@ -58,7 +37,7 @@ export class SfenParser extends ParserBase {
   }
 
   parse() {
-    this.raw_body = this.raw_body.replace(/startpos/, "sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
+    this.raw_body = this.raw_body.replace(/(position )?startpos/, this.constructor.SFEN_DEFAULT)
     const regex = XRegExp("sfen\\s+(?<board>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
     this.attributes = XRegExp.exec(this.raw_body, regex)
     if (process.env.NODE_ENV === "deveopment") {
@@ -67,15 +46,15 @@ export class SfenParser extends ParserBase {
   }
 
   get board() {
-    const board = new Board()
+    const board = Board.create_empty()
     this.attributes["board"].split("/").forEach((e, y) => {
       let x = 0
       XRegExp.forEach(e, XRegExp("(?<promoted>\\+?)(?<piece>\\S)"), (m, i) => {
         if (/\d+/.test(m.piece)) {
           x += Number(m.piece)
         } else {
-          const soldier = new Soldier({
-            place: new Place([x, y]),
+          const soldier = Soldier.create({
+            place: Place.fetch([x, y]),
             piece: Piece.fetch(m.piece),
             promoted: (m.promoted === "+"),
             location: this.__location_by_upper_or_lower_case(m.piece),
@@ -166,14 +145,6 @@ export class SfenParser extends ParserBase {
   }
 
   // 最初の局面(1から始まる)
-  //
-  //   以下のようにしてもよい
-  //   const sfen_parser = SfenParser.create()
-  //   sfen_parser.raw_body = "position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 2"
-  //   sfen_parser.parse()
-  //   sfen_parser.attributes.turn_counter_next = 1
-  //   expect(sfen_parser.init_sfen).toEqual('position sfen 7nl/7k1/9/7pp/6N2/9/9/9/9 b GS2r2b3g3s2n3l16p 1')
-  //
   get init_sfen_from_one() {
     const parts = []
     parts.push("position")

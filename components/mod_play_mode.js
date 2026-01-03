@@ -115,10 +115,7 @@ export const mod_play_mode = {
 
     // FIXME: なんで再度実行している？
     play_mode_xcontainer_seek_to(turn) {
-      this.xcontainer = new Xcontainer()
-      this.xcontainer.data_source = SfenParser.parse(this.play_mode_full_moves_sfen)
-      this.xcontainer.current_turn = turn
-      this.xcontainer.run()
+      this.xcontainer = Xcontainer.setup_by({sfen: this.play_mode_full_moves_sfen, current_turn: turn})
       this.flip_if_white_run()
     },
 
@@ -136,10 +133,7 @@ export const mod_play_mode = {
         // これも20msもかかるので実行したくないけど仕方ないのか？
         // 最後の1手だけを、data_source に追加できればいい気もするけど、しっかりしたテストがないとできない
         // とりあえず、これを実行すれば turn_offset は更新される
-        this.xcontainer = new Xcontainer()
-        this.xcontainer.data_source = SfenParser.parse(this.play_mode_full_moves_sfen)
-        this.xcontainer.current_turn = -1
-        this.xcontainer.run()
+        this.xcontainer = Xcontainer.setup_by({sfen: this.play_mode_full_moves_sfen, current_turn: -1})
       })
 
       const params = {
