@@ -65,7 +65,7 @@ export const mod_shortcut = {
               const place = Place.fetch(this.mouseover_info.xy)
               const soldier = this.xcontainer.board.lookup(place)
               if (soldier) {
-                this.piece_stand_piece_click(soldier.location, soldier.piece, soldier.promoted, null) // キーボードのイベントなので null 指定
+                this.piece_stand_piece_left_click(soldier.location, soldier.piece, soldier.promoted, null) // キーボードのイベントなので null 指定
                 e.preventDefault()
                 return true
               }
@@ -175,7 +175,7 @@ export const mod_shortcut = {
             this.board_cell_left_click(this.mouseover_info.xy, e) // 左クリック
           }
           if (this.mouseover_info.type === "MembershipStand") {
-            this.piece_stand_piece_click(this.mouseover_info.location, this.mouseover_info.piece, false, e)
+            this.piece_stand_piece_left_click(this.mouseover_info.location, this.mouseover_info.piece, false, e)
           }
           if (this.mouseover_info.type === "PieceBox") {
             this.piece_box_piece_click(this.mouseover_info.piece, e)
