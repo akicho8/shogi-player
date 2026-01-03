@@ -1,4 +1,5 @@
-// 利用者が自分で定義したスタイルを使えるように mark_color_index を SS_MARK_COLOR_COUNT で丸めてはいけない
+// ・値オブジェクト
+// ・利用者が自分で定義したスタイルを使えるように mark_color_index を SS_MARK_COLOR_COUNT で丸めてはいけない
 
 import { Beetleshine as GX } from "beetleshine"
 
@@ -12,12 +13,12 @@ export class Mark {
 
   constructor(attributes) {
     GX.assert_not_null(attributes)
-    GX.assert_not_null(attributes.mark_pos_key)
-    GX.assert_kind_of_string(attributes.mark_pos_key)
+    GX.assert_not_null(attributes["mark_pos_key"])
+    GX.assert_kind_of_string(attributes["mark_pos_key"])
 
-    this.mark_pos_key = attributes.mark_pos_key
-    this.mark_user_name = attributes.mark_user_name ?? ""
-    this.mark_color_index = attributes.mark_color_index ?? 0
+    this.mark_pos_key = attributes["mark_pos_key"]
+    this.mark_user_name = attributes["mark_user_name"] ?? ""
+    this.mark_color_index = attributes["mark_color_index"] ?? 0
 
     Object.freeze(this)
   }
@@ -53,7 +54,4 @@ export class Mark {
   equal_p(other) {
     return this.mark_user_name === other.mark_user_name && this.mark_pos_key === other.mark_pos_key
   }
-}
-
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
 }
