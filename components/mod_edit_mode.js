@@ -158,7 +158,7 @@ export const mod_edit_mode = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.event_call("ev_illegal_click_but_self_is_not_turn")
+        this.event_call("ev_illegal_click_but_self_is_not_turn", e)
         return
       }
 
@@ -680,7 +680,7 @@ export const mod_edit_mode = {
 
       if (this.cpu_location_p) {
         this.log("片方の手番だけを操作できるようにする sp_human_side の指定があってCPU側なので無効とする")
-        this.event_call("ev_illegal_click_but_self_is_not_turn")
+        this.event_call("ev_illegal_click_but_self_is_not_turn", e)
         return
       }
 
