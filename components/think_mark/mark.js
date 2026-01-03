@@ -2,7 +2,7 @@ import assert from "minimalistic-assert"
 
 export class Mark {
   static create(attributes) {
-    if (attributes.constructor === this.constructor) {
+    if (attributes instanceof this) {
       return attributes
     }
     return new this(attributes)
