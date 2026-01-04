@@ -1,10 +1,7 @@
 import _ from "lodash"
 
-import { Piece } from "./piece"
-import { Place } from "./place"
-import { Xcontainer } from "./xcontainer"
-import { Location } from "./location"
-import { Board } from "./board"
+import { Piece    } from "./../piece"
+import { Location } from "./../location"
 
 export class SfenSerializer {
   constructor(xcontainer) {
@@ -12,22 +9,24 @@ export class SfenSerializer {
   }
 
   get to_s() {
-    const parts = this.__base_parts
-    parts.push(this.xcontainer.display_turn + 1)           // 1
-    return parts.join(" ")
+    return [
+      ...this.__parts,
+      this.xcontainer.display_turn + 1,           // 1
+    ].join(" ")
   }
 
   // 局面ペディアのようにターンを指定するとエラーになるものに用いる
   // 千日手判定用のハッシュとしても使える
   get to_s_without_turn() {
-    return this.__base_parts.join(" ")
+    return this.__parts.join(" ")
   }
 
-  get to_board_sfen() {
+  // 互換性のためだけに残しているので使うな
+  get to_sfen_board() {
     return this.xcontainer.board.to_sfen
   }
 
-  get to_hold_pieces() {
+  get to_sfen_hold_pieces() {
     let str = Location.values.map((location_info) => {
       const hold_pieces = this.xcontainer.hold_pieces[location_info.key]
       const values = Piece.values.map((e) => { // 玉から歩の順になっている
@@ -60,11 +59,11 @@ export class SfenSerializer {
 
   // private
 
-  get __base_parts() {
-    const parts = []
-    parts.push(this.to_board_sfen)                    // 9/9/9/9...
-    parts.push(this.xcontainer.current_location.key[0]) // "b"
-    parts.push(this.to_hold_pieces)                   // "-"
-    return parts
+  get __parts() {
+    return [
+      this.xcontainer.board.to_sfen,           // 9/9/9/9...
+      this.xcontainer.current_location.key[0], // "b"
+      this.to_sfen_hold_pieces,                // "-"
+    ]
   }
 }
