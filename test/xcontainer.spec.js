@@ -3,6 +3,27 @@ import { SfenParser } from "@/components/models/sfen_parser.js"
 
 describe("Xcontainer", () => {
   describe("ClassMethods", () => {
+    it(".setup_default", () => {
+      const xcontainer = Xcontainer.setup_default()
+      expect(xcontainer.board != null).toEqual(true)
+    })
+  })
+
+  describe("SerializeMethods", () => {
+    it("#to_simple_sfen", () => {
+      const xcontainer = Xcontainer.setup_default()
+      expect(xcontainer.to_simple_sfen).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
+    })
+
+    it("#to_sfen_without_turn", () => {
+      const xcontainer = Xcontainer.setup_default()
+      expect(xcontainer.to_sfen_without_turn).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b -")
+    })
+
+    it("#to_short_sfen", () => {
+      const xcontainer = Xcontainer.setup_default()
+      expect(xcontainer.to_short_sfen).toEqual("position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
+    })
   })
 
   describe("TransformMethods", () => {

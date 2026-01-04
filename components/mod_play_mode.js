@@ -165,9 +165,9 @@ export const mod_play_mode = {
         const serializer = this.xcontainer.sfen_serializer
         return [
           "position sfen",
-          serializer.to_board_sfen,
+          this.xcontainer.board.to_sfen,
           this.init_location.key[0],
-          serializer.to_hold_pieces,
+          serializer.to_sfen_hold_pieces,
           1,
         ].join(" ")
       }
@@ -209,10 +209,10 @@ export const mod_play_mode = {
     // 不具合再現手順
     // 1. 編集モード→詰将棋
     // 2. 51の玉をvで反転(OK)
-    //    → this.xcontainer.sfen_serializer.to_board_sfen は変化する
+    //    → this.xcontainer.sfen_serializer.to_sfen_board は変化する
     //    → edit_mode_short_sfen2 も変化する
     // 3. 駒台の玉を11に置いてvで反転(ここがおかしい)
-    //    → this.xcontainer.sfen_serializer.to_board_sfen は変化する
+    //    → this.xcontainer.sfen_serializer.to_sfen_board は変化する
     //    → edit_mode_short_sfen2 が変化しない
     //
     // 暫定策として xcontainer と init_location_key だけを監視する watch を入れてそのなかで edit_mode_short_sfen() を実行している
@@ -223,9 +223,9 @@ export const mod_play_mode = {
       //   const serializer = this.xcontainer.sfen_serializer
       //   return [
       //     "position sfen",
-      //     serializer.to_board_sfen,
+      //     serializer.to_sfen_board,
       //     this.init_location.key[0],
-      //     serializer.to_hold_pieces,
+      //     serializer.to_sfen_hold_pieces,
       //     1,
       //   ].join(" ")
       // }
