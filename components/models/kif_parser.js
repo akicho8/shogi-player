@@ -47,7 +47,7 @@ export class KifParser extends ParserBase {
 
   get board() {
     if (this.board_lines.length === 0 && this.preset_info) {
-      return this.preset_info.sfen_info.board
+      return this.preset_info.sfen_parsed.board
     }
 
     return this.board_setup_from_board_lines()

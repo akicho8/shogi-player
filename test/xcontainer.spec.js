@@ -1,5 +1,9 @@
 import { Xcontainer } from "@/components/models/xcontainer.js"
 import { SfenParser } from "@/components/models/sfen_parser.js"
+import { SfenInfo } from "@/components/models/sfen_info.js"
+import { PresetInfo } from "@/components/models/preset_info.js"
+import { Location } from "@/components/models/location.js"
+import { Piece } from "@/components/models/piece.js"
 
 describe("Xcontainer", () => {
   describe("ClassMethods", () => {
@@ -21,8 +25,16 @@ describe("Xcontainer", () => {
     })
 
     it("#to_short_sfen", () => {
-      const xcontainer = Xcontainer.setup_default()
-      expect(xcontainer.to_short_sfen).toEqual("position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
+      {
+        const sfen = PresetInfo.fetch("平手").sfen
+        const xcontainer = Xcontainer.setup_by({sfen: sfen})
+        expect(xcontainer.to_short_sfen).toEqual(sfen)
+      }
+      {
+        const sfen = SfenInfo.fetch("適当な局面").sfen
+        const xcontainer = Xcontainer.setup_by({sfen: sfen})
+        expect(xcontainer.to_short_sfen).toEqual(sfen)
+      }
     })
   })
 
@@ -43,11 +55,13 @@ describe("Xcontainer", () => {
     expect(xcontainer.current_location.key).toEqual("white")
   })
 
-  describe("SerializeMethods", () => {
-    it("#to_short_sfen", () => {
-      const sfen = "position sfen lr5nl/2n3SB1/3gp2p1/8p/PNP1kpPP1/6p1P/2g+p5/3P1G3/L1K4RL w G2SN5Pbsp 3"
-      const xcontainer = Xcontainer.setup_by({sfen: sfen})
-      expect(xcontainer.to_short_sfen).toEqual(sfen)
+  describe("HoldPieceMethods", () => {
+    it("#hold_pieces_count", () => {
+      const xcontainer = Xcontainer.setup_by({sfen: SfenInfo.fetch("▲飛2△角2").sfen})
+      expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("B"))).toEqual(0)
+      expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(2)
+      expect(xcontainer.hold_pieces_count(Location.white, Piece.fetch("B"))).toEqual(2)
+      expect(xcontainer.hold_pieces_count(Location.white, Piece.fetch("R"))).toEqual(0)
     })
   })
 })

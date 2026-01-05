@@ -28,13 +28,8 @@ export class PresetInfo extends ApplicationMemoryRecord {
     ]
   }
 
-  // FIXME: first_location_key は sfen_info から取れる
-  get sfen_info() {
+  // FIXME: first_location_key は sfen_parsed から取れる
+  get sfen_parsed() {
     return SfenParser.parse(this.sfen)
   }
-}
-
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  console.log(PresetInfo.fetch("平手"))
-  console.log(PresetInfo.fetch("香落ち").first_location_key)
 }

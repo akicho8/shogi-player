@@ -3,15 +3,15 @@ import Vue from "vue"
 
 import { Beetleshine as GX } from "beetleshine"
 
-import { Board          } from "./board.js"
-import { Place          } from "./place.js"
-import { Piece          } from "./piece.js"
-import { Soldier        } from "./soldier.js"
-import { SfenParser     } from "./sfen_parser.js"
-import { KifParser      } from "./kif_parser.js"
-import { AnyParser      } from "./any_parser.js"
-import { PresetInfo     } from "./preset_info.js"
-import { Location       } from "./location.js"
+import { Board      } from "./board.js"
+import { Place      } from "./place.js"
+import { Piece      } from "./piece.js"
+import { Soldier    } from "./soldier.js"
+import { SfenParser } from "./sfen_parser.js"
+import { KifParser  } from "./kif_parser.js"
+import { AnyParser  } from "./any_parser.js"
+import { PresetInfo } from "./preset_info.js"
+import { Location   } from "./location.js"
 
 export class Xcontainer {
   static setup_default(attributes = {}) {
@@ -80,10 +80,6 @@ export class Xcontainer {
         this.board.soldier_move$(old_soldier, new_soldier)
       }
     }
-  }
-
-  hold_pieces_count(location, piece) {
-    return this.hold_pieces[location.key][piece.key] ?? 0
   }
 
   // 持駒が空か？
@@ -509,8 +505,10 @@ import { CoreMethods      } from "./xcontainer/core_methods"
 import { SerializeMethods } from "./xcontainer/serialize_methods"
 import { UtilityMethods   } from "./xcontainer/utility_methods"
 import { TransformMethods } from "./xcontainer/transform_methods"
+import { HoldPieceMethods } from "./xcontainer/hold_piece_methods"
 
 ClassHelper.class_include(Xcontainer, CoreMethods)
 ClassHelper.class_include(Xcontainer, SerializeMethods)
 ClassHelper.class_include(Xcontainer, UtilityMethods)
 ClassHelper.class_include(Xcontainer, TransformMethods)
+ClassHelper.class_include(Xcontainer, HoldPieceMethods)
