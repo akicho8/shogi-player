@@ -21,16 +21,6 @@ export class SfenParser extends ParserBase {
     return this.parse("position startpos")
   }
 
-  static sfen_flop(sfen) {
-    const data_source = this.parse(sfen)
-
-    // SFENパーサーで読み取ってそのままSFEN出力する間で属性を変更する
-    // FIXME: 破壊しないようにする
-    data_source.attributes["board"] = data_source.board.flop.to_sfen
-    data_source.attributes["moves"] = data_source.move_infos.map(e => e.to_flop_sfen).join(" ")
-    return data_source.to_sfen
-  }
-
   reset() {
     super.reset()
     this.attributes = {}
