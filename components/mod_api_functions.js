@@ -7,7 +7,7 @@ export const mod_api_functions = {
   methods: {
     // 盤面をシャッフルする
     api_board_shuffle() {
-      this.xcontainer.square_shuffle(Board.dimension)
+      this.xcontainer.square_shuffle$(Board.dimension)
     },
 
     // 盤を消してランダムに駒を配置する

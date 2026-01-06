@@ -37,7 +37,7 @@
           // PieceTap は盤上にあるとは限らないので x, y に依存してはいけない。だから x, y を元にしたものを渡している
           PieceTap(
             :class="TheSp.board_piece_tap_class(logical_xy(x, y))"
-            :piece_texture_class="TheSp.xcontainer.board_piece_fore_class(logical_xy(x, y))"
+            :piece_texture_class="TheSp.xcontainer.soldier_css_class_list(logical_xy(x, y))"
             :mark_pos_key="mark_pos_key_from(x, y)"
             )
 </template>

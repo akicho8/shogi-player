@@ -27,10 +27,10 @@ export class EditToolInfo extends ApplicationMemoryRecord {
       { name: "シャッフル",     func: e => { e.shuffle_dialog_open_handle() }, },
       { separator: true },
 
-      { name: "ローテイト ←", func: e => { e.xcontainer.rotate_xy(-1, 0) }, },
-      { name: "ローテイト →", func: e => { e.xcontainer.rotate_xy(1, 0)  }, },
-      { name: "ローテイト ↑", func: e => { e.xcontainer.rotate_xy(0, -1) }, },
-      { name: "ローテイト ↓", func: e => { e.xcontainer.rotate_xy(0, 1)  }, },
+      { name: "ローテイト ←", func: e => { e.xcontainer.rotate_xy$(-1, 0) }, },
+      { name: "ローテイト →", func: e => { e.xcontainer.rotate_xy$(1, 0)  }, },
+      { name: "ローテイト ↑", func: e => { e.xcontainer.rotate_xy$(0, -1) }, },
+      { name: "ローテイト ↓", func: e => { e.xcontainer.rotate_xy$(0, 1)  }, },
     ]
   }
 }

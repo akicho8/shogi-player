@@ -63,5 +63,29 @@ describe("Xcontainer", () => {
       expect(xcontainer.hold_pieces_count(Location.white, Piece.fetch("B"))).toEqual(2)
       expect(xcontainer.hold_pieces_count(Location.white, Piece.fetch("R"))).toEqual(0)
     })
+
+    it("#hold_pieces_blank_p", () => {
+      const xcontainer = Xcontainer.setup_by({sfen: SfenInfo.fetch("▲飛2角2△").sfen})
+      expect(xcontainer.hold_pieces_blank_p(Location.black)).toEqual(false)
+      expect(xcontainer.hold_pieces_blank_p(Location.white)).toEqual(true)
+    })
+
+    it("#hold_pieces_add", () => {
+      const xcontainer = Xcontainer.setup_default()
+      expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(0)
+      xcontainer.hold_pieces_add(Location.black, Piece.fetch("R"))
+      expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(1)
+      xcontainer.hold_pieces_add(Location.black, Piece.fetch("R"), -1)
+      expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(0)
+      xcontainer.hold_pieces_add(Location.black, Piece.fetch("R"), -1)
+      expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(0)
+    })
+
+    it("#hold_pieces_count", () => {
+      const xcontainer = Xcontainer.setup_by({sfen: SfenInfo.fetch("▲飛2△角2").sfen})
+      expect(xcontainer.hold_pieces_can_be_reduced_count(Location.black, Piece.fetch("R"), 1)).toEqual(1)
+      expect(xcontainer.hold_pieces_can_be_reduced_count(Location.black, Piece.fetch("R"), 2)).toEqual(2)
+      expect(xcontainer.hold_pieces_can_be_reduced_count(Location.black, Piece.fetch("R"), 3)).toEqual(2)
+    })
   })
 })
