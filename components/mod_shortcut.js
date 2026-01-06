@@ -114,7 +114,7 @@ export const mod_shortcut = {
         if (this.meta_p(e)) {
           const vector = this.arrow_vector_table[e.key]
           if (vector) {
-            this.xcontainer.rotate_xy(...vector)
+            this.xcontainer.rotate_xy$(...vector)
             e.preventDefault()
             return true
           }
@@ -141,7 +141,7 @@ export const mod_shortcut = {
         // if (this.meta_p(e)) {
         //   const vector = this.arrow_vector_table[e.key]
         //   if (vector) {
-        //     this.xcontainer.rotate_xy(...vector)
+        //     this.xcontainer.rotate_xy$(...vector)
         //     e.preventDefault()
         //     return true
         //   }

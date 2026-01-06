@@ -1,7 +1,7 @@
 import _ from "lodash"
 
-import { Piece    } from "./../piece"
-import { Location } from "./../location"
+import { Piece    } from "../piece.js"
+import { Location } from "../location.js"
 
 export class SfenSerializer {
   constructor(xcontainer) {

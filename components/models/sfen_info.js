@@ -13,6 +13,7 @@ export class SfenInfo extends ApplicationMemoryRecord {
       { key: "盤上は玉のみで他持駒", sfen: "position sfen 4k4/9/9/9/9/9/9/9/4K4 b RB2G2S2N2L9Prb2g2s2n2l9p 1", },
       { key: "すべて持駒",           sfen: "position sfen 9/9/9/9/9/9/9/9/9 b KRB2G2S2N2L9Pkrb2g2s2n2l9p 1", },
       { key: "▲飛2△角2",           sfen: "position sfen lnsgkgsnl/9/ppppppppp/9/9/9/PPPPPPPPP/9/LNSGKGSNL b 2R2b 1", },
+      { key: "▲飛2角2△",           sfen: "position sfen lnsgkgsnl/9/ppppppppp/9/9/9/PPPPPPPPP/9/LNSGKGSNL b 2R2B 1", },
       { key: "適当な局面",           sfen: "position sfen lr5nl/2n3SB1/3gp2p1/8p/PNP1kpPP1/6p1P/2g+p5/3P1G3/L1K4RL w G2SN5Pbsp 3", },
     ]
   }
