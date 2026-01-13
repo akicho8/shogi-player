@@ -3,8 +3,8 @@ import { ApplicationMemoryRecord } from "./application_memory_record.js"
 export class Location extends ApplicationMemoryRecord {
   static get define() {
     return [
-      { key: "black", name: "☗", char_key: "b", value_sign: +1, position_key: "is_position_south", long_name: "先手", handicap_long_name: "下手", human_color_name: "黒", },
-      { key: "white", name: "☖", char_key: "w", value_sign: -1, position_key: "is_position_north", long_name: "後手", handicap_long_name: "上手", human_color_name: "白", },
+      { key: "black", name: "☗", char_key: "b", value_sign: +1, position_key: "is_position_south", long_name: "先手", handicap_long_name: "下手", human_color_name: "黒", pentagon_char: "☗", polygon_char: "▲", },
+      { key: "white", name: "☖", char_key: "w", value_sign: -1, position_key: "is_position_north", long_name: "後手", handicap_long_name: "上手", human_color_name: "白", pentagon_char: "☖", polygon_char: "△", },
     ]
   }
 
