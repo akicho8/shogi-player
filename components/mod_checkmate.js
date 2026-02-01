@@ -1,13 +1,5 @@
 import _ from "lodash"
-import { Beetleshine as GX } from "beetleshine"
-
-// import { MoveInfo } from "./models/move_info.js"
-// import { Place } from "./models/place.js"
-// import { Board } from "./models/board.js"
-// import { Soldier } from "./models/soldier.js"
-// import { Location } from "./models/location.js"
-// import { LiftCancelActionInfo } from "./models/lift_cancel_action_info.js"
-// import { ClickResponseTimingInfo } from "./models/click_response_timing_info.js"
+import { GX } from "./models/gx"
 
 export const mod_checkmate = {
   props: {

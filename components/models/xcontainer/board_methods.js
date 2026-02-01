@@ -1,7 +1,7 @@
 import Vue from "vue"
 import _ from "lodash"
 import { Place } from "../place.js"
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "../gx"
 
 export class BoardMethods {
   get dimension() { return Board.dimension }

@@ -1,4 +1,4 @@
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "./gx"
 import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
 export class Location extends ApplicationMemoryRecord {

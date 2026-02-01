@@ -1,6 +1,6 @@
 import Vue from "vue"
 import _ from "lodash"
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "../gx"
 
 import { Soldier } from "../soldier.js"
 

@@ -1,7 +1,7 @@
 // ・値オブジェクト
 // ・利用者が自分で定義したスタイルを使えるように mark_color_index を SS_MARK_COLOR_COUNT で丸めてはいけない
 
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "../models/gx"
 
 export class Mark {
   static create(attributes) {

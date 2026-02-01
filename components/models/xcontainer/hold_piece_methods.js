@@ -3,7 +3,7 @@ import _ from "lodash"
 import { Place } from "../place.js"
 import { Piece } from "../piece.js"
 import { Location } from "../location.js"
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "../gx"
 
 export class HoldPieceMethods {
   // 持駒

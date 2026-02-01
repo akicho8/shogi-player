@@ -3,7 +3,7 @@ import Vue from "vue"
 import { Place } from "../place.js"
 import { Piece } from "../piece.js"
 import { PresetInfo } from "../preset_info.js"
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "../gx"
 
 export class PieceBoxMethods {
   piece_box_clear() {

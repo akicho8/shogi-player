@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "../gx"
 import { SfenSerializer } from "./sfen_serializer.js"
 
 export class SerializeMethods {

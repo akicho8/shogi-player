@@ -2,7 +2,7 @@ import _ from "lodash"
 import Vue from "vue"
 import { Soldier } from "./soldier"
 import { Place } from "./place.js"
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "./gx"
 
 export class Board {
   static get dimension()        { return 9 }

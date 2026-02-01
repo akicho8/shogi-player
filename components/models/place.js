@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "./gx"
 
 import { Board } from "./board"
 import { PlaceYomiageInfo } from "./place_yomiage_info.js"

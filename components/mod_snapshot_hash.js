@@ -3,7 +3,7 @@
 // ・shogi-player 側では具体的な実装はせず、単に低レベルの情報だけをイベントで返すようにする
 
 import _ from "lodash"
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "./models/gx"
 
 export const mod_snapshot_hash = {
   props: {

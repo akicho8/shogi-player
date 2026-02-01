@@ -3,7 +3,7 @@ import _ from "lodash"
 import { Xcontainer } from "./models/xcontainer.js"
 import { Location } from "./models/location.js"
 import { HumanSideInfo } from "./models/human_side_info.js"
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "./models/gx"
 import assert from "minimalistic-assert"
 import { SfenParser } from "./models/sfen_parser.js"
 

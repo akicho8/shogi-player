@@ -1,7 +1,7 @@
 import _ from "lodash"
 import Vue from "vue"
 
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "./gx"
 
 import { AnyParser } from "./any_parser.js"
 
@@ -10,18 +10,18 @@ export class Xcontainer {
     return this.setup_by(attributes)
   }
 
+  static setup_by(attributes = {}) {
+    const instance = this.create(attributes)
+    instance.run()
+    return instance
+  }
+
   static create(attributes = {}) {
     const normalized_attributes = {
       data_source: AnyParser.from_attributes(attributes),
       current_turn: attributes["current_turn"] ?? 0,
     }
     return new this(normalized_attributes)
-  }
-
-  static setup_by(attributes = {}) {
-    const instance = this.create(attributes)
-    instance.run()
-    return instance
   }
 
   constructor(...args) {
