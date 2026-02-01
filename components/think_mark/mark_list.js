@@ -1,6 +1,6 @@
 // ・Mutable
 
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "../models/gx"
 import { Mark } from "./mark.js"
 
 export class MarkList {

@@ -1,4 +1,4 @@
-import { Beetleshine as GX } from "beetleshine"
+import { GX } from "./models/gx"
 import { Vec2d } from "./models/vec2d.js"
 
 export const mod_chore = {
