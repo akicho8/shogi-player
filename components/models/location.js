@@ -1,3 +1,4 @@
+import { Beetleshine as GX } from "beetleshine"
 import { ApplicationMemoryRecord } from "./application_memory_record.js"
 
 export class Location extends ApplicationMemoryRecord {
@@ -12,14 +13,25 @@ export class Location extends ApplicationMemoryRecord {
   static get white() { return this.fetch("white") }
 
   static cycle_lookup(value) {
-    if (typeof value !== "number") {
-      throw new Error(`ArgumentError: ${this.name}.cycle_lookup(${JSON.stringify(value)})`)
-    }
-    return this.lookup(Math.abs(value) % this.values.length)
+    GX.assert_kind_of_integer(value)
+    const wrapped_index = GX.imodulo(value, this.values.length)
+    return this.lookup(wrapped_index)
   }
 
-  get flip() {
-    return this.constructor.cycle_lookup(this.code + 1)
+  advance(value = 1) {
+    return this.constructor.cycle_lookup(this.code + value)
+  }
+  get next()     { return this.advance(1)  }
+  get previous() { return this.advance(-1) }
+  get flip()     { return this.next        }
+
+  flip_if(flip) {
+    return this.advance(flip ? 1 : 0)
+  }
+
+  // 先手の持駒の飛車なら black_R を返す
+  to_mark_pos_key(piece) {
+    return [this.key, piece.key].join("_")
   }
 
   // shogi-player のなかでは使っていないが別のところで使っているので消しはいけない
@@ -30,32 +42,4 @@ export class Location extends ApplicationMemoryRecord {
       return this.long_name
     }
   }
-
-  advance(value) {
-    return this.constructor.cycle_lookup(this.code + value)
-  }
-
-  flip_if(flip) {
-    return this.advance(flip ? 1 : 0)
-  }
-
-  // 先手の持駒の飛車なら black_R を返す
-  to_mark_pos_key(piece) {
-    return [this.key, piece.key].join("_")
-  }
-}
-
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  console.log(Location.cycle_lookup(-1))
-
-  console.log(Location.fetch("black"))
-
-  Location.values.map((e) => {
-    console.log(e)
-  })
-
-  console.log(Location.fetch("black").flip)
-  console.log(Location.fetch("white").flip)
-  // console.log(Location.fetch("white").any_name(false))
-  // console.log(Location.fetch("white").any_name(true))
 }

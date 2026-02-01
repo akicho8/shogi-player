@@ -1,32 +1,40 @@
-import { Location } from '@/components/models/location.js'
+import { Location } from "@/components/models/location.js"
 
-describe('Location', () => {
-  it('fetch', () => {
+describe("Location", () => {
+  it("fetch", () => {
     Location.fetch("black")
   })
 
-  it('cycle_lookup', () => {
+  it("cycle_lookup", () => {
     expect(Location.cycle_lookup(-1).key).toEqual("white")
   })
 
-  it('flip', () => {
+  it("flip", () => {
     expect(Location.fetch("black").flip.key).toEqual("white")
   })
 
-  it('any_long_name', () => {
+  it("any_long_name", () => {
     expect(Location.fetch("black").any_long_name(false)).toEqual("先手")
     expect(Location.fetch("black").any_long_name(true)).toEqual("下手")
   })
 
-  it('human_color_name', () => {
+  it("human_color_name", () => {
     expect(Location.fetch("black").human_color_name).toEqual("黒")
   })
 
-  it('advance', () => {
+  it("advance", () => {
     expect(Location.fetch("black").advance(-2).key).toEqual("black")
     expect(Location.fetch("black").advance(-1).key).toEqual("white")
     expect(Location.fetch("black").advance(-0).key).toEqual("black")
     expect(Location.fetch("black").advance(-1).key).toEqual("white")
     expect(Location.fetch("black").advance(-2).key).toEqual("black")
+  })
+
+  it("next", () => {
+    expect(Location.fetch("black").next.key).toEqual("white")
+  })
+
+  it("previous", () => {
+    expect(Location.fetch("black").previous.key).toEqual("white")
   })
 })
