@@ -428,8 +428,7 @@ export default {
       this.current_turn_set(v, true)
     },
 
-    board_piece_tap_class(xy) {
-      const place = Place.fetch(xy)
+    board_piece_tap_class(place) {
       const soldier = this.xcontainer.board.lookup(place)
       let list = []
 

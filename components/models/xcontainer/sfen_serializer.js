@@ -8,6 +8,9 @@ export class SfenSerializer {
     this.xcontainer = xcontainer
   }
 
+  get to_simple_sfen() { return this.to_s }
+  get to_short_sfen()  { return `position sfen ${this.to_simple_sfen}` }
+
   get to_s() {
     return [
       ...this.__parts,
@@ -15,9 +18,8 @@ export class SfenSerializer {
     ].join(" ")
   }
 
-  // 局面ペディアのようにターンを指定するとエラーになるものに用いる
-  // 千日手判定用のハッシュとしても使える
-  get to_s_without_turn() {
+  // 千日手判定用のハッシュ
+  get snapshot_hash() {
     return this.__parts.join(" ")
   }
 

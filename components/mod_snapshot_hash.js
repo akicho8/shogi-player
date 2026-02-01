@@ -14,7 +14,7 @@ export const mod_snapshot_hash = {
     // 現在の局面のハッシュ文字列を返す (内容はSFEN文字列)
     snapshot_hash() {
       let value = null
-      this.benchmark_print("局面ハッシュ作成処理時間", () => { value = this.xcontainer.to_sfen_without_turn })
+      this.benchmark_print("局面ハッシュ作成処理時間", () => { value = this.xcontainer.snapshot_hash })
       return value
     },
 

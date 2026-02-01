@@ -4,6 +4,7 @@ import { SfenInfo } from "@/components/models/sfen_info.js"
 import { PresetInfo } from "@/components/models/preset_info.js"
 import { Location } from "@/components/models/location.js"
 import { Piece } from "@/components/models/piece.js"
+import { Place } from "@/components/models/place.js"
 
 describe("Xcontainer", () => {
   describe("ClassMethods", () => {
@@ -19,22 +20,28 @@ describe("Xcontainer", () => {
       expect(xcontainer.to_simple_sfen).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     })
 
-    it("#to_sfen_without_turn", () => {
+    it("#snapshot_hash", () => {
       const xcontainer = Xcontainer.setup_default()
-      expect(xcontainer.to_sfen_without_turn).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b -")
+      expect(xcontainer.snapshot_hash).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b -")
     })
 
     it("#to_short_sfen", () => {
       {
-        const sfen = PresetInfo.fetch("平手").sfen
-        const xcontainer = Xcontainer.setup_by({sfen: sfen})
-        expect(xcontainer.to_short_sfen).toEqual(sfen)
+        const xcontainer = Xcontainer.setup_by({preset_key: "平手"})
+        expect(xcontainer.to_short_sfen).toEqual(PresetInfo.fetch("平手").sfen)
       }
       {
-        const sfen = SfenInfo.fetch("適当な局面").sfen
-        const xcontainer = Xcontainer.setup_by({sfen: sfen})
-        expect(xcontainer.to_short_sfen).toEqual(sfen)
+        const xcontainer = Xcontainer.setup_by({sfen_key: "適当な局面"})
+        expect(xcontainer.to_short_sfen).toEqual(SfenInfo.fetch("適当な局面").sfen)
       }
+    })
+  })
+
+  describe("BoardMethods", () => {
+    it("#soldier_css_class_list", () => {
+      const xcontainer = Xcontainer.setup_by({preset_key: "平手"})
+      expect(xcontainer.soldier_css_class_list(Place.fetch("55"))).toEqual(undefined)
+      expect(xcontainer.soldier_css_class_list(Place.fetch("59"))).toEqual(["location_black", "promoted_false", "piece_name", "piece_K"])
     })
   })
 

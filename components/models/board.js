@@ -69,9 +69,22 @@ export class Board {
   //////////////////////////////////////////////////////////////////////////////// 非破壊的
 
   // 指定の場所にある駒を返す
+  // board.lookup(place)
   lookup(place) {
+    if (process.env.NODE_ENV !== "production") {
+      GX.assert(place instanceof Place)
+    }
+
     return this._surface[place.key]
   }
+
+  // // board.safe_lookup([x, y])
+  // safe_lookup(place) {
+  //   if (!(place instanceof Place)) {
+  //     place = Place.fetch(place)
+  //   }
+  //   return this.lookup(place)
+  // }
 
   //////////////////////////////////////////////////////////////////////////////// Utilities
 
