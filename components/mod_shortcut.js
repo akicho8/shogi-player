@@ -11,9 +11,11 @@ export const mod_shortcut = {
 
   methods: {
     shortcut_hook(e) {
+      this.log("shortcut_hook", e)
+
       if (this.play_p || this.edit_p) {
-        // 移動キャンセル
         if (e.code === "Escape") {
+          this.log("移動キャンセル")
           if (this.hold_cancel(e)) {
             e.preventDefault()
             return true
@@ -22,10 +24,10 @@ export const mod_shortcut = {
       }
 
       if (this.edit_p) {
-        // w, b で駒台をクリックしたことにする
         for (const loc of Location.values) {
           const key = e.key.toLowerCase()
           if (key === loc.char_key) {
+            this.log("w, b で駒台をクリックしたことにする")
             this.soldier_hold_unless_lifted_p(e)
             if (this.membership_left_click_handle(loc, e)) { // 駒台クリック
               e.preventDefault()
@@ -62,8 +64,7 @@ export const mod_shortcut = {
           // 何も持っていない状態なので持駒に同じ駒があれば持つ
           if (this.mouseover_info) {
             if (this.mouseover_info.type === "board") {
-              const place = Place.fetch(this.mouseover_info.xy)
-              const soldier = this.xcontainer.board.lookup(place)
+              const soldier = this.xcontainer.board.lookup(this.mouseover_info.place)
               if (soldier) {
                 this.piece_stand_piece_left_click(soldier.location, soldier.piece, soldier.promoted, null) // キーボードのイベントなので null 指定
                 e.preventDefault()
@@ -82,17 +83,17 @@ export const mod_shortcut = {
             if (this.mouseover_info.type === "board") {
               // r, v, h は factorio のキーバインドに倣っている
               if (e.key === "r" || e.code === "Space") {
-                this.board_cell_right_click(this.mouseover_info.xy, "transform_all", e) // 4パターン切り替え
+                this.board_cell_right_click(this.mouseover_info.place, "transform_all", e) // 4パターン切り替え
                 e.preventDefault()
                 return true
               }
               if (e.key === "v") {
-                this.board_cell_right_click(this.mouseover_info.xy, "transform_location", e) // 上下反転
+                this.board_cell_right_click(this.mouseover_info.place, "transform_location", e) // 上下反転
                 e.preventDefault()
                 return true
               }
               if (e.key === "h") {
-                this.board_cell_right_click(this.mouseover_info.xy, "transform_promote", e) // 裏表反転
+                this.board_cell_right_click(this.mouseover_info.place, "transform_promote", e) // 裏表反転
                 e.preventDefault()
                 return true
               }
@@ -151,8 +152,8 @@ export const mod_shortcut = {
       return false
     },
 
-    board_mouseover_handle(xy, e) {
-      this.mouseover_info = { type: "board", xy: xy }
+    board_mouseover_handle(place, e) {
+      this.mouseover_info = { type: "board", place: place }
     },
 
     piece_stand_mouseover_handle(location, piece, e) {
@@ -172,7 +173,7 @@ export const mod_shortcut = {
       if (this.mouseover_info) {                             // 盤上にマウスがあって
         if (!this.lifted_p) {                                // 駒を持っていなかったら
           if (this.mouseover_info.type === "board") {
-            this.board_cell_left_click(this.mouseover_info.xy, e) // 左クリック
+            this.board_cell_left_click(this.mouseover_info.place, e) // 左クリック
           }
           if (this.mouseover_info.type === "MembershipStand") {
             this.piece_stand_piece_left_click(this.mouseover_info.location, this.mouseover_info.piece, false, e)
