@@ -1,17 +1,18 @@
 import { ApplicationMemoryRecord } from "./application_memory_record.js"
 import { Location } from "./location"
+import { PresetInfo } from "./preset_info"
 
 export class EditToolInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
 
       { name: "☖持駒 → 駒箱", func: e => { e.xcontainer.hold_pieces_to_piece_box(Location.fetch("white")) }, },
-      { name: "☖持駒 ← 駒箱", func: e => { e.xcontainer.piece_box_to_hold_pieces(Location.fetch("white")) }, },
+      { name: "☖持駒 ← 駒箱", func: e => { e.xcontainer.piece_box_to_hold_pieces$(Location.fetch("white")) }, },
       { separator: true },
 
-      { name: "駒箱: セット", func: e => { e.xcontainer.piece_box_reset_by_preset("全部駒箱") }, },
-      { name: "駒箱: クリア", func: e => { e.xcontainer.piece_box_clear() }, },
-      { name: "駒箱: 正規化", func: e => { e.xcontainer.piece_box_piece_counts_adjust() }, },
+      { name: "駒箱: セット", func: e => { e.xcontainer.piece_box_reset_by_preset$(PresetInfo.fetch("全部駒箱")) }, },
+      { name: "駒箱: クリア", func: e => { e.xcontainer.piece_box_clear$() }, },
+      { name: "駒箱: 正規化", func: e => { e.xcontainer.piece_box_piece_counts_adjust$() }, },
       // { name: "視点切り替え",       func: e => { e.api_viewpoint_flip() }, },
       { separator: true },
 

@@ -1,6 +1,8 @@
 import Vue from "vue"
 import _ from "lodash"
-import { Place } from "../place.js"
+import { Board } from "../board.js"
+import { Soldier } from "../soldier.js"
+import { Location } from "../location.js"
 import { GX } from "../gx"
 
 export class KingFormationMethods {
@@ -73,7 +75,7 @@ export class KingFormationMethods {
         this.board.delete_at$(soldier.place)
         if (piece.key === "K") {
           // 玉の場合は駒箱にとらげる
-          this.piece_box_add(piece)
+          this.piece_box_add$(piece)
         } else {
           // 他の駒は相手の駒台へ
           this.hold_pieces_add(Location.fetch("white"), piece)
@@ -116,7 +118,7 @@ export class KingFormationMethods {
     // 駒箱から探す
     if (!found) {
       if (this.piece_box_count(piece) >= 1) {
-        this.piece_box_add(piece, -1)
+        this.piece_box_add$(piece, -1)
         found = true
       }
     }
@@ -159,19 +161,12 @@ export class KingFormationMethods {
       sy = -1
     }
     return [
-      { piece: "K", promoted: false, location: "black", place: [bx,           by           ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx,           by + sy + sy ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx + sx,      by + sy + sy ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, by + sy + sy ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, by + sy      ] },
-      { piece: "P", promoted: true,  location: "white", place: [bx + sx + sx, by           ] },
-    ].map(e => {
-      return Soldier.create({
-        piece: Piece.fetch(e.piece),
-        promoted: e.promoted,
-        location: Location.fetch(e.location),
-        place: Place.fetch(e.place),
-      })
-    })
+      { piece_key: "K", promoted: false, location_key: "black", place_key: [bx,           by           ] },
+      { piece_key: "P", promoted: true,  location_key: "white", place_key: [bx,           by + sy + sy ] },
+      { piece_key: "P", promoted: true,  location_key: "white", place_key: [bx + sx,      by + sy + sy ] },
+      { piece_key: "P", promoted: true,  location_key: "white", place_key: [bx + sx + sx, by + sy + sy ] },
+      { piece_key: "P", promoted: true,  location_key: "white", place_key: [bx + sx + sx, by + sy      ] },
+      { piece_key: "P", promoted: true,  location_key: "white", place_key: [bx + sx + sx, by           ] },
+    ].map(e => Soldier.easy_create(e))
   }
 }

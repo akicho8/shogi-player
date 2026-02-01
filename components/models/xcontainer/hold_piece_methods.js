@@ -1,50 +1,40 @@
 import Vue from "vue"
 import _ from "lodash"
+import { GX } from "../gx"
+
 import { Place } from "../place.js"
 import { Piece } from "../piece.js"
 import { Location } from "../location.js"
-import { GX } from "../gx"
 
 export class HoldPieceMethods {
-  // 持駒
-  realized_hold_pieces_of(location) {
-    const list = Object.entries(this.hold_pieces[location.key])
-    return _(list)
-      // .filter(([key, count]) => count >= 1)
-      .map(([key, count]) => [Piece.fetch(key), count])
-      .sortBy(([key, count]) => key.code)
-      .value()
+  hold_pieces_to_h(location) {
+    return this.hold_pieces[location.key]
   }
 
   // location の piece の数を返す
   hold_pieces_count(location, piece) {
-    return this.hold_pieces[location.key][piece.key] ?? 0
+    return this.hold_pieces_to_h(location)[piece.key] ?? 0
   }
 
   // location の持駒が空か？
   hold_pieces_blank_p(location) {
-    return Object.keys(this.hold_pieces[location.key]).length === 0
+    return Object.keys(this.hold_pieces_to_h(location)).length === 0
   }
 
   // location の piece の数に plus を足す
   hold_pieces_add(location, piece, plus = 1) {
-    const count = this.hold_pieces_count(location, piece) + plus
-    const counts_hash = this.hold_pieces[location.key]
+    const new_count = this.hold_pieces_count(location, piece) + plus
+    const counts_hash = this.hold_pieces_to_h(location)
 
-    // 次のように書いた場合、ハッシュの値(count)がいくら変化してもそのタイミングではトリガーが発生しない
-    //
-    //   if (count >= 1) {
-    //     Vue.set(counts_hash, piece.key, count) // ←ここが問題
-    //   } else {
-    //     Vue.delete(counts_hash, piece.key)
-    //   }
-    //
-    // そこで count を更新するときは「キーが新規で追加」されたことでトリガーを発生させるようにする
-    // つまり count を更新するときは「キー削除」→「キー追加」とする
-
-    Vue.delete(counts_hash, piece.key)
-    if (count >= 1) {
-      Vue.set(counts_hash, piece.key, count)
+    if (new_count >= 1) {
+      // スプレッド演算子で新しいオブジェクトを作成し、親にセットし直す
+      // これにより、counts_hash 自体の参照が変わるため、確実にリアクティブがトリガーされる
+      Vue.set(this.hold_pieces, location.key, {...counts_hash, [piece.key]: new_count})
+    } else {
+      // 削除する場合も、新しいオブジェクトから該当キーを除外してセットし直すとより安全
+      const new_hash = { ...counts_hash }
+      delete new_hash[piece.key]
+      Vue.set(this.hold_pieces, location.key, new_hash)
     }
   }
 
@@ -58,15 +48,27 @@ export class HoldPieceMethods {
     return count
   }
 
+  // 持駒
+  realized_hold_pieces_of(location) {
+    return _(this.hold_pieces_to_h(location))
+      .map((count, key) => [Piece.fetch(key), count]) // Lodashのmapは(value, key)の順
+      .sortBy(([piece]) => piece.code)
+      .value()
+  }
+
   // -------------------------------------------------------------------------------- Utilities
 
   // location の駒台の駒をすべて駒箱に移動する
   hold_pieces_to_piece_box(location) {
-    _.forIn(this.hold_pieces[location.key], (count, piece_key) => {
-      const piece = Piece.fetch(piece_key)
-      this.hold_pieces_add(location, piece, -count)
-      this.piece_box_add(piece, count)
+    const counts_hash = this.hold_pieces_to_h(location)
+
+    // 駒箱に足すべきリストを抽出して反映
+    _.forEach(counts_hash, (count, key) => {
+      this.piece_box_add$(Piece.fetch(key), count)
     })
+
+    // 持駒をリセット
+    Vue.set(this.hold_pieces, location.key, {})
   }
 
   // 両者の持駒を合わせたハッシュを返す
@@ -79,5 +81,4 @@ export class HoldPieceMethods {
     })
     return counts
   }
-
 }

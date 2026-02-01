@@ -28,14 +28,13 @@ export const mod_preset = {
       if (preset_info == null) {
         return
       }
-      preset_info = PresetInfo.fetch(preset_info)
       this.xcontainer = Xcontainer.setup_by({sfen: preset_info.sfen})
 
       // 足りない駒を preset_info から設定するのは廃止
-      // this.xcontainer.piece_box_reset_by_preset(preset_info)
+      // this.xcontainer.piece_box_reset_by_preset$(preset_info)
 
       // 自動的に駒箱を補充
-      this.xcontainer.piece_box_piece_counts_adjust()
+      this.xcontainer.piece_box_piece_counts_adjust$()
 
       // 駒落ちのときは△の手番から始まるので edit での手番に反映する
       // xcontainer の current_turn が 0 のまま run しているので xcontainer.current_location.key で最初の手番がわかる
