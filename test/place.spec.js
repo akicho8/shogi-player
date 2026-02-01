@@ -70,6 +70,11 @@ describe("Place", () => {
       expect(Place.fetch("92").odd_p).toEqual(true)
     })
 
+    it("#even_or_odd", () => {
+      expect(Place.fetch("91").even_or_odd).toEqual("even")
+      expect(Place.fetch("92").even_or_odd).toEqual("odd")
+    })
+
     it("#middle_center_p", () => {
       expect(Place.fetch("55").middle_center_p).toEqual(true)
     })

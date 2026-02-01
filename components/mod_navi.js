@@ -62,10 +62,12 @@ export const mod_navi = {
       }
 
       if (this.sp_operation_disabled) {
+        this.log("sp_operation_disabled が有効なのでキーボードショートカットを無効にしている")
         return
       }
 
       if (this.focus_on_input_tag_p()) {
+        this.log("他の要素にフォーカスが当たっているためキーボードショートカットを無効にしている")
         return
       }
 

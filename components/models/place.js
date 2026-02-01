@@ -197,6 +197,10 @@ export class Place {
     return !this.even_p
   }
 
+  get even_or_odd() {
+    return this.even_p ? "even" : "odd"
+  }
+
   get middle_center_p() {
     const e = this.constructor.center_center
     return this.x === e.x && this.y === e.y

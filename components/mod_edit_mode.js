@@ -96,8 +96,7 @@ export const mod_edit_mode = {
     // },
 
     // 盤をクリック
-    board_cell_left_click(xy, e) {
-      const place = Place.fetch(xy)
+    board_cell_left_click(place, e) {
       this.event_call("ev_action_board_cell_pointerdown", place, e)
       this.board_cell_left_click_markable_event(place, e)
       this.board_cell_left_click_piece_move(place, e)

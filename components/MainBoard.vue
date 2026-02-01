@@ -26,19 +26,18 @@
         td.BoardCell(
           v-for="(_, x) in TheSp.sp_board_dimension_w"
           data-resize_observer_id="BoardCell"
-          @pointerdown.stop.prevent.left="TheSp.board_cell_left_click(logical_xy(x, y), $event)"
-          @pointerdown.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), 'transform_all', $event)"
-          @mouseover="TheSp.board_mouseover_handle(logical_xy(x, y), $event)"
+          @pointerdown.stop.prevent.left="TheSp.board_cell_left_click(place_by(x, y), $event)"
+          @pointerdown.stop.prevent.right="TheSp.board_cell_right_click(place_by(x, y), 'transform_all', $event)"
+          @mouseover="TheSp.board_mouseover_handle(place_by(x, y), $event)"
           @mouseleave="TheSp.mouseleave_handle"
-          :class="cell_class(logical_xy(x, y))"
+          :class="cell_class(place_by(x, y))"
           )
-          // @[TheSp.click_response_timing_info.method]="TheSp.interactive_board_cell_click_entry(logical_xy(x, y), $event)"
 
           // PieceTap は盤上にあるとは限らないので x, y に依存してはいけない。だから x, y を元にしたものを渡している
           PieceTap(
-            :class="TheSp.board_piece_tap_class(logical_place_from_xy(x, y))"
-            :piece_texture_class="TheSp.xcontainer.soldier_css_class_list(logical_place_from_xy(x, y))"
-            :mark_pos_key="logical_place_from_xy(x, y).to_mark_pos_key"
+            :class="TheSp.board_piece_tap_class(place_by(x, y))"
+            :piece_texture_class="TheSp.xcontainer.soldier_css_class_list(place_by(x, y))"
+            :mark_pos_key="place_by(x, y).to_mark_pos_key"
             )
 </template>
 
@@ -61,27 +60,26 @@ export default {
     this.TheSp.$data._MainBoardRenderCount += 1
   },
   methods: {
-    cell_class(xy) {
-      const place = Place.fetch(xy)
-      let list = []
-      // console.log(xy[0], xy[1], place.human_x, place.human_y, (place.human_x + place.human_y), place.even_p)
-      list.push(place.even_p ? "even" : "odd")
+    place_by(x, y) {
+      const w = this.TheSp.sp_board_dimension_w
+      const h = this.TheSp.sp_board_dimension_h
+      x = x + Board.dimension - w
+      y = y + Board.dimension - h
+      if (this.TheSp.fliped) {
+        x = w - x - 1
+        y = h - y - 1
+      }
+      return Place.fetch([x, y])
+    },
+
+    cell_class(place) {
+      let list = [place.even_or_odd]
       const fn = this.TheSp.sp_board_cell_class_fn
       if (fn) {
         list = _.concat(list, fn(place))
       }
       return list
     },
-    logical_xy(x, y) {
-      x = x + Board.dimension - this.TheSp.sp_board_dimension_w
-      y = y + Board.dimension - this.TheSp.sp_board_dimension_h
-      if (this.TheSp.fliped) {
-        x = this.TheSp.sp_board_dimension_w - x - 1
-        y = this.TheSp.sp_board_dimension_h - y - 1
-      }
-      return [x, y]
-    },
-    logical_place_from_xy(x, y) { return Place.fetch(this.logical_xy(x, y))               },
   },
 }
 </script>
