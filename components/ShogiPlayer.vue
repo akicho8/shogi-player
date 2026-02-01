@@ -369,7 +369,7 @@ export default {
         this.xcontainer = Xcontainer.setup_by({sfen: this.xcontainer.to_short_sfen})
         this.init_location_key = this.xcontainer.current_location.key
 
-        this.xcontainer.piece_box_piece_counts_adjust()
+        this.xcontainer.piece_box_piece_counts_adjust$()
       }
     },
 
@@ -402,7 +402,7 @@ export default {
       this.xcontainer = Xcontainer.setup_by({any: this.kifu_source, current_turn: this.sp_turn})
 
       // 不足駒を駒箱に生成
-      this.xcontainer.piece_box_piece_counts_adjust()
+      this.xcontainer.piece_box_piece_counts_adjust$()
 
       this.flip_if_white_run()
     },

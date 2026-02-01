@@ -730,14 +730,14 @@ export const mod_edit_mode = {
       if (this.have_piece_location && this.have_piece) {
         this.log("駒台から駒箱に移動")
         const count = this.hold_piece_source_cut(e)               // 相手の持駒を減らして減らした分だけ
-        this.xcontainer.piece_box_add(this.have_piece, count) // 駒箱に加算する
+        this.xcontainer.piece_box_add$(this.have_piece, count) // 駒箱に加算する
         this.current_turn_reset_all()
         return true
       }
 
       if (this.origin_soldier1) {
         this.log("盤上の駒を駒箱に移動")
-        this.xcontainer.piece_box_add(this.origin_soldier1.piece)
+        this.xcontainer.piece_box_add$(this.origin_soldier1.piece)
         this.xcontainer.board.delete_at$(this.origin_soldier1.place)
         this.current_turn_reset_all()
         return true
@@ -817,7 +817,7 @@ export const mod_edit_mode = {
           count = this.xcontainer.piece_box_count(this.have_piece)
         }
         count = this.xcontainer.piece_box_can_be_reduced_count(this.have_piece, count) // 減らせる数を clamp する。そうしないと駒箱から移動するときに駒が増えいく
-        this.xcontainer.piece_box_add(this.have_piece, -count)
+        this.xcontainer.piece_box_add$(this.have_piece, -count)
       }
 
       // 実際に減らせれた数を返す(重要)
@@ -829,7 +829,7 @@ export const mod_edit_mode = {
       if (this.have_piece_location) {
         this.xcontainer.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
       } else {
-        this.xcontainer.piece_box_add(this.have_piece, -1)
+        this.xcontainer.piece_box_add$(this.have_piece, -1)
       }
     },
 
