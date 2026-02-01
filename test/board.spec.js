@@ -74,6 +74,13 @@ describe("Board", () => {
       expect(board.lookup(soldier.place)).toEqual(soldier)
     })
 
+    // it("#safe_lookup", () => {
+    //   const soldier = Soldier.easy_create()
+    //   const board = Board.create_from_soldiers([soldier])
+    //   expect(board.safe_lookup(soldier.place)).toEqual(soldier)
+    //   expect(board.safe_lookup(soldier.place.digit_human)).toEqual(soldier)
+    // })
+
     it("#shallow_clone", () => {
       const soldier = Soldier.easy_create()
       const old_board = Board.create_empty()
