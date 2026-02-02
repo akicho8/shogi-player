@@ -10,11 +10,13 @@ export class SfenInfo extends ApplicationMemoryRecord {
       // { key: "連続王手の千日手確認用", sfen: "position sfen 9/9/8l/8k/6KR1/8p/9/9/9 b - 1", },
       // { key: "頭金で一手詰確認用",     sfen: "position sfen 4k4/9/4G4/9/9/9/9/9/9 b GP 1", },
       // { key: "頭歩で王手確認用",       sfen: "position sfen 4k4/9/9/9/9/9/9/9/9 b P 1", },
-      { key: "盤上は玉のみで他持駒", sfen: "position sfen 4k4/9/9/9/9/9/9/9/4K4 b RB2G2S2N2L9Prb2g2s2n2l9p 1", },
-      { key: "すべて持駒",           sfen: "position sfen 9/9/9/9/9/9/9/9/9 b KRB2G2S2N2L9Pkrb2g2s2n2l9p 1", },
-      { key: "▲飛2△角2",           sfen: "position sfen lnsgkgsnl/9/ppppppppp/9/9/9/PPPPPPPPP/9/LNSGKGSNL b 2R2b 1", },
-      { key: "▲飛2角2△",           sfen: "position sfen lnsgkgsnl/9/ppppppppp/9/9/9/PPPPPPPPP/9/LNSGKGSNL b 2R2B 1", },
-      { key: "適当な局面",           sfen: "position sfen lr5nl/2n3SB1/3gp2p1/8p/PNP1kpPP1/6p1P/2g+p5/3P1G3/L1K4RL w G2SN5Pbsp 3", },
+      { key: "盤上は玉のみで他持駒",     sfen: "position sfen 4k4/9/9/9/9/9/9/9/4K4 b RB2G2S2N2L9Prb2g2s2n2l9p 1", },
+      { key: "すべて持駒",               sfen: "position sfen 9/9/9/9/9/9/9/9/9 b KRB2G2S2N2L9Pkrb2g2s2n2l9p 1", },
+      { key: "▲飛2△角2",               sfen: "position sfen lnsgkgsnl/9/ppppppppp/9/9/9/PPPPPPPPP/9/LNSGKGSNL b 2R2b 1", },
+      { key: "▲飛2角2△",               sfen: "position sfen lnsgkgsnl/9/ppppppppp/9/9/9/PPPPPPPPP/9/LNSGKGSNL b 2R2B 1", },
+      { key: "適当な局面",               sfen: "position sfen lr5nl/2n3SB1/3gp2p1/8p/PNP1kpPP1/6p1P/2g+p5/3P1G3/L1K4RL w G2SN5Pbsp 3", },
+      { key: "最速角交換",               sfen: "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+ 3a2b", }, // 初手=1手目 からの角交換
+      { key: "最速角交換から相筋違い角", sfen: "position sfen lnsgkg1nl/1r5s1/pppppp1pp/6p2/9/2P6/PP1PPPPPP/7R1/LNSGKGSNL b Bb 5 moves B*4e B*6e", },         // 初手=5手目 からの相筋違い角
     ]
   }
 

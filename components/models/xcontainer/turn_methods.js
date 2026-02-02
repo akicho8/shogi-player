@@ -3,6 +3,11 @@ import { Place } from "../place.js"
 import { GX } from "../gx"
 
 export class TurnMethods {
+  // delegates
+  get turn_offset_min() { return this.data_source.turn_offset_min }
+  get turn_offset_max() { return this.data_source.turn_offset_max }
+  get turn_base()       { return this.data_source.turn_base       } // 何手目から始まっているかを返す
+
   // ruby style array index access
   get turn_offset() {
     let index = Number(this.current_turn)
@@ -20,26 +25,14 @@ export class TurnMethods {
     return GX.imodulo(Number(index), this.turn_offset_max + 1)
   }
 
-  get previous_location() {
-    return this.data_source.location_by_offset(this.turn_offset - 1)
-  }
-
-  get current_location() {
-    return this.data_source.location_by_offset(this.turn_offset)
-  }
+  get previous_location() { return this.data_source.location_by_offset(this.turn_offset - 1) }
+  get current_location()  { return this.data_source.location_by_offset(this.turn_offset)     }
+  get next_location()     { return this.data_source.location_by_offset(this.turn_offset + 1) }
 
   get current_comments() {
     if (this.data_source.comment_lines_hash) {
       return this.data_source.comment_lines_hash[this.turn_offset]
     }
-  }
-
-  get turn_offset_min() {
-    return this.data_source.turn_offset_min
-  }
-
-  get turn_offset_max() {
-    return this.data_source.turn_offset_max
   }
 
   get current_turn_label() {
@@ -53,10 +46,5 @@ export class TurnMethods {
   // 100手目から始まっている棋譜でオフセットが20のときは足して 120 を返す
   get display_turn() {
     return this.turn_base + this.turn_offset
-  }
-
-  // 何手目から始まっているかを返す
-  get turn_base() {
-    return this.data_source.turn_base
   }
 }
