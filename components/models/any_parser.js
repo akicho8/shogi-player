@@ -1,5 +1,6 @@
 import { PresetInfo } from "./preset_info.js"
 import { SfenInfo } from "./sfen_info.js"
+import { KifInfo } from "./kif_info.js"
 import { KifParser } from "./kif_parser.js"
 import { SfenParser } from "./sfen_parser.js"
 
@@ -28,6 +29,12 @@ export class AnyParser {
         v = attributes["sfen_key"]
         if (v) {
           value = SfenParser.parse(SfenInfo.fetch(v).sfen)
+        }
+      }
+      if (value == null) {
+        v = attributes["kif_key"]
+        if (v) {
+          value = KifParser.parse(KifInfo.fetch(v).kif)
         }
       }
     }
