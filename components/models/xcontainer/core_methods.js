@@ -3,6 +3,7 @@ import _ from "lodash"
 import { GX } from "../gx"
 
 import { Soldier } from "../soldier.js"
+import { PieceBox } from "../piece_box.js"
 
 export class CoreMethods {
   initialize(attributes = {}) {
@@ -16,7 +17,7 @@ export class CoreMethods {
     this.board       = null
     this.hold_pieces = null
     this.last_hand   = null
-    this.piece_box   = {}
+    this.piece_box   = PieceBox.empty()
   }
 
   run() {

@@ -10,9 +10,9 @@ export class EditToolInfo extends ApplicationMemoryRecord {
       { name: "☖持駒 ← 駒箱", func: e => { e.xcontainer.piece_box_to_hold_pieces$(Location.fetch("white")) }, },
       { separator: true },
 
-      { name: "駒箱: セット", func: e => { e.xcontainer.piece_box_reset_by_preset$(PresetInfo.fetch("全部駒箱")) }, },
+      { name: "駒箱: セット", func: e => { e.xcontainer.piece_box_set_by_preset_info$(PresetInfo.fetch("全部駒箱")) }, },
       { name: "駒箱: クリア", func: e => { e.xcontainer.piece_box_clear$() }, },
-      { name: "駒箱: 正規化", func: e => { e.xcontainer.piece_box_piece_counts_adjust$() }, },
+      { name: "駒箱: 正規化", func: e => { e.xcontainer.piece_box_adjust$() }, },
       // { name: "視点切り替え",       func: e => { e.api_viewpoint_flip() }, },
       { separator: true },
 

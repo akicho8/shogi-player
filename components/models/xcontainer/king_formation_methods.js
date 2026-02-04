@@ -117,7 +117,7 @@ export class KingFormationMethods {
 
     // 駒箱から探す
     if (!found) {
-      if (this.piece_box_count(piece) >= 1) {
+      if (this.piece_box.count(piece) >= 1) {
         this.piece_box_add$(piece, -1)
         found = true
       }

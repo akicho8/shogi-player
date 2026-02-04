@@ -1,15 +1,15 @@
 import _ from "lodash"
 import Vue from "vue"
-import { Piece } from "../piece.js"
-import { PresetInfo } from "../preset_info.js"
-import { GX } from "../gx"
+import { Piece } from "./piece.js"
+import { PresetInfo } from "./preset_info.js"
+import { GX } from "./gx"
 
 export class PieceBox {
   static empty() {
     return this.create({})
   }
 
-  static create_by_preset(preset_info) {
+  static create_by_preset_info(preset_info) {
     GX.assert_kind_of_hash(preset_info.piece_box)
     return this.create(preset_info.piece_box)
   }
@@ -43,6 +43,27 @@ export class PieceBox {
     } else {
       delete new_counts[piece.key]
     }
+
+    return this.constructor.create(new_counts)
+  }
+
+  merge(other) {
+    return this.merge_from_hash_counts(other.to_h)
+  }
+
+  merge_from_hash_counts(hash_counts) {
+    GX.assert_kind_of_hash(hash_counts)
+
+    const new_counts = { ...this._counts }
+
+    _.each(hash_counts, (amount, key) => {
+      const count = (new_counts[key] ?? 0) + amount
+      if (count >= 1) {
+        new_counts[key] = count
+      } else {
+        delete new_counts[key]
+      }
+    })
 
     return this.constructor.create(new_counts)
   }
