@@ -29,14 +29,14 @@ export class SfenSerializer {
   }
 
   get to_sfen_hold_pieces() {
-    let str = Location.values.map((location_info) => {
+    const str = Location.values.map(location_info => {
       const hold_pieces = this.xcontainer.hold_pieces[location_info.key]
-      const values = Piece.values.map((e) => { // 玉から歩の順になっている
-        let count = hold_pieces[e.key] || 0
-        let str = ""
+      const values = Piece.values.map(e => { // 玉から歩の順になっている
+        const count = hold_pieces[e.key] ?? 0
         if (count === 0) {
-          return null
+          return ""
         }
+        let str = ""
         if (count >= 2) {
           str += count
         }
@@ -49,11 +49,11 @@ export class SfenSerializer {
         str += key
         return str
       })
-      return _.compact(values).join("")
+      return values.join("")
     }).join("")
 
-    if (_.isEmpty(str)) {
-      str = "-"
+    if (str === "") {
+      return "-"
     }
 
     return str

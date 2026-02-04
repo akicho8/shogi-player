@@ -22,7 +22,7 @@ export class HoldPieceMethods {
   }
 
   // location の piece の数に plus を足す
-  hold_pieces_add(location, piece, plus = 1) {
+  hold_pieces_add$(location, piece, plus = 1) {
     const new_count = this.hold_pieces_count(location, piece) + plus
     const counts_hash = this.hold_pieces_to_h(location)
 
@@ -59,7 +59,7 @@ export class HoldPieceMethods {
   // -------------------------------------------------------------------------------- Utilities
 
   // location の駒台の駒をすべて駒箱に移動する
-  hold_pieces_to_piece_box(location) {
+  hold_pieces_to_piece_box$(location) {
     const counts_hash = this.hold_pieces_to_h(location)
 
     // 駒箱に足すべきリストを抽出して反映
@@ -75,8 +75,8 @@ export class HoldPieceMethods {
   get hold_piece_all_counts_hash() {
     const counts = {}
     Location.values.forEach(e => {
-      _.forIn(this.hold_pieces[e.key], (count, piece_key) => {
-        counts[piece_key] = (counts[piece_key] ?? 0) + count
+      _.forIn(this.hold_pieces_to_h(e), (count, key) => {
+        counts[key] = (counts[key] ?? 0) + count
       })
     })
     return counts

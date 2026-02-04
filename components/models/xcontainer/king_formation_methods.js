@@ -8,22 +8,22 @@ import { GX } from "../gx"
 export class KingFormationMethods {
   //////////////////////////////////////////////////////////////////////////////// 指将棋用玉配置
 
-  king_formation_auto_set_on_off(v) {
+  king_formation_auto_set_on_off$(v) {
     if (v) {
-      return this.king_formation_auto_set()
+      return this.king_formation_auto_set$()
     } else {
-      return this.king_formation_auto_unset()
+      return this.king_formation_auto_unset$()
     }
   }
 
   // 指将棋用玉配置(自動)
-  king_formation_auto_set() {
+  king_formation_auto_set$() {
     let success = false
     if (!success) {
-      success = this.king_formation_set("bottom_left")
+      success = this.king_formation_set$("bottom_left")
     }
     if (!success) {
-      success = this.king_formation_set("bottom_right")
+      success = this.king_formation_set$("bottom_right")
     }
     return success
   }
@@ -31,19 +31,19 @@ export class KingFormationMethods {
   // 指将棋用玉配置解除
   // 玉は駒箱へ
   // それ以外は相手の駒台へ
-  king_formation_auto_unset() {
+  king_formation_auto_unset$() {
     let success = false
     if (!success) {
-      success = this.king_formation_unset("bottom_left")
+      success = this.king_formation_unset$("bottom_left")
     }
     if (!success) {
-      success = this.king_formation_unset("bottom_right")
+      success = this.king_formation_unset$("bottom_right")
     }
     return success
   }
 
   // 指将棋用玉配置
-  king_formation_set(position) {
+  king_formation_set$(position) {
     const soldiers = this.king_formation_soldiers(position)
 
     // 置きたいところに駒が1つでも置かれていたら何もしない
@@ -60,7 +60,7 @@ export class KingFormationMethods {
   // 指将棋用玉配置解除
   // 玉は駒箱へ
   // それ以外は相手の駒台へ
-  king_formation_unset(position) {
+  king_formation_unset$(position) {
     const soldiers = this.king_formation_soldiers(position)
 
     // 駒がそろってないときは何もしない
@@ -78,7 +78,7 @@ export class KingFormationMethods {
           this.piece_box_add$(piece)
         } else {
           // 他の駒は相手の駒台へ
-          this.hold_pieces_add(Location.fetch("white"), piece)
+          this.hold_pieces_add$(Location.white, piece)
         }
       }
     })
@@ -95,10 +95,10 @@ export class KingFormationMethods {
 
     // 玉の場合は初期配置の時点で存在しない場合もあるので「あれば」-1 するだけ
     if (soldier.piece.key === "K") {
-      this.piece_search_and_decrement(soldier.piece)
+      this.piece_search_and_decrement$(soldier.piece)
     } else {
       // 玉以外は駒が数が増えてしまってややこしくなるのを防ぐため必ず「あったときだけ」-1 し、なければ何もしない
-      if (!this.piece_search_and_decrement(soldier.piece)) {
+      if (!this.piece_search_and_decrement$(soldier.piece)) {
         return
       }
     }
@@ -107,12 +107,12 @@ export class KingFormationMethods {
   }
 
   // 相手の駒→駒箱→自分の駒の順で駒を探してあれば -1 して true を返す
-  piece_search_and_decrement(piece) {
+  piece_search_and_decrement$(piece) {
     let found = false
 
     // 相手の駒から探す
     if (!found) {
-      found = this.piece_search_on_hold_pieces_and_decrement("white", piece)
+      found = this.piece_search_on_hold_pieces_and_decrement$("white", piece)
     }
 
     // 駒箱から探す
@@ -126,7 +126,7 @@ export class KingFormationMethods {
     if (false) {
       // 自分の駒から探す
       if (!found) {
-        found = this.piece_search_on_hold_pieces_and_decrement("black", piece)
+        found = this.piece_search_on_hold_pieces_and_decrement$("black", piece)
       }
     }
 
@@ -134,15 +134,14 @@ export class KingFormationMethods {
   }
 
   // location_key の持駒から piece を探してあれば -1 して true を返す
-  piece_search_on_hold_pieces_and_decrement(location_key, piece) {
+  piece_search_on_hold_pieces_and_decrement$(location_key, piece) {
     const location = Location.fetch(location_key)
     if (this.hold_pieces_count(location, piece) >= 1) {
-      this.hold_pieces_add(location, piece, -1)
+      this.hold_pieces_add$(location, piece, -1)
       return true
     }
   }
 
-  // TODO: SFENで定義する方法もあり
   king_formation_soldiers(position) {
     let bx = null
     let sx = null

@@ -33,7 +33,6 @@ import { ClassHelper          } from "./class_helper"
 import { CoreMethods          } from "./xcontainer/core_methods"
 import { SerializeMethods     } from "./xcontainer/serialize_methods"
 import { UtilityMethods       } from "./xcontainer/utility_methods"
-import { TransformMethods     } from "./xcontainer/transform_methods"
 import { HoldPieceMethods     } from "./xcontainer/hold_piece_methods"
 import { BoardMethods         } from "./xcontainer/board_methods"
 import { KingFormationMethods } from "./xcontainer/king_formation_methods"
@@ -43,7 +42,6 @@ import { TurnMethods          } from "./xcontainer/turn_methods"
 ClassHelper.class_include(Xcontainer, CoreMethods)
 ClassHelper.class_include(Xcontainer, SerializeMethods)
 ClassHelper.class_include(Xcontainer, UtilityMethods)
-ClassHelper.class_include(Xcontainer, TransformMethods)
 ClassHelper.class_include(Xcontainer, HoldPieceMethods)
 ClassHelper.class_include(Xcontainer, BoardMethods)
 ClassHelper.class_include(Xcontainer, KingFormationMethods)

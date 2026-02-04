@@ -81,14 +81,14 @@ describe("Xcontainer", () => {
       expect(xcontainer.hold_pieces_blank_p(Location.white)).toEqual(true)
     })
 
-    it("#hold_pieces_add", () => {
+    it("#hold_pieces_add$", () => {
       const xcontainer = Xcontainer.setup_default()
       expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(0)
-      xcontainer.hold_pieces_add(Location.black, Piece.fetch("R"))
+      xcontainer.hold_pieces_add$(Location.black, Piece.fetch("R"))
       expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(1)
-      xcontainer.hold_pieces_add(Location.black, Piece.fetch("R"), -1)
+      xcontainer.hold_pieces_add$(Location.black, Piece.fetch("R"), -1)
       expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(0)
-      xcontainer.hold_pieces_add(Location.black, Piece.fetch("R"), -1)
+      xcontainer.hold_pieces_add$(Location.black, Piece.fetch("R"), -1)
       expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(0)
     })
 
@@ -105,9 +105,9 @@ describe("Xcontainer", () => {
       expect(xcontainer.realized_hold_pieces_of(Location.white)).toEqual([])
     })
 
-    it("#hold_pieces_to_piece_box", () => {
+    it("#hold_pieces_to_piece_box$", () => {
       const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2角2△"})
-      xcontainer.hold_pieces_to_piece_box(Location.black)
+      xcontainer.hold_pieces_to_piece_box$(Location.black)
       expect(xcontainer.hold_pieces_to_h(Location.black)).toEqual({})
       expect(xcontainer.piece_box_realize).toEqual([[Piece.fetch("R"), 2], [Piece.fetch("B"), 2]])
     })
@@ -116,9 +116,6 @@ describe("Xcontainer", () => {
       const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2△角2"})
       expect(xcontainer.hold_piece_all_counts_hash).toEqual({"R": 2, "B": 2})
     })
-  })
-
-  describe("TransformMethods", () => {
   })
 
   describe("PieceBoxMethods", () => {
@@ -238,6 +235,19 @@ describe("Xcontainer", () => {
     it("#display_turn", () => {
       const xcontainer = Xcontainer.setup_by({sfen_key: "最速角交換から相筋違い角"})
       expect(xcontainer.display_turn).toEqual(4)
+    })
+  })
+
+  describe("UtilityMethods", () => {
+    it("#rotate_xy$", () => {
+      const xcontainer = Xcontainer.setup_by({preset_key: "平手"})
+      xcontainer.rotate_xy$(1, 2)
+      expect(xcontainer.board.to_sfen).toEqual("2B5R/LLNSGKGSN/llnsgkgsn/2r5b/ppppppppp/9/9/9/PPPPPPPPP")
+    })
+
+    it("#square_shuffle$", () => {
+      const xcontainer = Xcontainer.setup_by({preset_key: "平手"})
+      expect(xcontainer.square_shuffle$(9)).toEqual(true)
     })
   })
 })

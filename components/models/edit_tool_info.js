@@ -6,7 +6,7 @@ export class EditToolInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
 
-      { name: "☖持駒 → 駒箱", func: e => { e.xcontainer.hold_pieces_to_piece_box(Location.fetch("white")) }, },
+      { name: "☖持駒 → 駒箱", func: e => { e.xcontainer.hold_pieces_to_piece_box$(Location.fetch("white")) }, },
       { name: "☖持駒 ← 駒箱", func: e => { e.xcontainer.piece_box_to_hold_pieces$(Location.fetch("white")) }, },
       { separator: true },
 
@@ -16,12 +16,12 @@ export class EditToolInfo extends ApplicationMemoryRecord {
       // { name: "視点切り替え",       func: e => { e.api_viewpoint_flip() }, },
       { separator: true },
 
-      { name: "玉: 配置",     func: e => { e.xcontainer.king_formation_auto_set()   }, },
-      { name: "玉: 回収",     func: e => { e.xcontainer.king_formation_auto_unset() }, },
-      // { name: "指将棋用玉配置(左)", func: e => { e.xcontainer.king_formation_set("bottom_left") }, },
-      // { name: "指将棋用玉回収(左)", func: e => { e.xcontainer.king_formation_unset("bottom_left") }, },
-      // { name: "指将棋用玉配置(右)", func: e => { e.xcontainer.king_formation_set("bottom_right") }, },
-      // { name: "指将棋用玉回収(右)", func: e => { e.xcontainer.king_formation_unset("bottom_right") }, },
+      { name: "玉: 配置",     func: e => { e.xcontainer.king_formation_auto_set$()   }, },
+      { name: "玉: 回収",     func: e => { e.xcontainer.king_formation_auto_unset$() }, },
+      // { name: "指将棋用玉配置(左)", func: e => { e.xcontainer.king_formation_set$("bottom_left") }, },
+      // { name: "指将棋用玉回収(左)", func: e => { e.xcontainer.king_formation_unset$("bottom_left") }, },
+      // { name: "指将棋用玉配置(右)", func: e => { e.xcontainer.king_formation_set$("bottom_right") }, },
+      // { name: "指将棋用玉回収(右)", func: e => { e.xcontainer.king_formation_unset$("bottom_right") }, },
       { separator: true },
 
       // { name: "盤面をシャッフル",   func: e => { e.xcontainer.square_shuffle(4) }, },
