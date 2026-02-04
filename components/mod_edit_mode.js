@@ -323,7 +323,7 @@ export const mod_edit_mode = {
       if (this.place_from) {
         this.log("盤上から移動")
         if (this.killed_soldier) {
-          this.xcontainer.hold_pieces_add(this.origin_soldier1.location, this.killed_soldier.piece) // 相手の駒があれば取る
+          this.xcontainer.hold_pieces_add$(this.origin_soldier1.location, this.killed_soldier.piece) // 相手の駒があれば取る
           // this.$forceUpdate()
         }
 
@@ -415,14 +415,14 @@ export const mod_edit_mode = {
         if (this.killed_soldier) {
           if (this.have_piece_location) {
             // have_piece_location の駒台から移動した駒で取ったので have_piece_location の方に置く
-            this.xcontainer.hold_pieces_add(this.have_piece_location, this.killed_soldier.piece)
+            this.xcontainer.hold_pieces_add$(this.have_piece_location, this.killed_soldier.piece)
           } else {
             // 駒箱から移動した駒で取ったので this.killed_soldier.location に返すとする場合
             if (false) {
-              this.xcontainer.hold_pieces_add(this.killed_soldier.location, this.killed_soldier.piece)
+              this.xcontainer.hold_pieces_add$(this.killed_soldier.location, this.killed_soldier.piece)
             } else {
               // 駒の向きは先手と同じなのでわかりやすいように 先手に返す
-              this.xcontainer.hold_pieces_add(Location.fetch("black"), this.killed_soldier.piece)
+              this.xcontainer.hold_pieces_add$(Location.fetch("black"), this.killed_soldier.piece)
             }
           }
         }
@@ -786,7 +786,7 @@ export const mod_edit_mode = {
 
     // 盤上の駒を駒台に置く
     board_soldir_to_hold_pieces(location) {
-      this.xcontainer.hold_pieces_add(location, this.origin_soldier1.piece) // 駒台にプラス
+      this.xcontainer.hold_pieces_add$(location, this.origin_soldier1.piece) // 駒台にプラス
       this.xcontainer.board.delete_at$(this.origin_soldier1.place)
       this.current_turn_reset_all()
     },
@@ -794,7 +794,7 @@ export const mod_edit_mode = {
     hold_pieces_move_to_my_hold_pieces(e, location) {
       this.log("相手の持駒を自分の駒台に移動")
       const count = this.hold_piece_source_cut(e)                           // 相手の持駒を減らして減らした分だけ
-      this.xcontainer.hold_pieces_add(location, this.have_piece, count) // 自分に加算する
+      this.xcontainer.hold_pieces_add$(location, this.have_piece, count) // 自分に加算する
       this.current_turn_reset_all()
     },
 
@@ -809,7 +809,7 @@ export const mod_edit_mode = {
           count = this.xcontainer.hold_pieces_count(this.have_piece_location, this.have_piece)
         }
         count = this.xcontainer.hold_pieces_can_be_reduced_count(this.have_piece_location, this.have_piece, count)
-        this.xcontainer.hold_pieces_add(this.have_piece_location, this.have_piece, -count)
+        this.xcontainer.hold_pieces_add$(this.have_piece_location, this.have_piece, -count)
       } else {
         this.log("駒箱から移動")
         if (this.meta_p(e)) {
@@ -827,7 +827,7 @@ export const mod_edit_mode = {
     // 駒を1つ減らす
     piece_decriment() {
       if (this.have_piece_location) {
-        this.xcontainer.hold_pieces_add(this.have_piece_location, this.have_piece, -1)
+        this.xcontainer.hold_pieces_add$(this.have_piece_location, this.have_piece, -1)
       } else {
         this.xcontainer.piece_box_add$(this.have_piece, -1)
       }

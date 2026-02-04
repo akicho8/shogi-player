@@ -35,12 +35,12 @@ export class CoreMethods {
     if (m.drop_piece) {
       const drop_soldier = Soldier.create({piece: m.drop_piece, place: m.place, promoted: m.promoted, location: m.location})
       this.board.soldier_drop$(drop_soldier)
-      this.hold_pieces_add(m.location, drop_soldier.piece, -1)
+      this.hold_pieces_add$(m.location, drop_soldier.piece, -1)
     } else {
       {
         const killed_soldier = this.board.lookup(m.place)
         if (killed_soldier) {
-          this.hold_pieces_add(m.location, killed_soldier.piece, 1)
+          this.hold_pieces_add$(m.location, killed_soldier.piece, 1)
         }
       }
       {

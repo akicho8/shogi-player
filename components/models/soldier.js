@@ -182,16 +182,6 @@ export class Soldier {
 }
 
 import { ClassHelper } from "./class_helper"
-// import { SerializeMethods } from "./soldier/serialize_methods"
-// import { ViolationMethods } from "./soldier/violation_methods"
-// import { UtilityMethods } from "./soldier/utility_methods"
 import { TransformMethods } from "./soldier/transform_methods"
-// import { LeaveKingAloneMethods } from "./soldier/leave_king_alone_methods"
-// import { CheckmateMethods } from "./soldier/checkmate_methods"
 
-// ClassHelper.class_include(Soldier, SerializeMethods)
-// ClassHelper.class_include(Soldier, ViolationMethods)
-// ClassHelper.class_include(Soldier, UtilityMethods)
 ClassHelper.class_include(Soldier, TransformMethods)
-// ClassHelper.class_include(Soldier, LeaveKingAloneMethods)
-// ClassHelper.class_include(Soldier, CheckmateMethods)

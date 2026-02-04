@@ -59,7 +59,7 @@ export class PieceBoxMethods {
     _.forIn(this.piece_box, (count, key) => {
       const piece = Piece.fetch(key)
       this.piece_box_add$(piece, -count)
-      this.hold_pieces_add(location, piece, count)
+      this.hold_pieces_add$(location, piece, count)
     })
   }
 
