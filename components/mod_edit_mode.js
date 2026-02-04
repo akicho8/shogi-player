@@ -814,9 +814,9 @@ export const mod_edit_mode = {
         this.log("駒箱から移動")
         if (this.meta_p(e)) {
           this.log("シフトが押されていたので全部移動")
-          count = this.xcontainer.piece_box_count(this.have_piece)
+          count = this.xcontainer.piece_box.count(this.have_piece)
         }
-        count = this.xcontainer.piece_box_can_be_reduced_count(this.have_piece, count) // 減らせる数を clamp する。そうしないと駒箱から移動するときに駒が増えいく
+        count = this.xcontainer.piece_box.can_be_reduced_count(this.have_piece, count) // 減らせる数を clamp する。そうしないと駒箱から移動するときに駒が増えいく
         this.xcontainer.piece_box_add$(this.have_piece, -count)
       }
 

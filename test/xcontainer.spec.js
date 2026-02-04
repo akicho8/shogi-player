@@ -109,7 +109,7 @@ describe("Xcontainer", () => {
       const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2角2△"})
       xcontainer.hold_pieces_to_piece_box$(Location.black)
       expect(xcontainer.hold_pieces_to_h(Location.black)).toEqual({})
-      expect(xcontainer.piece_box_realize).toEqual([[Piece.fetch("R"), 2], [Piece.fetch("B"), 2]])
+      expect(xcontainer.piece_box.realize).toEqual([[Piece.fetch("R"), 2], [Piece.fetch("B"), 2]])
     })
 
     it("#hold_piece_all_counts_hash", () => {
@@ -119,64 +119,39 @@ describe("Xcontainer", () => {
   })
 
   describe("PieceBoxMethods", () => {
-    it("#piece_box_count", () => {
-      const xcontainer = Xcontainer.setup_default()
-      expect(xcontainer.piece_box_to_h).toEqual({})
-      xcontainer.piece_box_add$(Piece.fetch("R"), 1)
-      expect(xcontainer.piece_box_to_h).toEqual({"R": 1})
-    })
-
-    it("#piece_box_count", () => {
-      const xcontainer = Xcontainer.setup_default()
-      expect(xcontainer.piece_box_count(Piece.fetch("R"))).toEqual(0)
-    })
-
     it("#piece_box_add$", () => {
       const xcontainer = Xcontainer.setup_default()
-      expect(xcontainer.piece_box_count(Piece.fetch("R"))).toEqual(0)
+      expect(xcontainer.piece_box.count(Piece.fetch("R"))).toEqual(0)
       xcontainer.piece_box_add$(Piece.fetch("R"), 1)
-      expect(xcontainer.piece_box_count(Piece.fetch("R"))).toEqual(1)
+      expect(xcontainer.piece_box.count(Piece.fetch("R"))).toEqual(1)
       xcontainer.piece_box_add$(Piece.fetch("R"), 1)
-      expect(xcontainer.piece_box_count(Piece.fetch("R"))).toEqual(2)
+      expect(xcontainer.piece_box.count(Piece.fetch("R"))).toEqual(2)
       xcontainer.piece_box_add$(Piece.fetch("R"), -1)
-      expect(xcontainer.piece_box_count(Piece.fetch("R"))).toEqual(1)
+      expect(xcontainer.piece_box.count(Piece.fetch("R"))).toEqual(1)
       xcontainer.piece_box_add$(Piece.fetch("R"), -1)
-      expect(xcontainer.piece_box_count(Piece.fetch("R"))).toEqual(0)
+      expect(xcontainer.piece_box.count(Piece.fetch("R"))).toEqual(0)
       xcontainer.piece_box_add$(Piece.fetch("R"), -1)
-      expect(xcontainer.piece_box_count(Piece.fetch("R"))).toEqual(0)
-    })
-
-    it("#piece_box_can_be_reduced_count", () => {
-      const xcontainer = Xcontainer.setup_default()
-      xcontainer.piece_box_add$(Piece.fetch("R"), 5)
-      expect(xcontainer.piece_box_can_be_reduced_count(Piece.fetch("R"), 8)).toEqual(5)
-    })
-
-    it("#piece_box_realize", () => {
-      const xcontainer = Xcontainer.setup_default()
-      xcontainer.piece_box_add$(Piece.fetch("B"), 1)
-      xcontainer.piece_box_add$(Piece.fetch("R"), 2)
-      expect(xcontainer.piece_box_realize).toEqual([[Piece.fetch("R"), 2], [Piece.fetch("B"), 1]])
+      expect(xcontainer.piece_box.count(Piece.fetch("R"))).toEqual(0)
     })
 
     it("#piece_box_to_hold_pieces$", () => {
       const xcontainer = Xcontainer.setup_default()
       xcontainer.piece_box_add$(Piece.fetch("R"), 1)
       xcontainer.piece_box_to_hold_pieces$(Location.black)
-      expect(xcontainer.piece_box_to_h).toEqual({})
+      expect(xcontainer.piece_box.to_h).toEqual({})
       expect(xcontainer.hold_pieces_to_h(Location.black)).toEqual({"R": 1})
     })
 
-    it("#piece_box_reset_by_preset$", () => {
+    it("#piece_box_set_by_preset_info$", () => {
       const xcontainer = Xcontainer.setup_default()
-      xcontainer.piece_box_reset_by_preset$(PresetInfo.fetch("角落ち"))
-      expect(xcontainer.piece_box_to_h).toEqual({"B": 1})
+      xcontainer.piece_box_set_by_preset_info$(PresetInfo.fetch("角落ち"))
+      expect(xcontainer.piece_box.to_h).toEqual({"B": 1})
     })
 
-    it("#piece_box_piece_counts_adjust$", () => {
+    it("#piece_box_adjust$", () => {
       const xcontainer = Xcontainer.setup_by({preset_key: "角落ち"})
-      xcontainer.piece_box_piece_counts_adjust$()
-      expect(xcontainer.piece_box_to_h).toEqual({"B": 1})
+      xcontainer.piece_box_adjust$()
+      expect(xcontainer.piece_box.to_h).toEqual({"B": 1})
     })
   })
 
