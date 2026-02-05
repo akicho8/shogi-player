@@ -39,7 +39,8 @@ export class SePresetInfo extends ApplicationMemoryRecord {
           context.sp_player_info.white.name      = "後手"
 
           context.sp_coordinate                  = true               // 座標を表示する
-          context.sp_coordinate_variant_v        = "kanji"          // 座標の種類
+          context.sp_coordinate_variant_h        = "number"           // 座標の種類(上)
+          context.sp_coordinate_variant_v        = "kanji"            // 座標の種類(右)
           context.sp_board_horizontal_gap        = 0.2                // 座標があるため盤面の左右を空ける
           context.sp_coordinate_x_push           = 0.05               // 座標調整
           context.sp_coordinate_y_push           = 0.01               // 座標調整

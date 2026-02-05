@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: true
+  autoInstallPeers: false
   excludeLinksFromLockfile: false
 
 dependencies:
@@ -24,10 +24,10 @@ dependencies:
 devDependencies:
   '@babel/cli':
     specifier: ^7.21.0
-    version: 7.21.0(@babel/core@7.22.5)
+    version: 7.21.0
   '@babel/plugin-proposal-private-property-in-object':
     specifier: ^7.21.11
-    version: 7.21.11(@babel/core@7.22.5)
+    version: 7.21.11
   '@nuxtjs/style-resources':
     specifier: ^1.0.0
     version: 1.0.0
@@ -36,16 +36,16 @@ devDependencies:
     version: 1.11.7
   file-loader:
     specifier: ^6.2.0
-    version: 6.2.0(webpack@4.46.0)
+    version: 6.2.0
   jest:
     specifier: ^29.5.0
     version: 29.5.0
   nuxt:
     specifier: ^2.16.3
-    version: 2.16.3(consola@2.15.3)(pug@2.0.4)(vue@2.7.14)
+    version: 2.16.3(pug@2.0.4)
   nuxt-buefy:
     specifier: ^0.4.25
-    version: 0.4.25(vue@2.7.14)
+    version: 0.4.25
   pattern.css:
     specifier: ^1.0.0
     version: 1.0.0
@@ -60,13 +60,13 @@ devDependencies:
     version: 1.1.0(pug@2.0.4)
   raw-loader:
     specifier: ^4.0.2
-    version: 4.0.2(webpack@4.46.0)
+    version: 4.0.2
   sass:
     specifier: ^1.63.2
     version: 1.63.2
   sass-loader:
     specifier: ^10.4.1
-    version: 10.4.1(sass@1.63.2)(webpack@4.46.0)
+    version: 10.4.1(sass@1.63.2)
   vue-scrollto:
     specifier: ^2.20.0
     version: 2.20.0
@@ -84,14 +84,13 @@ packages:
       '@jridgewell/trace-mapping': 0.3.18
     dev: true
 
-  /@babel/cli@7.21.0(@babel/core@7.22.5):
+  /@babel/cli@7.21.0:
     resolution: {integrity: sha512-xi7CxyS8XjSyiwUGCfwf+brtJxjW1/ZTcBUkP10xawIEXLX5HzLn+3aXkgxozcP2UhRhtKTmQurw9Uaes7jZrA==}
     engines: {node: '>=6.9.0'}
     hasBin: true
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': 7.22.5
       '@jridgewell/trace-mapping': 0.3.18
       commander: 4.1.1
       convert-source-map: 1.9.0
@@ -101,7 +100,7 @@ packages:
       slash: 2.0.0
     optionalDependencies:
       '@nicolo-ribaudo/chokidar-2': 2.1.8-no-fsevents.3
-      chokidar: 3.5.3
+      chokidar: 3.6.0
     dev: true
 
   /@babel/code-frame@7.22.5:
@@ -175,6 +174,25 @@ packages:
       browserslist: 4.21.7
       lru-cache: 5.1.1
       semver: 6.3.0
+    dev: true
+
+  /@babel/helper-create-class-features-plugin@7.22.5:
+    resolution: {integrity: sha512-xkb58MyOYIslxu3gKmVXmjTtUPvBU4odYzbiIQbWwLKIHCsx6UGZGX6F1IznMFVnDdirseUZopzN+ZRt8Xb33Q==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+    dependencies:
+      '@babel/helper-annotate-as-pure': 7.22.5
+      '@babel/helper-environment-visitor': 7.22.5
+      '@babel/helper-function-name': 7.22.5
+      '@babel/helper-member-expression-to-functions': 7.22.5
+      '@babel/helper-optimise-call-expression': 7.22.5
+      '@babel/helper-replace-supers': 7.22.5
+      '@babel/helper-skip-transparent-expression-wrappers': 7.22.5
+      '@babel/helper-split-export-declaration': 7.22.5
+      semver: 6.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/helper-create-class-features-plugin@7.22.5(@babel/core@7.22.5):
@@ -488,17 +506,16 @@ packages:
       '@babel/core': 7.22.5
     dev: true
 
-  /@babel/plugin-proposal-private-property-in-object@7.21.11(@babel/core@7.22.5):
+  /@babel/plugin-proposal-private-property-in-object@7.21.11:
     resolution: {integrity: sha512-0QZ8qP/3RLDVBwBFoWAwCtgcDZJVwA5LUJRZU8x2YFfKNuFq161wK3cuGrALu5yiPu+vzwTAg/sMWVNeWeNyaw==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': 7.22.5
       '@babel/helper-annotate-as-pure': 7.22.5
-      '@babel/helper-create-class-features-plugin': 7.22.5(@babel/core@7.22.5)
+      '@babel/helper-create-class-features-plugin': 7.22.5
       '@babel/helper-plugin-utils': 7.22.5
-      '@babel/plugin-syntax-private-property-in-object': 7.14.5(@babel/core@7.22.5)
+      '@babel/plugin-syntax-private-property-in-object': 7.14.5
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -678,6 +695,15 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.5
+      '@babel/helper-plugin-utils': 7.22.5
+    dev: true
+
+  /@babel/plugin-syntax-private-property-in-object@7.14.5:
+    resolution: {integrity: sha512-0wVnp9dxJ72ZUJDV27ZfbSj6iHLoytYZmh3rFcxNnvsJF3ktkzLDZPy/mA17HGsaQT3/DQsWYX1f1QGWkCoVUg==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
 
@@ -2112,7 +2138,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /@nuxt/babel-preset-app@2.16.3(vue@2.7.14):
+  /@nuxt/babel-preset-app@2.16.3:
     resolution: {integrity: sha512-FZnQUnnXvGTXPnnwAMa9gRmSu16Wn796NffzwBzKQHoKVkal2HJcZ+D7/EnqeqVd8dFijFCrdquEj1WoastUSA==}
     engines: {node: ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
@@ -2128,7 +2154,7 @@ packages:
       '@babel/plugin-transform-runtime': 7.22.5(@babel/core@7.22.5)
       '@babel/preset-env': 7.22.5(@babel/core@7.22.5)
       '@babel/runtime': 7.22.5
-      '@vue/babel-preset-jsx': 1.4.0(@babel/core@7.22.5)(vue@2.7.14)
+      '@vue/babel-preset-jsx': 1.4.0(@babel/core@7.22.5)
       core-js: 3.31.0
       core-js-compat: 3.31.0
       regenerator-runtime: 0.13.11
@@ -2137,14 +2163,14 @@ packages:
       - vue
     dev: true
 
-  /@nuxt/builder@2.16.3(pug@2.0.4)(vue@2.7.14):
+  /@nuxt/builder@2.16.3(pug@2.0.4):
     resolution: {integrity: sha512-yQWqr1YnlgOyqT/au1rgORAL3BkH2gJ4Dn2o5DDUGZQZLnkhEAYB5WblTk8e78xENhjfzIYF3pqzxMhMqNxqBw==}
     engines: {node: ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
       '@nuxt/devalue': 2.0.2
       '@nuxt/utils': 2.16.3
       '@nuxt/vue-app': 2.16.3
-      '@nuxt/webpack': 2.16.3(pug@2.0.4)(vue@2.7.14)
+      '@nuxt/webpack': 2.16.3(pug@2.0.4)
       chalk: 4.1.2
       chokidar: 3.5.3
       consola: 2.15.3
@@ -2254,14 +2280,13 @@ packages:
       - supports-color
     dev: true
 
-  /@nuxt/components@2.2.1(consola@2.15.3):
+  /@nuxt/components@2.2.1:
     resolution: {integrity: sha512-r1LHUzifvheTnJtYrMuA+apgsrEJbxcgFKIimeXKb+jl8TnPWdV3egmrxBCaDJchrtY/wmHyP47tunsft7AWwg==}
     peerDependencies:
       consola: '*'
     dependencies:
       chalk: 4.1.2
       chokidar: 3.5.3
-      consola: 2.15.3
       glob: 7.2.3
       globby: 11.1.0
       scule: 0.2.1
@@ -2458,17 +2483,17 @@ packages:
       vue-server-renderer: 2.7.14
     dev: true
 
-  /@nuxt/webpack@2.16.3(pug@2.0.4)(vue@2.7.14):
+  /@nuxt/webpack@2.16.3(pug@2.0.4):
     resolution: {integrity: sha512-VHXTMQj+8bUaaeIZKH4z2Ip/TnO4GuvpFV6GL7D+wjGMB+qeSsTPlWS7/FQxOt86uKEzpMz9w4jPJTYzgLV6pg==}
     engines: {node: ^14.18.0 || ^16.10.0 || ^17.0.0 || ^18.0.0 || ^19.0.0}
     dependencies:
       '@babel/core': 7.22.5
-      '@nuxt/babel-preset-app': 2.16.3(vue@2.7.14)
+      '@nuxt/babel-preset-app': 2.16.3
       '@nuxt/friendly-errors-webpack-plugin': 2.5.2(webpack@4.46.0)
       '@nuxt/utils': 2.16.3
       babel-loader: 8.3.0(@babel/core@7.22.5)(webpack@4.46.0)
       cache-loader: 4.1.0(webpack@4.46.0)
-      caniuse-lite: 1.0.30001499
+      caniuse-lite: 1.0.30001769
       consola: 2.15.3
       css-loader: 5.2.7(webpack@4.46.0)
       cssnano: 5.1.15(postcss@8.4.24)
@@ -2761,7 +2786,7 @@ packages:
       svg-tags: 1.0.0
     dev: true
 
-  /@vue/babel-preset-jsx@1.4.0(@babel/core@7.22.5)(vue@2.7.14):
+  /@vue/babel-preset-jsx@1.4.0(@babel/core@7.22.5):
     resolution: {integrity: sha512-QmfRpssBOPZWL5xw7fOuHNifCQcNQC1PrOo/4fu6xlhlKJJKSA3HqX92Nvgyx8fqHZTUGMPHmFA+IDqwXlqkSA==}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2779,7 +2804,6 @@ packages:
       '@vue/babel-sugar-inject-h': 1.4.0(@babel/core@7.22.5)
       '@vue/babel-sugar-v-model': 1.4.0(@babel/core@7.22.5)
       '@vue/babel-sugar-v-on': 1.4.0(@babel/core@7.22.5)
-      vue: 2.7.14
     dev: true
 
   /@vue/babel-sugar-composition-api-inject-h@1.4.0(@babel/core@7.22.5):
@@ -3114,10 +3138,8 @@ packages:
       ajv: 6.12.6
     dev: true
 
-  /ajv-formats@2.1.1(ajv@8.12.0):
+  /ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependencies:
-      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -3348,7 +3370,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.7
-      caniuse-lite: 1.0.30001499
+      caniuse-lite: 1.0.30001769
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3697,7 +3719,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001499
+      caniuse-lite: 1.0.30001769
       electron-to-chromium: 1.4.427
       node-releases: 2.0.12
       update-browserslist-db: 1.0.11(browserslist@4.21.7)
@@ -3709,14 +3731,13 @@ packages:
       node-int64: 0.4.0
     dev: true
 
-  /buefy@0.9.23(vue@2.7.14):
+  /buefy@0.9.23:
     resolution: {integrity: sha512-zkmTOUDlh7xx0ID8cSw3Wtm97nkTGU992TcIBBTC41rjKHjJTyQn9fYr8oqvVaCTLNVJmdPnnjDCuYZtHoDEog==}
     engines: {node: '>= 4.0.0', npm: '>= 3.0.0'}
     peerDependencies:
       vue: ^2.6.11
     dependencies:
       bulma: 0.9.4
-      vue: 2.7.14
     dev: true
 
   /buffer-from@1.1.2:
@@ -3789,7 +3810,7 @@ packages:
       minipass-pipeline: 1.2.4
       mkdirp: 1.0.4
       p-map: 4.0.0
-      promise-inflight: 1.0.1(bluebird@3.7.2)
+      promise-inflight: 1.0.1
       rimraf: 3.0.2
       ssri: 8.0.1
       tar: 6.1.15
@@ -3873,13 +3894,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.21.7
-      caniuse-lite: 1.0.30001499
+      caniuse-lite: 1.0.30001769
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite@1.0.30001499:
-    resolution: {integrity: sha512-IhoQqRrW6WiecFcfZgoJS1YLEN1/HR1vHP5WNgjCARRW7KUNToHHTX3FrwCM+y4zkRa48D9rE90WFYc2IWhDWQ==}
+  /caniuse-lite@1.0.30001769:
+    resolution: {integrity: sha512-BCfFL1sHijQlBGWBMuJyhZUhzo7wer5sVj9hqekB/7xn0Ypy+pER/edCYQm4exbXj4WiySGp40P8UuTh6w1srg==}
     dev: true
 
   /center-align@0.1.3:
@@ -3957,8 +3978,25 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
+
+  /chokidar@3.6.0:
+    resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
+    engines: {node: '>= 8.10.0'}
+    requiresBuild: true
+    dependencies:
+      anymatch: 3.1.3
+      braces: 3.0.2
+      glob-parent: 5.1.2
+      is-binary-path: 2.1.0
+      is-glob: 4.0.3
+      normalize-path: 3.0.0
+      readdirp: 3.6.0
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: true
+    optional: true
 
   /chownr@1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
@@ -5283,6 +5321,16 @@ packages:
       escape-string-regexp: 1.0.5
     dev: true
 
+  /file-loader@6.2.0:
+    resolution: {integrity: sha512-qo3glqyTa61Ytg4u73GultjHGjdRyig3tG6lPtyX/jOEJvHif9uB0/OCI2Kif6ctF3caQTW2G5gym21oAsI4pw==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      webpack: ^4.0.0 || ^5.0.0
+    dependencies:
+      loader-utils: 2.0.4
+      schema-utils: 3.2.0
+    dev: true
+
   /file-loader@6.2.0(webpack@4.46.0):
     resolution: {integrity: sha512-qo3glqyTa61Ytg4u73GultjHGjdRyig3tG6lPtyX/jOEJvHif9uB0/OCI2Kif6ctF3caQTW2G5gym21oAsI4pw==}
     engines: {node: '>= 10.13.0'}
@@ -5473,8 +5521,8 @@ packages:
     dev: true
     optional: true
 
-  /fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -6392,7 +6440,7 @@ packages:
       exit: 0.1.2
       graceful-fs: 4.2.11
       import-local: 3.1.0
-      jest-config: 29.5.0(@types/node@20.3.0)
+      jest-config: 29.5.0
       jest-util: 29.5.0
       jest-validate: 29.5.0
       prompts: 2.4.2
@@ -6401,6 +6449,44 @@ packages:
       - '@types/node'
       - supports-color
       - ts-node
+    dev: true
+
+  /jest-config@29.5.0:
+    resolution: {integrity: sha512-kvDUKBnNJPNBmFFOhDbm59iu1Fii1Q6SxyhXfvylq3UTHbg6o7j/g8k2dZyXWLvfdKB1vAPxNZnMgtKJcmu3kA==}
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+    peerDependencies:
+      '@types/node': '*'
+      ts-node: '>=9.0.0'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      ts-node:
+        optional: true
+    dependencies:
+      '@babel/core': 7.22.5
+      '@jest/test-sequencer': 29.5.0
+      '@jest/types': 29.5.0
+      babel-jest: 29.5.0(@babel/core@7.22.5)
+      chalk: 4.1.2
+      ci-info: 3.8.0
+      deepmerge: 4.3.1
+      glob: 7.2.3
+      graceful-fs: 4.2.11
+      jest-circus: 29.5.0
+      jest-environment-node: 29.5.0
+      jest-get-type: 29.4.3
+      jest-regex-util: 29.4.3
+      jest-resolve: 29.5.0
+      jest-runner: 29.5.0
+      jest-util: 29.5.0
+      jest-validate: 29.5.0
+      micromatch: 4.0.5
+      parse-json: 5.2.0
+      pretty-format: 29.5.0
+      slash: 3.0.0
+      strip-json-comments: 3.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /jest-config@29.5.0(@types/node@20.3.0):
@@ -6503,7 +6589,7 @@ packages:
       micromatch: 4.0.5
       walker: 1.0.8
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /jest-leak-detector@29.5.0:
@@ -7515,24 +7601,24 @@ packages:
       boolbase: 1.0.0
     dev: true
 
-  /nuxt-buefy@0.4.25(vue@2.7.14):
+  /nuxt-buefy@0.4.25:
     resolution: {integrity: sha512-ITOgw7ktveRXhTNB9xzIgyUHWz3g3D6iLJ8Uhst5QgXb/Pcd/GbLwAjS4uVwZSm3y8gkAu+4jG0aAbAsE/PIQg==}
     engines: {node: '>=8.0.0'}
     dependencies:
-      buefy: 0.9.23(vue@2.7.14)
+      buefy: 0.9.23
     transitivePeerDependencies:
       - vue
     dev: true
 
-  /nuxt@2.16.3(consola@2.15.3)(pug@2.0.4)(vue@2.7.14):
+  /nuxt@2.16.3(pug@2.0.4):
     resolution: {integrity: sha512-KfqOwtsgo2vew+mHNTQZOf23SlUYYnppH65Rj7whmbXJ+J28Rdvx8ccTj0Mir13TVpjUMtxYBq9VWAL6cFZyOA==}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@nuxt/babel-preset-app': 2.16.3(vue@2.7.14)
-      '@nuxt/builder': 2.16.3(pug@2.0.4)(vue@2.7.14)
+      '@nuxt/babel-preset-app': 2.16.3
+      '@nuxt/builder': 2.16.3(pug@2.0.4)
       '@nuxt/cli': 2.16.3
-      '@nuxt/components': 2.2.1(consola@2.15.3)
+      '@nuxt/components': 2.2.1
       '@nuxt/config': 2.16.3
       '@nuxt/core': 2.16.3
       '@nuxt/generator': 2.16.3
@@ -7543,7 +7629,7 @@ packages:
       '@nuxt/utils': 2.16.3
       '@nuxt/vue-app': 2.16.3
       '@nuxt/vue-renderer': 2.16.3
-      '@nuxt/webpack': 2.16.3(pug@2.0.4)(vue@2.7.14)
+      '@nuxt/webpack': 2.16.3(pug@2.0.4)
     transitivePeerDependencies:
       - '@vue/compiler-sfc'
       - arc-templates
@@ -8760,6 +8846,15 @@ packages:
     engines: {node: '>= 0.6.0'}
     dev: true
 
+  /promise-inflight@1.0.1:
+    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dev: true
+
   /promise-inflight@1.0.1(bluebird@3.7.2):
     resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
     peerDependencies:
@@ -9006,7 +9101,7 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /raw-loader@4.0.2(webpack@4.46.0):
+  /raw-loader@4.0.2:
     resolution: {integrity: sha512-ZnScIV3ag9A4wPX/ZayxL/jZH+euYb6FcUinPcgiQW0+UBtEv0O6Q3lGd3cqJ+GHH+rksEv3Pj99oxJ3u3VIKA==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -9014,7 +9109,6 @@ packages:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.2.0
-      webpack: 4.46.0
     dev: true
 
   /rc9@2.1.0:
@@ -9326,7 +9420,7 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: true
 
-  /sass-loader@10.4.1(sass@1.63.2)(webpack@4.46.0):
+  /sass-loader@10.4.1(sass@1.63.2):
     resolution: {integrity: sha512-aX/iJZTTpNUNx/OSYzo2KsjIUQHqvWsAhhUijFjAPdZTEhstjZI9zTNvkTTwsx+uNUJqUwOw5gacxQMx4hJxGQ==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -9348,7 +9442,6 @@ packages:
       sass: 1.63.2
       schema-utils: 3.2.0
       semver: 7.5.1
-      webpack: 4.46.0
     dev: true
 
   /sass-resources-loader@2.2.5:
@@ -9403,7 +9496,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.12
       ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
+      ajv-formats: 2.1.1
       ajv-keywords: 5.1.0(ajv@8.12.0)
     dev: true
 
@@ -10592,7 +10685,7 @@ packages:
       graceful-fs: 4.2.11
       neo-async: 2.6.2
     optionalDependencies:
-      chokidar: 3.5.3
+      chokidar: 3.6.0
       watchpack-chokidar2: 2.0.1
     transitivePeerDependencies:
       - supports-color

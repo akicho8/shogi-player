@@ -22,15 +22,16 @@
     // @[xxx].left と @[xxx].right を定義しても .left .right の部分は無視されているため @[xxx] は一つだけとする
     //
     table.BoardMatrix
-      tr.BoardRow(v-for="(_, y) in TheSp.sp_board_dimension_h")
+      tr.BoardRow(v-for="(_, y) in TheSp.sp_board_view_h")
         td.BoardCell(
-          v-for="(_, x) in TheSp.sp_board_dimension_w"
+          v-for="(_, x) in TheSp.sp_board_view_w"
           data-resize_observer_id="BoardCell"
           @pointerdown.stop.prevent.left="TheSp.board_cell_left_click(place_by(x, y), $event)"
           @pointerdown.stop.prevent.right="TheSp.board_cell_right_click(place_by(x, y), 'transform_all', $event)"
           @mouseover="TheSp.board_mouseover_handle(place_by(x, y), $event)"
           @mouseleave="TheSp.mouseleave_handle"
-          :class="cell_class(place_by(x, y))"
+          :class="cell_class(x, y)"
+          :style="cell_style(place_by(x, y))"
           )
 
           // PieceTap は盤上にあるとは限らないので x, y に依存してはいけない。だから x, y を元にしたものを渡している
@@ -60,25 +61,72 @@ export default {
     this.TheSp.$data._MainBoardRenderCount += 1
   },
   methods: {
-    place_by(x, y) {
-      const w = this.TheSp.sp_board_dimension_w
-      const h = this.TheSp.sp_board_dimension_h
-      x = x + Board.dimension - w
-      y = y + Board.dimension - h
+    place_by(px, py) {
+      const px2 = this.TheSp.sp_board_view_x + px
+      const py2 = this.TheSp.sp_board_view_y + py
+      const place = Place.fetch([px2, py2])
       if (this.TheSp.fliped) {
-        x = w - x - 1
-        y = h - y - 1
+        return place.half_spin
       }
-      return Place.fetch([x, y])
+      return place
     },
 
-    cell_class(place) {
+    cell_class(px, py) {
+      const place = this.place_by(px, py)
       let list = [place.even_or_odd]
       const fn = this.TheSp.sp_board_cell_class_fn
       if (fn) {
         list = _.concat(list, fn(place))
       }
+      if (this.star_cell_p(px, py, place)) {
+        list.push("is_star")
+      }
       return list
+    },
+
+    star_cell_p(px, py, place) {
+      // 端かそれより外であれば星を書かない
+      // 単に見た目の問題で表示しないのではない
+      // 必ずこうしないとスタイルが座標表示と重なってしまう
+      if (!this.star_cell_candidate_p(px, py)) {
+        return
+      }
+
+      if (this.TheSp.sp_star_step === 0) {
+        return
+      }
+
+      const hx = place.human_x - 1
+      const hy = place.human_y - 1
+      return true &&
+        (hx % this.TheSp.sp_star_step) === 0 &&
+        (hy % this.TheSp.sp_star_step) === 0 &&
+        true
+    },
+
+    // 範囲的な意味で物理座標(px,py)にあるセルは星を書く担当に含まれるか？
+    // 例えば3x3のときは、
+    // +---+---+---|
+    // |   |   |   |
+    // +---+---+---|
+    // | o | o |   |
+    // +---+---+---|
+    // | o | o |   |
+    // +---+---+---|
+    // 担当のセルは「右上に星を書く」ので3x3のうちの左下の2x2が担当セルになる
+    // sp_star_step を 1 にするとこの範囲を正確に確認できる
+    star_cell_candidate_p(px, py) {
+      return true &&
+        0 <= px && px < (this.TheSp.sp_board_view_w - 1) &&
+        0 <  py && px < (this.TheSp.sp_board_view_h - 1) &&
+        true
+    },
+
+    cell_style(place) {
+      return {
+        "--cell_human_x": place.human_x,
+        "--cell_human_y": place.human_y,
+      }
     },
   },
 }
@@ -153,7 +201,8 @@ export default {
     // Firefox ではまったく均等にしないためセルが表示されない
     // そのため明示的に指定するようにした。これによって対象外としていた Firefox でも見れるようになった
     // ちなみに flex であれば height: 100% で均等になる
-    height: calc(100.0% / var(--sp_board_dimension_h))
+    // max は0除算対策
+    height: calc(100.0% / max(1, var(--sp_board_view_h)))
 
     &.even
       background-color: var(--sp_board_even_cell_color)
@@ -168,8 +217,10 @@ export default {
   //     // border: calc(var(--sp_grid_inner_stroke) * 1px) solid var(--sp_grid_inner_color)
 
   // 星
-  .BoardRow:nth-child(3n+4)
-    .BoardCell:nth-child(3n+4)
+  .BoardCell
+    &.is_star
+      // background-color: blue
+
       position: relative
       &:after
         position: absolute
@@ -177,12 +228,27 @@ export default {
         // "%" で指定すると長方形になってしまう
         // sp_cell_h だけを基準にすると正方形になる
         // 中央が右下にずれているので半ピクセル調整する
-        top:    calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
-        left:   calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
+        top:   calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
+        right: calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
         width:  calc(var(--sp_cell_h) * var(--sp_star_size))
         height: calc(var(--sp_cell_h) * var(--sp_star_size))
+        // top: 0
+        // right:   0
+        // width:  calc(var(--sp_cell_h) * 0.5)
+        // height: calc(var(--sp_cell_h) * 0.5)
         border-radius: 50%
         background-color: var(--sp_star_color, var(--sp_grid_outer_color))
         z-index: var(--sp_star_z_index)
+        pointer-events: none // タップの邪魔をしないようにするため
 
+  &.is_layer_on
+    .BoardCell
+      &.is_star
+        +is_layer_border($primary, 4)
+
+  // // 2. 最初と最後の行 (上端 tr:first-child / 下端 tr:last-child)
+  // .BoardMatrix
+  //   .BoardRow:first-child,.BoardRow:last-child
+  //     .BoardCell.is_star:after
+  //       content: none
 </style>

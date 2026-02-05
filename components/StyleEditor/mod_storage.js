@@ -1,4 +1,4 @@
-const PSTORE_VERSION = 1
+const PSTORE_VERSION = 2
 const PSTORE_KEY     = "__sp_style_editor__"
 
 import { Pstore } from "../models/pstore.js"
