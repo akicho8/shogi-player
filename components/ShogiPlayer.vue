@@ -27,6 +27,7 @@ import { ModeInfo         } from "./models/mode_info.js"
 import { PieceVariantInfo } from "./models/piece_variant_info.js"
 import { BoardVariantInfo    } from "./models/board_variant_info.js"
 import { LayoutInfo       } from "./models/layout_info.js"
+import { CoordinateInfo   } from "./models/coordinate_info.js"
 
 // components
 import ErrorNotify        from "./ErrorNotify.vue"
@@ -110,8 +111,12 @@ export default {
   ],
 
   props: {
-    sp_board_dimension_w: { type: Number, default: 9, }, // 盤のセル数(W)
-    sp_board_dimension_h: { type: Number, default: 9, }, // 盤のセル数(H)
+    sp_board_view_x: { type: Number, default: 0, }, // 盤のセル数(W)
+    sp_board_view_y: { type: Number, default: 0, }, // 盤のセル数(H)
+    sp_board_view_w: { type: Number, default: 9, }, // 盤のセル数(W)
+    sp_board_view_h: { type: Number, default: 9, }, // 盤のセル数(H)
+
+    sp_star_step: { type: Number, default: 3, }, // 星をX個間隔で表示する
 
     // レイアウト
     sp_layout: {
@@ -172,10 +177,17 @@ export default {
     },
 
     // 座標の表記
+    sp_coordinate_variant_h: {
+      type: String,
+      default: "number",
+      validator(value) { return CoordinateInfo.keys.includes(value) },
+    },
+
+    // 座標の表記
     sp_coordinate_variant_v: {
       type: String,
       default: "kanji",
-      validator(value) { return ["kanji", "number", "alphabet"].includes(value) },
+      validator(value) { return CoordinateInfo.keys.includes(value) },
     },
 
     // 駒台の位置
@@ -507,6 +519,7 @@ export default {
     ModeInfo()          { return ModeInfo         },
     BoardVariantInfo()     { return BoardVariantInfo    },
     PieceVariantInfo()  { return PieceVariantInfo },
+    // CoordinateInfo()  { return CoordinateInfo },
 
     location_black() { return Location.fetch("black")                    },
     location_white() { return Location.fetch("white")                    },
@@ -536,7 +549,8 @@ export default {
 
         // String
         this.str_to_css_class("is_layout", this.sp_layout),                         // is_layout_horizontal is_layout_vertical
-        this.str_to_css_class("is_coordinate_variant_v", this.sp_coordinate_variant_v), // is_coordinate_variant_kanji
+        // this.str_to_css_class("is_coordinate_variant_h", this.sp_coordinate_variant_h), // is_coordinate_variant_kanji
+        // this.str_to_css_class("is_coordinate_variant_v", this.sp_coordinate_variant_v), // is_coordinate_variant_kanji
         this.str_to_css_class("is_name_direction", this.sp_name_direction),         // is_name_direction_horizontal
         this.str_to_css_class("is_stand_gravity", this.sp_stand_gravity),           // is_stand_gravity_top
         this.str_to_css_class("is_piece_variant", this.mut_piece_variant),          // is_piece_variant_nureyon
@@ -558,8 +572,12 @@ export default {
     component_style() {
       return {
         ...this.sp_pass_style_native, // Web Components のための無理矢理スタイルを渡すためのもの
-        "--sp_board_dimension_w": this.sp_board_dimension_w,
-        "--sp_board_dimension_h": this.sp_board_dimension_h,
+        // "--sp_board_view_x": this.sp_board_view_x,
+        // "--sp_board_view_y": this.sp_board_view_y,
+        "--sp_board_view_w": this.sp_board_view_w,
+        "--sp_board_view_h": this.sp_board_view_h, // CSS 側で参照しているため
+        "--sp_coordinate_variant_h": CoordinateInfo.lookup_or_first(this.sp_coordinate_variant_h).css_value,
+        "--sp_coordinate_variant_v": CoordinateInfo.lookup_or_first(this.sp_coordinate_variant_v).css_value,
         ...this.ro_css_variables_hash,  // sp_cell_w 等
       }
     },

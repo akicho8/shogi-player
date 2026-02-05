@@ -28,6 +28,8 @@
     .ShogiPlayerWrap
       ShogiPlayer(
       v-bind="sp_params"
+      v-on="sp_hook"
+      :sp_viewpoint.sync="sp_viewpoint"
       :sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && '天王山'"
       )
 </template>
@@ -39,6 +41,7 @@ import { HumanSideInfo    }    from "../models/human_side_info.js"
 import { ModeInfo         }      from "../models/mode_info.js"
 import { BoardVariantInfo }    from "../models/board_variant_info.js"
 import { PieceVariantInfo }    from "../models/piece_variant_info.js"
+import { CoordinateInfo }    from "../models/coordinate_info.js"
 import { KifuBookInfo     }     from "../models/kifu_book_info.js"
 import { MixBlendModeInfo } from "../models/mix_blend_mode_info.js"
 import { LiftCancelActionInfo    }    from "../models/lift_cancel_action_info.js"
@@ -47,11 +50,14 @@ import { ClickResponseTimingInfo    }    from "../models/click_response_timing_i
 import { SeVariableInfo } from "./se_variable_info.js"
 import { SePresetInfo   } from "./se_preset_info.js"
 import { SeSectionInfo  } from "./se_section_info.js"
+import { SeBoardSizePresetInfo } from "./se_board_size_preset_info.js"
+import { SeUserCustomCssPresetInfo } from "./se_user_custom_css_preset_info.js"
 
 import { mod_storage } from "./mod_storage.js"
 import { mod_sp_css } from "./mod_sp_css.js"
 import { mod_se_css } from "./mod_se_css.js"
 import { mod_helper } from "./mod_helper.js"
+import { mod_think_mark } from "./mod_think_mark.js"
 
 import ShogiPlayer   from "../ShogiPlayer.vue"
 import SidebarContent   from "./SidebarContent.vue"
@@ -63,6 +69,7 @@ export default {
     mod_sp_css,
     mod_se_css,
     mod_helper,
+    mod_think_mark,
   ],
 
   components: {
@@ -160,9 +167,18 @@ export default {
       this.sp_board_variant = "none" // 背景画像プリセットを選択してない状態に戻しておく
     },
 
-    paper_style_handle(se_preset_info) {
+    se_preset_apply_handle(se_preset_info) {
       se_preset_info.func(this)
     },
+
+    se_board_size_preset_apply_handle(se_board_size_preset_info) {
+      se_board_size_preset_info.func(this)
+    },
+
+    se_user_custom_css_preset_apply_handle(se_user_custom_css_preset_info) {
+      this.user_custom_css = se_user_custom_css_preset_info.user_custom_css.trim()
+    },
+
     se_tf0_reset() {
       this.se_tf0_perspective = 200
       this.se_tf0_translate_x = 0
@@ -198,16 +214,19 @@ export default {
     development_p() { return DEVELOPMENT_P },
     __SYSTEM_TEST_RUNNING__() { return this.$route.query.__SYSTEM_TEST_RUNNING__ === "true" },
 
-    HumanSideInfo()    { return HumanSideInfo    },
-    ModeInfo()         { return ModeInfo         },
-    BoardVariantInfo() { return BoardVariantInfo },
-    PieceVariantInfo() { return PieceVariantInfo },
-    KifuBookInfo()     { return KifuBookInfo     },
-    LiftCancelActionInfo() { return LiftCancelActionInfo },
+    HumanSideInfo()           { return HumanSideInfo           },
+    ModeInfo()                { return ModeInfo                },
+    BoardVariantInfo()        { return BoardVariantInfo        },
+    PieceVariantInfo()        { return PieceVariantInfo        },
+    CoordinateInfo()          { return CoordinateInfo          },
+    KifuBookInfo()            { return KifuBookInfo            },
+    LiftCancelActionInfo()    { return LiftCancelActionInfo    },
     ClickResponseTimingInfo() { return ClickResponseTimingInfo },
-    SeSectionInfo()         { return SeSectionInfo         },
-    SeVariableInfo()   { return SeVariableInfo   },
-    SePresetInfo()     { return SePresetInfo     },
+    SeSectionInfo()           { return SeSectionInfo           },
+    SeVariableInfo()          { return SeVariableInfo          },
+    SePresetInfo()            { return SePresetInfo            },
+    SeBoardSizePresetInfo()   { return SeBoardSizePresetInfo   },
+    SeUserCustomCssPresetInfo()   { return SeUserCustomCssPresetInfo   },
 
     kifu_book_info() {
       if (this.kifu_sample_key) {
@@ -265,32 +284,36 @@ export default {
 
     sp_params() {
       let params = {}
-      params.sp_board_dimension_w    = this.sp_board_dimension_w
-      params.sp_board_dimension_h    = this.sp_board_dimension_h
+
+      params.sp_mode                 = this.sp_mode
+      params.sp_body                 = this.sp_body
+      params.sp_turn                 = this.sp_turn
+      params.sp_viewpoint            = this.sp_viewpoint
+
+      params.sp_controller           = this.sp_controller
+      params.sp_slider               = this.sp_slider
+      params.sp_player_info          = this.sp_player_info
+
+      params.sp_piece_variant        = this.sp_piece_variant
+      params.sp_board_variant        = this.sp_board_variant
+
       params.sp_layout               = this.sp_layout
       params.sp_balloon              = this.sp_balloon
       params.sp_layer                = this.sp_layer
-      params.sp_piece_variant        = this.sp_piece_variant
-      params.sp_board_variant        = this.sp_board_variant
       params.sp_mobile_vertical      = this.sp_mobile_vertical
-      params.sp_mode                 = this.sp_mode
-      params.sp_viewpoint            = this.sp_viewpoint
       params.sp_debug                = this.sp_debug,
       params.sp_comment              = this.sp_comment,
-      params.sp_turn                 = this.sp_turn
-      params.sp_body                 = this.sp_body
       params.sp_dev_tools            = this.sp_dev_tools
       params.sp_dev_tools_group            = this.sp_dev_tools_group
       params.sp_overlay_nav          = this.sp_overlay_nav
       params.sp_turn_show            = this.sp_turn_show
       params.sp_coordinate           = this.sp_coordinate
+      params.sp_coordinate_variant_h = this.sp_coordinate_variant_h
       params.sp_coordinate_variant_v = this.sp_coordinate_variant_v
       params.sp_stand_gravity        = this.sp_stand_gravity
       params.sp_stand_flip           = this.sp_stand_flip
       params.sp_name_direction       = this.sp_name_direction
-      params.sp_slider               = this.sp_slider
-      params.sp_controller           = this.sp_controller
-      params.sp_player_info          = this.sp_player_info
+      params.sp_star_step    = this.sp_star_step
 
       params.sp_legal_move_only      = this.sp_legal_move_only
       params.sp_illegal_validate     = this.sp_illegal_validate
@@ -301,7 +324,42 @@ export default {
 
       params.sp_lift_cancel_action   = this.sp_lift_cancel_action
       params.sp_click_response_timing     = this.sp_click_response_timing
+
+      params.sp_board_view_x    = this.sp_board_view_x
+      params.sp_board_view_y    = this.sp_board_view_y
+      params.sp_board_view_w    = this.sp_board_view_w
+      params.sp_board_view_h    = this.sp_board_view_h
+
       return params
+    },
+
+    // 動作を受け取るやつら
+    sp_hook() {
+      const hv = {}
+      // hv["ev_play_mode_move"]              = this.SB.ev_play_mode_move
+      // hv["ev_edit_mode_short_sfen_change"] = this.SB.ev_edit_mode_short_sfen_change
+      // hv["ev_short_sfen_change"]           = this.SB.ev_short_sfen_change
+      // hv["ev_turn_offset_change"]          = v => this.SB.current_turn = v
+      // hv["ev_turn_offset_max_change"]      = v => this.SB.turn_offset_max = v
+      //
+      // hv["ev_action_viewpoint_flip"]       = this.SB.ev_action_viewpoint_flip // 意図して☗☖をタップして反転させたとき
+      // hv["ev_action_turn_change"]          = this.SB.ev_action_turn_change    // スライダーを動かしたとき
+      // hv["ev_action_piece_lift"]           = this.SB.ev_action_piece_lift     // 意図して持ち上げた
+      // hv["ev_action_piece_cancel"]         = this.SB.ev_action_piece_cancel   // 意図してキャンセルした
+      // hv["ev_action_promote_select_open"]       = this.SB.ev_action_promote_select_open  // 成 or 不成 選択モードに入る
+      // hv["ev_action_promote_select_close"]      = this.SB.ev_action_promote_select_close // 成 or 不成 選択モードから出る
+      //
+      // // 手番 or 先後違い系
+      // hv["ev_illegal_click_but_self_is_not_turn"] = this.SB.ev_illegal_click_but_self_is_not_turn // 手番が違うのに操作しようとした
+      // hv["ev_illegal_my_turn_but_oside_click"]    = this.SB.ev_illegal_my_turn_but_oside_click    // 自分が手番だが相手の駒を動かそうとした
+      //
+      // // 反則系
+      // hv["ev_illegal_illegal_accident"] = this.SB.ev_illegal_illegal_accident
+
+      // マークできる箇所をタップした
+      hv["ev_action_click_for_think_mark"] = this.ev_action_click_for_think_mark
+
+      return hv
     },
   },
 }

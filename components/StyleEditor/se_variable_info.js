@@ -8,7 +8,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "kifu_sample_key", default: null, },
       { key: "transform_tab_index", default: 0, },
 
-      { key: "user_custom_css", default: DEVELOPMENT_P ? ".BoardTexture, .PieceObject { filter: drop-shadow(4px 4px 4px hsla(0 0% 0% / 0.5)) }" : "", },
+      { key: "user_custom_css", default: "", },
 
       ////////////////////////////////////////////////////////////////////////////////
       { key: "se_frame_width", default: 80, },
@@ -41,8 +41,12 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_board_radius", default: 5, },
       { key: "sp_board_padding", default: 0.015, },
 
-      { key: "sp_board_dimension_w", default: 9, },
-      { key: "sp_board_dimension_h", default: 9, },
+      { key: "sp_star_step", default: 3, },
+
+      { key: "sp_board_view_x", default: 0, },
+      { key: "sp_board_view_y", default: 0, },
+      { key: "sp_board_view_w", default: 9, },
+      { key: "sp_board_view_h", default: 9, },
       { key: "sp_layout", default: "horizontal", },
       { key: "sp_mode", default: DEVELOPMENT_P ? "view" : "view", },
       { key: "sp_mobile_vertical", default: true, },
@@ -51,7 +55,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_promote_select_modal_bg_color", default: "hsla(0, 0%, 0%, 0.5)", },
       { key: "sp_promote_select_modal_hover_color", default: "hsla(0, 0%, 100%, 0.5)", },
 
-      // 駒を操作中の移動元スタイル
+      // 駒を操作中の移動元
       { key: "sp_mouse_lifted_origin_bg_color", default: "hsla(0, 0%, 0%, 0.15)", },
       { key: "sp_mouse_lifted_origin_opacity", default: 0.0, },
 
@@ -99,7 +103,8 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       //////////////////////////////////////////////////////////////////////////////// 座標
       { key: "sp_coordinate", default: DEVELOPMENT_P ? true : false, },
-      { key: "sp_coordinate_variant_v", default: DEVELOPMENT_P ? "alphabet" : "kanji", },
+      { key: "sp_coordinate_variant_h", default: "number", },
+      { key: "sp_coordinate_variant_v", default: "kanji", },
       { key: "sp_coordinate_x_size", default: 0.125, },
       { key: "sp_coordinate_y_size", default: 0.168, },
       { key: "sp_coordinate_x_push", default: 0.014, },
@@ -116,8 +121,8 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       { key: "sp_body", default: "", },
 
-      { key: "sp_turn_show", default:    DEVELOPMENT_P ? true : false, },
-      { key: "sp_dev_tools", default: false },
+      { key: "sp_turn_show", default: false, },
+      { key: "sp_dev_tools", default: false, },
       { key: "sp_dev_tools_group", default: DEVELOPMENT_P ? "event" : "main", },
       { key: "sp_overlay_nav", default: false, },
 

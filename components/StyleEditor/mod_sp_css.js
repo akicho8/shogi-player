@@ -21,14 +21,23 @@ export const mod_sp_css = {
           --sp_board_horizontal_gap:             ${this.sp_board_horizontal_gap};
           --sp_board_vertical_gap:               ${this.sp_board_vertical_gap};
 
-          /* 盤グリッド */
+          /* グリッド */
           --sp_grid_inner_color:                 ${this.hsla_format(this.sp_grid_inner_color)};
           --sp_grid_outer_color:                 ${this.hsla_format(this.sp_grid_outer_color)};
           --sp_grid_inner_stroke:                ${this.sp_grid_inner_stroke};
           --sp_grid_outer_stroke:                ${this.sp_grid_outer_stroke};
           --sp_board_edge_stroke:                ${this.sp_board_edge_stroke};
+
+          /* 星 */
           --sp_star_size:                        ${this.sp_star_size};
           --sp_star_z_index:                     ${this.sp_star_z_index};
+
+          /* 座標 */
+          --sp_coordinate_x_size:                ${this.sp_coordinate_x_size};
+          --sp_coordinate_x_push:                ${this.sp_coordinate_x_push};
+          --sp_coordinate_y_size:                ${this.sp_coordinate_y_size};
+          --sp_coordinate_y_push:                ${this.sp_coordinate_y_push};
+          --sp_coordinate_color:                 ${this.sp_coordinate_color};
 
           /* 駒数 */
           --sp_piece_count_size:                 ${this.sp_piece_count_size};
@@ -61,7 +70,7 @@ export const mod_sp_css = {
           --sp_promote_select_modal_bg_color:    ${this.hsla_format(this.sp_promote_select_modal_bg_color)};
           --sp_promote_select_modal_hover_color: ${this.hsla_format(this.sp_promote_select_modal_hover_color)};
 
-          /* 駒を操作中の移動元スタイル */
+          /* 駒を操作中の移動元 */
           --sp_mouse_lifted_origin_bg_color:     ${this.hsla_format(this.sp_mouse_lifted_origin_bg_color)};
           --sp_mouse_lifted_origin_opacity:      ${this.sp_mouse_lifted_origin_opacity};
 
@@ -71,13 +80,6 @@ export const mod_sp_css = {
           /* コントローラー */
           --sp_controller_width:                 ${this.sp_controller_width};
           --sp_controller_width_mobile:          ${this.sp_controller_width_mobile};
-
-          /* 座標表記 */
-          --sp_coordinate_x_size:                ${this.sp_coordinate_x_size};
-          --sp_coordinate_x_push:                ${this.sp_coordinate_x_push};
-          --sp_coordinate_y_size:                ${this.sp_coordinate_y_size};
-          --sp_coordinate_y_push:                ${this.sp_coordinate_y_push};
-          --sp_coordinate_color:                 ${this.sp_coordinate_color};
         }
       `
     },

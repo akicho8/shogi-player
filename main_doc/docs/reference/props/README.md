@@ -189,18 +189,37 @@ Default: `false`
 
 座標を表示するか？
 
-### `sp_coordinate_variant_v`
+### `sp_coordinate_variant_h`
 
 Type: `kanji | number | alphabet`
 Default: `kanji`
 
-右側面の座標の表記
+上に表示するX座標表記
 
-| 値       | 表記   |
-|----------|--------|
-| kanji    | 一..九 |
-| number   | 1..9   |
+| 値          | 表記   |
+|-------------|--------|
+| number     | 1..9   |
+| kanji | 一..九 |
 | alphabet | a..i   |
+
+これらの値は CSS Counter Styles そのものなので他にも指定できる。
+実際に使うのは上の3つぐらいである。
+
+See also: [CSS Counter Styles](https://www.w3.org/TR/css-counter-styles-3/#simple-numeric), [sp_coordinate_variant_v](/reference/props/#sp-coordinate-variant-v)
+
+### `sp_coordinate_variant_v`
+
+Type: `kanji | number | alphabet`
+Default: `number`
+
+右に表示するY座標表記
+
+See also: [sp_coordinate_variant_h](/reference/props/#sp-coordinate-variant-h)
+
+### `sp_star_step`
+Default: `3`
+
+星をX個ごとに表示する
 
 ### `sp_stand_gravity`
 
@@ -213,8 +232,8 @@ Default: `bottom`
 一方、右上だけで詰将棋を作るなら上に寄せた方が持駒が見やすくなるなどの利点もある
 両方を☗視点で上に寄せるのはいまのところ対応していない
 
-| 値                      | 寄せる方向 |
-|-------------------------|------------|
+| 値     | 寄せる方向 |
+|--------|------------|
 | bottom | 下         |
 | top    | 上         |
 
