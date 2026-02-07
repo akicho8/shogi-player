@@ -2,13 +2,15 @@
 //
 // TDタグの前後で表記を入れている
 //
-// |--------+--------|
-// | 指定   | 用途   |
-// |--------+--------|
-// | before | 横軸用 |
-// | after  | 縦軸用 |
-// |--------+--------|
+// |-------------+------+--------------------------|
+// | 用途        | 位置 | セレクタ                 |
+// |-------------+------+--------------------------|
+// | X軸の目盛り | 上   | tr:first-child td:before |
+// | Y軸の目盛り | 右   | tr td:last-child:after   |
+// |-------------+------+--------------------------|
 //
+// - セレクタは正確に指定すること
+// - これが適当だと星にまで影響が出てしまう
 
 .ShogiPlayer
   +defvar(sp_coordinate_x_size, 0.125)                // 座標表記の文字サイズ(上)
@@ -19,14 +21,10 @@
 
   &.is_coordinate_on
     .BoardMatrix
-      // tr:first-child td:before = 横軸(上)
-      // tr td:last-child:after   = 縦軸(右)
-      // ※他の td にはスタイルを適用してはいけない。適用すると星がおかしくなる。
-
       // 共通して対応する td を基点にする
       tr:first-child td, tr td:last-child
         position: relative
-        
+
       // 共通のサイズ・色
       tr:first-child td:before, tr td:last-child:after
         line-height: 1.0    // フォントの上の隙間を取る
@@ -35,7 +33,7 @@
         position: absolute
         pointer-events: none    // 超重要。イベントに反応させない。これを入れない場合「九」を押すと「香」を拾ってしまい、☗を押しても☗が反応しない
 
-      // 横軸表記(上)の位置調整
+      // --- X軸（上：1 2 3...） ---
       tr:first-child td:before
         font-size: calc(var(--sp_cell_h) * var(--sp_coordinate_x_size))
         display: flex
@@ -53,7 +51,7 @@
         // 下から100%押して上外に飛び出す
         bottom: calc((1.0 + var(--sp_coordinate_x_push)) * 100%)
 
-      // 縦軸表記(右)の位置調整
+      // --- Y軸（右：一 二 三...） ---
       tr td:last-child:after
         // font-size と width の両方に指定することで次のようになる
         // ・文字の列は中央
@@ -74,7 +72,6 @@
 
         // 左から100%押し出して右外に飛び出す
         left: calc((1.0 + var(--sp_coordinate_y_push)) * 100%)
-
 
   &.is_layer_on
     &.is_coordinate_on

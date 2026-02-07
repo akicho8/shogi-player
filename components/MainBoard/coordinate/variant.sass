@@ -1,9 +1,11 @@
 .ShogiPlayer
   &.is_coordinate_on
     .BoardMatrix
+      // 上
       tr:first-child td:before
         counter-reset: cell_human_x var(--cell_human_x)
         content: counter(cell_human_x, var(--sp_coordinate_variant_h))
+      // 右
       tr td:last-child:after
         counter-reset: cell_human_y var(--cell_human_y)
         content: counter(cell_human_y, var(--sp_coordinate_variant_v))
