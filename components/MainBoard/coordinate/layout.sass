@@ -33,6 +33,7 @@
         color: var(--sp_coordinate_color)
         z-index: 0          // -1 だと盤の裏にいってしまう
         position: absolute
+        pointer-events: none    // 超重要。イベントに反応させない。これを入れない場合「九」を押すと「香」を拾ってしまい、☗を押しても☗が反応しない
 
       // 横軸表記(上)の位置調整
       tr:first-child td:before
