@@ -227,28 +227,18 @@ export default {
         content: ""
         // "%" で指定すると長方形になってしまう
         // sp_cell_h だけを基準にすると正方形になる
-        // 中央が右下にずれているので半ピクセル調整する
+        // 中央がずれているので半ピクセル調整する
         top:   calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
         right: calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
         width:  calc(var(--sp_cell_h) * var(--sp_star_size))
         height: calc(var(--sp_cell_h) * var(--sp_star_size))
-        // top: 0
-        // right:   0
-        // width:  calc(var(--sp_cell_h) * 0.5)
-        // height: calc(var(--sp_cell_h) * 0.5)
         border-radius: 50%
         background-color: var(--sp_star_color, var(--sp_grid_outer_color))
         z-index: var(--sp_star_z_index)
-        pointer-events: none // タップの邪魔をしないようにするため
+        pointer-events: none // 超重要。タップの邪魔をしないようにするため。
 
-  &.is_layer_on
-    .BoardCell
-      &.is_star
-        +is_layer_border($primary, 4)
-
-  // // 2. 最初と最後の行 (上端 tr:first-child / 下端 tr:last-child)
-  // .BoardMatrix
-  //   .BoardRow:first-child,.BoardRow:last-child
-  //     .BoardCell.is_star:after
-  //       content: none
+  // &.is_layer_on
+  //   .BoardCell
+  //     &.is_star
+  //       +is_layer_border($primary, 4)
 </style>
