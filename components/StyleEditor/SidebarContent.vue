@@ -75,20 +75,6 @@
       ImageUpload(@input="TheSe.sp_board_image_input_handle")
 
     .box
-      SeTitle(name="盤セル")
-
-      b-field(custom-class="is-small" label="偶数")
-        MyColorPicker(v-model="TheSe.sp_board_even_cell_color")
-
-      b-field(custom-class="is-small" label="奇数")
-        MyColorPicker(v-model="TheSe.sp_board_odd_cell_color")
-
-      b-field.mt-4(custom-class="is-small")
-        template(#message)
-         | 基本黒のままでよい。
-         | 透明度の調整でチェス風になる。
-
-    .box
       SeTitle(name="盤")
       b-field(custom-class="is-small" label="角丸め" message="紙面風なら0にする")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_radius" :min="0" :max="50" :step="0.01")
@@ -188,6 +174,18 @@
 
       b-field(custom-class="is-small" label="色")
         MyColorPicker(v-model="TheSe.sp_coordinate_color")
+
+    .box
+      SeTitle(name="盤セル")
+
+      b-field(custom-class="is-small" label="偶数")
+        MyColorPicker(v-model="TheSe.sp_board_even_cell_color")
+
+      b-field(custom-class="is-small" label="奇数")
+        MyColorPicker(v-model="TheSe.sp_board_odd_cell_color")
+
+      .help
+        | 黒のままで透明度の調整するのがおすすめ
 
     .box
       SeTitle(name="駒")
