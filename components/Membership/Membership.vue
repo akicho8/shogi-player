@@ -76,6 +76,9 @@ export default {
         list.push("is_turn_inactive")
       }
 
+      // list.push("is-invisible")
+      // list.push("is-hidden")
+
       return list
     },
 
@@ -100,6 +103,8 @@ export default {
   .Membership
     display: flex
     align-items: center // ▲を中央に配置
+
+    // height: var(--sp_board_h)
 
   &.is_layer_on
     .Membership
