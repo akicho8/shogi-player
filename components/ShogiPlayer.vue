@@ -54,6 +54,7 @@ import { mod_lifted_piece    } from "./mod_lifted_piece.js"
 import { mod_play_mode       } from "./mod_play_mode.js"
 import { mod_profile         } from "./mod_profile.js"
 import { mod_preset          } from "./mod_preset.js"
+import { mod_player_info          } from "./mod_player_info.js"
 import { mod_edit_tool       } from "./mod_edit_tool.js"
 import { mod_api_functions   } from "./mod_api_functions.js"
 import { mod_device_detector } from "./mod_device_detector.js"
@@ -105,6 +106,7 @@ export default {
     mod_play_mode,
     mod_profile,
     mod_preset,
+    mod_player_info,
     mod_edit_tool,
     mod_api_functions,
     mod_device_detector,
@@ -238,12 +240,6 @@ export default {
     // 棋譜 KIF or SFEN
     sp_body: {
       type: String,
-      default: null,
-    },
-
-    // 対局者名と時間
-    sp_player_info: {
-      type: Object,
       default: null,
     },
 
