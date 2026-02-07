@@ -21,17 +21,26 @@ export class SeUserCustomCssPresetInfo extends ApplicationMemoryRecord {
 `,
       },
       {
-        key: "駒の色相反転",
+        key: "hoverで駒拡大",
         user_custom_css: `
-.ShogiPlayer .PieceObject { filter: hue-rotate(0.5turn) }
+.ShogiPlayer {
+  .selectable_p {
+    .PieceObject {
+      transition: transform 0.2s;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
 `,
       },
       {
         key: "特定セル",
         user_custom_css: `
 .ShogiPlayer {
-  .place_7_6 { background-color: hsl(calc(340 + 0)   80% 90%) }
-  .place_3_4 { background-color: hsl(calc(340 + 180) 80% 90%) }
+  .place_7_6 { background-color: hsl(calc(340 + 0)   80% 90%); }
+  .place_3_4 { background-color: hsl(calc(340 + 180) 80% 90%); }
 }
 `,
       },
