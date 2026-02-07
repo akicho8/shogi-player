@@ -27,10 +27,35 @@ export class SeUserCustomCssPresetInfo extends ApplicationMemoryRecord {
 `,
       },
       {
-        key: "7六の地点",
+        key: "特定セル",
         user_custom_css: `
-.ShogiPlayer .place_7_6 { background-color: blue }
+.ShogiPlayer {
+  .place_7_6 { background-color: hsl(calc(340 + 0)   80% 90%) }
+  .place_3_4 { background-color: hsl(calc(340 + 180) 80% 90%) }
+}
 `,
+      },
+      {
+        key: "ノイズ盤",
+        user_custom_css: `
+.ShogiPlayer {
+  --sp_board_image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="5" /></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.5" /></svg>');
+`
+      },
+      {
+        key: "ノイズビニ盤",
+        user_custom_css: `
+.ShogiPlayer {
+  --sp_board_image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="5" /></filter><rect width="100%" height="100%" fill="orange" /><rect width="100%" height="100%" filter="url(%23n)" opacity="0.5" /></svg>');
+`
+      },
+      {
+        key: "木目",
+        user_custom_css: `
+.ShogiPlayer {
+  --sp_board_image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.5 0.01" numOctaves="2" /></filter><rect width="100%" height="100%" fill="hsl(35 90% 65%)" /><rect width="100%" height="100%" filter="url(%23n)" opacity="0.3" style="mix-blend-mode:multiply;" /></svg>');
+}
+`
       },
     ]
   }
