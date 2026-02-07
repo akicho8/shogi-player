@@ -34,9 +34,6 @@
         b-radio-button(size="is-small" v-model="TheSe.sp_mode" native-value="view") 再生
         b-radio-button(size="is-small" v-model="TheSe.sp_mode" native-value="play") 操作
         b-radio-button(size="is-small" v-model="TheSe.sp_mode" native-value="edit") 編集
-      b-field(custom-class="is-small" label="レイヤー確認")
-        b-radio-button(size="is-small" v-model="TheSe.sp_layer" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_layer" :native-value="true") ON
     .box
       SeTitle(name="背景")
 
@@ -467,6 +464,10 @@
       b-field(custom-class="is-small" label="手数表示")
         b-radio-button(size="is-small" v-model="TheSe.sp_turn_show" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_turn_show" :native-value="true") ON
+
+      b-field(custom-class="is-small" label="レイヤー確認")
+        b-radio-button(size="is-small" v-model="TheSe.sp_layer" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_layer" :native-value="true") ON
 
       b-field(custom-class="is-small" label="Dev Tools")
         b-radio-button(size="is-small" v-model="TheSe.sp_dev_tools" :native-value="false") OFF
