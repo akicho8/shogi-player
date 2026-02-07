@@ -18,7 +18,7 @@
             template(v-for="e in TheSe.SePresetInfo.values")
               b-button.mb-0(@click="TheSe.se_preset_apply_handle(e)" size="is-small") {{e.name}}
 
-      b-field(custom-class="is-small" label="パラメータ")
+      b-field(custom-class="is-small" label="永続化")
         .control
           .buttons.are-small.storage_buttons
             b-button.mb-0(@click="TheSe.xstore_save_handle") SAVE
@@ -89,12 +89,12 @@
 
     .box
       SeTitle(name="グリッド")
-      b-field(custom-class="is-small" label="基本")
+      b-field(custom-class="is-small" label="内側")
         MyColorPicker(v-model="TheSe.sp_grid_inner_color")
-      b-field(custom-class="is-small" label="星・外枠・エッジ")
+      b-field(custom-class="is-small" label="外枠・エッジ・星")
         MyColorPicker(v-model="TheSe.sp_grid_outer_color")
-      b-field(custom-class="is-small" label="太さ (基本)")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_grid_inner_stroke" :min="0" :max="5" :step="0.5")
+      b-field(custom-class="is-small" label="太さ (内側)")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_grid_inner_stroke" :min="0" :max="10" :step="0.5")
       b-field(custom-class="is-small" label="太さ (外枠)")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
       b-field(custom-class="is-small" label="太さ (エッジ)")
@@ -105,7 +105,7 @@
       b-field(custom-class="is-small" label="大きさ")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_star_size" :min="0" :max="1.0" :step="0.001")
       b-field(custom-class="is-small" label="配置間隔")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_star_step" :min="0" :max="9")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_star_step" :min="0" :max="10")
       b-field(custom-class="is-small" label="表示優先度" message="これは星を巨大化させたときに「駒に重なってその下にある駒を持つイベントを奪ってしまう」対策として入れたものだが、あとでイベントを奪わない方法に気づいたため、現在は -1 にする利点はとくにない。-1のときは盤の奥に描画するため盤が透明でない場合に見えなくなる点に注意する。")
         b-radio-button(size="is-small" v-model="TheSe.sp_star_z_index" :native-value="-1") -1
         b-radio-button(size="is-small" v-model="TheSe.sp_star_z_index" :native-value="0") 0
@@ -131,14 +131,13 @@
         .control
           .buttons.mb-0
             template(v-for="e in TheSe.SeBoardSizePresetInfo.values")
-              b-button.mb-0(@click="TheSe.se_board_size_preset_apply_handle(e)" size="is-small") {{e.name}}
+              b-button(@click="TheSe.se_board_size_preset_apply_handle(e)" size="is-small") {{e.name}}
 
-      b-field.mt-4.mb-0(custom-class="is-small")
-        template(#message)
-          ul
-            li あくまで見える範囲が変わるだけであって内部は<b>符号座標</b>９一を左上とした本将棋のままである。
-            li 詰将棋向けに右上だけの表示でいいなら<b>配列座標</b>で左上を(4,0)でセル数を5x5とする。
-            li セル数を小さくすると壊れがち。
+      .help.content
+        ul
+          li 内部は<b>符号座標</b>９一を左上とした本将棋のままである
+          li 右上だけの表示でいいなら<b>配列座標</b>で左上を(4,0)でセル数を5x5などとする
+          li セル数を小さくすると壊れる
 
     .box
       SeTitle(name="座標")
@@ -148,20 +147,20 @@
 
       .columns.mt-5
         .column.py-0
-          b-field(custom-class="is-small" label="表記(X)")
+          b-field(custom-class="is-small" label="上の表記(X)")
             template(v-for="e in TheSe.CoordinateInfo.values")
               b-radio-button(size="is-small" v-model="TheSe.sp_coordinate_variant_h" :native-value="e.key") {{e.name}}
         .column.py-0
-          b-field(custom-class="is-small" label="表記(Y)")
+          b-field(custom-class="is-small" label="右の表記(Y)")
             template(v-for="e in TheSe.CoordinateInfo.values")
               b-radio-button(size="is-small" v-model="TheSe.sp_coordinate_variant_v" :native-value="e.key") {{e.name}}
 
       .columns.mt-5
         .column.py-0
-          b-field(custom-class="is-small" label="大きさ(X)")
+          b-field(custom-class="is-small" label="上の大きさ(X)")
             b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_coordinate_x_size" :min="0" :max="1.0" :step="0.001")
         .column.py-0
-          b-field(custom-class="is-small" label="大きさ(Y)")
+          b-field(custom-class="is-small" label="右の大きさ(Y)")
             b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_coordinate_y_size" :min="0" :max="1.0" :step="0.001")
 
       .columns.mt-5
@@ -399,12 +398,6 @@
     .box
       SeTitle(name="コントローラー")
 
-      b-field(custom-class="is-small" label="横幅")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_controller_width" :min="0" :max="1.0" :step="0.001")
-
-      b-field(custom-class="is-small" label="横幅(モバイル時)")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_controller_width_mobile" :min="0" :max="1.0" :step="0.001")
-
       b-field(custom-class="is-small" label="コントローラー表示")
         b-radio-button(size="is-small" v-model="TheSe.sp_controller" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_controller" :native-value="true") ON
@@ -412,6 +405,12 @@
       b-field(custom-class="is-small" label="スライダー表示")
         b-radio-button(size="is-small" v-model="TheSe.sp_slider" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_slider" :native-value="true") ON
+
+      b-field(custom-class="is-small" label="横幅(PC)")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_controller_width" :min="0" :max="1.0" :step="0.001")
+
+      b-field(custom-class="is-small" label="横幅(モバイル時)")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_controller_width_mobile" :min="0" :max="1.0" :step="0.001")
 
     .box
       SeTitle(name="反則")
