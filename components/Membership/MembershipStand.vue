@@ -1,7 +1,7 @@
 <template lang="pug">
 .MembershipStand(:class="component_class" @pointerdown.right.stop.prevent="TheSp.hold_cancel" v-if="hold_pieces.length > 0")
   .MembershipStandTexture.is-overlay
-  .MembershipStand2
+  .MembershipStandPieces
     .PieceWithCount.is-flex(
       v-for="[piece, count] in hold_pieces"
       @pointerdown="TheSp.piece_stand_piece_click_with_mark_event(ms.location, piece, false, $event)"
@@ -131,7 +131,7 @@ export default {
     // width: 100%
     // height: 100%
 
-  .MembershipStand2
+  .MembershipStandPieces
     display: flex
     justify-content: center // 駒台が広がったときに中央に寄るのを防ぎたいときは flex-start にする
     align-items: center
@@ -188,13 +188,13 @@ export default {
   // 駒がなくても駒が置けるようにする ← piece_lifted_hover_reaction になったときだけにすると駒台が拡縮して使いにくい
   //
   // +IF_HORIZONTAL
-  //   .MembershipStand2
+  //   .MembershipStandPieces
   //     &.piece_lifted_hover_reaction
   //       min-height: calc(var(--sp_cell_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
   //       justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
   //       min-width:  var(--sp_cell_w)           // 横を最低限確保
   // &.vertical
-  //   .MembershipStand2
+  //   .MembershipStandPieces
   //     &.piece_lifted_hover_reaction
   //       width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
   //       justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
@@ -210,19 +210,19 @@ export default {
   ////////////////////////////////////////////////////////////////////////////////
   +IF_HORIZONTAL
     .is_position_north
-      .MembershipStand2
+      .MembershipStandPieces
         flex-direction: column-reverse // 全体横並び → 後手 → 縦並び(昇順) △が下にあるので大駒順に並べるため
     .is_position_south
-      .MembershipStand2
+      .MembershipStandPieces
         flex-direction: column         // 全体横並び → 先手 → 縦並び(降順)
   +IF_VERTICAL
     .is_position_north
-      .MembershipStand2
+      .MembershipStandPieces
         flex-direction: row-reverse    // 「飛歩」→「歩飛」
       .MembershipStand
         margin-left: auto              // 「△後手 飛歩…………」→「△後手…………飛歩」
     .is_position_south
-      .MembershipStand2
+      .MembershipStandPieces
         flex-direction: row            // 「飛歩」→「飛歩」
       .MembershipStand
         margin-right: auto             // 「…………飛歩 先手▲」→「飛歩…………先手▲」
@@ -232,13 +232,13 @@ export default {
 //   &.is_mode_edit
 //     // 駒がなくても駒が置けるようにする
 //     +IF_HORIZONTAL
-//       .MembershipStand2
+//       .MembershipStandPieces
 //         // &.piece_lifted_hover_reaction
 //         min-height: calc(var(--sp_cell_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
 //         justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
 //         min-width:  var(--sp_cell_w)           // 横を最低限確保
 //     +IF_VERTICAL
-//       .MembershipStand2
+//       .MembershipStandPieces
 //         // &.piece_lifted_hover_reaction
 //         min-height: var(--sp_cell_h) // 縦を最低限確保
 //         width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
