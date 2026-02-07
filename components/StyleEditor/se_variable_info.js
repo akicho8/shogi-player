@@ -25,7 +25,6 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "se_ws_invert", default: 0, },
       { key: "se_ws_hue", default:        0, },
       { key: "se_ws_saturate", default:   1.0, },
-      { key: "se_ws_saturate2", default:   0, },
       { key: "se_ws_brightness", default: 1.0, },
       { key: "se_ws_sepia", default: 0, },
 
