@@ -147,6 +147,31 @@ export default {
     //   justify-content: flex-start
     //
 
+    // height: 100%       // 親である MembershipStand の高さに合わせる
+    // // height: 200px       // 親である MembershipStand の高さに合わせる
+    // overflow: hidden   // はみ出さないようにガード
+
+    .PieceWithCount
+      // //   // 縦並びの時の子要素（アイテム）としての設定
+      // // flex-shrink: 1
+      // // min-height: 0    // 高さを縮小可能にするために必須
+      // //   // display: flex
+      // //   // flex-direction: column
+      // flex: 0 1 auto    // grow: 0, shrink: 1, basis: auto
+      // min-height: 0     // 必須。これが「縮んでいいよ」の最終的な許可証
+      // // display: flex
+      // // flex-direction: column
+
+      // grow: 0, shrink: 1, basis: auto
+      // これを PieceTap ではなく、ループの最外殻であるここに入れるのが最重要です
+      // flex: 0 1 auto
+      // min-height: 0
+      //
+      // // 中の PieceTap を正しく表示させるための flex 設定
+      // display: flex
+      // flex-direction: column
+      // align-items: center
+
   .MembershipStand
     +is_overlay_origin
   .MembershipStandTexture
