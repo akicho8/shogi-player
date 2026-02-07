@@ -17,7 +17,7 @@ export const mod_se_css = {
           --se_ws_contrast:     ${this.se_ws_contrast};
           --se_ws_invert:       ${this.se_ws_invert};
           --se_ws_hue:          ${this.se_ws_hue};
-          --se_ws_saturate:     ${this.se_ws_saturate + this.se_ws_saturate2};
+          --se_ws_saturate:     ${this.se_ws_saturate};
           --se_ws_brightness:   ${this.se_ws_brightness};
           --se_ws_sepia:        ${this.se_ws_sepia};
 
