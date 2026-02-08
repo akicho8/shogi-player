@@ -625,14 +625,14 @@ export default {
   --sp_common_gap_real_px: calc(var(--sp_board_entire_current_h) * var(--sp_common_gap))
 
   // 駒台のセルの大きさ
-  +defvar(sp_stand_cell_size, 1.0 / 8)
+  +defvar(sp_stand_cell_size, calc(1.0 / 8))
   // --sp_stand_cell_current_w: clamp(0px, var(--sp_board_entire_current_w) * var(--sp_stand_cell_size), var(--sp_board_cell_current_w))
   // --sp_stand_cell_current_h: clamp(0px, var(--sp_board_entire_current_h) * var(--sp_stand_cell_size), var(--sp_board_cell_current_h))
   --sp_stand_cell_current_w: calc(var(--sp_board_entire_current_w) * var(--sp_stand_cell_size))
   --sp_stand_cell_current_h: calc(var(--sp_board_entire_current_h) * var(--sp_stand_cell_size))
 
   // 駒箱のセルの大きさ
-  +defvar(sp_piece_box_cell_size, 1.0 / 8)
+  +defvar(sp_piece_box_cell_size, calc(1.0 / 8))
   // --sp_piece_box_cell_current_w: clamp(0px, var(--sp_board_entire_current_w) * var(--sp_piece_box_cell_size), var(--sp_board_cell_current_w))
   // --sp_piece_box_cell_current_h: clamp(0px, var(--sp_board_entire_current_h) * var(--sp_piece_box_cell_size), var(--sp_board_cell_current_h))
   --sp_piece_box_cell_current_w: calc(var(--sp_board_entire_current_w) * var(--sp_piece_box_cell_size))
