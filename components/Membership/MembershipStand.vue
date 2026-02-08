@@ -1,5 +1,5 @@
 <template lang="pug">
-.MembershipStand(:class="component_class" @pointerdown.right.stop.prevent="TheSp.hold_cancel" v-if="hold_pieces.length > 0")
+.MembershipStand(:class="component_class" @pointerdown.right.stop.prevent="TheSp.hold_cancel" v-if="component_show_p")
   .MembershipStandTexture.is-overlay
   .MembershipStandPieces
     .PieceWithCount.is-flex(
@@ -111,6 +111,16 @@ export default {
         }
       }
       return list
+    },
+
+    component_show_p() {
+      if (this.hold_pieces.length === 0) {
+        return false
+      }
+      if (this.ms.player_attr_of("piece_visibility") === "hidden") {
+        return false
+      }
+      return true
     },
 
     hold_pieces() {

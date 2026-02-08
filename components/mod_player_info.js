@@ -1,7 +1,3 @@
-import { Xcontainer } from "./models/xcontainer.js"
-import { PresetInfo } from "./models/preset_info.js"
-import { SfenParser } from "./models/sfen_parser.js"
-
 export const mod_player_info = {
   props: {
     // 対局者名と時間など
@@ -16,7 +12,5 @@ export const mod_player_info = {
         return this.sp_player_info[location.key]
       }
     },
-  },
-  computed: {
   },
 }

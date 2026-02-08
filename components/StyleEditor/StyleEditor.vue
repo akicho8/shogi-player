@@ -52,6 +52,7 @@ import { SePresetInfo   } from "./se_preset_info.js"
 import { SeSectionInfo  } from "./se_section_info.js"
 import { SeBoardSizePresetInfo } from "./se_board_size_preset_info.js"
 import { SeUserCustomCssPresetInfo } from "./se_user_custom_css_preset_info.js"
+import { SePieceVisibilityInfo } from "./se_piece_visibility_info.js"
 
 import { mod_storage } from "./mod_storage.js"
 import { mod_sp_css } from "./mod_sp_css.js"
@@ -227,6 +228,7 @@ export default {
     SePresetInfo()            { return SePresetInfo            },
     SeBoardSizePresetInfo()   { return SeBoardSizePresetInfo   },
     SeUserCustomCssPresetInfo()   { return SeUserCustomCssPresetInfo   },
+    SePieceVisibilityInfo()   { return SePieceVisibilityInfo   },
 
     kifu_book_info() {
       if (this.kifu_sample_key) {
