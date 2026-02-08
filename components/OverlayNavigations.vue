@@ -40,12 +40,12 @@ export default {
         z-index: $flip_trigger_cell_z
 
         // (100% / 9) は間違い。テーブルのパディングがあるため正しいセルのサイズは出ない
-        // 中心の左上半分から [sp_cell_w, sp_cell_h] のサイズとするのが正しい
+        // 中心の左上半分から [sp_board_cell_current_w, sp_board_cell_current_h] のサイズとするのが正しい
 
-        left: calc(50% - var(--sp_cell_w) / 2)    // 中央からセルの横半分左に移動する
-        width: var(--sp_cell_w)
-        top: calc(50% - var(--sp_cell_h) / 2)     // 中央からセルの縦半分上に移動する
-        height: var(--sp_cell_h)
+        left: calc(50% - var(--sp_board_cell_current_w) / 2)    // 中央からセルの横半分左に移動する
+        width: var(--sp_board_cell_current_w)
+        top: calc(50% - var(--sp_board_cell_current_h) / 2)     // 中央からセルの縦半分上に移動する
+        height: var(--sp_board_cell_current_h)
 
       //////////////////////////////////////////////////////////////////////////////// cursor
       cursor: pointer

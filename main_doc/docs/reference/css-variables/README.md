@@ -109,10 +109,10 @@ Default: `0.9`
 | 紙面風   | 0.8〜0.9 |
 | Portella |      1.0 |
 
-### `--sp_board_piece_position`
+### `--sp_piece_vertical_position`
 Default: `center`
 
-盤上の駒の縦の位置
+駒テクスチャを貼る縦の位置
 
 | 値     | 位置   | 備考                                   |
 |--------|--------|----------------------------------------|
@@ -380,37 +380,25 @@ Default: `none`
 
 駒台を含めた盤の領域に敷く画像
 
-## 内部で使用
+## 動的に変化する寸法
 
-* 参照可
+* 読み出し専用
 * オーバーライド禁止
+* 単位: px
 
-### `--sp_board_view_w`
-Default: `9`
+### `--sp_board_entire_current_w`
 
-現在の盤面の横のセル数
+盤の横幅
 
-### `--sp_board_view_h`
-Default: `9`
+### `--sp_board_entire_current_h`
 
-現在の盤面の縦のセル数
+盤の縦幅
 
-### `--sp_board_w`
-Default: `47px`
+### `--sp_board_cell_current_w`
 
-現在の盤の横幅で動的に変化する
+セルの横幅
 
-### `--sp_board_h`
-Default: `50px`
+### `--sp_board_cell_current_h`
 
-現在の盤の縦幅で動的に変化する
+セルの縦幅
 
-### `--sp_cell_w`
-Default: `47px`
-
-現在の盤面のセルの横幅で動的に変化する
-
-### `--sp_cell_h`
-Default: `50px`
-
-現在の盤面のセルの縦幅で動的に変化する

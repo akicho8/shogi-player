@@ -138,8 +138,8 @@ export default {
 
     // 最低限の大きさを確保するには？
     //
-    //   min-width:  var(--sp_cell_w)
-    //   min-height: var(--sp_cell_h)
+    //   min-width:  var(--sp_stand_cell_current_w)
+    //   min-height: var(--sp_stand_cell_current_h)
     //
     // もし駒台を最初から見せる場合は？
     //
@@ -190,15 +190,15 @@ export default {
   // +IF_HORIZONTAL
   //   .MembershipStandPieces
   //     &.piece_lifted_hover_reaction
-  //       min-height: calc(var(--sp_cell_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
+  //       min-height: calc(var(--sp_stand_cell_current_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
   //       justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
-  //       min-width:  var(--sp_cell_w)           // 横を最低限確保
+  //       min-width:  var(--sp_stand_cell_current_w)           // 横を最低限確保
   // &.vertical
   //   .MembershipStandPieces
   //     &.piece_lifted_hover_reaction
   //       width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
   //       justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
-  //       min-height: var(--sp_cell_h) // 縦を最低限確保
+  //       min-height: var(--sp_stand_cell_current_h) // 縦を最低限確保
 
   ////////////////////////////////////////////////////////////////////////////////
   &.is_layer_on
@@ -234,13 +234,13 @@ export default {
 //     +IF_HORIZONTAL
 //       .MembershipStandPieces
 //         // &.piece_lifted_hover_reaction
-//         min-height: calc(var(--sp_cell_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
+//         min-height: calc(var(--sp_stand_cell_current_h) * var(--sp_stand_horizontal_hoverable_min_height)) // 最低限縦に駒3つ分を確保
 //         justify-content: flex-start                   // そうすると既存の駒が中央によってしまうので上寄せ
-//         min-width:  var(--sp_cell_w)           // 横を最低限確保
+//         min-width:  var(--sp_stand_cell_current_w)           // 横を最低限確保
 //     +IF_VERTICAL
 //       .MembershipStandPieces
 //         // &.piece_lifted_hover_reaction
-//         min-height: var(--sp_cell_h) // 縦を最低限確保
+//         min-height: var(--sp_stand_cell_current_h) // 縦を最低限確保
 //         width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
 //         justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
 </style>

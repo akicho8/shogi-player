@@ -39,9 +39,9 @@ export default {
 
   .NavigateBlockInside
     +tablet
-      width: calc(var(--sp_controller_width) * var(--sp_board_w))
+      width: calc(var(--sp_controller_width) * var(--sp_board_entire_current_w))
     +mobile
-      width: calc(var(--sp_controller_width_mobile) * var(--sp_board_w))
+      width: calc(var(--sp_controller_width_mobile) * var(--sp_board_entire_current_w))
 
   &.is_layer_on
     .NavigateBlock, .NavigateBlockInside

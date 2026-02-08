@@ -91,8 +91,8 @@ export default {
     flex-direction: column
 
   .PieceBoxInside
-    min-height: var(--sp_cell_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
-    width: var(--sp_board_w)     // 横幅を最大ではなく盤の幅に合わせる
+    min-height: var(--sp_piece_box_cell_current_h) // 駒がないときに駒台が消えるのを防ぐため(▲△もないので必ず必要)
+    width: var(--sp_board_entire_current_w)     // 横幅を最大ではなく盤の幅に合わせる
 
   .PieceBoxPieces
     display: flex

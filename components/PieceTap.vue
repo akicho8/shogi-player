@@ -68,7 +68,7 @@ export default {
   ////////////////////////////////////////////////////////////////////////////////
 
   +defvar(sp_board_piece_size, 0.9)                         // 盤のセル内の駒占有率
-  +defvar(sp_board_piece_position, center)                  // 駒を選択できる範囲内の駒の縦位置
+  +defvar(sp_piece_vertical_position, center)                  // 駒を選択できる範囲内の駒の縦位置
 
   +defvar(sp_piece_origin_color, hsla(0, 0%, 0%, 0.15))     // 最後に動かした駒の元の位置の背景色
   +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.15))  // 持ち上げれる駒の背景色
@@ -165,7 +165,7 @@ export default {
   .PieceTexture // .PieceObject:after の alias みたいなもの
     +is_overlay_block
 
-    background-position: var(--sp_board_piece_position)
+    background-position: var(--sp_piece_vertical_position)
     background-repeat: no-repeat
     background-size: contain      // 必ず駒の全体が表示されるようにする
     // background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
@@ -210,19 +210,19 @@ export default {
   .Membership
     .PieceTap
       //   // flex-shrink: 1
-      //   // width: calc(var(--sp_cell_w) * 0.9)
-      //   // height: calc(var(--sp_cell_h) * 0.5)
+      //   // width: calc(var(--sp_stand_cell_current_w) * 0.9)
+      //   // height: calc(var(--sp_stand_cell_current_h) * 0.5)
       //   // min-width: 0
       //   // min-height: 0
-      width:  var(--sp_cell_w)
-      height: var(--sp_cell_h)
-      // flex-basis: var(--sp_cell_h) // 「基本の高さ」にする
+      width:  var(--sp_stand_cell_current_w)
+      height: var(--sp_stand_cell_current_h)
+      // flex-basis: var(--sp_stand_cell_current_h) // 「基本の高さ」にする
       // flex-shrink: 0               // 縮小を許可
       //
-      // width: var(--sp_cell_w)
+      // width: var(--sp_stand_cell_current_w)
       //
       // // // 1. 基本のサイズ（高さ）を固定のように振る舞わせる
-      // // height: var(--sp_cell_h)
+      // // height: var(--sp_stand_cell_current_h)
       // //
       // // // 2. 「基本サイズより大きくはならない」と釘を刺す
       // // flex-grow: 0
@@ -233,19 +233,19 @@ export default {
       // // 4. 縮小の限界を撤廃する
       // min-height: 0
 
-      // width:  var(--sp_cell_w)
-      // height: var(--sp_cell_h)      // 物理的な高さを指定
-      // flex-basis: var(--sp_cell_h) // Flexbox上の基準サイズ
+      // width:  var(--sp_stand_cell_current_w)
+      // height: var(--sp_stand_cell_current_h)      // 物理的な高さを指定
+      // flex-basis: var(--sp_stand_cell_current_h) // Flexbox上の基準サイズ
       // flex-grow: 0                 // 親が広くても勝手に膨らまない
       // flex-shrink: 1               // 親が狭い時だけ削ることを許可
       // min-height: 0                // 縮小の限界を突破させる
 
-      // width:  var(--sp_cell_w)
+      // width:  var(--sp_stand_cell_current_w)
       // // 固定値ではなく、親(PieceWithCount)の高さ一杯に広がるようにする
       // height: 100%
       // // ベースとなる「本来の高さ」をここで指定
-      // flex-basis: var(--sp_cell_h)
-      // // height: var(--sp_cell_h)
+      // flex-basis: var(--sp_stand_cell_current_h)
+      // // height: var(--sp_stand_cell_current_h)
       // flex-shrink: 1
       // min-height: 0
 
@@ -254,17 +254,17 @@ export default {
       height: calc(var(--sp_stand_piece_size) * 100%)
 
     // .PieceTap
-    //   // width:  var(--sp_cell_w)
-    //   // height: var(--sp_cell_h) <-- これを削除または flex-basis に変更
-    //   flex-basis: var(--sp_cell_h) // 「基本の高さ」にする
+    //   // width:  var(--sp_stand_cell_current_w)
+    //   // height: var(--sp_stand_cell_current_h) <-- これを削除または flex-basis に変更
+    //   flex-basis: var(--sp_stand_cell_current_h) // 「基本の高さ」にする
     //   // flex-shrink: 1               // 縮小を許可
     //   // min-height: 0                // 最小の高さ制限を解除
 
   // 駒箱
   .PieceBox
     .PieceTap
-      width:  var(--sp_cell_w)
-      height: var(--sp_cell_h)
+      width:  var(--sp_piece_box_cell_current_w)
+      height: var(--sp_piece_box_cell_current_h)
     .PieceObject
       width:  calc(var(--sp_piece_box_piece_size) * 100%)
       height: calc(var(--sp_piece_box_piece_size) * 100%)
@@ -272,8 +272,8 @@ export default {
   // 持ち上げ駒
   // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceObject は 100% 固定にする
   .LiftedPieceElement
-    width:  var(--sp_cell_w)
-    height: var(--sp_cell_h)
+    width:  var(--sp_board_cell_current_w)
+    height: var(--sp_board_cell_current_h)
     .PieceTap
       width:  100%     // 外側の大きさに合わせる
       height: 100%
@@ -281,12 +281,12 @@ export default {
       width:  100%     // 縮小させない
       height: 100%
 
-  // 持ち上げ駒
+  // 成り不成
   // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceObject は 100% 固定にする
   .PromoteSelectModal
     .PieceTap
-      width:  var(--sp_cell_w)
-      height: var(--sp_cell_h)
+      width:  var(--sp_board_cell_current_w)
+      height: var(--sp_board_cell_current_h)
     .PieceObject
       width:  80%
       height: 80%

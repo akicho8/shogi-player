@@ -104,7 +104,7 @@ export default {
     display: flex
     align-items: center // ▲を中央に配置
 
-    // height: var(--sp_board_h)
+    // height: var(--sp_board_entire_current_h)
 
   &.is_layer_on
     .Membership

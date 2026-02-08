@@ -35,10 +35,18 @@ export default {
     justify-content: center
     align-items: center
 
+  .MembershipStand
+    .PieceCount
+      font-size: calc(var(--sp_stand_cell_current_h) * var(--sp_piece_count_size))
+      padding:   calc(var(--sp_stand_cell_current_w) * var(--sp_piece_count_padding)) calc(var(--sp_stand_cell_current_h) * var(--sp_piece_count_padding))
+
+  .PieceBox
+    .PieceCount
+      font-size: calc(var(--sp_piece_box_cell_current_h) * var(--sp_piece_count_size))
+      padding:   calc(var(--sp_piece_box_cell_current_w) * var(--sp_piece_count_padding)) calc(var(--sp_piece_box_cell_current_h) * var(--sp_piece_count_padding))
+
   .PieceCount
     @extend %is_piece_count_color_set
-    font-size: calc(var(--sp_cell_h) * var(--sp_piece_count_size))
-    padding:   calc(var(--sp_cell_w) * var(--sp_piece_count_padding)) calc(var(--sp_cell_h) * var(--sp_piece_count_padding))
 
     line-height: 1.0
     border-radius: 50%
@@ -46,6 +54,8 @@ export default {
 
     z-index: $piece_count_z // 駒数が Membership の下に潜るのを防ぐ (FIXME: これは本当に必要？)
     position: relative      // 相対的にずらすため、かつ z-index 用
+
+    pointer-events: none    // タップの邪魔をしないようにするため。
 
   &.is_layer_on
     .PieceCount

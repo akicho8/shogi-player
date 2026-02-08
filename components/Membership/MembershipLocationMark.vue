@@ -78,8 +78,8 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// サイズ (基本)
 
   .MembershipLocationMark
-    width:  var(--sp_cell_w)
-    height: var(--sp_cell_h)
+    width:  var(--sp_stand_cell_current_w)
+    height: var(--sp_stand_cell_current_h)
   .MembershipLocationMarkTexture
     width:  calc(var(--sp_stand_piece_size) * var(--sp_location_mark_active_size) * 100%)
     height: calc(var(--sp_stand_piece_size) * var(--sp_location_mark_active_size) * 100%)
