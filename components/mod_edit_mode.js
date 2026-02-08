@@ -14,7 +14,7 @@ export const mod_edit_mode = {
     sp_piece_auto_promote:        { type: Boolean, default: true, },       // play で死に駒になるときは自動的に成る
     sp_my_piece_only_move:        { type: Boolean, default: true, },       // play では自分手番とき自分の駒しか動かせないようにする
     sp_my_piece_kill_disabled:    { type: Boolean, default: true, },       // play では自分の駒で同じ仲間の駒を取れないようにする
-    sp_double_click_threshold_ms: { type: Number,  default: 350,  },       // edit で駒を反転するときのダブルクリックと認識する時間(ms)
+    sp_double_click_threshold_ms: { type: Number,  default: 350, validator(value) { return Number.isInteger(value) }, }, // edit で駒を反転するときのダブルクリックと認識する時間(ms)
     sp_view_mode_piece_movable:   { type: Boolean, default: true, },       // view でも駒を動かせる(ただし本筋は破壊しない)
 
     // 駒キャンセル方法

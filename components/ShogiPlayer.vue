@@ -118,7 +118,7 @@ export default {
     sp_board_view_w: { type: Number, default: 9, validator(value) { return Number.isInteger(value) }, }, // 盤のセル数(W)
     sp_board_view_h: { type: Number, default: 9, validator(value) { return Number.isInteger(value) }, }, // 盤のセル数(H)
 
-    sp_star_step: { type: Number, default: 3, }, // 星をX個間隔で表示する
+    sp_star_step: { type: Number, default: 3, validator(value) { return Number.isInteger(value) }, }, // 星をX個間隔で表示する
 
     // レイアウト
     sp_layout: {
@@ -216,6 +216,7 @@ export default {
     sp_turn: {
       type: Number,
       default: -1,
+      validator(value) { return Number.isInteger(value) },
     },
 
     // スタイル(Web Components 専用)
