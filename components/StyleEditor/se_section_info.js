@@ -15,6 +15,7 @@ export class SeSectionInfo extends ApplicationMemoryRecord {
       { key: "駒の種類",               },
       { key: "駒の大きさ",             },
       { key: "駒台",                   },
+      { key: "持駒の表示",             },
       { key: "対局者名",               },
       { key: "駒数",                   },
       { key: "駒箱",                   },

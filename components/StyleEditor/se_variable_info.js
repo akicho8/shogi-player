@@ -116,7 +116,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       ////////////////////////////////////////////////////////////////////////////////
 
-      { key: "sp_player_info", default: { black: { name: "先手", time: "", }, white: { name: "後手", time: "", },}, },
+      { key: "sp_player_info", default: { black: { name: "先手", time: "", piece_visibility: "visible", }, white: { name: "後手", time: "", piece_visibility: "visible", },}, },
       { key: "sp_name_direction", default: DEVELOPMENT_P ? "vertical" : "horizontal", },
       { key: "sp_player_name_size", default: 0.25, },
       { key: "sp_player_time_size", default: 0.25, },

@@ -1,5 +1,5 @@
 <template lang="pug">
-.MembershipLocationPlayerInfo(v-if="component_show_p" :class="component_class" @pointerdown="click_handle")
+.MembershipLocationPlayerInfo(v-if="component_show_p" :class="player_class" @pointerdown="click_handle")
   .MembershipLocationPlayerInfoName(v-html="player_name" v-if="player_name")
   .MembershipLocationPlayerInfoTime.is-family-monospace(v-html="player_time" v-if="player_time")
 </template>
@@ -12,22 +12,15 @@ export default {
   mixins: [support],
   inject: ["ms"],
   methods: {
-    player_attr_of(key) {
-      const hv = this.current_player_info
-      if (hv) {
-        return hv[key]
-      }
-    },
     click_handle() {
-      this.TheSp.event_call("ev_action_player_info_click", this.ms.location, this.current_player_info)
+      this.TheSp.event_call("ev_action_player_info_click", this.ms.location, this.ms.current_player_info)
     },
   },
   computed: {
-    current_player_info() { return this.TheSp.player_info_at(this.ms.location) },
-    component_class()     { return this.player_attr_of("class")                },
-    player_name()         { return this.player_attr_of("name")                 },
-    player_time()         { return this.player_attr_of("time")                 },
-    component_show_p()    { return this.player_name || this.player_time        },
+    player_class()     { return this.ms.player_attr_of("class")      },
+    player_name()      { return this.ms.player_attr_of("name")       },
+    player_time()      { return this.ms.player_attr_of("time")       },
+    component_show_p() { return this.player_name || this.player_time },
   },
 }
 </script>

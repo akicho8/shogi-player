@@ -55,9 +55,18 @@ export default {
         e.stopPropagation()
       }
     },
+
+    player_attr_of(key) {
+      const hv = this.current_player_info
+      if (hv) {
+        return hv[key]
+      }
+    },
   },
 
   computed: {
+    current_player_info() { return this.TheSp.player_info_at(this.location) },
+
     component_class() {
       const list = []
 

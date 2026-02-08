@@ -127,13 +127,15 @@
           b-field(custom-class="is-small" label="セル数(H)")
             b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_view_h" :min="0" :max="19")
 
+      hr
+
       b-field.mt-4(custom-class="is-small" label="プリセット")
         .control
           .buttons.mb-0
             template(v-for="e in TheSe.SeBoardSizePresetInfo.values")
               b-button(@click="TheSe.se_board_size_preset_apply_handle(e)" size="is-small") {{e.name}}
 
-      .help.content
+      p.help.content
         ul
           li 内部は<b>符号座標</b>９一を左上とした本将棋のままである
           li 右上だけの表示でいいなら<b>配列座標</b>で左上を(4,0)でセル数を5x5などとする
@@ -183,52 +185,33 @@
       b-field(custom-class="is-small" label="奇数")
         MyColorPicker(v-model="TheSe.sp_board_odd_cell_color")
 
-      .help
+      p.help
         | 黒のままで透明度の調整するのがおすすめ
-
-    .box
-      SeTitle(name="駒")
-
-      b-field(custom-class="is-small" label="プリセット")
-        b-select(size="is-small" v-model="TheSe.sp_piece_variant")
-          template(v-for="e in TheSe.PieceVariantInfo.values")
-            option(:value="e.key") {{e.name}}
-
-      b-field(custom-class="is-small" label="セルの大きさ (駒台)" message="盤に対する割合")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
-
-      b-field(custom-class="is-small" label="セルの大きさ (駒箱)" message="盤に対する割合")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_piece_box_cell_size" :min="0" :max="1.0" :step="0.0001")
-
-      b-field(custom-class="is-small" label="駒の大きさ (盤内)" message="「紙面風」や「ぬれよん」などは元が巨大なため小さめに調整すること。一方で「Portella」は大きさ調整済み駒のため原寸(1.0)が望ましい。")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_piece_size" :min="0" :max="1.0" :step="0.001")
-
-      b-field(custom-class="is-small" label="駒の大きさ (駒台)")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
-
-      b-field(custom-class="is-small" label="駒の大きさ (駒箱)")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_piece_box_piece_size" :min="0" :max="1.0" :step="0.01")
-
-      b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="下にすると駒の底辺が揃う(ただし駒の種類による)")
-        b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="top") ↑
-        b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="center") ・
-        b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="bottom") ↓
 
     .box
       SeTitle(name="駒の種類")
 
-      b-field(custom-class="is-small" label="プリセット" message="「紙面風」や「ぬれよん」などは元が巨大なため駒の少し小さくするのが望ましい。「Portella」は大きさ調整済み駒のため原寸(1.0)が望ましい。")
+      b-field(custom-class="is-small" label="プリセット")
+        template(#message)
+          | 「紙面風」や「ぬれよん」などは元が巨大なため少し小さく表示した方がよい<br>
+          | 「Portella」は調整済みのため原寸(1.0)が望ましい<br>
         b-select(size="is-small" v-model="TheSe.sp_piece_variant")
           template(v-for="e in TheSe.PieceVariantInfo.values")
             option(:value="e.key") {{e.name}}
 
-      b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="下にすると駒の底辺が揃う(ただし駒の種類による)")
+      b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置" message="下にすると駒の底辺が揃う (ただし駒の種類による)")
         b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="top") ↑
         b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="center") ・
         b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="bottom") ↓
 
     .box
       SeTitle(name="駒の大きさ")
+
+      //- b-field.grouped(custom-class="is-small" label="セル (駒台)" message="盤に対する割合")
+      //-   b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
+      //-   b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
+      //-
+      //- hr
 
       .columns.mt-1
         .column.py-0
@@ -254,6 +237,14 @@
           b-field(custom-class="is-small" label="駒 (駒箱)")
             b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_piece_box_piece_size" :min="0" :max="1.0" :step="0.01")
 
+      hr
+
+      p.help
+        | セルはクリックできる領域のことでその中に駒がある。<br>
+        | もともとは盤内のセルと駒台のセルは同じ大きさだった。<br>
+        | しかし盤を5x5にしてしまうと、8種類の駒がどうやっても駒台に乗らなくなってしまった。<br>
+        | そこで盤の大きさを基準にするようにした。<br>
+
     .box
       SeTitle(name="駒台")
       b-field(custom-class="is-small" label="レイアウト")
@@ -275,6 +266,25 @@
         MyColorPicker(v-model="TheSe.sp_stand_hover_border_color")
 
     .box
+      SeTitle(name="持駒の表示")
+
+      .columns
+        .column
+          b-field(custom-class="is-small" label="☗")
+            template(v-for="e in TheSe.SePieceVisibilityInfo.values")
+              b-radio-button(size="is-small" v-model="TheSe.sp_player_info.black.piece_visibility" :native-value="e.key") {{e.radio_button_name}}
+        .column
+          b-field(custom-class="is-small" label="☖")
+            template(v-for="e in TheSe.SePieceVisibilityInfo.values")
+              b-radio-button(size="is-small" v-model="TheSe.sp_player_info.white.piece_visibility" :native-value="e.key") {{e.radio_button_name}}
+
+      p.help.content
+        ul
+          li <b>玉方の持駒を隠す</b>目的で入れた詰将棋向けの実験的機能
+          li 混乱を招きそう
+          li 単に玉方の駒を駒箱に移せば済むのだから余計な機能かもしれない
+
+    .box
       SeTitle(name="対局者名")
       b-field(custom-class="is-small" label="縦・横書き(全体レイアウトが横の場合のみ有効)" message="英字も考慮して縦書きにするなら横書きのままで1文字ずつ<br>を入れた方が正しく縦書きになる。日本語しか使わないのであれば単に縦書きでもよい。モバイルの場合は狭いので横書きの方がよい")
         b-radio-button(size="is-small" v-model="TheSe.sp_name_direction" native-value="horizontal") 横書き
@@ -286,7 +296,7 @@
       b-field(custom-class="is-small" label="時間の大きさ")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_player_time_size" :min="0" :max="0.5" :step="0.001")
 
-      b-field(custom-class="is-small" label="テキストの視認性を上げる(駒数の背景を適用)")
+      b-field(custom-class="is-small" label="テキストの視認性を上げる" message="駒数の背景を適用する")
         b-radio-button(size="is-small" v-model="TheSe.sp_balloon" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_balloon" :native-value="true") ON
 
@@ -308,7 +318,7 @@
     .box
       SeTitle(name="駒数")
 
-      .columns.mt-4.is-multiline
+      .columns.mt-1.is-multiline
         .column.is-12.py-0
           b-field(custom-class="is-small" label="横レイアウト時の相対位置")
         .column.is-6.py-0
