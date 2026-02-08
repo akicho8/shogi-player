@@ -62,8 +62,8 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       //////////////////////////////////////////////////////////////////////////////// 駒
       { key: "sp_piece_variant",        default: "nureyon", },
-      { key: "sp_stand_cell_size",          default: 1.0 / 8,   },
-      { key: "sp_piece_box_cell_size",          default: 1.0 / 8,   },
+      { key: "sp_stand_cell_size",      default: 1.0 / 10,   },
+      { key: "sp_piece_box_cell_size",  default: 1.0 / 10,   },
       { key: "sp_stand_piece_size",     default: 0.8,       },
       { key: "sp_piece_box_piece_size", default: 0.8,       },
 
