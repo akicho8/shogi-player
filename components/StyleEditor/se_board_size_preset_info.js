@@ -4,6 +4,15 @@ export class SeBoardSizePresetInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       {
+        key: "初期値",
+        func: context => {
+          context.sp_board_view_x = 0
+          context.sp_board_view_y = 0
+          context.sp_board_view_w = 9
+          context.sp_board_view_h = 9
+        }
+      },
+      {
         key: "右上5x5",
         func: context => {
           context.sp_board_view_x = 4
