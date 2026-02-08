@@ -96,8 +96,14 @@ export default {
         return
       }
 
-      const hx = place.human_x - 1
-      const hy = place.human_y - 1
+      // https://x.com/XKpekeko/status/2020317806819176773
+      // - CSS側で右上に書くか左下に書くかを切り替える方法もあるが端を除外するコードまで変更しなくてはいけなくなる
+      // - なので単に反転している場合は -1 しないようにする
+      // - するとそのまま符号座標 3, 6 が担当になり、右上に星を書けば 3 ごとになる
+      // - 先後どちらから見ても「CSS側で右上に星を書く」のロジックはそのままでよくなる
+      const offset = this.TheSp.fliped ? 0 : -1
+      const hx = place.human_x + offset
+      const hy = place.human_y + offset
       return true &&
         (hx % this.TheSp.sp_star_step) === 0 &&
         (hy % this.TheSp.sp_star_step) === 0 &&
@@ -117,8 +123,8 @@ export default {
     // sp_star_step を 1 にするとこの範囲を正確に確認できる
     star_cell_candidate_p(px, py) {
       return true &&
-        0 <= px && px < (this.TheSp.sp_board_view_w - 1) &&
-        0 <  py && px < (this.TheSp.sp_board_view_h - 1) &&
+        0 <= px && px <  (this.TheSp.sp_board_view_w - 1) &&
+        0 <  py && py <= (this.TheSp.sp_board_view_h - 1) &&
         true
     },
 
