@@ -188,16 +188,71 @@
 
     .box
       SeTitle(name="駒")
+
       b-field(custom-class="is-small" label="プリセット")
         b-select(size="is-small" v-model="TheSe.sp_piece_variant")
           template(v-for="e in TheSe.PieceVariantInfo.values")
             option(:value="e.key") {{e.name}}
-      b-field(custom-class="is-small" label="大きさ")
+
+      b-field(custom-class="is-small" label="セルの大きさ (駒台)" message="盤に対する割合")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
+
+      b-field(custom-class="is-small" label="セルの大きさ (駒箱)" message="盤に対する割合")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_piece_box_cell_size" :min="0" :max="1.0" :step="0.0001")
+
+      b-field(custom-class="is-small" label="駒の大きさ (盤内)" message="「紙面風」や「ぬれよん」などは元が巨大なため小さめに調整すること。一方で「Portella」は大きさ調整済み駒のため原寸(1.0)が望ましい。")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_piece_size" :min="0" :max="1.0" :step="0.001")
+
+      b-field(custom-class="is-small" label="駒の大きさ (駒台)")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
+
+      b-field(custom-class="is-small" label="駒の大きさ (駒箱)")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_piece_box_piece_size" :min="0" :max="1.0" :step="0.01")
+
       b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="下にすると駒の底辺が揃う(ただし駒の種類による)")
-        b-radio-button(size="is-small" v-model="TheSe.sp_board_piece_position" native-value="top") ↑
-        b-radio-button(size="is-small" v-model="TheSe.sp_board_piece_position" native-value="center") ・
-        b-radio-button(size="is-small" v-model="TheSe.sp_board_piece_position" native-value="bottom") ↓
+        b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="top") ↑
+        b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="center") ・
+        b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="bottom") ↓
+
+    .box
+      SeTitle(name="駒の種類")
+
+      b-field(custom-class="is-small" label="プリセット" message="「紙面風」や「ぬれよん」などは元が巨大なため駒の少し小さくするのが望ましい。「Portella」は大きさ調整済み駒のため原寸(1.0)が望ましい。")
+        b-select(size="is-small" v-model="TheSe.sp_piece_variant")
+          template(v-for="e in TheSe.PieceVariantInfo.values")
+            option(:value="e.key") {{e.name}}
+
+      b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置(揃える位置)" message="下にすると駒の底辺が揃う(ただし駒の種類による)")
+        b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="top") ↑
+        b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="center") ・
+        b-radio-button(size="is-small" v-model="TheSe.sp_piece_vertical_position" native-value="bottom") ↓
+
+    .box
+      SeTitle(name="駒の大きさ")
+
+      .columns.mt-1
+        .column.py-0
+          b-field(custom-class="is-small" label="セル (盤内)" message="最大で固定。縮小する利点はない。")
+            //- b-slider(v-bind="TheSe.slider_attrs" :value="1.0" :min="0" :max="1.0" disabled)
+        .column.py-0
+          b-field(custom-class="is-small" label="駒 (盤内)" message="")
+            b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_piece_size" :min="0" :max="1.0" :step="0.001")
+
+      .columns.mt-4
+        .column.py-0
+          b-field(custom-class="is-small" label="セル (駒台)" message="盤に対する割合")
+            b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
+        .column.py-0
+          b-field(custom-class="is-small" label="駒 (駒台)")
+            b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
+
+      .columns.mt-4
+        .column.py-0
+          b-field(custom-class="is-small" label="セル (駒箱)" message="0.1 ぐらいですべての駒が収まる")
+            b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_piece_box_cell_size" :min="0" :max="1.0" :step="0.0001")
+        .column.py-0
+          b-field(custom-class="is-small" label="駒 (駒箱)")
+            b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_piece_box_piece_size" :min="0" :max="1.0" :step="0.01")
 
     .box
       SeTitle(name="駒台")
@@ -210,12 +265,10 @@
       //- .columns.mt-4
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
-      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_cell_w" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_cell_current_w" :min="1" :max="80" :step="1")
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="セル(H)" message="駒と駒の隙間に影響する")
-      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_cell_h" :min="1" :max="80" :step="1")
-      b-field(custom-class="is-small" label="駒の大きさ")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
+      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_cell_current_h" :min="1" :max="80" :step="1")
       b-field(custom-class="is-small" label="背景色")
         MyColorPicker(v-model="TheSe.sp_stand_bg_color")
       b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色" message="編集モード時のみ有効。駒箱にも適用する。")
@@ -287,25 +340,23 @@
 
     .box
       SeTitle(name="駒箱")
-      b-field(custom-class="is-small" label="駒の大きさ")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_piece_box_piece_size" :min="0" :max="1.0" :step="0.01")
       b-field(custom-class="is-small" label="")
         MyColorPicker(v-model="TheSe.sp_piece_box_color")
       //- .columns.mt-4
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="セル(W)")
-      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_cell_w" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_cell_current_w" :min="1" :max="80" :step="1")
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="セル(H)")
-      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_cell_h" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_cell_current_h" :min="1" :max="80" :step="1")
 
       //- .columns.mt-4
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="持駒画像(W)")
-      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_cell_w" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_cell_current_w" :min="1" :max="80" :step="1")
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="持駒画像(H)")
-      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_cell_h" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_cell_current_h" :min="1" :max="80" :step="1")
 
     .box
       SeTitle(name="成り不成り選択")

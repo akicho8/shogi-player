@@ -8,13 +8,16 @@ const DEBOUNCE_WRAP                = false      // debounce で処理を保留�
 const DEBOUNCE_MS                  = 1000 / 20  // debounce で処理を保留する時間(ms)
 
 export const mod_resize_observer = {
+  // props: {
+  //   sp_cell_scale: { type: Number, default: 1.0, },
+  // },
   data() {
     return {
-      sp_board_w: 1,
-      sp_board_h: 1,
+      sp_board_entire_current_w: 1,
+      sp_board_entire_current_h: 1,
 
-      sp_cell_w: 1,
-      sp_cell_h: 1,
+      sp_board_cell_current_w: 1,
+      sp_board_cell_current_h: 1,
     }
   },
   mounted() {
@@ -84,8 +87,12 @@ export const mod_resize_observer = {
     // リサイズの情報を読み取る
     ro_read(e, entry) {
       if (entry.target.dataset["resize_observer_id"] === e.key) {
-        const w = entry.contentRect.width
-        const h = entry.contentRect.height
+        let w = entry.contentRect.width
+        let h = entry.contentRect.height
+        if (false) {
+          w = Math.round(w)
+          h = Math.round(h)
+        }
         if (w > 0 && h > 0) {
           const bw = this[e.attr_w]
           const bh = this[e.attr_h]
@@ -108,11 +115,11 @@ export const mod_resize_observer = {
     // CSS変数化
     ro_css_variables_hash() {
       return {
-        "--sp_board_w": `${this.sp_board_w}px`,
-        "--sp_board_h": `${this.sp_board_h}px`,
+        "--sp_board_entire_current_w": `${this.sp_board_entire_current_w}px`,
+        "--sp_board_entire_current_h": `${this.sp_board_entire_current_h}px`,
 
-        "--sp_cell_w": `${this.sp_cell_w}px`,
-        "--sp_cell_h": `${this.sp_cell_h}px`,
+        "--sp_board_cell_current_w": `${this.sp_board_cell_current_w}px`,
+        "--sp_board_cell_current_h": `${this.sp_board_cell_current_h}px`,
       }
     },
   },

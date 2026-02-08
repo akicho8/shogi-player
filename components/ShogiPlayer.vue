@@ -113,10 +113,10 @@ export default {
   ],
 
   props: {
-    sp_board_view_x: { type: Number, default: 0, }, // 盤のセル数(W)
-    sp_board_view_y: { type: Number, default: 0, }, // 盤のセル数(H)
-    sp_board_view_w: { type: Number, default: 9, }, // 盤のセル数(W)
-    sp_board_view_h: { type: Number, default: 9, }, // 盤のセル数(H)
+    sp_board_view_x: { type: Number, default: 0, validator(value) { return Number.isInteger(value) }, }, // 盤のセル数(W)
+    sp_board_view_y: { type: Number, default: 0, validator(value) { return Number.isInteger(value) }, }, // 盤のセル数(H)
+    sp_board_view_w: { type: Number, default: 9, validator(value) { return Number.isInteger(value) }, }, // 盤のセル数(W)
+    sp_board_view_h: { type: Number, default: 9, validator(value) { return Number.isInteger(value) }, }, // 盤のセル数(H)
 
     sp_star_step: { type: Number, default: 3, }, // 星をX個間隔で表示する
 
@@ -574,7 +574,7 @@ export default {
         "--sp_board_view_h": this.sp_board_view_h, // CSS 側で参照しているため
         "--sp_coordinate_variant_h": CoordinateInfo.lookup_or_first(this.sp_coordinate_variant_h).css_value,
         "--sp_coordinate_variant_v": CoordinateInfo.lookup_or_first(this.sp_coordinate_variant_v).css_value,
-        ...this.ro_css_variables_hash,  // sp_cell_w 等
+        ...this.ro_css_variables_hash,  // sp_board_cell_current_w 等
       }
     },
 
@@ -617,11 +617,25 @@ export default {
     @extend %unselectable
 
 .ShogiPlayer
-  +defvar(sp_common_gap, 0.02) // 共通の隙間(駒セルの縦幅に対する割合)
-
+  // 共通の隙間(駒セルの縦幅に対する割合)
   // あまり重要ではないところでの縦のマージンが必要なときに使う
   // sp_common_gap を直接使ってはいけない
-  --sp_common_gap_real_px: calc(var(--sp_board_h) * var(--sp_common_gap))
+  +defvar(sp_common_gap, 0.02)
+  --sp_common_gap_real_px: calc(var(--sp_board_entire_current_h) * var(--sp_common_gap))
+
+  // 駒台のセルの大きさ
+  +defvar(sp_stand_cell_size, 1.0 / 8)
+  // --sp_stand_cell_current_w: clamp(0px, var(--sp_board_entire_current_w) * var(--sp_stand_cell_size), var(--sp_board_cell_current_w))
+  // --sp_stand_cell_current_h: clamp(0px, var(--sp_board_entire_current_h) * var(--sp_stand_cell_size), var(--sp_board_cell_current_h))
+  --sp_stand_cell_current_w: calc(var(--sp_board_entire_current_w) * var(--sp_stand_cell_size))
+  --sp_stand_cell_current_h: calc(var(--sp_board_entire_current_h) * var(--sp_stand_cell_size))
+
+  // 駒箱のセルの大きさ
+  +defvar(sp_piece_box_cell_size, 1.0 / 8)
+  // --sp_piece_box_cell_current_w: clamp(0px, var(--sp_board_entire_current_w) * var(--sp_piece_box_cell_size), var(--sp_board_cell_current_w))
+  // --sp_piece_box_cell_current_h: clamp(0px, var(--sp_board_entire_current_h) * var(--sp_piece_box_cell_size), var(--sp_board_cell_current_h))
+  --sp_piece_box_cell_current_w: calc(var(--sp_board_entire_current_w) * var(--sp_piece_box_cell_size))
+  --sp_piece_box_cell_current_h: calc(var(--sp_board_entire_current_h) * var(--sp_piece_box_cell_size))
 
   &.is_layer_on
     +is_layer_border

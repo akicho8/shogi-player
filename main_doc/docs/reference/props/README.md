@@ -44,7 +44,7 @@ Default: `null`
 
 ### `sp_turn`
 
-Type: `Number`
+Type: `Integer`
 Default: `-1`
 
 開始局面を指定する
@@ -491,7 +491,7 @@ Web Components 版では内部で eval しているため動作する
 
 ### `sp_double_click_threshold_ms`
 
-Type: `Number`
+Type: `Integer`
 Default: `350`
 
 編集モードで駒を反転するときのダブルクリックと認識する時間(ms)
@@ -508,6 +508,42 @@ Default: `false`
 ::: warning
 副作用あり。他のプログラムの操作を奪ってしまうかもしれないため基本は false にしておいた方がよい
 :::
+
+
+## カメラ
+
+* 見える範囲を指定する
+* あくまで視野が変わるだけであって内部は<b>符号座標</b>９一を左上とした本将棋のままである
+* 右上だけの表示でいいなら<b>配列座標</b>で左上を(4,0)でセル数を5x5などとする
+* セル数を小さくすると壊れる
+
+### `sp_board_view_x`
+
+Type: `Integer`
+Default: `0`
+
+左上(X)
+
+### `sp_board_view_y`
+
+Type: `Integer`
+Default: `0`
+
+左上(Y)
+
+### `sp_board_view_w`
+
+Type: `Integer`
+Default: `9`
+
+セル数(W)
+
+### `sp_board_view_h`
+
+Type: `Integer`
+Default: `9`
+
+セル数(H)
 
 ## 合法手
 

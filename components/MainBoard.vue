@@ -231,13 +231,13 @@ export default {
       &:after
         position: absolute
         content: ""
-        // "%" で指定すると長方形になってしまう
-        // sp_cell_h だけを基準にすると正方形になる
+        // "%" で指定するとセルの形の影響を受けて長方形になってしまう
+        // sp_board_cell_current_w か sp_board_cell_current_h の一方だけを基準にすると正方形になる
         // 中央がずれているので半ピクセル調整する
-        top:   calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
-        right: calc(var(--sp_cell_h) * var(--sp_star_size) * -0.5 - 0.5px)
-        width:  calc(var(--sp_cell_h) * var(--sp_star_size))
-        height: calc(var(--sp_cell_h) * var(--sp_star_size))
+        top:   calc(var(--sp_board_cell_current_h) * var(--sp_star_size) * -0.5 - 0.5px)
+        right: calc(var(--sp_board_cell_current_h) * var(--sp_star_size) * -0.5 - 0.5px)
+        width:  calc(var(--sp_board_cell_current_h) * var(--sp_star_size))
+        height: calc(var(--sp_board_cell_current_h) * var(--sp_star_size))
         border-radius: 50%
         background-color: var(--sp_star_color, var(--sp_grid_outer_color))
         z-index: var(--sp_star_z_index)

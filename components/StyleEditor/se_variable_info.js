@@ -36,7 +36,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_board_vertical_gap", default: 0, },
       { key: "sp_board_aspect_ratio", default: 1.097, },
       { key: "sp_board_piece_size", default: 0.9, },
-      { key: "sp_board_piece_position", default: "center", },
+      { key: "sp_piece_vertical_position", default: "center", },
       { key: "sp_board_radius", default: 5, },
       { key: "sp_board_padding", default: 0.015, },
 
@@ -60,8 +60,14 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       { key: "sp_balloon", default: true, },
 
+      //////////////////////////////////////////////////////////////////////////////// 駒
+      { key: "sp_piece_variant",        default: "nureyon", },
+      { key: "sp_stand_cell_size",          default: 1.0 / 8,   },
+      { key: "sp_piece_box_cell_size",          default: 1.0 / 8,   },
+      { key: "sp_stand_piece_size",     default: 0.8,       },
+      { key: "sp_piece_box_piece_size", default: 0.8,       },
+
       //////////////////////////////////////////////////////////////////////////////// 駒台
-      { key: "sp_stand_piece_size", default: 0.8, },
       { key: "sp_stand_hover_border_color", default: "hsla(0, 0%, 0%, 0.2)", },
       { key: "sp_stand_bg_color", default: "hsla(0, 0%, 0%, 0.0)", },
       { key: "sp_stand_gravity", default: "bottom" },
@@ -89,7 +95,6 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_star_z_index", default: 0, },
 
       { key: "sp_piece_box_color", default: "hsla(0, 0%, 0%, 0.2)", },
-      { key: "sp_piece_box_piece_size", default: 0.8, },
 
       { key: "sp_location_mark_active_size", default: 1.0, },
       { key: "sp_location_mark_inactive_size", default: 0.5, },
@@ -97,7 +102,6 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_comment", default: false, },
       { key: "sp_common_gap", default: 0.02, },
       { key: "sp_layer", default: DEVELOPMENT_P ? true : false, },
-      { key: "sp_piece_variant", default: "nureyon",    },
       { key: "sp_board_variant", default: "none",  },
 
       //////////////////////////////////////////////////////////////////////////////// 座標

@@ -90,6 +90,10 @@ export default {
     sp_lift_cancel_action:             { type: String,  }, // standard: (死に駒セルを除き)移動できないセルに移動したとき持った状態をキャンセルする。reality: (盤上の駒に限り)キャンセルは元の位置をタップ。rehold: (盤上の駒に限り)キャンセルと同時に盤上の駒を持つ
     sp_view_mode_piece_movable:        { type: Boolean, }, // view でも駒を動かせる(ただし本筋は破壊しない)
     sp_board_cell_left_click_disabled: { type: Boolean, }, // 盤上セルタップ時の通常処理の無効化
+    sp_board_view_x: { type: Number, }, // 視野 左上(X)
+    sp_board_view_y: { type: Number, }, // 視野 左上(y)
+    sp_board_view_w: { type: Number, }, // 視野 幅(W)
+    sp_board_view_h: { type: Number, }, // 視野 高さ(W)
 
     // 本当は Object
     sp_player_info:                    { type: String,  }, // 対局者名と時間

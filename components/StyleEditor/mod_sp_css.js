@@ -17,7 +17,7 @@ export const mod_sp_css = {
           --sp_board_radius:                     ${this.sp_board_radius};
           --sp_board_aspect_ratio:               ${this.sp_board_aspect_ratio};
           --sp_board_piece_size:                 ${this.sp_board_piece_size};
-          --sp_board_piece_position:             ${this.sp_board_piece_position};
+          --sp_piece_vertical_position:             ${this.sp_piece_vertical_position};
           --sp_board_horizontal_gap:             ${this.sp_board_horizontal_gap};
           --sp_board_vertical_gap:               ${this.sp_board_vertical_gap};
 
@@ -38,6 +38,10 @@ export const mod_sp_css = {
           --sp_coordinate_y_size:                ${this.sp_coordinate_y_size};
           --sp_coordinate_y_push:                ${this.sp_coordinate_y_push};
           --sp_coordinate_color:                 ${this.sp_coordinate_color};
+
+          /* 駒 */
+          --sp_stand_cell_size:                      ${this.sp_stand_cell_size};
+          --sp_piece_box_cell_size:                      ${this.sp_piece_box_cell_size};
 
           /* 駒数 */
           --sp_piece_count_size:                 ${this.sp_piece_count_size};

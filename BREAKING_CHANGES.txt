@@ -1,6 +1,0 @@
-CSS変数名変更: --sp_board_dimension_w → --sp_board_view_w
-CSS変数名変更: --sp_board_dimension_h → --sp_board_view_h
-CSS変数追加: --sp_board_view_x
-CSS変数変更: --sp_board_view_y
-CSSクラス名変更: .MembershipStand2 → .MembershipStandPieces
-
