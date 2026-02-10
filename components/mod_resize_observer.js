@@ -6,6 +6,7 @@ import _ from "lodash"
 const REQUEST_ANIMATION_FRAME_WRAP = true       // requestAnimationFrame でラップするか？
 const DEBOUNCE_WRAP                = false      // debounce で処理を保留するか？
 const DEBOUNCE_MS                  = 1000 / 20  // debounce で処理を保留する時間(ms)
+const CAST_INTEGER                 = true       // 小数だとぷるぷるするので整数にする？
 
 export const mod_resize_observer = {
   // props: {
@@ -89,7 +90,7 @@ export const mod_resize_observer = {
       if (entry.target.dataset["resize_observer_id"] === e.key) {
         let w = entry.contentRect.width
         let h = entry.contentRect.height
-        if (false) {
+        if (CAST_INTEGER) {
           w = Math.round(w)
           h = Math.round(h)
         }
