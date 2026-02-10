@@ -25,9 +25,9 @@
             b-button.mb-0(@click="TheSe.xstore_load_handle") LOAD
     .box
       SeTitle(name="基本")
-      b-field(custom-class="is-small" label="コンテナ幅")
+      b-field(custom-class="is-small" label="コンテナ幅" message="将棋盤の大きさは外側の要素の横幅で決まる")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.se_frame_width" :min="1" :max="100")
-      b-field(custom-class="is-small" label="レイアウト")
+      b-field(custom-class="is-small" label="レイアウト" message="駒台の配置位置。左右=PC 上下=モバイル 向け")
         b-radio-button(size="is-small" v-model="TheSe.sp_layout" native-value="horizontal") 左右
         b-radio-button(size="is-small" v-model="TheSe.sp_layout" native-value="vertical") 上下
       b-field(custom-class="is-small" label="モード")
@@ -61,10 +61,15 @@
       //- b-field(custom-class="is-small" label="非透輝度")
       //-   b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.se_ws_opacity" :min="0" :max="1.0" :step="0.001")
 
+      hr
+
+      p.help
+        | 背景は使う側の設定であって ShogiPlayer とは直接関係が無い
+
     .box
       SeTitle(name="盤テクスチャ")
 
-      b-field(custom-class="is-small")
+      b-field(custom-class="is-small" label="単色")
         MyColorPicker(v-model="TheSe.sp_board_color")
 
       b-field.my-4(custom-class="is-small" label="プリセット画像")
@@ -80,11 +85,11 @@
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_radius" :min="0" :max="50" :step="0.01")
       b-field(custom-class="is-small" label="余白" message="紙面風なら0にする")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_padding" :min="0" :max="0.05" :step="0.001")
-      b-field(custom-class="is-small" label="アスペクト比" message="将棋盤は僅かに縦長である。正方形だとめちゃくちゃ気持ち悪い。")
+      b-field(custom-class="is-small" label="アスペクト比" message="将棋盤は正方形ではない")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
-      b-field(custom-class="is-small" label="左右余白(横レイアウト時有効)" message="盤と持駒の間にタップできない領域ができてしまうため基本0でよい。座標を表示するときのみ少し空けるとよいかもしれない")
+      b-field(custom-class="is-small" label="左右余白 (横レイアウト時有効)" message="盤と持駒の間にクリックできない領域ができてしまうため基本0でよい。座標を表示するときのみ少し空けるとよいかもしれない。")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_horizontal_gap" :min="0" :max="1.0" :step="0.01")
-      b-field(custom-class="is-small" label="上下余白(縦レイアウト時有効)" message="基本0でよい" v-if="development_p")
+      b-field(custom-class="is-small" label="上下余白 (縦レイアウト時有効)" message="縦幅は貴重なので基本0でよい" v-if="development_p")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_vertical_gap" :min="0" :max="1.0" :step="0.01")
 
     .box
@@ -112,6 +117,11 @@
 
     .box
       SeTitle(name="カメラ")
+      b-field.mt-1(custom-class="is-small" label="プリセット")
+        .control
+          .buttons.mb-0
+            template(v-for="e in TheSe.SeBoardSizePresetInfo.values")
+              b-button(@click="TheSe.se_board_size_preset_apply_handle(e)" size="is-small") {{e.name}}
       .columns.mt-1.mb-2
         .column.py-0
           b-field(custom-class="is-small" label="左上(X)")
@@ -128,12 +138,6 @@
             b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_board_view_h" :min="0" :max="19")
 
       hr
-
-      b-field.mt-4(custom-class="is-small" label="プリセット")
-        .control
-          .buttons.mb-0
-            template(v-for="e in TheSe.SeBoardSizePresetInfo.values")
-              b-button(@click="TheSe.se_board_size_preset_apply_handle(e)" size="is-small") {{e.name}}
 
       p.help.content
         ul
@@ -286,6 +290,13 @@
 
     .box
       SeTitle(name="対局者名")
+
+      b-field(custom-class="is-small" label="手番のときの☗☖の大きさ")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_location_mark_active_size" :min="0" :max="1.5" :step="0.01")
+
+      b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ")
+        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_location_mark_inactive_size" :min="0" :max="1.5" :step="0.01")
+
       b-field(custom-class="is-small" label="縦・横書き(全体レイアウトが横の場合のみ有効)" message="英字も考慮して縦書きにするなら横書きのままで1文字ずつ<br>を入れた方が正しく縦書きになる。日本語しか使わないのであれば単に縦書きでもよい。モバイルの場合は狭いので横書きの方がよい")
         b-radio-button(size="is-small" v-model="TheSe.sp_name_direction" native-value="horizontal") 横書き
         b-radio-button(size="is-small" v-model="TheSe.sp_name_direction" native-value="vertical") 縦書き
@@ -384,6 +395,7 @@
 
     .box
       SeTitle(name="Transform")
+
       b-tabs(size="is-small" v-model="TheSe.transform_tab_index" expanded)
         b-tab-item(label="背景")
           b-field(custom-class="is-small" label="")
@@ -456,6 +468,17 @@
             .control
               b-button(size="is-small" @click="TheSe.se_tf2_reset") リセット
 
+      hr
+
+      b-field(custom-class="is-small" label="チェッカー背景")
+        b-radio-button(size="is-small" v-model="TheSe.se_bg_pattern" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.se_bg_pattern" :native-value="true") ON
+
+      hr
+
+      p.help.content
+        | Transform 関連はスタイルエディタ側で ShogiPlayer の要素にCSSを適用しているだけ
+
     .box
       SeTitle(name="コントローラー")
 
@@ -474,18 +497,75 @@
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_controller_width_mobile" :min="0" :max="1.0" :step="0.001")
 
     .box
+      SeTitle(name="操作感")
+
+      b-field(custom-class="is-small" label="持ち上げた駒のキャンセル方法")
+        template(v-for="e in TheSe.LiftCancelActionInfo.values")
+          b-radio-button(size="is-small" v-model="TheSe.sp_lift_cancel_action" :native-value="e.key") {{e.radio_button_name}}
+
+    .box
       SeTitle(name="反則")
-      b-field(custom-class="is-small" label="操作モードでは合法手に絞る(反則判定には関与しない)")
+
+      b-field(custom-class="is-small" label="移動制限")
+        template(#message)
+          | 駒の特性を考慮する親切オプションで例えば玉は1マスしか動けなくなる。
+          | ただし反則のロジックには関与しないためそれが自殺手になっているかはわからない。
         b-radio-button(size="is-small" v-model="TheSe.sp_legal_move_only" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_legal_move_only" :native-value="true") ON
 
-      b-field(custom-class="is-small" label="操作モードでの反則判定")
+      b-field(custom-class="is-small" label="反則検知")
+        template(#message)
+          | 反則が起きていないかチェックする。
+          | 例えば王手ではない状態から利きがあるところに玉を動かせば<b>自殺手</b>の情報を、着手イベント ev_play_mode_move に含める。
+          | これを有効にするときは移動制限も有効にすること。
         b-radio-button(size="is-small" v-model="TheSe.sp_illegal_validate" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_illegal_validate" :native-value="true") ON
 
-      b-field(custom-class="is-small" label="操作モードでの反則ブロック")
+      b-field(custom-class="is-small" label="反則ブロック")
+        template(#message)
+          | 反則できないようにするオプション。
+          | 反則検知オプション有効時に反則を検知しても ev_play_mode_move に含めない。
+          | 代わりに ev_illegal_illegal_accident イベントで反則を投げるが無視してもよい。
         b-radio-button(size="is-small" v-model="TheSe.sp_illegal_cancel" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_illegal_cancel" :native-value="true") ON
+
+      p.help
+        | 以上はすべて操作モードでのみ有効である
+
+    .box
+      SeTitle(name="千日手")
+
+      b-field(custom-class="is-small" label="現局面のハッシュをイベントに含めるか？")
+        template(#message)
+          | 有効にすると ev_play_mode_move イベントに含める。
+          | 同じハッシュの4回目を発生させた側を反則とするかどうかはイベントを受け取った側に任せてある。
+          | また設計ミスにより(いまのところは)反則検知ができない。
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_snapshot_hash" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_snapshot_hash" :native-value="true") ON
+
+      b-field(custom-class="is-small" label="操作モードで王手しているかどうかの結果をイベントに含めるか？")
+        template(#message)
+          | 連続王手の千日手の判定サポート用
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_op_king_check" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_request_op_king_check" :native-value="true") ON
+
+      p.help
+        | 以上はすべて操作モードでのみ有効である
+
+    .box
+      SeTitle(name="デバッグ")
+
+      b-field(custom-class="is-small" label="レイヤー確認")
+        b-radio-button(size="is-small" v-model="TheSe.sp_layer" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_layer" :native-value="true") ON
+
+      b-field(custom-class="is-small" label="Dev Tools")
+        b-radio-button(size="is-small" v-model="TheSe.sp_dev_tools" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_dev_tools" :native-value="true") ON
+
+      b-field(custom-class="is-small" label="手数表示")
+        b-radio-button(size="is-small" v-model="TheSe.sp_turn_show" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_turn_show" :native-value="true") ON
 
     .box
       SeTitle(name="その他")
@@ -494,21 +574,7 @@
         b-radio-button(size="is-small" v-model="TheSe.sp_request_checkmate_stat" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_request_checkmate_stat" :native-value="true") ON
 
-      b-field(custom-class="is-small" label="操作モードで現局面のハッシュをイベントに含めるか？")
-        b-radio-button(size="is-small" v-model="TheSe.sp_request_snapshot_hash" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_request_snapshot_hash" :native-value="true") ON
-
-      b-field(custom-class="is-small" label="操作モードで王手しているかどうかの結果をイベントに含めるか？")
-        b-radio-button(size="is-small" v-model="TheSe.sp_request_op_king_check" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_request_op_king_check" :native-value="true") ON
-
-      b-field(custom-class="is-small" label="手番のときの☗☖の大きさ")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_location_mark_active_size" :min="0" :max="1.5" :step="0.01")
-
-      b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ")
-        b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_location_mark_inactive_size" :min="0" :max="1.5" :step="0.01")
-
-      b-field(custom-class="is-small" label="共通の隙間" message="駒セル縦幅に対する割合")
+      b-field(custom-class="is-small" label="共通の隙間" message="盤の縦幅に対する割合")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_common_gap" :min="0" :max="0.1" :step="0.0001")
 
       b-field(custom-class="is-small" label="モバイル時に縦配置にする")
@@ -519,47 +585,30 @@
         b-radio-button(size="is-small" v-model="TheSe.sp_viewpoint" native-value="black") ☗
         b-radio-button(size="is-small" v-model="TheSe.sp_viewpoint" native-value="white") ☖
 
-      b-field(custom-class="is-small" label="手数表示")
-        b-radio-button(size="is-small" v-model="TheSe.sp_turn_show" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_turn_show" :native-value="true") ON
-
-      b-field(custom-class="is-small" label="レイヤー確認")
-        b-radio-button(size="is-small" v-model="TheSe.sp_layer" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_layer" :native-value="true") ON
-
-      b-field(custom-class="is-small" label="Dev Tools")
-        b-radio-button(size="is-small" v-model="TheSe.sp_dev_tools" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_dev_tools" :native-value="true") ON
-
       b-field(custom-class="is-small" label="盤面左右で局面変更" message="再生モード時のみ有効")
         b-radio-button(size="is-small" v-model="TheSe.sp_overlay_nav" :native-value="false") OFF
         b-radio-button(size="is-small" v-model="TheSe.sp_overlay_nav" :native-value="true") ON
-
-      b-field(custom-class="is-small" label="KIFコメ表示")
-        b-radio-button(size="is-small" v-model="TheSe.sp_comment" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.sp_comment" :native-value="true") ON
-
-      b-field(custom-class="is-small" label="持ち上げた駒のキャンセル方法")
-        template(v-for="e in TheSe.LiftCancelActionInfo.values")
-          b-radio-button(size="is-small" v-model="TheSe.sp_lift_cancel_action" :native-value="e.key") {{e.radio_button_name}}
 
       //- b-field(custom-class="is-small" label="盤が反応するタイミング")
       //-   template(v-for="e in TheSe.ClickResponseTimingInfo.values")
       //-     b-radio-button(size="is-small" v-model="TheSe.sp_click_response_timing" :native-value="e.key") {{e.name}}
 
-      b-field(custom-class="is-small" label="チェッカー背景")
-        b-radio-button(size="is-small" v-model="TheSe.se_bg_pattern" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSe.se_bg_pattern" :native-value="true") ON
-
     .box
       SeTitle(name="棋譜")
+
       b-field(custom-class="is-small" label="プリセット")
         b-select(size="is-small" v-model="TheSe.kifu_sample_key" @input="TheSe.kifu_sample_key_input_handle")
           option(:value="null")
           template(v-for="e in TheSe.KifuBookInfo.values")
             option(:value="e.key") {{e.name}}
+
       b-field(custom-class="is-small" label="棋譜")
         b-input(size="is-small" v-model="TheSe.sp_body" type="textarea" :rows="8")
+
+      b-field(custom-class="is-small" label="KIFコメ表示")
+        b-radio-button(size="is-small" v-model="TheSe.sp_comment" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="TheSe.sp_comment" :native-value="true") ON
+
     .box
       SeTitle(name="カスタムCSS")
       b-field(custom-class="is-small" label="プリセット")

@@ -96,7 +96,7 @@ See also: [sp_controller](/reference/props/#sp-controller), [sp_mounted_focus_to
 
 ### `sp_piece_variant`
 
-Type: `nureyon | paper | zuan | portella`
+Type: `none | nureyon | paper | zuan | portella`
 Default: `nureyon`
 
 駒の種類
@@ -202,10 +202,7 @@ Default: `kanji`
 | kanji | 一..九 |
 | alphabet | a..i   |
 
-これらの値は CSS Counter Styles そのものなので他にも指定できる。
-実際に使うのは上の3つぐらいである。
-
-See also: [CSS Counter Styles](https://www.w3.org/TR/css-counter-styles-3/#simple-numeric), [sp_coordinate_variant_v](/reference/props/#sp-coordinate-variant-v)
+See also: [sp_coordinate_variant_v](/reference/props/#sp-coordinate-variant-v)
 
 ### `sp_coordinate_variant_v`
 
@@ -552,7 +549,7 @@ Default: `9`
 Type: `Boolean`
 Default: `true`
 
-操作モードで合法手のみに絞るか？
+操作モードで駒の移動を制限するか？
 
 * false にすると？
   * 禁じ手や手番の制約がなくなる
@@ -627,7 +624,7 @@ See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
 Type: `Boolean`
 Default: `false`
 
-反則判定にひっかかったあと反則を無かったことにするか？
+反則検知にひっかかったあと反則を無かったことにするか？
 
 * 無かったことにしてもイベントで反則を知ることはできる
 * 有効にすると基本的な反則の操作はできなくなる
@@ -639,7 +636,7 @@ Default: `false`
 ### `sp_request_snapshot_hash`
 
 Type: `Boolean`
-Default: `true`
+Default: `false`
 
 操作モードのイベント `ev_play_mode_move` に現局面のハッシュを含めるか？
 
