@@ -13,7 +13,7 @@
       b-navbar-dropdown(label="実験" hoverable v-if="development_p")
         b-navbar-item(tag="nuxt-link" :to="{name: 'test-sp_device'}") sp_device テスト
         b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_bod_parse'}") BOD読み込み
-        b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_illegal'}") 反則判定
+        b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_illegal'}") 反則検知
         b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_sound_timing'}") 音タイミング
         b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_think_mark'}") マーク
         b-navbar-item(tag="nuxt-link" :to="{name: 'test-test_show'}") 表示

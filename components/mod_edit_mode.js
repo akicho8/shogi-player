@@ -10,7 +10,7 @@ import { ClickResponseTimingInfo } from "./models/click_response_timing_info.js"
 
 export const mod_edit_mode = {
   props: {
-    sp_legal_move_only:           { type: Boolean, default: true, },       // play で合法手のみに絞る
+    sp_legal_move_only:           { type: Boolean, default: true, },       // play で駒の移動を制限する
     sp_piece_auto_promote:        { type: Boolean, default: true, },       // play で死に駒になるときは自動的に成る
     sp_my_piece_only_move:        { type: Boolean, default: true, },       // play では自分手番とき自分の駒しか動かせないようにする
     sp_my_piece_kill_disabled:    { type: Boolean, default: true, },       // play では自分の駒で同じ仲間の駒を取れないようにする
@@ -270,7 +270,7 @@ export const mod_edit_mode = {
         return
       }
 
-      // 盤上から移動させようとしたとき合法手以外は指せないようにする
+      // 盤上から移動させようとしたとき移動を制限する
       if (this.sp_legal_move_only && this.play_p && this.place_from) {
         let found = false
 

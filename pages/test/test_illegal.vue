@@ -3,7 +3,7 @@
   MainDocMainNavbar
     template(slot="brand")
       MainDocNavbarItemHome
-      b-navbar-item(tag="div").has-text-weight-bold 反則判定
+      b-navbar-item(tag="div").has-text-weight-bold 反則検知
   .section
     .container.is-fluid
       .columns.is-multiline
@@ -30,7 +30,7 @@
               :sp_body="illegal_accident.sfen"
             )
         .column.is-2
-          b-field(custom-class="is-small" label="反則判定" message="OFFなら気持ち程度処理も軽くなる")
+          b-field(custom-class="is-small" label="反則検知" message="OFFなら気持ち程度処理も軽くなる")
             b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_illegal_validate" :native-value="true") ON
           b-field(custom-class="is-small" label="反則ブロック" message="ONは初心者向けで判定にひっかかったら操作を無効にする")

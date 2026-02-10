@@ -37,6 +37,9 @@
 <script>
 const DEVELOPMENT_P = process.env.NODE_ENV === "development"
 
+import _ from "lodash"
+import { GX } from "../models/gx.js"
+
 import { HumanSideInfo    }    from "../models/human_side_info.js"
 import { ModeInfo         }      from "../models/mode_info.js"
 import { BoardVariantInfo }    from "../models/board_variant_info.js"
@@ -59,6 +62,7 @@ import { mod_sp_css } from "./mod_sp_css.js"
 import { mod_se_css } from "./mod_se_css.js"
 import { mod_helper } from "./mod_helper.js"
 import { mod_think_mark } from "./mod_think_mark.js"
+import { mod_general_event } from "./mod_general_event.js"
 
 import ShogiPlayer   from "../ShogiPlayer.vue"
 import SidebarContent   from "./SidebarContent.vue"
@@ -71,6 +75,7 @@ export default {
     mod_se_css,
     mod_helper,
     mod_think_mark,
+    mod_general_event,
   ],
 
   components: {
@@ -287,50 +292,50 @@ export default {
     sp_params() {
       let params = {}
 
-      params.sp_mode                 = this.sp_mode
-      params.sp_body                 = this.sp_body
-      params.sp_turn                 = this.sp_turn
-      params.sp_viewpoint            = this.sp_viewpoint
+      params.sp_mode                   = this.sp_mode
+      params.sp_body                   = this.sp_body
+      params.sp_turn                   = this.sp_turn
+      params.sp_viewpoint              = this.sp_viewpoint
 
-      params.sp_controller           = this.sp_controller
-      params.sp_slider               = this.sp_slider
-      params.sp_player_info          = this.sp_player_info
+      params.sp_controller             = this.sp_controller
+      params.sp_slider                 = this.sp_slider
+      params.sp_player_info            = this.sp_player_info
 
-      params.sp_piece_variant        = this.sp_piece_variant
-      params.sp_board_variant        = this.sp_board_variant
+      params.sp_piece_variant          = this.sp_piece_variant
+      params.sp_board_variant          = this.sp_board_variant
 
-      params.sp_layout               = this.sp_layout
-      params.sp_balloon              = this.sp_balloon
-      params.sp_layer                = this.sp_layer
-      params.sp_mobile_vertical      = this.sp_mobile_vertical
-      params.sp_debug                = this.sp_debug,
-      params.sp_comment              = this.sp_comment,
-      params.sp_dev_tools            = this.sp_dev_tools
-      params.sp_dev_tools_group            = this.sp_dev_tools_group
-      params.sp_overlay_nav          = this.sp_overlay_nav
-      params.sp_turn_show            = this.sp_turn_show
-      params.sp_coordinate           = this.sp_coordinate
-      params.sp_coordinate_variant_h = this.sp_coordinate_variant_h
-      params.sp_coordinate_variant_v = this.sp_coordinate_variant_v
-      params.sp_stand_gravity        = this.sp_stand_gravity
-      params.sp_stand_flip           = this.sp_stand_flip
-      params.sp_name_direction       = this.sp_name_direction
-      params.sp_star_step    = this.sp_star_step
+      params.sp_layout                 = this.sp_layout
+      params.sp_balloon                = this.sp_balloon
+      params.sp_layer                  = this.sp_layer
+      params.sp_mobile_vertical        = this.sp_mobile_vertical
+      params.sp_debug                  = this.sp_debug,
+      params.sp_comment                = this.sp_comment,
+      params.sp_dev_tools              = this.sp_dev_tools
+      params.sp_dev_tools_group        = this.sp_dev_tools_group
+      params.sp_overlay_nav            = this.sp_overlay_nav
+      params.sp_turn_show              = this.sp_turn_show
+      params.sp_coordinate             = this.sp_coordinate
+      params.sp_coordinate_variant_h   = this.sp_coordinate_variant_h
+      params.sp_coordinate_variant_v   = this.sp_coordinate_variant_v
+      params.sp_stand_gravity          = this.sp_stand_gravity
+      params.sp_stand_flip             = this.sp_stand_flip
+      params.sp_name_direction         = this.sp_name_direction
+      params.sp_star_step              = this.sp_star_step
 
-      params.sp_legal_move_only      = this.sp_legal_move_only
-      params.sp_illegal_validate     = this.sp_illegal_validate
-      params.sp_illegal_cancel       = this.sp_illegal_cancel
-      params.sp_request_checkmate_stat     = this.sp_request_checkmate_stat
-      params.sp_request_snapshot_hash     = this.sp_request_snapshot_hash
-      params.sp_request_op_king_check     = this.sp_request_op_king_check
+      params.sp_legal_move_only        = this.sp_legal_move_only
+      params.sp_illegal_validate       = this.sp_illegal_validate
+      params.sp_illegal_cancel         = this.sp_illegal_cancel
+      params.sp_request_checkmate_stat = this.sp_request_checkmate_stat
+      params.sp_request_snapshot_hash  = this.sp_request_snapshot_hash
+      params.sp_request_op_king_check  = this.sp_request_op_king_check
 
-      params.sp_lift_cancel_action   = this.sp_lift_cancel_action
-      params.sp_click_response_timing     = this.sp_click_response_timing
+      params.sp_lift_cancel_action     = this.sp_lift_cancel_action
+      params.sp_click_response_timing  = this.sp_click_response_timing
 
-      params.sp_board_view_x    = this.sp_board_view_x
-      params.sp_board_view_y    = this.sp_board_view_y
-      params.sp_board_view_w    = this.sp_board_view_w
-      params.sp_board_view_h    = this.sp_board_view_h
+      params.sp_board_view_x           = this.sp_board_view_x
+      params.sp_board_view_y           = this.sp_board_view_y
+      params.sp_board_view_w           = this.sp_board_view_w
+      params.sp_board_view_h           = this.sp_board_view_h
 
       return params
     },
@@ -338,7 +343,7 @@ export default {
     // 動作を受け取るやつら
     sp_hook() {
       const hv = {}
-      // hv["ev_play_mode_move"]              = this.SB.ev_play_mode_move
+      hv["ev_play_mode_move"]              = this.ev_play_mode_move
       // hv["ev_edit_mode_short_sfen_change"] = this.SB.ev_edit_mode_short_sfen_change
       // hv["ev_short_sfen_change"]           = this.SB.ev_short_sfen_change
       // hv["ev_turn_offset_change"]          = v => this.SB.current_turn = v
@@ -356,7 +361,7 @@ export default {
       // hv["ev_illegal_my_turn_but_oside_click"]    = this.SB.ev_illegal_my_turn_but_oside_click    // 自分が手番だが相手の駒を動かそうとした
       //
       // // 反則系
-      // hv["ev_illegal_illegal_accident"] = this.SB.ev_illegal_illegal_accident
+      hv["ev_illegal_illegal_accident"] = this.ev_illegal_illegal_accident
 
       // マークできる箇所をタップした
       hv["ev_action_click_for_think_mark"] = this.ev_action_click_for_think_mark

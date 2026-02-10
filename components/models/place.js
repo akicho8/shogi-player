@@ -220,6 +220,10 @@ export class Place {
     return this.constructor.straight_p(this, to)
   }
 
+  // toJSON() {
+  //   return { a: 1 }
+  // }
+
   // private
 
   __str_to_xy(str) {

@@ -82,7 +82,7 @@ export default {
     sp_request_op_king_check:             { type: Boolean, }, // 着手した側が相手に対して王手したかどうかの結果をイベントに含めるか？
     sp_illegal_validate:               { type: Boolean, }, // play で反則の判定をするか？
     sp_illegal_cancel:                 { type: Boolean, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)
-    sp_legal_move_only:                { type: Boolean, }, // play で合法手のみに絞る
+    sp_legal_move_only:                { type: Boolean, }, // play で駒の移動を制限する
     sp_piece_auto_promote:             { type: Boolean, }, // play で死に駒になるときは自動的に成る
     sp_my_piece_only_move:             { type: Boolean, }, // play では自分手番とき自分の駒しか動かせないようにする
     sp_my_piece_kill_disabled:         { type: Boolean, }, // play では自分の駒で同じ仲間の駒を取れないようにする

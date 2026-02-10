@@ -618,7 +618,7 @@ export default {
     @extend %unselectable
 
 .ShogiPlayer
-  // 共通の隙間(駒セルの縦幅に対する割合)
+  // 共通の隙間(盤の縦幅に対する割合)
   // あまり重要ではないところでの縦のマージンが必要なときに使う
   // sp_common_gap を直接使ってはいけない
   +defvar(sp_common_gap, 0.02)
