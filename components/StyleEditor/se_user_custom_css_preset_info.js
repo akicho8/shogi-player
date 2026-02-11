@@ -45,6 +45,12 @@ export class SeUserCustomCssPresetInfo extends ApplicationMemoryRecord {
 `,
       },
       {
+        key: "盤のみ",
+        user_custom_css: `
+.ShogiPlayer .Membership { display: none }
+`
+      },
+      {
         key: "ノイズ盤",
         user_custom_css: `
 .ShogiPlayer {

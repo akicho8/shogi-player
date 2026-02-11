@@ -54,14 +54,15 @@ export default {
 
   //////////////////////////////////////////////////////////////////////////////// 名前の方向
 
-  +IF_HORIZONTAL                            // 横書きなら
-    &.is_name_direction_vertical           // 縦書き
+  +IF_HORIZONTAL                    // 横書きなら
+    &.is_name_direction_vertical    // 縦書き
       .MembershipLocationPlayerInfoName
         writing-mode: vertical-rl
-  +IF_VERTICAL                              // 縦の場合は(自動で縦にした場合も含めて)横にする
-    &.is_name_direction_vertical           // 詳細度で負けないように必要
+        text-orientation: upright   // 英字も正立させる https://x.com/Robby_WebDesign/status/1660638749611417603/photo/1
+  +IF_VERTICAL                      // 縦の場合は(自動で縦にした場合も含めて)横にする
+    &.is_name_direction_vertical    // 詳細度で負けないように必要
       .MembershipLocationPlayerInfoName
-        writing-mode: horizontal-tb         // 明示的に横にする
+        writing-mode: horizontal-tb // 明示的に横にする
 
   //////////////////////////////////////////////////////////////////////////////// 時間
 

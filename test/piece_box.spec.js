@@ -1,5 +1,5 @@
 import { SfenParser } from "@/components/models/sfen_parser.js"
-import { SfenInfo } from "@/components/models/sfen_info.js"
+import { SfenBookInfo } from "@/components/models/sfen_book_info.js"
 import { PresetInfo } from "@/components/models/preset_info.js"
 import { Location } from "@/components/models/location.js"
 import { Piece } from "@/components/models/piece.js"

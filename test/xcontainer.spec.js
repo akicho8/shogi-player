@@ -1,6 +1,6 @@
 import { Xcontainer } from "@/components/models/xcontainer.js"
 import { SfenParser } from "@/components/models/sfen_parser.js"
-import { SfenInfo } from "@/components/models/sfen_info.js"
+import { SfenBookInfo } from "@/components/models/sfen_book_info.js"
 import { PresetInfo } from "@/components/models/preset_info.js"
 import { Location } from "@/components/models/location.js"
 import { Piece } from "@/components/models/piece.js"
@@ -47,8 +47,8 @@ describe("Xcontainer", () => {
         expect(xcontainer.to_short_sfen).toEqual(PresetInfo.fetch("平手").sfen)
       }
       {
-        const xcontainer = Xcontainer.setup_by({sfen_key: "適当な局面"})
-        expect(xcontainer.to_short_sfen).toEqual(SfenInfo.fetch("適当な局面").sfen)
+        const xcontainer = Xcontainer.setup_by({sfen_book_key: "適当な局面"})
+        expect(xcontainer.to_short_sfen).toEqual(SfenBookInfo.fetch("適当な局面").sfen)
       }
     })
   })
@@ -63,12 +63,12 @@ describe("Xcontainer", () => {
 
   describe("HoldPieceMethods", () => {
     it("#hold_pieces_to_h", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2△角2"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "▲飛2△角2"})
       expect(xcontainer.hold_pieces_to_h(Location.black)).toEqual({"R": 2})
     })
 
     it("#hold_pieces_count", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2△角2"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "▲飛2△角2"})
       expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("B"))).toEqual(0)
       expect(xcontainer.hold_pieces_count(Location.black, Piece.fetch("R"))).toEqual(2)
       expect(xcontainer.hold_pieces_count(Location.white, Piece.fetch("B"))).toEqual(2)
@@ -76,7 +76,7 @@ describe("Xcontainer", () => {
     })
 
     it("#hold_pieces_blank_p", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2角2△"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "▲飛2角2△"})
       expect(xcontainer.hold_pieces_blank_p(Location.black)).toEqual(false)
       expect(xcontainer.hold_pieces_blank_p(Location.white)).toEqual(true)
     })
@@ -93,27 +93,27 @@ describe("Xcontainer", () => {
     })
 
     it("#hold_pieces_can_be_reduced_count", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2△角2"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "▲飛2△角2"})
       expect(xcontainer.hold_pieces_can_be_reduced_count(Location.black, Piece.fetch("R"), 1)).toEqual(1)
       expect(xcontainer.hold_pieces_can_be_reduced_count(Location.black, Piece.fetch("R"), 2)).toEqual(2)
       expect(xcontainer.hold_pieces_can_be_reduced_count(Location.black, Piece.fetch("R"), 3)).toEqual(2)
     })
 
     it("#realized_hold_pieces_of", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2角2△"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "▲飛2角2△"})
       expect(xcontainer.realized_hold_pieces_of(Location.black)).toEqual([[Piece.fetch("R"), 2], [Piece.fetch("B"), 2]])
       expect(xcontainer.realized_hold_pieces_of(Location.white)).toEqual([])
     })
 
     it("#hold_pieces_to_piece_box$", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2角2△"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "▲飛2角2△"})
       xcontainer.hold_pieces_to_piece_box$(Location.black)
       expect(xcontainer.hold_pieces_to_h(Location.black)).toEqual({})
       expect(xcontainer.piece_box.realize).toEqual([[Piece.fetch("R"), 2], [Piece.fetch("B"), 2]])
     })
 
     it("#hold_piece_all_counts_hash", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "▲飛2△角2"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "▲飛2△角2"})
       expect(xcontainer.hold_piece_all_counts_hash).toEqual({"R": 2, "B": 2})
     })
   })
@@ -157,21 +157,21 @@ describe("Xcontainer", () => {
 
   describe("TurnMethods", () => {
     it("#turn_offset", () => {
-      expect(Xcontainer.setup_by({sfen_key: "最速角交換", current_turn: -2}).turn_offset).toEqual(3)
-      expect(Xcontainer.setup_by({sfen_key: "最速角交換", current_turn: -1}).turn_offset).toEqual(4)
-      expect(Xcontainer.setup_by({sfen_key: "最速角交換", current_turn:  0}).turn_offset).toEqual(0)
-      expect(Xcontainer.setup_by({sfen_key: "最速角交換", current_turn:  1}).turn_offset).toEqual(1)
-      expect(Xcontainer.setup_by({sfen_key: "最速角交換", current_turn:  5}).turn_offset).toEqual(4)
+      expect(Xcontainer.setup_by({sfen_book_key: "最速角交換", current_turn: -2}).turn_offset).toEqual(3)
+      expect(Xcontainer.setup_by({sfen_book_key: "最速角交換", current_turn: -1}).turn_offset).toEqual(4)
+      expect(Xcontainer.setup_by({sfen_book_key: "最速角交換", current_turn:  0}).turn_offset).toEqual(0)
+      expect(Xcontainer.setup_by({sfen_book_key: "最速角交換", current_turn:  1}).turn_offset).toEqual(1)
+      expect(Xcontainer.setup_by({sfen_book_key: "最速角交換", current_turn:  5}).turn_offset).toEqual(4)
     })
 
     it("#turn_clamp", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "最速角交換"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "最速角交換"})
       expect(xcontainer.turn_clamp(-1)).toEqual(0)
       expect(xcontainer.turn_clamp(5)).toEqual(4)
     })
 
     it("#turn_cycle", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "最速角交換"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "最速角交換"})
       expect(xcontainer.turn_cycle(-2)).toEqual(3)
       expect(xcontainer.turn_cycle(-1)).toEqual(4)
       expect(xcontainer.turn_cycle(+0)).toEqual(0)
@@ -180,14 +180,14 @@ describe("Xcontainer", () => {
     })
 
     it("#turn_offset_min #turn_offset_max #turn_base", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "最速角交換"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "最速角交換"})
       expect(xcontainer.turn_offset_min).toEqual(0)
       expect(xcontainer.turn_offset_max).toEqual(4)
       expect(xcontainer.turn_base).toEqual(0)
     })
 
     it("#previous_location #current_location #next_location", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "最速角交換"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "最速角交換"})
       expect(xcontainer.previous_location).toEqual(Location.white)
       expect(xcontainer.current_location).toEqual(Location.black)
       expect(xcontainer.next_location).toEqual(Location.white)
@@ -200,15 +200,15 @@ describe("Xcontainer", () => {
     })
 
     it("#current_turn_label", () => {
-      expect(Xcontainer.setup_by({sfen_key: "最速角交換", current_turn:  0}).current_turn_label).toEqual("0手")
-      expect(Xcontainer.setup_by({sfen_key: "最速角交換", current_turn: -1}).current_turn_label).toEqual("まで4手で☖の勝ち")
+      expect(Xcontainer.setup_by({sfen_book_key: "最速角交換", current_turn:  0}).current_turn_label).toEqual("0手")
+      expect(Xcontainer.setup_by({sfen_book_key: "最速角交換", current_turn: -1}).current_turn_label).toEqual("まで4手で☖の勝ち")
 
-      expect(Xcontainer.setup_by({sfen_key: "最速角交換から相筋違い角", current_turn:  0}).current_turn_label).toEqual("4手")
-      expect(Xcontainer.setup_by({sfen_key: "最速角交換から相筋違い角", current_turn: -1}).current_turn_label).toEqual("まで6手で☖の勝ち")
+      expect(Xcontainer.setup_by({sfen_book_key: "最速角交換から相筋違い角", current_turn:  0}).current_turn_label).toEqual("4手")
+      expect(Xcontainer.setup_by({sfen_book_key: "最速角交換から相筋違い角", current_turn: -1}).current_turn_label).toEqual("まで6手で☖の勝ち")
     })
 
     it("#display_turn", () => {
-      const xcontainer = Xcontainer.setup_by({sfen_key: "最速角交換から相筋違い角"})
+      const xcontainer = Xcontainer.setup_by({sfen_book_key: "最速角交換から相筋違い角"})
       expect(xcontainer.display_turn).toEqual(4)
     })
   })

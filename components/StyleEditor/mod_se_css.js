@@ -1,7 +1,9 @@
+import { SeVariableInfo } from "./se_variable_info.js"
+
 export const mod_se_css = {
   computed: {
-    se_css_human() { return this.css_to_human(this.se_css)  },
-    se_css_embed() { return this.css_normalize(this.se_css) },
+    se_css_human() { return SeVariableInfo.css_to_human(this.se_css)  },
+    se_css_embed() { return SeVariableInfo.css_normalize(this.se_css) },
 
     se_css() {
       return `
@@ -10,7 +12,7 @@ export const mod_se_css = {
           --se_frame_width:     ${this.se_frame_width}vmin;
 
           /* 背景 */
-          --se_ws_color:        ${this.hsla_format(this.se_ws_color)};
+          --se_ws_color:        ${SeVariableInfo.hsla_format(this.se_ws_color)};
           --se_ws_image:        ${this.se_ws_bg_url};
           --se_ws_blur:         ${this.se_ws_blur};
           --se_ws_grayscale:    ${this.se_ws_grayscale};

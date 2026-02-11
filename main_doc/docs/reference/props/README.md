@@ -261,10 +261,6 @@ Default: `horizontal`
 | horizontal | 横書き |
 | vertical   | 縦書き |
 
-::: warning
-半角アルファベットを縦書きにすると横になってしまう。その場合は、横書きのまま1文字ずつ `<br>` を入れて縦にした方がいいかもしれない
-:::
-
 ### `sp_player_info`
 
 Type: `Hash`
@@ -647,9 +643,10 @@ See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
 Type: `Boolean`
 Default: `false`
 
-* 操作モードのイベント `ev_play_mode_move` に相手に王手しているかどうかの結果を含めるか？
-* これを有効にするとアプリ側で初心者向けに「王手！」などと表示することができる
-* また連続王手の千日手を判定するには `sp_request_snapshot_hash` と合わせて有効にする
+操作モードのイベント `ev_play_mode_move` に相手に王手しているかどうかの結果を含めるか？
+
+* アプリ側で初心者向けに「王手！」などと表示することができる
+* 連続王手の千日手を判定するには `sp_request_snapshot_hash` と合わせて有効にする
 
 See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
 
