@@ -1,5 +1,5 @@
 <template lang="pug">
-.SidebarContent.mx-4.my-4
+.EditorUI.mx-4.my-4
   .is-flex.is-justify-content-start.is-align-items-center
     b-button(@click="TheSe.sidebar_toggle_handle" icon-left="menu")
     .mx-3.has-text-weight-bold スタイルエディタ
@@ -25,7 +25,11 @@
             b-button.mb-0(@click="TheSe.xstore_load_handle") LOAD
     .box
       SeTitle(name="基本")
-      b-field(custom-class="is-small" label="コンテナ幅" message="将棋盤の大きさは外側の要素の横幅で決まる")
+      b-field(custom-class="is-small" label="コンテナ幅")
+        template(#message)
+          | 入れ物の横幅で盤の大きさが決まる。
+          | 高さでも調整できるようにしたい。
+
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.se_frame_width" :min="1" :max="100")
       b-field(custom-class="is-small" label="レイアウト" message="駒台の配置位置。左右=PC 上下=モバイル 向け")
         b-radio-button(size="is-small" v-model="TheSe.sp_layout" native-value="horizontal") 左右
@@ -270,7 +274,7 @@
         MyColorPicker(v-model="TheSe.sp_stand_hover_border_color")
 
     .box
-      SeTitle(name="持駒の表示")
+      SeTitle(name="持駒表示")
 
       .columns
         .column
@@ -284,12 +288,11 @@
 
       p.help.content
         ul
-          li <b>玉方の持駒を隠す</b>目的で入れた詰将棋向けの実験的機能
-          li 混乱を招きそう
+          li <b>玉方の持駒を隠す</b>目的で入れた詰将棋向けの機能 (実験的)
           li 単に玉方の駒を駒箱に移せば済むのだから余計な機能かもしれない
 
     .box
-      SeTitle(name="対局者名")
+      SeTitle(name="対局者")
 
       b-field(custom-class="is-small" label="手番のときの☗☖の大きさ")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_location_mark_active_size" :min="0" :max="1.5" :step="0.01")
@@ -297,7 +300,10 @@
       b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ")
         b-slider(v-bind="TheSe.slider_attrs" v-model="TheSe.sp_location_mark_inactive_size" :min="0" :max="1.5" :step="0.01")
 
-      b-field(custom-class="is-small" label="縦・横書き(全体レイアウトが横の場合のみ有効)" message="英字も考慮して縦書きにするなら横書きのままで1文字ずつ<br>を入れた方が正しく縦書きになる。日本語しか使わないのであれば単に縦書きでもよい。モバイルの場合は狭いので横書きの方がよい")
+      b-field(custom-class="is-small" label="名前の向き")
+        template(#message)
+          | 横書きは持駒を左右に置くレイアウトのときのみ有効
+
         b-radio-button(size="is-small" v-model="TheSe.sp_name_direction" native-value="horizontal") 横書き
         b-radio-button(size="is-small" v-model="TheSe.sp_name_direction" native-value="vertical") 縦書き
 
@@ -596,14 +602,27 @@
     .box
       SeTitle(name="棋譜")
 
-      b-field(custom-class="is-small" label="プリセット")
-        b-select(size="is-small" v-model="TheSe.kifu_sample_key" @input="TheSe.kifu_sample_key_input_handle")
+      b-field(custom-class="is-small" label="プリセット1")
+        b-select(size="is-small" v-model="TheSe.kifu_book_key" @input="TheSe.kifu_book_key_change_handle")
           option(:value="null")
           template(v-for="e in TheSe.KifuBookInfo.values")
             option(:value="e.key") {{e.name}}
 
-      b-field(custom-class="is-small" label="棋譜")
-        b-input(size="is-small" v-model="TheSe.sp_body" type="textarea" :rows="8")
+      b-field(custom-class="is-small" label="プリセット2")
+        b-select(size="is-small" v-model="TheSe.sfen_book_info_key" @input="TheSe.sfen_book_info_key_change_handle")
+          option(:value="null")
+          template(v-for="e in TheSe.SfenBookInfo.values")
+            option(:value="e.key") {{e.name}}
+
+      b-field.mb-0(custom-class="is-small" label="棋譜")
+        b-input(size="is-small" v-model="TheSe.user_body" type="textarea" :rows="8")
+      b-field.mt-2(custom-class="is-small" position="is-right")
+        .control
+          b-button(size="is-small" @click="TheSe.user_body_apply_handle" type="is-primary") 読み込む
+
+      template(v-if="development_p && false")
+        b-field(custom-class="is-small" label="反映済みの棋譜")
+          b-input(size="is-small" v-model="TheSe.sp_body" type="textarea" :rows="4" readonly)
 
       b-field(custom-class="is-small" label="KIFコメ表示")
         b-radio-button(size="is-small" v-model="TheSe.sp_comment" :native-value="false") OFF
@@ -621,16 +640,22 @@
 
     .box
       SeTitle(name="コンポーネント引数確認")
+      b-field(custom-class="is-small" label="デフォルト値の表示")
+        b-radio-button(size="is-small" v-model="TheSe.component_parmas_show_all" :native-value="false") しない
+        b-radio-button(size="is-small" v-model="TheSe.component_parmas_show_all" :native-value="true") する
       pre
-        | {{TheSe.sp_params}}
+        | {{TheSe.sp_component_attributes}}
     .box
       SeTitle(name="CSS変数確認")
+      b-field(custom-class="is-small" label="デフォルト値の表示")
+        b-radio-button(size="is-small" v-model="TheSe.css_params_show_all" :native-value="false") しない
+        b-radio-button(size="is-small" v-model="TheSe.css_params_show_all" :native-value="true") する
       pre
         | {{TheSe.sp_css_human}}
-    .box(v-if="development_p")
-      SeTitle(name="コメントを除去したCSS")
-      pre
-        | {{TheSe.sp_css_embed}}
+      //- .block(v-if="development_p")
+      //-   p.help sp_css_raw
+      //-   pre
+      //-     | {{TheSe.sp_css_raw}}
 </template>
 
 <script>
@@ -639,7 +664,7 @@ import ImageUpload   from "./ImageUpload.vue"
 import SeTitle       from "./SeTitle.vue"
 
 export default {
-  name: "SidebarContent",
+  name: "EditorUI",
   inject: ["TheSe"],
   components: {
     MyColorPicker,
@@ -652,7 +677,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 
-.SidebarContent
+.EditorUI
   .box
     margin-top: 1rem
     margin-bottom: 0

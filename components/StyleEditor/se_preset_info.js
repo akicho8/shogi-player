@@ -7,10 +7,18 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         key: "default",
         key: "初期値",
         func: context => {
-          context.SeVariableInfo.values.forEach(e => {
-            context.$data[e.key] = e.default
-          })
-          context.data_init()
+          context.SeVariableInfo.values.forEach(e => {context[e.key] = e.default_value})
+        }
+      },
+      {
+        key: "paper",
+        key: "あれこれ追加",
+        func: context => {
+          context.sp_player_info.black.name = "先手"
+          context.sp_player_info.white.name = "後手"
+          context.sp_coordinate             = true
+          context.sp_slider                 = true
+          context.sp_controller             = true
         }
       },
       {

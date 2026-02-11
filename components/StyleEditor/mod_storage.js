@@ -34,7 +34,7 @@ export const mod_storage = {
       this.SeVariableInfo.values.forEach(e => {
         const v = params[e.key] ?? storage[e.key]
         if (v != null) {
-          this.$data[e.key] = v
+          this[e.key] = v
         }
       })
     },
@@ -51,7 +51,7 @@ export const mod_storage = {
   },
   computed: {
     xstore_attributes() {
-      return this.SeVariableInfo.values.reduce((a, e) => ({...a, [e.key]: this.$data[e.key]}), {})
+      return this.SeVariableInfo.values.reduce((a, e) => ({...a, [e.key]: this[e.key]}), {})
     },
   },
 }

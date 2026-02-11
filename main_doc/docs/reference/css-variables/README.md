@@ -189,12 +189,12 @@ Default: `hsl(0 0% 0% / 0.15)`
 ### `--sp_mouse_lifted_origin_bg_color`
 Default: `hsl(0 0% 0% / 0.15)`
 
-マウスポインタで持ち上げた駒の移動元の升目の背景色
+マウスで持ち上げた駒の移動元の升目の背景色
 
 ### `--sp_mouse_lifted_origin_opacity`
 Default: `0.0`
 
-マウスポインタで持ち上げた駒の移動元にある駒の非透明度
+マウスで持ち上げた駒の移動元にある駒の非透明度
 
 半透明にすると駒が分身したかのように見える効果がある
 
@@ -300,7 +300,7 @@ Default: `0.0`
 ### `--sp_piece_count_vertical_y`
 Default: `0.47`
 
-駒数のY座標 (横配置時)
+駒数のY座標 (縦配置時)
 
 ### `--sp_piece_count_size`
 Default: `0.2`

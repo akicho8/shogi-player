@@ -7,7 +7,7 @@
   .StyleEditor-Background.is-overlay(:class="component_background_class")
 
   b-sidebar.StyleEditorSidebar(fullheight right v-model="sidebar_p" position="fixed" :can-cancel="['escape']")
-    SidebarContent
+    EditorUI
 
   b-button.sidebar_toggle_button(@click="sidebar_toggle_handle" icon-left="menu" size="is-medium" type="is-text")
 
@@ -27,8 +27,8 @@
     .WorkspaceBackground.is-overlay
     .ShogiPlayerWrap
       ShogiPlayer(
-      v-bind="sp_params"
-      v-on="sp_hook"
+      v-bind="sp_component_attributes"
+      v-on="sp_component_events"
       :sp_viewpoint.sync="sp_viewpoint"
       :sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && '天王山'"
       )
@@ -38,34 +38,35 @@
 const DEVELOPMENT_P = process.env.NODE_ENV === "development"
 
 import _ from "lodash"
+import Vue from "vue"
 import { GX } from "../models/gx.js"
 
-import { HumanSideInfo    }    from "../models/human_side_info.js"
-import { ModeInfo         }      from "../models/mode_info.js"
-import { BoardVariantInfo }    from "../models/board_variant_info.js"
-import { PieceVariantInfo }    from "../models/piece_variant_info.js"
-import { CoordinateInfo }    from "../models/coordinate_info.js"
-import { KifuBookInfo     }     from "../models/kifu_book_info.js"
-import { MixBlendModeInfo } from "../models/mix_blend_mode_info.js"
-import { LiftCancelActionInfo    }    from "../models/lift_cancel_action_info.js"
-import { ClickResponseTimingInfo    }    from "../models/click_response_timing_info.js"
+import { HumanSideInfo             } from "../models/human_side_info.js"
+import { ModeInfo                  } from "../models/mode_info.js"
+import { BoardVariantInfo          } from "../models/board_variant_info.js"
+import { PieceVariantInfo          } from "../models/piece_variant_info.js"
+import { CoordinateInfo            } from "../models/coordinate_info.js"
+import { MixBlendModeInfo          } from "../models/mix_blend_mode_info.js"
+import { LiftCancelActionInfo      } from "../models/lift_cancel_action_info.js"
+import { ClickResponseTimingInfo   } from "../models/click_response_timing_info.js"
 
-import { SeVariableInfo } from "./se_variable_info.js"
-import { SePresetInfo   } from "./se_preset_info.js"
-import { SeSectionInfo  } from "./se_section_info.js"
-import { SeBoardSizePresetInfo } from "./se_board_size_preset_info.js"
+import { SePresetInfo              } from "./se_preset_info.js"
+import { SeSectionInfo             } from "./se_section_info.js"
+import { SeBoardSizePresetInfo     } from "./se_board_size_preset_info.js"
 import { SeUserCustomCssPresetInfo } from "./se_user_custom_css_preset_info.js"
-import { SePieceVisibilityInfo } from "./se_piece_visibility_info.js"
+import { SePieceVisibilityInfo     } from "./se_piece_visibility_info.js"
 
-import { mod_storage } from "./mod_storage.js"
-import { mod_sp_css } from "./mod_sp_css.js"
-import { mod_se_css } from "./mod_se_css.js"
-import { mod_helper } from "./mod_helper.js"
-import { mod_think_mark } from "./mod_think_mark.js"
-import { mod_general_event } from "./mod_general_event.js"
+import { mod_storage               } from "./mod_storage.js"
+import { mod_sp_css                } from "./mod_sp_css.js"
+import { mod_se_css                } from "./mod_se_css.js"
+import { mod_helper                } from "./mod_helper.js"
+import { mod_think_mark            } from "./mod_think_mark.js"
+import { mod_general_event         } from "./mod_general_event.js"
+import { mod_variables             } from "./mod_variables.js"
+import { mod_book                } from "./mod_book.js"
 
-import ShogiPlayer   from "../ShogiPlayer.vue"
-import SidebarContent   from "./SidebarContent.vue"
+import ShogiPlayer    from "../ShogiPlayer.vue"
+import EditorUI from "./EditorUI.vue"
 
 export default {
   name: "StyleEditor",
@@ -76,18 +77,13 @@ export default {
     mod_helper,
     mod_think_mark,
     mod_general_event,
+    mod_variables,
+    mod_book,
   ],
 
   components: {
     ShogiPlayer,
-    SidebarContent,
-  },
-
-  data() {
-    return {
-      sidebar_p: true,
-      ...SeVariableInfo.data_all,
-    }
+    EditorUI,
   },
 
   provide() {
@@ -96,70 +92,9 @@ export default {
     }
   },
 
-  created() {
-    this.data_init()
-  },
-
   methods: {
-    data_init() {
-      if (true) {
-        const query = this.$route.query
-        const { body, black, white } = query
-        if (body) {
-          this.sp_body = body
-        }
-        if (black) {
-          this.sp_player_info.black = black
-        }
-        if (white) {
-          this.sp_player_info.white = white
-        }
-        if ("turn" in query) {
-          this.sp_turn = Number(query.turn)
-        }
-        if ("viewpoint" in query) {
-          this.sp_viewpoint = query.viewpoint
-        }
-        if (false) {
-          if (!body) {
-            this.kifu_sample_key = this.KifuBookInfo.values[1].key
-            this.kifu_sample_key = this.KifuBookInfo.fetch("KIF_15733").key
-            this.kifu_sample_key_input_handle()
-          }
-        }
-        if (false) {
-          this.sp_player_info = {
-            black: { name: "先手", time: "12:34", },
-            white: { name: "後手", time: "56:78", },
-          }
-        }
-      }
-
-      SeVariableInfo.values.forEach(it => this.variable_set(it))
-      this.variable_set({key: "sidebar_p", default: true})
-    },
-
-    variable_set(it) {
-      const value = this.$route.query[it.key]
-      if (value) {
-        if (typeof it.default === "string") {
-          this.$data[it.key] = value.trim()
-        } else {
-          this.$data[it.key] = (value === "true")
-        }
-      }
-    },
-
     tfx_slider_attrs(value) {
       return { ...this.slider_attrs, disabled: value }
-    },
-
-    kifu_sample_key_input_handle() {
-      if (this.kifu_book_info) {
-        this.sp_body = this.kifu_book_info.sp_body
-        this.sp_player_info.black.name = this.kifu_book_info.black
-        this.sp_player_info.white.name = this.kifu_book_info.white
-      }
     },
 
     sidebar_toggle_handle() {
@@ -225,21 +160,14 @@ export default {
     BoardVariantInfo()        { return BoardVariantInfo        },
     PieceVariantInfo()        { return PieceVariantInfo        },
     CoordinateInfo()          { return CoordinateInfo          },
-    KifuBookInfo()            { return KifuBookInfo            },
     LiftCancelActionInfo()    { return LiftCancelActionInfo    },
     ClickResponseTimingInfo() { return ClickResponseTimingInfo },
     SeSectionInfo()           { return SeSectionInfo           },
-    SeVariableInfo()          { return SeVariableInfo          },
     SePresetInfo()            { return SePresetInfo            },
     SeBoardSizePresetInfo()   { return SeBoardSizePresetInfo   },
     SeUserCustomCssPresetInfo()   { return SeUserCustomCssPresetInfo   },
     SePieceVisibilityInfo()   { return SePieceVisibilityInfo   },
 
-    kifu_book_info() {
-      if (this.kifu_sample_key) {
-        return KifuBookInfo.fetch(this.kifu_sample_key)
-      }
-    },
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -289,59 +217,8 @@ export default {
       return `url(${this.se_ws_image})`
     },
 
-    sp_params() {
-      let params = {}
-
-      params.sp_mode                   = this.sp_mode
-      params.sp_body                   = this.sp_body
-      params.sp_turn                   = this.sp_turn
-      params.sp_viewpoint              = this.sp_viewpoint
-
-      params.sp_controller             = this.sp_controller
-      params.sp_slider                 = this.sp_slider
-      params.sp_player_info            = this.sp_player_info
-
-      params.sp_piece_variant          = this.sp_piece_variant
-      params.sp_board_variant          = this.sp_board_variant
-
-      params.sp_layout                 = this.sp_layout
-      params.sp_balloon                = this.sp_balloon
-      params.sp_layer                  = this.sp_layer
-      params.sp_mobile_vertical        = this.sp_mobile_vertical
-      params.sp_debug                  = this.sp_debug,
-      params.sp_comment                = this.sp_comment,
-      params.sp_dev_tools              = this.sp_dev_tools
-      params.sp_dev_tools_group        = this.sp_dev_tools_group
-      params.sp_overlay_nav            = this.sp_overlay_nav
-      params.sp_turn_show              = this.sp_turn_show
-      params.sp_coordinate             = this.sp_coordinate
-      params.sp_coordinate_variant_h   = this.sp_coordinate_variant_h
-      params.sp_coordinate_variant_v   = this.sp_coordinate_variant_v
-      params.sp_stand_gravity          = this.sp_stand_gravity
-      params.sp_stand_flip             = this.sp_stand_flip
-      params.sp_name_direction         = this.sp_name_direction
-      params.sp_star_step              = this.sp_star_step
-
-      params.sp_legal_move_only        = this.sp_legal_move_only
-      params.sp_illegal_validate       = this.sp_illegal_validate
-      params.sp_illegal_cancel         = this.sp_illegal_cancel
-      params.sp_request_checkmate_stat = this.sp_request_checkmate_stat
-      params.sp_request_snapshot_hash  = this.sp_request_snapshot_hash
-      params.sp_request_op_king_check  = this.sp_request_op_king_check
-
-      params.sp_lift_cancel_action     = this.sp_lift_cancel_action
-      params.sp_click_response_timing  = this.sp_click_response_timing
-
-      params.sp_board_view_x           = this.sp_board_view_x
-      params.sp_board_view_y           = this.sp_board_view_y
-      params.sp_board_view_w           = this.sp_board_view_w
-      params.sp_board_view_h           = this.sp_board_view_h
-
-      return params
-    },
-
     // 動作を受け取るやつら
-    sp_hook() {
+    sp_component_events() {
       const hv = {}
       hv["ev_play_mode_move"]              = this.ev_play_mode_move
       // hv["ev_edit_mode_short_sfen_change"] = this.SB.ev_edit_mode_short_sfen_change
