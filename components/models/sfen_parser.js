@@ -30,7 +30,7 @@ export class SfenParser extends ParserBase {
     this.raw_body = this.raw_body.replace(/(position )?startpos/, this.constructor.SFEN_DEFAULT)
     const regex = XRegExp("sfen\\s+(?<board>\\S+)\\s+(?<b_or_w>\\S+)\\s+(?<hold_pieces>\\S+)\\s+(?<turn_counter_next>\\d+)(\\s+moves\\s+(?<moves>.*))?")
     this.attributes = XRegExp.exec(this.raw_body, regex)
-    if (process.env.NODE_ENV === "deveopment") {
+    if (process.env.NODE_ENV === "development") {
       console.log(this.attributes)
     }
   }
