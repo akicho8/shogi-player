@@ -30,5 +30,5 @@ export default {
   +mobile
     width: 100%
   +tablet
-    width: 50vmin
+    width: 50dvmin
 </style>
