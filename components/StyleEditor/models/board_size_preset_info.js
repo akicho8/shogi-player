@@ -1,6 +1,6 @@
-import { ApplicationMemoryRecord } from "../models/application_memory_record.js"
+import { ApplicationMemoryRecord } from "../../models/application_memory_record.js"
 
-export class SeBoardSizePresetInfo extends ApplicationMemoryRecord {
+export class BoardSizePresetInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       {

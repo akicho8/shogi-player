@@ -1,5 +1,5 @@
 <template lang="pug">
-.ImageUpload
+.ImageUploader
   b-field.file.my-4(custom-class="is-small")
     b-upload(v-model="file_info" @input="input_handle" expanded)
       a.button.is-fullwidth.is-size-7
@@ -43,12 +43,12 @@
 </template>
 
 <script>
-import MyColorPicker from "./MyColorPicker.vue"
+import ColorEditor from "./ColorEditor.vue"
 
 export default {
-  name: "ImageUpload",
+  name: "ImageUploader",
   components: {
-    MyColorPicker,
+    ColorEditor,
   },
   props: {
     single_color: { type: String,  required: false, default: "#888888", },
@@ -71,11 +71,11 @@ export default {
     }
   },
   watch: {
-    file_src(v)         { this.$emit("input", v)               },
-    new_single_color(v) { this.$emit("update:single_color", v) },
-    new_grayscale(v)    { this.$emit("update:grayscale", v)    },
-    new_brightness(v)   { this.$emit("update:brightness", v)   },
-    new_blur(v)         { this.$emit("update:blur", v)         },
+    file_src(v)         { this.$emit("input", this.css_cast(v)) },
+    new_single_color(v) { this.$emit("update:single_color", v)  },
+    new_grayscale(v)    { this.$emit("update:grayscale", v)     },
+    new_brightness(v)   { this.$emit("update:brightness", v)    },
+    new_blur(v)         { this.$emit("update:blur", v)          },
   },
   methods: {
     input_handle(v) {
@@ -92,6 +92,14 @@ export default {
       this.new_brightness = 1.0
       this.new_blur = 0
     },
+    css_cast(v) {
+      if (v == null) {
+        v = "none"
+      } else {
+        v = `url("${v}")`
+      }
+      return v
+    },
   },
   computed: {
     new_filter_p() {
@@ -102,8 +110,8 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
-.ImageUpload
+@import "./support.scss"
+.ImageUploader
   .file
     .button
       font-size: $size-7

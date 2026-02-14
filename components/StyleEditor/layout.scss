@@ -1,0 +1,16 @@
+@import "./support.scss";
+
+.StyleEditorSidebar {
+  .sidebar-content {
+    transition: none;
+    @include mobile {
+      width: $sidebar_width_mobile;
+    }
+    @include tablet {
+      width: $sidebar_width_tablet;
+    }
+    @include desktop {
+      width: $sidebar_width_desktop;
+    }
+  }
+}

@@ -1,10 +1,10 @@
 <template lang="pug">
-a.SeTitle.title.is-5(:id="name") {{name}}
+.GroupName.title.is-5(is="a" :id="name") {{name}}
 </template>
 
 <script>
 export default {
-  name: "SeTitle",
+  name: "GroupName",
   props: {
     name: { type: String, required: true },
   },
@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style lang="sass">
-.SeTitle
+.GroupName
   display: inline-block
   margin-top: 0.4rem
   margin-bottom: 1rem

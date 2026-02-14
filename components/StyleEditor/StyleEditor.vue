@@ -4,33 +4,23 @@
   div(is="style" v-text="se_css_embed")
   div(is="style" v-text="user_custom_css")
 
-  .StyleEditor-Background.is-overlay(:class="component_background_class")
+  .StyleEditorBackground.is-overlay(:class="component_background_class")
 
-  b-sidebar.StyleEditorSidebar(fullheight right v-model="sidebar_p" position="fixed" :can-cancel="['escape']")
-    EditorUI
+  // .StyleEditor .b-sidebar ではセレクタが効かないため .StyleEditorSidebar としている
+  b-sidebar.StyleEditorSidebar(fullheight right v-model="sidebar_p" position="fixed" :can-cancel="[]")
+    ControlPanel
 
   b-button.sidebar_toggle_button(@click="sidebar_toggle_handle" icon-left="menu" size="is-medium" type="is-text")
-
-    //- b-navbar(type="is-primary" :mobile-burger="false" wrapper-class="container" spaced)
-    //-   template(slot="brand")
-    //-     b-navbar-item.has-text-weight-bold 将棋盤エディター
-    //-   template(slot="end")
-    //-     b-navbar-item(@click="sidebar_toggle_handle")
-    //-       b-icon(icon="menu")
-
-    //- .section
-    //-   .container.is-fluid
-    //-     .buttons
-    //-     .columns.is-multiline
 
   .Workspace.is-overlay
     .WorkspaceBackground.is-overlay
     .ShogiPlayerWrap
       ShogiPlayer(
-      v-bind="sp_component_attributes"
+      v-bind="sp_component_bind_attrs"
       v-on="sp_component_events"
       :sp_viewpoint.sync="sp_viewpoint"
-      :sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && '天王山'"
+      :sp_board_cell_class_fn="sp_board_cell_class_fn"
+      ref="sp_object"
       )
 </template>
 
@@ -50,45 +40,55 @@ import { MixBlendModeInfo          } from "../models/mix_blend_mode_info.js"
 import { LiftCancelActionInfo      } from "../models/lift_cancel_action_info.js"
 import { ClickResponseTimingInfo   } from "../models/click_response_timing_info.js"
 
-import { SePresetInfo              } from "./se_preset_info.js"
-import { SeSectionInfo             } from "./se_section_info.js"
-import { SeBoardSizePresetInfo     } from "./se_board_size_preset_info.js"
-import { SeUserCustomCssPresetInfo } from "./se_user_custom_css_preset_info.js"
-import { SePieceVisibilityInfo     } from "./se_piece_visibility_info.js"
+import { PresetInfo              } from "./models/preset_info.js"
+import { SectionInfo             } from "./models/section_info.js"
+import { BoardSizePresetInfo     } from "./models/board_size_preset_info.js"
+import { UserCustomCssPresetInfo } from "./models/user_custom_css_preset_info.js"
+import { PieceVisibilityInfo     } from "./models/piece_visibility_info.js"
+import { CssHelper                } from "./models/css_helper.js"
+import { ColorHelper                } from "./models/color_helper.js"
 
-import { mod_storage               } from "./mod_storage.js"
-import { mod_sp_css                } from "./mod_sp_css.js"
-import { mod_se_css                } from "./mod_se_css.js"
-import { mod_helper                } from "./mod_helper.js"
-import { mod_think_mark            } from "./mod_think_mark.js"
-import { mod_general_event         } from "./mod_general_event.js"
-import { mod_variables             } from "./mod_variables.js"
-import { mod_book                } from "./mod_book.js"
+import { mod_persistence      } from "./mod_persistence.js"
+import { mod_sp_css       } from "./mod_sp_css.js"
+import { mod_se_css       } from "./mod_se_css.js"
+import { mod_helper       } from "./mod_helper.js"
+import { mod_think_mark   } from "./mod_think_mark.js"
+import { mod_event        } from "./mod_event.js"
+import { mod_variables    } from "./mod_variables.js"
+import { mod_book         } from "./mod_book.js"
+import { mod_shortcut         } from "./mod_shortcut.js"
+import { mod_keydown         } from "./mod_keydown.js"
+import { mod_autorun } from "./mod_autorun.js"
+import { mod_callback } from "./mod_callback.js"
 
 import ShogiPlayer    from "../ShogiPlayer.vue"
-import EditorUI from "./EditorUI.vue"
+import ControlPanel from "./ControlPanel.vue"
 
 export default {
   name: "StyleEditor",
   mixins: [
-    mod_storage,
+    mod_persistence,
     mod_sp_css,
     mod_se_css,
     mod_helper,
     mod_think_mark,
-    mod_general_event,
+    mod_event,
     mod_variables,
     mod_book,
+    mod_shortcut,
+    mod_keydown,
+    mod_autorun,
+    mod_callback,
   ],
 
   components: {
     ShogiPlayer,
-    EditorUI,
+    ControlPanel,
   },
 
   provide() {
     return {
-      TheSe: this,
+      TheSE: this,
     }
   },
 
@@ -108,16 +108,21 @@ export default {
       this.sp_board_variant = "none" // 背景画像プリセットを選択してない状態に戻しておく
     },
 
-    se_preset_apply_handle(se_preset_info) {
-      se_preset_info.func(this)
+    se_preset_apply_handle(preset_info) {
+      preset_info.func(this)
     },
 
-    se_board_size_preset_apply_handle(se_board_size_preset_info) {
-      se_board_size_preset_info.func(this)
+    se_board_size_preset_apply_handle(board_size_preset_info) {
+      board_size_preset_info.func(this)
     },
 
-    se_user_custom_css_preset_apply_handle(se_user_custom_css_preset_info) {
-      this.user_custom_css = se_user_custom_css_preset_info.user_custom_css.trim()
+    se_user_custom_css_preset_apply_handle(user_custom_css_preset_info) {
+      this.user_custom_css_update_by(user_custom_css_preset_info.key)
+    },
+
+    user_custom_css_update_by(key) {
+      const user_custom_css_preset_info = this.UserCustomCssPresetInfo.fetch(key)
+      this.user_custom_css = user_custom_css_preset_info.user_custom_css.trim()
     },
 
     se_tf0_reset() {
@@ -155,19 +160,20 @@ export default {
     development_p() { return DEVELOPMENT_P },
     __SYSTEM_TEST_RUNNING__() { return this.$route.query.__SYSTEM_TEST_RUNNING__ === "true" },
 
-    HumanSideInfo()           { return HumanSideInfo           },
-    ModeInfo()                { return ModeInfo                },
-    BoardVariantInfo()        { return BoardVariantInfo        },
-    PieceVariantInfo()        { return PieceVariantInfo        },
-    CoordinateInfo()          { return CoordinateInfo          },
-    LiftCancelActionInfo()    { return LiftCancelActionInfo    },
-    ClickResponseTimingInfo() { return ClickResponseTimingInfo },
-    SeSectionInfo()           { return SeSectionInfo           },
-    SePresetInfo()            { return SePresetInfo            },
-    SeBoardSizePresetInfo()   { return SeBoardSizePresetInfo   },
-    SeUserCustomCssPresetInfo()   { return SeUserCustomCssPresetInfo   },
-    SePieceVisibilityInfo()   { return SePieceVisibilityInfo   },
-
+    HumanSideInfo()             { return HumanSideInfo             },
+    ModeInfo()                  { return ModeInfo                  },
+    BoardVariantInfo()          { return BoardVariantInfo          },
+    PieceVariantInfo()          { return PieceVariantInfo          },
+    CoordinateInfo()            { return CoordinateInfo            },
+    LiftCancelActionInfo()      { return LiftCancelActionInfo      },
+    ClickResponseTimingInfo()   { return ClickResponseTimingInfo   },
+    SectionInfo()             { return SectionInfo             },
+    PresetInfo()              { return PresetInfo              },
+    BoardSizePresetInfo()     { return BoardSizePresetInfo     },
+    UserCustomCssPresetInfo() { return UserCustomCssPresetInfo },
+    PieceVisibilityInfo()     { return PieceVisibilityInfo     },
+    CssHelper()                { return CssHelper                },
+    ColorHelper()                { return ColorHelper                },
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -201,20 +207,6 @@ export default {
       if (this.se_bg_pattern) {
         return ["pattern-checks-md", "has-text-black-bis", "has-background-black-ter"]
       }
-    },
-
-    sp_board_image_url() {
-      if (!this.sp_board_image) {
-        return "none"
-      }
-      return `url(${this.sp_board_image})`
-    },
-
-    se_ws_bg_url() {
-      if (!this.se_ws_image) {
-        return "none"
-      }
-      return `url(${this.se_ws_image})`
     },
 
     // 動作を受け取るやつら
@@ -251,16 +243,12 @@ export default {
 
 <style lang="sass">
 @import "pattern.css/pattern.scss"
-@import "./support.sass"
+@import "./support.scss"
+@import "./layout.scss"
 
-.StyleEditorSidebar
-  .sidebar-content
-    +mobile
-      width: $sidebar_width_mobile
-    +tablet
-      width: $sidebar_width_tablet
-    +desktop
-      width: $sidebar_width_desktop
+.StyleEditor
+  min-height: 100dvh
+  overflow: hidden
 
 .StyleEditor
   .sidebar_toggle_button
@@ -269,8 +257,6 @@ export default {
     right: 0
     z-index: 1
 
-  min-height: 100vh
-
   &.sidebar_p
     .Workspace
       +tablet
@@ -278,7 +264,7 @@ export default {
       +desktop
         width: unquote("calc(100% - #{$sidebar_width_desktop})")
 
-  .StyleEditor-Background
+  .StyleEditorBackground
     height: 100%
     z-index: -200               // sp_star_z_index が -1 のときチェッカー背景より前面になるようにするため -1 未満にする
 
@@ -291,16 +277,13 @@ export default {
   .WorkspaceBackground
     z-index: -100              // sp_star_z_index が -1 のとき背景より前面なるようにするため -1 未満にする
     background-color: var(--se_ws_color)
-    background-image: var(--se_ws_image)
+    background-image: var(--se_ws_image, none)
     background-position: center
     background-repeat: no-repeat
     background-size: cover
     filter: unquote('invert(var(--se_ws_invert)) sepia(var(--se_ws_sepia)) hue-rotate(calc(var(--se_ws_hue) * 1turn)) saturate(var(--se_ws_saturate)) grayscale(var(--se_ws_grayscale)) brightness(var(--se_ws_brightness)) contrast(var(--se_ws_contrast)) blur(calc(var(--se_ws_blur) * 1px))')
 
   .ShogiPlayerWrap
-    // width: 100%
-    // +tablet
-    //   width: var(--se_frame_width)
     width: var(--se_frame_width)
 
   // 背景の変形

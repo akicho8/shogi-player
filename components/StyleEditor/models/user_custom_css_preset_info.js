@@ -1,6 +1,6 @@
-import { ApplicationMemoryRecord } from "../models/application_memory_record.js"
+import { ApplicationMemoryRecord } from "../../models/application_memory_record.js"
 
-export class SeUserCustomCssPresetInfo extends ApplicationMemoryRecord {
+export class UserCustomCssPresetInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       {

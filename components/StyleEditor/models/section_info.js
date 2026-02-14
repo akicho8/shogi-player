@@ -1,9 +1,9 @@
-import { ApplicationMemoryRecord } from "../models/application_memory_record.js"
+import { ApplicationMemoryRecord } from "../../models/application_memory_record.js"
 
-export class SeSectionInfo extends ApplicationMemoryRecord {
+export class SectionInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
-      { key: "基本",                   },
+      { key: "動作モード",             },
       { key: "背景",                   },
       { key: "盤テクスチャ",           },
       { key: "盤",                     },
@@ -15,7 +15,7 @@ export class SeSectionInfo extends ApplicationMemoryRecord {
       { key: "駒の種類",               },
       { key: "駒の大きさ",             },
       { key: "駒台",                   },
-      { key: "持駒表示",             },
+      { key: "持駒表示",               },
       { key: "対局者",                 },
       { key: "駒数",                   },
       { key: "駒箱",                   },

@@ -1,19 +1,17 @@
-import { SeVariableInfo } from "./se_variable_info.js"
-
 export const mod_se_css = {
   computed: {
-    se_css_human() { return SeVariableInfo.css_to_human(this.se_css)  },
-    se_css_embed() { return SeVariableInfo.css_normalize(this.se_css) },
+    se_css_human() { return this.CssHelper.pretty(this.se_css)  },
+    se_css_embed() { return this.CssHelper.normalize(this.se_css) },
 
     se_css() {
       return `
-        .Workspace {
+        :root {
           /* 将棋盤全体の外側の横幅(コンテナ幅) */
-          --se_frame_width:     ${this.se_frame_width}vmin;
+          --se_frame_width:     ${this.se_frame_width}dvmin;
 
           /* 背景 */
-          --se_ws_color:        ${SeVariableInfo.hsla_format(this.se_ws_color)};
-          --se_ws_image:        ${this.se_ws_bg_url};
+          --se_ws_color:        ${this.VariableInfo.hsla_format(this.se_ws_color)};
+          --se_ws_image:        ${this.se_ws_image};
           --se_ws_blur:         ${this.se_ws_blur};
           --se_ws_grayscale:    ${this.se_ws_grayscale};
           --se_ws_contrast:     ${this.se_ws_contrast};
