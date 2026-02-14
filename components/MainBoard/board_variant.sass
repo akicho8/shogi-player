@@ -1,8 +1,14 @@
-=board_variant_define($key)
+=board_variant_define($key, $type)
   .ShogiPlayer
     &.is_board_variant_#{$key}
       .BoardTexture
-        background-image: url("../assets/board_variant/#{$key}.png")
+        background-image: url("../assets/board_variant/#{$key}.#{$type}")
 
-+board_variant_define("wood_normal")
-+board_variant_define("wood_bright")
++board_variant_define("wood_normal", "png")
++board_variant_define("wood_bright", "png")
++board_variant_define("zarazara", "svg")
++board_variant_define("wood_effect", "svg")
++board_variant_define("bump_effect", "svg")
++board_variant_define("washi", "svg")
+
+
