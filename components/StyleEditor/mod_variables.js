@@ -1,11 +1,11 @@
-import { SeVariableInfo } from "./se_variable_info.js"
+import { VariableInfo } from "./models/variable_info.js"
 import { GX } from "../models/gx.js"
 import JSON5 from "json5"
 
 export const mod_variables = {
   data() {
     return {
-      ...SeVariableInfo.vue_data_attributes,
+      ...VariableInfo.vue_define_attributes(),
     }
   },
 
@@ -22,7 +22,7 @@ export const mod_variables = {
 
     var_init_for_development() {
       if (this.development_p) {
-        SeVariableInfo.values.forEach(e => {
+        this.VariableInfo.values.forEach(e => {
           const v = e.development_value
           if (v !== null) {
             this[e.key] = v
@@ -51,20 +51,21 @@ export const mod_variables = {
     },
 
     var_init_by_url_params_all() {
-      SeVariableInfo.values.forEach(e => {
-        let v = this.$route.query[e.key]
-        if (v) {
+      this.VariableInfo.values.forEach(e => {
+        const s = this.$route.query[e.key]
+        if (s != null) {
+          let v = null
           if (false) {
           } else if (e.type === "String") {
-            v = v.trim()
+            v = s.trim()
           } else if (e.type === "Bool") {
-            v = (v === "true")
+            v = (s === "true")
           } else if (e.type === "Hash") {
-            v = JSON5.parse(v)
+            v = JSON5.parse(s)
           } else if (e.type === "Float") {
-            v = parseFloat(v)
+            v = parseFloat(s)
           } else if (e.type === "Integer") {
-            v = parseInt(v)
+            v = parseInt(s)
           } else {
             throw new Error("must not happen")
           }
@@ -75,11 +76,12 @@ export const mod_variables = {
   },
 
   computed: {
-    SeVariableInfo() { return SeVariableInfo },
+    VariableInfo() { return VariableInfo },
 
-    sp_component_attributes_current() {
+    // 現在値
+    sp_component_current_attrs() {
       let hv = {}
-      SeVariableInfo.values.forEach(e => {
+      this.VariableInfo.values.forEach(e => {
         if (e.context_type === "sp_var") {
           hv[e.key] = this[e.key]
         }
@@ -87,12 +89,13 @@ export const mod_variables = {
       return hv
     },
 
-    sp_component_attributes() {
-      const hv = this.sp_component_attributes_current
+    //
+    sp_component_bind_attrs() {
+      const hv = this.sp_component_current_attrs
       if (this.component_parmas_show_all) {
         return hv
       }
-      return SeVariableInfo.sp_component_attributes(hv)
+      return this.VariableInfo.default_value_reject(hv)
     },
   },
 }

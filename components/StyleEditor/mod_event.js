@@ -1,7 +1,7 @@
 import _ from "lodash"
 import { GX } from "../models/gx.js"
 
-export const mod_general_event = {
+export const mod_event = {
   methods: {
     ev_play_mode_move(e) {
       // 挙動

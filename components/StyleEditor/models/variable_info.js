@@ -1,31 +1,32 @@
-import { ApplicationMemoryRecord } from "../models/application_memory_record.js"
+import { ApplicationMemoryRecord } from "../../models/application_memory_record.js"
 import * as DeepObjectDiff from "deep-object-diff"
 import chroma from "chroma-js"
+import { GX } from "../../models/gx.js"
 
-const sp_player_info_one = {
+const sp_player_info_one_create = () => Object.freeze({
   name: "",
   time: "",
   piece_visibility: "visible",
-}
+})
 
-const sp_player_info = {
-  black: { ...sp_player_info_one },
-  white: { ...sp_player_info_one },
-}
+export const sp_player_info_create = () => Object.freeze({
+  black: sp_player_info_one_create(),
+  white: sp_player_info_one_create(),
+})
 
-export class SeVariableInfo extends ApplicationMemoryRecord {
+export class VariableInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
       { key: "sidebar_p",                           name: "サイドバーの状態",                                                         context_type: "se_var", type: "Bool",    sub_type: null,   default_value: true,                       development_value: null, },
       { key: "kifu_book_key",                       name: "棋譜プリセット",                                                           context_type: "se_var", type: "String",  sub_type: null,   default_value: null,                       development_value: null, },
-      { key: "sfen_book_info_key",                       name: "棋譜プリセット",                                                           context_type: "se_var", type: "String",  sub_type: null,   default_value: null,                       development_value: null, },
+      { key: "sfen_book_key",                       name: "棋譜プリセット",                                                           context_type: "se_var", type: "String",  sub_type: null,   default_value: null,                       development_value: null, },
       { key: "transform_tab_index",                 name: "Transformのタブ位置",                                                      context_type: "se_var", type: "Integer", sub_type: null,   default_value: 0,                          development_value: null, },
 
       { key: "user_custom_css",                     name: "カスタムCSS",                                                              context_type: "se_var", type: "String",  sub_type: null,   default_value: "",                         development_value: null, },
       { key: "component_parmas_show_all",                       name: "コンポーネント引数確認時にデフォルト値も表示する",                         context_type: "se_var", type: "Bool",    sub_type: null,   default_value: false,                      development_value: null, },
       { key: "css_params_show_all",                      name: "コンポーネント引数確認時にデフォルト値も表示する",                         context_type: "se_var", type: "Bool",    sub_type: null,   default_value: false,                      development_value: null, },
 
-      { key: "sp_board_image",                      name: "盤の画像",                                                                 context_type: "sp_css", type: "String",  sub_type: null,   default_value: null,                       development_value: null, },
+      { key: "sp_board_image",                      name: "盤の画像",                                                                 context_type: "sp_css", type: "String",  sub_type: null,   default_value: "none",               development_value: null, },
       { key: "sp_controller_width",                 name: "コントローラー横幅",                                                       context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.5,                        development_value: null, },
       { key: "sp_controller_width_mobile",          name: "コントローラー横幅(モバイル時)",                                           context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.8,                        development_value: null, },
 
@@ -56,7 +57,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       // 駒を操作中の移動元
       { key: "sp_mouse_lifted_origin_bg_color",     name: "マウスで持ち上げた駒の移動元の升目の背景色",                               context_type: "sp_css", type: "String",  sub_type: "hsla", default_value: "hsla(0, 0%, 0%, 0.15)",    development_value: null, },
-      { key: "sp_mouse_lifted_origin_opacity",      name: "マウスで持ち上げた駒の移動元にある駒の非透明度",                           context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.0,                        development_value: null, },
+      { key: "sp_mouse_lifted_origin_opacity",      name: "マウスで持ち上げた駒の移動元にある駒の不透明度",                           context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.0,                        development_value: null, },
 
       { key: "sp_balloon",                          name: "対局者名の下に駒数スタイルと同じ背景色を置くか？",                         context_type: "sp_var", type: "String",  sub_type: null,   default_value: true,                       development_value: null, },
 
@@ -88,8 +89,8 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       { key: "sp_piece_count_horizontal_x",         name: "駒数のX座標 (横配置時)",                                                   context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.43,                       development_value: null, },
       { key: "sp_piece_count_horizontal_y",         name: "駒数のY座標 (横配置時)",                                                   context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.30,                       development_value: null, },
-      { key: "sp_piece_count_vertical_x",           name: "駒数のX座標 (縦配置時)",                                                   context_type: "sp_css", type: "String",  sub_type: null,   default_value: 0.00,                       development_value: null, },
-      { key: "sp_piece_count_vertical_y",           name: "駒数のY座標 (縦配置時)",                                                   context_type: "sp_css", type: "String",  sub_type: null,   default_value: 0.47,                       development_value: null, },
+      { key: "sp_piece_count_vertical_x",           name: "駒数のX座標 (縦配置時)",                                                   context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.00,                       development_value: null, },
+      { key: "sp_piece_count_vertical_y",           name: "駒数のY座標 (縦配置時)",                                                   context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.47,                       development_value: null, },
 
       { key: "sp_board_variant",                    name: "盤の種類",                                                                 context_type: "sp_var", type: "String",  sub_type: null,   default_value: "none",                     development_value: null, },
 
@@ -97,7 +98,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_grid_outer_stroke",                name: "盤の格子の外枠の太さ",                                                     context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.0,                        development_value: null, },
       { key: "sp_grid_outer_color",                 name: "盤の外枠の色",                                                             context_type: "sp_css", type: "String",  sub_type: "hsla", default_value: "hsla(0, 0%, 0%, 0.5)",     development_value: null, },
       { key: "sp_grid_inner_color",                 name: "盤の内側の格子の色",                                                       context_type: "sp_css", type: "String",  sub_type: "hsla", default_value: "hsla(0, 0%, 0%, 0.5)",     development_value: null, },
-      { key: "sp_grid_inner_stroke",                name: "盤の内側の格子の太さ",                                                     context_type: "sp_css", type: "String",  sub_type: null,   default_value: 1,                          development_value: null, },
+      { key: "sp_grid_inner_stroke",                name: "盤の内側の格子の太さ",                                                     context_type: "sp_css", type: "Float",  sub_type: null,   default_value: 1,                          development_value: null, },
       { key: "sp_star_size",                        name: "星の大きさ",                                                               context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.1,                        development_value: null, },
       { key: "sp_star_z_index",                     name: "星の z-index",                                                             context_type: "sp_css", type: "Integer", sub_type: null,   default_value: 0,                          development_value: null, },
 
@@ -106,7 +107,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "sp_location_mark_active_size",        name: "手番のときの☗☖の大きさ",                                                   context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 1.0,                        development_value: null, },
       { key: "sp_location_mark_inactive_size",      name: "手番ではないときの☗☖の大きさ",                                             context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.5,                        development_value: null, },
 
-      { key: "sp_comment",                          name: "KIFコメント表示",                                                          context_type: "sp_var", type: "String",  sub_type: null,   default_value: false,                      development_value: null, },
+      { key: "sp_comment",                          name: "棋譜コメント表示",                                                          context_type: "sp_var", type: "String",  sub_type: null,   default_value: true,                      development_value: null, },
       { key: "sp_common_gap",                       name: "共通の隙間",                                                               context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.02,                       development_value: null, },
       { key: "sp_layer",                            name: "レイヤー表示",                                                             context_type: "sp_var", type: "String",  sub_type: null,   default_value: false,                      development_value: null, },
 
@@ -122,7 +123,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       ////////////////////////////////////////////////////////////////////////////////
 
-      { key: "sp_player_info",                      name: "対局者の情報",                                                             context_type: "sp_var", type: "Hash",    sub_type: null,   default_value: sp_player_info,             development_value: null, },
+      { key: "sp_player_info",                      name: "対局者の情報",                                                             context_type: "sp_var", type: "Hash",    sub_type: null,   default_value: sp_player_info_create(),    development_value: null, },
       { key: "sp_name_direction",                   name: "対局者の名前の向き",                                                       context_type: "sp_var", type: "String",  sub_type: null,   default_value: "horizontal",               development_value: null, },
       { key: "sp_player_name_size",                 name: "対局者の名前の大きさ",                                                     context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.25,                       development_value: null, },
       { key: "sp_player_time_size",                 name: "対局者の持時間の大きさ",                                                   context_type: "sp_css", type: "Float",   sub_type: null,   default_value: 0.25,                       development_value: null, },
@@ -155,7 +156,7 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
       { key: "se_bg_pattern",                       name: "背景の裏にチェック模様を置く",                                             context_type: "se_var", type: "String",  sub_type: null,   default_value: true,                       development_value: null, },
       { key: "se_frame_width",                      name: "コンテナ幅",                                                               context_type: "se_css", type: "Float",   sub_type: null,   default_value: 80.0,                       development_value: null, },
-      { key: "se_ws_image",                         name: "背景画像",                                                                 context_type: "se_css", type: "String",  sub_type: null,   default_value: null,                       development_value: null, },
+      { key: "se_ws_image",                         name: "背景画像",                                                                 context_type: "se_css", type: "String",  sub_type: null,   default_value: "none",               development_value: null, },
 
       ////////////////////////////////////////////////////////////////////////////////
 
@@ -184,12 +185,12 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
       { key: "se_tf1_mode",                         name: "盤",                                                                       context_type: "se_var", type: "String",  sub_type: null,   default_value: "is_tf1_mode_off",          development_value: null, },
       { key: "se_tf1_perspective",                  name: "盤 - 視点との距離",                                                        context_type: "se_css", type: "Float",   sub_type: null,   default_value: 200,                        development_value: null, },
       { key: "se_tf1_translate_x",                  name: "盤 - 移動 X",                                                              context_type: "se_css", type: "Float",   sub_type: null,   default_value: 0.0,                        development_value: null, },
-      { key: "se_tf1_translate_y",                  name: "盤 - 移動 Y",                                                              context_type: "se_css", type: "Float",   sub_type: null,   default_value: -55,                        development_value: null, },
+      { key: "se_tf1_translate_y",                  name: "盤 - 移動 Y",                                                              context_type: "se_css", type: "Float",   sub_type: null,   default_value: -90,                        development_value: null, },
       { key: "se_tf1_translate_z",                  name: "盤 - 移動 Z",                                                              context_type: "se_css", type: "Float",   sub_type: null,   default_value: 0.0,                        development_value: null, },
-      { key: "se_tf1_rotate_x",                     name: "盤 - 回転 X",                                                              context_type: "se_css", type: "Float",   sub_type: null,   default_value: 0.015,                      development_value: null, },
+      { key: "se_tf1_rotate_x",                     name: "盤 - 回転 X",                                                              context_type: "se_css", type: "Float",   sub_type: null,   default_value: 0.05,                       development_value: null, },
       { key: "se_tf1_rotate_y",                     name: "盤 - 回転 Y",                                                              context_type: "se_css", type: "Float",   sub_type: null,   default_value: 0.0,                        development_value: null, },
       { key: "se_tf1_rotate_z",                     name: "盤 - 回転 Z",                                                              context_type: "se_css", type: "Float",   sub_type: null,   default_value: 0.0,                        development_value: null, },
-      { key: "se_tf1_scale",                        name: "盤 - 拡縮",                                                                context_type: "se_css", type: "Float",   sub_type: null,   default_value: 1.0,                        development_value: null, },
+      { key: "se_tf1_scale",                        name: "盤 - 拡縮",                                                                context_type: "se_css", type: "Float",   sub_type: null,   default_value: 0.8,                        development_value: null, },
 
       { key: "se_tf2_mode",                         name: "駒",                                                                       context_type: "se_var", type: "String",  sub_type: null,   default_value: "is_tf2_mode_off",          development_value: null, },
       { key: "se_tf2_perspective",                  name: "駒 - 視点との距離",                                                        context_type: "se_css", type: "Float",   sub_type: null,   default_value: 200,                        development_value: null, },
@@ -203,11 +204,13 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
     ]
   }
 
-  static get vue_data_attributes() {
-    return this.values.reduce((a, e) => ({...a, [e.key]: e.default_value}), {})
+  // Hash を含んでいるため deep clone (structuredClone) が必要になる
+  // deep clone していないとデフォルト値を書き換えてしまって「対局者名」が正しくでなくなる
+  static vue_define_attributes() {
+    return this.values.reduce((a, e) => ({...a, [e.key]: e.default_value_clone}), {})
   }
 
-  static get sp_component_attributes_default() {
+  static get sp_component_bind_attrs_default() {
     let hv = {}
     this.values.forEach(e => {
       if (e.context_type === "sp_var") {
@@ -217,31 +220,15 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
     return hv
   }
 
-  static sp_component_attributes(sp_component_attributes_current) {
-    const a = this.sp_component_attributes_default
-    const b = sp_component_attributes_current
-    const diff = DeepObjectDiff.updatedDiff(a, b)
-    const claen_diff = structuredClone(diff)
-    return claen_diff
-  }
-
-  // 人間向けの見やすい形に変換する
-  static css_to_human(css_body) {
-    let s = css_body
-    s = s.replace(/\s*.Workspace.*/, "")
-    s = s.replace(/\s*[{}]\s*/, "")
-    s = s.replace(/url\(.*\)/g, "url(XXXXXXXX)")
-    s = s.replace(/base64,.*;/, "base64,XXXXXXXX;")
-    return s.trim()
-  }
-
-  // style に埋めて問題ない形に変換する
-  // 以前は "//" コメントを取っていたが、もとから /* */ スタイルで書けばいいのでここでは何もしていない
-  static css_normalize(css_body) {
-    return css_body
+  // 差分だけを返す
+  // 引数の all_attrs から初期値を除いた状態にして返す
+  static default_value_reject(all_attrs) {
+    const diff = DeepObjectDiff.updatedDiff(this.sp_component_bind_attrs_default, all_attrs)
+    return structuredClone(diff)
   }
 
   static hsla_format(v) {
+    GX.assert_not_null(v)
     return chroma(v).css("hsla")
   }
 
@@ -250,7 +237,9 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
   }
 
   as_string_of(value) {
-    if (this.type === "Float") {
+    if (value == null) {
+      value = ""
+    } else if (this.type === "Float") {
       value = this.constructor.float_format(value)
     } else if (this.type === "String") {
       if (this.sub_type === "hsla") {
@@ -262,5 +251,10 @@ export class SeVariableInfo extends ApplicationMemoryRecord {
 
   get default_value_as_str() {
     return this.as_string_of(this.default_value)
+  }
+
+  // 更新しても問題ないデフォルト値を返す
+  get default_value_clone() {
+    return structuredClone(this.default_value)
   }
 }

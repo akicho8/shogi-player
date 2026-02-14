@@ -1,30 +1,32 @@
 <template lang="pug">
-b-colorpicker.MyColorPicker(
+b-colorpicker.ColorEditor(
   v-model="new_value"
   :alpha="alpha"
   :inline="inline"
   )
   template(#footer="{color}")
-    .colorpicker-fields
+    .colorpicker-fields.mb-0
       //- 自由入力の方はリアルタイムで反応する (上書きはされない)
-      b-field(custom-class="is-small" label-position="on-border" label="自由入力" :message="other_formats")
+      b-field.mb-0(custom-class="is-small" label-position="on-border" label="自由入力")
+        template(#message)
+          .box.is-shadowless.has-background-white-ter.px-2.py-2.mt-2.mb-0
+            template(v-for="e in other_formats")
+              | {{e}}<br>
+
         b-input(size="is-small" type="text" :value="user_input" @input="input_handle")
 
-      //- 下の3つはフォーカスを外したときに反応する(リアルタイムにすると入力を書き換えられて不便なため)
-      b-field(custom-class="is-small" label-position="on-border" label="HEX")
-        b-input(size="is-small" type="text" lazy :value="current_chroma.hex('auto')" @input="input_handle")
-      b-field(custom-class="is-small" label-position="on-border" label="RGBA")
-        b-input(size="is-small" type="text" lazy :value="current_chroma.css('rgba')" @input="input_handle")
-      b-field(custom-class="is-small" label-position="on-border" label="HSLA")
-        b-input(size="is-small" type="text" lazy :value="current_chroma.css('hsla')" @input="input_handle")
+      b-field.mt-2
+        template(#message)
+          b-button(size="is-small" @click="random_handle" type="is-primary") ランダム
 </template>
 
 <script>
 import chroma from "chroma-js"
 import BuefyColor from "@/node_modules/buefy/src/utils/color"
+import { ColorHelper } from "./models/color_helper.js"
 
 export default {
-  name: "MyColorPicker",
+  name: "ColorEditor",
   props: {
     value:  { type: String, required: true  },
     alpha:  { type: Boolean, default: true  },
@@ -74,23 +76,28 @@ export default {
       console.info(`読み取りOK: ${v}`)
       return chroma(v)
     },
+
+    random_handle() {
+      const str = ColorHelper.random({alpha: this.current_chroma.alpha()}) // alpha 値は保持する
+      this.user_input = str
+      this.input_handle(this.user_input)
+    },
   },
   computed: {
     other_formats() {
       return [
-        this.current_chroma.hex('auto'), // auto: alphaがあれば8桁でなければ6桁になる
-        this.current_chroma.css('rgba'),
-        this.current_chroma.css('hsla'),
+        this.current_chroma.hex("auto"), // auto: alphaがあれば8桁でなければ6桁になる
+        this.current_chroma.css("rgba"),
+        this.current_chroma.css("hsla"),
       ]
     },
   },
-
 }
 </script>
 
 <style lang="sass">
-@import "../support.sass"
-.MyColorPicker
+@import "./support.scss"
+.ColorEditor
   input
     text-align: unset ! important // R,G,Bの各入力フィールドをばらばらに数値で入れる想定で右寄せになっているのを解除する
 </style>
