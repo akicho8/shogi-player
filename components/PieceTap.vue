@@ -74,10 +74,10 @@ export default {
   +defvar(sp_piece_selectable_color, hsla(0, 0%, 0%, 0.15))  // 持ち上げれる駒の背景色
 
   +defvar(sp_mouse_lifted_origin_bg_color, hsla(0, 0%, 0%, 0.15)) // 持ち上げた駒の背景色(desktop)
-  +defvar(sp_mouse_lifted_origin_opacity, 0.0)                   // 持ち上げた駒の元のセルの非透明度(desktop)
+  +defvar(sp_mouse_lifted_origin_opacity, 0.0)                   // 持ち上げた駒の元のセルの不透明度(desktop)
 
   +defvar(sp_touch_lifted_origin_bg_color, hsla(0, 0%, 0%, 0.15))   // 持ち上げた駒の背景色(touch)
-  +defvar(sp_touch_lifted_origin_opacity, 1.0)                     // 持ち上げた駒の元のセルの非透明度(touch)
+  +defvar(sp_touch_lifted_origin_opacity, 1.0)                     // 持ち上げた駒の元のセルの不透明度(touch)
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_size, 0.8)            // 駒台のセル内の駒占有率
