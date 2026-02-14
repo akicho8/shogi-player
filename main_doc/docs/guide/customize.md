@@ -24,6 +24,6 @@
 
 <CustomizeExample name="customize/itaban" />
 
-## KIFコメントを右に表示する
+## 棋譜コメントを右に表示する
 
 <CustomizeExample name="customize/comment_layout" :width="300" :height="220" />

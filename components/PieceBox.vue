@@ -5,7 +5,7 @@
     @pointerdown.stop.prevent="TheSp.piece_box_other_click"
     @pointerdown.right.prevent="TheSp.hold_cancel"
     )
-    // PieceBoxPieces を is-overlay にしないとPieceBoxPiecesの背景にPieceBoxTextureの色の非透明度が影響してしまう
+    // PieceBoxPieces を is-overlay にしないとPieceBoxPiecesの背景にPieceBoxTextureの色の不透明度が影響してしまう
     .PieceBoxTexture.is-overlay
     .PieceBoxPieces.is-overlay
       .PieceWithCount(
