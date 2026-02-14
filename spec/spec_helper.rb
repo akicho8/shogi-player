@@ -15,7 +15,7 @@ if true
     Capybara.current_driver = :selenium_chrome
   end
 
-  Capybara.app_host = "http://0.0.0.0:5000"
+  Capybara.app_host = "http://0.0.0.0:3800"
 end
 
 # https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
