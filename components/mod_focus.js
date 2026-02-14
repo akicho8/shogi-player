@@ -1,6 +1,7 @@
 import _ from "lodash"
 import { Location } from "./models/location.js"
-import isMobile from 'ismobilejs'
+import isMobile from "ismobilejs"
+import { DomHelper } from "./models/dom_helper.js"
 
 const FOCUS_FUNCTION = false
 
@@ -25,14 +26,6 @@ export const mod_focus = {
     }
   },
   methods: {
-    // テキストフィールドまたはテキストエリアにフォーカスしているか？
-    focus_on_input_tag_p() {
-      const dom = document.activeElement
-      if (dom.tagName === "TEXTAREA" || dom.tagName === "INPUT") {
-        return true
-      }
-    },
-
     // コントローラーの指定のパーツにフォーカスする
     nav_focus_to(key) {
       if (this.focus_disable_p) { return false }

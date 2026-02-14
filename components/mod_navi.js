@@ -1,5 +1,6 @@
 import _ from "lodash"
 import { Location } from "./models/location.js"
+import { DomHelper } from "./models/dom_helper.js"
 
 const FOCUS_FUNCTION = false
 
@@ -66,7 +67,7 @@ export const mod_navi = {
         return
       }
 
-      if (this.focus_on_input_tag_p()) {
+      if (DomHelper.focus_on_input_tag_p()) {
         this.log("他の要素にフォーカスが当たっているためキーボードショートカットを無効にしている")
         return
       }
