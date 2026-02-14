@@ -85,7 +85,10 @@ export class Pstore {
   }
 
   static get core() {
-    return (typeof window !== 'undefined' && this.storage)
+    if (typeof window === "undefined") {
+      return
+    }
+    return this.storage
   }
 
   static get storage() {
