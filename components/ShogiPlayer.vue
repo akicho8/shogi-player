@@ -663,7 +663,7 @@ export default {
     +is_overlay_block
 
     background-color: var(--sp_ground_color)
-    background-image: var(--sp_ground_image)
+    background-image: var(--sp_ground_image, none)
     background-position: center
     background-repeat: no-repeat
     background-size: cover
