@@ -3,6 +3,7 @@ XRegExp.uninstall("namespacing")
 
 import Vue from "vue"
 import _ from "lodash"
+import { GX } from "./gx.js"
 
 import { Board      } from "./board.js"
 import { Piece      } from "./piece.js"
@@ -33,6 +34,8 @@ export class SfenParser extends ParserBase {
     if (process.env.NODE_ENV === "development") {
       console.log(this.attributes)
     }
+    GX.assert_not_null(this.attributes)
+    GX.assert_kind_of_hash(this.attributes)
   }
 
   get board() {
