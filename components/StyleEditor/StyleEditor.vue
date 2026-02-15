@@ -163,9 +163,9 @@ export default {
       }
     },
 
-    tf0_slider_attrs() { return this.tfx_slider_attrs(this.se_tf0_mode === "is_tf0_mode_off") },
-    tf1_slider_attrs() { return this.tfx_slider_attrs(this.se_tf1_mode === "is_tf1_mode_off") },
-    tf2_slider_attrs() { return this.tfx_slider_attrs(this.se_tf2_mode === "is_tf2_mode_off") },
+    tf_wall_slider_attrs() { return this.tfx_slider_attrs(this.se_tf_wall_mode === "is_tf_wall_mode_off") },
+    tf_board_slider_attrs() { return this.tfx_slider_attrs(this.se_tf_board_mode === "is_tf_board_mode_off") },
+    tf_piece_slider_attrs() { return this.tfx_slider_attrs(this.se_tf_piece_mode === "is_tf_piece_mode_off") },
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -174,9 +174,9 @@ export default {
         {
           sidebar_p: this.sidebar_p
         },
-        this.se_tf0_mode,
-        this.se_tf1_mode,
-        this.se_tf2_mode,
+        this.se_tf_wall_mode,
+        this.se_tf_board_mode,
+        this.se_tf_piece_mode,
       ]
     },
 

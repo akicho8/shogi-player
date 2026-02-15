@@ -22,34 +22,34 @@ export const mod_se_style = {
           --se_ws_sepia:        ${this.se_ws_sepia};
 
           /* Transform 背景 */
-          --se_tf0_perspective: ${this.se_tf0_perspective}px;
-          --se_tf0_translate_x: ${this.se_tf0_translate_x}px;
-          --se_tf0_translate_y: ${this.se_tf0_translate_y}px;
-          --se_tf0_translate_z: ${this.se_tf0_translate_z}px;
-          --se_tf0_rotate_x:    ${this.se_tf0_rotate_x}turn;
-          --se_tf0_rotate_y:    ${this.se_tf0_rotate_y}turn;
-          --se_tf0_rotate_z:    ${this.se_tf0_rotate_z}turn;
-          --se_tf0_scale:       ${this.se_tf0_scale};
+          --se_tf_wall_perspective: ${this.se_tf_wall_perspective}px;
+          --se_tf_wall_translate_x: ${this.se_tf_wall_translate_x}px;
+          --se_tf_wall_translate_y: ${this.se_tf_wall_translate_y}px;
+          --se_tf_wall_translate_z: ${this.se_tf_wall_translate_z}px;
+          --se_tf_wall_rotate_x:    ${this.se_tf_wall_rotate_x}turn;
+          --se_tf_wall_rotate_y:    ${this.se_tf_wall_rotate_y}turn;
+          --se_tf_wall_rotate_z:    ${this.se_tf_wall_rotate_z}turn;
+          --se_tf_wall_scale:       ${this.se_tf_wall_scale};
 
           /* Transform 盤 */
-          --se_tf1_perspective: ${this.se_tf1_perspective}px;
-          --se_tf1_translate_x: ${this.se_tf1_translate_x};
-          --se_tf1_translate_y: ${this.se_tf1_translate_y};
-          --se_tf1_translate_z: ${this.se_tf1_translate_z}px;
-          --se_tf1_rotate_x:    ${this.se_tf1_rotate_x}turn;
-          --se_tf1_rotate_y:    ${this.se_tf1_rotate_y}turn;
-          --se_tf1_rotate_z:    ${this.se_tf1_rotate_z}turn;
-          --se_tf1_scale:       ${this.se_tf1_scale};
+          --se_tf_board_perspective: ${this.se_tf_board_perspective}px;
+          --se_tf_board_translate_x: ${this.se_tf_board_translate_x};
+          --se_tf_board_translate_y: ${this.se_tf_board_translate_y};
+          --se_tf_board_translate_z: ${this.se_tf_board_translate_z}px;
+          --se_tf_board_rotate_x:    ${this.se_tf_board_rotate_x}turn;
+          --se_tf_board_rotate_y:    ${this.se_tf_board_rotate_y}turn;
+          --se_tf_board_rotate_z:    ${this.se_tf_board_rotate_z}turn;
+          --se_tf_board_scale:       ${this.se_tf_board_scale};
 
           /* Transform 駒 */
-          --se_tf2_perspective: ${this.se_tf2_perspective}px;
-          --se_tf2_translate_x: ${this.se_tf2_translate_x};
-          --se_tf2_translate_y: ${this.se_tf2_translate_y};
-          --se_tf2_translate_z: ${this.se_tf2_translate_z}px;
-          --se_tf2_rotate_x:    ${this.se_tf2_rotate_x}turn;
-          --se_tf2_rotate_y:    ${this.se_tf2_rotate_y}turn;
-          --se_tf2_rotate_z:    ${this.se_tf2_rotate_z}turn;
-          --se_tf2_scale:       ${this.se_tf2_scale};
+          --se_tf_piece_perspective: ${this.se_tf_piece_perspective}px;
+          --se_tf_piece_translate_x: ${this.se_tf_piece_translate_x};
+          --se_tf_piece_translate_y: ${this.se_tf_piece_translate_y};
+          --se_tf_piece_translate_z: ${this.se_tf_piece_translate_z}px;
+          --se_tf_piece_rotate_x:    ${this.se_tf_piece_rotate_x}turn;
+          --se_tf_piece_rotate_y:    ${this.se_tf_piece_rotate_y}turn;
+          --se_tf_piece_rotate_z:    ${this.se_tf_piece_rotate_z}turn;
+          --se_tf_piece_scale:       ${this.se_tf_piece_scale};
         }
       `
     },
