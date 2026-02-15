@@ -1,4 +1,4 @@
-export const mod_se_css = {
+export const mod_se_style = {
   computed: {
     se_css_human() { return this.CssHelper.pretty(this.se_css)  },
     se_css_embed() { return this.CssHelper.normalize(this.se_css) },
@@ -10,7 +10,7 @@ export const mod_se_css = {
           --se_frame_width:     ${this.se_frame_width}dvmin;
 
           /* 背景 */
-          --se_ws_color:        ${this.VariableInfo.hsla_format(this.se_ws_color)};
+          --se_ws_color:        ${this.ColorHelper.hsla_format(this.se_ws_color)};
           --se_ws_image:        ${this.se_ws_image};
           --se_ws_blur:         ${this.se_ws_blur};
           --se_ws_grayscale:    ${this.se_ws_grayscale};
@@ -33,8 +33,8 @@ export const mod_se_css = {
 
           /* Transform 盤 */
           --se_tf1_perspective: ${this.se_tf1_perspective}px;
-          --se_tf1_translate_x: ${this.se_tf1_translate_x}px;
-          --se_tf1_translate_y: ${this.se_tf1_translate_y}px;
+          --se_tf1_translate_x: ${this.se_tf1_translate_x};
+          --se_tf1_translate_y: ${this.se_tf1_translate_y};
           --se_tf1_translate_z: ${this.se_tf1_translate_z}px;
           --se_tf1_rotate_x:    ${this.se_tf1_rotate_x}turn;
           --se_tf1_rotate_y:    ${this.se_tf1_rotate_y}turn;
@@ -43,8 +43,8 @@ export const mod_se_css = {
 
           /* Transform 駒 */
           --se_tf2_perspective: ${this.se_tf2_perspective}px;
-          --se_tf2_translate_x: ${this.se_tf2_translate_x}px;
-          --se_tf2_translate_y: ${this.se_tf2_translate_y}px;
+          --se_tf2_translate_x: ${this.se_tf2_translate_x};
+          --se_tf2_translate_y: ${this.se_tf2_translate_y};
           --se_tf2_translate_z: ${this.se_tf2_translate_z}px;
           --se_tf2_rotate_x:    ${this.se_tf2_rotate_x}turn;
           --se_tf2_rotate_y:    ${this.se_tf2_rotate_y}turn;

@@ -1,24 +1,31 @@
-* 置換
+* Version 1.2.0
+
+** コンポーネント引数の名前変更
 
 |-------------------------+----------------------------|
 | 置換前                  | 置換後                     |
 |-------------------------+----------------------------|
 | sp_board_dimension_w    | sp_board_view_w            |
 | sp_board_dimension_h    | sp_board_view_h            |
-|                         |                            |
-| sp_board_w              | sp_board_entire_current_w  |
-| sp_board_h              | sp_board_entire_current_h  |
-| sp_cell_w               | sp_board_cell_current_w    |
-| sp_cell_h               | sp_board_cell_current_h    |
-|                         |                            |
-| MembershipStand2        | MembershipStandPieces      |
 | sp_board_piece_position | sp_piece_vertical_position |
 |-------------------------+----------------------------|
 
-* 初期値変更
+** 参照されているかもしれない内部変数やCSSクラス
 
-|--------------------------+------+--------|
-| コンポーネント引数       | 古い | 新しい |
-|--------------------------+------+--------|
-| sp_request_snapshot_hash | true | false  |
-|--------------------------+------+--------|
+|------------------+---------------------------|
+| 置換前           | 置換後                    |
+|------------------+---------------------------|
+| sp_board_w       | sp_board_entire_current_w |
+| sp_board_h       | sp_board_entire_current_h |
+| sp_cell_w        | sp_board_cell_current_w   |
+| sp_cell_h        | sp_board_cell_current_h   |
+| MembershipStand2 | MembershipStandPieces     |
+|------------------+---------------------------|
+
+** 初期値変更
+
+|--------------------------+--------+--------|
+| コンポーネント引数       | 変更前 | 変更後 |
+|--------------------------+--------+--------|
+| sp_request_snapshot_hash | true   | false  |
+|--------------------------+--------+--------|

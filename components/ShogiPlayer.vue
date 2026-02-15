@@ -669,4 +669,13 @@ export default {
     background-size: cover
     //- background-image: url("https://glyphwiki.org/glyph/u9f8d.svg") // 確認用(消すな)
     // background-color: red
+
+  // スマートに計算するための符号で position_info.js の sign と対応している
+  // クラスで分けるのではなく、CSS変数を使った計算で、物理的に
+  // 下側の視点になっているものは +1 で
+  // 上側の視点になっているものは -1 としたいときに使う
+  .is_position_north
+    --sp_position_sign: -1
+  .is_position_south
+    --sp_position_sign: 1
 </style>
