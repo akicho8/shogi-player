@@ -400,114 +400,114 @@
             .column
               b-field(grouped)
                 b-field.mb-0(custom-class="is-small")
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf1_mode" native-value="is_tf1_mode_off") OFF
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf1_mode" native-value="is_tf1_mode_on") ON
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_mode" native-value="is_tf_board_mode_off") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_mode" native-value="is_tf_board_mode_on") ON
                 b-field.mb-0(custom-class="is-small")
                   .control
-                    b-button(size="is-small" @click="AppContext.transform_reset('tf1')") リセット
+                    b-button(size="is-small" @click="AppContext.transform_reset('tf_board')") リセット
           .columns
             .column
               b-field(custom-class="is-small" label="遠近感")
-                VariableSlider(variable_key="se_tf1_perspective")
+                VariableSlider(variable_key="se_tf_board_perspective")
             .column
               b-field(custom-class="is-small" label="スケール")
-                VariableSlider(variable_key="se_tf1_scale")
+                VariableSlider(variable_key="se_tf_board_scale")
           .columns
             .column
               b-field(custom-class="is-small" label="回転 X")
-                VariableSlider(variable_key="se_tf1_rotate_x")
+                VariableSlider(variable_key="se_tf_board_rotate_x")
             .column
               b-field(custom-class="is-small" label="回転 Y")
-                VariableSlider(variable_key="se_tf1_rotate_y")
+                VariableSlider(variable_key="se_tf_board_rotate_y")
             .column
               b-field(custom-class="is-small" label="回転 Z")
-                VariableSlider(variable_key="se_tf1_rotate_z")
+                VariableSlider(variable_key="se_tf_board_rotate_z")
           .columns
             .column
               b-field(custom-class="is-small" label="移動 X")
-                VariableSlider(variable_key="se_tf1_translate_x")
+                VariableSlider(variable_key="se_tf_board_translate_x")
             .column
               b-field(custom-class="is-small" label="移動 Y")
-                VariableSlider(variable_key="se_tf1_translate_y")
+                VariableSlider(variable_key="se_tf_board_translate_y")
             .column
               b-field(custom-class="is-small" label="移動 Z")
-                VariableSlider(variable_key="se_tf1_translate_z")
+                VariableSlider(variable_key="se_tf_board_translate_z")
 
         b-tab-item(label="駒")
           .columns
             .column
               b-field(grouped)
                 b-field.mb-0(custom-class="is-small")
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf2_mode" native-value="is_tf2_mode_off") OFF
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf2_mode" native-value="is_tf2_mode_on") ON
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_mode" native-value="is_tf_piece_mode_off") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_mode" native-value="is_tf_piece_mode_on") ON
                 b-field.mb-0(custom-class="is-small")
                   .control
-                    b-button(size="is-small" @click="AppContext.transform_reset('tf2')") リセット
+                    b-button(size="is-small" @click="AppContext.transform_reset('tf_piece')") リセット
           .columns
             .column
               b-field(custom-class="is-small" label="遠近感")
-                VariableSlider(variable_key="se_tf2_perspective")
+                VariableSlider(variable_key="se_tf_piece_perspective")
             .column
               b-field(custom-class="is-small" label="スケール")
-                VariableSlider(variable_key="se_tf2_scale")
+                VariableSlider(variable_key="se_tf_piece_scale")
           .columns
             .column
               b-field(custom-class="is-small" label="回転 X")
-                VariableSlider(variable_key="se_tf2_rotate_x")
+                VariableSlider(variable_key="se_tf_piece_rotate_x")
             .column
               b-field(custom-class="is-small" label="回転 Y")
-                VariableSlider(variable_key="se_tf2_rotate_y")
+                VariableSlider(variable_key="se_tf_piece_rotate_y")
             .column
               b-field(custom-class="is-small" label="回転 Z")
-                VariableSlider(variable_key="se_tf2_rotate_z")
+                VariableSlider(variable_key="se_tf_piece_rotate_z")
           .columns
             .column
               b-field(custom-class="is-small" label="移動 X")
-                VariableSlider(variable_key="se_tf2_translate_x")
+                VariableSlider(variable_key="se_tf_piece_translate_x")
             .column
               b-field(custom-class="is-small" label="移動 Y")
-                VariableSlider(variable_key="se_tf2_translate_y")
+                VariableSlider(variable_key="se_tf_piece_translate_y")
             .column
               b-field(custom-class="is-small" label="移動 Z")
-                VariableSlider(variable_key="se_tf2_translate_z")
+                VariableSlider(variable_key="se_tf_piece_translate_z")
 
         b-tab-item(label="背景")
           .columns
             .column
               b-field(grouped)
                 b-field.mb-0(custom-class="is-small")
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf0_mode" native-value="is_tf0_mode_off") OFF
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf0_mode" native-value="is_tf0_mode_on") ON
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_mode" native-value="is_tf_wall_mode_off") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_mode" native-value="is_tf_wall_mode_on") ON
                 b-field.mb-0(custom-class="is-small")
                   .control
-                    b-button(size="is-small" @click="AppContext.transform_reset('tf0')") リセット
+                    b-button(size="is-small" @click="AppContext.transform_reset('tf_wall')") リセット
           .columns
             .column
               b-field(custom-class="is-small" label="遠近感")
-                VariableSlider(variable_key="se_tf0_perspective")
+                VariableSlider(variable_key="se_tf_wall_perspective")
             .column
               b-field(custom-class="is-small" label="スケール")
-                VariableSlider(variable_key="se_tf0_scale")
+                VariableSlider(variable_key="se_tf_wall_scale")
           .columns
             .column
               b-field(custom-class="is-small" label="回転 X")
-                VariableSlider(variable_key="se_tf0_rotate_x")
+                VariableSlider(variable_key="se_tf_wall_rotate_x")
             .column
               b-field(custom-class="is-small" label="回転 Y")
-                VariableSlider(variable_key="se_tf0_rotate_y")
+                VariableSlider(variable_key="se_tf_wall_rotate_y")
             .column
               b-field(custom-class="is-small" label="回転 Z")
-                VariableSlider(variable_key="se_tf0_rotate_z")
+                VariableSlider(variable_key="se_tf_wall_rotate_z")
           .columns
             .column
               b-field(custom-class="is-small" label="移動 X")
-                VariableSlider(variable_key="se_tf0_translate_x")
+                VariableSlider(variable_key="se_tf_wall_translate_x")
             .column
               b-field(custom-class="is-small" label="移動 Y")
-                VariableSlider(variable_key="se_tf0_translate_y")
+                VariableSlider(variable_key="se_tf_wall_translate_y")
             .column
               b-field(custom-class="is-small" label="移動 Z")
-                VariableSlider(variable_key="se_tf0_translate_z")
+                VariableSlider(variable_key="se_tf_wall_translate_z")
 
       template(v-if="development_p && false")
         hr

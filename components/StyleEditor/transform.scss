@@ -1,53 +1,53 @@
 .StyleEditor {
   // 背景
-  &.is_tf0_mode_on {
+  &.is_tf_wall_mode_on {
     .Workspace {
       transform:
-        perspective(var(--se_tf0_perspective))
-        scale(var(--se_tf0_scale))
+        perspective(var(--se_tf_wall_perspective))
+        scale(var(--se_tf_wall_scale))
         translate3d(
-          var(--se_tf0_translate_x),
-          var(--se_tf0_translate_y),
-          var(--se_tf0_translate_z)
+          var(--se_tf_wall_translate_x),
+          var(--se_tf_wall_translate_y),
+          var(--se_tf_wall_translate_z)
         )
-        rotateX(var(--se_tf0_rotate_x))
-        rotateY(var(--se_tf0_rotate_y))
-        rotateZ(var(--se_tf0_rotate_z))
+        rotateX(var(--se_tf_wall_rotate_x))
+        rotateY(var(--se_tf_wall_rotate_y))
+        rotateZ(var(--se_tf_wall_rotate_z))
       ;
     }
   }
 
   // 盤
-  &.is_tf1_mode_on {
+  &.is_tf_board_mode_on {
     .SpTransformBlock {
       transform:
-        perspective(var(--se_tf1_perspective))
-        scale(var(--se_tf1_scale))
+        perspective(var(--se_tf_board_perspective))
+        scale(var(--se_tf_board_scale))
         translate3d(
-          calc(var(--sp_board_entire_current_w) * var(--se_tf1_translate_x)),
-          calc(var(--sp_board_entire_current_h) * var(--se_tf1_translate_y)),
-          var(--se_tf1_translate_z)
+          calc(var(--sp_board_entire_current_w) * var(--se_tf_board_translate_x)),
+          calc(var(--sp_board_entire_current_h) * var(--se_tf_board_translate_y)),
+          var(--se_tf_board_translate_z)
         )
-        rotateX(var(--se_tf1_rotate_x))
-        rotateY(var(--se_tf1_rotate_y))
-        rotateZ(var(--se_tf1_rotate_z))
+        rotateX(var(--se_tf_board_rotate_x))
+        rotateY(var(--se_tf_board_rotate_y))
+        rotateZ(var(--se_tf_board_rotate_z))
       ;
     }
   }
 
-  &.is_tf2_mode_on {
+  &.is_tf_piece_mode_on {
     .PieceObject {
       transform:
-        perspective(var(--se_tf2_perspective))
-        scale(var(--se_tf2_scale))
+        perspective(var(--se_tf_piece_perspective))
+        scale(var(--se_tf_piece_scale))
         translate3d(
-          calc(var(--sp_board_cell_current_w) * var(--se_tf2_translate_x) * var(--sp_position_sign)),
-          calc(var(--sp_board_cell_current_h) * var(--se_tf2_translate_y) * var(--sp_position_sign)),
-          var(--se_tf2_translate_z)
+          calc(var(--sp_board_cell_current_w) * var(--se_tf_piece_translate_x) * var(--sp_position_sign)),
+          calc(var(--sp_board_cell_current_h) * var(--se_tf_piece_translate_y) * var(--sp_position_sign)),
+          var(--se_tf_piece_translate_z)
         )
-        rotateX(calc(var(--se_tf2_rotate_x) * var(--sp_position_sign)))
-        rotateY(calc(var(--se_tf2_rotate_y) * var(--sp_position_sign)))
-        rotateZ(var(--se_tf2_rotate_z))
+        rotateX(calc(var(--se_tf_piece_rotate_x) * var(--sp_position_sign)))
+        rotateY(calc(var(--se_tf_piece_rotate_y) * var(--sp_position_sign)))
+        rotateZ(var(--se_tf_piece_rotate_z))
       ;
     }
   }
