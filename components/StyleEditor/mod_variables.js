@@ -73,6 +73,14 @@ export const mod_variables = {
         }
       })
     },
+
+    transform_reset(group) {
+      this.VariableInfo.values.forEach(e => {
+        if (e.group === group) {
+          this[e.key] = e.default_value_clone
+        }
+      })
+    },
   },
 
   computed: {

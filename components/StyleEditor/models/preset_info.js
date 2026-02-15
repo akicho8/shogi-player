@@ -106,6 +106,7 @@ export class PresetInfo extends ApplicationMemoryRecord {
         key: "3D",
         func: context => {
           context.se_tf1_mode = "is_tf1_mode_on"
+          context.se_tf2_mode = "is_tf2_mode_on"
         },
       },
     ]

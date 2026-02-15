@@ -40,17 +40,18 @@ import { MixBlendModeInfo          } from "../models/mix_blend_mode_info.js"
 import { LiftCancelActionInfo      } from "../models/lift_cancel_action_info.js"
 import { ClickResponseTimingInfo   } from "../models/click_response_timing_info.js"
 
+import { VariableInfo            } from "./models/variable_info.js"
 import { PresetInfo              } from "./models/preset_info.js"
-import { SectionInfo             } from "./models/section_info.js"
+import { CategoryInfo            } from "./models/category_info.js"
 import { BoardSizePresetInfo     } from "./models/board_size_preset_info.js"
 import { UserCustomCssPresetInfo } from "./models/user_custom_css_preset_info.js"
 import { PieceVisibilityInfo     } from "./models/piece_visibility_info.js"
-import { CssHelper                } from "./models/css_helper.js"
-import { ColorHelper                } from "./models/color_helper.js"
+import { CssHelper               } from "./models/css_helper.js"
+import { ColorHelper             } from "./models/color_helper.js"
 
 import { mod_persistence      } from "./mod_persistence.js"
-import { mod_sp_css       } from "./mod_sp_css.js"
-import { mod_se_css       } from "./mod_se_css.js"
+import { mod_sp_style       } from "./mod_sp_style.js"
+import { mod_se_style       } from "./mod_se_style.js"
 import { mod_helper       } from "./mod_helper.js"
 import { mod_think_mark   } from "./mod_think_mark.js"
 import { mod_event        } from "./mod_event.js"
@@ -60,16 +61,17 @@ import { mod_shortcut         } from "./mod_shortcut.js"
 import { mod_keydown         } from "./mod_keydown.js"
 import { mod_autorun } from "./mod_autorun.js"
 import { mod_callback } from "./mod_callback.js"
+import { mod_category } from "./mod_category.js"
 
-import ShogiPlayer    from "../ShogiPlayer.vue"
+import ShogiPlayer from "../ShogiPlayer.vue"
 import ControlPanel from "./ControlPanel.vue"
 
 export default {
   name: "StyleEditor",
   mixins: [
     mod_persistence,
-    mod_sp_css,
-    mod_se_css,
+    mod_sp_style,
+    mod_se_style,
     mod_helper,
     mod_think_mark,
     mod_event,
@@ -79,6 +81,7 @@ export default {
     mod_keydown,
     mod_autorun,
     mod_callback,
+    mod_category,
   ],
 
   components: {
@@ -88,8 +91,12 @@ export default {
 
   provide() {
     return {
-      TheSE: this,
+      AppContext: this,
     }
+  },
+
+  mounted() {
+
   },
 
   methods: {
@@ -125,55 +132,26 @@ export default {
       this.user_custom_css = user_custom_css_preset_info.user_custom_css.trim()
     },
 
-    se_tf0_reset() {
-      this.se_tf0_perspective = 200
-      this.se_tf0_translate_x = 0
-      this.se_tf0_translate_y = 0
-      this.se_tf0_translate_z = 0
-      this.se_tf0_rotate_x    = 0
-      this.se_tf0_rotate_y    = 0
-      this.se_tf0_rotate_z    = 0
-      this.se_tf0_scale       = 1.0
-    },
-    se_tf1_reset() {
-      this.se_tf1_perspective = 200
-      this.se_tf1_translate_x = 0
-      this.se_tf1_translate_y = 0
-      this.se_tf1_translate_z = 0
-      this.se_tf1_rotate_x    = 0
-      this.se_tf1_rotate_y    = 0
-      this.se_tf1_rotate_z    = 0
-      this.se_tf1_scale       = 1.0
-    },
-    se_tf2_reset() {
-      this.se_tf2_perspective = 200
-      this.se_tf2_translate_x = 0
-      this.se_tf2_translate_y = 0
-      this.se_tf2_translate_z = 0
-      this.se_tf2_rotate_x    = 0
-      this.se_tf2_rotate_y    = 0
-      this.se_tf2_rotate_z    = 0
-      this.se_tf2_scale       = 1.0
-    },
   },
   computed: {
     development_p() { return DEVELOPMENT_P },
     __SYSTEM_TEST_RUNNING__() { return this.$route.query.__SYSTEM_TEST_RUNNING__ === "true" },
 
-    HumanSideInfo()             { return HumanSideInfo             },
-    ModeInfo()                  { return ModeInfo                  },
-    BoardVariantInfo()          { return BoardVariantInfo          },
-    PieceVariantInfo()          { return PieceVariantInfo          },
-    CoordinateInfo()            { return CoordinateInfo            },
-    LiftCancelActionInfo()      { return LiftCancelActionInfo      },
-    ClickResponseTimingInfo()   { return ClickResponseTimingInfo   },
-    SectionInfo()             { return SectionInfo             },
+    VariableInfo()            { return VariableInfo            },
+    HumanSideInfo()           { return HumanSideInfo           },
+    ModeInfo()                { return ModeInfo                },
+    BoardVariantInfo()        { return BoardVariantInfo        },
+    PieceVariantInfo()        { return PieceVariantInfo        },
+    CoordinateInfo()          { return CoordinateInfo          },
+    LiftCancelActionInfo()    { return LiftCancelActionInfo    },
+    ClickResponseTimingInfo() { return ClickResponseTimingInfo },
+    CategoryInfo()            { return CategoryInfo            },
     PresetInfo()              { return PresetInfo              },
     BoardSizePresetInfo()     { return BoardSizePresetInfo     },
     UserCustomCssPresetInfo() { return UserCustomCssPresetInfo },
     PieceVisibilityInfo()     { return PieceVisibilityInfo     },
-    CssHelper()                { return CssHelper                },
-    ColorHelper()                { return ColorHelper                },
+    CssHelper()               { return CssHelper               },
+    ColorHelper()             { return ColorHelper             },
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -245,6 +223,8 @@ export default {
 @import "pattern.css/pattern.scss"
 @import "./support.scss"
 @import "./layout.scss"
+@import "./property.scss"
+@import "./transform.scss"
 
 .StyleEditor
   min-height: 100dvh
@@ -286,24 +266,4 @@ export default {
   .ShogiPlayerWrap
     width: var(--se_frame_width)
 
-  // 背景の変形
-  &.is_tf0_mode_on
-    .Workspace
-      transform: perspective(var(--se_tf0_perspective)) translate3d(var(--se_tf0_translate_x), var(--se_tf0_translate_y), var(--se_tf0_translate_z)) rotateX(var(--se_tf0_rotate_x)) rotateY(var(--se_tf0_rotate_y)) rotateZ(var(--se_tf0_rotate_z)) scale(var(--se_tf0_scale))
-
-  // 盤の変形
-  &.is_tf1_mode_on
-    .SpTransformBlock
-      transform: perspective(var(--se_tf1_perspective)) translate3d(var(--se_tf1_translate_x), var(--se_tf1_translate_y), var(--se_tf1_translate_z)) rotateX(var(--se_tf1_rotate_x)) rotateY(var(--se_tf1_rotate_y)) rotateZ(var(--se_tf1_rotate_z)) scale(var(--se_tf1_scale))
-
-  // 駒の変形は先後対称。何を先後対称にするかは感覚で決める
-  =def_tf2($dir)
-    transform: unquote('perspective(var(--se_tf2_perspective)) translate3d(calc(var(--se_tf2_translate_x) * #{$dir}), calc(var(--se_tf2_translate_y) * #{$dir}), var(--se_tf2_translate_z)) rotateX(calc(var(--se_tf2_rotate_x) * #{$dir})) rotateY(calc(var(--se_tf2_rotate_y) * 1)) rotateZ(calc(var(--se_tf2_rotate_z) * 1)) scale(var(--se_tf2_scale))')
-  &.is_tf2_mode_on
-    .is_position_north
-      .PieceObject
-        +def_tf2(-1)
-    .is_position_south
-      .PieceObject
-        +def_tf2(1)
 </style>

@@ -1,6 +1,6 @@
 import { GX } from "../models/gx.js"
 
-export const mod_sp_css = {
+export const mod_sp_style = {
   computed: {
     sp_css_human() { return this.CssHelper.pretty(this.sp_css_raw)  },
     sp_css_embed() { return this.CssHelper.normalize(this.sp_css_raw) },

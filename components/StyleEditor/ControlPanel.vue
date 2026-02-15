@@ -1,7 +1,7 @@
 <template lang="pug">
 .ControlPanel.mx-4.my-4
   .is-flex.is-justify-content-start.is-align-items-center
-    b-button(@click="TheSE.sidebar_toggle_handle" icon-left="menu")
+    b-button(@click="AppContext.sidebar_toggle_handle" icon-left="menu")
     .mx-3.has-text-weight-bold スタイルエディタ
 
   .ControlPanelBoxes
@@ -9,143 +9,134 @@
       b-field(custom-class="is-small" label="ショートカット")
         .control
           .short_cut_buttons
-            template(v-for="e in TheSE.SectionInfo.values")
-              a.button.is-small.is-marginless(v-scroll-to="{container: '.sidebar-content', element: `#${e.key}`, offset: -40}") {{e.name}}
+            template(v-for="e in AppContext.CategoryInfo.values")
+              template(v-if="e.enable_p")
+                a.button.is-small.is-marginless(v-scroll-to="AppContext.v_scroll_to_params(e)")
+                  | {{e.display_name}}
 
       b-field(custom-class="is-small" label="プリセット")
         .control
           .buttons.mb-0
-            template(v-for="e in TheSE.PresetInfo.values")
-              b-button(@click="TheSE.se_preset_apply_handle(e)" size="is-small") {{e.name}}
+            template(v-for="e in AppContext.PresetInfo.values")
+              b-button(@click="AppContext.se_preset_apply_handle(e)" size="is-small") {{e.name}}
 
       b-field(custom-class="is-small" label="永続化")
         template(#message)
-          a(:href="TheSE.xstore_autoload_link") 自動復元URL
+          a(:href="AppContext.xstore_autoload_link") 自動復元URL
         .control
           .buttons.mb-0.are-small.storage_buttons
-            b-button.mb-0(@click="TheSE.xstore_save_handle") 保存
-            b-button.mb-0(@click="TheSE.xstore_load_handle") 復元
+            b-button.mb-0(@click="AppContext.xstore_save_handle") 保存
+            b-button.mb-0(@click="AppContext.xstore_load_handle") 復元
 
-    .box
-      GroupName(name="動作モード")
+    CategoryBox(category_key="動作モード")
       b-field(custom-class="is-small")
-        b-radio-button(size="is-small" v-model="TheSE.sp_mode" native-value="view") 再生
-        b-radio-button(size="is-small" v-model="TheSE.sp_mode" native-value="play") 操作
-        b-radio-button(size="is-small" v-model="TheSE.sp_mode" native-value="edit") 編集
+        b-radio-button(size="is-small" v-model="AppContext.sp_mode" native-value="view") 再生
+        b-radio-button(size="is-small" v-model="AppContext.sp_mode" native-value="play") 操作
+        b-radio-button(size="is-small" v-model="AppContext.sp_mode" native-value="edit") 編集
 
-    .box
-      GroupName(name="レイアウト")
-
+    CategoryBox(category_key="レイアウト")
       b-field(custom-class="is-small" label="大きさ")
         template(#message)
-          | 親要素の<b>横幅</b>で大きさが変わる <b>({{TheSE.se_frame_width}}dvmin)</b>
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.se_frame_width" :min="0" :max="200")
+          | 親要素の<b>横幅</b>で大きさが変わる <b>({{AppContext.se_frame_width}}dvmin)</b>
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_frame_width" :min="0" :max="200")
 
-    .box
-      GroupName(name="背景")
-
+    CategoryBox(category_key="背景")
       b-field(custom-class="is-small" label="")
-        ColorEditor(v-model="TheSE.se_ws_color" :alpha="false")
+        ColorEditor(v-model="AppContext.se_ws_color" :alpha="false")
 
-      ImageUploader(@input="TheSE.se_ws_image_input_handle")
+      ImageUploader(@input="AppContext.se_ws_image_input_handle")
 
       b-field(custom-class="is-small" label="色相")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.se_ws_hue" :min="-0.5" :max="0.5" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_hue" :min="-0.5" :max="0.5" :step="0.001")
       b-field(custom-class="is-small" label="彩度")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.se_ws_saturate" :min="0" :max="2.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_saturate" :min="0" :max="2.0" :step="0.001")
       b-field(custom-class="is-small" label="輝度")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.se_ws_brightness" :min="0" :max="2.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_brightness" :min="0" :max="2.0" :step="0.001")
       b-field(custom-class="is-small" label="ぼかし")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.se_ws_blur" :min="0" :max="30" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_blur" :min="0" :max="30" :step="0.001")
       b-field(custom-class="is-small" label="セピア")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.se_ws_sepia" :min="0" :max="1.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_sepia" :min="0" :max="1.0" :step="0.001")
       b-field(custom-class="is-small" label="グレースケール")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.se_ws_grayscale" :min="0" :max="1.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_grayscale" :min="0" :max="1.0" :step="0.001")
       b-field(custom-class="is-small" label="コントラスト")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.se_ws_contrast" :min="0" :max="2.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_contrast" :min="0" :max="2.0" :step="0.001")
       b-field(custom-class="is-small" label="反転")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.se_ws_invert" :min="0" :max="1.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_invert" :min="0" :max="1.0" :step="0.001")
 
       hr
 
       p.help
         | 背景は使う側の設定であって ShogiPlayer とは直接関係が無い
 
-    .box
-      GroupName(name="盤テクスチャ")
-
+    CategoryBox(category_key="盤テクスチャ")
       b-field(custom-class="is-small" label="素材")
         template(#message)
           | アップロード画像を有効にするには none にする
-        b-select(size="is-small" v-model="TheSE.sp_board_variant")
-          template(v-for="e in TheSE.BoardVariantInfo.values")
+        b-select(size="is-small" v-model="AppContext.sp_board_variant")
+          template(v-for="e in AppContext.BoardVariantInfo.values")
             option(:value="e.key") {{e.name}}
 
-      ImageUploader(@input="TheSE.sp_board_image_input_handle")
+      ImageUploader(@input="AppContext.sp_board_image_input_handle")
 
       b-field(custom-class="is-small" label="単色")
         template(#message)
           | 単色は素材の裏にあるため素材の不透明度が100%だと見えない
-        ColorEditor(v-model="TheSE.sp_board_color")
+        ColorEditor(v-model="AppContext.sp_board_color")
 
-    .box
-      GroupName(name="盤")
+    CategoryBox(category_key="盤")
 
       b-field(custom-class="is-small" label="角丸め" message="紙面風なら0にする")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_radius" :min="0" :max="50" :step="0.01")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_radius" :min="0" :max="50" :step="0.01")
       b-field(custom-class="is-small" label="余白" message="紙面風なら0にする")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_padding" :min="0" :max="0.05" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_padding" :min="0" :max="0.05" :step="0.001")
       b-field(custom-class="is-small" label="アスペクト比" message="将棋盤は正方形ではない")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
       b-field(custom-class="is-small" label="左右余白 (横レイアウト時有効)" message="盤と持駒の間にクリックできない領域ができてしまうため基本0でよい。座標を表示するときのみ少し空けるとよいかもしれない。")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_horizontal_gap" :min="0" :max="1.0" :step="0.01")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_horizontal_gap" :min="0" :max="1.0" :step="0.01")
       b-field(custom-class="is-small" label="上下余白 (縦レイアウト時有効)" message="縦幅は貴重なので基本0でよい" v-if="development_p")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_vertical_gap" :min="0" :max="1.0" :step="0.01")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_vertical_gap" :min="0" :max="1.0" :step="0.01")
 
-    .box
-      GroupName(name="グリッド")
+    CategoryBox(category_key="グリッド")
       b-field(custom-class="is-small" label="内側")
-        ColorEditor(v-model="TheSE.sp_grid_inner_color")
+        ColorEditor(v-model="AppContext.sp_grid_inner_color")
       b-field(custom-class="is-small" label="外枠・エッジ・星")
-        ColorEditor(v-model="TheSE.sp_grid_outer_color")
+        ColorEditor(v-model="AppContext.sp_grid_outer_color")
       b-field(custom-class="is-small" label="太さ (内側)")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_grid_inner_stroke" :min="0" :max="10" :step="0.5")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_grid_inner_stroke" :min="0" :max="10" :step="0.5")
       b-field(custom-class="is-small" label="太さ (外枠)")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
       b-field(custom-class="is-small" label="太さ (エッジ)")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_edge_stroke" :min="0" :max="10" :step="0.5")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_edge_stroke" :min="0" :max="10" :step="0.5")
 
-    .box
-      GroupName(name="星")
+    CategoryBox(category_key="星")
       b-field(custom-class="is-small" label="大きさ")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_star_size" :min="0" :max="1.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_star_size" :min="0" :max="1.0" :step="0.001")
       b-field(custom-class="is-small" label="配置間隔")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_star_step" :min="0" :max="10")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_star_step" :min="0" :max="10")
       b-field(custom-class="is-small" label="表示優先度" message="これは星を巨大化させたときに「駒に重なってその下にある駒を持つイベントを奪ってしまう」対策として入れたものだが、あとでイベントを奪わない方法に気づいたため、現在は -1 にする利点はとくにない。-1のときは盤の奥に描画するため盤が透明でない場合に見えなくなる点に注意する。")
-        b-radio-button(size="is-small" v-model="TheSE.sp_star_z_index" :native-value="-1") -1
-        b-radio-button(size="is-small" v-model="TheSE.sp_star_z_index" :native-value="0") 0
+        b-radio-button(size="is-small" v-model="AppContext.sp_star_z_index" :native-value="-1") -1
+        b-radio-button(size="is-small" v-model="AppContext.sp_star_z_index" :native-value="0") 0
 
-    .box
-      GroupName(name="カメラ")
+    CategoryBox(category_key="カメラ")
       b-field.mt-1(custom-class="is-small" label="プリセット")
         .control
           .buttons.mb-0
-            template(v-for="e in TheSE.BoardSizePresetInfo.values")
-              b-button(@click="TheSE.se_board_size_preset_apply_handle(e)" size="is-small") {{e.name}}
+            template(v-for="e in AppContext.BoardSizePresetInfo.values")
+              b-button(@click="AppContext.se_board_size_preset_apply_handle(e)" size="is-small") {{e.name}}
       .columns.mt-1.mb-2
         .column.py-0
           b-field(custom-class="is-small" label="左上(X)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_view_x" :min="-9" :max="9")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_view_x" :min="-9" :max="9")
         .column.py-0
           b-field(custom-class="is-small" label="左上(Y)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_view_y" :min="-9" :max="9")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_view_y" :min="-9" :max="9")
       .columns.mt-4.mb-2
         .column.py-0
           b-field(custom-class="is-small" label="セル数(W)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_view_w" :min="0" :max="19")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_view_w" :min="0" :max="19")
         .column.py-0
           b-field(custom-class="is-small" label="セル数(H)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_view_h" :min="0" :max="19")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_view_h" :min="0" :max="19")
 
       hr
 
@@ -155,101 +146,97 @@
           li 右上だけの表示でいいなら<b>配列座標</b>で左上を(4,0)でセル数を5x5などとする
           li セル数を小さくすると壊れる
 
-    .box
-      GroupName(name="座標")
+    CategoryBox(category_key="座標")
       b-field(custom-class="is-small" label="表示")
-        b-radio-button(size="is-small" v-model="TheSE.sp_coordinate" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_coordinate" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_coordinate" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_coordinate" :native-value="true") ON
 
       .columns.mt-5
         .column.py-0
           b-field(custom-class="is-small" label="上の表記(X)")
-            template(v-for="e in TheSE.CoordinateInfo.values")
-              b-radio-button(size="is-small" v-model="TheSE.sp_coordinate_variant_h" :native-value="e.key") {{e.name}}
+            template(v-for="e in AppContext.CoordinateInfo.values")
+              b-radio-button(size="is-small" v-model="AppContext.sp_coordinate_variant_h" :native-value="e.key") {{e.name}}
         .column.py-0
           b-field(custom-class="is-small" label="右の表記(Y)")
-            template(v-for="e in TheSE.CoordinateInfo.values")
-              b-radio-button(size="is-small" v-model="TheSE.sp_coordinate_variant_v" :native-value="e.key") {{e.name}}
+            template(v-for="e in AppContext.CoordinateInfo.values")
+              b-radio-button(size="is-small" v-model="AppContext.sp_coordinate_variant_v" :native-value="e.key") {{e.name}}
 
       .columns.mt-5
         .column.py-0
           b-field(custom-class="is-small" label="上の大きさ(X)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_coordinate_x_size" :min="0" :max="1.0" :step="0.001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_coordinate_x_size" :min="0" :max="1.0" :step="0.001")
         .column.py-0
           b-field(custom-class="is-small" label="右の大きさ(Y)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_coordinate_y_size" :min="0" :max="1.0" :step="0.001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_coordinate_y_size" :min="0" :max="1.0" :step="0.001")
 
       .columns.mt-5
         .column.py-0
           b-field(custom-class="is-small" label="位置(X)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_coordinate_x_push" :min="-0.5" :max="0.5" :step="0.001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_coordinate_x_push" :min="-0.5" :max="0.5" :step="0.001")
         .column.py-0
           b-field(custom-class="is-small" label="位置(Y)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_coordinate_y_push" :min="-0.5" :max="0.5" :step="0.001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_coordinate_y_push" :min="-0.5" :max="0.5" :step="0.001")
 
       b-field(custom-class="is-small" label="色")
-        ColorEditor(v-model="TheSE.sp_coordinate_color")
+        ColorEditor(v-model="AppContext.sp_coordinate_color")
 
-    .box
-      GroupName(name="盤セル")
+    CategoryBox(category_key="盤セル")
 
       b-field(custom-class="is-small" label="偶数")
-        ColorEditor(v-model="TheSE.sp_board_even_cell_color")
+        ColorEditor(v-model="AppContext.sp_board_even_cell_color")
 
       b-field(custom-class="is-small" label="奇数")
-        ColorEditor(v-model="TheSE.sp_board_odd_cell_color")
+        ColorEditor(v-model="AppContext.sp_board_odd_cell_color")
 
       p.help
         | 黒のままで透明度の調整するのがおすすめ
 
-    .box
-      GroupName(name="駒の種類")
+    CategoryBox(category_key="駒の種類")
 
       b-field(custom-class="is-small" label="プリセット")
         template(#message)
           | 「紙面風」や「ぬれよん」などは元が巨大なため少し小さく表示した方がよい<br>
           | 「Portella」は調整済みのため原寸(1.0)が望ましい<br>
-        b-select(size="is-small" v-model="TheSE.sp_piece_variant")
-          template(v-for="e in TheSE.PieceVariantInfo.values")
+        b-select(size="is-small" v-model="AppContext.sp_piece_variant")
+          template(v-for="e in AppContext.PieceVariantInfo.values")
             option(:value="e.key") {{e.name}}
 
       b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置" message="下にすると駒の底辺が揃う (ただし駒の種類による)")
-        b-radio-button(size="is-small" v-model="TheSE.sp_piece_vertical_position" native-value="top") ↑
-        b-radio-button(size="is-small" v-model="TheSE.sp_piece_vertical_position" native-value="center") ・
-        b-radio-button(size="is-small" v-model="TheSE.sp_piece_vertical_position" native-value="bottom") ↓
+        b-radio-button(size="is-small" v-model="AppContext.sp_piece_vertical_position" native-value="top") ↑
+        b-radio-button(size="is-small" v-model="AppContext.sp_piece_vertical_position" native-value="center") ・
+        b-radio-button(size="is-small" v-model="AppContext.sp_piece_vertical_position" native-value="bottom") ↓
 
-    .box
-      GroupName(name="駒の大きさ")
+    CategoryBox(category_key="駒の大きさ")
 
       //- b-field.grouped(custom-class="is-small" label="セル (駒台)" message="盤に対する割合")
-      //-   b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
-      //-   b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
+      //-   b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
+      //-   b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
       //-
       //- hr
 
       .columns.mt-1
         .column.py-0
           b-field(custom-class="is-small" label="セル (盤内)" message="最大で固定。縮小する利点はない。")
-            //- b-slider(v-bind="TheSE.slider_attrs" :value="1.0" :min="0" :max="1.0" disabled)
+            //- b-slider(v-bind="AppContext.slider_attrs" :value="1.0" :min="0" :max="1.0" disabled)
         .column.py-0
           b-field(custom-class="is-small" label="駒 (盤内)" message="")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_piece_size" :min="0" :max="1.0" :step="0.001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_piece_size" :min="0" :max="1.0" :step="0.001")
 
       .columns.mt-4
         .column.py-0
           b-field(custom-class="is-small" label="セル (駒台)" message="盤に対する割合")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
         .column.py-0
           b-field(custom-class="is-small" label="駒 (駒台)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
 
       .columns.mt-4
         .column.py-0
           b-field(custom-class="is-small" label="セル (駒箱)" message="0.1 ぐらいですべての駒が収まる")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_piece_box_cell_size" :min="0" :max="1.0" :step="0.0001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_box_cell_size" :min="0" :max="1.0" :step="0.0001")
         .column.py-0
           b-field(custom-class="is-small" label="駒 (駒箱)")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_piece_box_piece_size" :min="0" :max="1.0" :step="0.01")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_box_piece_size" :min="0" :max="1.0" :step="0.01")
 
       hr
 
@@ -259,432 +246,465 @@
         | しかし盤を5x5にしてしまうと、8種類の駒がどうやっても駒台に乗らなくなってしまった。<br>
         | そこで盤の大きさを基準にするようにした。<br>
 
-    .box
-      GroupName(name="駒台")
+    CategoryBox(category_key="駒台")
 
       b-field(custom-class="is-small" label="盤のどこに配置する？")
-        b-radio-button(size="is-small" v-model="TheSE.sp_layout" native-value="horizontal") 左右
-        b-radio-button(size="is-small" v-model="TheSE.sp_layout" native-value="vertical") 上下
+        b-radio-button(size="is-small" v-model="AppContext.sp_layout" native-value="horizontal") 左右
+        b-radio-button(size="is-small" v-model="AppContext.sp_layout" native-value="vertical") 上下
 
       b-field(custom-class="is-small" label="左右配置時の上下位置")
-        b-radio-button(size="is-small" v-model="TheSE.sp_stand_gravity" native-value="bottom") 下寄せ
-        b-radio-button(size="is-small" v-model="TheSE.sp_stand_gravity" native-value="top") 上寄せ
+        b-radio-button(size="is-small" v-model="AppContext.sp_stand_gravity" native-value="bottom") 下寄せ
+        b-radio-button(size="is-small" v-model="AppContext.sp_stand_gravity" native-value="top") 上寄せ
 
       b-field(custom-class="is-small" label="相手側を反転")
-        b-radio-button(size="is-small" v-model="TheSE.sp_stand_flip" :native-value="false") しない
-        b-radio-button(size="is-small" v-model="TheSE.sp_stand_flip" :native-value="true") する
+        b-radio-button(size="is-small" v-model="AppContext.sp_stand_flip" :native-value="false") しない
+        b-radio-button(size="is-small" v-model="AppContext.sp_stand_flip" :native-value="true") する
       //- .columns.mt-4
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
-      //-       b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_cell_current_w" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_cell_current_w" :min="1" :max="80" :step="1")
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="セル(H)" message="駒と駒の隙間に影響する")
-      //-       b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_cell_current_h" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_cell_current_h" :min="1" :max="80" :step="1")
       b-field(custom-class="is-small" label="背景色")
-        ColorEditor(v-model="TheSE.sp_stand_bg_color")
+        ColorEditor(v-model="AppContext.sp_stand_bg_color")
       b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色" message="編集モード時のみ有効。駒箱にも適用する。")
-        ColorEditor(v-model="TheSE.sp_stand_hover_border_color")
+        ColorEditor(v-model="AppContext.sp_stand_hover_border_color")
 
-    .box
-      GroupName(name="持駒表示")
+    CategoryBox(category_key="持駒表示")
 
       .columns
         .column
           b-field(custom-class="is-small" label="☗")
-            template(v-for="e in TheSE.PieceVisibilityInfo.values")
-              b-radio-button(size="is-small" v-model="TheSE.sp_player_info.black.piece_visibility" :native-value="e.key") {{e.radio_button_name}}
+            template(v-for="e in AppContext.PieceVisibilityInfo.values")
+              b-radio-button(size="is-small" v-model="AppContext.sp_player_info.black.piece_visibility" :native-value="e.key") {{e.radio_button_name}}
         .column
           b-field(custom-class="is-small" label="☖")
-            template(v-for="e in TheSE.PieceVisibilityInfo.values")
-              b-radio-button(size="is-small" v-model="TheSE.sp_player_info.white.piece_visibility" :native-value="e.key") {{e.radio_button_name}}
+            template(v-for="e in AppContext.PieceVisibilityInfo.values")
+              b-radio-button(size="is-small" v-model="AppContext.sp_player_info.white.piece_visibility" :native-value="e.key") {{e.radio_button_name}}
 
       p.help.content
         ul
           li <b>玉方の持駒を隠す</b>目的で入れた詰将棋向けの機能 (実験的)
           li 単に玉方の駒を駒箱に移せば済むのだから余計な機能かもしれない
 
-    .box
-      GroupName(name="対局者")
+    CategoryBox(category_key="対局者")
 
       b-field(custom-class="is-small" label="手番のときの☗☖の大きさ")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_location_mark_active_size" :min="0" :max="1.5" :step="0.01")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_location_mark_active_size" :min="0" :max="1.5" :step="0.01")
 
       b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_location_mark_inactive_size" :min="0" :max="1.5" :step="0.01")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_location_mark_inactive_size" :min="0" :max="1.5" :step="0.01")
 
       b-field(custom-class="is-small" label="名前の向き")
         template(#message)
           | 横書きは持駒を左右に置くレイアウトのときのみ有効
 
-        b-radio-button(size="is-small" v-model="TheSE.sp_name_direction" native-value="horizontal") 横書き
-        b-radio-button(size="is-small" v-model="TheSE.sp_name_direction" native-value="vertical") 縦書き
+        b-radio-button(size="is-small" v-model="AppContext.sp_name_direction" native-value="horizontal") 横書き
+        b-radio-button(size="is-small" v-model="AppContext.sp_name_direction" native-value="vertical") 縦書き
 
       b-field(custom-class="is-small" label="名前の大きさ")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_player_name_size" :min="0" :max="0.5" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_player_name_size" :min="0" :max="0.5" :step="0.001")
 
       b-field(custom-class="is-small" label="時間の大きさ")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_player_time_size" :min="0" :max="0.5" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_player_time_size" :min="0" :max="0.5" :step="0.001")
 
       b-field(custom-class="is-small" label="テキストの視認性を上げる" message="駒数の背景を適用する")
-        b-radio-button(size="is-small" v-model="TheSE.sp_balloon" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_balloon" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_balloon" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_balloon" :native-value="true") ON
 
       .columns
         .column
           b-field(custom-class="is-small" label="☗")
-            b-input(size="is-small" v-model.trim="TheSE.sp_player_info.black.name" type="text")
+            b-input(size="is-small" v-model.trim="AppContext.sp_player_info.black.name" type="text")
         .column
           b-field(custom-class="is-small" label="時間")
-            b-input(size="is-small" v-model.trim="TheSE.sp_player_info.black.time" type="text")
+            b-input(size="is-small" v-model.trim="AppContext.sp_player_info.black.time" type="text")
       .columns
         .column
           b-field(custom-class="is-small" label="☖")
-            b-input(size="is-small" v-model.trim="TheSE.sp_player_info.white.name" type="text")
+            b-input(size="is-small" v-model.trim="AppContext.sp_player_info.white.name" type="text")
         .column
           b-field(custom-class="is-small" label="時間")
-            b-input(size="is-small" v-model.trim="TheSE.sp_player_info.white.time" type="text")
+            b-input(size="is-small" v-model.trim="AppContext.sp_player_info.white.time" type="text")
 
-    .box
-      GroupName(name="駒数")
+    CategoryBox(category_key="駒数")
 
       .columns.mt-1.is-multiline
         .column.is-12.py-0
           b-field(custom-class="is-small" label="横レイアウト時の相対位置")
         .column.is-6.py-0
           b-field(custom-class="is-small" label="X")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_piece_count_horizontal_x" :min="-1.0" :max="1.0" :step="0.001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_horizontal_x" :min="-1.0" :max="1.0" :step="0.001")
         .column.is-6.py-0
           b-field(custom-class="is-small" label="Y")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_piece_count_horizontal_y" :min="-1.0" :max="1.0" :step="0.001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_horizontal_y" :min="-1.0" :max="1.0" :step="0.001")
 
       .columns.mt-4.is-multiline
         .column.is-12.py-0
           b-field(custom-class="is-small" label="縦レイアウト時の相対位置")
         .column.is-6.py-0
           b-field(custom-class="is-small" label="X")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_piece_count_vertical_x" :min="-1.0" :max="1.0" :step="0.001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_vertical_x" :min="-1.0" :max="1.0" :step="0.001")
         .column.is-6.py-0
           b-field(custom-class="is-small" label="Y")
-            b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_piece_count_vertical_y" :min="-1.0" :max="1.0" :step="0.001")
+            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_vertical_y" :min="-1.0" :max="1.0" :step="0.001")
 
       b-field(custom-class="is-small" label="余白")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_piece_count_padding" :min="0" :max="1.0" :step="0.01")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_padding" :min="0" :max="1.0" :step="0.01")
 
       b-field(custom-class="is-small" label="大きさ")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_piece_count_size" :min="0" :max="1.0" :step="0.01")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_size" :min="0" :max="1.0" :step="0.01")
       b-field(custom-class="is-small" label="テキスト色 (対局者名にも適用)")
-        ColorEditor(v-model="TheSE.sp_piece_count_font_color")
+        ColorEditor(v-model="AppContext.sp_piece_count_font_color")
       b-field(custom-class="is-small" label="背景")
-        ColorEditor(v-model="TheSE.sp_piece_count_bg_color")
+        ColorEditor(v-model="AppContext.sp_piece_count_bg_color")
 
-    .box
-      GroupName(name="駒箱")
+    CategoryBox(category_key="駒箱")
       b-field(custom-class="is-small" label="")
-        ColorEditor(v-model="TheSE.sp_piece_box_color")
+        ColorEditor(v-model="AppContext.sp_piece_box_color")
       //- .columns.mt-4
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="セル(W)")
-      //-       b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_cell_current_w" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_cell_current_w" :min="1" :max="80" :step="1")
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="セル(H)")
-      //-       b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_cell_current_h" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_cell_current_h" :min="1" :max="80" :step="1")
 
       //- .columns.mt-4
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="持駒画像(W)")
-      //-       b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_cell_current_w" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_cell_current_w" :min="1" :max="80" :step="1")
       //-   .column.py-0
       //-     b-field(custom-class="is-small" label="持駒画像(H)")
-      //-       b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_board_cell_current_h" :min="1" :max="80" :step="1")
+      //-       b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_cell_current_h" :min="1" :max="80" :step="1")
 
-    .box
-      GroupName(name="成り不成り選択")
+    CategoryBox(category_key="成り不成り選択")
       b-field(custom-class="is-small" label="背景")
-        ColorEditor(v-model="TheSE.sp_promote_select_modal_bg_color")
+        ColorEditor(v-model="AppContext.sp_promote_select_modal_bg_color")
       b-field(custom-class="is-small" label="hover色")
-        ColorEditor(v-model="TheSE.sp_promote_select_modal_hover_color")
+        ColorEditor(v-model="AppContext.sp_promote_select_modal_hover_color")
 
-    .box
-      GroupName(name="駒を操作中の移動元")
+    CategoryBox(category_key="駒を操作中の移動元")
       b-field(custom-class="is-small" label="背景")
-        ColorEditor(v-model="TheSE.sp_mouse_lifted_origin_bg_color")
+        ColorEditor(v-model="AppContext.sp_mouse_lifted_origin_bg_color")
       b-field(custom-class="is-small" label="駒の不透明度")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_mouse_lifted_origin_opacity" :min="0" :max="1.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_mouse_lifted_origin_opacity" :min="0" :max="1.0" :step="0.001")
 
-    .box
-      GroupName(name="Transform")
+    CategoryBox(category_key="transform")
 
-      b-tabs(size="is-small" v-model="TheSE.transform_tab_index" expanded)
-        b-tab-item(label="背景")
-          b-field(custom-class="is-small" label="")
-            b-radio-button(size="is-small" v-model="TheSE.se_tf0_mode" native-value="is_tf0_mode_off") OFF
-            b-radio-button(size="is-small" v-model="TheSE.se_tf0_mode" native-value="is_tf0_mode_on") ON
-          b-field(custom-class="is-small" label="視点との距離")
-            b-slider(v-bind="TheSE.tf0_slider_attrs" v-model="TheSE.se_tf0_perspective" :min="0" :max="400" :step="0.001")
-          b-field(custom-class="is-small" label="移動 X")
-            b-slider(v-bind="TheSE.tf0_slider_attrs" v-model="TheSE.se_tf0_translate_x" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="移動 Y")
-            b-slider(v-bind="TheSE.tf0_slider_attrs" v-model="TheSE.se_tf0_translate_y" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="移動 Z")
-            b-slider(v-bind="TheSE.tf0_slider_attrs" v-model="TheSE.se_tf0_translate_z" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="回転 X")
-            b-slider(v-bind="TheSE.tf0_slider_attrs" v-model="TheSE.se_tf0_rotate_x" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="回転 Y")
-            b-slider(v-bind="TheSE.tf0_slider_attrs" v-model="TheSE.se_tf0_rotate_y" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="回転 Z")
-            b-slider(v-bind="TheSE.tf0_slider_attrs" v-model="TheSE.se_tf0_rotate_z" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="拡縮")
-            b-slider(v-bind="TheSE.tf0_slider_attrs" v-model="TheSE.se_tf0_scale" :min="0" :max="2.0" :step="0.001")
-          b-field(custom-class="is-small")
-            .control
-              b-button(size="is-small" @click="TheSE.se_tf0_reset") リセット
+      b-tabs(size="is-small" v-model="AppContext.transform_tab_index" expanded)
 
         b-tab-item(label="盤")
-          b-field(custom-class="is-small" label="" message="有効にすると背景とのブレンドは効かなくなる")
-            b-radio-button(size="is-small" v-model="TheSE.se_tf1_mode" native-value="is_tf1_mode_off") OFF
-            b-radio-button(size="is-small" v-model="TheSE.se_tf1_mode" native-value="is_tf1_mode_on") ON
-          b-field(custom-class="is-small" label="視点との距離")
-            b-slider(v-bind="TheSE.tf1_slider_attrs" v-model="TheSE.se_tf1_perspective" :min="0" :max="1000" :step="0.001")
-          b-field(custom-class="is-small" label="移動 X")
-            b-slider(v-bind="TheSE.tf1_slider_attrs" v-model="TheSE.se_tf1_translate_x" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="移動 Y")
-            b-slider(v-bind="TheSE.tf1_slider_attrs" v-model="TheSE.se_tf1_translate_y" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="移動 Z")
-            b-slider(v-bind="TheSE.tf1_slider_attrs" v-model="TheSE.se_tf1_translate_z" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="回転 X")
-            b-slider(v-bind="TheSE.tf1_slider_attrs" v-model="TheSE.se_tf1_rotate_x" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="回転 Y")
-            b-slider(v-bind="TheSE.tf1_slider_attrs" v-model="TheSE.se_tf1_rotate_y" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="回転 Z")
-            b-slider(v-bind="TheSE.tf1_slider_attrs" v-model="TheSE.se_tf1_rotate_z" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="拡縮")
-            b-slider(v-bind="TheSE.tf1_slider_attrs" v-model="TheSE.se_tf1_scale" :min="0" :max="2.0" :step="0.001")
-          b-field(custom-class="is-small")
-            .control
-              b-button(size="is-small" @click="TheSE.se_tf1_reset") リセット
+          .columns
+            .column
+              b-field(grouped)
+                b-field.mb-0(custom-class="is-small")
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf1_mode" native-value="is_tf1_mode_off") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf1_mode" native-value="is_tf1_mode_on") ON
+                b-field.mb-0(custom-class="is-small")
+                  .control
+                    b-button(size="is-small" @click="AppContext.transform_reset('tf1')") リセット
+          .columns
+            .column
+              b-field(custom-class="is-small" label="遠近感")
+                VariableSlider(variable_key="se_tf1_perspective")
+            .column
+              b-field(custom-class="is-small" label="スケール")
+                VariableSlider(variable_key="se_tf1_scale")
+          .columns
+            .column
+              b-field(custom-class="is-small" label="回転 X")
+                VariableSlider(variable_key="se_tf1_rotate_x")
+            .column
+              b-field(custom-class="is-small" label="回転 Y")
+                VariableSlider(variable_key="se_tf1_rotate_y")
+            .column
+              b-field(custom-class="is-small" label="回転 Z")
+                VariableSlider(variable_key="se_tf1_rotate_z")
+          .columns
+            .column
+              b-field(custom-class="is-small" label="移動 X")
+                VariableSlider(variable_key="se_tf1_translate_x")
+            .column
+              b-field(custom-class="is-small" label="移動 Y")
+                VariableSlider(variable_key="se_tf1_translate_y")
+            .column
+              b-field(custom-class="is-small" label="移動 Z")
+                VariableSlider(variable_key="se_tf1_translate_z")
+
         b-tab-item(label="駒")
-          b-field(custom-class="is-small" label="" message="有効にすると盤とのブレンドは効かなくなる")
-            b-radio-button(size="is-small" v-model="TheSE.se_tf2_mode" native-value="is_tf2_mode_off") OFF
-            b-radio-button(size="is-small" v-model="TheSE.se_tf2_mode" native-value="is_tf2_mode_on") ON
-          b-field(custom-class="is-small" label="視点との距離")
-            b-slider(v-bind="TheSE.tf2_slider_attrs" v-model="TheSE.se_tf2_perspective" :min="0" :max="400" :step="0.001")
-          b-field(custom-class="is-small" label="移動 X")
-            b-slider(v-bind="TheSE.tf2_slider_attrs" v-model="TheSE.se_tf2_translate_x" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="移動 Y")
-            b-slider(v-bind="TheSE.tf2_slider_attrs" v-model="TheSE.se_tf2_translate_y" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="移動 Z")
-            b-slider(v-bind="TheSE.tf2_slider_attrs" v-model="TheSE.se_tf2_translate_z" :min="-1000" :max="1000" :step="1")
-          b-field(custom-class="is-small" label="回転 X")
-            b-slider(v-bind="TheSE.tf2_slider_attrs" v-model="TheSE.se_tf2_rotate_x" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="回転 Y")
-            b-slider(v-bind="TheSE.tf2_slider_attrs" v-model="TheSE.se_tf2_rotate_y" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="回転 Z")
-            b-slider(v-bind="TheSE.tf2_slider_attrs" v-model="TheSE.se_tf2_rotate_z" :min="-1" :max="1" :step="0.001")
-          b-field(custom-class="is-small" label="拡縮")
-            b-slider(v-bind="TheSE.tf2_slider_attrs" v-model="TheSE.se_tf2_scale" :min="0" :max="2.0" :step="0.001")
-          b-field(custom-class="is-small")
-            .control
-              b-button(size="is-small" @click="TheSE.se_tf2_reset") リセット
+          .columns
+            .column
+              b-field(grouped)
+                b-field.mb-0(custom-class="is-small")
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf2_mode" native-value="is_tf2_mode_off") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf2_mode" native-value="is_tf2_mode_on") ON
+                b-field.mb-0(custom-class="is-small")
+                  .control
+                    b-button(size="is-small" @click="AppContext.transform_reset('tf2')") リセット
+          .columns
+            .column
+              b-field(custom-class="is-small" label="遠近感")
+                VariableSlider(variable_key="se_tf2_perspective")
+            .column
+              b-field(custom-class="is-small" label="スケール")
+                VariableSlider(variable_key="se_tf2_scale")
+          .columns
+            .column
+              b-field(custom-class="is-small" label="回転 X")
+                VariableSlider(variable_key="se_tf2_rotate_x")
+            .column
+              b-field(custom-class="is-small" label="回転 Y")
+                VariableSlider(variable_key="se_tf2_rotate_y")
+            .column
+              b-field(custom-class="is-small" label="回転 Z")
+                VariableSlider(variable_key="se_tf2_rotate_z")
+          .columns
+            .column
+              b-field(custom-class="is-small" label="移動 X")
+                VariableSlider(variable_key="se_tf2_translate_x")
+            .column
+              b-field(custom-class="is-small" label="移動 Y")
+                VariableSlider(variable_key="se_tf2_translate_y")
+            .column
+              b-field(custom-class="is-small" label="移動 Z")
+                VariableSlider(variable_key="se_tf2_translate_z")
 
-      hr
+        b-tab-item(label="背景")
+          .columns
+            .column
+              b-field(grouped)
+                b-field.mb-0(custom-class="is-small")
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf0_mode" native-value="is_tf0_mode_off") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf0_mode" native-value="is_tf0_mode_on") ON
+                b-field.mb-0(custom-class="is-small")
+                  .control
+                    b-button(size="is-small" @click="AppContext.transform_reset('tf0')") リセット
+          .columns
+            .column
+              b-field(custom-class="is-small" label="遠近感")
+                VariableSlider(variable_key="se_tf0_perspective")
+            .column
+              b-field(custom-class="is-small" label="スケール")
+                VariableSlider(variable_key="se_tf0_scale")
+          .columns
+            .column
+              b-field(custom-class="is-small" label="回転 X")
+                VariableSlider(variable_key="se_tf0_rotate_x")
+            .column
+              b-field(custom-class="is-small" label="回転 Y")
+                VariableSlider(variable_key="se_tf0_rotate_y")
+            .column
+              b-field(custom-class="is-small" label="回転 Z")
+                VariableSlider(variable_key="se_tf0_rotate_z")
+          .columns
+            .column
+              b-field(custom-class="is-small" label="移動 X")
+                VariableSlider(variable_key="se_tf0_translate_x")
+            .column
+              b-field(custom-class="is-small" label="移動 Y")
+                VariableSlider(variable_key="se_tf0_translate_y")
+            .column
+              b-field(custom-class="is-small" label="移動 Z")
+                VariableSlider(variable_key="se_tf0_translate_z")
 
-      template(v-if="development_p")
+      template(v-if="development_p && false")
+        hr
         b-field(custom-class="is-small" label="チェッカー背景" )
-          b-radio-button(size="is-small" v-model="TheSE.se_bg_pattern" :native-value="false") OFF
-          b-radio-button(size="is-small" v-model="TheSE.se_bg_pattern" :native-value="true") ON
+          b-radio-button(size="is-small" v-model="AppContext.se_bg_pattern" :native-value="false") OFF
+          b-radio-button(size="is-small" v-model="AppContext.se_bg_pattern" :native-value="true") ON
 
       hr
 
       p.help.content
-        | Transform 関連はスタイルエディタ側で ShogiPlayer の要素にスタイルを適用しているだけであって ShogiPlayer が用意している機能ではない
+        | 基本的に<b>回転X(斜め度) 遠近感(強度) 移動Z(大きさ)</b>の3つで調整する。
+        | これらはスタイルエディタ側でスタイルを適用しているだけで ShogiPlayer が用意している機能ではない。
 
-    .box
-      GroupName(name="コントローラー")
+    CategoryBox(category_key="コントローラー")
 
       b-field(custom-class="is-small" label="コントローラー表示")
-        b-radio-button(size="is-small" v-model="TheSE.sp_controller" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_controller" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_controller" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_controller" :native-value="true") ON
 
       b-field(custom-class="is-small" label="スライダー表示")
-        b-radio-button(size="is-small" v-model="TheSE.sp_slider" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_slider" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_slider" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_slider" :native-value="true") ON
 
       b-field(custom-class="is-small" label="横幅(PC)")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_controller_width" :min="0" :max="1.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_controller_width" :min="0" :max="1.0" :step="0.001")
 
       b-field(custom-class="is-small" label="横幅(モバイル時)")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_controller_width_mobile" :min="0" :max="1.0" :step="0.001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_controller_width_mobile" :min="0" :max="1.0" :step="0.001")
 
-    .box
-      GroupName(name="操作感")
+    CategoryBox(category_key="操作感")
 
       b-field(custom-class="is-small" label="持ち上げた駒のキャンセル方法")
-        template(v-for="e in TheSE.LiftCancelActionInfo.values")
-          b-radio-button(size="is-small" v-model="TheSE.sp_lift_cancel_action" :native-value="e.key") {{e.radio_button_name}}
+        template(v-for="e in AppContext.LiftCancelActionInfo.values")
+          b-radio-button(size="is-small" v-model="AppContext.sp_lift_cancel_action" :native-value="e.key") {{e.radio_button_name}}
 
-    .box
-      GroupName(name="反則")
+    CategoryBox(category_key="反則")
 
       b-field(custom-class="is-small" label="移動制限")
         template(#message)
           | 駒の特性を考慮する親切オプションで例えば玉は1マスしか動けなくなる。
           | ただし反則のロジックには関与しないためそれが自殺手になっているかはわからない。
-        b-radio-button(size="is-small" v-model="TheSE.sp_legal_move_only" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_legal_move_only" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_legal_move_only" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_legal_move_only" :native-value="true") ON
 
       b-field(custom-class="is-small" label="反則検知")
         template(#message)
           | 反則が起きていないかチェックする。
           | 例えば王手ではない状態から利きがあるところに玉を動かせば<b>自殺手</b>の情報を、着手イベント ev_play_mode_move に含める。
           | これを有効にするときは移動制限も有効にすること。
-        b-radio-button(size="is-small" v-model="TheSE.sp_illegal_validate" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_illegal_validate" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_illegal_validate" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_illegal_validate" :native-value="true") ON
 
       b-field(custom-class="is-small" label="反則ブロック")
         template(#message)
           | 反則できないようにするオプション。
           | 反則検知オプション有効時に反則を検知しても ev_play_mode_move に含めない。
           | 代わりに ev_illegal_illegal_accident イベントで反則を投げるが無視してもよい。
-        b-radio-button(size="is-small" v-model="TheSE.sp_illegal_cancel" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_illegal_cancel" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_illegal_cancel" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_illegal_cancel" :native-value="true") ON
 
       p.help
         | 以上はすべて操作モードでのみ有効である
 
-    .box
-      GroupName(name="千日手")
+    CategoryBox(category_key="千日手")
 
       b-field(custom-class="is-small" label="現局面のハッシュをイベントに含めるか？")
         template(#message)
           | 有効にすると ev_play_mode_move イベントに含める。
           | 同じハッシュの4回目を発生させた側を反則とするかどうかはイベントを受け取った側に任せてある。
           | また設計ミスにより(いまのところは)反則検知ができない。
-        b-radio-button(size="is-small" v-model="TheSE.sp_request_snapshot_hash" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_request_snapshot_hash" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_request_snapshot_hash" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_request_snapshot_hash" :native-value="true") ON
 
       b-field(custom-class="is-small" label="操作モードで王手しているかどうかの結果をイベントに含めるか？")
         template(#message)
           | 連続王手の千日手の判定サポート用
-        b-radio-button(size="is-small" v-model="TheSE.sp_request_op_king_check" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_request_op_king_check" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_request_op_king_check" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_request_op_king_check" :native-value="true") ON
 
       p.help
         | 以上はすべて操作モードでのみ有効である
 
-    .box
-      GroupName(name="デバッグ")
+    CategoryBox(category_key="デバッグ")
 
       b-field(custom-class="is-small" label="レイヤー確認")
-        b-radio-button(size="is-small" v-model="TheSE.sp_layer" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_layer" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_layer" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_layer" :native-value="true") ON
 
       b-field(custom-class="is-small" label="Dev Tools")
-        b-radio-button(size="is-small" v-model="TheSE.sp_dev_tools" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_dev_tools" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_dev_tools" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_dev_tools" :native-value="true") ON
 
       b-field(custom-class="is-small" label="手数表示")
-        b-radio-button(size="is-small" v-model="TheSE.sp_turn_show" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_turn_show" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_turn_show" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_turn_show" :native-value="true") ON
 
-    .box
-      GroupName(name="その他")
+    CategoryBox(category_key="その他")
 
       b-field(custom-class="is-small" label="操作モードでの詰み判定")
-        b-radio-button(size="is-small" v-model="TheSE.sp_request_checkmate_stat" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_request_checkmate_stat" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_request_checkmate_stat" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_request_checkmate_stat" :native-value="true") ON
 
       b-field(custom-class="is-small" label="共通の隙間" message="盤の縦幅に対する割合")
-        b-slider(v-bind="TheSE.slider_attrs" v-model="TheSE.sp_common_gap" :min="0" :max="0.1" :step="0.0001")
+        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_common_gap" :min="0" :max="0.1" :step="0.0001")
 
       b-field(custom-class="is-small" label="モバイル時に縦配置にする")
-        b-radio-button(size="is-small" v-model="TheSE.sp_mobile_vertical" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_mobile_vertical" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_mobile_vertical" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_mobile_vertical" :native-value="true") ON
 
       b-field(custom-class="is-small" label="視点" message="☗☖をクリックしても切り替わる")
-        b-radio-button(size="is-small" v-model="TheSE.sp_viewpoint" native-value="black") ☗
-        b-radio-button(size="is-small" v-model="TheSE.sp_viewpoint" native-value="white") ☖
+        b-radio-button(size="is-small" v-model="AppContext.sp_viewpoint" native-value="black") ☗
+        b-radio-button(size="is-small" v-model="AppContext.sp_viewpoint" native-value="white") ☖
 
       b-field(custom-class="is-small" label="盤面左右で局面変更" message="再生モード時のみ有効")
-        b-radio-button(size="is-small" v-model="TheSE.sp_overlay_nav" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_overlay_nav" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_overlay_nav" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_overlay_nav" :native-value="true") ON
 
       //- b-field(custom-class="is-small" label="盤が反応するタイミング")
-      //-   template(v-for="e in TheSE.ClickResponseTimingInfo.values")
-      //-     b-radio-button(size="is-small" v-model="TheSE.sp_click_response_timing" :native-value="e.key") {{e.name}}
+      //-   template(v-for="e in AppContext.ClickResponseTimingInfo.values")
+      //-     b-radio-button(size="is-small" v-model="AppContext.sp_click_response_timing" :native-value="e.key") {{e.name}}
 
-    .box
-      GroupName(name="棋譜")
+    CategoryBox(category_key="棋譜")
 
       b-field(custom-class="is-small" label="プリセット1")
-        b-select(size="is-small" v-model="TheSE.kifu_book_key" @input="TheSE.kifu_book_change_handle")
+        b-select(size="is-small" v-model="AppContext.kifu_book_key" @input="AppContext.kifu_book_change_handle")
           option(:value="null")
-          template(v-for="e in TheSE.KifuBookInfo.values")
+          template(v-for="e in AppContext.KifuBookInfo.values")
             option(:value="e.key") {{e.name}}
 
       b-field(custom-class="is-small" label="プリセット2")
-        b-select(size="is-small" v-model="TheSE.sfen_book_key" @input="TheSE.sfen_book_change_handle")
+        b-select(size="is-small" v-model="AppContext.sfen_book_key" @input="AppContext.sfen_book_change_handle")
           option(:value="null")
-          template(v-for="e in TheSE.SfenBookInfo.values")
+          template(v-for="e in AppContext.SfenBookInfo.values")
             option(:value="e.key") {{e.name}}
 
       b-field.mb-0(custom-class="is-small" label="棋譜")
-        b-input(size="is-small" v-model="TheSE.user_body" type="textarea" :rows="8")
+        b-input(size="is-small" v-model="AppContext.user_body" type="textarea" :rows="8")
       b-field.mt-2(custom-class="is-small" position="is-right")
         .control
-          b-button(size="is-small" @click="TheSE.user_body_apply_handle" type="is-primary") 読み込む
+          b-button(size="is-small" @click="AppContext.user_body_apply_handle" type="is-primary") 読み込む
 
       template(v-if="development_p && false")
         b-field(custom-class="is-small" label="反映済みの棋譜")
-          b-input(size="is-small" v-model="TheSE.sp_body" type="textarea" :rows="4" readonly)
+          b-input(size="is-small" v-model="AppContext.sp_body" type="textarea" :rows="4" readonly)
 
       b-field(custom-class="is-small" label="棋譜コメント表示")
-        b-radio-button(size="is-small" v-model="TheSE.sp_comment" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="TheSE.sp_comment" :native-value="true") ON
+        b-radio-button(size="is-small" v-model="AppContext.sp_comment" :native-value="false") OFF
+        b-radio-button(size="is-small" v-model="AppContext.sp_comment" :native-value="true") ON
 
-    .box
-      GroupName(name="カスタムCSS")
+    CategoryBox(category_key="カスタムCSS")
       b-field(custom-class="is-small" label="プリセット")
         .control
           .buttons.mb-0
-            template(v-for="e in TheSE.UserCustomCssPresetInfo.values")
-              b-button(@click="TheSE.se_user_custom_css_preset_apply_handle(e)" size="is-small") {{e.name}}
+            template(v-for="e in AppContext.UserCustomCssPresetInfo.values")
+              b-button(@click="AppContext.se_user_custom_css_preset_apply_handle(e)" size="is-small") {{e.name}}
       b-field(custom-class="is-small" label="CSS")
-        b-input(size="is-small" v-model="TheSE.user_custom_css" type="textarea" :rows="8")
+        b-input(size="is-small" v-model="AppContext.user_custom_css" type="textarea" :rows="8")
 
-    .box
-      GroupName(name="コンポーネント引数確認")
-      b-field(custom-class="is-small" label="")
-        b-radio-button(size="is-small" v-model="TheSE.component_parmas_show_all" :native-value="false") 差分のみ
-        b-radio-button(size="is-small" v-model="TheSE.component_parmas_show_all" :native-value="true") すべて表示する
+    CategoryBox(category_key="コンポーネント引数確認")
+      b-field(custom-class="is-small")
+        b-radio-button(size="is-small" v-model="AppContext.component_parmas_show_all" :native-value="false") 差分のみ
+        b-radio-button(size="is-small" v-model="AppContext.component_parmas_show_all" :native-value="true") すべて表示する
       pre
-        | {{TheSE.sp_component_bind_attrs}}
+        | {{AppContext.sp_component_bind_attrs}}
       p.help
         a(href="https://shogi-player.netlify.app/reference/props/" target="_blank") ドキュメント
 
-    .box
-      GroupName(name="CSS変数確認")
-      b-field(custom-class="is-small" label="")
-        b-radio-button(size="is-small" v-model="TheSE.css_params_show_all" :native-value="false") 差分のみ
-        b-radio-button(size="is-small" v-model="TheSE.css_params_show_all" :native-value="true") すべて表示する
+    CategoryBox(category_key="CSS変数確認")
+      b-field(custom-class="is-small")
+        b-radio-button(size="is-small" v-model="AppContext.css_params_show_all" :native-value="false") 差分のみ
+        b-radio-button(size="is-small" v-model="AppContext.css_params_show_all" :native-value="true") すべて表示する
       pre
-        | {{TheSE.sp_css_human}}
+        | {{AppContext.sp_css_human}}
       p.help
         a(href="https://shogi-player.netlify.app/reference/css-variables/" target="_blank") ドキュメント
 
+    CategoryBox(category_key="SE側CSS変数確認")
+      pre
+        | {{AppContext.se_css_human}}
 </template>
 
 <script>
 import ColorEditor from "./ColorEditor.vue"
 import ImageUploader from "./ImageUploader.vue"
-import GroupName from "./GroupName.vue"
+import CategoryBox from "./CategoryBox.vue"
+import CategoryName from "./CategoryName.vue"
+import VariableSlider from "./VariableSlider.vue"
 
 export default {
   name: "ControlPanel",
-  inject: ["TheSE"],
+  inject: ["AppContext"],
   components: {
     ColorEditor,
     ImageUploader,
-    GroupName,
+    CategoryBox,
+    CategoryName,
+    VariableSlider,
   },
 }
 </script>

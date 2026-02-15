@@ -44,6 +44,11 @@ export const mod_persistence = {
       return count
     },
 
+    restore() {
+      this.xstore_load()
+      this.category_jump_to_last_selected()
+    },
+
     // private
 
     xstore_storage() {
@@ -61,7 +66,7 @@ export const mod_persistence = {
 
     xstore_autoload_link() {
       const url = new URL(window.location.href)
-      url.searchParams.set("initial_action", "xstore_load")
+      url.searchParams.set("initial_action", "restore")
       return url.toString()
     },
   },
