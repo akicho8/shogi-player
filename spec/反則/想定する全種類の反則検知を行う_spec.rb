@@ -27,12 +27,12 @@ RSpec.describe __FILE__ do
         sp_illegal_validate: true,
         sp_illegal_cancel: true,
         sp_mode: :play,
-        sp_dev_tools_group: :event,
+        sp_controller: true,
         sidebar_p: false,
+        sp_dev_tools_group: :event,
         **options,
       })
     yield
-    find("body").send_keys(:escape)
     find(:button, :class => "dev_tools").click
     assert_text %("#{illegal_key}")
   end

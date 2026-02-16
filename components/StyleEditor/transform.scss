@@ -1,53 +1,56 @@
 .StyleEditor {
-  // 背景
-  &.is_tf_wall_mode_on {
-    .Workspace {
-      transform:
-        perspective(var(--se_tf_wall_perspective))
-        scale(var(--se_tf_wall_scale))
-        translate3d(
-          var(--se_tf_wall_translate_x),
-          var(--se_tf_wall_translate_y),
-          var(--se_tf_wall_translate_z)
-        )
-        rotateX(var(--se_tf_wall_rotate_x))
-        rotateY(var(--se_tf_wall_rotate_y))
-        rotateZ(var(--se_tf_wall_rotate_z))
-      ;
-    }
-  }
-
   // 盤
   &.is_tf_board_mode_on {
     .SpTransformBlock {
       transform:
-        perspective(var(--se_tf_board_perspective))
+        perspective(calc(var(--se_tf_board_perspective) * 1px))
         scale(var(--se_tf_board_scale))
         translate3d(
-          calc(var(--sp_board_entire_current_w) * var(--se_tf_board_translate_x)),
-          calc(var(--sp_board_entire_current_h) * var(--se_tf_board_translate_y)),
-          var(--se_tf_board_translate_z)
+          calc(var(--se_tf_board_translate_x) * 100cqw),
+          // calc(var(--se_tf_board_translate_x) * var(--sp_board_entire_current_w)),
+          calc(var(--se_tf_board_translate_y) * var(--sp_board_entire_current_h)),
+          // calc(var(--se_tf_board_translate_y) * 100cqw),
+          calc(var(--se_tf_board_translate_z) * 1px)
         )
-        rotateX(var(--se_tf_board_rotate_x))
-        rotateY(var(--se_tf_board_rotate_y))
-        rotateZ(var(--se_tf_board_rotate_z))
+        rotateX(calc(var(--se_tf_board_rotate_x) * 1turn))
+        rotateY(calc(var(--se_tf_board_rotate_y) * 1turn))
+        rotateZ(calc(var(--se_tf_board_rotate_z) * 1turn))
       ;
     }
   }
 
+  // 駒
   &.is_tf_piece_mode_on {
     .PieceObject {
       transform:
-        perspective(var(--se_tf_piece_perspective))
+        perspective(calc(var(--se_tf_piece_perspective) * 1px))
         scale(var(--se_tf_piece_scale))
         translate3d(
-          calc(var(--sp_board_cell_current_w) * var(--se_tf_piece_translate_x) * var(--sp_position_sign)),
-          calc(var(--sp_board_cell_current_h) * var(--se_tf_piece_translate_y) * var(--sp_position_sign)),
-          var(--se_tf_piece_translate_z)
+          calc(var(--se_tf_piece_translate_x) * var(--sp_board_cell_current_w) * var(--sp_position_sign)),
+          calc(var(--se_tf_piece_translate_y) * var(--sp_board_cell_current_h) * var(--sp_position_sign)),
+          calc(var(--se_tf_piece_translate_z) * 1px)
         )
-        rotateX(calc(var(--se_tf_piece_rotate_x) * var(--sp_position_sign)))
-        rotateY(calc(var(--se_tf_piece_rotate_y) * var(--sp_position_sign)))
-        rotateZ(var(--se_tf_piece_rotate_z))
+        rotateX(calc(var(--se_tf_piece_rotate_x) * 1turn * var(--sp_position_sign)))
+        rotateY(calc(var(--se_tf_piece_rotate_y) * 1turn * var(--sp_position_sign)))
+        rotateZ(calc(var(--se_tf_piece_rotate_z) * 1turn))
+      ;
+    }
+  }
+
+  // 背景
+  &.is_tf_wall_mode_on {
+    .Workspace {
+      transform:
+        perspective(calc(var(--se_tf_wall_perspective) * 1px))
+        scale(var(--se_tf_wall_scale))
+        translate3d(
+          calc(var(--se_tf_wall_translate_x) * 100vw),
+          calc(var(--se_tf_wall_translate_y) * 100vh),
+          calc(var(--se_tf_wall_translate_z) * 1px)
+        )
+        rotateX(calc(var(--se_tf_wall_rotate_x) * 1turn))
+        rotateY(calc(var(--se_tf_wall_rotate_y) * 1turn))
+        rotateZ(calc(var(--se_tf_wall_rotate_z) * 1turn))
       ;
     }
   }

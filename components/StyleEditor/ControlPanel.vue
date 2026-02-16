@@ -37,36 +37,37 @@
     CategoryBox(category_key="レイアウト")
       b-field(custom-class="is-small" label="大きさ")
         template(#message)
-          | 親要素の<b>横幅</b>で大きさが変わる <b>({{AppContext.se_frame_width}}dvmin)</b>
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_frame_width" :min="0" :max="200")
+          | 親要素の<b>横幅</b>で大きさが変わる
+          //- | <b>({{AppContext.se_frame_width}}dvmin)</b>
+        VariableSlider(variable_key="se_frame_width")
 
     CategoryBox(category_key="背景")
       b-field(custom-class="is-small" label="")
-        ColorEditor(v-model="AppContext.se_ws_color" :alpha="false")
+        ColorEditor(v-model="AppContext.se_ws_color" :alpha="true")
 
       ImageUploader(@input="AppContext.se_ws_image_input_handle")
 
       b-field(custom-class="is-small" label="色相")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_hue" :min="-0.5" :max="0.5" :step="0.001")
+        VariableSlider(variable_key="se_ws_hue")
       b-field(custom-class="is-small" label="彩度")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_saturate" :min="0" :max="2.0" :step="0.001")
+        VariableSlider(variable_key="se_ws_saturate")
       b-field(custom-class="is-small" label="輝度")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_brightness" :min="0" :max="2.0" :step="0.001")
+        VariableSlider(variable_key="se_ws_brightness")
       b-field(custom-class="is-small" label="ぼかし")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_blur" :min="0" :max="30" :step="0.001")
+        VariableSlider(variable_key="se_ws_blur")
       b-field(custom-class="is-small" label="セピア")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_sepia" :min="0" :max="1.0" :step="0.001")
+        VariableSlider(variable_key="se_ws_sepia")
       b-field(custom-class="is-small" label="グレースケール")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_grayscale" :min="0" :max="1.0" :step="0.001")
+        VariableSlider(variable_key="se_ws_grayscale")
       b-field(custom-class="is-small" label="コントラスト")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_contrast" :min="0" :max="2.0" :step="0.001")
+        VariableSlider(variable_key="se_ws_contrast")
       b-field(custom-class="is-small" label="反転")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.se_ws_invert" :min="0" :max="1.0" :step="0.001")
+        VariableSlider(variable_key="se_ws_invert")
 
       hr
 
       p.help
-        | 背景は使う側の設定であって ShogiPlayer とは直接関係が無い
+        | 背景はスタイルエディタ側の設定であって ShogiPlayer とはなんも関係無い
 
     CategoryBox(category_key="盤テクスチャ")
       b-field(custom-class="is-small" label="素材")
@@ -400,14 +401,14 @@
             .column
               b-field(grouped)
                 b-field.mb-0(custom-class="is-small")
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_mode" native-value="is_tf_board_mode_off") OFF
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_mode" native-value="is_tf_board_mode_on") ON
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_mode" :native-value="false") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_mode" :native-value="true") ON
                 b-field.mb-0(custom-class="is-small")
                   .control
                     b-button(size="is-small" @click="AppContext.transform_reset('tf_board')") リセット
           .columns
             .column
-              b-field(custom-class="is-small" label="遠近感")
+              b-field(custom-class="is-small" label="視点との距離 (px)")
                 VariableSlider(variable_key="se_tf_board_perspective")
             .column
               b-field(custom-class="is-small" label="スケール")
@@ -430,7 +431,7 @@
               b-field(custom-class="is-small" label="移動 Y")
                 VariableSlider(variable_key="se_tf_board_translate_y")
             .column
-              b-field(custom-class="is-small" label="移動 Z")
+              b-field(custom-class="is-small" label="移動 Z (px)")
                 VariableSlider(variable_key="se_tf_board_translate_z")
 
         b-tab-item(label="駒")
@@ -438,14 +439,14 @@
             .column
               b-field(grouped)
                 b-field.mb-0(custom-class="is-small")
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_mode" native-value="is_tf_piece_mode_off") OFF
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_mode" native-value="is_tf_piece_mode_on") ON
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_mode" :native-value="false") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_mode" :native-value="true") ON
                 b-field.mb-0(custom-class="is-small")
                   .control
                     b-button(size="is-small" @click="AppContext.transform_reset('tf_piece')") リセット
           .columns
             .column
-              b-field(custom-class="is-small" label="遠近感")
+              b-field(custom-class="is-small" label="視点との距離 (px)")
                 VariableSlider(variable_key="se_tf_piece_perspective")
             .column
               b-field(custom-class="is-small" label="スケール")
@@ -468,22 +469,22 @@
               b-field(custom-class="is-small" label="移動 Y")
                 VariableSlider(variable_key="se_tf_piece_translate_y")
             .column
-              b-field(custom-class="is-small" label="移動 Z")
+              b-field(custom-class="is-small" label="移動 Z (px)")
                 VariableSlider(variable_key="se_tf_piece_translate_z")
 
-        b-tab-item(label="背景")
+        b-tab-item(label="全体")
           .columns
             .column
               b-field(grouped)
                 b-field.mb-0(custom-class="is-small")
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_mode" native-value="is_tf_wall_mode_off") OFF
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_mode" native-value="is_tf_wall_mode_on") ON
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_mode" :native-value="false") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_mode" :native-value="true") ON
                 b-field.mb-0(custom-class="is-small")
                   .control
                     b-button(size="is-small" @click="AppContext.transform_reset('tf_wall')") リセット
           .columns
             .column
-              b-field(custom-class="is-small" label="遠近感")
+              b-field(custom-class="is-small" label="視点との距離 (px)")
                 VariableSlider(variable_key="se_tf_wall_perspective")
             .column
               b-field(custom-class="is-small" label="スケール")
@@ -506,19 +507,19 @@
               b-field(custom-class="is-small" label="移動 Y")
                 VariableSlider(variable_key="se_tf_wall_translate_y")
             .column
-              b-field(custom-class="is-small" label="移動 Z")
+              b-field(custom-class="is-small" label="移動 Z (px)")
                 VariableSlider(variable_key="se_tf_wall_translate_z")
 
       template(v-if="development_p && false")
         hr
         b-field(custom-class="is-small" label="チェッカー背景" )
-          b-radio-button(size="is-small" v-model="AppContext.se_bg_pattern" :native-value="false") OFF
-          b-radio-button(size="is-small" v-model="AppContext.se_bg_pattern" :native-value="true") ON
+          b-radio-button(size="is-small" v-model="AppContext.se_checkerboard_pattern" :native-value="false") OFF
+          b-radio-button(size="is-small" v-model="AppContext.se_checkerboard_pattern" :native-value="true") ON
 
       hr
 
       p.help.content
-        | 基本的に<b>回転X(斜め度) 遠近感(強度) 移動Z(大きさ)</b>の3つで調整する。
+        | 基本的に<b>回転X</b>・<b>視点との距離</b>・<b>移動Z</b>の3つで調整する。
         | これらはスタイルエディタ側でスタイルを適用しているだけで ShogiPlayer が用意している機能ではない。
 
     CategoryBox(category_key="コントローラー")
@@ -677,16 +678,30 @@
 
     CategoryBox(category_key="CSS変数確認")
       b-field(custom-class="is-small")
-        b-radio-button(size="is-small" v-model="AppContext.css_params_show_all" :native-value="false") 差分のみ
-        b-radio-button(size="is-small" v-model="AppContext.css_params_show_all" :native-value="true") すべて表示する
+        b-radio-button(size="is-small" v-model="AppContext.css_params_show_all_sp" :native-value="false") 差分のみ
+        b-radio-button(size="is-small" v-model="AppContext.css_params_show_all_sp" :native-value="true") すべて表示する
       pre
         | {{AppContext.sp_css_human}}
       p.help
         a(href="https://shogi-player.netlify.app/reference/css-variables/" target="_blank") ドキュメント
 
     CategoryBox(category_key="SE側CSS変数確認")
+      b-field(custom-class="is-small")
+        b-radio-button(size="is-small" v-model="AppContext.css_params_show_all_se" :native-value="false") 差分のみ
+        b-radio-button(size="is-small" v-model="AppContext.css_params_show_all_se" :native-value="true") すべて表示する
       pre
-        | {{AppContext.se_css_human}}
+        | {{AppContext.se_component_style_human}}
+      p.help
+        | 実際には StyleEditor(style="...") で渡している
+
+    CategoryBox(category_key="KBショートカット")
+      pre
+        | 0 - 初期化
+        | s - 保存
+        | l - 復元
+        | # - レイヤー ON / OFF
+        | d - dev tools ON / OFF
+        | c - コントローラー類 ON / OFF
 </template>
 
 <script>

@@ -22,8 +22,16 @@ export default {
         min: this.variable_info.min,
         max: this.variable_info.max,
         step: this.variable_info.step,
+        disabled: !this.enabled,
         ...this.$attrs,
       }
+    },
+    enabled() {
+      const key = this.variable_info.ui_enable_if
+      if (key != null) {
+        return this.AppContext[key]
+      }
+      return true
     },
   },
 }

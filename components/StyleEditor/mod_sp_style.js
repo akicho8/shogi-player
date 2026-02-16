@@ -12,7 +12,7 @@ export const mod_sp_style = {
         if (e.context_type === "sp_css") {
           let original_value = this[e.key]
           let str = e.as_string_of(original_value)
-          if (!this.css_params_show_all) {
+          if (!this.css_params_show_all_sp) {
             if (str === e.default_value_as_str) {
               str = null
             }
