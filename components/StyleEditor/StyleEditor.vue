@@ -1,10 +1,10 @@
 <template lang="pug">
-.StyleEditor.is-relative(:class="component_class")
+.StyleEditor.is-relative(:class="se_component_class" :style="se_component_style")
   div(is="style" v-text="sp_css_embed")
-  div(is="style" v-text="se_css_embed")
+  //- div(is="style" v-text="se_css_embed")
   div(is="style" v-text="user_custom_css")
 
-  .StyleEditorBackground.is-overlay(:class="component_background_class")
+  .CheckerboardPattern.is-overlay(:class="checkerboard_pattern_params")
 
   // .StyleEditor .b-sidebar ではセレクタが効かないため .StyleEditorSidebar としている
   b-sidebar.StyleEditorSidebar(fullheight right v-model="sidebar_p" position="fixed" :can-cancel="[]")
@@ -62,6 +62,7 @@ import { mod_keydown         } from "./mod_keydown.js"
 import { mod_autorun } from "./mod_autorun.js"
 import { mod_callback } from "./mod_callback.js"
 import { mod_category } from "./mod_category.js"
+import { mod_control_panel       } from "./mod_control_panel.js"
 
 import ShogiPlayer from "../ShogiPlayer.vue"
 import ControlPanel from "./ControlPanel.vue"
@@ -82,6 +83,7 @@ export default {
     mod_autorun,
     mod_callback,
     mod_category,
+    mod_control_panel,
   ],
 
   components: {
@@ -99,40 +101,6 @@ export default {
 
   },
 
-  methods: {
-    tfx_slider_attrs(value) {
-      return { ...this.slider_attrs, disabled: value }
-    },
-
-    sidebar_toggle_handle() {
-      this.sidebar_p = !this.sidebar_p
-    },
-    se_ws_image_input_handle(v) {
-      this.se_ws_image = v
-    },
-    sp_board_image_input_handle(v) {
-      this.sp_board_image = v
-      this.sp_board_variant = "none" // 背景画像プリセットを選択してない状態に戻しておく
-    },
-
-    se_preset_apply_handle(preset_info) {
-      preset_info.func(this)
-    },
-
-    se_board_size_preset_apply_handle(board_size_preset_info) {
-      board_size_preset_info.func(this)
-    },
-
-    se_user_custom_css_preset_apply_handle(user_custom_css_preset_info) {
-      this.user_custom_css_update_by(user_custom_css_preset_info.key)
-    },
-
-    user_custom_css_update_by(key) {
-      const user_custom_css_preset_info = this.UserCustomCssPresetInfo.fetch(key)
-      this.user_custom_css = user_custom_css_preset_info.user_custom_css.trim()
-    },
-
-  },
   computed: {
     development_p() { return DEVELOPMENT_P },
     __SYSTEM_TEST_RUNNING__() { return this.$route.query.__SYSTEM_TEST_RUNNING__ === "true" },
@@ -155,34 +123,23 @@ export default {
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    slider_attrs() {
-      return {
-        indicator: true,
-        tooltip: false,
-        size: "is-small",
-      }
-    },
-
-    tf_wall_slider_attrs() { return this.tfx_slider_attrs(this.se_tf_wall_mode === "is_tf_wall_mode_off") },
-    tf_board_slider_attrs() { return this.tfx_slider_attrs(this.se_tf_board_mode === "is_tf_board_mode_off") },
-    tf_piece_slider_attrs() { return this.tfx_slider_attrs(this.se_tf_piece_mode === "is_tf_piece_mode_off") },
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    component_class() {
+    se_component_class() {
       return [
         {
           sidebar_p: this.sidebar_p
         },
-        this.se_tf_wall_mode,
-        this.se_tf_board_mode,
-        this.se_tf_piece_mode,
+        `is_tf_board_mode_${this.se_tf_board_mode}`,
+        `is_tf_piece_mode_${this.se_tf_piece_mode}`,
+        `is_tf_wall_mode_${this.se_tf_wall_mode}`,
       ]
     },
 
-    // sp_star_z_index が -1 のときこちらが勝ってしまうので se_bg_pattern を false にすること
-    component_background_class() {
-      if (this.se_bg_pattern) {
+    // sp_star_z_index が -1 のときこちらが勝ってしまうので se_checkerboard_pattern を false にすること
+    checkerboard_pattern_params() {
+      if (this.se_checkerboard_pattern) {
         return ["pattern-checks-md", "has-text-black-bis", "has-background-black-ter"]
       }
     },
@@ -220,50 +177,5 @@ export default {
 </script>
 
 <style lang="sass">
-@import "pattern.css/pattern.scss"
-@import "./support.scss"
-@import "./layout.scss"
-@import "./property.scss"
-@import "./transform.scss"
-
-.StyleEditor
-  min-height: 100dvh
-  overflow: hidden
-
-.StyleEditor
-  .sidebar_toggle_button
-    position: fixed
-    top: 0
-    right: 0
-    z-index: 1
-
-  &.sidebar_p
-    .Workspace
-      +tablet
-        width: unquote("calc(100% - #{$sidebar_width_tablet})")
-      +desktop
-        width: unquote("calc(100% - #{$sidebar_width_desktop})")
-
-  .StyleEditorBackground
-    height: 100%
-    z-index: -200               // sp_star_z_index が -1 のときチェッカー背景より前面になるようにするため -1 未満にする
-
-  .Workspace
-    display: flex
-    align-items: center
-    justify-content: center
-    flex-direction: column
-
-  .WorkspaceBackground
-    z-index: -100              // sp_star_z_index が -1 のとき背景より前面なるようにするため -1 未満にする
-    background-color: var(--se_ws_color)
-    background-image: var(--se_ws_image, none)
-    background-position: center
-    background-repeat: no-repeat
-    background-size: cover
-    filter: unquote('invert(var(--se_ws_invert)) sepia(var(--se_ws_sepia)) hue-rotate(calc(var(--se_ws_hue) * 1turn)) saturate(var(--se_ws_saturate)) grayscale(var(--se_ws_grayscale)) brightness(var(--se_ws_brightness)) contrast(var(--se_ws_contrast)) blur(calc(var(--se_ws_blur) * 1px))')
-
-  .ShogiPlayerWrap
-    width: var(--se_frame_width)
-
+@import "./StyleEditor.scss"
 </style>

@@ -105,8 +105,8 @@ export class PresetInfo extends ApplicationMemoryRecord {
       {
         key: "3D",
         func: context => {
-          context.se_tf_board_mode = "is_tf_board_mode_on"
-          context.se_tf_piece_mode = "is_tf_piece_mode_on"
+          context.se_tf_board_mode = true
+          context.se_tf_piece_mode = true
         },
       },
     ]

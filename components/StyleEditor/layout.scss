@@ -3,6 +3,7 @@
 .StyleEditorSidebar {
   .sidebar-content {
     transition: none;
+
     @include mobile {
       width: $sidebar_width_mobile;
     }

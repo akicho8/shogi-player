@@ -603,6 +603,8 @@ export default {
 
 <style lang="sass">
 @import "./support.sass"
+@import "./application.scss"
+
 // .ShogiPlayer
 //   width: 100%
 .ShogiPlayer

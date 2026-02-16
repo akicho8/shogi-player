@@ -1,0 +1,42 @@
+.StyleEditor {
+  &.sidebar_p {
+    .Workspace {
+      @include tablet {
+        width: unquote("calc(100% - #{$sidebar_width_tablet})");
+      }
+      @include desktop {
+        width: unquote("calc(100% - #{$sidebar_width_desktop})");
+      }
+    }
+  }
+
+  .Workspace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .WorkspaceBackground {
+      z-index: -100;              // sp_star_z_index が -1 のとき背景より前面なるようにするため -1 未満にする
+      background-color: var(--se_ws_color);
+      background-image: var(--se_ws_image, none);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter:
+        invert(var(--se_ws_invert))
+        sepia(var(--se_ws_sepia))
+        hue-rotate(calc(var(--se_ws_hue) * 1turn))
+        saturate(var(--se_ws_saturate))
+        grayscale(var(--se_ws_grayscale))
+        brightness(var(--se_ws_brightness))
+        contrast(var(--se_ws_contrast))
+        blur(calc(var(--se_ws_blur) * 1px))
+      ;
+    }
+
+    .ShogiPlayerWrap {
+      width: calc(var(--se_frame_width) * 100dvmin);
+    }
+  }
+}

@@ -97,7 +97,7 @@ export const mod_variables = {
       return hv
     },
 
-    //
+    // 現在値から初期値を除いたものを返す
     sp_component_bind_attrs() {
       const hv = this.sp_component_current_attrs
       if (this.component_parmas_show_all) {

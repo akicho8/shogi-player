@@ -1,0 +1,27 @@
+@import "pattern.css/pattern.scss";
+@import "./support.scss";
+@import "./layout.scss";
+@import "./property.scss";
+@import "./transform.scss";
+@import "./Workspace.scss";
+
+.StyleEditor {
+  min-height: 100dvh;
+  overflow: hidden;
+
+  .sidebar_toggle_button {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  .CheckerboardPattern {
+    height: 100%;
+    z-index: -200;               // sp_star_z_index が -1 のときチェッカー背景より前面になるようにするため -1 未満にする
+  }
+
+  .ShogiPlayerWrap {
+    width: calc(var(--se_frame_width) * 100dvmin);
+  }
+}
