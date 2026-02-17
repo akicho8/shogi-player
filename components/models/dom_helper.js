@@ -1,5 +1,5 @@
-export const DomHelper = {
-  focus_on_input_tag_p() {
+export class DomHelper {
+  static focus_on_input_tag_p() {
     const dom = document.activeElement
     if (dom == null) {
       return false
@@ -9,5 +9,5 @@ export const DomHelper = {
     const is_editable = dom.isContentEditable // contenteditable="true" 対策
 
     return is_input || is_editable
-  },
+  }
 }

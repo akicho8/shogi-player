@@ -13,8 +13,8 @@ export const mod_control_panel = {
       this.sp_board_variant = "none" // 背景画像プリセットを選択してない状態に戻しておく
     },
 
-    se_preset_apply_handle(preset_info) {
-      preset_info.func(this)
+    se_preset_apply_handle(se_preset_info) {
+      se_preset_info.call(this)
     },
 
     se_board_size_preset_apply_handle(board_size_preset_info) {

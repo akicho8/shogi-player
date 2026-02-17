@@ -17,8 +17,8 @@
       b-field(custom-class="is-small" label="プリセット")
         .control
           .buttons.mb-0
-            template(v-for="e in AppContext.PresetInfo.values")
-              b-button(@click="AppContext.se_preset_apply_handle(e)" size="is-small") {{e.name}}
+            template(v-for="e in AppContext.SePresetInfo.values")
+              b-button(@click="e.call(AppContext)" size="is-small") {{e.name}}
 
       b-field(custom-class="is-small" label="永続化")
         template(#message)
@@ -702,6 +702,10 @@
         | # - レイヤー ON / OFF
         | d - dev tools ON / OFF
         | c - コントローラー類 ON / OFF
+        | Enter / Space / Escape - MENU
+        | e - 編集モード
+        |
+        | ※編集モードのときは ShogiPlayer 側のショートカットを優先する
 </template>
 
 <script>
@@ -759,4 +763,6 @@ export default {
   pre
     padding: 0.75rem
     font-size: $size-7
+    white-space: pre-wrap
+    word-break: break-all
 </style>
