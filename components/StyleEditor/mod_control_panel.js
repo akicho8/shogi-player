@@ -2,10 +2,6 @@ import { GX } from "../models/gx.js"
 
 export const mod_control_panel = {
   methods: {
-    tfx_slider_attrs(value) {
-      return { ...this.slider_attrs, disabled: value }
-    },
-
     sidebar_toggle_handle() {
       this.sidebar_p = !this.sidebar_p
     },
@@ -43,9 +39,5 @@ export const mod_control_panel = {
         size: "is-small",
       }
     },
-
-    tf_wall_slider_attrs() { return this.tfx_slider_attrs(this.se_tf_wall_mode === "is_tf_wall_mode_off") },
-    tf_board_slider_attrs() { return this.tfx_slider_attrs(this.se_tf_board_mode === "is_tf_board_mode_off") },
-    tf_piece_slider_attrs() { return this.tfx_slider_attrs(this.se_tf_piece_mode === "is_tf_piece_mode_off") },
   },
 }
