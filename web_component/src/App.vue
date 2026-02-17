@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-  <pre>~/src/shogi-player/web_component/src/App.vue</pre>
+  <pre>~/src/shogi/shogi-player/web_component/src/App.vue</pre>
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
 </div>
