@@ -1,10 +1,24 @@
+import { KeyboardHelper } from "../models/keyboard_helper.js"
+
 export const mod_shortcut = {
   methods: {
     shortcut_hook(e) {
-      if (e.code === "Enter" || e.code === "Escape" || e.code === "Space" || e.key === "/") {
+      // if (KeyboardHelper.modifier_p(e)) {
+      //   return
+      // }
+
+      if (this.sp_mode !== "edit") {
+        if (e.code === "Space") {
+          this.sidebar_toggle_handle()
+          return true
+        }
+      }
+
+      if (KeyboardHelper.pure_enter_p(e) || e.code === "Escape" || e.key === "/") {
         this.sidebar_toggle_handle()
         return true
       }
+
       // if (e.code === "ArrowRight") {
       //   this.$refs.sp_object.api_turn_add(1)
       //   return true
@@ -13,31 +27,41 @@ export const mod_shortcut = {
       //   this.$refs.sp_object.api_turn_add(-1)
       //   return true
       // }
-      if (e.key === "0") {
-        this.PresetInfo.fetch("初期値").func(this)
+
+      if (KeyboardHelper.soft_pure_key_p(e, "0")) {
+        this.SePresetInfo.fetch("初期値").func(this)
         return true
       }
-      if (e.key === "#") {
+      if (KeyboardHelper.soft_pure_key_p(e, "#")) {
         this.sp_layer = !this.sp_layer
         return true
       }
-      if (e.key === "s") {
+      if (KeyboardHelper.soft_pure_key_p(e, "s")) {
         this.xstore_save_handle()
         return true
       }
-      if (e.key === "l") {
+      if (KeyboardHelper.soft_pure_key_p(e, "l")) {
         this.xstore_load_handle()
         return true
       }
-      if (e.key === "d") {
+      if (KeyboardHelper.soft_pure_key_p(e, "d")) {
         this.sp_dev_tools = !this.sp_dev_tools
         return true
       }
-      if (e.key === "c") {
+      if (KeyboardHelper.soft_pure_key_p(e, "c")) {
         this.sp_controller = !this.sp_controller
         this.sp_slider = !this.sp_slider
         return true
       }
+      if (KeyboardHelper.soft_pure_key_p(e, "e")) {
+        this.sp_mode = "edit"
+        return true
+      }
     },
+
+    modifier_p(e) {
+      return e.shiftKey || e.ctrlKey || e.altKey || e.metaKey
+    },
+
   },
 }

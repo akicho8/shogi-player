@@ -7,9 +7,7 @@
         scale(var(--se_tf_board_scale))
         translate3d(
           calc(var(--se_tf_board_translate_x) * 100cqw),
-          // calc(var(--se_tf_board_translate_x) * var(--sp_board_entire_current_w)),
           calc(var(--se_tf_board_translate_y) * var(--sp_board_entire_current_h)),
-          // calc(var(--se_tf_board_translate_y) * 100cqw),
           calc(var(--se_tf_board_translate_z) * 1px)
         )
         rotateX(calc(var(--se_tf_board_rotate_x) * 1turn))
@@ -55,3 +53,4 @@
     }
   }
 }
+

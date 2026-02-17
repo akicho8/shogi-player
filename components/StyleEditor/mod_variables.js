@@ -52,24 +52,9 @@ export const mod_variables = {
 
     var_init_by_url_params_all() {
       this.VariableInfo.values.forEach(e => {
-        const s = this.$route.query[e.key]
-        if (s != null) {
-          let v = null
-          if (false) {
-          } else if (e.type === "String") {
-            v = s.trim()
-          } else if (e.type === "Bool") {
-            v = (s === "true")
-          } else if (e.type === "Hash") {
-            v = JSON5.parse(s)
-          } else if (e.type === "Float") {
-            v = parseFloat(s)
-          } else if (e.type === "Integer") {
-            v = parseInt(s)
-          } else {
-            throw new Error("must not happen")
-          }
-          this[e.key] = v
+        const str = this.$route.query[e.key]
+        if (str != null) {
+          this[e.key] = e.native_value_from(str)
         }
       })
     },

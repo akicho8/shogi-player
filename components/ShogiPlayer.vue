@@ -16,6 +16,11 @@ import JSON5 from "json5"
 import _ from "lodash"
 import Vue from "vue"
 
+// Helpers
+import { KeyboardHelper   } from "./models/keyboard_helper.js"
+import { DomHelper        } from "./models/dom_helper.js"
+import { DeviseHelper     } from "./models/devise_helper.js"
+
 // Models
 import { Xcontainer       } from "./models/xcontainer.js"
 import { Place            } from "./models/place.js"
@@ -25,7 +30,7 @@ import { Location         } from "./models/location.js"
 import { EventList        } from "./models/event_list.js"
 import { ModeInfo         } from "./models/mode_info.js"
 import { PieceVariantInfo } from "./models/piece_variant_info.js"
-import { BoardVariantInfo    } from "./models/board_variant_info.js"
+import { BoardVariantInfo } from "./models/board_variant_info.js"
 import { LayoutInfo       } from "./models/layout_info.js"
 import { CoordinateInfo   } from "./models/coordinate_info.js"
 
@@ -512,6 +517,10 @@ export default {
   },
 
   computed: {
+    KeyboardHelper() { return KeyboardHelper },
+    DomHelper()      { return DomHelper },
+    DeviseHelper()      { return DeviseHelper },
+
     Location()          { return Location         },
     ModeInfo()          { return ModeInfo         },
     BoardVariantInfo()     { return BoardVariantInfo    },

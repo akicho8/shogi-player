@@ -31,6 +31,9 @@ import _ from "lodash"
 import Vue from "vue"
 import { GX } from "../models/gx.js"
 
+import { KeyboardHelper            } from "../models/keyboard_helper.js"
+import { DomHelper                 } from "../models/dom_helper.js"
+
 import { HumanSideInfo             } from "../models/human_side_info.js"
 import { ModeInfo                  } from "../models/mode_info.js"
 import { BoardVariantInfo          } from "../models/board_variant_info.js"
@@ -41,7 +44,7 @@ import { LiftCancelActionInfo      } from "../models/lift_cancel_action_info.js"
 import { ClickResponseTimingInfo   } from "../models/click_response_timing_info.js"
 
 import { VariableInfo            } from "./models/variable_info.js"
-import { PresetInfo              } from "./models/preset_info.js"
+import { SePresetInfo              } from "./models/se_preset_info.js"
 import { CategoryInfo            } from "./models/category_info.js"
 import { BoardSizePresetInfo     } from "./models/board_size_preset_info.js"
 import { UserCustomCssPresetInfo } from "./models/user_custom_css_preset_info.js"
@@ -105,6 +108,9 @@ export default {
     development_p() { return DEVELOPMENT_P },
     __SYSTEM_TEST_RUNNING__() { return this.$route.query.__SYSTEM_TEST_RUNNING__ === "true" },
 
+    KeyboardHelper() { return KeyboardHelper },
+    DomHelper()      { return DomHelper      },
+
     VariableInfo()            { return VariableInfo            },
     HumanSideInfo()           { return HumanSideInfo           },
     ModeInfo()                { return ModeInfo                },
@@ -114,7 +120,7 @@ export default {
     LiftCancelActionInfo()    { return LiftCancelActionInfo    },
     ClickResponseTimingInfo() { return ClickResponseTimingInfo },
     CategoryInfo()            { return CategoryInfo            },
-    PresetInfo()              { return PresetInfo              },
+    SePresetInfo()              { return SePresetInfo              },
     BoardSizePresetInfo()     { return BoardSizePresetInfo     },
     UserCustomCssPresetInfo() { return UserCustomCssPresetInfo },
     PieceVisibilityInfo()     { return PieceVisibilityInfo     },
@@ -122,7 +128,6 @@ export default {
     ColorHelper()             { return ColorHelper             },
 
     ////////////////////////////////////////////////////////////////////////////////
-
 
     ////////////////////////////////////////////////////////////////////////////////
 

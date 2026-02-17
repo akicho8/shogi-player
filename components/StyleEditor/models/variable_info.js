@@ -255,4 +255,26 @@ export class VariableInfo extends ApplicationMemoryRecord {
   get default_value_clone() {
     return structuredClone(this.default_value)
   }
+
+  native_value_from(str) {
+    if (str == null) {
+      return null
+    }
+    let v = null
+    if (false) {
+    } else if (this.type === "String") {
+      v = str.trim()
+    } else if (this.type === "Bool") {
+      v = (str === "true")
+    } else if (this.type === "Hash") {
+      v = JSON5.parse(str)
+    } else if (this.type === "Float") {
+      v = parseFloat(str)
+    } else if (this.type === "Integer") {
+      v = parseInt(str)
+    } else {
+      throw new Error("must not happen")
+    }
+    return v
+  }
 }
