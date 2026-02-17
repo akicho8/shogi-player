@@ -112,7 +112,7 @@ task :release do
   pnpm publish
   git push --tags
   git push
-  (cd ~/src/shogi-extend/nuxt_side && ncu shogi-player -u && npm i)
+  (cd ~/src/shogi/shogi-extend/nuxt_side && ncu shogi-player -u && npm i)
   rake old_doc:deploy
   rake open
   rake cdn
@@ -143,10 +143,10 @@ task :update do
 end
 
 task :cp => :copy
-desc "~/src/shogi-extend 側にコピーする (alias cp)"
+desc "~/src/shogi/shogi-extend 側にコピーする (alias cp)"
 task :copy do
   system! <<~EOT
-  rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi-player/ ~/src/shogi-extend/nuxt_side/node_modules/shogi-player/
+  rsync -avz --delete --exclude=".git" --exclude="node_modules" --exclude=".nuxt" ~/src/shogi/shogi-player/ ~/src/shogi/shogi-extend/nuxt_side/node_modules/shogi-player/
     EOT
 end
 

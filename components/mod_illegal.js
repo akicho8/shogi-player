@@ -36,7 +36,7 @@ export const mod_illegal = {
       const illegal_hv = {
         // 混ぜるな危険。構造化していれよ
         // あとこれら以外は入れるな
-        // /Users/ikeda/src/shogi-extend/nuxt_side/components/ShareBoard/mod_illegal/mod_illegal.js の illegal_create_perpetual_check と合わせること
+        // /Users/ikeda/src/shogi/shogi-extend/nuxt_side/components/ShareBoard/mod_illegal/mod_illegal.js の illegal_create_perpetual_check と合わせること
         illegal_info: illegal_info,
         sfen_and_turn: { sfen: sfen, turn: this.turn_offset + 1 },
         last_move_info: last_move_info,
