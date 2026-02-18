@@ -1,12 +1,12 @@
 <template lang="pug">
-.OverlayNavigations(v-if="TheSp.sp_overlay_nav")
+.OverlayNavigations(v-if="TheSP.sp_overlay_nav")
   // それぞれに一長一短ある
   //   @pointerdown → v-sp-disable-interactions の影響があっても使える。押したとに反応する。タッチスクロールできない。
   //   @click       → v-sp-disable-interactions の影響があると使えない。離したときに反応する。タッチスクロールできる。
   // 現在は v-sp-disable-interactions の影響を MainBoard に限定して @click を使うようにしている
-  .OverlayNavigationItem.previous(         @click.stop.prevent="TheSp.api_turn_add(-1, {interactive: $event})")
-  .OverlayNavigationItem.next(             @click.stop.prevent="TheSp.api_turn_add(+1, {interactive: $event})")
-  .OverlayNavigationItem.flip_trigger_cell(@click.stop.prevent="TheSp.viewpoint_flip_handle")
+  .OverlayNavigationItem.previous(         @click.stop.prevent="TheSP.api_turn_add(-1, {interactive: $event})")
+  .OverlayNavigationItem.next(             @click.stop.prevent="TheSP.api_turn_add(+1, {interactive: $event})")
+  .OverlayNavigationItem.flip_trigger_cell(@click.stop.prevent="TheSP.viewpoint_flip_handle")
 </template>
 
 <script>

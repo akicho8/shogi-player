@@ -1,9 +1,9 @@
 <template lang="pug">
 // よかれと考えてこれに v-sp-disable-interactions を指定すると touchstart の制限が影響してコントローラー(ボタン)が押せなくなるので注意せよ
-.NavigateBlock(v-if="TheSp.inside_navigate_p")
+.NavigateBlock(v-if="TheSP.inside_navigate_p")
   .NavigateBlockInside
-    SpController(v-if="TheSp.inside_controller_p")
-    SpSlider(v-if="TheSp.inside_slider_p" ref="SpSlider")
+    SpController(v-if="TheSP.inside_controller_p")
+    SpSlider(v-if="TheSP.inside_slider_p" ref="SpSlider")
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
     SpController,
   },
   mounted() {
-    this.TheSp.$NavigateBlock = this // どこからでも refs するための荒技
+    this.TheSP.$NavigateBlock = this // どこからでも refs するための荒技
   },
 }
 </script>

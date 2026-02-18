@@ -44,13 +44,13 @@ export default {
     // capture にしなかったら駒台の駒を持ち替えることができる
     // しかし一見便利なように見えて駒を離せなくなるので持ち替えはやらない方がよい
     left_click_handle(e) {
-      if (this.TheSp.membership_left_click_handle(this.location, e)) {
+      if (this.TheSP.membership_left_click_handle(this.location, e)) {
         e.preventDefault()
         e.stopPropagation()
       }
     },
     right_click_handle(e) {
-      if (this.TheSp.membership_right_click_handle(this.location, e)) {
+      if (this.TheSP.membership_right_click_handle(this.location, e)) {
         e.preventDefault()
         e.stopPropagation()
       }
@@ -65,13 +65,13 @@ export default {
   },
 
   computed: {
-    current_player_info() { return this.TheSp.player_info_at(this.location) },
+    current_player_info() { return this.TheSP.player_info_at(this.location) },
 
     component_class() {
       const list = []
 
       // 一番上で定義してあるので子には渡す必要なし
-      if (this.TheSp.sp_stand_flip) {
+      if (this.TheSP.sp_stand_flip) {
         list.push(`is_position_south`)
       } else {
         list.push(`is_position_${this.position}`)
@@ -79,7 +79,7 @@ export default {
 
       list.push(`is_${this.location.key}`)
 
-      if (this.TheSp.xcontainer.current_location === this.location) {
+      if (this.TheSP.xcontainer.current_location === this.location) {
         list.push("is_turn_active")
       } else {
         list.push("is_turn_inactive")
@@ -94,8 +94,8 @@ export default {
     // 表示するか？
     // ・sp_piece_stand_blank_then_hidden が有効なとき持駒が空なら駒台を表示しない
     component_show_p() {
-      if (this.TheSp.sp_piece_stand_blank_then_hidden) {
-        if (this.TheSp.xcontainer.hold_pieces_blank_p(this.location)) {
+      if (this.TheSP.sp_piece_stand_blank_then_hidden) {
+        if (this.TheSP.xcontainer.hold_pieces_blank_p(this.location)) {
           return false
         }
       }

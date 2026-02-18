@@ -1,18 +1,18 @@
 <template lang="pug">
 .SpController.buttons.are-small.has-addons.is-centered.is-paddingless.is-flex-wrap-nowrap
-  template(v-if="TheSp.inside_controller_p")
-    button.button.first(ref="first" @click.stop.prevent="TheSp.api_turn_set_to_min({interactive: $event})")
+  template(v-if="TheSP.inside_controller_p")
+    button.button.first(ref="first" @click.stop.prevent="TheSP.api_turn_set_to_min({interactive: $event})")
       b-icon(size="is-small" icon="menu-left")
-    button.button.previous(ref="previous" @click.stop.prevent="TheSp.api_turn_add(-1, {interactive: $event})")
+    button.button.previous(ref="previous" @click.stop.prevent="TheSP.api_turn_add(-1, {interactive: $event})")
       b-icon(size="is-small" icon="chevron-left")
-    button.button.dev_tools(@click.stop.prevent="TheSp.dev_tools_toggle_handle" v-if="TheSp.debug_or_development_p")
+    button.button.dev_tools(@click.stop.prevent="TheSP.dev_tools_toggle_handle" v-if="TheSP.debug_or_development_p")
       b-icon(size="is-small" icon="cog")
-    button.button.next(ref="next" @click.stop.prevent="TheSp.api_turn_add(+1, {interactive: $event})")
+    button.button.next(ref="next" @click.stop.prevent="TheSP.api_turn_add(+1, {interactive: $event})")
       b-icon(size="is-small" icon="chevron-right")
-    button.button.last(ref="last" @click.stop.prevent="TheSp.api_turn_set_to_max({interactive: $event})")
+    button.button.last(ref="last" @click.stop.prevent="TheSP.api_turn_set_to_max({interactive: $event})")
       b-icon(size="is-small" icon="menu-right")
   template(v-if="false")
-    button.button.flip(@click.stop.prevent="TheSp.viewpoint_flip_handle")
+    button.button.flip(@click.stop.prevent="TheSP.viewpoint_flip_handle")
       b-icon(size="is-small" icon="swap-vertical")
 </template>
 

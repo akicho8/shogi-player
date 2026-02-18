@@ -13,7 +13,7 @@ export default {
   inject: ["ms"],
   methods: {
     click_handle() {
-      this.TheSp.event_call("ev_action_player_info_click", this.ms.location, this.ms.current_player_info)
+      this.TheSP.event_call("ev_action_player_info_click", this.ms.location, this.ms.current_player_info)
     },
   },
   computed: {

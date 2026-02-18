@@ -1,5 +1,5 @@
 export const support = {
   inject: [
-    "TheSp",
+    "TheSP",
   ],
 }

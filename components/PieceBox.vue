@@ -1,18 +1,18 @@
 <template lang="pug">
-.PieceBox.is-unselectable(v-if="TheSp.edit_p" v-sp-disable-interactions)
+.PieceBox.is-unselectable(v-if="TheSP.edit_p" v-sp-disable-interactions)
   .PieceBoxInside(
     :class="component_class"
-    @pointerdown.stop.prevent="TheSp.piece_box_other_click"
-    @pointerdown.right.prevent="TheSp.hold_cancel"
+    @pointerdown.stop.prevent="TheSP.piece_box_other_click"
+    @pointerdown.right.prevent="TheSP.hold_cancel"
     )
     // PieceBoxPieces を is-overlay にしないとPieceBoxPiecesの背景にPieceBoxTextureの色の不透明度が影響してしまう
     .PieceBoxTexture.is-overlay
     .PieceBoxPieces.is-overlay
       .PieceWithCount(
-        v-for="[piece, count] in TheSp.xcontainer.piece_box.realize"
-        @pointerdown.stop.prevent="TheSp.piece_box_piece_click(piece, $event)"
-        @mouseover="TheSp.piece_box_mouseover_handle(piece, $event)"
-        @mouseleave="TheSp.mouseleave_handle"
+        v-for="[piece, count] in TheSP.xcontainer.piece_box.realize"
+        @pointerdown.stop.prevent="TheSP.piece_box_piece_click(piece, $event)"
+        @mouseover="TheSP.piece_box_mouseover_handle(piece, $event)"
+        @mouseleave="TheSP.mouseleave_handle"
         )
         PieceTap(
           :class="piece_box_piece_tap_class(piece)"
@@ -36,14 +36,14 @@ export default {
     piece_box_piece_tap_class(piece) {
       let list = []
 
-      if (this.TheSp.lifted_p) {
+      if (this.TheSP.lifted_p) {
         list.push("piece_lifted_hover_reaction")
       }
 
-      if (this.TheSp.piece_box_have_p(piece)) {
+      if (this.TheSP.piece_box_have_p(piece)) {
         list.push("lifted_from_p")
-      } else if (this.TheSp.edit_p) {
-        if (!this.TheSp.lifted_p) {
+      } else if (this.TheSP.edit_p) {
+        if (!this.TheSP.lifted_p) {
           list.push("selectable_p")
         }
       }
@@ -70,7 +70,7 @@ export default {
   computed: {
     component_class() {
       const list = []
-      if (this.TheSp.lifted_p) {
+      if (this.TheSP.lifted_p) {
         list.push("is_droppable")
       }
       return list

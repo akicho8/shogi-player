@@ -13,7 +13,7 @@ export default {
   methods: {
     click_handle() {
       if (this.flipable) {
-        this.TheSp.viewpoint_flip_handle()
+        this.TheSP.viewpoint_flip_handle()
       }
     },
   },
@@ -34,10 +34,10 @@ export default {
       ].join(".")
     },
     is_turn_key() {
-      return this.TheSp.xcontainer.current_location === this.ms.location ? "active" : "inactive"
+      return this.TheSP.xcontainer.current_location === this.ms.location ? "active" : "inactive"
     },
     flipable() {
-      return this.TheSp.sp_location_click_behavior === "flip"
+      return this.TheSP.sp_location_click_behavior === "flip"
     },
   },
 }

@@ -9,11 +9,11 @@
 //- |----------+----------------------------+------------------------+------------------------|
 b-slider.is-unselectable.SpSlider(
   size="is-small"
-  :value="TheSp.turn_offset"
-  @dragging="v => TheSp.current_turn_set(v, {interactive: true})"
-  @change="  v => TheSp.current_turn_set(v, {interactive: true})"
-  :min="TheSp.turn_offset_min"
-  :max="TheSp.turn_offset_max"
+  :value="TheSP.turn_offset"
+  @dragging="v => TheSP.current_turn_set(v, {interactive: true})"
+  @change="  v => TheSP.current_turn_set(v, {interactive: true})"
+  :min="TheSP.turn_offset_min"
+  :max="TheSP.turn_offset_max"
   :tooltip="false"
   :indicator="true"
   @dragstart="focus_handle"
@@ -37,7 +37,7 @@ export default {
     // フォーカスさせた状態で document.activeElement を見ると何にフォーカスするべきかわかる
     // v-if="false" のときは querySelector が取れないので注意
     focus_to_self() {
-      if (this.TheSp.focus_disable_p) {
+      if (this.TheSP.focus_disable_p) {
         return false
       }
       if (this.$el.querySelector) {

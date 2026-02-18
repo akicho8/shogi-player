@@ -1,6 +1,6 @@
 <template lang="pug">
 .DevToolsGroup
-  pre {{TheSp.$data}}
+  pre {{TheSP.$data}}
 </template>
 
 <script>

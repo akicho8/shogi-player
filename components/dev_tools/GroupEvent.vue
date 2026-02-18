@@ -1,8 +1,8 @@
 <template lang="pug">
 .DevToolsGroup
   b-field(custom-class="is-small" label="イベントログ")
-    b-switch(v-model="TheSp.mut_event_log" type="is-primary" size="is-small")
-  pre {{TheSp.event_logs}}
+    b-switch(v-model="TheSP.mut_event_log" type="is-primary" size="is-small")
+  pre {{TheSP.event_logs}}
 </template>
 
 <script>

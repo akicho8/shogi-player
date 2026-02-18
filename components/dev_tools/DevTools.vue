@@ -1,17 +1,17 @@
 <template lang="pug">
 .DevTools(:class="component_class")
-  FriendlyCloseButton(@click.stop="TheSp.dev_tools_close_handle")
+  FriendlyCloseButton(@click.stop="TheSP.dev_tools_close_handle")
   b-tabs(
     size="is-small"
-    :value="TheSp.dev_tools_group_info.code"
-    @input="e => TheSp.mut_dev_tools_group = this.TheSp.DevToolsGroupInfo.fetch(e).code"
+    :value="TheSP.dev_tools_group_info.code"
+    @input="e => TheSP.mut_dev_tools_group = this.TheSP.DevToolsGroupInfo.fetch(e).code"
     :animated="false"
     )
-    template(v-for="e in TheSp.DevToolsGroupInfo.values")
+    template(v-for="e in TheSP.DevToolsGroupInfo.values")
       b-tab-item(:label="e.name" :icon="e.icon")
   .DevToolsGroupContent
-    template(v-for="e in TheSp.DevToolsGroupInfo.values")
-      component(:is="e.component" v-if="TheSp.dev_tools_group_info.key === e.key")
+    template(v-for="e in TheSP.DevToolsGroupInfo.values")
+      component(:is="e.component" v-if="TheSP.dev_tools_group_info.key === e.key")
 </template>
 
 <script>
@@ -43,7 +43,7 @@ export default {
     GroupCog,
   },
   mounted() {
-    this.TheSp.dev_tools_restore()
+    this.TheSP.dev_tools_restore()
     document.addEventListener("keydown", this.keydown_hook)
   },
   beforeDestroy() {
@@ -52,14 +52,14 @@ export default {
   methods: {
     keydown_hook(e) {
       if (e.code === "Escape") {
-        this.TheSp.dev_tools_close_handle()
+        this.TheSP.dev_tools_close_handle()
       }
     },
   },
   computed: {
     component_class() {
       return [
-        this.TheSp.dev_tools_position_info.css_class,
+        this.TheSP.dev_tools_position_info.css_class,
       ]
     },
   },
