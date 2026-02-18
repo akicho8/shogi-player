@@ -1,14 +1,14 @@
 <template lang="pug">
-.MembershipStand(:class="component_class" @pointerdown.right.stop.prevent="TheSp.hold_cancel" v-if="component_show_p")
+.MembershipStand(:class="component_class" @pointerdown.right.stop.prevent="TheSP.hold_cancel" v-if="component_show_p")
   .MembershipStandTexture.is-overlay
   .MembershipStandPieces
     .PieceWithCount.is-flex(
       v-for="[piece, count] in hold_pieces"
-      @pointerdown="TheSp.piece_stand_piece_click_with_mark_event(ms.location, piece, false, $event)"
-      @mouseover="TheSp.piece_stand_mouseover_handle(ms.location, piece, $event)"
-      @mouseleave="TheSp.mouseleave_handle"
+      @pointerdown="TheSP.piece_stand_piece_click_with_mark_event(ms.location, piece, false, $event)"
+      @mouseover="TheSP.piece_stand_mouseover_handle(ms.location, piece, $event)"
+      @mouseleave="TheSP.mouseleave_handle"
       )
-      //- @[TheSp.click_response_timing_info.method]="TheSp.piece_stand_piece_click_with_mark_event(ms.location, piece, false, $event)"
+      //- @[TheSP.click_response_timing_info.method]="TheSP.piece_stand_piece_click_with_mark_event(ms.location, piece, false, $event)"
       PieceTap(
         :class="piece_tap_class(piece)"
         :piece_texture_class="piece_texture_class(piece)"
@@ -33,7 +33,7 @@ export default {
 
   methods: {
     hold_piece_lifted_p(piece) {
-      return this.TheSp.have_piece_location === this.ms.location && this.TheSp.have_piece === piece
+      return this.TheSP.have_piece_location === this.ms.location && this.TheSP.have_piece === piece
     },
 
     piece_tap_class(piece) {
@@ -52,26 +52,26 @@ export default {
       } else {
         if (!this.lifted_p) {
           let f = false
-          if (this.TheSp.edit_p) {
+          if (this.TheSP.edit_p) {
             f = true
           }
-          if (this.TheSp.play_p) {
-            if (!this.TheSp.cpu_location_p && this.TheSp.xcontainer.current_location === this.ms.location) {
+          if (this.TheSP.play_p) {
+            if (!this.TheSP.cpu_location_p && this.TheSP.xcontainer.current_location === this.ms.location) {
               f = true
             }
           }
-          if (this.TheSp.play_p && !this.TheSp.sp_my_piece_only_move) {
+          if (this.TheSP.play_p && !this.TheSP.sp_my_piece_only_move) {
             f = true
           }
 
           // 再生モードの場合
-          if (this.TheSp.view_p) {
+          if (this.TheSP.view_p) {
             // 再生モードでもデフォルトの sp_view_mode_piece_movable=true なら駒は動かせるので手番の側であれば動かせるとする
-            if (this.TheSp.xcontainer.current_location === this.ms.location) {
+            if (this.TheSP.xcontainer.current_location === this.ms.location) {
               f = true
             }
             // しかし sp_overlay_nav の場合は盤面で操作できないので駒台の方も無効にする
-            if (this.TheSp.sp_overlay_nav) {
+            if (this.TheSP.sp_overlay_nav) {
               f = false
             }
           }
@@ -100,12 +100,12 @@ export default {
 
   computed: {
     lifted_p() {
-      return this.TheSp.lifted_p
+      return this.TheSP.lifted_p
     },
 
     component_class() {
       const list = []
-      if (this.TheSp.edit_p) {
+      if (this.TheSP.edit_p) {
         if (this.lifted_p) {
           list.push("is_droppable")
         }
@@ -124,7 +124,7 @@ export default {
     },
 
     hold_pieces() {
-      return this.TheSp.xcontainer.realized_hold_pieces_of(this.ms.location)
+      return this.TheSP.xcontainer.realized_hold_pieces_of(this.ms.location)
     },
   },
 }

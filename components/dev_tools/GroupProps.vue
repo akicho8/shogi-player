@@ -1,6 +1,6 @@
 <template lang="pug">
 .DevToolsGroup
-  pre {{TheSp.$props}}
+  pre {{TheSP.$props}}
 </template>
 
 <script>

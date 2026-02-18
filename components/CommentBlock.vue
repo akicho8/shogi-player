@@ -1,9 +1,9 @@
 <template lang="pug">
-.CommentBlock(v-if="TheSp.sp_comment && TheSp.xcontainer.current_comments")
+.CommentBlock(v-if="TheSP.sp_comment && TheSP.xcontainer.current_comments")
   .message.has-text-left
     .message-body
       .content
-        template(v-for="str in TheSp.xcontainer.current_comments")
+        template(v-for="str in TheSP.xcontainer.current_comments")
           template(v-if="_.isEmpty(str)")
             br
           template(v-else)

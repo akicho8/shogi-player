@@ -1,28 +1,28 @@
 <template lang="pug">
 .TurnShowOrEdit.is-unselectable(v-if="component_alive_p")
-  template(v-if="TheSp.turn_edit_p")
+  template(v-if="TheSP.turn_edit_p")
     b-input(
       size="is-small"
       type="number"
-      v-model.number="TheSp.turn_edit_value"
-      @input="TheSp.turn_edit_value_set"
+      v-model.number="TheSP.turn_edit_value"
+      @input="TheSP.turn_edit_value_set"
       @blur="blur_handle"
-      :min="TheSp.turn_offset_min"
-      :max="TheSp.turn_offset_max"
+      :min="TheSP.turn_offset_min"
+      :max="TheSP.turn_offset_max"
       ref="turn_edit_input"
       )
   template(v-else)
     // is-inline-block にすることで縦の margin が効く
     .SpTurnText.is-inline-block(@click.stop.prevent="turn_edit_handle")
-      template(v-if="TheSp.view_p")
-        | {{TheSp.xcontainer.current_turn_label}}
-      template(v-if="TheSp.play_p")
-        template(v-if="TheSp.turn_base === 0")
-          | {{TheSp.turn_offset}}
-        template(v-if="TheSp.turn_base >= 1")
-          | {{TheSp.turn_base}}
-          template(v-if="TheSp.turn_offset >= 1")
-            | +{{TheSp.turn_offset}}
+      template(v-if="TheSP.view_p")
+        | {{TheSP.xcontainer.current_turn_label}}
+      template(v-if="TheSP.play_p")
+        template(v-if="TheSP.turn_base === 0")
+          | {{TheSP.turn_offset}}
+        template(v-if="TheSP.turn_base >= 1")
+          | {{TheSP.turn_base}}
+          template(v-if="TheSP.turn_offset >= 1")
+            | +{{TheSP.turn_offset}}
         | 手
 </template>
 
@@ -34,16 +34,16 @@ export default {
   mixins: [support],
   methods: {
     blur_handle() {
-      this.TheSp.turn_edit_p = false
+      this.TheSP.turn_edit_p = false
     },
     turn_edit_handle() {
-      this.TheSp.turn_edit_handle()
+      this.TheSP.turn_edit_handle()
       this.$nextTick(() => this.$refs.turn_edit_input.focus({preventScroll: true}))
     },
   },
   computed: {
     component_alive_p() {
-      return this.TheSp.xcontainer && this.TheSp.sp_turn_show && (this.TheSp.view_p || this.TheSp.play_p)
+      return this.TheSP.xcontainer && this.TheSP.sp_turn_show && (this.TheSP.view_p || this.TheSP.play_p)
     },
   },
 }

@@ -25,7 +25,7 @@ export default {
   computed: {
     // 現在のセルで表示するマークたち
     current_items() {
-      return this.TheSp.mut_think_mark_list_hash[this.mark_pos_key] ?? []
+      return this.TheSP.mut_think_mark_list_hash[this.mark_pos_key] ?? []
     },
 
     current_css_circle_class() {

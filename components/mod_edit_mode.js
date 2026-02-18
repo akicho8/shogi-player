@@ -79,8 +79,8 @@ export const mod_edit_mode = {
     // // 盤面クリック時に反応する部分
     // //
     // // 本来は、
-    // // @pointerdown.stop.prevent.left="TheSp.board_cell_left_click(logical_xy(x, y), $event)"
-    // // @pointerdown.stop.prevent.right="TheSp.board_cell_right_click(logical_xy(x, y), 'transform_all', $event)"
+    // // @pointerdown.stop.prevent.left="TheSP.board_cell_left_click(logical_xy(x, y), $event)"
+    // // @pointerdown.stop.prevent.right="TheSP.board_cell_right_click(logical_xy(x, y), 'transform_all', $event)"
     // // として書いていたが、pointerdown の部分を pointerdown か click 動的に切り替えると stop.prevent.xxx が利かなくなるため
     // // 一つのメソッドだけが反応するようにしている
     // //
@@ -130,7 +130,7 @@ export const mod_edit_mode = {
       //   }
       // }
 
-      // @pointerdown="TheSp.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
+      // @pointerdown="TheSP.board_cell_pointerdown_handle(logical_xy(x, y), $event)"
 
       if (this.sp_board_cell_left_click_disabled) {
         this.log(`セルをクリックしたときの通常処理を無効化する`)

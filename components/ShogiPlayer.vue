@@ -295,7 +295,7 @@ export default {
 
   provide() {
     return {
-      TheSp: this,
+      TheSP: this,
     }
   },
 

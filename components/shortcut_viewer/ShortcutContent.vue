@@ -1,5 +1,5 @@
 <template lang="pug">
-.ShortcutContent.box.has-text-left(@click="TheSp.shortcut_viewer_close_handle")
+.ShortcutContent.box.has-text-left(@click="TheSP.shortcut_viewer_close_handle")
   .my_title
     | ショートカット
   table.table.is-fullwidth.mt-1.mb-0

@@ -29,7 +29,7 @@ export default {
 
   methods: {
     location_of(key) {
-      return Location.fetch(key).flip_if(this.TheSp.fliped)
+      return Location.fetch(key).flip_if(this.TheSP.fliped)
     },
   },
 

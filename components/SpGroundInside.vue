@@ -1,6 +1,6 @@
 <template lang="pug">
 .SpGroundInside
-  PromoteSelectModal(v-if="TheSp.dialog_soldier")
+  PromoteSelectModal(v-if="TheSP.dialog_soldier")
   OpDisabledBlock
   ToolBelt
   TurnShowOrEdit

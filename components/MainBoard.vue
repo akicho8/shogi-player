@@ -22,22 +22,22 @@
     // @[xxx].left と @[xxx].right を定義しても .left .right の部分は無視されているため @[xxx] は一つだけとする
     //
     table.BoardMatrix
-      tr.BoardRow(v-for="(_, y) in TheSp.sp_board_view_h")
+      tr.BoardRow(v-for="(_, y) in TheSP.sp_board_view_h")
         td.BoardCell(
-          v-for="(_, x) in TheSp.sp_board_view_w"
+          v-for="(_, x) in TheSP.sp_board_view_w"
           data-resize_observer_id="BoardCell"
-          @pointerdown.stop.prevent.left="TheSp.board_cell_left_click(place_by(x, y), $event)"
-          @pointerdown.stop.prevent.right="TheSp.board_cell_right_click(place_by(x, y), 'transform_all', $event)"
-          @mouseover="TheSp.board_mouseover_handle(place_by(x, y), $event)"
-          @mouseleave="TheSp.mouseleave_handle"
+          @pointerdown.stop.prevent.left="TheSP.board_cell_left_click(place_by(x, y), $event)"
+          @pointerdown.stop.prevent.right="TheSP.board_cell_right_click(place_by(x, y), 'transform_all', $event)"
+          @mouseover="TheSP.board_mouseover_handle(place_by(x, y), $event)"
+          @mouseleave="TheSP.mouseleave_handle"
           :class="cell_class(x, y)"
           :style="cell_style(place_by(x, y))"
           )
 
           // PieceTap は盤上にあるとは限らないので x, y に依存してはいけない。だから x, y を元にしたものを渡している
           PieceTap(
-            :class="TheSp.board_piece_tap_class(place_by(x, y))"
-            :piece_texture_class="TheSp.xcontainer.soldier_css_class_list(place_by(x, y))"
+            :class="TheSP.board_piece_tap_class(place_by(x, y))"
+            :piece_texture_class="TheSP.xcontainer.soldier_css_class_list(place_by(x, y))"
             :mark_pos_key="place_by(x, y).to_mark_pos_key"
             )
 </template>
@@ -58,14 +58,14 @@ export default {
     PieceTap,
   },
   beforeUpdate() {
-    this.TheSp.$data._MainBoardRenderCount += 1
+    this.TheSP.$data._MainBoardRenderCount += 1
   },
   methods: {
     place_by(px, py) {
-      const px2 = this.TheSp.sp_board_view_x + px
-      const py2 = this.TheSp.sp_board_view_y + py
+      const px2 = this.TheSP.sp_board_view_x + px
+      const py2 = this.TheSP.sp_board_view_y + py
       const place = Place.fetch([px2, py2])
-      if (this.TheSp.fliped) {
+      if (this.TheSP.fliped) {
         return place.half_spin
       }
       return place
@@ -74,7 +74,7 @@ export default {
     cell_class(px, py) {
       const place = this.place_by(px, py)
       let list = [place.even_or_odd]
-      const fn = this.TheSp.sp_board_cell_class_fn
+      const fn = this.TheSP.sp_board_cell_class_fn
       if (fn) {
         list = _.concat(list, fn(place))
       }
@@ -92,7 +92,7 @@ export default {
         return
       }
 
-      if (this.TheSp.sp_star_step === 0) {
+      if (this.TheSP.sp_star_step === 0) {
         return
       }
 
@@ -101,12 +101,12 @@ export default {
       // - なので単に反転している場合は -1 しないようにする
       // - するとそのまま符号座標 3, 6 が担当になり、右上に星を書けば 3 ごとになる
       // - 先後どちらから見ても「CSS側で右上に星を書く」のロジックはそのままでよくなる
-      const offset = this.TheSp.fliped ? 0 : -1
+      const offset = this.TheSP.fliped ? 0 : -1
       const hx = place.human_x + offset
       const hy = place.human_y + offset
       return true &&
-        (hx % this.TheSp.sp_star_step) === 0 &&
-        (hy % this.TheSp.sp_star_step) === 0 &&
+        (hx % this.TheSP.sp_star_step) === 0 &&
+        (hy % this.TheSP.sp_star_step) === 0 &&
         true
     },
 
@@ -123,8 +123,8 @@ export default {
     // sp_star_step を 1 にするとこの範囲を正確に確認できる
     star_cell_candidate_p(px, py) {
       return true &&
-        0 <= px && px <  (this.TheSp.sp_board_view_w - 1) &&
-        0 <  py && py <= (this.TheSp.sp_board_view_h - 1) &&
+        0 <= px && px <  (this.TheSP.sp_board_view_w - 1) &&
+        0 <  py && py <= (this.TheSP.sp_board_view_h - 1) &&
         true
     },
 

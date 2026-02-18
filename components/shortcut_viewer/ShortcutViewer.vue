@@ -1,5 +1,5 @@
 <template lang="pug">
-.ShortcutViewer(@click.stop="TheSp.shortcut_viewer_close_handle")
+.ShortcutViewer(@click.stop="TheSP.shortcut_viewer_close_handle")
   ShortcutContent
 </template>
 
@@ -22,7 +22,7 @@ export default {
   methods: {
     keydown_hook(e) {
       if (e.code === "Escape") {
-        this.TheSp.shortcut_viewer_close_handle()
+        this.TheSP.shortcut_viewer_close_handle()
       }
     },
   },
