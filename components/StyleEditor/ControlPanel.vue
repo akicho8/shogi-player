@@ -29,10 +29,10 @@
             b-button.mb-0(@click="AppContext.xstore_load_handle") 復元
 
     CategoryBox(category_key="動作モード")
+      //- VariableRadio
       b-field(custom-class="is-small")
-        b-radio-button(size="is-small" v-model="AppContext.sp_mode" native-value="view") 再生
-        b-radio-button(size="is-small" v-model="AppContext.sp_mode" native-value="play") 操作
-        b-radio-button(size="is-small" v-model="AppContext.sp_mode" native-value="edit") 編集
+        template(v-for="e in AppContext.ModeInfo.values")
+          b-radio-button(size="is-small" v-model="AppContext.sp_mode" :native-value="e.key") {{e.name}}
 
     CategoryBox(category_key="レイアウト")
       b-field(custom-class="is-small" label="大きさ")
@@ -154,32 +154,30 @@
 
       .columns.mt-5
         .column.py-0
-          b-field(custom-class="is-small" label="上の表記(X)")
-            template(v-for="e in AppContext.CoordinateInfo.values")
-              b-radio-button(size="is-small" v-model="AppContext.sp_coordinate_variant_h" :native-value="e.key") {{e.name}}
+          b-field(custom-class="is-small" label="大きさ(列)")
+            VariableSlider(variable_key="sp_coordinate_x_size")
         .column.py-0
-          b-field(custom-class="is-small" label="右の表記(Y)")
+          b-field(custom-class="is-small" label="位置(列)")
+            VariableSlider(variable_key="sp_coordinate_x_push")
+        .column.py-0
+          b-field(custom-class="is-small" label="表記(列)")
             template(v-for="e in AppContext.CoordinateInfo.values")
-              b-radio-button(size="is-small" v-model="AppContext.sp_coordinate_variant_v" :native-value="e.key") {{e.name}}
+              b-radio-button(size="is-small" v-model="AppContext.sp_coordinate_variant_h" :native-value="e.key" :disabled="!AppContext.sp_coordinate") {{e.name}}
 
       .columns.mt-5
         .column.py-0
-          b-field(custom-class="is-small" label="上の大きさ(X)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_coordinate_x_size" :min="0" :max="1.0" :step="0.001")
+          b-field(custom-class="is-small" label="大きさ(行)")
+            VariableSlider(variable_key="sp_coordinate_y_size")
         .column.py-0
-          b-field(custom-class="is-small" label="右の大きさ(Y)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_coordinate_y_size" :min="0" :max="1.0" :step="0.001")
-
-      .columns.mt-5
+          b-field(custom-class="is-small" label="位置(行)")
+            VariableSlider(variable_key="sp_coordinate_y_push")
         .column.py-0
-          b-field(custom-class="is-small" label="位置(X)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_coordinate_x_push" :min="-0.5" :max="0.5" :step="0.001")
-        .column.py-0
-          b-field(custom-class="is-small" label="位置(Y)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_coordinate_y_push" :min="-0.5" :max="0.5" :step="0.001")
+          b-field(custom-class="is-small" label="表記(行)")
+            template(v-for="e in AppContext.CoordinateInfo.values")
+              b-radio-button(size="is-small" v-model="AppContext.sp_coordinate_variant_v" :native-value="e.key" :disabled="!AppContext.sp_coordinate") {{e.name}}
 
       b-field(custom-class="is-small" label="色")
-        ColorEditor(v-model="AppContext.sp_coordinate_color")
+        ColorEditor(v-model="AppContext.sp_coordinate_color" :disabled="!AppContext.sp_coordinate")
 
     CategoryBox(category_key="盤セル")
 
@@ -703,6 +701,8 @@
         | d - dev tools ON / OFF
         | c - コントローラー類 ON / OFF
         | Enter / Space / Escape - MENU
+        | v - 再生モード
+        | p - 操作モード
         | e - 編集モード
         |
         | ※編集モードのときは ShogiPlayer 側のショートカットを優先する
@@ -714,6 +714,7 @@ import ImageUploader from "./ImageUploader.vue"
 import CategoryBox from "./CategoryBox.vue"
 import CategoryName from "./CategoryName.vue"
 import VariableSlider from "./VariableSlider.vue"
+import VariableRadio from "./VariableRadio.vue"
 
 export default {
   name: "ControlPanel",
@@ -724,6 +725,7 @@ export default {
     CategoryBox,
     CategoryName,
     VariableSlider,
+    VariableRadio,
   },
 }
 </script>

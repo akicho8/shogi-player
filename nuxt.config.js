@@ -198,6 +198,19 @@ export default {
 
     // https://ja.nuxtjs.org/api/configuration-build/#transpile
     // transpile: ["shogi-player"], // 外側にあるファイルは import 文を require に変換しないと node でパースできない
+    // transpile: [
+    //   "colorjs.io",
+    // ],
+    transpile: ['colorjs.io'],
+
+    babel: {
+      plugins: [
+        // Nullish Coalescing (??) をサポート
+        '@babel/plugin-proposal-nullish-coalescing-operator',
+        // Optional Chaining (?.) をサポート（念のため）
+        '@babel/plugin-proposal-optional-chaining',
+      ],
+    },
 
     // オーディオファイルをロードするように Webpack の設定を拡張するには？
     // https://ja.nuxtjs.org/faq/webpack-audio-files/

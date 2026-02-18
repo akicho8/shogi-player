@@ -16,12 +16,12 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         key: "紙面風",
         parent_key: "初期値",
         func: context => {
-          context.se_ws_color                    = "hsla(0, 0%, 100%, 1.0)" // 背景
+          context.se_ws_color                    = "hsl(none 0% 100%)" // 背景
 
           context.sp_piece_variant               = "paper"                  // 紙面風駒
           context.sp_board_radius                = 0                        // 角を丸くしない
           context.sp_board_padding               = 0                        // 隙間なし
-          context.sp_board_color                 = "hsla(0, 0%, 100%, 1.0)" // 盤透過
+          context.sp_board_color                 = "white"                  // 盤を白くする
 
           context.sp_grid_inner_stroke           = 1                        // グリッド線(細)
           context.sp_grid_outer_stroke           = 2                        // グリッド枠(太)

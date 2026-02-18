@@ -53,15 +53,18 @@ export const mod_shortcut = {
         this.sp_slider = !this.sp_slider
         return true
       }
+      if (KeyboardHelper.soft_pure_key_p(e, "v")) {
+        this.sp_mode = "view"
+        return true
+      }
+      if (KeyboardHelper.soft_pure_key_p(e, "p")) {
+        this.sp_mode = "play"
+        return true
+      }
       if (KeyboardHelper.soft_pure_key_p(e, "e")) {
         this.sp_mode = "edit"
         return true
       }
     },
-
-    modifier_p(e) {
-      return e.shiftKey || e.ctrlKey || e.altKey || e.metaKey
-    },
-
   },
 }

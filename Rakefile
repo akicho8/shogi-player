@@ -137,7 +137,6 @@ task :update do
   # ncu pug -u
   # ncu nuxt -u
   ncu js-memory-record -u
-  ncu chroma.js -u
   # npm install
   EOT
 end

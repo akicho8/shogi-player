@@ -42,10 +42,10 @@
   },
   "dependencies": {
     "beetleshine": "^0.0.35",
-    "chroma-js": "^2.4.2",
+    "colorjs.io": "^0.6.1",
+    "deep-object-diff": "^1.1.9",
     "ismobilejs": "^1.1.1",
     "js-memory-record": "^0.0.28",
-    "deep-object-diff": "^1.1.9",
     "xregexp": "^5.1.1"
   },
   "devDependencies": {

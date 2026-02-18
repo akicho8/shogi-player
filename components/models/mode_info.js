@@ -9,8 +9,3 @@ export class ModeInfo extends ApplicationMemoryRecord {
     ]
   }
 }
-
-if (typeof process !== "undefined" && process.argv[1] === __filename) {
-  console.log(ModeInfo.fetch("simple").key)
-  console.log(ModeInfo.fetch("simple").name)
-}
