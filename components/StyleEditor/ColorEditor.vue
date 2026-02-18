@@ -1,19 +1,18 @@
 <template lang="pug">
 b-colorpicker.ColorEditor(
-  v-model="new_value"
+  v-model="mut_color"
   :alpha="alpha"
   :inline="inline"
+  :disabled="disabled"
   )
   template(#footer="{color}")
     .colorpicker-fields.mb-0
-      //- 自由入力の方はリアルタイムで反応する (上書きはされない)
       b-field.mb-0(custom-class="is-small" label-position="on-border" label="自由入力")
         template(#message)
-          .box.is-shadowless.has-background-white-ter.px-2.py-2.mt-2.mb-0
+          .other_formats.box.is-shadowless.has-background-white-ter.px-2.py-2.mt-2.mb-0
             template(v-for="e in other_formats")
               | {{e}}<br>
-
-        b-input(size="is-small" type="text" :value="user_input" @input="input_handle")
+        b-input(size="is-small" type="text" :value="free_text" @input="input_handle")
 
       b-field.mt-2
         template(#message)
@@ -21,74 +20,73 @@ b-colorpicker.ColorEditor(
 </template>
 
 <script>
-import chroma from "chroma-js"
 import BuefyColor from "@/node_modules/buefy/src/utils/color"
 import { ColorHelper } from "./models/color_helper.js"
 
 export default {
   name: "ColorEditor",
   props: {
-    value:  { type: String, required: true  },
-    alpha:  { type: Boolean, default: true  },
-    inline: { type: Boolean, default: false },
+    value:    { type: String, required: true  },
+    alpha:    { type: Boolean, default: true  },
+    inline:   { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
   },
   data() {
     return {
-      new_value: this.buefy_color_new(this.value), // colorpicker 用に BuefyColor 型にする
-      user_input: this.value,                      // 最初の値を保持する
-      current_chroma: chroma(this.value),          // 常に現在の値
+      free_text: this.value,    // 自由入力用
     }
   },
   watch: {
     // 外側から変更があったとき
-    value(v) {
-      this.new_value = this.buefy_color_new(v)
+    value(str) {
+      if (str !== this.free_text) {
+        this.input_handle(str)
+      }
     },
-    // colorpicker が動いたとき
-    new_value(v) {
-      this.current_chroma = chroma(v.toString("rgba"))
-      this.$emit("input", v.toString("rgba"))
-    },
+
   },
   methods: {
     // ユーザーが変更したとき
-    input_handle(v) {
-      let color = this.safe_chroma(v)
-      if (color == null) {
-        // まだ入力中
-        return
+    input_handle(str) {
+      if (ColorHelper.valid_p(str)) {
+        this.free_text = str
       }
-      this.current_chroma = color
-      this.new_value = this.buefy_color_new(v)
     },
 
     // BuefyColor オブジェクトを返す
-    buefy_color_new(v) {
-      return BuefyColor.parse(chroma(v).css("rgba")) // Buefy内蔵のBuefyColor クラスは rgba しかパースできない
-    },
-
-    // chroma でパースできたときだけ chroma オブジェクトを返す
-    safe_chroma(v) {
-      if (!chroma.valid(v)) {
-        console.warn(`読み取りNG: ${v}`)
-        return
+    buefy_color_create(str) {
+      if (ColorHelper.invalid_p(str)) {
+        str = "black"
       }
-      console.info(`読み取りOK: ${v}`)
-      return chroma(v)
+      const color = ColorHelper.create(str)
+      const hex_str = color.toString({format: "hex"})
+      return BuefyColor.parse(hex_str)
     },
 
     random_handle() {
-      const str = ColorHelper.random({alpha: this.current_chroma.alpha()}) // alpha 値は保持する
-      this.user_input = str
-      this.input_handle(this.user_input)
+      const str = ColorHelper.random({alpha: this.color_object.alpha}) // alpha 値は保持する
+      this.input_handle(str)
     },
   },
   computed: {
+    mut_color: {
+      get() {
+        return this.buefy_color_create(this.free_text)
+      },
+      set(v) {
+        const old_format = v.toString("hsla") // BuefyColor 型は出力に関してはいろんなフォーマットに変換できる(が、古い書き方)
+        const new_format = ColorHelper.create(old_format).toString({format: "hsl"}) // 新しい書き方 hsl(a b c / d) 形式
+        this.$emit("input", new_format)
+      },
+    },
+    color_object() {
+      return ColorHelper.create(this.mut_color.toString("hsla"))
+    },
     other_formats() {
       return [
-        this.current_chroma.hex("auto"), // auto: alphaがあれば8桁でなければ6桁になる
-        this.current_chroma.css("rgba"),
-        this.current_chroma.css("hsla"),
+        this.color_object.toString({format: "hsl"}),
+        this.color_object.toString({format: "rgb"}),
+        this.color_object.toString({format: "hex"}),
       ]
     },
   },
@@ -100,4 +98,6 @@ export default {
 .ColorEditor
   input
     text-align: unset ! important // R,G,Bの各入力フィールドをばらばらに数値で入れる想定で右寄せになっているのを解除する
+  .other_formats
+    font-size: 0.5rem
 </style>
