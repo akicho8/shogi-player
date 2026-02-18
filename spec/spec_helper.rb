@@ -18,6 +18,28 @@ if true
   Capybara.app_host = "http://0.0.0.0:3800"
 end
 
+Capybara.register_driver :selenium_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--start-maximized') # 最大化
+  # ヘッドレスの場合はこちらも併用すると確実です
+  # options.add_argument('--window-size=1920,1080')
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+
+  # ヘッドレス設定
+  options.add_argument('--headless')
+  options.add_argument('--disable-gpu') # Windows環境での安定化のためによく併用されます
+
+  # ここでサイズを指定（一般的なフルHDサイズなど）
+  options.add_argument('--window-size=1920,1080')
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
 # https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.expect_with :minitest
