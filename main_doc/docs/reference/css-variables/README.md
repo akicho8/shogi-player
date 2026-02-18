@@ -264,7 +264,7 @@ Default: `1.0`
 手番のときの☗☖の大きさ
 
 ### `--sp_location_mark_inactive_size`
-Default: `0.5`
+Default: `1.0`
 
 手番ではないときの☗☖の大きさ
 

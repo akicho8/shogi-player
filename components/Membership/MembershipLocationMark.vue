@@ -47,7 +47,7 @@ export default {
 @import "../support.sass"
 .ShogiPlayer
   +defvar(sp_location_mark_active_size, 1.0)   // 手番のときの☗サイズの倍率
-  +defvar(sp_location_mark_inactive_size, 0.5) // 手番ではないときの☗サイズの倍率
+  +defvar(sp_location_mark_inactive_size, 1.0) // 手番ではないときの☗サイズの倍率
 
   .MembershipLocationMark
     display: flex
