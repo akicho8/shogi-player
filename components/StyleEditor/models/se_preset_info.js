@@ -100,14 +100,14 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         key: "3D",
         parent_key: null,
         func: context => {
-          context.se_tf_board_mode = true
+          context.se_tf_board_switch = true
         },
       },
       {
         key: "駒変形",
         parent_key: null,
         func: context => {
-          context.se_tf_piece_mode = true
+          context.se_tf_piece_switch = true
         },
       },
       {
