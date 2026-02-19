@@ -66,6 +66,7 @@ export default {
     random_handle() {
       const str = ColorHelper.random({alpha: this.color_object.alpha}) // alpha 値は保持する
       this.input_handle(str)
+      this.mut_color = this.mut_color // input イベントを発生させるため
     },
   },
   computed: {
