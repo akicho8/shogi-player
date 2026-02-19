@@ -1,5 +1,5 @@
 const PSTORE_KEY      = "__sp_style_editor__"
-const PSTORE_VERSION  = 6
+const PSTORE_VERSION  = 7
 const PSTORE_AUTOLOAD = false
 
 import { Pstore } from "../models/pstore.js"

@@ -1,7 +1,6 @@
 <template lang="pug">
 .StyleEditor.is-relative(:class="se_component_class" :style="se_component_style")
   div(is="style" v-text="sp_css_embed")
-  //- div(is="style" v-text="se_css_embed")
   div(is="style" v-text="user_custom_css")
 
   .CheckerboardPattern.is-overlay(:class="checkerboard_pattern_params")
@@ -25,8 +24,6 @@
 </template>
 
 <script>
-const DEVELOPMENT_P = process.env.NODE_ENV === "development"
-
 import _ from "lodash"
 import Vue from "vue"
 import { GX } from "../models/gx.js"
@@ -35,14 +32,15 @@ import { KeyboardHelper            } from "../models/keyboard_helper.js"
 import { DomHelper                 } from "../models/dom_helper.js"
 
 // ShogiPlayer 側で持っているもの
-import { HumanSideInfo           } from "../models/human_side_info.js"
-import { ModeInfo                } from "../models/mode_info.js"
-import { BoardVariantInfo        } from "../models/board_variant_info.js"
-import { PieceVariantInfo        } from "../models/piece_variant_info.js"
-import { CoordinateInfo          } from "../models/coordinate_info.js"
-import { MixBlendModeInfo        } from "../models/mix_blend_mode_info.js"
-import { LiftCancelActionInfo    } from "../models/lift_cancel_action_info.js"
-import { ClickResponseTimingInfo } from "../models/click_response_timing_info.js"
+import { HumanSideInfo             } from "../models/human_side_info.js"
+import { ModeInfo                  } from "../models/mode_info.js"
+import { BoardVariantInfo          } from "../models/board_variant_info.js"
+import { PieceVariantInfo          } from "../models/piece_variant_info.js"
+import { CoordinateInfo            } from "../models/coordinate_info.js"
+import { MixBlendModeInfo          } from "../models/mix_blend_mode_info.js"
+import { LiftCancelActionInfo      } from "../models/lift_cancel_action_info.js"
+import { ClickResponseTimingInfo   } from "../models/click_response_timing_info.js"
+import { PieceVerticalPositionInfo } from "../models/piece_vertical_position_info.js"
 
 // StyleEditor 側で用意したもの
 import { VariableInfo            } from "./models/variable_info.js"
@@ -54,20 +52,20 @@ import { PieceVisibilityInfo     } from "./models/piece_visibility_info.js"
 import { CssHelper               } from "./models/css_helper.js"
 import { ColorHelper             } from "./models/color_helper.js"
 
-import { mod_persistence      } from "./mod_persistence.js"
-import { mod_sp_style       } from "./mod_sp_style.js"
-import { mod_se_style       } from "./mod_se_style.js"
-import { mod_helper       } from "./mod_helper.js"
-import { mod_think_mark   } from "./mod_think_mark.js"
-import { mod_event        } from "./mod_event.js"
-import { mod_variables    } from "./mod_variables.js"
-import { mod_book         } from "./mod_book.js"
-import { mod_shortcut         } from "./mod_shortcut.js"
-import { mod_keydown         } from "./mod_keydown.js"
-import { mod_autorun } from "./mod_autorun.js"
-import { mod_callback } from "./mod_callback.js"
-import { mod_category } from "./mod_category.js"
-import { mod_control_panel       } from "./mod_control_panel.js"
+import { mod_persistence   } from "./mod_persistence.js"
+import { mod_sp_style      } from "./mod_sp_style.js"
+import { mod_se_style      } from "./mod_se_style.js"
+import { mod_helper        } from "./mod_helper.js"
+import { mod_think_mark    } from "./mod_think_mark.js"
+import { mod_event         } from "./mod_event.js"
+import { mod_variables     } from "./mod_variables.js"
+import { mod_book          } from "./mod_book.js"
+import { mod_shortcut      } from "./mod_shortcut.js"
+import { mod_keydown       } from "./mod_keydown.js"
+import { mod_autorun       } from "./mod_autorun.js"
+import { mod_callback      } from "./mod_callback.js"
+import { mod_category      } from "./mod_category.js"
+import { mod_control_panel } from "./mod_control_panel.js"
 
 import ShogiPlayer from "../ShogiPlayer.vue"
 import ControlPanel from "./ControlPanel.vue"
@@ -102,32 +100,29 @@ export default {
     }
   },
 
-  mounted() {
-
-  },
-
   computed: {
-    development_p() { return DEVELOPMENT_P },
+    development_p() { return process.env.NODE_ENV === "development" },
     __SYSTEM_TEST_RUNNING__() { return this.$route.query.__SYSTEM_TEST_RUNNING__ === "true" },
 
-    KeyboardHelper() { return KeyboardHelper },
-    DomHelper()      { return DomHelper      },
+    KeyboardHelper()            { return KeyboardHelper            },
+    DomHelper()                 { return DomHelper                 },
+    CssHelper()                 { return CssHelper                 },
+    ColorHelper()               { return ColorHelper               },
 
-    VariableInfo()            { return VariableInfo            },
-    HumanSideInfo()           { return HumanSideInfo           },
-    ModeInfo()                { return ModeInfo                },
-    BoardVariantInfo()        { return BoardVariantInfo        },
-    PieceVariantInfo()        { return PieceVariantInfo        },
-    CoordinateInfo()          { return CoordinateInfo          },
-    LiftCancelActionInfo()    { return LiftCancelActionInfo    },
-    ClickResponseTimingInfo() { return ClickResponseTimingInfo },
-    CategoryInfo()            { return CategoryInfo            },
+    VariableInfo()              { return VariableInfo              },
+    HumanSideInfo()             { return HumanSideInfo             },
+    ModeInfo()                  { return ModeInfo                  },
+    BoardVariantInfo()          { return BoardVariantInfo          },
+    PieceVariantInfo()          { return PieceVariantInfo          },
+    CoordinateInfo()            { return CoordinateInfo            },
+    LiftCancelActionInfo()      { return LiftCancelActionInfo      },
+    ClickResponseTimingInfo()   { return ClickResponseTimingInfo   },
+    PieceVerticalPositionInfo() { return PieceVerticalPositionInfo },
+    CategoryInfo()              { return CategoryInfo              },
     SePresetInfo()              { return SePresetInfo              },
-    BoardSizePresetInfo()     { return BoardSizePresetInfo     },
-    UserCustomCssPresetInfo() { return UserCustomCssPresetInfo },
-    PieceVisibilityInfo()     { return PieceVisibilityInfo     },
-    CssHelper()               { return CssHelper               },
-    ColorHelper()             { return ColorHelper             },
+    BoardSizePresetInfo()       { return BoardSizePresetInfo       },
+    UserCustomCssPresetInfo()   { return UserCustomCssPresetInfo   },
+    PieceVisibilityInfo()       { return PieceVisibilityInfo       },
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -138,9 +133,9 @@ export default {
         {
           sidebar_p: this.sidebar_p
         },
-        `is_tf_board_mode_${this.se_tf_board_mode}`,
-        `is_tf_piece_mode_${this.se_tf_piece_mode}`,
-        `is_tf_wall_mode_${this.se_tf_wall_mode}`,
+        `is_tf_board_switch_${this.se_tf_board_switch}`,
+        `is_tf_piece_switch_${this.se_tf_piece_switch}`,
+        `is_tf_wall_switch_${this.se_tf_wall_switch}`,
       ]
     },
 

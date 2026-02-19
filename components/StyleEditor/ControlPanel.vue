@@ -29,10 +29,7 @@
             b-button.mb-0(@click="AppContext.xstore_load_handle") 復元
 
     CategoryBox(category_key="動作モード")
-      //- VariableRadio
-      b-field(custom-class="is-small")
-        template(v-for="e in AppContext.ModeInfo.values")
-          b-radio-button(size="is-small" v-model="AppContext.sp_mode" :native-value="e.key") {{e.name}}
+      VariableRadio(variable_key="sp_mode")
 
     CategoryBox(category_key="レイアウト")
       b-field(custom-class="is-small" label="大きさ")
@@ -87,33 +84,33 @@
     CategoryBox(category_key="盤")
 
       b-field(custom-class="is-small" label="角丸め" message="紙面風なら0にする")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_radius" :min="0" :max="50" :step="0.01")
+        VariableSlider(variable_key="sp_board_radius")
       b-field(custom-class="is-small" label="余白" message="紙面風なら0にする")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_padding" :min="0" :max="0.05" :step="0.001")
+        VariableSlider(variable_key="sp_board_padding")
       b-field(custom-class="is-small" label="アスペクト比" message="将棋盤は正方形ではない")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_aspect_ratio" :min="0.5" :max="1.5" :step="0.001")
+        VariableSlider(variable_key="sp_board_aspect_ratio")
       b-field(custom-class="is-small" label="左右余白 (横レイアウト時有効)" message="盤と持駒の間にクリックできない領域ができてしまうため基本0でよい。座標を表示するときのみ少し空けるとよいかもしれない。")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_horizontal_gap" :min="0" :max="1.0" :step="0.01")
+        VariableSlider(variable_key="sp_board_horizontal_gap")
       b-field(custom-class="is-small" label="上下余白 (縦レイアウト時有効)" message="縦幅は貴重なので基本0でよい" v-if="development_p")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_vertical_gap" :min="0" :max="1.0" :step="0.01")
+        VariableSlider(variable_key="sp_board_vertical_gap")
 
     CategoryBox(category_key="グリッド")
+      b-field(custom-class="is-small" label="太さ (内側)")
+        VariableSlider(variable_key="sp_grid_inner_stroke")
+      b-field(custom-class="is-small" label="太さ (外枠)")
+        VariableSlider(variable_key="sp_grid_outer_stroke")
+      b-field(custom-class="is-small" label="太さ (エッジ)")
+        VariableSlider(variable_key="sp_board_edge_stroke")
       b-field(custom-class="is-small" label="内側")
         ColorEditor(v-model="AppContext.sp_grid_inner_color")
       b-field(custom-class="is-small" label="外枠・エッジ・星")
         ColorEditor(v-model="AppContext.sp_grid_outer_color")
-      b-field(custom-class="is-small" label="太さ (内側)")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_grid_inner_stroke" :min="0" :max="10" :step="0.5")
-      b-field(custom-class="is-small" label="太さ (外枠)")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_grid_outer_stroke" :min="0" :max="10" :step="0.5")
-      b-field(custom-class="is-small" label="太さ (エッジ)")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_edge_stroke" :min="0" :max="10" :step="0.5")
 
     CategoryBox(category_key="星")
       b-field(custom-class="is-small" label="大きさ")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_star_size" :min="0" :max="1.0" :step="0.001")
+        VariableSlider(variable_key="sp_star_size")
       b-field(custom-class="is-small" label="配置間隔")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_star_step" :min="0" :max="10")
+        VariableSlider(variable_key="sp_star_step")
       b-field(custom-class="is-small" label="表示優先度" message="これは星を巨大化させたときに「駒に重なってその下にある駒を持つイベントを奪ってしまう」対策として入れたものだが、あとでイベントを奪わない方法に気づいたため、現在は -1 にする利点はとくにない。-1のときは盤の奥に描画するため盤が透明でない場合に見えなくなる点に注意する。")
         b-radio-button(size="is-small" v-model="AppContext.sp_star_z_index" :native-value="-1") -1
         b-radio-button(size="is-small" v-model="AppContext.sp_star_z_index" :native-value="0") 0
@@ -127,17 +124,17 @@
       .columns.mt-1.mb-2
         .column.py-0
           b-field(custom-class="is-small" label="左上(X)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_view_x" :min="-9" :max="9")
+            VariableSlider(variable_key="sp_board_view_x")
         .column.py-0
           b-field(custom-class="is-small" label="左上(Y)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_view_y" :min="-9" :max="9")
+            VariableSlider(variable_key="sp_board_view_y")
       .columns.mt-4.mb-2
         .column.py-0
           b-field(custom-class="is-small" label="セル数(W)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_view_w" :min="0" :max="19")
+            VariableSlider(variable_key="sp_board_view_w")
         .column.py-0
           b-field(custom-class="is-small" label="セル数(H)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_view_h" :min="0" :max="19")
+            VariableSlider(variable_key="sp_board_view_h")
 
       hr
 
@@ -160,9 +157,7 @@
           b-field(custom-class="is-small" label="位置(列)")
             VariableSlider(variable_key="sp_coordinate_x_push")
         .column.py-0
-          b-field(custom-class="is-small" label="表記(列)")
-            template(v-for="e in AppContext.CoordinateInfo.values")
-              b-radio-button(size="is-small" v-model="AppContext.sp_coordinate_variant_h" :native-value="e.key" :disabled="!AppContext.sp_coordinate") {{e.name}}
+          VariableRadio(variable_key="sp_coordinate_variant_h" label="表記(列)" :disabled="!AppContext.sp_coordinate")
 
       .columns.mt-5
         .column.py-0
@@ -172,9 +167,7 @@
           b-field(custom-class="is-small" label="位置(行)")
             VariableSlider(variable_key="sp_coordinate_y_push")
         .column.py-0
-          b-field(custom-class="is-small" label="表記(行)")
-            template(v-for="e in AppContext.CoordinateInfo.values")
-              b-radio-button(size="is-small" v-model="AppContext.sp_coordinate_variant_v" :native-value="e.key" :disabled="!AppContext.sp_coordinate") {{e.name}}
+          VariableRadio(variable_key="sp_coordinate_variant_v" label="表記(行)" :disabled="!AppContext.sp_coordinate")
 
       b-field(custom-class="is-small" label="色")
         ColorEditor(v-model="AppContext.sp_coordinate_color" :disabled="!AppContext.sp_coordinate")
@@ -191,14 +184,14 @@
         | 黒のままで透明度の調整するのがおすすめ
 
     CategoryBox(category_key="駒の種類")
-
-      b-field(custom-class="is-small" label="プリセット")
+      //- b-field(custom-class="is-small" label="プリセット")
+      //-   b-select(size="is-small" v-model="AppContext.sp_piece_variant")
+      //-     template(v-for="e in AppContext.PieceVariantInfo.values")
+      //-       option(:value="e.key") {{e.name}}
+      VariableRadio(variable_key="sp_piece_variant" label="プリセット")
         template(#message)
           | 「紙面風」や「ぬれよん」などは元が巨大なため少し小さく表示した方がよい<br>
           | 「Portella」は調整済みのため原寸(1.0)が望ましい<br>
-        b-select(size="is-small" v-model="AppContext.sp_piece_variant")
-          template(v-for="e in AppContext.PieceVariantInfo.values")
-            option(:value="e.key") {{e.name}}
 
       b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置" message="下にすると駒の底辺が揃う (ただし駒の種類による)")
         b-radio-button(size="is-small" v-model="AppContext.sp_piece_vertical_position" native-value="top") ↑
@@ -399,8 +392,8 @@
             .column
               b-field(grouped)
                 b-field.mb-0(custom-class="is-small")
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_mode" :native-value="false") OFF
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_mode" :native-value="true") ON
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_switch" :native-value="false") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_board_switch" :native-value="true") ON
                 b-field.mb-0(custom-class="is-small")
                   .control
                     b-button(size="is-small" @click="AppContext.transform_reset('tf_board')") リセット
@@ -437,8 +430,8 @@
             .column
               b-field(grouped)
                 b-field.mb-0(custom-class="is-small")
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_mode" :native-value="false") OFF
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_mode" :native-value="true") ON
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_switch" :native-value="false") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_piece_switch" :native-value="true") ON
                 b-field.mb-0(custom-class="is-small")
                   .control
                     b-button(size="is-small" @click="AppContext.transform_reset('tf_piece')") リセット
@@ -475,8 +468,8 @@
             .column
               b-field(grouped)
                 b-field.mb-0(custom-class="is-small")
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_mode" :native-value="false") OFF
-                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_mode" :native-value="true") ON
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_switch" :native-value="false") OFF
+                  b-radio-button(size="is-small" v-model="AppContext.se_tf_wall_switch" :native-value="true") ON
                 b-field.mb-0(custom-class="is-small")
                   .control
                     b-button(size="is-small" @click="AppContext.transform_reset('tf_wall')") リセット
