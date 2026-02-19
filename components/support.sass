@@ -74,7 +74,7 @@ $shortcut_viewer_z:         $piece_count_z + 1  // $piece_count_z より上に�
 
 // is_layer_on 用
 =sp_xray_color($level)
-  $color: hsla((240 + 360 / 15) * $level, 50%, 50%, 0.4)
+  $color: hsl((240 + 360 / 15) * $level 50% 50% / 0.4)
   background-color: $color
   border: 1px solid darken($color, 50%)
 

@@ -2,13 +2,13 @@ import Color from "colorjs.io"
 
 describe("Color", () => {
   it("HSLA → HSLA", () => {
-    let color = new Color("hsla(10deg, 20%, 30%, 0.4)")
+    let color = new Color("hsl(10deg 20% 30% / 0.4)")
     expect(color.alpha).toEqual(0.4)
     expect(color.toString({format: "hsl"})).toEqual("hsl(10 20% 30% / 0.4)")
   })
 
   it("HSLA → RGBA", () => {
-    let color = new Color("hsla(10deg, 20%, 30%, 0.4)")
+    let color = new Color("hsl(10deg 20% 30% / 0.4)")
     expect(color.toString({format: "rgb"})).toEqual("rgb(36% 26% 24% / 0.4)")
   })
 
@@ -19,7 +19,7 @@ describe("Color", () => {
   })
 
   it("HSLA → HEX", () => {
-    let color = new Color("hsla(10deg, 20%, 30%, 0.4)")
+    let color = new Color("hsl(10deg 20% 30% / 0.4)")
     expect(color.toString({format: "hex"})).toEqual("#5c423d66")
   })
 

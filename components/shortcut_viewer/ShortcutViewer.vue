@@ -41,7 +41,7 @@ export default {
   overflow: auto
 
   z-index: $shortcut_viewer_z
-  background-color: hsla(0, 0%, 0%, 0.5)
+  background-color: hsl(0 0% 0% / 0.5)
 
   display: flex
   align-items: center

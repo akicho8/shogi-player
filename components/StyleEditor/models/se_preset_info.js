@@ -16,7 +16,7 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         key: "紙面風",
         parent_key: "初期値",
         func: context => {
-          context.se_ws_color                    = "hsl(none 0% 100%)" // 背景
+          context.se_ws_color                    = "hsl(0 0% 100%)"      // 背景
 
           context.sp_piece_variant               = "paper"                  // 紙面風駒
           context.sp_board_radius                = 0                        // 角を丸くしない
@@ -43,7 +43,7 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         key: "リアル",
         parent_key: "初期値",
         func: context => {
-          context.se_ws_color             = "hsla(37.5,52.94%,73.33%,1)"
+          context.se_ws_color             = "hsl(37.5 52.94% 73.33%)"
 
           context.sp_piece_variant        = "portella",
           context.sp_board_variant        = "wood_normal"
@@ -61,9 +61,9 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         func: context => {
           context.user_custom_css_update_by("ノイズ盤")
           context.sp_board_variant    = "none"
-          context.se_ws_color         = "hsla(0,0%, 10%,1.0)"
-          context.sp_grid_outer_color = "hsla(0,0%,100%,0.4)"
-          context.sp_grid_inner_color = "hsla(0,0%,100%,0.4)"
+          context.se_ws_color         = "hsl(0 0% 10% / 1.0)"
+          context.sp_grid_outer_color = "hsl(0 0% 100% / 0.4)"
+          context.sp_grid_inner_color = "hsl(0 0% 100% / 0.4)"
         },
       },
 
@@ -72,7 +72,7 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         parent_key: null,
         func: context => {
           // this.fetch("初期値").func(context)
-          context.sp_board_even_cell_color = "hsla(0,0%,0%,0.2)"  // セルの色(偶数)
+          context.sp_board_even_cell_color = "hsl(0 0% 0% / 0.2)"  // セルの色(偶数)
           context.sp_board_edge_stroke     = 3.0                  // 盤のエッジの縁取りの太さ
           context.sp_grid_inner_stroke     = 3.0                  // 盤の内側の格子の太さ
           context.sp_star_size             = 0.0                  // 星の大きさ

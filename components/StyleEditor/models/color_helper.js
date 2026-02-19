@@ -10,7 +10,13 @@ export class ColorHelper {
     return `hsl(${h} ${s}% ${l}% / ${alpha})`
   }
 
-  static hsla_format(v) {
+  static normalize(str) {
+    if (str != null) {
+      return this.hsl_format(str)
+    }
+  }
+
+  static hsl_format(v) {
     GX.assert_not_null(v)
     return this.create(v.toString()).toString({format: "hsl"})
   }
@@ -26,10 +32,10 @@ export class ColorHelper {
   static valid_p(str) {
     let valid = true
     try {
-      const color = new Color(str)                // hsl(n 10% 20%) でもインスタンスができてしまう
+      const color = new Color(str)                // "hsl(n 10% 20%)" でも生煮えオブジェクトができてしまう
       const hex = color.toString({format: "hex"}) // そこでいったん hex 変換すると #NaNNaNNaN になるので
-      new Color(hex)                              // それで再度インスタンス生成しようとすると今度は例外が出る
-    } catch (e) {
+      new Color(hex)                              // それで再度作ると今度は例外が出る
+    } catch (e) {                                 // という、きもい判定をしている
       valid = false
     }
     return valid
