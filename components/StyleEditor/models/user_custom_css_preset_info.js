@@ -10,14 +10,14 @@ export class UserCustomCssPresetInfo extends ApplicationMemoryRecord {
       {
         key: "駒に影",
         user_custom_css: `
-.ShogiPlayer .PieceObject { filter: drop-shadow(4px 4px 4px hsla(0 0% 0% / 0.5)) }
+.ShogiPlayer .PieceObject { filter: drop-shadow(4px 4px 4px hsl(0 0% 0% / 0.5)) }
 `,
       },
       {
         key: "盤に影",
         user_custom_css: `
 /* 盤テクスチャ有効時にははっきりと影ができる (半透明の盤だと効果は薄い) */
-.ShogiPlayer .BoardTexture { filter: drop-shadow(4px 4px 4px hsla(0 0% 0% / 0.5)) }
+.ShogiPlayer .BoardTexture { filter: drop-shadow(4px 4px 4px hsl(0 0% 0% / 0.5)) }
 `,
       },
       {

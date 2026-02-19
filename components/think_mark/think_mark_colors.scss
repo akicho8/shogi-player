@@ -5,7 +5,7 @@
   $SS_MARK_COLOR_COUNT: 12;
 
   // 基本色。あまり派手にしないこと
-  $color_base: hsla(0, 35%, 50%, 0.9);
+  $color_base: hsl(0 35% 50% / 0.9);
 
   // スプリットコンプリメンタリー (180 ± 30) を意識している → やめ
   // $hue_step: math.div(360, $SS_MARK_COLOR_COUNT) + math.div(360, 3)
@@ -47,10 +47,10 @@
       color: if($lightness > 50%, darken($color, $rate), lighten($color, $rate));
 
       // // 名前の背景
-      // background-color: hsla(0, 0%, 10%, 0.8);
-      // // text-shadow: 0px 0px 2px hsla(0, 0%, 0%, 1.0);
+      // background-color: hsl(0 0% 10% / 0.8);
+      // // text-shadow: 0px 0px 2px hsl(0 0% 0% / 1.0);
       // // -webkit-text-stroke: 0.5px black;
-      // color: hsla(0, 0%, 100%, 1.0);
+      // color: hsl(0 0% 100% / 1.0);
     }
   }
 }
