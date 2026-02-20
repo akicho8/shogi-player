@@ -7,8 +7,8 @@ export class BoardVariantInfo extends ApplicationMemoryRecord {
       { key: "wood_normal", name: "普通の木目",  },
       { key: "wood_bright", name: "明るい木目",  },
       { key: "zarazara",    name: "ざらざら",    },
-      { key: "wood_effect",      name: "木目",        },
-      { key: "bump_effect",      name: "エンボス",    },
+      { key: "wood_effect", name: "木目",        },
+      { key: "bump_effect", name: "エンボス",    },
       { key: "washi",       name: "和紙",        },
     ]
   }
