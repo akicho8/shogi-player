@@ -41,6 +41,11 @@ import { MixBlendModeInfo          } from "../models/mix_blend_mode_info.js"
 import { LiftCancelActionInfo      } from "../models/lift_cancel_action_info.js"
 import { ClickResponseTimingInfo   } from "../models/click_response_timing_info.js"
 import { PieceVerticalPositionInfo } from "../models/piece_vertical_position_info.js"
+import { LayoutInfo } from "../models/layout_info.js"
+import { StandGravityInfo } from "../models/stand_gravity_info.js"
+import { StandFlipInfo } from "../models/stand_flip_info.js"
+import { BalloonInfo } from "../models/balloon_info.js"
+import { NameDirectionInfo } from "../models/name_direction_info.js"
 
 // StyleEditor 側で用意したもの
 import { VariableInfo            } from "./models/variable_info.js"
@@ -118,6 +123,11 @@ export default {
     LiftCancelActionInfo()      { return LiftCancelActionInfo      },
     ClickResponseTimingInfo()   { return ClickResponseTimingInfo   },
     PieceVerticalPositionInfo() { return PieceVerticalPositionInfo },
+    LayoutInfo() { return LayoutInfo },
+    StandGravityInfo() { return StandGravityInfo },
+    StandFlipInfo() { return StandFlipInfo },
+    BalloonInfo() { return BalloonInfo },
+    NameDirectionInfo() { return NameDirectionInfo },
     CategoryInfo()              { return CategoryInfo              },
     SePresetInfo()              { return SePresetInfo              },
     BoardSizePresetInfo()       { return BoardSizePresetInfo       },
