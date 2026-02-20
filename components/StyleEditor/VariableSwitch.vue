@@ -1,5 +1,5 @@
 <template lang="pug">
-b-field.VariableRadio(
+b-field.VariableSwitch(
   v-bind="$attrs"
   custom-class="is-small"
   )
@@ -8,7 +8,7 @@ b-field.VariableRadio(
   template(#label)
     slot(name="label")
   template(v-for="e in variable_model.values")
-    b-radio-button(size="is-small" v-model="AppContext[variable_info.key]" :native-value="e.native_value ?? e.key" :disabled="disabled")
+    b-radio-button(size="is-small" v-model="AppContext[variable_info.key]" :native-value="e.key" :disabled="disabled")
       | {{name_of(e)}}
 </template>
 
@@ -41,10 +41,6 @@ export default {
 <style lang="sass">
 @import "./support.scss"
 .StyleEditorSidebar
-  .VariableRadio
-    &.wrap_layout
-      /* field内の要素を折り返し許可にする */
-      .has-addons
-        flex-wrap: wrap
-        gap: 0.5rem
+  .VariableSwitch
+    __css_keep__: 0
 </style>
