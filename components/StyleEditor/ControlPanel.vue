@@ -67,12 +67,9 @@
         | 背景はスタイルエディタ側の設定であって ShogiPlayer とはなんも関係無い
 
     CategoryBox(category_key="盤テクスチャ")
-      b-field(custom-class="is-small" label="素材")
+      VariableRadio(variable_key="sp_board_variant" label="素材" class="wrap_layout")
         template(#message)
           | アップロード画像を有効にするには none にする
-        b-select(size="is-small" v-model="AppContext.sp_board_variant")
-          template(v-for="e in AppContext.BoardVariantInfo.values")
-            option(:value="e.key") {{e.name}}
 
       ImageUploader(@input="AppContext.sp_board_image_input_handle")
 
@@ -193,10 +190,8 @@
           | 「紙面風」や「ぬれよん」などは元が巨大なため少し小さく表示した方がよい<br>
           | 「Portella」は調整済みのため原寸(1.0)が望ましい<br>
 
-      b-field(custom-class="is-small" label="テクスチャ領域内のマッピンング縦位置" message="下にすると駒の底辺が揃う (ただし駒の種類による)")
-        b-radio-button(size="is-small" v-model="AppContext.sp_piece_vertical_position" native-value="top") ↑
-        b-radio-button(size="is-small" v-model="AppContext.sp_piece_vertical_position" native-value="center") ・
-        b-radio-button(size="is-small" v-model="AppContext.sp_piece_vertical_position" native-value="bottom") ↓
+      //- VariableRadio(variable_key="sp_piece_variant" label="プリセット")
+      VariableRadio(variable_key="sp_piece_vertical_position" label="テクスチャ領域内のマッピンング縦位置" message="下にすると駒の底辺が揃う (ただし駒の種類による)")
 
     CategoryBox(category_key="駒の大きさ")
 
@@ -212,23 +207,23 @@
             //- b-slider(v-bind="AppContext.slider_attrs" :value="1.0" :min="0" :max="1.0" disabled)
         .column.py-0
           b-field(custom-class="is-small" label="駒 (盤内)" message="")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_piece_size" :min="0" :max="1.0" :step="0.001")
+            VariableSlider(variable_key="sp_board_piece_size")
 
       .columns.mt-4
         .column.py-0
           b-field(custom-class="is-small" label="セル (駒台)" message="盤に対する割合")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
+            VariableSlider(variable_key="sp_stand_cell_size")
         .column.py-0
           b-field(custom-class="is-small" label="駒 (駒台)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
+            VariableSlider(variable_key="sp_stand_piece_size")
 
       .columns.mt-4
         .column.py-0
           b-field(custom-class="is-small" label="セル (駒箱)" message="0.1 ぐらいですべての駒が収まる")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_box_cell_size" :min="0" :max="1.0" :step="0.0001")
+            VariableSlider(variable_key="sp_piece_box_cell_size")
         .column.py-0
           b-field(custom-class="is-small" label="駒 (駒箱)")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_box_piece_size" :min="0" :max="1.0" :step="0.01")
+            VariableSlider(variable_key="sp_piece_box_piece_size")
 
       hr
 
@@ -239,32 +234,15 @@
         | そこで盤の大きさを基準にするようにした。<br>
 
     CategoryBox(category_key="駒台")
-
-      b-field(custom-class="is-small" label="盤のどこに配置する？")
-        b-radio-button(size="is-small" v-model="AppContext.sp_layout" native-value="horizontal") 左右
-        b-radio-button(size="is-small" v-model="AppContext.sp_layout" native-value="vertical") 上下
-
-      b-field(custom-class="is-small" label="左右配置時の上下位置")
-        b-radio-button(size="is-small" v-model="AppContext.sp_stand_gravity" native-value="bottom") 下寄せ
-        b-radio-button(size="is-small" v-model="AppContext.sp_stand_gravity" native-value="top") 上寄せ
-
-      b-field(custom-class="is-small" label="相手側を反転")
-        b-radio-button(size="is-small" v-model="AppContext.sp_stand_flip" :native-value="false") しない
-        b-radio-button(size="is-small" v-model="AppContext.sp_stand_flip" :native-value="true") する
-      //- .columns.mt-4
-      //-   .column.py-0
-      //-     b-field(custom-class="is-small" label="セル(W)" message="盤の左右の(見た目の)隙間に影響する")
-      //-       b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_cell_current_w" :min="1" :max="80" :step="1")
-      //-   .column.py-0
-      //-     b-field(custom-class="is-small" label="セル(H)" message="駒と駒の隙間に影響する")
-      //-       b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_board_cell_current_h" :min="1" :max="80" :step="1")
+      VariableRadio(variable_key="sp_layout" label="盤のどこに配置する？")
+      VariableRadio(variable_key="sp_stand_gravity" label="横配置時の上下位置")
+      VariableRadio(variable_key="sp_stand_flip" label="相手側を反転")
       b-field(custom-class="is-small" label="背景色")
         ColorEditor(v-model="AppContext.sp_stand_bg_color")
       b-field(custom-class="is-small" label="持駒をhoverさせたときのborder色" message="編集モード時のみ有効。駒箱にも適用する。")
         ColorEditor(v-model="AppContext.sp_stand_hover_border_color")
 
     CategoryBox(category_key="持駒表示")
-
       .columns
         .column
           b-field(custom-class="is-small" label="☗")
@@ -283,27 +261,22 @@
     CategoryBox(category_key="対局者")
 
       b-field(custom-class="is-small" label="手番のときの☗☖の大きさ")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_location_mark_active_size" :min="0" :max="1.5" :step="0.01")
+        VariableSlider(variable_key="sp_location_mark_active_size")
 
       b-field(custom-class="is-small" label="手番でないときの☗☖の大きさ")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_location_mark_inactive_size" :min="0" :max="1.5" :step="0.01")
+        VariableSlider(variable_key="sp_location_mark_inactive_size")
 
-      b-field(custom-class="is-small" label="名前の向き")
+      VariableRadio(variable_key="sp_name_direction" label="名前の向き")
         template(#message)
           | 横書きは持駒を左右に置くレイアウトのときのみ有効
 
-        b-radio-button(size="is-small" v-model="AppContext.sp_name_direction" native-value="horizontal") 横書き
-        b-radio-button(size="is-small" v-model="AppContext.sp_name_direction" native-value="vertical") 縦書き
-
       b-field(custom-class="is-small" label="名前の大きさ")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_player_name_size" :min="0" :max="0.5" :step="0.001")
+        VariableSlider(variable_key="sp_player_name_size")
 
       b-field(custom-class="is-small" label="時間の大きさ")
-        b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_player_time_size" :min="0" :max="0.5" :step="0.001")
+        VariableSlider(variable_key="sp_player_time_size")
 
-      b-field(custom-class="is-small" label="テキストの視認性を上げる" message="駒数の背景を適用する")
-        b-radio-button(size="is-small" v-model="AppContext.sp_balloon" :native-value="false") OFF
-        b-radio-button(size="is-small" v-model="AppContext.sp_balloon" :native-value="true") ON
+      VariableRadio(variable_key="sp_balloon" label="テキストの視認性を上げる" message="駒数の背景を適用する")
 
       .columns
         .column
@@ -327,20 +300,20 @@
           b-field(custom-class="is-small" label="横レイアウト時の相対位置")
         .column.is-6.py-0
           b-field(custom-class="is-small" label="X")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_horizontal_x" :min="-1.0" :max="1.0" :step="0.001")
+            VariableSlider(variable_key="sp_piece_count_horizontal_x")
         .column.is-6.py-0
           b-field(custom-class="is-small" label="Y")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_horizontal_y" :min="-1.0" :max="1.0" :step="0.001")
+            VariableSlider(variable_key="sp_piece_count_horizontal_x")
 
       .columns.mt-4.is-multiline
         .column.is-12.py-0
           b-field(custom-class="is-small" label="縦レイアウト時の相対位置")
         .column.is-6.py-0
           b-field(custom-class="is-small" label="X")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_vertical_x" :min="-1.0" :max="1.0" :step="0.001")
+            VariableSlider(variable_key="sp_piece_count_vertical_x")
         .column.is-6.py-0
           b-field(custom-class="is-small" label="Y")
-            b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_vertical_y" :min="-1.0" :max="1.0" :step="0.001")
+            VariableSlider(variable_key="sp_piece_count_vertical_y")
 
       b-field(custom-class="is-small" label="余白")
         b-slider(v-bind="AppContext.slider_attrs" v-model="AppContext.sp_piece_count_padding" :min="0" :max="1.0" :step="0.01")
@@ -726,7 +699,7 @@ export default {
 <style lang="sass">
 @import "./support.scss"
 
-.ControlPanel
+.StyleEditorSidebar .ControlPanel
   .box
     margin-top: 1rem
     margin-bottom: 0
