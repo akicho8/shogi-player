@@ -151,10 +151,10 @@ See also: [sp_mobile_vertical](/reference/props/#sp-mobile-vertical)
 Type: `Boolean`
 Default: `true`
 
-画面幅が狭いとき自動的に縦配置に切り替えるか？
+画面幅が狭いとき自動的に上下配置に切り替えるか？
 
-初期値を横配置にしているときに関係してくる
-言い替えると画面幅が広いときに横配置に切り替えるかの設定でもある
+初期値を左右配置にしているときに関係してくる
+言い替えると画面幅が広いときに左右配置に切り替えるかの設定でもある
 
 See also: [sp_layout](/reference/props/#sp-layout)
 
