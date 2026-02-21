@@ -17,6 +17,8 @@ export class SfenBookInfo extends ApplicationMemoryRecord {
       { key: "適当な局面",               sfen: "position sfen lr5nl/2n3SB1/3gp2p1/8p/PNP1kpPP1/6p1P/2g+p5/3P1G3/L1K4RL w G2SN5Pbsp 3", },
       { key: "最速角交換",               sfen: "position sfen lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1 moves 7g7f 3c3d 8h2b+ 3a2b", }, // 初手=1手目 からの角交換
       { key: "最速角交換から相筋違い角", sfen: "position sfen lnsgkg1nl/1r5s1/pppppp1pp/6p2/9/2P6/PP1PPPPPP/7R1/LNSGKGSNL b Bb 5 moves B*4e B*6e", },         // 初手=5手目 からの相筋違い角
+      { key: "駒表示確認用",             sfen: "position sfen l+n1g1g1n+l/1ks2r1+r1/1pppp1bpp/p2+b+sp+p2/9/P1P1+SP1PP/1+P+BPP1P2/1BK1GR1+R1/+L+NSG3NL b R2B3G4S5N11L99Pr2b3g4s5n11l99p 1", },
+      { key: "最後の審判",               sfen: "position sfen 1+P1pS2+PR/2n2S1lg/1l3p1p1/1G2n1pS1/N1p2k3/3S2l2/4K1lgP/3P1+p2p/4Pg1PN b BPrb4p 1 moves B*5f 4e4d 4b3c 4d5c 5a4b 5c5b 5f7d B*6c 7d6c+ 5b6c B*8e 6c6b 4b5a 6b5c 3c4b 5c4d P*4e 4d4e 8e6g P*5f 6g5f 4e4d 4b3c 4d5c 5a4b 5c5b 5f7d B*6c 7d6c+ 5b6c B*8e 6c6b 4b5a 6b5c 3c4b 5c4d P*4e 4d4e 8e6g P*5f 6g5f 4e4d 4b3c 4d5c 5a4b 5c5b 5f7d B*6c 7d6c+ 5b6c B*8e 6c6b 4b5a 6b5c 3c4b 5c4d P*4e 4d4e 8e6g 4e4d 2d3c 4d3e 1i2g 3e2f G*1f 2f2g 6g4i 4h4i G*2h", },
     ]
   }
 
