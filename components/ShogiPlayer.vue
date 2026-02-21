@@ -32,7 +32,7 @@ import { ModeInfo         } from "./models/mode_info.js"
 import { PieceVariantInfo } from "./models/piece_variant_info.js"
 import { BoardVariantInfo } from "./models/board_variant_info.js"
 import { LayoutInfo       } from "./models/layout_info.js"
-import { CoordinateInfo   } from "./models/coordinate_info.js"
+import { CoordinateVariantInfo   } from "./models/coordinate_variant_info.js"
 
 // components
 import ErrorNotify        from "./ErrorNotify.vue"
@@ -152,7 +152,7 @@ export default {
       validator(value) { return BoardVariantInfo.keys.includes(value) },
     },
 
-    // モバイル時に自動的に縦配置に切り替える
+    // モバイル時に自動的に上下配置に切り替える
     sp_mobile_vertical: {
       type: Boolean,
       default: true,
@@ -187,14 +187,14 @@ export default {
     sp_coordinate_variant_h: {
       type: String,
       default: "number",
-      validator(value) { return CoordinateInfo.keys.includes(value) },
+      validator(value) { return CoordinateVariantInfo.keys.includes(value) },
     },
 
     // 座標の表記
     sp_coordinate_variant_v: {
       type: String,
       default: "kanji",
-      validator(value) { return CoordinateInfo.keys.includes(value) },
+      validator(value) { return CoordinateVariantInfo.keys.includes(value) },
     },
 
     // 駒台の位置
@@ -210,7 +210,7 @@ export default {
       default: false,
     },
 
-    // 名前の縦横書き切り替え(縦は横配置時のみ有効)
+    // 名前の縦横書き切り替え(縦は左右配置時のみ有効)
     sp_name_direction: {
       type: String,
       default: "horizontal",
@@ -525,7 +525,7 @@ export default {
     ModeInfo()          { return ModeInfo         },
     BoardVariantInfo()     { return BoardVariantInfo    },
     PieceVariantInfo()  { return PieceVariantInfo },
-    // CoordinateInfo()  { return CoordinateInfo },
+    // CoordinateVariantInfo()  { return CoordinateVariantInfo },
 
     location_black() { return Location.fetch("black")                    },
     location_white() { return Location.fetch("white")                    },
@@ -582,8 +582,8 @@ export default {
         // "--sp_board_view_y": this.sp_board_view_y,
         "--sp_board_view_w": this.sp_board_view_w,
         "--sp_board_view_h": this.sp_board_view_h, // CSS 側で参照しているため
-        "--sp_coordinate_variant_h": CoordinateInfo.lookup_or_first(this.sp_coordinate_variant_h).css_value,
-        "--sp_coordinate_variant_v": CoordinateInfo.lookup_or_first(this.sp_coordinate_variant_v).css_value,
+        "--sp_coordinate_variant_h": CoordinateVariantInfo.lookup_or_first(this.sp_coordinate_variant_h).css_value,
+        "--sp_coordinate_variant_v": CoordinateVariantInfo.lookup_or_first(this.sp_coordinate_variant_v).css_value,
         ...this.ro_css_variables_hash,  // sp_board_cell_current_w 等
       }
     },
