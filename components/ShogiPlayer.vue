@@ -33,6 +33,8 @@ import { PieceVariantInfo } from "./models/piece_variant_info.js"
 import { BoardVariantInfo } from "./models/board_variant_info.js"
 import { LayoutInfo       } from "./models/layout_info.js"
 import { CoordinateVariantInfo   } from "./models/coordinate_variant_info.js"
+import { StandGravityInfo   } from "./models/stand_gravity_info.js"
+import { NameDirectionInfo   } from "./models/name_direction_info.js"
 
 // components
 import ErrorNotify        from "./ErrorNotify.vue"
@@ -201,7 +203,7 @@ export default {
     sp_stand_gravity: {
       type: String,
       default: "bottom",
-      validator(value) { return ["top", "bottom"].includes(value) },
+      validator(value) { return StandGravityInfo.keys.includes(value) },
     },
 
     // 相手側の反転
@@ -214,7 +216,7 @@ export default {
     sp_name_direction: {
       type: String,
       default: "horizontal",
-      validator(value) { return ["horizontal", "vertical"].includes(value) },
+      validator(value) { return NameDirectionInfo.keys.includes(value) },
     },
 
     // 局面(手数)
