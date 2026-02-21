@@ -409,6 +409,7 @@
         | 以上はすべて操作モードでのみ有効である
 
     CategoryBox(category_key="デバッグ")
+      SmartRadio(variable_key="sp_debug" label="デバッグモード")
       SmartRadio(variable_key="sp_layer" label="レイヤー確認")
       SmartRadio(variable_key="sp_dev_tools" label="Dev Tools")
       SmartRadio(variable_key="sp_turn_show" label="手数表示")
