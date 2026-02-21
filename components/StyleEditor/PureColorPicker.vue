@@ -1,9 +1,10 @@
 <template lang="pug">
-b-colorpicker.ColorEditor(
+//- https://buefy.org/documentation/colorpicker
+b-colorpicker.PureColorPicker(
+  alpha
+  :color-formatter="color_formatter"
+  v-bind="$attrs"
   v-model="mut_color"
-  :alpha="alpha"
-  :inline="inline"
-  :disabled="disabled"
   )
   template(#footer="{color}")
     .colorpicker-fields.mb-0
@@ -24,12 +25,10 @@ import BuefyColor from "@/node_modules/buefy/src/utils/color"
 import { ColorHelper } from "./models/color_helper.js"
 
 export default {
-  name: "ColorEditor",
+  name: "PureColorPicker",
+  inheritAttrs: false,
   props: {
-    value:    { type: String, required: true  },
-    alpha:    { type: Boolean, default: true  },
-    inline:   { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false },
+    value: { type: String, required: true },
   },
   data() {
     return {
@@ -63,13 +62,28 @@ export default {
       return BuefyColor.parse(hex_str)
     },
 
+    // color_parser(str) {
+    //   // const color = ColorHelper.create(str)
+    //   // const hex_str = color.toString({format: "hex"})
+    //   // return BuefyColor.parse(hex_str)
+    //   return BuefyColor.parse(str)
+    //   // console.log("color_parser", str)
+    //   // return this.buefy_color_create(str)
+    // },
+
     random_handle() {
       const str = ColorHelper.random({alpha: this.color_object.alpha}) // alpha 値は保持する
       this.input_handle(str)
       this.mut_color = this.mut_color // input イベントを発生させるため
     },
+
+    color_formatter(color) {
+      // return `hsl(${color.hue}, ${color.saturation}, ${color.lightness} / ${color.alpha})`
+      return color.toString("hsla")
+    },
   },
   computed: {
+    // b-colorpicker が参照および更新する変数
     mut_color: {
       get() {
         return this.buefy_color_create(this.free_text)
@@ -80,9 +94,13 @@ export default {
         this.$emit("input", new_format)
       },
     },
+
+    // 現在値
     color_object() {
       return ColorHelper.create(this.mut_color.toString("hsla"))
     },
+
+    // 他フォーマットでの表記を確認する用
     other_formats() {
       return [
         this.color_object.toString({format: "hsl"}),
@@ -96,9 +114,10 @@ export default {
 
 <style lang="sass">
 @import "./support.scss"
-.ColorEditor
-  input
-    text-align: unset ! important // R,G,Bの各入力フィールドをばらばらに数値で入れる想定で右寄せになっているのを解除する
-  .other_formats
-    font-size: 0.5rem
+.StyleEditorSidebar
+  .PureColorPicker
+    input
+      text-align: unset ! important // R,G,Bの各入力フィールドをばらばらに数値で入れる想定で右寄せになっているのを解除する
+    .other_formats
+      font-size: 0.5rem
 </style>

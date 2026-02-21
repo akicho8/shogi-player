@@ -1,5 +1,20 @@
-export const mod_se_style = {
+export const mod_component_params = {
   computed: {
+    // class 属性に設定する変数たち
+    se_component_class() {
+      let av = []
+      this.VariableInfo.values.forEach(e => {
+        if (e.context_type === "se_class") {
+          const value = this[e.key]
+          if (value != null) {
+            const key = [e.key, "-", value].join("")
+            av.push(key)
+          }
+        }
+      })
+      return av
+    },
+
     // style 属性に設定するCSS変数たち
     se_component_style() {
       let av = []
