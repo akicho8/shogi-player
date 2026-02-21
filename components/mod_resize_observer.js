@@ -3,15 +3,20 @@
 import { ResizeTargetInfo } from "./models/resize_target_info.js"
 import _ from "lodash"
 
-const REQUEST_ANIMATION_FRAME_WRAP = true       // requestAnimationFrame でラップするか？
-const DEBOUNCE_WRAP                = false      // debounce で処理を保留するか？
-const DEBOUNCE_MS                  = 1000 / 20  // debounce で処理を保留する時間(ms)
-const CAST_INTEGER                 = true       // 小数だとぷるぷるするので整数にする？
+const REQUEST_ANIMATION_FRAME_WRAP = true          // requestAnimationFrame でラップするか？
+const DEBOUNCE_WRAP                = false         // debounce で処理を保留するか？
+const DEBOUNCE_MS                  = 17 * 1        // debounce で処理を保留する時間(ms)
+const CAST_INTEGER                 = true          // 小数だとぷるぷるするので整数にする？
 
 export const mod_resize_observer = {
-  // props: {
-  //   sp_cell_scale: { type: Number, default: 1.0, },
-  // },
+  props: {
+    sp_resize_observer_threshold: {
+      type: Number,
+      default: 2,
+      validator(value) { return Number.isInteger(value) },
+    },
+  },
+
   data() {
     return {
       sp_board_entire_current_w: 1,
@@ -38,11 +43,16 @@ export const mod_resize_observer = {
       this.ro_stop()
 
       const callback = (entries, observer) => {
+        this.$pending_entries = entries
         if (REQUEST_ANIMATION_FRAME_WRAP) {
-          this.$animation_frame_id = requestAnimationFrame(() => this.ro_entries_each_call(entries))
+          this.ro_animation_frame_cancel()
+          this.$animation_frame_id = requestAnimationFrame(() => {
+            this.$animation_frame_id = null
+            this.ro_entries_each_call(this.$pending_entries)
+          })
           this.log(`ResizeObserver: requestAnimationFrameの戻値=${this.$animation_frame_id}`)
         } else {
-          this.ro_entries_each_call(entries)
+          this.ro_entries_each_call(this.$pending_entries)
         }
       }
 
@@ -55,6 +65,13 @@ export const mod_resize_observer = {
 
       this.$ro = new ResizeObserver(ro_callback)
       ResizeTargetInfo.values.forEach(e => this.ro_observe(e))
+    },
+
+    ro_animation_frame_cancel() {
+      if (this.$animation_frame_id != null) {
+        cancelAnimationFrame(this.$animation_frame_id)
+        this.$animation_frame_id = null
+      }
     },
 
     ro_entries_each_call(entries) {
@@ -78,11 +95,7 @@ export const mod_resize_observer = {
       if (this.$ro) {
         this.$ro.disconnect()
         this.$ro = null
-
-        if (this.$animation_frame_id != null) {
-          cancelAnimationFrame(this.$animation_frame_id)
-          this.$animation_frame_id = null
-        }
+        this.ro_animation_frame_cancel()
       }
     },
     // リサイズの情報を読み取る
@@ -91,15 +104,15 @@ export const mod_resize_observer = {
         let w = entry.contentRect.width
         let h = entry.contentRect.height
         if (CAST_INTEGER) {
-          w = Math.round(w)
-          h = Math.round(h)
+          w = Math.floor(w)
+          h = Math.floor(h)
         }
         if (w > 0 && h > 0) {
           const bw = this[e.attr_w]
           const bh = this[e.attr_h]
           const dw = Math.abs(bw - w)
           const dh = Math.abs(bh - h)
-          const update = dw > e.threshold || dh > e.threshold
+          const update = dw >= this.sp_resize_observer_threshold || dh >= this.sp_resize_observer_threshold
           if (update) {
             this[e.attr_w] = w
             this[e.attr_h] = h
@@ -118,7 +131,6 @@ export const mod_resize_observer = {
       return {
         "--sp_board_entire_current_w": `${this.sp_board_entire_current_w}px`,
         "--sp_board_entire_current_h": `${this.sp_board_entire_current_h}px`,
-
         "--sp_board_cell_current_w": `${this.sp_board_cell_current_w}px`,
         "--sp_board_cell_current_h": `${this.sp_board_cell_current_h}px`,
       }
