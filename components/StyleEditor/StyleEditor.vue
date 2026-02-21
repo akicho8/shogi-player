@@ -36,7 +36,7 @@ import { HumanSideInfo             } from "../models/human_side_info.js"
 import { ModeInfo                  } from "../models/mode_info.js"
 import { BoardVariantInfo          } from "../models/board_variant_info.js"
 import { PieceVariantInfo          } from "../models/piece_variant_info.js"
-import { CoordinateInfo            } from "../models/coordinate_info.js"
+import { CoordinateVariantInfo            } from "../models/coordinate_variant_info.js"
 import { MixBlendModeInfo          } from "../models/mix_blend_mode_info.js"
 import { LiftCancelActionInfo      } from "../models/lift_cancel_action_info.js"
 import { ClickResponseTimingInfo   } from "../models/click_response_timing_info.js"
@@ -46,6 +46,12 @@ import { StandGravityInfo } from "../models/stand_gravity_info.js"
 import { StandFlipInfo } from "../models/stand_flip_info.js"
 import { BalloonInfo } from "../models/balloon_info.js"
 import { NameDirectionInfo } from "../models/name_direction_info.js"
+import { StarZIndexInfo } from "../models/star_z_index_info.js"
+import { CoordinateInfo            } from "../models/coordinate_info.js"
+import { PieceVisibilityInfo            } from "../models/piece_visibility_info.js"
+import { RequestCheckmateStatInfo            } from "../models/request_checkmate_stat_info.js"
+import { BinaryInfo             } from "../models/binary_info.js"
+import { Location             } from "../models/location.js"
 
 // StyleEditor 側で用意したもの
 import { VariableInfo            } from "./models/variable_info.js"
@@ -53,13 +59,13 @@ import { SePresetInfo            } from "./models/se_preset_info.js"
 import { CategoryInfo            } from "./models/category_info.js"
 import { BoardSizePresetInfo     } from "./models/board_size_preset_info.js"
 import { UserCustomCssPresetInfo } from "./models/user_custom_css_preset_info.js"
-import { PieceVisibilityInfo     } from "./models/piece_visibility_info.js"
 import { CssHelper               } from "./models/css_helper.js"
 import { ColorHelper             } from "./models/color_helper.js"
+import { AllShowInfo             } from "./models/all_show_info.js"
 
 import { mod_persistence   } from "./mod_persistence.js"
 import { mod_sp_style      } from "./mod_sp_style.js"
-import { mod_se_style      } from "./mod_se_style.js"
+import { mod_component_params      } from "./mod_component_params.js"
 import { mod_helper        } from "./mod_helper.js"
 import { mod_think_mark    } from "./mod_think_mark.js"
 import { mod_event         } from "./mod_event.js"
@@ -80,7 +86,7 @@ export default {
   mixins: [
     mod_persistence,
     mod_sp_style,
-    mod_se_style,
+    mod_component_params,
     mod_helper,
     mod_think_mark,
     mod_event,
@@ -113,45 +119,40 @@ export default {
     DomHelper()                 { return DomHelper                 },
     CssHelper()                 { return CssHelper                 },
     ColorHelper()               { return ColorHelper               },
+    AllShowInfo()               { return AllShowInfo               },
 
     VariableInfo()              { return VariableInfo              },
     HumanSideInfo()             { return HumanSideInfo             },
     ModeInfo()                  { return ModeInfo                  },
     BoardVariantInfo()          { return BoardVariantInfo          },
     PieceVariantInfo()          { return PieceVariantInfo          },
+    CoordinateVariantInfo()     { return CoordinateVariantInfo     },
     CoordinateInfo()            { return CoordinateInfo            },
+    RequestCheckmateStatInfo()  { return RequestCheckmateStatInfo  },
+    PieceVisibilityInfo()       { return PieceVisibilityInfo       },
     LiftCancelActionInfo()      { return LiftCancelActionInfo      },
     ClickResponseTimingInfo()   { return ClickResponseTimingInfo   },
     PieceVerticalPositionInfo() { return PieceVerticalPositionInfo },
-    LayoutInfo() { return LayoutInfo },
-    StandGravityInfo() { return StandGravityInfo },
-    StandFlipInfo() { return StandFlipInfo },
-    BalloonInfo() { return BalloonInfo },
-    NameDirectionInfo() { return NameDirectionInfo },
+    LayoutInfo()                { return LayoutInfo                },
+    StandGravityInfo()          { return StandGravityInfo          },
+    StandFlipInfo()             { return StandFlipInfo             },
+    BalloonInfo()               { return BalloonInfo               },
+    NameDirectionInfo()         { return NameDirectionInfo         },
+    StarZIndexInfo()            { return StarZIndexInfo            },
     CategoryInfo()              { return CategoryInfo              },
     SePresetInfo()              { return SePresetInfo              },
     BoardSizePresetInfo()       { return BoardSizePresetInfo       },
     UserCustomCssPresetInfo()   { return UserCustomCssPresetInfo   },
-    PieceVisibilityInfo()       { return PieceVisibilityInfo       },
+    BinaryInfo()                { return BinaryInfo                },
+    Location()                  { return Location                  },
 
     ////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    se_component_class() {
-      return [
-        {
-          sidebar_p: this.sidebar_p
-        },
-        `is_tf_board_switch_${this.se_tf_board_switch}`,
-        `is_tf_piece_switch_${this.se_tf_piece_switch}`,
-        `is_tf_wall_switch_${this.se_tf_wall_switch}`,
-      ]
-    },
-
-    // sp_star_z_index が -1 のときこちらが勝ってしまうので se_checkerboard_pattern を false にすること
+    // sp_star_z_index が -1 のときこちらが勝ってしまうので se_checkerboard_p を false にすること
     checkerboard_pattern_params() {
-      if (this.se_checkerboard_pattern) {
+      if (this.se_checkerboard_p) {
         return ["pattern-checks-md", "has-text-black-bis", "has-background-black-ter"]
       }
     },

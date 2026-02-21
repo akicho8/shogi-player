@@ -65,6 +65,14 @@ export const mod_shortcut = {
         this.sp_mode = "edit"
         return true
       }
+      if (KeyboardHelper.soft_pure_key_p(e, "L")) {
+        if (this.sp_layout === "vertical") {
+          this.sp_layout = "horizontal"
+        } else if (this.sp_layout === "horizontal") {
+          this.sp_layout = "vertical"
+        }
+        return true
+      }
     },
   },
 }

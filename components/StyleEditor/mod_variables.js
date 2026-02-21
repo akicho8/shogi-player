@@ -90,5 +90,14 @@ export const mod_variables = {
       }
       return this.VariableInfo.default_value_reject(hv)
     },
+
+    sp_player_info_black_piece_visibility: {
+      get()  { return this.sp_player_info.black.piece_visibility },
+      set(v) { this.sp_player_info.black.piece_visibility = v    },
+    },
+    sp_player_info_white_piece_visibility: {
+      get()  { return this.sp_player_info.white.piece_visibility },
+      set(v) { this.sp_player_info.white.piece_visibility = v    },
+    },
   },
 }
