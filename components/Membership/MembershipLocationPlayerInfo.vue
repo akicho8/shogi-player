@@ -106,7 +106,7 @@ export default {
     .MembershipLocationPlayerInfo
       __css_keep__: 0
 
-  // 横配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
+  // 左右配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
   +IF_HORIZONTAL
     .MembershipLocationPlayerInfo
       max-width: var(--sp_stand_cell_current_w)

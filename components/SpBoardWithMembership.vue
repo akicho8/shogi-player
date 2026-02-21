@@ -45,8 +45,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 .ShogiPlayer
-  +defvar(sp_board_horizontal_gap, 0) // 盤の左右の隙間(横配置時)
-  +defvar(sp_board_vertical_gap, 0)   // 盤の上下の隙間(縦配置時)
+  +defvar(sp_board_horizontal_gap, 0) // 盤の左右の隙間(左右配置時)
+  +defvar(sp_board_vertical_gap, 0)   // 盤の上下の隙間(上下配置時)
 
   .SpBoardWithMembership
     // 縦横関係なく中央に寄せる
@@ -63,7 +63,7 @@ export default {
   // |         | .horizontal | .vertical | 備考                                 |
   // |---------+----------------+--------------+--------------------------------------|
   // | +tablet | row            | column       | 画面が広いので切り替え可             |
-  // | +mobile | column         | column       | 画面幅を最大に使いたいので常に縦配置 |
+  // | +mobile | column         | column       | 画面幅を最大に使いたいので常に上下配置 |
   // |---------+----------------+--------------+--------------------------------------|
   +IF_HORIZONTAL
     .SpBoardWithMembership

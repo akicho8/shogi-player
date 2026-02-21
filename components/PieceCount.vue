@@ -19,10 +19,10 @@ export default {
 @import "./support.sass"
 
 .ShogiPlayer
-  +defvar(sp_piece_count_horizontal_x, 0.43)                // 駒数の中央からの相対位置X(%) (横配置時)
-  +defvar(sp_piece_count_horizontal_y, 0.30)                // 駒数の中央からの相対位置Y(%) (横配置時)
-  +defvar(sp_piece_count_vertical_x, 0.0)                   // 駒数の中央からの相対位置X(%) (縦配置時)
-  +defvar(sp_piece_count_vertical_y, 0.47)                  // 駒数の中央からの相対位置y(%) (縦配置時)
+  +defvar(sp_piece_count_horizontal_x, 0.43)                // 駒数の中央からの相対位置X(%) (左右配置時)
+  +defvar(sp_piece_count_horizontal_y, 0.30)                // 駒数の中央からの相対位置Y(%) (左右配置時)
+  +defvar(sp_piece_count_vertical_x, 0.0)                   // 駒数の中央からの相対位置X(%) (上下配置時)
+  +defvar(sp_piece_count_vertical_y, 0.47)                  // 駒数の中央からの相対位置y(%) (上下配置時)
   +defvar(sp_piece_count_size, 0.2)                         // 駒数の文字サイズ(駒セル縦幅に対する比率)
   +defvar(sp_piece_count_font_color, hsl(0 0% 0% / 0.75)) // 駒数の文字色
   +defvar(sp_piece_count_bg_color, hsl(0 0% 100% / 0.9))  // 駒数の文字色背景
