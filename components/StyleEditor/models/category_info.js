@@ -34,7 +34,8 @@ export class CategoryInfo extends ApplicationMemoryRecord {
       { key: "コンポーネント引数確認", alter_name: null, development_only: false, },
       { key: "CSS変数確認",            alter_name: null, development_only: false, },
       { key: "SE側CSS変数確認",        alter_name: null, development_only: true,  },
-      { key: "KBショートカット",       alter_name: null, development_only: false, },
+      { key: "ショートカット",       alter_name: null, development_only: false, },
+      { key: "開発環境限定",           alter_name: null, development_only: true,  },
     ]
   }
 

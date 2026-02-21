@@ -1,5 +1,5 @@
 .StyleEditor {
-  &.sidebar_p {
+  &.sidebar_p-true {
     .Workspace {
       @include tablet {
         width: unquote("calc(100% - #{$sidebar_width_tablet})");

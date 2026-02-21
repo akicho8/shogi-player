@@ -21,61 +21,19 @@
         audio(:src="file_src" controls)
       template(v-else)
         | プレビュー未対応
-
-  //- template(v-if="new_filter_p")
-  //-   b-field(custom-class="is-small" label="ぼかし")
-  //-     b-slider(v-model="new_blur" :min="0" :max="30" :step="0.01")
-  //-   b-field(custom-class="is-small" label="グレースケール")
-  //-     b-slider(v-model="new_grayscale" :min="0" :max="1.0" :step="0.01")
-  //-   b-field(custom-class="is-small" label="輝度")
-  //-     b-slider(v-model="new_brightness" :min="0" :max="2.0" :step="0.01")
-
-  b-field(v-if="false")
-    .control
-      pre
-        | {{new_single_color}}
-        | {{new_grayscale}}
-        | {{new_brightness}}
-        | {{new_blur}}
-        | {{filter_p}}
-        | {{new_filter_p}}
-        | {{$props}}
 </template>
 
 <script>
-import ColorEditor from "./ColorEditor.vue"
-
 export default {
   name: "ImageUploader",
-  components: {
-    ColorEditor,
-  },
-  props: {
-    single_color: { type: String,  required: false, default: "#888888", },
-    grayscale:    { type: Number,  required: false, default: 0,         },
-    brightness:   { type: Number,  required: false, default: 0,         },
-    blur:         { type: Number,  required: false, default: 0,         },
-    debug_p:      { type: Boolean, required: false, default: false,     },
-    filter_p:     { type: Boolean, required: false, default: false,     },
-    disableAlpha: { type: Boolean, required: false, default: false,     },
-  },
   data() {
     return {
       file_info: null,
       file_src: null,
-
-      new_single_color: this.single_color,
-      new_grayscale:    this.grayscale,
-      new_brightness:   this.brightness,
-      new_blur:         this.blur,
     }
   },
   watch: {
-    file_src(v)         { this.$emit("input", this.css_cast(v)) },
-    new_single_color(v) { this.$emit("update:single_color", v)  },
-    new_grayscale(v)    { this.$emit("update:grayscale", v)     },
-    new_brightness(v)   { this.$emit("update:brightness", v)    },
-    new_blur(v)         { this.$emit("update:blur", v)          },
+    file_src(v) { this.$emit("input", this.css_cast(v)) },
   },
   methods: {
     input_handle(v) {
@@ -87,10 +45,6 @@ export default {
     close_handle() {
       this.file_info = null
       this.file_src = null
-
-      this.new_grayscale = 0
-      this.new_brightness = 1.0
-      this.new_blur = 0
     },
     css_cast(v) {
       if (v == null) {
@@ -101,32 +55,28 @@ export default {
       return v
     },
   },
-  computed: {
-    new_filter_p() {
-      return this.file_info || this.filter_p
-    },
-  },
 }
 </script>
 
 <style lang="sass">
 @import "./support.scss"
-.ImageUploader
-  .file
-    .button
-      font-size: $size-7
-      overflow: hidden
+.StyleEditorSidebar
+  .ImageUploader
+    .file
+      .button
+        font-size: $size-7
+        overflow: hidden
 
-  .preview
-    position: relative
-    .delete_container
-      position: absolute
-      top: 0
-      right: 0
-      .delete
-        margin: 0.25rem
-        background-color: change_color($black, $alpha: 0.5)
-      &:hover
+    .preview
+      position: relative
+      .delete_container
+        position: absolute
+        top: 0
+        right: 0
         .delete
-          background-color: change_color($black, $alpha: 0.75)
+          margin: 0.25rem
+          background-color: change_color($black, $alpha: 0.5)
+        &:hover
+          .delete
+            background-color: change_color($black, $alpha: 0.75)
 </style>

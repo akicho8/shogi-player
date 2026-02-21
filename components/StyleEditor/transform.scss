@@ -1,6 +1,6 @@
 .StyleEditor {
   // 盤
-  &.is_tf_board_switch_true {
+  &.se_tf_board_p-true {
     .SpTransformBlock {
       transform:
         perspective(calc(var(--se_tf_board_perspective) * 1px))
@@ -18,7 +18,7 @@
   }
 
   // 駒
-  &.is_tf_piece_switch_true {
+  &.se_tf_piece_p-true {
     .PieceObject {
       transform:
         perspective(calc(var(--se_tf_piece_perspective) * 1px))
@@ -36,7 +36,7 @@
   }
 
   // 背景
-  &.is_tf_wall_switch_true {
+  &.se_tf_wall_p-true {
     .Workspace {
       transform:
         perspective(calc(var(--se_tf_wall_perspective) * 1px))
@@ -53,4 +53,3 @@
     }
   }
 }
-

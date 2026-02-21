@@ -16,27 +16,27 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         key: "紙面風",
         parent_key: "初期値",
         func: context => {
-          context.se_ws_color                    = "hsl(0 0% 100%)"      // 背景
+          context.se_ws_color                    = "hsl(0 0% 100%)" // 背景
 
-          context.sp_piece_variant               = "paper"                  // 紙面風駒
-          context.sp_board_radius                = 0                        // 角を丸くしない
-          context.sp_board_padding               = 0                        // 隙間なし
-          context.sp_board_color                 = "white"                  // 盤を白くする
+          context.sp_piece_variant               = "paper"          // 紙面風駒
+          context.sp_board_radius                = 0                // 角を丸くしない
+          context.sp_board_padding               = 0                // 隙間なし
+          context.sp_board_color                 = "white"          // 盤を白くする
 
-          context.sp_grid_inner_stroke           = 1                        // グリッド線(細)
-          context.sp_grid_outer_stroke           = 2                        // グリッド枠(太)
+          context.sp_grid_inner_stroke           = 1                // グリッド線(細)
+          context.sp_grid_outer_stroke           = 2                // グリッド枠(太)
           context.sp_board_edge_stroke           = 0
-          context.sp_stand_gravity               = "top"                    // 駒台の位置
-          context.sp_stand_flip                  = false                    // 相手側を反転
-          context.sp_name_direction              = "vertical"               // 縦横書き
-          context.sp_balloon                     = false                    // 名前の下に吹き出し背景を入れない
-          context.sp_location_mark_active_size   = 1.0                      // 手番でないときの☗☖を小さくしない
-          context.sp_location_mark_inactive_size = 1.0                      // 手番でないときの☗☖を小さくしない
+          context.sp_stand_gravity               = "top"            // 駒台の位置
+          context.sp_stand_flip                  = false            // 相手側を反転
+          context.sp_name_direction              = "vertical"       // 縦横書き
+          context.sp_balloon                     = false            // 名前の下に吹き出し背景を入れない
+          context.sp_location_mark_active_size   = 1.0              // 手番でないときの☗☖を小さくしない
+          context.sp_location_mark_inactive_size = 1.0              // 手番でないときの☗☖を小さくしない
           context.sp_player_info.black.name      = "先手"
           context.sp_player_info.white.name      = "後手"
 
-          context.sp_coordinate                  = true                     // 座標を表示する
-          context.sp_board_horizontal_gap        = 0.2                      // 座標があるため盤面の左右を空ける
+          context.sp_coordinate                  = true             // 座標を表示する
+          context.sp_board_horizontal_gap        = 0.2              // 座標があるため盤面の左右を空ける
         }
       },
       {
@@ -100,16 +100,16 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         key: "3D",
         parent_key: null,
         func: context => {
-          context.se_tf_board_switch = true
+          context.se_tf_board_p = true
         },
       },
-      {
-        key: "駒変形",
-        parent_key: null,
-        func: context => {
-          context.se_tf_piece_switch = true
-        },
-      },
+      // {
+      //   key: "駒変形",
+      //   parent_key: null,
+      //   func: context => {
+      //     context.se_tf_piece_p = true
+      //   },
+      // },
       {
         key: "コントローラー付き",
         parent_key: null,

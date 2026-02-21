@@ -32,7 +32,7 @@ export const mod_control_panel = {
   },
 
   computed: {
-    slider_attrs() {
+    slider_options() {
       return {
         indicator: true,
         tooltip: false,
