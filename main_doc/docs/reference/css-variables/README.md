@@ -63,7 +63,7 @@ Default: `0`
 
 盤の左右の隙間
 
-* 横配置時にのみ有効
+* 左右配置時にのみ有効
 * 紙面風で座標を表示したときだけ隙間を開けると見栄えがよくなる
 
 ### `--sp_board_vertical_gap`
@@ -71,7 +71,7 @@ Default: `0`
 
 盤の上下の隙間
 
-* 縦配置時にのみ有効
+* 上下配置時にのみ有効
 
 ### `--sp_common_gap`
 Default: `0.02`
@@ -285,22 +285,22 @@ Default: `0.8`
 ### `--sp_piece_count_horizontal_x`
 Default: `0.43`
 
-駒数のX座標 (横配置時)
+駒数のX座標 (左右配置時)
 
 ### `--sp_piece_count_horizontal_y`
 Default: `0.30`
 
-駒数のY座標 (横配置時)
+駒数のY座標 (左右配置時)
 
 ### `--sp_piece_count_vertical_x`
 Default: `0.0`
 
-駒数のX座標 (縦配置時)
+駒数のX座標 (上下配置時)
 
 ### `--sp_piece_count_vertical_y`
 Default: `0.47`
 
-駒数のY座標 (縦配置時)
+駒数のY座標 (上下配置時)
 
 ### `--sp_piece_count_size`
 Default: `0.2`
@@ -344,22 +344,22 @@ Default: `hsl(0 0% 100% / 0.5)`
 ## 座標(符号)
 
 ### `--sp_coordinate_x_size`
-Default: `0.125`
+Default: `0.128`
 
 盤面の上に表示するX座標の文字サイズ
 
 ### `--sp_coordinate_x_push`
-Default: `0.014`
+Default: `0.038`
 
 盤面の上に表示するX座標の位置調整
 
 ### `--sp_coordinate_y_size`
-Default: `0.168`
+Default: `0.128`
 
 盤面の右に表示するY座標の文字サイズ
 
 ### `--sp_coordinate_y_push`
-Default: `-0.009`
+Default: `0.041`
 
 盤面の右に表示するY座標の位置調整
 
