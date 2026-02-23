@@ -23,7 +23,7 @@ export class CategoryInfo extends ApplicationMemoryRecord {
       { key: "成り不成り選択",         alter_name: null, development_only: false, },
       { key: "駒を操作中の移動元",     alter_name: null, development_only: false, },
       { key: "transform",              alter_name: "3D", development_only: false, },
-      { key: "コントローラー",         alter_name: null, development_only: false, },
+      { key: "コントローラー類",       alter_name: null, development_only: false, },
       { key: "操作感",                 alter_name: null, development_only: false, },
       { key: "反則",                   alter_name: null, development_only: false, },
       { key: "千日手",                 alter_name: null, development_only: false, },
@@ -34,7 +34,7 @@ export class CategoryInfo extends ApplicationMemoryRecord {
       { key: "コンポーネント引数確認", alter_name: null, development_only: false, },
       { key: "CSS変数確認",            alter_name: null, development_only: false, },
       { key: "SE側CSS変数確認",        alter_name: null, development_only: true,  },
-      { key: "ショートカット",       alter_name: null, development_only: false, },
+      { key: "ショートカット",         alter_name: null, development_only: false, },
       { key: "開発環境限定",           alter_name: null, development_only: true,  },
     ]
   }
