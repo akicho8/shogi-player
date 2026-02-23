@@ -59,7 +59,7 @@ export class SePresetInfo extends ApplicationMemoryRecord {
         key: "ダーク",
         parent_key: null,
         func: context => {
-          context.user_custom_css_update_by("ノイズ盤")
+          // context.user_custom_css_update_by("ノイズ盤")
           context.sp_board_variant    = "none"
           context.se_ws_color         = "hsl(0 0% 10% / 1.0)"
           context.sp_grid_outer_color = "hsl(0 0% 100% / 0.4)"
