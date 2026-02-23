@@ -1,7 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg">
-  <filter id="vintage">
-    <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="3" />
-    <feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.5 0" />
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <filter id="washi-texture">
+    <feTurbulence type="fractalNoise" baseFrequency="0.1 0.04" numOctaves="5" result="noise" />
+
+    <feDiffuseLighting in="noise" lighting-color="hsl(45 30% 100%)" surfaceScale="1.5" result="diffuse">
+      <feDistantLight azimuth="45" elevation="50" />
+    </feDiffuseLighting>
+
+    <feComponentTransfer in="diffuse" result="softened">
+      <feFuncR type="linear" slope="0.9" />
+      <feFuncG type="linear" slope="0.9" />
+      <feFuncB type="linear" slope="0.9" />
+    </feComponentTransfer>
   </filter>
-  <rect width="100%" height="100%" filter="url(#vintage)" />
+
+  <rect width="100%" height="100%" fill="hsl(48 20% 95%)" />
+
+  <rect width="100%" height="100%" filter="url(#washi-texture)" style="mix-blend-mode: multiply; opacity: 0.5;" />
 </svg>

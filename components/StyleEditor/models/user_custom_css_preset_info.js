@@ -1,11 +1,15 @@
 import { ApplicationMemoryRecord } from "../../models/application_memory_record.js"
 import { CssHelper } from "./css_helper.js"
 
+import wood_alpha from "!!raw-loader!../../../assets/board_variant/wood_alpha.svg"
+import wood_opaque from "!!raw-loader!../../../assets/board_variant/wood_opaque.svg"
+
 import emboss_alpha from "!!raw-loader!../../../assets/board_variant/emboss_alpha.svg"
 import emboss_opaque from "!!raw-loader!../../../assets/board_variant/emboss_opaque.svg"
 
-import wood_alpha from "!!raw-loader!../../../assets/board_variant/wood_alpha.svg"
-import wood_opaque from "!!raw-loader!../../../assets/board_variant/wood_opaque.svg"
+import brushed_steel from "!!raw-loader!../../../assets/board_variant/brushed_steel.svg"
+import mottled_steel from "!!raw-loader!../../../assets/board_variant/mottled_steel.svg"
+import japanese_paper from "!!raw-loader!../../../assets/board_variant/japanese_paper.svg"
 
 export class UserCustomCssPresetInfo extends ApplicationMemoryRecord {
   static get define() {
@@ -58,10 +62,13 @@ export class UserCustomCssPresetInfo extends ApplicationMemoryRecord {
 `
       },
 
-      { key: "凹凸効果", user_custom_css: CssHelper.svg_to_user_css(emboss_alpha),  },
-      { key: "凹凸盤",   user_custom_css: CssHelper.svg_to_user_css(emboss_opaque), },
-      { key: "木目効果", user_custom_css: CssHelper.svg_to_user_css(wood_alpha),    },
-      { key: "木目盤",   user_custom_css: CssHelper.svg_to_user_css(wood_opaque),   },
+      { key: "木目効果", user_custom_css: CssHelper.svg_to_user_css(wood_alpha),     },
+      { key: "木目盤",   user_custom_css: CssHelper.svg_to_user_css(wood_opaque),    },
+      { key: "凹凸効果", user_custom_css: CssHelper.svg_to_user_css(emboss_alpha),   },
+      { key: "凹凸盤",   user_custom_css: CssHelper.svg_to_user_css(emboss_opaque),  },
+      { key: "斑青金属", user_custom_css: CssHelper.svg_to_user_css(mottled_steel),  },
+      { key: "研磨痕",   user_custom_css: CssHelper.svg_to_user_css(brushed_steel),  },
+      { key: "和紙",     user_custom_css: CssHelper.svg_to_user_css(japanese_paper), },
     ]
   }
 }
