@@ -87,20 +87,20 @@
       SmartRadio(variable_key="sp_star_z_index" label="表示優先度" message="技術的な問題で入れた設定だが現在は -1 にする利点はない")
 
     CategoryBox(category_key="カメラ")
-      b-field.mt-1(custom-class="is-small" label="プリセット")
+      b-field(custom-class="is-small" label="プリセット")
         .control
           .buttons.mb-0
             template(v-for="e in AppContext.BoardSizePresetInfo.values")
               b-button(@click="AppContext.se_board_size_preset_apply_handle(e)" size="is-small") {{e.name}}
-      .columns.mt-1.mb-2
-        .column.py-0
+      .columns
+        .column
           SmartSlider(variable_key="sp_board_view_x" label="左上(X)")
-        .column.py-0
+        .column
           SmartSlider(variable_key="sp_board_view_y" label="左上(Y)")
-      .columns.mt-4.mb-2
-        .column.py-0
+      .columns
+        .column
           SmartSlider(variable_key="sp_board_view_w" label="セル数(W)")
-        .column.py-0
+        .column
           SmartSlider(variable_key="sp_board_view_h" label="セル数(H)")
 
       hr
@@ -114,20 +114,20 @@
     CategoryBox(category_key="座標")
       SmartRadio(variable_key="sp_coordinate" label="表示")
 
-      .columns.mt-5
-        .column.py-0
+      .columns
+        .column
           SmartSlider(variable_key="sp_coordinate_x_size" label="大きさ(列)")
-        .column.py-0
+        .column
           SmartSlider(variable_key="sp_coordinate_x_push" label="位置(列)")
-        .column.py-0
+        .column
           SmartRadio(variable_key="sp_coordinate_variant_h" label="表記(列)")
 
-      .columns.mt-5
-        .column.py-0
+      .columns
+        .column
           SmartSlider(variable_key="sp_coordinate_y_size" label="大きさ(行)")
-        .column.py-0
+        .column
           SmartSlider(variable_key="sp_coordinate_y_push" label="位置(行)")
-        .column.py-0
+        .column
           SmartRadio(variable_key="sp_coordinate_variant_v" label="表記(行)")
 
       SmartColor(variable_key="sp_coordinate_color" label="色" :disabled="!AppContext.sp_coordinate")
@@ -150,28 +150,22 @@
 
     CategoryBox(category_key="駒の大きさ")
 
-      //- b-field.grouped(custom-class="is-small" label="セル (駒台)" message="盤に対する割合")
-      //-   b-slider(v-bind="AppContext.slider_options" v-model="AppContext.sp_stand_cell_size" :min="0" :max="1.0" :step="0.0001")
-      //-   b-slider(v-bind="AppContext.slider_options" v-model="AppContext.sp_stand_piece_size" :min="0" :max="1.0" :step="0.01")
-      //-
-      //- hr
-
-      .columns.mt-1
-        .column.py-0
+      .columns
+        .column
           b-field(custom-class="is-small" label="セル (盤内)" message="最大で固定。縮小する利点はない。")
-        .column.py-0
+        .column
           SmartSlider(variable_key="sp_board_piece_size" label="駒 (盤内)" message="")
 
-      .columns.mt-4
-        .column.py-0
+      .columns
+        .column
           SmartSlider(variable_key="sp_stand_cell_size" label="セル (駒台)" message="盤に対する割合")
-        .column.py-0
+        .column
           SmartSlider(variable_key="sp_stand_piece_size" label="駒 (駒台)")
 
-      .columns.mt-4
-        .column.py-0
+      .columns
+        .column
           SmartSlider(variable_key="sp_piece_box_cell_size" label="セル (駒箱)" message="0.1 ぐらいですべての駒が収まる")
-        .column.py-0
+        .column
           SmartSlider(variable_key="sp_piece_box_piece_size" label="駒 (駒箱)")
 
       hr
@@ -232,16 +226,16 @@
 
     CategoryBox(category_key="駒数")
 
-      .columns.mt-1
-        .column.py-0
+      .columns
+        .column
           SmartSlider(variable_key="sp_piece_count_horizontal_x" label="左右レイアウト時 (X)")
-        .column.py-0
+        .column
           SmartSlider(variable_key="sp_piece_count_horizontal_y" label="左右レイアウト時 (Y)")
 
-      .columns.mt-4
-        .column.py-0
+      .columns
+        .column
           SmartSlider(variable_key="sp_piece_count_vertical_x" label="上下レイアウト時 (X)")
-        .column.py-0
+        .column
           SmartSlider(variable_key="sp_piece_count_vertical_y" label="上下レイアウト時 (Y)")
 
       b-field(custom-class="is-small" label="余白")
@@ -253,11 +247,11 @@
       SmartColor(variable_key="sp_piece_count_bg_color" label="背景")
 
     CategoryBox(category_key="駒箱")
-      SmartColor(variable_key="sp_piece_box_color")
+      SmartColor(variable_key="sp_piece_box_color" label="背景")
 
     CategoryBox(category_key="成り不成り選択")
-      SmartColor(variable_key="sp_promote_select_modal_bg_color" label="背景")
-      SmartColor(variable_key="sp_promote_select_modal_hover_color" label="hover色")
+      SmartColor(variable_key="sp_promote_select_modal_bg_color" label="オーバーレイ" message="半透明推奨")
+      SmartColor(variable_key="sp_promote_select_modal_hover_color" label="選択時のセル背景色")
 
     CategoryBox(category_key="駒を操作中の移動元")
       SmartColor(variable_key="sp_mouse_lifted_origin_bg_color" label="背景")
@@ -357,7 +351,7 @@
         | 基本的に<b>回転X</b>・<b>視点との距離</b>・<b>移動Z</b>の3つで調整する。
         | これらはスタイルエディタ側でスタイルを適用しているだけで ShogiPlayer が用意している機能ではない。
 
-    CategoryBox(category_key="コントローラー")
+    CategoryBox(category_key="コントローラー類")
 
       SmartRadio(variable_key="sp_controller" label="コントローラー表示")
 
@@ -482,7 +476,7 @@
       pre
         | {{AppContext.se_component_style_human}}
       p.help
-        | 実際には StyleEditor(style="...") で渡している
+        | 実際には <code>StyleEditor(style="...")</code> で渡している
 
     CategoryBox(category_key="ショートカット")
       pre
@@ -515,7 +509,7 @@ import PureColorPicker from "./PureColorPicker.vue"
 import SmartColor from "./SmartColor.vue"
 import ImageUploader from "./ImageUploader.vue"
 import CategoryBox from "./CategoryBox.vue"
-import CategoryName from "./CategoryName.vue"
+import CategoryTitle from "./CategoryTitle.vue"
 import SmartSlider from "./SmartSlider.vue"
 import SmartRadio from "./SmartRadio.vue"
 
@@ -527,7 +521,7 @@ export default {
     SmartColor,
     ImageUploader,
     CategoryBox,
-    CategoryName,
+    CategoryTitle,
     SmartSlider,
     SmartRadio,
   },
@@ -559,6 +553,6 @@ export default {
   pre
     padding: 0.75rem
     font-size: $size-7
-    white-space: pre-wrap
-    word-break: break-all
+    // white-space: pre-wrap
+    // word-break: break-all
 </style>
