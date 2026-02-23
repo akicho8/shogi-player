@@ -2,12 +2,12 @@ import { GX } from "../models/gx.js"
 
 export const mod_sp_style = {
   computed: {
-    sp_css_human() { return this.CssHelper.pretty(this.sp_css_raw)  },
+    sp_css_human() { return this.CssHelper.pretty(this.sp_css_raw)    },
     sp_css_embed() { return this.CssHelper.normalize(this.sp_css_raw) },
 
     sp_css_raw() {
       let out = []
-      out.push(".ShogiPlayer {\n")
+      out.push(".ShogiPlayer {")
       this.VariableInfo.values.forEach(e => {
         if (e.context_type === "sp_css") {
           let original_value = this[e.key]
@@ -21,13 +21,13 @@ export const mod_sp_style = {
             const indent = "  "
             const syntax = `--${e.key}: ${str}`
             const comment = `/* ${e.name} */`
-            const line = `${indent}${syntax}; ${comment}\n`
+            const line = `${indent}${syntax}; ${comment}`
             out.push(line)
           }
         }
       })
-      out.push("}\n")
-      return out.join("")
+      out.push("}")
+      return out.join("\n")
     },
   },
 }

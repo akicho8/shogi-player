@@ -1,6 +1,8 @@
 export const mod_component_params = {
   computed: {
     // class 属性に設定する変数たち
+    // sidebar_p であれば "sidebar_p-true" また "sidebar_p-false" にしてクラスにする
+    // こうしておけば sidebar_p で単語検索が効く
     se_component_class() {
       let av = []
       this.VariableInfo.values.forEach(e => {
@@ -16,6 +18,7 @@ export const mod_component_params = {
     },
 
     // style 属性に設定するCSS変数たち
+    // ここが StyleEditor なので「デフォルト値ならスキップ」の処理はしてはいけない
     se_component_style() {
       let av = []
       this.VariableInfo.values.forEach(e => {
@@ -33,7 +36,7 @@ export const mod_component_params = {
     // 確認用
     se_component_style_human() {
       let av = []
-      av.push(".StyleEditor {\n")
+      av.push(".StyleEditor {")
       this.VariableInfo.values.forEach(e => {
         if (e.context_type === "se_css") {
           let str = e.as_string_of(this[e.key])
@@ -43,16 +46,16 @@ export const mod_component_params = {
             }
           }
           if (str !== null) {
-            const indent = "  "
+            const indent = ""
             const syntax = `--${e.key}: ${str}`
             const comment = `/* ${e.name} */`
-            const line = `${indent}${syntax}; ${comment}\n`
+            const line = `${indent}${syntax}; ${comment}`
             av.push(line)
           }
         }
       })
-      av.push("}\n")
-      const text = av.join("")
+      av.push("}")
+      const text = av.join("\n")
       return this.CssHelper.pretty(text)
     },
   },
