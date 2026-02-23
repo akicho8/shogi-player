@@ -1,4 +1,11 @@
 import { ApplicationMemoryRecord } from "../../models/application_memory_record.js"
+import { CssHelper } from "./css_helper.js"
+
+import emboss_alpha from "!!raw-loader!../../../assets/board_variant/emboss_alpha.svg"
+import emboss_opaque from "!!raw-loader!../../../assets/board_variant/emboss_opaque.svg"
+
+import wood_alpha from "!!raw-loader!../../../assets/board_variant/wood_alpha.svg"
+import wood_opaque from "!!raw-loader!../../../assets/board_variant/wood_opaque.svg"
 
 export class UserCustomCssPresetInfo extends ApplicationMemoryRecord {
   static get define() {
@@ -50,28 +57,11 @@ export class UserCustomCssPresetInfo extends ApplicationMemoryRecord {
 .ShogiPlayer .Membership { display: none }
 `
       },
-      {
-        key: "ノイズ盤",
-        user_custom_css: `
-.ShogiPlayer {
-  --sp_board_image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="5" /></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.5" /></svg>');
-`
-      },
-      {
-        key: "ノイズビニ盤",
-        user_custom_css: `
-.ShogiPlayer {
-  --sp_board_image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="5" /></filter><rect width="100%" height="100%" fill="orange" /><rect width="100%" height="100%" filter="url(%23n)" opacity="0.5" /></svg>');
-`
-      },
-      {
-        key: "木目",
-        user_custom_css: `
-.ShogiPlayer {
-  --sp_board_image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.5 0.01" numOctaves="2" /></filter><rect width="100%" height="100%" fill="hsl(35 90% 65%)" /><rect width="100%" height="100%" filter="url(%23n)" opacity="0.3" style="mix-blend-mode:multiply;" /></svg>');
-}
-`
-      },
+
+      { key: "凹凸効果", user_custom_css: CssHelper.svg_to_user_css(emboss_alpha),  },
+      { key: "凹凸盤",   user_custom_css: CssHelper.svg_to_user_css(emboss_opaque), },
+      { key: "木目効果", user_custom_css: CssHelper.svg_to_user_css(wood_alpha),    },
+      { key: "木目盤",   user_custom_css: CssHelper.svg_to_user_css(wood_opaque),   },
     ]
   }
 }
