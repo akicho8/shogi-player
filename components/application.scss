@@ -1,8 +1,8 @@
 .ShogiPlayer {
   // container-type: size;      // こっちだと cqmin を使う
   // aspect-ratio: 1 / 1;
-  container-type: inline-size;  // 縦は可変だが cqw しか使えなくなる
-  container-name: ShogiPlayer;
+  // container-type: inline-size;  // 縦は可変だが cqw しか使えなくなる
+  // container-name: ShogiPlayer;
   width: 100%;
   &.is_layer_on {
     border: 1px solid red ! important;
