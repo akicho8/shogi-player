@@ -62,23 +62,17 @@ export default {
       return BuefyColor.parse(hex_str)
     },
 
-    // color_parser(str) {
-    //   // const color = ColorHelper.create(str)
-    //   // const hex_str = color.toString({format: "hex"})
-    //   // return BuefyColor.parse(hex_str)
-    //   return BuefyColor.parse(str)
-    //   // console.log("color_parser", str)
-    //   // return this.buefy_color_create(str)
-    // },
-
     random_handle() {
       const str = ColorHelper.random({alpha: this.color_object.alpha}) // alpha 値は保持する
       this.input_handle(str)
       this.mut_color = this.mut_color // input イベントを発生させるため
     },
 
+    // 小さくしたボタンに表示する名前
+    // 結果は自動的に大文字にされる
+    // `hsl(${color.hue}, ${color.saturation}, ${color.lightness} / ${color.alpha})` とするのはそのままだと alpha が 0-255 になっていたり
+    // するのでたんに toString で hsla 変換した方がいい
     color_formatter(color) {
-      // return `hsl(${color.hue}, ${color.saturation}, ${color.lightness} / ${color.alpha})`
       return color.toString("hsla")
     },
   },
