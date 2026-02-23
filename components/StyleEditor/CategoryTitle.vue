@@ -1,10 +1,10 @@
 <template lang="pug">
-.CategoryName.title.is-5(is="a" :id="name" @click="click_handle") {{name}}
+.CategoryTitle.title.is-5(is="a" :id="name" @click="click_handle") {{name}}
 </template>
 
 <script>
 export default {
-  name: "CategoryName",
+  name: "CategoryTitle",
   inject: ["AppContext"],
   props: {
     name: { type: String, required: true },
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="sass">
-.CategoryName
+.CategoryTitle
   display: inline-block
   margin-top: 0.4rem
   margin-bottom: 1rem

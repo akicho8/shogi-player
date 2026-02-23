@@ -1,17 +1,17 @@
 <template lang="pug">
 .CategoryBox.box(v-if="category_info.enable_p" :id="category_info.key")
-  CategoryName(:name="category_info.display_name")
+  CategoryTitle(:name="category_info.display_name")
   slot
 </template>
 
 <script>
-import CategoryName from "./CategoryName.vue"
+import CategoryTitle from "./CategoryTitle.vue"
 
 export default {
   name: "CategoryBox",
   inject: ["AppContext"],
   components: {
-    CategoryName,
+    CategoryTitle,
   },
   props: {
     category_key: { type: String, required: true },
