@@ -125,18 +125,18 @@ Default: `none`
 * 例えば「ぬれよん」×「木目盤」のような異なるタイプの組み合わせは違和感が大きい
 * 「○○効果」のものは半透明なので `--sp_board_color` との組み合わせて使うのを想定している
 
-| 値             | 名前       |                                                                            |
-|----------------|------------|----------------------------------------------------------------------------|
-| none           | なし       |                                                                            |
-| wood_normal    | 普通の木目 | <img src="../../../../assets/board_variant/wood_normal.png" width="32" height="32">    |
-| wood_bright    | 明るい木目 | <img src="../../../../assets/board_variant/wood_bright.png" width="32" height="32">    |
-| wood_alpha     | 木目効果   | <img src="../../../../assets/board_variant/wood_alpha.svg" width="32" height="32">     |
-| wood_opaque    | 木目盤     | <img src="../../../../assets/board_variant/wood_opaque.svg" width="32" height="32">    |
-| emboss_alpha   | 凹凸効果   | <img src="../../../../assets/board_variant/emboss_alpha.svg" width="32" height="32">   |
-| emboss_opaque  | 凹凸盤     | <img src="../../../../assets/board_variant/emboss_opaque.svg" width="32" height="32">  |
-| mottled_steel  | 斑青金属   | <img src="../../../../assets/board_variant/mottled_steel.svg" width="32" height="32">  |
-| brushed_steel  | 研磨痕     | <img src="../../../../assets/board_variant/brushed_steel.svg" width="32" height="32">  |
-| japanese_paper | 和紙       | <img src="../../../../assets/board_variant/japanese_paper.svg" width="32" height="32"> |
+| 値             | 名称       | 表示                                                                                   | 形式 | 特徴   |
+|----------------|------------|----------------------------------------------------------------------------------------|------|--------|
+| none           | なし       |                                                                                        |      |        |
+| wood_normal    | 普通の木目 | <img src="../../../../assets/board_variant/wood_normal.png" width="32" height="32">    | png  |        |
+| wood_bright    | 明るい木目 | <img src="../../../../assets/board_variant/wood_bright.png" width="32" height="32">    | png  |        |
+| wood_alpha     | 木目効果   | <img src="../../../../assets/board_variant/wood_alpha.svg" width="32" height="32">     | svg  | 半透明 |
+| wood_opaque    | 木目盤     | <img src="../../../../assets/board_variant/wood_opaque.svg" width="32" height="32">    | svg  |        |
+| emboss_alpha   | 凹凸効果   | <img src="../../../../assets/board_variant/emboss_alpha.svg" width="32" height="32">   | svg  | 半透明 |
+| emboss_opaque  | 凹凸盤     | <img src="../../../../assets/board_variant/emboss_opaque.svg" width="32" height="32">  | svg  |        |
+| mottled_steel  | 斑青金属   | <img src="../../../../assets/board_variant/mottled_steel.svg" width="32" height="32">  | svg  |        |
+| brushed_steel  | 研磨痕     | <img src="../../../../assets/board_variant/brushed_steel.svg" width="32" height="32">  | svg  |        |
+| japanese_paper | 和紙       | <img src="../../../../assets/board_variant/japanese_paper.svg" width="32" height="32"> | svg  | いまいち       |
 
 ## Level 2
 
