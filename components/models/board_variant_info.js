@@ -14,9 +14,10 @@ export class BoardVariantInfo extends ApplicationMemoryRecord {
       { key: "emboss_alpha",   name: "凹凸効果",     },
       { key: "emboss_opaque",  name: "凹凸盤",       },
 
-      { key: "mottled_steel",  name: "斑青金属",     },
+      { key: "mottled_stone",  name: "斑石板",       },
       { key: "brushed_steel",  name: "研磨痕",       },
       { key: "japanese_paper", name: "和紙",         },
+      { key: "ghost_text",     name: "透かし盤",       },
     ]
   }
 }
