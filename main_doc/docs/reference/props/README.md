@@ -134,9 +134,10 @@ Default: `none`
 | wood_opaque    | 木目盤     | <img src="../../../../assets/board_variant/wood_opaque.svg" width="32" height="32">    | svg  |        |
 | emboss_alpha   | 凹凸効果   | <img src="../../../../assets/board_variant/emboss_alpha.svg" width="32" height="32">   | svg  | 半透明 |
 | emboss_opaque  | 凹凸盤     | <img src="../../../../assets/board_variant/emboss_opaque.svg" width="32" height="32">  | svg  |        |
-| mottled_steel  | 斑青金属   | <img src="../../../../assets/board_variant/mottled_steel.svg" width="32" height="32">  | svg  |        |
+| mottled_stone  | 斑石板   | <img src="../../../../assets/board_variant/mottled_stone.svg" width="32" height="32">  | svg  |        |
 | brushed_steel  | 研磨痕     | <img src="../../../../assets/board_variant/brushed_steel.svg" width="32" height="32">  | svg  |        |
 | japanese_paper | 和紙       | <img src="../../../../assets/board_variant/japanese_paper.svg" width="32" height="32"> | svg  | いまいち       |
+| ghost_text | 透かし盤   | <img src="../../../../assets/board_variant/ghost_text.svg" width="32" height="32"> | svg  |        |
 
 ## Level 2
 
