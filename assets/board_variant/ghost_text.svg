@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <defs>
+    <filter id="liquify">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="50" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="hsl(36 80 60)" />
+  <text x="50%" y="60%"
+        font-size="90vw"
+        font-family="serif"
+        font-weight="bold"
+        fill="white"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        filter="url(#liquify)"
+        style="mix-blend-mode: overlay; opacity: 0.2">
+    滅
+  </text>
+</svg>
