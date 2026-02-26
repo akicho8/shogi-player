@@ -22,6 +22,7 @@
                 b-button(@click="test_label"  ) 名前
                 b-button(@click="test_api_clear") 消去(API)
                 b-button(@click="test_api_json")  JSON(API)
+                b-button(@click="test_clear_current_user_only") {{current_user_name}}のみ削除(API)
       .columns
         .column.is-6
           ShogiPlayer(
@@ -124,6 +125,10 @@ export default {
 
     test_clear() {
       this.sp_think_mark_list = []
+    },
+
+    test_clear_current_user_only() {
+      this.$refs.sp_object.mut_think_mark_list.group_reject$(this.current_user_name)
     },
 
     test_api_json() {
