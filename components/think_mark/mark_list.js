@@ -87,6 +87,10 @@ export class MarkList {
     return this._items
   }
 
+  get size() {
+    return this._items.length
+  }
+
   //////////////////////////////////////////////////////////////////////////////// toggle 処理のコマンド化
 
   // toggle コマンド生成
@@ -108,7 +112,22 @@ export class MarkList {
     }
   }
 
-  ////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////// グループ関連
+
+  // mark_user_name のアイテムたちを返す
+  items_by_group(mark_user_name) {
+    return this._items.filter(e => e.mark_user_name === mark_user_name)
+  }
+
+  // mark_user_name のアイテムたちが1つでも存在する？
+  group_exist_p(mark_user_name) {
+    return this._items.some(e => e.mark_user_name === mark_user_name)
+  }
+
+  // 同じグループの印を削除する
+  group_reject$(mark_user_name) {
+    this._items = this._items.filter(e => e.mark_user_name !== mark_user_name)
+  }
 }
 
 if (typeof process !== "undefined" && process.argv[1] === __filename) {
