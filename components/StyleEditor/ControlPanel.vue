@@ -389,7 +389,7 @@
 
     CategoryBox(category_key="千日手")
 
-      SmartRadio(variable_key="sp_request_snapshot_hash" label="現局面のハッシュをイベントに含めるか？")
+      SmartRadio(variable_key="sp_request_position_hash" label="現局面のハッシュをイベントに含めるか？")
         template(#message)
           | 有効にすると ev_play_mode_move イベントに含める。
           | 同じハッシュの4回目を発生させた側を反則とするかどうかはイベントを受け取った側に任せてある。

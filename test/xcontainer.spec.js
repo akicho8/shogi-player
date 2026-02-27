@@ -36,9 +36,9 @@ describe("Xcontainer", () => {
       expect(xcontainer.to_simple_sfen).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b - 1")
     })
 
-    it("#snapshot_hash", () => {
+    it("#position_hash", () => {
       const xcontainer = Xcontainer.setup_default()
-      expect(xcontainer.snapshot_hash).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b -")
+      expect(xcontainer.position_hash).toEqual("lnsgkgsnl/1r5b1/ppppppppp/9/9/9/PPPPPPPPP/1B5R1/LNSGKGSNL b -")
     })
 
     it("#to_short_sfen", () => {

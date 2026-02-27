@@ -1,20 +1,20 @@
-// ・千日手の判定をするには、アプリ側で snapshot_hash の登場個数をカウントする
+// ・千日手の判定をするには、アプリ側で position_hash の登場個数をカウントする
 // ・連続王手の千日手の反則検知するには、それに加えて op_king_check を考慮してカウントする
 // ・shogi-player 側では具体的な実装はせず、単に低レベルの情報だけをイベントで返すようにする
 
 import _ from "lodash"
 import { GX } from "./models/gx"
 
-export const mod_snapshot_hash = {
+export const mod_position_hash = {
   props: {
-    sp_request_snapshot_hash: { type: Boolean, default: false, }, // 操作モードで千日手判定用に現局面のハッシュをイベントに含めるか？
+    sp_request_position_hash: { type: Boolean, default: false, }, // 操作モードで千日手判定用に現局面のハッシュをイベントに含めるか？
     sp_request_op_king_check: { type: Boolean, default: false, }, // 操作モードで王手しているかどうかの結果をイベントに含めるか？
   },
   methods: {
     // 現在の局面のハッシュ文字列を返す (内容はSFEN文字列)
-    snapshot_hash() {
+    position_hash() {
       let value = null
-      this.benchmark_print("局面ハッシュ作成処理時間", () => { value = this.xcontainer.snapshot_hash })
+      this.benchmark_print("局面ハッシュ作成処理時間", () => { value = this.xcontainer.position_hash })
       return value
     },
 

@@ -22,7 +22,7 @@ RSpec.describe __FILE__ do
     }.merge(options)
     visit_to("/style-editor", {
         sp_request_checkmate_stat: true,
-        sp_request_snapshot_hash: true,
+        sp_request_position_hash: true,
         sp_request_op_king_check: true,
         sp_illegal_validate: true,
         sp_illegal_cancel: true,

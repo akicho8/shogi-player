@@ -16,7 +16,7 @@
             sp_controller
             sp_slider
             :sp_request_checkmate_stat="sp_request_checkmate_stat"
-            :sp_request_snapshot_hash="sp_request_snapshot_hash"
+            :sp_request_position_hash="sp_request_position_hash"
             :sp_request_op_king_check="sp_request_op_king_check"
             :sp_illegal_validate="sp_illegal_validate"
             :sp_illegal_cancel="sp_illegal_cancel"
@@ -40,8 +40,8 @@
             b-radio-button(size="is-small" v-model="sp_request_checkmate_stat" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_request_checkmate_stat" :native-value="true") ON
           b-field(custom-class="is-small" label="千日手判定" message="千日手判定用に現局面用のSFENを送るか？")
-            b-radio-button(size="is-small" v-model="sp_request_snapshot_hash" :native-value="false") OFF
-            b-radio-button(size="is-small" v-model="sp_request_snapshot_hash" :native-value="true") ON
+            b-radio-button(size="is-small" v-model="sp_request_position_hash" :native-value="false") OFF
+            b-radio-button(size="is-small" v-model="sp_request_position_hash" :native-value="true") ON
           b-field(custom-class="is-small" label="王手したか判定" message="動かした側が王手したかの結果を送るか？")
             b-radio-button(size="is-small" v-model="sp_request_op_king_check" :native-value="false") OFF
             b-radio-button(size="is-small" v-model="sp_request_op_king_check" :native-value="true") ON
@@ -132,7 +132,7 @@ export default {
   data() {
     return {
       sp_request_checkmate_stat: true,
-      sp_request_snapshot_hash: true,
+      sp_request_position_hash: true,
       sp_request_op_king_check: true,
       sp_illegal_validate: true,
       sp_illegal_cancel: true,
@@ -145,7 +145,7 @@ export default {
   methods: {
     ev_play_mode_move(e) {
       this.play_mode_move = e
-      const key = [e.op_king_check, e.snapshot_hash].join(",")
+      const key = [e.op_king_check, e.position_hash].join(",")
       const new_count = (this.pcounts_hash[key] ?? 0) + 1
       this.pcounts_hash[key] = new_count
       if (new_count >= 4) {

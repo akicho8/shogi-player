@@ -13,8 +13,8 @@ export const mod_event = {
       })
 
       // 局面ハッシュ
-      if (e.snapshot_hash) {
-        this.$buefy.toast.open({message: `局面ハッシュ: ${e.snapshot_hash}`, queue: false})
+      if (e.position_hash) {
+        this.$buefy.toast.open({message: `局面ハッシュ: ${e.position_hash}`, queue: false})
       }
 
       // 指し手

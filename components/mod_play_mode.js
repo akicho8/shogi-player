@@ -143,8 +143,8 @@ export const mod_play_mode = {
         illegal_hv_list: this.illegal_hv_list,           // 反則情報たち (複数ある場合もある) ※illegal_hv_list を last_move_info に入れると循環で ActionCable がぶっこわれる
       }
 
-      if (this.sp_request_snapshot_hash) {
-        params["snapshot_hash"] = this.snapshot_hash() // 履歴を含まない現在の局面(BOD相当のSFEN)
+      if (this.sp_request_position_hash) {
+        params["position_hash"] = this.position_hash() // 履歴を含まない現在の局面(BOD相当のSFEN)
       }
 
       if (this.sp_request_op_king_check) {
