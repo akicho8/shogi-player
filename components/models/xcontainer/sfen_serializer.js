@@ -19,7 +19,7 @@ export class SfenSerializer {
   }
 
   // 千日手判定用のハッシュ
-  get snapshot_hash() {
+  get position_hash() {
     return this.__parts.join(" ")
   }
 

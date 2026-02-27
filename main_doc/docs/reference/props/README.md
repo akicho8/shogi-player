@@ -641,7 +641,7 @@ Default: `false`
 
 ## 千日手関連
 
-### `sp_request_snapshot_hash`
+### `sp_request_position_hash`
 
 Type: `Boolean`
 Default: `false`
@@ -658,7 +658,7 @@ Default: `false`
 操作モードのイベント `ev_play_mode_move` に相手に王手しているかどうかの結果を含めるか？
 
 * アプリ側で初心者向けに「王手！」などと表示することができる
-* 連続王手の千日手を判定するには `sp_request_snapshot_hash` と合わせて有効にする
+* 連続王手の千日手を判定するには `sp_request_position_hash` と合わせて有効にする
 
 See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
 

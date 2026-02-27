@@ -78,7 +78,7 @@ export default {
     sp_human_side:                     { type: String,  }, // 含まれる側だけ操作できるようにする
     sp_device:                         { type: String,  }, // デバイスを強制的に指定する
     sp_request_checkmate_stat:              { type: Boolean, }, // 詰み判定するか？
-    sp_request_snapshot_hash:             { type: Boolean, }, // 操作モードで千日手判定用に現局面のSFENをイベントに含めるか？
+    sp_request_position_hash:             { type: Boolean, }, // 操作モードで千日手判定用に現局面のSFENをイベントに含めるか？
     sp_request_op_king_check:             { type: Boolean, }, // 着手した側が相手に対して王手したかどうかの結果をイベントに含めるか？
     sp_illegal_validate:               { type: Boolean, }, // play で反則の判定をするか？
     sp_illegal_cancel:                 { type: Boolean, }, // 判定で反則だったら emit して抜けるか？(true: 初心者向け)

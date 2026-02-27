@@ -54,11 +54,11 @@ APIで内部変数を参照するよりこちらを使った方が良い
 | sfen           | 着手後の長いSFEN                          |                                                       |
 | turn           | 着手後の手数                              |                                                       |
 | last_move_info | 着手した手の情報(Object)                  |                                                       |
-| snapshot_hash  | 現在の盤面のハッシュコード (千日手判定用) | `sp_request_snapshot_hash` を有効にしたときだけ入っている  |
+| position_hash  | 現在の盤面のハッシュコード (千日手判定用) | `sp_request_position_hash` を有効にしたときだけ入っている  |
 | op_king_check   | 着手した側が相手に対して王手したか？      | `sp_request_op_king_check` を有効にしたときだけ入っている      |
 | checkmate_stat | 詰み情報                          | `sp_request_checkmate_stat` を有効にしたときだけ入っている |
 
-* 連続王手の千日手を判定するにはアプリ側で `snapshot_hash` と `op_king_check` を組み合せて登場回数をカウントし、`op_king_check` が `true` の4回目が現われたか判定すればよい
+* 連続王手の千日手を判定するにはアプリ側で `position_hash` と `op_king_check` を組み合せて登場回数をカウントし、`op_king_check` が `true` の4回目が現われたか判定すればよい
 * 同様に `op_king_check` が `false` の4回目が出たときはただの千日手(引き分け)になる
 
 ### `ev_play_mode_next_moves(moves: array)`
