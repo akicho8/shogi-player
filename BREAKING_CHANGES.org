@@ -2,20 +2,21 @@
 
 ** コンポーネント引数の名前変更
 
-|-------------------------+----------------------------|
-| 置換前                  | 置換後                     |
-|-------------------------+----------------------------|
-| sp_board_dimension_w    | sp_board_view_w            |
-| sp_board_dimension_h    | sp_board_view_h            |
-| sp_board_piece_position | sp_piece_vertical_position |
-|-------------------------+----------------------------|
+|--------------------------+----------------------------|
+| 置換前                   | 置換後                     |
+|--------------------------+----------------------------|
+| sp_board_dimension_w     | sp_board_view_w            |
+| sp_board_dimension_h     | sp_board_view_h            |
+| sp_board_piece_position  | sp_piece_vertical_position |
+| sp_request_snapshot_hash | sp_request_position_hash   |
+|--------------------------+----------------------------|
 
 ** 初期値変更
 
 |--------------------------------+--------+--------|
 | コンポーネント引数             | 変更前 | 変更後 |
 |--------------------------------+--------+--------|
-| sp_request_snapshot_hash       | true   | false  |
+| sp_request_position_hash       | true   | false  |
 | sp_location_mark_inactive_size | 0.5    | 1.0    |
 |--------------------------------+--------+--------|
 
