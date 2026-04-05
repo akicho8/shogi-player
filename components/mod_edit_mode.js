@@ -70,10 +70,10 @@ export const mod_edit_mode = {
     //   this.event_call("ev_action_board_cell_pointerdown", place, e)
     //
     //   const params = {
-    //     mark_pos_key: place.to_mark_pos_key, // これだけあればいいけど
+    //     think_mark_pos_key: place.to_think_mark_pos_key, // これだけあればいいけど
     //     place: place,                        // 他のも入れとく
     //   }
-    //   this.event_call("ev_action_click_for_think_mark", params, e)
+    //   this.event_call("ev_think_mark_click", params, e)
     // },
 
     // // 盤面クリック時に反応する部分
@@ -98,19 +98,19 @@ export const mod_edit_mode = {
     // 盤をクリック
     board_cell_left_click(place, e) {
       this.event_call("ev_action_board_cell_pointerdown", place, e)
-      this.board_cell_left_click_markable_event(place, e)
+      this.board_cell_left_click_think_mark_event(place, e)
       this.board_cell_left_click_piece_move(place, e)
     },
 
     // マークしたいとき用のイベントを発行する
-    board_cell_left_click_markable_event(place, e) {
+    board_cell_left_click_think_mark_event(place, e) {
       // if (!this.lifted_p) {
       const params = {
-        mark_pos_key: place.to_mark_pos_key, // これだけあればいいけど
+        think_mark_pos_key: place.to_think_mark_pos_key, // これだけあればいいけど
         place: place,                        // 他のも入れとく
       }
       // if (this.meta_p(e)) {
-      this.event_call("ev_action_click_for_think_mark", params, e)
+      this.event_call("ev_think_mark_click", params, e)
       // }
     },
 
@@ -545,7 +545,7 @@ export const mod_edit_mode = {
 
       // 右クリックでの思考印
       if (this.play_p) {
-        this.board_cell_left_click_markable_event(place, e)
+        this.board_cell_left_click_think_mark_event(place, e)
       }
     },
 
@@ -644,11 +644,11 @@ export const mod_edit_mode = {
 
     piece_stand_markable_event(location, piece, e) {
       const params = {
-        mark_pos_key: location.to_mark_pos_key(piece), // これだけあればいいけど
+        think_mark_pos_key: location.to_think_mark_pos_key(piece), // これだけあればいいけど
         location: location,                    // 何かに使うかもしれないので
         piece: piece,                          // 他のも入れとく
       }
-      this.event_call("ev_action_click_for_think_mark", params, e)
+      this.event_call("ev_think_mark_click", params, e)
     },
 
     // 駒台の駒をクリック

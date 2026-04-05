@@ -185,7 +185,7 @@ export class Place {
 
   // 盤と駒台を含めたユニークな位置情報の文字列を返す
   // "7_6"
-  get to_mark_pos_key() {
+  get to_think_mark_pos_key() {
     return this.human_xy_ary.join("_")
   }
 

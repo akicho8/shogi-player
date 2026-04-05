@@ -38,7 +38,7 @@
           PieceTap(
             :class="TheSP.board_piece_tap_class(place_by(x, y))"
             :piece_texture_class="TheSP.xcontainer.soldier_css_class_list(place_by(x, y))"
-            :mark_pos_key="place_by(x, y).to_mark_pos_key"
+            :think_mark_pos_key="place_by(x, y).to_think_mark_pos_key"
             )
 </template>
 

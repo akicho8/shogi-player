@@ -17,7 +17,7 @@
     $lightness: lightness($color);
 
     // 円とラベルを個別にユニークにするのはではなく階層的にして上だけをユニークにしたくなるがそれぞれ独立しているためそれは間違い
-    .think_mark_circle_color#{$i} {
+    .think_mark_effect_color#{$i} {
       // 円の色
       border-color: $color;
 

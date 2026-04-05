@@ -6,7 +6,7 @@ export const EventList = [
   "ev_action_player_info_click",
   "ev_action_turn_change",
   "ev_action_viewpoint_flip",
-  "ev_action_click_for_think_mark",
+  "ev_think_mark_click",
   "ev_action_promote_select_open",
   "ev_action_promote_select_close",
   "ev_comment_change",

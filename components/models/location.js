@@ -30,7 +30,7 @@ export class Location extends ApplicationMemoryRecord {
   }
 
   // 先手の持駒の飛車なら black_R を返す
-  to_mark_pos_key(piece) {
+  to_think_mark_pos_key(piece) {
     return [this.key, piece.key].join("_")
   }
 

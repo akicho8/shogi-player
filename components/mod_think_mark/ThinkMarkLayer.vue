@@ -1,12 +1,12 @@
 <template lang="pug">
-.ThinkMark(v-if="current_items.length >= 1")
-  .think_mark_circle_container.is-overlay
-    .think_mark_circle(:class="current_css_circle_class")
+.ThinkMarkLayer(v-if="current_items.length >= 1")
+  .think_mark_effect_container.is-overlay
+    .think_mark_effect(:class="current_css_effect_class")
   .think_mark_user_name_container.is-overlay
     template(v-for="(item, i) in current_items")
-      template(v-if="item.mark_user_name")
+      template(v-if="item.think_mark_user_name")
         .think_mark_user_name(:class="item.css_label_class")
-          | {{item.mark_user_name}}
+          | {{item.think_mark_user_name}}
 </template>
 
 <script>
@@ -14,22 +14,22 @@ import _ from "lodash"
 
 import { support } from "../support.js"
 
-const CIRCLE_COLOR_OWNER = 0    // 0:最初の人 -1:最後の人
+const EFFECT_COLOR_OWNER = 0    // 0:最初の人 -1:最後の人
 
 export default {
-  name: "ThinkMark",
+  name: "ThinkMarkLayer",
   mixins: [support],
   props: {
-    mark_pos_key: { default: null, },
+    think_mark_pos_key: { default: null, },
   },
   computed: {
     // 現在のセルで表示するマークたち
     current_items() {
-      return this.TheSP.mut_think_mark_list_hash[this.mark_pos_key] ?? []
+      return this.TheSP.mut_think_mark_list_hash[this.think_mark_pos_key] ?? []
     },
 
-    current_css_circle_class() {
-      return this.current_items.at(CIRCLE_COLOR_OWNER).css_circle_class
+    current_css_effect_class() {
+      return this.current_items.at(EFFECT_COLOR_OWNER).css_effect_class
     },
   },
 }
@@ -37,22 +37,22 @@ export default {
 
 <style lang="sass">
 @import "../support.sass"
-@import "./think_mark_colors.scss"
+@import "./think_mark_color.scss"
 
 .ShogiPlayer
   // .BoardCell
   .PieceTap
     position: relative
-    .ThinkMark
+    .ThinkMarkLayer
       z-index: $piece_count_z + 1 // 駒数より上に円を書く。FIXME: これは本当に必要？
 
-  .think_mark_circle_container
+  .think_mark_effect_container
     // 円を中央に表示するため
     display: flex
     align-items: center
     justify-content: center
 
-  .think_mark_circle
+  .think_mark_effect
     // 円の最大をセルの大きさとするには100%だけど隙間がないと気持ちわるいので少し小さめにする
     width: 80%
     height: 80%
