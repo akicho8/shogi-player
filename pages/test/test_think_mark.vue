@@ -36,7 +36,7 @@
             sp_board_variant="wood_normal"
             :sp_slider="true"
             :sp_think_mark_list="sp_think_mark_list"
-            @ev_action_click_for_think_mark="ev_action_click_for_think_mark"
+            @ev_think_mark_click="ev_think_mark_click"
             sp_human_side="none"
           )
         .column
@@ -54,10 +54,8 @@
 <script>
 import assert from "minimalistic-assert"
 
-import { Mark } from "@/components/think_mark/mark.js"
-import { MarkList } from "@/components/think_mark/mark_list.js"
-
-import { think_mark_methods } from "@/components/think_mark/think_mark_methods.js"
+import { ThinkMark } from "@/components/mod_think_mark/think_mark_item.js"
+import { ThinkMarkList } from "@/components/mod_think_mark/think_mark_list.js"
 
 export default {
   data() {
@@ -102,20 +100,18 @@ export default {
   },
 
   methods: {
-    ...think_mark_methods,
-
     //////////////////////////////////////////////////////////////////////////////// ユーザー側の定義
 
-    ev_action_click_for_think_mark(params, event) {
-      const mark_attrs = this.mark_attrs_from(params.mark_pos_key)
+    ev_think_mark_click(params, event) {
+      const mark_attrs = this.mark_attrs_from(params.think_mark_pos_key)
       this.$refs.sp_object.mut_think_mark_list.toggle(mark_attrs)
     },
 
-    mark_attrs_from(mark_pos_key) {
+    mark_attrs_from(think_mark_pos_key) {
       return {
-        mark_pos_key:   mark_pos_key,
-        mark_user_name: this.current_user_name,
-        mark_color_index: this.user_index,
+        think_mark_pos_key:   think_mark_pos_key,
+        think_mark_user_name: this.current_user_name,
+        think_mark_color_index: this.user_index,
       }
     },
 
@@ -139,10 +135,10 @@ export default {
 
     // ss_mark_create(attrs) {
     //   const item = {...attrs}
-    //   assert(item.mark_pos_key)
-    //   item.mark_user_name ??= `${this.sp_think_mark_list.length}`
-    //   item.mark_color_index ??= this.sp_think_mark_list.length
-    //   item.mark_color_index = item.mark_color_index % this.SS_MARK_COLOR_COUNT // 一周して色数を越えないようにする
+    //   assert(item.think_mark_pos_key)
+    //   item.think_mark_user_name ??= `${this.sp_think_mark_list.length}`
+    //   item.think_mark_color_index ??= this.sp_think_mark_list.length
+    //   item.think_mark_color_index = item.think_mark_color_index % this.SS_MARK_COLOR_COUNT // 一周して色数を越えないようにする
     //   return item
     // },
 
@@ -154,50 +150,50 @@ export default {
     },
 
     test_one() {
-      this.sp_think_mark_list.push({mark_pos_key: "1_1", mark_user_name: "なまえ", mark_color_index:  0, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "1_1", think_mark_user_name: "なまえ", think_mark_color_index:  0, })
     },
 
     test_color() {
-      this.sp_think_mark_list.push({mark_pos_key: "9_5", mark_user_name: "0",  mark_color_index:  0, })
-      this.sp_think_mark_list.push({mark_pos_key: "8_5", mark_user_name: "1",  mark_color_index:  1, })
-      this.sp_think_mark_list.push({mark_pos_key: "7_5", mark_user_name: "2",  mark_color_index:  2, })
-      this.sp_think_mark_list.push({mark_pos_key: "6_5", mark_user_name: "3",  mark_color_index:  3, })
-      this.sp_think_mark_list.push({mark_pos_key: "5_5", mark_user_name: "4",  mark_color_index:  4, })
-      this.sp_think_mark_list.push({mark_pos_key: "4_5", mark_user_name: "5",  mark_color_index:  5, })
-      this.sp_think_mark_list.push({mark_pos_key: "3_5", mark_user_name: "6",  mark_color_index:  6, })
-      this.sp_think_mark_list.push({mark_pos_key: "2_5", mark_user_name: "7",  mark_color_index:  7, })
-      this.sp_think_mark_list.push({mark_pos_key: "1_5", mark_user_name: "8",  mark_color_index:  8, })
-      this.sp_think_mark_list.push({mark_pos_key: "9_6", mark_user_name: "9",  mark_color_index:  9, })
-      this.sp_think_mark_list.push({mark_pos_key: "8_6", mark_user_name: "10", mark_color_index: 10, })
-      this.sp_think_mark_list.push({mark_pos_key: "7_6", mark_user_name: "11", mark_color_index: 11, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "9_5", think_mark_user_name: "0",  think_mark_color_index:  0, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "8_5", think_mark_user_name: "1",  think_mark_color_index:  1, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "7_5", think_mark_user_name: "2",  think_mark_color_index:  2, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "6_5", think_mark_user_name: "3",  think_mark_color_index:  3, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "5_5", think_mark_user_name: "4",  think_mark_color_index:  4, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "4_5", think_mark_user_name: "5",  think_mark_color_index:  5, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "3_5", think_mark_user_name: "6",  think_mark_color_index:  6, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "2_5", think_mark_user_name: "7",  think_mark_color_index:  7, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "1_5", think_mark_user_name: "8",  think_mark_color_index:  8, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "9_6", think_mark_user_name: "9",  think_mark_color_index:  9, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "8_6", think_mark_user_name: "10", think_mark_color_index: 10, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "7_6", think_mark_user_name: "11", think_mark_color_index: 11, })
     },
 
     test_stand() {
-      this.sp_think_mark_list.push({mark_pos_key: "black_R", mark_user_name: "A", mark_color_index: 0, })
-      this.sp_think_mark_list.push({mark_pos_key: "black_R", mark_user_name: "B", mark_color_index: 1, })
-      this.sp_think_mark_list.push({mark_pos_key: "white_R", mark_user_name: "C", mark_color_index: 2, })
-      this.sp_think_mark_list.push({mark_pos_key: "white_R", mark_user_name: "D", mark_color_index: 3, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "black_R", think_mark_user_name: "A", think_mark_color_index: 0, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "black_R", think_mark_user_name: "B", think_mark_color_index: 1, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "white_R", think_mark_user_name: "C", think_mark_color_index: 2, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "white_R", think_mark_user_name: "D", think_mark_color_index: 3, })
     },
 
     test_label() {
       //
-      this.sp_think_mark_list.push({mark_pos_key: "9_3", mark_user_name: "あいうえお", mark_color_index: 0, })
-      this.sp_think_mark_list.push({mark_pos_key: "8_3", mark_user_name: "あいうえお", mark_color_index: 1, })
-      this.sp_think_mark_list.push({mark_pos_key: "7_3", mark_user_name: "あいうえお", mark_color_index: 2, })
-      this.sp_think_mark_list.push({mark_pos_key: "6_3", mark_user_name: "あいうえお", mark_color_index: 3, })
-      this.sp_think_mark_list.push({mark_pos_key: "5_3", mark_user_name: "あいうえお", mark_color_index: 4, })
-      this.sp_think_mark_list.push({mark_pos_key: "4_3", mark_user_name: "あいうえお", mark_color_index: 5, })
-      this.sp_think_mark_list.push({mark_pos_key: "3_3", mark_user_name: "あいうえお", mark_color_index: 6, })
-      this.sp_think_mark_list.push({mark_pos_key: "2_3", mark_user_name: "あいうえお", mark_color_index: 7, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "9_3", think_mark_user_name: "あいうえお", think_mark_color_index: 0, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "8_3", think_mark_user_name: "あいうえお", think_mark_color_index: 1, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "7_3", think_mark_user_name: "あいうえお", think_mark_color_index: 2, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "6_3", think_mark_user_name: "あいうえお", think_mark_color_index: 3, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "5_3", think_mark_user_name: "あいうえお", think_mark_color_index: 4, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "4_3", think_mark_user_name: "あいうえお", think_mark_color_index: 5, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "3_3", think_mark_user_name: "あいうえお", think_mark_color_index: 6, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "2_3", think_mark_user_name: "あいうえお", think_mark_color_index: 7, })
       //                                      _
-      this.sp_think_mark_list.push({mark_pos_key: "9_3", mark_user_name: "abcABC12345", mark_color_index: 7, })
-      this.sp_think_mark_list.push({mark_pos_key: "8_3", mark_user_name: "abcABC12345", mark_color_index: 6, })
-      this.sp_think_mark_list.push({mark_pos_key: "7_3", mark_user_name: "abcABC12345", mark_color_index: 5, })
-      this.sp_think_mark_list.push({mark_pos_key: "6_3", mark_user_name: "abcABC12345", mark_color_index: 4, })
-      this.sp_think_mark_list.push({mark_pos_key: "5_3", mark_user_name: "abcABC12345", mark_color_index: 3, })
-      this.sp_think_mark_list.push({mark_pos_key: "4_3", mark_user_name: "abcABC12345", mark_color_index: 2, })
-      this.sp_think_mark_list.push({mark_pos_key: "3_3", mark_user_name: "abcABC12345", mark_color_index: 1, })
-      this.sp_think_mark_list.push({mark_pos_key: "2_3", mark_user_name: "abcABC12345", mark_color_index: 0, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "9_3", think_mark_user_name: "abcABC12345", think_mark_color_index: 7, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "8_3", think_mark_user_name: "abcABC12345", think_mark_color_index: 6, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "7_3", think_mark_user_name: "abcABC12345", think_mark_color_index: 5, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "6_3", think_mark_user_name: "abcABC12345", think_mark_color_index: 4, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "5_3", think_mark_user_name: "abcABC12345", think_mark_color_index: 3, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "4_3", think_mark_user_name: "abcABC12345", think_mark_color_index: 2, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "3_3", think_mark_user_name: "abcABC12345", think_mark_color_index: 1, })
+      this.sp_think_mark_list.push({think_mark_pos_key: "2_3", think_mark_user_name: "abcABC12345", think_mark_color_index: 0, })
     },
   },
   computed: {

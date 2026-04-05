@@ -13,7 +13,7 @@
         :class="piece_tap_class(piece)"
         :piece_texture_class="piece_texture_class(piece)"
         :count="count"
-        :mark_pos_key="ms.location.to_mark_pos_key(piece)"
+        :think_mark_pos_key="ms.location.to_think_mark_pos_key(piece)"
         )
 </template>
 

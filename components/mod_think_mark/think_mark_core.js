@@ -1,10 +1,7 @@
-import assert from "minimalistic-assert"
-import { think_mark_methods } from "./think_mark_methods.js"
-import { MarkList } from "./mark_list.js"
-import { Mark } from "./mark.js"
-import _ from "lodash"
+import { ThinkMarkList } from "./think_mark_list.js"
+import { GX } from "../models/gx"
 
-export const mod_think_mark = {
+export const think_mark_core = {
   props: {
     // 思考印の初期配列を指定する
     sp_think_mark_list: {
@@ -15,7 +12,7 @@ export const mod_think_mark = {
 
   data() {
     return {
-      mut_think_mark_list: MarkList.create(this.sp_think_mark_list),
+      mut_think_mark_list: ThinkMarkList.create(this.sp_think_mark_list),
     }
   },
 
@@ -30,7 +27,7 @@ export const mod_think_mark = {
     // sp_think_mark_list: {
     //   handler(new_list) {
     //     if (!_.isEqual(new_list, this.mut_think_mark_list.as_json)) {
-    //       this.mut_think_mark_list = MarkList.create(new_list)
+    //       this.mut_think_mark_list = ThinkMarkList.create(new_list)
     //     }
     //   },
     //   deep: true, // 配列の中のオブジェクトの変更も監視する
@@ -55,13 +52,11 @@ export const mod_think_mark = {
   },
 
   methods: {
-    ...think_mark_methods,
-
     //////////////////////////////////////////////////////////////////////////////// 公開API
 
     // 指定の状態にする
     // api_mark_list_reset(list = []) {
-    //   this.mut_think_mark_list = MarkList.create(list)
+    //   this.mut_think_mark_list = ThinkMarkList.create(list)
     // },
 
     // 指定の場所にマークをつける (または外す)
