@@ -1,5 +1,5 @@
 <template lang="pug">
-.PieceTap(v-if="count >= 1")
+.PieceTap(v-if="count >= 1" :class="component_class")
   // 駒を押せる部分
   .PieceTapBG.is-overlay
   .PieceObject
@@ -7,7 +7,8 @@
     .PieceTexture(:class="piece_texture_class")
     // 駒テクスチャの大きさに依存させたいので中に PieceObject のなかに入れている
     PieceCount(:count="count")
-  ThinkMarkLayer(:think_mark_pos_key="think_mark_pos_key")
+  ThinkMarkLayer(:general_mark_pos_key="general_mark_pos_key")
+  OriginMarkLayer(:general_mark_pos_key="general_mark_pos_key")
 </template>
 
 <script>
@@ -15,6 +16,7 @@ import _ from "lodash"
 import { support } from "./support.js"
 import PieceCount from "./PieceCount.vue"
 import ThinkMarkLayer from "./mod_think_mark/ThinkMarkLayer.vue"
+import OriginMarkLayer from "./mod_origin_mark/OriginMarkLayer.vue"
 
 export default {
   name: "PieceTap",
@@ -22,12 +24,14 @@ export default {
   components: {
     PieceCount,
     ThinkMarkLayer,
+    OriginMarkLayer,
   },
   props: {
     piece_texture_class: { required: true              },
     count:               { required: false, default: 1 },
     //
-    think_mark_pos_key:  { required: false             },
+    general_mark_pos_key:  { required: false             },
+    general_mark_pos_key:  { required: false             },
   },
 
   mounted() {
@@ -45,6 +49,18 @@ export default {
       // 新しい transform を適用
       piece.style.transform = `rotate(${newAngle}deg)`
     }
+  },
+
+  computed: {
+    component_class() {
+      let list = []
+      if (this.general_mark_pos_key) {
+        if (this.TheSP.mut_origin_mark_list_hash[this.general_mark_pos_key]) {
+          list.push("piece_tap_has_origin_mark")
+        }
+      }
+      return list
+    },
   },
 }
 </script>
@@ -78,6 +94,9 @@ export default {
 
   +defvar(sp_touch_lifted_origin_bg_color, hsl(0 0% 0% / 0.15))   // 持ち上げた駒の背景色(touch)
   +defvar(sp_touch_lifted_origin_opacity, 1.0)                     // 持ち上げた駒の元のセルの不透明度(touch)
+
+  +defvar(sp_origin_mark_bg_color, transparent) // 持ち上げた駒の背景色
+  +defvar(sp_origin_mark_opacity, 0.4)          // 持ち上げた駒の元のセルの不透明度
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_size, 0.8)            // 駒台のセル内の駒占有率
@@ -152,6 +171,17 @@ export default {
           &:hover
             .PieceTapBG
               background-color: var(--sp_piece_selectable_color)
+
+  //////////////////////////////////////////////////////////////////////////////// 持ち上げた状態をシミュレートする
+
+  .PieceTap
+    &.piece_tap_has_origin_mark
+      .PieceTapBG
+        background-color: var(--sp_origin_mark_bg_color)
+      .PieceTexture
+        opacity: var(--sp_origin_mark_opacity)  // 駒を持ち上げたので元の駒を含めて薄くする
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   .PieceTap
     &.current

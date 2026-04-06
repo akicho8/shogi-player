@@ -1,0 +1,5 @@
+思考印・移動元印
+
+確認
+../../pages/test/test_think_mark.vue
+../../pages/test/test_origin_mark.vue

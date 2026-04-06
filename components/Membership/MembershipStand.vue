@@ -13,7 +13,7 @@
         :class="piece_tap_class(piece)"
         :piece_texture_class="piece_texture_class(piece)"
         :count="count"
-        :think_mark_pos_key="ms.location.to_think_mark_pos_key(piece)"
+        :general_mark_pos_key="ms.location.general_mark_pos_key(piece)"
         )
 </template>
 
@@ -33,7 +33,7 @@ export default {
 
   methods: {
     hold_piece_lifted_p(piece) {
-      return this.TheSP.have_piece_location === this.ms.location && this.TheSP.have_piece === piece
+      return this.TheSP.pick_location === this.ms.location && this.TheSP.pick_piece === piece
     },
 
     piece_tap_class(piece) {
@@ -43,14 +43,14 @@ export default {
 
       let list = []
 
-      // if (this.lifted_p) {
+      // if (this.piece_pick_p) {
       //   list.push("piece_lifted_hover_reaction")
       // }
 
       if (this.hold_piece_lifted_p(piece)) {
         list.push("lifted_from_p")
       } else {
-        if (!this.lifted_p) {
+        if (!this.piece_pick_p) {
           let f = false
           if (this.TheSP.edit_p) {
             f = true
@@ -99,14 +99,14 @@ export default {
   },
 
   computed: {
-    lifted_p() {
-      return this.TheSP.lifted_p
+    piece_pick_p() {
+      return this.TheSP.piece_pick_p
     },
 
     component_class() {
       const list = []
       if (this.TheSP.edit_p) {
-        if (this.lifted_p) {
+        if (this.piece_pick_p) {
           list.push("is_droppable")
         }
       }

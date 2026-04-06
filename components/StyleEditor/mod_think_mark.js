@@ -3,8 +3,8 @@ export const mod_think_mark = {
     ev_think_mark_click(params, event) {
       // console.log(params)
       // alert(1)
-      // const mark_attrs = this.mark_attrs_from(params.think_mark_pos_key)
-      // this.$refs.sp_object.mut_think_mark_list.toggle(mark_attrs)
+      // const think_mark_attrs = this.think_mark_attrs_from(params.general_mark_pos_key)
+      // this.$refs.sp_object.mut_think_mark_list.toggle(think_mark_attrs)
     },
   },
   computed: {

@@ -3,7 +3,7 @@ const vm = new Vue({
   data: function () {
     return {
       dimension: 9,
-      place_from: null,
+      pick_place: null,
       from_dom: null,
       board: {
         "0,0": {piece: "香", location: "white"},
@@ -52,7 +52,7 @@ const vm = new Vue({
         black: {"歩": 2},
         white: {"歩": 2},
       },
-      have_piece: null,
+      pick_piece: null,
       turn_counter: 0,
       rules: {
         rule1: true, // 自分の手番で相手の駒を持ち上げれないようにする
@@ -98,7 +98,7 @@ const vm = new Vue({
       if (this.origin_soldier) {
         const count = (this.hold_pieces[location][this.origin_soldier.piece] || 0) + 1
         Vue.set(this.hold_pieces[location], this.origin_soldier.piece, count)
-        Vue.set(this.board, this.place_from, null)      // 元の位置を消す
+        Vue.set(this.board, this.pick_place, null)      // 元の位置を消す
         this.current_turn_reset_all()
         this.current_turn_commit()
         return
@@ -108,7 +108,7 @@ const vm = new Vue({
         // 持駒があれば持ち上げる
         const count = (this.hold_pieces[location][piece] || 0)
         if (count >= 1) {
-          this.have_piece = piece
+          this.pick_piece = piece
           e.target.classList.add("active")
           this.from_dom = e.target
         }
@@ -141,7 +141,7 @@ const vm = new Vue({
       }
 
       // 盤上の駒を持って同じ位置に戻したので状況キャンセル
-      if (_.isEqual(this.place_from, place)) {
+      if (_.isEqual(this.pick_place, place)) {
         this.current_turn_reset_all()
         return
       }
@@ -155,18 +155,18 @@ const vm = new Vue({
       }
 
       // 置く
-      if (this.place_from) {
+      if (this.pick_place) {
         this.piece_capture(soldier)                     // 相手の駒があれば取る
         Vue.set(this.board, place, this.origin_soldier) // 移動
-        Vue.set(this.board, this.place_from, null)      // 元の位置を消す
+        Vue.set(this.board, this.pick_place, null)      // 元の位置を消す
         this.current_turn_reset_all()
         this.current_turn_commit()
         return
       }
 
       // 持駒を置く
-      if (this.have_piece) {
-        const soldier = {piece: this.have_piece, location: this.current_player}
+      if (this.pick_piece) {
+        const soldier = {piece: this.pick_piece, location: this.current_player}
         Vue.set(this.board, place, soldier) // 置く
         this.mochigoma_herasu()             // 持駒を減らす
         this.current_turn_reset_all()
@@ -179,10 +179,10 @@ const vm = new Vue({
 
     // 持駒減らす
     mochigoma_herasu: function() {
-      const count = (this.hold_pieces[this.current_player][this.have_piece] || 0) - 1
-      Vue.set(this.hold_pieces[this.current_player], this.have_piece, count)
+      const count = (this.hold_pieces[this.current_player][this.pick_piece] || 0) - 1
+      Vue.set(this.hold_pieces[this.current_player], this.pick_piece, count)
       if (count <= 0) {
-        delete this.hold_pieces[this.current_player][this.have_piece] // 要素が0になるキーは削除
+        delete this.hold_pieces[this.current_player][this.pick_piece] // 要素が0になるキーは削除
       }
     },
 
@@ -201,14 +201,14 @@ const vm = new Vue({
 
     // 盤面の駒を持ち上げる
     soldier_hold: function(place, e) {
-      this.place_from = place
+      this.pick_place = place
       this.from_dom = e.target
       e.target.classList.add("active")
     },
 
     current_turn_reset_all: function() {
-      this.place_from = null // 持ってない状態にする
-      this.have_piece = null
+      this.pick_place = null // 持ってない状態にする
+      this.pick_piece = null
       if (this.from_dom) {
         this.from_dom.classList.remove("active")
         this.from_dom = null
@@ -239,11 +239,11 @@ const vm = new Vue({
     },
 
     origin_soldier: function() {
-      return this.board[this.place_from]
+      return this.board[this.pick_place]
     },
 
     hold_p: function() {
-      return !_.isNil(this.place_from) || !_.isNil(this.have_piece)
+      return !_.isNil(this.pick_place) || !_.isNil(this.pick_piece)
     },
   },
 })

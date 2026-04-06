@@ -50,18 +50,19 @@ import { mod_navi            } from "./mod_navi.js"
 import { mod_viewpoint       } from "./mod_viewpoint.js"
 import { mod_dev_tools       } from "./dev_tools/mod_dev_tools.js"
 import { mod_shortcut_viewer } from "./shortcut_viewer/mod_shortcut_viewer.js"
-import { mod_think_mark } from "./mod_think_mark/mod_think_mark.js"
+import { mod_think_mark      } from "./mod_think_mark/mod_think_mark.js"
+import { mod_origin_mark     } from "./mod_origin_mark/mod_origin_mark.js"
 import { mod_resize_observer } from "./mod_resize_observer.js"
 import { mod_shortcut        } from "./mod_shortcut.js"
-import { mod_edit_mode       } from "./mod_edit_mode.js"
+import { mod_interaction       } from "./mod_interaction.js"
 import { mod_checkmate       } from "./mod_checkmate.js"
-import { mod_position_hash      } from "./mod_position_hash.js"
+import { mod_position_hash   } from "./mod_position_hash.js"
 import { mod_illegal         } from "./mod_illegal.js"
-import { mod_lifted_piece    } from "./mod_lifted_piece.js"
+import { mod_picked_piece    } from "./mod_picked_piece.js"
 import { mod_play_mode       } from "./mod_play_mode.js"
 import { mod_profile         } from "./mod_profile.js"
 import { mod_preset          } from "./mod_preset.js"
-import { mod_player_info          } from "./mod_player_info.js"
+import { mod_player_info     } from "./mod_player_info.js"
 import { mod_edit_tool       } from "./mod_edit_tool.js"
 import { mod_api_functions   } from "./mod_api_functions.js"
 import { mod_device_detector } from "./mod_device_detector.js"
@@ -103,13 +104,14 @@ export default {
     mod_dev_tools,
     mod_shortcut_viewer,
     mod_think_mark,
+    mod_origin_mark,
     mod_resize_observer,
     mod_shortcut,
-    mod_edit_mode,
+    mod_interaction,
     mod_checkmate,
     mod_position_hash,
     mod_illegal,
-    mod_lifted_piece,
+    mod_picked_piece,
     mod_play_mode,
     mod_profile,
     mod_preset,
@@ -330,7 +332,7 @@ export default {
     // そうしないと sp_turn と sp_body を同時に変更したとき
     // sp_turn, sp_body の順に反映されて局面が1つ前になってしまう
     kifu_source() {
-      this.current_turn_reset_all() // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
+      this.current_turn_finish("棋譜更新") // 駒を持った状態で sp_body を切り替えられたとき駒を持ってない状態にする
 
       if (this.edit_p) {
         this.edit_mode_xcontainer_setup()
@@ -450,11 +452,11 @@ export default {
 
       list.push(place.css_place_key) // place_9_9
 
-      if (this.lifted_p) {
+      if (this.piece_pick_p) {
         list.push("piece_lifted_hover_reaction")
       }
 
-      if (!this.lifted_p) {
+      if (!this.piece_pick_p) {
         if (this.xcontainer.last_hand) {
           const origin_place = this.xcontainer.last_hand.origin_place
           if (origin_place) {
@@ -468,10 +470,10 @@ export default {
         }
       }
 
-      if (_.isEqual(this.place_from, place)) {
+      if (_.isEqual(this.pick_place, place)) {
         list.push("lifted_from_p")
       } else if (soldier) {
-        if (!this.lifted_p) {
+        if (!this.piece_pick_p) {
           let f = false
           if (this.edit_p) {
             f = true
@@ -503,6 +505,10 @@ export default {
 
       // if (this.sp_board_cell_class_fn) {
       //   list = _.concat(list, this.sp_board_cell_class_fn(place))
+      // }
+
+      // if (this.mut_origin_mark_list_hash[place.general_mark_pos_key]) {
+      //   list.push("piece_tap_has_origin_mark")
       // }
 
       return list
@@ -615,6 +621,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 @import "./application.scss"
+@import "./mod_general_mark/general_mark_color.scss"
 
 // .ShogiPlayer
 //   width: 100%

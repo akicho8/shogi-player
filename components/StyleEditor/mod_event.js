@@ -32,6 +32,11 @@ export const mod_event = {
           this.$buefy.toast.open({message: "詰み", queue: false})
         }
       }
+
+      // 移動元
+      if (e.general_mark_pos_key) {
+        this.$buefy.toast.open({message: `移動元: ${e.general_mark_pos_key}`, queue: false})
+      }
     },
 
     ev_illegal_illegal_accident(illegal_hv) {

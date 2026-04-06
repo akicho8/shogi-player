@@ -6,7 +6,7 @@ const HOVER_PIECE_ELEMENT_POSITION_UPDATE_60FPS = true
 import { PositionInfo } from "./models/position_info.js"
 import { Vec2d } from "./models/vec2d.js"
 
-export const mod_lifted_piece = {
+export const mod_picked_piece = {
   data() {
     return {
       // プレフィクスに_をつけるとVueに監視されない
@@ -98,10 +98,10 @@ export const mod_lifted_piece = {
 
     __soldier_to_position_info(soldier) {
       let key = null
-      if (this.lifted_from_box_p) {
+      if (this.piece_pick_from_box_p) {
         // 駒箱から取り出した駒は↑向き
         key = "is_position_south"
-      } else if (this.lifted_from_board_p || this.lifted_from_stand_p) {
+      } else if (this.piece_pick_from_board_p || this.piece_pick_from_stand_p) {
         // 盤や台から取り出した駒は soldier からわかる
         // ただし反転しているとその逆になる
         key = soldier.location.flip_if(this.fliped).position_key
