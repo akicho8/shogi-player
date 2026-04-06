@@ -43,11 +43,11 @@ rake doc:build
 
 `ShogiPlayer.vue` の機能は多数の Vue ミックスインに分割されている:
 - `mod_navi.js` — 手数ナビゲーション(←→キー、スライダー)
-- `mod_edit_mode.js` — 盤面編集モード
+- `mod_interaction.js` — 盤面編集モード
 - `mod_play_mode.js` — 対局モード
 - `mod_shortcut.js` — キーボードショートカット
 - `mod_viewpoint.js` — 視点(先後)切り替え
-- `mod_lifted_piece.js` — 持ち駒の持ち上げ状態管理
+- `mod_picked_piece.js` — 持ち駒の持ち上げ状態管理
 - `mod_api_functions.js` — 外部から呼び出し可能なAPIメソッド
 - その他多数
 

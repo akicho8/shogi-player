@@ -1,8 +1,10 @@
 export const EventList = [
   "ev_action_board_cell_pointerdown",
   "ev_action_stand_cell_pointerdown",
-  "ev_action_piece_cancel",
   "ev_action_piece_lift",
+  "ev_action_piece_cancel",
+  "ev_action_origin_mark_jump_invoke",
+  "ev_action_origin_mark_jump_cancel",
   "ev_action_player_info_click",
   "ev_action_turn_change",
   "ev_action_viewpoint_flip",

@@ -36,6 +36,7 @@ import { mod_sp_style         } from "./mod_sp_style.js"
 import { mod_component_params } from "./mod_component_params.js"
 import { mod_helper           } from "./mod_helper.js"
 import { mod_think_mark       } from "./mod_think_mark.js"
+import { mod_origin_mark       } from "./mod_origin_mark.js"
 import { mod_event            } from "./mod_event.js"
 import { mod_variables        } from "./mod_variables.js"
 import { mod_book             } from "./mod_book.js"
@@ -58,6 +59,7 @@ export default {
     mod_component_params,
     mod_helper,
     mod_think_mark,
+    mod_origin_mark,
     mod_event,
     mod_variables,
     mod_book,
@@ -107,6 +109,7 @@ export default {
       // hv["ev_action_viewpoint_flip"]       = this.SB.ev_action_viewpoint_flip // 意図して☗☖をタップして反転させたとき
       // hv["ev_action_turn_change"]          = this.SB.ev_action_turn_change    // スライダーを動かしたとき
       // hv["ev_action_piece_lift"]           = this.SB.ev_action_piece_lift     // 意図して持ち上げた
+      // hv["ev_action_origin_mark_jump_invoke"]           = this.SB.ev_action_origin_mark_jump_invoke     // 意図して持ち上げた
       // hv["ev_action_piece_cancel"]         = this.SB.ev_action_piece_cancel   // 意図してキャンセルした
       // hv["ev_action_promote_select_open"]       = this.SB.ev_action_promote_select_open  // 成 or 不成 選択モードに入る
       // hv["ev_action_promote_select_close"]      = this.SB.ev_action_promote_select_close // 成 or 不成 選択モードから出る

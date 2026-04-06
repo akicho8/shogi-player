@@ -1,8 +1,8 @@
 <template lang="pug">
-.ThinkMarkLayer.GeneralMarkLayer(v-if="current_items.length >= 1")
+.OriginMarkLayer.GeneralMarkLayer(v-if="current_items.length >= 1")
   .general_mark_effect_container.is-overlay
     .general_mark_effect(:class="current_css_effect_class")
-  .general_mark_user_name_container.is-overlay
+  .general_mark_user_name_container.is-overlay(v-if="name_show_p")
     template(v-for="(item, i) in current_items")
       template(v-if="item.general_mark_group_name")
         .general_mark_group_name(:class="item.css_label_class")
@@ -17,7 +17,7 @@ import { support } from "../support.js"
 const EFFECT_COLOR_OWNER = 0    // 0:最初の人 -1:最後の人
 
 export default {
-  name: "ThinkMarkLayer",
+  name: "OriginMarkLayer",
   mixins: [support],
   props: {
     general_mark_pos_key: { default: null, },
@@ -25,11 +25,15 @@ export default {
   computed: {
     // 現在のセルで表示するマークたち
     current_items() {
-      return this.TheSP.mut_think_mark_list_hash[this.general_mark_pos_key] ?? []
+      return this.TheSP.mut_origin_mark_list_hash[this.general_mark_pos_key] ?? []
     },
 
     current_css_effect_class() {
       return this.current_items.at(EFFECT_COLOR_OWNER).css_effect_class
+    },
+
+    name_show_p() {
+      return this.TheSP.mut_origin_mark_list.many_p
     },
   },
 }
@@ -39,7 +43,7 @@ export default {
 @import "../support.sass"
 
 .ShogiPlayer
-  .ThinkMarkLayer
+  .OriginMarkLayer
     z-index: $piece_count_z + 1 // 駒数より上に円を書く。FIXME: これは本当に必要？
 
     .general_mark_effect_container
@@ -50,11 +54,15 @@ export default {
 
     .general_mark_effect
       // 円の最大をセルの大きさとするには100%だけど隙間がないと気持ちわるいので少し小さめにする
-      width: 80%
-      height: 80%
-      border-radius: 50%
+      // width: 80%
+      // height: 80%
+      // border-radius: 50%
+
+      width: 100%
+      height: 100%
+
       border-width: 4px
-      border-style: solid
+      border-style: dotted
 
     .general_mark_user_name_container
       // 左上から左揃えで並べる

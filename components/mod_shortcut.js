@@ -54,7 +54,7 @@ export const mod_shortcut = {
         // https://wikiwiki.jp/factorio/%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95
         if (e.key === "q") {
           // 何か持っている状態ならキャンセルする
-          if (this.lifted_p) {
+          if (this.piece_pick_p) {
             if (this.hold_cancel(e)) {
               e.preventDefault()
               return true
@@ -171,7 +171,7 @@ export const mod_shortcut = {
     // 盤上にマウスがあって駒を持っていなかったら左クリック
     soldier_hold_unless_lifted_p(e) {
       if (this.mouseover_info) {                             // 盤上にマウスがあって
-        if (!this.lifted_p) {                                // 駒を持っていなかったら
+        if (!this.piece_pick_p) {                                // 駒を持っていなかったら
           if (this.mouseover_info.type === "board") {
             this.board_cell_left_click(this.mouseover_info.place, e) // 左クリック
           }

@@ -44,8 +44,8 @@
         th Value
         th 参照方法
     tbody
-      DebugBlockRow(code="place_from"                name="移動元座標"               :value="TheSP.place_from")
-      DebugBlockRow(code="have_piece"                name="駒台・駒箱から移動中の駒" :value="TheSP.have_piece")
+      DebugBlockRow(code="pick_place"                name="移動元座標"               :value="TheSP.pick_place")
+      DebugBlockRow(code="pick_piece"                name="駒台・駒箱から移動中の駒" :value="TheSP.pick_piece")
       DebugBlockRow(code="moves"                     name="play_modeでの指し手"      :value="TheSP.moves")
       DebugBlockRow(code="init_sfen"                 name="play_modeの開始局面"      :value="TheSP.init_sfen")
       DebugBlockRow(code="play_mode_full_moves_sfen" name="play_modeでのSFEN"        :value="TheSP.play_mode_full_moves_sfen")

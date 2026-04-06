@@ -97,11 +97,19 @@ APIで内部変数を参照するよりこちらを使った方が良い
 
 ### `ev_action_piece_lift`
 
-ユーザーが駒を持ち上げたとき
+ユーザーが駒を持ち上げたとき (駒箱を含む)
 
 ### `ev_action_piece_cancel`
 
 ユーザーが持ち上げた駒を元に戻したとき
+
+### `ev_action_origin_mark_jump_invoke`
+
+操作モードで、盤上または持駒の駒を持ち上げたとき (このタイミングで移動元の印を書け)
+
+### `ev_action_origin_mark_jump_cancel`
+
+操作モードで、盤上または持駒の駒を元に戻したとき (このタイミングで移動元の印を消せ)
 
 ### `ev_action_board_cell_pointerdown(place: Place)`
 

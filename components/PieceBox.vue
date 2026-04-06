@@ -36,14 +36,14 @@ export default {
     piece_box_piece_tap_class(piece) {
       let list = []
 
-      if (this.TheSP.lifted_p) {
+      if (this.TheSP.piece_pick_p) {
         list.push("piece_lifted_hover_reaction")
       }
 
       if (this.TheSP.piece_box_have_p(piece)) {
         list.push("lifted_from_p")
       } else if (this.TheSP.edit_p) {
-        if (!this.TheSP.lifted_p) {
+        if (!this.TheSP.piece_pick_p) {
           list.push("selectable_p")
         }
       }
@@ -70,7 +70,7 @@ export default {
   computed: {
     component_class() {
       const list = []
-      if (this.TheSP.lifted_p) {
+      if (this.TheSP.piece_pick_p) {
         list.push("is_droppable")
       }
       return list

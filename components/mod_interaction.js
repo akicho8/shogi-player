@@ -8,7 +8,7 @@ import { Location } from "./models/location.js"
 import { LiftCancelActionInfo } from "./models/lift_cancel_action_info.js"
 import { ClickResponseTimingInfo } from "./models/click_response_timing_info.js"
 
-export const mod_edit_mode = {
+export const mod_interaction = {
   props: {
     sp_legal_move_only:           { type: Boolean, default: true, },       // play で駒の移動を制限する
     sp_piece_auto_promote:        { type: Boolean, default: true, },       // play で死に駒になるときは自動的に成る
@@ -35,16 +35,16 @@ export const mod_edit_mode = {
   data() {
     return {
       // |------------------------+------------+------------+---------------------|
-      // | どこの駒を持ち上げた？ | place_from | have_piece | have_piece_location |
+      // | どこの駒を持ち上げた？ | pick_place | pick_piece | pick_location |
       // |------------------------+------------+------------+---------------------|
       // | 盤上                   | ○         |            |                     |
       // | 駒台                   |            | ○         | ○                  |
       // | 駒箱                   |            | ○         |                     |
       // |------------------------+------------+------------+---------------------|
-      place_from: null,           // 盤上ら動かそうとしているときの元位置
-      have_piece: null,           // 駒台 or 駒箱から持った駒
-      have_piece_location: null,  // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
-      have_piece_promoted: null,  // 持ったとき成った状態にするか？
+      pick_place: null,    // 盤上ら動かそうとしているときの元位置
+      pick_piece: null,    // 駒台 or 駒箱から持った駒
+      pick_location: null, // 駒台から持ったときだけ先後が入っている。駒箱から取り出しているときは null
+      pick_promoted: null, // 持ったとき成った状態にするか？
 
       dialog_soldier: null,     // 成り確認ダイアログ表示中か？
       _last_clicked_cell: null,        // 最後にクリックした要素
@@ -58,7 +58,7 @@ export const mod_edit_mode = {
 
   watch: {
     mut_mode() {
-      this.current_turn_reset_all() // モードが切り替わったときに持ち上げた駒を元に戻す(こうしないとカーソルから駒が離れない)
+      this.current_turn_finish("モードが切り替え") // モードが切り替わったときに持ち上げた駒を元に戻す(こうしないとカーソルから駒が離れない)
     },
   },
 
@@ -70,7 +70,7 @@ export const mod_edit_mode = {
     //   this.event_call("ev_action_board_cell_pointerdown", place, e)
     //
     //   const params = {
-    //     think_mark_pos_key: place.to_think_mark_pos_key, // これだけあればいいけど
+    //     general_mark_pos_key: place.general_mark_pos_key, // これだけあればいいけど
     //     place: place,                        // 他のも入れとく
     //   }
     //   this.event_call("ev_think_mark_click", params, e)
@@ -104,9 +104,9 @@ export const mod_edit_mode = {
 
     // マークしたいとき用のイベントを発行する
     board_cell_left_click_think_mark_event(place, e) {
-      // if (!this.lifted_p) {
+      // if (!this.piece_pick_p) {
       const params = {
-        think_mark_pos_key: place.to_think_mark_pos_key, // これだけあればいいけど
+        general_mark_pos_key: place.general_mark_pos_key, // これだけあればいいけど
         place: place,                        // 他のも入れとく
       }
       // if (this.meta_p(e)) {
@@ -163,7 +163,7 @@ export const mod_edit_mode = {
 
       if (this.sp_my_piece_only_move) {
         if (this.play_p) {
-          if (!this.lifted_p) {
+          if (!this.piece_pick_p) {
             if (this.killed_soldier) {
               if (this.killed_soldier.location !== this.xcontainer.current_location) {
                 this.log("自分の手番で相手の駒を持ち上げようとしたので無効とする")
@@ -175,14 +175,14 @@ export const mod_edit_mode = {
         }
       }
 
-      if (this.play_p && this.have_piece && this.killed_soldier) {
+      if (this.play_p && this.pick_piece && this.killed_soldier) {
         this.log("駒台や駒箱から持ち上げた駒を盤上の駒の上に置こうとしたので無効とする")
-        this.if_standard_then_unhold() // ←元の位置に戻す場合
+        this.if_standard_then_unhold(e) // ←元の位置に戻す場合
         return
       }
 
       if (this.sp_illegal_validate) {
-        if (this.play_p && this.have_piece && !this.killed_soldier) {
+        if (this.play_p && this.pick_piece && !this.killed_soldier) {
           const new_soldier = this.soldier_create_from_stand_or_box_on(place)
           if (new_soldier.dead_place_p) {
             this.log("駒台や駒箱から持ち上げた駒を置こうとしたけど死に駒なので無効とする")
@@ -194,7 +194,7 @@ export const mod_edit_mode = {
         }
       }
 
-      if (!this.lifted_p && !this.killed_soldier) {
+      if (!this.piece_pick_p && !this.killed_soldier) {
         this.log("持たずに何もないところをクリックしたので無効とする")
         return
       }
@@ -210,7 +210,7 @@ export const mod_edit_mode = {
               return
             }
 
-            this.if_standard_then_unhold() // ←元の位置に戻す場合
+            this.if_standard_then_unhold(e) // ←元の位置に戻す場合
             return
           }
         }
@@ -221,7 +221,7 @@ export const mod_edit_mode = {
         const old = this.$data._double_tap_time
         this.$data._double_tap_time = Date.now()
         if (this.killed_soldier) {
-          if (_.isEqual(this.place_from, place)) { // この処理をスキップすると3連打で2回反転できるが誤操作が頻発するのでやめ
+          if (_.isEqual(this.pick_place, place)) { // この処理をスキップすると3連打で2回反転できるが誤操作が頻発するのでやめ
             if (old) {
               const gap = this.$data._double_tap_time - old
               const enable = gap < this.sp_double_click_threshold_ms
@@ -237,18 +237,18 @@ export const mod_edit_mode = {
         }
       }
 
-      if (_.isEqual(this.place_from, place)) {
+      if (_.isEqual(this.pick_place, place)) {
         this.log("盤上の駒を持って同じ位置に戻したので状況キャンセル")
-        this.interactive_lifted_piece_cancel()
+        this.interactive_lifted_piece_cancel(e)
         return
       }
 
       // --------------------------------------------------------------------------------
 
       if (this.edit_p) {
-        this.log(`lifted_from_p: ${this.lifted_p}`)
+        this.log(`lifted_from_p: ${this.piece_pick_p}`)
         if (this.meta_p(e)) {
-          if (!this.lifted_p && this.killed_soldier) { // 持ってなくて、駒がある
+          if (!this.piece_pick_p && this.killed_soldier) { // 持ってなくて、駒がある
             this.log("盤上の駒を裏返す")
             this.xcontainer.board.soldier_drop$(this.killed_soldier.transform_all)
             this.piece_hold_and_put_for_bug(place, e) // 不具合対策
@@ -258,7 +258,7 @@ export const mod_edit_mode = {
       }
 
       // 盤上の駒を持ちあげる
-      if (!this.lifted_p) {
+      if (!this.piece_pick_p) {
         this.log("盤上の駒を持ちあげる")
 
         // if (this.meta_p(e)) {
@@ -271,7 +271,7 @@ export const mod_edit_mode = {
       }
 
       // 盤上から移動させようとしたとき移動を制限する
-      if (this.sp_legal_move_only && this.play_p && this.place_from) {
+      if (this.sp_legal_move_only && this.play_p && this.pick_place) {
         let found = false
 
         // 1つだけ動ける系
@@ -302,7 +302,7 @@ export const mod_edit_mode = {
 
         if (!found) {
           this.log("操作モードで盤上の駒を動かし中だが動けないセルをタップしたので無効")
-          this.if_standard_then_unhold() // ←元の位置に戻す場合
+          this.if_standard_then_unhold(e) // ←元の位置に戻す場合
           return
         }
 
@@ -320,7 +320,7 @@ export const mod_edit_mode = {
       }
 
       // 盤上から移動
-      if (this.place_from) {
+      if (this.pick_place) {
         this.log("盤上から移動")
         if (this.killed_soldier) {
           this.xcontainer.hold_pieces_add$(this.origin_soldier1.location, this.killed_soldier.piece) // 相手の駒があれば取る
@@ -362,16 +362,16 @@ export const mod_edit_mode = {
           }
           this.move_then_checkmate_check(new_soldier)
           this.xcontainer.board.soldier_drop$(new_soldier) // 置く
-          this.xcontainer.board.delete_at$(this.place_from)
+          this.xcontainer.board.delete_at$(this.pick_place)
           this.current_turn_commit()
-          this.current_turn_reset_all()
+          this.current_turn_finish("盤上の駒を移動する")
         }
 
         return
       }
 
       // 持駒を置く
-      if (this.have_piece) {
+      if (this.pick_piece) {
         this.log("持駒を置く")
 
         const drop_soldier = this.soldier_create_from_stand_or_box_on(place)
@@ -392,8 +392,8 @@ export const mod_edit_mode = {
         // 二歩判定
         if (this.sp_illegal_validate) {
           if (this.play_p) {
-            if (this.have_piece.key === "P") {
-              if (this.have_piece_location) {
+            if (this.pick_piece.key === "P") {
+              if (this.pick_location) {
                 // 駒台から動かしている状態
                 if (this.xcontainer.board.double_pawn_violation_p(drop_soldier)) {
                   // 二歩をブロックしたとき、これまで "二歩" の文字列だけを発行していたが
@@ -413,9 +413,9 @@ export const mod_edit_mode = {
 
         // 駒の上に置いた場合は取る
         if (this.killed_soldier) {
-          if (this.have_piece_location) {
-            // have_piece_location の駒台から移動した駒で取ったので have_piece_location の方に置く
-            this.xcontainer.hold_pieces_add$(this.have_piece_location, this.killed_soldier.piece)
+          if (this.pick_location) {
+            // pick_location の駒台から移動した駒で取ったので pick_location の方に置く
+            this.xcontainer.hold_pieces_add$(this.pick_location, this.killed_soldier.piece)
           } else {
             // 駒箱から移動した駒で取ったので this.killed_soldier.location に返すとする場合
             if (false) {
@@ -453,7 +453,7 @@ export const mod_edit_mode = {
         this.last_move_info_set({type: "put", to: drop_soldier})
         this.moves_set()
         this.current_turn_commit()
-        this.current_turn_reset_all()
+        this.current_turn_finish("駒台の駒を盤上に置く")
         return
       }
 
@@ -469,7 +469,7 @@ export const mod_edit_mode = {
     //   const soldier = this.xcontainer.board.lookup(place)
     //
     //   if (this.edit_p) {
-    //     if (!this.lifted_p) {
+    //     if (!this.piece_pick_p) {
     //       if (soldier) {
     //         this.log("操作モードでダブルタップしたので裏返す")
     //         // this.xcontainer.board.soldier_drop$(soldier.transform_all)
@@ -493,9 +493,9 @@ export const mod_edit_mode = {
       this.moves_set() // 7g7f+
       this.move_then_checkmate_check(new_soldier)
       this.xcontainer.board.soldier_drop$(new_soldier) // 置く
-      this.xcontainer.board.delete_at$(this.place_from)
+      this.xcontainer.board.delete_at$(this.pick_place)
       this.current_turn_commit()
-      this.current_turn_reset_all()
+      this.current_turn_finish("盤上の駒を移動して成り不成選択後")
     },
 
     // 最後に操作した駒の情報を作る
@@ -536,7 +536,7 @@ export const mod_edit_mode = {
       }
 
       if (this.edit_p) {
-        if (!this.lifted_p && soldier) {
+        if (!this.piece_pick_p && soldier) {
           this.log("盤上の駒を裏返す")
           this.xcontainer.board.soldier_drop$(soldier[method]) // method: transform_all | transform_location | transform_promote
           this.piece_hold_and_put_for_bug(place, e) // 不具合対策
@@ -564,7 +564,7 @@ export const mod_edit_mode = {
     //   }
     //
     //   if (this.edit_p) {
-    //     if (!this.lifted_p && soldier) {
+    //     if (!this.piece_pick_p && soldier) {
     //       this.log("盤上の駒を裏返す")
     //       this.xcontainer.board.soldier_drop$(soldier.transform_all)
     //       this.piece_hold_and_put_for_bug(place, e) // 不具合対策
@@ -578,18 +578,18 @@ export const mod_edit_mode = {
         return
       }
 
-      if (this.have_piece) {                         // 盤上からではない駒を持っているか？
-        if (this.have_piece_location === location) { // 駒台からの駒か？
+      if (this.pick_piece) {                         // 盤上からではない駒を持っているか？
+        if (this.pick_location === location) { // 駒台からの駒か？
           this.log("自分の駒台から駒を持ち上げているならキャンセル")
-          this.interactive_lifted_piece_cancel()
+          this.interactive_lifted_piece_cancel(e)
           return true
         }
       }
 
       // 相手の駒台から自分の駒台、または駒箱から自分の駒台へ移動
       if (this.edit_p) {
-        // if (this.have_piece_location !== location && this.have_piece) {
-        if (this.have_piece) {
+        // if (this.pick_location !== location && this.pick_piece) {
+        if (this.pick_piece) {
           // 相手の持駒を自分の駒台に移動
           this.hold_pieces_move_to_my_hold_pieces(e, location)
           return true
@@ -599,7 +599,7 @@ export const mod_edit_mode = {
       if (this.play_p) {
         if (this.origin_soldier1) {
           this.log("play では盤上の駒を駒台に置くことはできない")
-          this.if_standard_then_unhold()
+          this.if_standard_then_unhold(e)
           return true
         }
       }
@@ -616,14 +616,14 @@ export const mod_edit_mode = {
 
     // 副ボタンクリックの場合は
     membership_right_click_handle(location, e) {
-      if (this.lifted_p) {
-        this.interactive_lifted_piece_cancel()
+      if (this.piece_pick_p) {
+        this.interactive_lifted_piece_cancel(e)
         return true
       }
     },
 
     // 駒台の駒を押した瞬間
-    piece_stand_piece_click_with_mark_event(location, piece, have_piece_promoted, e) {
+    piece_stand_piece_click_with_mark_event(location, piece, pick_promoted, e) {
       this.event_call("ev_action_stand_cell_pointerdown", location, piece, e) // 共有将棋盤では未使用
 
       // 思考印は左クリックと右クリックのどちらを使って有効にしようとしているか関与しないためどちらのクリックであってイベントを発生させる
@@ -634,7 +634,7 @@ export const mod_edit_mode = {
       // ・限定しなかった場合、右クリックで「駒を持つ」「持ち上げ駒キャンセル」のイベントが同時に発生してしまう
       // ・そうなると共有将棋盤側で左クリックして思考印をつけると3つ「思考印をつける」「駒を持つ」「持ち上げ駒キャンセル」の効果音が鳴ってしまう
       if (e.button === 0) {
-        this.piece_stand_piece_left_click(location, piece, have_piece_promoted, e)
+        this.piece_stand_piece_left_click(location, piece, pick_promoted, e)
       }
     },
 
@@ -644,7 +644,7 @@ export const mod_edit_mode = {
 
     piece_stand_markable_event(location, piece, e) {
       const params = {
-        think_mark_pos_key: location.to_think_mark_pos_key(piece), // これだけあればいいけど
+        general_mark_pos_key: location.general_mark_pos_key(piece), // これだけあればいいけど
         location: location,                    // 何かに使うかもしれないので
         piece: piece,                          // 他のも入れとく
       }
@@ -652,7 +652,7 @@ export const mod_edit_mode = {
     },
 
     // 駒台の駒をクリック
-    piece_stand_piece_left_click(location, piece, have_piece_promoted, e) {
+    piece_stand_piece_left_click(location, piece, pick_promoted, e) {
       this.log("駒台の駒を左クリック")
 
       if (this.break_if_view_mode) {
@@ -692,45 +692,47 @@ export const mod_edit_mode = {
 
       // 駒を持った状態で駒台を触るといったん離すにすれば↓これらは必要ない
       //
-      // if (this.have_piece && this.have_piece.key === piece.key) {
-      //   if (this.have_piece_location === location) {
+      // if (this.pick_piece && this.pick_piece.key === piece.key) {
+      //   if (this.pick_location === location) {
       //     this.log("駒台の駒を持った状態で同じ駒台の同じ駒を持ったのでキャンセルする")
       //     this.current_turn_reset_all()
       //     return
       //   }
       // }
       //
-      // if (this.have_piece && this.have_piece_location) {
+      // if (this.pick_piece && this.pick_location) {
       //   this.log("駒を持った状態で再び駒を持とうとしているため無効とする")
       //   return
       // }
 
       this.log("駒台の駒を持つ")
-      this.have_piece = piece
-      this.have_piece_location = location
-      this.have_piece_promoted = have_piece_promoted
+      this.pick_piece = piece
+      this.pick_location = location
+      this.pick_promoted = pick_promoted
       this.lp_create(e, this.origin_soldier2)
+
+      this.origin_mark_jump_invoke_event(e)
     },
 
     // 駒箱の駒を持ち上げている？
     piece_box_have_p(piece) {
-      return _.isNil(this.have_piece_location) && this.have_piece === piece
+      return _.isNil(this.pick_location) && this.pick_piece === piece
     },
 
     // FIXME: 駒を持っているときは「駒箱の駒」に対して一切反応しないようにしたい。そうすると駒箱だけの判定で済む
     piece_box_other_click(e) {
       this.log("piece_box_other_click:駒箱クリック")
 
-      if (_.isNil(this.have_piece_location) && this.have_piece) {
+      if (_.isNil(this.pick_location) && this.pick_piece) {
         this.log("持っているならキャンセル")
         this.current_turn_reset_all()
         return true
       }
 
-      if (this.have_piece_location && this.have_piece) {
+      if (this.pick_location && this.pick_piece) {
         this.log("駒台から駒箱に移動")
         const count = this.hold_piece_source_cut(e)               // 相手の持駒を減らして減らした分だけ
-        this.xcontainer.piece_box_add$(this.have_piece, count) // 駒箱に加算する
+        this.xcontainer.piece_box_add$(this.pick_piece, count) // 駒箱に加算する
         this.current_turn_reset_all()
         return true
       }
@@ -754,9 +756,9 @@ export const mod_edit_mode = {
       }
 
       this.log("piece_box_piece_click:駒箱の駒を持つ")
-      this.have_piece = piece
-      this.have_piece_location = null
-      this.have_piece_promoted = false
+      this.pick_piece = piece
+      this.pick_location = null
+      this.pick_promoted = false
       this.lp_create(e, this.origin_soldier2)
     },
 
@@ -774,9 +776,9 @@ export const mod_edit_mode = {
       this.log("hold_cancel")
 
       if (!this.dialog_soldier) {
-        if (this.lifted_p) {
+        if (this.piece_pick_p) {
           this.log("持ち上げた駒を元に戻す")
-          this.interactive_lifted_piece_cancel()
+          this.interactive_lifted_piece_cancel(e)
           return true
         }
       }
@@ -794,7 +796,7 @@ export const mod_edit_mode = {
     hold_pieces_move_to_my_hold_pieces(e, location) {
       this.log("相手の持駒を自分の駒台に移動")
       const count = this.hold_piece_source_cut(e)                           // 相手の持駒を減らして減らした分だけ
-      this.xcontainer.hold_pieces_add$(location, this.have_piece, count) // 自分に加算する
+      this.xcontainer.hold_pieces_add$(location, this.pick_piece, count) // 自分に加算する
       this.current_turn_reset_all()
     },
 
@@ -802,22 +804,22 @@ export const mod_edit_mode = {
     hold_piece_source_cut(e) {
       let count = 1
 
-      if (this.have_piece_location) {
+      if (this.pick_location) {
         this.log("相手の駒台から移動")
         if (this.meta_p(e)) {
           this.log("シフトが押されていたので全部移動")
-          count = this.xcontainer.hold_pieces_count(this.have_piece_location, this.have_piece)
+          count = this.xcontainer.hold_pieces_count(this.pick_location, this.pick_piece)
         }
-        count = this.xcontainer.hold_pieces_can_be_reduced_count(this.have_piece_location, this.have_piece, count)
-        this.xcontainer.hold_pieces_add$(this.have_piece_location, this.have_piece, -count)
+        count = this.xcontainer.hold_pieces_can_be_reduced_count(this.pick_location, this.pick_piece, count)
+        this.xcontainer.hold_pieces_add$(this.pick_location, this.pick_piece, -count)
       } else {
         this.log("駒箱から移動")
         if (this.meta_p(e)) {
           this.log("シフトが押されていたので全部移動")
-          count = this.xcontainer.piece_box.count(this.have_piece)
+          count = this.xcontainer.piece_box.count(this.pick_piece)
         }
-        count = this.xcontainer.piece_box.can_be_reduced_count(this.have_piece, count) // 減らせる数を clamp する。そうしないと駒箱から移動するときに駒が増えいく
-        this.xcontainer.piece_box_add$(this.have_piece, -count)
+        count = this.xcontainer.piece_box.can_be_reduced_count(this.pick_piece, count) // 減らせる数を clamp する。そうしないと駒箱から移動するときに駒が増えいく
+        this.xcontainer.piece_box_add$(this.pick_piece, -count)
       }
 
       // 実際に減らせれた数を返す(重要)
@@ -826,20 +828,20 @@ export const mod_edit_mode = {
 
     // 駒を1つ減らす
     piece_decriment() {
-      if (this.have_piece_location) {
-        this.xcontainer.hold_pieces_add$(this.have_piece_location, this.have_piece, -1)
+      if (this.pick_location) {
+        this.xcontainer.hold_pieces_add$(this.pick_location, this.pick_piece, -1)
       } else {
-        this.xcontainer.piece_box_add$(this.have_piece, -1)
+        this.xcontainer.piece_box_add$(this.pick_piece, -1)
       }
     },
 
     // 自分の駒の上に重ねた？ (移動元にある駒を含まない)
     // つまり27の歩を持った状態で28の飛を持ったとき
     put_on_my_soldier_p(soldier) {
-      if (this.lifted_p) {
+      if (this.piece_pick_p) {
         if (soldier) {
           if (soldier.location === this.xcontainer.current_location) {
-            if (_.isEqual(this.place_from, soldier.place)) {
+            if (_.isEqual(this.pick_place, soldier.place)) {
               // 持ち上げた駒と同じ位置
             } else {
               // 持ち上げた駒とは異なる
@@ -852,36 +854,56 @@ export const mod_edit_mode = {
 
     // 盤面の駒を持ち上げる
     soldier_hold(place, e) {
-      this.place_from = place
+      this.pick_place = place
       this.lp_create(e, this.origin_soldier1)
+      this.origin_mark_jump_invoke_event(e)
     },
 
     // ユーザーの操作で故意に駒を持ってない状態にする (イベント発生)
-    interactive_lifted_piece_cancel() {
+    interactive_lifted_piece_cancel(e) {
       this.event_call("ev_action_piece_cancel")
+      this.origin_mark_jump_cancel_event(e)
       this.current_turn_reset_all()
     },
 
     // 駒を持ってない状態にする
-    current_turn_reset_all() {
+    current_turn_reset_all(e = null) {
       this.log("current_turn_reset_all: 駒を持ってない状態にする")
-      this.dialog_soldier = null
-      this.place_from = null // 持ってない状態にする
-      this.have_piece = null
-      this.have_piece_location = null
-      this.have_piece_promoted = null
-      this.killed_soldier = null
+
+      // 前処理
+      // this.origin_mark_jump_cancel_event(e)
+
+      // 本当のクリア処理
+      this.picked_vars_clear()
       this.checkmate_init()
-      // this.checkmate_init2()
       this.illegal_clear()
       this.lp_destroy()
     },
 
+    current_turn_finish(message = "") {
+      this.log(`${message} → 移動元印を消去しつつ持ち上げ駒情報もリセットする`)
+
+      this.mut_origin_mark_list.clear()
+      this.mut_think_mark_list.clear()
+
+      this.current_turn_reset_all()
+    },
+
+    picked_vars_clear() {
+      this.pick_piece     = null
+      this.pick_place     = null
+      this.pick_location  = null
+      this.pick_promoted  = null
+
+      this.dialog_soldier = null
+      this.killed_soldier = null
+    },
+
     // 持った状態で他の駒をタップするとキャンセルする場合はキャンセル
-    if_standard_then_unhold() {
+    if_standard_then_unhold(e) {
       if (this.lift_cancel_action_info.smooth_cancel) {
         this.log("持った状態で自分の非合法セルタップでキャンセル")
-        this.interactive_lifted_piece_cancel()
+        this.interactive_lifted_piece_cancel(e)
       }
     },
 
@@ -922,10 +944,10 @@ export const mod_edit_mode = {
     // 駒箱や駒台から持ち上げている駒
     soldier_create_from_stand_or_box_on(place) {
       return Soldier.create({
-        piece: this.have_piece,
+        piece: this.pick_piece,
         place: place,
-        promoted: this.have_piece_promoted || false,
-        location: this.have_piece_location || Location.fetch("black"),
+        promoted: this.pick_promoted || false,
+        location: this.pick_location || Location.fetch("black"),
       })
     },
 
@@ -982,8 +1004,8 @@ export const mod_edit_mode = {
 
     // 移動元の駒(盤上から)
     origin_soldier1() {
-      if (this.place_from) {
-        return this.xcontainer.board.lookup(this.place_from)
+      if (this.pick_place) {
+        return this.xcontainer.board.lookup(this.pick_place)
       }
     },
 
@@ -991,31 +1013,39 @@ export const mod_edit_mode = {
     // place に中途半端なインスタンスを設定してはいけない
     // null を設定することで盤上からではないことがわかる
     origin_soldier2() {
-      if (this.have_piece) {
-        // const place = Place.fetch([0, 0])
-        const place = null
-        return this.soldier_create_from_stand_or_box_on(place)
+      if (this.pick_piece) {
+        return this.soldier_create_from_stand_or_box_on(null)
       }
     },
 
     // |------------------------+------------+------------+---------------------|
-    // | どこの駒を持ち上げた？ | place_from | have_piece | have_piece_location |
+    // | どこの駒を持ち上げた？ | pick_place | pick_piece | pick_location |
     // |------------------------+------------+------------+---------------------|
     // | 盤上                   | ○         |            |                     |
     // | 駒台                   |            | ○         | ○                  |
     // | 駒箱                   |            | ○         |                     |
     // |------------------------+------------+------------+---------------------|
-    lifted_p()            { return this.place_from || this.have_piece                               }, // 駒を持ち上げているか？
-    lifted_from_board_p() { return this.place_from                                                  }, // 盤の駒を持ち上げているか？
-    lifted_from_stand_p() { return this.have_piece_location                                         }, // 駒台の駒を持ち上げているか？
-    lifted_from_box_p()   { return !this.place_from && this.have_piece && !this.have_piece_location }, // 駒箱の駒を持ち上げているか？
+    piece_pick_p()            { return this.pick_place || this.pick_piece                                         }, // 駒を持ち上げているか？
+    piece_pick_from_board_p() { return this.pick_place                                                              }, // 盤の駒を持ち上げているか？
+    piece_pick_from_stand_p() { return this.pick_location                                                           }, // 駒台の駒を持ち上げているか？
+    piece_pick_from_box_p()   { return this.pick_place == null && this.pick_piece && this.pick_location == null }, // 駒箱の駒を持ち上げているか？
 
-    lifted_inspect() {
+    piece_pick_inspect() {
       return [
-        this.lifted_from_board_p ? "盤" : "",
-        this.lifted_from_stand_p ? "台" : "",
-        this.lifted_from_box_p   ? "箱" : "",
+        this.piece_pick_from_board_p ? "盤" : "",
+        this.piece_pick_from_stand_p ? "台" : "",
+        this.piece_pick_from_box_p   ? "箱" : "",
       ].join("")
+    },
+
+    current_general_mark_pos_key() {
+      if (this.piece_pick_from_board_p) {
+        return this.pick_place.general_mark_pos_key
+      } if (this.piece_pick_from_stand_p) {
+        return this.pick_location.general_mark_pos_key(this.pick_piece)
+      } else {
+        // 持駒をもっていない or 駒箱の駒を持っている
+      }
     },
 
     // 片方の手番だけを操作できるようにする sp_human_side の指定があってCPUの手番？
