@@ -8,7 +8,6 @@
 // | to_sfen             | "7g7f"        |                                                              |
 // | to_kif              | "☗7六歩(77)"  |                                                              |
 // | to_kif_without_from | "☗7六歩"      |                                                              |
-// | to_yomiage          | "7 6 ふ うつ" |                                                              |
 // |---------------------+---------------+--------------------------------------------------------------|
 export class MoveInfo {
   constructor(attributes) {
@@ -42,23 +41,6 @@ export class MoveInfo {
   // 7六歩
   get to_kif_without_from_and_location() {
     return this.to_custom_kif({from: false, location: false})
-  }
-
-  // 7 6 ふ うつ
-  get to_yomiage() {
-    let v = null
-    if (this.type === "move") {
-      v = this.from.yomiage_name
-    } else if (this.type === "promotable") {
-      v = this.from.piece.piece_yomiage.prefix_name + "、" + (this.to.promoted ? "なりっ！" : "ならずっ！")
-    } else if (this.type === "put") {
-      v = this.to.piece.piece_yomiage.prefix_name + "、" + "うつ！"
-    } else {
-      throw new Error("must not happen")
-    }
-    const x = this.to.place.yomiage_x
-    const y = this.to.place.yomiage_y
-    return [x, y, v].join(" ")
   }
 
   // 挙動を効果音のキーに変換するため

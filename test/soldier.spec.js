@@ -53,11 +53,6 @@ describe("Soldier", () => {
     expect(Soldier.easy_create().inspect).toEqual("<☗59玉>")
   })
 
-  it("#yomiage_name", () => {
-    expect(Soldier.easy_create({piece_key: "R", promoted: false}).yomiage_name).toEqual("ひしゃっ！")
-    expect(Soldier.easy_create({piece_key: "R", promoted: true}).yomiage_name).toEqual("りゅー！")
-  })
-
   it("#to_sfen", () => {
     expect(Soldier.easy_create({piece_key: "R", promoted: false}).to_sfen).toEqual("R")
     expect(Soldier.easy_create({piece_key: "R", promoted: true}).to_sfen).toEqual("+R")

@@ -51,8 +51,4 @@ describe("Piece", () => {
     expect(Piece.fetch("L").repeat_vectors(false).length).toEqual(1) // 香
     expect(Piece.fetch("L").repeat_vectors(true)).toEqual(undefined) // 杏
   })
-
-  it("#piece_yomiage", () => {
-    expect(Piece.fetch("R").piece_yomiage.constructor.name).toEqual("PieceYomiage")
-  })
 })
