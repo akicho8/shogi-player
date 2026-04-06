@@ -1,6 +1,5 @@
 import { ApplicationMemoryRecord } from "./application_memory_record.js"
 import { PieceVector } from "./piece_vector.js"
-import { PieceYomiage } from "./piece_yomiage.js"
 
 export class Piece extends ApplicationMemoryRecord {
   static get define() {
@@ -70,10 +69,6 @@ export class Piece extends ApplicationMemoryRecord {
   }
 
   ////////////////////////////////////////////////////////////////////////////////
-
-  get piece_yomiage() {
-    return PieceYomiage.fetch(this.key)
-  }
 }
 
 if (typeof process !== "undefined" && process.argv[1] === __filename) {

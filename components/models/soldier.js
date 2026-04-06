@@ -91,10 +91,6 @@ export class Soldier {
     return this.piece.name
   }
 
-  get yomiage_name() {
-    return this.piece.piece_yomiage.yomiage(this.promoted)
-  }
-
   get to_sfen() {
     let str = ""
     if (this.promoted) {

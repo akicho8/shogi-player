@@ -2,7 +2,6 @@ import _ from "lodash"
 import { GX } from "./gx"
 
 import { Board } from "./board"
-import { PlaceYomiageInfo } from "./place_yomiage_info.js"
 
 export class Place {
   static ANY_TO_NUMBER_REPLACE_TABLE = {
@@ -118,14 +117,6 @@ export class Place {
 
   get kanji_human_y() {
     return this.constructor.TO_KANJI_REPLACE_TABLE_Y[this.human_y]
-  }
-
-  get yomiage_x() {
-    return PlaceYomiageInfo.fetch(this.human_x.toString()).yomiage
-  }
-
-  get yomiage_y() {
-    return PlaceYomiageInfo.fetch(this.human_y.toString()).yomiage
   }
 
   get human_y() {
