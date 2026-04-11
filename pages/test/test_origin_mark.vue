@@ -33,9 +33,9 @@
             sp_debug
             sp_controller
             sp_layer
-            sp_board_variant="wood_normal"
             :sp_slider="true"
             :sp_origin_mark_list="sp_origin_mark_list"
+            :sp_think_mark_list="sp_think_mark_list"
             @ev_action_origin_mark_jump_invoke="ev_action_origin_mark_jump_invoke"
             @ev_action_origin_mark_jump_cancel="ev_action_origin_mark_jump_cancel"
             @ev_play_mode_move="ev_play_mode_move"
@@ -72,6 +72,10 @@ export default {
 
       user_index: 0,
       sp_origin_mark_list: [],
+
+      sp_think_mark_list: [
+        { general_mark_pos_key: "1_1", general_mark_group_name: "なまえ", general_mark_color_index: 0, },
+      ],
 
       sp_body: `
 後手の持駒：玉9金9銀9桂9香9飛9角9歩9
