@@ -96,7 +96,7 @@ export default {
   +defvar(sp_touch_lifted_origin_opacity, 1.0)                     // 持ち上げた駒の元のセルの不透明度(touch)
 
   +defvar(sp_origin_mark_bg_color, transparent) // 持ち上げた駒の背景色
-  +defvar(sp_origin_mark_opacity, 0.4)          // 持ち上げた駒の元のセルの不透明度
+  +defvar(sp_origin_mark_opacity, 1.0)          // 持ち上げた駒の元のセルの不透明度
 
   //////////////////////////////////////////////////////////////////////////////// >= tablet
   +defvar(sp_stand_piece_size, 0.8)            // 駒台のセル内の駒占有率

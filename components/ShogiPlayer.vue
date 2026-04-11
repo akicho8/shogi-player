@@ -621,6 +621,7 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 @import "./application.scss"
+@import "./mod_general_mark/general_mark_base.scss"
 @import "./mod_general_mark/general_mark_color.scss"
 
 // .ShogiPlayer
