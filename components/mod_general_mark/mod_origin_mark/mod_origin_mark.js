@@ -1,5 +1,5 @@
-import { GeneralMarkList } from "../mod_general_mark/general_mark_list.js"
-import { GX } from "../models/gx"
+import { GeneralMarkList } from "../general_mark_list.js"
+import { GX } from "../../models/gx"
 
 export const mod_origin_mark = {
   props: {

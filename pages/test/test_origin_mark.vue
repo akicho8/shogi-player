@@ -157,7 +157,7 @@ export default {
     //   assert(item.general_mark_pos_key)
     //   item.general_mark_group_name ??= `${this.sp_origin_mark_list.length}`
     //   item.general_mark_color_index ??= this.sp_origin_mark_list.length
-    //   item.general_mark_color_index = item.general_mark_color_index % this.SS_MARK_COLOR_COUNT // 一周して色数を越えないようにする
+    //   item.general_mark_color_index = item.general_mark_color_index % this.SP_GENERAL_MARK_PALETTE_COUNT // 一周して色数を越えないようにする
     //   return item
     // },
 
@@ -224,4 +224,17 @@ export default {
 <style lang="sass">
 .test-test_origin_mark
   __css_keep__: 0
+  background-color: #444
+  --sp_board_color: orange
+  // height: 100vh
+  // background: linear-gradient(135deg, #ff4500 0%, #0047ab 100%)
+  // background: radial-gradient(circle at top left, rgba(255, 69, 0, 0.8), transparent 70%), radial-gradient(circle at bottom right, rgba(0, 71, 171, 0.8), transparent 70%), #000
+
+  // --tile_size: 32px
+  // --color_main: #333
+  // --color_sub: #444
+  // background-color: var(--color_main)
+  // background-image: linear-gradient(45deg, var(--color_sub) 25%, transparent 25%),linear-gradient(-45deg, var(--color_sub) 25%, transparent 25%),linear-gradient(45deg, transparent 75%, var(--color_sub) 75%),linear-gradient(-45deg, transparent 75%, var(--color_sub) 75%)
+  // background-size: var(--tile_size) var(--tile_size)
+  // background-position: 0 0, 0 calc(var(--tile_size) / 2), calc(var(--tile_size) / 2) calc(var(--tile_size) / -2), calc(var(--tile_size) / -2) 0px
 </style>

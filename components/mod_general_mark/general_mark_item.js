@@ -1,5 +1,5 @@
 // ・値オブジェクト
-// ・利用者が自分で定義したスタイルを使えるように general_mark_color_index を SS_MARK_COLOR_COUNT で丸めてはいけない
+// ・利用者が自分で定義したスタイルを使えるように general_mark_color_index を SP_GENERAL_MARK_PALETTE_COUNT で丸めてはいけない
 
 import { GX } from "../models/gx"
 
@@ -25,12 +25,8 @@ export class GeneralMarkItem {
     Object.freeze(this)
   }
 
-  get css_effect_class() {
-    return ["general_mark_effect_color", this.general_mark_color_index].join("")
-  }
-
-  get css_label_class() {
-    return ["general_mark_user_name_color", this.general_mark_color_index].join("")
+  get css_class() {
+    return ["general_mark_color_index", this.general_mark_color_index].join("")
   }
 
   get attributes() {

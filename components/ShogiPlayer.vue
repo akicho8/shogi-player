@@ -50,8 +50,7 @@ import { mod_navi            } from "./mod_navi.js"
 import { mod_viewpoint       } from "./mod_viewpoint.js"
 import { mod_dev_tools       } from "./dev_tools/mod_dev_tools.js"
 import { mod_shortcut_viewer } from "./shortcut_viewer/mod_shortcut_viewer.js"
-import { mod_think_mark      } from "./mod_think_mark/mod_think_mark.js"
-import { mod_origin_mark     } from "./mod_origin_mark/mod_origin_mark.js"
+import { mod_general_mark      } from "./mod_general_mark/mod_general_mark.js"
 import { mod_resize_observer } from "./mod_resize_observer.js"
 import { mod_shortcut        } from "./mod_shortcut.js"
 import { mod_interaction       } from "./mod_interaction.js"
@@ -103,8 +102,7 @@ export default {
     mod_viewpoint,
     mod_dev_tools,
     mod_shortcut_viewer,
-    mod_think_mark,
-    mod_origin_mark,
+    mod_general_mark,
     mod_resize_observer,
     mod_shortcut,
     mod_interaction,
@@ -621,8 +619,8 @@ export default {
 <style lang="sass">
 @import "./support.sass"
 @import "./application.scss"
-@import "./mod_general_mark/general_mark_base.scss"
 @import "./mod_general_mark/general_mark_color.scss"
+@import "./mod_general_mark/general_mark_base.scss"
 
 // .ShogiPlayer
 //   width: 100%

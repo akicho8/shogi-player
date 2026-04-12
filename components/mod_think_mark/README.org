@@ -1,3 +1,0 @@
-思考印
-
-確認用 ../../pages/test/test_think_mark.vue

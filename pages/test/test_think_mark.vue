@@ -137,7 +137,7 @@ export default {
     //   assert(item.general_mark_pos_key)
     //   item.general_mark_group_name ??= `${this.sp_think_mark_list.length}`
     //   item.general_mark_color_index ??= this.sp_think_mark_list.length
-    //   item.general_mark_color_index = item.general_mark_color_index % this.SS_MARK_COLOR_COUNT // 一周して色数を越えないようにする
+    //   item.general_mark_color_index = item.general_mark_color_index % this.SP_GENERAL_MARK_PALETTE_COUNT // 一周して色数を越えないようにする
     //   return item
     // },
 
