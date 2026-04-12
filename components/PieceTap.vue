@@ -15,8 +15,8 @@
 import _ from "lodash"
 import { support } from "./support.js"
 import PieceCount from "./PieceCount.vue"
-import ThinkMarkLayer from "./mod_think_mark/ThinkMarkLayer.vue"
-import OriginMarkLayer from "./mod_origin_mark/OriginMarkLayer.vue"
+import ThinkMarkLayer from "./mod_general_mark/mod_think_mark/ThinkMarkLayer.vue"
+import OriginMarkLayer from "./mod_general_mark/mod_origin_mark/OriginMarkLayer.vue"
 
 export default {
   name: "PieceTap",
@@ -27,11 +27,9 @@ export default {
     OriginMarkLayer,
   },
   props: {
-    piece_texture_class: { required: true              },
-    count:               { required: false, default: 1 },
-    //
-    general_mark_pos_key:  { required: false             },
-    general_mark_pos_key:  { required: false             },
+    piece_texture_class:  { required: true              },
+    count:                { required: false, default: 1 },
+    general_mark_pos_key: { required: false             },
   },
 
   mounted() {

@@ -1,5 +1,5 @@
-import { GeneralMarkList } from "../mod_general_mark/general_mark_list.js"
-import { GX } from "../models/gx"
+import { GeneralMarkList } from "../general_mark_list.js"
+import { GX } from "../../models/gx"
 
 export const mod_think_mark = {
   props: {
@@ -16,7 +16,6 @@ export const mod_think_mark = {
     sp_think_mark_list(v) { this.mut_think_mark_list.reset(v) }, // 外 -> 中
   },
   computed: {
-    // メモ化する
-    mut_think_mark_list_hash() { return this.mut_think_mark_list.hash_table },
+    mut_think_mark_list_hash() { return this.mut_think_mark_list.hash_table }, // メモ化する
   },
 }
