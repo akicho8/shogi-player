@@ -17,6 +17,7 @@ export class GeneralMarkItem {
     GX.assert_not_null(attributes)
     GX.assert_kind_of_hash(attributes)
     GX.assert_kind_of_string(attributes["general_mark_pos_key"])
+    GX.assert_present(attributes["general_mark_pos_key"])
 
     this.general_mark_pos_key = attributes["general_mark_pos_key"]
     this.general_mark_group_name = attributes["general_mark_group_name"] ?? ""
@@ -49,7 +50,7 @@ export class GeneralMarkItem {
     return this.attributes
   }
 
-  equal_p(other) {
+  content_equal_p(other) {
     return this.general_mark_group_name === other.general_mark_group_name && this.general_mark_pos_key === other.general_mark_pos_key
   }
 

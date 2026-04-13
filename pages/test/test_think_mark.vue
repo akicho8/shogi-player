@@ -103,7 +103,7 @@ export default {
 
     ev_think_mark_click(params, event) {
       const think_mark_attrs = this.think_mark_attrs_from(params.general_mark_pos_key)
-      this.$refs.sp_object.mut_think_mark_list.toggle(think_mark_attrs)
+      this.$refs.sp_object.mut_think_mark_list.toggle$(think_mark_attrs)
     },
 
     think_mark_attrs_from(general_mark_pos_key) {
@@ -115,7 +115,7 @@ export default {
     },
 
     test_api_clear() {
-      this.$refs.sp_object.mut_think_mark_list.clear()
+      this.$refs.sp_object.mut_think_mark_list.clear$()
     },
 
     test_clear() {
@@ -123,7 +123,7 @@ export default {
     },
 
     test_clear_current_user_only() {
-      this.$refs.sp_object.mut_think_mark_list.group_reject$(this.current_user_name)
+      this.$refs.sp_object.mut_think_mark_list.group_name_reject$(this.current_user_name)
     },
 
     test_api_json() {

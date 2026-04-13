@@ -13,7 +13,7 @@ export const mod_think_mark = {
   },
   watch: {
     // 次の方法であれば単純にコンポーネント引数の更新を内部に反映するだけになり、一方通行なので無限ループは絶対に起きない
-    sp_think_mark_list(v) { this.mut_think_mark_list.reset(v) }, // 外 -> 中
+    sp_think_mark_list(v) { this.mut_think_mark_list.reset$(v) }, // 外 -> 中
   },
   computed: {
     mut_think_mark_list_hash() { return this.mut_think_mark_list.hash_table }, // メモ化する
