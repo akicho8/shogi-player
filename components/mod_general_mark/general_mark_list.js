@@ -4,6 +4,10 @@ import { GX } from "../models/gx"
 import { GeneralMarkItem } from "./general_mark_item.js"
 
 export class GeneralMarkList {
+  static empty() {
+    return this.create()
+  }
+
   static create(general_mark_items = []) {
     return new this(general_mark_items)
   }
@@ -24,25 +28,32 @@ export class GeneralMarkList {
     return this.create(general_mark_items)
   }
 
+  static command_create(method, params) {
+    GX.assert_kind_of_string(method)
+    GX.assert_kind_of_hash(params)
+
+    return { method, params }
+  }
+
   ////////////////////////////////////////////////////////////////////////////////
 
   constructor(general_mark_items = []) {
-    this.reset(general_mark_items)
+    this.reset$(general_mark_items)
   }
 
-  reset(general_mark_items = []) {
+  reset$(general_mark_items = []) {
     this._items = general_mark_items.map(e => GeneralMarkItem.create(e))
   }
 
-  clear() {
+  clear$() {
     if (this.exist_p) {
-      this.reset([])
+      this.reset$([])
       return true
     }
   }
 
   // なければ追加する
-  push(general_mark_item) {
+  push$(general_mark_item) {
     general_mark_item = GeneralMarkItem.create(general_mark_item)
     if (!this.any_p(general_mark_item)) {
       this._items.push(general_mark_item)
@@ -51,27 +62,27 @@ export class GeneralMarkList {
   }
 
   // あれば削除する
-  remove(general_mark_item) {
+  remove$(general_mark_item) {
     general_mark_item = GeneralMarkItem.create(general_mark_item)
     if (this.any_p(general_mark_item)) {
-      this._items = this._items.filter(e => !e.equal_p(general_mark_item))
+      this._items = this._items.filter(e => !e.content_equal_p(general_mark_item))
       return true
     }
   }
 
   // あれば削除してなければ追加する
-  toggle(general_mark_item) {
+  toggle$(general_mark_item) {
     if (this.any_p(general_mark_item)) {
-      return this.remove(general_mark_item)
+      return this.remove$(general_mark_item)
     } else {
-      return this.push(general_mark_item)
+      return this.push$(general_mark_item)
     }
   }
 
   // すでにあるか？
   any_p(general_mark_item) {
     general_mark_item = GeneralMarkItem.create(general_mark_item)
-    return this._items.some(e => e.equal_p(general_mark_item))
+    return this._items.some(e => e.content_equal_p(general_mark_item))
   }
 
   // 含むか？
@@ -86,14 +97,14 @@ export class GeneralMarkList {
 
   // 位置をキーにしたハッシュを返す
   get hash_table() {
-    return this._items.reduce((a, e) => {
-      GX.assert(e.general_mark_pos_key)
+    let a = {}
+    this._items.forEach(e => {
       if (!a[e.general_mark_pos_key]) {
         a[e.general_mark_pos_key] = []
       }
       a[e.general_mark_pos_key].push(e)
-      return a
-    }, {})
+    })
+    return a
   }
 
   get as_json() {
@@ -106,6 +117,10 @@ export class GeneralMarkList {
 
   get to_a() {
     return this._items
+  }
+
+  get to_serial() {
+    return this._items.map(e => e.to_serial).join(",")
   }
 
   get size() {
@@ -124,25 +139,22 @@ export class GeneralMarkList {
     return this.size > 1
   }
 
-  //////////////////////////////////////////////////////////////////////////////// toggle 処理のコマンド化
+  //////////////////////////////////////////////////////////////////////////////// Command Pattern
 
   // toggle コマンド生成
-  toggle_command_create(general_mark_item) {
-    return {
-      method: this.include_p(general_mark_item) ? "remove" : "push",
-      params: general_mark_item,
-    }
+  command_for_toggle(general_mark_item) {
+    return this.constructor.command_create(this.include_p(general_mark_item) ? "remove" : "push", general_mark_item)
   }
 
-  // toggle_command_create で生成した内容を反映する
-  command_execute(command) {
+  // command_for_toggle で生成した内容を反映する
+  command_execute$(command) {
     GX.assert_kind_of_string(command.method)
     GX.assert_kind_of_hash(command.params)
 
     if (command.method === "push") {
-      return this.push(command.params)
+      return this.push$(command.params)
     } else if (command.method === "remove") {
-      return this.remove(command.params)
+      return this.remove$(command.params)
     } else {
       throw new Error("must not happen")
     }
@@ -151,23 +163,17 @@ export class GeneralMarkList {
   //////////////////////////////////////////////////////////////////////////////// グループ関連
 
   // general_mark_group_name のアイテムたちを返す
-  items_by_group(general_mark_group_name) {
+  find_all_by_group_name(general_mark_group_name) {
     return this._items.filter(e => e.general_mark_group_name === general_mark_group_name)
   }
 
   // general_mark_group_name のアイテムたちが1つでも存在する？
-  group_exist_p(general_mark_group_name) {
+  group_name_exist_p(general_mark_group_name) {
     return this._items.some(e => e.general_mark_group_name === general_mark_group_name)
   }
 
   // 同じグループの印を削除する
-  group_reject$(general_mark_group_name) {
+  group_name_reject$(general_mark_group_name) {
     this._items = this._items.filter(e => e.general_mark_group_name !== general_mark_group_name)
-  }
-
-  //////////////////////////////////////////////////////////////////////////////// シリアライズ
-
-  get to_serial() {
-    return this._items.map(e => e.to_serial).join(",")
   }
 }

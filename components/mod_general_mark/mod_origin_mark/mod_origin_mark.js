@@ -11,7 +11,7 @@ export const mod_origin_mark = {
     }
   },
   watch: {
-    sp_origin_mark_list(v) { this.mut_origin_mark_list.reset(v) }, // 外 -> 中
+    sp_origin_mark_list(v) { this.mut_origin_mark_list.reset$(v) }, // 外 -> 中
   },
   methods: {
     origin_mark_jump_invoke_event(ev) {

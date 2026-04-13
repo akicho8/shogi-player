@@ -110,20 +110,20 @@ export default {
       if (params.general_mark_pos_key) {
         this.$buefy.toast.open({message: `移動したので移動元(${params.general_mark_pos_key})を静かに消す`, queue: false})
         const attributes = this.create_attributes(params.general_mark_pos_key)
-        this.$refs.sp_object.mut_origin_mark_list.remove(attributes)
+        this.$refs.sp_object.mut_origin_mark_list.remove$(attributes)
       }
     },
 
     ev_action_origin_mark_jump_invoke(general_mark_pos_key, ev) {
       this.$buefy.toast.open({message: `持ち上げたので音を出して移動元(${general_mark_pos_key})に印を付ける`, queue: false})
       const attributes = this.create_attributes(general_mark_pos_key)
-      this.$refs.sp_object.mut_origin_mark_list.push(attributes)
+      this.$refs.sp_object.mut_origin_mark_list.push$(attributes)
     },
 
     ev_action_origin_mark_jump_cancel(general_mark_pos_key, ev) {
       this.$buefy.toast.open({message: `意図して元に戻したので音を出して移動元(${general_mark_pos_key})の印を消す`, queue: false})
       const attributes = this.create_attributes(general_mark_pos_key)
-      this.$refs.sp_object.mut_origin_mark_list.remove(attributes)
+      this.$refs.sp_object.mut_origin_mark_list.remove$(attributes)
     },
 
     create_attributes(general_mark_pos_key) {
@@ -135,7 +135,7 @@ export default {
     },
 
     test_api_clear() {
-      this.$refs.sp_object.mut_origin_mark_list.clear()
+      this.$refs.sp_object.mut_origin_mark_list.clear$()
     },
 
     test_clear() {
@@ -143,7 +143,7 @@ export default {
     },
 
     test_clear_current_user_only() {
-      this.$refs.sp_object.mut_origin_mark_list.group_reject$(this.current_user_name)
+      this.$refs.sp_object.mut_origin_mark_list.group_name_reject$(this.current_user_name)
     },
 
     test_api_json() {
