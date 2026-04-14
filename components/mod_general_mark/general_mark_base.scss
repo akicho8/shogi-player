@@ -6,6 +6,8 @@
     // 色数。これ以上の色が必要なら利用者定義してもらう
     z-index: $piece_count_z + 1; // 駒数より上に円を書く。FIXME: これは本当に必要？
 
+    pointer-events: none;
+
     .general_mark_effect_container {
       // 円を中央に表示するため
       display: flex;

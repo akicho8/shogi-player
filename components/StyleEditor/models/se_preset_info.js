@@ -118,6 +118,22 @@ export class SePresetInfo extends ApplicationMemoryRecord {
           context.sp_controller = true
         }
       },
+      {
+        key: "盤面と駒台に隙間",
+        parent_key: null,
+        func: context => {
+          context.sp_board_horizontal_gap = 0.05 /* 盤の左右の隙間(左右配置時) */
+          context.sp_board_vertical_gap   = 0.05 /* 盤の上下の隙間(上下配置時) */
+        }
+      },
+      {
+        key: "盤と駒台に共通色",
+        parent_key: null,
+        func: context => {
+          context.sp_board_color    = "hsl(36.23,75.36%,58.63%)"
+          context.sp_stand_bg_color = "hsl(36.23,75.36%,58.63%)"
+        }
+      },
     ]
   }
 

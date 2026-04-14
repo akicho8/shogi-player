@@ -29,7 +29,6 @@ import _ from "lodash"
 import Vue from "vue"
 import { GX } from "../models/gx.js"
 
-
 import { mod_import         } from "./mod_import.js"
 import { mod_persistence      } from "./mod_persistence.js"
 import { mod_sp_style         } from "./mod_sp_style.js"
@@ -123,6 +122,11 @@ export default {
 
       // マークできる箇所をタップした
       hv["ev_think_mark_click"] = this.ev_think_mark_click
+
+//             :sp_origin_mark_list="sp_origin_mark_list"
+//             :sp_think_mark_list="sp_think_mark_list"
+      hv["ev_action_origin_mark_jump_invoke"] = this.ev_action_origin_mark_jump_invoke
+      hv["ev_action_origin_mark_jump_cancel"] = this.ev_action_origin_mark_jump_cancel
 
       return hv
     },

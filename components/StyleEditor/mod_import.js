@@ -5,6 +5,7 @@ import { KeyboardHelper            } from "../models/keyboard_helper.js"
 import { BalloonInfo               } from "../models/balloon_info.js"
 import { BinaryInfo                } from "../models/binary_info.js"
 import { BoardVariantInfo          } from "../models/board_variant_info.js"
+import { OriginMarkVariantInfo     } from "../mod_general_mark/mod_origin_mark/origin_mark_variant_info.js"
 import { ClickResponseTimingInfo   } from "../models/click_response_timing_info.js"
 import { CoordinateInfo            } from "../models/coordinate_info.js"
 import { CoordinateVariantInfo     } from "../models/coordinate_variant_info.js"
@@ -26,6 +27,7 @@ import { StarZIndexInfo            } from "../models/star_z_index_info.js"
 // StyleEditor 側で用意したもの
 import { AllShowInfo               } from "./models/all_show_info.js"
 import { BoardSizePresetInfo       } from "./models/board_size_preset_info.js"
+import { OriginMarkPresetInfo      } from "./models/origin_mark_preset_info.js"
 import { CategoryInfo              } from "./models/category_info.js"
 import { ColorHelper               } from "./models/color_helper.js"
 import { CssHelper                 } from "./models/css_helper.js"
@@ -43,6 +45,7 @@ export const mod_import = {
       BalloonInfo,
       BinaryInfo,
       BoardVariantInfo,
+      OriginMarkVariantInfo,
       ClickResponseTimingInfo,
       CoordinateInfo,
       CoordinateVariantInfo,
@@ -64,6 +67,7 @@ export const mod_import = {
       // StyleEditor 側で用意したもの
       AllShowInfo,
       BoardSizePresetInfo,
+      OriginMarkPresetInfo,
       CategoryInfo,
       ColorHelper,
       CssHelper,

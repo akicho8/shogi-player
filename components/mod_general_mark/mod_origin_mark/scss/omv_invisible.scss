@@ -1,0 +1,7 @@
+.ShogiPlayer {
+  &.is_origin_mark_variant_omv_invisible {
+    .OriginMarkLayer {
+      display: none;
+    }
+  }
+}

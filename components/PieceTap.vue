@@ -21,6 +21,7 @@ import OriginMarkLayer from "./mod_general_mark/mod_origin_mark/OriginMarkLayer.
 export default {
   name: "PieceTap",
   mixins: [support],
+  provide: ["general_mark_pos_key"],
   components: {
     PieceCount,
     ThinkMarkLayer,
@@ -54,7 +55,12 @@ export default {
       let list = []
       if (this.general_mark_pos_key) {
         if (this.TheSP.mut_origin_mark_list_hash[this.general_mark_pos_key]) {
-          list.push("piece_tap_has_origin_mark")
+          list.push("has_origin_mark")
+        }
+      }
+      if (this.general_mark_pos_key) {
+        if (this.TheSP.mut_think_mark_list_hash[this.general_mark_pos_key]) {
+          list.push("has_think_mark")
         }
       }
       return list
@@ -173,7 +179,7 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// 持ち上げた状態をシミュレートする
 
   .PieceTap
-    &.piece_tap_has_origin_mark
+    &.has_origin_mark
       .PieceTapBG
         background-color: var(--sp_origin_mark_bg_color)
       .PieceTexture

@@ -12,3 +12,6 @@ gem "minitest"
 gem "minitest-power_assert"
 gem "activesupport"
 gem "debug"
+# gem "bioshogi", github: "akicho8/bioshogi", branch: "master"
+
+

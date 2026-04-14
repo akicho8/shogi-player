@@ -506,7 +506,7 @@ export default {
       // }
 
       // if (this.mut_origin_mark_list_hash[place.general_mark_pos_key]) {
-      //   list.push("piece_tap_has_origin_mark")
+      //   list.push("has_origin_mark")
       // }
 
       return list
@@ -568,15 +568,14 @@ export default {
         this.str_to_css_class("is_piece_variant", this.mut_piece_variant),          // is_piece_variant_nureyon
         this.str_to_css_class("is_board_variant", this.mut_board_variant),                // is_board_variant_wood_normal
         this.str_to_css_class("is_device", this.devise_info.key),                   // is_device_touch
+        this.str_to_css_class("is_origin_mark_variant", this.sp_origin_mark_variant),  // is_origin_mark_variant_omv_square_color
+        this.str_to_css_class("is_viewpoint", this.mut_viewpoint),  // is_viewpoint_black (システムテストで見ている)
 
         // Boolean
         this.bool_to_css_class("is_layer", this.mut_layer),
         this.bool_to_css_class("is_mobile_vertical", this.sp_mobile_vertical),
         this.bool_to_css_class("is_coordinate", this.sp_coordinate),
         this.bool_to_css_class("is_balloon", this.sp_balloon),
-
-        // 特殊
-        `is_viewpoint_${this.mut_viewpoint}`, // is_viewpoint_black (システムテストで見ている)
       ]
     },
 
