@@ -96,7 +96,7 @@ See also: [sp_controller](/reference/props/#sp-controller), [sp_mounted_focus_to
 
 ### `sp_piece_variant`
 
-Type: `none | nureyon | paper | zuan | portella`
+Type: `invisible | nureyon | paper | zuan | portella`
 Default: `nureyon`
 
 駒の種類
@@ -106,7 +106,7 @@ Default: `nureyon`
 
 | 値       | 名称     | 表示                                                                                                                                             | 形式   | 影     |  特徴                      |
 |----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------|--------|----------------------------|
-| none     | なし     |                                                                                                                                                  |        |        |  見えない                  |
+| invisible     | 透明     |                                                                                                                                                  |        |        |  見えない                  |
 | nureyon  | ぬれよん | <img src="../../../../assets/piece_variant/nureyon/BR0.svg" width="32"><img src="../../../../assets/piece_variant/nureyon/BR1.svg" width="32">   | SVG    |        |  見やすいゴシック体の一文字 |
 | paper    | 紙面風   | <img src="../../../../assets/piece_variant/paper/BR0.svg" width="32"><img src="../../../../assets/piece_variant/paper/BR1.svg" width="32">       | SVG    |        |  明朝体・裏面赤            |
 | zuan     | 図案駒   | <img src="../../../../assets/piece_variant/zuan/BR0.png" width="32"><img src="../../../../assets/piece_variant/zuan/BR1.png" width="32">         | PNG    |        |  ユニバーサルデザイン      |

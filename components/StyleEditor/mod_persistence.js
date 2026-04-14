@@ -5,6 +5,10 @@ const PSTORE_AUTOLOAD = false
 import { Pstore } from "../models/pstore.js"
 
 export const mod_persistence = {
+  beforeCreate() {
+    this.after_restore_hook = []
+  },
+
   beforeMount() {
     if (PSTORE_AUTOLOAD) {
       this.xstore_load()
@@ -47,6 +51,7 @@ export const mod_persistence = {
     restore() {
       this.xstore_load()
       this.category_jump_to_last_selected()
+      this.after_restore_hook.forEach(e => e())
     },
 
     // private

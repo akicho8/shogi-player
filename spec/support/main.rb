@@ -43,37 +43,39 @@ module SpSystemTestMethods
 
   # from から to に移動する
   def piece_move(from, to)
-    [from, to].each { |e| place_click(e) }
+    [from, to].each { |e| board_place(e).click }
   end
 
-  # place_click("76") は find(".place_7_6").click 相当
-  def place_click(place)
-    find(place_class(place)).click
+  def board_place(place)
+    find(place_class(place))
   end
 
   def place_class(place)
     [".place", place.chars].join("_")
   end
 
-  # 持駒を持つ
-  def stand_click(location_key, piece_key)
-    find(".Membership.is_#{location_key} .piece_#{piece_key}").click
+  def stand_piece(location, piece)
+    find(".Membership.is_#{location} .piece_#{piece}")
+  end
+
+  def stand_of(location)
+    find(".Membership.is_#{location}")
   end
 
   # 持駒を place に打つ
   def stand_drop(location_key, piece_key, place)
-    stand_click(location_key, piece_key)
-    place_click(place)
+    stand_piece(location_key, piece_key).click
+    board_place(place).click
   end
 
   # place の位置の駒を持ち上げ中か？
   def lifted_from(place)
-    assert_selector "#{place_class(place)}.lifted_from_p"
+    assert_selector "#{board_place(place)}.lifted_from_p"
   end
 
   # place の位置の駒を持ち上げてない
   def no_lifted_from(place)
-    assert_no_selector "#{place_class(place)}.lifted_from_p"
+    assert_no_selector "#{board_place(place)}.lifted_from_p"
   end
 
   # location_key 色の piece_key が盤上にある

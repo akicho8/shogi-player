@@ -27,21 +27,22 @@ export default {
 }
 </script>
 
-<style lang="sass">
-@import "../../support.sass"
-
-.ShogiPlayer
-  .OriginMarkLayer
-    // ../general_mark_color.scss
-    // ../general_mark_base.scss
-    .general_mark_effect
-      width: 100%
-      height: 100%
-      border: 4px solid var(--general_mark_stroke_color)
-
-.ShogiPlayer
-  &.is_layer_on
-    .OriginMarkLayer
-      .general_mark_group_name_container
-        __css_keep__: 0
+<style lang="scss">
+@import "../../support.sass";
+/* ../general_mark_color.scss */
+/* ../general_mark_base.scss */
+@import "./scss/omv_aim.scss";
+@import "./scss/omv_invisible.scss";
+@import "./scss/omv_square_gray.scss";
+@import "./scss/omv_square_color.scss";
+@import "./scss/omv_fire.scss";
+.ShogiPlayer {
+  &.is_layer_on {
+    .OriginMarkLayer {
+      .general_mark_group_name_container {
+        __css_keep__: 0;
+      }
+    }
+  }
+}
 </style>

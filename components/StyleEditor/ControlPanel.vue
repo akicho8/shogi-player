@@ -402,6 +402,9 @@
       p.help
         | 以上はすべて操作モードでのみ有効である
 
+    CategoryBox(category_key="イベント")
+      SmartRadio(variable_key="event_show_p" label="簡易確認")
+
     CategoryBox(category_key="デバッグ")
       SmartRadio(variable_key="sp_debug" label="デバッグモード")
       SmartRadio(variable_key="sp_layer" label="レイヤー確認")
@@ -456,6 +459,36 @@
               b-button(@click="AppContext.se_user_custom_css_preset_apply_handle(e)" size="is-small") {{e.name}}
       b-field(custom-class="is-small" label="CSS")
         b-input(size="is-small" v-model="AppContext.user_custom_css" type="textarea" :rows="8")
+
+    CategoryBox(category_key="移動元印")
+      b-field(custom-class="is-small" label="配置確認")
+        .control
+          .buttons.mb-0
+            template(v-for="e in AppContext.OriginMarkPresetInfo.values")
+              b-button(@click="AppContext.origin_mark_preset_apply_handle(e)" size="is-small") {{e.name}}
+      b-field.mb-0(custom-class="is-small" label="データ")
+        b-input(size="is-small" v-model="AppContext.origin_mark_list_json_text" type="textarea" :rows="8")
+      b-field.mt-2(custom-class="is-small" position="is-right")
+        .control
+          b-button(size="is-small" @click="AppContext.origin_mark_apply_handle" type="is-primary") 読み込む
+
+      hr
+
+      SmartRadio(variable_key="sp_origin_mark_variant" label="種類")
+
+      .columns
+        .column
+          b-field(custom-class="is-small" label="名前")
+            b-input(size="is-small" v-model.trim="AppContext.origin_mark_group_name" placeholder="名前")
+        .column
+          b-field(custom-class="is-small" label="色番号")
+            b-input(size="is-small" v-model.number="AppContext.origin_mark_color_index" placeholder="0")
+
+      b-field(custom-class="is-small" label="内部変数" v-if="development_p")
+        .control
+          pre(v-if="AppContext.$refs.sp_object")
+            | mut_origin_mark_list => {{AppContext.$refs.sp_object.mut_origin_mark_list}}
+            | mut_origin_mark_list.hash_table => {{AppContext.$refs.sp_object.mut_origin_mark_list.hash_table}}
 
     CategoryBox(category_key="コンポーネント引数確認")
       SmartRadio(variable_key="component_parmas_show_all")
@@ -551,8 +584,14 @@ export default {
     margin-bottom: 1.25rem
 
   pre
+    border: 1px solid $grey-lighter
     padding: 0.75rem
     font-size: $size-7
     // white-space: pre-wrap
     // word-break: break-all
+    &.resizeable
+      resize: vertical
+      overflow: auto
+    &.is_small
+      height: 4rem
 </style>

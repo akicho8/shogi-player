@@ -1,6 +1,7 @@
 import { VariableInfo } from "./models/variable_info.js"
 import { GX } from "../models/gx.js"
 import JSON5 from "json5"
+import _ from "lodash"
 
 export const mod_variables = {
   data() {
@@ -69,14 +70,12 @@ export const mod_variables = {
   },
 
   computed: {
-    VariableInfo() { return VariableInfo },
-
     // 現在値
     sp_component_current_attrs() {
       let hv = {}
       this.VariableInfo.values.forEach(e => {
         if (e.context_type === "sp_var") {
-          hv[e.key] = this[e.key]
+          hv[e.key] = structuredClone(this[e.key]) // structuredClone を挟むと Vue のアクセサが外れる
         }
       })
       return hv
@@ -84,10 +83,13 @@ export const mod_variables = {
 
     // 現在値から初期値を除いたものを返す
     sp_component_bind_attrs() {
+      // return this.sp_component_current_attrs
+
       const hv = this.sp_component_current_attrs
       if (this.component_parmas_show_all) {
         return hv
       }
+
       return this.VariableInfo.default_value_reject(hv)
     },
 
@@ -99,5 +101,10 @@ export const mod_variables = {
       get()  { return this.sp_player_info.white.piece_visibility },
       set(v) { this.sp_player_info.white.piece_visibility = v    },
     },
+
+    // origin_mark_list_json_text: {
+    //   get()  { return JSON.stringify(this.sp_origin_mark_list) },
+    //   set(v) { this.sp_origin_mark_list = JSON5.parse(v)               },
+    // },
   },
 }

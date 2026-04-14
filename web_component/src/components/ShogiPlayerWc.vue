@@ -99,6 +99,9 @@ export default {
     sp_player_info:                    { type: String,  }, // 対局者名と時間
     // 本当は Array
     sp_think_mark_list:                { type: String,  }, // 初期思考印配列
+    // 本当は Array
+    sp_origin_mark_list:                { type: String,  }, // 初期移動元印配列
+    sp_origin_mark_variant:         { type: String,  }, // 移動元印の種類
     // 本当は Function
     sp_board_cell_class_fn:            { type: String,  }, // セルのクラスを決める処理
   },
@@ -164,6 +167,7 @@ export default {
       return {
         sp_player_info:         this.sp_player_info_native,
         sp_think_mark_list:     this.sp_think_mark_list_native,
+        sp_origin_mark_list:    this.sp_origin_mark_list_native,
         sp_board_cell_class_fn: this.sp_board_cell_class_fn_native,
       }
     },
@@ -176,9 +180,17 @@ export default {
       }
     },
 
-    // sp_think_mark_list の Hash 化
+    // sp_think_mark_list の Array 化
     sp_think_mark_list_native() {
       const v = this.lookup_var("sp_think_mark_list")
+      if (v != null) {
+        return JSON5.parse(v)
+      }
+    },
+
+    // sp_origin_mark_list の Array 化
+    sp_origin_mark_list_native() {
+      const v = this.lookup_var("sp_origin_mark_list")
       if (v != null) {
         return JSON5.parse(v)
       }

@@ -2,6 +2,7 @@ import { ApplicationMemoryRecord } from "../../models/application_memory_record.
 import * as DeepObjectDiff from "deep-object-diff"
 import { GX } from "../../models/gx.js"
 import { ColorHelper } from "./color_helper.js"
+import _ from "lodash"
 
 const sp_player_info_one_create = () => Object.freeze({
   name: "",
@@ -22,14 +23,20 @@ export class VariableInfo extends ApplicationMemoryRecord {
       { key: "kifu_book_key",                          name: "棋譜プリセット",                                                            group: "geneal",   context_type: "se_var",    type: "String",  sub_type: null,    default_value: null,                     development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: null,                        },
       { key: "sfen_book_key",                          name: "棋譜プリセット",                                                            group: "geneal",   context_type: "se_var",    type: "String",  sub_type: null,    default_value: null,                     development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: null,                        },
       { key: "transform_tab_index",                    name: "Transformのタブ位置",                                                       group: "geneal",   context_type: "se_var",    type: "Integer", sub_type: null,    default_value: 0,                        development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: null,                        },
+      { key: "event_show_p",                              name: "簡易確認",                                                              group: "geneal",   context_type: "se_var",    type: "Bool",    sub_type: null,    default_value: false,                    development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: "BinaryInfo",                },
 
       { key: "user_custom_css",                        name: "カスタムCSS",                                                               group: "geneal",   context_type: "se_var",    type: "Text",    sub_type: null,    default_value: "",                       development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: null,                        },
       { key: "component_parmas_show_all",              name: "ShogiPlayerのコンポーネント引数確認時にデフォルト値も表示する",             group: "geneal",   context_type: "se_var",    type: "Bool",    sub_type: null,    default_value: false,                    development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: "AllShowInfo",               },
       { key: "css_params_show_all_sp",                 name: "ShogiPlayerのCSS変数確認時にデフォルト値も表示する",                        group: "geneal",   context_type: "se_var",    type: "Bool",    sub_type: null,    default_value: false,                    development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: "AllShowInfo",               },
       { key: "css_params_show_all_se",                 name: "スタイルエディタ側のCSS変数確認時にデフォルト値も表示する",                 group: "geneal",   context_type: "se_var",    type: "Bool",    sub_type: null,    default_value: false,                    development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: "AllShowInfo",               },
 
-      { key: "sp_player_info_black_piece_visibility",  name: "☗の持駒表示",                                                               group: "geneal",   context_type: "virtual",   type: "String",  sub_type: null,    default_value: null,                     development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: "PieceVisibilityInfo",       },
-      { key: "sp_player_info_white_piece_visibility",  name: "☖の持駒表示",                                                               group: "geneal",   context_type: "virtual",   type: "String",  sub_type: null,    default_value: null,                     development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: "PieceVisibilityInfo",       },
+      { key: "origin_mark_list_json_text",             name: "移動元印の確認用初期データ",                                                group: "geneal",   context_type: "se_var",    type: "Text",    sub_type: null,    default_value: "[]",                     development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: null,                        },
+      { key: "origin_mark_group_name",                 name: "移動元印の名前",                                                            group: "geneal",   context_type: "se_var",    type: "String",  sub_type: null,    default_value: "(name)",                 development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: null,                        },
+      { key: "origin_mark_color_index",                name: "移動元印の色",                                                              group: "geneal",   context_type: "se_var",    type: "Integer", sub_type: null,    default_value: 0,                        development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: null,                        },
+      { key: "sp_origin_mark_variant",                 name: "移動元印の種類",                                                            group: "geneal",   context_type: "sp_var",    type: "String",  sub_type: null,     default_value: "omv_square_color",                  development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: "OriginMarkVariantInfo",               },
+
+      { key: "sp_player_info_black_piece_visibility",  name: "☗の持駒表示",                                                              group: "geneal",   context_type: "virtual",   type: "String",  sub_type: null,    default_value: null,                     development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: "PieceVisibilityInfo",       },
+      { key: "sp_player_info_white_piece_visibility",  name: "☖の持駒表示",                                                              group: "geneal",   context_type: "virtual",   type: "String",  sub_type: null,    default_value: null,                     development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: "PieceVisibilityInfo",       },
 
       ////////////////////////////////////////////////////////////////////////////////
 
@@ -131,6 +138,8 @@ export class VariableInfo extends ApplicationMemoryRecord {
       { key: "sp_coordinate_color",                    name: "座標の文字色",                                                              group: "geneal",   context_type: "sp_css",    type: "String",  sub_type: "color", default_value: "hsl(0 0% 0% / 0.75)",    development_value: null, min: null, max: null, step: null,    parent_key: "sp_coordinate", relative_model: null,                        },
 
       ////////////////////////////////////////////////////////////////////////////////
+
+      { key: "sp_origin_mark_list",                    name: "移動元印",                                                                  group: "geneal",   context_type: "sp_var",    type: "Array",   sub_type: null,    default_value: [],                       development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: null,                        },
 
       { key: "sp_player_info",                         name: "対局者の情報",                                                              group: "geneal",   context_type: "sp_var",    type: "Hash",    sub_type: null,    default_value: sp_player_info_create(),  development_value: null, min: null, max: null, step: null,    parent_key: null,            relative_model: null,                        },
 
@@ -234,8 +243,43 @@ export class VariableInfo extends ApplicationMemoryRecord {
   // 差分だけを返す
   // 引数の all_attrs から初期値を除いた状態にして返す
   static default_value_reject(all_attrs) {
-    const diff = DeepObjectDiff.updatedDiff(this.sp_component_bind_attrs_default, all_attrs)
-    return structuredClone(diff)
+    // const diff = DeepObjectDiff.updatedDiff(this.sp_component_bind_attrs_default, all_attrs)
+    // return {}
+
+    // const diff = DeepObjectDiff.diff(this.sp_component_bind_attrs_default, all_attrs)
+    // return structuredClone(diff)
+
+    const attrs_default = this.sp_component_bind_attrs_default
+    // console.log(structuredClone(all_attrs))
+    // debugger
+
+    // _.each(all_attrs, (value, key) => {
+    //   console.log({value: structuredClone(value)})
+    //   console.log(`${key}: ${value}`)
+    // })
+    // return {}
+    // for (const [key, value] of all_attrs) {
+
+    // _.each(all_attrs, (value, key) => {
+    //   console.log({value: structuredClone(value)})
+    //   console.log(`${key}: ${value}`)
+    // })
+    // return {}
+
+    const hv = {}
+    _.each(all_attrs, (value, key) => {
+      let a = attrs_default[key]
+      let b = value
+      if (true) {
+        a = structuredClone(a)
+        b = structuredClone(b)
+      }
+      if (JSON.stringify(a) === JSON.stringify(b)) {
+      } else {
+        hv[key] = b
+      }
+    })
+    return hv
   }
 
   static float_format(v) {
@@ -278,7 +322,7 @@ export class VariableInfo extends ApplicationMemoryRecord {
       v = str.trim()
     } else if (this.type === "Bool") {
       v = (str === "true")
-    } else if (this.type === "Hash") {
+    } else if (this.type === "Hash" || this.type === "Array") {
       v = JSON5.parse(str)
     } else if (this.type === "Float") {
       v = parseFloat(str)

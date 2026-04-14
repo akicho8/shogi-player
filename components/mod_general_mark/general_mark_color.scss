@@ -1,7 +1,7 @@
 @use "sass:math";
 
 .ShogiPlayer {
-  $SP_GENERAL_MARK_PALETTE_COUNT: 12;                       // 色数。これ以上の色が必要なら利用者定義してもらう
+  $SP_GENERAL_MARK_PALETTE_COUNT: 8;                       // 色数。これ以上の色が必要なら利用者定義してもらう
   $color_base: hsl(0 35% 50% / 0.9);              // 基本色。あまり派手にしないこと
   $hue_step: math.div(360, $SP_GENERAL_MARK_PALETTE_COUNT); // 色差
 
