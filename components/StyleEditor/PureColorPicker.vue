@@ -45,10 +45,16 @@ export default {
 
   },
   methods: {
+    // 強制的にイベントを発生させる
+    emit_event_call_force() {
+      this.mut_color = this.mut_color
+    },
+
     // ユーザーが変更したとき
     input_handle(str) {
       if (ColorHelper.valid_p(str)) {
         this.free_text = str
+        this.emit_event_call_force()
       }
     },
 
@@ -65,7 +71,6 @@ export default {
     random_handle() {
       const str = ColorHelper.random({alpha: this.color_object.alpha}) // alpha 値は保持する
       this.input_handle(str)
-      this.mut_color = this.mut_color // input イベントを発生させるため
     },
 
     // 小さくしたボタンに表示する名前
