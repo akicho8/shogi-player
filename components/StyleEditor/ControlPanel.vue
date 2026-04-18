@@ -180,6 +180,7 @@
       SmartRadio(variable_key="sp_layout" label="盤のどこに配置する？")
       SmartRadio(variable_key="sp_stand_gravity" label="左右配置時の上下位置")
       SmartRadio(variable_key="sp_stand_flip" label="相手側を反転")
+      SmartRadio(variable_key="sp_board_variant_to_stand" label="盤の種類を駒台にも適用するか？" message="背景色を有効にするときはこちらを OFF にする")
       SmartColor(variable_key="sp_stand_bg_color" label="背景色")
       SmartColor(variable_key="sp_stand_hover_border_color" label="持駒をhoverさせたときのborder色" message="編集モード時のみ有効。駒箱にも適用する。")
 
@@ -225,6 +226,19 @@
             b-input(size="is-small" v-model.trim="AppContext.sp_player_info.white.time" type="text" placeholder="56:78")
 
     CategoryBox(category_key="駒数")
+      .columns
+        .column
+          SmartSlider(variable_key="sp_piece_count_size" label="文字の大きさ" message="")
+        .column
+          SmartColor(variable_key="sp_piece_count_font_color" label="文字の色" message="対局者名にも適用する")
+      .columns
+        .column
+          SmartSlider(variable_key="sp_piece_count_border_width" label="ボーダーの太さ")
+        .column
+          SmartColor(variable_key="sp_piece_count_border_color" label="ボーダー色")
+
+      SmartColor(variable_key="sp_piece_count_bg_color" label="背景")
+      SmartSlider(variable_key="sp_piece_count_padding" label="余白")
 
       .columns
         .column
@@ -238,13 +252,12 @@
         .column
           SmartSlider(variable_key="sp_piece_count_vertical_y" label="上下レイアウト時 (Y)")
 
-      b-field(custom-class="is-small" label="余白")
-        b-slider(v-bind="AppContext.slider_options" v-model="AppContext.sp_piece_count_padding" :min="0" :max="1.0" :step="0.01")
-
-      b-field(custom-class="is-small" label="大きさ")
-        b-slider(v-bind="AppContext.slider_options" v-model="AppContext.sp_piece_count_size" :min="0" :max="1.0" :step="0.01")
-      SmartColor(variable_key="sp_piece_count_font_color" label="テキスト色 (対局者名にも適用)")
-      SmartColor(variable_key="sp_piece_count_bg_color" label="背景")
+    CategoryBox(category_key="対局者領域")
+      .columns
+        .column
+          SmartSlider(variable_key="sp_membership_vertical_gap" label="余白 (横長レイアウト時)" message="駒台に色をつけている場合に対局者名との隙間がなくなるため少し空けるとよい")
+        .column
+          SmartSlider(variable_key="sp_membership_horizontal_gap" label="余白 (縦長レイアウト時)" message="対局者名は右寄せになっているため空けなくてもよいが☗との隙間が気になるなら空ける")
 
     CategoryBox(category_key="駒箱")
       SmartColor(variable_key="sp_piece_box_color" label="背景")
@@ -256,6 +269,36 @@
     CategoryBox(category_key="駒を操作中の移動元")
       SmartColor(variable_key="sp_mouse_lifted_origin_bg_color" label="背景")
       SmartSlider(variable_key="sp_mouse_lifted_origin_opacity" label="駒の不透明度")
+
+    CategoryBox(category_key="移動元印")
+      b-field(custom-class="is-small" label="初期配置プリセット")
+        .control
+          .buttons.mb-0
+            template(v-for="e in AppContext.OriginMarkPresetInfo.values")
+              b-button(@click="AppContext.origin_mark_preset_apply_handle(e)" size="is-small") {{e.name}}
+      b-field.mb-0(custom-class="is-small" label="初期配置 (デバッグ用)")
+        b-input(size="is-small" v-model="AppContext.origin_mark_list_json_text" type="textarea" :rows="8")
+      b-field.mt-2(custom-class="is-small" position="is-right")
+        .control
+          b-button(size="is-small" @click="AppContext.origin_mark_apply_handle" type="is-primary") 読み込む
+
+      hr
+
+      SmartRadio(variable_key="sp_origin_mark_variant" label="種類")
+
+      .columns
+        .column
+          b-field(custom-class="is-small" label="名前")
+            b-input(size="is-small" v-model.trim="AppContext.origin_mark_group_name" placeholder="名前")
+        .column
+          b-field(custom-class="is-small" label="色番号")
+            b-input(size="is-small" v-model.number="AppContext.origin_mark_color_index" placeholder="0")
+
+      b-field(custom-class="is-small" label="内部変数" v-if="development_p")
+        .control
+          pre(v-if="AppContext.$refs.sp_object")
+            | mut_origin_mark_list => {{AppContext.$refs.sp_object.mut_origin_mark_list}}
+            | mut_origin_mark_list.hash_table => {{AppContext.$refs.sp_object.mut_origin_mark_list.hash_table}}
 
     CategoryBox(category_key="transform")
       b-tabs(size="is-small" v-model="AppContext.transform_tab_index" expanded)
@@ -460,36 +503,6 @@
       b-field(custom-class="is-small" label="CSS")
         b-input(size="is-small" v-model="AppContext.user_custom_css" type="textarea" :rows="8")
 
-    CategoryBox(category_key="移動元印")
-      b-field(custom-class="is-small" label="配置確認")
-        .control
-          .buttons.mb-0
-            template(v-for="e in AppContext.OriginMarkPresetInfo.values")
-              b-button(@click="AppContext.origin_mark_preset_apply_handle(e)" size="is-small") {{e.name}}
-      b-field.mb-0(custom-class="is-small" label="データ")
-        b-input(size="is-small" v-model="AppContext.origin_mark_list_json_text" type="textarea" :rows="8")
-      b-field.mt-2(custom-class="is-small" position="is-right")
-        .control
-          b-button(size="is-small" @click="AppContext.origin_mark_apply_handle" type="is-primary") 読み込む
-
-      hr
-
-      SmartRadio(variable_key="sp_origin_mark_variant" label="種類")
-
-      .columns
-        .column
-          b-field(custom-class="is-small" label="名前")
-            b-input(size="is-small" v-model.trim="AppContext.origin_mark_group_name" placeholder="名前")
-        .column
-          b-field(custom-class="is-small" label="色番号")
-            b-input(size="is-small" v-model.number="AppContext.origin_mark_color_index" placeholder="0")
-
-      b-field(custom-class="is-small" label="内部変数" v-if="development_p")
-        .control
-          pre(v-if="AppContext.$refs.sp_object")
-            | mut_origin_mark_list => {{AppContext.$refs.sp_object.mut_origin_mark_list}}
-            | mut_origin_mark_list.hash_table => {{AppContext.$refs.sp_object.mut_origin_mark_list.hash_table}}
-
     CategoryBox(category_key="コンポーネント引数確認")
       SmartRadio(variable_key="component_parmas_show_all")
       pre
@@ -523,7 +536,7 @@
         | v - 再生モード
         | p - 操作モード
         | e - 編集モード
-        | L - レアイウト切り替え
+        | h - レアイウト切り替え
         |
         | ※編集モードのときは ShogiPlayer 側のショートカットを優先する
 
