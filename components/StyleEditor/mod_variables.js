@@ -95,16 +95,11 @@ export const mod_variables = {
 
     sp_player_info_black_piece_visibility: {
       get()  { return this.sp_player_info.black.piece_visibility },
-      set(v) { this.sp_player_info.black.piece_visibility = v    },
+      set(v) { this.sp_player_info.black.piece_visibility = v },
     },
     sp_player_info_white_piece_visibility: {
       get()  { return this.sp_player_info.white.piece_visibility },
       set(v) { this.sp_player_info.white.piece_visibility = v    },
     },
-
-    // origin_mark_list_json_text: {
-    //   get()  { return JSON.stringify(this.sp_origin_mark_list) },
-    //   set(v) { this.sp_origin_mark_list = JSON5.parse(v)               },
-    // },
   },
 }
