@@ -22,14 +22,25 @@ export class UserCustomCssPresetInfo extends ApplicationMemoryRecord {
       {
         key: "駒に影",
         user_custom_css: `
-.ShogiPlayer .PieceObject { filter: drop-shadow(4px 4px 4px hsl(0 0% 0% / 0.5)) }
+.ShogiPlayer {
+  .PieceObject {
+    filter: drop-shadow(4px 4px 4px hsl(none 0% 0% / 0.5));
+  }
+}
 `,
       },
       {
-        key: "盤に影",
+        key: "盤と駒台に影",
         user_custom_css: `
 /* 盤テクスチャ有効時にははっきりと影ができる (半透明の盤だと効果は薄い) */
-.ShogiPlayer .BoardTexture { filter: drop-shadow(4px 4px 4px hsl(0 0% 0% / 0.5)) }
+.ShogiPlayer {
+  .BoardTexture,
+  .MembershipLocationMark,
+  .MembershipLocationPlayerInfo,
+  .MembershipStand {
+    filter: drop-shadow(3px 3px 3px hsl(none 0% 0% / 0.5));
+  }
+}
 `,
       },
       {
@@ -71,6 +82,17 @@ export class UserCustomCssPresetInfo extends ApplicationMemoryRecord {
       { key: "研磨痕",   user_custom_css: CssHelper.svg_to_user_css(brushed_steel),  },
       { key: "和紙",     user_custom_css: CssHelper.svg_to_user_css(japanese_paper), },
       { key: "透かし盤", user_custom_css: CssHelper.svg_to_user_css(ghost_text),  },
+
+      {
+        key: "背景グラデーション",
+        user_custom_css: `
+body {
+  background: radial-gradient(circle at top left,     hsl( 16 100% 50% / 0.8), transparent 70%),
+              radial-gradient(circle at bottom right, hsl(215 100% 34% / 0.8), transparent 70%),
+              #000;
+}
+`
+      },
     ]
   }
 }
