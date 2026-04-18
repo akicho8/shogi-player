@@ -137,9 +137,9 @@ export default {
   +defvar(sp_stand_hover_border_stroke, 2)                   // 駒を持って駒箱の上にいるときのボーダーの太さ
   +defvar(sp_stand_bg_color, hsl(0 0% 0% / 0))             // 駒台の背景色
 
-  .MembershipStand
-    // width: 100%
-    // height: 100%
+  // .MembershipStand
+  //   // width: 100%
+  //   // height: 100%
 
   .MembershipStandPieces
     display: flex
@@ -161,32 +161,36 @@ export default {
     // // height: 200px       // 親である MembershipStand の高さに合わせる
     // overflow: hidden   // はみ出さないようにガード
 
-    .PieceWithCount
-      // //   // 縦並びの時の子要素（アイテム）としての設定
-      // // flex-shrink: 1
-      // // min-height: 0    // 高さを縮小可能にするために必須
-      // //   // display: flex
-      // //   // flex-direction: column
-      // flex: 0 1 auto    // grow: 0, shrink: 1, basis: auto
-      // min-height: 0     // 必須。これが「縮んでいいよ」の最終的な許可証
-      // // display: flex
-      // // flex-direction: column
-
-      // grow: 0, shrink: 1, basis: auto
-      // これを PieceTap ではなく、ループの最外殻であるここに入れるのが最重要です
-      // flex: 0 1 auto
-      // min-height: 0
-      //
-      // // 中の PieceTap を正しく表示させるための flex 設定
-      // display: flex
-      // flex-direction: column
-      // align-items: center
+    // .PieceWithCount
+    //   // //   // 縦並びの時の子要素（アイテム）としての設定
+    //   // // flex-shrink: 1
+    //   // // min-height: 0    // 高さを縮小可能にするために必須
+    //   // //   // display: flex
+    //   // //   // flex-direction: column
+    //   // flex: 0 1 auto    // grow: 0, shrink: 1, basis: auto
+    //   // min-height: 0     // 必須。これが「縮んでいいよ」の最終的な許可証
+    //   // // display: flex
+    //   // // flex-direction: column
+    //
+    //   // grow: 0, shrink: 1, basis: auto
+    //   // これを PieceTap ではなく、ループの最外殻であるここに入れるのが最重要です
+    //   // flex: 0 1 auto
+    //   // min-height: 0
+    //   //
+    //   // // 中の PieceTap を正しく表示させるための flex 設定
+    //   // display: flex
+    //   // flex-direction: column
+    //   // align-items: center
 
   .MembershipStand
     +is_overlay_origin
   .MembershipStandTexture
     background-color: var(--sp_stand_bg_color)
     border-radius: calc(var(--sp_board_radius) * 1px)
+
+    // +is_background_cover_by_image
+    // background-image: var(--sp_board_image)  // none でスルーする
+    // background-image: url("../../assets/inspect/256x256.png")
 
   //////////////////////////////////////////////////////////////////////////////// 駒を持って駒箱の上にいるとき
   .MembershipStand
