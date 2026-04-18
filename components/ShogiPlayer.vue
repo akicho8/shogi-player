@@ -140,6 +140,12 @@ export default {
       default: true,
     },
 
+    // 盤の種類を駒台にも適用するか？
+    sp_board_variant_to_stand: {
+      type: Boolean,
+      default: false,
+    },
+
     // 駒の種類
     sp_piece_variant: {
       type: String,
@@ -576,6 +582,7 @@ export default {
         this.bool_to_css_class("is_mobile_vertical", this.sp_mobile_vertical),
         this.bool_to_css_class("is_coordinate", this.sp_coordinate),
         this.bool_to_css_class("is_balloon", this.sp_balloon),
+        this.bool_to_css_class("is_board_variant_to_stand", this.sp_board_variant_to_stand),
       ]
     },
 
