@@ -109,25 +109,26 @@ export default {
 @import "../support.sass"
 
 .ShogiPlayer
+  +defvar(sp_membership_vertical_gap, 0.0)    // 盤の左右の隙間(全体横レイアウト時)
+  +defvar(sp_membership_horizontal_gap, 0.0)  // 盤の上下の隙間(全体縦レイアウト時)
+
   .Membership
     display: flex
     align-items: center // ▲を中央に配置
 
-    // height: var(--sp_board_entire_current_h)
+  ////////////////////////////////////////////////////////////////////////////////
 
-  &.is_layer_on
+  // 左右配置の場合は縦に並ぶため駒台の駒の高さ(H)を基準にする
+  +IF_HORIZONTAL
     .Membership
-      +is_layer_border
+      gap: calc(var(--sp_stand_cell_current_h) * var(--sp_membership_vertical_gap))
 
-  // .Membership
-  //   border: 3px dashed blue ! important
-  //
-  // .MembershipLocation
-  //   // border: 1px dashed change_color($primary, $alpha: 0.5)
-  // .MembershipLocationPlayerInfo
-  //   // border: 1px dashed change_color($primary, $alpha: 0.5)
-  // .MembershipStand
-  //   border: 3px dashed red ! important
+  // 上下配置の場合は横に並ぶため駒台の駒の幅(W)を基準にする
+  +IF_VERTICAL
+    .Membership
+      gap: calc(var(--sp_stand_cell_current_w) * var(--sp_membership_horizontal_gap))
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   +IF_HORIZONTAL
     .Membership
@@ -135,13 +136,13 @@ export default {
         flex-direction: column-reverse // 全体が横並び → 持駒は縦並び(△が下に来るため反転)
       &.is_position_south
         flex-direction: column         // 全体が横並び → 持駒は縦並び(▲が上に来るためそのまま)
-    &.is_stand_gravity_top               // 左↓ 右↑
+    &.is_stand_gravity_top             // 左↓ 右↑
       .Membership
         &.is_position_north
           align-self: flex-end         // 全体が横並び → 持駒は縦並び → 後手は下寄せ
         &.is_position_south
           align-self: flex-start       // 全体が横並び → 持駒は縦並び → 先手は上寄せ
-    &.is_stand_gravity_bottom              // 左↑ 右↓
+    &.is_stand_gravity_bottom          // 左↑ 右↓
       .Membership
         &.is_position_north
           align-self: flex-start       // 全体が横並び → 持駒は縦並び → 後手は上寄せ
@@ -153,7 +154,17 @@ export default {
       width: 100%
       height: 100%
       &.is_position_north
-        flex-direction: row              // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△ 後手 飛歩」のままでよい (左端→)
+        flex-direction: row            // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△ 後手 飛歩」のままでよい (左端→)
+        align-items: flex-end
       &.is_position_south
-        flex-direction: row-reverse      // 全体が縦並び → 持駒は横並び → 右寄せ 先手は「飛歩 先手 ▲」とする (←右端)
+        flex-direction: row-reverse    // 全体が縦並び → 持駒は横並び → 右寄せ 先手は「飛歩 先手 ▲」とする (←右端)
+        align-items: flex-start
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  &.is_layer_on
+    .Membership
+      +is_layer_border
+
+  ////////////////////////////////////////////////////////////////////////////////
 </style>
