@@ -58,6 +58,7 @@ export default {
     sp_key_event_capture:              { type: Boolean, }, // スライダーにフォーカスしていなくても左右キーで手数を動かす
     sp_layout:                         { type: String,  }, // レイアウト is_(vertical\|horizontal)
     sp_balloon:                        { type: Boolean, }, // 対局者名の下に駒数スタイルと同じ背景色を置く
+    sp_board_variant_to_stand:                         { type: Boolean, }, // 盤の種類を駒台にも適用するか？
     sp_layer:                          { type: Boolean, }, // レイヤー確認(デバッグ用)
     sp_piece_variant:                  { type: String,  }, // 駒の種類
     sp_board_variant:                  { type: String,  }, // 盤の種類

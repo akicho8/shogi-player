@@ -3,6 +3,9 @@
     &.is_board_variant_#{$key}
       .BoardTexture
         background-image: url("../assets/board_variant/#{$key}.#{$type}")
+      &.is_board_variant_to_stand_on
+        .MembershipStandTexture
+          background-image: url("../assets/board_variant/#{$key}.#{$type}")
 
 +board_variant_define("wood_normal", "png")
 +board_variant_define("wood_bright", "png")
