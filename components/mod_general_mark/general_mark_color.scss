@@ -1,30 +1,21 @@
 @use "sass:math";
 
 .ShogiPlayer {
-  $SP_GENERAL_MARK_PALETTE_COUNT: 8;                       // 色数。これ以上の色が必要なら利用者定義してもらう
-  $color_base: hsl(0 35% 50% / 0.9);              // 基本色。あまり派手にしないこと
-  $hue_step: math.div(360, $SP_GENERAL_MARK_PALETTE_COUNT); // 色差
+  $SP_GENERAL_MARK_PALETTE_COUNT: 9;
+
+  // oklchでの定義 (Lightness, Chroma, Hue)
+  // hsl(0 35% 50%) に近い設定: L=0.6, C=0.15, H=20
+  $L: 0.6;
+  $C: 0.15;
+  $step: math.div(360, $SP_GENERAL_MARK_PALETTE_COUNT);
 
   .GeneralMarkLayer {
     @for $i from 0 through $SP_GENERAL_MARK_PALETTE_COUNT - 1 {
-      $color: adjust-hue($color_base, $i * $hue_step);
-      $lightness: lightness($color);
-
-      // コントラスト計算
-      $edge_rate: 30%;
-      $edge_color: if($lightness > 50%, lighten($color, $edge_rate), darken($color, $edge_rate));
-
-      $text_bg_rate: 25%;
-      $text_bg: if($lightness > 50%, lighten($color, $text_bg_rate), darken($color, $text_bg_rate));
-
-      $text_color: if($lightness > 50%, darken($color, 100%), lighten($color, 100%));
-
-      // 色番号ごとの変数定義クラス
       &.general_mark_color_index#{$i} {
-        --general_mark_stroke_color: #{$color};
-        --general_mark_edge_color: #{$edge_color};
-        --general_mark_text_bg: #{$text_bg};
-        --general_mark_text_color: #{$text_color};
+        --c: oklch(#{$L} #{$C} #{$i * $step});
+        --general_mark_stroke_color: oklch(from var(--c) calc(l * 1.0)  c h);
+        --general_mark_text_bg:      oklch(from var(--c) calc(l * 0.75) c h / 0.5);
+        --general_mark_text_color:   oklch(from var(--c) calc(l * 1.5)  c h);
       }
     }
   }

@@ -39,8 +39,6 @@ export default {
       height: 80%
       border-radius: 50%
       border: 4px solid var(--general_mark_stroke_color)
-      outline: 1px solid var(--general_mark_edge_color)
-      box-shadow: inset 0 0 0 1px var(--general_mark_edge_color)
 
 .ShogiPlayer
   &.is_layer_on
