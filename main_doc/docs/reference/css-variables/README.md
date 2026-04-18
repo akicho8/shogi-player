@@ -73,6 +73,22 @@ Default: `0`
 
 * 上下配置時にのみ有効
 
+### `--sp_membership_vertical_gap`
+Default: `0`
+
+全体が横長レイアウト時の各対局者の領域内の要素毎の隙間
+
+* 全体が横長レイアウトのとき駒台は縦長になり、その駒台と対局者の領域に隙間をあけたいときに指定する
+* 駒台が透明な場合はとくに指定しないでよい
+
+### `--sp_membership_horizontal_gap`
+Default: `0`
+
+全体が縦長レイアウト時の各対局者の領域内の要素毎の隙間
+
+* 縦長のときは横幅が貴重なので基本0でよい
+* また対局者名は右に寄っているので隙間を入れる必要がない
+
 ### `--sp_common_gap`
 Default: `0.02`
 
@@ -303,7 +319,7 @@ Default: `0.47`
 駒数のY座標 (上下配置時)
 
 ### `--sp_piece_count_size`
-Default: `0.2`
+Default: `0.25`
 
 駒数の文字サイズ
 
@@ -323,6 +339,16 @@ Default: `hsl(0 0% 100% / 0.9)`
 Default: `0.08`
 
 駒数の余白
+
+### `--sp_piece_count_border_width`
+Default: `2.0`
+
+駒数のボーダーピクセル数 (単位不要)
+
+### `--sp_piece_count_border_color`
+Default: `hsl(0 0% 0% / 0.1)`
+
+駒数のボーダー色
 
 ## 成り不成り
 
@@ -401,4 +427,3 @@ Default: `none`
 ### `--sp_board_cell_current_h`
 
 セルの縦幅
-
