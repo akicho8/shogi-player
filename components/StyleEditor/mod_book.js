@@ -17,6 +17,11 @@ export const mod_book = {
       }
     },
 
+    sfen_book_apply(sfen_book_key) {
+      this.sfen_book_key = sfen_book_key
+      this.sfen_book_change_handle()
+    },
+
     user_body_apply_handle() {
       this.sp_body = this.user_body
     },
