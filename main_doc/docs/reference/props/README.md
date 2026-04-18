@@ -367,6 +367,13 @@ Default: `true`
 
 対局者名の下に駒数スタイルと同じ背景色を置くか？
 
+### `sp_board_variant_to_stand`
+
+Type: `Boolean`
+Default: `false`
+
+盤の種類を駒台にも適用するか？
+
 ## Level 3
 
 ### `sp_lift_cancel_action`
