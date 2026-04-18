@@ -30,18 +30,9 @@ export default {
   beforeMount() {
     GX.assert(this.variable_model, `${this.variable_info.relative_model} に対応するモデルが見つからない`)
   },
-  mounted() {
-    console.log(this.variable_key)
-    console.log(this.variable_info.key)
-    console.log(this.AppContext[this.variable_info.key])
-  },
-
   methods: {
     name_of(e) {
       return e.radio_button_name ?? e.name
-    },
-    input_handle(value) {
-      console.log(value)
     },
   },
   computed: {
@@ -52,10 +43,6 @@ export default {
         return this.AppContext[this.variable_info.parent_info.key]
       }
       return true
-    },
-    foo: {
-      get() { return this.AppContext[this.variable_info.key] },
-      set(value) { this.AppContext[this.variable_info.key] = value },
     },
   },
 }
