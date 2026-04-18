@@ -23,10 +23,12 @@ export default {
   +defvar(sp_piece_count_horizontal_y, 0.30)                // 駒数の中央からの相対位置Y(%) (左右配置時)
   +defvar(sp_piece_count_vertical_x, 0.0)                   // 駒数の中央からの相対位置X(%) (上下配置時)
   +defvar(sp_piece_count_vertical_y, 0.47)                  // 駒数の中央からの相対位置y(%) (上下配置時)
-  +defvar(sp_piece_count_size, 0.2)                         // 駒数の文字サイズ(駒セル縦幅に対する比率)
-  +defvar(sp_piece_count_font_color, hsl(0 0% 0% / 0.75)) // 駒数の文字色
-  +defvar(sp_piece_count_bg_color, hsl(0 0% 100% / 0.9))  // 駒数の文字色背景
+  +defvar(sp_piece_count_size, 0.25)                        // 駒数の文字サイズ(駒セル縦幅に対する比率)
+  +defvar(sp_piece_count_font_color, hsl(0 0% 0% / 0.75))   // 駒数の文字色
+  +defvar(sp_piece_count_bg_color, hsl(0 0% 100% / 0.9))    // 駒数の文字色背景
   +defvar(sp_piece_count_padding, 0.08)                     // 駒数のパディング(駒セル縦幅に対する比率)
+  +defvar(sp_piece_count_border_width, 0.0)                 // 駒数の外枠ピクセル数
+  +defvar(sp_piece_count_border_color, hsl(0 0% 0% / 0.1))  // 駒数の外枠色
 
   //////////////////////////////////////////////////////////////////////////////// 本当に共通のもの
 
@@ -51,6 +53,7 @@ export default {
     line-height: 1.0
     border-radius: 50%
     font-weight: bold
+    border: calc(var(--sp_piece_count_border_width) * 1px) solid var(--sp_piece_count_border_color)
 
     z-index: $piece_count_z // 駒数が Membership の下に潜るのを防ぐ (FIXME: これは本当に必要？)
     position: relative      // 相対的にずらすため、かつ z-index 用
