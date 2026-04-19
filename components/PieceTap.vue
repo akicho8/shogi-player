@@ -216,10 +216,9 @@ export default {
       top: -50%
       left: -50%
 
-    // 本当はマウスカーソルを変更したいが pointer-events: none にしていると cursor が効かない
-    // だからといって pointer-events: auto にすると駒を移動できなくなる
-    // pointer-events: auto
-    // cursor: wait
+  // 持ち上げたときにカーソルを変更する (.ShogiPlayer のなかに .LiftedPieceElement があればカーソルを変更する)
+  &:has(.LiftedPieceElement)
+    cursor: grab                // none にするのもいいかもしれない
 
   // タッチデバイスでは消す場合
   &.is_device_touch
