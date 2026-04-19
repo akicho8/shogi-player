@@ -49,7 +49,7 @@ export const mod_origin_mark = {
     origin_mark_item_attributes(general_mark_pos_key) {
       return {
         general_mark_pos_key: general_mark_pos_key,
-        general_mark_user_name: this.origin_mark_group_name,
+        general_mark_user_name: this.origin_mark_user_name,
         general_mark_color_index: this.origin_mark_color_index,
       }
     },

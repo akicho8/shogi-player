@@ -271,6 +271,9 @@
       SmartSlider(variable_key="sp_mouse_lifted_origin_opacity" label="駒の不透明度")
 
     CategoryBox(category_key="移動元印")
+      p.help.content
+        | 操作モードでのみ動作する
+
       b-field(custom-class="is-small" label="初期配置プリセット")
         .control
           .buttons.mb-0
@@ -286,19 +289,47 @@
 
       SmartRadio(variable_key="sp_origin_mark_variant" label="種類")
 
-      .columns
-        .column
-          b-field(custom-class="is-small" label="名前")
-            b-input(size="is-small" v-model.trim="AppContext.origin_mark_group_name" placeholder="名前")
-        .column
-          b-field(custom-class="is-small" label="色番号")
-            b-input(size="is-small" v-model.number="AppContext.origin_mark_color_index" placeholder="0")
+      b-field(custom-class="is-small" label="名前")
+        b-input(size="is-small" v-model.trim="AppContext.origin_mark_user_name" placeholder="名前")
+
+      SmartSlider(variable_key="origin_mark_color_index" label="色番号")
 
       b-field(custom-class="is-small" label="内部変数" v-if="development_p")
         .control
           pre(v-if="AppContext.$refs.sp_object")
             | mut_origin_mark_collection => {{AppContext.$refs.sp_object.mut_origin_mark_collection}}
             | mut_origin_mark_collection.hash_table => {{AppContext.$refs.sp_object.mut_origin_mark_collection.hash_table}}
+
+    CategoryBox(category_key="思考印")
+      p.help.content
+        | 操作モードでのみ動作する
+
+      b-field(custom-class="is-small" label="初期配置プリセット")
+        .control
+          .buttons.mb-0
+            template(v-for="e in AppContext.ThinkMarkPresetInfo.values")
+              b-button(@click="AppContext.think_mark_preset_apply_handle(e)" size="is-small") {{e.name}}
+
+      b-field.mb-0(custom-class="is-small" label="初期配置 (デバッグ用)")
+        b-input(size="is-small" v-model="AppContext.think_mark_collection_json_text" type="textarea" :rows="8")
+      b-field.mt-2(custom-class="is-small" position="is-right")
+        .control
+          b-button(size="is-small" @click="AppContext.think_mark_apply_handle" type="is-primary") 読み込む
+
+      hr
+
+      SmartRadio(variable_key="sp_think_mark_variant" label="種類")
+
+      b-field(custom-class="is-small" label="名前")
+        b-input(size="is-small" v-model.trim="AppContext.think_mark_user_name" placeholder="名前")
+
+      SmartSlider(variable_key="think_mark_color_index" label="色番号")
+
+      b-field(custom-class="is-small" label="内部変数" v-if="development_p")
+        .control
+          pre(v-if="AppContext.$refs.sp_object")
+            | mut_think_mark_collection => {{AppContext.$refs.sp_object.mut_think_mark_collection}}
+            | mut_think_mark_collection.hash_table => {{AppContext.$refs.sp_object.mut_think_mark_collection.hash_table}}
 
     CategoryBox(category_key="transform")
       b-tabs(size="is-small" v-model="AppContext.transform_tab_index" expanded)
