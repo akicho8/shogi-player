@@ -8,24 +8,20 @@ export class GeneralMarkCollection {
     return this.create()
   }
 
-  static create(general_mark_items = []) {
-    return new this(general_mark_items)
+  static create(items = []) {
+    return new this(items)
   }
 
   static from_serial(str = null) {
     const av = GX.str_split(str ?? "", /,/)
-    const general_mark_items = GX.ary_each_slice_to_a(av, GeneralMarkItem.ATTRIBUTE_COUNT).map(([
-      general_mark_pos_key,
-      general_mark_user_name,
-      general_mark_color_index,
+    const items = GX.ary_each_slice_to_a(av, GeneralMarkItem.ATTRIBUTE_COUNT).map(([
+      gm_pos_key,
+      gm_user_name,
+      gm_color_index,
     ]) => {
-      return {
-        general_mark_pos_key: general_mark_pos_key,
-        general_mark_user_name: general_mark_user_name,
-        general_mark_color_index: general_mark_color_index,
-      }
+      return { gm_pos_key, gm_user_name, gm_color_index }
     })
-    return this.create(general_mark_items)
+    return this.create(items)
   }
 
   static command_create(method, params) {
@@ -37,12 +33,12 @@ export class GeneralMarkCollection {
 
   ////////////////////////////////////////////////////////////////////////////////
 
-  constructor(general_mark_items = []) {
-    this.reset$(general_mark_items)
+  constructor(items = []) {
+    this.reset$(items)
   }
 
-  reset$(general_mark_items = []) {
-    this._items = general_mark_items.map(e => GeneralMarkItem.create(e))
+  reset$(items = []) {
+    this._items = items.map(e => GeneralMarkItem.create(e))
   }
 
   clear$() {
@@ -53,56 +49,56 @@ export class GeneralMarkCollection {
   }
 
   // なければ追加する
-  push$(general_mark_item) {
-    general_mark_item = GeneralMarkItem.create(general_mark_item)
-    if (!this.any_p(general_mark_item)) {
-      this._items.push(general_mark_item)
+  push$(item) {
+    item = GeneralMarkItem.create(item)
+    if (!this.any_p(item)) {
+      this._items.push(item)
       return true
     }
   }
 
   // あれば削除する
-  remove$(general_mark_item) {
-    general_mark_item = GeneralMarkItem.create(general_mark_item)
-    if (this.any_p(general_mark_item)) {
-      this._items = this._items.filter(e => !e.content_equal_p(general_mark_item))
+  remove$(item) {
+    item = GeneralMarkItem.create(item)
+    if (this.any_p(item)) {
+      this._items = this._items.filter(e => !e.content_equal_p(item))
       return true
     }
   }
 
   // あれば削除してなければ追加する
-  toggle$(general_mark_item) {
-    if (this.any_p(general_mark_item)) {
-      return this.remove$(general_mark_item)
+  toggle$(item) {
+    if (this.any_p(item)) {
+      return this.remove$(item)
     } else {
-      return this.push$(general_mark_item)
+      return this.push$(item)
     }
   }
 
   // すでにあるか？
-  any_p(general_mark_item) {
-    general_mark_item = GeneralMarkItem.create(general_mark_item)
-    return this._items.some(e => e.content_equal_p(general_mark_item))
+  any_p(item) {
+    item = GeneralMarkItem.create(item)
+    return this._items.some(e => e.content_equal_p(item))
   }
 
   // 含むか？
-  include_p(general_mark_item) {
-    return this.any_p(general_mark_item)
+  include_p(item) {
+    return this.any_p(item)
   }
 
   // 含まないか？
-  exclude_p(general_mark_item) {
-    return !this.include_p(general_mark_item)
+  exclude_p(item) {
+    return !this.include_p(item)
   }
 
   // 位置をキーにしたハッシュを返す
   get hash_table() {
     let a = {}
     this._items.forEach(e => {
-      if (!a[e.general_mark_pos_key]) {
-        a[e.general_mark_pos_key] = []
+      if (!a[e.gm_pos_key]) {
+        a[e.gm_pos_key] = []
       }
-      a[e.general_mark_pos_key].push(e)
+      a[e.gm_pos_key].push(e)
     })
     return a
   }
@@ -142,8 +138,8 @@ export class GeneralMarkCollection {
   //////////////////////////////////////////////////////////////////////////////// Command Pattern
 
   // toggle コマンド生成
-  command_for_toggle(general_mark_item) {
-    return this.constructor.command_create(this.include_p(general_mark_item) ? "remove" : "push", general_mark_item)
+  command_for_toggle(item) {
+    return this.constructor.command_create(this.include_p(item) ? "remove" : "push", item)
   }
 
   // command_for_toggle で生成した内容を反映する
@@ -162,18 +158,18 @@ export class GeneralMarkCollection {
 
   //////////////////////////////////////////////////////////////////////////////// グループ関連
 
-  // general_mark_user_name のアイテムたちを返す
-  find_all_by_general_mark_user_name(general_mark_user_name) {
-    return this._items.filter(e => e.general_mark_user_name === general_mark_user_name)
+  // gm_user_name のアイテムたちを返す
+  find_all_by_gm_user_name(gm_user_name) {
+    return this._items.filter(e => e.gm_user_name === gm_user_name)
   }
 
-  // general_mark_user_name のアイテムたちが1つでも存在する？
-  general_mark_user_name_exist_p(general_mark_user_name) {
-    return this._items.some(e => e.general_mark_user_name === general_mark_user_name)
+  // gm_user_name のアイテムたちが1つでも存在する？
+  gm_user_name_exist_p(gm_user_name) {
+    return this._items.some(e => e.gm_user_name === gm_user_name)
   }
 
   // 同じグループの印を削除する
-  general_mark_user_name_reject$(general_mark_user_name) {
-    this._items = this._items.filter(e => e.general_mark_user_name !== general_mark_user_name)
+  gm_user_name_reject$(gm_user_name) {
+    this._items = this._items.filter(e => e.gm_user_name !== gm_user_name)
   }
 }
