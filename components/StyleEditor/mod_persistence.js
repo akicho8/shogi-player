@@ -1,5 +1,5 @@
+const PSTORE_VERSION  = 8
 const PSTORE_KEY      = "__sp_style_editor__"
-const PSTORE_VERSION  = 7
 const PSTORE_AUTOLOAD = false
 
 import { Pstore } from "../models/pstore.js"
@@ -35,7 +35,7 @@ export const mod_persistence = {
     },
 
     // 復元
-    // 「同じ引数があればそっちを優先する」とするのはバグの温床となる(というかなった)ため関与しないようにする
+    // 「同じ引数があればそっちを優先する」とするのはバグの温床となったため関与しないようにする
     xstore_load() {
       const storage = this.xstore_storage()
       let count = 0
