@@ -511,7 +511,7 @@ export default {
       //   list = _.concat(list, this.sp_board_cell_class_fn(place))
       // }
 
-      // if (this.mut_origin_mark_list_hash[place.general_mark_pos_key]) {
+      // if (this.mut_origin_mark_collection_hash[place.general_mark_pos_key]) {
       //   list.push("has_origin_mark")
       // }
 
