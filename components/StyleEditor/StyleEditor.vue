@@ -123,8 +123,8 @@ export default {
       // マークできる箇所をタップした
       hv["ev_think_mark_click"] = this.ev_think_mark_click
 
-//             :sp_origin_mark_list="sp_origin_mark_list"
-//             :sp_think_mark_list="sp_think_mark_list"
+//             :sp_origin_mark_collection="sp_origin_mark_collection"
+//             :sp_think_mark_collection="sp_think_mark_collection"
       hv["ev_action_origin_mark_jump_invoke"] = this.ev_action_origin_mark_jump_invoke
       hv["ev_action_origin_mark_jump_cancel"] = this.ev_action_origin_mark_jump_cancel
 

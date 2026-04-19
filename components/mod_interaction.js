@@ -883,8 +883,8 @@ export const mod_interaction = {
     current_turn_finish(message = "") {
       this.log(`${message} → 移動元印を消去しつつ持ち上げ駒情報もリセットする`)
 
-      this.mut_origin_mark_list.clear$()
-      this.mut_think_mark_list.clear$()
+      this.mut_origin_mark_collection.clear$()
+      this.mut_think_mark_collection.clear$()
 
       this.current_turn_reset_all()
     },

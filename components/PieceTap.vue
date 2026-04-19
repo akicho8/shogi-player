@@ -54,12 +54,12 @@ export default {
     component_class() {
       let list = []
       if (this.general_mark_pos_key) {
-        if (this.TheSP.mut_origin_mark_list_hash[this.general_mark_pos_key]) {
+        if (this.TheSP.mut_origin_mark_collection_hash[this.general_mark_pos_key]) {
           list.push("has_origin_mark")
         }
       }
       if (this.general_mark_pos_key) {
-        if (this.TheSP.mut_think_mark_list_hash[this.general_mark_pos_key]) {
+        if (this.TheSP.mut_think_mark_collection_hash[this.general_mark_pos_key]) {
           list.push("has_think_mark")
         }
       }

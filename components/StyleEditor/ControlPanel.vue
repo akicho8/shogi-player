@@ -277,7 +277,7 @@
             template(v-for="e in AppContext.OriginMarkPresetInfo.values")
               b-button(@click="AppContext.origin_mark_preset_apply_handle(e)" size="is-small") {{e.name}}
       b-field.mb-0(custom-class="is-small" label="初期配置 (デバッグ用)")
-        b-input(size="is-small" v-model="AppContext.origin_mark_list_json_text" type="textarea" :rows="8")
+        b-input(size="is-small" v-model="AppContext.origin_mark_collection_json_text" type="textarea" :rows="8")
       b-field.mt-2(custom-class="is-small" position="is-right")
         .control
           b-button(size="is-small" @click="AppContext.origin_mark_apply_handle" type="is-primary") 読み込む
@@ -297,8 +297,8 @@
       b-field(custom-class="is-small" label="内部変数" v-if="development_p")
         .control
           pre(v-if="AppContext.$refs.sp_object")
-            | mut_origin_mark_list => {{AppContext.$refs.sp_object.mut_origin_mark_list}}
-            | mut_origin_mark_list.hash_table => {{AppContext.$refs.sp_object.mut_origin_mark_list.hash_table}}
+            | mut_origin_mark_collection => {{AppContext.$refs.sp_object.mut_origin_mark_collection}}
+            | mut_origin_mark_collection.hash_table => {{AppContext.$refs.sp_object.mut_origin_mark_collection.hash_table}}
 
     CategoryBox(category_key="transform")
       b-tabs(size="is-small" v-model="AppContext.transform_tab_index" expanded)
