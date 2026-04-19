@@ -1,0 +1,7 @@
+.ShogiPlayer {
+  &.is_think_mark_variant_tmv_invisible {
+    .ThinkMarkLayer {
+      display: none;
+    }
+  }
+}

@@ -100,6 +100,7 @@ export default {
     sp_player_info:                    { type: String,  }, // 対局者名と時間
     // 本当は Array
     sp_think_mark_collection:                { type: String,  }, // 初期思考印配列
+    sp_think_mark_variant:                { type: String,  }, // 思考印の種類
     // 本当は Array
     sp_origin_mark_collection:                { type: String,  }, // 初期移動元印配列
     sp_origin_mark_variant:         { type: String,  }, // 移動元印の種類

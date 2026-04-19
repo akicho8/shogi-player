@@ -26,23 +26,22 @@ export default {
 }
 </script>
 
-<style lang="sass">
-@import "../../support.sass"
+<style lang="scss">
+@import "../../support.sass";
+/* ../general_mark_color.scss */
+/* ../general_mark_base.scss */
 
-.ShogiPlayer
-  .ThinkMarkLayer
-    // ../../mod_general_mark/general_mark_base.scss
-    // ../../mod_general_mark/general_mark_color.scss
-    .general_mark_effect
-      // 円の最大をセルの大きさとするには100%だけど隙間がないと気持ちわるいので少し小さめにする
-      width: 80%
-      height: 80%
-      border-radius: 50%
-      border: 4px solid var(--general_mark_stroke_color)
+@import "./scss/tmv_circle_color.scss";
+@import "./scss/tmv_circle_gray.scss";
+@import "./scss/tmv_invisible.scss";
 
-.ShogiPlayer
-  &.is_layer_on
-    .ThinkMarkLayer
-      .general_mark_user_name_container
-        __css_keep__: 0
+.ShogiPlayer {
+  &.is_layer_on {
+    .ThinkMarkLayer {
+      .general_mark_user_name_container {
+        __css_keep__: 0;
+      }
+    }
+  }
+}
 </style>

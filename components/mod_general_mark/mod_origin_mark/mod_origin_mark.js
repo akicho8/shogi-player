@@ -24,13 +24,13 @@ export const mod_origin_mark = {
   },
   methods: {
     origin_mark_jump_invoke_event(ev) {
-      if (this.play_p && this.current_general_mark_pos_key) {
-        this.event_call("ev_action_origin_mark_jump_invoke", this.current_general_mark_pos_key, ev)
+      if (this.play_p && this.current_origin_mark_pos_key) {
+        this.event_call("ev_action_origin_mark_jump_invoke", this.current_origin_mark_pos_key, ev)
       }
     },
     origin_mark_jump_cancel_event(ev) {
-      if (this.play_p && this.current_general_mark_pos_key) {
-        this.event_call("ev_action_origin_mark_jump_cancel", this.current_general_mark_pos_key, ev)
+      if (this.play_p && this.current_origin_mark_pos_key) {
+        this.event_call("ev_action_origin_mark_jump_cancel", this.current_origin_mark_pos_key, ev)
       }
     },
   },

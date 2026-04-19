@@ -101,8 +101,8 @@ export default {
   methods: {
     //////////////////////////////////////////////////////////////////////////////// ユーザー側の定義
 
-    ev_think_mark_click(params, event) {
-      const think_mark_attrs = this.think_mark_attrs_from(params.general_mark_pos_key)
+    ev_think_mark_click(think_mark_pos_key, event) {
+      const think_mark_attrs = this.think_mark_attrs_from(think_mark_pos_key)
       this.$refs.sp_object.mut_think_mark_collection.toggle$(think_mark_attrs)
     },
 

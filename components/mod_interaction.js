@@ -104,14 +104,7 @@ export const mod_interaction = {
 
     // マークしたいとき用のイベントを発行する
     board_cell_left_click_think_mark_event(place, e) {
-      // if (!this.piece_pick_p) {
-      const params = {
-        general_mark_pos_key: place.general_mark_pos_key, // これだけあればいいけど
-        place: place,                        // 他のも入れとく
-      }
-      // if (this.meta_p(e)) {
-      this.event_call("ev_think_mark_click", params, e)
-      // }
+      this.think_mark_click_event(place.general_mark_pos_key, e)
     },
 
     board_cell_left_click_piece_move(place, e) {
@@ -643,12 +636,7 @@ export const mod_interaction = {
     // },
 
     piece_stand_markable_event(location, piece, e) {
-      const params = {
-        general_mark_pos_key: location.general_mark_pos_key(piece), // これだけあればいいけど
-        location: location,                    // 何かに使うかもしれないので
-        piece: piece,                          // 他のも入れとく
-      }
-      this.event_call("ev_think_mark_click", params, e)
+      this.think_mark_click_event(location.general_mark_pos_key(piece), e)
     },
 
     // 駒台の駒をクリック
@@ -1038,7 +1026,7 @@ export const mod_interaction = {
       ].join("")
     },
 
-    current_general_mark_pos_key() {
+    current_origin_mark_pos_key() {
       if (this.piece_pick_from_board_p) {
         return this.pick_place.general_mark_pos_key
       } if (this.piece_pick_from_stand_p) {
