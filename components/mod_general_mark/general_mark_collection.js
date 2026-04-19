@@ -3,7 +3,7 @@
 import { GX } from "../models/gx"
 import { GeneralMarkItem } from "./general_mark_item.js"
 
-export class GeneralMarkList {
+export class GeneralMarkCollection {
   static empty() {
     return this.create()
   }
@@ -16,12 +16,12 @@ export class GeneralMarkList {
     const av = GX.str_split(str ?? "", /,/)
     const general_mark_items = GX.ary_each_slice_to_a(av, GeneralMarkItem.ATTRIBUTE_COUNT).map(([
       general_mark_pos_key,
-      general_mark_group_name,
+      general_mark_user_name,
       general_mark_color_index,
     ]) => {
       return {
         general_mark_pos_key: general_mark_pos_key,
-        general_mark_group_name: general_mark_group_name,
+        general_mark_user_name: general_mark_user_name,
         general_mark_color_index: general_mark_color_index,
       }
     })
@@ -162,18 +162,18 @@ export class GeneralMarkList {
 
   //////////////////////////////////////////////////////////////////////////////// グループ関連
 
-  // general_mark_group_name のアイテムたちを返す
-  find_all_by_group_name(general_mark_group_name) {
-    return this._items.filter(e => e.general_mark_group_name === general_mark_group_name)
+  // general_mark_user_name のアイテムたちを返す
+  find_all_by_general_mark_user_name(general_mark_user_name) {
+    return this._items.filter(e => e.general_mark_user_name === general_mark_user_name)
   }
 
-  // general_mark_group_name のアイテムたちが1つでも存在する？
-  group_name_exist_p(general_mark_group_name) {
-    return this._items.some(e => e.general_mark_group_name === general_mark_group_name)
+  // general_mark_user_name のアイテムたちが1つでも存在する？
+  general_mark_user_name_exist_p(general_mark_user_name) {
+    return this._items.some(e => e.general_mark_user_name === general_mark_user_name)
   }
 
   // 同じグループの印を削除する
-  group_name_reject$(general_mark_group_name) {
-    this._items = this._items.filter(e => e.general_mark_group_name !== general_mark_group_name)
+  general_mark_user_name_reject$(general_mark_user_name) {
+    this._items = this._items.filter(e => e.general_mark_user_name !== general_mark_user_name)
   }
 }
