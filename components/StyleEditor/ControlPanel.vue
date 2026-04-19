@@ -324,7 +324,15 @@
       b-field(custom-class="is-small" label="所有者名")
         b-input(size="is-small" v-model.trim="AppContext.think_mark_user_name")
 
+      b-field(custom-class="is-small" label="API")
+        .control
+          .buttons.mb-0
+            b-button(@click="AppContext.think_mark_clear_handle" size="is-small") 全消し
+            b-button(@click="AppContext.think_mark_reject_handle" size="is-small") 所有者の印を消去
+
       SmartSlider(variable_key="think_mark_color_index" label="色番号")
+
+      think_mark_reject_handle
 
       b-field(custom-class="is-small" label="内部変数" v-if="development_p")
         .control
