@@ -303,8 +303,8 @@ Default: `null`
 <!--  -->
 <!-- ``` js -->
 <!-- [ -->
-<!--   { general_mark_pos_key: "7_6",     general_mark_user_name: "alice",  general_mark_color_index: 0, }, -->
-<!--   { general_mark_pos_key: "white_P", general_mark_user_name: "bob",    general_mark_color_index: 1, }, -->
+<!--   { gm_pos_key: "7_6",     gm_user_name: "alice",  gm_color_index: 0, }, -->
+<!--   { gm_pos_key: "white_P", gm_user_name: "bob",    gm_color_index: 1, }, -->
 <!-- ] -->
 <!-- ``` -->
 
