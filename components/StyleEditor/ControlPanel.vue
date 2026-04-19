@@ -332,8 +332,6 @@
 
       SmartSlider(variable_key="think_mark_color_index" label="色番号")
 
-      think_mark_reject_handle
-
       b-field(custom-class="is-small" label="内部変数" v-if="development_p")
         .control
           pre(v-if="AppContext.$refs.sp_object")
