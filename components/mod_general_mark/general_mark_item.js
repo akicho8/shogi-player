@@ -16,25 +16,25 @@ export class GeneralMarkItem {
   constructor(attributes) {
     GX.assert_not_null(attributes)
     GX.assert_kind_of_hash(attributes)
-    GX.assert_kind_of_string(attributes["general_mark_pos_key"])
-    GX.assert_present(attributes["general_mark_pos_key"])
+    GX.assert_kind_of_string(attributes["gm_pos_key"])
+    GX.assert_present(attributes["gm_pos_key"])
 
-    this.general_mark_pos_key = attributes["general_mark_pos_key"]
-    this.general_mark_user_name = attributes["general_mark_user_name"] ?? ""
-    this.general_mark_color_index = attributes["general_mark_color_index"] ?? 0
+    this.gm_pos_key = attributes["gm_pos_key"]
+    this.gm_user_name = attributes["gm_user_name"] ?? ""
+    this.gm_color_index = attributes["gm_color_index"] ?? 0
 
     Object.freeze(this)
   }
 
   get css_class() {
-    return ["general_mark_color_index", this.general_mark_color_index].join("")
+    return ["general_mark_color_index", this.gm_color_index].join("")
   }
 
   get attributes() {
     return {
-      general_mark_pos_key:     this.general_mark_pos_key,
-      general_mark_user_name:   this.general_mark_user_name,
-      general_mark_color_index: this.general_mark_color_index,
+      gm_pos_key:     this.gm_pos_key,
+      gm_user_name:   this.gm_user_name,
+      gm_color_index: this.gm_color_index,
     }
   }
 
@@ -51,14 +51,14 @@ export class GeneralMarkItem {
   }
 
   content_equal_p(other) {
-    return this.general_mark_user_name === other.general_mark_user_name && this.general_mark_pos_key === other.general_mark_pos_key
+    return this.gm_user_name === other.gm_user_name && this.gm_pos_key === other.gm_pos_key
   }
 
   get to_serial() {
     return [
-      this.general_mark_pos_key,
-      this.general_mark_user_name,
-      this.general_mark_color_index,
+      this.gm_pos_key,
+      this.gm_user_name,
+      this.gm_color_index,
     ].join(",")
   }
 }
