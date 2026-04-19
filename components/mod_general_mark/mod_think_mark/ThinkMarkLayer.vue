@@ -31,9 +31,9 @@ export default {
 /* ../general_mark_color.scss */
 /* ../general_mark_base.scss */
 
-@import "./scss/tmv_circle_color.scss";
-@import "./scss/tmv_circle_gray.scss";
-@import "./scss/tmv_invisible.scss";
+@import "./scss/circle_color.scss";
+@import "./scss/circle_gray.scss";
+@import "./scss/invisible.scss";
 
 .ShogiPlayer {
   &.is_layer_on {

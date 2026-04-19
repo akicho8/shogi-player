@@ -30,9 +30,9 @@ export default {
 @import "../../support.sass";
 /* ../general_mark_color.scss */
 /* ../general_mark_base.scss */
-@import "./scss/omv_square_color.scss";
-@import "./scss/omv_square_gray.scss";
-@import "./scss/omv_invisible.scss";
+@import "./scss/square_color.scss";
+@import "./scss/square_gray.scss";
+@import "./scss/invisible.scss";
 .ShogiPlayer {
   &.is_layer_on {
     .OriginMarkLayer {
