@@ -54,14 +54,17 @@ export const mod_shortcut = {
         return true
       }
       if (KeyboardHelper.soft_pure_key_p(e, "v")) {
+        this.$buefy.toast.open("再生モード")
         this.sp_mode = "view"
         return true
       }
       if (KeyboardHelper.soft_pure_key_p(e, "p")) {
+        this.$buefy.toast.open("操作モード")
         this.sp_mode = "play"
         return true
       }
       if (KeyboardHelper.soft_pure_key_p(e, "e")) {
+        this.$buefy.toast.open("編集モード")
         this.sp_mode = "edit"
         return true
       }
