@@ -24,6 +24,7 @@ export class CategoryInfo extends ApplicationMemoryRecord {
       { key: "成り不成り選択",         alter_name: null, development_only: false, },
       { key: "駒を操作中の移動元",     alter_name: null, development_only: false, },
       { key: "移動元印",               alter_name: null, development_only: false, },
+      { key: "思考印",                 alter_name: null, development_only: false, },
       { key: "transform",              alter_name: "3D", development_only: false, },
       { key: "コントローラー類",       alter_name: null, development_only: false, },
       { key: "操作感",                 alter_name: null, development_only: false, },
