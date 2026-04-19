@@ -40,8 +40,8 @@ export const mod_event = {
       }
 
       // 移動元
-      if (e.general_mark_pos_key) {
-        this.event_puts(`移動元: ${e.general_mark_pos_key}`)
+      if (e.origin_mark_pos_key) {
+        this.event_puts(`移動元: ${e.origin_mark_pos_key}`)
       }
     },
 

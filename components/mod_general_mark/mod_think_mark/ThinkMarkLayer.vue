@@ -4,8 +4,8 @@
     .general_mark_effect
   .general_mark_user_name_container.is-overlay
     template(v-for="(item, i) in current_items")
-      .general_mark_user_name(v-if="item.general_mark_user_name")
-        | {{item.general_mark_user_name}}
+      .general_mark_user_name(v-if="item.gm_user_name")
+        | {{item.gm_user_name}}
 </template>
 
 <script>
@@ -17,10 +17,10 @@ export default {
   name: "ThinkMarkLayer",
   mixins: [support],
   props: {
-    general_mark_pos_key: { default: null, },
+    think_mark_pos_key: { default: null, },
   },
   computed: {
-    current_items() { return this.TheSP.mut_think_mark_collection_hash[this.general_mark_pos_key] ?? [] }, // このセルの印たち
+    current_items() { return this.TheSP.mut_think_mark_collection_hash[this.think_mark_pos_key] ?? [] }, // このセルの印たち
     css_class()     { return this.current_items.at(this.EFFECT_COLOR_OWNER).css_class             }, // このセルの代表色
   },
 }

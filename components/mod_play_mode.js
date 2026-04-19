@@ -144,7 +144,7 @@ export const mod_play_mode = {
       }
 
       if (this.current_origin_mark_pos_key) {
-        params["general_mark_pos_key"] = this.current_origin_mark_pos_key // 移動元 (移動元印がある場合はこの位置の印を静かに消す)
+        params["origin_mark_pos_key"] = this.current_origin_mark_pos_key // 移動元 (移動元印がある場合はこの位置の印を静かに消す)
       }
 
       if (this.sp_request_position_hash) {
