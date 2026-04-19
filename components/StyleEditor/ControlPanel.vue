@@ -289,8 +289,8 @@
 
       SmartRadio(variable_key="sp_origin_mark_variant" label="種類")
 
-      b-field(custom-class="is-small" label="名前")
-        b-input(size="is-small" v-model.trim="AppContext.origin_mark_user_name" placeholder="名前")
+      b-field(custom-class="is-small" label="所有者名")
+        b-input(size="is-small" v-model.trim="AppContext.origin_mark_user_name")
 
       SmartSlider(variable_key="origin_mark_color_index" label="色番号")
 
@@ -302,7 +302,8 @@
 
     CategoryBox(category_key="思考印")
       p.help.content
-        | 操作モードでのみ動作する
+        | 右クリックでセルに印をつける<br>
+        | 操作モードでのみ動作する<br>
 
       b-field(custom-class="is-small" label="初期配置プリセット")
         .control
@@ -320,8 +321,8 @@
 
       SmartRadio(variable_key="sp_think_mark_variant" label="種類")
 
-      b-field(custom-class="is-small" label="名前")
-        b-input(size="is-small" v-model.trim="AppContext.think_mark_user_name" placeholder="名前")
+      b-field(custom-class="is-small" label="所有者名")
+        b-input(size="is-small" v-model.trim="AppContext.think_mark_user_name")
 
       SmartSlider(variable_key="think_mark_color_index" label="色番号")
 
