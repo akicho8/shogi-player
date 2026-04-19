@@ -7,8 +7,8 @@
     .PieceTexture(:class="piece_texture_class")
     // 駒テクスチャの大きさに依存させたいので中に PieceObject のなかに入れている
     PieceCount(:count="count")
-  ThinkMarkLayer(:general_mark_pos_key="general_mark_pos_key")
-  OriginMarkLayer(:general_mark_pos_key="general_mark_pos_key")
+  ThinkMarkLayer(:think_mark_pos_key="general_mark_pos_key")
+  OriginMarkLayer(:origin_mark_pos_key="general_mark_pos_key")
 </template>
 
 <script>
