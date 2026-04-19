@@ -20,7 +20,7 @@ export class GeneralMarkItem {
     GX.assert_present(attributes["general_mark_pos_key"])
 
     this.general_mark_pos_key = attributes["general_mark_pos_key"]
-    this.general_mark_group_name = attributes["general_mark_group_name"] ?? ""
+    this.general_mark_user_name = attributes["general_mark_user_name"] ?? ""
     this.general_mark_color_index = attributes["general_mark_color_index"] ?? 0
 
     Object.freeze(this)
@@ -33,7 +33,7 @@ export class GeneralMarkItem {
   get attributes() {
     return {
       general_mark_pos_key:     this.general_mark_pos_key,
-      general_mark_group_name:   this.general_mark_group_name,
+      general_mark_user_name:   this.general_mark_user_name,
       general_mark_color_index: this.general_mark_color_index,
     }
   }
@@ -51,13 +51,13 @@ export class GeneralMarkItem {
   }
 
   content_equal_p(other) {
-    return this.general_mark_group_name === other.general_mark_group_name && this.general_mark_pos_key === other.general_mark_pos_key
+    return this.general_mark_user_name === other.general_mark_user_name && this.general_mark_pos_key === other.general_mark_pos_key
   }
 
   get to_serial() {
     return [
       this.general_mark_pos_key,
-      this.general_mark_group_name,
+      this.general_mark_user_name,
       this.general_mark_color_index,
     ].join(",")
   }
