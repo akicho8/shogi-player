@@ -1,0 +1,16 @@
+@include defvar(sp_think_mark_tmv_circle_color_stroke_width, 0.07);
+
+.ShogiPlayer {
+  &.is_think_mark_variant_tmv_circle_color {
+    .ThinkMarkLayer {
+      .general_mark_effect {
+        width: 85%;
+        height: 85%;
+        border-radius: 50%;
+        border-width: calc(var(--sp_board_cell_current_w) * var(--sp_think_mark_tmv_circle_color_stroke_width));
+        border-style: solid;
+        border-color: var(--general_mark_stroke_color);
+      }
+    }
+  }
+}

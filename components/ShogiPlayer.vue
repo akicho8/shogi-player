@@ -574,8 +574,10 @@ export default {
         this.str_to_css_class("is_piece_variant", this.mut_piece_variant),          // is_piece_variant_nureyon
         this.str_to_css_class("is_board_variant", this.mut_board_variant),                // is_board_variant_wood_normal
         this.str_to_css_class("is_device", this.devise_info.key),                   // is_device_touch
-        this.str_to_css_class("is_origin_mark_variant", this.sp_origin_mark_variant),  // is_origin_mark_variant_omv_square_color
         this.str_to_css_class("is_viewpoint", this.mut_viewpoint),  // is_viewpoint_black (システムテストで見ている)
+
+        this.origin_mark_variant_info.css_class,
+        this.think_mark_variant_info.css_class,
 
         // Boolean
         this.bool_to_css_class("is_layer", this.mut_layer),
