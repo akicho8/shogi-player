@@ -1,7 +1,7 @@
 import { GeneralMarkItem } from "@/components/mod_general_mark/general_mark_item.js"
 
 describe("GeneralMarkItem", () => {
-  const item_a       = { general_mark_pos_key: "7_6", general_mark_user_name: "alice", general_mark_color_index: 0, }
+  const item_a       = { gm_pos_key: "7_6", gm_user_name: "alice", gm_color_index: 0, }
   const serial_str_a = "7_6,alice,0"
 
   it(".create", () => {
@@ -11,28 +11,28 @@ describe("GeneralMarkItem", () => {
   })
 
   it("#css_class", () => {
-    const general_mark_item = GeneralMarkItem.create(item_a)
-    expect(general_mark_item.css_class).toEqual("general_mark_color_index0")
+    const obj = GeneralMarkItem.create(item_a)
+    expect(obj.css_class).toEqual("general_mark_color_index0")
   })
 
   it("#attributes", () => {
-    const general_mark_item = GeneralMarkItem.create(item_a)
-    expect(general_mark_item.attributes).toEqual(item_a)
+    const obj = GeneralMarkItem.create(item_a)
+    expect(obj.attributes).toEqual(item_a)
   })
 
   it("#to_h", () => {
-    const general_mark_item = GeneralMarkItem.create(item_a)
-    expect(general_mark_item.to_h).toEqual(item_a)
+    const obj = GeneralMarkItem.create(item_a)
+    expect(obj.to_h).toEqual(item_a)
   })
 
   it("#as_json", () => {
-    const general_mark_item = GeneralMarkItem.create(item_a)
-    expect(general_mark_item.as_json).toEqual(item_a)
+    const obj = GeneralMarkItem.create(item_a)
+    expect(obj.as_json).toEqual(item_a)
   })
 
   it("#toJSON", () => {
-    const general_mark_item = GeneralMarkItem.create(item_a)
-    expect(general_mark_item.toJSON()).toEqual(item_a)
+    const obj = GeneralMarkItem.create(item_a)
+    expect(obj.toJSON()).toEqual(item_a)
   })
 
   it("#content_equal_p", () => {
@@ -43,7 +43,7 @@ describe("GeneralMarkItem", () => {
   })
 
   it("#to_serial", () => {
-    const general_mark_item = GeneralMarkItem.create(item_a)
-    expect(general_mark_item.to_serial).toEqual(serial_str_a)
+    const obj = GeneralMarkItem.create(item_a)
+    expect(obj.to_serial).toEqual(serial_str_a)
   })
 })
