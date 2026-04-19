@@ -1,5 +1,4 @@
 import { ApplicationMemoryRecord } from "../../models/application_memory_record.js"
-import * as DeepObjectDiff from "deep-object-diff"
 import { GX } from "../../models/gx.js"
 import { ColorHelper } from "./color_helper.js"
 import _ from "lodash"
@@ -263,29 +262,7 @@ export class VariableInfo extends ApplicationMemoryRecord {
   // 差分だけを返す
   // 引数の all_attrs から初期値を除いた状態にして返す
   static default_value_reject(all_attrs) {
-    // const diff = DeepObjectDiff.updatedDiff(this.sp_component_bind_attrs_default, all_attrs)
-    // return {}
-
-    // const diff = DeepObjectDiff.diff(this.sp_component_bind_attrs_default, all_attrs)
-    // return structuredClone(diff)
-
     const attrs_default = this.sp_component_bind_attrs_default
-    // console.log(structuredClone(all_attrs))
-    // debugger
-
-    // _.each(all_attrs, (value, key) => {
-    //   console.log({value: structuredClone(value)})
-    //   console.log(`${key}: ${value}`)
-    // })
-    // return {}
-    // for (const [key, value] of all_attrs) {
-
-    // _.each(all_attrs, (value, key) => {
-    //   console.log({value: structuredClone(value)})
-    //   console.log(`${key}: ${value}`)
-    // })
-    // return {}
-
     const hv = {}
     _.each(all_attrs, (value, key) => {
       let a = attrs_default[key]

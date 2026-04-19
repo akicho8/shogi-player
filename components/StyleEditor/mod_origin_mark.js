@@ -55,7 +55,6 @@ export const mod_origin_mark = {
     },
   },
 }
-
 // <template lang="pug">
 // .test-test_origin_mark
 //   MainDocMainNavbar
