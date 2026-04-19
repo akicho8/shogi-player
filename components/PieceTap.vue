@@ -106,11 +106,20 @@ export default {
   +defvar(sp_stand_piece_size, 0.8)            // 駒台のセル内の駒占有率
   +defvar(sp_piece_box_piece_size, 0.8)        // 駒箱のセル内の駒占有率
 
+  //////////////////////////////////////////////////////////////////////////////// カーソル形状
+
   // 共通
   .PieceTap
     &.selectable_p
       &:hover
-        cursor: pointer
+        cursor: grab
+
+  // 持ち上げたときにカーソルを変更する (.ShogiPlayer のなかに .LiftedPieceElement があればカーソルを変更する)
+  &:has(.LiftedPieceElement)
+    cursor: grabbing
+
+  ////////////////////////////////////////////////////////////////////////////////
+
 
   // 確認用
   &.is_layer_on
@@ -215,10 +224,6 @@ export default {
       position: relative
       top: -50%
       left: -50%
-
-  // 持ち上げたときにカーソルを変更する (.ShogiPlayer のなかに .LiftedPieceElement があればカーソルを変更する)
-  &:has(.LiftedPieceElement)
-    cursor: grab                // none にするのもいいかもしれない
 
   // タッチデバイスでは消す場合
   &.is_device_touch
