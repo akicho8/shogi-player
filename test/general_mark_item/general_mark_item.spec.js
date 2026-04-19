@@ -1,7 +1,7 @@
 import { GeneralMarkItem } from "@/components/mod_general_mark/general_mark_item.js"
 
 describe("GeneralMarkItem", () => {
-  const item_a       = { general_mark_pos_key: "7_6", general_mark_group_name: "alice", general_mark_color_index: 0, }
+  const item_a       = { general_mark_pos_key: "7_6", general_mark_user_name: "alice", general_mark_color_index: 0, }
   const serial_str_a = "7_6,alice,0"
 
   it(".create", () => {
