@@ -14,7 +14,7 @@ export class OriginMarkPresetInfo extends ApplicationMemoryRecord {
         key: "1箇所",
         body: `
 [
-  { general_mark_pos_key: "1_1", general_mark_user_name: "alice", general_mark_color_index: 0, },
+  { gm_pos_key: "1_1", gm_user_name: "alice", gm_color_index: 0, },
 ]
 `,
       },
@@ -22,8 +22,8 @@ export class OriginMarkPresetInfo extends ApplicationMemoryRecord {
         key: "2箇所",
         body: `
 [
-  { general_mark_pos_key: "1_1", general_mark_user_name: "alice", general_mark_color_index: 0, },
-  { general_mark_pos_key: "1_2", general_mark_user_name: "bob",   general_mark_color_index: 1, },
+  { gm_pos_key: "1_1", gm_user_name: "alice", gm_color_index: 0, },
+  { gm_pos_key: "1_2", gm_user_name: "bob",   gm_color_index: 1, },
 ]
 `,
       },
@@ -31,8 +31,8 @@ export class OriginMarkPresetInfo extends ApplicationMemoryRecord {
         key: "重なり",
         body: `
 [
-  { general_mark_pos_key: "1_1", general_mark_user_name: "alice", general_mark_color_index: 0, },
-  { general_mark_pos_key: "1_1", general_mark_user_name: "bob",   general_mark_color_index: 1, },
+  { gm_pos_key: "1_1", gm_user_name: "alice", gm_color_index: 0, },
+  { gm_pos_key: "1_1", gm_user_name: "bob",   gm_color_index: 1, },
 ]
 `,
       },
@@ -40,15 +40,15 @@ export class OriginMarkPresetInfo extends ApplicationMemoryRecord {
         key: "色一覧",
         body: `
 [
-      { general_mark_pos_key: "3_1", general_mark_user_name: "0",  general_mark_color_index:  0, },
-      { general_mark_pos_key: "2_1", general_mark_user_name: "1",  general_mark_color_index:  1, },
-      { general_mark_pos_key: "1_1", general_mark_user_name: "2",  general_mark_color_index:  2, },
-      { general_mark_pos_key: "3_2", general_mark_user_name: "3",  general_mark_color_index:  3, },
-      { general_mark_pos_key: "2_2", general_mark_user_name: "4",  general_mark_color_index:  4, },
-      { general_mark_pos_key: "1_2", general_mark_user_name: "5",  general_mark_color_index:  5, },
-      { general_mark_pos_key: "3_3", general_mark_user_name: "6",  general_mark_color_index:  6, },
-      { general_mark_pos_key: "2_3", general_mark_user_name: "7",  general_mark_color_index:  7, },
-      { general_mark_pos_key: "1_3", general_mark_user_name: "8",  general_mark_color_index:  8, },
+      { gm_pos_key: "3_1", gm_user_name: "0",  gm_color_index:  0, },
+      { gm_pos_key: "2_1", gm_user_name: "1",  gm_color_index:  1, },
+      { gm_pos_key: "1_1", gm_user_name: "2",  gm_color_index:  2, },
+      { gm_pos_key: "3_2", gm_user_name: "3",  gm_color_index:  3, },
+      { gm_pos_key: "2_2", gm_user_name: "4",  gm_color_index:  4, },
+      { gm_pos_key: "1_2", gm_user_name: "5",  gm_color_index:  5, },
+      { gm_pos_key: "3_3", gm_user_name: "6",  gm_color_index:  6, },
+      { gm_pos_key: "2_3", gm_user_name: "7",  gm_color_index:  7, },
+      { gm_pos_key: "1_3", gm_user_name: "8",  gm_color_index:  8, },
 ]
 `,
       },
@@ -56,26 +56,26 @@ export class OriginMarkPresetInfo extends ApplicationMemoryRecord {
         key: "盤上＋持駒",
         body: `
 [
-      { general_mark_pos_key: "1_1", general_mark_user_name: "alice", general_mark_color_index: 0, },
-      { general_mark_pos_key: "1_1", general_mark_user_name: "bob",   general_mark_color_index: 1, },
+      { gm_pos_key: "1_1", gm_user_name: "alice", gm_color_index: 0, },
+      { gm_pos_key: "1_1", gm_user_name: "bob",   gm_color_index: 1, },
 
-      { general_mark_pos_key: "black_R", general_mark_user_name: "A", general_mark_color_index: 0, },
-      { general_mark_pos_key: "black_B", general_mark_user_name: "B", general_mark_color_index: 1, },
-      { general_mark_pos_key: "black_G", general_mark_user_name: "C", general_mark_color_index: 2, },
-      { general_mark_pos_key: "black_S", general_mark_user_name: "D", general_mark_color_index: 3, },
-      { general_mark_pos_key: "black_K", general_mark_user_name: "E", general_mark_color_index: 4, },
-      { general_mark_pos_key: "black_N", general_mark_user_name: "F", general_mark_color_index: 5, },
-      { general_mark_pos_key: "black_P", general_mark_user_name: "G", general_mark_color_index: 6, },
-      { general_mark_pos_key: "black_L", general_mark_user_name: "L", general_mark_color_index: 7, },
+      { gm_pos_key: "black_R", gm_user_name: "A", gm_color_index: 0, },
+      { gm_pos_key: "black_B", gm_user_name: "B", gm_color_index: 1, },
+      { gm_pos_key: "black_G", gm_user_name: "C", gm_color_index: 2, },
+      { gm_pos_key: "black_S", gm_user_name: "D", gm_color_index: 3, },
+      { gm_pos_key: "black_K", gm_user_name: "E", gm_color_index: 4, },
+      { gm_pos_key: "black_N", gm_user_name: "F", gm_color_index: 5, },
+      { gm_pos_key: "black_P", gm_user_name: "G", gm_color_index: 6, },
+      { gm_pos_key: "black_L", gm_user_name: "L", gm_color_index: 7, },
 
-      { general_mark_pos_key: "white_R", general_mark_user_name: "A", general_mark_color_index: 0, },
-      { general_mark_pos_key: "white_B", general_mark_user_name: "B", general_mark_color_index: 1, },
-      { general_mark_pos_key: "white_G", general_mark_user_name: "C", general_mark_color_index: 2, },
-      { general_mark_pos_key: "white_S", general_mark_user_name: "D", general_mark_color_index: 3, },
-      { general_mark_pos_key: "white_K", general_mark_user_name: "E", general_mark_color_index: 4, },
-      { general_mark_pos_key: "white_N", general_mark_user_name: "F", general_mark_color_index: 5, },
-      { general_mark_pos_key: "white_P", general_mark_user_name: "G", general_mark_color_index: 6, },
-      { general_mark_pos_key: "white_L", general_mark_user_name: "L", general_mark_color_index: 7, },
+      { gm_pos_key: "white_R", gm_user_name: "A", gm_color_index: 0, },
+      { gm_pos_key: "white_B", gm_user_name: "B", gm_color_index: 1, },
+      { gm_pos_key: "white_G", gm_user_name: "C", gm_color_index: 2, },
+      { gm_pos_key: "white_S", gm_user_name: "D", gm_color_index: 3, },
+      { gm_pos_key: "white_K", gm_user_name: "E", gm_color_index: 4, },
+      { gm_pos_key: "white_N", gm_user_name: "F", gm_color_index: 5, },
+      { gm_pos_key: "white_P", gm_user_name: "G", gm_color_index: 6, },
+      { gm_pos_key: "white_L", gm_user_name: "L", gm_color_index: 7, },
 ]
 `,
       },
@@ -83,8 +83,8 @@ export class OriginMarkPresetInfo extends ApplicationMemoryRecord {
         key: "文字数",
         body: `
 [
-      { general_mark_pos_key: "1_1", general_mark_user_name: "12345678901234567890", general_mark_color_index: 0, },
-      { general_mark_pos_key: "1_1", general_mark_user_name: "１２３４５６７８９０１２３４５６７８９０", general_mark_color_index: 0, },
+      { gm_pos_key: "1_1", gm_user_name: "12345678901234567890", gm_color_index: 0, },
+      { gm_pos_key: "1_1", gm_user_name: "１２３４５６７８９０１２３４５６７８９０", gm_color_index: 0, },
 ]
 `,
       },

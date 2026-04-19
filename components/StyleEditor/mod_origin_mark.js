@@ -12,7 +12,7 @@ export const mod_origin_mark = {
   mounted() {
     if (false) {
       this.origin_mark_collection_json_text = `[
-  { general_mark_pos_key: "7_6", general_mark_user_name: "alice", general_mark_color_index: 0 },
+  { gm_pos_key: "7_6", gm_user_name: "alice", gm_color_index: 0 },
 ]`
     }
   },
@@ -34,23 +34,23 @@ export const mod_origin_mark = {
       }
     },
 
-    ev_action_origin_mark_jump_invoke(general_mark_pos_key, ev) {
-      this.event_puts(`持ち上げ: ${general_mark_pos_key}`)
-      const attributes = this.origin_mark_item_attributes(general_mark_pos_key)
+    ev_action_origin_mark_jump_invoke(origin_mark_pos_key, ev) {
+      this.event_puts(`持ち上げ: ${origin_mark_pos_key}`)
+      const attributes = this.origin_mark_item_attributes(origin_mark_pos_key)
       this.$refs.sp_object.mut_origin_mark_collection.push$(attributes)
     },
 
-    ev_action_origin_mark_jump_cancel(general_mark_pos_key, ev) {
-      this.event_puts(`持ち下げ: ${general_mark_pos_key}`)
-      const attributes = this.origin_mark_item_attributes(general_mark_pos_key)
+    ev_action_origin_mark_jump_cancel(origin_mark_pos_key, ev) {
+      this.event_puts(`持ち下げ: ${origin_mark_pos_key}`)
+      const attributes = this.origin_mark_item_attributes(origin_mark_pos_key)
       this.$refs.sp_object.mut_origin_mark_collection.remove$(attributes)
     },
 
-    origin_mark_item_attributes(general_mark_pos_key) {
+    origin_mark_item_attributes(origin_mark_pos_key) {
       return {
-        general_mark_pos_key: general_mark_pos_key,
-        general_mark_user_name: this.origin_mark_user_name,
-        general_mark_color_index: this.origin_mark_color_index,
+        gm_pos_key: origin_mark_pos_key,
+        gm_user_name: this.origin_mark_user_name,
+        gm_color_index: this.origin_mark_color_index,
       }
     },
   },
@@ -79,7 +79,7 @@ export const mod_origin_mark = {
 //                 b-button(@click="test_label"  ) 名前
 //                 b-button(@click="test_api_clear") 消去(API)
 //                 b-button(@click="test_api_json")  JSON(API)
-//                 b-button(@click="test_clear_current_user_only") {{current_user_name}}のみ削除(API)
+//                 b-button(@click="think_mark_reject_handle") {{current_user_name}}のみ削除(API)
 //       .columns
 //         .column.is-6
 //           ShogiPlayer(
@@ -171,8 +171,8 @@ export const mod_origin_mark = {
 //       this.sp_origin_mark_collection = []
 //     },
 //
-//     test_clear_current_user_only() {
-//       this.$refs.sp_object.mut_origin_mark_collection.general_mark_user_name_reject$(this.current_user_name)
+//     think_mark_reject_handle() {
+//       this.$refs.sp_object.mut_origin_mark_collection.gm_user_name_reject$(this.current_user_name)
 //     },
 //
 //     test_api_json() {
