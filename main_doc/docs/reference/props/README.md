@@ -292,7 +292,7 @@ Default: `null`
 }
 ```
 
-<!-- ### `sp_think_mark_list` -->
+<!-- ### `sp_think_mark_collection` -->
 <!--  -->
 <!-- Type: `Array` -->
 <!-- Default: `[]` -->
@@ -303,8 +303,8 @@ Default: `null`
 <!--  -->
 <!-- ``` js -->
 <!-- [ -->
-<!--   { general_mark_pos_key: "7_6",     general_mark_group_name: "alice",  general_mark_color_index: 0, }, -->
-<!--   { general_mark_pos_key: "white_P", general_mark_group_name: "bob",    general_mark_color_index: 1, }, -->
+<!--   { general_mark_pos_key: "7_6",     general_mark_user_name: "alice",  general_mark_color_index: 0, }, -->
+<!--   { general_mark_pos_key: "white_P", general_mark_user_name: "bob",    general_mark_color_index: 1, }, -->
 <!-- ] -->
 <!-- ``` -->
 
