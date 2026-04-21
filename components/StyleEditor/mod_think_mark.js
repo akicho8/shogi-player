@@ -57,8 +57,8 @@ export const mod_think_mark = {
     think_mark_item_attributes(think_mark_pos_key) {
       return {
         gm_pos_key: think_mark_pos_key,
-        gm_user_name: this.think_mark_user_name,
-        gm_color_index: this.think_mark_color_index,
+        gm_user_name: this.se_current_user_name,
+        gm_color_index: this.se_current_color_index,
       }
     },
   },

@@ -93,7 +93,7 @@ export class SePresetInfo extends ApplicationMemoryRecord {
           context.sp_player_info.white.name             = "後手"
           context.sp_player_info.white.time             = ""
           context.sp_coordinate                         = true       // 座標を表示する
-          context.sp_player_info.white.piece_visibility = "hidden"
+          // context.sp_player_info.white.piece_visibility = "hidden"
         }
       },
 
