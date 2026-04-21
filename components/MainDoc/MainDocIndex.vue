@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 .MainDocIndex
   +mobile
     font-size: 15px

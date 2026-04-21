@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 
 .ShogiPlayer
   +defvar(sp_piece_count_horizontal_x, 0.43)                // 駒数の中央からの相対位置X(%) (左右配置時)

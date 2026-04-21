@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 
 $sp_controller_font_size: 0.02     // 盤の縦幅に対する割合
 $sp_controller_font_min: 8px       // ただしこれ以上は小さくしない(SpSlider.vueの8pxと合わせたい)

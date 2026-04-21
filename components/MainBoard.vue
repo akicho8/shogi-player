@@ -139,10 +139,10 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 
-@import "./MainBoard/coordinate.sass"
-@import "./MainBoard/board_variant.sass"
+@import "./MainBoard/coordinate"
+@import "./MainBoard/board_variant"
 
 // 外枠 border をどこに適用するか？
 // |-------------------+--------------------------+------------------------------------+------------------------------------+------|

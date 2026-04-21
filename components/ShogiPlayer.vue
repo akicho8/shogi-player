@@ -625,7 +625,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 @import "./application.scss"
 @import "./mod_general_mark/general_mark_color.scss"
 @import "./mod_general_mark/general_mark_base.scss"

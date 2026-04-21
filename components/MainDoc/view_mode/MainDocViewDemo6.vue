@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
+@import "../support"
 .MainDocViewDemo6
   --sp_board_color: hsl(0 0% 0% / 0.15)
 </style>

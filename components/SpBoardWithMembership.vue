@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 .ShogiPlayer
   +defvar(sp_board_horizontal_gap, 0) // 盤の左右の隙間(左右配置時)
   +defvar(sp_board_vertical_gap, 0)   // 盤の上下の隙間(上下配置時)

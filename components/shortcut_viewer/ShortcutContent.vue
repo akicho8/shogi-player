@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
+@import "../support"
 .ShogiPlayer .ShortcutContent
   .my_title
     padding-bottom: 0.75rem

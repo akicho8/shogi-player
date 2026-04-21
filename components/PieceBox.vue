@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 .ShogiPlayer
   +defvar(sp_piece_box_color, hsl(0 0% 0% / 0.2)) // 駒箱背景
 
