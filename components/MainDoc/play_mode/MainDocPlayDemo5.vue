@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
+@import "../support"
 .MainDocPlayDemo5
   __css_keep__: 0
 </style>

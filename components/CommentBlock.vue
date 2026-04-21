@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 .ShogiPlayer
   .CommentBlock
     margin: var(--sp_common_gap_real_px) 0 0

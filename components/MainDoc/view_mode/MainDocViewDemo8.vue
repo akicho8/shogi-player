@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
+@import "../support"
 .MainDocViewDemo8
   --sp_board_color: hsl(205.71 17.07% 59.8%)
 </style>

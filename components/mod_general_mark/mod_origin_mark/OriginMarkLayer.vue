@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../support.sass";
+@import "../../support";
 @import "./scss/square.scss";
 @import "./scss/invisible.scss";
 .ShogiPlayer {

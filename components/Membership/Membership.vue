@@ -106,7 +106,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "../support.sass"
+@import "../support"
 
 .ShogiPlayer
   +defvar(sp_membership_vertical_gap, 0.0)    // 盤の左右の隙間(全体横レイアウト時)

@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 .ShogiPlayer
   .SpGroundInside
     // これがないと OpDisabledBlock の 100% は画面幅になってしまう

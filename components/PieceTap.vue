@@ -70,11 +70,11 @@ export default {
 </script>
 
 <style lang="sass">
-@import "./support.sass"
+@import "./support"
 
 // *.vue の中から読み込むのが重要
 // ここからの相対パスで assets を指定することでパスが確定される
-@import "./PieceTap/piece_variant.sass"
+@import "./PieceTap/piece_variant"
 
 //
 // .LiftedPieceElement // マウスの (x, y) を反映
