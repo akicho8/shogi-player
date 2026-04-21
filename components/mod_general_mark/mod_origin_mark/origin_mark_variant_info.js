@@ -3,9 +3,8 @@ import { ApplicationMemoryRecord } from "../../models/application_memory_record.
 export class OriginMarkVariantInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
-      { key: "square_color", name: "四角(カラフル)", },
-      { key: "square_gray",  name: "四角(灰色)",     },
-      { key: "invisible",    name: "非表示",         },
+      { key: "square",    name: "四角", },
+      { key: "invisible", name: "透明", },
     ]
   }
 

@@ -1,0 +1,17 @@
+@include defvar(sp_think_mark_circle_stroke_width, 0.08);
+@include defvar(sp_think_mark_circle_size, 0.85);
+
+.ShogiPlayer {
+  &.is_think_mark_variant_circle {
+    .ThinkMarkLayer {
+      .general_mark_effect {
+        width:  calc(var(--sp_think_mark_circle_size) * 100%);
+        height: calc(var(--sp_think_mark_circle_size) * 100%);
+        border-width: calc(var(--sp_board_cell_current_w) * var(--sp_think_mark_circle_stroke_width));
+        border-style: solid;
+        border-color: var(--general_mark_stroke_color);
+        border-radius: 50%;
+      }
+    }
+  }
+}

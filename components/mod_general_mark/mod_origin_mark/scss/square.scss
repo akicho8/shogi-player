@@ -1,0 +1,16 @@
+@include defvar(sp_origin_mark_square_stroke_width, 0.06);
+@include defvar(sp_origin_mark_square_size, 1.0);
+
+.ShogiPlayer {
+  &.is_origin_mark_variant_square {
+    .OriginMarkLayer {
+      .general_mark_effect {
+        width:  calc(var(--sp_origin_mark_square_size) * 100%);
+        height: calc(var(--sp_origin_mark_square_size) * 100%);
+        border-width: calc(var(--sp_board_cell_current_w) * var(--sp_origin_mark_square_stroke_width));
+        border-style: solid;
+        border-color: var(--general_mark_stroke_color);
+      }
+    }
+  }
+}

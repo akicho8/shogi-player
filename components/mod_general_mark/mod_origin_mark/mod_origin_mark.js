@@ -10,7 +10,7 @@ export const mod_origin_mark = {
     },
     sp_origin_mark_variant: {
       type: String,
-      default: "square_color",
+      default: "square",
       validator(value) { return OriginMarkVariantInfo.keys.includes(value) },
     },
   },

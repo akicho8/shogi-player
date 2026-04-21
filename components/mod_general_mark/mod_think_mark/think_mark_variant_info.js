@@ -3,9 +3,8 @@ import { ApplicationMemoryRecord } from "../../models/application_memory_record.
 export class ThinkMarkVariantInfo extends ApplicationMemoryRecord {
   static get define() {
     return [
-      { key: "circle_color", name: "丸(カラフル)", },
-      { key: "circle_gray",  name: "丸(灰色)",     },
-      { key: "invisible",    name: "非表示",       },
+      { key: "circle",    name: "丸",   },
+      { key: "invisible", name: "透明", },
     ]
   }
 
