@@ -1,21 +1,18 @@
 @use "sass:math";
 
 .ShogiPlayer {
-  $SP_GENERAL_MARK_PALETTE_COUNT: 9;
+  @include defvar(sp_general_mark_base_color, hsl(0 56% 58% / 0.8));
 
-  // oklchでの定義 (Lightness, Chroma, Hue)
-  // hsl(0 35% 50%) に近い設定: L=0.6, C=0.15, H=20
-  $L: 0.6;
-  $C: 0.15;
+  $SP_GENERAL_MARK_PALETTE_COUNT: 9;
   $step: math.div(360, $SP_GENERAL_MARK_PALETTE_COUNT);
 
   .GeneralMarkLayer {
     @for $i from 0 through $SP_GENERAL_MARK_PALETTE_COUNT - 1 {
       &.general_mark_color_index#{$i} {
-        --c: oklch(#{$L} #{$C} #{$i * $step});
-        --general_mark_stroke_color: oklch(from var(--c) calc(l * 1.0)  c h);
-        --general_mark_text_bg:      oklch(from var(--c) calc(l * 0.75) c h / 0.5);
-        --general_mark_text_color:   oklch(from var(--c) calc(l * 1.5)  c h);
+        --c: oklch(from var(--sp_general_mark_base_color) l c calc(h + #{$i * $step}) / alpha);
+        --general_mark_stroke_color: oklch(from var(--c) calc(l * 1.00) c h / alpha);
+        --general_mark_text_bg:      oklch(from var(--c) calc(l * 0.90) c h / calc(alpha * 0.5));
+        --general_mark_text_color:   oklch(from var(--c) calc(l * 2.00) c h / calc(alpha * 2.0));
       }
     }
   }
