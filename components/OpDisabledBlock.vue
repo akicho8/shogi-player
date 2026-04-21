@@ -18,7 +18,7 @@ export default {
     .SpGroundInside
       .OpDisabledBlock
         z-index: $overlay_for_disable_z
-    .is_layer_on
+    &.is_layer_on
       .OpDisabledBlock
         background: change_color($primary, $alpha: 0.5)
 </style>
