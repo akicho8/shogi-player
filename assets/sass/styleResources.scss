@@ -1,4 +1,4 @@
 // *.vue で $primary や +mobile を使えるようにするための styleResources 用の定義
 
-@import "bulma_init.scss"            // bulma
+@import "bulma_init"            // bulma
 @import "~bulma/sass/utilities/_all" // +mobile など
