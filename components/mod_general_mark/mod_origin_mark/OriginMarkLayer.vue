@@ -28,10 +28,7 @@ export default {
 
 <style lang="scss">
 @import "../../support.sass";
-/* ../general_mark_color.scss */
-/* ../general_mark_base.scss */
-@import "./scss/square_color.scss";
-@import "./scss/square_gray.scss";
+@import "./scss/square.scss";
 @import "./scss/invisible.scss";
 .ShogiPlayer {
   &.is_layer_on {

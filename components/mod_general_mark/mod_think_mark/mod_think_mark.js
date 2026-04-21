@@ -10,7 +10,7 @@ export const mod_think_mark = {
     },
     sp_think_mark_variant: {
       type: String,
-      default: "circle_color",
+      default: "circle",
       validator(value) { return ThinkMarkVariantInfo.keys.includes(value) },
     },
   },
