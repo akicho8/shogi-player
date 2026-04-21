@@ -10,6 +10,11 @@ const CAST_INTEGER                 = true          // 小数だとぷるぷる�
 
 export const mod_resize_observer = {
   props: {
+    // ドキュメント非公開
+    sp_resize_observer_feature: {
+      type: Boolean,
+      default: true,
+    },
     sp_resize_observer_threshold: {
       type: Number,
       default: 2,
@@ -100,6 +105,9 @@ export const mod_resize_observer = {
     },
     // リサイズの情報を読み取る
     ro_read(e, entry) {
+      if (!this.sp_resize_observer_feature) {
+        return
+      }
       if (entry.target.dataset["resize_observer_id"] === e.key) {
         let w = entry.contentRect.width
         let h = entry.contentRect.height
