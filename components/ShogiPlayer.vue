@@ -631,7 +631,7 @@ export default {
 @import "./mod_general_mark/general_mark_base.scss"
 
 // .ShogiPlayer
-//   width: stretch
+//   width: 100%
 .ShogiPlayer
   // ダブルタップによるズームを無効にする (しかし Mobile Safari では無視される)
   touch-action: manipulation

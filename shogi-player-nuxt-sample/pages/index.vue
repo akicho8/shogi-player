@@ -29,7 +29,7 @@ export default {
   // ShogiPlayer は常に横100%まで広がるので外側で大きさを調整する
   .MyShogiPlayerContainer
     +mobile
-      width: stretch
+      width: 100%
     +tablet
       width: 60dvmin
 </style>

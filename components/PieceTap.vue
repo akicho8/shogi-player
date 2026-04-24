@@ -244,8 +244,8 @@ export default {
   // 盤面
   .MainBoard
     .PieceTap
-      width: stretch              // 外側の TD に合わせる
-      height: stretch
+      width:  100%              // 外側の TD に合わせる
+      height: 100%
     .PieceObject
       width:  calc(var(--sp_board_piece_size) * 100%)
       height: calc(var(--sp_board_piece_size) * 100%)
@@ -286,7 +286,7 @@ export default {
 
       // width:  var(--sp_stand_cell_current_w)
       // // 固定値ではなく、親(PieceWithCount)の高さ一杯に広がるようにする
-      // height: stretch
+      // height: 100%
       // // ベースとなる「本来の高さ」をここで指定
       // flex-basis: var(--sp_stand_cell_current_h)
       // // height: var(--sp_stand_cell_current_h)
@@ -319,11 +319,11 @@ export default {
     width:  var(--sp_board_cell_current_w)
     height: var(--sp_board_cell_current_h)
     .PieceTap
-      width: stretch     // 外側の大きさに合わせる
-      height: stretch
+      width:  100%     // 外側の大きさに合わせる
+      height: 100%
     .PieceObject
-      width: stretch     // 縮小させない
-      height: stretch
+      width:  100%     // 縮小させない
+      height: 100%
 
   // 成り不成
   // カーソルは駒台の駒と同じ大きさにしておくが盤上の駒を持ち上げたときに小さくなるので PieceObject は 100% 固定にする
