@@ -29,7 +29,7 @@ export default {
       position: absolute
       z-index: $overlay_navigation_item_z
       width: 50% // クリックできるエリアを横に広げるとモバイルのときに画面の右に隙間ができてしまうの盤の幅以上広げはいけない
-      height: stretch
+      height: 100%
       -webkit-tap-highlight-color: transparent
 
       &.previous

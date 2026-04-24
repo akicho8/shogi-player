@@ -28,7 +28,7 @@ export default {
 
 .ShogiPlayerContainer
   +mobile
-    width: stretch
+    width: 100%
   +tablet
     width: 50dvmin
 </style>
