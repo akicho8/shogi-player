@@ -15,6 +15,6 @@ export default {
   +defvar(sp_board_aspect_ratio, 1.097) // 盤の横を1.0としたときの縦の比率
 
   .AspectRatioFixedBlock
-    width: 100%
+    width: stretch
     aspect-ratio: 1 / var(--sp_board_aspect_ratio)
 </style>

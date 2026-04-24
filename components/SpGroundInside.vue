@@ -51,7 +51,7 @@ export default {
     position: relative
 
   .SpGroundInside
-    width: 100%
+    width: stretch
 
   &.is_layer_on
     .SpGroundInside

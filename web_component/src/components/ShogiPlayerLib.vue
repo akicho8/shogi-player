@@ -38,5 +38,5 @@ export default {
 // @import "~bulma/sass/utilities/_all"
 
 // .ShogiPlayerLib
-//   width: 100%
+//   width: stretch
 </style>
