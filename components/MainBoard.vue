@@ -172,8 +172,8 @@ export default {
   +defvar(sp_star_z_index, 0)                 // 星の z-index (符号の鬼ではタップの邪魔にならないよう -1 にする)
 
   .MainBoard
-    width: 100%
-    height: 100%
+    width: stretch
+    height: stretch
     +is_overlay_origin
 
   .BoardTexture
@@ -190,8 +190,8 @@ export default {
 
   //- flex に移行しやすいように table, tr, td 使用禁止
   .BoardMatrix
-    width: 100%
-    height: 100%
+    width: stretch
+    height: stretch
     border: calc(var(--sp_grid_outer_stroke) * 1px) solid var(--sp_grid_outer_color)
     border-collapse: collapse // td同士のborderを共有する
 
@@ -206,7 +206,7 @@ export default {
     // Google Chrome 91.0.4472.77  からは最初と最後の行だけ1.2倍ほど広がり均等でなくなった
     // Firefox ではまったく均等にしないためセルが表示されない
     // そのため明示的に指定するようにした。これによって対象外としていた Firefox でも見れるようになった
-    // ちなみに flex であれば height: 100% で均等になる
+    // ちなみに flex であれば height: stretch で均等になる
     // max は0除算対策
     height: calc(100.0% / max(1, var(--sp_board_view_h)))
 

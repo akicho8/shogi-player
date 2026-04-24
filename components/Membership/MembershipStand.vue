@@ -138,8 +138,8 @@ export default {
   +defvar(sp_stand_bg_color, hsl(0 0% 0% / 0))             // 駒台の背景色
 
   // .MembershipStand
-  //   // width: 100%
-  //   // height: 100%
+  //   // width: stretch
+  //   // height: stretch
 
   .MembershipStandPieces
     display: flex
@@ -153,11 +153,11 @@ export default {
     //
     // もし駒台を最初から見せる場合は？
     //
-    //   width: 100%
+    //   width: stretch
     //   justify-content: flex-start
     //
 
-    // height: 100%       // 親である MembershipStand の高さに合わせる
+    // height: stretch       // 親である MembershipStand の高さに合わせる
     // // height: 200px       // 親である MembershipStand の高さに合わせる
     // overflow: hidden   // はみ出さないようにガード
 
@@ -210,7 +210,7 @@ export default {
   // &.vertical
   //   .MembershipStandPieces
   //     &.piece_lifted_hover_reaction
-  //       width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
+  //       width: stretch                         // 駒がなくても駒台に置けるようにするため横幅最大化
   //       justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
   //       min-height: var(--sp_stand_cell_current_h) // 縦を最低限確保
 
@@ -255,6 +255,6 @@ export default {
 //       .MembershipStandPieces
 //         // &.piece_lifted_hover_reaction
 //         min-height: var(--sp_stand_cell_current_h) // 縦を最低限確保
-//         width: 100%                         // 駒がなくても駒台に置けるようにするため横幅最大化
+//         width: stretch                         // 駒がなくても駒台に置けるようにするため横幅最大化
 //         justify-content: flex-start         // そうすると既存の駒が中央によってしまうので左寄せ
 </style>

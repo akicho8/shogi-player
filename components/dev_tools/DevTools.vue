@@ -84,7 +84,7 @@ export default {
   gap: 0rem                   // ヘッダと本体の隙間
   .DevToolsGroupContent
     padding: 0.75rem
-    flex-grow: 1                // height: 100% などとしてはいけない
+    flex-grow: 1                // height: stretch などとしてはいけない
     overflow: auto
     pre
       padding: 0.5rem

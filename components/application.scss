@@ -6,7 +6,7 @@
   // container-type: inline-size;  // 縦は可変だが cqw しか使えなくなる
   // container-name: ShogiPlayer;
 
-  width: 100%;                  // これ width: auto でもいいし、それでいいならデフォルトは auto なので書かんでよくね？
+  width: stretch;                  // これ width: auto でもいいし、それでいいならデフォルトは auto なので書かんでよくね？
 
   &.is_layer_on {
     border: 1px solid red ! important;

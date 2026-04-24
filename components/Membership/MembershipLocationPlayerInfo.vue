@@ -127,7 +127,7 @@ export default {
   // 左右配置のときに限り、横幅を「駒台の駒の押せる領域」と同じ幅にする
   +IF_HORIZONTAL
     .MembershipLocationPlayerInfo
-      width: 100%                               // 1文字であっても横幅を最大化する
+      width: stretch                               // 1文字であっても横幅を最大化する
       max-width: var(--sp_stand_cell_current_w) // とはいえ駒台の幅を超えないようにする
 
   // 縦幅がわりと自由につかえるので隙間をあける → いろいろ表示すると持駒が離れてしまう

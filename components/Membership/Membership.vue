@@ -151,8 +151,8 @@ export default {
 
   +IF_VERTICAL
     .Membership
-      width: 100%
-      height: 100%
+      width: stretch
+      height: stretch
       &.is_position_north
         flex-direction: row            // 全体が縦並び → 持駒は横並び → 左寄せ 後手は「△ 後手 飛歩」のままでよい (左端→)
         align-items: flex-end

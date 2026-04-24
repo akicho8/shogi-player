@@ -17,7 +17,7 @@
   }
 
   .CheckerboardPattern {
-    height: 100%;
+    height: stretch;
     z-index: -200;               // sp_star_z_index が -1 のときチェッカー背景より前面になるようにするため -1 未満にする
   }
 
