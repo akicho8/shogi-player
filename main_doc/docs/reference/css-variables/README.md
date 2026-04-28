@@ -252,7 +252,7 @@ Default: `hsl(0 0% 0% / 0)`
 駒台の背景色
 
 ### `--sp_player_name_size`
-Default: `0.25`
+Default: `0.2`
 
 対局者名の大きさ
 
