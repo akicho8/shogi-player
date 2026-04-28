@@ -31,10 +31,10 @@ export default {
 <style lang="sass">
 @import "../support"
 .ShogiPlayer
-  +defvar(sp_player_name_size, 0.25)       // 対局者の名前の表示サイズ
+  +defvar(sp_player_name_size, 0.2)        // 対局者の名前の表示サイズ
   +defvar(sp_player_time_size, 0.25)       // 対局者の時間の表示サイズ
   +defvar(sp_player_gap, 0.07)             // 対局者の名前と時間の隙間
-  +defvar(sp_player_padding, 0.14)
+  +defvar(sp_player_padding, 0.15)
 
   .MembershipLocationPlayerInfo
     flex-shrink: 0     // 縮小しない(縦置き時に駒台の横幅を100%にするとここが縮小しようとして1文字ずつ折り返しになる、のを防ぐ)
