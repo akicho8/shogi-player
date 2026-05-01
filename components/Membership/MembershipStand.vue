@@ -195,9 +195,10 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// 駒を持って駒箱の上にいるとき
   .MembershipStand
     &.is_droppable
-      &:hover
-        .MembershipStandTexture
-          border: calc(var(--sp_stand_hover_border_stroke) * 1px) dashed var(--sp_stand_hover_border_color)
+      @media (hover: hover)
+        &:hover
+          .MembershipStandTexture
+            border: calc(var(--sp_stand_hover_border_stroke) * 1px) dashed var(--sp_stand_hover_border_color)
 
   // 駒がなくても駒が置けるようにする ← piece_lifted_hover_reaction になったときだけにすると駒台が拡縮して使いにくい
   //

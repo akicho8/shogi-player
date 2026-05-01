@@ -76,7 +76,8 @@ export default {
         .delete
           margin: 0.25rem
           background-color: change_color($black, $alpha: 0.5)
-        &:hover
-          .delete
-            background-color: change_color($black, $alpha: 0.75)
+        @media (hover: hover)
+          &:hover
+            .delete
+              background-color: change_color($black, $alpha: 0.75)
 </style>

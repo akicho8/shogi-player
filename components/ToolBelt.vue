@@ -60,8 +60,9 @@ export default {
     .button
       border-radius: 0 ! important  // 複雑な条件で 2px 入っているため仕方なく詳細度を上げる
       border-width: 1px
-      &:hover
-        background-color: $white-ter
+      @media (hover: hover)
+        &:hover
+          background-color: $white-ter
     .location_name
       padding-left: 0.6rem               // ここだけでかいので調整する
       padding-right: 0.6rem              // 縦は触るな
