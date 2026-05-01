@@ -111,8 +111,9 @@ export default {
   // 共通
   .PieceTap
     &.selectable_p
-      &:hover
-        cursor: grab
+      @media (hover: hover)
+        &:hover
+          cursor: grab
 
   // 持ち上げたときにカーソルを変更する (.ShogiPlayer のなかに .LiftedPieceElement があればカーソルを変更する)
   &:has(.LiftedPieceElement)
@@ -167,23 +168,25 @@ export default {
 
       // 選択が可能
       &.selectable_p
-        &:hover
-          // スマホでは手を離しても hover 状態を保持してしまう
-          // そのため2手目に1手目の指し手の hover の色がつきっぱなしになってしまう
-          // そうすると2手目より1手目の方が目立って違和感がある
-          // なのでマウスが使える環境だけを対象にする
-          // 選択できる駒だけ反応する
-          // background プロパティをつかうと他の設定をリセットしてしまうので注意
-          .PieceTapBG
-            background-color: var(--sp_piece_selectable_color)
+        @media (hover: hover)
+          &:hover
+            // スマホでは手を離しても hover 状態を保持してしまう
+            // そのため2手目に1手目の指し手の hover の色がつきっぱなしになってしまう
+            // そうすると2手目より1手目の方が目立って違和感がある
+            // なのでマウスが使える環境だけを対象にする
+            // 選択できる駒だけ反応する
+            // background プロパティをつかうと他の設定をリセットしてしまうので注意
+            .PieceTapBG
+              background-color: var(--sp_piece_selectable_color)
       // 持って上空を移動したときの下のセルの反応
       // touchではタップしたときにhoverが反応してfocusしたような状態になってしまう
       // なので desktop 以上のときだけにする
       &.piece_lifted_hover_reaction
         &:not(.lifted_from_p)
-          &:hover
-            .PieceTapBG
-              background-color: var(--sp_piece_selectable_color)
+          @media (hover: hover)
+            &:hover
+              .PieceTapBG
+                background-color: var(--sp_piece_selectable_color)
 
   //////////////////////////////////////////////////////////////////////////////// 持ち上げた状態をシミュレートする
 
@@ -235,9 +238,10 @@ export default {
   &.is_device_mouse
     .PromoteSelectModal
       .PieceTap
-        &:hover
-          cursor: pointer
-          background-color: var(--sp_promote_select_modal_hover_color)
+        @media (hover: hover)
+          &:hover
+            cursor: pointer
+            background-color: var(--sp_promote_select_modal_hover_color)
 
   //////////////////////////////////////////////////////////////////////////////// サイズ (PC)
 

@@ -115,9 +115,10 @@ export default {
   //////////////////////////////////////////////////////////////////////////////// 駒持ってhoverしたとき全体にborder
   .PieceBoxInside
     &.is_droppable
-      &:hover
-        .PieceBoxTexture
-          border: calc(var(--sp_stand_hover_border_stroke) * 1px) dashed var(--sp_stand_hover_border_color)
+      @media (hover: hover)
+        &:hover
+          .PieceBoxTexture
+              border: calc(var(--sp_stand_hover_border_stroke) * 1px) dashed var(--sp_stand_hover_border_color)
 
   //////////////////////////////////////////////////////////////////////////////// color
   .PieceBoxInside

@@ -46,12 +46,14 @@ export class UserCustomCssPresetInfo extends ApplicationMemoryRecord {
       {
         key: "hoverで駒拡大",
         user_custom_css: `
-.ShogiPlayer {
-  .selectable_p {
-    .PieceObject {
-      transition: transform 0.2s;
-      &:hover {
-        transform: scale(1.1);
+@media (hover: hover) {
+  .ShogiPlayer {
+    .selectable_p {
+      .PieceObject {
+        transition: transform 0.2s;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
   }
