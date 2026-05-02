@@ -67,7 +67,7 @@ export const mod_navi = {
         return
       }
 
-      if (DomHelper.focus_on_input_tag_p()) {
+      if (DomHelper.input_focused_p()) {
         this.log("他の要素にフォーカスが当たっているためキーボードショートカットを無効にしている")
         return
       }
