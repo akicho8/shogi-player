@@ -11,7 +11,7 @@ export const mod_keydown = {
 
   methods: {
     keydown_hook(e) {
-      if (DomHelper.focus_on_input_tag_p()) {
+      if (DomHelper.input_focused_p()) {
         return
       }
       if (this.shortcut_hook) {

@@ -1,13 +1,21 @@
 export class DomHelper {
-  static focus_on_input_tag_p() {
+  static input_focused_p() {
     const dom = document.activeElement
     if (dom == null) {
       return false
     }
 
-    const is_input = ["INPUT", "TEXTAREA", "SELECT"].includes(dom.tagName)
-    const is_editable = dom.isContentEditable // contenteditable="true" 対策
+    if (dom.tagName === "TEXTAREA" || dom.tagName === "SELECT" || dom.isContentEditable) {
+      return true
+    }
 
-    return is_input || is_editable
+    if (dom.tagName === "INPUT") {
+      const text_input_types = ["text", "password", "number", "email", "tel", "url", "search", "date", "datetime-local"]
+      if (text_input_types.includes(dom.type)) {
+        return true
+      }
+    }
+
+    return false
   }
 }
