@@ -1,4 +1,7 @@
 export class KeyboardHelper {
+  // https://deploy-preview-884--i18n-drafts.netlify.app/articles/input-method/index.en.html#respect-composition-state
+  // https://x.com/p_craft/status/2044418886175793154
+  // https://blog.utgw.net/entry/2021/06/29/212256
   static pure_enter_p(e) {
     return e.key === "Enter" && !e.isComposing
   }
