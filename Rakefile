@@ -19,8 +19,9 @@ task :default => :test
 desc "setup"
 task :setup do
   system! <<~EOT
-  arm64 nodenv install -f 16.19.1
-  npm i -g pnpm@7
+  # arm64 nodenv install -f 16.19.1
+  # npm i -g pnpm@7
+  echo "現在は mise をつかっているので nodenv は使わない"
   npm i -g npm-check-updates
   nodenv which node
   EOT
