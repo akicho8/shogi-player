@@ -16,6 +16,11 @@ module.exports = {
 @import "~bulma/sass/utilities/_all"
 `
       },
+      scss: {
+        additionalData: `
+@import "~bulma/sass/utilities/_all";
+`
+      },
     },
   },
 }

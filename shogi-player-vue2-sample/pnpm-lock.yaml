@@ -33,8 +33,8 @@ devDependencies:
     specifier: ^10.4.1
     version: 10.4.1(sass@1.63.2)(webpack@5.86.0)
   shogi-player:
-    specifier: ^1.1.12
-    version: 1.1.12
+    specifier: ^2.0.0
+    version: 2.0.0
 
 packages:
 
@@ -2484,8 +2484,8 @@ packages:
     resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}
     dev: true
 
-  /beetleshine@0.0.9:
-    resolution: {integrity: sha512-vKrjjRdXibHv4SvmuzmTCoGZukb2aVBV9Oevn9em/Ht0A2oRKtqU8ME6AYgBSMjrgDrAh8+YaPQgCeIeIu7kLg==}
+  /beetleshine@0.0.35:
+    resolution: {integrity: sha512-27xxoNVsgTMzRpQ6WknBEFUeQHJTtONQncM8QYb17lMvsS32jBLcKH6ESswQb+s/uNm+lBGUc/sfUfM+kF6m2w==}
     dependencies:
       autolinker: 4.0.0
       extsprintf: 1.4.1
@@ -2836,6 +2836,10 @@ packages:
 
   /colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
+    dev: true
+
+  /colorjs.io@0.6.1:
+    resolution: {integrity: sha512-8lyR2wHzuIykCpqHKgluGsqQi5iDm3/a2IgP2GBZrasn2sBRkE4NOGsglZxWLs/jZQoNkmA/KM/8NV16rLUdBg==}
     dev: true
 
   /commander@2.20.3:
@@ -5990,10 +5994,11 @@ packages:
     dev: true
 
   /shogi-player@2.0.0:
-    resolution: {integrity: sha512-qpfqArTPh+Fl0N43MTXhT2mnqxuz7YuE7bumy/Z8BVBlj3mPC1DVflSuDXgTnazXUGMwO6m5f1tRkcGVqpQcOQ==}
+    resolution: {integrity: sha512-gDlb6A+btaCp51G9k22CbR9OuaJmKZBWFYgq8iFsu3U+37VTjCEy4vd1xq++q0qM0UoqfLaTn8ugup/X60BAsw==}
     dependencies:
-      beetleshine: 0.0.9
+      beetleshine: 0.0.35
       chroma-js: 2.4.2
+      colorjs.io: 0.6.1
       ismobilejs: 1.1.1
       js-memory-record: 0.0.28
       xregexp: 5.1.1
@@ -6586,6 +6591,7 @@ packages:
 
   /vue@2.7.14:
     resolution: {integrity: sha512-b2qkFyOM0kwqWFuQmgd4o+uHGU7T+2z3T+WQp8UBjADfEv2n4FEMffzBmCKNP0IGzOEEfYjvtcC62xaSKeQDrQ==}
+    deprecated: Vue 2 has reached EOL and is no longer actively maintained. See https://v2.vuejs.org/eol/ for more details.
     dependencies:
       '@vue/compiler-sfc': 2.7.14
       csstype: 3.1.2
