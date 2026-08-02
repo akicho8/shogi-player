@@ -31,14 +31,14 @@ module.exports = {
 @import "@/sp_sass_variables_${process.env.SP_TARGET || 'none'}.scss";
 `
       },
-      postcss: {
-        postcssOptions: {
-          plugins: [
-            // calc の事前計算・最適化を無効化する
-            require('postcss-calc')({ preserve: true, warnWhenCannotResolve: false })
-          ]
-        }
-      }
+      // postcss: {
+      //   postcssOptions: {
+      //     plugins: [
+      //       // calc の事前計算・最適化を無効化する
+      //       require('postcss-calc')({ preserve: true, warnWhenCannotResolve: false })
+      //     ]
+      //   }
+      // }
     },
   },
 
