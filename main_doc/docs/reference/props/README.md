@@ -33,7 +33,7 @@ Default: `view`
 Type: `String`
 Default: `null`
 
-盤面に反映する棋譜を指定する
+盤面に反映する棋譜を指定する。
 
 * SFEN, KIF, BOD に対応する
 * 棋譜のコンテンツを渡す (URLではない)
@@ -47,7 +47,7 @@ Default: `null`
 Type: `Integer`
 Default: `-1`
 
-開始局面を指定する
+開始局面を指定する。
 
 * 棋譜には表示したい局面のの情報が含まれていないためこれで指定する
 * 負の値は最終局面から数えた局面になるため -1 は一番最後(終了図)の局面になる
@@ -146,7 +146,7 @@ Default: `none`
 Type: `horizontal | vertical`
 Default: `horizontal`
 
-駒台・名前・時間の表示場所を決める
+駒台・名前・時間の表示場所を決める。
 
 | 値         | 配置 |                  |
 |------------|------|------------------|
@@ -162,8 +162,8 @@ Default: `true`
 
 画面幅が狭いとき自動的に上下配置に切り替えるか？
 
-初期値を左右配置にしているときに関係してくる
-言い替えると画面幅が広いときに左右配置に切り替えるかの設定でもある
+初期値を左右配置にしているときに関係してくる。
+言い替えると画面幅が広いときに左右配置に切り替えるかの設定でもある。
 
 See also: [sp_layout](/reference/props/#sp-layout)
 
@@ -225,7 +225,7 @@ See also: [sp_coordinate_variant_h](/reference/props/#sp-coordinate-variant-h)
 ### `sp_star_step`
 Default: `3`
 
-星をX個ごとに表示する
+星をX個ごとに表示する。
 
 ### `sp_stand_gravity`
 
@@ -234,9 +234,9 @@ Default: `bottom`
 
 駒台を左右に配置したとき位置は上か下か？
 
-下に寄せた方が対角線的に綺麗な配置に見える
-一方、右上だけで詰将棋を作るなら上に寄せた方が持駒が見やすくなるなどの利点もある
-両方を☗視点で上に寄せるのはいまのところ対応していない
+下に寄せた方が対角線的に綺麗な配置に見える。
+一方、右上だけで詰将棋を作るなら上に寄せた方が持駒が見やすくなるなどの利点もある。
+両方を☗視点で上に寄せるのはいまのところ対応していない。
 
 | 値     | 寄せる方向 |
 |--------|------------|
@@ -262,8 +262,8 @@ Default: `horizontal`
 
 名前の縦横書き切り替え
 
-左右配置時のみ有効になる
-紙面風にしたいときかつ「先手」「後手」とだけ表記するなら縦書きにするのがてっとり早い
+左右配置時のみ有効になる。
+紙面風にしたいときかつ「先手」「後手」とだけ表記するなら縦書きにするのがてっとり早い。
 
 | 値         | 意味   |
 |------------|--------|
@@ -275,7 +275,7 @@ Default: `horizontal`
 Type: `Hash`
 Default: `null`
 
-対局者と時間の情報をハッシュ形式で渡す
+対局者と時間の情報をハッシュ形式で渡す。
 
 例:
 
@@ -328,7 +328,7 @@ Default: `false`
 
 起動時に手番側の視点にするか？
 
-言い替えると「指定の局面の手番が☖なら反転するか？」という意味になる
+言い替えると「指定の局面の手番が☖なら反転するか？」という意味になる。
 
 See also: [sp_viewpoint](/reference/props/#sp-viewpoint)
 
@@ -347,7 +347,7 @@ KIF形式の棋譜にコメントが含まれていれば盤の下に表示す�
 Type: `none | both | black | white`
 Default: `both`
 
-操作モードで操作できる側を制限する
+操作モードで操作できる側を制限する。
 
 * 自分が先手でCPUが後手だったとき both だと後手の考慮中に先手が後手の駒を動かせてしまう
 * そんなとき black に変更しておけば先手は後手の駒を動かせなくなる
@@ -430,7 +430,7 @@ Type: `Boolean`
 Default: `false`
 
 盤上のセルをクリックしたときの通常処理を無効化するか？ <Badge text="要検討" type="error" vertical="top" />
-この機能は sp_view_mode_piece_movable を false するのでいい気がしている
+この機能は sp_view_mode_piece_movable を false するのでいい気がしている。
 
 ### `sp_location_click_behavior`
 
@@ -463,7 +463,7 @@ Default: `false`
   * スマホだととくにメリットはない
 
 ::: warning
-フォーカスする際にブラウザがスクロールしてしまう場合がある
+フォーカスする際にブラウザがスクロールしてしまう場合がある。
 :::
 
 See also: [sp_slider](/reference/props#sp-slider)
@@ -475,7 +475,7 @@ Default: `false`
 
 全体の操作を無効化するか？
 
-画像のような状態であってほしいときに使う
+画像のような状態であってほしいときに使う。
 
 ### `sp_piece_stand_blank_then_hidden`
 
@@ -484,22 +484,22 @@ Default: `false`
 
 持駒がないときは駒台を非表示にするか？
 
-開戦していない局面を狭い領域にたくさん表示したいときだけ使う
+開戦していない局面を狭い領域にたくさん表示したいときだけ使う。
 
 ### `sp_board_cell_class_fn`
 
 Type: `Function`
 Default: `null`
 
-盤面のセルのクラスを決める
+盤面のセルのクラスを決める。
 
-座標を引数にして呼び出すので例えば次のようにすると55の地点に「天王山」のクラスを付与する
+座標を引数にして呼び出すので例えば次のようにすると55の地点に「天王山」のクラスを付与する。
 
 ```html
 :sp_board_cell_class_fn="p => p.human_x === 5 && p.human_y === 5 && '天王山'"
 ```
 
-Web Components 版では内部で eval しているため動作する
+Web Components 版では内部で eval しているため動作する。
 
 ### `sp_double_click_threshold_ms`
 
@@ -508,7 +508,7 @@ Default: `350`
 
 編集モードで駒を反転するときのダブルクリックと認識する時間(ms)
 
-ネイティブなダブルクリック判定を入れると通常のクリック判定が遅れるため自力判定している
+ネイティブなダブルクリック判定を入れると通常のクリック判定が遅れるため自力判定している。
 
 ### `sp_key_event_capture`
 
@@ -518,7 +518,7 @@ Default: `false`
 スライダーにフォーカスしていなくても左右キーで手数を動かせるようにするか？ <Badge text="非推奨" type="error" vertical="top" />
 
 ::: warning
-副作用あり。他のプログラムの操作を奪ってしまうかもしれないため基本は false にしておいた方がよい
+副作用あり。他のプログラムの操作を奪ってしまうかもしれないため基本は false にしておいた方がよい。
 :::
 
 
@@ -694,12 +694,12 @@ Default: `null`
 Type: `String`
 Default: `null`
 
-Shadow DOM 内に指定のCSSを渡す <Badge text="自己責任" type="error" vertical="top" />
+Shadow DOM 内に指定のCSSを渡す。 <Badge text="自己責任" type="error" vertical="top" />
 
 * Shadow DOM 内でCSSは隔離される。これは Web Components が他のWebページやWebアプリとの完全な分離を保証するために必要な機能である。だがWeb開発者にとっては制約となる場合もある。その制約を回避する禁じ手がこれ。
 * ShogiPlayer.vue コンポーネントの内側で style タグを生成してそのコンテンツとする
 
-例えばこれで盤のスタイルを自由に変えられるが後に `BoardTexture` の名前は変わるかもしれない
+例えばこれで盤のスタイルを自由に変えられるが後に `BoardTexture` の名前は変わるかもしれない。
 
 ```html
 <shogi-player-wc
@@ -772,7 +772,7 @@ Default: `main`
 Type: `touch | desktop`
 Default: `null`
 
-デバイスを強制的に指定する
+デバイスを強制的に指定する。
 
   * 自動判別するので基本そのままでよい
   * デバイス判別によって駒を動かすときの挙動が変わる

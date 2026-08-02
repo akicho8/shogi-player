@@ -11,7 +11,7 @@
         static styles = css`
           :host {
             display: block;
-            border: 1px solid hsl(0 0% 0% / 0.1);
+            border: 1px solid oklch(from black l c h / 0.1);
             padding: 1rem;
           }
           .container {
@@ -26,8 +26,8 @@
             --sp_board_color: LightSkyBlue;
           }
           .comment {
-            border: 1px solid hsl(0 0% 0% / 0.10);
-            background-color: hsl(0 0% 0% / 0.02);
+            border: 1px solid oklch(from black l c h / 0.1);
+            background-color: oklch(from black l c h / 0.02);
             border-radius: 4px;
             flex-basis: 320px;
             position: relative;

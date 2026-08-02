@@ -1,5 +1,11 @@
 # 各種組み込み例
 
+どれも次の動作をする例としている。
+
+- 操作モード
+- 先手から角交換するまでの4手の棋譜(SFEN)をロードする
+- 手動で指した場合は指し手を alert で表示する
+
 ## Vanilla JS
 
 <<< @/docs/.vuepress/public/examples/build/case_wc_html.html
@@ -7,7 +13,7 @@
 
 Also see: [使い方](/guide/usage/)
 
-## Ruby
+## ruby.wasm
 
 <<< @/docs/.vuepress/public/examples/build/case_wc_ruby.html
 <LinkToExample name="build/case_wc_ruby" />
@@ -22,25 +28,27 @@ Also see: [使い方](/guide/usage/)
 <<< @/docs/.vuepress/public/examples/build/case_wc_solid.html
 <LinkToExample name="build/case_wc_solid" />
 
-## Web Components
+## 標準の Web Components 機能でラップする
 
-### Basic
+### 基本
 <<< @/docs/.vuepress/public/examples/build/case_wc_wc_basic.html
 <LinkToExample name="build/case_wc_wc_basic" />
 
-### Full Component
+### 棋譜の更新の反応させる場合 (スタイルも調整)
 <<< @/docs/.vuepress/public/examples/build/case_wc_wc_full.html
 <LinkToExample name="build/case_wc_wc_full" />
 
 ## Lit
 
-### Basic
+### 基本
 <<< @/docs/.vuepress/public/examples/build/case_wc_lit_basic.html
 <LinkToExample name="build/case_wc_lit_basic" />
 
-### Full Component
+### 棋譜の更新の反応させる場合 (スタイルも調整)
 <<< @/docs/.vuepress/public/examples/build/case_wc_lit_full.html
 <LinkToExample name="build/case_wc_lit_full" />
+
+プロパティの更新に反応させる場合は、上のように Lit を使えば標準より簡潔に書ける。
 
 ## Vue.js 2
 
@@ -59,7 +67,7 @@ Also see: [使い方](/guide/usage/)
 
 ::: warning 引数が渡せない問題と回避方法
 * Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたときに限り snake_case なパラメータ名を持つ値が渡せない問題がある
-  * 簡単に言えば `_` を含むパラメータが無視される
+  * 具体的には `_` を含むパラメータが無視される
 * そこでその嫌がらせのような制約を回避するために仕方なく `sp-pass-props` を用意した
 * これは `v-bind` に似ているが Vue はただの文字列として解釈するため確実に内容を渡すことができる
 * `sp-pass-props` の内容は JSON5 形式の文字列としてパースする
@@ -81,11 +89,11 @@ Also see: [使い方](/guide/usage/)
 
 ## Nuxt.js + ShogiPlayer.vue
 
-手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いている
+手動で組み込んだ例を [shogi-player-nuxt-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-nuxt-sample) に置いている。
 
 ## Svelte
 
-手動で組み込んだ例を [shogi-player-svelte-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-svelte-sample) に置いている
+手動で組み込んだ例を [shogi-player-svelte-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-svelte-sample) に置いている。
 
 そこから該当箇所の抜粋:
 

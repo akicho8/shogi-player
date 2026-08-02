@@ -186,7 +186,7 @@ module.exports = {
 
   // https://github.com/markdown-it/markdown-it
   markdown: {
-    breaks: true, // Convert "\n" in paragraphs into <br>
+    breaks: false, // false:一つの改行を <br> にしない true:Zennみたいになる
     linkify: true, // URLを書いたら自動的にリンクするか？
   },
 

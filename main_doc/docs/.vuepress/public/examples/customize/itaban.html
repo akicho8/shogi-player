@@ -8,8 +8,8 @@
       box-sizing: border-box;
     }
     html {
-      background-image: radial-gradient(hsl(196 100% 47% / 0.2) 30%, transparent 0%);
-      background-size: 64px 64px;
+      background-image: url(images/background1.png);
+      background-size: cover;
     }
     body {
       padding: 0;
@@ -25,7 +25,7 @@
       flex-basis: 800px;
     }
     shogi-player-wc::part(root) {
-      --sp_board_image: url(img/character1.png);
+      --sp_board_image: url(images/character1.png);
     }
   </style>
 </head>
@@ -34,7 +34,7 @@
     <shogi-player-wc
       sp_piece_variant="nureyon"
       sp_mobile_vertical="false"
-      sp_pass_css=".BoardTexture, .PieceObject { filter: drop-shadow(4px 4px 4px hsla(0 0% 0% / 0.5)) }"
+      sp_pass_css=".BoardTexture, .PieceObject { filter: drop-shadow(4px 4px 4px oklch(from black l c h / 0.5)) }"
       ></shogi-player-wc>
   </div>
 </body>

@@ -10,7 +10,7 @@
       box-sizing: border-box;
     }
     html {
-      background-color: hsl(0 5% 15%);
+      background-color: oklch(26.6% 0.0057 17.5);
     }
     body {
       padding: 0;
@@ -27,12 +27,12 @@
     }
     shogi-player-wc::part(root) {
       /* 色 */
-      --sp_board_color: transparent;                   /* 盤の色 */
-      --sp_board_even_cell_color: hsl(0 0% 100% / 5%); /* 盤の偶数セルの色 */
-      --sp_grid_inner_color: hsl(0 50% 50%);           /* 内側の線の色 */
-      --sp_grid_outer_color: hsl(0 50% 50%);           /* 外側の線の色 */
-      --sp_board_edge_color: hsl(0 50% 50%);           /* 盤の縁取りの色 */
-      --sp_star_color:       hsl(0 50% 50%);           /* 星の色 */
+      --sp_board_color: transparent;                       /* 盤の色 */
+      --sp_board_even_cell_color: oklch(100% 0 none / 5%); /* 盤の偶数セルの色 */
+      --sp_grid_inner_color: oklch(55.2% 0.1637 24.2);     /* 内側の線の色 */
+      --sp_grid_outer_color: oklch(55.2% 0.1637 24.2);     /* 外側の線の色 */
+      --sp_board_edge_color: oklch(55.2% 0.1637 24.2);     /* 盤の縁取りの色 */
+      --sp_star_color:       oklch(55.2% 0.1637 24.2);     /* 星の色 */
 
       /* 線の太さ */
       --sp_grid_inner_stroke: 0.5;                    /* 内側の線を細くする(お好みで調整) */

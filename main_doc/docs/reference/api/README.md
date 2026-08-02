@@ -14,63 +14,63 @@ sidebar: auto
 
 ### `api_board_shuffle()`
 
-盤上の駒をシャッフルしてランダムに配置し直す
+盤上の駒をシャッフルしてランダムに配置し直す。
 
 ### `api_random_puton()`
 
-盤面をクリアし、ランダムに駒を1つ配置し、Soldier インスタンスを返す
+盤面をクリアし、ランダムに駒を1つ配置し、Soldier インスタンスを返す。
 
 ### `api_place_on(soldier: Soldier)`
 
-Soldier インスタンスを盤面に置く
+Soldier インスタンスを盤面に置く。
 
 ### `api_board_clear()`
 
-盤面をクリアする
+盤面をクリアする。
 
 ### `api_board_turn_set(turn: number)`
 
-再生モード用で指定手数の局面に移動する
+再生モード用で指定手数の局面に移動する。
 
 ### `api_play_mode_seek_to(turn: number)`
 
-操作モード用で指定手数の局面に移動する
+操作モード用で指定手数の局面に移動する。
 
 ### `api_viewpoint_set(location_key: string)`
 
-視点を指定する
+視点を指定する。
 
 ### `api_viewpoint_flip()`
 
-視点を反転する
+視点を反転する。
 
 ### `api_retract_a_move()`
 
-待ったする (現在の局面から2手戻す)
+待ったする (現在の局面から2手戻す)。
 
 ### `api_sfen_or_kif_set(sfen_or_kif: string)`
 
-棋譜を指定する
+棋譜を指定する。
 
 ### `api_play_mode_setup()`
 
-api_sfen_or_kif_set で指定した棋譜で再生モード用の内部変数を初期化する
+api_sfen_or_kif_set で指定した棋譜で再生モード用の内部変数を初期化する。
 
 ### `api_lifted_piece_cancel()`
 
-持った駒を離す
+持った駒を離す。
 
 ### `api_turn_slider_focus()`
 
-スライダーがあればフォーカスする
+スライダーがあればフォーカスする。
 
 ### `api_moves_take_turn_offset()`
 
-操作モードでの `moves.take(turn_offset)` 相当を返す
+操作モードでの `moves.take(turn_offset)` 相当を返す。
 
 ### `api_turn_add`
 
-局面を移動する
+局面を移動する。
 
 | 実行例                               | 意味                               |
 |--------------------------------------|------------------------------------|
@@ -81,7 +81,7 @@ api_sfen_or_kif_set で指定した棋譜で再生モード用の内部変数を
 
 ### `api_turn_set_to_min()`
 
-開始局面に移動する
+開始局面に移動する。
 
 | 実行例                             | 意味                               |
 |------------------------------------|------------------------------------|
@@ -90,7 +90,7 @@ api_sfen_or_kif_set で指定した棋譜で再生モード用の内部変数を
 
 ### `api_turn_set_to_max()`
 
-最終局面に移動する
+最終局面に移動する。
 
 | 実行例                            | 意味                               |
 |-----------------------------------|------------------------------------|

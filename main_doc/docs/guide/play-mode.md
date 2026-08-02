@@ -61,7 +61,7 @@ export default {
 
 <CustomizeExample name="quiz" :width="250" :height="340" />
 
-指し手によって「正解」「不正解」を表示する
+指し手によって「正解」「不正解」を表示する。
 
 ### 手順
 
