@@ -108,8 +108,8 @@ desc "最新版をリリースしてサイトを更新する"
 task :release do
   system! <<~EOT
   rake dist
-  # npm version patch
-  npm version major
+  npm version patch
+  # npm version major
   rake example_cdn_version_replace
   pnpm publish
   git push --tags
@@ -223,7 +223,7 @@ task :k => :embed_to_nuxt_and_vue2
 desc "[k] embed_to_nuxt_and_vue2"
 task :embed_to_nuxt_and_vue2 do
   system! <<~EOT
-  r -Qx '"shogi-player": "file:.."' '"shogi-player": "^#{Package.version}"' shogi-player-vue2-sample/package.json shogi-player-nuxt-sample/package.json
+  r -Fx '"shogi-player": "file:.."' '"shogi-player": "^#{Package.version}"' shogi-player-vue2-sample/package.json shogi-player-nuxt-sample/package.json
   # r -x '"shogi-player": "^\d+\.\d+\.\d+"' '"shogi-player": "file:.."'  shogi-player-vue2-sample/package.json shogi-player-nuxt-sample/package.json
 
   tmux kill-window -t vue2
@@ -300,14 +300,14 @@ namespace :doc do
   desc "jsdelivr_to_unpkg"
   task :jsdelivr_to_unpkg do
     system! <<~EOT
-    r -Qx '"https://cdn.jsdelivr.net/npm/' '"https://unpkg.com/'
+    r -Fx '"https://cdn.jsdelivr.net/npm/' '"https://unpkg.com/'
     EOT
   end
 
   desc "unpkg_to_jsdelivr"
   task :unpkg_to_jsdelivr do
     system! <<~EOT
-    r -Qx '"https://unpkg.com/' '"https://cdn.jsdelivr.net/npm/'
+    r -Fx '"https://unpkg.com/' '"https://cdn.jsdelivr.net/npm/'
     EOT
   end
 end
