@@ -107,7 +107,8 @@ desc "最新版をリリースしてサイトを更新する"
 task :release do
   system! <<~EOT
   rake dist
-  npm version patch
+  # npm version patch
+  npm version major
   rake example_cdn_version_replace
   pnpm publish
   git push --tags

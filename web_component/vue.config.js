@@ -25,10 +25,10 @@ module.exports = {
     extract: false, // false: production のときも css を分離しない → 結果的に駒が表示されるようになる
 
     loaderOptions: {
-      sass: {
+      scss: {
         additionalData: `
-@import "@/sp_sass_variables.sass"
-@import "@/sp_sass_variables_${process.env.SP_TARGET || 'none'}.sass"
+@import "@/sp_sass_variables.scss";
+@import "@/sp_sass_variables_${process.env.SP_TARGET || 'none'}.scss";
 `
       }
     },
