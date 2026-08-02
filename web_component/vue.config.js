@@ -25,20 +25,20 @@ module.exports = {
     extract: false, // false: production のときも css を分離しない → 結果的に駒が表示されるようになる
 
     loaderOptions: {
-      scss: {
+      // <style lang="sass"> 用（Sass記法：セミコロン不要）
+      sass: {
         additionalData: `
-@import "@/sp_sass_variables.scss";
-@import "@/sp_sass_variables_${process.env.SP_TARGET || 'none'}.scss";
+@import "@/sp_sass_variables.sass"
+@import "@/sp_sass_variables_${process.env.SP_TARGET || 'none'}.sass"
 `
       },
-      // postcss: {
-      //   postcssOptions: {
-      //     plugins: [
-      //       // calc の事前計算・最適化を無効化する
-      //       require('postcss-calc')({ preserve: true, warnWhenCannotResolve: false })
-      //     ]
-      //   }
-      // }
+      // <style lang="scss"> や <style> 用（SCSS記法：セミコロンが必要！）
+      scss: {
+        additionalData: `
+@import "@/sp_sass_variables.sass";
+@import "@/sp_sass_variables_${process.env.SP_TARGET || 'none'}.sass";
+`
+      },
     },
   },
 
