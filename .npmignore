@@ -32,6 +32,10 @@
 /nuxt.config.js
 /components/MainDoc
 vue.conifg.inspect.*
+/mise.toml
+/.claude
+/.codex
+/CLAUDE.md
 
 # Assets
 /assets/style_editor_images
