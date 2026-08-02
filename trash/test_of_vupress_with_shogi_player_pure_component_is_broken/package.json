@@ -19,5 +19,8 @@
   "dependencies": {
     "process": "^0.11.10",
     "shogi-player": "^0.0.366"
+  },
+  "resolutions": {
+    "form-data": "2.5.4"
   }
 }
