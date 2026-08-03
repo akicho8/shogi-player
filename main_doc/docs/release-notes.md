@@ -19,8 +19,7 @@
 - 星の位置をカスタマイズできるようにしました (いらん機能)
 - カーソル形状を整理しました。（駒を持ってない・駒を持つことができる・駒を持っている の3つの状態に合わせて形状が適切に変化する）
 - 盤の種類(正確にはSVGによる模様エフェクト)を追加しました。
-- `sp_request_*` なオプションをいろいろ有効にしたとき、`ev_play_mode_move` に追加情報を含めるようにしました。
-- 持駒が空のときは `MembershipStand` コンポーネントを表示しないようにしました。(CSSを当てやすくするため)
+- `sp_request_*` 系のオプションをいろいろ有効にしたとき、`ev_play_mode_move` に追加情報を含めるようにしました。
 
 #### 内部的なもの
 
@@ -43,10 +42,10 @@
 
 - System Spec の導入でブラウザ上のでテストをできるようにしました。
 - 移動元印のシステムテストを追加しました。
+- 持駒が空のときは `MembershipStand` コンポーネントを表示しないようにしました。(CSSを当てやすくするため)
 - SVG の `hsl()` 表記からパーセント記号を削除しました。
 - `sp_lift_cancel_action` のデフォルト値を `standard` に変更しました。
 - `.ShogiPlayer` で `container-type: inline-size` を指定するようにしました。
-- `GeneralMark` の基本色を CSS 変数 `sp_general_mark_base_color` で制御できるようにしました。
 - `sp_board_variant_to_stand` prop を追加しました。
 - 明示的に ☗☖▲△ を返す `Location#pentagon_char` / `Location#polygon_char` を追加しました。
 - 盤面だけを見て手合割を推測する `guess_preset_info` を追加しました。
@@ -83,7 +82,7 @@
 ### 内部的なもの
 
 - UI コンポーネントのラッパーを用意して DRY 化しました。
-- 色変換ライブラリを chroma-js から colorjs.io に移行しました。あわせて `GeneralMark` の色システムを hsl から oklch に移行しています。
+- 色変換ライブラリを chroma-js から colorjs.io に移行しました。
 - `VariableInfo` に `relative_model` と min / max / step を追加し、コントロールパネルを整理しました。
 - プリセットを SVG ファイル読み込みに移行しました。
 - `se_tf_*_mode` を `se_tf_*_switch` にリネームしました。
