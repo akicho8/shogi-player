@@ -6,46 +6,47 @@ sidebar: auto
 
 ## はじめに
 
-* Vue.js 2 でコンポーネントを使う場合の説明となっている
+- Vue.js 2 でコンポーネントを使う場合の説明となっている
   * Web Components の場合はいろいろ制約がでてくる
-* 冗長だがすべて `ev_` から始まる
-* SFEN には2種類あって区別のための言い回しが冗長になるため単に長短で表わす
-  * 短いSFEN: moves なし (BOD相当)
-  * 長いSFEN: moves あり (KIF相当)
-* moves は SFEN の moves 後の指し手の配列を表わす
-* 手数はN手目の局面と言い表わすときの N の部分のこと
-* 動詞の過去形は使わない
-* `sp_event_log` にするとデバッグが楽
+- 冗長だがすべて `ev_` から始まる
+- `ev_xxx(turn: Integer)` の場合、コンポーネント側から、整数型の `turn` 変数を `ev_foo(turn)` のような感じで呼んでいるという意味になっている
+  - つまりイベントで受信した Hash 型の値の中に `turn` キーがある**わけではない**
+- Hash とはハッシュコードではなく JavaScript の世界でいうところの Object に相当する
+- SFEN には2種類あって区別のための言い回しが冗長になるため単に長短で表わす
+  - 短いSFEN: moves なし (BOD相当)
+  - 長いSFEN: moves あり (KIF相当)
+- moves は SFEN の moves 後の指し手の配列を表わす
+- 手数はN手目の局面と言い表わすときの N の部分のこと
+- 動詞の過去形は使わない
+- `sp_event_log` にするとデバッグが楽
 
 ## 一覧
 
-### `ev_turn_offset_change(turn: integer)`
+### `ev_turn_offset_change(turn: Integer)`
 
 手数が変更されたときに手数を投げる。
-
 APIで内部変数を参照するよりこちらを使った方が良い。
 
-### `ev_turn_offset_max_change(turn :integer)`
+### `ev_turn_offset_max_change(turn: Integer)`
 
 最大手数が変更されたとき最大手数を投げる。
 
-### `ev_short_sfen_change(sfen: string)`
+### `ev_short_sfen_change(sfen: String)`
 
 状態が変わったとき短いSFENを投げる。
-
 コントローラーで手を戻しても変化する。
 
-### `ev_comment_change(comment_lines: array)`
+### `ev_comment_change(comment_lines: Array)`
 
 コメントが変化したとき新しいコメントを投げる。
 
-* 文字列ではなく行毎の文字列配列になっている
-* コメントがないときは空配列ではなく `null` が来る
-* コメント形式
+- 文字列ではなく行毎の文字列配列になっている
+- コメントがないときは空配列ではなく `null` が来る
+- コメント形式
   * 段落毎に一行になっている正しい形式であれば `p` タグなどで囲って表示すればよい
   * 見た目で改行を入れてしまっているダメな形式であれば `(comment_lines ?? []).join("")` などとして詰めた方がいいかもしれない
 
-### `ev_play_mode_move(hash: object)`
+### `ev_play_mode_move(params: Hash)`
 
 操作モードで着手後にいろんな情報を投げる。
 
@@ -58,40 +59,36 @@ APIで内部変数を参照するよりこちらを使った方が良い。
 | op_king_check   | 着手した側が相手に対して王手したか？      | `sp_request_op_king_check` を有効にしたときだけ入っている      |
 | checkmate_stat | 詰み情報                          | `sp_request_checkmate_stat` を有効にしたときだけ入っている |
 
-* 連続王手の千日手を判定するにはアプリ側で `position_hash` と `op_king_check` を組み合せて登場回数をカウントし、`op_king_check` が `true` の4回目が現われたか判定すればよい
-* 同様に `op_king_check` が `false` の4回目が出たときはただの千日手(引き分け)になる
+- 連続王手の千日手を判定するにはアプリ側で `position_hash` と `op_king_check` を組み合せて登場回数をカウントし、`op_king_check` が `true` の4回目が現われたか判定すればよい
+- 同様に `op_king_check` が `false` の4回目が出たときはただの千日手(引き分け)になる
 
-### `ev_play_mode_next_moves(moves: array)`
+### `ev_play_mode_next_moves(moves: Array)`
 
 操作モードで着手したとき
 
-* moves の配列を投げる
-* `ev_play_mode_move` と統合する予定  <Badge text="TODO" type="error" vertical="top" />
+- moves の配列を投げる
+- `ev_play_mode_move` と統合する予定  <Badge text="TODO" type="error" vertical="top" />
 
-### `ev_play_mode_moves_change(moves: array)`
+### `ev_play_mode_moves_change(moves: Array)`
 
 操作モードで盤面が変化したとき <Badge text="非推奨" type="error" vertical="top" />
 
-* moves を投げる
-* 例えば `[a, b, c]` の指し手があってポインタが `c` のときコントローラーでポインタを `b` に戻すと `[a, b]` を持ってトリガーする
+- moves を投げる
+- 例えば `[a, b, c]` の指し手があってポインタが `c` のときコントローラーでポインタを `b` に戻すと `[a, b]` を持ってトリガーする
 
-### `ev_edit_mode_short_sfen_change(sfen: string)`
+### `ev_edit_mode_short_sfen_change(sfen: String)`
 
-編集モードで局面が変化したとき
+編集モードで局面が変化したときに短いSFENを投げる。
 
-* 短いSFENを投げる
+### `ev_edit_mode_short_sfen2_change(sfen: String)`
 
-### `ev_edit_mode_short_sfen2_change(sfen: string)`
-
-編集モードで局面が変化したとき <Badge text="非推奨" type="error" vertical="top" />
-
-* 短いSFENを投げる
+編集モードで局面が変化したときに短いSFENを投げる。<Badge text="非推奨" type="error" vertical="top" />
 
 ### `ev_action_viewpoint_flip`
 
 ユーザーが☗☖をクリックして視点を変更したとき
 
-### `ev_action_turn_change(turn: number)`
+### `ev_action_turn_change(turn: Integer)`
 
 ユーザーがコントローラーやスライダーを動かして手数を変更したとき
 
@@ -111,17 +108,13 @@ APIで内部変数を参照するよりこちらを使った方が良い。
 
 操作モードで、盤上または持駒の駒を元に戻したとき (このタイミングで移動元の印を消せ)
 
-### `ev_action_board_cell_pointerdown(place: Place)`
+### `ev_action_board_cell_pointerdown(place: Place, event: Event)`
 
-盤面のセルを触ったとき
+盤面のセルを触ったときにその位置を投げる。
 
-* その位置を投げる
+### `ev_action_stand_cell_pointerdown(location: Location, piece: Piece, event: Event)`
 
-### `ev_action_stand_cell_pointerdown(location: Location, piece: Piece)`
-
-持駒を触ったとき
-
-* 先後と駒の情報を投げる
+持駒を触ったときに先後と駒の情報を投げる。
 
 ### `ev_action_promote_select_open(soldier: Soldier)`
 
@@ -131,11 +124,9 @@ APIで内部変数を参照するよりこちらを使った方が良い。
 
 成不成選択モードから出たとき
 
-### `ev_action_player_info_click(location: Location, player_info: Object)`
+### `ev_action_player_info_click(location: Location, player_info: Hash)`
 
-プレイヤー名をクリックしたとき
-
-* 位置とプレイヤー情報を投げる
+プレイヤー名をクリックしたとき位置とプレイヤー情報を投げる。
 
 ### `ev_illegal_click_but_self_is_not_turn`
 
@@ -145,25 +136,25 @@ APIで内部変数を参照するよりこちらを使った方が良い。
 
 自分が手番だけど相手の駒を持ち上げようとしたとき
 
-### `ev_illegal_illegal_accident(hash: Object)`
+### `ev_illegal_illegal_accident(params: Hash)`
 
 反則が発生したとき
 
-* 反則の情報を投げる
-* `sp_illegal_validate && sp_illegal_cancel` のときのみ発生する
+- 反則の情報を投げる
+- `sp_illegal_validate && sp_illegal_cancel` のときのみ発生する
 
 ### `xxx.native`
 
 任意のネイティブイベント
 
-* `click` の場合はだいたい `sp_operation_disabled` と組み合わせる
+- `click` の場合はだいたい `sp_operation_disabled` と組み合わせる
 
 ## コンポーネント内部からの更新通知
 
-* すべて [.sync 修飾子](https://jp.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A3%BE%E5%AD%90) 用
-* 以下は内部で変更があると `update:xxx` のイベントを発行する
+- 以下は内部で変更があると `update:xxx` のイベントを発行する
   * `sp_turn`
   * `sp_viewpoint`
-* `sp_viewpoint` は☗☖のクリックで切り替わる
-* `sp_turn` に `-1` が指定されたとき必ず呼ばれてしまうため使いづらい
-* その他は内部の設定モーダルから更新される場合がある
+- `sp_viewpoint` は☗☖のクリックで切り替わる
+- `sp_turn` に `-1` が指定されたとき必ず呼ばれてしまうため使いづらい
+- すべて [.sync 修飾子](https://jp.vuejs.org/v2/guide/components-custom-events.html#sync-%E4%BF%AE%E9%A3%BE%E5%AD%90) 用
+- その他は内部の設定モーダルから更新される場合がある

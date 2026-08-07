@@ -5,22 +5,22 @@
 <<< @/docs/.vuepress/public/examples/fragment.html
 <LinkToExample name="fragment" />
 
-上の2行だけのHTMLを作るか、既存のサイトにコピペして動けば次へ
+上の2行だけのHTMLを作るか、既存のサイトにコピペして動けば次へ。
 
 ## 文字コードやスマホを考慮する (重要)
 
 <<< @/docs/.vuepress/public/examples/simple.html{3-4}
 <LinkToExample name="simple" />
 
-* 棋譜を正しく読むため UTF-8 を明示する
-* 反応遅延や意図しない画面ズームを防ぐため viewport を指定する
+- 棋譜を正しく読むため UTF-8 を明示する
+- 反応遅延や意図しない画面ズームを防ぐため viewport を指定する
 
 ## 棋譜再生
   
 ### SFEN
 
-<<< @/docs/.vuepress/public/examples/view.html{8-11}
-<LinkToExample name="view" />
+<<< @/docs/.vuepress/public/examples/view_sfen.html{10-13}
+<LinkToExample name="view_sfen" />
 
 最後の局面から表示させたいなら [sp_turn](/reference/props/#sp-turn) を `-1` にする。
 
@@ -30,9 +30,9 @@
 <LinkToExample name="view_kif" />
 
 SFEN と KIF (BOD) に対応している。
-どちらも [sp_body](/reference/props/#sp-body) に指定する (自動判別する)。
+どちらも [sp_body](/reference/props/#sp-body) に指定する。
 
-## スタイル変更 ##
+## スタイル変更
 
 <!-- <IframeWrap name="style" /> -->
 <<< @/docs/.vuepress/public/examples/style.html{7-9}
@@ -48,7 +48,7 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない。
 <!--     --sp_board_color: LightSkyBlue -->
 <!-- </style> -->
 
-## 直接スタイル変更 ##
+### コンポーネントタグ内に直接指定したい場合
 
 <!-- <IframeWrap name="sp_pass_style" /> -->
 <<< @/docs/.vuepress/public/examples/sp_pass_style.html{9}
@@ -67,13 +67,16 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない。
 このように `addEventListener` を使う形になってあまり綺麗には書けない。
 このあたりが負担になるなら [Lit](https://lit.dev/) などと組み合わせた方がいいかもしれない。
 
+See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-params-hash)
+
 ## レイアウト例
 
 <!-- <IframeWrap name="layout" /> -->
-<<< @/docs/.vuepress/public/examples/layout.html{7-13}
+<<< @/docs/.vuepress/public/examples/layout.html{7-15}
 <LinkToExample name="layout" />
 
-明確なサイズを持っていないためデスクトップでは大きくなりすぎてしまう。そこで中央配置した上で、最大横幅を指定し、それ以下であれば縮小するようにしたのが上の例になる。
+コンポーネントは**ブロック要素**のためデスクトップでは大きくなりすぎてしまう。
+そこで中央配置した上で、最大横幅を指定し、それ以下であれば縮小するようにしたのが上の例になる。
 
 ## 命令型APIの呼び方
 
@@ -85,17 +88,17 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない。
 
 ## CDN
 
-* JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@2.0.0
-* UNPKG:    https://unpkg.com/shogi-player@2.0.0
+- JSDelivr: https://cdn.jsdelivr.net/npm/shogi-player@2.0.0
+- UNPKG:    https://unpkg.com/shogi-player@2.0.0
 
 どちらも production 版へのショートカットになっている。
 
 ### CDNの正確なURL
 
-* JSDelivr
+- JSDelivr
   * https://cdn.jsdelivr.net/npm/shogi-player@2.0.0/dist/wc/production/shogi-player-wc.min.js
   * https://cdn.jsdelivr.net/npm/shogi-player@2.0.0/dist/wc/development/shogi-player-wc.min.js
-* UNPKG
+- UNPKG
   * https://unpkg.com/shogi-player@2.0.0/dist/wc/production/shogi-player-wc.min.js
   * https://unpkg.com/shogi-player@2.0.0/dist/wc/development/shogi-player-wc.min.js
 
@@ -105,13 +108,13 @@ production と development 版の2つがあり development 版を使うときは
 
 適当に最新版を試すときには次のように書いてもよいが、
 
-* https://cdn.jsdelivr.net/npm/shogi-player
-* https://unpkg.com/shogi-player
+- https://cdn.jsdelivr.net/npm/shogi-player
+- https://unpkg.com/shogi-player
 
 本番では `@x.x.x` をつけてバージョンを固定した方がよい。
 
-* https://cdn.jsdelivr.net/npm/shogi-player@2.0.0
-* https://unpkg.com/shogi-player@2.0.0
+- https://cdn.jsdelivr.net/npm/shogi-player@2.0.0
+- https://unpkg.com/shogi-player@2.0.0
 
 最新バージョン → [![npm version](https://badge.fury.io/js/shogi-player.svg)](https://badge.fury.io/js/shogi-player)
 

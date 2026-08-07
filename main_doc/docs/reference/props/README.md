@@ -6,9 +6,9 @@ sidebar: auto
 
 ## 概要
 
-* すべて `sp_` で始まる
-* Function 型は `_fn` で終わる
-* Web Components 経由の場合、複雑な型は使えない
+- すべて `sp_` で始まる
+- Function 型は `_fn` で終わる
+- Web Components 経由の場合、複雑な型は使えない
   * Hash 型などは JSON5 風の文字列として指定する
   * 内部で JSON5 形式としてパースする
   * Hash は正確には Object 型のこと
@@ -35,12 +35,12 @@ Default: `null`
 
 盤面に反映する棋譜を指定する。
 
-* SFEN, KIF, BOD に対応する
-* 棋譜のコンテンツを渡す (URLではない)
-* 再生モード専用**ではない**
-* モードに関係なく [sp_turn](/reference/props/#sp-turn) と合わせて盤面を変化させるのに使う
-* 不整合な形式の棋譜を渡してもエラーを出したりはしない
-* 何が起きるかわからないので本当に正しい形式だけを渡してほしい
+- SFEN, KIF, BOD に対応する
+- 棋譜のコンテンツを渡す (URLではない)
+- 再生モード専用**ではない**
+- モードに関係なく [sp_turn](/reference/props/#sp-turn) と合わせて盤面を変化させるのに使う
+- 不整合な形式の棋譜を渡してもエラーを出したりはしない
+- 何が起きるかわからないので本当に正しい形式だけを渡してほしい
 
 ### `sp_turn`
 
@@ -49,9 +49,9 @@ Default: `-1`
 
 開始局面を指定する。
 
-* 棋譜には表示したい局面のの情報が含まれていないためこれで指定する
-* 負の値は最終局面から数えた局面になるため -1 は一番最後(終了図)の局面になる
-* 例えば -2 は終了図の1つ過去の局面になる
+- 棋譜には表示したい局面のの情報が含まれていないためこれで指定する
+- 負の値は最終局面から数えた局面になるため -1 は一番最後(終了図)の局面になる
+- 例えば -2 は終了図の1つ過去の局面になる
 
 ### `sp_viewpoint`
 
@@ -60,8 +60,8 @@ Default: `black`
 
 視点
 
-* 後手または上手視点にするには `white` を指定する
-* `.sync` 対応
+- 後手または上手視点にするには `white` を指定する
+- `.sync` 対応
 
 | 値    | 視点 |
 |-------|------|
@@ -88,9 +88,9 @@ Default: `false`
 
 スライダーを表示するか？
 
-* 再生モード時には表示しておくと指定の局面に移動しやすい
-* 操作モード時にも表示できるけどガチ対局するときは消しておいた方がよい
-* 編集モード時には設定に関係なく表示しない
+- 再生モード時には表示しておくと指定の局面に移動しやすい
+- 操作モード時にも表示できるけどガチ対局するときは消しておいた方がよい
+- 編集モード時には設定に関係なく表示しない
 
 See also: [sp_controller](/reference/props/#sp-controller), [sp_mounted_focus_to_slider](/reference/props/#sp-mounted-focus-to-slider)
 
@@ -101,8 +101,8 @@ Default: `nureyon`
 
 駒の種類
 
-* SVG な駒はどんなに巨大化してもぼやけない
-* PNG な駒も元の解像度が高いので拡大してもそれほど気にならない
+- SVG な駒はどんなに巨大化してもぼやけない
+- PNG な駒も元の解像度が高いので拡大してもそれほど気にならない
 
 | 値       | 名称     | 表示                                                                                                                                             | 形式   | 影     |  特徴                      |
 |----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------|--------|----------------------------|
@@ -114,30 +114,37 @@ Default: `nureyon`
 
 ### `sp_board_variant`
 
-Type: `none | wood_normal | wood_bright`
+Type: `none | wood_normal | wood_bright | wood_alpha | wood_opaque | emboss_alpha | emboss_opaque | mottled_stone | brushed_steel | japanese_paper | ghost_text`
 Default: `none`
 
 盤のテクスチャ
 
-* 基本なしでよい
-* そのとき盤面の色は `--sp_board_color` で変更できる
-* 駒と異なるタイプの盤にするのはやめたほうがよい
-* 例えば「ぬれよん」×「木目盤」のような異なるタイプの組み合わせは違和感が大きい
-* 「○○効果」のものは半透明なので `--sp_board_color` との組み合わせて使うのを想定している
+- 基本なしでよい
+- そのとき盤面の色は `--sp_board_color` で変更できる
+- 「○○効果」のものは半透明なので `--sp_board_color` との組み合わせて使うのを想定している
 
-| 値             | 名称       | 表示                                                                                   | 形式 | 特徴   |
-|----------------|------------|----------------------------------------------------------------------------------------|------|--------|
-| none           | なし       |                                                                                        |      |        |
-| wood_normal    | 普通の木目 | <img src="../../../../assets/board_variant/wood_normal.png" width="32" height="32">    | png  |        |
-| wood_bright    | 明るい木目 | <img src="../../../../assets/board_variant/wood_bright.png" width="32" height="32">    | png  |        |
-| wood_alpha     | 木目効果   | <img src="../../../../assets/board_variant/wood_alpha.svg" width="32" height="32">     | svg  | 半透明 |
-| wood_opaque    | 木目盤     | <img src="../../../../assets/board_variant/wood_opaque.svg" width="32" height="32">    | svg  |        |
-| emboss_alpha   | 凹凸効果   | <img src="../../../../assets/board_variant/emboss_alpha.svg" width="32" height="32">   | svg  | 半透明 |
-| emboss_opaque  | 凹凸盤     | <img src="../../../../assets/board_variant/emboss_opaque.svg" width="32" height="32">  | svg  |        |
-| mottled_stone  | 斑石板   | <img src="../../../../assets/board_variant/mottled_stone.svg" width="32" height="32">  | svg  |        |
-| brushed_steel  | 研磨痕     | <img src="../../../../assets/board_variant/brushed_steel.svg" width="32" height="32">  | svg  |        |
-| japanese_paper | 和紙       | <img src="../../../../assets/board_variant/japanese_paper.svg" width="32" height="32"> | svg  | いまいち       |
-| ghost_text | 透かし盤   | <img src="../../../../assets/board_variant/ghost_text.svg" width="32" height="32"> | svg  |        |
+| 値             | 名称       | 表示                                                                                   | 形式 | 特徴   | おすすめ度 |
+|----------------|------------|----------------------------------------------------------------------------------------|------|--------|------------|
+| none           | なし       |                                                                                        |      |        | ◎         |
+| wood_normal    | 普通の木目 | <img src="../../../../assets/board_variant/wood_normal.png" width="32" height="32">    | png  |        | ◎         |
+| wood_bright    | 明るい木目 | <img src="../../../../assets/board_variant/wood_bright.png" width="32" height="32">    | png  |        | ○         |
+| wood_alpha     | 木目効果   | <img src="../../../../assets/board_variant/wood_alpha.svg" width="32" height="32">     | svg  | 半透明 | ○         |
+| wood_opaque    | 木目盤     | <img src="../../../../assets/board_variant/wood_opaque.svg" width="32" height="32">    | svg  |        | ◎         |
+| emboss_alpha   | 凹凸効果   | <img src="../../../../assets/board_variant/emboss_alpha.svg" width="32" height="32">   | svg  | 半透明 | △         |
+| emboss_opaque  | 凹凸盤     | <img src="../../../../assets/board_variant/emboss_opaque.svg" width="32" height="32">  | svg  |        | △         |
+| mottled_stone  | 斑石板     | <img src="../../../../assets/board_variant/mottled_stone.svg" width="32" height="32">  | svg  |        | △         |
+| brushed_steel  | 研磨痕     | <img src="../../../../assets/board_variant/brushed_steel.svg" width="32" height="32">  | svg  |        | △         |
+| japanese_paper | 和紙       | <img src="../../../../assets/board_variant/japanese_paper.svg" width="32" height="32"> | svg  | 実験的 | ×         |
+| ghost_text     | 透かし盤   | <img src="../../../../assets/board_variant/ghost_text.svg" width="32" height="32">     | svg  | 実験的 | ×         |
+
+::: warning
+異なる種類の駒と盤の組み合わせに注意すべし。
+デフォルメタイプとリアルタイプの組み合わせは最悪である。
+例えばデフォルメタイプの「ぬれよん」とリアルタイプの「木目盤」の組み合わせは違和感が大きい。
+つまり駒を「ぬれよん」にしたのであれば背景はなしの単色でよいし、盤を「木目盤」にしたなら、駒は「Portella」にすべきである。
+:::
+
+See also: [--sp_board_color](/reference/css-variables/#sp-board-color)
 
 ## Level 2
 
@@ -184,10 +191,10 @@ Default: `false`
 
 再生モードのときの盤上の左右をクリックして局面を動かせるようにするか？
 
-* 有効にすると再生しやすくなるが駒を動かせなくなる
-* 天王山をクリックすると反転する
-* 基本的に盤面の中の操作トリガーはタッチした瞬間に反応する `pointerdown` イベントに統一しているが `sp_overlay_nav` は `sp_controller` の代替機能でもあるため、例外的に `click` イベントに反応するようにしている
-* また `click` イベントにすることでタッチスクロールが可能になる
+- 有効にすると再生しやすくなるが駒を動かせなくなる
+- 天王山をクリックすると反転する
+- 基本的に盤面の中の操作トリガーはタッチした瞬間に反応する `pointerdown` イベントに統一しているが `sp_overlay_nav` は `sp_controller` の代替機能でもあるため、例外的に `click` イベントに反応するようにしている
+- また `click` イベントにすることでタッチスクロールが可能になる
 
 See also: [sp_controller](/reference/props/#sp-controller)
 
@@ -339,8 +346,8 @@ Default: `true`
 
 KIF形式の棋譜にコメントが含まれていれば盤の下に表示するか？
 
-* コメントがない場合には表示しない
-* したがって全体を画面の中心に配置したい場合にはコメントの有無で盤の位置が変動してしまうという問題がある
+- コメントがない場合には表示しない
+- したがって全体を画面の中心に配置したい場合にはコメントの有無で盤の位置が変動してしまうという問題がある
 
 ### `sp_human_side`
 
@@ -349,9 +356,9 @@ Default: `both`
 
 操作モードで操作できる側を制限する。
 
-* 自分が先手でCPUが後手だったとき both だと後手の考慮中に先手が後手の駒を動かせてしまう
-* そんなとき black に変更しておけば先手は後手の駒を動かせなくなる
-* つまりCPUと対戦するときの人間側を指定しておけばよい
+- 自分が先手でCPUが後手だったとき both だと後手の考慮中に先手が後手の駒を動かせてしまう
+- そんなとき black に変更しておけば先手は後手の駒を動かせなくなる
+- つまりCPUと対戦するときの人間側を指定しておけばよい
 
 | 値    | 操作できる側 |
 |-------|--------------|
@@ -383,9 +390,9 @@ Default: `standard`
 
 盤上の持ち上げた駒のキャンセル方法
 
-* 共通してマウスの右クリックやキーボードのESCキーでもキャンセルできる
-* もともとリアル志向を初期値としていたが将棋ウォーズに慣れきってしまった者たちにはハードルが高かったため初期値を変更した。が、やっぱり戻すかもしれない
-* 持駒にも同じ挙動を適用するべきだができていない
+- 共通してマウスの右クリックやキーボードのESCキーでもキャンセルできる
+- もともとリアル志向を初期値としていたが将棋ウォーズに慣れきってしまった者たちにはハードルが高かったため初期値を変更した。が、やっぱり戻すかもしれない
+- 持駒にも同じ挙動を適用するべきだができていない
 
 | 値       | 挙動                                         | タイプ                   |
 |----------|----------------------------------------------|--------------------------|
@@ -521,13 +528,12 @@ Default: `false`
 副作用あり。他のプログラムの操作を奪ってしまうかもしれないため基本は false にしておいた方がよい。
 :::
 
-
 ## カメラ
 
-* 見える範囲を指定する
-* あくまで視野が変わるだけであって内部は<b>符号座標</b>９一を左上とした本将棋のままである
-* 右上だけの表示でいいなら<b>配列座標</b>で左上を(4,0)でセル数を5x5などとする
-* セル数を小さくすると壊れる
+- 見える範囲を指定する
+- あくまで視野が変わるだけであって内部は<b>符号座標</b>９一を左上とした本将棋のままである
+- 右上だけの表示でいいなら<b>配列座標</b>で左上を(4,0)でセル数を5x5などとする
+- セル数を小さくすると壊れる
 
 ### `sp_board_view_x`
 
@@ -566,7 +572,7 @@ Default: `true`
 
 操作モードで駒の移動を制限するか？
 
-* false にすると？
+- false にすると？
   * 禁じ手や手番の制約がなくなる
   * ということは自分の手番で相手の駒を操作できる
   * それを利用して後手のときも先手の駒を動かせばずっと先手側を操作できるので先手だけの囲いの手順の棋譜(SFENに限る)を作ったりするのが簡単になる
@@ -579,8 +585,8 @@ Default: `true`
 
 操作モードで死に駒になるときは自動的に成るか？
 
-* 有効にすると「桂」を「11」に飛んだとき自動的に成る
-* 完全なリアル対局をイメージしたいときは `false` にする
+- 有効にすると「桂」を「11」に飛んだとき自動的に成る
+- 完全なリアル対局をイメージしたいときは `false` にする
 
 ### `sp_my_piece_only_move`
 
@@ -589,7 +595,7 @@ Default: `true`
 
 操作モードで動かせるのは自分の駒だけとするか？ <Badge text="要検討" type="error" vertical="top" />
 
-* `sp_human_side` と機能が重複しているような気がする
+- `sp_human_side` と機能が重複しているような気がする
 
 ### `sp_my_piece_kill_disabled`
 
@@ -629,10 +635,10 @@ Default: `true`
 | 千日手           | ×               | 厳密には反則ではなく引き分け |
 | 連続王手の千日手 | ×               |                              |
 
-* 反則ブロック対応とは `sp_illegal_cancel` を有効にしたときのこと
-* 千日手系は設計ミスにより指す前に判定ができないので将来的にはなんとかしたい <Badge text="TODO" type="error" vertical="top" />
+- 反則ブロック対応とは `sp_illegal_cancel` を有効にしたときのこと
+- 千日手系は設計ミスにより指す前に判定ができないので将来的にはなんとかしたい <Badge text="TODO" type="error" vertical="top" />
 
-See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
+See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-params-hash)
 
 ### `sp_illegal_cancel`
 
@@ -641,10 +647,10 @@ Default: `false`
 
 反則検知にひっかかったあと反則を無かったことにするか？
 
-* 無かったことにしてもイベントで反則を知ることはできる
-* 有効にすると基本的な反則の操作はできなくなる
-* 有効にすると将棋ウォーズのようになる
-* 千日手関連は判定できない
+- 無かったことにしてもイベントで反則を知ることはできる
+- 有効にすると基本的な反則の操作はできなくなる
+- 有効にすると将棋ウォーズのようになる
+- 千日手関連は判定できない
 
 ## 千日手関連
 
@@ -655,7 +661,7 @@ Default: `false`
 
 操作モードのイベント `ev_play_mode_move` に現局面のハッシュを含めるか？
 
-See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
+See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-params-hash)
 
 ### `sp_request_op_king_check`
 
@@ -664,10 +670,10 @@ Default: `false`
 
 操作モードのイベント `ev_play_mode_move` に相手に王手しているかどうかの結果を含めるか？
 
-* アプリ側で初心者向けに「王手！」などと表示することができる
-* 連続王手の千日手を判定するには `sp_request_position_hash` と合わせて有効にする
+- アプリ側で初心者向けに「王手！」などと表示することができる
+- 連続王手の千日手を判定するには `sp_request_position_hash` と合わせて有効にする
 
-See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-hash-object)
+See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-params-hash)
 
 ## Web Components 専用
 
@@ -678,10 +684,10 @@ Default: `null`
 
 `style` 属性の代替
 
-* `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したいときに使う
-* Web Components では style を指定しても内側(Shadow Dom)には届かないため引数を設けている
-* また Web Components 経由ではネイテイブなハッシュは渡せないので**JSON5形式文字列**で指定する
-* 最終的に ShogiPlayer.vue コンポーネントの style に渡す
+- `shogi-player-wc::part(root) {}` を使わず直接タグにCSS変数を渡したいときに使う
+- Web Components では style を指定しても内側(Shadow Dom)には届かないため引数を設けている
+- また Web Components 経由ではネイテイブなハッシュは渡せないので**JSON5形式文字列**で指定する
+- 最終的に ShogiPlayer.vue コンポーネントの style に渡す
 
 ```html
 <shogi-player-wc
@@ -696,8 +702,8 @@ Default: `null`
 
 Shadow DOM 内に指定のCSSを渡す。 <Badge text="自己責任" type="error" vertical="top" />
 
-* Shadow DOM 内でCSSは隔離される。これは Web Components が他のWebページやWebアプリとの完全な分離を保証するために必要な機能である。だがWeb開発者にとっては制約となる場合もある。その制約を回避する禁じ手がこれ。
-* ShogiPlayer.vue コンポーネントの内側で style タグを生成してそのコンテンツとする
+- Shadow DOM 内でCSSは隔離される。これは Web Components が他のWebページやWebアプリとの完全な分離を保証するために必要な機能である。だがWeb開発者にとっては制約となる場合もある。その制約を回避する禁じ手がこれ。
+- ShogiPlayer.vue コンポーネントの内側で style タグを生成してそのコンテンツとする
 
 例えばこれで盤のスタイルを自由に変えられるが後に `BoardTexture` の名前は変わるかもしれない。
 
@@ -720,16 +726,16 @@ Default: `null`
 
 `v-bind` 属性の代替
 
-* Web Components + Vue 3 専用
-* Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたとき `snake_case` なパラメータ名を持つ値が渡せない問題がある
-* いまのところ、これを回避する方法がないため代替パラメータを用意した
-* ここだけ例外的に `kebab-case` で書かないといけない
-* JSON5 形式の文字列としてパースする
-* 型変換は JSON5 のパーサーに任せている
+- Web Components + Vue 3 専用
+- Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたとき `snake_case` なパラメータ名を持つ値が渡せない問題がある
+- いまのところ、これを回避する方法がないため代替パラメータを用意した
+- ここだけ例外的に `kebab-case` で書かないといけない
+- JSON5 形式の文字列としてパースする
+- 型変換は JSON5 のパーサーに任せている
   * Boolean 型は `"true"` ではなく `true` と書く
   * Hash も Hash 型としてそのまま記述する
     * 文字列として書いてもよいがエスケープがものすごく大変になる
-* JSON5 なのでコメントも書ける
+- JSON5 なのでコメントも書ける
 
 ```html
 <shogi-player-wc

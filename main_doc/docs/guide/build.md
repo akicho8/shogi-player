@@ -66,26 +66,26 @@ Also see: [使い方](/guide/usage/)
 <LinkToExample name="build/case_wc_vue3" />
 
 ::: warning 引数が渡せない問題と回避方法
-* Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたときに限り snake_case なパラメータ名を持つ値が渡せない問題がある
+- Vue.js 2 で作成した Web Components を Vue 3 と組み合わせたときに限り snake_case なパラメータ名を持つ値が渡せない問題がある
   * 具体的には `_` を含むパラメータが無視される
-* そこでその嫌がらせのような制約を回避するために仕方なく `sp-pass-props` を用意した
-* これは `v-bind` に似ているが Vue はただの文字列として解釈するため確実に内容を渡すことができる
-* `sp-pass-props` の内容は JSON5 形式の文字列としてパースする
-* 型変換は JSON5 のパーサーに任せているので Boolean 型の真は `"true"` ではなく `true` と書く
-* 最終的に `sp-pass-props` の内容は `$props` 相当として扱う
+- そこでその嫌がらせのような制約を回避するために仕方なく `sp-pass-props` を用意した
+- これは `v-bind` に似ているが Vue はただの文字列として解釈するため確実に内容を渡すことができる
+- `sp-pass-props` の内容は JSON5 形式の文字列としてパースする
+- 型変換は JSON5 のパーサーに任せているので Boolean 型の真は `"true"` ではなく `true` と書く
+- 最終的に `sp-pass-props` の内容は `$props` 相当として扱う
 :::
 
 ## Vue.js 2 (vue/cli) + UMD
 
-* 手動で組み込んだ例を [shogi-player-vue2-sample-umd](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample-umd) に置いている
-* すでにビルドしているため `vue.config.js` に何も書かなくても動く
-* CSSも js に含んでいるため読み込む必要がない
+- 手動で組み込んだ例を [shogi-player-vue2-sample-umd](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample-umd) に置いている
+- すでにビルドしているため `vue.config.js` に何も書かなくても動く
+- CSSも js に含んでいるため読み込む必要がない
 
 ## Vue.js 2 (vue/cli) + ShogiPlayer.vue
 
-* 手動で組み込んだ例を [shogi-player-vue2-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample) に置いている
-* もともと Vue.js 2 製なので Vue.js 2 とは親和性が高い
-* ただし[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがある
+- 手動で組み込んだ例を [shogi-player-vue2-sample](https://github.com/akicho8/shogi-player/tree/master/shogi-player-vue2-sample) に置いている
+- もともと Vue.js 2 製なので Vue.js 2 とは親和性が高い
+- ただし[Bulma](https://bulma.io/)が他のCSSフレームワークと干渉する恐れがある
 
 ## Nuxt.js + ShogiPlayer.vue
 
@@ -112,20 +112,20 @@ Also see: [使い方](/guide/usage/)
 </main>
 ```
 
-* [Vue 3](/guide/build.md#vue-3) の場合と同じパラメータを渡す例が上になる
-* パラメータの渡し方が Vue 3 よりも難しい
-* `sp-pass-props` は途中で改行すると動かなくなる
+- [Vue 3](/guide/build.md#vue-3) の場合と同じパラメータを渡す例が上になる
+- パラメータの渡し方が Vue 3 よりも難しい
+- `sp-pass-props` は途中で改行すると動かなくなる
 
 ## 自力ビルドの要点
 
-* transpile 問題
+- transpile 問題
   * `node_modules/shogi-player` 以下を babel のビルド対象に含める
   * これをやらないとビルドできない
     * クラス定数や `??` 演算子が解釈されない
   * @vue/cli であれば vue.config.js の `transpileDependencies` に指定する
   * Nuxt.js であれば nuxt.config.js の `build.transpile` に含める
-* webpack-dev-server で `ResizeObserver loop limit exceeded` が出る場合
+- webpack-dev-server で `ResizeObserver loop limit exceeded` が出る場合
   * `devServer.client.overlay.runtimeErrors` を `false` にする
-* jest
+- jest
   * Babel の設定は `.babelrc` ではなく `babel.config.js` に書く
   * そうしないと node_modules/* に適用されず jest が動かない

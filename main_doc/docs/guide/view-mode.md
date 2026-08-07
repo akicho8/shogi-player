@@ -6,24 +6,24 @@
 
 ## 必須パラメータ
 
-* [sp_body](/reference/props/#sp-body): 棋譜
+- [sp_body](/reference/props/#sp-body): 棋譜
 
 ## 推奨オプション
 
-* [sp_turn](/reference/props/#sp-turn): 表示する局面(手数)を指定する
-* [sp_controller](/reference/props/#sp-controller): 盤の下にボタン類を表示する
-* [sp_slider](/reference/props/#sp-slider): 盤の下にスライダーを表示する
+- [sp_turn](/reference/props/#sp-turn): 表示する局面(手数)を指定する
+- [sp_controller](/reference/props/#sp-controller): 盤の下にボタン類を表示する
+- [sp_slider](/reference/props/#sp-slider): 盤の下にスライダーを表示する
 
 ## おまけオプション
 
-* [sp_viewpoint](/reference/props/#sp-viewpoint): 視点
-* [sp_overlay_nav](/reference/props/#sp-overlay-nav): 盤面の左右で局面を動かす(ただし駒を移動できなくなる)
-* [sp_turn_show](/reference/props/#sp-turn-show): 盤面の上に手数を表示する(邪魔)
+- [sp_viewpoint](/reference/props/#sp-viewpoint): 視点
+- [sp_overlay_nav](/reference/props/#sp-overlay-nav): 盤面の左右で局面を動かす(ただし駒を移動できなくなる)
+- [sp_turn_show](/reference/props/#sp-turn-show): 盤面の上に手数を表示する(邪魔)
 
 ## 補足
 
-* スライダーにフォーカスがある状態だと左右キーが効く
-* スライダーは fn + ←→ キーで最初と最後に移動する
+- スライダーにフォーカスがある状態だと左右キーが効く
+- スライダーは fn + ←→ キーで最初と最後に移動する
 
 ※どちらもブラウザの標準機能
 
@@ -36,7 +36,7 @@
 <<< @/docs/.vuepress/public/examples/simple_auto_play.html{8-13}
 <CustomizeExample name="simple_auto_play" :width="250" :height="320" />
 
-* 駒を動かすには棋譜はそのままで [sp_turn](/reference/props/#sp-turn) を進める
+- 駒を動かすには棋譜はそのままで [sp_turn](/reference/props/#sp-turn) を進める
   * 指定の駒をどこに動かすかを一つずつ指定するのではない
-* 局面(手数)を変更するには [api_turn_add](/reference/api/#api-turn-add) を使う方法もある
+- 局面(手数)を変更するには [api_turn_add](/reference/api/#api-turn-add) を使う方法もある
 
