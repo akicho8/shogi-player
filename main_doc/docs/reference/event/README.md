@@ -48,19 +48,26 @@ APIで内部変数を参照するよりこちらを使った方が良い。
 
 ### `ev_play_mode_move(params: Hash)`
 
-操作モードで着手後にいろんな情報を投げる。
+操作モードで着手時にいろんな情報を投げる。
 
-| メンバ         | 意味                                      | 備考                                                  |
-|----------------|-------------------------------------------|-------------------------------------------------------|
-| sfen           | 着手後の長いSFEN                          |                                                       |
-| turn           | 着手後の手数                              |                                                       |
-| last_move_info | 着手した手の情報(Object)                  |                                                       |
-| position_hash  | 現在の盤面のハッシュコード (千日手判定用) | `sp_request_position_hash` を有効にしたときだけ入っている  |
-| op_king_check   | 着手した側が相手に対して王手したか？      | `sp_request_op_king_check` を有効にしたときだけ入っている      |
-| checkmate_stat | 詰み情報                          | `sp_request_checkmate_stat` を有効にしたときだけ入っている |
+| メンバ          | 意味                                      | 備考                                                       |
+|-----------------|-------------------------------------------|------------------------------------------------------------|
+| sfen            | 着手後の長いSFEN                          |                                                            |
+| turn            | 着手後の手数                              |                                                            |
+| last_move_info  | 着手した手の情報(Object)                  |                                                            |
+| illegal_hv_list | 反則情報                                  | 配列                                                       |
+| op_king_check   | 着手した側が相手に対して王手したか？      | `sp_request_op_king_check` を有効にしたときだけ入っている  |
+| checkmate_stat  | 詰み情報                                  | `sp_request_checkmate_stat` を有効にしたときだけ入っている |
+| position_hash   | 現在の盤面のハッシュコード (千日手判定用) | `sp_request_position_hash` を有効にしたときだけ入っている  |
 
 - 連続王手の千日手を判定するにはアプリ側で `position_hash` と `op_king_check` を組み合せて登場回数をカウントし、`op_king_check` が `true` の4回目が現われたか判定すればよい
 - 同様に `op_king_check` が `false` の4回目が出たときはただの千日手(引き分け)になる
+
+See also:
+[sp_illegal_validate](/reference/props/#sp-illegal-validate),
+[sp_request_op_king_check](/reference/props/#sp-request-op-king-check),
+[sp_request_checkmate_stat](/reference/props/#sp-request-checkmate-stat),
+[sp_request_position_hash](/reference/props/#sp-request-position-hash)
 
 ### `ev_play_mode_next_moves(moves: Array)`
 
@@ -100,11 +107,11 @@ APIで内部変数を参照するよりこちらを使った方が良い。
 
 ユーザーが持ち上げた駒を元に戻したとき
 
-### `ev_action_origin_mark_jump_invoke`
+### `ev_action_origin_mark_jump_invoke(origin_mark_pos_key: String, event: Event)`
 
 操作モードで、盤上または持駒の駒を持ち上げたとき (このタイミングで移動元の印を書け)
 
-### `ev_action_origin_mark_jump_cancel`
+### `ev_action_origin_mark_jump_cancel(origin_mark_pos_key: String, event: Event)`
 
 操作モードで、盤上または持駒の駒を元に戻したとき (このタイミングで移動元の印を消せ)
 
@@ -128,7 +135,7 @@ APIで内部変数を参照するよりこちらを使った方が良い。
 
 プレイヤー名をクリックしたとき位置とプレイヤー情報を投げる。
 
-### `ev_illegal_click_but_self_is_not_turn`
+### `ev_illegal_click_but_self_is_not_turn(event: Event)`
 
 手番が違うのに操作しようとしたとき
 

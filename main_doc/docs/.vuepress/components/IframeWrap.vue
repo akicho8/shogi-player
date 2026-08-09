@@ -21,7 +21,6 @@ export default {
   // align-items: center
   flex-direction: column
   iframe
-    width: 160px
-    height: 210px
-    // border: 1px solid blue
+    width: 240px
+    height: 312px
 </style>

@@ -104,13 +104,22 @@ Default: `nureyon`
 - SVG な駒はどんなに巨大化してもぼやけない
 - PNG な駒も元の解像度が高いので拡大してもそれほど気にならない
 
-| 値       | 名称     | 表示                                                                                                                                             | 形式   | 影     |  特徴                      |
-|----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|--------|--------|----------------------------|
-| invisible     | 透明     |                                                                                                                                                  |        |        |  見えない                  |
-| nureyon  | ぬれよん | <img src="../../../../assets/piece_variant/nureyon/BR0.svg" width="32"><img src="../../../../assets/piece_variant/nureyon/BR1.svg" width="32">   | SVG    |        |  見やすいゴシック体の一文字 |
-| paper    | 紙面風   | <img src="../../../../assets/piece_variant/paper/BR0.svg" width="32"><img src="../../../../assets/piece_variant/paper/BR1.svg" width="32">       | SVG    |        |  明朝体・裏面赤            |
-| zuan     | 図案駒   | <img src="../../../../assets/piece_variant/zuan/BR0.png" width="32"><img src="../../../../assets/piece_variant/zuan/BR1.png" width="32">         | PNG    |        |  ユニバーサルデザイン      |
-| portella | Portella | <img src="../../../../assets/piece_variant/portella/BR0.png" width="32"><img src="../../../../assets/piece_variant/portella/BR1.png" width="32"> | PNG    | ✅     |  美麗                      |
+| 値        | 名称     | 表示                                                                                                                                             | 形式 | 影  | 特徴                       | 推奨<br>サイズ |
+|-----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|------|-----|----------------------------|------------|
+| invisible | 透明     |                                                                                                                                                  |      |     | 見えない                   |            |
+| nureyon   | ぬれよん | <img src="../../../../assets/piece_variant/nureyon/BR0.svg" width="32"><img src="../../../../assets/piece_variant/nureyon/BR1.svg" width="32">   | SVG  |     | ゴシック体の一文字 |        0.9 |
+| paper     | 紙面風   | <img src="../../../../assets/piece_variant/paper/BR0.svg" width="32"><img src="../../../../assets/piece_variant/paper/BR1.svg" width="32">       | SVG  |     | 明朝体・裏面赤             |        0.8 |
+| zuan      | 図案駒   | <img src="../../../../assets/piece_variant/zuan/BR0.png" width="32"><img src="../../../../assets/piece_variant/zuan/BR1.png" width="32">         | PNG  |     | ユニバーサルデザイン       |       0.95 |
+| portella  | Portella | <img src="../../../../assets/piece_variant/portella/BR0.png" width="32"><img src="../../../../assets/piece_variant/portella/BR1.png" width="32"> | PNG  | ✅ | 美麗                       |        1.0 |
+
+::: warning
+種類と大きさは別の設定になっているため、必ず種類に合わせて次のCSS変数で大きさを調整すること。
+- [--sp_board_piece_size](/reference/css-variables/#sp-board-piece-size): 盤上の駒
+- [--sp_stand_piece_size](/reference/css-variables/#sp-stand-piece-size): 持駒
+- [--sp_piece_box_piece_size](/reference/css-variables/#sp-piece-box-piece-size): 駒箱の駒
+:::
+
+See also: [--sp_board_piece_size](/reference/css-variables/#sp-board-piece-size), [--sp_stand_piece_size](/reference/css-variables/#sp-stand-piece-size), [--sp_piece_box_piece_size](/reference/css-variables/#sp-piece-box-piece-size)
 
 ### `sp_board_variant`
 
@@ -170,7 +179,7 @@ Default: `true`
 画面幅が狭いとき自動的に上下配置に切り替えるか？
 
 初期値を左右配置にしているときに関係してくる。
-言い替えると画面幅が広いときに左右配置に切り替えるかの設定でもある。
+言い替えると「画面幅が広いときに左右配置に切り替えるか？」の設定でもある。
 
 See also: [sp_layout](/reference/props/#sp-layout)
 
@@ -203,7 +212,13 @@ See also: [sp_controller](/reference/props/#sp-controller)
 Type: `Boolean`
 Default: `false`
 
-座標を表示するか？
+座標を表示するか？<Badge text="非推奨" type="error" vertical="top" />
+
+::: warning
+このオプションはまったくおすすめしない。
+座標は**左上が基点**であることを知っていればよいだけであり、わざわざ表示するのはシンメトリーな美しさを台無しにする。
+言わばロードバイク等を含めた自転車すべてに補助輪をつけるようなものである。
+:::
 
 ### `sp_coordinate_variant_h`
 
@@ -243,7 +258,6 @@ Default: `bottom`
 
 下に寄せた方が対角線的に綺麗な配置に見える。
 一方、右上だけで詰将棋を作るなら上に寄せた方が持駒が見やすくなるなどの利点もある。
-両方を☗視点で上に寄せるのはいまのところ対応していない。
 
 | 値     | 寄せる方向 |
 |--------|------------|
@@ -469,10 +483,6 @@ Default: `false`
   * 再生モードで最初からスライダーにフォーカスしておけばそのまま左右ボタンで局面が切り替えることができて利用者に優しいUIになる
   * スマホだととくにメリットはない
 
-::: warning
-フォーカスする際にブラウザがスクロールしてしまう場合がある。
-:::
-
 See also: [sp_slider](/reference/props#sp-slider)
 
 ### `sp_operation_disabled`
@@ -531,8 +541,8 @@ Default: `false`
 ## カメラ
 
 - 見える範囲を指定する
-- あくまで視野が変わるだけであって内部は<b>符号座標</b>９一を左上とした本将棋のままである
-- 右上だけの表示でいいなら<b>配列座標</b>で左上を(4,0)でセル数を5x5などとする
+- あくまで視野が変わるだけであって内部は**符号座標**９一を左上とした本将棋のままである
+- 右上だけの表示でいいなら**配列座標**で左上を(4,0)でセル数を5x5などとする
 - セル数を小さくすると壊れる
 
 ### `sp_board_view_x`
@@ -611,7 +621,15 @@ Default: `true`
 Type: `Boolean`
 Default: `false`
 
-操作モードで詰み判定するか？ (v1.1.34 以上)
+操作モードで詰み判定するか？
+
+- 体感できるほどではないが、わりと重い処理のためデフォルトでは無効としている
+
+<IframeWrap name="props/sp_request_checkmate_stat" />
+<<< @/docs/.vuepress/public/examples/props/sp_request_checkmate_stat.html
+<LinkToExample name="props/sp_request_checkmate_stat" />
+
+See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-params-hash)
 
 ## 反則
 
@@ -637,6 +655,10 @@ Default: `true`
 
 - 反則ブロック対応とは `sp_illegal_cancel` を有効にしたときのこと
 - 千日手系は設計ミスにより指す前に判定ができないので将来的にはなんとかしたい <Badge text="TODO" type="error" vertical="top" />
+
+<IframeWrap name="props/sp_illegal_validate" />
+<<< @/docs/.vuepress/public/examples/props/sp_illegal_validate.html
+<LinkToExample name="props/sp_illegal_validate" />
 
 See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-params-hash)
 
@@ -672,6 +694,10 @@ Default: `false`
 
 - アプリ側で初心者向けに「王手！」などと表示することができる
 - 連続王手の千日手を判定するには `sp_request_position_hash` と合わせて有効にする
+
+<IframeWrap name="props/sp_request_op_king_check" />
+<<< @/docs/.vuepress/public/examples/props/sp_request_op_king_check.html
+<LinkToExample name="props/sp_request_op_king_check" />
 
 See also: [ev_play_mode_move](/reference/event/#ev-play-mode-move-params-hash)
 

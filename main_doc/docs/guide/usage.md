@@ -48,14 +48,14 @@ CSS変数は普通に定義しても Shadow DOM 内には届かない。
 <!--     --sp_board_color: LightSkyBlue -->
 <!-- </style> -->
 
-### コンポーネントタグ内に直接指定したい場合
+### コンポーネントタグ内に直接指定する場合
 
 <!-- <IframeWrap name="sp_pass_style" /> -->
 <<< @/docs/.vuepress/public/examples/sp_pass_style.html{9}
 <LinkToExample name="sp_pass_style" />
 
 引数の [sp_pass_style](/reference/props/#sp-pass-style) に書いても変更できるようにしてある。
-これはタグの style を直接書くのに似ていて分けて書いたときより詳細度が高い。
+これはタグの style を直接書くのに似ていて、分けて書いたときより詳細度が高い。
 古の技術駆動では機能とスタイルは分けるべきとされているが目的駆動として見ればまとめて書く方が理に適っている。
 
 ## イベント受信 ##

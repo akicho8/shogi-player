@@ -122,11 +122,17 @@ Default: `0.9`
   * 漢字が巨大だと暑苦しい
   * 小さめにすると余白ができてすっきりとした印象になる
 
-| 値       | おすすめ |
-|----------|----------|
-| ぬれよん |      0.9 |
-| 紙面風   | 0.8〜0.9 |
-| Portella |      1.0 |
+| 名称     | 推奨値 |
+|----------|------|
+| ぬれよん |  0.9 |
+| 紙面風   |  0.8 |
+| 図案駒   | 0.95 |
+| Portella |  1.0 |
+
+See also:
+[sp_piece_variant](/reference/props/#sp-piece-variant),
+[--sp_stand_piece_size](/reference/css-variables/#sp-stand-piece-size),
+[--sp_piece_box_piece_size](/reference/css-variables/#sp-piece-box-piece-size)
 
 ### `--sp_piece_vertical_position`
 Default: `center`
@@ -239,6 +245,11 @@ Default: `0.8`
 
 駒台のセル内における駒の占有率
 
+See also:
+[sp_piece_variant](/reference/props/#sp-piece-variant),
+[--sp_board_piece_size](/reference/css-variables/#sp-board-piece-size),
+[--sp_piece_box_piece_size](/reference/css-variables/#sp-piece-box-piece-size)
+
 ### `--sp_stand_hover_border_color`
 Default: `hsl(0 0% 0% / 0.2)`
 
@@ -269,6 +280,11 @@ Default: `0.25`
 Default: `0.8`
 
 駒箱のセル内における駒の占有率
+
+See also:
+[sp_piece_variant](/reference/props/#sp-piece-variant),
+[--sp_board_piece_size](/reference/css-variables/#sp-board-piece-size),
+[--sp_stand_piece_size](/reference/css-variables/#sp-stand-piece-size),
 
 ### `--sp_piece_box_color`
 Default: `hsl(0 0% 0% / 0.2)`

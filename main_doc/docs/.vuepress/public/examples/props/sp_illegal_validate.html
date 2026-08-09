@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@2.0.0"></script>
+  <script type="module">
+    const el = document.querySelector("shogi-player-wc")
+    el.addEventListener("ev_play_mode_move", e => {
+      const params = e.detail[0]
+      if (params.illegal_hv_list.length > 0) {
+        const names = params.illegal_hv_list.map(e => e.illegal_info.name).join(",")
+        alert(names)
+      }
+    })
+  </script>
+</head>
+<body>
+  <shogi-player-wc
+    sp_mode="play"
+    sp_body="position sfen 7k1/5Gb2/7SL/8K/6s1P/9/9/9/8L b GNP 1"
+    ></shogi-player-wc>
+</body>
+</html>

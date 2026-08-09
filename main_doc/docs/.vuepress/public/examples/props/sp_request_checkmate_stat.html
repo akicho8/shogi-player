@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@2.0.0"></script>
+  <script type="module">
+    const el = document.querySelector("shogi-player-wc")
+    el.addEventListener("ev_play_mode_move", e => {
+      const params = e.detail[0]
+      alert(params.checkmate_stat.yes_or_no === "yes" ? "詰み" : "詰み逃し")
+    })
+  </script>
+</head>
+<body>
+  <shogi-player-wc
+    sp_mode="play"
+    sp_body="position sfen 6+Rgk/6Ggl/8P/5B2+R/6N2/9/9/9/9 b Nb4s2n3l17p 1"
+    ></shogi-player-wc>
+</body>
+</html>
