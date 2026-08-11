@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/shogi-player@2.0.0"></script>
+    <script type="module">
+      import { LitElement, css, html } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js"
+      export class XyTapApp extends LitElement {
+        static styles = css`
+          :host {
+            display: block;
+          }
+          .target {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .container {
+            display: flex;
+            justify-content: center;
+          }
+          shogi-player-wc {
+            flex-basis: 640px;
+          }
+        `
+
+        static properties = {
+          target_x: { type: Number },
+          target_y: { type: Number },
+          tap_x: { type: Number },
+          tap_y: { type: Number },
+        }
+
+        constructor() {
+          super()
+          this.target_random_set()
+        }
+
+        render() {
+          return html`
+            <div class="target">${this.target_x}${this.target_y}</div>
+            <div class="container">
+              <shogi-player-wc
+                sp_mode="play"
+                sp_human_side="none"
+                sp_piece_stand_blank_then_hidden
+                .sp_board_cell_class_fn="${this.sp_board_cell_class_fn}"
+                @ev_action_board_cell_pointerdown="${this.ev_action_board_cell_pointerdown}"
+                sp_pass_css=".marker { background-color: Lightskyblue !important }"
+              ></shogi-player-wc>
+            </div>
+          `
+        }
+
+        target_random_set() {
+          this.target_x = 1 + Math.floor(Math.random() * 9)
+          this.target_y = 1 + Math.floor(Math.random() * 9)
+        }
+
+        ev_action_board_cell_pointerdown(e) {
+          const [place] = e.detail
+
+          this.tap_x = place.human_x
+          this.tap_y = place.human_y
+
+          if (this.tap_x === this.target_x && this.tap_y === this.target_y) {
+            this.target_random_set()
+          }
+        }
+
+        get sp_board_cell_class_fn() {
+          return (place) => {
+            if (place.human_x === this.tap_x && place.human_y === this.tap_y) {
+               return "marker"
+            }
+          }
+        }
+      }
+
+      customElements.define("xy-tap-app", XyTapApp)
+    </script>
+  </head>
+  <body>
+    <xy-tap-app></xy-tap-app>
+  </body>
+</html>

@@ -9,7 +9,7 @@
 
 ## 関連オプション
 
-- [sp_body](/reference/props/#sp-body): AIと対戦すると仮定したときAIの指し手を反映する
+- [sp_body](/reference/props/#sp-body): 初期配置を指定したり、AIと対戦すると仮定したときAIの指し手を反映する
 - [sp_human_side](/reference/props/#sp-human-side): 片側の操作に絞る
 
 ## 関連イベント
@@ -141,3 +141,21 @@ ai_best_move(sfen) {
   }
 }
 ```
+
+## 例3. 符号タップゲーム
+
+<CustomizeExample name="xy_tap_app" :width="250" :height="320" />
+
+上に表示した2桁の数字に対応するセルをタップする。
+
+### 手順
+
+1. 操作モードにする
+1. [sp_piece_stand_blank_then_hidden](/reference/props/#sp-piece-stand-blank-then-hidden) を指定して持駒は非表示とする
+1. [sp_human_side](/reference/props/#sp_human_side) に `none` を指定してどちら側も操作できないようにする
+1. ランダムに座標を用意する
+1. タップすると [ev_action_board_cell_pointerdown](/reference/event/#ev-action-board-cell-pointerdown) のイベントがでどこをタップしたかわかる
+1. 用意した座標とタップした座標が一致するか判定する
+1. 4 に戻る
+
+この例では [sp_board_cell_class_fn](/reference/props/#sp-board-cell-class-fn) を指定してタップしたセルだけに特定のクラスをつけて、スタイルを適用している。
